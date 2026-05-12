@@ -48,6 +48,8 @@ private slots:
     void TestRotation();
     void TestFlip_data();
     void TestFlip();
+    void TestRotateAndFlip_data();
+    void TestRotateAndFlip();
     void TestCutArcByLength_data();
     void TestCutArcByLength();
     void TestCurveIntersectAxis_data();

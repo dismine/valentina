@@ -361,17 +361,62 @@ void TST_VArc::TestRotation()
     QFETCH(qreal, degrees);
     QFETCH(QString, prefix);
 
+    // Initialize original arc and store baseline metrics
     const VArc arcOrigin(VPointF(center), radius, startAngle, endAngle);
+    const qreal originalLength = qAbs(arcOrigin.GetLength());
+
+    // Get original arc endpoints for manual calculation
+    const QPointF originalP1 = arcOrigin.GetP1();
+    const QPointF originalP2 = arcOrigin.GetP2();
+
+    // Manually calculate where the endpoints SHOULD be after rotation
+    const QPointF expectedRotatedP1 = VPointF::RotatePF(rotatePoint, originalP1, degrees);
+    const QPointF expectedRotatedP2 = VPointF::RotatePF(rotatePoint, originalP2, degrees);
+
+    // Perform the actual rotation via the class method
     const VArc rotatedArc = arcOrigin.Rotate(rotatePoint, degrees, prefix);
 
-    QCOMPARE(arcOrigin.GetLength(), rotatedArc.GetLength());
-    QCOMPARE(arcOrigin.AngleArc(), rotatedArc.AngleArc());
+    // Verify name prefixing logic
+    const QString errorMsg = u"The name doesn't contain the prefix '%1'."_s.arg(prefix);
+    QVERIFY2(rotatedArc.name().endsWith(prefix), qUtf8Printable(errorMsg));
+
+    // Sweep angle (AngleArc) should remain constant during rotation
+    QVERIFY2(qAbs(arcOrigin.AngleArc() - rotatedArc.AngleArc()) <= 0.001,
+             qUtf8Printable(u"Sweep angle mismatch: original %1, rotated %2"_s.arg(arcOrigin.AngleArc())
+                                .arg(rotatedArc.AngleArc())));
+
+    // Length should be invariant (within 1mm tolerance)
+    const qreal rotatedLength = qAbs(rotatedArc.GetLength());
+    QVERIFY2(qAbs(originalLength - rotatedLength) <= ToPixel(1, Unit::Mm),
+             qUtf8Printable(u"Length mismatch. Original: %1, Rotated: %2"_s.arg(originalLength).arg(rotatedLength)));
+
+    // Basic properties should remain identical
     QCOMPARE(arcOrigin.GetRadius(), rotatedArc.GetRadius());
     QCOMPARE(arcOrigin.IsFlipped(), rotatedArc.IsFlipped());
     QCOMPARE(arcOrigin.IsReversed(), rotatedArc.IsReversed());
-    // cppcheck-suppress unreadVariable
-    const QString errorMsg = u"The name doesn't contain the prefix '%1'."_s.arg(prefix);
-    QVERIFY2(rotatedArc.name().endsWith(prefix), qUtf8Printable(errorMsg));
+
+    // Verify point path consistency for the original arc
+    const QVector<QPointF> originalPoints = arcOrigin.GetPoints();
+    QVERIFY2(!originalPoints.isEmpty(), "Original arc generated an empty point path");
+    QVERIFY2(VFuzzyComparePoints(originalP1, originalPoints.constFirst()), "Original P1 != path start");
+    QVERIFY2(VFuzzyComparePoints(originalP2, originalPoints.constLast()), "Original P2 != path end");
+
+    // Verify point path consistency for the rotated arc
+    const QVector<QPointF> rotatedPoints = rotatedArc.GetPoints();
+    QVERIFY2(!rotatedPoints.isEmpty(), "Rotated arc generated an empty point path");
+
+    const QPointF actualRotatedP1 = rotatedArc.GetP1();
+    const QPointF actualRotatedP2 = rotatedArc.GetP2();
+
+    // Check that GetP1/P2 match the internal path points
+    QVERIFY2(VFuzzyComparePoints(actualRotatedP1, rotatedPoints.constFirst()), "Actual P1 != path start");
+    QVERIFY2(VFuzzyComparePoints(actualRotatedP2, rotatedPoints.constLast()), "Actual P2 != path end");
+
+    // Final verification: Compare actual endpoints against manual geometric rotation
+    QVERIFY2(VFuzzyComparePoints(expectedRotatedP1, actualRotatedP1),
+             qPrintable(QStringLiteral("Rotation failed: actual P1 does not match expected manual rotation")));
+    QVERIFY2(VFuzzyComparePoints(expectedRotatedP2, actualRotatedP2),
+             qPrintable(QStringLiteral("Rotation failed: actual P2 does not match expected manual rotation")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -457,50 +502,137 @@ void TST_VArc::TestFlip()
     QFETCH(QLineF, axis);
     QFETCH(QString, prefix);
 
-    VArc const originArc(VPointF(center), radius, startAngle, endAngle);
-    const qreal length1 = qAbs(originArc.GetLength());
+    const VArc arcOrigin(VPointF(center), radius, startAngle, endAngle);
+    const qreal originalLength = qAbs(arcOrigin.GetLength());
+    const QPointF originalP1 = arcOrigin.GetP1();
+    const QPointF originalP2 = arcOrigin.GetP2();
 
-    const VArc flipped = originArc.Flip(axis, prefix);
-    const qreal length2 = qAbs(flipped.GetLength());
-
-    // Name contains prefix
-    const QString errorMsg = u"The name doesn't contain the prefix '%1'."_s.arg(prefix);
-    QVERIFY2(flipped.name().endsWith(prefix), qUtf8Printable(errorMsg));
-
-    // IsFlipped is toggled
-    QCOMPARE(flipped.IsFlipped(), true);
-
-    QString const errorLengthMsg
-        = u"Difference between original and flipped lengthes bigger than eps = %1. l1 = %2; l2 = %3"_s;
-    QVERIFY2(qAbs(length1 - length2) <= ToPixel(1, Unit::Mm),
-             qUtf8Printable(errorLengthMsg.arg(ToPixel(1, Unit::Mm)).arg(length1).arg(length2)));
-
-    // Radius and sweep angle are preserved
-    QCOMPARE(originArc.GetRadius(), flipped.GetRadius());
-    QCOMPARE(originArc.AngleArc(), flipped.AngleArc());
-
-    // Geometric correctness: center, p1, p2 are mirrored onto the axis
     const QPointF expectedCenter = VPointF::FlipPF(axis, center);
-    const QPointF expectedP1 = VPointF::FlipPF(axis, originArc.GetP1());
-    const QPointF expectedP2 = VPointF::FlipPF(axis, originArc.GetP2());
+    const QPointF expectedP1 = VPointF::FlipPF(axis, originalP1);
+    const QPointF expectedP2 = VPointF::FlipPF(axis, originalP2);
 
-    const auto flippedCenter = static_cast<QPointF>(flipped.GetCenter());
-    QVERIFY2(VFuzzyComparePoints(flippedCenter, expectedCenter), qUtf8Printable(u"Center mismatch after flip"_s));
-    QVERIFY2(VFuzzyComparePoints(flipped.GetP1(), expectedP1), qUtf8Printable(u"P1 mismatch after flip"_s));
-    QVERIFY2(VFuzzyComparePoints(flipped.GetP2(), expectedP2), qUtf8Printable(u"P2 mismatch after flip"_s));
+    const VArc flippedArc = arcOrigin.Flip(axis, prefix);
 
-    // Double flip restores original arc
-    const VArc doubleFlipped = flipped.Flip(axis, prefix);
-    QVERIFY2(VFuzzyComparePoints(static_cast<QPointF>(doubleFlipped.GetCenter()), center),
-             qUtf8Printable(u"Center mismatch after double flip"_s));
-    QVERIFY2(VFuzzyComparePoints(doubleFlipped.GetP1(), originArc.GetP1()),
-             qUtf8Printable(u"P1 mismatch after double flip"_s));
-    QVERIFY2(VFuzzyComparePoints(doubleFlipped.GetP2(), originArc.GetP2()),
-             qUtf8Printable(u"P2 mismatch after double flip"_s));
-    QCOMPARE(doubleFlipped.GetLength(), originArc.GetLength());
-    QCOMPARE(doubleFlipped.AngleArc(), originArc.AngleArc());
-    QVERIFY2(doubleFlipped.IsFlipped() == originArc.IsFlipped(),
-             qUtf8Printable(u"IsFlipped mismatch after double flip"_s));
+    // Verify metadata and basic state toggle
+    const QString nameError = u"The name doesn't contain the prefix '%1'."_s.arg(prefix);
+    QVERIFY2(flippedArc.name().endsWith(prefix), qUtf8Printable(nameError));
+    QVERIFY2(flippedArc.IsFlipped() != arcOrigin.IsFlipped(), "IsFlipped property was not toggled");
+
+    const qreal flippedLength = qAbs(flippedArc.GetLength());
+    QVERIFY2(qAbs(originalLength - flippedLength) <= ToPixel(1, Unit::Mm),
+             qUtf8Printable(
+                 u"Length mismatch after flip. Original: %1, Flipped: %2"_s.arg(originalLength).arg(flippedLength)));
+
+    QCOMPARE(flippedArc.GetRadius(), arcOrigin.GetRadius());
+    QVERIFY2(qAbs(flippedArc.AngleArc() - arcOrigin.AngleArc()) <= 0.001, "Sweep angle mismatch");
+
+    const QPointF actualCenter = static_cast<QPointF>(flippedArc.GetCenter());
+    QVERIFY2(VFuzzyComparePoints(actualCenter, expectedCenter), "Center mismatch after flip");
+
+    const QPointF actualP1 = flippedArc.GetP1();
+    const QPointF actualP2 = flippedArc.GetP2();
+
+    QVERIFY2(VFuzzyComparePoints(actualP1, expectedP1), "P1 mismatch after flip");
+    QVERIFY2(VFuzzyComparePoints(actualP2, expectedP2), "P2 mismatch after flip");
+
+    const QVector<QPointF> flippedPoints = flippedArc.GetPoints();
+    QVERIFY2(!flippedPoints.isEmpty(), "Flipped arc generated an empty point path");
+    QVERIFY2(VFuzzyComparePoints(actualP1, flippedPoints.constFirst()), "P1 != path start");
+    QVERIFY2(VFuzzyComparePoints(actualP2, flippedPoints.constLast()), "P2 != path end");
+
+    const VArc restoredArc = flippedArc.Flip(axis, prefix);
+
+    QVERIFY2(VFuzzyComparePoints(static_cast<QPointF>(restoredArc.GetCenter()), center),
+             "Center mismatch after double flip");
+    QVERIFY2(VFuzzyComparePoints(restoredArc.GetP1(), originalP1), "P1 mismatch after double flip");
+    QVERIFY2(VFuzzyComparePoints(restoredArc.GetP2(), originalP2), "P2 mismatch after double flip");
+    QCOMPARE(restoredArc.IsFlipped(), arcOrigin.IsFlipped());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VArc::TestRotateAndFlip_data()
+{
+    QTest::addColumn<QPointF>("center");
+    QTest::addColumn<qreal>("radius");
+    QTest::addColumn<qreal>("startAngle");
+    QTest::addColumn<qreal>("endAngle");
+    QTest::addColumn<QPointF>("rotatePoint");
+    QTest::addColumn<qreal>("rotateDegrees");
+    QTest::addColumn<QLineF>("flipAxis");
+    QTest::addColumn<QString>("prefixR");
+    QTest::addColumn<QString>("prefixF");
+
+    const QLineF vertAxis(QPointF(100, 0), QPointF(100, 500));
+    const QLineF horizAxis(QPointF(0, 100), QPointF(500, 100));
+    QLineF diagAxis(QPointF(0, 0), QPointF(100, 100));
+
+    // Case 1: Simple 90-degree rotation around origin then flip over vertical axis
+    QTest::newRow("Rotate 90 @ Origin -> Flip Vertical")
+        << QPointF(50, 0) << 50.0 << 0.0 << 180.0 << QPointF(0, 0) << 90.0 << vertAxis << "_rot" << "_flip";
+
+    // Case 2: Rotation around arc center then flip over horizontal axis
+    QTest::newRow("Rotate 45 @ Center -> Flip Horizontal")
+        << QPointF(100, 100) << 30.0 << 45.0 << 135.0 << QPointF(100, 100) << 45.0 << horizAxis << "_r" << "_f";
+
+    // Case 3: Negative rotation followed by diagonal flip
+    QTest::newRow("Negative Rotate -> Diagonal Flip")
+        << QPointF(200, 200) << 100.0 << 0.0 << 90.0 << QPointF(0, 0) << -90.0 << diagAxis << "_r" << "_f";
+
+    // Case 4: Full circle (360 degrees) handling
+    QTest::newRow("Full Circle sequence")
+        << QPointF(0, 0) << 10.0 << 0.0 << 360.0 << QPointF(10, 10) << 180.0 << vertAxis << "_rot" << "_mirr";
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VArc::TestRotateAndFlip()
+{
+    QFETCH(QPointF, center);
+    QFETCH(qreal, radius);
+    QFETCH(qreal, startAngle);
+    QFETCH(qreal, endAngle);
+    QFETCH(QPointF, rotatePoint);
+    QFETCH(qreal, rotateDegrees);
+    QFETCH(QLineF, flipAxis);
+    QFETCH(QString, prefixR);
+    QFETCH(QString, prefixF);
+
+    const VArc arcOrigin(VPointF(center), radius, startAngle, endAngle);
+    const qreal originalLength = qAbs(arcOrigin.GetLength());
+    const QPointF p1_0 = arcOrigin.GetP1();
+    const QPointF p2_0 = arcOrigin.GetP2();
+
+    const VArc rotatedArc = arcOrigin.Rotate(rotatePoint, rotateDegrees, prefixR);
+    const VArc finalArc = rotatedArc.Flip(flipAxis, prefixF);
+
+    const QPointF p1_rotated = VPointF::RotatePF(rotatePoint, p1_0, rotateDegrees);
+    const QPointF p2_rotated = VPointF::RotatePF(rotatePoint, p2_0, rotateDegrees);
+
+    const QPointF expectedP1 = VPointF::FlipPF(flipAxis, p1_rotated);
+    const QPointF expectedP2 = VPointF::FlipPF(flipAxis, p2_rotated);
+
+    const auto nameError = QStringLiteral("Final name '%1' does not contain expected prefixes.").arg(finalArc.name());
+    QVERIFY2(finalArc.name().endsWith(prefixR + prefixF) || finalArc.name().endsWith(prefixF),
+             qUtf8Printable(nameError));
+
+    const qreal finalLength = qAbs(finalArc.GetLength());
+    const qreal epsilon = ToPixel(1, Unit::Mm);
+
+    QVERIFY2(qAbs(originalLength - finalLength) <= epsilon,
+             qUtf8Printable(u"Length mismatch. Expected: %1, Actual: %2"_s.arg(originalLength).arg(finalLength)));
+
+    QCOMPARE(finalArc.GetRadius(), arcOrigin.GetRadius());
+
+    const QPointF actualP1 = finalArc.GetP1();
+    const QPointF actualP2 = finalArc.GetP2();
+
+    QVERIFY2(VFuzzyComparePoints(expectedP1, actualP1), "P1 mismatch after Rotate+Flip sequence");
+    QVERIFY2(VFuzzyComparePoints(expectedP2, actualP2), "P2 mismatch after Rotate+Flip sequence");
+
+    const QVector<QPointF> pathPoints = finalArc.GetPoints();
+    QVERIFY2(!pathPoints.isEmpty(), "Resulting arc path is empty");
+
+    QVERIFY2(VFuzzyComparePoints(actualP1, pathPoints.constFirst()), "P1 != first path point");
+    QVERIFY2(VFuzzyComparePoints(actualP2, pathPoints.constLast()), "P2 != last path point");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
