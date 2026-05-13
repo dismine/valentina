@@ -28,11 +28,14 @@
 
 #include "vsplinepath.h"
 
+#include <cmath>
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QPoint>
 
 #include "../ifc/exception/vexception.h"
+#include "../ifc/ifcdef.h"
+#include "../vmisc/defglobal.h"
 #include "vabstractcurve.h"
 #include "vsplinepath_p.h"
 
@@ -81,7 +84,7 @@ VSplinePath::VSplinePath(const QVector<VFSplinePoint> &points, qreal kCurve, qui
     }
 
     d->path = newPoints;
-    CreateName();
+    VSplinePath::CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -95,7 +98,58 @@ VSplinePath::VSplinePath(const QVector<VSplinePoint> &points, quint32 idObject, 
     }
 
     d->path = points;
-    CreateName();
+    VSplinePath::CreateName();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VSplinePath::VSplinePath(const QVector<VSpline> &path, quint32 idObject, Draw mode)
+  : VAbstractCubicBezierPath(GOType::SplinePath, idObject, mode),
+    d(new VSplinePathData())
+{
+    if (path.size() < 2)
+    {
+        return;
+    }
+
+    QVector<VSplinePoint> nodes;
+    nodes.reserve(path.size() + 1);
+
+    for (int i = 0; i < path.size(); ++i)
+    {
+        const VSpline &spl = path.at(i);
+
+        if (i == 0)
+        {
+            VSplinePoint node;
+            node.SetStrict(false);
+            node.SetP(spl.GetP1());
+            node.SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
+            node.SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
+            nodes.append(node);
+        }
+        else
+        {
+            // Update previous node with this spline's start control info
+            VSplinePoint &prevNode = nodes.last();
+            prevNode.SetAngle2(spl.GetStartAngle(), spl.GetStartAngleFormula());
+            prevNode.SetLength2(spl.GetC1Length(), spl.GetC1LengthFormula());
+        }
+
+        VSplinePoint node;
+        node.SetStrict(false);
+        node.SetP(spl.GetP4());
+        node.SetAngle1(spl.GetEndAngle(), spl.GetEndAngleFormula());
+        node.SetLength1(spl.GetC2Length(), spl.GetC2LengthFormula());
+        nodes.append(node);
+    }
+
+    if (nodes.isEmpty())
+    {
+        return;
+    }
+
+    d->path = nodes;
+    VSplinePath::CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -363,6 +417,15 @@ auto VSplinePath::ToJson() const -> QJsonObject
     object["nodes"_L1] = nodesArray;
 
     return object;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VSplinePath::SetStrict(bool strict)
+{
+    for (auto &node : d->path)
+    {
+        node.SetStrict(strict);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

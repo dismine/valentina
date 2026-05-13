@@ -38,6 +38,7 @@
 
 class VAbstractArcData;
 class VPointF;
+class VSplinePath;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_GCC("-Wsuggest-final-types")
@@ -70,7 +71,7 @@ public:
     void SetFormulaF2(const QString &formula, qreal value);
     auto GetEndAngle() const -> qreal override;
 
-    virtual auto GetCenter() const -> VPointF;
+    auto GetCenter() const -> VPointF;
     void SetCenter(const VPointF &point);
 
     auto GetFormulaLength() const -> QString;
@@ -80,15 +81,33 @@ public:
     auto NameForHistory(const QString &toolName) const -> QString override;
 
     auto IsFlipped() const -> bool;
+    auto IsReversed() const -> bool;
+    auto IsNegative() const -> bool;
+
     auto AngleArc() const -> qreal;
 
     auto GetPath() const -> QPainterPath override;
 
+    auto CutArc(qreal length, VAbstractArc *arc1, VAbstractArc *arc2, const QString &pointName) const -> QPointF;
+    auto CutArc(qreal length, const QString &pointName) const -> QPointF;
+
+    virtual auto ToSplinePath() const -> VSplinePath = 0;
+
 protected:
     void SetFlipped(bool value);
+    void SetReversed(bool value);
     void SetAllowEmpty(bool value);
+    auto IsAllowEmpty() const -> bool;
+
     virtual void FindF2(qreal length) = 0;
     void SetFormulaLength(const QString &formula);
+
+    virtual auto DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *arc2, const QString &pointName) const
+        -> QPointF
+        = 0;
+    virtual auto DoCutArcByLength(qreal length, const QString &pointName) const -> QPointF = 0;
+
+    auto AngleArc(qreal startAngle, qreal endAngle) const -> qreal;
 
 private:
     QSharedDataPointer<VAbstractArcData> d;

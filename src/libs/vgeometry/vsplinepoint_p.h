@@ -90,8 +90,16 @@ class VSplinePointData final : public QSharedData
 {
 public:
     VSplinePointData() = default;
-    VSplinePointData(const VPointF &pSpline, qreal angle1, const QString &angle1F, qreal angle2, const QString &angle2F,
-                     qreal length1, const QString &length1F, qreal length2, const QString &length2F);
+    VSplinePointData(const VPointF &pSpline,
+                     qreal angle1,
+                     const QString &angle1F,
+                     qreal angle2,
+                     const QString &angle2F,
+                     qreal length1,
+                     const QString &length1F,
+                     qreal length2,
+                     const QString &length2F,
+                     bool strict = true);
     VSplinePointData(const VSplinePointData &point);
     ~VSplinePointData() = default;
 
@@ -114,14 +122,23 @@ public:
     qreal length2{ToPixel(0.01, Unit::Mm)}; // NOLINT(misc-non-private-member-variables-in-classes)
     QString length2F{'0'};                  // NOLINT(misc-non-private-member-variables-in-classes)
 
+    bool strict{true};
+
 private:
     Q_DISABLE_ASSIGN_MOVE(VSplinePointData) // NOLINT
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-inline VSplinePointData::VSplinePointData(const VPointF &pSpline, qreal angle1, const QString &angle1F, qreal angle2,
-                                          const QString &angle2F, qreal length1, const QString &length1F, qreal length2,
-                                          const QString &length2F)
+inline VSplinePointData::VSplinePointData(const VPointF &pSpline,
+                                          qreal angle1,
+                                          const QString &angle1F,
+                                          qreal angle2,
+                                          const QString &angle2F,
+                                          qreal length1,
+                                          const QString &length1F,
+                                          qreal length2,
+                                          const QString &length2F,
+                                          bool strict)
   : pSpline(pSpline),
     angle1(angle1),
     angle1F(angle1F),
@@ -130,9 +147,10 @@ inline VSplinePointData::VSplinePointData(const VPointF &pSpline, qreal angle1, 
     length1(length1),
     length1F(length1F),
     length2(length2),
-    length2F(length2F)
+    length2F(length2F),
+    strict(strict)
 {
-    if (not VFuzzyComparePossibleNulls(qAbs(angle1 - angle2), 180))
+    if (strict && not VFuzzyComparePossibleNulls(qAbs(angle1 - angle2), 180))
     {
         QLineF line(0, 0, 100, 0);
 
@@ -172,7 +190,8 @@ inline VSplinePointData::VSplinePointData(const VSplinePointData &point)
     length1(point.length1),
     length1F(point.length1F),
     length2(point.length2),
-    length2F(point.length2F)
+    length2F(point.length2F),
+    strict(point.strict)
 {
     if (qFuzzyIsNull(this->length1))
     {

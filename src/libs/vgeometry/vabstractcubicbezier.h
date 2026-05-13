@@ -59,8 +59,13 @@ public:
     virtual auto GetP3() const -> VPointF = 0;
     virtual auto GetP4() const -> VPointF = 0;
 
-    auto CutSpline(qreal length, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3,
-                   const QString &pointName) const -> QPointF;
+    auto CutSpline(qreal length,
+                   QPointF &spl1p2,
+                   QPointF &spl1p3,
+                   QPointF &spl2p2,
+                   QPointF &spl2p3,
+                   const QString &pointName = QString()) const -> QPointF;
+    auto CutSplineAtParam(qreal t, QPointF &spl1p2, QPointF &spl1p3, QPointF &spl2p2, QPointF &spl2p3) const -> QPointF;
 
     auto NameForHistory(const QString &toolName) const -> QString override;
 

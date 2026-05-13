@@ -39,6 +39,36 @@
 
 using namespace Qt::Literals::StringLiterals;
 
+namespace
+{
+struct CutResult
+{
+    QPointF cutPoint{};
+    VEllipticalArc arc1{};
+    VEllipticalArc arc2{};
+};
+
+//---------------------------------------------------------------------------------------------------------------------
+auto MakeArc(qreal r1, qreal r2, qreal f1Deg, qreal f2Deg, qreal rotDeg) -> VEllipticalArc
+{
+    return {VPointF(), r1, r2, f1Deg, f2Deg, rotDeg};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DoCut(const VEllipticalArc &arc, qreal length) -> CutResult
+{
+    VEllipticalArc a1;
+    VEllipticalArc a2;
+
+    CutResult res;
+    res.cutPoint = arc.CutArc(length, &a1, &a2, QString());
+    res.arc1 = a1;
+    res.arc2 = a2;
+    return res;
+}
+
+} // namespace
+
 //---------------------------------------------------------------------------------------------------------------------
 TST_VEllipticalArc::TST_VEllipticalArc(QObject *parent)
   : AbstractTest(parent)
@@ -149,20 +179,23 @@ void TST_VEllipticalArc::CompareTwoWays()
 
     const VPointF center(c);
 
-    VEllipticalArc const arc1(center, radius1, radius2, f1, f2, rotationAngle);
-    const qreal length = arc1.GetLength();
+    VEllipticalArc arc1(center, radius1, radius2, f1, f2, rotationAngle);
+    arc1.SetApproximationScale(maxCurveApproximationScale);
+    const qreal length1 = arc1.GetLength();
 
-    VEllipticalArc const arc2(length, center, radius1, radius2, f1, rotationAngle);
+    VEllipticalArc arc2(length1, center, radius1, radius2, f1, rotationAngle);
+    arc2.SetApproximationScale(maxCurveApproximationScale);
+    const qreal length2 = arc2.GetLength();
 
     Q_RELAXED_CONSTEXPR qreal lengthEps = ToPixel(0.45, Unit::Mm); // computing error
 
     // cppcheck-suppress unreadVariable
     QString const errorLengthMsg =
         u"Difference between real and computing lengthes bigger than eps = %1. l1 = %2; l2 = %3"_s;
-    QVERIFY2(qAbs(arc2.GetLength() - length) <= lengthEps,
-             qUtf8Printable(errorLengthMsg.arg(lengthEps).arg(arc2.GetLength()).arg(length)));
-    QVERIFY2(qAbs(arc1.GetLength() - arc2.GetLength()) <= lengthEps,
-             qUtf8Printable(errorLengthMsg.arg(lengthEps).arg(arc2.GetLength()).arg(arc2.GetLength())));
+    QVERIFY2(qAbs(length2 - length1) <= lengthEps,
+             qUtf8Printable(errorLengthMsg.arg(lengthEps).arg(length2).arg(length1)));
+    QVERIFY2(qAbs(length1 - length2) <= lengthEps,
+             qUtf8Printable(errorLengthMsg.arg(lengthEps).arg(length2).arg(length1)));
 
     const qreal angleEps = 0.4;
     // cppcheck-suppress unreadVariable
@@ -182,7 +215,7 @@ void TST_VEllipticalArc::ArcByLength_data()
     QTest::addColumn<qreal>("f1");
     QTest::addColumn<qreal>("f2");
     QTest::addColumn<qreal>("rotationAngle");
-    QTest::addColumn<bool>("flipped");
+    QTest::addColumn<bool>("reversed");
     QTest::addColumn<int>("direction");
 
     QTest::newRow("+r, +r, +length") << 100. << 200. << 1. << 181. << 0. << false << 1;
@@ -203,7 +236,7 @@ void TST_VEllipticalArc::ArcByLength()
     QFETCH(qreal, f1);
     QFETCH(qreal, f2);
     QFETCH(qreal, rotationAngle);
-    QFETCH(bool, flipped);
+    QFETCH(bool, reversed);
     QFETCH(int, direction);
 
     const VPointF center;
@@ -225,7 +258,8 @@ void TST_VEllipticalArc::ArcByLength()
     const qreal angleEps = 0.4;
     QVERIFY2(arc.GetEndAngle() - f2 <= angleEps, qUtf8Printable(errorMsg.arg(eps).arg(arc.GetEndAngle()).arg(f2)));
 
-    QCOMPARE(arc.IsFlipped(), flipped);
+    QCOMPARE(arc.IsFlipped(), false);
+    QCOMPARE(arc.IsReversed(), reversed);
 }
 
 // cppcheck-suppress unusedFunction
@@ -855,27 +889,27 @@ void TST_VEllipticalArc::TestGetPoints4()
     QFETCH(qreal, rotationAngle);
 
     const VPointF center;
-    VEllipticalArc arc(center, radius1, radius2, startAngle, endAngle, rotationAngle);
+
+    VEllipticalArc arc(center, radius1, radius2, startAngle, endAngle, 0);
     arc.SetApproximationScale(maxCurveApproximationScale);
+    const qreal arcLength = arc.GetLength();
+
+    VEllipticalArc fullArc(center, radius1, radius2, startAngle, endAngle, rotationAngle);
+    fullArc.SetApproximationScale(maxCurveApproximationScale);
+    const qreal arcLengthFull = fullArc.GetLength();
 
     if (VFuzzyComparePossibleNulls(arc.AngleArc(), 360.0))
     { // calculated full ellipse length
-        const qreal h = ((qAbs(radius1) - qAbs(radius2)) * (qAbs(radius1) - qAbs(radius2))) /
-                        ((qAbs(radius1) + qAbs(radius2)) * (qAbs(radius1) + qAbs(radius2)));
-        qreal ellipseLength = M_PI * (qAbs(radius1) + qAbs(radius2)) * (1 + 3 * h / (10 + qSqrt(4 - 3 * h)));
-        if (radius1 < 0 || radius2 < 0)
-        {
-            ellipseLength *= -1;
-        }
-
-        Q_RELAXED_CONSTEXPR qreal epsLength = ToPixel(1, Unit::Mm); // computing error
-        const qreal arcLength = VEllipticalArc(center, radius1, radius2, 0, 360, 0).GetLength();
-        const qreal diffLength = qAbs(arcLength - ellipseLength);
-        // cppcheck-suppress unreadVariable
-        const QString errorMsg2 = u"Difference between real and computing lengthes "
+        Q_RELAXED_CONSTEXPR qreal epsLength = ToPixel(1, Unit::Mm);
+        const qreal diffLength = qAbs(arcLength - arcLengthFull);
+        const QString errorMsg2 = u"Difference between full arc lengths "
                                   u"(diff = '%1') bigger than eps = '%2'."_s.arg(diffLength)
                                       .arg(epsLength);
         QVERIFY2(diffLength <= epsLength, qUtf8Printable(errorMsg2));
+    }
+    else
+    {
+        QSKIP("Not full circumference");
     }
 }
 
@@ -925,35 +959,16 @@ void TST_VEllipticalArc::TestGetPoints5()
     {
         Q_RELAXED_CONSTEXPR qreal testAccuracy = ToPixel(1.5, Unit::Mm);
 
-        if (!arc.IsFlipped())
-        {
-            ComparePointsDistance(arc.GetP1(), points.constFirst(), testAccuracy);
-            ComparePointsDistance(arc.GetP2(), points.constLast(), testAccuracy);
-        }
-        else
-        {
-            ComparePointsDistance(arc.GetP1(), points.constLast(), testAccuracy);
-            ComparePointsDistance(arc.GetP2(), points.constFirst(), testAccuracy);
-        }
+        ComparePointsDistance(arc.GetP1(), points.constFirst(), testAccuracy);
+        ComparePointsDistance(arc.GetP2(), points.constLast(), testAccuracy);
 
         const qreal eps = 0.15;
 
-        if (!arc.IsFlipped())
-        {
-            f1 = QLineF(static_cast<QPointF>(center), points.constFirst()).angle();
-            QVERIFY2(f1 - stAngle <= eps, qUtf8Printable(QStringLiteral("f1: %1; expected: %2").arg(f1).arg(stAngle)));
+        f1 = QLineF(static_cast<QPointF>(center), points.constFirst()).angle();
+        QVERIFY2(f1 - stAngle <= eps, qUtf8Printable(QStringLiteral("f1: %1; expected: %2").arg(f1).arg(stAngle)));
 
-            f2 = QLineF(static_cast<QPointF>(center), points.constLast()).angle();
-            QVERIFY2(f2 - enAngle <= eps, qUtf8Printable(QStringLiteral("f2: %1; expected: %2").arg(f2).arg(enAngle)));
-        }
-        else
-        {
-            f1 = QLineF(static_cast<QPointF>(center), points.constLast()).angle();
-            QVERIFY2(f1 - stAngle <= eps, qUtf8Printable(QStringLiteral("f1: %1; expected: %2").arg(f1).arg(stAngle)));
-
-            f2 = QLineF(static_cast<QPointF>(center), points.constFirst()).angle();
-            QVERIFY2(f2 - enAngle <= eps, qUtf8Printable(QStringLiteral("f2: %1; expected: %2").arg(f2).arg(enAngle)));
-        }
+        f2 = QLineF(static_cast<QPointF>(center), points.constLast()).angle();
+        QVERIFY2(f2 - enAngle <= eps, qUtf8Printable(QStringLiteral("f2: %1; expected: %2").arg(f2).arg(enAngle)));
     }
 }
 
@@ -1076,7 +1091,21 @@ void TST_VEllipticalArc::TestRotation()
     QFETCH(QString, prefix);
 
     const VEllipticalArc arcOrigin(VPointF(center), radius1, radius2, startAngle, endAngle, rotationAngle);
+    const qreal length1 = qAbs(arcOrigin.GetLength());
+
+    // Get original arc endpoints
+    const QPointF originalP1 = arcOrigin.GetP1();
+    const QPointF originalP2 = arcOrigin.GetP2();
+
+    // Calculate expected rotated endpoints
+    const QPointF expectedRotatedP1 = VPointF::RotatePF(rotatePoint, originalP1, degrees);
+    const QPointF expectedRotatedP2 = VPointF::RotatePF(rotatePoint, originalP2, degrees);
+
     const VEllipticalArc rotatedArc = arcOrigin.Rotate(rotatePoint, degrees, prefix);
+
+    // cppcheck-suppress unreadVariable
+    const auto errorMsg = QStringLiteral("The name doesn't contain the prefix '%1'.").arg(prefix);
+    QVERIFY2(rotatedArc.name().endsWith(prefix), qUtf8Printable(errorMsg));
 
     QVERIFY2(qAbs(arcOrigin.AngleArc() - rotatedArc.AngleArc()) <= 1.6,
              qUtf8Printable(u"a1 = %1, a2 - %2"_s.arg(arcOrigin.AngleArc()).arg(rotatedArc.AngleArc())));
@@ -1084,16 +1113,36 @@ void TST_VEllipticalArc::TestRotation()
     // cppcheck-suppress unreadVariable
     QString const errorLengthMsg =
         u"Difference between real and computing lengthes bigger than eps = %1. l1 = %2; l2 = %3"_s;
-    QVERIFY2(qAbs(arcOrigin.GetLength() - rotatedArc.GetLength()) <= ToPixel(1, Unit::Mm),
-             qUtf8Printable(
-                 errorLengthMsg.arg(ToPixel(1, Unit::Mm)).arg(arcOrigin.GetLength()).arg(rotatedArc.GetLength())));
+    const qreal length2 = qAbs(rotatedArc.GetLength());
+    QVERIFY2(qAbs(length1 - length2) <= ToPixel(1, Unit::Mm),
+             qUtf8Printable(errorLengthMsg.arg(ToPixel(1, Unit::Mm)).arg(length1).arg(length2)));
 
     QCOMPARE(arcOrigin.GetRadius1(), rotatedArc.GetRadius1());
     QCOMPARE(arcOrigin.GetRadius2(), rotatedArc.GetRadius2());
-    QCOMPARE(arcOrigin.GetRotationAngle(), rotatedArc.GetRotationAngle());
-    // cppcheck-suppress unreadVariable
-    const QString errorMsg = u"The name doesn't contain the prefix '%1'."_s.arg(prefix);
-    QVERIFY2(rotatedArc.name().endsWith(prefix), qUtf8Printable(errorMsg));
+
+    const QVector<QPointF> originalPoints = arcOrigin.GetPoints();
+    QVERIFY2(!originalPoints.isEmpty(), "Original arc has no points");
+    QVERIFY2(VFuzzyComparePoints(originalP1, originalPoints.constFirst()),
+             qPrintable(QStringLiteral("originalP1 != originalPoints.constFirst")));
+    QVERIFY2(VFuzzyComparePoints(originalP2, originalPoints.constLast()),
+             qPrintable(QStringLiteral("originalP2 != originalPoints.constLast")));
+
+    const QVector<QPointF> rotatedPoints = rotatedArc.GetPoints();
+    QVERIFY2(!rotatedPoints.isEmpty(), "Rotated arc has no points");
+
+    // Get actual rotated endpoints
+    const QPointF actualRotatedP1 = rotatedArc.GetP1();
+    const QPointF actualRotatedP2 = rotatedArc.GetP2();
+
+    QVERIFY2(VFuzzyComparePoints(actualRotatedP1, rotatedPoints.constFirst()),
+             qPrintable(QStringLiteral("actualRotatedP1 != rotatedPoints.constFirst")));
+    QVERIFY2(VFuzzyComparePoints(actualRotatedP2, rotatedPoints.constLast()),
+             qPrintable(QStringLiteral("actualRotatedP2 != rotatedPoints.constLast")));
+
+    QVERIFY2(VFuzzyComparePoints(expectedRotatedP1, rotatedPoints.constFirst()),
+             qPrintable(QStringLiteral("expectedRotatedP1 != rotatedPoints.constFirst")));
+    QVERIFY2(VFuzzyComparePoints(expectedRotatedP2, rotatedPoints.constLast()),
+             qPrintable(QStringLiteral("expectedRotatedP2 != rotatedPoints.constLast")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1136,6 +1185,15 @@ void TST_VEllipticalArc::TestFlip()
     QFETCH(QString, prefix);
 
     const VEllipticalArc elArc(VPointF(), radius1, radius2, 1., 91., 0.);
+    const qreal length1 = qAbs(elArc.GetLength());
+
+    // Get original arc endpoints
+    const QPointF originalP1 = elArc.GetP1();
+    const QPointF originalP2 = elArc.GetP2();
+
+    // Calculate expected flipped endpoints
+    const QPointF expectedFlippedP1 = VPointF::FlipPF(axis, originalP1);
+    const QPointF expectedFlippedP2 = VPointF::FlipPF(axis, originalP2);
 
     const VEllipticalArc res = elArc.Flip(axis, prefix);
 
@@ -1143,9 +1201,136 @@ void TST_VEllipticalArc::TestFlip()
     const auto errorMsg = QStringLiteral("The name doesn't contain the prefix '%1'.").arg(prefix);
     QVERIFY2(res.name().endsWith(prefix), qUtf8Printable(errorMsg));
 
-    QCOMPARE(qRound(elArc.GetLength() * -1), qRound(res.GetLength()));
+    QString const errorLengthMsg
+        = u"Difference between original and flipped lengthes bigger than eps = %1. l1 = %2; l2 = %3"_s;
+    const qreal length2 = qAbs(res.GetLength());
+    QVERIFY2(qAbs(length1 - length2) <= ToPixel(1, Unit::Mm),
+             qUtf8Printable(errorLengthMsg.arg(ToPixel(1, Unit::Mm)).arg(length1).arg(length2)));
+
     QCOMPARE(elArc.GetRadius1(), res.GetRadius1());
     QCOMPARE(elArc.GetRadius2(), res.GetRadius2());
+
+    const QVector<QPointF> originalPoints = elArc.GetPoints();
+    QVERIFY2(!originalPoints.isEmpty(), "Original arc has no points");
+
+    QVERIFY2(VFuzzyComparePoints(originalP1, originalPoints.constFirst()),
+             qPrintable(QStringLiteral("originalP1 != originalPoints.constFirst")));
+    QVERIFY2(VFuzzyComparePoints(originalP2, originalPoints.constLast()),
+             qPrintable(QStringLiteral("originalP2 != originalPoints.constLast")));
+
+    const QVector<QPointF> flippedPoints = res.GetPoints();
+    QVERIFY2(!flippedPoints.isEmpty(), "Flipped arc has no points");
+
+    // Get actual flipped endpoints
+    const QPointF actualFlippedP1 = res.GetP1();
+    const QPointF actualFlippedP2 = res.GetP2();
+
+    QVERIFY2(VFuzzyComparePoints(actualFlippedP1, flippedPoints.constFirst()),
+             qPrintable(QStringLiteral("actualFlippedP1 != flippedPoints.constFirst")));
+    QVERIFY2(VFuzzyComparePoints(actualFlippedP2, flippedPoints.constLast()),
+             qPrintable(QStringLiteral("actualFlippedP2 != flippedPoints.constLast")));
+
+    QVERIFY2(VFuzzyComparePoints(expectedFlippedP1, flippedPoints.constFirst()),
+             qPrintable(QStringLiteral("expectedFlippedP1 != flippedPoints.constFirst")));
+    QVERIFY2(VFuzzyComparePoints(expectedFlippedP2, flippedPoints.constLast()),
+             qPrintable(QStringLiteral("expectedFlippedP2 != flippedPoints.constLast")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestRotateAndFlip_data()
+{
+    QTest::addColumn<QPointF>("center");
+    QTest::addColumn<qreal>("radius1");
+    QTest::addColumn<qreal>("radius2");
+    QTest::addColumn<qreal>("startAngle");
+    QTest::addColumn<qreal>("endAngle");
+    QTest::addColumn<qreal>("rotationAngle"); // Internal arc rotation
+    QTest::addColumn<QPointF>("rotatePoint"); // Pivot for Rotate() method
+    QTest::addColumn<qreal>("rotateDegrees"); // Degrees for Rotate() method
+    QTest::addColumn<QLineF>("flipAxis");
+    QTest::addColumn<QString>("prefixR");
+    QTest::addColumn<QString>("prefixF");
+
+    QLineF vertAxis(QPointF(100, 0), QPointF(100, 500));
+    QLineF horizAxis(QPointF(0, 100), QPointF(500, 100));
+
+    // Case 1: Rotate 90 degrees around origin, then flip over vertical axis
+    QTest::newRow("Rotate 90 then Flip Vertical") << QPointF(10, 10) << 50.0 << 30.0 << 0.0 << 90.0 << 0.0
+                                                  << QPointF(0, 0) << 90.0 << vertAxis << "_rot" << "_flip";
+
+    // Case 2: Rotate 45 degrees around center, then flip over horizontal axis
+    QTest::newRow("Rotate 45 then Flip Horizontal") << QPointF(50, 50) << 100.0 << 50.0 << 45.0 << 135.0 << 10.0
+                                                    << QPointF(50, 50) << 45.0 << horizAxis << "_r" << "_f";
+
+    // Case 3: Negative radii handling (geometric normalization check)
+    QTest::newRow("Negative Radii Transformation") << QPointF(0, 0) << -20.0 << 40.0 << 10.0 << 100.0 << 0.0
+                                                   << QPointF(10, 10) << -90.0 << vertAxis << "_r" << "_f";
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestRotateAndFlip()
+{
+    QFETCH(QPointF, center);
+    QFETCH(qreal, radius1);
+    QFETCH(qreal, radius2);
+    QFETCH(qreal, startAngle);
+    QFETCH(qreal, endAngle);
+    QFETCH(qreal, rotationAngle);
+    QFETCH(QPointF, rotatePoint);
+    QFETCH(qreal, rotateDegrees);
+    QFETCH(QLineF, flipAxis);
+    QFETCH(QString, prefixR);
+    QFETCH(QString, prefixF);
+
+    const VEllipticalArc arcOrigin(VPointF(center), radius1, radius2, startAngle, endAngle, rotationAngle);
+    const qreal originalLength = qAbs(arcOrigin.GetLength());
+    const QPointF p1_0 = arcOrigin.GetP1();
+    const QPointF p2_0 = arcOrigin.GetP2();
+
+    // Step 1: Rotate
+    const VEllipticalArc rotatedArc = arcOrigin.Rotate(rotatePoint, rotateDegrees, prefixR);
+
+    // Step 2: Flip the result of the rotation
+    const VEllipticalArc finalArc = rotatedArc.Flip(flipAxis, prefixF);
+
+    // Manually transform points: Rotate original points, then flip the results
+    const QPointF p1_rotated = VPointF::RotatePF(rotatePoint, p1_0, rotateDegrees);
+    const QPointF p2_rotated = VPointF::RotatePF(rotatePoint, p2_0, rotateDegrees);
+
+    const QPointF expectedP1 = VPointF::FlipPF(flipAxis, p1_rotated);
+    const QPointF expectedP2 = VPointF::FlipPF(flipAxis, p2_rotated);
+
+    const auto nameError = QStringLiteral("Final name '%1' does not end with expected prefix sequence.")
+                               .arg(finalArc.name());
+    QVERIFY2(finalArc.name().endsWith(prefixR + prefixF) || finalArc.name().endsWith(prefixF),
+             qUtf8Printable(nameError));
+
+    const qreal finalLength = qAbs(finalArc.GetLength());
+    const qreal epsilon = ToPixel(1, Unit::Mm);
+
+    QString const lengthMsg = u"Length mismatch after sequence. Original: %1, Final: %2"_s.arg(originalLength)
+                                  .arg(finalLength);
+    QVERIFY2(qAbs(originalLength - finalLength) <= epsilon, qUtf8Printable(lengthMsg));
+
+    QCOMPARE(finalArc.GetRadius1(), arcOrigin.GetRadius1());
+    QCOMPARE(finalArc.GetRadius2(), arcOrigin.GetRadius2());
+
+    const QPointF actualP1 = finalArc.GetP1();
+    const QPointF actualP2 = finalArc.GetP2();
+
+    QVERIFY2(VFuzzyComparePoints(expectedP1, actualP1),
+             qPrintable(QStringLiteral("Start point (P1) mismatch after Rotate+Flip sequence")));
+
+    QVERIFY2(VFuzzyComparePoints(expectedP2, actualP2),
+             qPrintable(QStringLiteral("End point (P2) mismatch after Rotate+Flip sequence")));
+
+    const QVector<QPointF> pathPoints = finalArc.GetPoints();
+    QVERIFY2(!pathPoints.isEmpty(), "Resulting arc contains no points in its path");
+
+    QVERIFY2(VFuzzyComparePoints(actualP1, pathPoints.constFirst()),
+             "GetP1() does not match the first point in GetPoints() path");
+    QVERIFY2(VFuzzyComparePoints(actualP2, pathPoints.constLast()),
+             "GetP2() does not match the last point in GetPoints() path");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1172,5 +1357,287 @@ void TST_VEllipticalArc::EmptyArc()
     empty.SetRadius1(radius1);
     empty.SetRadius2(radius2);
 
-    QVERIFY(qAbs(empty.GetLength() - length) <= ToPixel(1, Unit::Mm));
+    const qreal calcLength = qAbs(empty.GetLength());
+
+    QString const errorLengthMsg
+        = u"Difference between original and expected lengthes bigger than eps = %1. l1 = %2; l2 = %3"_s;
+    QVERIFY2(qAbs(calcLength - length) <= ToPixel(1, Unit::Mm),
+             qUtf8Printable(errorLengthMsg.arg(ToPixel(1, Unit::Mm)).arg(calcLength).arg(length)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestCutArc_data()
+{
+    QTest::addColumn<qreal>("r1");
+    QTest::addColumn<qreal>("r2");
+    QTest::addColumn<qreal>("f1");
+    QTest::addColumn<qreal>("f2");
+    QTest::addColumn<qreal>("rotDeg");
+    QTest::addColumn<qreal>("cutFraction");
+
+    // Circles
+    QTest::newRow("circle_quarter_at_half") << 100.0 << 100.0 << 0.0 << 90.0 << 0.0 << 0.50;
+    QTest::newRow("circle_half_at_quarter") << 100.0 << 100.0 << 0.0 << 180.0 << 0.0 << 0.25;
+    QTest::newRow("circle_threequarter") << 100.0 << 100.0 << 0.0 << 270.0 << 0.0 << 0.75;
+    QTest::newRow("circle_full_10pct") << 100.0 << 100.0 << 0.0 << 360.0 << 0.0 << 0.10;
+    QTest::newRow("circle_full_90pct") << 100.0 << 100.0 << 0.0 << 360.0 << 0.0 << 0.90;
+    QTest::newRow("circle_near_start") << 100.0 << 100.0 << 0.0 << 360.0 << 0.0 << 0.01;
+    QTest::newRow("circle_near_end") << 100.0 << 100.0 << 0.0 << 360.0 << 0.0 << 0.99;
+
+    // Regular ellipses
+    QTest::newRow("ellipse_r50_r30") << 50.0 << 30.0 << 30.0 << 150.0 << 0.0 << 0.33;
+    QTest::newRow("ellipse_half_at_30pct") << 60.0 << 40.0 << 0.0 << 180.0 << 0.0 << 0.30;
+    QTest::newRow("ellipse_partial_arc") << 80.0 << 50.0 << 30.0 << 120.0 << 0.0 << 0.70;
+    QTest::newRow("ellipse_full_50pct") << 100.0 << 60.0 << 0.0 << 360.0 << 0.0 << 0.50;
+    QTest::newRow("ellipse_nearly_circular") << 80.0 << 79.0 << 0.0 << 359.9 << 0.0 << 0.50;
+
+    // Thin / eccentric ellipses
+    QTest::newRow("thin_ellipse_half") << 200.0 << 20.0 << 0.0 << 180.0 << 0.0 << 0.40;
+    QTest::newRow("very_thin_quarter") << 300.0 << 10.0 << 0.0 << 90.0 << 45.0 << 0.20;
+
+    // Scale extremes
+    QTest::newRow("large_radii") << 500.0 << 300.0 << 10.0 << 350.0 << 30.0 << 0.60;
+    QTest::newRow("small_radii") << 5.0 << 3.0 << 0.0 << 270.0 << 0.0 << 0.80;
+
+    // Rotation angle sweep (same geometry, only rotation varies)
+    QTest::newRow("rot_0") << 100.0 << 60.0 << 0.0 << 270.0 << 0.0 << 0.50;
+    QTest::newRow("rot_30") << 100.0 << 60.0 << 0.0 << 270.0 << 30.0 << 0.50;
+    QTest::newRow("rot_45") << 100.0 << 60.0 << 0.0 << 270.0 << 45.0 << 0.50;
+    QTest::newRow("rot_90") << 100.0 << 60.0 << 0.0 << 270.0 << 90.0 << 0.50;
+    QTest::newRow("rot_135") << 100.0 << 60.0 << 0.0 << 270.0 << 135.0 << 0.50;
+    QTest::newRow("rot_180") << 100.0 << 60.0 << 0.0 << 270.0 << 180.0 << 0.50;
+    QTest::newRow("rot_270") << 100.0 << 60.0 << 0.0 << 270.0 << 270.0 << 0.50;
+    QTest::newRow("rot_359") << 100.0 << 60.0 << 0.0 << 270.0 << 359.0 << 0.50;
+    QTest::newRow("rotated_ellipse_33pct") << 120.0 << 70.0 << 10.0 << 350.0 << 90.0 << 0.33;
+    QTest::newRow("rotated_ellipse_45deg") << 80.0 << 40.0 << 0.0 << 180.0 << 45.0 << 0.50;
+    QTest::newRow("rotated_45_50pct") << 60.0 << 40.0 << 45.0 << 315.0 << 60.0 << 0.50;
+
+    // ── Reversed arcs (clockwise sweep via negative radius) ──────────────────
+    // A negative r1 or r2 flips the sweep direction. Mirrors the forward cases
+    // above to exercise the reversed-direction branch in FindF2 and sign
+    // handling inside DoCutArc / DoCutArcByLength.
+    QTest::newRow("rev_neg_r1_circle_quarter") << -100.0 << 100.0 << 0.0 << 90.0 << 0.0 << 0.50;
+    QTest::newRow("rev_neg_r1_circle_half") << -100.0 << 100.0 << 0.0 << 180.0 << 0.0 << 0.25;
+    QTest::newRow("rev_neg_r1_circle_threequart") << -100.0 << 100.0 << 0.0 << 270.0 << 0.0 << 0.75;
+    QTest::newRow("rev_neg_r1_near_start") << -100.0 << 100.0 << 0.0 << 360.0 << 0.0 << 0.01;
+    QTest::newRow("rev_neg_r1_near_end") << -100.0 << 100.0 << 0.0 << 360.0 << 0.0 << 0.99;
+    QTest::newRow("rev_neg_r2_circle_half") << 100.0 << -100.0 << 0.0 << 180.0 << 0.0 << 0.50;
+    QTest::newRow("rev_neg_r1_ellipse_r50_r30") << -50.0 << 30.0 << 30.0 << 150.0 << 0.0 << 0.33;
+    QTest::newRow("rev_neg_r2_ellipse_partial") << 80.0 << -50.0 << 30.0 << 120.0 << 0.0 << 0.70;
+    QTest::newRow("rev_neg_r1_thin_ellipse") << -200.0 << 20.0 << 0.0 << 180.0 << 0.0 << 0.40;
+    QTest::newRow("rev_neg_r2_large_radii") << 500.0 << -300.0 << 10.0 << 350.0 << 30.0 << 0.60;
+    QTest::newRow("rev_neg_r1_small_radii") << -5.0 << 3.0 << 0.0 << 270.0 << 0.0 << 0.80;
+    QTest::newRow("rev_neg_r1_rot_45") << -100.0 << 60.0 << 0.0 << 270.0 << 45.0 << 0.50;
+    QTest::newRow("rev_neg_r1_rot_90") << -100.0 << 60.0 << 0.0 << 270.0 << 90.0 << 0.50;
+    QTest::newRow("rev_neg_r1_rot_180") << -100.0 << 60.0 << 0.0 << 270.0 << 180.0 << 0.50;
+    QTest::newRow("rev_neg_r2_rotated_ellipse") << 120.0 << -70.0 << 10.0 << 350.0 << 90.0 << 0.33;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestCutArc()
+{
+    QFETCH(qreal, r1);
+    QFETCH(qreal, r2);
+    QFETCH(qreal, f1);
+    QFETCH(qreal, f2);
+    QFETCH(qreal, rotDeg);
+    QFETCH(qreal, cutFraction);
+
+    const VEllipticalArc arc = MakeArc(r1, r2, f1, f2, rotDeg);
+    const qreal total = arc.GetLength();
+    const qreal cutLen = total * cutFraction;
+
+    const auto [cutPoint, arc1, arc2] = DoCut(arc, cutLen);
+
+    // 1. Cut point lies on the junction of both sub-arcs
+    QVERIFY2(VFuzzyComparePoints(cutPoint, arc1.GetP2()), qPrintable(QStringLiteral("cutPoint != arc1.P2")));
+    QVERIFY2(VFuzzyComparePoints(cutPoint, arc2.GetP1()), qPrintable(QStringLiteral("cutPoint != arc2.P1")));
+
+    // 2. Length conservation: arc1 + arc2 == original
+    const qreal sum = arc1.GetLength() + arc2.GetLength();
+    const qreal diff = qAbs(sum - total);
+    QVERIFY2(diff < accuracyPointOnLine,
+             qPrintable(
+                 QStringLiteral("length not conserved: orig=%1  arc1+arc2=%2  diff=%3").arg(total).arg(sum).arg(diff)));
+
+    // 3. Each piece matches the requested split
+    QVERIFY2(qAbs(arc1.GetLength() - cutLen) < accuracyPointOnLine,
+             qPrintable(QStringLiteral("arc1 length: expected=%1  got=%2").arg(cutLen).arg(arc1.GetLength())));
+    QVERIFY2(qAbs(arc2.GetLength() - (total - cutLen)) < accuracyPointOnLine,
+             qPrintable(QStringLiteral("arc2 length: expected=%1  got=%2").arg(total - cutLen).arg(arc2.GetLength())));
+
+    // 4. Endpoint continuity: orig.P1 → cutPoint → orig.P2
+    QVERIFY2(VFuzzyComparePoints(arc.GetP1(), arc1.GetP1()), "arc1.P1 != original.P1");
+    QVERIFY2(VFuzzyComparePoints(arc.GetP2(), arc2.GetP2()), "arc2.P2 != original.P2");
+    QVERIFY2(VFuzzyComparePoints(arc1.GetP2(), arc2.GetP1()), "junction discontinuous");
+
+    // 5. Rotation angle is propagated into both children
+    QVERIFY2(VFuzzyComparePossibleNulls(arc1.GetRotationAngle(), rotDeg),
+             qPrintable(QStringLiteral("arc1 lost rotation angle: expected=%1  got=%2")
+                            .arg(rotDeg)
+                            .arg(arc1.GetRotationAngle())));
+    QVERIFY2(VFuzzyComparePossibleNulls(arc2.GetRotationAngle(), rotDeg),
+             qPrintable(QStringLiteral("arc2 lost rotation angle: expected=%1  got=%2")
+                            .arg(rotDeg)
+                            .arg(arc2.GetRotationAngle())));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestCutArc_ZeroLength_data()
+{
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestCutArc_ZeroLength()
+{
+    for (const VEllipticalArc &arc : {MakeArc(100.0, 100.0, 0.0, 180.0, 0.0),   // forward
+                                      MakeArc(-100.0, 100.0, 0.0, 180.0, 0.0)}) // reversed (neg r1)
+    {
+        const auto [cp, arc1, arc2] = DoCut(arc, 0.0);
+
+        QVERIFY2(VFuzzyComparePoints(cp, arc.GetP1()), "zero-cut: cutPoint != P1");
+        QVERIFY2(arc1.GetLength() < accuracyPointOnLine,
+                 qPrintable(QStringLiteral("zero-cut: arc1 length=%1").arg(arc1.GetLength())));
+        QVERIFY2(qAbs(arc2.GetLength() - arc.GetLength()) < accuracyPointOnLine, "zero-cut: arc2 length != original");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestCutArc_FullLength_data()
+{
+    QTest::addColumn<qreal>("r1");
+    QTest::addColumn<qreal>("r2");
+    QTest::addColumn<qreal>("f1");
+    QTest::addColumn<qreal>("f2");
+    QTest::addColumn<qreal>("rotDeg");
+
+    QTest::newRow("forward") << 100.0 << 100.0 << 0.0 << 270.0 << 0.0;
+    QTest::newRow("reversed (neg r1)") << -100.0 << 100.0 << 0.0 << 270.0 << 0.0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestCutArc_FullLength()
+{
+    QFETCH(qreal, r1);
+    QFETCH(qreal, r2);
+    QFETCH(qreal, f1);
+    QFETCH(qreal, f2);
+    QFETCH(qreal, rotDeg);
+
+    const VEllipticalArc arc = MakeArc(r1, r2, f1, f2, rotDeg);
+
+    const qreal total = arc.GetLength();
+    const auto [cp, arc1, arc2] = DoCut(arc, total);
+
+    QVERIFY2(VFuzzyComparePoints(cp, arc.GetP2()), "full-cut: cutPoint != P2");
+    QVERIFY2(qAbs(arc1.GetLength() - total) < accuracyPointOnLine, "full-cut: arc1 length != total");
+    QVERIFY2(arc2.GetLength() < accuracyPointOnLine,
+             qPrintable(QStringLiteral("full-cut: arc2 length=%1").arg(arc2.GetLength())));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestCutArc_LengthExceedsArc_data()
+{
+    QTest::addColumn<qreal>("r1");
+    QTest::addColumn<qreal>("r2");
+    QTest::addColumn<qreal>("f1");
+    QTest::addColumn<qreal>("f2");
+    QTest::addColumn<qreal>("rotDeg");
+
+    QTest::newRow("forward") << 50.0 << 30.0 << 0.0 << 180.0 << 0.0;
+    QTest::newRow("reversed (neg r1)") << -50.0 << 30.0 << 0.0 << 180.0 << 0.0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestCutArc_LengthExceedsArc()
+{
+    QFETCH(qreal, r1);
+    QFETCH(qreal, r2);
+    QFETCH(qreal, f1);
+    QFETCH(qreal, f2);
+    QFETCH(qreal, rotDeg);
+
+    const VEllipticalArc arc = MakeArc(r1, r2, f1, f2, rotDeg);
+
+    const qreal total = arc.GetLength();
+    const auto [cp, arc1, arc2] = DoCut(arc, total * 2.0);
+
+    QVERIFY2(arc1.GetLength() <= total + accuracyPointOnLine, "exceed-cut: arc1 exceeds original");
+    QVERIFY2(qFuzzyIsNull(arc2.GetLength()), "exceed-cut: arc2 not degenerate after clamp");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestCutArc_HalfLength_data()
+{
+    QTest::addColumn<qreal>("r1");
+    QTest::addColumn<qreal>("r2");
+    QTest::addColumn<qreal>("f1");
+    QTest::addColumn<qreal>("f2");
+    QTest::addColumn<qreal>("rotDeg");
+
+    // Symmetric circle cut exactly in half: both arcs must be equal.
+    // Holds for both winding directions.
+    QTest::newRow("forward") << 100.0 << 100.0 << 0.0 << 360.0 << 0.0;
+    QTest::newRow("reversed (neg r1)") << -100.0 << 100.0 << 0.0 << 360.0 << 0.0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestCutArc_HalfLength()
+{
+    QFETCH(qreal, r1);
+    QFETCH(qreal, r2);
+    QFETCH(qreal, f1);
+    QFETCH(qreal, f2);
+    QFETCH(qreal, rotDeg);
+
+    const VEllipticalArc arc = MakeArc(r1, r2, f1, f2, rotDeg);
+
+    const auto [cp, arc1, arc2] = DoCut(arc, arc.GetLength() / 2.0);
+
+    QVERIFY2(qAbs(arc1.GetLength() - arc2.GetLength()) < accuracyPointOnLine,
+             qPrintable(QStringLiteral("half-cut: arc1=%1  arc2=%2").arg(arc1.GetLength()).arg(arc2.GetLength())));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestCutArc_RepeatedCut_Consistent_data()
+{
+    QTest::addColumn<qreal>("r1");
+    QTest::addColumn<qreal>("r2");
+    QTest::addColumn<qreal>("f1");
+    QTest::addColumn<qreal>("f2");
+    QTest::addColumn<qreal>("rotDeg");
+
+    // Cut at 1/3, then cut the first piece at its own midpoint.
+    // Three resulting pieces must sum to the original and form an unbroken chain.
+    // Run for both forward and reversed arc directions.
+    QTest::newRow("forward") << 100.0 << 70.0 << 0.0 << 270.0 << 15.0;
+    QTest::newRow("reversed (neg r1)") << -100.0 << 70.0 << 0.0 << 270.0 << 15.0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VEllipticalArc::TestCutArc_RepeatedCut_Consistent()
+{
+    QFETCH(qreal, r1);
+    QFETCH(qreal, r2);
+    QFETCH(qreal, f1);
+    QFETCH(qreal, f2);
+    QFETCH(qreal, rotDeg);
+
+    const VEllipticalArc arc = MakeArc(r1, r2, f1, f2, rotDeg);
+
+    const qreal total = arc.GetLength();
+
+    const auto [cp1, a1, a2] = DoCut(arc, total / 3.0);
+    const auto [cp2, b1, b2] = DoCut(a1, a1.GetLength() / 2.0);
+
+    // Length: three pieces sum to original
+    const qreal sum3 = b1.GetLength() + b2.GetLength() + a2.GetLength();
+    QVERIFY2(qAbs(sum3 - total) < accuracyPointOnLine,
+             qPrintable(QStringLiteral("repeated-cut: 3-piece sum=%1  original=%2").arg(sum3).arg(total)));
+
+    // Endpoint chain: b1.P1 → b2 → a2.P2
+    QVERIFY2(VFuzzyComparePoints(b1.GetP1(), arc.GetP1()), "repeated-cut: chain start broken");
+    QVERIFY2(VFuzzyComparePoints(b1.GetP2(), b2.GetP1()), "repeated-cut: inner junction broken");
+    QVERIFY2(VFuzzyComparePoints(b2.GetP2(), a2.GetP1()), "repeated-cut: outer junction broken");
+    QVERIFY2(VFuzzyComparePoints(a2.GetP2(), arc.GetP2()), "repeated-cut: chain end broken");
 }

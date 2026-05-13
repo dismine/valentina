@@ -32,7 +32,6 @@
 #include <QLineF>
 
 #include "../vmisc/vmath.h"
-#include "vabstractcurve.h"
 #include "vspline_p.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
@@ -70,7 +69,7 @@ VSpline::VSpline(const VPointF &p1, const VPointF &p4, qreal angle1, qreal angle
   : VAbstractCubicBezier(GOType::Spline, idObject, mode),
     d(new VSplineData(p1, p4, angle1, angle2, kAsm1, kAsm2, kCurve))
 {
-    CreateName();
+    VSpline::CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -86,7 +85,7 @@ VSpline::VSpline(const VPointF &p1, const QPointF &p2, const QPointF &p3, const 
   : VAbstractCubicBezier(GOType::Spline, idObject, mode),
     d(new VSplineData(p1, p2, p3, p4))
 {
-    CreateName();
+    VSpline::CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -110,7 +109,7 @@ VSpline::VSpline(const VPointF &p1, const VPointF &p4, qreal angle1, const QStri
     d(new VSplineData(p1, p4, angle1, angle1Formula, angle2, angle2Formula, c1Length, c1LengthFormula, c2Length,
                       c2LengthFormula))
 {
-    CreateName();
+    VSpline::CreateName();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -207,9 +206,35 @@ auto VSpline::CutSpline(qreal length, VSpline &spl1, VSpline &spl2, const QStrin
 
     spl1 = VSpline(GetP1(), spl1p2, spl1p3, VPointF(cutPoint));
     spl1.SetApproximationScale(GetApproximationScale());
+    spl1.SetColor(GetColor());
+    spl1.SetPenStyle(GetPenStyle());
 
     spl2 = VSpline(VPointF(cutPoint), spl2p2, spl2p3, GetP4());
     spl2.SetApproximationScale(GetApproximationScale());
+    spl2.SetColor(GetColor());
+    spl2.SetPenStyle(GetPenStyle());
+    return cutPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VSpline::CutSplineAtParam(qreal t, VSpline &left, VSpline &right, const QString &midPointName) const -> QPointF
+{
+    QPointF spl1p2;
+    QPointF spl1p3;
+    QPointF spl2p2;
+    QPointF spl2p3;
+
+    const QPointF cutPoint = CutSplineAtParam(t, spl1p2, spl1p3, spl2p2, spl2p3);
+
+    left = VSpline(GetP1(), spl1p2, spl1p3, VPointF(cutPoint, midPointName, 0, 0));
+    left.SetApproximationScale(GetApproximationScale());
+    left.SetColor(GetColor());
+    left.SetPenStyle(GetPenStyle());
+
+    right = VSpline(VPointF(cutPoint, midPointName, 0, 0), spl2p2, spl2p3, GetP4());
+    right.SetApproximationScale(GetApproximationScale());
+    right.SetColor(GetColor());
+    right.SetPenStyle(GetPenStyle());
     return cutPoint;
 }
 
@@ -242,7 +267,9 @@ auto VSpline::SplinePoints(const QPointF &p1, const QPointF &p4, qreal angle1, q
 {
     QLineF p1pX(p1.x(), p1.y(), p1.x() + 100, p1.y());
     p1pX.setAngle(angle1);
-    qreal L = 0, radius = 0, angle = 90;
+    qreal L = 0;
+    qreal radius = 0;
+    constexpr qreal angle = 90;
     radius = QLineF(QPointF(p1.x(), p4.y()), p4).length();
     L = kCurve * radius * 4 / 3 * tan(angle * M_PI_4 / 180.0);
     QLineF p1p2(p1.x(), p1.y(), p1.x() + L * kAsm1, p1.y());
@@ -269,6 +296,7 @@ auto VSpline::operator=(const VSpline &spline) -> VSpline &
 //---------------------------------------------------------------------------------------------------------------------
 VSpline::VSpline(VSpline &&spline) noexcept
   : VAbstractCubicBezier(std::move(spline)),
+    // cppcheck-suppress accessMoved
     d(std::move(spline.d)) // NOLINT(bugprone-use-after-move)
 {
 }

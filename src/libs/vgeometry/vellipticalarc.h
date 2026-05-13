@@ -42,6 +42,7 @@
 #include "vpointf.h"
 
 class VEllipticalArcData;
+class VSplinePath;
 
 class VEllipticalArc final : public VAbstractArc
 {
@@ -60,12 +61,11 @@ public:
                    Draw mode = Draw::Calculation);
     VEllipticalArc(qreal length, const VPointF &center, qreal radius1, qreal radius2, qreal f1, qreal rotationAngle);
     VEllipticalArc(const VEllipticalArc &arc);
+    ~VEllipticalArc() override;
 
     auto Rotate(QPointF originPoint, qreal degrees, const QString &prefix = QString()) const -> VEllipticalArc;
     auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VEllipticalArc;
     auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VEllipticalArc;
-
-    ~VEllipticalArc() override;
 
     auto operator=(const VEllipticalArc &arc) -> VEllipticalArc &;
 
@@ -92,16 +92,9 @@ public:
     auto GetP1() const -> QPointF;
     auto GetP2() const -> QPointF;
 
-    auto GetTransform() const -> QTransform;
-    void SetTransform(const QTransform &matrix, bool combine = false);
-
-    auto GetCenter() const -> VPointF override;
     auto GetPoints() const -> QVector<QPointF> override;
-    auto GetStartAngle() const -> qreal override;
-    auto GetEndAngle() const -> qreal override;
 
-    auto CutArc(qreal length, VEllipticalArc &arc1, VEllipticalArc &arc2, const QString &pointName) const -> QPointF;
-    auto CutArc(qreal length, const QString &pointName) const -> QPointF;
+    auto ToSplinePath() const -> VSplinePath override;
 
     static auto OptimizeAngle(qreal angle) -> qreal;
 
@@ -109,13 +102,15 @@ protected:
     void CreateName() override;
     void CreateAlias() override;
     void FindF2(qreal length) override;
+    auto DoCutArc(qreal length, VAbstractArc *arc1, VAbstractArc *arc2, const QString &pointName) const
+        -> QPointF override;
+    auto DoCutArcByLength(qreal length, const QString &pointName) const -> QPointF override;
 
 private:
     QSharedDataPointer<VEllipticalArcData> d;
 
     auto MaxLength() const -> qreal;
-    auto GetP(qreal angle) const -> QPointF;
-    auto ArcPoints(QVector<QPointF> points) const -> QVector<QPointF>;
+    auto GetP(qreal angle, bool addRotation = true) const -> QPointF;
 
     auto CorrectCutLength(qreal length, qreal fullLength, const QString &pointName) const -> qreal;
 };

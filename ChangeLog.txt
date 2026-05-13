@@ -23,6 +23,7 @@
 - Valentina app. Block curve move when select with tool.
 - Puzzle app. Fix empty second blank page when printing tiled layout.
 - Puzzle app. Adjust macOS font scaling to fix oversized text in print mode.
+- Valentina app. Fixed arc transformations.
 
 # Valentina 1.0.0 July 21, 2025
 - Fix Puzzle app crash when application closing.

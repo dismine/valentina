@@ -58,10 +58,11 @@ public:
     VSpline(const VPointF &p1, const VPointF &p4, qreal angle1, const QString &angle1Formula, qreal angle2,
             const QString &angle2Formula, qreal c1Length, const QString &c1LengthFormula, qreal c2Length,
             const QString &c2LengthFormula, quint32 idObject = 0, Draw mode = Draw::Calculation);
+    ~VSpline() override;
+
     auto Rotate(const QPointF &originPoint, qreal degrees, const QString &prefix = QString()) const -> VSpline;
     auto Flip(const QLineF &axis, const QString &prefix = QString()) const -> VSpline;
     auto Move(qreal length, qreal angle, const QString &prefix = QString()) const -> VSpline;
-    ~VSpline() override;
 
     auto operator=(const VSpline &spline) -> VSpline &;
 
@@ -102,6 +103,9 @@ public:
 
     using VAbstractCubicBezier::CutSpline;
     auto CutSpline(qreal length, VSpline &spl1, VSpline &spl2, const QString &pointName) const -> QPointF;
+    using VAbstractCubicBezier::CutSplineAtParam;
+    auto CutSplineAtParam(qreal t, VSpline &left, VSpline &right, const QString &midPointName = QString()) const
+        -> QPointF;
 
     auto GetPoints() const -> QVector<QPointF> override;
     // cppcheck-suppress unusedFunction
