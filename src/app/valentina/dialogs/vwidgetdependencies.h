@@ -58,7 +58,9 @@ public:
 
 public slots:
     void UpdateDependencies();
-    void ShowDependency(QGraphicsItem *item);
+    void ShowDependency(vidtype id);
+
+    static auto ItemToId(QGraphicsItem *item) -> vidtype;
 
 signals:
     void ShowProperties(QGraphicsItem *item) const;

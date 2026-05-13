@@ -6431,8 +6431,17 @@ void MainWindow::InitDocksContain()
             Qt::QueuedConnection);
     connect(doc, &VPattern::PatternDependencyGraphCompleted, m_dependenciesWidget,
             &VWidgetDependencies::UpdateDependencies, Qt::QueuedConnection);
-    connect(ui->view, &VMainGraphicsView::itemClicked, m_dependenciesWidget, &VWidgetDependencies::ShowDependency,
-            Qt::QueuedConnection);
+    // Extract the tool ID synchronously while the item is alive, then deliver it
+    // via a queued call so ShowDependency does not block the UI thread.
+    // Passing a raw QGraphicsItem* through a queued connection is unsafe because
+    // the item can be destroyed before the slot fires.
+    connect(ui->view, &VMainGraphicsView::itemClicked, this,
+            [this](QGraphicsItem *item)
+            -> void  {
+                const vidtype id = VWidgetDependencies::ItemToId(item);
+                QMetaObject::invokeMethod(m_dependenciesWidget, [widget = m_dependenciesWidget, id]()
+                                          { widget->ShowDependency(id); }, Qt::QueuedConnection);
+            });
     connect(m_dependenciesWidget, &VWidgetDependencies::ShowProperties, m_toolOptions,
             &VToolOptionsPropertyBrowser::itemClicked, Qt::QueuedConnection);
     connect(m_dependenciesWidget, &VWidgetDependencies::ShowTool, ui->view, &VMainGraphicsView::EnsureToolVisible,

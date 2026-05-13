@@ -199,9 +199,27 @@ void VWidgetDependencies::UpdateDependencies()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VWidgetDependencies::ShowDependency(QGraphicsItem *item)
+auto VWidgetDependencies::ItemToId(QGraphicsItem *item) -> vidtype
 {
     if (item == nullptr || !item->isEnabled())
+    {
+        return NULL_ID;
+    }
+
+    auto *toolItem = FindItemTool_r(item);
+    const auto *tool = dynamic_cast<VAbstractTool *>(toolItem);
+    if (tool == nullptr)
+    {
+        return NULL_ID;
+    }
+
+    return tool->getId();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VWidgetDependencies::ShowDependency(vidtype id)
+{
+    if (id == NULL_ID)
     {
         if (m_activeTool != NULL_ID)
         {
@@ -211,18 +229,8 @@ void VWidgetDependencies::ShowDependency(QGraphicsItem *item)
         return;
     }
 
-    auto *toolItem = FindItemTool_r(item);
-
-    const auto *tool = dynamic_cast<VAbstractTool *>(toolItem);
-    if (tool == nullptr)
-    {
-        return;
-    }
-
-    vidtype const objectId = tool->getId();
-
     // Find in source model
-    const QModelIndex sourceIndex = m_dependencyModel->FindRootIndexByObjectId(objectId);
+    const QModelIndex sourceIndex = m_dependencyModel->FindRootIndexByObjectId(id);
 
     if (!sourceIndex.isValid())
     {
