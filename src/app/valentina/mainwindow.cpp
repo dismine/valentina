@@ -6436,10 +6436,10 @@ void MainWindow::InitDocksContain()
     // Passing a raw QGraphicsItem* through a queued connection is unsafe because
     // the item can be destroyed before the slot fires.
     connect(ui->view, &VMainGraphicsView::itemClicked, this,
-            [this](QGraphicsItem *item)
-            -> void  {
+            [this](QGraphicsItem *item) -> void
+            {
                 const vidtype id = VWidgetDependencies::ItemToId(item);
-                QMetaObject::invokeMethod(m_dependenciesWidget, [widget = m_dependenciesWidget, id]()
+                QMetaObject::invokeMethod(m_dependenciesWidget, [widget = m_dependenciesWidget, id]()-> void
                                           { widget->ShowDependency(id); }, Qt::QueuedConnection);
             });
     connect(m_dependenciesWidget, &VWidgetDependencies::ShowProperties, m_toolOptions,
