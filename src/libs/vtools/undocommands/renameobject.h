@@ -30,6 +30,7 @@
 
 #include "../ifc/xml/vpatterngraphnode.h"
 #include "../vgeometry/vgeometrydef.h"
+#include "renametoken.h"
 #include "vundocommand.h"
 
 enum class OperationType : quint8
@@ -112,15 +113,6 @@ private:
     QString m_newLabel;
 };
 
-enum class RenameObjectType : quint8
-{
-    Line,
-    Spline,
-    SplinePath
-};
-
-using ObjectPair_t = std::pair<QString, QString>;
-
 class RenamePair : public AbstractObjectRename
 {
     Q_OBJECT // NOLINT
@@ -170,15 +162,6 @@ private:
                QUndoCommand *parent = nullptr);
 };
 
-enum class CurveAliasType : quint8
-{
-    Arc,
-    ElArc,
-    Spline,
-    SplinePath,
-    All
-};
-
 class RenameAlias : public AbstractObjectRename
 {
     Q_OBJECT // NOLINT
@@ -202,12 +185,6 @@ private:
     CurveAliasType m_type;
     QString m_oldAlias;
     QString m_newAlias;
-};
-
-enum class RenameArcType : quint8
-{
-    Arc,
-    ElArc
 };
 
 class RenameArc : public AbstractObjectRename

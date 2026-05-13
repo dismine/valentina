@@ -40,6 +40,7 @@
 #include "tst_nameregexp.h"
 #include "tst_qmutokenparser.h"
 #include "tst_readval.h"
+#include "tst_renametoken.h"
 #include "tst_svgfontwritingsystem.h"
 #include "tst_vabstractcurve.h"
 #include "tst_vabstractpiece.h"
@@ -136,6 +137,7 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_VGObject());
     ASSERT_TEST(new TST_VPointF());
     ASSERT_TEST(new TST_ReadVal());
+    ASSERT_TEST(new TST_RenameToken());
     ASSERT_TEST(new TST_VTranslateVars());
     ASSERT_TEST(new TST_VToolUnionDetails());
     ASSERT_TEST(new TST_XSDShema());

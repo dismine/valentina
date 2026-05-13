@@ -341,6 +341,8 @@ VLib {
             "movetool.h",
             "renameobject.cpp",
             "renameobject.h",
+            "renametoken.cpp",
+            "renametoken.h",
             "renamepiece.cpp",
             "renamepiece.h",
             "savetooloptions.h",

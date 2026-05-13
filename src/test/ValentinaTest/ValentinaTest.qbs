@@ -103,6 +103,8 @@ VTestApp {
         "tst_vsplinepath.cpp",
         "tst_vpointf.cpp",
         "tst_readval.cpp",
+        "tst_renametoken.cpp",
+        "tst_renametoken.h",
         "tst_vsvgpathtokenizer.cpp",
         "tst_vsvgpathtokenizer.h",
         "tst_vtheme.cpp",
