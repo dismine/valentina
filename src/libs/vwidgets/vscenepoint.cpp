@@ -121,9 +121,12 @@ void VScenePoint::RefreshPointGeometry(const VPointF &point)
     }
 
     m_namePoint->setText(point.name());
-    m_namePoint->setVisible(m_showLabel);
 
-    RefreshLine();
+    if (!m_onlyPoint)
+    {
+        m_namePoint->setVisible(m_showLabel);
+        RefreshLine();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

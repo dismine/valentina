@@ -52,6 +52,7 @@ struct VAbstractNodeInitData : VAbstractToolInitData
     qreal mx{0};
     qreal my{0};
     bool showLabel{true};
+    bool showLabelExplicit{false};
 };
 
 /**

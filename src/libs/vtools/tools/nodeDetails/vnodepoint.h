@@ -61,8 +61,11 @@ public:
     };
     auto getTagName() const -> QString override;
 
+    void SetInternalPathNode(bool internalPathNode);
+
     void ChangeLabelPosition(quint32 id, const QPointF &pos) override;
     void SetLabelVisible(quint32 id, bool visible) override;
+
 signals:
     void ShowOptions();
     void ToggleInLayout(bool checked);
@@ -77,6 +80,7 @@ signals:
     void TogglePassmarkAngleType(quint32 id, PassmarkAngleType type);
     void TogglePassmarkLineType(quint32 id, PassmarkLineType type);
     void ResetPieceLabelTemplate();
+
 public slots:
     void FullUpdateFromFile() override;
     void NameChangePosition(const QPointF &pos);
@@ -97,6 +101,8 @@ protected:
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VNodePoint) // NOLINT
+
+    bool m_internalPathNode{false};
 
     explicit VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr,
                         QGraphicsItem *parent = nullptr);

@@ -262,6 +262,18 @@ void VPointF::SetShowLabel(bool hide)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPointF::IsShowLabelExplicit() const -> bool
+{
+    return d->m_showLabelExplicit;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPointF::SetShowLabelExplicit(bool value)
+{
+    d->m_showLabelExplicit = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPointF::ToJson() const -> QJsonObject
 {
     QJsonObject object = VGObject::ToJson();

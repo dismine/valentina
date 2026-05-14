@@ -177,6 +177,7 @@ void VNodePoint::Create(const VAbstractNodeInitData &initData)
     p->setIdObject(initData.idObject);
     p->setMode(Draw::Modeling);
     p->SetShowLabel(initData.showLabel);
+    p->SetShowLabelExplicit(initData.showLabelExplicit);
     p->setMx(initData.mx);
     p->setMy(initData.my);
 
@@ -246,6 +247,13 @@ void VNodePoint::SetLabelVisible(quint32 id, bool visible)
     {
         const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(id);
         point->SetShowLabel(visible);
+        point->SetShowLabelExplicit(true);
+
+        if (m_internalPathNode && IsOnlyPoint())
+        {
+            SetOnlyPoint(false);
+        }
+
         RefreshPointGeometry(*point);
         if (QGraphicsScene *sc = scene())
         {
@@ -290,7 +298,10 @@ void VNodePoint::AddToFile()
     doc->SetAttribute(domElement, AttrIdObject, idNode);
     doc->SetAttribute(domElement, AttrMx, VAbstractValApplication::VApp()->fromPixel(point->mx()));
     doc->SetAttribute(domElement, AttrMy, VAbstractValApplication::VApp()->fromPixel(point->my()));
-    doc->SetAttribute<bool>(domElement, AttrShowLabel, point->IsShowLabel());
+    doc->SetAttributeOrRemoveIf<bool>(domElement,
+                                      AttrShowLabel,
+                                      point->IsShowLabel(),
+                                      [](bool show) noexcept -> bool { return show; });
     if (idTool != NULL_ID)
     {
         doc->SetAttribute(domElement, AttrIdTool, idTool);
@@ -347,7 +358,15 @@ auto VNodePoint::InitContextMenu(QMenu *menu, vidtype pieceId, RemoveStatus stat
 
     QAction *actionShowLabel = menu->addAction(QCoreApplication::translate("VNodePoint", "Show label"));
     actionShowLabel->setCheckable(true);
-    actionShowLabel->setChecked(VAbstractTool::data.GeometricObject<VPointF>(m_id)->IsShowLabel());
+
+    if (const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id); !m_internalPathNode)
+    {
+        actionShowLabel->setChecked(point->IsShowLabel());
+    }
+    else
+    {
+        actionShowLabel->setChecked(point->IsShowLabelExplicit() ? point->IsShowLabel() : false);
+    }
     contextMenu.insert(static_cast<int>(ContextMenuOption::ShowLabel), actionShowLabel);
 
     InitPassmarkMenu(menu, pieceId, contextMenu);
@@ -784,4 +803,18 @@ void VNodePoint::AllowLabelHover(bool enabled)
 void VNodePoint::AllowLabelSelecting(bool enabled)
 {
     m_namePoint->setFlag(QGraphicsItem::ItemIsSelectable, enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNodePoint::SetInternalPathNode(bool internalPathNode)
+{
+    m_internalPathNode = internalPathNode;
+    bool onlyPoint = false;
+    if (const QSharedPointer<VPointF> point = VAbstractTool::data.GeometricObject<VPointF>(m_id);
+        m_internalPathNode && !point->IsShowLabelExplicit())
+    {
+        onlyPoint = true;
+    }
+
+    SetOnlyPoint(onlyPoint);
 }

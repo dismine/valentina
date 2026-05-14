@@ -591,8 +591,7 @@ auto VAbstractTool::PrepareNodes(const VPiecePath &path, VMainGraphicsScene *sce
     for (int i = 0; i < path.CountNodes(); ++i)
     {
         VPieceNode nodeD = path.at(i);
-        const quint32 id = PrepareNode(nodeD, scene, doc, data);
-        if (id > NULL_ID)
+        if (const quint32 id = PrepareNode(nodeD, scene, doc, data); id > NULL_ID)
         {
             nodeD.SetId(id);
             nodes.append(nodeD);

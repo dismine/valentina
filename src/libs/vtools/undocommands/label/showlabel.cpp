@@ -73,8 +73,7 @@ void ShowLabel::redo()
 //---------------------------------------------------------------------------------------------------------------------
 void ShowLabel::Do(bool visible)
 {
-    QDomElement domElement = Doc()->FindElementById(ElementId(), VAbstractPattern::TagPoint);
-    if (domElement.isElement())
+    if (QDomElement domElement = Doc()->FindElementById(ElementId(), VAbstractPattern::TagPoint); domElement.isElement())
     {
         Doc()->SetAttribute<bool>(domElement, AttrShowLabel, visible);
 

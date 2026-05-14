@@ -2781,6 +2781,7 @@ void VToolSeamAllowance::InitInternalNode(const VPieceNode &node, VToolSeamAllow
                 tool->SetParentType(ParentType::Item);
                 tool->SetExluded(node.IsExcluded());
             }
+            tool->SetInternalPathNode(true);
             tool->setVisible(not node.IsExcluded()); // Hide excluded point
             break;
         }

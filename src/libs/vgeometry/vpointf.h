@@ -89,6 +89,9 @@ public:
     auto IsShowLabel() const -> bool;
     void SetShowLabel(bool hide);
 
+    auto IsShowLabelExplicit() const -> bool;
+    void SetShowLabelExplicit(bool value);
+
     auto ToJson() const -> QJsonObject override;
 
     void SetAlias(const QString &alias) override;

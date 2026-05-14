@@ -62,6 +62,8 @@ public:
     /** @brief m_hideLabel show or not label for this point */
     bool m_showLabel{true}; // NOLINT(misc-non-private-member-variables-in-classes)
 
+    bool m_showLabelExplicit{false}; // NOLINT(misc-non-private-member-variables-in-classes)
+
 private:
     Q_DISABLE_ASSIGN_MOVE(VPointFData) // NOLINT
 };

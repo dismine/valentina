@@ -2080,6 +2080,7 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
         initData.idObject = GetParametrUInt(domElement, AttrIdObject, NULL_ID_STR);
         initData.idTool = GetParametrUInt(domElement, VAbstractNode::AttrIdTool, NULL_ID_STR);
         initData.showLabel = GetParametrBool(domElement, AttrShowLabel, trueStr);
+        initData.showLabelExplicit = domElement.hasAttribute(AttrShowLabel);
 
         VNodePoint::Create(initData);
     }
