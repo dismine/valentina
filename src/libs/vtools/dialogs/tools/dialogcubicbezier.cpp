@@ -127,8 +127,15 @@ void DialogCubicBezier::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (prepare == false && type == SceneObject::Point) // After first choose we ignore all objects
     {
+        qCDebug(vDialog) << "ChosenObject: number=" << number
+                         << "vis.isNull=" << vis.isNull()
+                         << "id=" << id;
         auto *path = qobject_cast<VisToolCubicBezier *>(vis);
         SCASSERT(path != nullptr)
+        if (Q_UNLIKELY(path == nullptr))
+        {
+            return;
+        }
 
         switch (number)
         {

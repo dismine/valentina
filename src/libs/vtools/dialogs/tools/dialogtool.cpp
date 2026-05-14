@@ -106,6 +106,8 @@ DialogTool::DialogTool(const VContainer *data, VAbstractPattern *doc, quint32 to
 //---------------------------------------------------------------------------------------------------------------------
 DialogTool::~DialogTool()
 {
+    qCDebug(vDialog) << "~DialogTool: vis=" << static_cast<void *>(vis.data())
+                     << "isNull=" << vis.isNull();
     delete vis.data();
 }
 

@@ -47,6 +47,7 @@
 VisToolCubicBezier::VisToolCubicBezier(const VContainer *data, QGraphicsItem *parent)
   : VisPath(data, parent)
 {
+    qCDebug(vVis) << "VisToolCubicBezier created:" << static_cast<void *>(this);
     m_helpLine1 = InitItem<VScaledLine>(VColorRole::VisMainColor, this);
     m_helpLine2 = InitItem<VScaledLine>(VColorRole::VisMainColor, this);
 
@@ -54,6 +55,13 @@ VisToolCubicBezier::VisToolCubicBezier(const VContainer *data, QGraphicsItem *pa
     m_point2 = InitPoint(VColorRole::VisSupportColor, this); //-V656
     m_point3 = InitPoint(VColorRole::VisSupportColor, this); //-V656
     m_point4 = InitPoint(VColorRole::VisSupportColor, this); //-V656
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+VisToolCubicBezier::~VisToolCubicBezier()
+{
+    qCDebug(vVis) << "VisToolCubicBezier destroyed:" << static_cast<void *>(this)
+                  << "scene:" << static_cast<void *>(scene());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

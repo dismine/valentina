@@ -108,6 +108,7 @@ void Visualization::SetLineStyle(const Qt::PenStyle &value)
 //---------------------------------------------------------------------------------------------------------------------
 void Visualization::StartVisualMode()
 {
+    qCDebug(vVis) << "StartVisualMode:" << static_cast<void *>(this);
     auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
     SCASSERT(scene != nullptr)
 

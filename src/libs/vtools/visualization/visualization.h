@@ -146,7 +146,8 @@ template <typename Item> inline void Visualization::AddItem(Item *item)
     SCASSERT(item != nullptr)
     auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
     SCASSERT(scene != nullptr)
-
+    qCDebug(vVis) << "AddItem:" << static_cast<void *>(item)
+                  << "→ scene:" << static_cast<void *>(scene);
     scene->addItem(item);
     connect(scene, &VMainGraphicsScene::mouseMove, item, &Visualization::MousePos);
 }
