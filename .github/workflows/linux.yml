@@ -389,7 +389,7 @@ jobs:
       - name: Restore pip cache
         uses: actions/cache@v5
         with:
-          path: /root/.cache/pip
+          path: /github/home/.cache/pip
           key: pip-appimage-${{ hashFiles('share/ci/requirements-ci.txt') }}
           restore-keys: |
             pip-appimage-
@@ -402,8 +402,7 @@ jobs:
             build-essential libgl1-mesa-dev libicu-dev cmake clang-15 llvm python3-pip \
             help2man texinfo"
           python3 --version
-          pip3 install --user --upgrade -r share/ci/requirements-ci.txt
-          echo "/root/.local/bin" >> $GITHUB_PATH
+          pip3 install --upgrade -r share/ci/requirements-ci.txt
 
       - name: Restore ccache
         uses: actions/cache@v5
