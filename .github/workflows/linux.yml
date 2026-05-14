@@ -64,6 +64,14 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v6
 
+      - name: Install Qt5 dependencies
+        run: >
+          bash -c "$PACKAGE_MANAGER_INSTALL
+          qtbase5-dev libqt5svg5-dev qttools5-dev-tools
+          libqt5xmlpatterns5-dev libqt5core5a libqt5gui5
+          libqt5printsupport5 libqt5svg5 libqt5widgets5
+          libqt5xml5 libqt5xmlpatterns5 poppler-utils git"
+
       - name: Fetch tags
         run: git fetch --tags
 
@@ -74,14 +82,6 @@ jobs:
           key: ccache-clang-qt5-${{ github.sha }}
           restore-keys: |
             ccache-clang-qt5-
-
-      - name: Install Qt5 dependencies
-        run: >
-          bash -c "$PACKAGE_MANAGER_INSTALL
-          qtbase5-dev libqt5svg5-dev qttools5-dev-tools
-          libqt5xmlpatterns5-dev libqt5core5a libqt5gui5
-          libqt5printsupport5 libqt5svg5 libqt5widgets5
-          libqt5xml5 libqt5xmlpatterns5 poppler-utils git"
 
       - name: Build and test
         run: |
@@ -122,6 +122,13 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v6
 
+      - name: Install Qt6 dependencies
+        run: >
+          bash -c "$PACKAGE_MANAGER_INSTALL
+          qt6-base-dev qt6-l10n-tools libqt6svg6-dev
+          qt6-base-dev-tools qmake6 libxerces-c-dev
+          poppler-utils libgl1-mesa-dev git"
+
       - name: Fetch tags
         run: git fetch --tags
 
@@ -132,13 +139,6 @@ jobs:
           key: ccache-clang-qt6-${{ github.sha }}
           restore-keys: |
             ccache-clang-qt6-
-
-      - name: Install Qt6 dependencies
-        run: >
-          bash -c "$PACKAGE_MANAGER_INSTALL
-          qt6-base-dev qt6-l10n-tools libqt6svg6-dev
-          qt6-base-dev-tools qmake6 libxerces-c-dev
-          poppler-utils libgl1-mesa-dev git"
 
       - name: Build and test
         run: |
@@ -180,6 +180,14 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v6
 
+      - name: Install Qt5 dependencies
+        run: >
+          bash -c "$PACKAGE_MANAGER_INSTALL
+          qtbase5-dev libqt5svg5-dev qttools5-dev-tools
+          libqt5xmlpatterns5-dev libqt5core5a libqt5gui5
+          libqt5printsupport5 libqt5svg5 libqt5widgets5
+          libqt5xml5 libqt5xmlpatterns5 poppler-utils git"
+
       - name: Fetch tags
         run: git fetch --tags
 
@@ -190,14 +198,6 @@ jobs:
           key: ccache-gcc-qt5-${{ github.sha }}
           restore-keys: |
             ccache-gcc-qt5-
-
-      - name: Install Qt5 dependencies
-        run: >
-          bash -c "$PACKAGE_MANAGER_INSTALL
-          qtbase5-dev libqt5svg5-dev qttools5-dev-tools
-          libqt5xmlpatterns5-dev libqt5core5a libqt5gui5
-          libqt5printsupport5 libqt5svg5 libqt5widgets5
-          libqt5xml5 libqt5xmlpatterns5 poppler-utils git"
 
       - name: Build and test
         run: |
@@ -239,6 +239,13 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v6
 
+      - name: Install Qt6 dependencies
+        run: >
+          bash -c "$PACKAGE_MANAGER_INSTALL
+          qt6-base-dev qt6-l10n-tools libqt6svg6-dev
+          qt6-base-dev-tools qmake6 libxerces-c-dev
+          poppler-utils libgl1-mesa-dev git"
+
       - name: Fetch tags
         run: git fetch --tags
 
@@ -249,13 +256,6 @@ jobs:
           key: ccache-gcc-qt6-${{ github.sha }}
           restore-keys: |
             ccache-gcc-qt6-
-
-      - name: Install Qt6 dependencies
-        run: >
-          bash -c "$PACKAGE_MANAGER_INSTALL
-          qt6-base-dev qt6-l10n-tools libqt6svg6-dev
-          qt6-base-dev-tools qmake6 libxerces-c-dev
-          poppler-utils libgl1-mesa-dev git"
 
       - name: Build and test
         run: |
@@ -297,6 +297,12 @@ jobs:
         with:
           fetch-depth: 0  # SonarCloud needs full history for branch analysis
 
+      - name: Install Qt6 dependencies
+        run: >
+          bash -c "$PACKAGE_MANAGER_INSTALL
+          qt6-base-dev qt6-l10n-tools libqt6svg6-dev
+          qt6-base-dev-tools libxerces-c-dev poppler-utils libgl1-mesa-dev git"
+
       - name: Fetch tags
         run: git fetch --tags
 
@@ -315,12 +321,6 @@ jobs:
           key: sonar-${{ github.sha }}
           restore-keys: |
             sonar-
-
-      - name: Install Qt6 dependencies
-        run: >
-          bash -c "$PACKAGE_MANAGER_INSTALL
-          qt6-base-dev qt6-l10n-tools libqt6svg6-dev
-          qt6-base-dev-tools libxerces-c-dev poppler-utils libgl1-mesa-dev"
 
       - name: Build with SonarCloud wrapper and analyze
         env:
@@ -390,17 +390,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v6
 
-      - name: Fetch tags
-        run: git fetch --tags
-
-      - name: Restore ccache
-        uses: actions/cache@v5
-        with:
-          path: /tmp/ccache_dir
-          key: ccache-appimage-${{ github.sha }}
-          restore-keys: |
-            ccache-appimage-
-
       - name: Restore pip cache
         uses: actions/cache@v5
         with:
@@ -408,17 +397,6 @@ jobs:
           key: pip-appimage-${{ hashFiles('share/ci/requirements-ci.txt') }}
           restore-keys: |
             pip-appimage-
-
-      - name: Setup Conan home folder
-        run: echo "CONAN_HOME=/tmp/.conan2" >> $GITHUB_ENV
-
-      - name: Restore Conan cache
-        uses: actions/cache@v5
-        with:
-          path: /tmp/.conan2/p
-          key: conan2-appimage-${{ hashFiles('**/conanfile.py') }}
-          restore-keys: |
-            conan2-appimage-
 
       - name: Install AppImage dependencies
         run: |
@@ -430,6 +408,28 @@ jobs:
           python3 --version
           export PATH="${PATH}:/root/.local/bin"
           pip3 install --user --upgrade -r share/ci/requirements-ci.txt
+
+      - name: Fetch tags
+        run: git fetch --tags
+
+      - name: Restore ccache
+        uses: actions/cache@v5
+        with:
+          path: /tmp/ccache_dir
+          key: ccache-appimage-${{ github.sha }}
+          restore-keys: |
+            ccache-appimage-
+
+      - name: Setup Conan home folder
+        run: echo "CONAN_HOME=/tmp/.conan2" >> $GITHUB_ENV
+
+      - name: Restore Conan cache
+        uses: actions/cache@v5
+        with:
+          path: /tmp/.conan2/p
+          key: conan2-appimage-${{ hashFiles('**/conanfile.py') }}
+          restore-keys: |
+            conan2-appimage-
 
       - name: Build AppImage
         env:
