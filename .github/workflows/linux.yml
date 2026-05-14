@@ -73,7 +73,9 @@ jobs:
           libqt5xml5 libqt5xmlpatterns5 poppler-utils git"
 
       - name: Fetch tags
-        run: git fetch --tags
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git fetch --tags
 
       - name: Restore ccache
         uses: actions/cache@v5
@@ -130,7 +132,9 @@ jobs:
           poppler-utils libgl1-mesa-dev git"
 
       - name: Fetch tags
-        run: git fetch --tags
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git fetch --tags
 
       - name: Restore ccache
         uses: actions/cache@v5
@@ -189,7 +193,9 @@ jobs:
           libqt5xml5 libqt5xmlpatterns5 poppler-utils git"
 
       - name: Fetch tags
-        run: git fetch --tags
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git fetch --tags
 
       - name: Restore ccache
         uses: actions/cache@v5
@@ -247,7 +253,9 @@ jobs:
           poppler-utils libgl1-mesa-dev git"
 
       - name: Fetch tags
-        run: git fetch --tags
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git fetch --tags
 
       - name: Restore ccache
         uses: actions/cache@v5
@@ -304,7 +312,9 @@ jobs:
           qt6-base-dev-tools libxerces-c-dev poppler-utils libgl1-mesa-dev git"
 
       - name: Fetch tags
-        run: git fetch --tags
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git fetch --tags
 
       - name: Restore ccache
         uses: actions/cache@v5
@@ -410,7 +420,9 @@ jobs:
           pip3 install --user --upgrade -r share/ci/requirements-ci.txt
 
       - name: Fetch tags
-        run: git fetch --tags
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git fetch --tags
 
       - name: Restore ccache
         uses: actions/cache@v5
