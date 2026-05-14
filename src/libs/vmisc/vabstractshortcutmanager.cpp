@@ -107,7 +107,7 @@ auto VAbstractShortcutManager::GetShortcutsList() const -> QList<VAbstractShortc
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> QString
 {
-    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 87, "Convert all actions.");
+    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 88, "Convert all actions.");
 
     switch (type)
     {
@@ -163,6 +163,8 @@ auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> Q
             return "lasttool"_L1;
         case VShortcutAction::CurveDetails:
             return "curvedetails"_L1;
+        case VShortcutAction::ShowSegmentLabels:
+            return "showsegmentlabels"_L1;
         case VShortcutAction::FinalMeasurements:
             return "finalmeasurements"_L1;
         case VShortcutAction::ReloadPieceLabels:
@@ -297,7 +299,7 @@ auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> Q
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractShortcutManager::ReadableName(VShortcutAction type) -> QString
 {
-    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 87, "Translate all actions.");
+    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 88, "Translate all actions.");
 
     switch (type)
     {
@@ -353,6 +355,8 @@ auto VAbstractShortcutManager::ReadableName(VShortcutAction type) -> QString
             return tr("Activate last used tool", "shortcut for action");
         case VShortcutAction::CurveDetails:
             return tr("Show curve details", "shortcut for action");
+        case VShortcutAction::ShowSegmentLabels:
+            return tr("Show/hide segment labels", "shortcut for action");
         case VShortcutAction::FinalMeasurements:
             return tr("Open final measurements dialog", "shortcut for action");
         case VShortcutAction::ReloadPieceLabels:

@@ -63,6 +63,7 @@ enum class VShortcutAction
     Quit,
     LastTool,
     CurveDetails,
+    ShowSegmentLabels,
     FinalMeasurements,
     ReloadPieceLabels,
     CaseSensitiveMatch,

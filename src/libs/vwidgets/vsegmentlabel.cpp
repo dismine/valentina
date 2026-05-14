@@ -192,12 +192,9 @@ void VSegmentLabel::UpdateLabelLine()
 void VSegmentLabel::SetLabelVisible(bool visible)
 {
     const bool showDetails = VAbstractValApplication::VApp()->ValentinaSettings()->IsShowCurveDetails();
+    const bool allowLabels = VAbstractValApplication::VApp()->ValentinaSettings()->IsShowSegmentLabels();
 
-    // Respect forced-visible state: once the user explicitly shows a label,
-    // it stays visible regardless of activation/deactivation.
-    // Also respect showDetails: if curve details are enabled, labels are
-    // always shown even when the segment would normally be hidden.
-    m_showLabel = visible || m_forcedVisible || showDetails;
+    m_showLabel = allowLabels && (visible || m_forcedVisible || showDetails);
 
     m_label->setVisible(m_showLabel);
     UpdateLabelLine();
@@ -211,11 +208,13 @@ void VSegmentLabel::SetLabelVisible(bool visible)
 //---------------------------------------------------------------------------------------------------------------------
 void VSegmentLabel::ShowExplicitly(bool show)
 {
+    const bool allowLabels = VAbstractValApplication::VApp()->ValentinaSettings()->IsShowSegmentLabels();
+
     // Track the user's explicit intent separately so it survives
     // activation/deactivation cycles.
-    m_forcedVisible = show;
+    m_forcedVisible = show && allowLabels;
 
-    m_showLabel = show;
+    m_showLabel = show && allowLabels;
     m_label->setVisible(m_showLabel);
     UpdateLabelLine();
 
@@ -277,7 +276,8 @@ void VSegmentLabel::LabelSelectionType(const SelectionType &type)
 //---------------------------------------------------------------------------------------------------------------------
 void VSegmentLabel::Init()
 {
-    m_showLabel = VAbstractValApplication::VApp()->ValentinaSettings()->IsShowCurveDetails();
+    m_showLabel = VAbstractValApplication::VApp()->ValentinaSettings()->IsShowCurveDetails() &&
+                  VAbstractValApplication::VApp()->ValentinaSettings()->IsShowSegmentLabels();
 
     setPos(m_labelPos.toQPointF());
 

@@ -121,6 +121,7 @@
     <addaction name="actionLast_tool"/>
     <addaction name="actionInteractiveTools"/>
     <addaction name="actionShowCurveDetails"/>
+    <addaction name="actionShowSegmentLabels"/>
     <addaction name="actionShowMainPath"/>
     <addaction name="actionBoundaryTogetherWithNotches"/>
     <addaction name="actionShowAccuracyRadius"/>
@@ -1164,6 +1165,26 @@
    </property>
    <property name="shortcut">
     <string notr="true">F2</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionShowSegmentLabels">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Show Segment Labels</string>
+   </property>
+   <property name="toolTip">
+    <string>Allow segment labels to appear. Uncheck to hide them in all cases.</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>

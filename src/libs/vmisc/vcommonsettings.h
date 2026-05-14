@@ -274,6 +274,9 @@ public:
     auto IsShowCurveDetails() const -> bool;
     void SetShowCurveDetails(bool value);
 
+    auto IsShowSegmentLabels() const -> bool;
+    void SetShowSegmentLabels(bool value);
+
     auto IsPieceShowMainPath() const -> bool;
     void SetPieceShowMainPath(bool value);
 

@@ -4784,6 +4784,7 @@ void MainWindow::Clear()
     ui->actionFinalMeasurements->setEnabled(false);
     ui->actionLast_tool->setEnabled(false);
     ui->actionShowCurveDetails->setEnabled(false);
+    ui->actionShowSegmentLabels->setEnabled(false);
     ui->actionShowAccuracyRadius->setEnabled(false);
     ui->actionShowMainPath->setEnabled(false);
     ui->actionBoundaryTogetherWithNotches->setEnabled(false);
@@ -5038,6 +5039,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionZoomFitBestCurrent->setEnabled(enableOnDrawStage);
     ui->actionZoomOriginal->setEnabled(enable);
     ui->actionShowCurveDetails->setEnabled(enableOnDrawStage);
+    ui->actionShowSegmentLabels->setEnabled(enableOnDrawStage);
     ui->actionShowAccuracyRadius->setEnabled(enableOnDesignStage);
     ui->actionShowMainPath->setEnabled(enableOnDetailsStage);
     ui->actionBoundaryTogetherWithNotches->setEnabled(enableOnDetailsStage);
@@ -6540,6 +6542,24 @@ void MainWindow::CreateActions()
                 emit ui->view->itemClicked(nullptr);
                 VAbstractValApplication::VApp()->ValentinaSettings()->SetShowCurveDetails(checked);
                 m_sceneDraw->EnableDetailsMode(checked);
+            });
+
+    ui->actionShowSegmentLabels->setChecked(
+        VAbstractValApplication::VApp()->ValentinaSettings()->IsShowSegmentLabels());
+    connect(ui->actionShowSegmentLabels, &QAction::triggered, this,
+            [this](bool checked) -> void
+            {
+                VAbstractValApplication::VApp()->ValentinaSettings()->SetShowSegmentLabels(checked);
+                if (!checked)
+                {
+                    emit ShowArcSegmentLabel(false);
+                    emit ShowElArcSegmentLabel(false);
+                    emit ShowSplineSegmentLabel(false);
+                    emit ShowSplinePathSegmentLabel(false);
+                }
+                const bool detailsMode =
+                    VAbstractValApplication::VApp()->ValentinaSettings()->IsShowCurveDetails();
+                m_sceneDraw->EnableDetailsMode(detailsMode);
             });
 
     ui->actionShowAccuracyRadius->setChecked(

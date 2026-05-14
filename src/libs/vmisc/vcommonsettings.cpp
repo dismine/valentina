@@ -163,6 +163,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLineWidth, ("pattern/line
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternCurveApproximationScale, ("pattern/curveApproximationScale"_L1))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternShowCurveDetails, ("pattern/showCurveDetails"_L1))     // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternShowSegmentLabels, ("pattern/showSegmentLabels"_L1)) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternPieceShowMainPath, ("pattern/pieceShowMainPath"_L1))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternLabelFontSize, ("pattern/labelFontSize"_L1))           // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingPatternHideLabels, ("pattern/hideLabels"_L1))                 // NOLINT
@@ -1409,6 +1410,18 @@ auto VCommonSettings::IsShowCurveDetails() const -> bool
 void VCommonSettings::SetShowCurveDetails(bool value)
 {
     setValue(*settingPatternShowCurveDetails, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::IsShowSegmentLabels() const -> bool
+{
+    return value(*settingPatternShowSegmentLabels, true).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetShowSegmentLabels(bool value)
+{
+    setValue(*settingPatternShowSegmentLabels, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
