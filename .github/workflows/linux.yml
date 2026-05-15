@@ -1,0 +1,498 @@
+name: Linux builds
+
+on:
+  push:
+    branches:
+      - 'master'
+  pull_request:
+    branches:
+      - 'master'
+
+env:
+  CCACHE_SIZE: "800M"
+  CCACHE_DIR: "/tmp/ccache_dir"
+  CCACHE_NOHASHDIR: "1"
+  CCACHE_CPP2: "yes"
+  DEBIAN_FRONTEND: "noninteractive"
+  PACKAGE_MANAGER_INSTALL: "apt-get -qq update && apt-get install -y"
+  DISPLAY: ":90"
+  XDG_RUNTIME_DIR: "/tmp/runtime-kdeci/"
+
+jobs:
+  # Detect which files changed so we only run relevant jobs.
+  # Mirrors Cirrus CI's changesInclude() skip filter.
+  changes:
+    name: Detect changed files
+    runs-on: ubuntu-latest
+    outputs:
+      qbs: ${{ steps.filter.outputs.qbs }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: dorny/paths-filter@v4
+        id: filter
+        with:
+          filters: |
+            qbs:
+              - '.github/workflows/linux.yml'
+              - 'scripts/upload_symbols.py'
+              - '**/*.h'
+              - '**/*.hpp'
+              - '**/*.cpp'
+              - '**/*.tpp'
+              - '**/*.c'
+              - '**/*.ts'
+              - '**/*.ui'
+              - '**/*.png'
+              - '**/*.qbs'
+              - '**/*.js'
+              - '**/*.svg'
+
+  clang_qt5_qbs:
+    name: 'latest Clang [Qt5 QBS]'
+    needs: changes
+    if: needs.changes.outputs.qbs == 'true'
+    runs-on: ubuntu-latest
+    container:
+      image: dismine/clang-ubuntu:latest
+    env:
+      COMPILER: clang
+      COMPILER_REGEX: clang
+      ENABLE_CCACHE: "true"
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Install Qt5 dependencies
+        run: >
+          bash -c "$PACKAGE_MANAGER_INSTALL
+          qtbase5-dev libqt5svg5-dev qttools5-dev-tools
+          libqt5xmlpatterns5-dev libqt5core5a libqt5gui5
+          libqt5printsupport5 libqt5svg5 libqt5widgets5
+          libqt5xml5 libqt5xmlpatterns5 poppler-utils git"
+
+      - name: Restore ccache
+        uses: actions/cache@v5
+        with:
+          path: /tmp/ccache_dir
+          key: ccache-clang-qt5-${{ github.sha }}
+          restore-keys: |
+            ccache-clang-qt5-
+
+      - name: Build and test
+        run: |
+          uname -a
+          mkdir -pm 0700 $XDG_RUNTIME_DIR
+          Xvfb $DISPLAY -ac -screen 0 1600x1200x24+32 -nolisten tcp -nolisten unix &
+          sleep 1
+          ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
+          echo $PATH
+          which qmake
+          which qbs
+          pwd
+          ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
+          ${COMPILER} --version
+          qmake --version
+          qbs --version
+          qbs setup-toolchains /usr/bin/${COMPILER} ${COMPILER}
+          qbs setup-qt /usr/bin/qmake qt5
+          qbs config defaultProfile qt5
+          qbs config profiles.qt5.baseProfile ${COMPILER}
+          qbs build -f valentina.qbs -d build --jobs $(nproc) profile:qt5 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} modules.cpp.linkerVariant:mold --force-probe-execution
+          qbs -p autotest-runner -d build profile:qt5 config:release
+          ccache -s
+
+  clang_qt6:
+    name: 'latest Clang [Qt6]'
+    needs: changes
+    if: needs.changes.outputs.qbs == 'true'
+    runs-on: ubuntu-latest
+    container:
+      image: dismine/clang-ubuntu:latest
+    env:
+      COMPILER: clang
+      COMPILER_REGEX: clang
+      ENABLE_CCACHE: "true"
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Install Qt6 dependencies
+        run: >
+          bash -c "$PACKAGE_MANAGER_INSTALL
+          qt6-base-dev qt6-l10n-tools libqt6svg6-dev
+          qt6-base-dev-tools qmake6 libxerces-c-dev
+          poppler-utils libgl1-mesa-dev git"
+
+      - name: Restore ccache
+        uses: actions/cache@v5
+        with:
+          path: /tmp/ccache_dir
+          key: ccache-clang-qt6-${{ github.sha }}
+          restore-keys: |
+            ccache-clang-qt6-
+
+      - name: Build and test
+        run: |
+          uname -a
+          mkdir -pm 0700 $XDG_RUNTIME_DIR
+          Xvfb $DISPLAY -ac -screen 0 1600x1200x24+32 -nolisten tcp -nolisten unix &
+          sleep 1
+          ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
+          echo $PATH
+          which qmake6
+          which qbs
+          pwd
+          ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
+          ${COMPILER} --version
+          qmake6 --version
+          qbs --version
+          qbs setup-toolchains /usr/bin/${COMPILER} ${COMPILER}
+          qbs setup-qt /usr/bin/qmake6 qt6
+          qbs config profiles.qt6.baseProfile ${COMPILER}
+          qbs config defaultProfile qt6
+          qbs build -f valentina.qbs -d build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} modules.cpp.linkerVariant:mold --force-probe-execution
+          qbs -p autotest-runner -d build profile:qt6 config:release
+          ccache -s
+
+  gcc_qt5_qbs:
+    name: 'latest GCC [Qt5 QBS]'
+    needs: changes
+    if: needs.changes.outputs.qbs == 'true'
+    runs-on: ubuntu-latest
+    container:
+      image: dismine/gcc-ubuntu:latest
+    env:
+      COMPILER: gcc
+      COMPILER_REGEX: "gcc|g\\+\\+"
+      GCC_COLORS: "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01"
+      ENABLE_CCACHE: "true"
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Install Qt5 dependencies
+        run: >
+          bash -c "$PACKAGE_MANAGER_INSTALL
+          qtbase5-dev libqt5svg5-dev qttools5-dev-tools
+          libqt5xmlpatterns5-dev libqt5core5a libqt5gui5
+          libqt5printsupport5 libqt5svg5 libqt5widgets5
+          libqt5xml5 libqt5xmlpatterns5 poppler-utils git"
+
+      - name: Restore ccache
+        uses: actions/cache@v5
+        with:
+          path: /tmp/ccache_dir
+          key: ccache-gcc-qt5-${{ github.sha }}
+          restore-keys: |
+            ccache-gcc-qt5-
+
+      - name: Build and test
+        run: |
+          uname -a
+          mkdir -pm 0700 $XDG_RUNTIME_DIR
+          Xvfb $DISPLAY -ac -screen 0 1600x1200x24+32 -nolisten tcp -nolisten unix &
+          sleep 1
+          ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
+          echo $PATH
+          which qmake
+          which qbs
+          pwd
+          ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
+          ${COMPILER} --version
+          qmake --version
+          qbs --version
+          qbs setup-toolchains /usr/bin/${COMPILER} ${COMPILER}
+          qbs setup-qt /usr/bin/qmake qt5
+          qbs config defaultProfile qt5
+          qbs config profiles.qt5.baseProfile ${COMPILER}
+          qbs build -f valentina.qbs -d build --jobs $(nproc) profile:qt5 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} modules.cpp.linkerVariant:mold --force-probe-execution
+          qbs -p autotest-runner -d build profile:qt5 config:release
+          ccache -s
+
+  gcc_qt6:
+    name: 'latest GCC [Qt6]'
+    needs: changes
+    if: needs.changes.outputs.qbs == 'true'
+    runs-on: ubuntu-latest
+    container:
+      image: dismine/gcc-ubuntu:latest
+    env:
+      COMPILER: gcc
+      COMPILER_REGEX: "gcc|g\\+\\+"
+      GCC_COLORS: "error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01"
+      ENABLE_CCACHE: "true"
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Install Qt6 dependencies
+        run: >
+          bash -c "$PACKAGE_MANAGER_INSTALL
+          qt6-base-dev qt6-l10n-tools libqt6svg6-dev
+          qt6-base-dev-tools qmake6 libxerces-c-dev
+          poppler-utils libgl1-mesa-dev git"
+
+      - name: Restore ccache
+        uses: actions/cache@v5
+        with:
+          path: /tmp/ccache_dir
+          key: ccache-gcc-qt6-${{ github.sha }}
+          restore-keys: |
+            ccache-gcc-qt6-
+
+      - name: Build and test
+        run: |
+          uname -a
+          mkdir -pm 0700 $XDG_RUNTIME_DIR
+          Xvfb $DISPLAY -ac -screen 0 1600x1200x24+32 -nolisten tcp -nolisten unix &
+          sleep 1
+          ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
+          echo $PATH
+          which qmake6
+          which qbs
+          pwd
+          ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
+          ${COMPILER} --version
+          qmake6 --version
+          qbs --version
+          qbs setup-toolchains /usr/bin/${COMPILER} ${COMPILER}
+          qbs setup-qt /usr/bin/qmake6 qt6
+          qbs config profiles.qt6.baseProfile ${COMPILER}
+          qbs config defaultProfile qt6
+          qbs build -f valentina.qbs -d build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} modules.cpp.linkerVariant:mold --force-probe-execution
+          qbs -p autotest-runner -d build profile:qt6 config:release
+          ccache -s
+
+  sonar_gcc_qt6:
+    name: 'Sonar, latest GCC [Qt6]'
+    needs: changes
+    if: needs.changes.outputs.qbs == 'true'
+    runs-on: ubuntu-latest
+    container:
+      image: dismine/gcc-ubuntu:latest
+    env:
+      COMPILER: gcc
+      COMPILER_REGEX: "gcc|g\\+\\+"
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0  # SonarCloud needs full history for branch analysis
+          fetch-tags: true
+
+      - name: Install Qt6 dependencies
+        run: >
+          bash -c "$PACKAGE_MANAGER_INSTALL
+          qt6-base-dev qt6-l10n-tools libqt6svg6-dev
+          qt6-base-dev-tools libxerces-c-dev poppler-utils libgl1-mesa-dev git"
+
+      - name: Restore ccache
+        uses: actions/cache@v5
+        with:
+          path: /tmp/ccache_dir
+          key: ccache-sonar-gcc-qt6-${{ github.sha }}
+          restore-keys: |
+            ccache-sonar-gcc-qt6-
+
+      - name: Restore SonarCloud cache
+        uses: actions/cache@v5
+        with:
+          path: ~/.sonar/cache
+          key: sonar-${{ github.sha }}
+          restore-keys: |
+            sonar-
+
+      - name: Build with SonarCloud wrapper and analyze
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          uname -a
+          mkdir -pm 0700 $XDG_RUNTIME_DIR
+          Xvfb $DISPLAY -ac -screen 0 1600x1200x24+32 -nolisten tcp -nolisten unix &
+          sleep 1
+          ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
+          echo $PATH
+          which qmake6
+          which qbs
+          pwd
+          ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
+          ${COMPILER} --version
+          qmake6 --version
+          qbs --version
+          qbs setup-toolchains /usr/bin/${COMPILER} ${COMPILER}
+          qbs setup-qt /usr/bin/qmake6 qt6
+          qbs config profiles.qt6.baseProfile ${COMPILER}
+          qbs config defaultProfile qt6
+          build-wrapper-linux-x86-64 \
+            --out-dir ${GITHUB_WORKSPACE}/bw-output \
+            qbs build --no-install \
+            -f valentina.qbs \
+            -d ${GITHUB_WORKSPACE}/build \
+            --jobs $(nproc) \
+            profile:qt6 config:debug \
+            modules.buildconfig.enableCcache:true \
+            modules.cpp.linkerVariant:mold \
+            modules.buildconfig.enableTestCoverage:true \
+            modules.buildconfig.enablePCH:false
+          qbs -p autotest-runner -d build profile:qt6 config:debug
+          mkdir ${GITHUB_WORKSPACE}/build/coverage-dir
+          cd ${GITHUB_WORKSPACE}/build/coverage-dir
+          find .. -name '*.o' -exec gcov --preserve-paths {} \;
+          cd $GITHUB_WORKSPACE
+          sonar-scanner \
+            -Dsonar.scm.revision=${GITHUB_SHA} \
+            -Dsonar.links.ci=https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} \
+            -Dsonar.branch.name=${GITHUB_REF_NAME} \
+            -Dsonar.cfamily.gcov.reportsPath="${GITHUB_WORKSPACE}/build/coverage-dir"
+          ccache -s
+
+  appimage:
+    name: 'AppImage'
+    needs: changes
+    if: needs.changes.outputs.qbs == 'true'
+    runs-on: ubuntu-latest
+    container:
+      image: dismine/valentina-appimage-builder:latest
+    env:
+      COMPILER: clang
+      COMPILER_REGEX: clang
+      ENABLE_CCACHE: "true"
+      DEPLOY: "true"
+      VERSION: "continuous"
+      QT_VERSION: "Qt6"
+      ARCH: "x86_64"
+      TARGET_PLATFORM: "Linux"
+      VALENTINA_VERSION: "1_0_0"
+      BUGSPLAT_DATABASE: "valentina"
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Restore pip cache
+        uses: actions/cache@v5
+        with:
+          path: /github/home/.cache/pip
+          key: pip-appimage-${{ hashFiles('share/ci/requirements-ci.txt') }}
+          restore-keys: |
+            pip-appimage-
+
+      - name: Install AppImage dependencies
+        run: |
+          bash -c "$PACKAGE_MANAGER_INSTALL \
+            qt6-base-dev libqt6svg6-dev qt6-translations-l10n qt6-image-formats-plugins \
+            qt6-l10n-tools qt6-base-dev-tools libxerces-c-dev poppler-utils git xvfb ccache \
+            build-essential libgl1-mesa-dev libicu-dev cmake clang-15 llvm python3-pip \
+            help2man texinfo"
+          python3 --version
+          pip3 install --upgrade -r share/ci/requirements-ci.txt
+
+      - name: Restore ccache
+        uses: actions/cache@v5
+        with:
+          path: /tmp/ccache_dir
+          key: ccache-appimage-${{ github.sha }}
+          restore-keys: |
+            ccache-appimage-
+
+      - name: Setup Conan home folder
+        run: |
+          echo "CONAN_HOME=/tmp/.conan2" >> $GITHUB_ENV
+          echo "CONAN_FILE_HASH=$(sha256sum conanfile.py | cut -d' ' -f1)" >> $GITHUB_ENV
+
+      - name: Restore Conan cache
+        uses: actions/cache@v5
+        with:
+          path: /tmp/.conan2/p
+          key: conan2-appimage-${{ env.CONAN_FILE_HASH }}
+          restore-keys: |
+            conan2-appimage-
+
+      - name: Build AppImage
+        env:
+          SYMBOL_UPLOAD_CLIENT_ID: ${{ secrets.SYMBOL_UPLOAD_CLIENT_ID }}
+          SYMBOL_UPLOAD_CLIENT_SECRET: ${{ secrets.SYMBOL_UPLOAD_CLIENT_SECRET }}
+        run: |
+          uname -a
+          git config --global --add safe.directory $GITHUB_WORKSPACE
+          mkdir -pm 0700 $XDG_RUNTIME_DIR
+          Xvfb $DISPLAY -ac -screen 0 1600x1200x24+32 -nolisten tcp -nolisten unix &
+          sleep 1
+          ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
+          echo $PATH
+          which qmake6
+          which qbs
+          pwd
+          ls -l /usr/bin/ | grep -E "${COMPILER_REGEX}"
+          ln -sf /usr/bin/clang-15 /usr/bin/clang
+          ln -sf /usr/bin/clang++-15 /usr/bin/clang++
+          update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
+          update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
+          ${COMPILER} --version
+          qmake6 --version
+          qbs --version
+          qbs setup-toolchains /usr/bin/${COMPILER} ${COMPILER}
+          qbs setup-qt /usr/bin/qmake6 qt6
+          qbs config defaultProfile qt6
+          qbs config profiles.qt6.baseProfile ${COMPILER}
+          conan install . --build=missing -o '&:with_crash_reporting=True' -pr:a=share/ci/conan/profiles/appimage
+          qbs build \
+            -f valentina.qbs \
+            -d $GITHUB_WORKSPACE/build \
+            --jobs $(nproc) \
+            profile:qt6 config:release \
+            modules.buildconfig.enableCcache:${ENABLE_CCACHE} \
+            modules.cpp.linkerVariant:mold \
+            qbs.installRoot:$GITHUB_WORKSPACE/build/AppDir \
+            modules.buildconfig.enableAppImage:true \
+            modules.buildconfig.enableRPath:false \
+            project.conanWithCrashReporting:true \
+            project.enableConan:true \
+            project.conanProfiles:share/ci/conan/profiles/appimage
+          qbs -p autotest-runner -d build profile:qt6 config:release
+          CRASH_QT_VERSION=$(/usr/bin/qmake6 -query QT_VERSION | awk -F. '{print "Qt_" $1 "_" $2}')
+          CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
+          python3 scripts/upload_symbols.py \
+            --build-dir $GITHUB_WORKSPACE/build/AppDir \
+            --app-version $VALENTINA_VERSION \
+            --git-hash g$CRASH_SHORT_SHA \
+            --qt-version $CRASH_QT_VERSION
+          $GITHUB_WORKSPACE/build/AppDir/usr/local/bin/crashpad_handler --version
+          du -h $GITHUB_WORKSPACE/build/AppDir/usr/local/bin/crashpad_handler
+          appimage-builder \
+            --recipe dist/AppImage/AppImageBuilder.yml \
+            --appdir $GITHUB_WORKSPACE/build/AppDir \
+            --skip-test
+          ccache -s
+
+      - name: Deploy AppImage
+        if: github.event_name != 'pull_request'
+        env:
+          ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
+          # Mapping to what appimage-deploy.sh expects
+          CIRRUS_WORKING_DIR: ${{ github.workspace }}
+          CIRRUS_BRANCH: ${{ github.ref_name }}
+          CIRRUS_CHANGE_IN_REPO: ${{ github.sha }}
+        shell: bash
+        run: ./scripts/appimage-deploy.sh
