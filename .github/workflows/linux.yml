@@ -413,13 +413,15 @@ jobs:
             ccache-appimage-
 
       - name: Setup Conan home folder
-        run: echo "CONAN_HOME=/tmp/.conan2" >> $GITHUB_ENV
+        run: |
+          echo "CONAN_HOME=/tmp/.conan2" >> $GITHUB_ENV
+          echo "CONAN_FILE_HASH=$(sha256sum conanfile.py | cut -d' ' -f1)" >> $GITHUB_ENV
 
       - name: Restore Conan cache
         uses: actions/cache@v5
         with:
           path: /tmp/.conan2/p
-          key: conan2-appimage-${{ hashFiles('**/conanfile.py') }}
+          key: conan2-appimage-${{ env.CONAN_FILE_HASH }}
           restore-keys: |
             conan2-appimage-
 
