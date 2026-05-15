@@ -489,4 +489,5 @@ jobs:
           CIRRUS_WORKING_DIR: ${{ github.workspace }}
           CIRRUS_BRANCH: ${{ github.ref_name }}
           CIRRUS_CHANGE_IN_REPO: ${{ github.sha }}
+        shell: bash
         run: ./scripts/appimage-deploy.sh
