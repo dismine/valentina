@@ -322,7 +322,7 @@ VAbstractPattern::VAbstractPattern(QObject *parent)
     history(QVector<VToolRecord>()),
     modified(false),
     m_patternGraph(new VPatternGraph()),
-    m_patternBlockMapper(new VPatternBlockMapper(this))
+    m_patternBlockMapper(new VPatternBlockMapper())
 {
     connect(qApp, &QCoreApplication::aboutToQuit, this, &VAbstractPattern::CancelFormulaDependencyChecks);
 }
@@ -330,6 +330,11 @@ VAbstractPattern::VAbstractPattern(QObject *parent)
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPattern::~VAbstractPattern()
 {
+    // Must be deleted before the QDomDocument base destructs. VDomDocument declares QObject before QDomDocument, so
+    // QDomDocument::~QDomDocument() runs before QObject::~QObject(). The QDomElement objects stored in
+    // VPatternBlockMapper must be released while the DOM nodes are still alive to avoid a double-free.
+    delete m_patternBlockMapper;
+
     qDeleteAll(toolsOnRemove);
     toolsOnRemove.clear();
     delete m_patternGraph;
