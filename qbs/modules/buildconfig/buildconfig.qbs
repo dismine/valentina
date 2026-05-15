@@ -21,10 +21,6 @@ Module {
     // do not permit the use of rpath, such as Fedora.
     property bool enableRPath: true
 
-    // Use this property to disable the use of precompiled headers. This can be used when packaging Valentina for
-    // distributions which provides not enough space on build servers.
-    property bool enablePCH: true
-
     property bool enableAppImage: false
 
     property bool enableMultiBundle: false
@@ -39,9 +35,12 @@ Module {
 
     // Use this property to disable the use of ccache.
     property bool enableCcache: true
-    readonly property bool ccachePresent: ccache.ccachePresent
-    readonly property bool ccachePCHSupport: ccache.pchSupport
-    readonly property bool buildWithCcache: enableCcache && (enablePCH && ccachePresent && ccachePCHSupport || (!enablePCH && ccachePresent))
+    readonly property bool buildWithCcache: enableCcache && ccache.ccachePresent
+
+    // Use this property to disable the use of precompiled headers. This can be used when packaging Valentina for
+    // distributions which provides not enough space on build servers.
+    // Automatically disabled when build with Clang and ccache. Can be overridden on the command line if needed.
+    property bool enablePCH: !ccache.ccachePresent || ccache.pchSupport
 
     property bool treatWarningsAsErrors: true
 

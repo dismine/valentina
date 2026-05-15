@@ -42,6 +42,8 @@ Module {
 
         property bool pchSupport
 
+        readonly property bool clangToolchain: product.qbs.toolchain.contains("gcc") && product.qbs.toolchain.contains("clang")
+
         configure: {
             var detector = new Process();
             try {
@@ -52,6 +54,11 @@ Module {
                     if (!pchSupport){
                         console.info("ccache is tool old, version >= 3.1.0 required to work with precompiled headers.");
                         pchSupport = false;
+                    }else{
+                        if (clangToolchain) {
+                            console.info("Clang is not compatible with ccache and precompiled headers.");
+                            pchSupport = false;
+                        }
                     }
                 }
             } finally {
