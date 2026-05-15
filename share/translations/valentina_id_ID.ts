@@ -24688,27 +24688,27 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="664"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="667"/>
         <source>Expand All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="665"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="668"/>
         <source>Collapse All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="667"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="670"/>
         <source>Copy ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="669"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="672"/>
         <source>Go to Object</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="671"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="674"/>
         <source>Delete</source>
         <translation type="unfinished">hapus</translation>
     </message>

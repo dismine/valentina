@@ -11790,12 +11790,12 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1184"/>
         <source>Show Segment Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Показати мітки сегментів</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1187"/>
         <source>Allow segment labels to appear. Uncheck to hide them in all cases.</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволити відображення міток сегментів. Зніміть галочку, щоб приховати їх у всіх випадках.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1299"/>
@@ -20510,7 +20510,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="359"/>
         <source>Show/hide segment labels</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Показати/приховати мітки сегментів</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="361"/>
@@ -28736,7 +28736,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="32"/>
         <source>Go to object automatically on node selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматично перейти до об’єкта після вибору елемента</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="62"/>
@@ -28759,29 +28759,29 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Перейти до найновішої можливої позиції в історії</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="664"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="667"/>
         <source>Expand All</source>
         <translation>Розкрити всі</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="665"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="668"/>
         <source>Collapse All</source>
         <translation>Згорнути всі</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="667"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="670"/>
         <source>Copy ID</source>
         <translation>Копіювати ID</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="669"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="672"/>
         <source>Go to Object</source>
         <translation>Перейти до об&apos;єкта</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="671"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="674"/>
         <source>Delete</source>
-        <translation type="unfinished">Видалити</translation>
+        <translation>Видалити</translation>
     </message>
 </context>
 <context>
@@ -29095,7 +29095,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolgraduatedcurve.cpp" line="100"/>
         <source>&lt;b&gt;Graduated curve&lt;/b&gt;: offsets = %1; &lt;b&gt;Mouse click&lt;/b&gt; - selecting next width, &lt;b&gt;%2&lt;/b&gt; - negative width, &lt;b&gt;%3&lt;/b&gt; - finish</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Градієнтна крива&lt;/b&gt;: зміщення = %1; &lt;b&gt;Клацніть мишкою&lt;/b&gt;, щоб вибрати наступну ширину, &lt;b&gt;%2&lt;/b&gt; — від&apos;ємна ширина, &lt;b&gt;%3&lt;/b&gt; — закінчити створення</translation>
     </message>
 </context>
 <context>
