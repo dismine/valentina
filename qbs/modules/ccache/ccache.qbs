@@ -56,12 +56,8 @@ Module {
                         pchSupport = false;
                     }else{
                         if (clangToolchain) {
-                            if (Utilities.versionCompare(version, "4.10") < 0) {
-                                console.info("ccache version < 4.10 is not compatible with Clang and precompiled headers.");
-                                pchSupport = false;
-                            }
-                        } else {
-                            console.info("ccache supports compilation with precompiled headers.");
+                            console.info("Clang is not compatible with ccache and precompiled headers.");
+                            pchSupport = false;
                         }
                     }
                 }
