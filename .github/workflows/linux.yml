@@ -101,6 +101,7 @@ jobs:
           qbs setup-qt /usr/bin/qmake qt5
           qbs config defaultProfile qt5
           qbs config profiles.qt5.baseProfile ${COMPILER}
+          git ls-files -z | xargs -0 touch -d "$(git log -1 --format='%cI')"
           qbs build -f valentina.qbs -d build --jobs $(nproc) profile:qt5 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} modules.cpp.linkerVariant:mold --force-probe-execution
           qbs -p autotest-runner -d build profile:qt5 config:release
           ccache -s
@@ -157,6 +158,7 @@ jobs:
           qbs setup-qt /usr/bin/qmake6 qt6
           qbs config profiles.qt6.baseProfile ${COMPILER}
           qbs config defaultProfile qt6
+          git ls-files -z | xargs -0 touch -d "$(git log -1 --format='%cI')"
           qbs build -f valentina.qbs -d build --jobs $(nproc) profile:qt6 config:release modules.buildconfig.enableCcache:${ENABLE_CCACHE} project.withICUCodecs:true modules.cpp.linkerVariant:mold --force-probe-execution
           qbs -p autotest-runner -d build profile:qt6 config:release
           ccache -s
