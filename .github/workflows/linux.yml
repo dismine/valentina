@@ -429,6 +429,7 @@ jobs:
           SYMBOL_UPLOAD_CLIENT_SECRET: ${{ secrets.SYMBOL_UPLOAD_CLIENT_SECRET }}
         run: |
           uname -a
+          git config --global --add safe.directory $GITHUB_WORKSPACE
           mkdir -pm 0700 $XDG_RUNTIME_DIR
           Xvfb $DISPLAY -ac -screen 0 1600x1200x24+32 -nolisten tcp -nolisten unix &
           sleep 1
