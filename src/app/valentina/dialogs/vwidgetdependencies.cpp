@@ -246,10 +246,13 @@ void VWidgetDependencies::ShowDependency(vidtype id)
         return;
     }
 
-    // Select and scroll to the item
+    // Block signals so OnNodeSelectionChanged does not fire and trigger GoToObject/auto-scroll
+    // while the user is still interacting with the scene. The view does not self-repaint when
+    // currentChanged is blocked, so we force a viewport update manually.
     QSignalBlocker const blocker(ui->treeView->selectionModel());
     ui->treeView->setCurrentIndex(proxyIndex);
     ui->treeView->scrollTo(proxyIndex);
+    ui->treeView->viewport()->update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
