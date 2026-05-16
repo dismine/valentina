@@ -30,6 +30,10 @@ env:
   MACOS_CI_KEYCHAIN_PWD:  ${{ secrets.MACOS_CI_KEYCHAIN_PWD }}
   DUMP_SYMS_VERSION: 'v2.3.5'
   WITH_CRASH_REPORTING: 'True'
+  CCACHE_SIZE: "800M"
+  CCACHE_DIR: "/tmp/ccache_dir"
+  CCACHE_NOHASHDIR: "1"
+  CCACHE_CPP2: "yes"
 
 jobs:
   changes:
@@ -126,6 +130,7 @@ jobs:
       WITH_ICU: ${{ matrix.qt.with_icu }}
       WITH_ICONV: ${{ matrix.qt.with_iconv }}
       WITH_BIG_CODECS: ${{ matrix.qt.with_big_codecs }}
+      ENABLE_CCACHE: "true"
 
     steps:
       - name: Checkout repo
@@ -246,7 +251,15 @@ jobs:
       - name: Install Valentina's dependencies
         uses: tecolicom/actions-use-homebrew-tools@v1
         with:
-          tools: coreutils
+          tools: coreutils ccache
+
+      - name: Restore ccache
+        uses: actions/cache@v5
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-macos-${{ runner.arch }}-${{ matrix.qt.label }}-${{ github.sha }}
+          restore-keys: |
+            ccache-macos-${{ runner.arch }}-${{ matrix.qt.label }}-
 
       - name: Install Qt Creator
         uses: ./.github/actions/download-qtc
@@ -255,6 +268,7 @@ jobs:
 
       - name: Before build
         run: |
+          ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
           sudo xcode-select -p
           qmake --version
           which qmake
@@ -292,6 +306,7 @@ jobs:
           project.conanWithCrashReporting:true 
           project.conanWithICU:${{ env.WITH_ICU }}
           project.conanWithICONV:${{ env.WITH_ICONV }}
+          modules.buildconfig.enableCcache:${ENABLE_CCACHE}
           project.conanProfiles:share/ci/conan/profiles/macos" >> $GITHUB_ENV
 
       - name: Build Valentina
@@ -332,6 +347,9 @@ jobs:
       - name: Tests
         if: env.RUN_TESTS == 'true'
         run: qbs -f valentina.qbs -p autotest-runner -d $GITHUB_WORKSPACE/build  profile:qt6 config:release
+
+      - name: ccache stats
+        run: ccache -s
 
       - name: Create DMG
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
@@ -443,6 +461,7 @@ jobs:
       WITH_ICU: ${{ matrix.qt.with_icu }}
       WITH_ICONV: ${{ matrix.qt.with_iconv }}
       WITH_BIG_CODECS: ${{ matrix.qt.with_big_codecs }}
+      ENABLE_CCACHE: "true"
 
     steps:
       - name: Checkout repo
@@ -560,7 +579,15 @@ jobs:
       - name: Install Valentina's dependencies
         uses: tecolicom/actions-use-homebrew-tools@v1
         with:
-          tools: coreutils
+          tools: coreutils ccache
+
+      - name: Restore ccache
+        uses: actions/cache@v5
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-macos-${{ runner.arch }}-${{ matrix.qt.label }}-${{ github.sha }}
+          restore-keys: |
+            ccache-macos-${{ runner.arch }}-${{ matrix.qt.label }}-
 
       - name: Install Qt Creator
         uses: ./.github/actions/download-qtc
@@ -569,6 +596,7 @@ jobs:
 
       - name: Before build
         run: |
+          ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
           sudo xcode-select -p
           qmake --version
           which qmake
@@ -606,6 +634,7 @@ jobs:
           project.conanWithCrashReporting:true 
           project.conanWithICU:${{ env.WITH_ICU }}
           project.conanWithICONV:${{ env.WITH_ICONV }}
+          modules.buildconfig.enableCcache:${ENABLE_CCACHE}
           project.conanProfiles:share/ci/conan/profiles/macos_arm" >> $GITHUB_ENV
 
       - name: Build Valentina
@@ -646,6 +675,9 @@ jobs:
       - name: Tests
         if: env.RUN_TESTS == 'true'
         run: qbs -f valentina.qbs -p autotest-runner -d $GITHUB_WORKSPACE/build  profile:qt6 config:release
+
+      - name: ccache stats
+        run: ccache -s
 
       - name: Create DMG
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
