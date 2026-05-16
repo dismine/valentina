@@ -120,14 +120,15 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
-          version:      ${{ matrix.qt.install }}
-          host:         'mac'
-          target:       'desktop'
-          arch:         'clang_64'
-          dir:          ${{ runner.temp }}
-          modules:      'qtimageformats'
-          cache:        true
-          setup-python: false
+          version:          ${{ matrix.qt.install }}
+          host:             'mac'
+          target:           'desktop'
+          arch:             'clang_64'
+          dir:              ${{ runner.temp }}
+          modules:          'qtimageformats'
+          cache:            true
+          cache-key-prefix: 'install-qt-intel-'
+          setup-python:     false
 
       - name: Set path to Qt
         run: echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
@@ -159,7 +160,7 @@ jobs:
 
       - name: Decode the environment variable into a regular .p12 file
         run: echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
-    
+
       # We need to create a new keychain, otherwise using the certificate will prompt
       # with a UI dialog asking for the certificate password, which we can't
       # use in a headless CI environment
@@ -402,14 +403,15 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
-          version:      ${{ matrix.qt.install }}
-          host:         'mac'
-          target:       'desktop'
-          arch:         'clang_64'
-          dir:          ${{ runner.temp }}
-          modules:      'qtimageformats'
-          cache:        true
-          setup-python: false
+          version:          ${{ matrix.qt.install }}
+          host:             'mac'
+          target:           'desktop'
+          arch:             'clang_64'
+          dir:              ${{ runner.temp }}
+          modules:          'qtimageformats'
+          cache:            true
+          cache-key-prefix: 'install-qt-arm-'
+          setup-python:     false
 
       - name: Set path to Qt
         run: echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
@@ -429,6 +431,9 @@ jobs:
           python -m pip install --upgrade setuptools
           python -m pip install -r share/ci/requirements-ci.txt
 
+      - name: Setup path to Conan home folder
+        run: echo "CONAN_HOME=${{ runner.temp }}/.conan2" >> $GITHUB_ENV
+
       - name: Cache Conan packages (Conan 2.x)
         uses: actions/cache@v5
         with:
@@ -438,7 +443,7 @@ jobs:
 
       - name: Decode the environment variable into a regular .p12 file
         run: echo $MACOS_CERTIFICATE | base64 --decode > certificate.p12
-    
+
       # We need to create a new keychain, otherwise using the certificate will prompt
       # with a UI dialog asking for the certificate password, which we can't
       # use in a headless CI environment
