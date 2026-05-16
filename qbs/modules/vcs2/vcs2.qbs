@@ -117,20 +117,22 @@ Module {
                 // 1. latest stable version is TAG, or vX.Y.Z
                 // 2. number of commits since latest stable version is N
                 // 3. latest commit is gSHA
-                proc.exec(tool, ["describe", "--always", "HEAD"], true);
+                proc.exec(tool, ["describe", "--always", "--long", "HEAD"], true);
                 repoState = proc.readStdOut().trim();
                 if (repoState) {
                     console.info("Repo state:" + repoState);
                     found = true;
 
-                    const tagSections = repoState.split("-");
-
-                    if (tagSections.length >= 3) {
-                        repoStateTag = tagSections[0];
-                        repoStateDistance = tagSections[1];
-                        repoStateRevision = tagSections[2];
-                    } else  {
-                        repoStateRevision = tagSections[0];
+                    // --long always emits TAG-N-gSHA when a tag exists;
+                    // --always falls back to a raw SHA when no tags exist.
+                    const match = repoState.match(/^(.*)-(\d+)-(g[0-9a-f]+)$/);
+                    if (match) {
+                        repoStateTag = match[1];
+                        repoStateDistance = match[2];
+                        repoStateRevision = match[3];
+                    } else {
+                        // No tags in repo; --always fell back to a raw SHA
+                        repoStateRevision = repoState;
                     }
                 } else {
                     console.info("Unable to get the repo state. " + repoState);
