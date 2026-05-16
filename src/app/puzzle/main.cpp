@@ -26,6 +26,7 @@
  **
  *************************************************************************/
 
+#include <QDebug>
 #include <QMessageBox> // For QT_REQUIRE_VERSION
 #include <QScreen>
 #include <QTimer>
