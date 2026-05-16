@@ -31,6 +31,7 @@
 #include <QPainter>
 #include <QRegularExpression>
 #include <QtDebug>
+#include <QtMath>
 
 #include "vsvgpathtokenizer.h"
 #include <qmath.h>
