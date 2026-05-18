@@ -522,6 +522,18 @@ auto AddNodeArc(const VPieceNode &node, const VToolUnionDetailsInitData &initDat
                                        QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()));
     arc1->setMode(Draw::Modeling);
 
+    // Preserve the source arc's name when it was explicitly set (e.g., after flip/rotate/move operations),
+    // because those operations set the center point name to "X" which produces a meaningless name like "Arc_X".
+    if (arc1->name() != arc->name())
+    {
+        const QString head = arc1->GetTypeHead();
+        const QString headless = arc->name().startsWith(head) ? Sliced(arc->name(), head.size()) : arc->name();
+        if (!headless.isEmpty())
+        {
+            arc1->SetNameSuffix(headless);
+        }
+    }
+
     auto arc2 = std::make_unique<VArc>(*arc1);
 
     const quint32 idObject = initData.data->AddGObject(arc1.release());
@@ -574,6 +586,18 @@ auto AddNodeElArc(const VPieceNode &node, const VToolUnionDetailsInitData &initD
         l1.angle(), QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()), 0, QChar('0'));
     arc1->setMode(Draw::Modeling);
 
+    // Preserve the source arc's name when it was explicitly set (e.g., after flip/rotate/move operations),
+    // because those operations set the center point name to "X" which produces a meaningless name like "ElArc_X".
+    if (arc1->name() != arc->name())
+    {
+        const QString head = arc1->GetTypeHead();
+        const QString headless = arc->name().startsWith(head) ? Sliced(arc->name(), head.size()) : arc->name();
+        if (!headless.isEmpty())
+        {
+            arc1->SetNameSuffix(headless);
+        }
+    }
+
     auto arc2 = std::make_unique<VEllipticalArc>(*arc1);
 
     const quint32 idObject = initData.data->AddGObject(arc1.release());
@@ -620,6 +644,21 @@ auto AddNodeSpline(const VPieceNode &node, const VToolUnionDetailsInitData &init
     }
 
     auto *spl = new VSpline(*p1, static_cast<QPointF>(p2), static_cast<QPointF>(p3), *p4, 0, Draw::Modeling);
+
+    // Preserve the source spline's name when it was explicitly set (e.g., after flip/rotate/move operations),
+    // because those operations store endpoint VPointF objects with temporary names ("X1", "X4") that would
+    // otherwise produce a meaningless auto-generated name like "Spl_X1_X4".
+    if (spl->name() != spline->name())
+    {
+        const QString head = spl->GetTypeHead();
+        const QString headless =
+            spline->name().startsWith(head) ? Sliced(spline->name(), head.size()) : spline->name();
+        if (!headless.isEmpty())
+        {
+            spl->SetNameSuffix(headless);
+        }
+    }
+
     const quint32 idObject = initData.data->AddGObject(spl);
     children.append(idObject);
 
@@ -692,6 +731,21 @@ auto AddNodeSplinePath(const VPieceNode &node, const VToolUnionDetailsInitData &
         path->append(VSplinePoint(*p4, spl.GetEndAngle(), spl.GetEndAngleFormula(), angle2, angle2F,
                                   spline.GetC2Length(), spline.GetC2LengthFormula(), pL2, pL2F));
     }
+
+    // Preserve the source spline path's name when it was explicitly set (e.g., after flip/rotate/move operations),
+    // because those operations store endpoint VPointF objects with temporary names ("X1", "X4") that would
+    // otherwise produce a meaningless auto-generated name like "SplPath_X1_X4".
+    if (path->name() != splinePath->name())
+    {
+        const QString head = path->GetTypeHead();
+        const QString headless =
+            splinePath->name().startsWith(head) ? Sliced(splinePath->name(), head.size()) : splinePath->name();
+        if (!headless.isEmpty())
+        {
+            path->SetNameSuffix(headless);
+        }
+    }
+
     auto path1 = std::make_unique<VSplinePath>(*path);
 
     const quint32 idObject = initData.data->AddGObject(path.release());
@@ -957,6 +1011,19 @@ void UpdateNodeArc(VContainer *data, const VPieceNode &node, QVector<quint32> &c
     auto arc1 = std::make_unique<VArc>(*center, arc->GetRadius(), arc->GetFormulaRadius(), l1.angle(),
                                        QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()));
     arc1->setMode(Draw::Modeling);
+
+    // Preserve the source arc's name when it was explicitly set (e.g., after flip/rotate/move operations),
+    // because those operations set the center point name to "X" which produces a meaningless name like "Arc_X".
+    if (arc1->name() != arc->name())
+    {
+        const QString head = arc1->GetTypeHead();
+        const QString headless = arc->name().startsWith(head) ? Sliced(arc->name(), head.size()) : arc->name();
+        if (!headless.isEmpty())
+        {
+            arc1->SetNameSuffix(headless);
+        }
+    }
+
     data->UpdateGObject(TakeNextId(children), arc1.release());
 }
 
@@ -985,6 +1052,19 @@ void UpdateNodeElArc(VContainer *data, const VPieceNode &node, QVector<quint32> 
         *center, arc->GetRadius1(), arc->GetRadius2(), arc->GetFormulaRadius1(), arc->GetFormulaRadius2(), l1.angle(),
         QString().setNum(l1.angle()), l2.angle(), QString().setNum(l2.angle()), 0, QChar('0'));
     arc1->setMode(Draw::Modeling);
+
+    // Preserve the source arc's name when it was explicitly set (e.g., after flip/rotate/move operations),
+    // because those operations set the center point name to "X" which produces a meaningless name like "ElArc_X".
+    if (arc1->name() != arc->name())
+    {
+        const QString head = arc1->GetTypeHead();
+        const QString headless = arc->name().startsWith(head) ? Sliced(arc->name(), head.size()) : arc->name();
+        if (!headless.isEmpty())
+        {
+            arc1->SetNameSuffix(headless);
+        }
+    }
+
     data->UpdateGObject(TakeNextId(children), arc1.release());
 }
 
@@ -1011,6 +1091,21 @@ void UpdateNodeSpline(VContainer *data, const VPieceNode &node, QVector<quint32>
 
     auto spl =
         std::make_unique<VSpline>(*p1, static_cast<QPointF>(p2), static_cast<QPointF>(p3), *p4, 0U, Draw::Modeling);
+
+    // Preserve the source spline's name when it was explicitly set (e.g., after flip/rotate/move operations),
+    // because those operations store endpoint VPointF objects with temporary names ("X1", "X4") that would
+    // otherwise produce a meaningless auto-generated name like "Spl_X1_X4".
+    if (spl->name() != spline->name())
+    {
+        const QString head = spl->GetTypeHead();
+        const QString headless =
+            spline->name().startsWith(head) ? Sliced(spline->name(), head.size()) : spline->name();
+        if (!headless.isEmpty())
+        {
+            spl->SetNameSuffix(headless);
+        }
+    }
+
     data->UpdateGObject(TakeNextId(children), spl.release());
 }
 
@@ -1067,6 +1162,21 @@ void UpdateNodeSplinePath(VContainer *data, const VPieceNode &node, QVector<quin
         path->append(VSplinePoint(*p4, spl.GetEndAngle(), spl.GetEndAngleFormula(), angle2, angle2F,
                                   spline.GetC2Length(), spline.GetC2LengthFormula(), pL2, pL2F));
     }
+
+    // Preserve the source spline path's name when it was explicitly set (e.g., after flip/rotate/move operations),
+    // because those operations store endpoint VPointF objects with temporary names ("X1", "X4") that would
+    // otherwise produce a meaningless auto-generated name like "SplPath_X1_X4".
+    if (path->name() != splinePath->name())
+    {
+        const QString head = path->GetTypeHead();
+        const QString headless =
+            splinePath->name().startsWith(head) ? Sliced(splinePath->name(), head.size()) : splinePath->name();
+        if (!headless.isEmpty())
+        {
+            path->SetNameSuffix(headless);
+        }
+    }
+
     data->UpdateGObject(TakeNextId(children), path.release());
 }
 
