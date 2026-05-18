@@ -430,7 +430,7 @@ void VDependencyTreeModel::UpdateTree(const QVector<vidtype> &newRootObjects)
         if (child->childrenLoaded)
         {
             QVector<vidtype> const newDeps = FetchDependenciesForObject(child->objectId);
-            UpdateNodeChildren(child.get(), newDeps);
+            UpdateNodeChildren_r(child.get(), newDeps);
         }
     }
 }
@@ -481,7 +481,7 @@ void VDependencyTreeModel::RefreshNode(const QString &objectPath)
     }
 
     QVector<vidtype> const newDependencies = FetchDependenciesForObject(node->objectId);
-    UpdateNodeChildren(node, newDependencies);
+    UpdateNodeChildren_r(node, newDependencies);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -633,7 +633,7 @@ void VDependencyTreeModel::LoadDependencies(const QModelIndex &parentIndex, VDep
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDependencyTreeModel::UpdateNodeChildren(VDependencyNode *node, const QVector<vidtype> &newDependencies)
+void VDependencyTreeModel::UpdateNodeChildren_r(VDependencyNode *node, const QVector<vidtype> &newDependencies)
 {
     if (node == nullptr)
     {
@@ -678,6 +678,16 @@ void VDependencyTreeModel::UpdateNodeChildren(VDependencyNode *node, const QVect
         {
             // Child exists but at wrong position - move it
             // For simplicity, we'll just leave it (or implement move logic)
+        }
+    }
+
+    // Recursively refresh loaded sub-children
+    for (const auto &child : std::as_const(node->children))
+    {
+        if (child->childrenLoaded)
+        {
+            QVector<vidtype> const newDeps = FetchDependenciesForObject(child->objectId);
+            UpdateNodeChildren_r(child.get(), newDeps);
         }
     }
 }
