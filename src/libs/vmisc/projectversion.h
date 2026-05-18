@@ -47,6 +47,11 @@ constexpr auto AppVersion() -> unsigned
     return FormatVersion(MAJOR_VERSION, MINOR_VERSION, DEBUG_VERSION);
 }
 
+// Version for QMainWindow::saveState/restoreState. Increment only when toolbar/dock layout changes
+// incompatibly (e.g. toolbars added or removed). Never tie this to AppVersion — doing so resets
+// toolbar positions on every app update.
+constexpr int kToolbarStateVersion = 0;
+
 // Change version number in projectversion.cpp too.
 
 #define VER_FILEVERSION 1, 0, 1

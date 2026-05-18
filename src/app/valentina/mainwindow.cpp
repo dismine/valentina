@@ -84,6 +84,7 @@
 #include "../vmisc/vmodifierkey.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/vvalentinasettings.h"
+#include "../vmisc/projectversion.h"
 #include "../vpatterndb/variables/vincrement.h"
 #include "../vpatterndb/variables/vmeasurement.h"
 #include "../vtools/dialogs/support/dialogeditlabel.h"
@@ -5732,7 +5733,7 @@ void MainWindow::ReadSettings()
     if (settings->status() == QSettings::NoError)
     {
         restoreGeometry(settings->GetGeometry());
-        restoreState(settings->GetToolbarsState(), static_cast<int>(AppVersion()));
+        restoreState(settings->GetToolbarsState(), kToolbarStateVersion);
 
         m_groupsActive = settings->IsDockWidgetGroupsActive();
         m_toolOptionsActive = settings->IsDockWidgetToolOptionsActive();
@@ -5780,7 +5781,7 @@ void MainWindow::WriteSettings()
 
     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     settings->SetGeometry(saveGeometry());
-    settings->SetToolbarsState(saveState(static_cast<int>(AppVersion())));
+    settings->SetToolbarsState(saveState(kToolbarStateVersion));
 
     settings->SetDockWidgetGroupsActive(ui->dockWidgetGroups->isVisible());
     settings->SetDockWidgetToolOptionsActive(ui->dockWidgetToolOptions->isVisible());
