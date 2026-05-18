@@ -62,6 +62,8 @@ public:
     using VScenePoint::IsOnlyPoint;
     using VScenePoint::SetOnlyPoint;
 
+    void TriggerChoosed() override;
+
     void SetVisualizationMode(bool value);
     auto IsVisualizationMode() const -> bool;
 

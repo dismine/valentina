@@ -76,6 +76,12 @@ void VSimpleCurve::RefreshGeometry(const QSharedPointer<VAbstractCurve> &curve)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VSimpleCurve::TriggerChoosed()
+{
+    emit Choosed(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VSimpleCurve::CurveChoosed()
 {
     emit Choosed(id);

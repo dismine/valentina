@@ -54,6 +54,8 @@ public:
 
     auto getTagName() const -> QString override;
 
+    void TriggerChoosed() override { emit ChoosedTool(m_id, SceneObject::Point); }
+
     template <typename T> void ShowToolVisualization(bool show);
 
 public slots:

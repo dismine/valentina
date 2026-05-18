@@ -125,6 +125,7 @@ public:
     explicit VMainGraphicsView(QWidget *parent = nullptr);
     void setShowToolOptions(bool value);
     void AllowRubberBand(bool value);
+    void AllowCustomRubberBand(bool value);
 
     static void NewSceneRect(QGraphicsScene *sc, QGraphicsView *view, QGraphicsItem *item = nullptr);
     static auto SceneVisibleArea(QGraphicsView *view) -> QRectF;
@@ -155,6 +156,9 @@ signals:
     void itemClicked(QGraphicsItem *item);
     void ScaleChanged(qreal scale);
     void ZoomFitBestCurrent();
+    void RubberBandSelectionStarted();
+    void RubberBandSelection(const QRectF &sceneRect);
+    void RubberBandSelectionFinished();
 
 public slots:
     void Zoom(qreal scale);
@@ -173,12 +177,17 @@ protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dropEvent(QDropEvent *event) override;
+    void drawForeground(QPainter *painter, const QRectF &rect) override;
 
 private:
     Q_DISABLE_COPY_MOVE(VMainGraphicsView) // NOLINT
     GraphicsViewZoom *zoom{nullptr};
     bool showToolOptions{true};
     bool isAllowRubberBand{true};
+    bool m_customRubberBand{false};
+    bool m_rubberBanding{false};
+    QPoint m_rubberBandOrigin{};
+    QPoint m_rubberBandCurrent{};
     QPoint m_ptStartPos{};
     QCursor m_oldCursor{};
     Qt::CursorShape m_currentCursor{Qt::ArrowCursor};

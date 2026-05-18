@@ -44,14 +44,23 @@
 #include <QOpenGLWidget>
 #include <QPainter>
 #include <QPoint>
+#include <QRubberBand>
 #include <QScreen>
 #include <QScrollBar>
+#include <QStyle>
+#include <QStyleOption>
 #include <QThread>
 #include <QTimeLine>
 #include <QTransform>
 #include <QWheelEvent>
 #include <QWidget>
 #include <QtMath>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 9, 0)
+#include "../vmisc/backport/qpainterstateguard.h"
+#else
+#include <QPainterStateGuard>
+#endif
 
 #include "../ifc/xml/utils.h"
 #include "../vmisc/compatibility.h"
@@ -560,9 +569,14 @@ void VMainGraphicsView::mousePressEvent(QMouseEvent *event)
     {
         case Qt::LeftButton:
         {
-            if (isAllowRubberBand)
+            if (isAllowRubberBand && not m_customRubberBand)
             {
                 QGraphicsView::setDragMode(QGraphicsView::RubberBandDrag);
+            }
+            else if (m_customRubberBand)
+            {
+                m_rubberBandOrigin = event->pos();
+                m_rubberBandCurrent = event->pos();
             }
 
             if (showToolOptions)
@@ -632,6 +646,22 @@ void VMainGraphicsView::mouseMoveEvent(QMouseEvent *event)
         vBar->setValue(vBar->value() - delta.y());
         m_ptStartPos = event->pos();
     }
+    else if (m_customRubberBand && (event->buttons() & Qt::LeftButton))
+    {
+        const QPoint delta = event->pos() - m_rubberBandOrigin;
+        if (not m_rubberBanding && delta.manhattanLength() > QApplication::startDragDistance())
+        {
+            m_rubberBanding = true;
+            emit RubberBandSelectionStarted();
+        }
+        if (m_rubberBanding)
+        {
+            m_rubberBandCurrent = event->pos();
+            viewport()->update();
+            const QRect viewRect = QRect(m_rubberBandOrigin, m_rubberBandCurrent).normalized();
+            emit RubberBandSelection(mapToScene(viewRect).boundingRect());
+        }
+    }
     else
     {
         QGraphicsView::mouseMoveEvent(event);
@@ -645,6 +675,15 @@ void VMainGraphicsView::mouseMoveEvent(QMouseEvent *event)
  */
 void VMainGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
+    if (m_customRubberBand && event->button() == Qt::LeftButton && m_rubberBanding)
+    {
+        m_rubberBanding = false;
+        viewport()->update();
+        emit RubberBandSelectionFinished();
+        emit MouseRelease();
+        return;
+    }
+
     QGraphicsView::mouseReleaseEvent(event); // First because need to hide a rubber band
     QGraphicsView::setDragMode(QGraphicsView::NoDrag);
     if (event->button() == Qt::MiddleButton)
@@ -736,6 +775,25 @@ void VMainGraphicsView::dropEvent(QDropEvent *event)
                 event->ignore();
             }
         }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::drawForeground(QPainter *painter, const QRectF &rect)
+{
+    QGraphicsView::drawForeground(painter, rect);
+    if (m_rubberBanding)
+    {
+        QPainterStateGuard const guard(painter);
+        painter->resetTransform();
+        const QRect viewRect = QRect(m_rubberBandOrigin, m_rubberBandCurrent).normalized();
+
+        QStyleOptionRubberBand option;
+        option.initFrom(viewport());
+        option.rect = viewRect;
+        option.shape = QRubberBand::Rectangle;
+        option.opaque = false;
+        viewport()->style()->drawControl(QStyle::CE_RubberBand, &option, painter, viewport());
     }
 }
 
@@ -841,6 +899,14 @@ void VMainGraphicsView::setShowToolOptions(bool value)
 void VMainGraphicsView::AllowRubberBand(bool value)
 {
     isAllowRubberBand = value;
+    m_customRubberBand = false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::AllowCustomRubberBand(bool value)
+{
+    isAllowRubberBand = value;
+    m_customRubberBand = value;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

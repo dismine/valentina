@@ -112,6 +112,15 @@ void VSegmentLabel::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VSegmentLabel::TriggerChoosed()
+{
+    if (not m_segment.isNull())
+    {
+        emit SegmentChoosed(m_labelPos.id(), m_segment->SceneObjectType());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VSegmentLabel::SetLabelData(const VPointF &pos)
 {
     m_labelPos = pos;

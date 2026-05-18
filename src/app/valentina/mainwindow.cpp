@@ -30,6 +30,7 @@
 
 #include <QAction>
 #include <QComboBox>
+#include <QPointer>
 #include <QDesktopServices>
 #include <QDoubleSpinBox>
 #include <QFileDialog>
@@ -54,6 +55,7 @@
 #include <QtDebug>
 #include <QtGlobal>
 #include <chrono>
+#include <functional>
 #include <memory>
 #include <thread>
 
@@ -180,8 +182,13 @@
 #include "../vtools/undocommands/image/deletebackgroundimage.h"
 #include "../vtools/undocommands/renamepp.h"
 #include "../vtools/undocommands/undogroup.h"
+#include "../vwidgets/vabstractsimple.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vsegmentlabel.h"
+#include "../vwidgets/vsimplecurve.h"
+#include "../vwidgets/vsimplepoint.h"
+#include "../vtools/tools/vabstracttool.h"
 #include "../vwidgets/vtoolbuttonpopup.h"
 #include "../vwidgets/vwidgetpopup.h"
 #include "core/vapplication.h"
@@ -380,6 +387,74 @@ auto ResolveToolCursorResource(const QString &resource, const QString &cursor) -
 
     return cursorResource;
 }
+//---------------------------------------------------------------------------------------------------------------------
+using TriggerFn = std::function<void()>;
+
+//---------------------------------------------------------------------------------------------------------------------
+// Returns the effective target for rubber band hit-testing, or nullptr to skip the item.
+auto ResolveRubberBandTarget(const QGraphicsItem *item) -> QGraphicsItem *
+{
+    // NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
+    QGraphicsItem *target = const_cast<QGraphicsItem *>(item);
+
+    // Redirect label text items to their parent
+    if (item->type() == VGraphicsSimpleTextItem::Type)
+    {
+        target = item->parentItem();
+        if (target == nullptr)
+        {
+            return nullptr;
+        }
+    }
+
+    // Skip leader lines and other non-selectable VSegmentLabel children.
+    // The text label is already redirected to VSegmentLabel above; anything
+    // else whose parent is a VSegmentLabel (e.g. VScaledLine leader line)
+    // must not trigger selection.
+    if (target->type() != VSimplePoint::Type && target->type() != VSimpleCurve::Type &&
+        target->type() != VSegmentLabel::Type)
+    {
+        if (QGraphicsItem const *parent = target->parentItem();
+            parent != nullptr && parent->type() == VSegmentLabel::Type)
+        {
+            return nullptr;
+        }
+    }
+
+    return target;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Returns the (id, trigger) pair for a resolved rubber band target, or {NULL_ID, {}} to skip.
+auto MakeRubberBandEntry(QGraphicsItem *target) -> std::pair<quint32, TriggerFn>
+{
+    if (target->type() == VSimplePoint::Type || target->type() == VSimpleCurve::Type)
+    {
+        auto *simple = dynamic_cast<VAbstractSimple *>(target);
+        if (simple == nullptr)
+        {
+            return {};
+        }
+        QPointer<VAbstractSimple> const ptr(simple);
+        return {simple->GetId(), [ptr]() -> void { if (ptr) { ptr->TriggerChoosed(); } }};
+    }
+
+    if (target->type() == VSegmentLabel::Type)
+    {
+        auto *segLabel = static_cast<VSegmentLabel *>(target);
+        QPointer<VSegmentLabel> const ptr(segLabel);
+        return {segLabel->GetSegmentId(), [ptr]() -> void { if (ptr) { ptr->TriggerChoosed(); } }};
+    }
+
+    if (auto *tool = dynamic_cast<VAbstractTool *>(target))
+    {
+        QPointer<VAbstractTool> const ptr(tool);
+        return {tool->getId(), [ptr]() -> void { if (ptr) { ptr->TriggerChoosed(); } }};
+    }
+
+    return {};
+}
+
 } // anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -715,6 +790,62 @@ void MainWindow::InitScenes()
     connect(ui->view, &VMainGraphicsView::ScaleChanged, this, &MainWindow::ScaleChanged);
     connect(ui->view, &VMainGraphicsView::ZoomFitBestCurrent, this, &MainWindow::ZoomFitBestCurrent,
             Qt::QueuedConnection);
+    // Shared state: stores a trigger function per item while it's inside the rubber band.
+    // QPointer ensures we don't call into deleted objects.
+    auto prevBandTriggers = std::make_shared<QMap<quint32, TriggerFn>>();
+
+    connect(ui->view, &VMainGraphicsView::RubberBandSelection, this,
+            [this, prevBandTriggers](const QRectF &sceneRect) -> void
+            {
+                QMap<quint32, TriggerFn> currentTriggers;
+
+                for (QGraphicsItem *item : m_sceneDraw->items(sceneRect, Qt::IntersectsItemShape))
+                {
+                    QGraphicsItem *target = ResolveRubberBandTarget(item);
+                    if (target == nullptr)
+                    {
+                        continue;
+                    }
+
+                    auto [id, trigger] = MakeRubberBandEntry(target);
+                    if (id != NULL_ID && not currentTriggers.contains(id))
+                    {
+                        currentTriggers.insert(id, trigger);
+                    }
+                }
+
+                // Fire trigger for items newly entering the rubber band
+                for (auto it = currentTriggers.cbegin(); it != currentTriggers.cend(); ++it)
+                {
+                    if (not prevBandTriggers->contains(it.key()))
+                    {
+                        it.value()();
+                    }
+                }
+
+                // Fire trigger for items that left the rubber band (toggles them back off)
+                for (auto it = prevBandTriggers->cbegin(); it != prevBandTriggers->cend(); ++it)
+                {
+                    if (not currentTriggers.contains(it.key()))
+                    {
+                        it.value()();
+                    }
+                }
+
+                *prevBandTriggers = std::move(currentTriggers);
+            });
+
+    connect(ui->view, &VMainGraphicsView::RubberBandSelectionStarted, this,
+            [this]() -> void
+            {
+                if (m_dialogTool)
+                {
+                    m_dialogTool->ClearSourceObjects();
+                }
+            });
+
+    connect(ui->view, &VMainGraphicsView::RubberBandSelectionFinished, this,
+            [prevBandTriggers]() -> void { prevBandTriggers->clear(); });
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
     ui->view->setSizePolicy(policy);
@@ -8220,8 +8351,33 @@ void MainWindow::ToolSelectAllDrawObjects()
 
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolSelectOperationObjects()
-{ // Keep separate method in case we will need something special in this case
-    ToolSelectAllDrawObjects();
+{
+    emit EnableLabelSelection(false);
+    emit EnablePointSelection(false);
+    emit EnableLineSelection(false);
+    emit EnableArcSelection(false);
+    emit EnableElArcSelection(false);
+    emit EnableSplineSelection(false);
+    emit EnableSplinePathSelection(false);
+    emit EnableBackgroundImageSelection(false);
+
+    emit EnableLabelHover(true);
+    emit EnablePointHover(true);
+    emit EnableLineHover(false);
+    emit EnableArcHover(true);
+    emit EnableElArcHover(true);
+    emit EnableSplineHover(true);
+    emit EnableSplinePathHover(true);
+    emit EnableImageBackgroundHover(false);
+
+    emit ShowArcSegmentLabel(true);
+    emit ShowElArcSegmentLabel(true);
+    emit ShowSplineSegmentLabel(true);
+    emit ShowSplinePathSegmentLabel(true);
+
+    emit ItemsSelection(SelectionType::ByMouseRelease);
+
+    ui->view->AllowCustomRubberBand(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

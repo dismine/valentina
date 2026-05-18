@@ -102,6 +102,7 @@ public:
     auto PointsList() const -> QMap<QString, quint32>;
     virtual auto getTagName() const -> QString = 0;
     virtual void ShowVisualization(bool show) = 0;
+    virtual void TriggerChoosed() {}
     virtual void ChangeLabelPosition(quint32 id, const QPointF &pos);
     virtual void ChangeSegmentLabelPosition(SegmentLabel segment, const QPointF &pos);
     virtual void SetLabelVisible(quint32 id, bool visible);

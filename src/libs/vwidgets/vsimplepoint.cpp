@@ -117,6 +117,12 @@ void VSimplePoint::ToolSelectionType(const SelectionType &selectionType)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VSimplePoint::TriggerChoosed()
+{
+    emit Choosed(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VSimplePoint::DeleteFromLabel()
 {
     emit Delete();

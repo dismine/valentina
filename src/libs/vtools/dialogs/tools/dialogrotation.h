@@ -84,6 +84,7 @@ public:
 
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
+    void ClearSourceObjects() override;
 
 private slots:
     /** @brief DeployAngleTextEdit grow or shrink formula input */

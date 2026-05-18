@@ -125,6 +125,7 @@ signals:
 public slots:
     virtual void ChosenObject(quint32 id, const SceneObject &type);
     virtual void SelectedObject(bool selected, quint32 object, quint32 tool);
+    virtual void ClearSourceObjects() {}
     virtual void DialogAccepted();
     /**
      * @brief DialogApply save data and emit signal DialogApplied.

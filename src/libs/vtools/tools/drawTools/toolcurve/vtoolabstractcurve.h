@@ -77,6 +77,8 @@ public:
     };
     auto getTagName() const -> QString override;
 
+    void TriggerChoosed() override { emit ChoosedTool(m_id, sceneType); }
+
     virtual void ShowHandles(bool show);
 
     auto GetLineColor() const -> QString;

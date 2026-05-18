@@ -403,6 +403,12 @@ void DialogMove::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogMove::ClearSourceObjects()
+{
+    SetSourceObjects({});
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogMove::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (stage1)

@@ -59,6 +59,8 @@ public:
         Type = UserType + static_cast<int>(Vis::SimpleCurve)
     };
 
+    void TriggerChoosed() override;
+
     void RefreshGeometry(const QSharedPointer<VAbstractCurve> &curve);
 signals:
     /**

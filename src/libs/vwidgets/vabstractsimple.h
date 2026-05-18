@@ -48,10 +48,12 @@ class VAbstractSimple : public QObject
 
 public:
     explicit VAbstractSimple(quint32 id, QObject *parent = nullptr);
-    virtual ~VAbstractSimple() = default;
+    ~VAbstractSimple() override = default;
 
     virtual void ToolSelectionType(const SelectionType &selectionType);
+    virtual void TriggerChoosed() {}
 
+    auto GetId() const -> quint32 { return id; }
     auto GetType() const -> GOType;
     void SetType(const GOType &value);
 

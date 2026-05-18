@@ -281,6 +281,12 @@ void DialogFlippingByAxis::CheckDependencyTreeComplete()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByAxis::ClearSourceObjects()
+{
+    SetSourceObjects({});
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (stage1)

@@ -337,6 +337,12 @@ void DialogRotation::CheckDependencyTreeComplete()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogRotation::ClearSourceObjects()
+{
+    SetSourceObjects({});
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
 {
     if (stage1)

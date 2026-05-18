@@ -65,6 +65,9 @@ public:
 
     void SetEnabledState(bool enabled);
 
+    void TriggerChoosed();
+    auto GetSegmentId() const -> quint32 { return m_labelPos.id(); }
+
     void SetLabelMovable(bool value);
 
     void SetLabelSelectable(bool value);
