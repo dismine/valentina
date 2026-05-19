@@ -115,7 +115,7 @@ auto VAbstractNode::IsRemovable() const -> RemoveStatus
     VPatternGraph const *patternGraph = doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    auto Filter = [](const auto &) -> auto { return true; };
+    auto Filter = [](const VNode &node) -> bool { return node.type == VNodeType::PIECE; };
 
     auto const dependecies = patternGraph->TryGetDependentNodes(m_id, 1000, Filter);
 

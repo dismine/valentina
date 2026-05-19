@@ -111,6 +111,8 @@ VTestApp {
         "tst_vtheme.h",
         "tst_vtranslatevars.cpp",
         "tst_vabstractpiece.cpp",
+        "tst_vpatterngraph.cpp",
+        "tst_vpatterngraph.h",
         "tst_vtooluniondetails.cpp",
         "tst_vposter.h",
         "tst_vspline.h",

@@ -271,6 +271,11 @@ private:
 
     void GarbageCollector();
     void BackupBeforeGarbageCollector() const;
+
+    auto GCStaleModelingObjects(const VPatternGraph *graph) -> QSet<vidtype>;
+    auto GCStaleUnionTools(const VPatternGraph *graph) -> QSet<vidtype>;
+    auto GCRemoveFromModeling(const QSet<vidtype> &candidates) -> QSet<vidtype>;
+    void GCUpdateHistory(const QSet<vidtype> &removed);
 };
 
 #endif // VPATTERN_H

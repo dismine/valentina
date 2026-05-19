@@ -206,6 +206,42 @@ auto ParsePieceMirrorLine(const QDomElement &domElement) -> VPieceFoldLineData
                                                   VDomDocument::AttrAlignment,
                                                   QString::number(Qt::AlignHCenter))};
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void CollectFromUnionSection(const QDomElement &parent, const QString &sectionTag, QVector<vidtype> &ids)
+{
+    const QDomElement section = parent.firstChildElement(sectionTag);
+    if (section.isNull())
+    {
+        return;
+    }
+    const QDomNodeList childList = section.elementsByTagName(VToolUnionDetails::TagChild);
+    for (int i = 0; i < childList.size(); ++i)
+    {
+        if (const QDomElement child = childList.at(i).toElement(); !child.isNull())
+        {
+            ids.append(static_cast<vidtype>(child.text().toUInt()));
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto CollectUnionChildIds(const QDomElement &toolElement) -> QVector<vidtype>
+{
+    const QDomElement tagChildren = toolElement.firstChildElement(VToolUnionDetails::TagChildren);
+    if (tagChildren.isNull())
+    {
+        return {};
+    }
+
+    QVector<vidtype> ids;
+    CollectFromUnionSection(tagChildren, VAbstractPattern::TagNodes, ids);
+    CollectFromUnionSection(tagChildren, VToolSeamAllowance::TagCSA, ids);
+    CollectFromUnionSection(tagChildren, VToolSeamAllowance::TagIPaths, ids);
+    CollectFromUnionSection(tagChildren, VToolSeamAllowance::TagPins, ids);
+    CollectFromUnionSection(tagChildren, VToolSeamAllowance::TagPlaceLabels, ids);
+    return ids;
+}
 } // anonymous namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3950,36 +3986,65 @@ auto VPattern::FindIncrement(const QString &name) const -> QDomElement
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPattern::GarbageCollector()
+// MODELING_TOOL (union tools) cannot be assessed via BFS from the tool itself because
+// their children keep the BFS path alive even when the resulting piece is gone.
+// They are handled separately in GCStaleUnionTools.
+auto VPattern::GCStaleModelingObjects(const VPatternGraph *graph) -> QSet<vidtype>
 {
-    bool cleared = false;
-
-    VPatternGraph const *graph = PatternGraph();
-
-    QSet<vidtype> candidates = ConvertToSet(graph->GetVerticesByType(VNodeType ::MODELING_OBJECT));
-    candidates += ConvertToSet(graph->GetVerticesByType(VNodeType ::MODELING_TOOL));
-
+    QSet<vidtype> candidates = ConvertToSet(graph->GetVerticesByType(VNodeType::MODELING_OBJECT));
     EraseIf(candidates,
-            [graph, this](auto node) -> bool
+            [graph, this](vidtype node) -> bool
             {
-                auto Filter = [](const auto &node) -> auto { return node.type == VNodeType::PIECE; };
-                const QVector<VNode> nodeDependencies = graph->GetDependentNodes(node, Filter);
-                return !nodeDependencies.isEmpty() || FindElementById(node).isNull();
+                auto const PieceFilter = [](const VNode &n) -> bool { return n.type == VNodeType::PIECE; };
+                return !graph->GetDependentNodes(node, PieceFilter).isEmpty() || FindElementById(node).isNull();
             });
+    return candidates;
+}
 
-    if (candidates.isEmpty())
+//---------------------------------------------------------------------------------------------------------------------
+// A union tool is stale when ALL its XML-recorded children have no reachable PIECE descendants.
+auto VPattern::GCStaleUnionTools(const VPatternGraph *graph) -> QSet<vidtype>
+{
+    auto const PieceFilter = [](const VNode &n) -> bool { return n.type == VNodeType::PIECE; };
+
+    QSet<vidtype> candidates;
+    for (vidtype const toolId : graph->GetVerticesByType(VNodeType::MODELING_TOOL))
     {
-        return;
+        const QDomElement toolElement = FindElementById(toolId);
+        if (toolElement.isNull() || toolElement.attribute(AttrType) != VToolUnionDetails::ToolType)
+        {
+            continue;
+        }
+
+        const QVector<vidtype> childIds = CollectUnionChildIds(toolElement);
+        if (childIds.isEmpty())
+        {
+            continue;
+        }
+
+        const bool allStale =
+            std::ranges::all_of(childIds,
+                                [graph, &PieceFilter](vidtype childId) -> bool
+                                { return graph->GetDependentNodes(childId, PieceFilter).isEmpty(); });
+        if (!allStale)
+        {
+            continue;
+        }
+
+        candidates.insert(toolId);
     }
+    return candidates;
+}
 
-    BackupBeforeGarbageCollector();
+//---------------------------------------------------------------------------------------------------------------------
+auto VPattern::GCRemoveFromModeling(const QSet<vidtype> &candidates) -> QSet<vidtype>
+{
+    QSet<vidtype> removed;
+    removed.reserve(candidates.size());
 
-    QSet<vidtype> clearedNodes;
-    clearedNodes.reserve(candidates.size());
-
-    for (const auto node : std::as_const(candidates))
+    for (vidtype const node : candidates)
     {
-        QDomElement const domElement = FindElementById(node);
+        const QDomElement domElement = FindElementById(node);
         if (domElement.isNull())
         {
             continue;
@@ -3989,33 +4054,50 @@ void VPattern::GarbageCollector()
             !parent.isNull() && parent.tagName() == TagModeling)
         {
             parent.removeChild(domElement);
-            cleared = true;
-            clearedNodes.insert(node);
+            removed.insert(node);
         }
     }
+    return removed;
+}
 
-    if (!cleared)
-    {
-        return;
-    }
-
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::GCUpdateHistory(const QSet<vidtype> &removed)
+{
     QVector<VToolRecord> newHistory;
     newHistory.reserve(history.size());
-
     for (const auto &record : std::as_const(history))
     {
-        if (!clearedNodes.contains(record.GetId()))
+        if (!removed.contains(record.GetId()))
         {
             newHistory.append(record);
         }
     }
-
     history = newHistory;
+}
 
-    if (cleared)
+//---------------------------------------------------------------------------------------------------------------------
+void VPattern::GarbageCollector()
+{
+    VPatternGraph const *graph = PatternGraph();
+
+    QSet<vidtype> candidates = GCStaleModelingObjects(graph);
+    candidates += GCStaleUnionTools(graph);
+
+    if (candidates.isEmpty())
     {
-        RefreshElementIdCache();
+        return;
     }
+
+    BackupBeforeGarbageCollector();
+
+    const QSet<vidtype> removed = GCRemoveFromModeling(candidates);
+    if (removed.isEmpty())
+    {
+        return;
+    }
+
+    GCUpdateHistory(removed);
+    RefreshElementIdCache();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

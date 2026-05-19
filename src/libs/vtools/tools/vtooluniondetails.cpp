@@ -400,6 +400,12 @@ auto AddNodePoint(const VPieceNode &node, const VToolUnionDetailsInitData &initD
 
     const quint32 idObject = initData.data->AddGObject(point.release());
     children.append(idObject);
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+    patternGraph->AddVertex(idObject, VNodeType::MODELING_OBJECT,
+                            initData.doc->PatternBlockMapper()->GetActiveId());
+
     point1->setIdObject(idObject);
     point1->setMode(Draw::Modeling);
     const quint32 id = initData.data->AddGObject(point1.release());
@@ -436,6 +442,12 @@ auto AddPin(quint32 id, const VToolUnionDetailsInitData &initData, QVector<quint
 
     const quint32 idObject = initData.data->AddGObject(point.release());
     children.append(idObject);
+
+    VPatternGraph *patternGraphPin = initData.doc->PatternGraph();
+    SCASSERT(patternGraphPin != nullptr)
+    patternGraphPin->AddVertex(idObject, VNodeType::MODELING_OBJECT,
+                               initData.doc->PatternBlockMapper()->GetActiveId());
+
     point1->setMode(Draw::Modeling);
     const quint32 idPin = initData.data->AddGObject(point1.release());
 
@@ -486,6 +498,11 @@ auto AddPlaceLabel(quint32 id, const VToolUnionDetailsInitData &initData, QVecto
 
     initNodeData.centerPoint = initData.data->AddGObject(label.release());
     children.append(initNodeData.centerPoint);
+
+    VPatternGraph *patternGraphLabel = initData.doc->PatternGraph();
+    SCASSERT(patternGraphLabel != nullptr)
+    patternGraphLabel->AddVertex(initNodeData.centerPoint, VNodeType::MODELING_OBJECT,
+                                 initData.doc->PatternBlockMapper()->GetActiveId());
 
     const quint32 idLabel = initData.data->AddGObject(label1.release());
     initNodeData.id = idLabel;
@@ -538,6 +555,11 @@ auto AddNodeArc(const VPieceNode &node, const VToolUnionDetailsInitData &initDat
 
     const quint32 idObject = initData.data->AddGObject(arc1.release());
     children.append(idObject);
+
+    VPatternGraph *patternGraphArc = initData.doc->PatternGraph();
+    SCASSERT(patternGraphArc != nullptr)
+    patternGraphArc->AddVertex(idObject, VNodeType::MODELING_OBJECT,
+                               initData.doc->PatternBlockMapper()->GetActiveId());
 
     arc2->setIdObject(idObject);
     arc2->setMode(Draw::Modeling);
@@ -603,6 +625,11 @@ auto AddNodeElArc(const VPieceNode &node, const VToolUnionDetailsInitData &initD
     const quint32 idObject = initData.data->AddGObject(arc1.release());
     children.append(idObject);
 
+    VPatternGraph *patternGraphElArc = initData.doc->PatternGraph();
+    SCASSERT(patternGraphElArc != nullptr)
+    patternGraphElArc->AddVertex(idObject, VNodeType::MODELING_OBJECT,
+                                 initData.doc->PatternBlockMapper()->GetActiveId());
+
     arc2->setIdObject(idObject);
     arc2->setMode(Draw::Modeling);
     const quint32 id = initData.data->AddGObject(arc2.release());
@@ -661,6 +688,11 @@ auto AddNodeSpline(const VPieceNode &node, const VToolUnionDetailsInitData &init
 
     const quint32 idObject = initData.data->AddGObject(spl);
     children.append(idObject);
+
+    VPatternGraph *patternGraphSpl = initData.doc->PatternGraph();
+    SCASSERT(patternGraphSpl != nullptr)
+    patternGraphSpl->AddVertex(idObject, VNodeType::MODELING_OBJECT,
+                               initData.doc->PatternBlockMapper()->GetActiveId());
 
     auto *spl1 = new VSpline(*spl);
     spl1->setIdObject(idObject);
@@ -750,6 +782,11 @@ auto AddNodeSplinePath(const VPieceNode &node, const VToolUnionDetailsInitData &
 
     const quint32 idObject = initData.data->AddGObject(path.release());
     children.append(idObject);
+
+    VPatternGraph *patternGraphSplPath = initData.doc->PatternGraph();
+    SCASSERT(patternGraphSplPath != nullptr)
+    patternGraphSplPath->AddVertex(idObject, VNodeType::MODELING_OBJECT,
+                                   initData.doc->PatternBlockMapper()->GetActiveId());
 
     path1->setIdObject(idObject);
     path1->setMode(Draw::Modeling);
@@ -1229,16 +1266,6 @@ void CreateUnitedNodes(VPiece &newDetail, const VPiece &d1, const VPiece &d2, co
     const VPiecePath d1Path = d1.GetPath().RemoveEdge(initData.indexD1);
     const VPiecePath d2Path = d2.GetPath().RemoveEdge(initData.indexD2);
 
-    for (qint32 i = 0; i < d1Path.CountNodes(); ++i)
-    {
-        patternGraph->AddEdge(d1Path.at(i).GetId(), initData.id);
-    }
-
-    for (qint32 i = 0; i < d2Path.CountNodes(); ++i)
-    {
-        patternGraph->AddEdge(d2Path.at(i).GetId(), initData.id);
-    }
-
     const auto unitedPath = VToolUnionDetails::CalcUnitedPath(d1Path, d2Path, initData.indexD2, pRotate);
 
     QVector<quint32> children;
@@ -1246,7 +1273,7 @@ void CreateUnitedNodes(VPiece &newDetail, const VPiece &d1, const VPiece &d2, co
 
     for (const auto &[first, second] : unitedPath)
     {
-        patternGraph->AddEdge(second.GetId(), initData.id);
+        const quint32 sourceId = second.GetId();
         if (first)
         { // first piece
             AddNodeToNewPath(initData, newPath, second, children, drawName);
@@ -1255,13 +1282,13 @@ void CreateUnitedNodes(VPiece &newDetail, const VPiece &d1, const VPiece &d2, co
         { // second piece
             AddNodeToNewPath(initData, newPath, second, children, drawName, dx, dy, pRotate, angle);
         }
+        patternGraph->AddEdge(sourceId, children.last());
     }
 
     newDetail.SetPath(newPath);
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 
@@ -1285,8 +1312,9 @@ void CreateUnitedDetailCSA(VPiece &newDetail, const VPiece &d, QVector<quint32> 
         newPath.Clear(); // Clear nodes
         for (int i = 0; i < path.CountNodes(); ++i)
         {
-            patternGraph->AddEdge(path.at(i).GetId(), initData.id);
+            const quint32 sourceId = path.at(i).GetId();
             AddNodeToNewPath(initData, newPath, path.at(i), nodeChildren, drawName, dx, dy, pRotate, angle);
+            patternGraph->AddEdge(sourceId, nodeChildren.last());
         }
         const quint32 idPath = initData.data->AddPiecePath(newPath);
 
@@ -1328,7 +1356,6 @@ void CreateUnitedCSA(VPiece &newDetail, const VPiece &d1, const VPiece &d2, cons
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 }
@@ -1351,8 +1378,9 @@ void CreateUnitedDetailInternalPaths(VPiece &newDetail, const VPiece &d, QVector
 
         for (int i = 0; i < path.CountNodes(); ++i)
         {
-            patternGraph->AddEdge(path.at(i).GetId(), initData.id);
+            const quint32 sourceId = path.at(i).GetId();
             AddNodeToNewPath(initData, newPath, path.at(i), nodeChildren, drawName, dx, dy, pRotate, angle);
+            patternGraph->AddEdge(sourceId, nodeChildren.last());
         }
         const quint32 idPath = initData.data->AddPiecePath(newPath);
 
@@ -1394,7 +1422,6 @@ void CreateUnitedInternalPaths(VPiece &newDetail, const VPiece &d1, const VPiece
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 }
@@ -1406,12 +1433,12 @@ void CreateUnitedDetailPins(VPiece &newDetail, const VPiece &d, QVector<quint32>
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    QVector<quint32> const nodeChildren;
+    QVector<quint32> nodeChildren;
     const QVector<quint32> pins = d.GetPins();
     for (auto pin : pins)
     {
-        patternGraph->AddEdge(pin, initData.id);
-        const quint32 id = AddPin(pin, initData, children, drawName, dx, dy, pRotate, angle);
+        const quint32 id = AddPin(pin, initData, nodeChildren, drawName, dx, dy, pRotate, angle);
+        patternGraph->AddEdge(pin, nodeChildren.last());
         newDetail.GetPins().append(id);
     }
     children += nodeChildren;
@@ -1425,13 +1452,12 @@ void CreateUnitedDetailPlaceLabels(VPiece &newDetail, const VPiece &d, QVector<q
     VPatternGraph *patternGraph = initData.doc->PatternGraph();
     SCASSERT(patternGraph != nullptr)
 
-    QVector<quint32> const nodeChildren;
+    QVector<quint32> nodeChildren;
     const QVector<quint32> placeLabels = d.GetPlaceLabels();
     for (auto placeLabel : placeLabels)
     {
-        patternGraph->AddEdge(placeLabel, initData.id);
-
-        const quint32 id = AddPlaceLabel(placeLabel, initData, children, drawName, dx, dy, pRotate, angle);
+        const quint32 id = AddPlaceLabel(placeLabel, initData, nodeChildren, drawName, dx, dy, pRotate, angle);
+        patternGraph->AddEdge(placeLabel, nodeChildren.last());
         newDetail.GetPlaceLabels().append(id);
     }
     children += nodeChildren;
@@ -1456,7 +1482,6 @@ void CreateUnitedPins(VPiece &newDetail, const VPiece &d1, const VPiece &d2, con
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 }
@@ -1481,7 +1506,6 @@ void CreateUnitedPlaceLabels(VPiece &newDetail, const VPiece &d1, const VPiece &
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 }
@@ -1510,16 +1534,6 @@ void UpdateUnitedNodes(const VToolUnionDetailsInitData &initData, qreal dx, qrea
     const vsizetype countNodeD1 = d1REPath.CountNodes();
     const vsizetype countNodeD2 = d2REPath.CountNodes();
 
-    for (qint32 i = 0; i < countNodeD1; ++i)
-    {
-        patternGraph->AddEdge(d1REPath.at(i).GetId(), initData.id);
-    }
-
-    for (qint32 i = 0; i < countNodeD2; ++i)
-    {
-        patternGraph->AddEdge(d2REPath.at(i).GetId(), initData.id);
-    }
-
     // This check needed for backward compatibility
     // Remove check and "else" part if min version is 0.3.2
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 3, 2), "Time to refactor the code.");
@@ -1529,7 +1543,8 @@ void UpdateUnitedNodes(const VToolUnionDetailsInitData &initData, qreal dx, qrea
 
         for (const auto &[first, second] : unitedPath)
         {
-            patternGraph->AddEdge(second.GetId(), initData.id);
+            const quint32 sourceId = second.GetId();
+            const quint32 rawCopyId = children.isEmpty() ? NULL_ID : children.first();
             if (first)
             { // first piece
                 UpdatePathNode(initData.data, second, children);
@@ -1537,6 +1552,10 @@ void UpdateUnitedNodes(const VToolUnionDetailsInitData &initData, qreal dx, qrea
             else
             { // second piece
                 UpdatePathNode(initData.data, second, children, dx, dy, pRotate, angle);
+            }
+            if (rawCopyId != NULL_ID)
+            {
+                patternGraph->AddEdge(sourceId, rawCopyId);
             }
         }
     }
@@ -1559,8 +1578,13 @@ void UpdateUnitedNodes(const VToolUnionDetailsInitData &initData, qreal dx, qrea
                     {
                         j = 0;
                     }
-                    patternGraph->AddEdge(d2REPath.at(j).GetId(), initData.id);
+                    const quint32 sourceId = d2REPath.at(j).GetId();
+                    const quint32 rawCopyId = children.isEmpty() ? NULL_ID : children.first();
                     UpdatePathNode(initData.data, d2REPath.at(j), children, dx, dy, pRotate, angle);
+                    if (rawCopyId != NULL_ID)
+                    {
+                        patternGraph->AddEdge(sourceId, rawCopyId);
+                    }
                     ++pointsD2;
                     ++j;
                 } while (pointsD2 < childrenCount);
@@ -1708,7 +1732,7 @@ void UpdateUnitedDetailPins(const VToolUnionDetailsInitData &initData, qreal dx,
 
     for (auto record : records)
     {
-        patternGraph->AddEdge(record, initData.id);
+        const quint32 rawCopyId = children.isEmpty() ? NULL_ID : children.first();
         auto point = std::make_unique<VPointF>(*initData.data->GeometricObject<VPointF>(record));
         point->setMode(Draw::Modeling);
         if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
@@ -1717,6 +1741,10 @@ void UpdateUnitedDetailPins(const VToolUnionDetailsInitData &initData, qreal dx,
                             static_cast<QPointF>(*initData.data->GeometricObject<VPointF>(pRotate)), angle);
         }
         initData.data->UpdateGObject(TakeNextId(children), point.release());
+        if (rawCopyId != NULL_ID)
+        {
+            patternGraph->AddEdge(record, rawCopyId);
+        }
     }
 }
 
@@ -1737,7 +1765,7 @@ void UpdateUnitedDetailPlaceLabels(const VToolUnionDetailsInitData &initData, qr
 
     for (auto record : records)
     {
-        patternGraph->AddEdge(record, initData.id);
+        const quint32 rawCopyId = children.isEmpty() ? NULL_ID : children.first();
         QSharedPointer<VPlaceLabelItem> const parentLabel = initData.data->GeometricObject<VPlaceLabelItem>(record);
         if (not qFuzzyIsNull(dx) || not qFuzzyIsNull(dy) || pRotate != NULL_ID)
         {
@@ -1753,6 +1781,10 @@ void UpdateUnitedDetailPlaceLabels(const VToolUnionDetailsInitData &initData, qr
 
         label->SetCorrectionAngle(parentLabel->GetCorrectionAngle() + angle);
         initData.data->UpdateGObject(TakeNextId(children), label.release());
+        if (rawCopyId != NULL_ID)
+        {
+            patternGraph->AddEdge(record, rawCopyId);
+        }
     }
 }
 
