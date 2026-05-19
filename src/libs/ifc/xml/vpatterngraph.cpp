@@ -30,6 +30,8 @@
 #include "../graaflib/properties/vertex_properties.h"
 #include "../vmisc/defglobal.h"
 
+#include <QDebug>
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief Add a vertex to the graph
@@ -56,6 +58,7 @@ auto VPatternGraph::AddVertex(const VNode &node) -> bool
     // Check if ID already exists
     if (m_idToVertex.contains(node.id))
     {
+        qWarning() << "VPatternGraph::AddVertex: vertex already exists. id=" << node.id;
         return false;
     }
 
@@ -79,6 +82,10 @@ auto VPatternGraph::AddEdge(vidtype fromId, vidtype toId) -> bool
 
     if (!m_idToVertex.contains(fromId) || !m_idToVertex.contains(toId))
     {
+        qWarning() << "VPatternGraph::AddEdge: one or both vertices not found. fromId=" << fromId
+                   << "toId=" << toId
+                   << "fromExists=" << m_idToVertex.contains(fromId)
+                   << "toExists=" << m_idToVertex.contains(toId);
         return false;
     }
 
@@ -87,6 +94,8 @@ auto VPatternGraph::AddEdge(vidtype fromId, vidtype toId) -> bool
 
     if (!m_graph.has_vertex(fromVertex) || !m_graph.has_vertex(toVertex))
     {
+        qWarning() << "VPatternGraph::AddEdge: vertex id maps to invalid graph vertex. fromId=" << fromId
+                   << "toId=" << toId;
         return false;
     }
 
