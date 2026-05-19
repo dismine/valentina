@@ -872,7 +872,7 @@ void DialogRotation::ColorChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::BulkRename()
 {
-    if (DialogBulkRename dlg(SaveSourceObjects(), data, this); dlg.exec() == QDialog::Accepted && dlg.HasChanges())
+    if (DialogBulkRename dlg(SaveSourceObjects(), *data, this); dlg.exec() == QDialog::Accepted && dlg.HasChanges())
     {
         SetSourceObjects(dlg.RenamedItems());
     }

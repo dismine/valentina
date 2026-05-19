@@ -626,7 +626,7 @@ void DialogFlippingByAxis::ColorChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::BulkRename()
 {
-    if (DialogBulkRename dlg(SaveSourceObjects(), data, this); dlg.exec() == QDialog::Accepted && dlg.HasChanges())
+    if (DialogBulkRename dlg(SaveSourceObjects(), *data, this); dlg.exec() == QDialog::Accepted && dlg.HasChanges())
     {
         SetSourceObjects(dlg.RenamedItems());
     }

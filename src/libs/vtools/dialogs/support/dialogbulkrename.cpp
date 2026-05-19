@@ -59,7 +59,7 @@ auto ApplyPlaceholders(const QString &text, int orderIndex) -> QString
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-DialogBulkRename::DialogBulkRename(const QVector<SourceItem> &items, const VContainer *data, QWidget *parent)
+DialogBulkRename::DialogBulkRename(const QVector<SourceItem> &items, const VContainer &data, QWidget *parent)
   : QDialog(parent),
     ui(new Ui::DialogBulkRename),
     m_items(items),
@@ -236,14 +236,14 @@ auto DialogBulkRename::BuildNewName(bool enabled, quint32 id, int &orderIndex) c
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogBulkRename::FullBaseName(quint32 id) const -> QString
 {
-    if (m_data == nullptr)
-    {
-        return {};
-    }
-
     try
     {
-        return m_data->GetGObject(id)->name();
+        const QSharedPointer<VGObject> obj = m_data.GetGObject(id);
+        if (obj.isNull())
+        {
+            return GetName(id);
+        }
+        return obj->name();
     }
     catch (const VExceptionBadId &)
     {
@@ -257,11 +257,16 @@ auto DialogBulkRename::NewFullBaseName(const QString &base, quint32 id) const ->
 {
     try
     {
-        if (const QSharedPointer<VGObject> obj = m_data->GetGObject(id); obj->getType() == GOType::Point)
+        const QSharedPointer<VGObject> obj = m_data.GetGObject(id);
+        if (obj.isNull() || obj->getType() == GOType::Point)
         {
             return base;
         }
-        const QSharedPointer<VAbstractCurve> curve = m_data->GeometricObject<VAbstractCurve>(id);
+        const QSharedPointer<VAbstractCurve> curve = m_data.GeometricObject<VAbstractCurve>(id);
+        if (curve.isNull())
+        {
+            return base;
+        }
         return curve->GetTypeHead() + base;
     }
     catch (const VExceptionBadId &)
@@ -274,18 +279,22 @@ auto DialogBulkRename::NewFullBaseName(const QString &base, quint32 id) const ->
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogBulkRename::BaseName(quint32 id) const -> QString
 {
-    if (m_data == nullptr)
-    {
-        return {};
-    }
-
     try
     {
-        if (const QSharedPointer<VGObject> obj = m_data->GetGObject(id); obj->getType() == GOType::Point)
+        const QSharedPointer<VGObject> obj = m_data.GetGObject(id);
+        if (obj.isNull())
+        {
+            return GetName(id);
+        }
+        if (obj->getType() == GOType::Point)
         {
             return obj->name();
         }
-        const QSharedPointer<VAbstractCurve> curve = m_data->GeometricObject<VAbstractCurve>(id);
+        const QSharedPointer<VAbstractCurve> curve = m_data.GeometricObject<VAbstractCurve>(id);
+        if (curve.isNull())
+        {
+            return GetName(id);
+        }
         return curve->HeadlessName();
     }
     catch (const VExceptionBadId &)
@@ -370,8 +379,8 @@ auto DialogBulkRename::IsNameValid(const QString &name, int currentRow) const ->
     }
 
     // Must be unique in the data container
-    if (NewFullBaseName(m_items.at(currentRow).name, m_items.at(currentRow).id) != name && (m_data != nullptr)
-        && !m_data->IsUnique(name))
+    if (NewFullBaseName(m_items.at(currentRow).name, m_items.at(currentRow).id) != name
+        && !m_data.IsUnique(name))
     {
         return false;
     }

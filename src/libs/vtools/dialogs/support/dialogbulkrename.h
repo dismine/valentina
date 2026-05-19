@@ -30,6 +30,7 @@
 
 #include <QDialog>
 
+#include "../vpatterndb/vcontainer.h"
 #include "../vtools/tools/toolsdef.h"
 
 namespace Ui
@@ -42,7 +43,7 @@ class DialogBulkRename : public QDialog
     Q_OBJECT // NOLINT
 
 public:
-    DialogBulkRename(const QVector<SourceItem> &items, const VContainer *data, QWidget *parent = nullptr);
+    DialogBulkRename(const QVector<SourceItem> &items, const VContainer &data, QWidget *parent = nullptr);
     ~DialogBulkRename() override;
 
     /** Returns true if the user actually changed at least one name. */
@@ -65,7 +66,7 @@ private:
     Q_DISABLE_COPY_MOVE(DialogBulkRename)
     Ui::DialogBulkRename *ui;
     QVector<SourceItem> m_items;
-    const VContainer *m_data;
+    VContainer m_data;
 
     void PopulateTable();
     auto BuildNewName(bool enabled, quint32 id, int &orderIndex) const -> QString;
