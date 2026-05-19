@@ -412,7 +412,11 @@ void VPattern::UpdateToolData(const quint32 &id, VContainer *data)
 {
     Q_ASSERT_X(id != 0, Q_FUNC_INFO, "id == 0"); //-V712 //-V654
     SCASSERT(data != nullptr)
-    ToolExists(id);
+    if (!tools.contains(id))
+    {
+        // Tool was deleted (e.g. an undo command freed its owner piece); skip gracefully.
+        return;
+    }
     VDataTool *tool = tools.value(id);
     SCASSERT(tool != nullptr)
     tool->VDataTool::setData(data);

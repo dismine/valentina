@@ -508,6 +508,9 @@ void VAbstractPattern::AddTool(quint32 id, VDataTool *tool)
     Q_ASSERT_X(id != 0, Q_FUNC_INFO, "id == 0");
     SCASSERT(tool != nullptr)
     tools.insert(id, tool);
+    // When a tool is deleted (e.g. when an undo command frees a piece and its children), remove
+    // it from the map automatically so no dangling pointer remains for LiteParseTree.
+    connect(tool, &QObject::destroyed, [id]() -> void { tools.remove(id); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
