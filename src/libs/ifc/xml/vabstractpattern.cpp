@@ -483,6 +483,7 @@ void VAbstractPattern::Clear()
     m_units = Unit::LAST_UNIT_DO_NOT_USE;
     modified = false;
     m_patternBlockMapper->Clear();
+    m_patternGraph->Clear();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
