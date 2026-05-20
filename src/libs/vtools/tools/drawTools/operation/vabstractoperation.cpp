@@ -40,6 +40,7 @@
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/compatibility.h"
+#include "../vwidgets/labelarrange/labelarrangetypes.h"
 #include "../vwidgets/vsimplepoint.h"
 #include "vtools/undocommands/renameobject.h"
 
@@ -1093,6 +1094,9 @@ void VAbstractOperation::InitOperatedObjects()
                 connect(point, &VSimplePoint::Delete, this, &VAbstractOperation::DeleteFromLabel);
                 connect(point, &VSimplePoint::NameChangedPosition, this, &VAbstractOperation::LabelChangePosition);
                 point->RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(object.id));
+                point->setData(LabelKindRole, static_cast<int>(LabelMoveRequest::Kind::Operation));
+                point->setData(LabelToolIdRole, static_cast<quint32>(m_id));
+                point->setData(LabelPointIdRole, static_cast<quint32>(object.id));
                 operatedObjects.insert(object.id, point);
                 break;
             }

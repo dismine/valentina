@@ -129,6 +129,7 @@
     <addaction name="actionAddBackgroundImage"/>
     <addaction name="separator"/>
     <addaction name="actionReloadLabels"/>
+    <addaction name="actionAutoArrangeLabels"/>
    </widget>
    <widget class="QMenu" name="menuMeasurements">
     <property name="title">
@@ -2634,6 +2635,23 @@
    </property>
    <property name="toolTip">
     <string>Reload piece labels</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionAutoArrangeLabels">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="format-justify-center"/>
+   </property>
+   <property name="text">
+    <string>Auto-arrange labels</string>
+   </property>
+   <property name="toolTip">
+    <string>Auto-arrange point labels to reduce overlaps</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>

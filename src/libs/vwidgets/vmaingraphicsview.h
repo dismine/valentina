@@ -38,6 +38,8 @@
 #include <QString>
 #include <QtGlobal>
 
+class QPoint;
+
 /*!
  * This class adds ability to zoom QGraphicsView using mouse wheel. The point under cursor
  * remains motionless while it's possible.
@@ -159,6 +161,7 @@ signals:
     void RubberBandSelectionStarted();
     void RubberBandSelection(const QRectF &sceneRect);
     void RubberBandSelectionFinished();
+    void SceneContextMenuRequested(QPoint globalPos);
 
 public slots:
     void Zoom(qreal scale);
@@ -174,6 +177,7 @@ protected:
     void mouseMoveEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
     void mouseDoubleClickEvent(QMouseEvent *event) override;
+    void contextMenuEvent(QContextMenuEvent *event) override;
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dropEvent(QDropEvent *event) override;

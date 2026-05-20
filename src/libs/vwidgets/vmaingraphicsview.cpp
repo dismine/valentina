@@ -29,6 +29,7 @@
 #include "vmaingraphicsview.h"
 
 #include <QApplication>
+#include <QContextMenuEvent>
 #include <QCursor>
 #include <QEvent>
 #include <QFlags>
@@ -706,6 +707,25 @@ void VMainGraphicsView::mouseDoubleClickEvent(QMouseEvent *event)
     }
 
     QGraphicsView::mouseDoubleClickEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VMainGraphicsView::contextMenuEvent(QContextMenuEvent *event)
+{
+    const QPointF scenePos = mapToScene(event->pos());
+    const QList<QGraphicsItem *> itemsAtPos = scene() != nullptr ? scene()->items(scenePos) : QList<QGraphicsItem *>{};
+    const bool hasToolItems = std::any_of(itemsAtPos.cbegin(), itemsAtPos.cend(),
+                                          [](const QGraphicsItem *item)
+                                          { return item->type() >= QGraphicsItem::UserType; });
+    if (hasToolItems)
+    {
+        QGraphicsView::contextMenuEvent(event);
+    }
+    else
+    {
+        emit SceneContextMenuRequested(event->globalPos());
+        event->accept();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

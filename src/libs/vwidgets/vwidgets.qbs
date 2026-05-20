@@ -78,6 +78,11 @@ VLib {
         "vpiecegrainline.h",
         "vpiecegrainline.cpp",
         "vpiecegrainline_p.h",
+        "labelarrange/labelarrangetypes.h",
+        "labelarrange/vlabelarrangeengine.h",
+        "labelarrange/vlabelarrangeengine.cpp",
+        "labelarrange/vdrawlabelcollector.h",
+        "labelarrange/vdrawlabelcollector.cpp",
     ]
 
     Export {

@@ -49,6 +49,7 @@
 #include "../vmisc/exception/vexception.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/labelarrange/labelarrangetypes.h"
 #include "../vwidgets/vsegmentlabel.h"
 #include "vtoolsinglepoint.h"
 
@@ -136,6 +137,22 @@ VToolPointOfIntersectionCurves::VToolPointOfIntersectionCurves(const VToolPointO
                                                &VToolPointOfIntersectionCurves::SegmentChoosed,
                                                &VToolPointOfIntersectionCurves::PointSelected,
                                                &VToolPointOfIntersectionCurves::Curve2Segment2LabelPositionChanged);
+
+    m_curve1Segment1Label->setData(LabelKindRole, static_cast<int>(LabelMoveRequest::Kind::Segment));
+    m_curve1Segment1Label->setData(LabelToolIdRole, static_cast<quint32>(initData.id));
+    m_curve1Segment1Label->setData(LabelExtraIdxRole, static_cast<int>(SegmentLabel::Segment1));
+
+    m_curve1Segment2Label->setData(LabelKindRole, static_cast<int>(LabelMoveRequest::Kind::Segment));
+    m_curve1Segment2Label->setData(LabelToolIdRole, static_cast<quint32>(initData.id));
+    m_curve1Segment2Label->setData(LabelExtraIdxRole, static_cast<int>(SegmentLabel::Segment2));
+
+    m_curve2Segment1Label->setData(LabelKindRole, static_cast<int>(LabelMoveRequest::Kind::Segment));
+    m_curve2Segment1Label->setData(LabelToolIdRole, static_cast<quint32>(initData.id));
+    m_curve2Segment1Label->setData(LabelExtraIdxRole, static_cast<int>(SegmentLabel::Segment3));
+
+    m_curve2Segment2Label->setData(LabelKindRole, static_cast<int>(LabelMoveRequest::Kind::Segment));
+    m_curve2Segment2Label->setData(LabelToolIdRole, static_cast<quint32>(initData.id));
+    m_curve2Segment2Label->setData(LabelExtraIdxRole, static_cast<int>(SegmentLabel::Segment4));
 
     ToolCreation(initData.typeCreation);
 }

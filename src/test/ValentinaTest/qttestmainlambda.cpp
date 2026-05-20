@@ -60,6 +60,7 @@
 #include "tst_vsplinepath.h"
 #include "tst_vsvgpathtokenizer.h"
 #include "tst_vtheme.h"
+#include "tst_vlabelarrangeengine.h"
 #include "tst_vpatterngraph.h"
 #include "tst_vtooluniondetails.h"
 #include "tst_vtranslatevars.h"
@@ -140,6 +141,7 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_ReadVal());
     ASSERT_TEST(new TST_RenameToken());
     ASSERT_TEST(new TST_VTranslateVars());
+    ASSERT_TEST(new TST_VLabelArrangeEngine());
     ASSERT_TEST(new TST_VPatternGraph());
     ASSERT_TEST(new TST_VToolUnionDetails());
     ASSERT_TEST(new TST_XSDShema());

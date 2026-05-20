@@ -68,6 +68,7 @@ public:
     void SetShowParentTooltip(bool show);
 
     void SetRealPos(const QPointF &pos);
+    auto GetRealPos() const -> QPointF { return m_realPos; }
 
     void SetDestination(const QPointF &destination);
 

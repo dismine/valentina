@@ -36,7 +36,9 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QFileSystemWatcher>
+#include <QEventLoop>
 #include <QFuture>
+#include <QFutureWatcher>
 #include <QGlobalStatic>
 #include <QImageReader>
 #include <QInputDialog>
@@ -183,8 +185,14 @@
 #include "../vtools/undocommands/image/deletebackgroundimage.h"
 #include "../vtools/undocommands/renamepp.h"
 #include "../vtools/undocommands/undogroup.h"
+#include "../vtools/undocommands/label/movedoublelabel.h"
+#include "../vtools/undocommands/label/movelabel.h"
+#include "../vtools/undocommands/label/movesegmentlabel.h"
+#include "../vtools/undocommands/label/operationmovelabel.h"
 #include "../vwidgets/vabstractsimple.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
+#include "../vwidgets/labelarrange/vdrawlabelcollector.h"
+#include "../vwidgets/labelarrange/vlabelarrangeengine.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vsegmentlabel.h"
 #include "../vwidgets/vsimplecurve.h"
@@ -508,6 +516,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionExportFontCorrections, &QAction::triggered, this, &MainWindow::ActionExportFontCorrections);
     connect(ui->actionInstallSingleLineFont, &QAction::triggered, this, &MainWindow::ActionInstallSingleLineFont);
     connect(ui->actionReloadLabels, &QAction::triggered, this, &MainWindow::ActionReloadLabels);
+    connect(ui->actionAutoArrangeLabels, &QAction::triggered, this, &MainWindow::RunAutoArrangeLabels);
 
     m_progressBar->setVisible(false);
 #if defined(Q_OS_WIN32) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -847,6 +856,7 @@ void MainWindow::InitScenes()
 
     connect(ui->view, &VMainGraphicsView::RubberBandSelectionFinished, this,
             [prevBandTriggers]() -> void { prevBandTriggers->clear(); });
+    connect(ui->view, &VMainGraphicsView::SceneContextMenuRequested, this, &MainWindow::AutoArrangeLabels);
     QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     policy.setHorizontalStretch(12);
     ui->view->setSizePolicy(policy);
@@ -3785,6 +3795,7 @@ void MainWindow::InitActionShortcuts()
     m_shortcutActions.insert(VShortcutAction::CurveDetails, ui->actionShowCurveDetails);
     m_shortcutActions.insert(VShortcutAction::FinalMeasurements, ui->actionFinalMeasurements);
     m_shortcutActions.insert(VShortcutAction::ReloadPieceLabels, ui->actionReloadLabels);
+    m_shortcutActions.insert(VShortcutAction::AutoArrangeLabels, ui->actionAutoArrangeLabels);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4927,6 +4938,7 @@ void MainWindow::Clear()
     ui->actionNextPatternPiece->setEnabled(false);
     ui->actionAddBackgroundImage->setEnabled(false);
     ui->actionReloadLabels->setEnabled(false);
+    ui->actionAutoArrangeLabels->setEnabled(false);
     SetEnableTool(false);
     VAbstractValApplication::VApp()->SetPatternUnits(Unit::Cm);
     VAbstractValApplication::VApp()->SetMeasurementsType(MeasurementsType::Unknown);
@@ -5181,6 +5193,7 @@ void MainWindow::SetEnableWidgets(bool enable)
     ui->actionNextPatternPiece->setEnabled(enableOnDrawStage);
     ui->actionAddBackgroundImage->setEnabled(enableOnDrawStage);
     ui->actionReloadLabels->setEnabled(enableOnDetailsStage);
+    ui->actionAutoArrangeLabels->setEnabled(enableOnDesignStage);
     ui->actionIncreaseLabelFont->setEnabled(enable);
     ui->actionDecreaseLabelFont->setEnabled(enable);
     ui->actionOriginalLabelFont->setEnabled(enable);
@@ -8492,4 +8505,100 @@ void MainWindow::OpenWatermark(const QString &path)
     m_watermarkEditors.append(watermark);
     watermark->show();
     watermark->Open(path);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::AutoArrangeLabels(QPoint globalPos)
+{
+    if (m_currentTool != Tool::Arrow)
+    {
+        return;
+    }
+
+    QMenu menu;
+    QAction const *arrangeAction =
+        menu.addAction(FromTheme(VThemeIcon::FormatJustifyCenter), tr("Auto-Arrange Labels"));
+    if (menu.exec(globalPos) != arrangeAction)
+    {
+        return;
+    }
+
+    RunAutoArrangeLabels();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::RunAutoArrangeLabels()
+{
+    if (m_currentTool != Tool::Arrow)
+    {
+        return;
+    }
+
+    VMainGraphicsScene *const activeScene = m_drawMode ? m_sceneDraw : m_sceneDetails;
+    auto [arrangeData, requests] = VDrawLabelCollector::Collect(activeScene);
+
+    if (arrangeData.isEmpty())
+    {
+        return;
+    }
+
+    // Run the placement engine on a worker thread so the UI stays alive (progress bar animates).
+    // setEnabled(false) blocks mouse/keyboard input to prevent re-entrant invocations.
+    m_progressBar->setRange(0, 0); // indeterminate spinner
+    m_progressBar->setValue(0);
+    m_statusLabel->setVisible(false);
+    m_progressBar->setVisible(true);
+    setEnabled(false);
+
+    // Structured-binding names cannot be captured by name in lambdas (Clang limitation),
+    // so copy to a regular named variable first.
+    const QVector<LabelArrangeData> labelData = arrangeData;
+
+    QFutureWatcher<QVector<QPointF>> watcher;
+    QEventLoop loop;
+    QObject::connect(&watcher, &QFutureWatcher<QVector<QPointF>>::finished, &loop, &QEventLoop::quit);
+    watcher.setFuture(QtConcurrent::run([&labelData]() { return VLabelArrangeEngine::Arrange(labelData); }));
+    loop.exec();
+
+    setEnabled(true);
+    m_progressBar->setVisible(false);
+    m_statusLabel->setVisible(true);
+
+    const QVector<QPointF> newOffsets = watcher.result();
+
+    QUndoStack *const undoStack = VAbstractApplication::VApp()->getUndoStack();
+    undoStack->beginMacro(tr("Auto-arrange labels"));
+
+    for (int i = 0; i < requests.size(); ++i)
+    {
+        const QPointF newOff = newOffsets.at(i);
+        const QPointF curOff = arrangeData.at(i).currentOffset;
+        if (qAbs(newOff.x() - curOff.x()) < 0.1 && qAbs(newOff.y() - curOff.y()) < 0.1)
+        {
+            continue;
+        }
+
+        const LabelMoveRequest &req = requests.at(i);
+        switch (req.kind)
+        {
+            case LabelMoveRequest::Kind::Point:
+                undoStack->push(new MoveLabel(doc, newOff, req.toolId));
+                break;
+            case LabelMoveRequest::Kind::Double:
+                undoStack->push(new MoveDoubleLabel(doc, newOff, static_cast<MoveDoublePoint>(req.extraIdx),
+                                                    req.toolId, req.pointId));
+                break;
+            case LabelMoveRequest::Kind::Operation:
+                undoStack->push(new OperationMoveLabel(req.toolId, doc, newOff, req.pointId));
+                break;
+            case LabelMoveRequest::Kind::Segment:
+                undoStack->push(new MoveSegmentLabel(doc, newOff, req.toolId,
+                                                     static_cast<SegmentLabel>(req.extraIdx)));
+                break;
+            default:
+                break;
+        }
+    }
+
+    undoStack->endMacro();
 }

@@ -50,6 +50,7 @@
 #include "../vmisc/exception/vexception.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/labelarrange/labelarrangetypes.h"
 #include "../vwidgets/vsegmentlabel.h"
 #include "vtoolsinglepoint.h"
 
@@ -130,6 +131,22 @@ VToolPointOfIntersectionArcs::VToolPointOfIntersectionArcs(const VToolPointOfInt
                                              &VToolPointOfIntersectionArcs::SegmentChoosed,
                                              &VToolPointOfIntersectionArcs::PointSelected,
                                              &VToolPointOfIntersectionArcs::Arc2Segment2LabelPositionChanged);
+
+    m_arc1Segment1Label->setData(LabelKindRole, static_cast<int>(LabelMoveRequest::Kind::Segment));
+    m_arc1Segment1Label->setData(LabelToolIdRole, static_cast<quint32>(initData.id));
+    m_arc1Segment1Label->setData(LabelExtraIdxRole, static_cast<int>(SegmentLabel::Segment1));
+
+    m_arc1Segment2Label->setData(LabelKindRole, static_cast<int>(LabelMoveRequest::Kind::Segment));
+    m_arc1Segment2Label->setData(LabelToolIdRole, static_cast<quint32>(initData.id));
+    m_arc1Segment2Label->setData(LabelExtraIdxRole, static_cast<int>(SegmentLabel::Segment2));
+
+    m_arc2Segment1Label->setData(LabelKindRole, static_cast<int>(LabelMoveRequest::Kind::Segment));
+    m_arc2Segment1Label->setData(LabelToolIdRole, static_cast<quint32>(initData.id));
+    m_arc2Segment1Label->setData(LabelExtraIdxRole, static_cast<int>(SegmentLabel::Segment3));
+
+    m_arc2Segment2Label->setData(LabelKindRole, static_cast<int>(LabelMoveRequest::Kind::Segment));
+    m_arc2Segment2Label->setData(LabelToolIdRole, static_cast<quint32>(initData.id));
+    m_arc2Segment2Label->setData(LabelExtraIdxRole, static_cast<int>(SegmentLabel::Segment4));
 
     ToolCreation(initData.typeCreation);
 }

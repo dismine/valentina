@@ -41,8 +41,6 @@
 #include <QRectF>
 #include <QSharedPointer>
 
-#include "../../../vgeometry/vpointf.h"
-#include "../../../vwidgets/vgraphicssimpletextitem.h"
 #include "../../undocommands/label/movelabel.h"
 #include "../../undocommands/label/showlabel.h"
 #include "../ifc/ifcdef.h"
@@ -51,17 +49,19 @@
 #include "../ifc/xml/vpatterngraph.h"
 #include "../vabstracttool.h"
 #include "../vdatatool.h"
+#include "../vgeometry/vpointf.h"
 #include "../vmisc/theme/themeDef.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vtoolseamallowance.h"
 #include "../vwidgets/global.h"
+#include "../vwidgets/labelarrange/labelarrangetypes.h"
 #include "../vwidgets/scalesceneitems.h"
+#include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmaingraphicsview.h"
 #include "vabstractnode.h"
-#include "vtools/tools/vinteractivetool.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -142,6 +142,8 @@ VNodePoint::VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent,
         [this]() -> void { RefreshLine(); },
         Qt::QueuedConnection);
     m_lineName->SetColorRole(VColorRole::PieceNodeLabelLineColor);
+    QGraphicsItem::setData(LabelKindRole, static_cast<int>(LabelMoveRequest::Kind::Point));
+    QGraphicsItem::setData(LabelToolIdRole, static_cast<quint32>(m_id));
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(initData.id));
     ToolCreation(initData.typeCreation);
     setCursor(Qt::ArrowCursor);

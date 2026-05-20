@@ -28,6 +28,7 @@
 #ifndef VABSTRACTSHORTCUTMANAGER_H
 #define VABSTRACTSHORTCUTMANAGER_H
 
+#include <utility>
 #include <QKeySequence>
 #include <QObject>
 
@@ -35,7 +36,7 @@
 #include <QtCore/QHashFunctions>
 #endif
 
-enum class VShortcutAction
+enum class VShortcutAction : quint8
 {
     ZoomIn,
     ZoomOut,
@@ -125,6 +126,7 @@ enum class VShortcutAction
     ToolEllipticalArcWithLength,
     ToolParallelCurve,
     ToolGraduatedCurve,
+    AutoArrangeLabels,
     LAST_ONE_DO_NOT_USE
 };
 
@@ -151,10 +153,10 @@ public:
         QStringList shortcuts{};        // NOLINT(misc-non-private-member-variables-in-classes)
 
         VSShortcut() = default;
-        VSShortcut(VShortcutAction type, const QStringList &defaultShortcuts, const QStringList &shortcuts)
+        VSShortcut(VShortcutAction type, QStringList defaultShortcuts, QStringList shortcuts)
           : type(type),
-            defaultShortcuts(defaultShortcuts),
-            shortcuts(shortcuts)
+            defaultShortcuts(std::move(defaultShortcuts)),
+            shortcuts(std::move(shortcuts))
         {
         }
     };

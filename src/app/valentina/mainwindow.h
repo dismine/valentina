@@ -139,6 +139,8 @@ protected:
 private slots:
     void ScaleChanged(qreal scale);
     void MouseMove(const QPointF &scenePos);
+    void AutoArrangeLabels(QPoint globalPos);
+    void RunAutoArrangeLabels();
     void Clear();
     void PatternChangesWereSaved(bool saved);
     void LastUsedTool();

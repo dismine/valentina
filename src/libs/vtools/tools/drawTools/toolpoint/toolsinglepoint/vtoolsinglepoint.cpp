@@ -62,6 +62,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/global.h"
+#include "../vwidgets/labelarrange/labelarrangetypes.h"
 #include "../vwidgets/scalesceneitems.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "toolcut/vtoolcutsplinepath.h"
@@ -108,6 +109,9 @@ VToolSinglePoint::VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quin
         Qt::QueuedConnection);
 
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
+
+    QGraphicsItem::setData(LabelKindRole, static_cast<int>(LabelMoveRequest::Kind::Point));
+    QGraphicsItem::setData(LabelToolIdRole, static_cast<quint32>(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

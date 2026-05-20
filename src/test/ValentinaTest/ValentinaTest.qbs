@@ -138,6 +138,8 @@ VTestApp {
         "tst_vtooluniondetails.h",
         "tst_xsdschema.cpp",
         "tst_xsdschema.h",
+        "tst_vlabelarrangeengine.cpp",
+        "tst_vlabelarrangeengine.h",
     ]
 
     Group {

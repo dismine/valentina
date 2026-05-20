@@ -59,6 +59,7 @@
 #include "../vtools/visualization/line/vistoolcurveintersectaxis.h"
 #include "../vtools/visualization/visualization.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/labelarrange/labelarrangetypes.h"
 #include "../vwidgets/vsegmentlabel.h"
 #include "vtoollinepoint.h"
 
@@ -128,6 +129,14 @@ VToolCurveIntersectAxis::VToolCurveIntersectAxis(const VToolCurveIntersectAxisIn
                                          &VToolCurveIntersectAxis::SegmentChoosed,
                                          &VToolCurveIntersectAxis::PointSelected,
                                          &VToolCurveIntersectAxis::Segment2LabelPositionChanged);
+
+    m_segment1Label->setData(LabelKindRole, static_cast<int>(LabelMoveRequest::Kind::Segment));
+    m_segment1Label->setData(LabelToolIdRole, static_cast<quint32>(initData.id));
+    m_segment1Label->setData(LabelExtraIdxRole, static_cast<int>(SegmentLabel::Segment1));
+
+    m_segment2Label->setData(LabelKindRole, static_cast<int>(LabelMoveRequest::Kind::Segment));
+    m_segment2Label->setData(LabelToolIdRole, static_cast<quint32>(initData.id));
+    m_segment2Label->setData(LabelExtraIdxRole, static_cast<int>(SegmentLabel::Segment2));
 
     ToolCreation(initData.typeCreation);
 }

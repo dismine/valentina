@@ -52,6 +52,7 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vwidgets/../ifc/ifcdef.h"
+#include "../vwidgets/labelarrange/labelarrangetypes.h"
 #include "../vwidgets/vsimplepoint.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
@@ -79,6 +80,10 @@ VToolDoublePoint::VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quin
     connect(firstPoint, &VSimplePoint::Delete, this, &VToolDoublePoint::DeleteFromLabel);
     connect(firstPoint, &VSimplePoint::NameChangedPosition, this, &VToolDoublePoint::Label1ChangePosition);
     firstPoint->RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(p1id));
+    firstPoint->setData(LabelKindRole, static_cast<int>(LabelMoveRequest::Kind::Double));
+    firstPoint->setData(LabelToolIdRole, static_cast<quint32>(id));
+    firstPoint->setData(LabelPointIdRole, static_cast<quint32>(p1id));
+    firstPoint->setData(LabelExtraIdxRole, static_cast<int>(MoveDoublePoint::FirstPoint));
 
     secondPoint = new VSimplePoint(p2id, VColorRole::PatternColor);
     secondPoint->setParentItem(this);
@@ -89,6 +94,10 @@ VToolDoublePoint::VToolDoublePoint(VAbstractPattern *doc, VContainer *data, quin
     connect(secondPoint, &VSimplePoint::Delete, this, &VToolDoublePoint::DeleteFromLabel);
     connect(secondPoint, &VSimplePoint::NameChangedPosition, this, &VToolDoublePoint::Label2ChangePosition);
     secondPoint->RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(p2id));
+    secondPoint->setData(LabelKindRole, static_cast<int>(LabelMoveRequest::Kind::Double));
+    secondPoint->setData(LabelToolIdRole, static_cast<quint32>(id));
+    secondPoint->setData(LabelPointIdRole, static_cast<quint32>(p2id));
+    secondPoint->setData(LabelExtraIdxRole, static_cast<int>(MoveDoublePoint::SecondPoint));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
