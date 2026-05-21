@@ -30,6 +30,10 @@ env:
   MACOS_CI_KEYCHAIN_PWD:  ${{ secrets.MACOS_CI_KEYCHAIN_PWD }}
   DUMP_SYMS_VERSION: 'v2.3.5'
   WITH_CRASH_REPORTING: 'True'
+  CCACHE_SIZE: "800M"
+  CCACHE_DIR: "/tmp/ccache_dir"
+  CCACHE_NOHASHDIR: "1"
+  CCACHE_CPP2: "yes"
 
 jobs:
   changes:
@@ -96,6 +100,7 @@ jobs:
       RUN_TESTS: ${{ matrix.qt.run_tests }}
       MULTI_BUNDLE: ${{ matrix.bundle.multibundle }}
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
+      ENABLE_CCACHE: "true"
 
     steps:
       - name: Checkout repo
@@ -217,7 +222,15 @@ jobs:
       - name: Install Valentina's dependencies
         uses: tecolicom/actions-use-homebrew-tools@v1
         with:
-          tools: coreutils
+          tools: coreutils ccache
+
+      - name: Restore ccache
+        uses: actions/cache@v5
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-macos-${{ runner.arch }}-${{ matrix.qt.label }}-${{ github.sha }}
+          restore-keys: |
+            ccache-macos-${{ runner.arch }}-${{ matrix.qt.label }}-
 
       - name: Install Qt Creator
         uses: ./.github/actions/download-qtc
@@ -226,6 +239,7 @@ jobs:
 
       - name: Before build
         run: |
+          ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
           sudo xcode-select -p
           qmake --version
           which qmake
@@ -243,21 +257,22 @@ jobs:
       - name: Set up common Qbs args
         run: >
           echo "COMMON_QBS_ARGS=
-          -f valentina.qbs 
+          -f valentina.qbs
           -d \"$GITHUB_WORKSPACE/build\"
           --jobs $(nproc)
-          config:release 
-          modules.buildconfig.enableUnitTests:${{ env.RUN_TESTS }}  
-          modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
+          config:release
+          modules.buildconfig.enableUnitTests:${{ env.RUN_TESTS }}
+          modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE}
           qbs.installRoot:\"$GITHUB_WORKSPACE/build/release/install-root\"
-          profile:qt6 
-          project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET 
-          \"modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME\" 
-          modules.macdeployqt.libpath:${{ env.QTDIR }}/lib 
-          modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir 
-          project.enableConan:true 
-          project.conanWithXerces:true 
-          project.conanWithCrashReporting:true 
+          profile:qt6
+          project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET
+          \"modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME\"
+          modules.macdeployqt.libpath:${{ env.QTDIR }}/lib
+          modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
+          project.enableConan:true
+          project.conanWithXerces:true
+          project.conanWithCrashReporting:true
+          modules.buildconfig.enableCcache:${ENABLE_CCACHE}
           project.conanProfiles:share/ci/conan/profiles/macos" >> $GITHUB_ENV
 
       - name: Build Valentina
@@ -299,10 +314,13 @@ jobs:
         if: env.RUN_TESTS == 'true'
         run: qbs -p autotest-runner ${{ env.COMMON_QBS_ARGS }}
 
+      - name: ccache stats
+        run: ccache -s
+
       - name: Create DMG
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
         run: >
-          qbs build 
+          qbs build
           -p 'Valentina DMG' 
           --force-probe-execution 
           ${{ env.COMMON_QBS_ARGS }}
@@ -379,6 +397,7 @@ jobs:
       RUN_TESTS: ${{ matrix.qt.run_tests }}
       MULTI_BUNDLE: ${{ matrix.bundle.multibundle }}
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
+      ENABLE_CCACHE: "true"
 
     steps:
       - name: Checkout repo
@@ -500,7 +519,15 @@ jobs:
       - name: Install Valentina's dependencies
         uses: tecolicom/actions-use-homebrew-tools@v1
         with:
-          tools: coreutils
+          tools: coreutils ccache
+
+      - name: Restore ccache
+        uses: actions/cache@v5
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-macos-${{ runner.arch }}-${{ matrix.qt.label }}-${{ github.sha }}
+          restore-keys: |
+            ccache-macos-${{ runner.arch }}-${{ matrix.qt.label }}-
 
       - name: Install Qt Creator
         uses: ./.github/actions/download-qtc
@@ -509,6 +536,7 @@ jobs:
 
       - name: Before build
         run: |
+          ccache --set-config sloppiness=pch_defines,time_macros max_size="$CCACHE_SIZE"
           sudo xcode-select -p
           qmake --version
           which qmake
@@ -528,19 +556,20 @@ jobs:
           echo "COMMON_QBS_ARGS=
           -f valentina.qbs
           -d \"$GITHUB_WORKSPACE/build\"
-          --jobs $(nproc) 
-          config:release 
+          --jobs $(nproc)
+          config:release
           modules.buildconfig.enableUnitTests:${{ env.RUN_TESTS }}
-          modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
+          modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE}
           qbs.installRoot:\"$GITHUB_WORKSPACE/build/release/install-root\"
-          profile:qt6 
-          project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET 
-          \"modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME\" 
-          modules.macdeployqt.libpath:${{ env.QTDIR }}/lib 
-          modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir 
-          project.enableConan:true 
-          project.conanWithXerces:true 
-          project.conanWithCrashReporting:true 
+          profile:qt6
+          project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET
+          \"modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME\"
+          modules.macdeployqt.libpath:${{ env.QTDIR }}/lib
+          modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
+          project.enableConan:true
+          project.conanWithXerces:true
+          project.conanWithCrashReporting:true
+          modules.buildconfig.enableCcache:${ENABLE_CCACHE}
           project.conanProfiles:share/ci/conan/profiles/macos_arm" >> $GITHUB_ENV
 
       - name: Build Valentina
@@ -581,6 +610,9 @@ jobs:
       - name: Tests
         if: env.RUN_TESTS == 'true'
         run: qbs -p autotest-runner ${{ env.COMMON_QBS_ARGS }}
+
+      - name: ccache stats
+        run: ccache -s
 
       - name: Create DMG
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
