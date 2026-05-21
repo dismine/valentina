@@ -470,11 +470,14 @@ void VPApplication::InitOptions()
                        this,
                        []()
                        {
-                           if (QString const country = VGAnalytics::CountryCode();
-                               country == "ru"_L1 || country == "by"_L1 || country == "ir"_L1)
-                           {
-                               QCoreApplication::exit();
-                           }
+                           VGAnalytics::CheckCountryCodeAsync(
+                               [](const QString &country)
+                               {
+                                   if (country == "ru"_L1 || country == "by"_L1 || country == "ir"_L1)
+                                   {
+                                       QCoreApplication::exit();
+                                   }
+                               });
                        });
 
     VTheme::InitApplicationStyle();
