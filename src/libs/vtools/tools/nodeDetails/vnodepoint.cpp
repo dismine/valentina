@@ -166,10 +166,10 @@ void VNodePoint::Create(const VAbstractNodeInitData &initData)
     {
         point = initData.data->GeometricObject<VPointF>(initData.idObject);
     }
-    catch (const VExceptionBadId &)
+    catch (const VExceptionBadId &e)
     { // Possible case. Parent was deleted, but the node object is still here.
         qDebug() << "Broken relation. Parent was deleted, but the node object is still here. Node point id ="
-                 << initData.id << ".";
+                 << initData.id << "." << e.ErrorMessage();
         return; // Just ignore
     }
 
