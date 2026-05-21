@@ -33,7 +33,6 @@
 #include "../vformat/knownmeasurements/vknownmeasurementsdocument.h"
 #include "../vganalytics/vganalytics.h"
 #include "../vmisc/compatibility.h"
-#include "../vmisc/defglobal.h"
 #include "../vmisc/dialogs/dialogaskcollectstatistic.h"
 #include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
@@ -61,6 +60,7 @@
 #include <QMimeType>
 #include <QPainter>
 #include <QPlainTextEdit>
+#include <QProcess>
 #include <QStringListModel>
 #include <QTimer>
 #include <QUuid>
