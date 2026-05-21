@@ -522,7 +522,7 @@ void VGAnalytics::CheckCountryCodeAsync(std::function<void(const QString &)> cal
         QNetworkAccessManager *manager = nullptr;
         QNetworkReply *reply = nullptr;
         QTimer *timer = nullptr;
-        std::function<void(const QString &)> callback;
+        std::function<void(const QString &)> callback{};
         std::atomic_bool done{false};
     };
 
