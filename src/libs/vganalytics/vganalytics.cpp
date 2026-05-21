@@ -538,8 +538,7 @@ void VGAnalytics::CheckCountryCodeAsync(std::function<void(const QString &)> cal
 
     auto finish = [state](const QString &country) -> void
     {
-        bool expected = false;
-        if (!state->done.compare_exchange_strong(expected, true))
+        if (bool expected = false; !state->done.compare_exchange_strong(expected, true))
         {
             return;
         }

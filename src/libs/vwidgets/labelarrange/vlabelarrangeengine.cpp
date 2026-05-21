@@ -147,12 +147,11 @@ auto IsWellPlaced(const QRectF &rect, int selfIdx,
     }
 
     // Check other anchor zones via anchor grid
-    const QVector<int> nearbyAnchors = grid.anchorGrid.Nearby(rect, grid.maxAnchorRadius);
-    if (std::any_of(nearbyAnchors.cbegin(), nearbyAnchors.cend(),
-                    [labels, selfIdx, rect](int j) -> bool
-                    {
-                        return j != selfIdx && rect.intersects(AnchorZone(labels.at(j)));
-                    }))
+    if (const QVector<int> nearbyAnchors = grid.anchorGrid.Nearby(rect, grid.maxAnchorRadius);
+        std::any_of(nearbyAnchors.cbegin(),
+                    nearbyAnchors.cend(),
+                    [&labels, selfIdx, &rect](int j) -> bool
+                    { return j != selfIdx && rect.intersects(AnchorZone(labels.at(j))); }))
     {
         return false;
     }
@@ -161,7 +160,7 @@ auto IsWellPlaced(const QRectF &rect, int selfIdx,
     const QVector<int> nearby = grid.rectGrid.Nearby(rect, grid.maxLabelEdge);
     return std::none_of(nearby.cbegin(),
                         nearby.cend(),
-                        [labels, offsets, selfIdx, rect](int j) -> bool
+                        [&labels, &offsets, selfIdx, &rect](int j) -> bool
                         {
                             if (j == selfIdx)
                             {

@@ -465,8 +465,8 @@ auto MakeRubberBandEntry(QGraphicsItem *target) -> std::pair<quint32, TriggerFn>
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void HandleRubberBandSelection(VMainGraphicsScene *scene, const QRectF &sceneRect,
-                                const std::shared_ptr<QMap<quint32, TriggerFn>> &prevBandTriggers)
+void HandleRubberBandSelection(const VMainGraphicsScene *scene, const QRectF &sceneRect,
+                               const std::shared_ptr<QMap<quint32, TriggerFn>> &prevBandTriggers)
 {
     QMap<quint32, TriggerFn> currentTriggers;
 
