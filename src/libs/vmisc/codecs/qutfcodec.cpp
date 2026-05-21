@@ -9,6 +9,8 @@
 
 #if defined(__i386__) || defined(__x86_64__)
 #include <emmintrin.h>
+#elif defined(__ARM_NEON__) || defined(__ARM_NEON)
+#include <arm_neon.h>
 #endif
 
 #include "qstringiterator_p.h"
