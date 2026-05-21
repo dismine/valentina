@@ -582,18 +582,21 @@ void VApplication::InitOptions()
 
     CheckSystemLocale();
 
-    QTimer::singleShot(0, this,
-                       []()
-                       {
-                           VGAnalytics::CheckCountryCodeAsync(
-                               [](const QString &country)
-                               {
-                                   if (country == "ru"_L1 || country == "by"_L1 || country == "ir"_L1)
+    if (IsGUIMode())
+    {
+        QTimer::singleShot(0, this,
+                           []()
+                           {
+                               VGAnalytics::CheckCountryCodeAsync(
+                                   [](const QString &country)
                                    {
-                                       QCoreApplication::exit();
-                                   }
-                               });
-                       });
+                                       if (country == "ru"_L1 || country == "by"_L1 || country == "ir"_L1)
+                                       {
+                                           QCoreApplication::exit();
+                                       }
+                                   });
+                           });
+    }
 
     if (VApplication::IsGUIMode()) // By default console version uses system locale
     {
