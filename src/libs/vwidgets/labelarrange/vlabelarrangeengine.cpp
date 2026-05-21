@@ -63,7 +63,7 @@ auto AnchorZone(const LabelArrangeData &L) -> QRectF
 struct SpatialGrid
 {
     qreal m_cellSize{1.0};
-    QHash<qint64, QVector<int>> m_cells;
+    QHash<qint64, QVector<int>> m_cells{};
 
     explicit SpatialGrid(qreal cellSize) : m_cellSize(qMax(cellSize, 1.0)) {}
 

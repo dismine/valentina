@@ -37,11 +37,12 @@
 #endif
 
 #if defined(Q_OS_LINUX)
-#include <QDir>
-#include <QMap>
 #include <unistd.h>
 #define MIN(x, y) (((x) < (y)) ? (x) : (y)) // NOLINT
 #endif
+
+#include <QDir>
+#include <QMap>
 
 #include <string>
 #include <vector>
