@@ -344,8 +344,9 @@ TMainWindow::TMainWindow(QWidget *parent)
 TMainWindow::~TMainWindow()
 {
     ui->lineEditFind->blockSignals(true); // prevents crash
-    delete m_data;
     delete m_m;
+    m_m = nullptr; // Prevent SyncKnownMeasurements from accessing freed object if events fire during delete ui
+    delete m_data;
     qDeleteAll(m_hackedWidgets);
     delete ui;
 }
