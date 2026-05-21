@@ -649,8 +649,8 @@ void VMainGraphicsView::mouseMoveEvent(QMouseEvent *event)
     }
     else if (m_customRubberBand && (event->buttons() & Qt::LeftButton))
     {
-        const QPoint delta = event->pos() - m_rubberBandOrigin;
-        if (not m_rubberBanding && delta.manhattanLength() > QApplication::startDragDistance())
+        if (const QPoint delta = event->pos() - m_rubberBandOrigin;
+            !m_rubberBanding && delta.manhattanLength() > QApplication::startDragDistance())
         {
             m_rubberBanding = true;
             emit RubberBandSelectionStarted();

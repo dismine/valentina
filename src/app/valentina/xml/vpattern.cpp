@@ -4026,11 +4026,9 @@ auto VPattern::GCStaleUnionTools(const VPatternGraph *graph) -> QSet<vidtype>
             continue;
         }
 
-        const bool allStale =
-            std::ranges::all_of(childIds,
-                                [graph, &PieceFilter](vidtype childId) -> bool
-                                { return graph->GetDependentNodes(childId, PieceFilter).isEmpty(); });
-        if (!allStale)
+        if (!std::ranges::all_of(childIds,
+                                  [graph, &PieceFilter](vidtype childId) -> bool
+                                  { return graph->GetDependentNodes(childId, PieceFilter).isEmpty(); }))
         {
             continue;
         }

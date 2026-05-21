@@ -257,8 +257,7 @@ auto DialogBulkRename::NewFullBaseName(const QString &base, quint32 id) const ->
 {
     try
     {
-        const QSharedPointer<VGObject> obj = m_data.GetGObject(id);
-        if (obj.isNull() || obj->getType() == GOType::Point)
+        if (const QSharedPointer<VGObject> obj = m_data.GetGObject(id); obj.isNull() || obj->getType() == GOType::Point)
         {
             return base;
         }

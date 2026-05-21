@@ -98,7 +98,7 @@ auto VDrawLabelCollector::Collect(const QGraphicsScene *scene)
             continue;
         }
 
-        auto *textItem = static_cast<VGraphicsSimpleTextItem *>(item);
+        const auto *textItem = static_cast<VGraphicsSimpleTextItem *>(item);
 
         const QSizeF rawSize = textItem->sceneBoundingRect().size();
         if (rawSize.isEmpty())

@@ -100,10 +100,10 @@ struct SpatialGrid
     // on every side. Use expansion = max item reach to guarantee no false negatives.
     auto Nearby(const QRectF &queryRect, qreal expansion) const -> QVector<int>
     {
-        const int c0 = static_cast<int>(qFloor((queryRect.left()   - expansion) / m_cellSize));
-        const int r0 = static_cast<int>(qFloor((queryRect.top()    - expansion) / m_cellSize));
-        const int c1 = static_cast<int>(qFloor((queryRect.right()  + expansion) / m_cellSize));
-        const int r1 = static_cast<int>(qFloor((queryRect.bottom() + expansion) / m_cellSize));
+        const auto c0 = static_cast<int>(qFloor((queryRect.left() - expansion) / m_cellSize));
+        const auto r0 = static_cast<int>(qFloor((queryRect.top() - expansion) / m_cellSize));
+        const auto c1 = static_cast<int>(qFloor((queryRect.right() + expansion) / m_cellSize));
+        const auto r1 = static_cast<int>(qFloor((queryRect.bottom() + expansion) / m_cellSize));
 
         QVector<int> result;
         for (int c = c0; c <= c1; ++c)
@@ -121,6 +121,17 @@ struct SpatialGrid
     }
 };
 
+// Bundles the two spatial grids and their lookup radii so they can be passed as
+// a single parameter rather than four separate ones.
+struct GridContext
+{
+    const SpatialGrid &anchorGrid;
+    qreal maxAnchorRadius;
+    SpatialGrid &rectGrid;
+    qreal maxLabelEdge;
+};
+
+//---------------------------------------------------------------------------------------------------------------------
 // Returns true when the label rect has no real problems: does not cover its own
 // anchor, does not cover any other anchor, and has no true overlap with any other
 // label. The margin gap is intentionally NOT checked here — it is only a soft
@@ -128,8 +139,7 @@ struct SpatialGrid
 auto IsWellPlaced(const QRectF &rect, int selfIdx,
                   const QVector<QPointF> &offsets,
                   const QVector<LabelArrangeData> &labels,
-                  const SpatialGrid &anchorGrid, qreal maxAnchorRadius,
-                  const SpatialGrid &rectGrid, qreal maxLabelEdge) -> bool
+                  const GridContext &grid) -> bool
 {
     if (rect.intersects(AnchorZone(labels.at(selfIdx))))
     {
@@ -137,50 +147,45 @@ auto IsWellPlaced(const QRectF &rect, int selfIdx,
     }
 
     // Check other anchor zones via anchor grid
-    for (int j : anchorGrid.Nearby(rect, maxAnchorRadius))
+    const QVector<int> nearbyAnchors = grid.anchorGrid.Nearby(rect, grid.maxAnchorRadius);
+    if (std::any_of(nearbyAnchors.cbegin(), nearbyAnchors.cend(),
+                    [labels, selfIdx, rect](int j) -> bool
+                    {
+                        return j != selfIdx && rect.intersects(AnchorZone(labels.at(j)));
+                    }))
     {
-        if (j == selfIdx)
-        {
-            continue;
-        }
-        if (rect.intersects(AnchorZone(labels.at(j))))
-        {
-            return false;
-        }
+        return false;
     }
 
     // Check other label rects via rect grid
-    for (int j : rectGrid.Nearby(rect, maxLabelEdge))
-    {
-        if (j == selfIdx)
-        {
-            continue;
-        }
-        if (const QRectF other{labels.at(j).anchor + offsets.at(j), labels.at(j).labelSize};
-            rect.intersects(other))
-        {
-            return false;
-        }
-    }
-
-    return true;
+    const QVector<int> nearby = grid.rectGrid.Nearby(rect, grid.maxLabelEdge);
+    return std::none_of(nearby.cbegin(),
+                        nearby.cend(),
+                        [labels, offsets, selfIdx, rect](int j) -> bool
+                        {
+                            if (j == selfIdx)
+                            {
+                                return false;
+                            }
+                            const QRectF other{labels.at(j).anchor + offsets.at(j), labels.at(j).labelSize};
+                            return rect.intersects(other);
+                        });
 }
 
+//---------------------------------------------------------------------------------------------------------------------
 auto ScoreCandidate(const QRectF &candidateRect,
                     const QPointF &anchor,
                     int selfIdx,
                     const QVector<QPointF> &offsets,
                     const QVector<LabelArrangeData> &labels,
-                    const SpatialGrid &anchorGrid, qreal maxAnchorRadius,
-                    const SpatialGrid &rectGrid, qreal maxLabelEdge) -> qreal
+                    const GridContext &grid) -> qreal
 {
     qreal score = 0.0;
 
     // Heavy penalty when the candidate covers the anchor-point indicator
     const qreal selfRadius = labels.at(selfIdx).anchorRadius;
-    const QRectF anchorZone{anchor.x() - selfRadius, anchor.y() - selfRadius,
-                             2.0 * selfRadius, 2.0 * selfRadius};
-    if (candidateRect.intersects(anchorZone))
+    if (const QRectF anchorZone{anchor.x() - selfRadius, anchor.y() - selfRadius, 2.0 * selfRadius, 2.0 * selfRadius};
+        candidateRect.intersects(anchorZone))
     {
         score += candidateRect.width() * candidateRect.height() * kAnchorPenaltyFactor;
     }
@@ -190,7 +195,7 @@ auto ScoreCandidate(const QRectF &candidateRect,
                                                            kLabelMargin, kLabelMargin);
 
     // Penalty for covering another label's anchor point (anchor grid lookup)
-    for (int j : anchorGrid.Nearby(candidateRect, maxAnchorRadius))
+    for (int const j : grid.anchorGrid.Nearby(candidateRect, grid.maxAnchorRadius))
     {
         if (j == selfIdx)
         {
@@ -207,7 +212,7 @@ auto ScoreCandidate(const QRectF &candidateRect,
     }
 
     // Overlap area with padded rect (rect grid lookup)
-    for (int j : rectGrid.Nearby(paddedCandidate, maxLabelEdge))
+    for (int const j : grid.rectGrid.Nearby(paddedCandidate, grid.maxLabelEdge))
     {
         if (j == selfIdx)
         {
@@ -222,6 +227,89 @@ auto ScoreCandidate(const QRectF &candidateRect,
     }
 
     return score;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto PickBestCandidate(const QVector<QPointF> &activeCandidates,
+                       const LabelArrangeData &L,
+                       int idx,
+                       const QVector<QPointF> &offsets,
+                       const QVector<LabelArrangeData> &labels,
+                       const GridContext &grid) -> QPointF
+{
+    qreal bestScore = std::numeric_limits<qreal>::max();
+    QPointF bestOffset = offsets.at(idx);
+
+    for (const QPointF &cand : std::as_const(activeCandidates))
+    {
+        const QRectF rect{L.anchor + cand, L.labelSize};
+        const qreal sc = ScoreCandidate(rect, L.anchor, idx, offsets, labels, grid);
+        if (sc < bestScore)
+        {
+            bestScore = sc;
+            bestOffset = cand;
+        }
+    }
+
+    return bestOffset;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void PlaceLabel(int idx,
+                const QVector<LabelArrangeData> &labels,
+                QVector<QPointF> &offsets,
+                const QVector<QPointF> &baseCandidates,
+                const GridContext &grid)
+{
+    const LabelArrangeData &L = labels.at(idx);
+
+    QVector<QPointF> candidates = baseCandidates;
+    candidates.append(offsets.at(idx));
+
+    const QRectF selfAnchorZone = AnchorZone(L);
+    QVector<QPointF> validCandidates;
+    QVector<QPointF> fallbackCandidates;
+    validCandidates.reserve(candidates.size());
+    for (const QPointF &cand : std::as_const(candidates))
+    {
+        const QRectF rect{L.anchor + cand, L.labelSize};
+        (rect.intersects(selfAnchorZone) ? fallbackCandidates : validCandidates).append(cand);
+    }
+    const QVector<QPointF> &activeCandidates = validCandidates.isEmpty() ? fallbackCandidates : validCandidates;
+
+    const QPointF bestOffset = PickBestCandidate(activeCandidates, L, idx, offsets, labels, grid);
+
+    const QPointF oldTopLeft = L.anchor + offsets.at(idx);
+    offsets[idx] = bestOffset;
+    grid.rectGrid.Remove(idx, oldTopLeft);
+    grid.rectGrid.Insert(idx, L.anchor + bestOffset);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void RunArrangePass(int n,
+                    const QVector<LabelArrangeData> &labels,
+                    const QVector<int> &order,
+                    QVector<QPointF> &offsets,
+                    const QVector<QVector<QPointF>> &allCandidates,
+                    const GridContext &grid)
+{
+    grid.rectGrid.Clear();
+    for (int i = 0; i < n; ++i)
+    {
+        grid.rectGrid.Insert(i, labels.at(i).anchor + offsets.at(i));
+    }
+
+    for (int const idx : std::as_const(order))
+    {
+        const LabelArrangeData &L = labels.at(idx);
+        if (const QRectF currentRect{L.anchor + offsets.at(idx), L.labelSize};
+            IsWellPlaced(currentRect, idx, offsets, labels, grid))
+        {
+            continue;
+        }
+
+        PlaceLabel(idx, labels, offsets, allCandidates.at(idx), grid);
+    }
 }
 
 } // namespace
@@ -260,7 +348,7 @@ auto VLabelArrangeEngine::GenerateCandidates(const QSizeF &size, qreal anchorRad
 //---------------------------------------------------------------------------------------------------------------------
 auto VLabelArrangeEngine::Arrange(const QVector<LabelArrangeData> &labels) -> QVector<QPointF>
 {
-    const int n = static_cast<int>(labels.size());
+    const auto n = static_cast<int>(labels.size());
     if (n == 0)
     {
         return {};
@@ -308,64 +396,18 @@ auto VLabelArrangeEngine::Arrange(const QVector<LabelArrangeData> &labels) -> QV
     // Rebuilt at the start of each pass and updated after each label is moved.
     SpatialGrid rectGrid(cellSize);
 
+    // Candidates are geometry-only and identical across passes; compute once here
+    // where GenerateCandidates is accessible as a private member.
+    QVector<QVector<QPointF>> allCandidates(n);
+    for (int i = 0; i < n; ++i)
+    {
+        allCandidates[i] = GenerateCandidates(labels.at(i).labelSize, labels.at(i).anchorRadius);
+    }
+
+    GridContext grid{anchorGrid, maxAnchorRadius, rectGrid, maxLabelEdge};
     for (int pass = 0; pass < kPasses; ++pass)
     {
-        rectGrid.Clear();
-        for (int i = 0; i < n; ++i)
-        {
-            rectGrid.Insert(i, labels.at(i).anchor + offsets.at(i));
-        }
-
-        for (int const idx : std::as_const(order))
-        {
-            const LabelArrangeData &L = labels.at(idx);
-
-            // Skip labels that are already correctly placed (strict check, no margin)
-            const QRectF currentRect{L.anchor + offsets.at(idx), L.labelSize};
-            if (IsWellPlaced(currentRect, idx, offsets, labels,
-                             anchorGrid, maxAnchorRadius, rectGrid, maxLabelEdge))
-            {
-                continue;
-            }
-
-            QVector<QPointF> candidates = GenerateCandidates(L.labelSize, L.anchorRadius);
-            candidates.append(offsets.at(idx)); // keep current position as a candidate
-
-            // Hard-partition: self-anchor-covering candidates are last resort only.
-            // Other-anchor and label-overlap penalties are handled by ScoreCandidate.
-            const QRectF selfAnchorZone = AnchorZone(L);
-            QVector<QPointF> validCandidates;
-            QVector<QPointF> fallbackCandidates;
-            validCandidates.reserve(candidates.size());
-            for (const QPointF &cand : std::as_const(candidates))
-            {
-                const QRectF rect{L.anchor + cand, L.labelSize};
-                (rect.intersects(selfAnchorZone) ? fallbackCandidates : validCandidates).append(cand);
-            }
-            const QVector<QPointF> &activeCandidates =
-                validCandidates.isEmpty() ? fallbackCandidates : validCandidates;
-
-            qreal bestScore = std::numeric_limits<qreal>::max();
-            QPointF bestOffset = offsets.at(idx);
-
-            for (const QPointF &cand : std::as_const(activeCandidates))
-            {
-                const QRectF rect{L.anchor + cand, L.labelSize};
-                const qreal sc = ScoreCandidate(rect, L.anchor, idx, offsets, labels,
-                                                anchorGrid, maxAnchorRadius, rectGrid, maxLabelEdge);
-                if (sc < bestScore)
-                {
-                    bestScore = sc;
-                    bestOffset = cand;
-                }
-            }
-
-            // Update the rect grid to reflect the new position before moving to the next label
-            const QPointF oldTopLeft = L.anchor + offsets.at(idx);
-            offsets[idx] = bestOffset;
-            rectGrid.Remove(idx, oldTopLeft);
-            rectGrid.Insert(idx, L.anchor + bestOffset);
-        }
+        RunArrangePass(n, labels, order, offsets, allCandidates, grid);
     }
 
     return offsets;

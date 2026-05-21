@@ -526,7 +526,7 @@ void TST_VArc::TestFlip()
     QCOMPARE(flippedArc.GetRadius(), arcOrigin.GetRadius());
     QVERIFY2(qAbs(flippedArc.AngleArc() - arcOrigin.AngleArc()) <= 0.001, "Sweep angle mismatch");
 
-    const QPointF actualCenter = static_cast<QPointF>(flippedArc.GetCenter());
+    const auto actualCenter = static_cast<QPointF>(flippedArc.GetCenter());
     QVERIFY2(VFuzzyComparePoints(actualCenter, expectedCenter), "Center mismatch after flip");
 
     const QPointF actualP1 = flippedArc.GetP1();

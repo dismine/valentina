@@ -404,7 +404,7 @@ using TriggerFn = std::function<void()>;
 auto ResolveRubberBandTarget(const QGraphicsItem *item) -> QGraphicsItem *
 {
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
-    QGraphicsItem *target = const_cast<QGraphicsItem *>(item);
+    auto *target = const_cast<QGraphicsItem *>(item);
 
     // Redirect label text items to their parent
     if (item->type() == VGraphicsSimpleTextItem::Type)
@@ -462,6 +462,48 @@ auto MakeRubberBandEntry(QGraphicsItem *target) -> std::pair<quint32, TriggerFn>
     }
 
     return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void HandleRubberBandSelection(VMainGraphicsScene *scene, const QRectF &sceneRect,
+                                const std::shared_ptr<QMap<quint32, TriggerFn>> &prevBandTriggers)
+{
+    QMap<quint32, TriggerFn> currentTriggers;
+
+    for (QGraphicsItem const*item : scene->items(sceneRect, Qt::IntersectsItemShape))
+    {
+        QGraphicsItem *target = ResolveRubberBandTarget(item);
+        if (target == nullptr)
+        {
+            continue;
+        }
+
+        auto [id, trigger] = MakeRubberBandEntry(target);
+        if (id != NULL_ID && not currentTriggers.contains(id))
+        {
+            currentTriggers.insert(id, trigger);
+        }
+    }
+
+    // Fire trigger for items newly entering the rubber band
+    for (auto it = currentTriggers.cbegin(); it != currentTriggers.cend(); ++it)
+    {
+        if (not prevBandTriggers->contains(it.key()))
+        {
+            it.value()();
+        }
+    }
+
+    // Fire trigger for items that left the rubber band (toggles them back off)
+    for (auto it = prevBandTriggers->cbegin(); it != prevBandTriggers->cend(); ++it)
+    {
+        if (not currentTriggers.contains(it.key()))
+        {
+            it.value()();
+        }
+    }
+
+    *prevBandTriggers = std::move(currentTriggers);
 }
 
 } // anonymous namespace
@@ -807,42 +849,7 @@ void MainWindow::InitScenes()
     connect(ui->view, &VMainGraphicsView::RubberBandSelection, this,
             [this, prevBandTriggers](const QRectF &sceneRect) -> void
             {
-                QMap<quint32, TriggerFn> currentTriggers;
-
-                for (QGraphicsItem *item : m_sceneDraw->items(sceneRect, Qt::IntersectsItemShape))
-                {
-                    QGraphicsItem *target = ResolveRubberBandTarget(item);
-                    if (target == nullptr)
-                    {
-                        continue;
-                    }
-
-                    auto [id, trigger] = MakeRubberBandEntry(target);
-                    if (id != NULL_ID && not currentTriggers.contains(id))
-                    {
-                        currentTriggers.insert(id, trigger);
-                    }
-                }
-
-                // Fire trigger for items newly entering the rubber band
-                for (auto it = currentTriggers.cbegin(); it != currentTriggers.cend(); ++it)
-                {
-                    if (not prevBandTriggers->contains(it.key()))
-                    {
-                        it.value()();
-                    }
-                }
-
-                // Fire trigger for items that left the rubber band (toggles them back off)
-                for (auto it = prevBandTriggers->cbegin(); it != prevBandTriggers->cend(); ++it)
-                {
-                    if (not currentTriggers.contains(it.key()))
-                    {
-                        it.value()();
-                    }
-                }
-
-                *prevBandTriggers = std::move(currentTriggers);
+                HandleRubberBandSelection(m_sceneDraw, sceneRect, prevBandTriggers);
             });
 
     connect(ui->view, &VMainGraphicsView::RubberBandSelectionStarted, this,
@@ -8239,32 +8246,7 @@ void MainWindow::ToolSelectArcElArc()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolSelectArcCurve()
 {
-    // Only true for rubber band selection
-    emit EnableLabelSelection(false);
-    emit EnablePointSelection(false);
-    emit EnableLineSelection(false);
-    emit EnableArcSelection(false);
-    emit EnableElArcSelection(false);
-    emit EnableSplineSelection(false);
-    emit EnableSplinePathSelection(false);
-    emit EnableBackgroundImageSelection(false);
-
-    // Hovering
-    emit EnableLabelHover(false);
-    emit EnablePointHover(false);
-    emit EnableLineHover(false);
-    emit EnableArcHover(true);
-    emit EnableElArcHover(true);
-    emit EnableSplineHover(false);
-    emit EnableSplinePathHover(false);
-    emit EnableImageBackgroundHover(false);
-
-    emit ShowArcSegmentLabel(true);
-    emit ShowElArcSegmentLabel(true);
-
-    emit ItemsSelection(SelectionType::ByMouseRelease);
-
-    ui->view->AllowRubberBand(false);
+    ToolSelectArcElArc();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -8516,9 +8498,9 @@ void MainWindow::AutoArrangeLabels(QPoint globalPos)
     }
 
     QMenu menu;
-    QAction const *arrangeAction =
-        menu.addAction(FromTheme(VThemeIcon::FormatJustifyCenter), tr("Auto-Arrange Labels"));
-    if (menu.exec(globalPos) != arrangeAction)
+    if (QAction const *arrangeAction =
+            menu.addAction(FromTheme(VThemeIcon::FormatJustifyCenter), tr("Auto-Arrange Labels"));
+            menu.exec(globalPos) != arrangeAction)
     {
         return;
     }
