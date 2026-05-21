@@ -29,6 +29,9 @@
 #include "vganalyticsworker.h"
 
 #include <vcsRepoState.h>
+#include <atomic>
+#include <functional>
+#include <memory>
 #include <QDataStream>
 #include <QDebug>
 #include <QGuiApplication>
@@ -509,6 +512,76 @@ auto VGAnalytics::CountryCode() -> QString
     reply->deleteLater();
 
     return country;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VGAnalytics::CheckCountryCodeAsync(std::function<void(const QString &)> callback)
+{
+    struct RequestState
+    {
+        QNetworkAccessManager *manager = nullptr;
+        QNetworkReply *reply = nullptr;
+        QTimer *timer = nullptr;
+        std::function<void(const QString &)> callback;
+        std::atomic_bool done{false};
+    };
+
+    auto state = std::make_shared<RequestState>();
+    state->manager = new QNetworkAccessManager;
+    state->callback = std::move(callback);
+
+    QNetworkRequest const request(QUrl(QStringLiteral("https://api.country.is")));
+    state->reply = state->manager->get(request);
+
+    state->timer = new QTimer;
+    state->timer->setSingleShot(true);
+
+    auto finish = [state](const QString &country) -> void
+    {
+        bool expected = false;
+        if (!state->done.compare_exchange_strong(expected, true))
+        {
+            return;
+        }
+
+        state->timer->stop();
+        state->timer->deleteLater();
+        state->reply->deleteLater();
+        state->manager->deleteLater();
+        state->callback(country);
+    };
+
+    QObject::connect(state->timer,
+                     &QTimer::timeout,
+                     [state, finish]() -> void
+                     {
+                         state->reply->abort();
+                         finish(QStringLiteral("Unknown"));
+                     });
+
+    QObject::connect(state->reply,
+                     &QNetworkReply::finished,
+                     [state, finish]() -> void
+                     {
+                         auto country = QStringLiteral("Unknown");
+                         if (state->reply->error() == QNetworkReply::NoError)
+                         {
+                             const QByteArray responseData = state->reply->readAll();
+                             QJsonParseError error;
+                             if (const QJsonDocument jsonDoc = QJsonDocument::fromJson(responseData, &error);
+                                 error.error == QJsonParseError::NoError && jsonDoc.isObject())
+                             {
+                                 if (const QJsonObject jsonObj = jsonDoc.object();
+                                     jsonObj.contains(QStringLiteral("country")))
+                                 {
+                                     country = jsonObj[QStringLiteral("country")].toString().toLower();
+                                 }
+                             }
+                         }
+                         finish(country);
+                     });
+
+    state->timer->start(5s);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
