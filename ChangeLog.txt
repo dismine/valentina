@@ -26,6 +26,7 @@
 - [Valentina app] New action Auto-arrange labels (Ctrl+Shift+A). Automatically repositions point labels in Draw and Details mode to reduce overlaps.
 
 # Valentina 1.0.2 (unreleased)
+- [Valentina app] Fixed crash when inserting nodes after undo/redo of piece operations.
 - [Tape app] Fix crash in SyncKnownMeasurements caused by wrong deletion order in TMainWindow destructor.
 
 # Valentina 1.0.1 May 16, 2026
