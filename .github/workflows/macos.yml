@@ -47,6 +47,7 @@ jobs:
       - uses: dorny/paths-filter@v4
         id: filter
         with:
+          base: ${{ github.event.before }}
           filters: |
             qbs:
               - '.github/workflows/macos.yml'
@@ -152,21 +153,32 @@ jobs:
           cache: 'pip'
           cache-dependency-path: 'share/ci/requirements-ci.txt'
 
+      - name: Cache Qt
+        id: cache-qt
+        uses: actions/cache@v5
+        with:
+          path: ${{ runner.temp }}/Qt
+          key: install-qt-intel-${{ matrix.qt.install }}-qtimageformats-v1
+          save-always: true
+
       - name: Install Qt
+        if: steps.cache-qt.outputs.cache-hit != 'true'
         uses: jurplel/install-qt-action@v4
         with:
-          version:          ${{ matrix.qt.install }}
-          host:             'mac'
-          target:           'desktop'
-          arch:             'clang_64'
-          dir:              ${{ runner.temp }}
-          modules:          'qtimageformats'
-          cache:            true
-          cache-key-prefix: 'install-qt-intel-'
-          setup-python:     false
+          version:      ${{ matrix.qt.install }}
+          host:         'mac'
+          target:       'desktop'
+          arch:         'clang_64'
+          dir:          ${{ runner.temp }}
+          modules:      'qtimageformats'
+          cache:        false
+          setup-python: false
 
       - name: Set path to Qt
-        run: echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
+        run: |
+          echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
+          echo "QT_DIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
+          echo "${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos/bin" >> $GITHUB_PATH
 
       - name: Build macdeployqt
         run: |
@@ -484,21 +496,32 @@ jobs:
           cache: 'pip'
           cache-dependency-path: 'share/ci/requirements-ci.txt'
 
+      - name: Cache Qt
+        id: cache-qt
+        uses: actions/cache@v5
+        with:
+          path: ${{ runner.temp }}/Qt
+          key: install-qt-arm-${{ matrix.qt.install }}-qtimageformats-v1
+          save-always: true
+
       - name: Install Qt
+        if: steps.cache-qt.outputs.cache-hit != 'true'
         uses: jurplel/install-qt-action@v4
         with:
-          version:          ${{ matrix.qt.install }}
-          host:             'mac'
-          target:           'desktop'
-          arch:             'clang_64'
-          dir:              ${{ runner.temp }}
-          modules:          'qtimageformats'
-          cache:            true
-          cache-key-prefix: 'install-qt-arm-'
-          setup-python:     false
+          version:      ${{ matrix.qt.install }}
+          host:         'mac'
+          target:       'desktop'
+          arch:         'clang_64'
+          dir:          ${{ runner.temp }}
+          modules:      'qtimageformats'
+          cache:        false
+          setup-python: false
 
       - name: Set path to Qt
-        run: echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
+        run: |
+          echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
+          echo "QT_DIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
+          echo "${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos/bin" >> $GITHUB_PATH
 
       - name: Build macdeployqt
         run: |

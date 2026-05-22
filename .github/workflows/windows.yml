@@ -35,6 +35,7 @@ jobs:
       - uses: dorny/paths-filter@v4
         id: filter
         with:
+          base: ${{ github.event.before }}
           filters: |
             qbs:
               - '.github/workflows/windows.yml'
