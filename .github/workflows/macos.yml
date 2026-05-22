@@ -128,6 +128,7 @@ jobs:
         with:
           path: ${{ runner.temp }}/Qt
           key: install-qt-intel-${{ matrix.qt.install }}-qtimageformats-v1
+          save-always: true
 
       - name: Install Qt
         if: steps.cache-qt.outputs.cache-hit != 'true'
@@ -435,6 +436,7 @@ jobs:
         with:
           path: ${{ runner.temp }}/Qt
           key: install-qt-arm-${{ matrix.qt.install }}-qtimageformats-v1
+          save-always: true
 
       - name: Install Qt
         if: steps.cache-qt.outputs.cache-hit != 'true'
