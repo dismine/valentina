@@ -143,7 +143,9 @@ jobs:
           setup-python: false
 
       - name: Set path to Qt
-        run: echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
+        run: |
+          echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
+          echo "QT_DIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
 
       - name: Build macdeployqt
         run: |
@@ -447,7 +449,9 @@ jobs:
           setup-python: false
 
       - name: Set path to Qt
-        run: echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
+        run: |
+          echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
+          echo "QT_DIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
 
       - name: Build macdeployqt
         run: |
