@@ -146,6 +146,7 @@ jobs:
         run: |
           echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
           echo "QT_DIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
+          echo "${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos/bin" >> $GITHUB_PATH
 
       - name: Build macdeployqt
         run: |
@@ -452,6 +453,7 @@ jobs:
         run: |
           echo "QTDIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
           echo "QT_DIR=${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos" >> $GITHUB_ENV
+          echo "${{ runner.temp }}/Qt/${{ matrix.qt.install }}/macos/bin" >> $GITHUB_PATH
 
       - name: Build macdeployqt
         run: |
