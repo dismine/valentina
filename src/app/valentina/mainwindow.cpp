@@ -3309,7 +3309,7 @@ void MainWindow::ToolBarPenOptions()
         {
             m_pushButtonColor->insertCustomColor(color);
         }
-    });
+    }, Qt::QueuedConnection);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
