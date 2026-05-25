@@ -238,6 +238,7 @@ void VWidgetBackgroundImages::ImageSelected(const QUuid &id)
 {
     int const row = ImageRow(id);
 
+    if (row != -1)
     {
         const QSignalBlocker blocker(ui->tableWidget);
         ui->tableWidget->setCurrentCell(row, ImageData::Name);
