@@ -241,9 +241,12 @@ void VWidgetBackgroundImages::ImageSelected(const QUuid &id)
 {
     int const row = ImageRow(id);
 
-    ui->tableWidget->blockSignals(true);
-    ui->tableWidget->setCurrentCell(row, ImageData::Name);
-    ui->tableWidget->blockSignals(false);
+    if (row != -1)
+    {
+        ui->tableWidget->blockSignals(true);
+        ui->tableWidget->setCurrentCell(row, ImageData::Name);
+        ui->tableWidget->blockSignals(false);
+    }
 
     if (row != -1 && not ui->checkBoxRelativeTranslation->isChecked())
     {

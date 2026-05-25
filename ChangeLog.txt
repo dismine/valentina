@@ -1,4 +1,5 @@
 # Valentina 1.0.2 (unreleased)
+- [Valentina app] Fixed accessibility warning on macOS when a QTableWidget had no selection.
 - [Valentina app] Fixed crash when inserting nodes after undo/redo of piece operations.
 - [Tape app] Fix crash in SyncKnownMeasurements caused by wrong deletion order in TMainWindow destructor.
 
