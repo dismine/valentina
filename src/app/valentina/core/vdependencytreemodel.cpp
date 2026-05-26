@@ -144,6 +144,38 @@ auto FindChildIndex(VDependencyNode *parent, vidtype objectId) -> int
     }
     return -1;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void AppendUnique(QVector<vidtype> &list, vidtype id)
+{
+    if (!list.contains(id))
+    {
+        list.append(id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void AppendUniqueNodes(QVector<vidtype> &list, const QVector<VNode> &nodes)
+{
+    for (const auto &node : nodes)
+    {
+        AppendUnique(list, node.id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// For a MODELING_OBJECT wrapper: if a union tool sits in its downstream path, return those tool
+// nodes so the user sees the operation that holds the reference; otherwise return the piece nodes.
+auto ResolveModelingObjectDeps(const VPatternGraph *graph, vidtype id) -> QVector<VNode>
+{
+    auto toolFilter = [](const auto &n) -> auto { return n.type == VNodeType::MODELING_TOOL; };
+    if (QVector<VNode> toolNodes = graph->GetDependentNodes(id, toolFilter); !toolNodes.isEmpty())
+    {
+        return toolNodes;
+    }
+    auto pieceFilter = [](const auto &n) -> auto { return n.type == VNodeType::PIECE; };
+    return graph->GetDependentNodes(id, pieceFilter);
+}
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -791,47 +823,11 @@ auto VDependencyTreeModel::FetchDependenciesForObject(vidtype objectId) const ->
 
         if (node->type == VNodeType::MODELING_TOOL)
         {
-            // Surface the tool directly so the user can see what is blocking a source object.
-            // Promoting it to its PIECE descendants would hide the fact that a union tool holds
-            // the reference, leaving the user with no way to understand why deletion is blocked.
-            if (!visibleDependencies.contains(id))
-            {
-                visibleDependencies.append(id);
-            }
+            AppendUnique(visibleDependencies, id);
         }
         else if (node->type == VNodeType::MODELING_OBJECT)
         {
-            // If a union tool sits between this modeling object and the piece, surface the
-            // union tool directly.  Without this, the tool is invisible: the wrapper is
-            // promoted all the way to PIECE and the user has no way to tell what is actually
-            // blocking the deletion of a source object.
-            auto toolFilter = [](const auto &n) -> auto { return n.type == VNodeType::MODELING_TOOL; };
-            const QVector<VNode> toolNodes = graph->GetDependentNodes(id, toolFilter);
-
-            if (!toolNodes.isEmpty())
-            {
-                for (const auto &toolNode : toolNodes)
-                {
-                    if (!visibleDependencies.contains(toolNode.id))
-                    {
-                        visibleDependencies.append(toolNode.id);
-                    }
-                }
-            }
-            else
-            {
-                // Regular internal wrapper: promote transparently to its downstream piece(s).
-                auto pieceFilter = [](const auto &n) -> auto { return n.type == VNodeType::PIECE; };
-                const QVector<VNode> nodeDependencies = graph->GetDependentNodes(id, pieceFilter);
-
-                for (const auto pieceNode : nodeDependencies)
-                {
-                    if (!visibleDependencies.contains(pieceNode.id))
-                    {
-                        visibleDependencies.append(pieceNode.id);
-                    }
-                }
-            }
+            AppendUniqueNodes(visibleDependencies, ResolveModelingObjectDeps(graph, id));
         }
         else
         {
