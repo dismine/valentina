@@ -132,7 +132,7 @@ DialogRotation::DialogRotation(const VContainer *data, VAbstractPattern *doc, qu
 
     ObjectTypeChanged(ui->comboBoxObjectType->currentIndex());
 
-    vis = new VisToolRotation(data);
+    vis = new VisToolRotation(&this->data);
 
     ui->tabWidget->setCurrentIndex(0);
     SetTabStopDistance(ui->plainTextEditToolNotes);
@@ -260,7 +260,7 @@ void DialogRotation::ShowDialog(bool click)
 
         VAbstractValApplication::VApp()->getSceneView()->AllowRubberBand(false);
 
-        FillDefSourceNames(m_sourceObjects, data, "r"_L1);
+        FillDefSourceNames(m_sourceObjects, &data, "r"_L1);
         FillSourceList();
 
         emit ToolTip(tr("Select origin point"));
@@ -280,7 +280,7 @@ void DialogRotation::ShowDialog(bool click)
         SCASSERT(scene != nullptr)
         try
         {
-            const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetOrigPointId());
+            const QSharedPointer<VPointF> point = data.GeometricObject<VPointF>(GetOrigPointId());
             const auto line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
 
             // Radius of point circle, but little bigger. Need handle with hover sizes.
@@ -419,7 +419,7 @@ void DialogRotation::DeployAngleTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::FXAngle()
 {
-    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
     dialog->setWindowTitle(tr("Edit angle"));
     dialog->SetFormula(GetAngle());
     dialog->setPostfix(degreeSymbol);
@@ -548,7 +548,7 @@ void DialogRotation::FillSourceList()
 
     for (const auto &sourceItem : std::as_const(m_sourceObjects))
     {
-        const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+        const QSharedPointer<VGObject> obj = data.GetGObject(sourceItem.id);
         auto *item = new QListWidgetItem(obj->ObjectName());
         item->setToolTip(obj->ObjectName());
         item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
@@ -594,7 +594,7 @@ auto DialogRotation::SaveSourceObjects() const -> QVector<SourceItem>
 void DialogRotation::EvalAngle()
 {
     Eval({.formula = ui->plainTextEditFormula->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditAngle,
           .labelResult = ui->labelResultAngle,
           .postfix = degreeSymbol},
@@ -626,7 +626,7 @@ void DialogRotation::ShowSourceDetails(int row)
 
     const auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
 
-    const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+    const QSharedPointer<VGObject> obj = data.GetGObject(sourceItem.id);
 
     if (obj->getType() == GOType::Point)
     {
@@ -667,7 +667,7 @@ void DialogRotation::ShowSourceDetails(int row)
 
         if (sourceItem.color.isEmpty() || sourceItem.color == ColorDefault)
         {
-            const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(sourceItem.id);
+            const QSharedPointer<VAbstractCurve> curve = data.GeometricObject<VAbstractCurve>(sourceItem.id);
             ui->pushButtonColor->setDefaultColor(curve->GetColor());
         }
 
@@ -681,7 +681,7 @@ void DialogRotation::ShowSourceDetails(int row)
 
     const QVector<SourceItem> sourceObjects = SaveSourceObjects();
     const QSet<QString> freeNames = FindFreeNames(m_sourceObjects, sourceObjects);
-    const bool nameValid = IsValidSourceName(sourceItem.name, sourceItem.id, m_sourceObjects, data, freeNames);
+    const bool nameValid = IsValidSourceName(sourceItem.name, sourceItem.id, m_sourceObjects, &data, freeNames);
     ChangeColor(ui->labelName, nameValid ? OkColor(this) : errorColor);
     flagName = nameValid;
     CheckState();
@@ -734,7 +734,7 @@ void DialogRotation::NameChanged(const QString &text)
 
         const QVector<SourceItem> objects = SaveSourceObjects();
         const QSet<QString> freeNames = FindFreeNames(m_sourceObjects, objects);
-        const bool valid = IsValidSourceName(text, sourceItem.id, objects, data, freeNames);
+        const bool valid = IsValidSourceName(text, sourceItem.id, objects, &data, freeNames);
 
         if (valid)
         {
@@ -742,7 +742,7 @@ void DialogRotation::NameChanged(const QString &text)
             item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
         }
 
-        const QSharedPointer<VGObject> obj = data->GetGObject(sourceItem.id);
+        const QSharedPointer<VGObject> obj = data.GetGObject(sourceItem.id);
         ChangeColor(ui->labelName, valid ? OkColor(this) : errorColor);
 
         if (!valid)
@@ -847,7 +847,7 @@ void DialogRotation::AddNewObject()
         }
     }
 
-    sourceObjects.append({.id = id, .name = GetDefSourceName(id, data, "m"_L1, occupiedNames)});
+    sourceObjects.append({.id = id, .name = GetDefSourceName(id, &data, "m"_L1, occupiedNames)});
     SetSourceObjects(sourceObjects);
     ui->toolButtonNewObject->setDisabled(true);
 }
@@ -872,7 +872,7 @@ void DialogRotation::ColorChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::BulkRename()
 {
-    if (DialogBulkRename dlg(SaveSourceObjects(), *data, this); dlg.exec() == QDialog::Accepted && dlg.HasChanges())
+    if (DialogBulkRename dlg(SaveSourceObjects(), data, this); dlg.exec() == QDialog::Accepted && dlg.HasChanges())
     {
         SetSourceObjects(dlg.RenamedItems());
     }

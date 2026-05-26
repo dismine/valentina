@@ -89,7 +89,7 @@ QT_WARNING_POP
  */
 DialogTool::DialogTool(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
   : QDialog(parent),
-    data(data),
+    data(*data),
     m_doc(doc),
     isInitialized(false),
     bOk(nullptr),
@@ -145,7 +145,6 @@ void DialogTool::showEvent(QShowEvent *event)
 
     isInitialized = true; // first show windows are held
     ShowVisualization();
-
     CheckState();
 }
 
@@ -172,7 +171,7 @@ void DialogTool::FillComboBoxPiecesList(QComboBox *box, const QVector<quint32> &
         box->clear();
         for (auto id : list)
         {
-            box->addItem(data->GetPiece(id).GetName(), id);
+            box->addItem(data.GetPiece(id).GetName(), id);
         }
     }
     box->setCurrentIndex(-1); // Force a user to choose
@@ -206,7 +205,7 @@ void DialogTool::FillComboBoxArcCurves(QComboBox *box, FillComboBox rule, quint3
     SCASSERT(box != nullptr)
     const QSignalBlocker blocker(box);
 
-    const QHash<quint32, QSharedPointer<VGObject>> *objs = data->CalculationGObjects();
+    const QHash<quint32, QSharedPointer<VGObject>> *objs = data.CalculationGObjects();
     QMap<QString, quint32> list;
     for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
@@ -245,7 +244,7 @@ void DialogTool::FillComboBoxSplines(QComboBox *box) const
     SCASSERT(box != nullptr)
     const QSignalBlocker blocker(box);
 
-    const auto *const objs = data->CalculationGObjects();
+    const auto *const objs = data.CalculationGObjects();
     QMap<QString, quint32> list;
     for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
@@ -264,7 +263,7 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box) const
     SCASSERT(box != nullptr)
     const QSignalBlocker blocker(box);
 
-    const auto *const objs = data->CalculationGObjects();
+    const auto *const objs = data.CalculationGObjects();
     QMap<QString, quint32> list;
     for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
@@ -281,7 +280,7 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box) const
 void DialogTool::FillComboBoxCurves(QComboBox *box) const
 {
     SCASSERT(box != nullptr)
-    const auto *const objs = data->CalculationGObjects();
+    const auto *const objs = data.CalculationGObjects();
     QMap<QString, quint32> list;
     for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
     {
@@ -349,7 +348,7 @@ auto DialogTool::DNumber(const QString &baseName) const -> quint32
     {
         ++num;
         name = baseName + u"_%1"_s.arg(num);
-    } while (not data->IsUnique(name));
+    } while (not data.IsUnique(name));
 
     return num;
 }
@@ -367,7 +366,7 @@ void DialogTool::NewNodeItem(QListWidget *listWidget, const VPieceNode &node, bo
         case Tool::NodeElArc:
         case Tool::NodeSpline:
         case Tool::NodeSplinePath:
-            name = GetNodeName(data, node, showPassmark);
+            name = GetNodeName(&data, node, showPassmark);
             break;
         default:
             qDebug() << "Got wrong tools. Ignore.";
@@ -588,7 +587,7 @@ auto DialogTool::SetObject(const quint32 &id, QComboBox *box, const QString &too
 //---------------------------------------------------------------------------------------------------------------------
 template <typename T> void DialogTool::PrepareList(QMap<QString, quint32> &list, quint32 id) const
 {
-    const auto obj = data->GeometricObject<T>(id);
+    const auto obj = data.GeometricObject<T>(id);
     SCASSERT(obj != nullptr)
     list[obj->ObjectName()] = id;
 }
@@ -711,10 +710,10 @@ void DialogTool::SetAssociatedTool(VAbstractTool *tool)
     {
         associatedTool = tool;
         SetToolId(tool->getId());
-        data = tool->getData();
+        data = *tool->getData();
         if (not vis.isNull())
         {
-            vis->SetData(data);
+            vis->SetData(&data);
         }
     }
     else
@@ -732,7 +731,7 @@ void DialogTool::FillCombo(QComboBox *box, GOType gType, FillComboBox rule, cons
     SCASSERT(box != nullptr)
     const QSignalBlocker blocker(box);
 
-    const QHash<quint32, QSharedPointer<VGObject>> *objs = data->CalculationGObjects();
+    const QHash<quint32, QSharedPointer<VGObject>> *objs = data.CalculationGObjects();
     QMap<QString, quint32> list;
     for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
     {

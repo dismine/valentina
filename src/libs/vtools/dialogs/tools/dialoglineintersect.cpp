@@ -85,7 +85,7 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, VAbstractPatter
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
             [this]()
             {
-                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, &this->data, flagName);
                 CheckState();
             });
     connect(ui->comboBoxP1Line1, &QComboBox::currentTextChanged, this, &DialogLineIntersect::PointNameChanged);
@@ -93,7 +93,7 @@ DialogLineIntersect::DialogLineIntersect(const VContainer *data, VAbstractPatter
     connect(ui->comboBoxP1Line2, &QComboBox::currentTextChanged, this, &DialogLineIntersect::PointNameChanged);
     connect(ui->comboBoxP2Line2, &QComboBox::currentTextChanged, this, &DialogLineIntersect::PointNameChanged);
 
-    vis = new VisToolLineIntersect(data);
+    vis = new VisToolLineIntersect(&this->data);
 
     ui->tabWidget->setCurrentIndex(0);
     SetTabStopDistance(ui->plainTextEditToolNotes);
@@ -228,10 +228,10 @@ void DialogLineIntersect::PointNameChanged()
         set.insert(p1Line2Id);
         set.insert(p2Line2Id);
 
-        const QSharedPointer<VPointF> p1Line1 = data->GeometricObject<VPointF>(p1Line1Id);
-        const QSharedPointer<VPointF> p2Line1 = data->GeometricObject<VPointF>(p2Line1Id);
-        const QSharedPointer<VPointF> p1Line2 = data->GeometricObject<VPointF>(p1Line2Id);
-        const QSharedPointer<VPointF> p2Line2 = data->GeometricObject<VPointF>(p2Line2Id);
+        const QSharedPointer<VPointF> p1Line1 = data.GeometricObject<VPointF>(p1Line1Id);
+        const QSharedPointer<VPointF> p2Line1 = data.GeometricObject<VPointF>(p2Line1Id);
+        const QSharedPointer<VPointF> p1Line2 = data.GeometricObject<VPointF>(p1Line2Id);
+        const QSharedPointer<VPointF> p2Line2 = data.GeometricObject<VPointF>(p2Line2Id);
 
         QLineF const line1(static_cast<QPointF>(*p1Line1), static_cast<QPointF>(*p2Line1));
         QLineF const line2(static_cast<QPointF>(*p1Line2), static_cast<QPointF>(*p2Line2));
@@ -269,10 +269,10 @@ auto DialogLineIntersect::CheckIntersecion() -> bool
 {
     try
     {
-        const QSharedPointer<VPointF> p1L1 = data->GeometricObject<VPointF>(GetP1Line1());
-        const QSharedPointer<VPointF> p2L1 = data->GeometricObject<VPointF>(GetP2Line1());
-        const QSharedPointer<VPointF> p1L2 = data->GeometricObject<VPointF>(GetP1Line2());
-        const QSharedPointer<VPointF> p2L2 = data->GeometricObject<VPointF>(GetP2Line2());
+        const QSharedPointer<VPointF> p1L1 = data.GeometricObject<VPointF>(GetP1Line1());
+        const QSharedPointer<VPointF> p2L1 = data.GeometricObject<VPointF>(GetP2Line1());
+        const QSharedPointer<VPointF> p1L2 = data.GeometricObject<VPointF>(GetP1Line2());
+        const QSharedPointer<VPointF> p2L2 = data.GeometricObject<VPointF>(GetP2Line2());
 
         QLineF const line1(static_cast<QPointF>(*p1L1), static_cast<QPointF>(*p2L1));
         QLineF const line2(static_cast<QPointF>(*p1L2), static_cast<QPointF>(*p2L2));

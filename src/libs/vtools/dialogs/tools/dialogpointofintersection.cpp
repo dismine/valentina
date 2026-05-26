@@ -72,14 +72,14 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, VAb
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
             [this]()
             {
-                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, &this->data, flagName);
                 CheckState();
             });
     connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged, this, &DialogPointOfIntersection::PointNameChanged);
     connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged, this,
             &DialogPointOfIntersection::PointNameChanged);
 
-    vis = new VisToolPointOfIntersection(data);
+    vis = new VisToolPointOfIntersection(&this->data);
     vis->VisualMode(NULL_ID); // Show vertical axis
 
     ui->tabWidget->setCurrentIndex(0);

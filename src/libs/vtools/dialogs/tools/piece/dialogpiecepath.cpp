@@ -103,7 +103,7 @@ DialogPiecePath::DialogPiecePath(const VContainer *data, VAbstractPattern *doc, 
 
     m_flagError = PathIsValid();
 
-    vis = new VisToolPiecePath(data);
+    vis = new VisToolPiecePath(&this->data);
 
     ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabSeamAllowance));
     ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabPassmarks));
@@ -183,7 +183,7 @@ void DialogPiecePath::ChosenObject(quint32 id, const SceneObject &type)
             SCASSERT(visPath != nullptr);
             const VPiecePath p = CreatePath();
             visPath->SetPath(p);
-            visPath->SetCuttingPath(CuttingPath(toolId, data));
+            visPath->SetCuttingPath(CuttingPath(toolId, &data));
 
             if (p.CountNodes() == 1)
             {
@@ -399,7 +399,7 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
         rowNode.SetPassmark(true);
         rowNode.SetPassmarkLineType(type);
         rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-        rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
+        rowItem->setText(GetNodeName(&data, rowNode, IsShowNotch()));
     };
 
     Q_STATIC_ASSERT_X(static_cast<int>(ContextMenuOption::LAST_ONE_DO_NOT_USE) == 16, "Not all options were handled.");
@@ -415,12 +415,12 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
         case ContextMenuOption::Reverse:
             rowNode.SetReverse(not rowNode.GetReverse());
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-            rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
+            rowItem->setText(GetNodeName(&data, rowNode, IsShowNotch()));
             break;
         case ContextMenuOption::NonePassmark:
             rowNode.SetPassmark(false);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-            rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
+            rowItem->setText(GetNodeName(&data, rowNode, IsShowNotch()));
             break;
         case ContextMenuOption::OneLine:
             SelectPassmarkLineType(PassmarkLineType::OneLine);
@@ -452,17 +452,17 @@ void DialogPiecePath::ShowContextMenu(const QPoint &pos)
         case ContextMenuOption::Uniqueness:
             rowNode.SetCheckUniqueness(not rowNode.IsCheckUniqueness());
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-            rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
+            rowItem->setText(GetNodeName(&data, rowNode, IsShowNotch()));
             break;
         case ContextMenuOption::TurnPoint:
             rowNode.SetTurnPoint(not rowNode.IsTurnPoint());
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-            rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
+            rowItem->setText(GetNodeName(&data, rowNode, IsShowNotch()));
             break;
         case ContextMenuOption::Excluded:
             rowNode.SetExcluded(not rowNode.IsExcluded());
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-            rowItem->setText(GetNodeName(data, rowNode, true));
+            rowItem->setText(GetNodeName(&data, rowNode, true));
             rowItem->setFont(NodeFont(rowItem->font(), rowNode.IsExcluded()));
             break;
         case ContextMenuOption::Delete:
@@ -487,7 +487,7 @@ void DialogPiecePath::ListChanged()
         auto *visPath = qobject_cast<VisToolPiecePath *>(vis);
         SCASSERT(visPath != nullptr);
         visPath->SetPath(CreatePath());
-        visPath->SetCuttingPath(CuttingPath(toolId, data));
+        visPath->SetCuttingPath(CuttingPath(toolId, &data));
         visPath->RefreshGeometry();
     }
 
@@ -738,7 +738,7 @@ void DialogPiecePath::PassmarkLineTypeChanged(int id)
 
             rowNode.SetPassmarkLineType(lineType);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-            rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
+            rowItem->setText(GetNodeName(&data, rowNode, IsShowNotch()));
 
             ListChanged();
         }
@@ -792,7 +792,7 @@ void DialogPiecePath::PassmarkAngleTypeChanged(int id)
 
             rowNode.SetPassmarkAngleType(angleType);
             rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-            rowItem->setText(GetNodeName(data, rowNode, IsShowNotch()));
+            rowItem->setText(GetNodeName(&data, rowNode, IsShowNotch()));
 
             ListChanged();
         }
@@ -857,7 +857,7 @@ void DialogPiecePath::PassmarkNotMirroredStateChanged(int state)
 void DialogPiecePath::EvalWidth()
 {
     m_saWidth = Eval({.formula = ui->plainTextEditFormulaWidth->toPlainText(),
-                      .variables = data->DataVariables(),
+                      .variables = data.DataVariables(),
                       .labelEditFormula = ui->labelEditWidth,
                       .labelResult = ui->labelResultWidth,
                       .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
@@ -866,7 +866,7 @@ void DialogPiecePath::EvalWidth()
 
     if (m_saWidth >= 0)
     {
-        auto *locData = const_cast<VContainer *>(data);
+        auto *locData = const_cast<VContainer *>(&data);
 
         auto *currentSA = new VIncrement(locData, currentSeamAllowance);
         currentSA->SetFormula(m_saWidth, QString().setNum(m_saWidth), true);
@@ -891,7 +891,7 @@ void DialogPiecePath::EvalWidthBefore()
         }
 
         Eval({.formula = ui->plainTextEditFormulaWidthBefore->toPlainText(),
-              .variables = data->DataVariables(),
+              .variables = data.DataVariables(),
               .labelEditFormula = ui->labelEditBefore,
               .labelResult = ui->labelResultBefore,
               .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
@@ -923,7 +923,7 @@ void DialogPiecePath::EvalWidthAfter()
         }
 
         Eval({.formula = ui->plainTextEditFormulaWidthAfter->toPlainText(),
-              .variables = data->DataVariables(),
+              .variables = data.DataVariables(),
               .labelEditFormula = ui->labelEditAfter,
               .labelResult = ui->labelResultAfter,
               .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
@@ -947,7 +947,7 @@ void DialogPiecePath::EvalWidthAfter()
 void DialogPiecePath::EvalVisible()
 {
     Eval({.formula = ui->plainTextEditFormulaVisible->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditVisible,
           .labelResult = ui->labelResultVisible,
           .checkLessThanZero = true},
@@ -962,7 +962,7 @@ void DialogPiecePath::EvalPassmarkLength()
         if (ui->comboBoxPassmarks->count() > 0)
         {
             Eval({.formula = ui->plainTextEditPassmarkLength->toPlainText(),
-                  .variables = data->DataVariables(),
+                  .variables = data.DataVariables(),
                   .labelEditFormula = ui->labelEditPassmarkLength,
                   .labelResult = ui->labelResultPassmarkLength,
                   .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
@@ -991,7 +991,7 @@ void DialogPiecePath::EvalPassmarkWidth()
         if (ui->comboBoxPassmarks->count() > 0)
         {
             Eval({.formula = ui->plainTextEditPassmarkWidth->toPlainText(),
-                  .variables = data->DataVariables(),
+                  .variables = data.DataVariables(),
                   .labelEditFormula = ui->labelEditPassmarkWidth,
                   .labelResult = ui->labelResultPassmarkWidth,
                   .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
@@ -1019,7 +1019,7 @@ void DialogPiecePath::EvalPassmarkAngle()
         if (ui->comboBoxPassmarks->count() > 0)
         {
             Eval({.formula = ui->plainTextEditPassmarkAngle->toPlainText(),
-                  .variables = data->DataVariables(),
+                  .variables = data.DataVariables(),
                   .labelEditFormula = ui->labelEditPassmarkAngle,
                   .labelResult = ui->labelResultPassmarkAngle,
                   .postfix = degreeSymbol},
@@ -1044,7 +1044,7 @@ void DialogPiecePath::EvalPassmarkVisible()
     if (ui->comboBoxPassmarks->count() > 0)
     {
         Eval({.formula = ui->plainTextEditPassmarkVisible->toPlainText(),
-              .variables = data->DataVariables(),
+              .variables = data.DataVariables(),
               .labelEditFormula = ui->labelEditPassmarkVisible,
               .labelResult = ui->labelResultPassmarkVisible,
               .checkLessThanZero = true},
@@ -1065,7 +1065,7 @@ void DialogPiecePath::EvalPassmarkVisible()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::FXWidth()
 {
-    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&data, toolId, this));
     dialog->setWindowTitle(tr("Edit seam allowance width"));
     dialog->SetFormula(GetFormulaSAWidth());
     dialog->setCheckLessThanZero(true);
@@ -1079,7 +1079,7 @@ void DialogPiecePath::FXWidth()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::FXWidthBefore()
 {
-    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&data, toolId, this));
     dialog->setWindowTitle(tr("Edit seam allowance width before"));
     dialog->SetFormula(GetFormulaSAWidthBefore());
     dialog->setCheckLessThanZero(true);
@@ -1093,7 +1093,7 @@ void DialogPiecePath::FXWidthBefore()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::FXWidthAfter()
 {
-    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&data, toolId, this));
     dialog->setWindowTitle(tr("Edit seam allowance width after"));
     dialog->SetFormula(GetFormulaSAWidthAfter());
     dialog->setCheckLessThanZero(true);
@@ -1107,7 +1107,7 @@ void DialogPiecePath::FXWidthAfter()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::FXVisible()
 {
-    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&data, toolId, this));
     dialog->setWindowTitle(tr("Control visibility"));
     dialog->SetFormula(GetFormulaVisible());
     if (dialog->exec() == QDialog::Accepted)
@@ -1119,7 +1119,7 @@ void DialogPiecePath::FXVisible()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::FXPassmarkLength()
 {
-    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&data, toolId, this));
     dialog->setWindowTitle(tr("Edit passmark length"));
     dialog->SetFormula(GetFormulaPassmarkLength());
     dialog->setCheckZero(true);
@@ -1134,7 +1134,7 @@ void DialogPiecePath::FXPassmarkLength()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::FXPassmarkWidth()
 {
-    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&data, toolId, this));
     dialog->setWindowTitle(tr("Edit passmark width"));
     dialog->SetFormula(GetFormulaPassmarkWidth());
     dialog->setCheckZero(true);
@@ -1148,7 +1148,7 @@ void DialogPiecePath::FXPassmarkWidth()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::FXPassmarkAngle()
 {
-    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&data, toolId, this));
     dialog->setWindowTitle(tr("Edit passmark angle"));
     dialog->SetFormula(GetFormulaPassmarkAngle());
     dialog->setPostfix(degreeSymbol);
@@ -1161,7 +1161,7 @@ void DialogPiecePath::FXPassmarkAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPiecePath::FXPassmarkVisible()
 {
-    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&data, toolId, this));
     dialog->setWindowTitle(tr("Edit notch visibility"));
     dialog->SetFormula(GetFormulaPassmarkVisibility());
     if (dialog->exec() == QDialog::Accepted)
@@ -1392,7 +1392,7 @@ void DialogPiecePath::InitPathTab()
 
                 rowNode.SetReverse(not rowNode.GetReverse());
                 rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-                rowItem->setText(GetNodeName(data, rowNode, true));
+                rowItem->setText(GetNodeName(&data, rowNode, true));
             });
 
     connect(ui->toolButtonExcluded,
@@ -1413,7 +1413,7 @@ void DialogPiecePath::InitPathTab()
 
                 rowNode.SetExcluded(not rowNode.IsExcluded());
                 rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-                rowItem->setText(GetNodeName(data, rowNode, true));
+                rowItem->setText(GetNodeName(&data, rowNode, true));
                 rowItem->setFont(NodeFont(rowItem->font(), rowNode.IsExcluded()));
             });
 
@@ -1435,7 +1435,7 @@ void DialogPiecePath::InitPathTab()
 
                 rowNode.SetTurnPoint(not rowNode.IsTurnPoint());
                 rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-                rowItem->setText(GetNodeName(data, rowNode, true));
+                rowItem->setText(GetNodeName(&data, rowNode, true));
             });
 
     connect(ui->toolButtonCheckUniqness,
@@ -1456,7 +1456,7 @@ void DialogPiecePath::InitPathTab()
 
                 rowNode.SetCheckUniqueness(not rowNode.IsCheckUniqueness());
                 rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-                rowItem->setText(GetNodeName(data, rowNode, true));
+                rowItem->setText(GetNodeName(&data, rowNode, true));
             });
 
     connect(ui->toolButtonPassmark,
@@ -1477,7 +1477,7 @@ void DialogPiecePath::InitPathTab()
 
                 rowNode.SetPassmark(checked);
                 rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
-                rowItem->setText(GetNodeName(data, rowNode, true));
+                rowItem->setText(GetNodeName(&data, rowNode, true));
             });
 
     connect(ui->toolButtonDelete,
@@ -1679,7 +1679,7 @@ void DialogPiecePath::InitNodesList()
             const VPieceNode &node = path.at(i);
             if (node.GetTypeTool() == Tool::NodePoint)
             {
-                const QString name = GetNodeName(data, node);
+                const QString name = GetNodeName(&data, node);
 
                 ui->comboBoxNodes->addItem(name, node.GetId());
             }
@@ -1713,7 +1713,7 @@ void DialogPiecePath::InitPassmarksList()
         {
             if (node.GetTypeTool() == Tool::NodePoint && node.IsPassmark())
             {
-                const QString name = GetNodeName(data, node);
+                const QString name = GetNodeName(&data, node);
 
                 ui->comboBoxPassmarks->addItem(name, node.GetId());
             }
@@ -1773,7 +1773,7 @@ void DialogPiecePath::SetPiecePath(const VPiecePath &path)
     auto *visPath = qobject_cast<VisToolPiecePath *>(vis);
     SCASSERT(visPath != nullptr);
     visPath->SetPath(path);
-    visPath->SetCuttingPath(CuttingPath(toolId, data));
+    visPath->SetCuttingPath(CuttingPath(toolId, &data));
 
     SetPenType(path.GetPenType());
     SetCutPath(path.IsCutPath());
@@ -2062,7 +2062,7 @@ void DialogPiecePath::SetFormulaSAWidth(const QString &formula)
     auto *path = qobject_cast<VisToolPiecePath *>(vis);
     SCASSERT(path != nullptr)
     path->SetPath(CreatePath());
-    path->SetCuttingPath(CuttingPath(toolId, data));
+    path->SetCuttingPath(CuttingPath(toolId, &data));
 
     if (ui->tabWidget->indexOf(ui->tabSeamAllowance) == -1)
     {
@@ -2088,7 +2088,7 @@ void DialogPiecePath::SetPieceId(quint32 id)
 {
     if (ui->comboBoxPiece->count() <= 0)
     {
-        ui->comboBoxPiece->addItem(data->GetPiece(id).GetName(), id);
+        ui->comboBoxPiece->addItem(data.GetPiece(id).GetName(), id);
     }
     else
     {
@@ -2155,14 +2155,14 @@ auto DialogPiecePath::CreatePath() const -> VPiecePath
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogPiecePath::PathIsValid() const -> bool
 {
-    if (CreatePath().PathPoints(data).count() < 2)
+    if (CreatePath().PathPoints(&data).count() < 2)
     {
         ui->helpLabel->setText(DialogWarningIcon(ui->helpLabel) + tr("You need more points!"));
         return false;
     }
 
     QString error;
-    if (GetType() == PiecePathType::CustomSeamAllowance && FirstPointEqualLast(ui->listWidget, data, error))
+    if (GetType() == PiecePathType::CustomSeamAllowance && FirstPointEqualLast(ui->listWidget, &data, error))
     {
         ui->helpLabel->setText(QStringLiteral("%1%2 %3").arg(
             DialogWarningIcon(ui->helpLabel),
@@ -2171,7 +2171,7 @@ auto DialogPiecePath::PathIsValid() const -> bool
     }
 
     error.clear();
-    if (DoublePoints(ui->listWidget, data, error))
+    if (DoublePoints(ui->listWidget, &data, error))
     {
         ui->helpLabel->setText(
             QStringLiteral("%1%2 %3").arg(DialogWarningIcon(ui->helpLabel), tr("You have double points!"), error));
@@ -2179,7 +2179,7 @@ auto DialogPiecePath::PathIsValid() const -> bool
     }
 
     error.clear();
-    if (DoubleCurves(ui->listWidget, data, error))
+    if (DoubleCurves(ui->listWidget, &data, error))
     {
         ui->helpLabel->setText(QStringLiteral("%1%2 %3").arg(DialogWarningIcon(ui->helpLabel),
                                                              tr("The same curve repeats twice!"), error));
@@ -2206,7 +2206,7 @@ auto DialogPiecePath::PathIsValid() const -> bool
     }
 
     error.clear();
-    if (InvalidSegment(ui->listWidget, data, error))
+    if (InvalidSegment(ui->listWidget, &data, error))
     {
         ui->helpLabel->setText(
             QStringLiteral("%1%2 %3").arg(DialogWarningIcon(ui->helpLabel), tr("Invalid segment!"), error));

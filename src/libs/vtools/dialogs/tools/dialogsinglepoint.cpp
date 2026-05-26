@@ -59,7 +59,7 @@ DialogSinglePoint::DialogSinglePoint(const VContainer *data, VAbstractPattern *d
     connect(ui->lineEditName, &QLineEdit::textChanged, this,
             [this]()
             {
-                CheckPointLabel(this, ui->lineEditName, ui->labelEditName, pointName, this->data, flagName);
+                CheckPointLabel(this, ui->lineEditName, ui->labelEditName, pointName, &this->data, flagName);
                 CheckState();
             });
 

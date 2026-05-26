@@ -64,11 +64,11 @@ DialogPointFromArcAndTangent::DialogPointFromArcAndTangent(const VContainer *dat
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
             [this]()
             {
-                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, &this->data, flagName);
                 CheckState();
             });
 
-    vis = new VisToolPointFromArcAndTangent(data);
+    vis = new VisToolPointFromArcAndTangent(&this->data);
 
     ui->tabWidget->setCurrentIndex(0);
     SetTabStopDistance(ui->plainTextEditToolNotes);

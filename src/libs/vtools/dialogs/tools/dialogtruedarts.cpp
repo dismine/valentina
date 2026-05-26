@@ -87,7 +87,7 @@ DialogTrueDarts::DialogTrueDarts(const VContainer *data, VAbstractPattern *doc, 
     connect(ui->comboBoxSecondDartPoint, &QComboBox::currentTextChanged, this, &DialogTrueDarts::PointNameChanged);
     connect(ui->comboBoxThirdDartPoint, &QComboBox::currentTextChanged, this, &DialogTrueDarts::PointNameChanged);
 
-    vis = new VisToolTrueDarts(data);
+    vis = new VisToolTrueDarts(&this->data);
 
     ui->tabWidget->setCurrentIndex(0);
     SetTabStopDistance(ui->plainTextEditToolNotes);
@@ -400,7 +400,7 @@ void DialogTrueDarts::CheckName(QLineEdit *edit, QLabel *labelEditNamePoint, con
     const QString secondName = secondPointName->text();
     if (QRegularExpression const rx(NameRegExp());
         name.isEmpty() || secondName == name ||
-        (pointD1Name != name && pointD2Name != name && data->IsUnique(name) == false) ||
+        (pointD1Name != name && pointD2Name != name && data.IsUnique(name) == false) ||
         rx.match(name).hasMatch() == false)
     {
         flagName = false;

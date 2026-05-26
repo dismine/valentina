@@ -74,7 +74,7 @@ DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *d
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
             [this]()
             {
-                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, &this->data, flagName);
                 CheckState();
             });
     connect(ui->comboBoxArc1, &QComboBox::currentTextChanged, this, &DialogPointOfIntersectionArcs::ArcChanged);
@@ -90,7 +90,7 @@ DialogPointOfIntersectionArcs::DialogPointOfIntersectionArcs(const VContainer *d
     connect(ui->lineEditArc2Alias1, &QLineEdit::textEdited, this, &DialogPointOfIntersectionArcs::ValidateAlias);
     connect(ui->lineEditArc2Alias2, &QLineEdit::textEdited, this, &DialogPointOfIntersectionArcs::ValidateAlias);
 
-    vis = new VisToolPointOfIntersectionArcs(data);
+    vis = new VisToolPointOfIntersectionArcs(&this->data);
 
     ui->tabWidget->setCurrentIndex(0);
     SetTabStopDistance(ui->plainTextEditToolNotes);
@@ -247,13 +247,13 @@ void DialogPointOfIntersectionArcs::SaveData()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionArcs::ValidateAlias()
 {
-    const QSharedPointer<VArc> arc1 = data->GeometricObject<VArc>(GetFirstArcId());
+    const QSharedPointer<VArc> arc1 = data.GeometricObject<VArc>(GetFirstArcId());
     auto const [arc1AliasFirst, arc1AliasSecond] = SegmentAliases(arc1->getType(),
                                                                   GetArc1AliasSuffix1(),
                                                                   GetArc1AliasSuffix2());
     auto const [arc1Name1, arc1Name2] = SegmentNames(arc1->getType(), GetArc1Name1(), GetArc1Name2());
 
-    const QSharedPointer<VArc> arc2 = data->GeometricObject<VArc>(GetSecondArcId());
+    const QSharedPointer<VArc> arc2 = data.GeometricObject<VArc>(GetSecondArcId());
     auto const [arc2AliasFirst, arc2AliasSecond] = SegmentAliases(arc2->getType(),
                                                                   GetArc2AliasSuffix1(),
                                                                   GetArc2AliasSuffix2());
@@ -269,7 +269,7 @@ void DialogPointOfIntersectionArcs::ValidateAlias()
                              const QString &originSuffix,
                              const QSet<QString> &conflictSet) -> bool
     {
-        if (originSuffix != suffix && !data->IsUnique(alias))
+        if (originSuffix != suffix && !data.IsUnique(alias))
         {
             return false;
         }
@@ -342,13 +342,13 @@ void DialogPointOfIntersectionArcs::ValidateAlias()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointOfIntersectionArcs::ValidateName()
 {
-    const QSharedPointer<VArc> arc1 = data->GeometricObject<VArc>(GetFirstArcId());
+    const QSharedPointer<VArc> arc1 = data.GeometricObject<VArc>(GetFirstArcId());
     auto const [arc1AliasFirst, arc1AliasSecond] = SegmentAliases(arc1->getType(),
                                                                   GetArc1AliasSuffix1(),
                                                                   GetArc1AliasSuffix2());
     auto const [arc1Name1, arc1Name2] = SegmentNames(arc1->getType(), GetArc1Name1(), GetArc1Name2());
 
-    const QSharedPointer<VArc> arc2 = data->GeometricObject<VArc>(GetSecondArcId());
+    const QSharedPointer<VArc> arc2 = data.GeometricObject<VArc>(GetSecondArcId());
     auto const [arc2AliasFirst, arc2AliasSecond] = SegmentAliases(arc2->getType(),
                                                                   GetArc2AliasSuffix1(),
                                                                   GetArc2AliasSuffix2());
@@ -364,7 +364,7 @@ void DialogPointOfIntersectionArcs::ValidateName()
                             const QString &originName,
                             const QSet<QString> &conflictSet) -> bool
     {
-        if (originName != inputName && !data->IsUnique(name))
+        if (originName != inputName && !data.IsUnique(name))
         {
             return false;
         }
@@ -425,25 +425,25 @@ void DialogPointOfIntersectionArcs::ValidateName()
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogPointOfIntersectionArcs::GenerateDefArc1LeftSubName() const -> QString
 {
-    return GenerateDefSubCurveName(data, GetFirstArcId(), "__1ls"_L1, "L1SubArc"_L1);
+    return GenerateDefSubCurveName(&data, GetFirstArcId(), "__1ls"_L1, "L1SubArc"_L1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogPointOfIntersectionArcs::GenerateDefArc1RightSubName() const -> QString
 {
-    return GenerateDefSubCurveName(data, GetFirstArcId(), "__1rs"_L1, "R1SubArc"_L1);
+    return GenerateDefSubCurveName(&data, GetFirstArcId(), "__1rs"_L1, "R1SubArc"_L1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogPointOfIntersectionArcs::GenerateDefArc2LeftSubName() const -> QString
 {
-    return GenerateDefSubCurveName(data, GetSecondArcId(), "__2ls"_L1, "L2SubArc"_L1);
+    return GenerateDefSubCurveName(&data, GetSecondArcId(), "__2ls"_L1, "L2SubArc"_L1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogPointOfIntersectionArcs::GenerateDefArc2RightSubName() const -> QString
 {
-    return GenerateDefSubCurveName(data, GetSecondArcId(), "__2rs"_L1, "R2SubArc"_L1);
+    return GenerateDefSubCurveName(&data, GetSecondArcId(), "__2rs"_L1, "R2SubArc"_L1);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -111,7 +111,7 @@ DialogGraduatedCurve::DialogGraduatedCurve(const VContainer *data,
     connect(ui->lineEditCurveName, &QLineEdit::textEdited, this, &DialogGraduatedCurve::ValidateName);
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogGraduatedCurve::ValidateAlias);
 
-    vis = new VisToolGraduatedCurve(data);
+    vis = new VisToolGraduatedCurve(&this->data);
 
     ui->tabWidget->setCurrentIndex(0);
     SetTabStopDistance(ui->plainTextEditToolNotes);
@@ -155,7 +155,7 @@ DialogGraduatedCurve::~DialogGraduatedCurve()
 {
     for (const auto &offset : std::as_const(m_offsets))
     {
-        data->RemoveUniqueName(offset.name);
+        data.RemoveUniqueName(offset.name);
     }
 
     VAbstractValApplication::VApp()->ValentinaSettings()->SetUserToolColors(ui->pushButtonColor->CustomColors());
@@ -199,7 +199,7 @@ void DialogGraduatedCurve::SetOffsets(const QVector<VRawGraduatedCurveOffset> &o
     m_offsets.clear();
     m_offsets.reserve(offsets.size());
 
-    auto localData = QSharedPointer<VContainer>(new VContainer(*data));
+    auto localData = QSharedPointer<VContainer>(new VContainer(data));
 
     for (const auto &offset : offsets)
     {
@@ -335,7 +335,7 @@ void DialogGraduatedCurve::ShowDialog(bool click)
         auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
 
-        const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(GetOriginCurveId());
+        const QSharedPointer<VAbstractCurve> curve = data.GeometricObject<VAbstractCurve>(GetOriginCurveId());
         QPointF const p = curve->ClosestPoint(scene->getScenePos());
 
         auto const line = QLineF(p, scene->getScenePos());
@@ -353,7 +353,7 @@ void DialogGraduatedCurve::ShowDialog(bool click)
         QVector<VRawGraduatedCurveOffset> rawOffsets = GetOffsets();
 
         rawOffsets.append(
-            {.name = GetOffsetName(false), .formula = QString::number(FromPixel(len, *data->GetPatternUnit()))});
+            {.name = GetOffsetName(false), .formula = QString::number(FromPixel(len, *data.GetPatternUnit()))});
 
         SetOffsets(rawOffsets);
         vis->RefreshGeometry();
@@ -394,7 +394,7 @@ void DialogGraduatedCurve::ChosenObject(quint32 id, const SceneObject &type)
         }
         prepare = true;
 
-        SetName(GenerateDefOffsetCurveName(data, GetOriginCurveId(), "__o"_L1, "Curve"_L1 + offset_));
+        SetName(GenerateDefOffsetCurveName(&data, GetOriginCurveId(), "__o"_L1, "Curve"_L1 + offset_));
 
         auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
         SCASSERT(window != nullptr)
@@ -453,12 +453,12 @@ void DialogGraduatedCurve::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogGraduatedCurve::ValidateName()
 {
-    const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(GetOriginCurveId());
+    const QSharedPointer<VAbstractCurve> curve = data.GeometricObject<VAbstractCurve>(GetOriginCurveId());
     const QString namePrefix = GetName();
     VSplinePath const splPath = curve->Outline({0}, namePrefix);
 
     if (QRegularExpression const rx(NameRegExp()); namePrefix.isEmpty() || not rx.match(splPath.name()).hasMatch()
-                                                   || (m_originName != namePrefix && not data->IsUnique(splPath.name())))
+                                                   || (m_originName != namePrefix && not data.IsUnique(splPath.name())))
     {
         m_flagName = false;
         ChangeColor(ui->labelName, errorColor);
@@ -475,14 +475,14 @@ void DialogGraduatedCurve::ValidateName()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogGraduatedCurve::ValidateAlias()
 {
-    const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(GetOriginCurveId());
+    const QSharedPointer<VAbstractCurve> curve = data.GeometricObject<VAbstractCurve>(GetOriginCurveId());
     VSplinePath splPath = curve->Offset(0, GetName());
 
     splPath.SetAliasSuffix(GetAliasSuffix());
     if (QRegularExpression const rx(NameRegExp());
         not GetAliasSuffix().isEmpty()
         && (not rx.match(splPath.GetAlias()).hasMatch()
-            || (m_originAliasSuffix != GetAliasSuffix() && not data->IsUnique(splPath.GetAlias()))))
+            || (m_originAliasSuffix != GetAliasSuffix() && not data.IsUnique(splPath.GetAlias()))))
     {
         m_flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);
@@ -581,7 +581,7 @@ void DialogGraduatedCurve::RemoveOffset()
 
     if (row >= 0 && row < rawOffsets.size())
     {
-        data->RemoveUniqueName(rawOffsets.at(row).name);
+        data.RemoveUniqueName(rawOffsets.at(row).name);
         rawOffsets.removeAt(row);
     }
 
@@ -714,7 +714,7 @@ void DialogGraduatedCurve::SaveOffsetName(const QString &text)
     }
 
     QString const newName = VAbstractApplication::VApp()->TrVars()->InternalVarFromUser(text);
-    if (const VContainer *localData = m_offsets.isEmpty() ? data : m_offsets.constLast().formulaData.data();
+    if (const VContainer *localData = m_offsets.isEmpty() ? &data : m_offsets.constLast().formulaData.data();
         not localData->IsUnique(newName))
     {
         return;
@@ -924,7 +924,7 @@ void DialogGraduatedCurve::EnableDetails(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogGraduatedCurve::GetOffsetName(bool translate) const -> QString
 {
-    const VContainer *localData = m_offsets.isEmpty() ? data : m_offsets.constLast().formulaData.data();
+    const VContainer *localData = m_offsets.isEmpty() ? &data : m_offsets.constLast().formulaData.data();
     qint32 num = 1;
     QString name;
     QString const subName = translate ? VAbstractApplication::VApp()->TrVars()->InternalVarToUser(offset_) : offset_;

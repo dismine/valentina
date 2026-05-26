@@ -76,7 +76,7 @@ DialogTriangle::DialogTriangle(const VContainer *data, VAbstractPattern *doc, qu
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
             [this]()
             {
-                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, &this->data, flagName);
                 CheckState();
             });
     connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged, this, &DialogTriangle::PointNameChanged);
@@ -84,7 +84,7 @@ DialogTriangle::DialogTriangle(const VContainer *data, VAbstractPattern *doc, qu
     connect(ui->comboBoxAxisP1, &QComboBox::currentTextChanged, this, &DialogTriangle::PointNameChanged);
     connect(ui->comboBoxAxisP2, &QComboBox::currentTextChanged, this, &DialogTriangle::PointNameChanged);
 
-    vis = new VisToolTriangle(data);
+    vis = new VisToolTriangle(&this->data);
 
     ui->tabWidget->setCurrentIndex(0);
     SetTabStopDistance(ui->plainTextEditToolNotes);

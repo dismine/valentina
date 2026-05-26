@@ -104,7 +104,7 @@ DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, VAbstra
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
             [this]()
             {
-                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, this->data, flagName);
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, pointName, &this->data, flagName);
                 CheckState();
             });
     connect(ui->plainTextEditFormula, &QPlainTextEdit::textChanged, this,
@@ -117,7 +117,7 @@ DialogLineIntersectAxis::DialogLineIntersectAxis(const VContainer *data, VAbstra
             &DialogLineIntersectAxis::PointNameChanged);
     connect(ui->comboBoxAxisPoint, &QComboBox::currentTextChanged, this, &DialogLineIntersectAxis::PointNameChanged);
 
-    vis = new VisToolLineIntersectAxis(data);
+    vis = new VisToolLineIntersectAxis(&this->data);
 
     ui->tabWidget->setCurrentIndex(0);
     SetTabStopDistance(ui->plainTextEditToolNotes);
@@ -260,7 +260,7 @@ void DialogLineIntersectAxis::ShowDialog(bool click)
             /*We will ignore click if poinet is in point circle*/
             auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
             SCASSERT(scene != nullptr)
-            const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetBasePointId());
+            const QSharedPointer<VPointF> point = data.GeometricObject<VPointF>(GetBasePointId());
             auto const line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
 
             // Radius of point circle, but little bigger. Need handle with hover sizes.
@@ -352,7 +352,7 @@ void DialogLineIntersectAxis::ChosenObject(quint32 id, const SceneObject &type)
 void DialogLineIntersectAxis::EvalAngle()
 {
     Eval({.formula = ui->plainTextEditFormula->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditFormula,
           .labelResult = ui->labelResultCalculation,
           .postfix = degreeSymbol},
@@ -393,7 +393,7 @@ void DialogLineIntersectAxis::PointNameChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogLineIntersectAxis::FXAngle()
 {
-    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
     dialog->setWindowTitle(tr("Edit angle"));
     dialog->SetFormula(GetAngle());
     dialog->setPostfix(degreeSymbol);

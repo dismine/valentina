@@ -97,7 +97,7 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, VAbstractPatter
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
             [this]()
             {
-                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data,
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, &this->data,
                                 m_flagName);
                 CheckState();
             });
@@ -108,7 +108,7 @@ DialogShoulderPoint::DialogShoulderPoint(const VContainer *data, VAbstractPatter
     connect(ui->comboBoxP2Line, &QComboBox::currentTextChanged, this, &DialogShoulderPoint::PointNameChanged);
     connect(ui->comboBoxP3, &QComboBox::currentTextChanged, this, &DialogShoulderPoint::PointNameChanged);
 
-    vis = new VisToolShoulderPoint(data);
+    vis = new VisToolShoulderPoint(&this->data);
 
     ui->tabWidget->setCurrentIndex(0);
     SetTabStopDistance(ui->plainTextEditToolNotes);
@@ -142,7 +142,7 @@ void DialogShoulderPoint::PointNameChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogShoulderPoint::FXLength()
 {
-    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetFormula());
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
@@ -157,7 +157,7 @@ void DialogShoulderPoint::FXLength()
 void DialogShoulderPoint::EvalFormula()
 {
     Eval({.formula = ui->plainTextEditFormula->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditFormula,
           .labelResult = ui->labelResultCalculation,
           .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)},
@@ -504,9 +504,9 @@ void DialogShoulderPoint::ShowDialog(bool click)
         auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
 
-        const QSharedPointer<VPointF> p3 = data->GeometricObject<VPointF>(GetP3());
+        const QSharedPointer<VPointF> p3 = data.GeometricObject<VPointF>(GetP3());
         QLineF const line(static_cast<QPointF>(*p3), scene->getScenePos());
-        SetFormula(QString::number(FromPixel(line.length(), *data->GetPatternUnit())));
+        SetFormula(QString::number(FromPixel(line.length(), *data.GetPatternUnit())));
     }
 
     FinishCreating();

@@ -105,7 +105,7 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, VAbstractPattern *doc, 
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
             [this]()
             {
-                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data,
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, &this->data,
                                 m_flagName);
                 CheckState();
             });
@@ -115,7 +115,7 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, VAbstractPattern *doc, 
     connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged, this, &DialogAlongLine::PointChanged);
     connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged, this, &DialogAlongLine::PointChanged);
 
-    vis = new VisToolAlongLine(data);
+    vis = new VisToolAlongLine(&this->data);
 
     // Call after initialization vis!!!!
     SetTypeLine(TypeLineNone); // By default don't show line
@@ -147,7 +147,7 @@ void DialogAlongLine::PointChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogAlongLine::FXLength()
 {
-    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetFormula());
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
@@ -162,7 +162,7 @@ void DialogAlongLine::FXLength()
 void DialogAlongLine::EvalFormula()
 {
     Eval({.formula = ui->plainTextEditFormula->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditFormula,
           .labelResult = ui->labelResultCalculation,
           .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)},
@@ -273,22 +273,22 @@ void DialogAlongLine::SetCurrentLength()
     VLengthLine *length = nullptr;
     try
     {
-        const QSharedPointer<VPointF> p1 = data->GeometricObject<VPointF>(GetFirstPointId());
-        const QSharedPointer<VPointF> p2 = data->GeometricObject<VPointF>(GetSecondPointId());
+        const QSharedPointer<VPointF> p1 = data.GeometricObject<VPointF>(GetFirstPointId());
+        const QSharedPointer<VPointF> p2 = data.GeometricObject<VPointF>(GetSecondPointId());
 
-        length = new VLengthLine(p1.data(), GetFirstPointId(), p2.data(), GetSecondPointId(), *data->GetPatternUnit());
+        length = new VLengthLine(p1.data(), GetFirstPointId(), p2.data(), GetSecondPointId(), *data.GetPatternUnit());
     }
     catch (const VExceptionBadId &)
     {
         QScopedPointer<VPointF> const p1(new VPointF());
         QScopedPointer<VPointF> const p2(new VPointF());
-        length = new VLengthLine(p1.data(), GetFirstPointId(), p2.data(), GetSecondPointId(), *data->GetPatternUnit());
+        length = new VLengthLine(p1.data(), GetFirstPointId(), p2.data(), GetSecondPointId(), *data.GetPatternUnit());
     }
 
     SCASSERT(length != nullptr)
     length->SetName(currentLength);
 
-    auto *locData = const_cast<VContainer *>(data);
+    auto *locData = const_cast<VContainer *>(&data);
     locData->AddVariable(length);
 }
 
@@ -409,8 +409,8 @@ void DialogAlongLine::ShowDialog(bool click)
         auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
 
-        const QSharedPointer<VPointF> p1 = data->GeometricObject<VPointF>(GetFirstPointId());
-        const QSharedPointer<VPointF> p2 = data->GeometricObject<VPointF>(GetSecondPointId());
+        const QSharedPointer<VPointF> p1 = data.GeometricObject<VPointF>(GetFirstPointId());
+        const QSharedPointer<VPointF> p2 = data.GeometricObject<VPointF>(GetSecondPointId());
         QLineF const baseLine(static_cast<QPointF>(*p1), static_cast<QPointF>(*p2));
 
         QLineF const line(static_cast<QPointF>(*p1), scene->getScenePos());
@@ -422,7 +422,7 @@ void DialogAlongLine::ShowDialog(bool click)
             len *= -1;
         }
 
-        SetFormula(QString::number(FromPixel(len, *data->GetPatternUnit())));
+        SetFormula(QString::number(FromPixel(len, *data.GetPatternUnit())));
     }
 
     FinishCreating();

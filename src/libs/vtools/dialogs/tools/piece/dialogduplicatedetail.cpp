@@ -43,7 +43,7 @@ DialogDuplicateDetail::DialogDuplicateDetail(const VContainer *data, VAbstractPa
     ui->setupUi(this);
     InitOkCancel(ui);
 
-    vis = new VisToolDuplicateDetail(data);
+    vis = new VisToolDuplicateDetail(&this->data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

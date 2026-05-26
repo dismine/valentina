@@ -160,7 +160,7 @@ DialogEllipticalArcWithLength::DialogEllipticalArcWithLength(const VContainer *d
 
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogEllipticalArcWithLength::ValidateAlias);
 
-    vis = new VisToolEllipticalArcWithLength(data);
+    vis = new VisToolEllipticalArcWithLength(&this->data);
 
     ui->tabWidget->setCurrentIndex(0);
     SetTabStopDistance(ui->plainTextEditToolNotes);
@@ -406,7 +406,7 @@ void DialogEllipticalArcWithLength::ShowDialog(bool click)
         /*We will ignore click if pointer is in point circle*/
         auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
-        const QSharedPointer<VPointF> center = data->GeometricObject<VPointF>(GetCenter());
+        const QSharedPointer<VPointF> center = data.GeometricObject<VPointF>(GetCenter());
         auto line = QLineF(static_cast<QPointF>(*center), scene->getScenePos());
 
         auto Angle = [&line]()
@@ -429,7 +429,7 @@ void DialogEllipticalArcWithLength::ShowDialog(bool click)
                 return;
             }
 
-            SetRadius1(QString::number(FromPixel(line.length(), *data->GetPatternUnit())));
+            SetRadius1(QString::number(FromPixel(line.length(), *data.GetPatternUnit())));
             vis->RefreshGeometry();
             ++m_stage;
             return;
@@ -447,7 +447,7 @@ void DialogEllipticalArcWithLength::ShowDialog(bool click)
                 return;
             }
 
-            SetRadius2(QString::number(FromPixel(line.length(), *data->GetPatternUnit())));
+            SetRadius2(QString::number(FromPixel(line.length(), *data.GetPatternUnit())));
             vis->RefreshGeometry();
             ++m_stage;
             return;
@@ -463,9 +463,9 @@ void DialogEllipticalArcWithLength::ShowDialog(bool click)
 
         if (m_stage == 3) // length
         {
-            const qreal r1 = Visualization::FindLengthFromUser(m_radius1, data->DataVariables());
-            const qreal r2 = Visualization::FindLengthFromUser(m_radius2, data->DataVariables());
-            const qreal angle1 = Visualization::FindValFromUser(m_f1, data->DataVariables());
+            const qreal r1 = Visualization::FindLengthFromUser(m_radius1, data.DataVariables());
+            const qreal r2 = Visualization::FindLengthFromUser(m_radius2, data.DataVariables());
+            const qreal angle1 = Visualization::FindValFromUser(m_f1, data.DataVariables());
             VEllipticalArc const arc(*center, r1, r2, angle1, line.angle(), 0);
 
             SetLength(QString::number(VAbstractValApplication::VApp()->fromPixel(arc.GetLength())));
@@ -559,7 +559,7 @@ void DialogEllipticalArcWithLength::DeployRotationAngleTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEllipticalArcWithLength::FXRadius1()
 {
-    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius1"));
     dialog->SetFormula(GetRadius1());
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
@@ -573,7 +573,7 @@ void DialogEllipticalArcWithLength::FXRadius1()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEllipticalArcWithLength::FXRadius2()
 {
-    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius2"));
     dialog->SetFormula(GetRadius2());
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
@@ -587,7 +587,7 @@ void DialogEllipticalArcWithLength::FXRadius2()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEllipticalArcWithLength::FXF1()
 {
-    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
     dialog->setWindowTitle(tr("Edit the first angle"));
     dialog->SetFormula(GetF1());
     dialog->setPostfix(degreeSymbol);
@@ -601,7 +601,7 @@ void DialogEllipticalArcWithLength::FXF1()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEllipticalArcWithLength::FXLength()
 {
-    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
     dialog->setWindowTitle(tr("Edit the elliptical arc length"));
     dialog->SetFormula(GetLength());
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
@@ -615,7 +615,7 @@ void DialogEllipticalArcWithLength::FXLength()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogEllipticalArcWithLength::FXRotationAngle()
 {
-    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
     dialog->setWindowTitle(tr("Edit rotation angle"));
     dialog->SetFormula(GetRotationAngle());
     dialog->setPostfix(degreeSymbol);
@@ -691,7 +691,7 @@ void DialogEllipticalArcWithLength::ValidateAlias()
     if (QRegularExpression const rx(NameRegExp());
         not GetAliasSuffix().isEmpty()
         && (not rx.match(arc.GetAlias()).hasMatch()
-            || (m_originAliasSuffix != GetAliasSuffix() && not data->IsUnique(arc.GetAlias()))))
+            || (m_originAliasSuffix != GetAliasSuffix() && not data.IsUnique(arc.GetAlias()))))
     {
         m_flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);
@@ -709,7 +709,7 @@ void DialogEllipticalArcWithLength::ValidateAlias()
 void DialogEllipticalArcWithLength::Radius1()
 {
     Eval({.formula = ui->plainTextEditRadius1->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditRadius1,
           .labelResult = ui->labelResultRadius1,
           .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
@@ -721,7 +721,7 @@ void DialogEllipticalArcWithLength::Radius1()
 void DialogEllipticalArcWithLength::Radius2()
 {
     Eval({.formula = ui->plainTextEditRadius2->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditRadius2,
           .labelResult = ui->labelResultRadius2,
           .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
@@ -733,7 +733,7 @@ void DialogEllipticalArcWithLength::Radius2()
 void DialogEllipticalArcWithLength::Length()
 {
     Eval({.formula = ui->plainTextEditLength->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditLength,
           .labelResult = ui->labelResultLength,
           .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)},
@@ -744,7 +744,7 @@ void DialogEllipticalArcWithLength::Length()
 void DialogEllipticalArcWithLength::EvalF()
 {
     Eval({.formula = ui->plainTextEditF1->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditF1,
           .labelResult = ui->labelResultF1,
           .postfix = degreeSymbol},
@@ -755,7 +755,7 @@ void DialogEllipticalArcWithLength::EvalF()
 void DialogEllipticalArcWithLength::RotationAngle()
 {
     Eval({.formula = ui->plainTextEditRotationAngle->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditRotationAngle,
           .labelResult = ui->labelResultRotationAngle,
           .postfix = degreeSymbol},

@@ -67,7 +67,7 @@ DialogPlaceLabel::DialogPlaceLabel(const VContainer *data, VAbstractPattern *doc
 
     connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]() { CheckPieces(); });
 
-    vis = new VisToolSpecialPoint(data);
+    vis = new VisToolSpecialPoint(&this->data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -213,7 +213,7 @@ void DialogPlaceLabel::SetPieceId(quint32 id)
 {
     if (ui->comboBoxPiece->count() <= 0)
     {
-        ui->comboBoxPiece->addItem(data->GetPiece(id).GetName(), id);
+        ui->comboBoxPiece->addItem(data.GetPiece(id).GetName(), id);
     }
     else
     {
@@ -333,7 +333,7 @@ void DialogPlaceLabel::DeployVisibleFormulaTextEdit()
 void DialogPlaceLabel::EvalWidth()
 {
     Eval({.formula = ui->plainTextEditFormulaWidth->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditFormulaWidth,
           .labelResult = ui->labelResultCalculationWidth,
           .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
@@ -345,7 +345,7 @@ void DialogPlaceLabel::EvalWidth()
 void DialogPlaceLabel::EvalHeight()
 {
     Eval({.formula = ui->plainTextEditFormulaHeight->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditFormulaHeight,
           .labelResult = ui->labelResultCalculationHeight,
           .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
@@ -357,7 +357,7 @@ void DialogPlaceLabel::EvalHeight()
 void DialogPlaceLabel::EvalAngle()
 {
     Eval({.formula = ui->plainTextEditFormulaAngle->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditFormulaAngle,
           .labelResult = ui->labelResultCalculationAngle,
           .postfix = degreeSymbol},
@@ -368,7 +368,7 @@ void DialogPlaceLabel::EvalAngle()
 void DialogPlaceLabel::EvalVisible()
 {
     Eval({.formula = ui->plainTextEditFormulaVisible->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditVisible,
           .labelResult = ui->labelResultVisible,
           .checkLessThanZero = true},
@@ -378,7 +378,7 @@ void DialogPlaceLabel::EvalVisible()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::FXWidth()
 {
-    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&data, toolId, this));
     dialog->setWindowTitle(tr("Edit rectangle width"));
     dialog->SetFormula(GetWidth());
     dialog->setCheckLessThanZero(true);
@@ -392,7 +392,7 @@ void DialogPlaceLabel::FXWidth()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::FXHeight()
 {
-    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&data, toolId, this));
     dialog->setWindowTitle(tr("Edit rectangle width"));
     dialog->SetFormula(GetHeight());
     dialog->setCheckLessThanZero(true);
@@ -406,7 +406,7 @@ void DialogPlaceLabel::FXHeight()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::FXAngle()
 {
-    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&data, toolId, this));
     dialog->setWindowTitle(tr("Edit angle"));
     dialog->SetFormula(GetAngle());
     dialog->setPostfix(degreeSymbol);
@@ -419,7 +419,7 @@ void DialogPlaceLabel::FXAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPlaceLabel::FXVisible()
 {
-    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(data, toolId, this));
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&data, toolId, this));
     dialog->setWindowTitle(tr("Control visibility"));
     dialog->SetFormula(GetFormulaVisible());
     if (dialog->exec() == QDialog::Accepted)

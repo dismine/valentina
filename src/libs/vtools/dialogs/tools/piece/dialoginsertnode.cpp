@@ -52,7 +52,7 @@ DialogInsertNode::DialogInsertNode(const VContainer *data, VAbstractPattern *doc
     connect(ui->spinBoxNodeNumber, QOverload<int>::of(&QSpinBox::valueChanged), this,
             &DialogInsertNode::NodeNumberChanged);
 
-    vis = new VisToolInsertNode(data);
+    vis = new VisToolInsertNode(&this->data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ void DialogInsertNode::SetPieceId(quint32 id)
 {
     if (ui->comboBoxPiece->count() <= 0)
     {
-        ui->comboBoxPiece->addItem(data->GetPiece(id).GetName(), id);
+        ui->comboBoxPiece->addItem(data.GetPiece(id).GetName(), id);
     }
     else
     {
@@ -165,7 +165,7 @@ void DialogInsertNode::ChosenObject(quint32 id, const SceneObject &type)
         GOType objectType = GOType::Unknown;
         try
         {
-            objectType = data->GetGObject(id)->getType();
+            objectType = data.GetGObject(id)->getType();
         }
         catch (const VExceptionBadId &)
         {

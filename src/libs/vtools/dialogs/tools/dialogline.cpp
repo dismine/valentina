@@ -73,7 +73,7 @@ DialogLine::DialogLine(const VContainer *data, VAbstractPattern *doc, quint32 to
     connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged, this, &DialogLine::PointNameChanged);
     connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged, this, &DialogLine::PointNameChanged);
 
-    vis = new VisToolLine(data);
+    vis = new VisToolLine(&this->data);
 
     ui->tabWidget->setCurrentIndex(0);
     SetTabStopDistance(ui->plainTextEditToolNotes);

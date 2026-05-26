@@ -146,7 +146,7 @@ DialogSplinePath::DialogSplinePath(const VContainer *data, VAbstractPattern *doc
 
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogSplinePath::ValidateAlias);
 
-    vis = new VisToolSplinePath(data);
+    vis = new VisToolSplinePath(&this->data);
     auto *path = qobject_cast<VisToolSplinePath *>(vis);
     SCASSERT(path != nullptr)
 
@@ -225,7 +225,7 @@ void DialogSplinePath::ChosenObject(quint32 id, const SceneObject &type)
             return;
         }
 
-        const auto point = data->GeometricObject<VPointF>(id);
+        const auto point = data.GeometricObject<VPointF>(id);
         VSplinePoint p;
         p.SetP(*point);
         NewItem(p);
@@ -264,7 +264,7 @@ void DialogSplinePath::SaveData()
     if (!m_oldName.isEmpty() && m_oldName != path.name())
     {
         path.SetDuplicate(0);
-        if (!data->IsUnique(path.name()))
+        if (!data.IsUnique(path.name()))
         {
             path.SetDuplicate(DNumber(path.name()));
             m_oldName = path.name();
@@ -346,7 +346,7 @@ void DialogSplinePath::Angle1Changed()
         auto p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString angle1F = ui->plainTextEditAngle1F->toPlainText();
-        const qreal angle1 = Visualization::FindValFromUser(angle1F, data->DataVariables());
+        const qreal angle1 = Visualization::FindValFromUser(angle1F, data.DataVariables());
         p.SetAngle1(angle1, VTranslateVars::TryFormulaFromUser(
                                 angle1F, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
 
@@ -380,7 +380,7 @@ void DialogSplinePath::Angle2Changed()
         auto p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString angle2F = ui->plainTextEditAngle2F->toPlainText();
-        const qreal angle2 = Visualization::FindValFromUser(angle2F, data->DataVariables());
+        const qreal angle2 = Visualization::FindValFromUser(angle2F, data.DataVariables());
         p.SetAngle2(angle2, VTranslateVars::TryFormulaFromUser(
                                 angle2F, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
 
@@ -414,7 +414,7 @@ void DialogSplinePath::Length1Changed()
         auto p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString length1F = ui->plainTextEditLength1F->toPlainText();
-        const qreal length1 = Visualization::FindLengthFromUser(length1F, data->DataVariables());
+        const qreal length1 = Visualization::FindLengthFromUser(length1F, data.DataVariables());
         p.SetLength1(length1, VTranslateVars::TryFormulaFromUser(
                                   length1F, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
 
@@ -440,7 +440,7 @@ void DialogSplinePath::Length2Changed()
         auto p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
         const QString length2F = ui->plainTextEditLength2F->toPlainText();
-        const qreal length2 = Visualization::FindLengthFromUser(length2F, data->DataVariables());
+        const qreal length2 = Visualization::FindLengthFromUser(length2F, data.DataVariables());
         p.SetLength2(length2, VTranslateVars::TryFormulaFromUser(
                                   length2F, VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
 
@@ -453,7 +453,7 @@ void DialogSplinePath::Length2Changed()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::FXAngle1()
 {
-    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
     dialog->setWindowTitle(tr("Edit first control point angle"));
 
     QString angle1F = VTranslateVars::TryFormulaFromUser(ui->plainTextEditAngle1F->toPlainText(),
@@ -479,7 +479,7 @@ void DialogSplinePath::FXAngle1()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::FXAngle2()
 {
-    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
     dialog->setWindowTitle(tr("Edit second control point angle"));
 
     QString angle2F = VTranslateVars::TryFormulaFromUser(ui->plainTextEditAngle2F->toPlainText(),
@@ -505,7 +505,7 @@ void DialogSplinePath::FXAngle2()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::FXLength1()
 {
-    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
     dialog->setWindowTitle(tr("Edit first control point length"));
 
     QString length1F = VTranslateVars::TryFormulaFromUser(ui->plainTextEditLength1F->toPlainText(),
@@ -531,7 +531,7 @@ void DialogSplinePath::FXLength1()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSplinePath::FXLength2()
 {
-    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
     dialog->setWindowTitle(tr("Edit second control point length"));
 
     QString length2F = VTranslateVars::TryFormulaFromUser(ui->plainTextEditLength2F->toPlainText(),
@@ -563,7 +563,7 @@ void DialogSplinePath::ValidateAlias()
     if (QRegularExpression const rx(NameRegExp());
         not ui->lineEditAlias->text().isEmpty() &&
         (not rx.match(tempPath.GetAlias()).hasMatch() ||
-         (originAliasSuffix != ui->lineEditAlias->text() && not data->IsUnique(tempPath.GetAlias()))))
+         (originAliasSuffix != ui->lineEditAlias->text() && not data.IsUnique(tempPath.GetAlias()))))
     {
         flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);
@@ -587,7 +587,7 @@ void DialogSplinePath::EvalAngle1()
     }
 
     Eval({.formula = ui->plainTextEditAngle1F->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditAngle1,
           .labelResult = ui->labelResultAngle1,
           .postfix = degreeSymbol},
@@ -610,7 +610,7 @@ void DialogSplinePath::EvalAngle2()
     }
 
     Eval({.formula = ui->plainTextEditAngle2F->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditAngle2,
           .labelResult = ui->labelResultAngle2,
           .postfix = degreeSymbol},
@@ -633,7 +633,7 @@ void DialogSplinePath::EvalLength1()
     }
 
     Eval({.formula = ui->plainTextEditLength1F->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditLength1,
           .labelResult = ui->labelResultLength1,
           .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
@@ -657,7 +657,7 @@ void DialogSplinePath::EvalLength2()
     }
 
     Eval({.formula = ui->plainTextEditLength2F->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditLength2,
           .labelResult = ui->labelResultLength2,
           .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
@@ -708,7 +708,7 @@ void DialogSplinePath::currentPointChanged(int index)
         QListWidgetItem *item = ui->listWidget->item(ui->listWidget->currentRow());
         auto p = qvariant_cast<VSplinePoint>(item->data(Qt::UserRole));
 
-        const auto point = data->GeometricObject<VPointF>(id);
+        const auto point = data.GeometricObject<VPointF>(id);
         p.SetP(*point);
 
         DataPoint(p);
@@ -746,7 +746,7 @@ void DialogSplinePath::NewPointChanged()
 void DialogSplinePath::AddPoint()
 {
     const auto id = qvariant_cast<quint32>(ui->comboBoxNewPoint->currentData());
-    const auto point = data->GeometricObject<VPointF>(id);
+    const auto point = data.GeometricObject<VPointF>(id);
     VSplinePoint p;
     p.SetP(*point);
     NewItem(p);
@@ -833,7 +833,7 @@ void DialogSplinePath::ShowDialog(bool click)
     {
         emit ToolTip(QString());
 
-        if (not data->IsUnique(path.name()))
+        if (not data.IsUnique(path.name()))
         {
             path.SetDuplicate(DNumber(path.name()));
         }

@@ -83,7 +83,7 @@ DialogHeight::DialogHeight(const VContainer *data, VAbstractPattern *doc, quint3
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
             [this]()
             {
-                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data,
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, &this->data,
                                 m_flagName);
                 CheckState();
             });
@@ -91,7 +91,7 @@ DialogHeight::DialogHeight(const VContainer *data, VAbstractPattern *doc, quint3
     connect(ui->comboBoxP1Line, &QComboBox::currentTextChanged, this, &DialogHeight::PointNameChanged);
     connect(ui->comboBoxP2Line, &QComboBox::currentTextChanged, this, &DialogHeight::PointNameChanged);
 
-    vis = new VisToolHeight(data);
+    vis = new VisToolHeight(&this->data);
 
     ui->tabWidget->setCurrentIndex(0);
     SetTabStopDistance(ui->plainTextEditToolNotes);
@@ -275,9 +275,9 @@ void DialogHeight::PointNameChanged()
 
     try
     {
-        const auto basePoint = static_cast<QPointF>(*data->GeometricObject<VPointF>(basePointId));
-        const auto p1Line = static_cast<QPointF>(*data->GeometricObject<VPointF>(p1LineId));
-        const auto p2Line = static_cast<QPointF>(*data->GeometricObject<VPointF>(p2LineId));
+        const auto basePoint = static_cast<QPointF>(*data.GeometricObject<VPointF>(basePointId));
+        const auto p1Line = static_cast<QPointF>(*data.GeometricObject<VPointF>(p1LineId));
+        const auto p2Line = static_cast<QPointF>(*data.GeometricObject<VPointF>(p2LineId));
 
         if (set.size() != 3 || VGObject::ClosestPoint(QLineF(p1Line, p2Line), basePoint) == QPointF())
         {

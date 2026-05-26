@@ -86,7 +86,7 @@ DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContaine
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
             [this]()
             {
-                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, this->data,
+                CheckPointLabel(this, ui->lineEditNamePoint, ui->labelEditNamePoint, m_pointName, &this->data,
                                 m_flagName);
                 CheckState();
             });
@@ -101,7 +101,7 @@ DialogPointFromCircleAndTangent::DialogPointFromCircleAndTangent(const VContaine
     connect(ui->pushButtonGrowRadius, &QPushButton::clicked, this,
             &DialogPointFromCircleAndTangent::DeployCircleRadiusTextEdit);
 
-    vis = new VisToolPointFromCircleAndTangent(data);
+    vis = new VisToolPointFromCircleAndTangent(&this->data);
 
     ui->tabWidget->setCurrentIndex(0);
     SetTabStopDistance(ui->plainTextEditToolNotes);
@@ -225,10 +225,10 @@ void DialogPointFromCircleAndTangent::ShowDialog(bool click)
         /*We will ignore click if pointer is in point circle*/
         auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
-        const QSharedPointer<VPointF> center = data->GeometricObject<VPointF>(GetCircleCenterId());
+        const QSharedPointer<VPointF> center = data.GeometricObject<VPointF>(GetCircleCenterId());
         auto const line = QLineF(static_cast<QPointF>(*center), scene->getScenePos());
 
-        SetCircleRadius(QString::number(FromPixel(line.length(), *data->GetPatternUnit())));
+        SetCircleRadius(QString::number(FromPixel(line.length(), *data.GetPatternUnit())));
     }
 
     FinishCreating();
@@ -317,7 +317,7 @@ void DialogPointFromCircleAndTangent::DeployCircleRadiusTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogPointFromCircleAndTangent::FXCircleRadius()
 {
-    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius"));
     dialog->SetFormula(GetCircleRadius());
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
@@ -332,7 +332,7 @@ void DialogPointFromCircleAndTangent::FXCircleRadius()
 void DialogPointFromCircleAndTangent::EvalCircleRadius()
 {
     const qreal radius = Eval({.formula = ui->plainTextEditRadius->toPlainText(),
-                               .variables = data->DataVariables(),
+                               .variables = data.DataVariables(),
                                .labelEditFormula = ui->labelEditRadius,
                                .labelResult = ui->labelResultCircleRadius,
                                .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)},

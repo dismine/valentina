@@ -55,6 +55,7 @@
 #include "../vmisc/def.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
+#include "../vpatterndb/vcontainer.h"
 #include "../vtools/visualization/visualization.h" // Issue on Windows
 #include "../vwidgets/vmaingraphicsscene.h"
 
@@ -136,7 +137,7 @@ public slots:
 
 protected:
     /** @brief data container with data */
-    const VContainer *data;
+    VContainer data;
 
     VAbstractPattern *m_doc;
 

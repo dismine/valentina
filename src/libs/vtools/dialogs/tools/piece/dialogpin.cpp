@@ -46,7 +46,7 @@ DialogPin::DialogPin(const VContainer *data, VAbstractPattern *doc, quint32 tool
 
     connect(ui->comboBoxPiece, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this]() { CheckPieces(); });
 
-    vis = new VisToolSpecialPoint(data);
+    vis = new VisToolSpecialPoint(&this->data);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ void DialogPin::SetPieceId(quint32 id)
 {
     if (ui->comboBoxPiece->count() <= 0)
     {
-        ui->comboBoxPiece->addItem(data->GetPiece(id).GetName(), id);
+        ui->comboBoxPiece->addItem(data.GetPiece(id).GetName(), id);
     }
     else
     {

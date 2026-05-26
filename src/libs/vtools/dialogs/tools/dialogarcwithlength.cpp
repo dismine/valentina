@@ -112,7 +112,7 @@ DialogArcWithLength::DialogArcWithLength(const VContainer *data, VAbstractPatter
 
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogArcWithLength::ValidateAlias);
 
-    vis = new VisToolArcWithLength(data);
+    vis = new VisToolArcWithLength(&this->data);
 
     ui->tabWidget->setCurrentIndex(0);
     SetTabStopDistance(ui->plainTextEditToolNotes);
@@ -299,7 +299,7 @@ void DialogArcWithLength::ShowDialog(bool click)
             /*We will ignore click if pointer is in point circle*/
             auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
             SCASSERT(scene != nullptr)
-            const QSharedPointer<VPointF> point = data->GeometricObject<VPointF>(GetCenter());
+            const QSharedPointer<VPointF> point = data.GeometricObject<VPointF>(GetCenter());
             auto const line = QLineF(static_cast<QPointF>(*point), scene->getScenePos());
 
             auto Angle = [&line]()
@@ -338,8 +338,8 @@ void DialogArcWithLength::ShowDialog(bool click)
             }
             else
             {
-                const qreal r = Visualization::FindLengthFromUser(m_radius, data->DataVariables());
-                const qreal angle1 = Visualization::FindValFromUser(m_f1, data->DataVariables());
+                const qreal r = Visualization::FindLengthFromUser(m_radius, data.DataVariables());
+                const qreal angle1 = Visualization::FindValFromUser(m_f1, data.DataVariables());
                 VArc const arc(*point, r, angle1, line.angle());
 
                 SetLength(QString::number(VAbstractValApplication::VApp()->fromPixel(arc.GetLength())));
@@ -408,7 +408,7 @@ void DialogArcWithLength::DeployLengthTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::FXRadius()
 {
-    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
     dialog->setWindowTitle(tr("Edit radius"));
     dialog->SetFormula(GetRadius());
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
@@ -422,7 +422,7 @@ void DialogArcWithLength::FXRadius()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::FXF1()
 {
-    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
     dialog->setWindowTitle(tr("Edit the first angle"));
     dialog->SetFormula(GetF1());
     dialog->setPostfix(degreeSymbol);
@@ -436,7 +436,7 @@ void DialogArcWithLength::FXF1()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogArcWithLength::FXLength()
 {
-    auto *dialog = new DialogEditWrongFormula(data, toolId, this);
+    auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
     dialog->setWindowTitle(tr("Edit the arc length"));
     dialog->SetFormula(GetLength());
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
@@ -506,7 +506,7 @@ void DialogArcWithLength::ValidateAlias()
     if (QRegularExpression const rx(NameRegExp());
         not GetAliasSuffix().isEmpty() &&
         (not rx.match(arc.GetAlias()).hasMatch() ||
-         (m_originAliasSuffix != GetAliasSuffix() && not data->IsUnique(arc.GetAlias()))))
+         (m_originAliasSuffix != GetAliasSuffix() && not data.IsUnique(arc.GetAlias()))))
     {
         m_flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);
@@ -524,7 +524,7 @@ void DialogArcWithLength::ValidateAlias()
 void DialogArcWithLength::Radius()
 {
     Eval({.formula = ui->plainTextEditRadius->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditRadius,
           .labelResult = ui->labelResultRadius,
           .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
@@ -536,7 +536,7 @@ void DialogArcWithLength::Radius()
 void DialogArcWithLength::Length()
 {
     Eval({.formula = ui->plainTextEditLength->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditLength,
           .labelResult = ui->labelResultLength,
           .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true)},
@@ -547,7 +547,7 @@ void DialogArcWithLength::Length()
 void DialogArcWithLength::EvalF()
 {
     Eval({.formula = ui->plainTextEditF1->toPlainText(),
-          .variables = data->DataVariables(),
+          .variables = data.DataVariables(),
           .labelEditFormula = ui->labelEditF1,
           .labelResult = ui->labelResultF1,
           .postfix = degreeSymbol},

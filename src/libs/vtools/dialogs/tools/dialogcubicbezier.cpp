@@ -73,7 +73,7 @@ DialogCubicBezier::DialogCubicBezier(const VContainer *data, VAbstractPattern *d
 
     connect(ui->lineEditAlias, &QLineEdit::textEdited, this, &DialogCubicBezier::ValidateAlias);
 
-    vis = new VisToolCubicBezier(data);
+    vis = new VisToolCubicBezier(&this->data);
 
     ui->tabWidget->setCurrentIndex(0);
     SetTabStopDistance(ui->plainTextEditToolNotes);
@@ -207,7 +207,7 @@ void DialogCubicBezier::ShowDialog(bool click)
         SaveSpline();
         emit ToolTip(QString());
 
-        if (not data->IsUnique(spl.name()))
+        if (not data.IsUnique(spl.name()))
         {
             spl.SetDuplicate(DNumber(spl.name()));
         }
@@ -230,7 +230,7 @@ void DialogCubicBezier::SaveData()
     if (!m_oldName.isEmpty() && m_oldName != spl.name())
     {
         spl.SetDuplicate(0);
-        if (!data->IsUnique(spl.name()))
+        if (!data.IsUnique(spl.name()))
         {
             spl.SetDuplicate(DNumber(spl.name()));
             m_oldName = spl.name();
@@ -256,7 +256,7 @@ void DialogCubicBezier::ValidateAlias()
     if (QRegularExpression const rx(NameRegExp());
         !ui->lineEditAlias->text().isEmpty()
         && (!rx.match(spline.GetAlias()).hasMatch()
-            || (originAliasSuffix != ui->lineEditAlias->text() && !data->IsUnique(spline.GetAlias()))))
+            || (originAliasSuffix != ui->lineEditAlias->text() && !data.IsUnique(spline.GetAlias()))))
     {
         flagAlias = false;
         ChangeColor(ui->labelAlias, errorColor);
@@ -273,25 +273,25 @@ void DialogCubicBezier::ValidateAlias()
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogCubicBezier::GetP1() const -> QSharedPointer<VPointF>
 {
-    return data->GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP1));
+    return data.GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP1));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogCubicBezier::GetP2() const -> QSharedPointer<VPointF>
 {
-    return data->GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP2));
+    return data.GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP2));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogCubicBezier::GetP3() const -> QSharedPointer<VPointF>
 {
-    return data->GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP3));
+    return data.GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP3));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogCubicBezier::GetP4() const -> QSharedPointer<VPointF>
 {
-    return data->GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP4));
+    return data.GeometricObject<VPointF>(getCurrentObjectId(ui->comboBoxP4));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

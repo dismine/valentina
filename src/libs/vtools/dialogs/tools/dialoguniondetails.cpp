@@ -113,7 +113,7 @@ auto DialogUnionDetails::CheckObject(const quint32 &id, const quint32 &idDetail)
     {
         return false;
     }
-    const VPiece det = data->GetPiece(idDetail);
+    const VPiece det = data.GetPiece(idDetail);
     return det.GetPath().Contains(id);
 }
 
@@ -125,7 +125,7 @@ auto DialogUnionDetails::CheckDetail(const quint32 &idDetail) const -> bool
         return false;
     }
 
-    const VPiece det = data->GetPiece(idDetail);
+    const VPiece det = data.GetPiece(idDetail);
     return det.GetPath().CountNodes() >= 3 && det.GetPath().ListNodePoint().size() >= 2;
 }
 
@@ -175,7 +175,7 @@ void DialogUnionDetails::ChoosedDetail(const quint32 &id, const SceneObject &typ
                 return;
             }
 
-            VPiece d = data->GetPiece(idDetail);
+            VPiece d = data.GetPiece(idDetail);
             if (d.GetPath().OnEdge(p1, id))
             {
                 p2 = id;
