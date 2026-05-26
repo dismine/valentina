@@ -57,11 +57,6 @@ auto VToolPin::Create(const QPointer<DialogTool> &dialog, VAbstractPattern *doc,
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolPin::Create(VToolPinInitData initData) -> VToolPin *
 {
-    VPatternGraph *patternGraph = initData.doc->PatternGraph();
-    SCASSERT(patternGraph != nullptr)
-
-    patternGraph->AddVertex(initData.id, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
-
     QSharedPointer<VPointF> point;
     try
     {
@@ -77,8 +72,6 @@ auto VToolPin::Create(VToolPinInitData initData) -> VToolPin *
         return nullptr; // Just ignore
     }
 
-    patternGraph->AddEdge(initData.pointId, initData.id);
-
     auto *pinPoint = new VPointF(*point);
     pinPoint->setIdObject(initData.pointId);
     pinPoint->setMode(Draw::Modeling);
@@ -91,6 +84,12 @@ auto VToolPin::Create(VToolPinInitData initData) -> VToolPin *
     {
         initData.data->UpdateGObject(initData.id, pinPoint);
     }
+
+    VPatternGraph *patternGraph = initData.doc->PatternGraph();
+    SCASSERT(patternGraph != nullptr)
+
+    patternGraph->AddVertex(initData.id, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
+    patternGraph->AddEdge(initData.pointId, initData.id);
 
     if (initData.typeCreation != Source::FromGui && initData.parse != Document::FullParse)
     {
