@@ -130,6 +130,7 @@ private:
     auto GetToolName(vidtype id, const VContainer &patternData, const QString &defaultName) const -> QString;
     auto GetOperationToolName(Tool toolType, const QString &defaultName) const -> QString;
     auto GetToolToolTip(vidtype id) const -> QString;
+    auto GetUnionDetailsToolTip(vidtype id) const -> QString;
     auto GetLineToolName(vidtype id, const QString &defaultName) const -> QString;
 };
 

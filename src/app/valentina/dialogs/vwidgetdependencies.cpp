@@ -511,7 +511,7 @@ auto VWidgetDependencies::CanGoToObject(vidtype id) const -> bool
 
     if (auto vertex = m_doc->PatternGraph()->GetVertex(id); vertex)
     {
-        return vertex->type != VNodeType::PIECE;
+        return vertex->type != VNodeType::PIECE && vertex->type != VNodeType::MODELING_TOOL;
     }
 
     return false;

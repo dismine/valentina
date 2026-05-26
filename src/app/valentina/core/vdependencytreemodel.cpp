@@ -782,17 +782,54 @@ auto VDependencyTreeModel::FetchDependenciesForObject(vidtype objectId) const ->
 
     for (const auto id : dependencies)
     {
-        if (const auto node = graph->GetVertex(id);
-            node && (node->type == VNodeType::MODELING_TOOL || node->type == VNodeType::MODELING_OBJECT))
+        const auto node = graph->GetVertex(id);
+        if (!node)
         {
-            auto Filter = [](const auto &node) -> auto { return node.type == VNodeType::PIECE; };
-            const QVector<VNode> nodeDependencies = graph->GetDependentNodes(id, Filter);
+            visibleDependencies.append(id);
+            continue;
+        }
 
-            for (const auto pieceNode : nodeDependencies)
+        if (node->type == VNodeType::MODELING_TOOL)
+        {
+            // Surface the tool directly so the user can see what is blocking a source object.
+            // Promoting it to its PIECE descendants would hide the fact that a union tool holds
+            // the reference, leaving the user with no way to understand why deletion is blocked.
+            if (!visibleDependencies.contains(id))
             {
-                if (!visibleDependencies.contains(pieceNode.id))
+                visibleDependencies.append(id);
+            }
+        }
+        else if (node->type == VNodeType::MODELING_OBJECT)
+        {
+            // If a union tool sits between this modeling object and the piece, surface the
+            // union tool directly.  Without this, the tool is invisible: the wrapper is
+            // promoted all the way to PIECE and the user has no way to tell what is actually
+            // blocking the deletion of a source object.
+            auto toolFilter = [](const auto &n) -> auto { return n.type == VNodeType::MODELING_TOOL; };
+            const QVector<VNode> toolNodes = graph->GetDependentNodes(id, toolFilter);
+
+            if (!toolNodes.isEmpty())
+            {
+                for (const auto &toolNode : toolNodes)
                 {
-                    visibleDependencies.append(pieceNode.id);
+                    if (!visibleDependencies.contains(toolNode.id))
+                    {
+                        visibleDependencies.append(toolNode.id);
+                    }
+                }
+            }
+            else
+            {
+                // Regular internal wrapper: promote transparently to its downstream piece(s).
+                auto pieceFilter = [](const auto &n) -> auto { return n.type == VNodeType::PIECE; };
+                const QVector<VNode> nodeDependencies = graph->GetDependentNodes(id, pieceFilter);
+
+                for (const auto pieceNode : nodeDependencies)
+                {
+                    if (!visibleDependencies.contains(pieceNode.id))
+                    {
+                        visibleDependencies.append(pieceNode.id);
+                    }
                 }
             }
         }
@@ -838,6 +875,7 @@ auto VDependencyTreeModel::GetDisplayNameForObject(vidtype objectId) const -> QS
         case VNodeType::OBJECT:
             return GetObjectName(node->id, patternData, defaultName);
         case VNodeType::TOOL:
+        case VNodeType::MODELING_TOOL:
             return GetToolName(node->id, patternData, defaultName);
         default:
             return defaultName;
@@ -867,6 +905,7 @@ auto VDependencyTreeModel::GetDisplayToolTipForObject(vidtype objectId) const ->
         case VNodeType::PIECE:
             return tr("Piece '%1'").arg(GetPieceName(node->id, patternData, QString()));
         case VNodeType::TOOL:
+        case VNodeType::MODELING_TOOL:
             return GetToolToolTip(node->id);
         case VNodeType::OBJECT:
         default:
@@ -958,6 +997,8 @@ auto VDependencyTreeModel::GetOperationToolName(Tool toolType, const QString &de
             return tr("Flipping by axis", "operation");
         case Tool::Move:
             return tr("Move", "operation");
+        case Tool::UnionDetails:
+            return tr("Union details", "operation");
         default:
             return defaultName;
     }
@@ -967,11 +1008,6 @@ auto VDependencyTreeModel::GetOperationToolName(Tool toolType, const QString &de
 auto VDependencyTreeModel::GetToolToolTip(vidtype id) const -> QString
 {
     const VToolRecord tool = FindToolRecord(id);
-
-    if (tool.GetToolType() == Tool::LAST_ONE_DO_NOT_USE)
-    {
-        return {};
-    }
 
     Q_STATIC_ASSERT_X(static_cast<int>(Tool::LAST_ONE_DO_NOT_USE) == 64, "List of tools changed.");
 
@@ -1039,9 +1075,40 @@ auto VDependencyTreeModel::GetToolToolTip(vidtype id) const -> QString
             return tr("Elliptical arc with given length");
         case Tool::Line:
             return tr("Line connecting two points");
+        case Tool::UnionDetails:
+            return GetUnionDetailsToolTip(id);
+        case Tool::LAST_ONE_DO_NOT_USE:
         default:
             return {};
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDependencyTreeModel::GetUnionDetailsToolTip(vidtype id) const -> QString
+{
+    const VPatternGraph *graph = m_doc->PatternGraph();
+    if (const auto toolVertex = graph->GetVertex(id); toolVertex && toolVertex->indexPatternBlock >= 0)
+    {
+        auto pieceFilter = [](const auto &n) -> auto { return n.type == VNodeType::PIECE; };
+        const QVector<VNode> pieces = graph->GetDependentNodes(id, pieceFilter);
+        if (!pieces.isEmpty())
+        {
+            const VContainer patternData =
+                m_doc->GetCompletePPData(m_doc->PatternBlockMapper()->FindName(toolVertex->indexPatternBlock));
+            try
+            {
+                const QString pieceName = patternData.GetPiece(pieces.first().id).GetName();
+                return tr("Union details operation creating piece '%1'. "
+                          "Source objects cannot be deleted while this operation exists")
+                    .arg(pieceName);
+            }
+            catch (const VExceptionBadId &)
+            {
+                // ignore
+            }
+        }
+    }
+    return tr("Union details operation. Source objects cannot be deleted while this operation exists");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
