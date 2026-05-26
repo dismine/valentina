@@ -146,4 +146,9 @@ void DeletePiece::redo()
     patternGraph->RemoveVertex(ElementId());
 
     emit Doc()->UpdateInLayoutList();
+
+    if (Doc()->IsPatternGraphComplete())
+    {
+        emit Doc()->PatternDependencyGraphCompleted();
+    }
 }
