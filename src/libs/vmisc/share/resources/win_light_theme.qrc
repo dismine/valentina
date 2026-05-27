@@ -47,6 +47,7 @@
         <file>icons/Eleven-Light/16/actions/add-placemark.svg</file>
         <file>icons/Eleven-Light/16/actions/document-print-preview.svg</file>
         <file>icons/Eleven-Light/16/actions/documentinfo.svg</file>
+        <file>icons/Eleven-Light/16/actions/gtk-convert.svg</file>
         <file>icons/Eleven-Light/16/actions/gtk-no.svg</file>
         <file>icons/Eleven-Light/16/actions/gtk-ok.svg</file>
         <file>icons/Eleven-Light/16/actions/preferences-other.svg</file>
@@ -95,6 +96,7 @@
         <file>icons/Eleven-Light/22/actions/zoom-out.svg</file>
         <file>icons/Eleven-Light/22/actions/document-print-preview.svg</file>
         <file>icons/Eleven-Light/22/actions/documentinfo.svg</file>
+        <file>icons/Eleven-Light/22/actions/gtk-convert.svg</file>
         <file>icons/Eleven-Light/22/actions/gtk-no.svg</file>
         <file>icons/Eleven-Light/22/actions/gtk-ok.svg</file>
         <file>icons/Eleven-Light/22/actions/preferences-other.svg</file>
@@ -143,6 +145,7 @@
         <file>icons/Eleven-Light/24/actions/zoom-out.svg</file>
         <file>icons/Eleven-Light/24/actions/document-print-preview.svg</file>
         <file>icons/Eleven-Light/24/actions/documentinfo.svg</file>
+        <file>icons/Eleven-Light/24/actions/gtk-convert.svg</file>
         <file>icons/Eleven-Light/24/actions/gtk-no.svg</file>
         <file>icons/Eleven-Light/24/actions/gtk-ok.svg</file>
         <file>icons/Eleven-Light/24/actions/preferences-other.svg</file>
@@ -197,6 +200,7 @@
         <file>icons/Eleven-Light/16@2x/actions/add-placemark.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/document-print-preview.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/documentinfo.svg</file>
+        <file>icons/Eleven-Light/16@2x/actions/gtk-convert.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/gtk-no.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/gtk-ok.svg</file>
         <file>icons/Eleven-Light/16@2x/actions/preferences-other.svg</file>
@@ -245,6 +249,7 @@
         <file>icons/Eleven-Light/22@2x/actions/zoom-out.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/document-print-preview.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/documentinfo.svg</file>
+        <file>icons/Eleven-Light/22@2x/actions/gtk-convert.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/gtk-no.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/gtk-ok.svg</file>
         <file>icons/Eleven-Light/22@2x/actions/preferences-other.svg</file>
@@ -293,6 +298,7 @@
         <file>icons/Eleven-Light/24@2x/actions/zoom-out.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/document-print-preview.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/documentinfo.svg</file>
+        <file>icons/Eleven-Light/24@2x/actions/gtk-convert.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/gtk-no.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/gtk-ok.svg</file>
         <file>icons/Eleven-Light/24@2x/actions/preferences-other.svg</file>

@@ -297,7 +297,7 @@
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/go-previous-use.svg</file> -->
         <file>icons/La-Sierra-Dark/actions/22x22/go-top.svg</file>
         <file>icons/La-Sierra-Dark/actions/22x22/go-up.svg</file>
-        <!-- <file>icons/La-Sierra-Dark/actions/22x22/gtk-convert.svg</file> -->
+        <file>icons/La-Sierra-Dark/actions/22x22/gtk-convert.svg</file>
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/gtk-select-font.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/help-donate.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/help-faq.svg</file> -->
@@ -1804,7 +1804,7 @@
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/go-previous-use.svg</file> -->
         <file>icons/La-Sierra-Dark/actions/22x22@2x/go-top.svg</file>
         <file>icons/La-Sierra-Dark/actions/22x22@2x/go-up.svg</file>
-        <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/gtk-convert.svg</file> -->
+        <file>icons/La-Sierra-Dark/actions/22x22@2x/gtk-convert.svg</file>
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/gtk-select-font.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/help-donate.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/help-faq.svg</file> -->

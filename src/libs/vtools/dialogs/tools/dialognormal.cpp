@@ -70,6 +70,10 @@ DialogNormal::DialogNormal(const VContainer *data, VAbstractPattern *doc, quint3
 
     InitIcons();
 
+    // Re-add spanning 2 rows
+    ui->gridLayoutPoints->removeItem(ui->gridLayoutPoints->itemAtPosition(1, 2));
+    ui->gridLayoutPoints->addLayout(ui->verticalLayoutSwap, 1, 2, 2, 1);
+
     MakeFilterableComboBox(ui->comboBoxFirstPoint);
     MakeFilterableComboBox(ui->comboBoxSecondPoint);
 
@@ -118,6 +122,7 @@ DialogNormal::DialogNormal(const VContainer *data, VAbstractPattern *doc, quint3
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogNormal::DeployFormulaTextEdit);
     connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged, this, &DialogNormal::PointNameChanged);
     connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged, this, &DialogNormal::PointNameChanged);
+    connect(ui->toolButtonSwapPoints, &QToolButton::clicked, this, &DialogNormal::SwapPoints);
 
     vis = new VisToolNormal(&this->data);
 
@@ -509,6 +514,15 @@ void DialogNormal::ShowDialog(bool click)
     }
 
     FinishCreating();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogNormal::SwapPoints()
+{
+    const quint32 first = GetFirstPointId();
+    const quint32 second = GetSecondPointId();
+    SetFirstPointId(second);
+    SetSecondPointId(first);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -78,6 +78,10 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, VAbstractPattern *doc, 
 
     InitIcons();
 
+    // Re-add spanning 2 rows
+    ui->gridLayout->removeItem(ui->gridLayout->itemAtPosition(1, 2));
+    ui->gridLayout->addLayout(ui->verticalLayoutSwap, 1, 2, 2, 1);
+
     MakeFilterableComboBox(ui->comboBoxFirstPoint);
     MakeFilterableComboBox(ui->comboBoxSecondPoint);
 
@@ -114,6 +118,7 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, VAbstractPattern *doc, 
     connect(ui->pushButtonGrowLength, &QPushButton::clicked, this, &DialogAlongLine::DeployFormulaTextEdit);
     connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged, this, &DialogAlongLine::PointChanged);
     connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged, this, &DialogAlongLine::PointChanged);
+    connect(ui->toolButtonSwapPoints, &QToolButton::clicked, this, &DialogAlongLine::SwapPoints);
 
     vis = new VisToolAlongLine(&this->data);
 
@@ -426,6 +431,15 @@ void DialogAlongLine::ShowDialog(bool click)
     }
 
     FinishCreating();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::SwapPoints()
+{
+    const quint32 first = GetFirstPointId();
+    const quint32 second = GetSecondPointId();
+    SetFirstPointId(second);
+    SetSecondPointId(first);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

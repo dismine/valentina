@@ -234,6 +234,7 @@ enum class VThemeIcon : quint8
     PreferencesOther,
     GtkOk,
     GtkNo,
+    GtkConvert,
     SnapNodesRotationCenter,
     DrawStar,
     AddPlacemark,

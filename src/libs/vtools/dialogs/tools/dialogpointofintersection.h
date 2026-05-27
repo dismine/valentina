@@ -71,6 +71,9 @@ public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
     void PointNameChanged() override;
 
+private slots:
+    void SwapPoints();
+
 protected:
     void ShowVisualization() override;
     /**

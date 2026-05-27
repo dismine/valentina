@@ -91,6 +91,9 @@ public slots:
     void FXLength();
     void EvalFormula();
 
+private slots:
+    void SwapPoints();
+
 protected:
     void ShowVisualization() override;
     /**

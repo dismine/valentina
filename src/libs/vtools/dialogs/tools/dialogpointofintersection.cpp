@@ -56,6 +56,10 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, VAb
 {
     ui->setupUi(this);
 
+    // Re-add spanning 2 rows
+    ui->gridLayout->removeItem(ui->gridLayout->itemAtPosition(1, 2));
+    ui->gridLayout->addLayout(ui->verticalLayoutSwap, 1, 2, 2, 1);
+
     MakeFilterableComboBox(ui->comboBoxFirstPoint);
     MakeFilterableComboBox(ui->comboBoxSecondPoint);
 
@@ -78,6 +82,7 @@ DialogPointOfIntersection::DialogPointOfIntersection(const VContainer *data, VAb
     connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged, this, &DialogPointOfIntersection::PointNameChanged);
     connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged, this,
             &DialogPointOfIntersection::PointNameChanged);
+    connect(ui->toolButtonSwapPoints, &QToolButton::clicked, this, &DialogPointOfIntersection::SwapPoints);
 
     vis = new VisToolPointOfIntersection(&this->data);
     vis->VisualMode(NULL_ID); // Show vertical axis
@@ -244,6 +249,15 @@ void DialogPointOfIntersection::SetNotes(const QString &notes)
 auto DialogPointOfIntersection::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogPointOfIntersection::SwapPoints()
+{
+    const quint32 first = GetFirstPointId();
+    const quint32 second = GetSecondPointId();
+    SetFirstPointId(second);
+    SetSecondPointId(first);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

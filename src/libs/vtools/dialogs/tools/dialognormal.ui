@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>354</width>
-    <height>473</height>
+    <height>501</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,7 +33,7 @@
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
-         <item alignment="Qt::AlignLeft">
+         <item alignment="Qt::AlignmentFlag::AlignLeft">
           <widget class="QLabel" name="labelEditFormula">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -86,7 +86,7 @@
          <item>
           <spacer name="horizontalSpacer">
            <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+            <enum>Qt::Orientation::Horizontal</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -96,7 +96,7 @@
            </property>
           </spacer>
          </item>
-         <item alignment="Qt::AlignRight">
+         <item alignment="Qt::AlignmentFlag::AlignRight">
           <widget class="QToolButton" name="toolButtonExprLength">
            <property name="toolTip">
             <string>Formula wizard</string>
@@ -116,7 +116,7 @@
            </property>
           </widget>
          </item>
-         <item alignment="Qt::AlignRight">
+         <item alignment="Qt::AlignmentFlag::AlignRight">
           <widget class="QLabel" name="label_3">
            <property name="text">
             <string/>
@@ -126,7 +126,7 @@
            </property>
           </widget>
          </item>
-         <item alignment="Qt::AlignRight">
+         <item alignment="Qt::AlignmentFlag::AlignRight">
           <widget class="QLabel" name="labelResultCalculation">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -211,9 +211,9 @@
         </layout>
        </item>
        <item>
-        <layout class="QFormLayout" name="formLayout">
-         <property name="fieldGrowthPolicy">
-          <enum>QFormLayout::ExpandingFieldsGrow</enum>
+        <layout class="QGridLayout" name="gridLayoutPoints">
+         <property name="verticalSpacing">
+          <number>1</number>
          </property>
          <item row="0" column="0">
           <widget class="QLabel" name="labelEditNamePoint">
@@ -253,6 +253,57 @@
          </item>
          <item row="1" column="1">
           <widget class="QComboBox" name="comboBoxFirstPoint"/>
+         </item>
+         <item row="1" column="2">
+          <layout class="QVBoxLayout" name="verticalLayoutSwap">
+           <property name="spacing">
+            <number>1</number>
+           </property>
+           <item alignment="Qt::AlignmentFlag::AlignTop">
+            <widget class="QLabel" name="label_8">
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string notr="true">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;font-weight:800;&quot;&gt;┓&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignHCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="toolButtonSwapPoints">
+             <property name="toolTip">
+              <string>Swap points</string>
+             </property>
+             <property name="text">
+              <string notr="true"/>
+             </property>
+             <property name="icon">
+              <iconset theme="gtk-convert"/>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>16</width>
+               <height>16</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignBottom">
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string notr="true">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:800;&quot;&gt;┛&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="labelSecondPoint">
@@ -299,7 +350,7 @@
          <item>
           <layout class="QGridLayout" name="gridLayout">
            <property name="sizeConstraint">
-            <enum>QLayout::SetMinimumSize</enum>
+            <enum>QLayout::SizeConstraint::SetMinimumSize</enum>
            </property>
            <property name="horizontalSpacing">
             <number>29</number>
@@ -478,7 +529,7 @@
        <item>
         <layout class="QFormLayout" name="formLayout_2">
          <property name="fieldGrowthPolicy">
-          <enum>QFormLayout::ExpandingFieldsGrow</enum>
+          <enum>QFormLayout::FieldGrowthPolicy::ExpandingFieldsGrow</enum>
          </property>
          <item row="0" column="0">
           <widget class="QLabel" name="label_7">
@@ -528,7 +579,7 @@
        <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -555,10 +606,10 @@
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::StandardButton::Apply|QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
      </property>
     </widget>
    </item>

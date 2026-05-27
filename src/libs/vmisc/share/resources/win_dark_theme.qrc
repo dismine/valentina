@@ -479,7 +479,7 @@
         <file>icons/Eleven-Dark/16/actions/go-up.svg</file>
         <!-- <file>icons/Eleven-Dark/16/actions/grid-axonometric.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/grid-rectangular.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16/actions/gtk-convert.svg</file> -->
+        <file>icons/Eleven-Dark/16/actions/gtk-convert.svg</file>
         <!-- <file>icons/Eleven-Dark/16/actions/gtk-index.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/gtk-select-font.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/hamburger-menu.svg</file> -->
@@ -2809,7 +2809,7 @@
         <file>icons/Eleven-Dark/22/actions/go-top.svg</file>
         <!-- <file>icons/Eleven-Dark/22/actions/go-up-skip.svg</file> -->
         <file>icons/Eleven-Dark/22/actions/go-up.svg</file>
-        <!-- <file>icons/Eleven-Dark/22/actions/gtk-convert.svg</file> -->
+        <file>icons/Eleven-Dark/22/actions/gtk-convert.svg</file>
         <!-- <file>icons/Eleven-Dark/22/actions/gtk-index.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/gtk-select-font.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/handle-move.svg</file> -->
@@ -5150,7 +5150,7 @@
         <file>icons/Eleven-Dark/24/actions/go-top.svg</file>
         <!-- <file>icons/Eleven-Dark/24/actions/go-up-skip.svg</file> -->
         <file>icons/Eleven-Dark/24/actions/go-up.svg</file>
-        <!-- <file>icons/Eleven-Dark/24/actions/gtk-convert.svg</file> -->
+        <file>icons/Eleven-Dark/24/actions/gtk-convert.svg</file>
         <!-- <file>icons/Eleven-Dark/24/actions/gtk-index.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/gtk-select-font.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/handle-move.svg</file> -->
@@ -8411,7 +8411,7 @@
         <file>icons/Eleven-Dark/16@2x/actions/go-up.svg</file>
         <!-- <file>icons/Eleven-Dark/16@2x/actions/grid-axonometric.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/grid-rectangular.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16@2x/actions/gtk-convert.svg</file> -->
+        <file>icons/Eleven-Dark/16@2x/actions/gtk-convert.svg</file>
         <!-- <file>icons/Eleven-Dark/16@2x/actions/gtk-index.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/gtk-select-font.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/hamburger-menu.svg</file> -->
@@ -10741,7 +10741,7 @@
         <file>icons/Eleven-Dark/22@2x/actions/go-top.svg</file>
         <!-- <file>icons/Eleven-Dark/22@2x/actions/go-up-skip.svg</file> -->
         <file>icons/Eleven-Dark/22@2x/actions/go-up.svg</file>
-        <!-- <file>icons/Eleven-Dark/22@2x/actions/gtk-convert.svg</file> -->
+        <file>icons/Eleven-Dark/22@2x/actions/gtk-convert.svg</file>
         <!-- <file>icons/Eleven-Dark/22@2x/actions/gtk-index.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/gtk-select-font.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/handle-move.svg</file> -->
@@ -13082,7 +13082,7 @@
         <file>icons/Eleven-Dark/24@2x/actions/go-top.svg</file>
         <!-- <file>icons/Eleven-Dark/24@2x/actions/go-up-skip.svg</file> -->
         <file>icons/Eleven-Dark/24@2x/actions/go-up.svg</file>
-        <!-- <file>icons/Eleven-Dark/24@2x/actions/gtk-convert.svg</file> -->
+        <file>icons/Eleven-Dark/24@2x/actions/gtk-convert.svg</file>
         <!-- <file>icons/Eleven-Dark/24@2x/actions/gtk-index.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/gtk-select-font.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/handle-move.svg</file> -->

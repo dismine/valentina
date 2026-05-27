@@ -57,6 +57,10 @@ DialogLine::DialogLine(const VContainer *data, VAbstractPattern *doc, quint32 to
     ui->setupUi(this);
     InitOkCancelApply(ui);
 
+    // Re-add spanning 2 rows
+    ui->gridLayout->removeItem(ui->gridLayout->itemAtPosition(0, 2));
+    ui->gridLayout->addLayout(ui->verticalLayoutSwap, 0, 2, 2, 1);
+
     MakeFilterableComboBox(ui->comboBoxFirstPoint);
     MakeFilterableComboBox(ui->comboBoxSecondPoint);
 
@@ -72,6 +76,7 @@ DialogLine::DialogLine(const VContainer *data, VAbstractPattern *doc, quint32 to
 
     connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged, this, &DialogLine::PointNameChanged);
     connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged, this, &DialogLine::PointNameChanged);
+    connect(ui->toolButtonSwapPoints, &QToolButton::clicked, this, &DialogLine::SwapPoints);
 
     vis = new VisToolLine(&this->data);
 
@@ -251,6 +256,15 @@ void DialogLine::SetNotes(const QString &notes)
 auto DialogLine::GetNotes() const -> QString
 {
     return ui->plainTextEditToolNotes->toPlainText();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogLine::SwapPoints()
+{
+    const quint32 first = GetFirstPoint();
+    const quint32 second = GetSecondPoint();
+    SetFirstPoint(second);
+    SetSecondPoint(first);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
