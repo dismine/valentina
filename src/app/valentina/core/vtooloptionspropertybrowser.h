@@ -31,6 +31,7 @@
 
 #include <QMap>
 #include <QObject>
+#include <QPointer>
 
 #include "../vpropertyexplorer/vproperty.h"
 #include "../vpropertyexplorer/vpropertyformview.h"
@@ -67,6 +68,7 @@ private:
     VPE::VPropertyFormView *m_formView{nullptr};
 
     QGraphicsItem *m_currentItem{nullptr};
+    QPointer<QObject> m_currentObject{};
     QMap<VPE::VProperty *, QString> m_propertyToId{};
     QMap<QString, VPE::VProperty *> m_idToProperty{};
 

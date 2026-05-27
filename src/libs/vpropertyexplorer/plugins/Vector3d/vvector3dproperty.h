@@ -84,7 +84,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT QVector3DProperty : public VProperty
 public:
     explicit QVector3DProperty(const QString &name);
 
-    virtual ~QVector3DProperty() override {}
+    ~QVector3DProperty() override;
 
     //! Get the data how it should be displayed
     virtual auto data(int column = DPC_Name, int role = Qt::DisplayRole) const -> QVariant override;

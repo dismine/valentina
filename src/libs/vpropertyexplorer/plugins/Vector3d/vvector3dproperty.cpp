@@ -33,6 +33,10 @@
 
 using namespace Qt::Literals::StringLiterals;
 
+// Out-of-line destructor: keeps the scalar deleting destructor inside the DLL on MSVC,
+// preventing heap corruption when deleting via a base-class pointer from a consuming module.
+VPE::QVector3DProperty::~QVector3DProperty() = default;
+
 VPE::QVector3DProperty::QVector3DProperty(const QString &name)
   : VProperty(name,
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)

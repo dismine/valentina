@@ -47,7 +47,7 @@ public:
     explicit VBoolProperty(const QString &name);
 
     //! Destructor
-    ~VBoolProperty() override = default;
+    ~VBoolProperty() override;
 
     //! Get the data how it should be displayed
     auto data(int column = DPC_Name, int role = Qt::DisplayRole) const -> QVariant override;

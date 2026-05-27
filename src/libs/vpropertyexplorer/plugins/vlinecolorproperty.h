@@ -53,7 +53,7 @@ public:
     explicit VLineColorProperty(const QString &name);
 
     //! Destructor
-    ~VLineColorProperty() override = default;
+    ~VLineColorProperty() override;
 
     //! Get the data how it should be displayed
     auto data(int column = DPC_Name, int role = Qt::DisplayRole) const -> QVariant override;

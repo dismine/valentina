@@ -145,6 +145,7 @@ void VToolOptionsPropertyBrowser::ClearPropertyBrowser()
     m_propertyToId.clear();
     m_idToProperty.clear();
     m_currentItem = nullptr;
+    m_currentObject = nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -233,6 +234,7 @@ void VToolOptionsPropertyBrowser::ShowItemOptions(QGraphicsItem *item)
         case VSimpleCurve::Type:
         case VSegmentLabel::Type:
             m_currentItem = item->parentItem();
+            m_currentObject = dynamic_cast<QObject *>(m_currentItem);
             ShowItemOptions(m_currentItem);
             break;
         case VToolLineIntersectAxis::Type:
@@ -428,8 +430,12 @@ void VToolOptionsPropertyBrowser::UpdateOptions()
 void VToolOptionsPropertyBrowser::RefreshOptions()
 {
     QGraphicsItem *item = m_currentItem;
+    QPointer<QObject> object = m_currentObject;
     itemClicked(nullptr); // close options
-    itemClicked(item);    // reopen options
+    if (!object.isNull())
+    {
+        itemClicked(item); // reopen options only if item is still alive
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -605,7 +611,7 @@ void VToolOptionsPropertyBrowser::itemClicked(QGraphicsItem *item)
     m_propertyToId.clear();
     m_idToProperty.clear();
 
-    if (m_currentItem != nullptr)
+    if (m_currentItem != nullptr && !m_currentObject.isNull())
     {
         auto *previousTool = dynamic_cast<VAbstractTool *>(m_currentItem);
         if (previousTool != nullptr)
@@ -615,6 +621,7 @@ void VToolOptionsPropertyBrowser::itemClicked(QGraphicsItem *item)
     }
 
     m_currentItem = item;
+    m_currentObject = dynamic_cast<QObject *>(m_currentItem);
     if (m_currentItem == nullptr)
     {
         m_formView->setTitle(QString());

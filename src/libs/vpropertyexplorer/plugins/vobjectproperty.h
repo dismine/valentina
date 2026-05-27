@@ -47,7 +47,7 @@ public:
     explicit VObjectProperty(const QString &name);
 
     //! Destructor
-    virtual ~VObjectProperty() override {}
+    ~VObjectProperty() override;
 
     //! Get the data how it should be displayed
     virtual auto data(int column = DPC_Name, int role = Qt::DisplayRole) const -> QVariant override;
