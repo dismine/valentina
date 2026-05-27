@@ -41,7 +41,7 @@ class VPROPERTYEXPLORERSHARED_EXPORT VPointFProperty : public VProperty
 public:
     explicit VPointFProperty(const QString &name);
 
-    virtual ~VPointFProperty() override {}
+    ~VPointFProperty() override;
 
     //! Get the data how it should be displayed
     virtual auto data(int column = DPC_Name, int role = Qt::DisplayRole) const -> QVariant override;

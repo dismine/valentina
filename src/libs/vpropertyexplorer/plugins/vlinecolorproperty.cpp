@@ -60,6 +60,10 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, StrCustomColors, ("customColors"_L1)) /
 QT_WARNING_POP
 } // namespace
 
+// Out-of-line destructor: keeps the scalar deleting destructor inside the DLL on MSVC,
+// preventing heap corruption when deleting via a base-class pointer from a consuming module.
+VPE::VLineColorProperty::~VLineColorProperty() = default;
+
 VPE::VLineColorProperty::VLineColorProperty(const QString &name)
   : VProperty(name,
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -91,21 +95,23 @@ auto VPE::VLineColorProperty::createEditor(QWidget *parent, const QStyleOptionVi
 
     bool foundDefaultColor = false;
 
-    if (defaultColors.contains(*defaultColorName))
+    QMap<QString, QString> colors = defaultColors;
+
+    if (colors.contains(*defaultColorName))
     {
-        tmpPicker->insertColor(QColor(), defaultColors.value(*defaultColorName));
-        defaultColors.remove(*defaultColorName);
+        tmpPicker->insertColor(QColor(), colors.value(*defaultColorName));
+        colors.remove(*defaultColorName);
         foundDefaultColor = true;
     }
 
-    auto i = defaultColors.constBegin();
-    while (i != defaultColors.constEnd())
+    auto i = colors.constBegin();
+    while (i != colors.constEnd())
     {
         tmpPicker->insertColor(QColor(i.key()), i.value());
         ++i;
     }
 
-    for (auto color : customColors)
+    for (auto color : std::as_const(customColors))
     {
         tmpPicker->insertCustomColor(color);
     }

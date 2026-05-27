@@ -292,6 +292,10 @@ private:
 
     \sa QFrame
 */
+// Out-of-line destructor: keeps the scalar deleting destructor inside the DLL on MSVC,
+// preventing heap corruption when deleting via a base-class pointer from a consuming module.
+VPE::QtColorPicker::~QtColorPicker() = default;
+
 VPE::QtColorPicker::QtColorPicker(QWidget *parent, int columns, bool enableColorDialog, bool useNativeDialog)
   : QPushButton(parent),
     withColorDialog(enableColorDialog)

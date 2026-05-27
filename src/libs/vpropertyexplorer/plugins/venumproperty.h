@@ -48,7 +48,7 @@ public:
     explicit VEnumProperty(const QString &name);
 
     //! Destructor
-    virtual ~VEnumProperty() override {}
+    ~VEnumProperty() override;
 
     //! Get the data how it should be displayed
     virtual auto data(int column = DPC_Name, int role = Qt::DisplayRole) const -> QVariant override;

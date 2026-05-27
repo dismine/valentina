@@ -54,7 +54,7 @@ public:
     explicit VLineTypeProperty(const QString &name);
 
     //! Destructor
-    ~VLineTypeProperty() override = default;
+    ~VLineTypeProperty() override;
 
     //! Get the data how it should be displayed
     auto data(int column = DPC_Name, int role = Qt::DisplayRole) const -> QVariant override;

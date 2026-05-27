@@ -73,7 +73,7 @@ public:
                            bool enableColorDialog = true,
                            bool useNativeDialog = true);
 
-    ~QtColorPicker() override = default;
+    ~QtColorPicker() override;
 
     void insertColor(const QColor &color, const QString &text = QString(), int index = -1);
     void insertCustomColor(const QColor &color, int index = -1);

@@ -27,6 +27,10 @@
 
 #include "../vproperty_p.h"
 
+// Out-of-line destructor: keeps the scalar deleting destructor inside the DLL on MSVC,
+// preventing heap corruption when deleteing via a base-class pointer from a consuming module.
+VPE::VBoolProperty::~VBoolProperty() = default;
+
 VPE::VBoolProperty::VBoolProperty(const QString& name) :
     VProperty(name,
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
