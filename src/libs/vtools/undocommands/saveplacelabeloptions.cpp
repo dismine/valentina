@@ -36,13 +36,11 @@ SavePlaceLabelOptions::SavePlaceLabelOptions(quint32 pieceId,
                                              VPlaceLabelItem oldLabel,
                                              VPlaceLabelItem newLabel,
                                              VAbstractPattern *doc,
-                                             VContainer *data,
                                              quint32 id,
                                              QUndoCommand *parent)
   : VUndoCommand(doc, id, parent),
     m_oldLabel(std::move(oldLabel)),
     m_newLabel(std::move(newLabel)),
-    m_data(data),
     m_pieceId(pieceId)
 {
     setText(tr("save place label options"));
@@ -68,14 +66,15 @@ void SavePlaceLabelOptions::undo()
     patternGraph->RemoveIncomingEdges(ElementId());
     patternGraph->AddEdge(m_oldLabel.GetCenterPoint(), ElementId());
 
-    SCASSERT(m_data);
-    const auto varData = m_data->DataDependencyVariables();
+    auto *labelTool = qobject_cast<VToolPlaceLabel *>(VAbstractPattern::getTool(ElementId()));
+    SCASSERT(labelTool != nullptr)
+    const auto varData = labelTool->getData()->DataDependencyVariables();
     Doc()->FindFormulaDependencies(m_oldLabel.GetWidthFormula(), ElementId(), varData);
     Doc()->FindFormulaDependencies(m_oldLabel.GetHeightFormula(), ElementId(), varData);
     Doc()->FindFormulaDependencies(m_oldLabel.GetAngleFormula(), ElementId(), varData);
     Doc()->FindFormulaDependencies(m_oldLabel.GetVisibilityTrigger(), ElementId(), varData);
 
-    m_data->UpdateGObject(ElementId(), new VPlaceLabelItem(m_oldLabel));
+    labelTool->getData()->UpdateGObject(ElementId(), new VPlaceLabelItem(m_oldLabel));
 
     if (m_pieceId != NULL_ID)
     {
@@ -106,14 +105,15 @@ void SavePlaceLabelOptions::redo()
     patternGraph->RemoveIncomingEdges(ElementId());
     patternGraph->AddEdge(m_newLabel.GetCenterPoint(), ElementId());
 
-    SCASSERT(m_data);
-    const auto varData = m_data->DataDependencyVariables();
+    auto *labelTool = qobject_cast<VToolPlaceLabel *>(VAbstractPattern::getTool(ElementId()));
+    SCASSERT(labelTool != nullptr)
+    const auto varData = labelTool->getData()->DataDependencyVariables();
     Doc()->FindFormulaDependencies(m_newLabel.GetWidthFormula(), ElementId(), varData);
     Doc()->FindFormulaDependencies(m_newLabel.GetHeightFormula(), ElementId(), varData);
     Doc()->FindFormulaDependencies(m_newLabel.GetAngleFormula(), ElementId(), varData);
     Doc()->FindFormulaDependencies(m_newLabel.GetVisibilityTrigger(), ElementId(), varData);
 
-    m_data->UpdateGObject(ElementId(), new VPlaceLabelItem(m_newLabel));
+    labelTool->getData()->UpdateGObject(ElementId(), new VPlaceLabelItem(m_newLabel));
 
     if (m_pieceId != NULL_ID)
     {

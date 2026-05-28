@@ -39,7 +39,6 @@ public:
                           VPlaceLabelItem oldLabel,
                           VPlaceLabelItem newLabel,
                           VAbstractPattern *doc,
-                          VContainer *data,
                           quint32 id,
                           QUndoCommand *parent = nullptr);
     ~SavePlaceLabelOptions() override = default;
@@ -56,7 +55,6 @@ private:
     const VPlaceLabelItem m_oldLabel;
     VPlaceLabelItem       m_newLabel;
 
-    VContainer *m_data;
     quint32 m_pieceId;
 };
 

@@ -2337,7 +2337,7 @@ void VToolSeamAllowance::ToggleExcludeState(quint32 id)
                 newPath[i] = node;
 
                 VAbstractApplication::VApp()->getUndoStack()->push(
-                    new SavePiecePathOptions(m_id, oldPath, newPath, doc, &(VAbstractTool::data), pathId));
+                    new SavePiecePathOptions(m_id, oldPath, newPath, doc, pathId));
                 return;
             }
         }

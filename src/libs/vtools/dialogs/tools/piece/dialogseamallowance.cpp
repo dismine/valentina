@@ -1367,7 +1367,7 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
 
         QPointer<VUndoCommand> const saveCommand = new SavePlaceLabelOptions(
             toolId, currentLabel, newLabel, VAbstractValApplication::VApp()->getCurrentDocument(),
-            const_cast<VContainer *>(&data), labelId);
+            labelId);
         m_undoStack.append(saveCommand);
         UpdateCurrentPlaceLabelRecords();
     };
@@ -1798,7 +1798,7 @@ void DialogSeamAllowance::PathDialogClosed(int result)
 
             QPointer<VUndoCommand> const saveCommand = new SavePiecePathOptions(
                 toolId, currentPath, newPath, VAbstractValApplication::VApp()->getCurrentDocument(),
-                const_cast<VContainer *>(&data), dialogTool->GetToolId());
+                dialogTool->GetToolId());
             m_undoStack.append(saveCommand);
             UpdateCurrentCustomSARecord();
             UpdateCurrentInternalPathRecord();
@@ -1851,7 +1851,7 @@ void DialogSeamAllowance::PlaceLabelDialogClosed(int result)
 
             QPointer<VUndoCommand> const saveCommand = new SavePlaceLabelOptions(
                 toolId, currentLabel, newLabel, VAbstractValApplication::VApp()->getCurrentDocument(),
-                const_cast<VContainer *>(&data), dialogTool->GetToolId());
+                dialogTool->GetToolId());
             m_undoStack.append(saveCommand);
             UpdateCurrentPlaceLabelRecords();
         }

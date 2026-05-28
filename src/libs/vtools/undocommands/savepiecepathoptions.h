@@ -42,7 +42,6 @@ public:
                          VPiecePath oldPath,
                          VPiecePath newPath,
                          VAbstractPattern *doc,
-                         VContainer *data,
                          quint32 id,
                          QUndoCommand *parent = nullptr);
     ~SavePiecePathOptions() override = default;
@@ -59,7 +58,6 @@ private:
     const VPiecePath m_oldPath;
     VPiecePath       m_newPath;
 
-    VContainer *m_data;
     quint32 m_pieceId;
 };
 
