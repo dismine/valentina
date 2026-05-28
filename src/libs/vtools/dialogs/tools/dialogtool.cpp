@@ -84,12 +84,12 @@ QT_WARNING_POP
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief DialogTool create dialog
- * @param data container with data
+ * @param patternData container with data
  * @param parent parent widget
  */
-DialogTool::DialogTool(const VContainer *data, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
+DialogTool::DialogTool(const VContainer *patternData, VAbstractPattern *doc, quint32 toolId, QWidget *parent)
   : QDialog(parent),
-    data(*data),
+    data(*patternData),
     m_doc(doc),
     isInitialized(false),
     bOk(nullptr),
@@ -99,7 +99,7 @@ DialogTool::DialogTool(const VContainer *data, VAbstractPattern *doc, quint32 to
     prepare(false),
     vis(nullptr)
 {
-    SCASSERT(data != nullptr);
+    SCASSERT(patternData != nullptr);
     SCASSERT(doc != nullptr);
 }
 
