@@ -153,13 +153,12 @@ jobs:
           cache: 'pip'
           cache-dependency-path: 'share/ci/requirements-ci.txt'
 
-      - name: Cache Qt
+      - name: Restore Qt cache
         id: cache-qt
-        uses: actions/cache@v5
+        uses: actions/cache/restore@v5
         with:
           path: ${{ runner.temp }}/Qt
           key: install-qt-intel-${{ matrix.qt.install }}-qtimageformats-v1
-          save-always: true
 
       - name: Install Qt
         if: steps.cache-qt.outputs.cache-hit != 'true'
@@ -173,6 +172,13 @@ jobs:
           modules:      'qtimageformats'
           cache:        false
           setup-python: false
+
+      - name: Save Qt cache
+        if: always() && steps.cache-qt.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v5
+        with:
+          path: ${{ runner.temp }}/Qt
+          key: install-qt-intel-${{ matrix.qt.install }}-qtimageformats-v1
 
       - name: Set path to Qt
         run: |
@@ -496,13 +502,12 @@ jobs:
           cache: 'pip'
           cache-dependency-path: 'share/ci/requirements-ci.txt'
 
-      - name: Cache Qt
+      - name: Restore Qt cache
         id: cache-qt
-        uses: actions/cache@v5
+        uses: actions/cache/restore@v5
         with:
           path: ${{ runner.temp }}/Qt
           key: install-qt-arm-${{ matrix.qt.install }}-qtimageformats-v1
-          save-always: true
 
       - name: Install Qt
         if: steps.cache-qt.outputs.cache-hit != 'true'
@@ -516,6 +521,13 @@ jobs:
           modules:      'qtimageformats'
           cache:        false
           setup-python: false
+
+      - name: Save Qt cache
+        if: always() && steps.cache-qt.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v5
+        with:
+          path: ${{ runner.temp }}/Qt
+          key: install-qt-arm-${{ matrix.qt.install }}-qtimageformats-v1
 
       - name: Set path to Qt
         run: |
