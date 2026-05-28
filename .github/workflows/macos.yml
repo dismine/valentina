@@ -244,10 +244,10 @@ jobs:
           restore-keys: |
             ccache-macos-${{ runner.arch }}-${{ matrix.qt.label }}-
 
-      - name: Install Qt Creator
-        uses: ./.github/actions/download-qtc
+      - name: Install Qbs
+        uses: ./.github/actions/download-qbs
         with:
-          version: '19.0.1'
+          version: '3.2.0'
 
       - name: Before build
         run: |
@@ -552,10 +552,10 @@ jobs:
           restore-keys: |
             ccache-macos-${{ runner.arch }}-${{ matrix.qt.label }}-
 
-      - name: Install Qt Creator
-        uses: ./.github/actions/download-qtc
+      - name: Install Qbs
+        uses: ./.github/actions/download-qbs
         with:
-          version: '19.0.1'
+          version: '3.2.0'
 
       - name: Before build
         run: |
