@@ -460,6 +460,7 @@ VLib {
             "path/vispiecespecialpoints.h",
             "line/vistoolspecialpoint.h",
             "path/vistoolduplicatedetail.h",
+            "path/vistooluniondetails.h",
             "visualization.cpp",
             "line/visline.cpp",
             "line/vistoolline.cpp",
@@ -502,6 +503,7 @@ VLib {
             "path/vispiecespecialpoints.cpp",
             "line/vistoolspecialpoint.cpp",
             "path/vistoolduplicatedetail.cpp",
+            "path/vistooluniondetails.cpp",
             "path/vistoolparallelcurve.cpp",
             "path/vistoolparallelcurve.h",
         ]

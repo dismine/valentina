@@ -61,6 +61,7 @@ public:
     auto RetainPieces() const -> bool;
 
     void CheckDependencyTreeComplete() override;
+    void ShowVisualization() override;
 
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;

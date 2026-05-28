@@ -332,6 +332,7 @@ enum class Vis : ToolVisHolderType
     ToolSpecialPoint,
     ToolPlaceLabel,
     ToolDuplicateDetail,
+    ToolUnionDetails,
     PieceSpecialPoints,
     NoBrush,
     CurvePathItem,
