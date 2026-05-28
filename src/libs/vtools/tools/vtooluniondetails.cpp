@@ -1298,7 +1298,6 @@ void CreateUnitedNodes(VPiece &newDetail, const VPiece &d1, const VPiece &d2, co
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 
@@ -1365,7 +1364,6 @@ void CreateUnitedCSA(VPiece &newDetail, const VPiece &d1, const VPiece &d2, cons
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 }
@@ -1431,7 +1429,6 @@ void CreateUnitedInternalPaths(VPiece &newDetail, const VPiece &d1, const VPiece
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 }
@@ -1493,7 +1490,6 @@ void CreateUnitedPins(VPiece &newDetail, const VPiece &d1, const VPiece &d2, con
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 }
@@ -1518,7 +1514,6 @@ void CreateUnitedPlaceLabels(VPiece &newDetail, const VPiece &d1, const VPiece &
 
     for (auto child : std::as_const(children))
     {
-        patternGraph->AddVertex(child, VNodeType::MODELING_OBJECT, initData.doc->PatternBlockMapper()->GetActiveId());
         patternGraph->AddEdge(initData.id, child);
     }
 }
