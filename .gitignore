@@ -191,3 +191,5 @@ bw-output
 /deactivate_conanrun.sh
 /deactivate_conanbuild.sh
 /compile_commands.json
+
+.cache
