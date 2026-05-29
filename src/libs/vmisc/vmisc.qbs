@@ -107,6 +107,7 @@ VLib {
         "vabstractshortcutmanager.cpp",
         "vtranslator.h",
         "vtranslator.cpp",
+        "vmainbase.h",
     ]
 
     Group {

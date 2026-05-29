@@ -125,6 +125,8 @@ public:
     static void InitHighDpiScaling(int argc, char *argv[]);
 #endif
 
+    static void LogScreenInfo();
+
     static auto LogDirPath() -> QString;
     static auto CreateLogDir() -> bool;
     static void ClearOldLogs();

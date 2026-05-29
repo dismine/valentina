@@ -46,6 +46,8 @@
 #include <QTimeZone>
 #include <QTranslator>
 #include <QUndoStack>
+#include <QGuiApplication>
+#include <QScreen>
 #include <QWidget>
 #include <QtDebug>
 
@@ -716,6 +718,34 @@ auto VAbstractApplication::CreateLogDir() -> bool
         return logDir.mkpath(QChar('.')); // Create directory for log if need
     }
     return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::LogScreenInfo()
+{
+    qDebug() << "=== Screen Information ===";
+    qDebug() << "Screens:";
+    for (auto *screen : QGuiApplication::screens())
+    {
+        qDebug() << "  -" << screen->name() << "DPI:" << screen->logicalDotsPerInch()
+                 << "Ratio:" << screen->devicePixelRatio() << "Geometry:" << screen->geometry();
+    }
+
+    // Monitor for screen configuration changes during runtime
+    QObject::connect(qApp,
+                     &QGuiApplication::screenAdded,
+                     [](QScreen *screen) -> void
+                     {
+                         qDebug() << "Screen added:" << screen->name();
+                     });
+
+    QObject::connect(qApp,
+                     &QGuiApplication::primaryScreenChanged,
+                     [](QScreen *screen) -> void
+                     {
+                         qDebug() << "Primary screen changed to:" << screen->name();
+                     });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
