@@ -67,15 +67,15 @@ class DialogOperationTool : public DialogTool
 
 public:
     auto GetVisibilityGroupName() const -> QString;
-    void SetVisibilityGroupName(const QString &name);
+    void SetVisibilityGroupName(const QString &name) const;
 
     auto HasLinkedVisibilityGroup() const -> bool;
-    void SetHasLinkedVisibilityGroup(bool linked);
+    void SetHasLinkedVisibilityGroup(bool linked) const;
 
-    void SetVisibilityGroupTags(const QStringList &tags);
+    void SetVisibilityGroupTags(const QStringList &tags) const;
     auto GetVisibilityGroupTags() const -> QStringList;
 
-    void SetNotes(const QString &notes);
+    void SetNotes(const QString &notes) const;
     auto GetNotes() const -> QString;
 
     void SetGroupCategories(const QStringList &categories) override;
@@ -91,13 +91,13 @@ public slots:
     void ClearSourceObjects() override;
     void GroupNameChanged();
     void ShowSourceDetails(int row);
-    void CurrentObjectChanged(int row);
+    void CurrentObjectChanged(int row) const;
     void NameChanged(const QString &text);
-    void PenStyleChanged();
-    void ObjectTypeChanged(int index);
-    void NewObjectChanged();
+    void PenStyleChanged() const;
+    void ObjectTypeChanged(int index) const;
+    void NewObjectChanged() const;
     void AddNewObject();
-    void ColorChanged();
+    void ColorChanged() const;
     void BulkRename();
     void RemoveObject();
 

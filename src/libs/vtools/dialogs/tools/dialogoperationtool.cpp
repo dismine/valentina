@@ -64,7 +64,7 @@ auto DialogOperationTool::GetVisibilityGroupName() const -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogOperationTool::SetVisibilityGroupName(const QString &name)
+void DialogOperationTool::SetVisibilityGroupName(const QString &name) const
 {
     Widgets().visibilityGroupLine->setText(name.isEmpty() ? tr("Rotation") : name);
 }
@@ -76,13 +76,13 @@ auto DialogOperationTool::HasLinkedVisibilityGroup() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogOperationTool::SetHasLinkedVisibilityGroup(bool linked)
+void DialogOperationTool::SetHasLinkedVisibilityGroup(bool linked) const
 {
     Widgets().visibilityGroup->setChecked(linked);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogOperationTool::SetVisibilityGroupTags(const QStringList &tags)
+void DialogOperationTool::SetVisibilityGroupTags(const QStringList &tags) const
 {
     Widgets().groupTags->setText(tags.join(", "));
 }
@@ -129,7 +129,7 @@ void DialogOperationTool::CheckDependencyTreeComplete()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogOperationTool::SetNotes(const QString &notes)
+void DialogOperationTool::SetNotes(const QString &notes) const
 {
     Widgets().notes->setPlainText(notes);
 }
@@ -245,7 +245,7 @@ void DialogOperationTool::ShowSourceDetails(int row)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogOperationTool::CurrentObjectChanged(int row)
+void DialogOperationTool::CurrentObjectChanged(int row) const
 {
     if (Widgets().sourceList->count() < 2)
     {
@@ -313,7 +313,7 @@ void DialogOperationTool::NameChanged(const QString &text)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogOperationTool::PenStyleChanged()
+void DialogOperationTool::PenStyleChanged() const
 {
     if (Widgets().sourceList->count() == 0)
     {
@@ -329,7 +329,7 @@ void DialogOperationTool::PenStyleChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogOperationTool::ObjectTypeChanged(int index)
+void DialogOperationTool::ObjectTypeChanged(int index) const
 {
     Widgets().addObject->setDisabled(true);
 
@@ -370,7 +370,7 @@ void DialogOperationTool::ObjectTypeChanged(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogOperationTool::NewObjectChanged()
+void DialogOperationTool::NewObjectChanged() const
 {
     quint32 const id = getCurrentObjectId(Widgets().newObject);
     if (id == NULL_ID)
@@ -410,7 +410,7 @@ void DialogOperationTool::AddNewObject()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogOperationTool::ColorChanged()
+void DialogOperationTool::ColorChanged() const
 {
     if (Widgets().sourceList->count() == 0)
     {
