@@ -320,11 +320,10 @@ void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
         auto *operation = qobject_cast<VisToolRotation *>(vis);
         SCASSERT(operation != nullptr)
 
-        auto obj = std::find_if(SourceObjects().begin(),
-                                SourceObjects().end(),
-                                [id](const SourceItem &sItem) { return sItem.id == id; });
-
-        if (obj != SourceObjects().end())
+        if (auto obj = std::find_if(SourceObjects().begin(),
+                                    SourceObjects().end(),
+                                    [id](const SourceItem &sItem) { return sItem.id == id; });
+            obj != SourceObjects().end())
         {
             if (SourceObjects().size() > 1)
             {
@@ -446,14 +445,13 @@ void DialogRotation::changeEvent(QEvent *event)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::PointChanged()
 {
+    QColor color;
     quint32 const id = getCurrentObjectId(ui->comboBoxOriginPoint);
 
-    auto obj = std::find_if(SourceObjects().begin(),
-                            SourceObjects().end(),
-                            [id](const SourceItem &sItem) { return sItem.id == id; });
-
-    QColor color;
-    if (obj != SourceObjects().end())
+    if (auto obj = std::find_if(SourceObjects().begin(),
+                                SourceObjects().end(),
+                                [id](const SourceItem &sItem) { return sItem.id == id; });
+        obj != SourceObjects().end())
     {
         SetFlagError(false);
         color = errorColor;
