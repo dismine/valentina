@@ -607,7 +607,7 @@
         <translation type="vanished">Afficher le segment depuis son premier point jusqu&apos;à ce point</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.cpp" line="209"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.cpp" line="214"/>
         <source>Select second point of line</source>
         <translation>Sélectionner le deuxième point du segment</translation>
     </message>
@@ -621,7 +621,7 @@
         <translation type="vanished">Couleur du tracé</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.cpp" line="151"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.cpp" line="156"/>
         <source>Edit length</source>
         <translation>Modifierr la longueur</translation>
     </message>
@@ -651,42 +651,47 @@
         <translation>Nom du point :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="247"/>
         <source>First point:</source>
         <translation>Premier point :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="260"/>
         <source>First point of the line</source>
         <translation>Premier point du segment</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="257"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="287"/>
+        <source>Swap points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="318"/>
         <source>Second point:</source>
         <translation>Deuxième point :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="270"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="331"/>
         <source>Second point of the line</source>
         <translation>Deuxième point du segment</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="277"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="338"/>
         <source>Type of line:</source>
         <translation>Style de tracé :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="315"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="376"/>
         <source>Line color:</source>
         <translation>Couleur du tracé :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="322"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="237"/>
         <source>Unique label</source>
         <translation>Nom unique</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="325"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="240"/>
         <source>Choose unique label.</source>
         <translation>Saisissez un nom pas encore utilisé.</translation>
     </message>
@@ -696,7 +701,7 @@
         <translation>Outil</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="355"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="412"/>
         <source>Notes</source>
         <translation>Notes</translation>
     </message>
@@ -3698,27 +3703,26 @@
         <translation>Type d&apos;axe :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="241"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="294"/>
         <source>Select origin point</source>
         <translation>Sélectionner le point d&apos;origine de l&apos;axe</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="326"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="342"/>
         <source>Select origin point that is not part of the list of objects</source>
         <translation>Sélectionnez un point d&apos;origine non inclus dans les objets pré-sélectionnés</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="504"/>
         <source>Invalid name</source>
-        <translation>Nom invalide</translation>
+        <translation type="vanished">Nom invalide</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="735"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="429"/>
         <source>Vertical axis</source>
         <translation>Axe vertical</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="736"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="430"/>
         <source>Horizontal axis</source>
         <translation>Axe horizontal</translation>
     </message>
@@ -3740,9 +3744,8 @@
         <translation>Nom :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="172"/>
         <source>Rotation</source>
-        <translation>Rotation</translation>
+        <translation type="vanished">Rotation</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="251"/>
@@ -3781,7 +3784,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="802"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="440"/>
         <source>Ready</source>
         <translation>Prêt</translation>
     </message>
@@ -3791,24 +3794,21 @@
         <translation>Notes</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="352"/>
         <source>Invalid group name</source>
-        <translation>Nom de groupe non valide</translation>
+        <translation type="vanished">Nom de groupe non valide</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="414"/>
         <source>Default</source>
-        <translation>Par défaut</translation>
+        <translation type="vanished">Par défaut</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="718"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="412"/>
         <source>Invalid point</source>
         <translation>Point invalide</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="504"/>
         <source>Invalid label</source>
-        <translation>Libellé non valide</translation>
+        <translation type="vanished">Libellé non valide</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="219"/>
@@ -3837,22 +3837,22 @@
         <translation>Second point de la ligne :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="235"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="288"/>
         <source>Select first line point</source>
         <translation>Sélectionner le premier point de la ligne</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="320"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="336"/>
         <source>Select first line point that is not part of the list of objects</source>
         <translation>Le premier point de la ligne ne doit pas être inclus dans la liste des objets pré-sélectionnés</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="324"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="340"/>
         <source>Select second line point</source>
         <translation>Sélectionner le deuxième point de la ligne</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="336"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="352"/>
         <source>Select second line point that is not part of the list of objects</source>
         <translation>Le second point de la ligne ne doit pas être inclus dans la liste des objets pré-sélectionnés</translation>
     </message>
@@ -3874,9 +3874,8 @@
         <translation>Nom :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="166"/>
         <source>Rotation</source>
-        <translation>Rotation</translation>
+        <translation type="vanished">Rotation</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="251"/>
@@ -3915,7 +3914,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="831"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="468"/>
         <source>Ready</source>
         <translation>Prêt</translation>
     </message>
@@ -3925,39 +3924,35 @@
         <translation>Notes</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="368"/>
         <source>Invalid group name</source>
-        <translation>Nom de groupe non valide</translation>
+        <translation type="vanished">Nom de groupe non valide</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="431"/>
         <source>Default</source>
-        <translation>Par défaut</translation>
+        <translation type="vanished">Par défaut</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="521"/>
         <source>Invalid name</source>
-        <translation>Nom invalide</translation>
+        <translation type="vanished">Nom invalide</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="748"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="441"/>
         <source>Invalid line points</source>
         <translation>Points de la ligne non valides</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="755"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="448"/>
         <source>Invalid first line point</source>
         <translation>Premier point de la ligne non valide</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="762"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="455"/>
         <source>Invalid second line point</source>
         <translation>Second point de la ligne non valide</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="521"/>
         <source>Invalid label</source>
-        <translation>Libellé non valide</translation>
+        <translation type="vanished">Libellé non valide</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="219"/>
@@ -5612,7 +5607,7 @@ Appliquer quand même les réglages ?</translation>
         <translation type="vanished">Visualiser la ligne depuis son premier point jusqu&apos;à ce point</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.cpp" line="190"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.cpp" line="195"/>
         <source>Select second point</source>
         <translation>Sélectionner le second point</translation>
     </message>
@@ -5626,24 +5621,29 @@ Appliquer quand même les réglages ?</translation>
         <translation type="vanished">Couleur du tracé</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="52"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="158"/>
         <source>First point:</source>
         <translation>Premier point :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="81"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="88"/>
         <source>Second point:</source>
         <translation>Deuxième point :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="110"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="52"/>
         <source>Type of line:</source>
         <translation>Style de tracé :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="145"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="59"/>
         <source>Line color:</source>
         <translation>Couleur du tracé :</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="185"/>
+        <source>Swap points</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="37"/>
@@ -5651,7 +5651,7 @@ Appliquer quand même les réglages ?</translation>
         <translation>Outil</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="160"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="217"/>
         <source>Notes</source>
         <translation>Notes</translation>
     </message>
@@ -6186,12 +6186,12 @@ Appliquer quand même les réglages ?</translation>
         <translation type="vanished">Suffixe :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="476"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="521"/>
         <source>Edit angle</source>
         <translation>Modifier l&apos;angle</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="504"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="549"/>
         <source>Edit length</source>
         <translation>Modifier la longueur</translation>
     </message>
@@ -6214,7 +6214,7 @@ Appliquer quand même les réglages ?</translation>
         <translation>Angle de rotation :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="490"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="535"/>
         <source>Edit rotation angle</source>
         <translation>Modifier l&apos;angle de rotation</translation>
     </message>
@@ -6224,7 +6224,7 @@ Appliquer quand même les réglages ?</translation>
         <translation>Point d&apos;origine de la rotation:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="119"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="123"/>
         <source>Center point</source>
         <translation>Point central</translation>
     </message>
@@ -6240,9 +6240,8 @@ Appliquer quand même les réglages ?</translation>
         <translation>Nom :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="282"/>
         <source>Rotation</source>
-        <translation>Rotation</translation>
+        <translation type="vanished">Rotation</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="797"/>
@@ -6291,7 +6290,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="820"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="1052"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="687"/>
         <source>Ready</source>
         <translation>Prêt</translation>
     </message>
@@ -6301,39 +6300,35 @@ Appliquer quand même les réglages ?</translation>
         <translation>Notes</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="524"/>
         <source>Invalid group name</source>
-        <translation>Nom de groupe non valide</translation>
+        <translation type="vanished">Nom de groupe non valide</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="587"/>
         <source>Default</source>
-        <translation>Par défaut</translation>
+        <translation type="vanished">Par défaut</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="677"/>
         <source>Invalid name</source>
-        <translation>Nom invalide</translation>
+        <translation type="vanished">Nom invalide</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="937"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="628"/>
         <source>Invalid angle formula</source>
         <translation>La formule de l&apos;angle est non valide</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="953"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="644"/>
         <source>Invalid rotation angle formula</source>
         <translation>Formule d’angle de rotation non valide</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="969"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="660"/>
         <source>Invalid length formula</source>
         <translation>La formule de la longueur est non valide</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="677"/>
         <source>Invalid label</source>
-        <translation>Libellé non valide</translation>
+        <translation type="vanished">Libellé non valide</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="765"/>
@@ -6518,7 +6513,7 @@ Appliquer quand même les réglages ?</translation>
         <translation type="vanished">Visualiser la ligne depuis son premier point jusqu&apos;à ce point</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.cpp" line="218"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.cpp" line="223"/>
         <source>Select second point of line</source>
         <translation>Sélectionner le deuxième point de la ligne</translation>
     </message>
@@ -6540,7 +6535,7 @@ Appliquer quand même les réglages ?</translation>
         <translation type="vanished">Couleur du tracé</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.cpp" line="151"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.cpp" line="156"/>
         <source>Edit length</source>
         <translation>Modifier la longueur</translation>
     </message>
@@ -6585,22 +6580,27 @@ Appliquer quand même les réglages ?</translation>
         <translation>Premier point :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="280"/>
+        <source>Swap points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="317"/>
         <source>Second point:</source>
         <translation>Deuxième point :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="292"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="343"/>
         <source>Additional angle degrees:</source>
         <translation>Angle supplémentaire en degrés :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="486"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="537"/>
         <source>Type of line:</source>
         <translation>Style de tracé :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="515"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="566"/>
         <source>Line color:</source>
         <translation>Couleur du tracé :</translation>
     </message>
@@ -6610,9 +6610,37 @@ Appliquer quand même les réglages ?</translation>
         <translation>Outil</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="545"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="596"/>
         <source>Notes</source>
         <translation>Notes</translation>
+    </message>
+</context>
+<context>
+    <name>DialogOperationTool</name>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="69"/>
+        <source>Rotation</source>
+        <translation type="unfinished">Rotation</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="159"/>
+        <source>Invalid group name</source>
+        <translation type="unfinished">Nom de groupe non valide</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="221"/>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="311"/>
+        <source>Invalid label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="311"/>
+        <source>Invalid name</source>
+        <translation type="unfinished">Nom invalide</translation>
     </message>
 </context>
 <context>
@@ -8214,7 +8242,7 @@ Appliquer quand même les réglages ?</translation>
         <translation type="vanished">Y : point à l&apos;horizontale</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.cpp" line="131"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.cpp" line="136"/>
         <source>Select point for Y value (horizontal)</source>
         <translation>Sélectionner le point de l&apos;axe X (vertical)</translation>
     </message>
@@ -8234,12 +8262,17 @@ Appliquer quand même les réglages ?</translation>
         <translation>Saisissez un nom pas encore utilisé.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="78"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="72"/>
         <source>X: vertical point:</source>
         <translation>X : point à la verticale :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="94"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="102"/>
+        <source>Swap points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="139"/>
         <source>Y: horizontal point:</source>
         <translation>Y : point à l&apos;horizontale :</translation>
     </message>
@@ -8249,7 +8282,7 @@ Appliquer quand même les réglages ?</translation>
         <translation>Outil</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="105"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="150"/>
         <source>Notes</source>
         <translation>Notes</translation>
     </message>
@@ -8732,7 +8765,6 @@ Appliquer quand même les réglages ?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="410"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="197"/>
         <source>Rotation</source>
         <translation>Rotation</translation>
     </message>
@@ -8770,12 +8802,12 @@ Appliquer quand même les réglages ?</translation>
         <translation type="vanished">Suffixe :</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="423"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="437"/>
         <source>Edit angle</source>
         <translation>Modifier l&apos;angle</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="317"/>
         <source>Select origin point</source>
         <translation>Sélectionner le point d&apos;origine</translation>
     </message>
@@ -8789,7 +8821,7 @@ Appliquer quand même les réglages ?</translation>
         <translation>Formule</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="394"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="408"/>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Ce point ne peut pas être le point de départ. Sélectionnez-en un autre</translation>
     </message>
@@ -8841,7 +8873,7 @@ Appliquer quand même les réglages ?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="443"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="937"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="573"/>
         <source>Ready</source>
         <translation>Prêt</translation>
     </message>
@@ -8851,34 +8883,30 @@ Appliquer quand même les réglages ?</translation>
         <translation>Notes</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="443"/>
         <source>Invalid group name</source>
-        <translation>Nom de groupe non valide</translation>
+        <translation type="vanished">Nom de groupe non valide</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="529"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="530"/>
         <source>Invalid rotation point</source>
         <translation>Point de rotation non valide</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="750"/>
         <source>Invalid label</source>
-        <translation>Libellé invalide</translation>
+        <translation type="vanished">Libellé invalide</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="750"/>
         <source>Invalid name</source>
-        <translation>Nom invalide</translation>
+        <translation type="vanished">Nom invalide</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="605"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="562"/>
         <source>Invalid angle formula</source>
         <translation>La formule de l&apos;angle est non valide</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="660"/>
         <source>Default</source>
-        <translation>Par défaut</translation>
+        <translation type="vanished">Par défaut</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="388"/>
@@ -11144,37 +11172,37 @@ Appliquer quand même les réglages ?</translation>
         <translation>Outil Fusion de pièces</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="96"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="105"/>
         <source>Select unique detail</source>
         <translation>Ne sélectionner une pièce qu&apos;une seule fois</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="147"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="174"/>
         <source>Select a first point</source>
         <translation>Sélectionner un premier point</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="151"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="178"/>
         <source>Workpiece should have at least two points and three objects</source>
         <translation>La pièce extraite doit inclure au moins deux points et trois objets</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="166"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="193"/>
         <source>Select a second point</source>
         <translation>Sélectionner un deuxième point</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="174"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="201"/>
         <source>Select a unique point</source>
         <translation>Sélectionner un point unique</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="196"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="223"/>
         <source>Select a detail</source>
         <translation>Sélectionner une pièce</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="201"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="228"/>
         <source>Select a point on edge</source>
         <translation>Sélectionner un point de la couture</translation>
     </message>
@@ -15435,16 +15463,12 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Le chemin vers le fichier de mesures est déjà absolu.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/main.cpp" line="80"/>
-        <location filename="../../src/app/tape/main.cpp" line="80"/>
-        <location filename="../../src/app/valentina/main.cpp" line="84"/>
+        <location filename="../../src/libs/vmisc/vmainbase.h" line="54"/>
         <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
         <translation>Le fichier exécutable &apos;%1&apos; requiert Qt %2, alors que vous avez Qt %3.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/main.cpp" line="85"/>
-        <location filename="../../src/app/tape/main.cpp" line="85"/>
-        <location filename="../../src/app/valentina/main.cpp" line="89"/>
+        <location filename="../../src/libs/vmisc/vmainbase.h" line="59"/>
         <source>Incompatible Qt Library Error</source>
         <translation>Erreur : bibliothèque Qt incompatible</translation>
     </message>
@@ -15693,7 +15717,7 @@ This option will take an affect after restart.</source>
         <translation>Id mal paramétré. Seul les id &gt; 0 sont autorisés.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1813"/>
+        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1808"/>
         <source>United detail</source>
         <translation>Pièces de patron fusionnées</translation>
     </message>
@@ -16530,7 +16554,7 @@ This option will take an affect after restart.</source>
 <context>
     <name>SavePiecePathOptions</name>
     <message>
-        <location filename="../../src/libs/vtools/undocommands/savepiecepathoptions.cpp" line="57"/>
+        <location filename="../../src/libs/vtools/undocommands/savepiecepathoptions.cpp" line="54"/>
         <source>save path options</source>
         <translation>Sauvegarder les réglages du contour</translation>
     </message>
@@ -16538,7 +16562,7 @@ This option will take an affect after restart.</source>
 <context>
     <name>SavePlaceLabelOptions</name>
     <message>
-        <location filename="../../src/libs/vtools/undocommands/saveplacelabeloptions.cpp" line="48"/>
+        <location filename="../../src/libs/vtools/undocommands/saveplacelabeloptions.cpp" line="46"/>
         <source>save place label options</source>
         <translation>Enregistrer les réglages de placement d&apos;étiquette</translation>
     </message>
@@ -22067,7 +22091,7 @@ Voulez-vous enregistrer vos changements ?</translation>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="997"/>
         <source>Union details</source>
         <comment>operation</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pièce fusionnée</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1013"/>
@@ -22218,12 +22242,12 @@ Voulez-vous enregistrer vos changements ?</translation>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1097"/>
         <source>Union details operation creating piece &apos;%1&apos;. Source objects cannot be deleted while this operation exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Pièce &apos;%1&apos; créée par fusion de pièces. Les objets inclus dans cette opération ne peuvent pas être supprimés tant que cette fusion existe</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1107"/>
         <source>Union details operation. Source objects cannot be deleted while this operation exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Opération de fusion de pièces. Les objets inclus dans cette opération ne peuvent pas être supprimés tant que cette fusion existe</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1121"/>
@@ -23136,105 +23160,105 @@ Voulez-vous enregistrer vos changements ?</translation>
 <context>
     <name>VPE::QtColorPicker</name>
     <message>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="310"/>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="500"/>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="652"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="314"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="504"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="656"/>
         <source>Black</source>
         <translation>Noir</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="501"/>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="653"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="505"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="657"/>
         <source>White</source>
         <translation>Blanc</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="502"/>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="654"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="506"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="658"/>
         <source>Red</source>
         <translation>Rouge</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="503"/>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="655"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="507"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="659"/>
         <source>Dark red</source>
         <translation>Rouge foncé</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="504"/>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="656"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="508"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="660"/>
         <source>Green</source>
         <translation>Vert</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="505"/>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="657"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="509"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="661"/>
         <source>Dark green</source>
         <translation>Vert foncé</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="506"/>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="658"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="510"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="662"/>
         <source>Blue</source>
         <translation>Bleu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="507"/>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="659"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="511"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="663"/>
         <source>Dark blue</source>
         <translation>Bleu foncé</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="508"/>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="660"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="512"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="664"/>
         <source>Cyan</source>
         <translation>Cyan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="509"/>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="661"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="513"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="665"/>
         <source>Dark cyan</source>
         <translation>Cyan foncé</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="510"/>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="662"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="514"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="666"/>
         <source>Magenta</source>
         <translation>Magenta</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="511"/>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="663"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="515"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="667"/>
         <source>Dark magenta</source>
         <translation>Magenta foncé</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="512"/>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="664"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="516"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="668"/>
         <source>Yellow</source>
         <translation>Jaune</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="513"/>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="665"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="517"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="669"/>
         <source>Dark yellow</source>
         <translation>Jaune foncé</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="514"/>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="666"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="518"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="670"/>
         <source>Gray</source>
         <translation>Gris</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="515"/>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="667"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="519"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="671"/>
         <source>Dark gray</source>
         <translation>Gris foncé</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="516"/>
-        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="668"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="520"/>
+        <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="672"/>
         <source>Light gray</source>
         <translation>Gris clair</translation>
     </message>
@@ -25737,7 +25761,7 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
 <context>
     <name>VToolOptionsPropertyBrowser</name>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3043"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3050"/>
         <source>Base point</source>
         <translation>Point de départ</translation>
     </message>
@@ -25750,7 +25774,7 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
         <translation type="vanished">Position</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3059"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3066"/>
         <source>Point at distance and angle</source>
         <translation>Point à distance et angle</translation>
     </message>
@@ -25767,12 +25791,12 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
         <translation type="vanished">Angle</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3078"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3085"/>
         <source>Point at distance along line</source>
         <translation>Point à distance dans l&apos;axe d&apos;un segment</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3097"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3104"/>
         <source>Arc</source>
         <translation>Arc</translation>
     </message>
@@ -25789,42 +25813,42 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
         <translation type="vanished">Deuxième angle</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3143"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3150"/>
         <source>Point along bisector</source>
         <translation>Point sur bissectrice</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3180"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3187"/>
         <source>Cut arc tool</source>
         <translation>Outil segmentation d&apos;un arc</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3197"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3204"/>
         <source>Tool for segmenting a curve</source>
         <translation>Outil de segmentation d&apos;une courbe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3214"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3221"/>
         <source>Tool segment a pathed curve</source>
         <translation>Outil de segmentation d&apos;une courbe complexe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3231"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3238"/>
         <source>Perpendicular point along line</source>
         <translation>Point perpendiculaire sur axe d&apos;un segment</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3250"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3257"/>
         <source>Line between points</source>
         <translation>Ligne entre 2 points</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3269"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3276"/>
         <source>Point at line intersection</source>
         <translation>Point à l&apos;intersection de 2 lignes</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3284"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3291"/>
         <source>Point along perpendicular</source>
         <translation>Point sur perpendiculaire</translation>
     </message>
@@ -25837,17 +25861,17 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
         <translation type="vanished">Point d&apos;intersection d&apos;un arc et d&apos;un axe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3326"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3333"/>
         <source>Tool to make point from x &amp; y of two other points</source>
         <translation>Créer un point à partir des coordonnées X et Y de deux autres points</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3429"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3436"/>
         <source>Special point on shoulder</source>
         <translation>Point épaule</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3449"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3456"/>
         <source>Curve tool</source>
         <translation>Outil Courbe</translation>
     </message>
@@ -25856,17 +25880,17 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
         <translation type="vanished">Facteur de courbe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3518"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3525"/>
         <source>Tool for path curve</source>
         <translation>Outil de création de courbe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3556"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3563"/>
         <source>Tool triangle</source>
         <translation>Outil Triangle</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3571"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3578"/>
         <source>Point intersection line and axis</source>
         <translation>Point à l&apos;intersection d&apos;une ligne et d&apos;un axe</translation>
     </message>
@@ -25879,27 +25903,27 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
         <translation type="vanished">Couleur</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3591"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3598"/>
         <source>Point intersection curve and axis</source>
         <translation>Point d&apos;intersection d&apos;une courbe et d&apos;un axe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="842"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="849"/>
         <source>First point</source>
         <translation>Premier point</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="842"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="849"/>
         <source>Second point</source>
         <translation>Deuxième point</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3120"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3127"/>
         <source>Arc with given length</source>
         <translation>Arc de longueur donnée</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3163"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3170"/>
         <source>True darts</source>
         <translation>Pince automatique</translation>
     </message>
@@ -25912,7 +25936,7 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
         <translation type="vanished">Nom du point 2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3339"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3346"/>
         <source>Tool to make point from intersection two arcs</source>
         <translation>Outil de création d&apos;un point à l&apos;intersection de deux arcs</translation>
     </message>
@@ -25921,7 +25945,7 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
         <translation type="vanished">Prendre</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3361"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3368"/>
         <source>Tool to make point from intersection two circles</source>
         <translation>Outil de création d&apos;un point à l&apos;intersection de deux cercles</translation>
     </message>
@@ -25934,7 +25958,7 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
         <translation type="vanished">Rayon du second cercle</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3400"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3407"/>
         <source>Tool to make point from circle and tangent</source>
         <translation>Outil de création d&apos;un point à l&apos;intersection d&apos;un cercle et d&apos;une tangente</translation>
     </message>
@@ -25943,32 +25967,32 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
         <translation type="vanished">Rayon du cercle</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3415"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3422"/>
         <source>Tool to make point from arc and tangent</source>
         <translation>Outil de création d&apos;un point à l&apos;intersection d&apos;un arc et d&apos;une tangente</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="852"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="859"/>
         <source>Highest point</source>
         <translation>Point le plus haut</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="852"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="859"/>
         <source>Lowest point</source>
         <translation>Point le plus bas</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="862"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="869"/>
         <source>Leftmost point</source>
         <translation>Point le plus à gauche</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="862"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="869"/>
         <source>Rightmost point</source>
         <translation>Point le plus à droite</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3377"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3384"/>
         <source>Tool to make point from intersection two curves</source>
         <translation>Outil pour créer un point d&apos;intersection entre deux courbes</translation>
     </message>
@@ -26001,17 +26025,17 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
         <translation type="vanished">C2 : distance</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3495"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3502"/>
         <source>Cubic bezier curve</source>
         <translation>Courbe de Bézier cubique</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3537"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3544"/>
         <source>Tool cubic bezier curve</source>
         <translation>Outil courbe de Bézier cubique</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3614"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3621"/>
         <source>Tool rotation</source>
         <translation>Outil Rotation</translation>
     </message>
@@ -26020,27 +26044,27 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
         <translation type="vanished">Suffixe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="872"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="879"/>
         <source>Vertical axis</source>
         <translation>Axe vertical</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="872"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="879"/>
         <source>Horizontal axis</source>
         <translation>Axe horizontal</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3626"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3633"/>
         <source>Tool move</source>
         <translation>Outil Déplacer</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3640"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3647"/>
         <source>Tool flipping by line</source>
         <translation>Outil de reproduction en miroir par rapport à une ligne</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3652"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3659"/>
         <source>Tool flipping by axis</source>
         <translation>Outil de reproduction en miroir par rapport à un axe</translation>
     </message>
@@ -26049,695 +26073,695 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
         <translation type="vanished">Type d&apos;axe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3664"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3671"/>
         <source>Elliptical arc</source>
         <translation>Arc elliptique</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3045"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3063"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3082"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3147"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3182"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3199"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3216"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3235"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3271"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3289"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3313"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3328"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3341"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3363"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3379"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3402"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3417"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3433"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3558"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3575"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3595"/>
-        <source>Point label:</source>
-        <translation>Nom du point :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3047"/>
-        <source>Position:</source>
-        <translation>Position :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3064"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3236"/>
-        <source>Base point:</source>
-        <translation>Point de base :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3065"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3085"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3151"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3239"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3259"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3292"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3437"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3579"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3602"/>
-        <source>Line type:</source>
-        <translation>Type de tracé :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3067"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3087"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3153"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3241"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3260"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3294"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3439"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3581"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3604"/>
-        <source>Line color:</source>
-        <translation>Couleur du tracé :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3068"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3088"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3128"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3154"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3188"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3205"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3222"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3288"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3440"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3629"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3723"/>
-        <source>Length:</source>
-        <translation>Longueur :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3069"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3582"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3605"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3617"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3628"/>
-        <source>Angle:</source>
-        <translation>Angle :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3083"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3148"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3254"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3290"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3434"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3500"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3561"/>
-        <source>First point:</source>
-        <translation>Premier point :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3084"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3149"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3255"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3291"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3435"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3501"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3562"/>
-        <source>Second point:</source>
-        <translation>Deuxième point :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3102"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3125"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3669"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3719"/>
-        <source>Center point:</source>
-        <translation>Point central :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3103"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3126"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3317"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3670"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3671"/>
-        <source>Radius:</source>
-        <translation>Rayon :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3104"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3127"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3672"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3722"/>
-        <source>First angle:</source>
-        <translation>Premier angle :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3105"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3673"/>
-        <source>Second angle:</source>
-        <translation>Second angle :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3110"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3133"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3485"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3508"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3527"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3546"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3680"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3730"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3753"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3775"/>
-        <source>Color:</source>
-        <translation>Couleur :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3150"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3436"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3502"/>
-        <source>Third point:</source>
-        <translation>Troisième point :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3165"/>
-        <source>Point 1 label:</source>
-        <translation>Nom du point 1 :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3166"/>
-        <source>Point 2 label:</source>
-        <translation>Nom du point 2 :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3167"/>
-        <source>First base point:</source>
-        <translation>Premier point de base :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3168"/>
-        <source>Second base point:</source>
-        <translation>Second point de base :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3169"/>
-        <source>First dart point:</source>
-        <translation>Premier point de la pince :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3170"/>
-        <source>Second dart point:</source>
-        <translation>Deuxième point de la pince :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3171"/>
-        <source>Third dart point:</source>
-        <translation>Troisième point de la pince :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3183"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3419"/>
-        <source>Arc:</source>
-        <translation>Arc :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3184"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3201"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3218"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3598"/>
-        <source>Name1:</source>
-        <translation>Nom1 :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3185"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3202"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3219"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3599"/>
-        <source>Name2:</source>
-        <translation>Nom2 :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3200"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3217"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3597"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3745"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3768"/>
-        <source>Curve:</source>
-        <translation>Courbe :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3237"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3577"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3642"/>
-        <source>First line point:</source>
-        <translation>Premier point de la ligne :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3238"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3578"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3643"/>
-        <source>Second line point:</source>
-        <translation>Second point de la ligne :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3272"/>
-        <source>First line (first point):</source>
-        <translation>Première ligne (premier point) :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3273"/>
-        <source>First line (second point):</source>
-        <translation>Première ligne (second point) :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3274"/>
-        <source>Second line (first point):</source>
-        <translation>Deuxième ligne (premier point) :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3275"/>
-        <source>Second line (second point):</source>
-        <translation>Deuxième ligne (second point) :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3296"/>
-        <source>Additional angle degrees:</source>
-        <translation>Angle supplémentaire en degrés :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3314"/>
-        <source>Center of arc:</source>
-        <translation>Centre de l&apos;arc :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3315"/>
-        <source>Top of the line:</source>
-        <translation>Début de la ligne :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3316"/>
-        <source>End of the line:</source>
-        <translation>Fin de la ligne :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3329"/>
-        <source>X: vertical point:</source>
-        <translation>X : Point vertical :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3330"/>
-        <source>Y: horizontal point:</source>
-        <translation>Y : Point horizontal :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3342"/>
-        <source>First arc:</source>
-        <translation>Premier arc :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3343"/>
-        <source>Second arc:</source>
-        <translation>Second arc :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3344"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3368"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3406"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3420"/>
-        <source>Take:</source>
-        <translation>Prendre :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3345"/>
-        <source>First arc. Left sub arc name:</source>
-        <translation>Premier arc. Nom de la section de gauche :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3346"/>
-        <source>First arc. Right sub arc name:</source>
-        <translation>Premier arc. Nom de la section de droite :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3347"/>
-        <source>First arc. Left sub arc alias:</source>
-        <translation>Premier arc. Alias de la section de gauche :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3348"/>
-        <source>First arc. Right sub arc alias:</source>
-        <translation>Premier arc. Alias de la section de droite :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3349"/>
-        <source>Second arc. Left sub arc name:</source>
-        <translation>Second arc. Nom de la section de gauche :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3350"/>
-        <source>Second arc. Right sub arc name:</source>
-        <translation>Second arc. Nom de la section de droite :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3351"/>
-        <source>Second arc. Left sub arc alias:</source>
-        <translation>Second arc. Alias de la section de gauche :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3352"/>
-        <source>Second arc. Right sub arc alias:</source>
-        <translation>Second arc. Alias de la section de droite :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3364"/>
-        <source>Center of the first circle:</source>
-        <translation>Centre du premier cercle :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3365"/>
-        <source>Center of the second circle:</source>
-        <translation>Centre du second cercle :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3366"/>
-        <source>First circle radius:</source>
-        <translation>Rayon du premier cercle :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3367"/>
-        <source>Second circle radius:</source>
-        <translation>Rayon du second cercle :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3380"/>
-        <source>First curve:</source>
-        <translation>Première courbe :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3381"/>
-        <source>Second curve:</source>
-        <translation>Deuxième courbe :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3382"/>
-        <source>Vertical correction:</source>
-        <translation>Correction verticale :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3383"/>
-        <source>Horizontal correction:</source>
-        <translation>Correction horizontale :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3384"/>
-        <source>First curve. Left sub curve name:</source>
-        <translation>Première courbe. Nom de la section de gauche :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3385"/>
-        <source>First curve. Right sub curve name:</source>
-        <translation>Première courbe. Nom de la section de droite :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3386"/>
-        <source>First curve. Left sub curve alias:</source>
-        <translation>Première courbe. Alias de la section de gauche :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3387"/>
-        <source>First curve. Right sub curve alias:</source>
-        <translation>Première courbe. Alias de la section de droite :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3388"/>
-        <source>Second curve. Left sub curve name:</source>
-        <translation>Deuxième courbe. Nom de la section de gauche :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3389"/>
-        <source>Second curve. Right sub curve name:</source>
-        <translation>Deuxième courbe. Nom de la section de droite :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3390"/>
-        <source>Second curve. Left sub curve alias:</source>
-        <translation>Deuxième courbe. Alias de la section de gauche :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3391"/>
-        <source>Second curve. Right sub curve alias:</source>
-        <translation>Deuxième courbe. Alias de la section de droite :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3403"/>
-        <source>Center of the circle:</source>
-        <translation>Centre du cercle :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3404"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3418"/>
-        <source>Tangent point:</source>
-        <translation>Origine tangente :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3405"/>
-        <source>Circle radius:</source>
-        <translation>Rayon du cercle :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3714"/>
-        <source>Elliptical arc with given length</source>
-        <translation>Arc elliptique de longueur donnée</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3720"/>
-        <source>Radius1:</source>
-        <translation>Rayon 1:</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3721"/>
-        <source>Radius2:</source>
-        <translation>Rayon2:</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3740"/>
-        <source>Parallel curve</source>
-        <translation>Courbe parallèle</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3744"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3767"/>
-        <source>Full name:</source>
-        <translation>Nom complet:</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3746"/>
-        <source>Width:</source>
-        <translation>Distance :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3763"/>
-        <source>Graduated curve</source>
-        <translation>Gradation de courbe</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3101"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3124"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3453"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3499"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3522"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3541"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3668"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3691"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3703"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3718"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3747"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3769"/>
-        <source>Name:</source>
-        <translation>Nom :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3459"/>
-        <source>C1: angle:</source>
-        <translation>C1 : angle :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3465"/>
-        <source>C1: length:</source>
-        <translation>C1 : distance :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3471"/>
-        <source>C2: angle:</source>
-        <translation>C2 : angle :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3477"/>
-        <source>C2: length:</source>
-        <translation>C2 : distance :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3559"/>
-        <source>First point of axis:</source>
-        <translation>Premier point de l&apos;axe :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3560"/>
-        <source>Second point of axis:</source>
-        <translation>Deuxième point de l&apos;axe :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3576"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3596"/>
-        <source>Axis point:</source>
-        <translation>Origine de l&apos;axe :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3616"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3655"/>
-        <source>Origin point:</source>
-        <translation>Point d&apos;origine :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3654"/>
-        <source>Axis type:</source>
-        <translation>Type d&apos;axe :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3630"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3674"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3724"/>
-        <source>Rotation angle:</source>
-        <translation>Angle de rotation :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3503"/>
-        <source>Fourth point:</source>
-        <translation>Quatrième point :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3108"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3131"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3483"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3506"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3525"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3544"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3677"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3727"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3750"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3772"/>
-        <source>Pen style:</source>
-        <translation>Style de tracé :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3111"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3134"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3486"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3509"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3528"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3547"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3681"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3731"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3754"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3776"/>
-        <source>Approximation scale:</source>
-        <translation>Approximation d&apos;échelle :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3631"/>
-        <source>Rotation origin point:</source>
-        <translation>Point d&apos;origine de la rotation :</translation>
-    </message>
-    <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3051"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3052"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3070"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3089"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3112"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3135"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3155"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3172"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3154"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3189"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3206"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3223"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3242"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3278"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3296"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3320"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3335"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3348"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3370"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3386"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3409"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3424"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3440"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3565"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3582"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3602"/>
+        <source>Point label:</source>
+        <translation>Nom du point :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3054"/>
+        <source>Position:</source>
+        <translation>Position :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3071"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3243"/>
+        <source>Base point:</source>
+        <translation>Point de base :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3072"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3092"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3158"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3246"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3266"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3299"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3444"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3586"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3609"/>
+        <source>Line type:</source>
+        <translation>Type de tracé :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3074"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3094"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3160"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3248"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3267"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3301"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3446"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3588"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3611"/>
+        <source>Line color:</source>
+        <translation>Couleur du tracé :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3075"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3095"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3135"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3161"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3195"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3212"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3229"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3295"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3447"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3636"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3730"/>
+        <source>Length:</source>
+        <translation>Longueur :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3076"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3589"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3612"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3624"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3635"/>
+        <source>Angle:</source>
+        <translation>Angle :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3090"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3155"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3261"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3276"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3303"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3318"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3331"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3353"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3369"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3392"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3407"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3421"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3297"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3441"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3487"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3510"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3507"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3568"/>
+        <source>First point:</source>
+        <translation>Premier point :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3091"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3156"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3262"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3298"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3442"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3508"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3569"/>
+        <source>Second point:</source>
+        <translation>Deuxième point :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3109"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3132"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3676"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3726"/>
+        <source>Center point:</source>
+        <translation>Point central :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3110"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3133"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3324"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3677"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3678"/>
+        <source>Radius:</source>
+        <translation>Rayon :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3111"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3134"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3679"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3729"/>
+        <source>First angle:</source>
+        <translation>Premier angle :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3112"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3680"/>
+        <source>Second angle:</source>
+        <translation>Second angle :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3117"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3140"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3492"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3515"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3534"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3553"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3687"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3737"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3760"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3782"/>
+        <source>Color:</source>
+        <translation>Couleur :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3157"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3443"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3509"/>
+        <source>Third point:</source>
+        <translation>Troisième point :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3172"/>
+        <source>Point 1 label:</source>
+        <translation>Nom du point 1 :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3173"/>
+        <source>Point 2 label:</source>
+        <translation>Nom du point 2 :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3174"/>
+        <source>First base point:</source>
+        <translation>Premier point de base :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3175"/>
+        <source>Second base point:</source>
+        <translation>Second point de base :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3176"/>
+        <source>First dart point:</source>
+        <translation>Premier point de la pince :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3177"/>
+        <source>Second dart point:</source>
+        <translation>Deuxième point de la pince :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3178"/>
+        <source>Third dart point:</source>
+        <translation>Troisième point de la pince :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3190"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3426"/>
+        <source>Arc:</source>
+        <translation>Arc :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3191"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3208"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3225"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3605"/>
+        <source>Name1:</source>
+        <translation>Nom1 :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3192"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3209"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3226"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3606"/>
+        <source>Name2:</source>
+        <translation>Nom2 :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3207"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3224"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3604"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3752"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3775"/>
+        <source>Curve:</source>
+        <translation>Courbe :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3244"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3584"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3649"/>
+        <source>First line point:</source>
+        <translation>Premier point de la ligne :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3245"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3585"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3650"/>
+        <source>Second line point:</source>
+        <translation>Second point de la ligne :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3279"/>
+        <source>First line (first point):</source>
+        <translation>Première ligne (premier point) :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3280"/>
+        <source>First line (second point):</source>
+        <translation>Première ligne (second point) :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3281"/>
+        <source>Second line (first point):</source>
+        <translation>Deuxième ligne (premier point) :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3282"/>
+        <source>Second line (second point):</source>
+        <translation>Deuxième ligne (second point) :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3303"/>
+        <source>Additional angle degrees:</source>
+        <translation>Angle supplémentaire en degrés :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3321"/>
+        <source>Center of arc:</source>
+        <translation>Centre de l&apos;arc :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3322"/>
+        <source>Top of the line:</source>
+        <translation>Début de la ligne :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3323"/>
+        <source>End of the line:</source>
+        <translation>Fin de la ligne :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3336"/>
+        <source>X: vertical point:</source>
+        <translation>X : Point vertical :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3337"/>
+        <source>Y: horizontal point:</source>
+        <translation>Y : Point horizontal :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3349"/>
+        <source>First arc:</source>
+        <translation>Premier arc :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3350"/>
+        <source>Second arc:</source>
+        <translation>Second arc :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3351"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3375"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3413"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3427"/>
+        <source>Take:</source>
+        <translation>Prendre :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3352"/>
+        <source>First arc. Left sub arc name:</source>
+        <translation>Premier arc. Nom de la section de gauche :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3353"/>
+        <source>First arc. Right sub arc name:</source>
+        <translation>Premier arc. Nom de la section de droite :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3354"/>
+        <source>First arc. Left sub arc alias:</source>
+        <translation>Premier arc. Alias de la section de gauche :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3355"/>
+        <source>First arc. Right sub arc alias:</source>
+        <translation>Premier arc. Alias de la section de droite :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3356"/>
+        <source>Second arc. Left sub arc name:</source>
+        <translation>Second arc. Nom de la section de gauche :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3357"/>
+        <source>Second arc. Right sub arc name:</source>
+        <translation>Second arc. Nom de la section de droite :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3358"/>
+        <source>Second arc. Left sub arc alias:</source>
+        <translation>Second arc. Alias de la section de gauche :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3359"/>
+        <source>Second arc. Right sub arc alias:</source>
+        <translation>Second arc. Alias de la section de droite :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3371"/>
+        <source>Center of the first circle:</source>
+        <translation>Centre du premier cercle :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3372"/>
+        <source>Center of the second circle:</source>
+        <translation>Centre du second cercle :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3373"/>
+        <source>First circle radius:</source>
+        <translation>Rayon du premier cercle :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3374"/>
+        <source>Second circle radius:</source>
+        <translation>Rayon du second cercle :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3387"/>
+        <source>First curve:</source>
+        <translation>Première courbe :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3388"/>
+        <source>Second curve:</source>
+        <translation>Deuxième courbe :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3389"/>
+        <source>Vertical correction:</source>
+        <translation>Correction verticale :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3390"/>
+        <source>Horizontal correction:</source>
+        <translation>Correction horizontale :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3391"/>
+        <source>First curve. Left sub curve name:</source>
+        <translation>Première courbe. Nom de la section de gauche :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3392"/>
+        <source>First curve. Right sub curve name:</source>
+        <translation>Première courbe. Nom de la section de droite :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3393"/>
+        <source>First curve. Left sub curve alias:</source>
+        <translation>Première courbe. Alias de la section de gauche :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3394"/>
+        <source>First curve. Right sub curve alias:</source>
+        <translation>Première courbe. Alias de la section de droite :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3395"/>
+        <source>Second curve. Left sub curve name:</source>
+        <translation>Deuxième courbe. Nom de la section de gauche :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3396"/>
+        <source>Second curve. Right sub curve name:</source>
+        <translation>Deuxième courbe. Nom de la section de droite :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3397"/>
+        <source>Second curve. Left sub curve alias:</source>
+        <translation>Deuxième courbe. Alias de la section de gauche :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3398"/>
+        <source>Second curve. Right sub curve alias:</source>
+        <translation>Deuxième courbe. Alias de la section de droite :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3410"/>
+        <source>Center of the circle:</source>
+        <translation>Centre du cercle :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3411"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3425"/>
+        <source>Tangent point:</source>
+        <translation>Origine tangente :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3412"/>
+        <source>Circle radius:</source>
+        <translation>Rayon du cercle :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3721"/>
+        <source>Elliptical arc with given length</source>
+        <translation>Arc elliptique de longueur donnée</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3727"/>
+        <source>Radius1:</source>
+        <translation>Rayon 1:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3728"/>
+        <source>Radius2:</source>
+        <translation>Rayon2:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3747"/>
+        <source>Parallel curve</source>
+        <translation>Courbe parallèle</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3751"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3774"/>
+        <source>Full name:</source>
+        <translation>Nom complet:</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3753"/>
+        <source>Width:</source>
+        <translation>Distance :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3770"/>
+        <source>Graduated curve</source>
+        <translation>Gradation de courbe</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3108"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3131"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3460"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3506"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3529"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3548"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3563"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3675"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3698"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3710"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3725"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3754"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3776"/>
+        <source>Name:</source>
+        <translation>Nom :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3466"/>
+        <source>C1: angle:</source>
+        <translation>C1 : angle :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3472"/>
+        <source>C1: length:</source>
+        <translation>C1 : distance :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3478"/>
+        <source>C2: angle:</source>
+        <translation>C2 : angle :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3484"/>
+        <source>C2: length:</source>
+        <translation>C2 : distance :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3566"/>
+        <source>First point of axis:</source>
+        <translation>Premier point de l&apos;axe :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3567"/>
+        <source>Second point of axis:</source>
+        <translation>Deuxième point de l&apos;axe :</translation>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3583"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3606"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3618"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3632"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3644"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3656"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3682"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3732"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3755"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3777"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3603"/>
+        <source>Axis point:</source>
+        <translation>Origine de l&apos;axe :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3623"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3662"/>
+        <source>Origin point:</source>
+        <translation>Point d&apos;origine :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3661"/>
+        <source>Axis type:</source>
+        <translation>Type d&apos;axe :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3637"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3681"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3731"/>
+        <source>Rotation angle:</source>
+        <translation>Angle de rotation :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3510"/>
+        <source>Fourth point:</source>
+        <translation>Quatrième point :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3115"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3138"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3490"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3513"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3532"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3551"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3684"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3734"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3757"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3779"/>
+        <source>Pen style:</source>
+        <translation>Style de tracé :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3118"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3141"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3493"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3516"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3535"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3554"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3688"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3738"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3761"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3783"/>
+        <source>Approximation scale:</source>
+        <translation>Approximation d&apos;échelle :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3638"/>
+        <source>Rotation origin point:</source>
+        <translation>Point d&apos;origine de la rotation :</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3058"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3077"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3096"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3119"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3142"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3162"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3179"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3196"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3213"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3230"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3249"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3268"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3283"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3310"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3325"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3338"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3360"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3376"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3399"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3414"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3428"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3448"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3494"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3517"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3536"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3555"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3570"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3590"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3613"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3625"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3639"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3651"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3663"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3689"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3739"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3762"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3784"/>
         <source>Notes:</source>
         <translation>Notes :</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3106"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3129"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3481"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3504"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3523"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3542"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3675"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3725"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3748"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3770"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3113"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3136"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3488"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3511"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3530"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3549"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3682"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3732"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3755"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3777"/>
         <source>Alias:</source>
         <translation>Alias :</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3186"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3203"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3220"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3600"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3193"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3210"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3227"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3607"/>
         <source>Alias1:</source>
         <translation>Alias1 :</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3187"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3204"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3221"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3601"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3194"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3211"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3228"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3608"/>
         <source>Alias2:</source>
         <translation>Alias2 :</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3311"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3318"/>
         <source>Point of intersection circle and segment</source>
         <translation>Point à l&apos;intersection d&apos;un cercle et d&apos;un segment</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3689"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3701"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3696"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3708"/>
         <source>Background image</source>
         <translation>Image en arrière-plan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3692"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3704"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3699"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3711"/>
         <source>Hold:</source>
         <translation>Ancrer :</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3693"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3705"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3700"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3712"/>
         <source>Visible:</source>
         <translation>Visible :</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3694"/>
-        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3706"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3701"/>
+        <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3713"/>
         <source>Opacity:</source>
         <translation>Opacité :</translation>
     </message>
@@ -27011,7 +27035,7 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
 <context>
     <name>VToolUnionDetails</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1984"/>
+        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1979"/>
         <source>union details</source>
         <translation>Fusion de pièces de patron</translation>
     </message>
@@ -27020,7 +27044,7 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
         <translation type="vanished">Pièces de patron fusionnées</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="2080"/>
+        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="2075"/>
         <source>This id (%1) is not unique.</source>
         <translation>Cet identifiant (%1) n&apos;est pas unique.</translation>
     </message>
