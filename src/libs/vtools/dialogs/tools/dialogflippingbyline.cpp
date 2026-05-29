@@ -253,14 +253,14 @@ void DialogFlippingByLine::SetSecondLinePointId(quint32 value)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByLine::ShowDialog(bool click)
 {
-    if (stage1 && not click)
+    if (IsStage1() && not click)
     {
-        if (m_sourceObjects.isEmpty())
+        if (SourceObjects().isEmpty())
         {
             return;
         }
 
-        stage1 = false;
+        SetStage1(false);
 
         auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
@@ -282,12 +282,12 @@ void DialogFlippingByLine::ShowDialog(bool click)
 
         VAbstractValApplication::VApp()->getSceneView()->AllowRubberBand(false);
 
-        FillDefSourceNames(m_sourceObjects, &data, "fl"_L1);
+        FillDefSourceNames(SourceObjects(), &data, "fl"_L1);
         FillSourceList();
 
         emit ToolTip(tr("Select first line point"));
     }
-    else if (not stage1 && prepare && click)
+    else if (not IsStage1() && prepare && click)
     {
         setModal(true);
         emit ToolTip(QString());
@@ -298,22 +298,22 @@ void DialogFlippingByLine::ShowDialog(bool click)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (stage1)
+    if (IsStage1())
     {
-        if (auto obj = std::find_if(m_sourceObjects.begin(),
-                                    m_sourceObjects.end(),
+        if (auto obj = std::find_if(SourceObjects().begin(),
+                                    SourceObjects().end(),
                                     [id](const SourceItem &sItem) -> bool { return sItem.id == id; });
-            obj == m_sourceObjects.end())
+            obj == SourceObjects().end())
         {
-            m_sourceObjects.push_back(SourceItem{id});
+            SourceObjects().push_back(SourceItem{id});
         }
         else
         {
-            m_sourceObjects.erase(obj);
+            SourceObjects().erase(obj);
         }
         auto *operation = qobject_cast<VisToolFlippingByLine *>(vis);
         SCASSERT(operation != nullptr)
-        operation->SetObjects(SourceToObjects(m_sourceObjects));
+        operation->SetObjects(SourceToObjects(SourceObjects()));
         if (!VAbstractValApplication::VApp()->getCurrentScene()->items().contains(operation))
         {
             operation->VisualMode(NULL_ID);
@@ -325,13 +325,13 @@ void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
     }
     else if (!prepare && type == SceneObject::Point) // After first choose we ignore all objects
     {
-        auto obj = std::find_if(m_sourceObjects.begin(),
-                                m_sourceObjects.end(),
+        auto obj = std::find_if(SourceObjects().begin(),
+                                SourceObjects().end(),
                                 [id](const SourceItem &sItem) -> bool { return sItem.id == id; });
         switch (number)
         {
             case 0:
-                if (obj != m_sourceObjects.end())
+                if (obj != SourceObjects().end())
                 {
                     emit ToolTip(tr("Select first line point that is not part of the list of objects"));
                     return;
@@ -347,14 +347,14 @@ void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
                 }
                 break;
             case 1:
-                if (obj != m_sourceObjects.end())
+                if (obj != SourceObjects().end())
                 {
                     emit ToolTip(tr("Select second line point that is not part of the list of objects"));
                     return;
                 }
 
                 if (getCurrentObjectId(ui->comboBoxFirstLinePoint) != id &&
-                    SetObject(id, ui->comboBoxSecondLinePoint, QString()) && flagError)
+                    SetObject(id, ui->comboBoxSecondLinePoint, QString()) && IsFlagError())
                 {
                     number = 0;
                     prepare = true;
@@ -376,7 +376,7 @@ void DialogFlippingByLine::OnSourceObjectsSet()
 {
     auto *operation = qobject_cast<VisToolFlippingByLine *>(vis);
     SCASSERT(operation != nullptr)
-    operation->SetObjects(SourceToObjects(m_sourceObjects));
+    operation->SetObjects(SourceToObjects(SourceObjects()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -388,14 +388,14 @@ void DialogFlippingByLine::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByLine::SaveData()
 {
-    m_sourceObjects = SaveSourceObjects();
+    SourceObjects() = SaveSourceObjects();
 
     if (!vis.isNull())
     {
         auto *operation = qobject_cast<VisToolFlippingByLine *>(vis);
         SCASSERT(operation != nullptr)
 
-        operation->SetObjects(SourceToObjects(m_sourceObjects));
+        operation->SetObjects(SourceToObjects(SourceObjects()));
         operation->SetFirstLinePointId(GetFirstLinePointId());
         operation->SetSecondLinePointId(GetSecondLinePointId());
         operation->RefreshGeometry();
@@ -405,51 +405,51 @@ void DialogFlippingByLine::SaveData()
     for (auto &tag : groupTags)
     {
         tag = tag.trimmed();
-        if (not m_groupTags.contains(tag))
+        if (not GroupTags().contains(tag))
         {
-            m_groupTags.append(tag);
+            GroupTags().append(tag);
         }
     }
 
-    ui->lineEditGroupTags->SetCompletion(m_groupTags);
+    ui->lineEditGroupTags->SetCompletion(GroupTags());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByLine::PointChanged()
 {
     QColor color = OkColor(this);
-    flagError = true;
+    SetFlagError(true);
     ChangeColor(ui->labelFirstLinePoint, color);
     ChangeColor(ui->labelSecondLinePoint, color);
 
     quint32 const id1 = getCurrentObjectId(ui->comboBoxFirstLinePoint);
-    auto obj1 = std::find_if(m_sourceObjects.begin(),
-                             m_sourceObjects.end(),
+    auto obj1 = std::find_if(SourceObjects().begin(),
+                             SourceObjects().end(),
                              [id1](const SourceItem &sItem) { return sItem.id == id1; });
 
     quint32 const id2 = getCurrentObjectId(ui->comboBoxSecondLinePoint);
-    auto obj2 = std::find_if(m_sourceObjects.begin(),
-                             m_sourceObjects.end(),
+    auto obj2 = std::find_if(SourceObjects().begin(),
+                             SourceObjects().end(),
                              [id2](const SourceItem &sItem) { return sItem.id == id2; });
 
     if (getCurrentObjectId(ui->comboBoxFirstLinePoint) == getCurrentObjectId(ui->comboBoxSecondLinePoint))
     {
-        flagError = false;
+        SetFlagError(false);
         color = errorColor;
         ChangeColor(ui->labelFirstLinePoint, color);
         ChangeColor(ui->labelSecondLinePoint, color);
         ui->labelStatus->setText(tr("Invalid line points"));
     }
-    else if (obj1 != m_sourceObjects.end())
+    else if (obj1 != SourceObjects().end())
     {
-        flagError = false;
+        SetFlagError(false);
         color = errorColor;
         ChangeColor(ui->labelFirstLinePoint, color);
         ui->labelStatus->setText(tr("Invalid first line point"));
     }
-    else if (obj2 != m_sourceObjects.end())
+    else if (obj2 != SourceObjects().end())
     {
-        flagError = false;
+        SetFlagError(false);
         color = errorColor;
         ChangeColor(ui->labelSecondLinePoint, color);
         ui->labelStatus->setText(tr("Invalid second line point"));
@@ -461,7 +461,7 @@ void DialogFlippingByLine::PointChanged()
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogFlippingByLine::IsValid() const -> bool
 {
-    bool const ready = flagError && flagName && flagGroupName;
+    bool const ready = IsFlagError() && IsFlagName() && IsFlagGroupName();
 
     if (ready)
     {

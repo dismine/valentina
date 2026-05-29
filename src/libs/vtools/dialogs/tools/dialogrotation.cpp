@@ -282,14 +282,14 @@ void DialogRotation::SetAngle(const QString &value)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::ShowDialog(bool click)
 {
-    if (stage1 && not click)
+    if (IsStage1() && not click)
     {
-        if (m_sourceObjects.isEmpty())
+        if (SourceObjects().isEmpty())
         {
             return;
         }
 
-        stage1 = false;
+        SetStage1(false);
 
         auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
@@ -311,12 +311,12 @@ void DialogRotation::ShowDialog(bool click)
 
         VAbstractValApplication::VApp()->getSceneView()->AllowRubberBand(false);
 
-        FillDefSourceNames(m_sourceObjects, &data, "r"_L1);
+        FillDefSourceNames(SourceObjects(), &data, "r"_L1);
         FillSourceList();
 
         emit ToolTip(tr("Select origin point"));
     }
-    else if (not stage1 && prepare && click)
+    else if (not IsStage1() && prepare && click)
     {
         // The check need to ignore first release of mouse button.
         // User can select point by clicking on a label.
@@ -359,23 +359,23 @@ void DialogRotation::ShowDialog(bool click)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (stage1)
+    if (IsStage1())
     {
-        if (auto obj = std::find_if(m_sourceObjects.begin(),
-                                    m_sourceObjects.end(),
+        if (auto obj = std::find_if(SourceObjects().begin(),
+                                    SourceObjects().end(),
                                     [id](const SourceItem &sItem) { return sItem.id == id; });
-            obj == m_sourceObjects.end())
+            obj == SourceObjects().end())
         {
-            m_sourceObjects.push_back(SourceItem{id});
+            SourceObjects().push_back(SourceItem{id});
         }
         else
         {
-            m_sourceObjects.erase(obj);
+            SourceObjects().erase(obj);
         }
 
         auto *operation = qobject_cast<VisToolRotation *>(vis);
         SCASSERT(operation != nullptr)
-        operation->SetObjects(SourceToObjects(m_sourceObjects));
+        operation->SetObjects(SourceToObjects(SourceObjects()));
         if (!VAbstractValApplication::VApp()->getCurrentScene()->items().contains(operation))
         {
             operation->VisualMode(NULL_ID);
@@ -390,18 +390,18 @@ void DialogRotation::ChosenObject(quint32 id, const SceneObject &type)
         auto *operation = qobject_cast<VisToolRotation *>(vis);
         SCASSERT(operation != nullptr)
 
-        auto obj = std::find_if(m_sourceObjects.begin(),
-                                m_sourceObjects.end(),
+        auto obj = std::find_if(SourceObjects().begin(),
+                                SourceObjects().end(),
                                 [id](const SourceItem &sItem) { return sItem.id == id; });
 
-        if (obj != m_sourceObjects.end())
+        if (obj != SourceObjects().end())
         {
-            if (m_sourceObjects.size() > 1)
+            if (SourceObjects().size() > 1)
             {
                 // It's not really logical for a user that a center of rotation no need to select.
                 // To fix this issue we just silently remove it from the list.
-                m_sourceObjects.erase(obj);
-                operation->SetObjects(SourceToObjects(m_sourceObjects));
+                SourceObjects().erase(obj);
+                operation->SetObjects(SourceToObjects(SourceObjects()));
             }
             else
             {
@@ -449,7 +449,7 @@ void DialogRotation::OnSourceObjectsSet()
 {
     auto *operation = qobject_cast<VisToolRotation *>(vis);
     SCASSERT(operation != nullptr)
-    operation->SetObjects(SourceToObjects(m_sourceObjects));
+    operation->SetObjects(SourceToObjects(SourceObjects()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -462,14 +462,14 @@ void DialogRotation::ShowVisualization()
 void DialogRotation::SaveData()
 {
     formulaAngle = ui->plainTextEditFormula->toPlainText();
-    m_sourceObjects = SaveSourceObjects();
+    SourceObjects() = SaveSourceObjects();
 
     if (!vis.isNull())
     {
         auto *operation = qobject_cast<VisToolRotation *>(vis);
         SCASSERT(operation != nullptr)
 
-        operation->SetObjects(SourceToObjects(m_sourceObjects));
+        operation->SetObjects(SourceToObjects(SourceObjects()));
         operation->SetOriginPointId(GetOrigPointId());
         operation->SetAngle(formulaAngle);
         operation->RefreshGeometry();
@@ -479,13 +479,13 @@ void DialogRotation::SaveData()
     for (auto &tag : groupTags)
     {
         tag = tag.trimmed();
-        if (not m_groupTags.contains(tag))
+        if (not GroupTags().contains(tag))
         {
-            m_groupTags.append(tag);
+            GroupTags().append(tag);
         }
     }
 
-    ui->lineEditGroupTags->SetCompletion(m_groupTags);
+    ui->lineEditGroupTags->SetCompletion(GroupTags());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -518,20 +518,20 @@ void DialogRotation::PointChanged()
 {
     quint32 const id = getCurrentObjectId(ui->comboBoxOriginPoint);
 
-    auto obj = std::find_if(m_sourceObjects.begin(),
-                            m_sourceObjects.end(),
+    auto obj = std::find_if(SourceObjects().begin(),
+                            SourceObjects().end(),
                             [id](const SourceItem &sItem) { return sItem.id == id; });
 
     QColor color;
-    if (obj != m_sourceObjects.end())
+    if (obj != SourceObjects().end())
     {
-        flagError = false;
+        SetFlagError(false);
         color = errorColor;
         ui->labelStatus->setText(tr("Invalid rotation point"));
     }
     else
     {
-        flagError = true;
+        SetFlagError(true);
         color = OkColor(this);
     }
     ChangeColor(ui->labelOriginPoint, color);
@@ -566,7 +566,7 @@ void DialogRotation::EvalAngle()
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogRotation::IsValid() const -> bool
 {
-    bool const ready = flagAngle && flagName && flagError && flagGroupName;
+    bool const ready = flagAngle && IsFlagName() && IsFlagError() && IsFlagGroupName();
 
     if (ready)
     {

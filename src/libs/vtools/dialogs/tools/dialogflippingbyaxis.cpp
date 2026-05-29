@@ -259,14 +259,14 @@ void DialogFlippingByAxis::SetAxisType(AxisType type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::ShowDialog(bool click)
 {
-    if (stage1 && not click)
+    if (IsStage1() && not click)
     {
-        if (m_sourceObjects.isEmpty())
+        if (SourceObjects().isEmpty())
         {
             return;
         }
 
-        stage1 = false;
+        SetStage1(false);
 
         auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
         SCASSERT(scene != nullptr)
@@ -288,12 +288,12 @@ void DialogFlippingByAxis::ShowDialog(bool click)
 
         VAbstractValApplication::VApp()->getSceneView()->AllowRubberBand(false);
 
-        FillDefSourceNames(m_sourceObjects, &data, "fa"_L1);
+        FillDefSourceNames(SourceObjects(), &data, "fa"_L1);
         FillSourceList();
 
         emit ToolTip(tr("Select origin point"));
     }
-    else if (not stage1 && prepare && click)
+    else if (not IsStage1() && prepare && click)
     {
         CheckState();
         setModal(true);
@@ -305,23 +305,23 @@ void DialogFlippingByAxis::ShowDialog(bool click)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (stage1)
+    if (IsStage1())
     {
-        if (auto obj = std::find_if(m_sourceObjects.begin(),
-                                    m_sourceObjects.end(),
+        if (auto obj = std::find_if(SourceObjects().begin(),
+                                    SourceObjects().end(),
                                     [id](const SourceItem &sItem) -> bool { return sItem.id == id; });
-            obj == m_sourceObjects.end())
+            obj == SourceObjects().end())
         {
-            m_sourceObjects.push_back(SourceItem{id});
+            SourceObjects().push_back(SourceItem{id});
         }
         else
         {
-            m_sourceObjects.erase(obj);
+            SourceObjects().erase(obj);
         }
 
         auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
         SCASSERT(operation != nullptr)
-        operation->SetObjects(SourceToObjects(m_sourceObjects));
+        operation->SetObjects(SourceToObjects(SourceObjects()));
         if (!VAbstractValApplication::VApp()->getCurrentScene()->items().contains(operation))
         {
             operation->VisualMode(NULL_ID);
@@ -333,11 +333,11 @@ void DialogFlippingByAxis::ChosenObject(quint32 id, const SceneObject &type)
     }
     else if (!prepare && type == SceneObject::Point) // After first choose we ignore all objects
     {
-        auto obj = std::find_if(m_sourceObjects.begin(),
-                                m_sourceObjects.end(),
+        auto obj = std::find_if(SourceObjects().begin(),
+                                SourceObjects().end(),
                                 [id](const SourceItem &sItem) -> bool { return sItem.id == id; });
 
-        if (obj != m_sourceObjects.end())
+        if (obj != SourceObjects().end())
         {
             emit ToolTip(tr("Select origin point that is not part of the list of objects"));
             return;
@@ -360,7 +360,7 @@ void DialogFlippingByAxis::OnSourceObjectsSet()
 {
     auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
     SCASSERT(operation != nullptr)
-    operation->SetObjects(SourceToObjects(m_sourceObjects));
+    operation->SetObjects(SourceToObjects(SourceObjects()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -372,14 +372,14 @@ void DialogFlippingByAxis::ShowVisualization()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::SaveData()
 {
-    m_sourceObjects = SaveSourceObjects();
+    SourceObjects() = SaveSourceObjects();
 
     if (!vis.isNull())
     {
         auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
         SCASSERT(operation != nullptr)
 
-        operation->SetObjects(SourceToObjects(m_sourceObjects));
+        operation->SetObjects(SourceToObjects(SourceObjects()));
         operation->SetOriginPointId(GetOriginPointId());
         operation->SetAxisType(GetAxisType());
         operation->RefreshGeometry();
@@ -389,13 +389,13 @@ void DialogFlippingByAxis::SaveData()
     for (auto &tag : groupTags)
     {
         tag = tag.trimmed();
-        if (not m_groupTags.contains(tag))
+        if (not GroupTags().contains(tag))
         {
-            m_groupTags.append(tag);
+            GroupTags().append(tag);
         }
     }
 
-    ui->lineEditGroupTags->SetCompletion(m_groupTags);
+    ui->lineEditGroupTags->SetCompletion(GroupTags());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -403,18 +403,18 @@ void DialogFlippingByAxis::PointChanged()
 {
     QColor color;
     quint32 const id = getCurrentObjectId(ui->comboBoxOriginPoint);
-    auto obj = std::find_if(m_sourceObjects.begin(),
-                            m_sourceObjects.end(),
+    auto obj = std::find_if(SourceObjects().begin(),
+                            SourceObjects().end(),
                             [id](const SourceItem &sItem) -> bool { return sItem.id == id; });
-    if (obj != m_sourceObjects.end())
+    if (obj != SourceObjects().end())
     {
-        flagError = false;
+        SetFlagError(false);
         ui->labelStatus->setText(tr("Invalid point"));
         color = errorColor;
     }
     else
     {
-        flagError = true;
+        SetFlagError(true);
         color = OkColor(this);
     }
     ChangeColor(ui->labelOriginPoint, color);
@@ -433,7 +433,7 @@ void DialogFlippingByAxis::FillComboBoxAxisType(QComboBox *box)
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogFlippingByAxis::IsValid() const -> bool
 {
-    bool const ready = flagError && flagName && flagGroupName;
+    bool const ready = IsFlagError() && IsFlagName() && IsFlagGroupName();
 
     if (ready)
     {

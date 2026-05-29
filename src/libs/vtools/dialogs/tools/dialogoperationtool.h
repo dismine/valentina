@@ -104,6 +104,19 @@ protected:
 
     virtual void OnSourceObjectsSet() {}
 
+    void FillSourceList();
+    auto SaveSourceObjects() const -> QVector<SourceItem>;
+
+    auto SourceObjects() -> QVector<SourceItem> & { return m_sourceObjects; }
+    auto IsStage1() const -> bool { return stage1; }
+    void SetStage1(bool value) { stage1 = value; }
+    auto IsFlagName() const -> bool { return flagName; }
+    auto IsFlagGroupName() const -> bool { return flagGroupName; }
+    auto IsFlagError() const -> bool { return flagError; }
+    void SetFlagError(bool value) { flagError = value; }
+    auto GroupTags() -> QStringList & { return m_groupTags; }
+
+private:
     QVector<SourceItem> m_sourceObjects{};
     QVector<DestinationItem> m_destination{};
 
@@ -113,9 +126,6 @@ protected:
     bool flagError{false};
     QStringList m_groupTags{};
     bool m_dependencyReady{true};
-
-    void FillSourceList();
-    auto SaveSourceObjects() const -> QVector<SourceItem>;
 };
 
 #endif // DIALOGOPERATIONTOOL_H

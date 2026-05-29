@@ -367,14 +367,14 @@ void DialogMove::SetRotationOrigPointId(const quint32 &value)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::ShowDialog(bool click)
 {
-    if (stage1 && not click)
+    if (IsStage1() && not click)
     {
-        if (m_sourceObjects.isEmpty())
+        if (SourceObjects().isEmpty())
         {
             return;
         }
 
-        stage1 = false;
+        SetStage1(false);
         prepare = true;
 
         auto *scene = qobject_cast<VMainGraphicsScene *>(VAbstractValApplication::VApp()->getCurrentScene());
@@ -400,10 +400,10 @@ void DialogMove::ShowDialog(bool click)
 
         VAbstractValApplication::VApp()->getSceneView()->AllowRubberBand(false);
 
-        FillDefSourceNames(m_sourceObjects, &data, "m"_L1);
+        FillDefSourceNames(SourceObjects(), &data, "m"_L1);
         FillSourceList();
     }
-    else if (not stage2 && not stage1 && prepare && click)
+    else if (not stage2 && not IsStage1() && prepare && click)
     {
         auto *operation = qobject_cast<VisToolMove *>(vis);
         SCASSERT(operation != nullptr)
@@ -421,7 +421,7 @@ void DialogMove::ShowDialog(bool click)
             stage2 = true;
         }
     }
-    else if (not stage1 && stage2 && prepare && click)
+    else if (not IsStage1() && stage2 && prepare && click)
     {
         auto *operation = qobject_cast<VisToolMove *>(vis);
         SCASSERT(operation != nullptr)
@@ -456,23 +456,23 @@ void DialogMove::ShowDialog(bool click)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::ChosenObject(quint32 id, const SceneObject &type)
 {
-    if (stage1)
+    if (IsStage1())
     {
-        if (auto obj = std::find_if(m_sourceObjects.begin(),
-                                    m_sourceObjects.end(),
+        if (auto obj = std::find_if(SourceObjects().begin(),
+                                    SourceObjects().end(),
                                     [id](const SourceItem &sItem) { return sItem.id == id; });
-            obj == m_sourceObjects.end())
+            obj == SourceObjects().end())
         {
-            m_sourceObjects.push_back(SourceItem{id});
+            SourceObjects().push_back(SourceItem{id});
         }
         else
         {
-            m_sourceObjects.erase(obj);
+            SourceObjects().erase(obj);
         }
 
         auto *operation = qobject_cast<VisToolMove *>(vis);
         SCASSERT(operation != nullptr)
-        operation->SetObjects(SourceToObjects(m_sourceObjects));
+        operation->SetObjects(SourceToObjects(SourceObjects()));
         if (!VAbstractValApplication::VApp()->getCurrentScene()->items().contains(operation))
         {
             operation->VisualMode(NULL_ID);
@@ -561,7 +561,7 @@ void DialogMove::OnSourceObjectsSet()
 {
     auto *operation = qobject_cast<VisToolMove *>(vis);
     SCASSERT(operation != nullptr)
-    operation->SetObjects(SourceToObjects(m_sourceObjects));
+    operation->SetObjects(SourceToObjects(SourceObjects()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -576,14 +576,14 @@ void DialogMove::SaveData()
     formulaAngle = ui->plainTextEditAngle->toPlainText();
     formulaRotationAngle = ui->plainTextEditRotationAngle->toPlainText();
     formulaLength = ui->plainTextEditLength->toPlainText();
-    m_sourceObjects = SaveSourceObjects();
+    SourceObjects() = SaveSourceObjects();
 
     if (!vis.isNull())
     {
         auto *operation = qobject_cast<VisToolMove *>(vis);
         SCASSERT(operation != nullptr)
 
-        operation->SetObjects(SourceToObjects(m_sourceObjects));
+        operation->SetObjects(SourceToObjects(SourceObjects()));
         operation->SetAngle(formulaAngle);
         operation->SetLength(formulaLength);
         operation->SetRotationAngle(formulaRotationAngle);
@@ -595,13 +595,13 @@ void DialogMove::SaveData()
     for (auto &tag : groupTags)
     {
         tag = tag.trimmed();
-        if (not m_groupTags.contains(tag))
+        if (not GroupTags().contains(tag))
         {
-            m_groupTags.append(tag);
+            GroupTags().append(tag);
         }
     }
 
-    ui->lineEditGroupTags->SetCompletion(m_groupTags);
+    ui->lineEditGroupTags->SetCompletion(GroupTags());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -680,7 +680,7 @@ void DialogMove::InitIcons()
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogMove::IsValid() const -> bool
 {
-    bool const ready = flagAngle && flagRotationAngle && flagLength && flagName && flagGroupName;
+    bool const ready = flagAngle && flagRotationAngle && flagLength && IsFlagName() && IsFlagGroupName();
 
     if (ready)
     {
