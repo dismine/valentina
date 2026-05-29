@@ -36,16 +36,14 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "../../tools/toolsdef.h"
-#include "../vmisc/def.h"
-#include "dialogtool.h"
+#include "dialogoperationtool.h"
 
 namespace Ui
 {
 class DialogMove;
 }
 
-class DialogMove final : public DialogTool
+class DialogMove final : public DialogOperationTool
 {
     Q_OBJECT // NOLINT
 
@@ -65,32 +63,10 @@ public:
     auto GetRotationOrigPointId() const -> quint32;
     void SetRotationOrigPointId(const quint32 &value);
 
-    auto GetVisibilityGroupName() const -> QString;
-    void SetVisibilityGroupName(const QString &name);
-
-    auto HasLinkedVisibilityGroup() const -> bool;
-    void SetHasLinkedVisibilityGroup(bool linked);
-
-    void SetVisibilityGroupTags(const QStringList &tags);
-    auto GetVisibilityGroupTags() const -> QStringList;
-
-    void SetNotes(const QString &notes);
-    auto GetNotes() const -> QString;
-
-    void SetGroupCategories(const QStringList &categories) override;
-
     void ShowDialog(bool click) override;
-
-    auto GetSourceObjects() const -> QVector<SourceItem>;
-    void SetSourceObjects(const QVector<SourceItem> &value);
-
-    void SetDestinationObjects(const QVector<DestinationItem> &value);
-
-    void CheckDependencyTreeComplete() override;
 
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
-    void ClearSourceObjects() override;
 
 private slots:
     /** @brief DeployAngleTextEdit grow or shrink formula input */
@@ -102,19 +78,6 @@ private slots:
     void FXRotationAngle();
     void FXLength();
 
-    void GroupNameChanged();
-
-    void ShowSourceDetails(int row);
-    void CurrentObjectChanged(int row);
-    void NameChanged(const QString &text);
-    void PenStyleChanged();
-    void ObjectTypeChanged(int index);
-    void NewObjectChanged();
-    void AddNewObject();
-    void ColorChanged();
-    void BulkRename();
-    void RemoveObject();
-
 protected:
     void ShowVisualization() override;
 
@@ -122,6 +85,24 @@ protected:
     void SaveData() override;
     void closeEvent(QCloseEvent *event) override;
     auto IsValid() const -> bool override;
+
+    void OnSourceObjectsSet() override;
+
+    auto SourceListWidget() const -> QListWidget * override;
+    auto NameLineEdit() const -> QLineEdit * override;
+    auto LabelName() const -> QLabel * override;
+    auto LabelStatus() const -> QLabel * override;
+    auto LabelGroupName() const -> QLabel * override;
+    auto PenStyleComboBox() const -> QComboBox * override;
+    auto ColorButton() const -> VPE::QtColorPicker * override;
+    auto ObjectTypeComboBox() const -> QComboBox * override;
+    auto NewObjectComboBox() const -> QComboBox * override;
+    auto AddObjectButton() const -> QAbstractButton * override;
+    auto RemoveObjectButton() const -> QAbstractButton * override;
+    auto NotesPlainTextEdit() const -> QPlainTextEdit * override;
+    auto GroupTagsLineEdit() const -> VCompleterLineEdit * override;
+    auto VisibilityGroupLineEdit() const -> QLineEdit * override;
+    auto VisibilityGroupBox() const -> QGroupBox * override;
 
 private:
     Q_DISABLE_COPY_MOVE(DialogMove) // NOLINT
@@ -142,10 +123,6 @@ private:
     int formulaBaseHeightRotationAngle{0};
     int formulaBaseHeightLength{0};
 
-    QVector<SourceItem> m_sourceObjects{};
-    QVector<DestinationItem> m_destination{};
-
-    bool stage1{true};
     bool stage2{false};
 
     bool optionalRotationOrigin{false};
@@ -154,22 +131,12 @@ private:
     bool flagAngle{false};
     bool flagRotationAngle{false};
     bool flagLength{false};
-    bool flagName{true};
-    bool flagGroupName{true};
-
-    QStringList m_groupTags{};
-
-    bool m_dependencyReady{true};
 
     void EvalAngle();
     void EvalRotationAngle();
     void EvalLength();
 
-    void FillSourceList();
-
     void InitIcons();
-
-    auto SaveSourceObjects() const -> QVector<SourceItem>;
 };
 
 #endif // DIALOGMOVING_H

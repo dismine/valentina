@@ -29,8 +29,6 @@
 #ifndef DIALOGFLIPPINGBYLINE_H
 #define DIALOGFLIPPINGBYLINE_H
 
-#include "dialogtool.h"
-
 #include <QList>
 #include <QMetaObject>
 #include <QObject>
@@ -38,15 +36,14 @@
 #include <QVector>
 #include <QtGlobal>
 
-#include "../../tools/toolsdef.h"
-#include "../vmisc/def.h"
+#include "dialogoperationtool.h"
 
 namespace Ui
 {
 class DialogFlippingByLine;
 }
 
-class DialogFlippingByLine final : public DialogTool
+class DialogFlippingByLine final : public DialogOperationTool
 {
     Q_OBJECT // NOLINT
 
@@ -61,45 +58,10 @@ public:
     auto GetSecondLinePointId() const -> quint32;
     void SetSecondLinePointId(quint32 value);
 
-    auto GetVisibilityGroupName() const -> QString;
-    void SetVisibilityGroupName(const QString &name);
-
-    auto HasLinkedVisibilityGroup() const -> bool;
-    void SetHasLinkedVisibilityGroup(bool linked);
-
-    void SetVisibilityGroupTags(const QStringList &tags);
-    auto GetVisibilityGroupTags() const -> QStringList;
-
-    void SetNotes(const QString &notes);
-    auto GetNotes() const -> QString;
-
-    void SetGroupCategories(const QStringList &categories) override;
-
     void ShowDialog(bool click) override;
-
-    auto GetSourceObjects() const -> QVector<SourceItem>;
-    void SetSourceObjects(const QVector<SourceItem> &value);
-
-    void SetDestinationObjects(const QVector<DestinationItem> &value);
-
-    void CheckDependencyTreeComplete() override;
 
 public slots:
     void ChosenObject(quint32 id, const SceneObject &type) override;
-    void ClearSourceObjects() override;
-
-private slots:
-    void GroupNameChanged();
-    void ShowSourceDetails(int row);
-    void CurrentObjectChanged(int row);
-    void NameChanged(const QString &text);
-    void PenStyleChanged();
-    void ObjectTypeChanged(int index);
-    void NewObjectChanged();
-    void AddNewObject();
-    void ColorChanged();
-    void BulkRename();
-    void RemoveObject();
 
 protected:
     void ShowVisualization() override;
@@ -107,6 +69,24 @@ protected:
     /** @brief SaveData Put dialog data in local variables */
     void SaveData() override;
     auto IsValid() const -> bool override;
+
+    void OnSourceObjectsSet() override;
+
+    auto SourceListWidget() const -> QListWidget * override;
+    auto NameLineEdit() const -> QLineEdit * override;
+    auto LabelName() const -> QLabel * override;
+    auto LabelStatus() const -> QLabel * override;
+    auto LabelGroupName() const -> QLabel * override;
+    auto PenStyleComboBox() const -> QComboBox * override;
+    auto ColorButton() const -> VPE::QtColorPicker * override;
+    auto ObjectTypeComboBox() const -> QComboBox * override;
+    auto NewObjectComboBox() const -> QComboBox * override;
+    auto AddObjectButton() const -> QAbstractButton * override;
+    auto RemoveObjectButton() const -> QAbstractButton * override;
+    auto NotesPlainTextEdit() const -> QPlainTextEdit * override;
+    auto GroupTagsLineEdit() const -> VCompleterLineEdit * override;
+    auto VisibilityGroupLineEdit() const -> QLineEdit * override;
+    auto VisibilityGroupBox() const -> QGroupBox * override;
 
 private slots:
     void PointChanged();
@@ -116,25 +96,8 @@ private:
 
     Ui::DialogFlippingByLine *ui;
 
-    QVector<SourceItem> m_sourceObjects{};
-    QVector<DestinationItem> m_destination{};
-
-    bool stage1{true};
-
-    bool flagName{true};
-    bool flagGroupName{true};
-    bool flagError{false};
-
-    QStringList m_groupTags{};
-
     /** @brief number number of handled objects */
     qint32 number{0};
-
-    bool m_dependencyReady{true};
-
-    void FillSourceList();
-
-    auto SaveSourceObjects() const -> QVector<SourceItem>;
 };
 
 #endif // DIALOGFLIPPINGBYLINE_H
