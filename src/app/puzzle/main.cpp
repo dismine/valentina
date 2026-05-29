@@ -28,6 +28,7 @@
 
 #include "vpapplication.h"
 
+#include <QMessageBox> // For QT_REQUIRE_VERSION
 #include <QTimer>
 
 #ifdef Q_OS_WIN
