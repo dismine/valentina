@@ -151,8 +151,7 @@ void DialogOperationTool::GroupNameChanged()
 {
     if (const auto *edit = qobject_cast<QLineEdit *>(sender()); edit)
     {
-        const QString name = edit->text();
-        if (name.isEmpty())
+        if (edit->text().isEmpty())
         {
             flagGroupName = false;
             ChangeColor(LabelGroupName(), errorColor);
@@ -186,10 +185,7 @@ void DialogOperationTool::ShowSourceDetails(int row)
     }
 
     const auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
-
-    const QSharedPointer<VGObject> obj = data.GetGObject(sourceItem.id);
-
-    if (obj->getType() == GOType::Point)
+    if (data.GetGObject(sourceItem.id)->getType() == GOType::Point)
     {
         const QSignalBlocker blockerPenStyle(PenStyleComboBox());
         const QSignalBlocker blockerColor(ColorButton());
