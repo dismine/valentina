@@ -735,17 +735,11 @@ void VAbstractApplication::LogScreenInfo()
     // Monitor for screen configuration changes during runtime
     QObject::connect(qApp,
                      &QGuiApplication::screenAdded,
-                     [](QScreen *screen) -> void
-                     {
-                         qDebug() << "Screen added:" << screen->name();
-                     });
+                     [](const QScreen *screen) -> void { qDebug() << "Screen added:" << screen->name(); });
 
     QObject::connect(qApp,
                      &QGuiApplication::primaryScreenChanged,
-                     [](QScreen *screen) -> void
-                     {
-                         qDebug() << "Primary screen changed to:" << screen->name();
-                     });
+                     [](const QScreen *screen) -> void { qDebug() << "Primary screen changed to:" << screen->name(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
