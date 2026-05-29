@@ -726,7 +726,7 @@ void VAbstractApplication::LogScreenInfo()
 {
     qDebug() << "=== Screen Information ===";
     qDebug() << "Screens:";
-    for (auto *screen : QGuiApplication::screens())
+    for (const auto *screen : QGuiApplication::screens())
     {
         qDebug() << "  -" << screen->name() << "DPI:" << screen->logicalDotsPerInch()
                  << "Ratio:" << screen->devicePixelRatio() << "Geometry:" << screen->geometry();

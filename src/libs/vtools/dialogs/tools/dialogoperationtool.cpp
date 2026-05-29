@@ -179,7 +179,7 @@ void DialogOperationTool::ShowSourceDetails(int row)
         return;
     }
 
-    auto *item = SourceListWidget()->item(row);
+    const auto *item = SourceListWidget()->item(row);
     if (item == nullptr)
     {
         return;
