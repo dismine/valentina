@@ -42,6 +42,25 @@ namespace VPE
 class QtColorPicker;
 }
 
+struct OperationWidgets
+{
+    QListWidget *sourceList{nullptr};
+    QLineEdit *name{nullptr};
+    QLabel *labelName{nullptr};
+    QLabel *labelStatus{nullptr};
+    QLabel *labelGroupName{nullptr};
+    QComboBox *penStyle{nullptr};
+    VPE::QtColorPicker *color{nullptr};
+    QComboBox *objectType{nullptr};
+    QComboBox *newObject{nullptr};
+    QAbstractButton *addObject{nullptr};
+    QAbstractButton *removeObject{nullptr};
+    QPlainTextEdit *notes{nullptr};
+    VCompleterLineEdit *groupTags{nullptr};
+    QLineEdit *visibilityGroupLine{nullptr};
+    QGroupBox *visibilityGroup{nullptr};
+};
+
 class DialogOperationTool : public DialogTool
 {
     Q_OBJECT // NOLINT
@@ -86,21 +105,7 @@ protected:
     explicit DialogOperationTool(const VContainer *data, VAbstractPattern *doc, quint32 toolId,
                                  QWidget *parent = nullptr);
 
-    virtual auto SourceListWidget() const -> QListWidget * = 0;
-    virtual auto NameLineEdit() const -> QLineEdit * = 0;
-    virtual auto LabelName() const -> QLabel * = 0;
-    virtual auto LabelStatus() const -> QLabel * = 0;
-    virtual auto LabelGroupName() const -> QLabel * = 0;
-    virtual auto PenStyleComboBox() const -> QComboBox * = 0;
-    virtual auto ColorButton() const -> VPE::QtColorPicker * = 0;
-    virtual auto ObjectTypeComboBox() const -> QComboBox * = 0;
-    virtual auto NewObjectComboBox() const -> QComboBox * = 0;
-    virtual auto AddObjectButton() const -> QAbstractButton * = 0;
-    virtual auto RemoveObjectButton() const -> QAbstractButton * = 0;
-    virtual auto NotesPlainTextEdit() const -> QPlainTextEdit * = 0;
-    virtual auto GroupTagsLineEdit() const -> VCompleterLineEdit * = 0;
-    virtual auto VisibilityGroupLineEdit() const -> QLineEdit * = 0;
-    virtual auto VisibilityGroupBox() const -> QGroupBox * = 0;
+    virtual auto Widgets() const -> OperationWidgets = 0;
 
     virtual void OnSourceObjectsSet() {}
 

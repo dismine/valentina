@@ -183,93 +183,23 @@ DialogMove::~DialogMove()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogMove::SourceListWidget() const -> QListWidget *
+auto DialogMove::Widgets() const -> OperationWidgets
 {
-    return ui->listWidget;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogMove::NameLineEdit() const -> QLineEdit *
-{
-    return ui->lineEditName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogMove::LabelName() const -> QLabel *
-{
-    return ui->labelName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogMove::LabelStatus() const -> QLabel *
-{
-    return ui->labelStatus;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogMove::LabelGroupName() const -> QLabel *
-{
-    return ui->labelGroupName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogMove::PenStyleComboBox() const -> QComboBox *
-{
-    return ui->comboBoxPenStyle;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogMove::ColorButton() const -> VPE::QtColorPicker *
-{
-    return ui->pushButtonColor;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogMove::ObjectTypeComboBox() const -> QComboBox *
-{
-    return ui->comboBoxObjectType;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogMove::NewObjectComboBox() const -> QComboBox *
-{
-    return ui->comboBoxNewObject;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogMove::AddObjectButton() const -> QAbstractButton *
-{
-    return ui->toolButtonNewObject;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogMove::RemoveObjectButton() const -> QAbstractButton *
-{
-    return ui->toolButtonRemoveObject;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogMove::NotesPlainTextEdit() const -> QPlainTextEdit *
-{
-    return ui->plainTextEditToolNotes;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogMove::GroupTagsLineEdit() const -> VCompleterLineEdit *
-{
-    return ui->lineEditGroupTags;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogMove::VisibilityGroupLineEdit() const -> QLineEdit *
-{
-    return ui->lineEditVisibilityGroup;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogMove::VisibilityGroupBox() const -> QGroupBox *
-{
-    return ui->groupBoxVisibilityGroup;
+    return {.sourceList = ui->listWidget,
+            .name = ui->lineEditName,
+            .labelName = ui->labelName,
+            .labelStatus = ui->labelStatus,
+            .labelGroupName = ui->labelGroupName,
+            .penStyle = ui->comboBoxPenStyle,
+            .color = ui->pushButtonColor,
+            .objectType = ui->comboBoxObjectType,
+            .newObject = ui->comboBoxNewObject,
+            .addObject = ui->toolButtonNewObject,
+            .removeObject = ui->toolButtonRemoveObject,
+            .notes = ui->plainTextEditToolNotes,
+            .groupTags = ui->lineEditGroupTags,
+            .visibilityGroupLine = ui->lineEditVisibilityGroup,
+            .visibilityGroup = ui->groupBoxVisibilityGroup};
 }
 
 //---------------------------------------------------------------------------------------------------------------------

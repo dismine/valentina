@@ -79,21 +79,7 @@ protected:
 
     void OnSourceObjectsSet() override;
 
-    auto SourceListWidget() const -> QListWidget * override;
-    auto NameLineEdit() const -> QLineEdit * override;
-    auto LabelName() const -> QLabel * override;
-    auto LabelStatus() const -> QLabel * override;
-    auto LabelGroupName() const -> QLabel * override;
-    auto PenStyleComboBox() const -> QComboBox * override;
-    auto ColorButton() const -> VPE::QtColorPicker * override;
-    auto ObjectTypeComboBox() const -> QComboBox * override;
-    auto NewObjectComboBox() const -> QComboBox * override;
-    auto AddObjectButton() const -> QAbstractButton * override;
-    auto RemoveObjectButton() const -> QAbstractButton * override;
-    auto NotesPlainTextEdit() const -> QPlainTextEdit * override;
-    auto GroupTagsLineEdit() const -> VCompleterLineEdit * override;
-    auto VisibilityGroupLineEdit() const -> QLineEdit * override;
-    auto VisibilityGroupBox() const -> QGroupBox * override;
+    auto Widgets() const -> OperationWidgets override;
 
 private slots:
     void PointChanged();

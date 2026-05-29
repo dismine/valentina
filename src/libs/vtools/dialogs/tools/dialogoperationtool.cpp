@@ -60,44 +60,44 @@ DialogOperationTool::DialogOperationTool(const VContainer *data, VAbstractPatter
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogOperationTool::GetVisibilityGroupName() const -> QString
 {
-    return VisibilityGroupLineEdit()->text();
+    return Widgets().visibilityGroupLine->text();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogOperationTool::SetVisibilityGroupName(const QString &name)
 {
-    VisibilityGroupLineEdit()->setText(name.isEmpty() ? tr("Rotation") : name);
+    Widgets().visibilityGroupLine->setText(name.isEmpty() ? tr("Rotation") : name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogOperationTool::HasLinkedVisibilityGroup() const -> bool
 {
-    return VisibilityGroupBox()->isChecked();
+    return Widgets().visibilityGroup->isChecked();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogOperationTool::SetHasLinkedVisibilityGroup(bool linked)
 {
-    VisibilityGroupBox()->setChecked(linked);
+    Widgets().visibilityGroup->setChecked(linked);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogOperationTool::SetVisibilityGroupTags(const QStringList &tags)
 {
-    GroupTagsLineEdit()->setText(tags.join(", "));
+    Widgets().groupTags->setText(tags.join(", "));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogOperationTool::GetVisibilityGroupTags() const -> QStringList
 {
-    return GroupTagsLineEdit()->text().split(',');
+    return Widgets().groupTags->text().split(',');
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogOperationTool::SetGroupCategories(const QStringList &categories)
 {
     m_groupTags = categories;
-    GroupTagsLineEdit()->SetCompletion(m_groupTags);
+    Widgets().groupTags->SetCompletion(m_groupTags);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -118,26 +118,26 @@ void DialogOperationTool::SetSourceObjects(const QVector<SourceItem> &value)
 void DialogOperationTool::SetDestinationObjects(const QVector<DestinationItem> &value)
 {
     m_destination = value;
-    CurrentObjectChanged(SourceListWidget()->currentRow());
+    CurrentObjectChanged(Widgets().sourceList->currentRow());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogOperationTool::CheckDependencyTreeComplete()
 {
     m_dependencyReady = m_doc->IsPatternGraphComplete();
-    NameLineEdit()->setEnabled(m_dependencyReady);
+    Widgets().name->setEnabled(m_dependencyReady);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogOperationTool::SetNotes(const QString &notes)
 {
-    NotesPlainTextEdit()->setPlainText(notes);
+    Widgets().notes->setPlainText(notes);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto DialogOperationTool::GetNotes() const -> QString
 {
-    return NotesPlainTextEdit()->toPlainText();
+    return Widgets().notes->toPlainText();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -154,14 +154,14 @@ void DialogOperationTool::GroupNameChanged()
         if (edit->text().isEmpty())
         {
             flagGroupName = false;
-            ChangeColor(LabelGroupName(), errorColor);
-            LabelStatus()->setText(tr("Invalid group name"));
+            ChangeColor(Widgets().labelGroupName, errorColor);
+            Widgets().labelStatus->setText(tr("Invalid group name"));
             CheckState();
             return;
         }
 
         flagGroupName = true;
-        ChangeColor(LabelGroupName(), OkColor(this));
+        ChangeColor(Widgets().labelGroupName, OkColor(this));
     }
     CheckState();
 }
@@ -169,16 +169,16 @@ void DialogOperationTool::GroupNameChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogOperationTool::ShowSourceDetails(int row)
 {
-    NameLineEdit()->setDisabled(true);
-    PenStyleComboBox()->setDisabled(true);
-    ColorButton()->setDisabled(true);
+    Widgets().name->setDisabled(true);
+    Widgets().penStyle->setDisabled(true);
+    Widgets().color->setDisabled(true);
 
-    if (SourceListWidget()->count() == 0)
+    if (Widgets().sourceList->count() == 0)
     {
         return;
     }
 
-    const auto *item = SourceListWidget()->item(row);
+    const auto *item = Widgets().sourceList->item(row);
     if (item == nullptr)
     {
         return;
@@ -187,11 +187,11 @@ void DialogOperationTool::ShowSourceDetails(int row)
     const auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
     if (data.GetGObject(sourceItem.id)->getType() == GOType::Point)
     {
-        const QSignalBlocker blockerPenStyle(PenStyleComboBox());
-        const QSignalBlocker blockerColor(ColorButton());
+        const QSignalBlocker blockerPenStyle(Widgets().penStyle);
+        const QSignalBlocker blockerColor(Widgets().color);
 
-        PenStyleComboBox()->setCurrentIndex(-1);
-        ColorButton()->setCurrentColor(QColor());
+        Widgets().penStyle->setCurrentIndex(-1);
+        Widgets().color->setCurrentColor(QColor());
     }
     else
     {
@@ -209,37 +209,37 @@ void DialogOperationTool::ShowSourceDetails(int row)
             }
         };
 
-        SetValue(PenStyleComboBox(), sourceItem.penStyle, TypeLineDefault);
+        SetValue(Widgets().penStyle, sourceItem.penStyle, TypeLineDefault);
 
         if (sourceItem.penStyle.isEmpty() || sourceItem.penStyle == TypeLineDefault)
         {
-            int const index = PenStyleComboBox()->currentIndex();
-            PenStyleComboBox()->setItemText(index, '<' + tr("Default") + '>');
+            int const index = Widgets().penStyle->currentIndex();
+            Widgets().penStyle->setItemText(index, '<' + tr("Default") + '>');
         }
 
-        QSignalBlocker blockerColor(ColorButton());
+        QSignalBlocker blockerColor(Widgets().color);
         QColor const color(sourceItem.color);
-        ColorButton()->setCurrentColor(color.isValid() ? color : ColorDefault);
+        Widgets().color->setCurrentColor(color.isValid() ? color : ColorDefault);
         blockerColor.unblock();
 
         if (sourceItem.color.isEmpty() || sourceItem.color == ColorDefault)
         {
             const QSharedPointer<VAbstractCurve> curve = data.GeometricObject<VAbstractCurve>(sourceItem.id);
-            ColorButton()->setDefaultColor(curve->GetColor());
+            Widgets().color->setDefaultColor(curve->GetColor());
         }
 
-        PenStyleComboBox()->setEnabled(true);
-        ColorButton()->setEnabled(true);
+        Widgets().penStyle->setEnabled(true);
+        Widgets().color->setEnabled(true);
     }
 
-    const QSignalBlocker blockerName(NameLineEdit());
-    NameLineEdit()->setText(sourceItem.name);
-    NameLineEdit()->setEnabled(m_dependencyReady);
+    const QSignalBlocker blockerName(Widgets().name);
+    Widgets().name->setText(sourceItem.name);
+    Widgets().name->setEnabled(m_dependencyReady);
 
     const QVector<SourceItem> sourceObjects = SaveSourceObjects();
     const QSet<QString> freeNames = FindFreeNames(m_sourceObjects, sourceObjects);
     const bool nameValid = IsValidSourceName(sourceItem.name, sourceItem.id, m_sourceObjects, &data, freeNames);
-    ChangeColor(LabelName(), nameValid ? OkColor(this) : errorColor);
+    ChangeColor(Widgets().labelName, nameValid ? OkColor(this) : errorColor);
     flagName = nameValid;
     CheckState();
 }
@@ -247,16 +247,16 @@ void DialogOperationTool::ShowSourceDetails(int row)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogOperationTool::CurrentObjectChanged(int row)
 {
-    if (SourceListWidget()->count() < 2)
+    if (Widgets().sourceList->count() < 2)
     {
-        RemoveObjectButton()->setDisabled(true);
+        Widgets().removeObject->setDisabled(true);
         return;
     }
 
-    const auto *item = SourceListWidget()->item(row);
+    const auto *item = Widgets().sourceList->item(row);
     if (item == nullptr)
     {
-        RemoveObjectButton()->setDisabled(true);
+        Widgets().removeObject->setDisabled(true);
         return;
     }
 
@@ -270,22 +270,22 @@ void DialogOperationTool::CurrentObjectChanged(int row)
     if (const quint32 targetId = it != m_destination.cend() ? it->id : NULL_ID;
         !IsSafeToRemoveGroupObject(targetId, m_doc))
     {
-        RemoveObjectButton()->setDisabled(true);
+        Widgets().removeObject->setDisabled(true);
         return;
     }
 
-    RemoveObjectButton()->setEnabled(true);
+    Widgets().removeObject->setEnabled(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogOperationTool::NameChanged(const QString &text)
 {
-    if (SourceListWidget()->count() == 0)
+    if (Widgets().sourceList->count() == 0)
     {
         return;
     }
 
-    if (auto *item = SourceListWidget()->currentItem())
+    if (auto *item = Widgets().sourceList->currentItem())
     {
         auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
 
@@ -300,11 +300,11 @@ void DialogOperationTool::NameChanged(const QString &text)
         }
 
         const QSharedPointer<VGObject> obj = data.GetGObject(sourceItem.id);
-        ChangeColor(LabelName(), valid ? OkColor(this) : errorColor);
+        ChangeColor(Widgets().labelName, valid ? OkColor(this) : errorColor);
 
         if (!valid)
         {
-            LabelStatus()->setText(obj->getType() == GOType::Point ? tr("Invalid label") : tr("Invalid name"));
+            Widgets().labelStatus->setText(obj->getType() == GOType::Point ? tr("Invalid label") : tr("Invalid name"));
         }
 
         flagName = valid;
@@ -315,15 +315,15 @@ void DialogOperationTool::NameChanged(const QString &text)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogOperationTool::PenStyleChanged()
 {
-    if (SourceListWidget()->count() == 0)
+    if (Widgets().sourceList->count() == 0)
     {
         return;
     }
 
-    if (auto *item = SourceListWidget()->currentItem())
+    if (auto *item = Widgets().sourceList->currentItem())
     {
         auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
-        sourceItem.penStyle = GetComboBoxCurrentData(PenStyleComboBox(), TypeLineDefault);
+        sourceItem.penStyle = GetComboBoxCurrentData(Widgets().penStyle, TypeLineDefault);
         item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
     }
 }
@@ -331,36 +331,36 @@ void DialogOperationTool::PenStyleChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogOperationTool::ObjectTypeChanged(int index)
 {
-    AddObjectButton()->setDisabled(true);
+    Widgets().addObject->setDisabled(true);
 
-    const QSignalBlocker blocker(NewObjectComboBox());
-    NewObjectComboBox()->clear();
+    const QSignalBlocker blocker(Widgets().newObject);
+    Widgets().newObject->clear();
 
     if (index == -1)
     {
         return;
     }
 
-    auto const type = ObjectTypeComboBox()->itemData(index).value<GOType>();
+    auto const type = Widgets().objectType->itemData(index).value<GOType>();
 
     switch (type)
     {
         case GOType::Point:
-            FillComboBoxPoints(NewObjectComboBox());
+            FillComboBoxPoints(Widgets().newObject);
             break;
         case GOType::Arc:
-            FillComboBoxArcs(NewObjectComboBox());
+            FillComboBoxArcs(Widgets().newObject);
             break;
         case GOType::EllipticalArc:
-            FillComboBoxEllipticalArcs(NewObjectComboBox());
+            FillComboBoxEllipticalArcs(Widgets().newObject);
             break;
         case GOType::Spline:
         case GOType::CubicBezier:
-            FillComboBoxSplines(NewObjectComboBox());
+            FillComboBoxSplines(Widgets().newObject);
             break;
         case GOType::SplinePath:
         case GOType::CubicBezierPath:
-            FillComboBoxSplinesPath(NewObjectComboBox());
+            FillComboBoxSplinesPath(Widgets().newObject);
             break;
         case GOType::PlaceLabel:
         case GOType::Unknown:
@@ -372,7 +372,7 @@ void DialogOperationTool::ObjectTypeChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogOperationTool::NewObjectChanged()
 {
-    quint32 const id = getCurrentObjectId(NewObjectComboBox());
+    quint32 const id = getCurrentObjectId(Widgets().newObject);
     if (id == NULL_ID)
     {
         return;
@@ -382,13 +382,13 @@ void DialogOperationTool::NewObjectChanged()
     const auto it = std::find_if(sourceObjects.cbegin(),
                                  sourceObjects.cend(),
                                  [id](const SourceItem &item) -> bool { return item.id == id; });
-    AddObjectButton()->setDisabled(it != sourceObjects.cend());
+    Widgets().addObject->setDisabled(it != sourceObjects.cend());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogOperationTool::AddNewObject()
 {
-    quint32 const id = getCurrentObjectId(NewObjectComboBox());
+    quint32 const id = getCurrentObjectId(Widgets().newObject);
     if (id == NULL_ID)
     {
         return;
@@ -406,21 +406,21 @@ void DialogOperationTool::AddNewObject()
 
     sourceObjects.append({.id = id, .name = GetDefSourceName(id, &data, "m"_L1, occupiedNames)});
     SetSourceObjects(sourceObjects);
-    AddObjectButton()->setDisabled(true);
+    Widgets().addObject->setDisabled(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogOperationTool::ColorChanged()
 {
-    if (SourceListWidget()->count() == 0)
+    if (Widgets().sourceList->count() == 0)
     {
         return;
     }
 
-    if (auto *item = SourceListWidget()->currentItem())
+    if (auto *item = Widgets().sourceList->currentItem())
     {
         auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
-        QColor const color = ColorButton()->currentColor();
+        QColor const color = Widgets().color->currentColor();
         sourceItem.color = color.isValid() ? color.name() : ColorDefault;
         item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
     }
@@ -438,13 +438,13 @@ void DialogOperationTool::BulkRename()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogOperationTool::RemoveObject()
 {
-    if (SourceListWidget()->count() < 2)
+    if (Widgets().sourceList->count() < 2)
     {
-        RemoveObjectButton()->setDisabled(true);
+        Widgets().removeObject->setDisabled(true);
         return;
     }
 
-    const QListWidgetItem *item = SourceListWidget()->currentItem();
+    const QListWidgetItem *item = Widgets().sourceList->currentItem();
     if (!item)
     {
         return;
@@ -460,24 +460,24 @@ void DialogOperationTool::RemoveObject()
     if (const quint32 targetId = it != m_destination.cend() ? it->id : NULL_ID;
         !IsSafeToRemoveGroupObject(targetId, m_doc))
     {
-        RemoveObjectButton()->setDisabled(true);
+        Widgets().removeObject->setDisabled(true);
         return;
     }
 
-    const int currentRow = SourceListWidget()->row(item);
-    delete SourceListWidget()->takeItem(currentRow);
+    const int currentRow = Widgets().sourceList->row(item);
+    delete Widgets().sourceList->takeItem(currentRow);
 
     SetSourceObjects(SaveSourceObjects());
 
-    RemoveObjectButton()->setDisabled(true);
+    Widgets().removeObject->setDisabled(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogOperationTool::FillSourceList()
 {
-    QSignalBlocker blocker(SourceListWidget());
+    QSignalBlocker blocker(Widgets().sourceList);
 
-    SourceListWidget()->clear();
+    Widgets().sourceList->clear();
 
     int row = -1;
 
@@ -487,14 +487,14 @@ void DialogOperationTool::FillSourceList()
         auto *item = new QListWidgetItem(obj->ObjectName());
         item->setToolTip(obj->ObjectName());
         item->setData(Qt::UserRole, QVariant::fromValue(sourceItem));
-        SourceListWidget()->insertItem(++row, item);
+        Widgets().sourceList->insertItem(++row, item);
     }
 
     blocker.unblock();
 
-    if (SourceListWidget()->count() > 0)
+    if (Widgets().sourceList->count() > 0)
     {
-        SourceListWidget()->setCurrentRow(0);
+        Widgets().sourceList->setCurrentRow(0);
     }
 }
 
@@ -502,11 +502,11 @@ void DialogOperationTool::FillSourceList()
 auto DialogOperationTool::SaveSourceObjects() const -> QVector<SourceItem>
 {
     QVector<SourceItem> objects;
-    objects.reserve(SourceListWidget()->count());
+    objects.reserve(Widgets().sourceList->count());
 
-    for (int i = 0; i < SourceListWidget()->count(); ++i)
+    for (int i = 0; i < Widgets().sourceList->count(); ++i)
     {
-        if (const QListWidgetItem *item = SourceListWidget()->item(i))
+        if (const QListWidgetItem *item = Widgets().sourceList->item(i))
         {
             const auto sourceItem = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
             objects.append(sourceItem);

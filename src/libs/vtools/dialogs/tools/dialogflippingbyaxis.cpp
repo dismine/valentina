@@ -132,93 +132,23 @@ DialogFlippingByAxis::~DialogFlippingByAxis()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogFlippingByAxis::SourceListWidget() const -> QListWidget *
+auto DialogFlippingByAxis::Widgets() const -> OperationWidgets
 {
-    return ui->listWidget;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogFlippingByAxis::NameLineEdit() const -> QLineEdit *
-{
-    return ui->lineEditName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogFlippingByAxis::LabelName() const -> QLabel *
-{
-    return ui->labelName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogFlippingByAxis::LabelStatus() const -> QLabel *
-{
-    return ui->labelStatus;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogFlippingByAxis::LabelGroupName() const -> QLabel *
-{
-    return ui->labelGroupName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogFlippingByAxis::PenStyleComboBox() const -> QComboBox *
-{
-    return ui->comboBoxPenStyle;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogFlippingByAxis::ColorButton() const -> VPE::QtColorPicker *
-{
-    return ui->pushButtonColor;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogFlippingByAxis::ObjectTypeComboBox() const -> QComboBox *
-{
-    return ui->comboBoxObjectType;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogFlippingByAxis::NewObjectComboBox() const -> QComboBox *
-{
-    return ui->comboBoxNewObject;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogFlippingByAxis::AddObjectButton() const -> QAbstractButton *
-{
-    return ui->toolButtonNewObject;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogFlippingByAxis::RemoveObjectButton() const -> QAbstractButton *
-{
-    return ui->toolButtonRemoveObject;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogFlippingByAxis::NotesPlainTextEdit() const -> QPlainTextEdit *
-{
-    return ui->plainTextEditToolNotes;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogFlippingByAxis::GroupTagsLineEdit() const -> VCompleterLineEdit *
-{
-    return ui->lineEditGroupTags;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogFlippingByAxis::VisibilityGroupLineEdit() const -> QLineEdit *
-{
-    return ui->lineEditVisibilityGroup;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto DialogFlippingByAxis::VisibilityGroupBox() const -> QGroupBox *
-{
-    return ui->groupBoxVisibilityGroup;
+    return {.sourceList = ui->listWidget,
+            .name = ui->lineEditName,
+            .labelName = ui->labelName,
+            .labelStatus = ui->labelStatus,
+            .labelGroupName = ui->labelGroupName,
+            .penStyle = ui->comboBoxPenStyle,
+            .color = ui->pushButtonColor,
+            .objectType = ui->comboBoxObjectType,
+            .newObject = ui->comboBoxNewObject,
+            .addObject = ui->toolButtonNewObject,
+            .removeObject = ui->toolButtonRemoveObject,
+            .notes = ui->plainTextEditToolNotes,
+            .groupTags = ui->lineEditGroupTags,
+            .visibilityGroupLine = ui->lineEditVisibilityGroup,
+            .visibilityGroup = ui->groupBoxVisibilityGroup};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
