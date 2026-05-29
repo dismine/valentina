@@ -50,7 +50,7 @@ public:
     VToolRecord(VToolRecord &&) = default;
     auto operator=(VToolRecord &&) -> VToolRecord & = default;
 
-    auto operator==(const VToolRecord &record) const -> bool;
+    auto operator==(const VToolRecord &record) const noexcept -> bool;
 
     auto GetId() const -> quint32;
     void SetId(const quint32 &value);
@@ -135,7 +135,7 @@ inline void VToolRecord::SetPatternBlockIndex(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto VToolRecord::operator==(const VToolRecord &record) const -> bool
+inline auto VToolRecord::operator==(const VToolRecord &record) const noexcept -> bool
 {
     // Id should be enough
     return id == record.id;
