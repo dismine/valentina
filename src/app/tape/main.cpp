@@ -93,7 +93,7 @@ auto main(int argc, char *argv[]) -> int
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    VXercesGuard xercesGuard;
+    const VXercesGuard xercesGuard;
 #endif
 
 #ifndef Q_OS_MAC // supports natively

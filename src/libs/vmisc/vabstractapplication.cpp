@@ -440,7 +440,7 @@ auto VAbstractApplication::ClearMessage(QString msg) -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractApplication::IsWarningMessage(const QString &message) const -> bool
+auto VAbstractApplication::IsWarningMessage(const QString &message) -> bool
 {
     return VAbstractApplication::ClearMessage(message).startsWith(warningMessageSignature);
 }
@@ -570,10 +570,12 @@ void VAbstractApplication::CheckSystemLocale()
         return;
     }
 
-    auto CheckLanguage = [](QStandardPaths::StandardLocation type, const QStringList &test)
+    auto CheckLanguage = [](QStandardPaths::StandardLocation type, const QStringList &test) -> int
     {
         const QString path = QStandardPaths::writableLocation(type);
-        bool const res = std::any_of(test.begin(), test.end(), [path](const QString &t) { return path.contains(t); });
+        bool const res = std::any_of(test.begin(),
+                                     test.end(),
+                                     [path](const QString &t) -> bool { return path.contains(t); });
         return static_cast<int>(res);
     };
 
@@ -646,8 +648,8 @@ void VAbstractApplication::RepopulateFontDatabase(const QString &path)
 {
     if (m_svgFontDatabase != nullptr)
     {
-        QFuture<void> const future =
-            QtConcurrent::run([this, path]() { m_svgFontDatabase->PopulateFontDatabase(path); });
+        QFuture<void> const future = QtConcurrent::run([this, path]() -> void
+                                                       { m_svgFontDatabase->PopulateFontDatabase(path); });
     }
 }
 
@@ -758,6 +760,7 @@ void VAbstractApplication::ClearOldLogs()
     QDir::setCurrent(logDirPath);
 
     // Restore working directory
+    // NOLINTNEXTLINE(modernize-use-trailing-return-type)
     auto restore = qScopeGuard([workingDirectory] { QDir::setCurrent(workingDirectory); });
 
     QDirIterator it(logsDir.absolutePath(), QDir::Files | QDir::NoDotAndDotDot, QDirIterator::NoIteratorFlags);
@@ -774,13 +777,13 @@ void VAbstractApplication::ClearOldLogs()
     }
 
     qDebug("Clearing old logs");
-    for (const auto &fn : allFiles)
+    for (const auto &fn : std::as_const(allFiles))
     {
         QFileInfo const info(fn);
         const QDateTime created = info.birthTime();
         if (created.daysTo(QDateTime::currentDateTime()) >= DAYS_TO_KEEP_LOGS)
         {
-            VLockGuard<QFile> const tmp(info.absoluteFilePath(), [&fn]() { return new QFile(fn); });
+            VLockGuard<QFile> const tmp(info.absoluteFilePath(), [&fn]() -> QFile * { return new QFile(fn); });
             if (tmp.GetProtected() != nullptr)
             {
                 if (tmp.GetProtected()->remove())

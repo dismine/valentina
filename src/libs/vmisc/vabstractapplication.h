@@ -93,7 +93,7 @@ public:
     static auto ClearMessage(QString msg) -> QString;
 
     static const QString warningMessageSignature;
-    auto IsWarningMessage(const QString &message) const -> bool;
+    static auto IsWarningMessage(const QString &message) -> bool;
 
     auto NativeFileDialog(QFileDialog::Options options = QFileDialog::Options()) const -> QFileDialog::Options;
 

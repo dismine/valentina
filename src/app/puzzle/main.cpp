@@ -107,7 +107,7 @@ auto main(int argc, char *argv[]) -> int
 #endif // Q_OS_MAC
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    VXercesGuard xercesGuard;
+    const VXercesGuard xercesGuard;
 #endif
 
     VPApplication app(argc, argv);
