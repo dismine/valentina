@@ -3703,22 +3703,22 @@
         <translation>Achsentyp:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="294"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="224"/>
         <source>Select origin point</source>
         <translation>Ursprung auswählen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="342"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="272"/>
         <source>Select origin point that is not part of the list of objects</source>
         <translation>Ursprung auswählen, der nicht Teil der Liste an Objekten ist</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="429"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="359"/>
         <source>Vertical axis</source>
         <translation>Vertikale Achse</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="430"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="360"/>
         <source>Horizontal axis</source>
         <translation>Horizontale Achse</translation>
     </message>
@@ -3738,10 +3738,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="234"/>
         <source>Name:</source>
         <translation>Name:</translation>
-    </message>
-    <message>
-        <source>Rotation</source>
-        <translation type="vanished">Drehung</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="251"/>
@@ -3780,7 +3776,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="370"/>
         <source>Ready</source>
         <translation>Fertig</translation>
     </message>
@@ -3790,21 +3786,9 @@
         <translation>Notizen</translation>
     </message>
     <message>
-        <source>Invalid group name</source>
-        <translation type="vanished">Ungültiger Gruppen Name</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">Standard</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="342"/>
         <source>Invalid point</source>
         <translation>Fehlerhafter Punkt</translation>
-    </message>
-    <message>
-        <source>Invalid label</source>
-        <translation type="vanished">Fehlerhafte Beschriftung</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="219"/>
@@ -3833,22 +3817,22 @@
         <translation>Zweiter Linienpunkt:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="288"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="218"/>
         <source>Select first line point</source>
         <translation>Ersten Punkt der Linie auswählen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="336"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="266"/>
         <source>Select first line point that is not part of the list of objects</source>
         <translation>Wähle ersten Punkt der Linie, der nicht Teil der Liste der Objekte ist</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="340"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="270"/>
         <source>Select second line point</source>
         <translation>Zweiten Punkt der Linie auswählen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="352"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="282"/>
         <source>Select second line point that is not part of the list of objects</source>
         <translation>Wähle zweiten Punkt der Linie, der nicht Teil der Liste der Objekte ist</translation>
     </message>
@@ -3868,10 +3852,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="234"/>
         <source>Name:</source>
         <translation>Name:</translation>
-    </message>
-    <message>
-        <source>Rotation</source>
-        <translation type="vanished">Drehung</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="251"/>
@@ -3910,7 +3890,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="468"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="398"/>
         <source>Ready</source>
         <translation>Fertig</translation>
     </message>
@@ -3920,31 +3900,19 @@
         <translation>Notizen</translation>
     </message>
     <message>
-        <source>Invalid group name</source>
-        <translation type="vanished">Ungültiger Gruppen Name</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">Standard</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="441"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="371"/>
         <source>Invalid line points</source>
         <translation>Fehlerhafter Linienpunkt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="448"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="378"/>
         <source>Invalid first line point</source>
         <translation>Fehlerhafter erster Linienpunkt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="455"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="385"/>
         <source>Invalid second line point</source>
         <translation>Fehlerhafter zweiter Linienpunkt</translation>
-    </message>
-    <message>
-        <source>Invalid label</source>
-        <translation type="vanished">Fehlerhafte Beschriftung</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="219"/>
@@ -6177,12 +6145,12 @@ Einstellungen trotzdem anwenden?</translation>
         <translation type="vanished">Suffix:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="521"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="451"/>
         <source>Edit angle</source>
         <translation>Winkel bearbeiten</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="549"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="479"/>
         <source>Edit length</source>
         <translation>Länge bearbeiten</translation>
     </message>
@@ -6205,7 +6173,7 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Drehungs-Winkel:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="535"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="465"/>
         <source>Edit rotation angle</source>
         <translation>Drehungs-Winkel bearbeiten</translation>
     </message>
@@ -6229,10 +6197,6 @@ Einstellungen trotzdem anwenden?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="780"/>
         <source>Name:</source>
         <translation>Name:</translation>
-    </message>
-    <message>
-        <source>Rotation</source>
-        <translation type="vanished">Drehung</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="797"/>
@@ -6281,7 +6245,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="820"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="687"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="617"/>
         <source>Ready</source>
         <translation>Fertig</translation>
     </message>
@@ -6291,31 +6255,19 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Notizen</translation>
     </message>
     <message>
-        <source>Invalid group name</source>
-        <translation type="vanished">Ungültiger Gruppen Name</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">Standard</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="628"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="558"/>
         <source>Invalid angle formula</source>
         <translation>Ungültige Winkelformeln</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="644"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="574"/>
         <source>Invalid rotation angle formula</source>
         <translation>Ungültige Drehwinkel-Formel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="660"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="590"/>
         <source>Invalid length formula</source>
         <translation>Unzulässige Längenformel</translation>
-    </message>
-    <message>
-        <source>Invalid label</source>
-        <translation type="vanished">Fehlerhafte Beschriftung</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="765"/>
@@ -6610,22 +6562,22 @@ Einstellungen trotzdem anwenden?</translation>
         <translation type="unfinished">Drehung</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="159"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="158"/>
         <source>Invalid group name</source>
-        <translation type="unfinished">Ungültiger Gruppen Name</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="221"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="217"/>
         <source>Default</source>
         <translation type="unfinished">Standard</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="311"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="307"/>
         <source>Invalid label</source>
-        <translation type="unfinished">Fehlerhafte Beschriftung</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="311"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="307"/>
         <source>Invalid name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8789,12 +8741,12 @@ Einstellungen trotzdem anwenden?</translation>
         <translation type="vanished">Suffix:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="437"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="367"/>
         <source>Edit angle</source>
         <translation>Winkel bearbeiten</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="317"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="247"/>
         <source>Select origin point</source>
         <translation>Ursprung auswählen</translation>
     </message>
@@ -8808,7 +8760,7 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Berechnung</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="408"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="338"/>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Dieser Punkt kann nicht der Ausgangspunkt sein. Bitte wähle einen anderen Ausgangspunkt</translation>
     </message>
@@ -8860,7 +8812,7 @@ Einstellungen trotzdem anwenden?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="443"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="573"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="503"/>
         <source>Ready</source>
         <translation>Fertig</translation>
     </message>
@@ -8870,26 +8822,14 @@ Einstellungen trotzdem anwenden?</translation>
         <translation>Notizen</translation>
     </message>
     <message>
-        <source>Invalid group name</source>
-        <translation type="vanished">Ungültiger Gruppen Name</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="530"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="460"/>
         <source>Invalid rotation point</source>
         <translation>Ungültiger Drehpunkt</translation>
     </message>
     <message>
-        <source>Invalid label</source>
-        <translation type="vanished">Fehlerhafte Beschriftung</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="562"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="492"/>
         <source>Invalid angle formula</source>
         <translation>Ungültige Winkelformeln</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">Standard</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="388"/>

@@ -663,7 +663,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="287"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Поміняти точки місцями</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="318"/>
@@ -3703,26 +3703,22 @@
         <translation>Тип вісі:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="294"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="224"/>
         <source>Select origin point</source>
         <translation>Виберіть початкову точку</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="342"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="272"/>
         <source>Select origin point that is not part of the list of objects</source>
         <translation>Виберіть початкову точку, що не є частиною списку об&apos;єктів</translation>
     </message>
     <message>
-        <source>Invalid name</source>
-        <translation type="vanished">Неправильне ім&apos;я</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="429"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="359"/>
         <source>Vertical axis</source>
         <translation>Вертикальна вісь</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="430"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="360"/>
         <source>Horizontal axis</source>
         <translation>Горизонтальна вісь</translation>
     </message>
@@ -3742,10 +3738,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="234"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
-    </message>
-    <message>
-        <source>Rotation</source>
-        <translation type="vanished">Обертання</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="251"/>
@@ -3784,7 +3776,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="370"/>
         <source>Ready</source>
         <translation>Готово</translation>
     </message>
@@ -3794,21 +3786,9 @@
         <translation>Примітки</translation>
     </message>
     <message>
-        <source>Invalid group name</source>
-        <translation type="vanished">Недійсна назва групи</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">По замовчуванню</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="342"/>
         <source>Invalid point</source>
         <translation>Неправильна точка</translation>
-    </message>
-    <message>
-        <source>Invalid label</source>
-        <translation type="vanished">Неправильна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="219"/>
@@ -3837,22 +3817,22 @@
         <translation>Друга точка лінії:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="288"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="218"/>
         <source>Select first line point</source>
         <translation>Виберіть першу точку лінії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="336"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="266"/>
         <source>Select first line point that is not part of the list of objects</source>
         <translation>Виберіть першу точку лінії, що не є частиною списку об&apos;єктів</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="340"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="270"/>
         <source>Select second line point</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="352"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="282"/>
         <source>Select second line point that is not part of the list of objects</source>
         <translation>Виберіть другу точку лінії, що не є частиною списку об&apos;єктів</translation>
     </message>
@@ -3872,10 +3852,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="234"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
-    </message>
-    <message>
-        <source>Rotation</source>
-        <translation type="vanished">Обертання</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="251"/>
@@ -3914,7 +3890,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="468"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="398"/>
         <source>Ready</source>
         <translation>Готово</translation>
     </message>
@@ -3924,35 +3900,19 @@
         <translation>Примітки</translation>
     </message>
     <message>
-        <source>Invalid group name</source>
-        <translation type="vanished">Неправильна назва групи</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">По замовчуванню</translation>
-    </message>
-    <message>
-        <source>Invalid name</source>
-        <translation type="vanished">Неправильне ім&apos;я</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="441"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="371"/>
         <source>Invalid line points</source>
         <translation>Недійсні точки лінії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="448"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="378"/>
         <source>Invalid first line point</source>
         <translation>Недійсна перша точка лінії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="455"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="385"/>
         <source>Invalid second line point</source>
         <translation>Недійсна друга точка лінії</translation>
-    </message>
-    <message>
-        <source>Invalid label</source>
-        <translation type="vanished">Неправильна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="219"/>
@@ -5643,7 +5603,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="185"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Поміняти точки місцями</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="37"/>
@@ -6186,12 +6146,12 @@ Apply settings anyway?</source>
         <translation type="vanished">Суфікс:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="521"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="451"/>
         <source>Edit angle</source>
         <translation>Редагувати кут</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="549"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="479"/>
         <source>Edit length</source>
         <translation>Редагувати довжину</translation>
     </message>
@@ -6214,7 +6174,7 @@ Apply settings anyway?</source>
         <translation>Кут обертання:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="535"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="465"/>
         <source>Edit rotation angle</source>
         <translation>Редагувати кут обертання</translation>
     </message>
@@ -6238,10 +6198,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="780"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
-    </message>
-    <message>
-        <source>Rotation</source>
-        <translation type="vanished">Обертання</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="797"/>
@@ -6290,7 +6246,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="820"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="687"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="617"/>
         <source>Ready</source>
         <translation>Готово</translation>
     </message>
@@ -6300,35 +6256,19 @@ Apply settings anyway?</source>
         <translation>Примітки</translation>
     </message>
     <message>
-        <source>Invalid group name</source>
-        <translation type="vanished">Неправильна назва групи</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">По замовчуванню</translation>
-    </message>
-    <message>
-        <source>Invalid name</source>
-        <translation type="vanished">Неправильне ім&apos;я</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="628"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="558"/>
         <source>Invalid angle formula</source>
         <translation>Недійсна формула кута</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="644"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="574"/>
         <source>Invalid rotation angle formula</source>
         <translation>Недійсна формула кута повороту</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="660"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="590"/>
         <source>Invalid length formula</source>
         <translation>Недійсна формула довжини</translation>
-    </message>
-    <message>
-        <source>Invalid label</source>
-        <translation type="vanished">Неправильна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="765"/>
@@ -6582,7 +6522,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="280"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Поміняти точки місцями</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="317"/>
@@ -6620,27 +6560,27 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="69"/>
         <source>Rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Обертання</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="159"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="158"/>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправильна назва групи</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="221"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="217"/>
         <source>Default</source>
-        <translation type="unfinished">По замовчуванню</translation>
+        <translation>По замовчуванню</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="311"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="307"/>
         <source>Invalid label</source>
-        <translation type="unfinished">Неправильна мітка</translation>
+        <translation>Неправильна мітка</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="311"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="307"/>
         <source>Invalid name</source>
-        <translation type="unfinished">Неправильне ім&apos;я</translation>
+        <translation>Неправильне ім&apos;я</translation>
     </message>
 </context>
 <context>
@@ -8269,7 +8209,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="102"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Поміняти точки місцями</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="139"/>
@@ -8804,12 +8744,12 @@ Apply settings anyway?</source>
         <translation type="vanished">Суфікс:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="437"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="367"/>
         <source>Edit angle</source>
         <translation>Редагувати кут</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="317"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="247"/>
         <source>Select origin point</source>
         <translation>Виберіть початкову точку</translation>
     </message>
@@ -8823,7 +8763,7 @@ Apply settings anyway?</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="408"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="338"/>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Ця точка може бути вихідною точкою. Будь ласка, виберіть іншу відправну точку операції</translation>
     </message>
@@ -8875,7 +8815,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="443"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="573"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="503"/>
         <source>Ready</source>
         <translation>Готово</translation>
     </message>
@@ -8885,30 +8825,14 @@ Apply settings anyway?</source>
         <translation>Примітки</translation>
     </message>
     <message>
-        <source>Invalid group name</source>
-        <translation type="vanished">Неправильна назва групи</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="530"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="460"/>
         <source>Invalid rotation point</source>
         <translation>Недійсна точка обертання</translation>
     </message>
     <message>
-        <source>Invalid label</source>
-        <translation type="vanished">Неправильна мітка</translation>
-    </message>
-    <message>
-        <source>Invalid name</source>
-        <translation type="vanished">Неправильне ім&apos;я</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="562"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="492"/>
         <source>Invalid angle formula</source>
         <translation>Недійсна формула кута</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">По замовчуванню</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="388"/>

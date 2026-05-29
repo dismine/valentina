@@ -3703,22 +3703,22 @@
         <translation>Vrsta osi:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="294"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="224"/>
         <source>Select origin point</source>
         <translation>Odaberite početnu točku</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="342"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="272"/>
         <source>Select origin point that is not part of the list of objects</source>
         <translation>Odaberite početnu točku koja nije dio popisa objekata</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="429"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="359"/>
         <source>Vertical axis</source>
         <translation>Okomita os</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="430"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="360"/>
         <source>Horizontal axis</source>
         <translation>Vodoravna os</translation>
     </message>
@@ -3738,10 +3738,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="234"/>
         <source>Name:</source>
         <translation>Naziv:</translation>
-    </message>
-    <message>
-        <source>Rotation</source>
-        <translation type="vanished">Rotacija</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="251"/>
@@ -3780,7 +3776,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="370"/>
         <source>Ready</source>
         <translation>Spremno</translation>
     </message>
@@ -3790,21 +3786,9 @@
         <translation>Bilješke</translation>
     </message>
     <message>
-        <source>Invalid group name</source>
-        <translation type="vanished">Neispravno ime grupe</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">Zadano</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="342"/>
         <source>Invalid point</source>
         <translation>Neispravna točka</translation>
-    </message>
-    <message>
-        <source>Invalid label</source>
-        <translation type="vanished">Neispravna oznaka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="219"/>
@@ -3833,22 +3817,22 @@
         <translation>Druga točka linije:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="288"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="218"/>
         <source>Select first line point</source>
         <translation>Odaberi prvu točku linije</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="336"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="266"/>
         <source>Select first line point that is not part of the list of objects</source>
         <translation>Odaberi prvu točku linije koja nije dio popisa objekata</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="340"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="270"/>
         <source>Select second line point</source>
         <translation>Odaberi drugu točku linije</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="352"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="282"/>
         <source>Select second line point that is not part of the list of objects</source>
         <translation>Odaberi drugu točku linije koja nije dio popisa objekata</translation>
     </message>
@@ -3868,10 +3852,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="234"/>
         <source>Name:</source>
         <translation>Naziv:</translation>
-    </message>
-    <message>
-        <source>Rotation</source>
-        <translation type="vanished">Rotacija</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="251"/>
@@ -3910,7 +3890,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="468"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="398"/>
         <source>Ready</source>
         <translation>Spremno</translation>
     </message>
@@ -3920,31 +3900,19 @@
         <translation>Bilješke</translation>
     </message>
     <message>
-        <source>Invalid group name</source>
-        <translation type="vanished">Neispravno ime grupe</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">Zadano</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="441"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="371"/>
         <source>Invalid line points</source>
         <translation>Neispravne točke linije</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="448"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="378"/>
         <source>Invalid first line point</source>
         <translation>Neispravna prva točka linije</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="455"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="385"/>
         <source>Invalid second line point</source>
         <translation>Neispravna druga točka linije</translation>
-    </message>
-    <message>
-        <source>Invalid label</source>
-        <translation type="vanished">Neispravna oznaka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="219"/>
@@ -6178,12 +6146,12 @@ Svejedno primijeniti postavke?</translation>
         <translation type="vanished">Sufiks:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="521"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="451"/>
         <source>Edit angle</source>
         <translation>Uredi kut</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="549"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="479"/>
         <source>Edit length</source>
         <translation>Uredi duljinu</translation>
     </message>
@@ -6206,7 +6174,7 @@ Svejedno primijeniti postavke?</translation>
         <translation>Kut rotacije:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="535"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="465"/>
         <source>Edit rotation angle</source>
         <translation>Uredi kut rotacije</translation>
     </message>
@@ -6230,10 +6198,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="780"/>
         <source>Name:</source>
         <translation>Naziv:</translation>
-    </message>
-    <message>
-        <source>Rotation</source>
-        <translation type="vanished">Rotacija</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="797"/>
@@ -6282,7 +6246,7 @@ Svejedno primijeniti postavke?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="820"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="687"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="617"/>
         <source>Ready</source>
         <translation>Spremno</translation>
     </message>
@@ -6292,31 +6256,19 @@ Svejedno primijeniti postavke?</translation>
         <translation>Bilješke</translation>
     </message>
     <message>
-        <source>Invalid group name</source>
-        <translation type="vanished">Neispravno ime grupe</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">Zadano</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="628"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="558"/>
         <source>Invalid angle formula</source>
         <translation>Neispravna formula kuta</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="644"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="574"/>
         <source>Invalid rotation angle formula</source>
         <translation>Neispravna formula kuta rotacije</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="660"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="590"/>
         <source>Invalid length formula</source>
         <translation>Neispravna formula duljine</translation>
-    </message>
-    <message>
-        <source>Invalid label</source>
-        <translation type="vanished">Neispravna oznaka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="765"/>
@@ -6611,22 +6563,22 @@ Svejedno primijeniti postavke?</translation>
         <translation type="unfinished">Rotacija</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="159"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="158"/>
         <source>Invalid group name</source>
-        <translation type="unfinished">Neispravno ime grupe</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="221"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="217"/>
         <source>Default</source>
         <translation type="unfinished">Zadano</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="311"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="307"/>
         <source>Invalid label</source>
-        <translation type="unfinished">Neispravna oznaka</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="311"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="307"/>
         <source>Invalid name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8792,12 +8744,12 @@ Svejedno primijeniti postavke?</translation>
         <translation type="vanished">Sufiks:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="437"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="367"/>
         <source>Edit angle</source>
         <translation>Uredi kut</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="317"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="247"/>
         <source>Select origin point</source>
         <translation>Odaberite početnu točku</translation>
     </message>
@@ -8811,7 +8763,7 @@ Svejedno primijeniti postavke?</translation>
         <translation>Izračun</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="408"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="338"/>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Ova točka ne može biti početna točka. Molimo, odaberite drugu početnu točku</translation>
     </message>
@@ -8863,7 +8815,7 @@ Svejedno primijeniti postavke?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="443"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="573"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="503"/>
         <source>Ready</source>
         <translation>Spremno</translation>
     </message>
@@ -8873,26 +8825,14 @@ Svejedno primijeniti postavke?</translation>
         <translation>Bilješke</translation>
     </message>
     <message>
-        <source>Invalid group name</source>
-        <translation type="vanished">Neispravno ime grupe</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="530"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="460"/>
         <source>Invalid rotation point</source>
         <translation>Neispravna točka rotacije</translation>
     </message>
     <message>
-        <source>Invalid label</source>
-        <translation type="vanished">Neispravna oznaka</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="562"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="492"/>
         <source>Invalid angle formula</source>
         <translation>Neispravna formula kuta</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">Zadano</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="388"/>
