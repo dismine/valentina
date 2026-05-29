@@ -355,12 +355,12 @@ void DialogFlippingByLine::PointChanged()
     quint32 const id1 = getCurrentObjectId(ui->comboBoxFirstLinePoint);
     auto obj1 = std::find_if(SourceObjects().begin(),
                              SourceObjects().end(),
-                             [id1](const SourceItem &sItem) { return sItem.id == id1; });
+                             [id1](const SourceItem &sItem) -> bool { return sItem.id == id1; });
 
     quint32 const id2 = getCurrentObjectId(ui->comboBoxSecondLinePoint);
     auto obj2 = std::find_if(SourceObjects().begin(),
                              SourceObjects().end(),
-                             [id2](const SourceItem &sItem) { return sItem.id == id2; });
+                             [id2](const SourceItem &sItem) -> bool { return sItem.id == id2; });
 
     if (getCurrentObjectId(ui->comboBoxFirstLinePoint) == getCurrentObjectId(ui->comboBoxSecondLinePoint))
     {

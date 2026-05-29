@@ -445,12 +445,12 @@ void DialogOperationTool::RemoveObject()
     }
 
     const QListWidgetItem *item = Widgets().sourceList->currentItem();
-    if (!item)
+    if (item == nullptr)
     {
         return;
     }
 
-    const SourceItem target = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
+    const auto target = qvariant_cast<SourceItem>(item->data(Qt::UserRole));
     const QUuid recordId = target.recordId;
 
     const auto it = std::find_if(m_destination.cbegin(),
