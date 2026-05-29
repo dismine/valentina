@@ -131,7 +131,7 @@ inline void LogMessageDetails(QtMsgType type, const QMessageLogContext &context,
 {
     QString debugdate = "["_L1 + QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss"));
     QString const file = VAbstractApplication::ReduceLogContextFilePath(context.file);
-    const bool isPatternMessage = VAbstractApplication::VApp()->IsWarningMessage(msg);
+    const bool isPatternMessage = VAbstractApplication::IsWarningMessage(msg);
 
     switch (type)
     {
@@ -274,7 +274,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     }
 
     QString logMsg = msg;
-    const bool isPatternMessage = VAbstractApplication::VApp()->IsWarningMessage(msg);
+    const bool isPatternMessage = VAbstractApplication::IsWarningMessage(msg);
     if (isPatternMessage)
     {
         logMsg = logMsg.remove(VAbstractValApplication::warningMessageSignature);

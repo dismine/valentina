@@ -144,7 +144,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         return;
     }
 
-    if (VAbstractApplication::VApp()->IsWarningMessage(msg))
+    if (VAbstractApplication::IsWarningMessage(msg))
     {
         return;
     }

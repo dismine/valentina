@@ -245,7 +245,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     }
 
     QString logMsg = msg;
-    if (const bool isWarningMessage = VAbstractApplication::VApp()->IsWarningMessage(msg); isWarningMessage)
+    if (const bool isWarningMessage = VAbstractApplication::IsWarningMessage(msg); isWarningMessage)
     {
         logMsg = logMsg.remove(VAbstractApplication::warningMessageSignature);
     }
