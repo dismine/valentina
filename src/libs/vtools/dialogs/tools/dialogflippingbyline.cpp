@@ -255,48 +255,52 @@ void DialogFlippingByLine::ChosenObject(quint32 id, const SceneObject &type)
     }
     else if (!prepare && type == SceneObject::Point) // After first choose we ignore all objects
     {
-        auto obj = std::find_if(SourceObjects().begin(),
-                                SourceObjects().end(),
-                                [id](const SourceItem &sItem) -> bool { return sItem.id == id; });
-        switch (number)
+        ChooseLinePoint(id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogFlippingByLine::ChooseLinePoint(quint32 id)
+{
+    if (const bool isSourceObject = std::find_if(SourceObjects().begin(),
+                                                 SourceObjects().end(),
+                                                 [id](const SourceItem &sItem) -> bool { return sItem.id == id; })
+                                    != SourceObjects().end();
+        number == 0)
+    {
+        if (isSourceObject)
         {
-            case 0:
-                if (obj != SourceObjects().end())
-                {
-                    emit ToolTip(tr("Select first line point that is not part of the list of objects"));
-                    return;
-                }
+            emit ToolTip(tr("Select first line point that is not part of the list of objects"));
+            return;
+        }
 
-                if (SetObject(id, ui->comboBoxFirstLinePoint, tr("Select second line point")))
-                {
-                    number++;
-                    auto *operation = qobject_cast<VisToolFlippingByLine *>(vis);
-                    SCASSERT(operation != nullptr)
-                    operation->SetFirstLinePointId(id);
-                    operation->RefreshGeometry();
-                }
-                break;
-            case 1:
-                if (obj != SourceObjects().end())
-                {
-                    emit ToolTip(tr("Select second line point that is not part of the list of objects"));
-                    return;
-                }
+        if (SetObject(id, ui->comboBoxFirstLinePoint, tr("Select second line point")))
+        {
+            number++;
+            auto *operation = qobject_cast<VisToolFlippingByLine *>(vis);
+            SCASSERT(operation != nullptr)
+            operation->SetFirstLinePointId(id);
+            operation->RefreshGeometry();
+        }
+    }
+    else if (number == 1)
+    {
+        if (isSourceObject)
+        {
+            emit ToolTip(tr("Select second line point that is not part of the list of objects"));
+            return;
+        }
 
-                if (getCurrentObjectId(ui->comboBoxFirstLinePoint) != id &&
-                    SetObject(id, ui->comboBoxSecondLinePoint, QString()) && IsFlagError())
-                {
-                    number = 0;
-                    prepare = true;
+        if (getCurrentObjectId(ui->comboBoxFirstLinePoint) != id &&
+            SetObject(id, ui->comboBoxSecondLinePoint, QString()) && IsFlagError())
+        {
+            number = 0;
+            prepare = true;
 
-                    auto *operation = qobject_cast<VisToolFlippingByLine *>(vis);
-                    SCASSERT(operation != nullptr)
-                    operation->SetSecondLinePointId(id);
-                    operation->RefreshGeometry();
-                }
-                break;
-            default:
-                break;
+            auto *operation = qobject_cast<VisToolFlippingByLine *>(vis);
+            SCASSERT(operation != nullptr)
+            operation->SetSecondLinePointId(id);
+            operation->RefreshGeometry();
         }
     }
 }

@@ -84,6 +84,8 @@ private:
 
     /** @brief number number of handled objects */
     qint32 number{0};
+
+    void ChooseLinePoint(quint32 id);
 };
 
 #endif // DIALOGFLIPPINGBYLINE_H
