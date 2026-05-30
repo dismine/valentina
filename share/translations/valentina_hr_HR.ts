@@ -349,7 +349,7 @@
     <message>
         <location filename="../../src/libs/vdxf/libdxfrw/intern/drw_textcodec.cpp" line="121"/>
         <source>No available codec for code page &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nema dostupnog kodeka za kodnu stranicu &apos;%1&apos;.</translation>
     </message>
 </context>
 <context>
@@ -392,7 +392,7 @@
     <message>
         <location filename="../../src/libs/vtools/undocommands/deletepatternpiece.cpp" line="45"/>
         <source>delete pattern block</source>
-        <translation type="unfinished"></translation>
+        <translation>izbriši blok uzorka</translation>
     </message>
 </context>
 <context>
@@ -437,12 +437,12 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="266"/>
         <source>Special thanks</source>
-        <translation type="unfinished"></translation>
+        <translation>Posebne zahvale</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="308"/>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Zahvale</translation>
     </message>
     <message>
         <source>Contributors</source>
@@ -503,12 +503,12 @@
     <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="273"/>
         <source>Special thanks</source>
-        <translation type="unfinished"></translation>
+        <translation>Posebne zahvale</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="321"/>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Zahvale</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="144"/>
@@ -663,7 +663,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="287"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamijeni točke</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="318"/>
@@ -1014,7 +1014,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="14"/>
         <source>Arc with length</source>
-        <translation type="unfinished"></translation>
+        <translation>Luk zadane duljine</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="651"/>
@@ -1222,52 +1222,52 @@
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="24"/>
         <source>Rename…</source>
-        <translation type="unfinished"></translation>
+        <translation>Preimenuj…</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="43"/>
         <source>Base name</source>
-        <translation type="unfinished"></translation>
+        <translation>Osnovno ime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="48"/>
         <source>New name</source>
-        <translation type="unfinished"></translation>
+        <translation>Novo ime</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="58"/>
         <source>Text:</source>
-        <translation type="unfinished">Tekst:</translation>
+        <translation>Tekst:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="65"/>
         <source>Use %n, %0n, %00n, %000n for counting</source>
-        <translation type="unfinished"></translation>
+        <translation>Koristi %n, %0n, %00n, %000n za numeriranje</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="75"/>
         <source>Position:</source>
-        <translation type="unfinished">Pozicija:</translation>
+        <translation>Pozicija:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="84"/>
         <source>Append</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj na kraj</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="97"/>
         <source>Prepend</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj na početak</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="107"/>
         <source>Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamijeni</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.cpp" line="182"/>
         <source>Enable renaming for this item</source>
-        <translation type="unfinished"></translation>
+        <translation>Omogući preimenovanje za ovu stavku</translation>
     </message>
 </context>
 <context>
@@ -1275,17 +1275,17 @@
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="14"/>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Zahvale</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="28"/>
         <source>Sponsors</source>
-        <translation type="unfinished"></translation>
+        <translation>Sponzori</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="42"/>
         <source>Authors</source>
-        <translation type="unfinished"></translation>
+        <translation>Autori</translation>
     </message>
 </context>
 <context>
@@ -1584,22 +1584,22 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="357"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="364"/>
         <source>Choose unique name for left sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite jedinstven naziv za lijevu potkrivulju</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="371"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="378"/>
         <source>Choose unique name for right sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite jedinstven naziv za desnu potkrivulju</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="28"/>
@@ -1725,22 +1725,22 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="288"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="295"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="302"/>
         <source>Choose unique name for left sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite jedinstven naziv za lijevu potkrivulju</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="309"/>
         <source>Choose unique name for right sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite jedinstven naziv za desnu potkrivulju</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="332"/>
@@ -1840,7 +1840,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="253"/>
         <source>Choose unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite jedinstven naziv</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="260"/>
@@ -1855,22 +1855,22 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="280"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="287"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="294"/>
         <source>Choose unique name for left sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite jedinstven naziv za lijevu potkrivulju</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="301"/>
         <source>Choose unique name for right sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite jedinstven naziv za desnu potkrivulju</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="324"/>
@@ -1971,17 +1971,17 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="260"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="267"/>
         <source>Choose unique name for left sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite jedinstven naziv za lijevu potkrivulju</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="274"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="281"/>
@@ -1996,7 +1996,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="309"/>
         <source>Choose unique name for right sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite jedinstven naziv za desnu potkrivulju</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="332"/>
@@ -3167,17 +3167,17 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="14"/>
         <source>Elliptical arc with length</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliptični luk zadane duljine</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="28"/>
         <source>Tool</source>
-        <translation type="unfinished">Alat</translation>
+        <translation>Alat</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="79"/>
         <source>Radius1:</source>
-        <translation type="unfinished">Polumjer1:</translation>
+        <translation>Polumjer1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="99"/>
@@ -3186,7 +3186,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="648"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="827"/>
         <source>Formula wizard</source>
-        <translation type="unfinished">Čarobnjak za formule</translation>
+        <translation>Čarobnjak za formule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="141"/>
@@ -3195,7 +3195,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="690"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="869"/>
         <source>Value</source>
-        <translation type="unfinished">Vrijednost</translation>
+        <translation>Vrijednost</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="195"/>
@@ -3204,17 +3204,17 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="738"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="923"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="264"/>
         <source>Radius2:</source>
-        <translation type="unfinished">Polumjer2:</translation>
+        <translation>Polumjer2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="449"/>
         <source>First angle:</source>
-        <translation type="unfinished">Prvi kut:</translation>
+        <translation>Prvi kut:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="173"/>
@@ -3223,77 +3223,77 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="716"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="901"/>
         <source>Calculation</source>
-        <translation type="unfinished">Izračun</translation>
+        <translation>Izračun</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="628"/>
         <source>Length:</source>
-        <translation type="unfinished">Duljina:</translation>
+        <translation>Duljina:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="807"/>
         <source>Rotation angle:</source>
-        <translation type="unfinished">Kut rotacije:</translation>
+        <translation>Kut rotacije:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="958"/>
         <source>Center point:</source>
-        <translation type="unfinished">Središnja točka:</translation>
+        <translation>Središnja točka:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="968"/>
         <source>Color:</source>
-        <translation type="unfinished">Boja:</translation>
+        <translation>Boja:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="975"/>
         <source>Pen style:</source>
-        <translation type="unfinished">Stil pera:</translation>
+        <translation>Stil pera:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1004"/>
         <source>Approximation scale:</source>
-        <translation type="unfinished">Skala aproksimacije:</translation>
+        <translation>Skala aproksimacije:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1011"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation type="unfinished">Postavi približnu skalu za ovu krivulju, 0 - koristi globalnu vrijednost</translation>
+        <translation>Postavi približnu skalu za ovu krivulju, 0 - koristi globalnu vrijednost</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1027"/>
         <source>Alias:</source>
-        <translation type="unfinished">Pseudonim:</translation>
+        <translation>Pseudonim:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1064"/>
         <source>Notes</source>
-        <translation type="unfinished">Bilješke</translation>
+        <translation>Bilješke</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="563"/>
         <source>Edit radius1</source>
-        <translation type="unfinished">Uredi polumjer1</translation>
+        <translation>Uredi polumjer1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="577"/>
         <source>Edit radius2</source>
-        <translation type="unfinished">Uredi polumjer2</translation>
+        <translation>Uredi polumjer2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="591"/>
         <source>Edit the first angle</source>
-        <translation type="unfinished">Uredi prvi kut</translation>
+        <translation>Uredi prvi kut</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="605"/>
         <source>Edit the elliptical arc length</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi duljinu eliptičnog luka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="619"/>
         <source>Edit rotation angle</source>
-        <translation type="unfinished">Uredi kut rotacije</translation>
+        <translation>Uredi kut rotacije</translation>
     </message>
 </context>
 <context>
@@ -3708,17 +3708,17 @@
         <translation>Odaberite početnu točku</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="272"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="271"/>
         <source>Select origin point that is not part of the list of objects</source>
         <translation>Odaberite početnu točku koja nije dio popisa objekata</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="358"/>
         <source>Vertical axis</source>
         <translation>Okomita os</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="360"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="359"/>
         <source>Horizontal axis</source>
         <translation>Vodoravna os</translation>
     </message>
@@ -3762,7 +3762,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="42"/>
         <source>New:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="142"/>
@@ -3776,7 +3776,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="370"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="369"/>
         <source>Ready</source>
         <translation>Spremno</translation>
     </message>
@@ -3786,7 +3786,7 @@
         <translation>Bilješke</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="342"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="341"/>
         <source>Invalid point</source>
         <translation>Neispravna točka</translation>
     </message>
@@ -3822,17 +3822,17 @@
         <translation>Odaberi prvu točku linije</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="273"/>
         <source>Select first line point that is not part of the list of objects</source>
         <translation>Odaberi prvu točku linije koja nije dio popisa objekata</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="270"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="277"/>
         <source>Select second line point</source>
         <translation>Odaberi drugu točku linije</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="282"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="290"/>
         <source>Select second line point that is not part of the list of objects</source>
         <translation>Odaberi drugu točku linije koja nije dio popisa objekata</translation>
     </message>
@@ -3876,7 +3876,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="42"/>
         <source>New:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="142"/>
@@ -3890,7 +3890,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="398"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="402"/>
         <source>Ready</source>
         <translation>Spremno</translation>
     </message>
@@ -3900,17 +3900,17 @@
         <translation>Bilješke</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="375"/>
         <source>Invalid line points</source>
         <translation>Neispravne točke linije</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="378"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="382"/>
         <source>Invalid first line point</source>
         <translation>Neispravna prva točka linije</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="385"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="389"/>
         <source>Invalid second line point</source>
         <translation>Neispravna druga točka linije</translation>
     </message>
@@ -3925,151 +3925,151 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="20"/>
         <source>Graduated curve tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Alat graduirana krivulja</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="34"/>
         <source>Tool</source>
-        <translation type="unfinished">Alat</translation>
+        <translation>Alat</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="40"/>
         <source>Offsets</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomaci</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="75"/>
         <source>Name</source>
-        <translation type="unfinished">Naziv</translation>
+        <translation>Naziv</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="80"/>
         <source>Calculated value</source>
-        <translation type="unfinished">Izračunata vrijednost</translation>
+        <translation>Izračunata vrijednost</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="85"/>
         <source>Formula</source>
-        <translation type="unfinished">Formula</translation>
+        <translation>Formula</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="100"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="103"/>
         <source>Details</source>
-        <translation type="unfinished">Detalji</translation>
+        <translation>Detalji</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="114"/>
         <source>Move offset up</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomakni pomak gore</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="131"/>
         <source>Move offset down</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomakni pomak dolje</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="206"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="472"/>
         <source>Name:</source>
-        <translation type="unfinished">Naziv:</translation>
+        <translation>Naziv:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="216"/>
         <source>Unique offset name</source>
-        <translation type="unfinished"></translation>
+        <translation>Jedinstven naziv pomaka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="226"/>
         <source>Calculated value:</source>
-        <translation type="unfinished">Izračunata vrijednost:</translation>
+        <translation>Izračunata vrijednost:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="233"/>
         <source>Formula:</source>
-        <translation type="unfinished">Formula:</translation>
+        <translation>Formula:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="257"/>
         <source>Calculation</source>
-        <translation type="unfinished">Izračun</translation>
+        <translation>Izračun</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="285"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="314"/>
         <source>Formula wizard</source>
-        <translation type="unfinished">Čarobnjak za formule</translation>
+        <translation>Čarobnjak za formule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="361"/>
         <source>Description:</source>
-        <translation type="unfinished">Opis:</translation>
+        <translation>Opis:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="396"/>
         <source>Curve:</source>
-        <translation type="unfinished">Krivulja:</translation>
+        <translation>Krivulja:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="406"/>
         <source>Pen style:</source>
-        <translation type="unfinished">Stil pera:</translation>
+        <translation>Stil pera:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="435"/>
         <source>Color:</source>
-        <translation type="unfinished">Boja:</translation>
+        <translation>Boja:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="449"/>
         <source>Approximation scale:</source>
-        <translation type="unfinished">Skala aproksimacije:</translation>
+        <translation>Skala aproksimacije:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="456"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation type="unfinished">Postavi približnu skalu za ovu krivulju, 0 - koristi globalnu vrijednost</translation>
+        <translation>Postavi približnu skalu za ovu krivulju, 0 - koristi globalnu vrijednost</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="482"/>
         <source>Alias:</source>
-        <translation type="unfinished">Pseudonim:</translation>
+        <translation>Pseudonim:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="512"/>
         <source>Notes</source>
-        <translation type="unfinished">Bilješke</translation>
+        <translation>Bilješke</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="220"/>
         <source>Offset %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomak %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="516"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="785"/>
         <source>Error</source>
-        <translation type="unfinished">Pogreška</translation>
+        <translation>Pogreška</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="522"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="791"/>
         <source>Value</source>
-        <translation type="unfinished">Vrijednost</translation>
+        <translation>Vrijednost</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="691"/>
         <source>Edit offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi pomak</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="786"/>
         <source>Parser error: %1</source>
-        <translation type="unfinished">Pogreška analizatora: %1</translation>
+        <translation>Pogreška analizatora: %1</translation>
     </message>
 </context>
 <context>
@@ -4570,72 +4570,72 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1401"/>
         <source>Increment name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv prirasta je prazan.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1406"/>
         <source>Imported file must not contain the same name twice.</source>
-        <translation type="unfinished">Uvezena datoteka ne smije sadržavati isti naziv dvaput.</translation>
+        <translation>Uvezena datoteka ne smije sadržavati isti naziv dvaput.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1411"/>
         <source>Increment &apos;%1&apos; doesn&apos;t match regex pattern.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prirast &apos;%1&apos; ne odgovara uzorku regularnog izraza.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1416"/>
         <source>Increment &apos;%1&apos; already present in the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prirast &apos;%1&apos; već postoji u datoteci.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1439"/>
         <source>Name</source>
         <comment>increment column</comment>
-        <translation type="unfinished">Naziv</translation>
+        <translation>Naziv</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1441"/>
         <source>Calculated value</source>
         <comment>increment column</comment>
-        <translation type="unfinished">Izračunata vrijednost</translation>
+        <translation>Izračunata vrijednost</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1443"/>
         <source>Formula</source>
         <comment>increment column</comment>
-        <translation type="unfinished">Formula</translation>
+        <translation>Formula</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1445"/>
         <source>Description</source>
         <comment>increment column</comment>
-        <translation type="unfinished">Opis</translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1462"/>
         <source>Increments require at least 2 columns.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prirasti zahtijevaju najmanje 2 stupca.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1479"/>
         <source>Error in row %1. The increment name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pogreška u retku %1. Naziv prirasta je prazan.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1517"/>
         <source>Error in row %1. %2</source>
-        <translation type="unfinished">Pogreška u retku %1. %2</translation>
+        <translation>Pogreška u retku %1. %2</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1690"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1755"/>
         <source>Comma-Separated Values</source>
-        <translation type="unfinished">Vrijednosti odvojene zarezima</translation>
+        <translation>Vrijednosti odvojene zarezima</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1757"/>
         <source>values</source>
-        <translation type="unfinished">Vrijednosti</translation>
+        <translation>Vrijednosti</translation>
     </message>
     <message>
         <source>Increment_%1</source>
@@ -4800,14 +4800,14 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1167"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1760"/>
         <source>Export to CSV</source>
-        <translation type="unfinished">Izvoz u CSV</translation>
+        <translation>Izvoz u CSV</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="475"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1177"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1694"/>
         <source>Import from CSV</source>
-        <translation type="unfinished">Uvezi iz CSV-a</translation>
+        <translation>Uvezi iz CSV-a</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="543"/>
@@ -4841,83 +4841,83 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="14"/>
         <source>Import increments</source>
-        <translation type="unfinished"></translation>
+        <translation>Uvezi priraste</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="26"/>
         <source>Preview</source>
-        <translation type="unfinished">Pregled</translation>
+        <translation>Pregled</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="32"/>
         <source>Input</source>
-        <translation type="unfinished">Unos</translation>
+        <translation>Unos</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="48"/>
         <source>Import</source>
-        <translation type="unfinished">Uvoz</translation>
+        <translation>Uvoz</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="67"/>
         <source>Columns</source>
-        <translation type="unfinished">Stupci</translation>
+        <translation>Stupci</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="96"/>
         <source>Description:</source>
-        <translation type="unfinished">Opis:</translation>
+        <translation>Opis:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="111"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="510"/>
         <source>Ready</source>
-        <translation type="unfinished">Spremno</translation>
+        <translation>Spremno</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="167"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="442"/>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Naziv</translation>
+        <translation>Naziv</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="169"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="444"/>
         <source>Value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Vrijednost</translation>
+        <translation>Vrijednost</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="171"/>
         <source>Description</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Opis</translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="286"/>
         <source>Skip</source>
-        <translation type="unfinished">Preskoči</translation>
+        <translation>Preskoči</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="481"/>
         <source>File path is empty</source>
-        <translation type="unfinished">Putanja datoteke je prazna</translation>
+        <translation>Putanja datoteke je prazna</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="490"/>
         <source>Not enough columns</source>
-        <translation type="unfinished">Nema dovoljno stupaca</translation>
+        <translation>Nema dovoljno stupaca</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="497"/>
         <source>Not enough data to import</source>
-        <translation type="unfinished">Nema dovoljno podataka za uvoz</translation>
+        <translation>Nema dovoljno podataka za uvoz</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="505"/>
         <source>Please, select unique number for each column</source>
-        <translation type="unfinished">Molimo, odaberite jedinstveni broj za svaki stupac</translation>
+        <translation>Molimo, odaberite jedinstveni broj za svaki stupac</translation>
     </message>
 </context>
 <context>
@@ -5603,7 +5603,7 @@ Svejedno primijeniti postavke?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="185"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamijeni točke</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="37"/>
@@ -6222,17 +6222,17 @@ Svejedno primijeniti postavke?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="45"/>
         <source>New:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="103"/>
         <source>Bulk rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Skupno preimenovanje</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="119"/>
         <source>Remove object</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukloni objekt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="152"/>
@@ -6281,17 +6281,17 @@ Svejedno primijeniti postavke?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogmovesteps.ui" line="14"/>
         <source>Move steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Koraci pomicanja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogmovesteps.ui" line="29"/>
         <source>Move Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Alat za pomicanje</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogmovesteps.ui" line="41"/>
         <source>Steps:</source>
-        <translation type="unfinished"></translation>
+        <translation>Koraci:</translation>
     </message>
 </context>
 <context>
@@ -6522,7 +6522,7 @@ Svejedno primijeniti postavke?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="280"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamijeni točke</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="317"/>
@@ -6560,27 +6560,27 @@ Svejedno primijeniti postavke?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="69"/>
         <source>Rotation</source>
-        <translation type="unfinished">Rotacija</translation>
+        <translation>Rotacija</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="158"/>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Neispravno ime grupe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="217"/>
         <source>Default</source>
-        <translation type="unfinished">Zadano</translation>
+        <translation>Zadano</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="307"/>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Neispravan naziv</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="307"/>
         <source>Invalid name</source>
-        <translation type="unfinished"></translation>
+        <translation>Neispravno ime</translation>
     </message>
 </context>
 <context>
@@ -6588,82 +6588,82 @@ Svejedno primijeniti postavke?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="14"/>
         <source>Parallel curve tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Alat paralelna krivulja</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="28"/>
         <source>Tool</source>
-        <translation type="unfinished">Alat</translation>
+        <translation>Alat</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="79"/>
         <source>Width:</source>
-        <translation type="unfinished">Širina:</translation>
+        <translation>Širina:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="99"/>
         <source>Formula wizard</source>
-        <translation type="unfinished">Čarobnjak za formule</translation>
+        <translation>Čarobnjak za formule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="141"/>
         <source>Value</source>
-        <translation type="unfinished">Vrijednost</translation>
+        <translation>Vrijednost</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="167"/>
         <source>Calculation</source>
-        <translation type="unfinished">Izračun</translation>
+        <translation>Izračun</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="189"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="224"/>
         <source>Curve:</source>
-        <translation type="unfinished">Krivulja:</translation>
+        <translation>Krivulja:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="234"/>
         <source>Color:</source>
-        <translation type="unfinished">Boja:</translation>
+        <translation>Boja:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="241"/>
         <source>Pen style:</source>
-        <translation type="unfinished">Stil pera:</translation>
+        <translation>Stil pera:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="270"/>
         <source>Approximation scale:</source>
-        <translation type="unfinished">Skala aproksimacije:</translation>
+        <translation>Skala aproksimacije:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="277"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation type="unfinished">Postavi približnu skalu za ovu krivulju, 0 - koristi globalnu vrijednost</translation>
+        <translation>Postavi približnu skalu za ovu krivulju, 0 - koristi globalnu vrijednost</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="293"/>
         <source>Alias:</source>
-        <translation type="unfinished">Pseudonim:</translation>
+        <translation>Pseudonim:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="314"/>
         <source>Name:</source>
-        <translation type="unfinished">Naziv:</translation>
+        <translation>Naziv:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="340"/>
         <source>Notes</source>
-        <translation type="unfinished">Bilješke</translation>
+        <translation>Bilješke</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.cpp" line="316"/>
         <source>Edit width to parallel curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi širinu paralelne krivulje</translation>
     </message>
 </context>
 <context>
@@ -7278,12 +7278,12 @@ Svejedno primijeniti postavke?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2182"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a notch visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Stvorite formulu koja regulira vidljivost. Vrijednosti različite od &quot;0&quot; čine zarez vidljivim</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2420"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Stvorite formulu koja regulira vidljivost. Vrijednosti različite od &quot;0&quot; čine putanju vidljivom</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1069"/>
@@ -7313,7 +7313,7 @@ Svejedno primijeniti postavke?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1165"/>
         <source>Edit notch visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi vidljivost zareza</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1659"/>
@@ -8209,7 +8209,7 @@ Svejedno primijeniti postavke?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="102"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamijeni točke</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="139"/>
@@ -8300,53 +8300,53 @@ Svejedno primijeniti postavke?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="52"/>
         <source>Choose unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite jedinstven naziv</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="103"/>
         <source>Arc 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Luk 1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="109"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="202"/>
         <source>Alias2:</source>
-        <translation type="unfinished">Pseudonim2:</translation>
+        <translation>Pseudonim2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="123"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="216"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="137"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="195"/>
         <source>Alias1:</source>
-        <translation type="unfinished">Pseudonim1:</translation>
+        <translation>Pseudonim1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="144"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="223"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="151"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="181"/>
         <source>Choose unique name for left sub arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite jedinstven naziv za lijevu podluku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="158"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="209"/>
         <source>Choose unique name for right sub arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite jedinstven naziv za desnu podluku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="168"/>
         <source>Arc 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Luk 2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="234"/>
@@ -8552,25 +8552,25 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="143"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="236"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="164"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="243"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="171"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="201"/>
         <source>Choose unique name for left sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite jedinstven naziv za lijevu potkrivulju</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="178"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="229"/>
         <source>Choose unique name for right sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite jedinstven naziv za desnu potkrivulju</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="254"/>
@@ -8744,7 +8744,7 @@ Svejedno primijeniti postavke?</translation>
         <translation type="vanished">Sufiks:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="367"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="366"/>
         <source>Edit angle</source>
         <translation>Uredi kut</translation>
     </message>
@@ -8763,7 +8763,7 @@ Svejedno primijeniti postavke?</translation>
         <translation>Izračun</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="338"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="337"/>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Ova točka ne može biti početna točka. Molimo, odaberite drugu početnu točku</translation>
     </message>
@@ -8801,7 +8801,7 @@ Svejedno primijeniti postavke?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="42"/>
         <source>New:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="142"/>
@@ -8815,7 +8815,7 @@ Svejedno primijeniti postavke?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="443"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="503"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="501"/>
         <source>Ready</source>
         <translation>Spremno</translation>
     </message>
@@ -8825,12 +8825,12 @@ Svejedno primijeniti postavke?</translation>
         <translation>Bilješke</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="458"/>
         <source>Invalid rotation point</source>
         <translation>Neispravna točka rotacije</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="492"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="490"/>
         <source>Invalid angle formula</source>
         <translation>Neispravna formula kuta</translation>
     </message>
@@ -9651,7 +9651,7 @@ Svejedno primijeniti postavke?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3075"/>
         <source>Edit notch visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi vidljivost zareza</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3087"/>
@@ -9958,19 +9958,19 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="14"/>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="35"/>
         <source>Select measurements type</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite vrstu mjerenja</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="52"/>
         <source>Individual</source>
         <comment>measurements type</comment>
-        <translation type="unfinished">Individualno</translation>
+        <translation>Individualno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="72"/>
         <source>Multisize</source>
         <comment>measurements type</comment>
-        <translation type="unfinished">Višestruke veličine</translation>
+        <translation>Višestruke veličine</translation>
     </message>
 </context>
 <context>
@@ -11686,12 +11686,12 @@ Svejedno primijeniti postavke?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="696"/>
         <source>Pen options</source>
-        <translation type="unfinished"></translation>
+        <translation>Mogućnosti olovke</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="707"/>
         <source>Dependency tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Stablo ovisnosti</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="719"/>
@@ -11742,17 +11742,17 @@ Svejedno primijeniti postavke?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1185"/>
         <source>Show Segment Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Prikaži oznake segmenata</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1188"/>
         <source>Allow segment labels to appear. Uncheck to hide them in all cases.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dopusti prikaz oznaka segmenata. Poništite odabir za sakrivanje u svim slučajevima.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1300"/>
         <source>Load Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Učitaj mjerenja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1679"/>
@@ -11792,44 +11792,44 @@ Svejedno primijeniti postavke?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2634"/>
         <source>Reload labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponovo učitaj oznake</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2637"/>
         <source>Reload piece labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponovo učitaj oznake komada</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2651"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="8552"/>
         <source>Auto-arrange labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatski rasporedi oznake</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2654"/>
         <source>Auto-arrange point labels to reduce overlaps</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatski rasporedi oznake točaka radi smanjenja preklapanja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2665"/>
         <source>Install single line font</source>
-        <translation type="unfinished"></translation>
+        <translation>Instaliraj jednolinjijski font</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2683"/>
         <source>Elliptical arc with given length</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliptični luk zadane duljine</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2701"/>
         <source>Parallel curve tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Alat paralelna krivulja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2719"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2722"/>
         <source>Graduated curve tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Alat graduirana krivulja</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
@@ -12068,7 +12068,7 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1684"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1964"/>
         <source>Select one or more objects, &lt;b&gt;%1&lt;/b&gt; - confirm selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite jedan ili više objekata, &lt;b&gt;%1&lt;/b&gt; - potvrdi odabir</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1844"/>
@@ -12966,7 +12966,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1303"/>
         <source>Connect measurements file to pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Poveži datoteku mjerenja s uzorkom</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1314"/>
@@ -13576,29 +13576,29 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1999"/>
         <source>Select point of the center of the elliptical arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite točku središta eliptičnog luka</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2116"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3262"/>
         <source>Pen style:</source>
-        <translation type="unfinished">Stil pera:</translation>
+        <translation>Stil pera:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2117"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3286"/>
         <source>Color:</source>
-        <translation type="unfinished">Boja:</translation>
+        <translation>Boja:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3267"/>
         <source>Sets the &lt;b&gt;default pen style&lt;/b&gt; for all newly created objects. This style is applied the first time an object is drawn.</source>
-        <translation type="unfinished"></translation>
+        <translation>Postavlja &lt;b&gt;zadani stil olovke&lt;/b&gt; za sve novostvorene objekte. Ovaj stil se primjenjuje pri prvom crtanju objekta.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3290"/>
         <source>Defines the &lt;b&gt;global object color property&lt;/b&gt;. This color is applied automatically the first time a new object is drawn.</source>
-        <translation type="unfinished"></translation>
+        <translation>Definira &lt;b&gt;globalnu svojstvenost boje objekta&lt;/b&gt;. Ova boja se automatski primjenjuje pri prvom crtanju novog objekta.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3426"/>
@@ -13658,39 +13658,41 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4821"/>
         <source>All Single-Line Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Svi jednolinjijski fontovi</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4822"/>
         <source>TrueType Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>TrueType fontovi</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4823"/>
         <source>OpenType Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>OpenType fontovi</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4824"/>
         <source>SVG Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>SVG fontovi</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4825"/>
         <source>All Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Sve datoteke</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4830"/>
         <source>Select Font Files to Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Odaberite datoteke fontova za instalaciju</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4864"/>
         <source>Failed to install font file: %1
 
 Reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalacija datoteke fonta nije uspjela: %1
+
+Razlog: %2</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4870"/>
@@ -13698,17 +13700,20 @@ Reason: %2</source>
 
 Successful Installations: %1
 Failed Installations: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Sažetak instalacije fonta:
+
+Uspješne instalacije: %1
+Neuspješne instalacije: %2</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4876"/>
         <source>Installation Complete with Errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalacija završena s pogreškama</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4880"/>
         <source>Installation Successful</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalacija uspješna</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5497"/>
@@ -13729,7 +13734,7 @@ Failed Installations: %2</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="8502"/>
         <source>Auto-Arrange Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatski rasporedi oznake</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2362"/>
@@ -14013,7 +14018,7 @@ Nedostaje: %1
     <message>
         <location filename="../../src/libs/vtools/undocommands/label/movesegmentlabel.cpp" line="101"/>
         <source>move segment label</source>
-        <translation type="unfinished"></translation>
+        <translation>pomakni oznaku segmenta</translation>
     </message>
 </context>
 <context>
@@ -14037,7 +14042,7 @@ Nedostaje: %1
     <message>
         <location filename="../../src/libs/vtools/undocommands/movetool.cpp" line="218"/>
         <source>move tool down in history</source>
-        <translation type="unfinished"></translation>
+        <translation>pomakni alat dolje u povijesti</translation>
     </message>
 </context>
 <context>
@@ -14045,7 +14050,7 @@ Nedostaje: %1
     <message>
         <location filename="../../src/libs/vtools/undocommands/movetool.cpp" line="41"/>
         <source>move tool up in history</source>
-        <translation type="unfinished"></translation>
+        <translation>pomakni alat gore u povijesti</translation>
     </message>
 </context>
 <context>
@@ -14395,7 +14400,7 @@ Nedostaje: %1
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="237"/>
         <source>Enable Garbage Collector</source>
-        <translation type="unfinished"></translation>
+        <translation>Omogući sakupljač smeća</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="265"/>
@@ -14561,7 +14566,7 @@ Nedostaje: %1
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="234"/>
         <source>Enable collecting unused objects when open pattern file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Omogući prikupljanje nekorištenih objekata pri otvaranju datoteke uzorka.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="371"/>
@@ -14707,7 +14712,7 @@ Nedostaje: %1
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="82"/>
         <source>This setting has no effect since the value is overridden by the command-line option</source>
-        <translation type="unfinished"></translation>
+        <translation>Ova postavka nema učinka jer vrijednost nadjačava opcija naredbenog retka</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="226"/>
@@ -15665,7 +15670,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="828"/>
         <source>Piece &apos;%1&apos;. Notch collapse for point &apos;%2&apos;. Provide a manual angle value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Komad &apos;%1&apos;. Kolaps zareza za točku &apos;%2&apos;. Unesite ručnu vrijednost kuta.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="228"/>
@@ -15705,27 +15710,27 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1232"/>
         <source>Point</source>
-        <translation type="unfinished">Točka</translation>
+        <translation>Točka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1233"/>
         <source>Spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Splajn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1234"/>
         <source>Spline path</source>
-        <translation type="unfinished">Splajn putanja</translation>
+        <translation>Splajn putanja</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1235"/>
         <source>Arc</source>
-        <translation type="unfinished">Luk</translation>
+        <translation>Luk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1236"/>
         <source>Elliptical arc</source>
-        <translation type="unfinished">Eliptični luk</translation>
+        <translation>Eliptični luk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vbank.cpp" line="422"/>
@@ -15768,7 +15773,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiecenode.cpp" line="486"/>
         <source>Cannot calculate passmark visibility for point &apos;%1&apos;. Reason: %2. Visibility trigger will be ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nije moguće izračunati vidljivost pasmarke za točku &apos;%1&apos;. Razlog: %2. Okidač vidljivosti bit će zanemaren.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiecenode.cpp" line="388"/>
@@ -16139,7 +16144,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolspline.cpp" line="192"/>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolsplinepath.cpp" line="172"/>
         <source>Curve &apos;%1&apos; with id %2 has not unique name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Krivulja &apos;%1&apos; s id-om %2 nema jedinstven naziv.</translation>
     </message>
 </context>
 <context>
@@ -16426,7 +16431,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/renamepp.cpp" line="47"/>
         <source>rename pattern block</source>
-        <translation type="unfinished"></translation>
+        <translation>preimenuj blok uzorka</translation>
     </message>
 </context>
 <context>
@@ -16500,7 +16505,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/savetooloptions.cpp" line="43"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
 </context>
 <context>
@@ -18062,7 +18067,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1390"/>
         <source>&amp;Open</source>
-        <translation type="unfinished">&amp;Otvori</translation>
+        <translation>&amp;Otvori</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1608"/>
@@ -18199,7 +18204,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4414"/>
         <source>Measurement &apos;%1&apos; already present in the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mjerenje &apos;%1&apos; već postoji u datoteci.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4847"/>
@@ -18882,7 +18887,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="343"/>
         <source>Not Mirrored</source>
-        <translation type="unfinished">Nije zrcaljeno</translation>
+        <translation>Nije zrcaljeno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="351"/>
@@ -18920,17 +18925,17 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1039"/>
         <source>Control</source>
-        <translation type="unfinished">Kontrola</translation>
+        <translation>Kontrola</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1093"/>
         <source>Visible</source>
-        <translation type="unfinished">Vidljivo</translation>
+        <translation>Vidljivo</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1193"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a notch visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Stvorite formulu koja regulira vidljivost. Vrijednosti različite od &quot;0&quot; čine zarez vidljivim</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1268"/>
@@ -19191,7 +19196,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="602"/>
         <source>Activates true zero seam allowance width. This also disables intersection checks between the seam line and seam allowance.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivira pravu nultu širinu dosjeda šava. Time se onemogućuje i provjera presjeka između šavne linije i dosjeda šava.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="657"/>
@@ -19369,7 +19374,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="605"/>
         <source>True zero width</source>
-        <translation type="unfinished"></translation>
+        <translation>Prava nulta širina</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1264"/>
@@ -20251,7 +20256,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="765"/>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="1248"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
 </context>
 <context>
@@ -20305,7 +20310,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/vabstractpoint.cpp" line="118"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
 </context>
 <context>
@@ -20470,7 +20475,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="361"/>
         <source>Show/hide segment labels</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Prikaži/sakrij oznake segmenata</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="363"/>
@@ -20482,7 +20487,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="365"/>
         <source>Reload piece labels</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ponovo učitaj oznake komada</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="367"/>
@@ -20824,25 +20829,25 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="479"/>
         <source>Tool &apos;Elliptical arc with given length&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Alat &apos;Eliptični luk zadane duljine&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="481"/>
         <source>Tool &apos;Parallel curve&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Alat &apos;Paralelna krivulja&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="483"/>
         <source>Tool &apos;Graduated curve&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Alat &apos;Graduirana krivulja&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="485"/>
         <source>Auto-arrange labels</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Automatski rasporedi oznake</translation>
     </message>
 </context>
 <context>
@@ -21544,12 +21549,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="698"/>
         <source>Override the global curve approximation scale setting from the application preferences. The value must be between %1 and %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadjačajte globalnu postavku mjerila aproksimacije krivulje u postavkama aplikacije. Vrijednost mora biti između %1 i %2.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="703"/>
         <source>Curve approximation</source>
-        <translation type="unfinished"></translation>
+        <translation>Aproksimacija krivulje</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="772"/>
@@ -21926,7 +21931,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="267"/>
         <source>Can&apos;t cast object to the requested type. Object id = %1, actual type = %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nije moguće pretvoriti objekt u traženi tip. ID objekta = %1, stvarni tip = %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="294"/>
@@ -21974,209 +21979,209 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="294"/>
         <source>Dependency tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Stablo ovisnosti</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="902"/>
         <source>Piece &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Komad &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="987"/>
         <source>True darts</source>
         <comment>operation</comment>
-        <translation type="unfinished">Pravi ušitci</translation>
+        <translation>Pravi ušitci</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="989"/>
         <source>Rotation</source>
         <comment>operation</comment>
-        <translation type="unfinished">Rotacija</translation>
+        <translation>Rotacija</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="991"/>
         <source>Flipping by line</source>
         <comment>operation</comment>
-        <translation type="unfinished">Preokretanje po liniji</translation>
+        <translation>Preokretanje po liniji</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="993"/>
         <source>Flipping by axis</source>
         <comment>operation</comment>
-        <translation type="unfinished">Zrcaljenje po osi</translation>
+        <translation>Zrcaljenje po osi</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="995"/>
         <source>Move</source>
         <comment>operation</comment>
-        <translation type="unfinished">Pomak</translation>
+        <translation>Pomak</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="997"/>
         <source>Union details</source>
         <comment>operation</comment>
-        <translation type="unfinished"></translation>
+        <translation>Objedini detalje</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1013"/>
         <source>Base point</source>
-        <translation type="unfinished">Osnovna točka</translation>
+        <translation>Osnovna točka</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1015"/>
         <source>Point at distance and angle</source>
-        <translation type="unfinished">Točka na udaljenosti i pod kutom</translation>
+        <translation>Točka na udaljenosti i pod kutom</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1017"/>
         <source>Point along line</source>
-        <translation type="unfinished"></translation>
+        <translation>Točka duž linije</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1019"/>
         <source>Shoulder point</source>
-        <translation type="unfinished"></translation>
+        <translation>Točka ramena</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1021"/>
         <source>Point along perpendicular</source>
-        <translation type="unfinished">Točka duž okomice</translation>
+        <translation>Točka duž okomice</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1023"/>
         <source>Bisector</source>
-        <translation type="unfinished">Bisektor</translation>
+        <translation>Bisektor</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1025"/>
         <source>Point at line intersection</source>
-        <translation type="unfinished">Točka na presjeku linija</translation>
+        <translation>Točka na presjeku linija</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1028"/>
         <source>Spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Splajn</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1030"/>
         <source>Arc</source>
-        <translation type="unfinished">Luk</translation>
+        <translation>Luk</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1032"/>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1071"/>
         <source>Elliptical arc with given length</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliptični luk zadane duljine</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1034"/>
         <source>Parallel curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Paralelna krivulja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1036"/>
         <source>Graduated curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Graduirana krivulja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1039"/>
         <source>Spline path</source>
-        <translation type="unfinished">Splajn putanja</translation>
+        <translation>Splajn putanja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1041"/>
         <source>Point of intersection circle and segment</source>
-        <translation type="unfinished">Točka presjeka kruga i segmenta</translation>
+        <translation>Točka presjeka kruga i segmenta</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1043"/>
         <source>Perpendicular point along line</source>
-        <translation type="unfinished">Okomita točka duž linije</translation>
+        <translation>Okomita točka duž linije</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1045"/>
         <source>Point located at the triangle&apos;s right-angled corner, lying along the axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Točka smještena u pravi kut trokuta, koja leži duž osi</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1047"/>
         <source>Point from X and Y of two other points</source>
-        <translation type="unfinished">Točka iz X i Y dviju drugih točaka</translation>
+        <translation>Točka iz X i Y dviju drugih točaka</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1049"/>
         <source>Point segmenting an arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Točka za segmentiranje luka</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1051"/>
         <source>Point segmenting a spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Točka za segmentiranje splajn krivulje</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1053"/>
         <source>Point segmenting a spline path</source>
-        <translation type="unfinished"></translation>
+        <translation>Točka za segmentiranje složene splajn putanje</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1055"/>
         <source>Point of intersection line and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Točka presjeka linije i osi</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1057"/>
         <source>Point of intersection curve and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Točka presjeka krivulje i osi</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1059"/>
         <source>Point of intersection arcs</source>
-        <translation type="unfinished">Točka presjeka lukova</translation>
+        <translation>Točka presjeka lukova</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1061"/>
         <source>Point of intersection circles</source>
-        <translation type="unfinished">Točka presjeka krugova</translation>
+        <translation>Točka presjeka krugova</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1063"/>
         <source>Point of intersection curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Točka presjeka krivulja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1065"/>
         <source>Point from circle and tangent</source>
-        <translation type="unfinished">Točka s kružnice i tangente</translation>
+        <translation>Točka s kružnice i tangente</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1067"/>
         <source>Point from arc and tangent</source>
-        <translation type="unfinished">Točka s luka i tangente</translation>
+        <translation>Točka s luka i tangente</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1069"/>
         <source>Elliptical arc</source>
-        <translation type="unfinished">Eliptični luk</translation>
+        <translation>Eliptični luk</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1073"/>
         <source>Line connecting two points</source>
-        <translation type="unfinished"></translation>
+        <translation>Linija koja spaja dvije točke</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1097"/>
         <source>Union details operation creating piece &apos;%1&apos;. Source objects cannot be deleted while this operation exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Operacija objedinjavanja detalja stvara komad &apos;%1&apos;. Izvorni objekti ne mogu se brisati dok ova operacija postoji</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1107"/>
         <source>Union details operation. Source objects cannot be deleted while this operation exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Operacija objedinjavanja detalja. Izvorni objekti ne mogu se brisati dok ova operacija postoji</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1121"/>
         <source>Line_%1_%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Linija_%1_%2</translation>
     </message>
 </context>
 <context>
@@ -22312,22 +22317,22 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="355"/>
         <source>Pending</source>
-        <translation type="unfinished"></translation>
+        <translation>Na čekanju</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="380"/>
         <source>Cannot Delete Object</source>
-        <translation type="unfinished"></translation>
+        <translation>Nije moguće izbrisati objekt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="381"/>
         <source>This object cannot be deleted because it is being used by other items.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ovaj objekt nije moguće izbrisati jer ga koriste drugi elementi.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="382"/>
         <source>Please resolve the dependencies before attempting to delete this object.</source>
-        <translation type="unfinished"></translation>
+        <translation>Molimo riješite ovisnosti prije pokušaja brisanja ovog objekta.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="445"/>
@@ -22399,72 +22404,72 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="515"/>
         <source>Could not determine the system font installation path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nije moguće odrediti sistemski put za instalaciju fontova.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="521"/>
         <source>Failed to create destination directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Neuspješno stvaranje odredišnog direktorija: %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="490"/>
         <source>Failed to copy file from %1 to %2. Possible reasons: permission denied, file locked, or general I/O error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiranje datoteke iz %1 u %2 nije uspjelo. Mogući razlozi: zabranjen pristup, datoteka zaključana ili opća I/U pogreška.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="280"/>
         <source>Font copy succeeded, but Linux font cache rebuild failed. Font may not be immediately visible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiranje fonta uspjelo, ali obnova predmemorije fontova na Linuxu nije uspjela. Font možda neće biti odmah vidljiv.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="288"/>
         <source>Font copy succeeded, but Windows Registry registration failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiranje fonta uspjelo, ali registracija u Windows registru nije uspjela.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="371"/>
         <source>Font loaded, but could not determine font family name to install font corrections.</source>
-        <translation type="unfinished"></translation>
+        <translation>Font učitan, ali nije moguće odrediti naziv obitelji fontova za instalaciju ispravaka fonta.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="397"/>
         <source>Font correction file already exists at destination: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Datoteka ispravaka fonta već postoji na odredištu: %1.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="402"/>
         <source>Failed to copy font correction file from %1 to %2. Possible reasons: permission denied, file locked, or general I/O error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiranje datoteke ispravaka fonta iz %1 u %2 nije uspjelo. Mogući razlozi: zabranjen pristup, datoteka zaključana ili opća I/U pogreška.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="434"/>
         <source>Skipped existing font (User choice: No to All): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Preskočen postojeći font (Izbor korisnika: Ne za sve): %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="443"/>
         <source>Font Already Exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Font već postoji</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="444"/>
         <source>The font &apos;%1&apos; is already installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Font &apos;%1&apos; je već instaliran.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="445"/>
         <source>Do you want to replace it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Želite li ga zamijeniti?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="474"/>
         <source>Installation cancelled by user. Font not replaced.</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalacija otkazana od strane korisnika. Font nije zamijenjen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="481"/>
         <source>Failed to remove existing file: %1. Check permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Brisanje postojeće datoteke nije uspjelo: %1. Provjerite dozvole.</translation>
     </message>
 </context>
 <context>
@@ -22824,7 +22829,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="432"/>
         <source>Pending</source>
-        <translation type="unfinished"></translation>
+        <translation>Na čekanju</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="457"/>
@@ -23048,7 +23053,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="273"/>
         <source>Special thanks</source>
-        <translation type="unfinished"></translation>
+        <translation>Posebne zahvale</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="317"/>
@@ -23058,7 +23063,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="324"/>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Zahvale</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="66"/>
@@ -23924,7 +23929,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1655"/>
         <source>Print text as paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Ispiši tekst kao putanje</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1809"/>
@@ -24512,13 +24517,13 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3287"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3293"/>
         <source>Error creating or updating a parallel curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Pogreška pri stvaranju ili ažuriranju paralelne krivulje</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3362"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3368"/>
         <source>Error creating or updating a graduated curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Pogreška pri stvaranju ili ažuriranju graduirane krivulje</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3449"/>
@@ -24542,7 +24547,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3670"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3676"/>
         <source>Error creating or updating elliptical arc with length</source>
-        <translation type="unfinished"></translation>
+        <translation>Pogreška pri stvaranju ili ažuriranju eliptičnog luka zadane duljine</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3703"/>
@@ -25117,7 +25122,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="549"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
 </context>
 <context>
@@ -25126,7 +25131,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="902"/>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="952"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
 </context>
 <context>
@@ -25134,12 +25139,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="203"/>
         <source>Length</source>
-        <translation type="unfinished">Duljina</translation>
+        <translation>Duljina</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="205"/>
         <source>Label</source>
-        <translation type="unfinished">Oznaka</translation>
+        <translation>Oznaka</translation>
     </message>
 </context>
 <context>
@@ -25147,7 +25152,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="687"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
 </context>
 <context>
@@ -25170,7 +25175,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolalongline.cpp" line="196"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
 </context>
 <context>
@@ -25242,7 +25247,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="157"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="418"/>
@@ -25280,7 +25285,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcut.cpp" line="191"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
 </context>
 <context>
@@ -25293,7 +25298,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="376"/>
         <source>Elliptical arc</source>
-        <translation type="unfinished">Eliptični luk</translation>
+        <translation>Eliptični luk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="377"/>
@@ -25323,12 +25328,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="382"/>
         <source>radius1</source>
-        <translation type="unfinished"></translation>
+        <translation>polumjer1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="383"/>
         <source>radius2</source>
-        <translation type="unfinished"></translation>
+        <translation>polumjer2</translation>
     </message>
 </context>
 <context>
@@ -25430,7 +25435,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/tooldoublepoint/vtooldoublepoint.cpp" line="534"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
 </context>
 <context>
@@ -25472,32 +25477,32 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.cpp" line="470"/>
         <source>Length</source>
-        <translation type="unfinished">Duljina</translation>
+        <translation>Duljina</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.cpp" line="473"/>
         <source>Radius1</source>
-        <translation type="unfinished"></translation>
+        <translation>Polumjer1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.cpp" line="475"/>
         <source>Radius2</source>
-        <translation type="unfinished"></translation>
+        <translation>Polumjer2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.cpp" line="477"/>
         <source>Start angle</source>
-        <translation type="unfinished">Početni kut</translation>
+        <translation>Početni kut</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.cpp" line="479"/>
         <source>End angle</source>
-        <translation type="unfinished">Završni kut</translation>
+        <translation>Završni kut</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.cpp" line="481"/>
         <source>Label</source>
-        <translation type="unfinished">Oznaka</translation>
+        <translation>Oznaka</translation>
     </message>
 </context>
 <context>
@@ -25536,7 +25541,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolgraduatedcurve.cpp" line="111"/>
         <source>Offset %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomak %1</translation>
     </message>
 </context>
 <context>
@@ -25559,7 +25564,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolheight.cpp" line="334"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
 </context>
 <context>
@@ -25577,7 +25582,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vtoolline.cpp" line="461"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
 </context>
 <context>
@@ -25590,7 +25595,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoollineintersect.cpp" line="358"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoollineintersect.cpp" line="152"/>
@@ -25618,7 +25623,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.cpp" line="398"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.cpp" line="139"/>
@@ -25646,7 +25651,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollinepoint.cpp" line="252"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
 </context>
 <context>
@@ -26208,7 +26213,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3225"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3605"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv1:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3192"/>
@@ -26216,7 +26221,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3226"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3606"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv2:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3207"/>
@@ -26312,42 +26317,42 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3352"/>
         <source>First arc. Left sub arc name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prva duga. Naziv lijeve podduge:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3353"/>
         <source>First arc. Right sub arc name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prva duga. Naziv desne podduge:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3354"/>
         <source>First arc. Left sub arc alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prva duga. Pseudonim lijeve podduge:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3355"/>
         <source>First arc. Right sub arc alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prva duga. Pseudonim desne podduge:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3356"/>
         <source>Second arc. Left sub arc name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Druga duga. Naziv lijeve podduge:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3357"/>
         <source>Second arc. Right sub arc name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Druga duga. Naziv desne podduge:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3358"/>
         <source>Second arc. Left sub arc alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Druga duga. Pseudonim lijeve podduge:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3359"/>
         <source>Second arc. Right sub arc alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Druga duga. Pseudonim desne podduge:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3371"/>
@@ -26392,42 +26397,42 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3391"/>
         <source>First curve. Left sub curve name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prva krivulja. Naziv lijeve potkrivulje:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3392"/>
         <source>First curve. Right sub curve name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prva krivulja. Naziv desne potkrivulje:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3393"/>
         <source>First curve. Left sub curve alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prva krivulja. Pseudonim lijeve potkrivulje:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3394"/>
         <source>First curve. Right sub curve alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prva krivulja. Pseudonim desne potkrivulje:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3395"/>
         <source>Second curve. Left sub curve name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Druga krivulja. Naziv lijeve potkrivulje:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3396"/>
         <source>Second curve. Right sub curve name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Druga krivulja. Naziv desne potkrivulje:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3397"/>
         <source>Second curve. Left sub curve alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Druga krivulja. Pseudonim lijeve potkrivulje:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3398"/>
         <source>Second curve. Right sub curve alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Druga krivulja. Pseudonim desne potkrivulje:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3410"/>
@@ -26448,38 +26453,38 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3721"/>
         <source>Elliptical arc with given length</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliptični luk zadane duljine</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3727"/>
         <source>Radius1:</source>
-        <translation type="unfinished">Polumjer1:</translation>
+        <translation>Polumjer1:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3728"/>
         <source>Radius2:</source>
-        <translation type="unfinished">Polumjer2:</translation>
+        <translation>Polumjer2:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3747"/>
         <source>Parallel curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Paralelna krivulja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3751"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3774"/>
         <source>Full name:</source>
-        <translation type="unfinished">Puno ime:</translation>
+        <translation>Puno ime:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3753"/>
         <source>Width:</source>
-        <translation type="unfinished">Širina:</translation>
+        <translation>Širina:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3770"/>
         <source>Graduated curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Graduirana krivulja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3108"/>
@@ -26726,7 +26731,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.cpp" line="410"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.cpp" line="219"/>
@@ -26739,7 +26744,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectionarcs.cpp" line="167"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectionarcs.cpp" line="535"/>
@@ -26760,7 +26765,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="173"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="632"/>
@@ -26945,7 +26950,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolshoulderpoint.cpp" line="379"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>spremi opcije alata</translation>
     </message>
 </context>
 <context>
@@ -28298,7 +28303,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="66"/>
         <source>Offset_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Pomak_</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="116"/>
@@ -28718,57 +28723,57 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="22"/>
         <source>Filter</source>
-        <translation type="unfinished">Filter</translation>
+        <translation>Filter</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="32"/>
         <source>Go to object automatically on node selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatski idi na objekt pri odabiru čvora</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="62"/>
         <source>Move to earliest possible position in history</source>
-        <translation type="unfinished"></translation>
+        <translation>Premjesti na najraniju moguću poziciju u povijesti</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="75"/>
         <source>Move earlier in history</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomakni ranije u povijesti</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="88"/>
         <source>Move later in history</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomakni kasnije u povijesti</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="101"/>
         <source>Move to latest possible position in history</source>
-        <translation type="unfinished"></translation>
+        <translation>Premjesti na najkasniju moguću poziciju u povijesti</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="667"/>
         <source>Expand All</source>
-        <translation type="unfinished">Proširi sve</translation>
+        <translation>Proširi sve</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="668"/>
         <source>Collapse All</source>
-        <translation type="unfinished">Sažmi sve</translation>
+        <translation>Sažmi sve</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="670"/>
         <source>Copy ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiraj ID</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="672"/>
         <source>Go to Object</source>
-        <translation type="unfinished"></translation>
+        <translation>Idi na objekt</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="674"/>
         <source>Delete</source>
-        <translation type="unfinished">Obriši</translation>
+        <translation>Obriši</translation>
     </message>
 </context>
 <context>
@@ -29020,12 +29025,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="119"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Eliptični luk&lt;/b&gt;: polumjer1 = %1%2, polumjer2 = %3%2, kut1 = %4°; &lt;b&gt;Klik mišem&lt;/b&gt; - završetak odabira prvog polumjera, &lt;b&gt;%5&lt;/b&gt; - kut prianjanja, &lt;b&gt;%6&lt;/b&gt; - preskoči</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="164"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°, rotation = %6°; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%7&lt;/b&gt; - sticking angle, &lt;b&gt;%8&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Eliptični luk&lt;/b&gt;: polumjer1 = %1%2, polumjer2 = %3%2, kut1 = %4°, kut2 = %5°, rotacija = %6°; &lt;b&gt;Klik mišem&lt;/b&gt; - završetak stvaranja, &lt;b&gt;%7&lt;/b&gt; - kut prianjanja, &lt;b&gt;%8&lt;/b&gt; - preskoči</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="141"/>
@@ -29038,27 +29043,27 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarcwithlength.cpp" line="83"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished">&lt;b&gt;Eliptični luk&lt;/b&gt;: prvi polumjer = %1%2; &lt;b&gt;Klik mišem&lt;/b&gt; - završetak odabira prvog polumjera, &lt;b&gt;%3&lt;/b&gt; - preskoči</translation>
+        <translation>&lt;b&gt;Eliptični luk&lt;/b&gt;: prvi polumjer = %1%2; &lt;b&gt;Klik mišem&lt;/b&gt; - završetak odabira prvog polumjera, &lt;b&gt;%3&lt;/b&gt; - preskoči</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarcwithlength.cpp" line="100"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%4&lt;/b&gt; - skip</source>
-        <translation type="unfinished">&lt;b&gt;Eliptični luk&lt;/b&gt;: prvi polumjer = %1%2, drugi polumjer = %3%2; &lt;b&gt;Klik mišem&lt;/b&gt; - završetak odabira drugog polumjera, &lt;b&gt;%4&lt;/b&gt; - preskoči</translation>
+        <translation>&lt;b&gt;Eliptični luk&lt;/b&gt;: prvi polumjer = %1%2, drugi polumjer = %3%2; &lt;b&gt;Klik mišem&lt;/b&gt; - završetak odabira drugog polumjera, &lt;b&gt;%4&lt;/b&gt; - preskoči</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarcwithlength.cpp" line="117"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Eliptični luk&lt;/b&gt;: polumjer1 = %1%2, polumjer2 = %3%2, kut1 = %4°; &lt;b&gt;Klik mišem&lt;/b&gt; - završetak odabira prvog polumjera, &lt;b&gt;%5&lt;/b&gt; - kut prianjanja, &lt;b&gt;%6&lt;/b&gt; - preskoči</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarcwithlength.cpp" line="140"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, arc length = %5%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the arc length, &lt;b&gt;%6&lt;/b&gt; - sticking angle, &lt;b&gt;%7&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Eliptični luk&lt;/b&gt;: polumjer1 = %1%2, polumjer2 = %3%2, kut1 = %4°, duljina luka = %5%2; &lt;b&gt;Klik mišem&lt;/b&gt; - završetak odabira duljine luka, &lt;b&gt;%6&lt;/b&gt; - kut prianjanja, &lt;b&gt;%7&lt;/b&gt; - preskoči</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarcwithlength.cpp" line="168"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, arc length = %5%2, rotation = %6°; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%7&lt;/b&gt; - sticking angle, &lt;b&gt;%8&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Eliptični luk&lt;/b&gt;: polumjer1 = %1%2, polumjer2 = %3%2, kut1 = %4°, duljina luka = %5%2, rotacija = %6°; &lt;b&gt;Klik mišem&lt;/b&gt; - završetak stvaranja, &lt;b&gt;%7&lt;/b&gt; - kut prianjanja, &lt;b&gt;%8&lt;/b&gt; - preskoči</translation>
     </message>
 </context>
 <context>
@@ -29082,7 +29087,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolgraduatedcurve.cpp" line="100"/>
         <source>&lt;b&gt;Graduated curve&lt;/b&gt;: offsets = %1; &lt;b&gt;Mouse click&lt;/b&gt; - selecting next width, &lt;b&gt;%2&lt;/b&gt; - negative width, &lt;b&gt;%3&lt;/b&gt; - finish</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Graduirana krivulja&lt;/b&gt;: pomaci = %1; &lt;b&gt;Klik mišem&lt;/b&gt; - odabir sljedeće širine, &lt;b&gt;%2&lt;/b&gt; - negativna širina, &lt;b&gt;%3&lt;/b&gt; - završi</translation>
     </message>
 </context>
 <context>
@@ -29127,7 +29132,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolparallelcurve.cpp" line="75"/>
         <source>&lt;b&gt;Parallel curve&lt;/b&gt;: width = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the width, &lt;b&gt;%3&lt;/b&gt; - negative width, &lt;b&gt;%4&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Paralelna krivulja&lt;/b&gt;: širina = %1%2; &lt;b&gt;Klik mišem&lt;/b&gt; - završetak odabira širine, &lt;b&gt;%3&lt;/b&gt; - negativna širina, &lt;b&gt;%4&lt;/b&gt; - preskoči</translation>
     </message>
 </context>
 <context>

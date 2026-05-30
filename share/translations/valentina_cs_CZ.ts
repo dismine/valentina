@@ -3708,17 +3708,17 @@
         <translation>Vybrat původní bod</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="272"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="271"/>
         <source>Select origin point that is not part of the list of objects</source>
         <translation>Vyberte původní bod, který není částí seznamu předmětů</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="358"/>
         <source>Vertical axis</source>
         <translation>Svislá osa</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="360"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="359"/>
         <source>Horizontal axis</source>
         <translation>Vodorovná osa</translation>
     </message>
@@ -3776,7 +3776,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="370"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="369"/>
         <source>Ready</source>
         <translation>Připraven</translation>
     </message>
@@ -3786,7 +3786,7 @@
         <translation>Poznámky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="342"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="341"/>
         <source>Invalid point</source>
         <translation>Neplatný bod</translation>
     </message>
@@ -3822,17 +3822,17 @@
         <translation>Vybrat první bod čáry</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="273"/>
         <source>Select first line point that is not part of the list of objects</source>
         <translation>Vyberte první bod, který není částí seznamu předmětů</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="270"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="277"/>
         <source>Select second line point</source>
         <translation>Vybrat druhý bod čáry</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="282"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="290"/>
         <source>Select second line point that is not part of the list of objects</source>
         <translation>Vyberte druhý bod, který není částí seznamu předmětů</translation>
     </message>
@@ -3890,7 +3890,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="398"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="402"/>
         <source>Ready</source>
         <translation>Připraven</translation>
     </message>
@@ -3900,17 +3900,17 @@
         <translation>Poznámky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="375"/>
         <source>Invalid line points</source>
         <translation>Neplatné body čáry</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="378"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="382"/>
         <source>Invalid first line point</source>
         <translation>Neplatný první bod čáry</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="385"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="389"/>
         <source>Invalid second line point</source>
         <translation>Neplatný druhý bod čáry</translation>
     </message>
@@ -8744,7 +8744,7 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Přípona:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="367"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="366"/>
         <source>Edit angle</source>
         <translation>Upravit úhel</translation>
     </message>
@@ -8763,7 +8763,7 @@ Přesto použít nastavení?</translation>
         <translation>Výpočet</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="338"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="337"/>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Tento bod nemůže být původní bod. Vyberte, prosím, jiný původní bod</translation>
     </message>
@@ -8815,7 +8815,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="443"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="503"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="501"/>
         <source>Ready</source>
         <translation>Připraven</translation>
     </message>
@@ -8825,12 +8825,12 @@ Přesto použít nastavení?</translation>
         <translation>Poznámky</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="458"/>
         <source>Invalid rotation point</source>
         <translation>Neplatný bod otáčení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="492"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="490"/>
         <source>Invalid angle formula</source>
         <translation>Neplatný vzorec úhlu</translation>
     </message>

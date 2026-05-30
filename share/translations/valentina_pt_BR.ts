@@ -3709,17 +3709,17 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <translation>Selecionar ponto de origem</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="272"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="271"/>
         <source>Select origin point that is not part of the list of objects</source>
         <translation>Selecione um ponto de origem que não faça parte da lista de objetos</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="358"/>
         <source>Vertical axis</source>
         <translation>Eixo vertical</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="360"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="359"/>
         <source>Horizontal axis</source>
         <translation>Eixo horizontal</translation>
     </message>
@@ -3777,7 +3777,7 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="370"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="369"/>
         <source>Ready</source>
         <translation>Pronto</translation>
     </message>
@@ -3787,7 +3787,7 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <translation>Anotações</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="342"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="341"/>
         <source>Invalid point</source>
         <translation>Ponto inválido</translation>
     </message>
@@ -3823,17 +3823,17 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <translation>Selecione o primeiro ponto da linha</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="273"/>
         <source>Select first line point that is not part of the list of objects</source>
         <translation>Selecione o primeiro ponto de linha que não faz parte da lista de objetos</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="270"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="277"/>
         <source>Select second line point</source>
         <translation>Selecione o segundo ponto da linha</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="282"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="290"/>
         <source>Select second line point that is not part of the list of objects</source>
         <translation>Selecione o segundo ponto de linha que não faz parte da lista de objetos</translation>
     </message>
@@ -3891,7 +3891,7 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="398"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="402"/>
         <source>Ready</source>
         <translation>Pronto</translation>
     </message>
@@ -3901,17 +3901,17 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <translation>Anotações</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="375"/>
         <source>Invalid line points</source>
         <translation>Pontos da linha inválidos</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="378"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="382"/>
         <source>Invalid first line point</source>
         <translation>Primeiro ponto da linha é inválido</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="385"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="389"/>
         <source>Invalid second line point</source>
         <translation>Segundo ponto da linha é inválido</translation>
     </message>
@@ -8744,7 +8744,7 @@ Aplicar configurações assim mesmo?</translation>
         <translation type="vanished">Sufixo:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="367"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="366"/>
         <source>Edit angle</source>
         <translation>Editar ângulo</translation>
     </message>
@@ -8763,7 +8763,7 @@ Aplicar configurações assim mesmo?</translation>
         <translation>Fórmula</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="338"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="337"/>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Este ponto não pode ser o ponto de origem. Selecione outro ponto de origem</translation>
     </message>
@@ -8815,7 +8815,7 @@ Aplicar configurações assim mesmo?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="443"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="503"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="501"/>
         <source>Ready</source>
         <translation>Pronto</translation>
     </message>
@@ -8825,12 +8825,12 @@ Aplicar configurações assim mesmo?</translation>
         <translation>Anotações</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="458"/>
         <source>Invalid rotation point</source>
         <translation>Ponto de rotação inválido</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="492"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="490"/>
         <source>Invalid angle formula</source>
         <translation>Fórmula de ângulo inválido</translation>
     </message>

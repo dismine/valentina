@@ -6,7 +6,7 @@
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/addbackgroundimage.cpp" line="35"/>
         <source>add background image</source>
-        <translation type="unfinished"></translation>
+        <translation>achtergrondafbeelding toevoegen</translation>
     </message>
 </context>
 <context>
@@ -349,7 +349,7 @@
     <message>
         <location filename="../../src/libs/vdxf/libdxfrw/intern/drw_textcodec.cpp" line="121"/>
         <source>No available codec for code page &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen beschikbare codec voor codepagina &apos;%1&apos;.</translation>
     </message>
 </context>
 <context>
@@ -373,7 +373,7 @@
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/deletebackgroundimage.cpp" line="37"/>
         <source>delete background image</source>
-        <translation type="unfinished"></translation>
+        <translation>achtergrondafbeelding verwijderen</translation>
     </message>
 </context>
 <context>
@@ -392,7 +392,7 @@
     <message>
         <location filename="../../src/libs/vtools/undocommands/deletepatternpiece.cpp" line="45"/>
         <source>delete pattern block</source>
-        <translation type="unfinished"></translation>
+        <translation>patroonblok verwijderen</translation>
     </message>
 </context>
 <context>
@@ -437,12 +437,12 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="266"/>
         <source>Special thanks</source>
-        <translation type="unfinished"></translation>
+        <translation>Speciale dank</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="308"/>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Credits</translation>
     </message>
     <message>
         <source>Contributors</source>
@@ -503,12 +503,12 @@
     <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="273"/>
         <source>Special thanks</source>
-        <translation type="unfinished"></translation>
+        <translation>Speciale dank</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="321"/>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Credits</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="144"/>
@@ -545,7 +545,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaddbackgroundimage.ui" line="14"/>
         <source>Background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Achtergrondafbeelding</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaddbackgroundimage.ui" line="26"/>
@@ -555,7 +555,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaddbackgroundimage.ui" line="38"/>
         <source>Determine should an image built in or added as path to the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bepaal of een afbeelding ingesloten of als bestandspad wordt toegevoegd.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaddbackgroundimage.ui" line="41"/>
@@ -663,7 +663,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="287"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Punten omwisselen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="318"/>
@@ -1014,7 +1014,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="14"/>
         <source>Arc with length</source>
-        <translation type="unfinished"></translation>
+        <translation>Boog met lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="651"/>
@@ -1032,32 +1032,32 @@
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="14"/>
         <source>Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Privacy</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="24"/>
         <source>Usage statistic</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruiksstatistiek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="30"/>
         <source>Send usage statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruiksstatistieken verzenden</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="40"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
-        <translation type="unfinished"></translation>
+        <translation>Help mee de kwaliteit van Valentina te verbeteren door automatisch gebruiksstatistieken te verzenden. De verzonden gegevens bevatten &lt;span style=&quot; font-weight:700;&quot;&gt;geen mogelijk gevoelige informatie&lt;/span&gt; zoals gebruikersnamen, e-mailadressen, bestandsinhoud of bestandspaden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="53"/>
         <source>Crash reports</source>
-        <translation type="unfinished"></translation>
+        <translation>Crashrapporten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="59"/>
         <source>Send automatic crash reports</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatische crashrapporten verzenden</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="71"/>
@@ -1067,7 +1067,7 @@
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="87"/>
         <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het melden van crashes helpt ons Valentina betrouwbaarder te maken. Alle informatie wordt vertrouwelijk behandeld en wordt alleen gebruikt om toekomstige versies van dit programma te verbeteren. Activeer het automatisch verzenden van crashrapporten en vul uw e-mailadres in (optioneel). Als u dit invult, kunnen wij contact met u opnemen met aanvullende informatie over de crash.</translation>
     </message>
 </context>
 <context>
@@ -1222,52 +1222,52 @@
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="24"/>
         <source>Rename…</source>
-        <translation type="unfinished"></translation>
+        <translation>Hernoemen…</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="43"/>
         <source>Base name</source>
-        <translation type="unfinished"></translation>
+        <translation>Basisnaam</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="48"/>
         <source>New name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe naam</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="58"/>
         <source>Text:</source>
-        <translation type="unfinished">Tekst:</translation>
+        <translation>Tekst:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="65"/>
         <source>Use %n, %0n, %00n, %000n for counting</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik %n, %0n, %00n, %000n voor nummering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="75"/>
         <source>Position:</source>
-        <translation type="unfinished">Positie:</translation>
+        <translation>Positie:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="84"/>
         <source>Append</source>
-        <translation type="unfinished"></translation>
+        <translation>Achteraan toevoegen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="97"/>
         <source>Prepend</source>
-        <translation type="unfinished"></translation>
+        <translation>Vooraan toevoegen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="107"/>
         <source>Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>Vervangen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.cpp" line="182"/>
         <source>Enable renaming for this item</source>
-        <translation type="unfinished"></translation>
+        <translation>Hernoemen voor dit item inschakelen</translation>
     </message>
 </context>
 <context>
@@ -1275,17 +1275,17 @@
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="14"/>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Credits</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="28"/>
         <source>Sponsors</source>
-        <translation type="unfinished"></translation>
+        <translation>Sponsors</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="42"/>
         <source>Authors</source>
-        <translation type="unfinished"></translation>
+        <translation>Auteurs</translation>
     </message>
 </context>
 <context>
@@ -1415,7 +1415,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="36"/>
         <source>New point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="134"/>
@@ -1584,22 +1584,22 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="357"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="364"/>
         <source>Choose unique name for left sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies een unieke naam voor de linker deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="371"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="378"/>
         <source>Choose unique name for right sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies een unieke naam voor de rechter deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="28"/>
@@ -1725,22 +1725,22 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="288"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="295"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="302"/>
         <source>Choose unique name for left sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies een unieke naam voor de linker deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="309"/>
         <source>Choose unique name for right sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies een unieke naam voor de rechter deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="332"/>
@@ -1840,7 +1840,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="253"/>
         <source>Choose unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies een uniek label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="260"/>
@@ -1855,22 +1855,22 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="280"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="287"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="294"/>
         <source>Choose unique name for left sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies een unieke naam voor de linker deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="301"/>
         <source>Choose unique name for right sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies een unieke naam voor de rechter deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="324"/>
@@ -1971,17 +1971,17 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="260"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="267"/>
         <source>Choose unique name for left sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies een unieke naam voor de linker deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="274"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="281"/>
@@ -1996,7 +1996,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="309"/>
         <source>Choose unique name for right sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies een unieke naam voor de rechter deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="332"/>
@@ -2307,7 +2307,7 @@
     <message>
         <location filename="../../src/app/tape/dialogs/dialogdimensioncustomnames.ui" line="14"/>
         <source>Dimension custom names</source>
-        <translation type="unfinished"></translation>
+        <translation>Aangepaste dimensienamen</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogdimensioncustomnames.ui" line="31"/>
@@ -2317,7 +2317,7 @@
     <message>
         <location filename="../../src/app/tape/dialogs/dialogdimensioncustomnames.ui" line="36"/>
         <source>Custom Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Aangepaste naam</translation>
     </message>
 </context>
 <context>
@@ -2706,7 +2706,7 @@
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="626"/>
         <source>Waist label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Tailleetiket</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="691"/>
@@ -2737,99 +2737,99 @@
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="591"/>
         <source>Dimension X</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie X</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="587"/>
         <source>Measurements file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestandsnaam maatbestand</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="595"/>
         <source>Dimension Y</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie Y</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="599"/>
         <source>Dimension Z</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie Z</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="603"/>
         <source>Dimension W</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie W</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="609"/>
         <source>Dimension X label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Label dimensie X</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="616"/>
         <source>Dimension Y label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Label dimensie Y</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="622"/>
         <source>Dimension Z label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Label dimensie Z</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="627"/>
         <source>Dimension W label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Label dimensie W</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="632"/>
         <source>Measurements extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Extensie maatbestand</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="667"/>
         <source>Measurement %1 value alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias waarde maat %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="747"/>
         <source>No data for the X dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gegevens voor dimensie X.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="748"/>
         <source>No data for the Y dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gegevens voor dimensie Y.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="749"/>
         <source>No data for the Z dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gegevens voor dimensie Z.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="750"/>
         <source>No data for the W dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gegevens voor dimensie W.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="560"/>
         <source>Area units</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppervlakte-eenheden</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="678"/>
         <source>Piece full area</source>
-        <translation type="unfinished"></translation>
+        <translation>Volledig oppervlak stuk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="679"/>
         <source>Piece seam line area</source>
-        <translation type="unfinished"></translation>
+        <translation>Naadlijn oppervlak stuk</translation>
     </message>
 </context>
 <context>
@@ -3006,17 +3006,17 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="315"/>
         <source>Pieces areas</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppervlakten stukken</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="241"/>
         <source>Length to control point</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte naar controlepunt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="836"/>
         <source>Area of piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Oppervlak van stuk</translation>
     </message>
 </context>
 <context>
@@ -3167,17 +3167,17 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="14"/>
         <source>Elliptical arc with length</source>
-        <translation type="unfinished"></translation>
+        <translation>Elliptische boog met lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="28"/>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="79"/>
         <source>Radius1:</source>
-        <translation type="unfinished">Straal1:</translation>
+        <translation>Straal1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="99"/>
@@ -3186,7 +3186,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="648"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="827"/>
         <source>Formula wizard</source>
-        <translation type="unfinished">Formule assistent</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="141"/>
@@ -3195,7 +3195,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="690"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="869"/>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="195"/>
@@ -3204,17 +3204,17 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="738"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="923"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Volledige berekening tonen in berichtvenster&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="264"/>
         <source>Radius2:</source>
-        <translation type="unfinished">Straal2:</translation>
+        <translation>Straal2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="449"/>
         <source>First angle:</source>
-        <translation type="unfinished">Eerste hoek:</translation>
+        <translation>Eerste hoek:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="173"/>
@@ -3223,77 +3223,77 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="716"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="901"/>
         <source>Calculation</source>
-        <translation type="unfinished">Berekening</translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="628"/>
         <source>Length:</source>
-        <translation type="unfinished">Lengte:</translation>
+        <translation>Lengte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="807"/>
         <source>Rotation angle:</source>
-        <translation type="unfinished">Hoek van draaiing:</translation>
+        <translation>Hoek van draaiing:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="958"/>
         <source>Center point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Middelpunt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="968"/>
         <source>Color:</source>
-        <translation type="unfinished">Kleur:</translation>
+        <translation>Kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="975"/>
         <source>Pen style:</source>
-        <translation type="unfinished">Pen stijl:</translation>
+        <translation>Penstijl:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1004"/>
         <source>Approximation scale:</source>
-        <translation type="unfinished">Schaal bij benadering:</translation>
+        <translation>Schaal bij benadering:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1011"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation type="unfinished">Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
+        <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1027"/>
         <source>Alias:</source>
-        <translation type="unfinished">Alias:</translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1064"/>
         <source>Notes</source>
-        <translation type="unfinished">Notities</translation>
+        <translation>Notities</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="563"/>
         <source>Edit radius1</source>
-        <translation type="unfinished">Bewerk straal1</translation>
+        <translation>Bewerk straal1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="577"/>
         <source>Edit radius2</source>
-        <translation type="unfinished">Bewerk straal2</translation>
+        <translation>Bewerk straal2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="591"/>
         <source>Edit the first angle</source>
-        <translation type="unfinished">Verander de eerste hoek</translation>
+        <translation>Verander de eerste hoek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="605"/>
         <source>Edit the elliptical arc length</source>
-        <translation type="unfinished"></translation>
+        <translation>Elliptische booglengte bewerken</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="619"/>
         <source>Edit rotation angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Draaihoek bewerken</translation>
     </message>
 </context>
 <context>
@@ -3623,63 +3623,63 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="32"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zoekgeschiedenis &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="41"/>
         <source>Alt+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+Down</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="68"/>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.cpp" line="807"/>
         <source>0 results</source>
-        <translation type="unfinished"></translation>
+        <translation>0 resultaten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="95"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hoofdlettergevoelig &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="126"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hele woorden &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="160"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Reguliere expressies &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="191"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Unicode-eigenschappen gebruiken &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;De betekenis van de tekenklassen \w, \d, enzovoort, en hun tegenhangers (\W, \D, enzovoort) wordt gewijzigd van alleen ASCII-tekens naar elk teken met de bijbehorende Unicode-eigenschap. Zo wordt \d gewijzigd om elk teken te matchen met de Unicode-eigenschap Nd (decimaal cijfer); \w om elk teken te matchen met de Unicode-eigenschap L (letter) of N (cijfer), plus underscore, enzovoort. Deze optie komt overeen met de /u-modifier in Perl reguliere expressies.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="197"/>
         <source>Alt+U</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+U</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="217"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vorige zoeken &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="226"/>
         <source>Shift+F3</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+F3</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="236"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Volgende zoeken %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="245"/>
         <source>F3</source>
-        <translation type="unfinished"></translation>
+        <translation>F3</translation>
     </message>
 </context>
 <context>
@@ -3708,17 +3708,17 @@
         <translation>Selecteer het startpunt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="272"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="271"/>
         <source>Select origin point that is not part of the list of objects</source>
         <translation>Selecteer een startpunt dat geen onderdeel is van de gekozen objecten</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="358"/>
         <source>Vertical axis</source>
         <translation>Verticale aslijn</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="360"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="359"/>
         <source>Horizontal axis</source>
         <translation>Horizontale aslijn</translation>
     </message>
@@ -3762,7 +3762,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="42"/>
         <source>New:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="142"/>
@@ -3776,7 +3776,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="370"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="369"/>
         <source>Ready</source>
         <translation>Klaar</translation>
     </message>
@@ -3786,14 +3786,14 @@
         <translation>Notities</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="342"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="341"/>
         <source>Invalid point</source>
         <translation>Ongeldig punt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="219"/>
         <source>Enable to create a visibility group from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Inschakelen om een zichtbaarheidsgroep van de oorspronkelijke objecten te maken</translation>
     </message>
 </context>
 <context>
@@ -3822,17 +3822,17 @@
         <translation>Kies het eerste punt van de lijn</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="273"/>
         <source>Select first line point that is not part of the list of objects</source>
         <translation>Het eerste punt van de lijn mag geen deel uitmaken van de gekozen objecten</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="270"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="277"/>
         <source>Select second line point</source>
         <translation>Kies het tweede punt van de lijn</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="282"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="290"/>
         <source>Select second line point that is not part of the list of objects</source>
         <translation>het tweede punt van de lijn mag geen deel uitmaken van de gekozen objecten</translation>
     </message>
@@ -3876,7 +3876,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="42"/>
         <source>New:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="142"/>
@@ -3890,7 +3890,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="398"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="402"/>
         <source>Ready</source>
         <translation>Klaar</translation>
     </message>
@@ -3900,24 +3900,24 @@
         <translation>Notities</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="375"/>
         <source>Invalid line points</source>
         <translation>Ongeldig lijnpunt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="378"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="382"/>
         <source>Invalid first line point</source>
         <translation>Ongeldig eerste lijnpunt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="385"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="389"/>
         <source>Invalid second line point</source>
         <translation>Ongeldig tweede lijnpunt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="219"/>
         <source>Enable to create a visibility group from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Inschakelen om een zichtbaarheidsgroep van de oorspronkelijke objecten te maken</translation>
     </message>
 </context>
 <context>
@@ -3925,151 +3925,151 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="20"/>
         <source>Graduated curve tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Getrapte curve gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="34"/>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="40"/>
         <source>Offsets</source>
-        <translation type="unfinished"></translation>
+        <translation>Offsets</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="75"/>
         <source>Name</source>
-        <translation type="unfinished">Naam</translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="80"/>
         <source>Calculated value</source>
-        <translation type="unfinished">Berekende waarde</translation>
+        <translation>Berekende waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="85"/>
         <source>Formula</source>
-        <translation type="unfinished">Formule</translation>
+        <translation>Formule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="100"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="103"/>
         <source>Details</source>
-        <translation type="unfinished">Details</translation>
+        <translation>Details</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="114"/>
         <source>Move offset up</source>
-        <translation type="unfinished"></translation>
+        <translation>Offset omhoog verplaatsen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="131"/>
         <source>Move offset down</source>
-        <translation type="unfinished"></translation>
+        <translation>Offset omlaag verplaatsen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="206"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="472"/>
         <source>Name:</source>
-        <translation type="unfinished">Naam:</translation>
+        <translation>Naam:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="216"/>
         <source>Unique offset name</source>
-        <translation type="unfinished"></translation>
+        <translation>Unieke offsetnaam</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="226"/>
         <source>Calculated value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Berekende waarde:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="233"/>
         <source>Formula:</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="257"/>
         <source>Calculation</source>
-        <translation type="unfinished">Berekening</translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="285"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Volledige berekening tonen in berichtvenster&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="314"/>
         <source>Formula wizard</source>
-        <translation type="unfinished">Formule assistent</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="361"/>
         <source>Description:</source>
-        <translation type="unfinished">Beschrijving:</translation>
+        <translation>Beschrijving:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="396"/>
         <source>Curve:</source>
-        <translation type="unfinished">Kromming:</translation>
+        <translation>Kromming:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="406"/>
         <source>Pen style:</source>
-        <translation type="unfinished">Pen stijl:</translation>
+        <translation>Penstijl:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="435"/>
         <source>Color:</source>
-        <translation type="unfinished">Kleur:</translation>
+        <translation>Kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="449"/>
         <source>Approximation scale:</source>
-        <translation type="unfinished">Schaal bij benadering:</translation>
+        <translation>Schaal bij benadering:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="456"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation type="unfinished">Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
+        <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="482"/>
         <source>Alias:</source>
-        <translation type="unfinished">Alias:</translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="512"/>
         <source>Notes</source>
-        <translation type="unfinished">Notities</translation>
+        <translation>Notities</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="220"/>
         <source>Offset %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Offset %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="516"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="785"/>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="522"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="791"/>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="691"/>
         <source>Edit offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Offset bewerken</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="786"/>
         <source>Parser error: %1</source>
-        <translation type="unfinished">Fout bij opsplitsen: %1</translation>
+        <translation>Fout bij opsplitsen: %1</translation>
     </message>
 </context>
 <context>
@@ -4570,72 +4570,72 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1401"/>
         <source>Increment name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toeslagnaam is leeg.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1406"/>
         <source>Imported file must not contain the same name twice.</source>
-        <translation type="unfinished">Geïmporteerd bestand mag geen tweemaal dezelfde naam bevatten.</translation>
+        <translation>Geïmporteerd bestand mag geen tweemaal dezelfde naam bevatten.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1411"/>
         <source>Increment &apos;%1&apos; doesn&apos;t match regex pattern.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toeslag &apos;%1&apos; voldoet niet aan het regex-patroon.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1416"/>
         <source>Increment &apos;%1&apos; already present in the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toeslag &apos;%1&apos; is al aanwezig in het bestand.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1439"/>
         <source>Name</source>
         <comment>increment column</comment>
-        <translation type="unfinished">Naam</translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1441"/>
         <source>Calculated value</source>
         <comment>increment column</comment>
-        <translation type="unfinished">Berekende waarde</translation>
+        <translation>Berekende waarde</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1443"/>
         <source>Formula</source>
         <comment>increment column</comment>
-        <translation type="unfinished">Formule</translation>
+        <translation>Formule</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1445"/>
         <source>Description</source>
         <comment>increment column</comment>
-        <translation type="unfinished">Beschrijving</translation>
+        <translation>Beschrijving</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1462"/>
         <source>Increments require at least 2 columns.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toeslagen vereisen minimaal 2 kolommen.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1479"/>
         <source>Error in row %1. The increment name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout in rij %1. De toeslagnaam is leeg.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1517"/>
         <source>Error in row %1. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout in rij %1. %2</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1690"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1755"/>
         <source>Comma-Separated Values</source>
-        <translation type="unfinished">Komma-scheidingsteken waardes</translation>
+        <translation>Komma-scheidingsteken waardes</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1757"/>
         <source>values</source>
-        <translation type="unfinished">waarden</translation>
+        <translation>waarden</translation>
     </message>
     <message>
         <source>Increment_%1</source>
@@ -4725,13 +4725,13 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="63"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="771"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zoekgeschiedenis &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="72"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="780"/>
         <source>Alt+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+Down</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="99"/>
@@ -4739,75 +4739,75 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1033"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1067"/>
         <source>0 results</source>
-        <translation type="unfinished"></translation>
+        <translation>0 resultaten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="126"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="834"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hoofdlettergevoelig &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="157"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="865"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hele woorden &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="191"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="899"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Reguliere expressies &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="222"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="930"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Unicode-eigenschappen gebruiken &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;De betekenis van de tekenklassen \w, \d, enzovoort, en hun tegenhangers (\W, \D, enzovoort) wordt gewijzigd van alleen ASCII-tekens naar elk teken met de bijbehorende Unicode-eigenschap. Zo wordt \d gewijzigd om elk teken te matchen met de Unicode-eigenschap Nd (decimaal cijfer); \w om elk teken te matchen met de Unicode-eigenschap L (letter) of N (cijfer), plus underscore, enzovoort. Deze optie komt overeen met de /u-modifier in Perl reguliere expressies.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="228"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="936"/>
         <source>Alt+U</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+U</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="248"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="956"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vorige zoeken &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="257"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="965"/>
         <source>Shift+F3</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+F3</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="267"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="975"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Volgende zoeken %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="276"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="984"/>
         <source>F3</source>
-        <translation type="unfinished"></translation>
+        <translation>F3</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="459"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1167"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1760"/>
         <source>Export to CSV</source>
-        <translation type="unfinished">Exporteer naar CSV</translation>
+        <translation>Exporteer naar CSV</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="475"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1177"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1694"/>
         <source>Import from CSV</source>
-        <translation type="unfinished">Importeer van CSV</translation>
+        <translation>Importeer van CSV</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="543"/>
@@ -4841,83 +4841,83 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="14"/>
         <source>Import increments</source>
-        <translation type="unfinished"></translation>
+        <translation>Toeslagen importeren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="26"/>
         <source>Preview</source>
-        <translation type="unfinished">Voorbeeld</translation>
+        <translation>Voorbeeld</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="32"/>
         <source>Input</source>
-        <translation type="unfinished">Ingave</translation>
+        <translation>Ingave</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="48"/>
         <source>Import</source>
-        <translation type="unfinished">Importeer</translation>
+        <translation>Importeer</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="67"/>
         <source>Columns</source>
-        <translation type="unfinished">Kolommen</translation>
+        <translation>Kolommen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="96"/>
         <source>Description:</source>
-        <translation type="unfinished">Beschrijving:</translation>
+        <translation>Beschrijving:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="111"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="510"/>
         <source>Ready</source>
-        <translation type="unfinished">Klaar</translation>
+        <translation>Klaar</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="167"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="442"/>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Naam</translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="169"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="444"/>
         <source>Value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="171"/>
         <source>Description</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Beschrijving</translation>
+        <translation>Beschrijving</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="286"/>
         <source>Skip</source>
-        <translation type="unfinished">Overslaan</translation>
+        <translation>Overslaan</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="481"/>
         <source>File path is empty</source>
-        <translation type="unfinished">Bestandspad is leeg</translation>
+        <translation>Bestandspad is leeg</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="490"/>
         <source>Not enough columns</source>
-        <translation type="unfinished">Niet genoeg kolommen</translation>
+        <translation>Niet genoeg kolommen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="497"/>
         <source>Not enough data to import</source>
-        <translation type="unfinished">Onvoldoende gegevens om te importeren</translation>
+        <translation>Onvoldoende gegevens om te importeren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="505"/>
         <source>Please, select unique number for each column</source>
-        <translation type="unfinished">Gelieve een uniek nummer voor elke kolom te selecteren</translation>
+        <translation>Gelieve een uniek nummer voor elke kolom te selecteren</translation>
     </message>
 </context>
 <context>
@@ -5484,17 +5484,17 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="346"/>
         <source>Boundary together with notches</source>
-        <translation type="unfinished"></translation>
+        <translation>Contour samen met inkepingen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="353"/>
         <source>Debug</source>
-        <translation type="unfinished"></translation>
+        <translation>Debug</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="359"/>
         <source>Show layout allowance</source>
-        <translation type="unfinished"></translation>
+        <translation>Indelingstoeslag tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="416"/>
@@ -5509,7 +5509,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="461"/>
         <source>Set layout efficiency coefficient. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made.</source>
-        <translation type="unfinished"></translation>
+        <translation>Indelingsefficiëntiecoëfficiënt instellen. De coëfficiënt is de verhouding van het oppervlak bezet door de stukken tot de begrenzende rechthoek van alle stukken. Als de nestfactor het vereiste niveau bereikt, stopt het proces. Bij waarde 0 wordt geen controle uitgevoerd.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="510"/>
@@ -5603,7 +5603,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="185"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Punten omwisselen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="37"/>
@@ -6076,7 +6076,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="766"/>
         <source>Shift</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Verschuiving</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="505"/>
@@ -6222,17 +6222,17 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="45"/>
         <source>New:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="103"/>
         <source>Bulk rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Massaal hernoemen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="119"/>
         <source>Remove object</source>
-        <translation type="unfinished"></translation>
+        <translation>Object verwijderen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="152"/>
@@ -6273,7 +6273,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="765"/>
         <source>Enable to create a visibility group from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Inschakelen om een zichtbaarheidsgroep van de oorspronkelijke objecten te maken</translation>
     </message>
 </context>
 <context>
@@ -6281,17 +6281,17 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogmovesteps.ui" line="14"/>
         <source>Move steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Stappen verplaatsen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogmovesteps.ui" line="29"/>
         <source>Move Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaatsgereedschap</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogmovesteps.ui" line="41"/>
         <source>Steps:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stappen:</translation>
     </message>
 </context>
 <context>
@@ -6405,12 +6405,12 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/dialognoknownmeasurements.ui" line="14"/>
         <source>Known measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Bekende maten</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialognoknownmeasurements.ui" line="24"/>
         <source>The measurements file is not currently connected to the database of known measurements. Before adding known measurements, you&apos;ll need to create a database and connect it to your measurements file. To connect to one of the known sets, please navigate to the &apos;Information&apos; tab. After doing so, you can retry your action. Alternatively, you can create a new database of known measurements and connect it to your measurements file. Would you like to create it now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Het maatbestand is momenteel niet verbonden met de database van bekende maten. Voordat u bekende maten kunt toevoegen, moet u een database aanmaken en deze verbinden met uw maatbestand. Om verbinding te maken met een van de bekende sets, ga naar het tabblad &apos;Informatie&apos;. Daarna kunt u uw actie opnieuw proberen. U kunt ook een nieuwe database van bekende maten aanmaken en deze verbinden met uw maatbestand. Wilt u dit nu aanmaken?</translation>
     </message>
 </context>
 <context>
@@ -6522,7 +6522,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="280"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Punten omwisselen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="317"/>
@@ -6560,27 +6560,27 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="69"/>
         <source>Rotation</source>
-        <translation type="unfinished">Rotatie</translation>
+        <translation>Rotatie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="158"/>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige groepsnaam</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="217"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="307"/>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="307"/>
         <source>Invalid name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige naam</translation>
     </message>
 </context>
 <context>
@@ -6588,82 +6588,82 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="14"/>
         <source>Parallel curve tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Parallelle curve gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="28"/>
         <source>Tool</source>
-        <translation type="unfinished">Gereedschap</translation>
+        <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="79"/>
         <source>Width:</source>
-        <translation type="unfinished">Breedte:</translation>
+        <translation>Breedte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="99"/>
         <source>Formula wizard</source>
-        <translation type="unfinished">Formule assistent</translation>
+        <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="141"/>
         <source>Value</source>
-        <translation type="unfinished">Waarde</translation>
+        <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="167"/>
         <source>Calculation</source>
-        <translation type="unfinished">Berekening</translation>
+        <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="189"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Volledige berekening tonen in berichtvenster&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="224"/>
         <source>Curve:</source>
-        <translation type="unfinished">Kromming:</translation>
+        <translation>Kromming:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="234"/>
         <source>Color:</source>
-        <translation type="unfinished">Kleur:</translation>
+        <translation>Kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="241"/>
         <source>Pen style:</source>
-        <translation type="unfinished">Pen stijl:</translation>
+        <translation>Penstijl:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="270"/>
         <source>Approximation scale:</source>
-        <translation type="unfinished">Schaal bij benadering:</translation>
+        <translation>Schaal bij benadering:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="277"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation type="unfinished">Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
+        <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="293"/>
         <source>Alias:</source>
-        <translation type="unfinished">Alias:</translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="314"/>
         <source>Name:</source>
-        <translation type="unfinished">Naam:</translation>
+        <translation>Naam:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="340"/>
         <source>Notes</source>
-        <translation type="unfinished">Notities</translation>
+        <translation>Notities</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.cpp" line="316"/>
         <source>Edit width to parallel curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Breedte naar parallelle curve bewerken</translation>
     </message>
 </context>
 <context>
@@ -6759,27 +6759,27 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="121"/>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="138"/>
         <source>Name of measurement or increment</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam van maat of toeslag</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="131"/>
         <source>Passmark width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasmerkbreedte:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="150"/>
         <source>Default piece label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard stukklabelsjabloon</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="169"/>
         <source>Path to default label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Pad naar standaard labelsjabloon</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="185"/>
         <source>Select path to label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Pad naar labelsjabloon selecteren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="188"/>
@@ -6932,28 +6932,28 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="114"/>
         <source>Passmark length:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasmerklengte:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="437"/>
         <source>Invalid image. Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige afbeelding. Fout: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="460"/>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="491"/>
         <source>Unable to save image. Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan afbeelding niet opslaan. Fout: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="475"/>
         <source>Save Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeelding opslaan</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="503"/>
         <source>Unable to show image. Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan afbeelding niet tonen. Fout: %1</translation>
     </message>
 </context>
 <context>
@@ -7148,32 +7148,32 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="120"/>
         <source>Reverse node direction</source>
-        <translation type="unfinished"></translation>
+        <translation>Knooppuntrichting omdraaien</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="139"/>
         <source>Excluded node</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitgesloten knooppunt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="158"/>
         <source>Turn point</source>
-        <translation type="unfinished"></translation>
+        <translation>Draaipunt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="177"/>
         <source>Check node uniqness</source>
-        <translation type="unfinished"></translation>
+        <translation>Uniekheid knooppunt controleren</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="196"/>
         <source>Notch</source>
-        <translation type="unfinished"></translation>
+        <translation>Inkeping</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="215"/>
         <source>Delete node</source>
-        <translation type="unfinished"></translation>
+        <translation>Knooppunt verwijderen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="339"/>
@@ -7278,12 +7278,12 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2182"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a notch visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak een formule die de zichtbaarheid regelt. Waarden anders dan &quot;0&quot; maken een inkeping zichtbaar</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2420"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak een formule die de zichtbaarheid regelt. Waarden anders dan &quot;0&quot; maken een pad zichtbaar</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1069"/>
@@ -7303,17 +7303,17 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1138"/>
         <source>Edit passmark width</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasmerkbreedte bewerken</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1152"/>
         <source>Edit passmark angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasmerkhoek bewerken</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1165"/>
         <source>Edit notch visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Inkepingszichtbaarheid bewerken</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1659"/>
@@ -7432,7 +7432,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="332"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1338"/>
         <source>Not Mirrored</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet gespiegeld</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1055"/>
@@ -7442,7 +7442,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1176"/>
         <source>Check mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Vinkje</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1243"/>
@@ -7469,12 +7469,12 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1328"/>
         <source>Clockwise opening</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechtsom opening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1346"/>
         <source>Manual shape</source>
-        <translation type="unfinished"></translation>
+        <translation>Handmatige vorm</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1355"/>
@@ -7650,7 +7650,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2212"/>
         <source>Invalid segment!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig segment!</translation>
     </message>
 </context>
 <context>
@@ -7814,7 +7814,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="620"/>
         <source>Not mirrored</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet gespiegeld</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="628"/>
@@ -8209,7 +8209,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="102"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Punten omwisselen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="139"/>
@@ -8300,53 +8300,53 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="52"/>
         <source>Choose unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies een uniek label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="103"/>
         <source>Arc 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Boog 1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="109"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="202"/>
         <source>Alias2:</source>
-        <translation type="unfinished">Alias2:</translation>
+        <translation>Alias2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="123"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="216"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="137"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="195"/>
         <source>Alias1:</source>
-        <translation type="unfinished">Alias1:</translation>
+        <translation>Alias1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="144"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="223"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="151"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="181"/>
         <source>Choose unique name for left sub arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies een unieke naam voor de linker deelboog</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="158"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="209"/>
         <source>Choose unique name for right sub arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies een unieke naam voor de rechter deelboog</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="168"/>
         <source>Arc 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Boog 2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="234"/>
@@ -8552,25 +8552,25 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="143"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="236"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="164"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="243"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="171"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="201"/>
         <source>Choose unique name for left sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies een unieke naam voor de linker deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="178"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="229"/>
         <source>Choose unique name for right sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies een unieke naam voor de rechter deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="254"/>
@@ -8636,7 +8636,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogpuzzlepreferences.ui" line="14"/>
         <source>Puzzle preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Puzzle-voorkeuren</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogpuzzlepreferences.ui" line="60"/>
@@ -8651,9 +8651,9 @@ Toch de instellingen aanpassen?</translation>
     <message numerus="yes">
         <location filename="../../src/app/puzzle/dialogs/dialogpuzzlepreferences.cpp" line="159"/>
         <source>Followed %n option(s) require restart to take effect: %1.</source>
-        <translation type="unfinished">
-            <numerusform>Volgende optie vereist een herstart om geactiveerd te worden: %1.</numerusform>
-            <numerusform>Volgende %n optie(s) vereisen een herstart om geactiveerd te worden: %1.</numerusform>
+        <translation>
+            <numerusform>De volgende %n optie vereist opnieuw opstarten om van kracht te worden: %1.</numerusform>
+            <numerusform>De volgende %n opties vereisen opnieuw opstarten om van kracht te worden: %1.</numerusform>
         </translation>
     </message>
     <message>
@@ -8742,7 +8742,7 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Achtervoegsel:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="367"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="366"/>
         <source>Edit angle</source>
         <translation>Verander de hoek</translation>
     </message>
@@ -8761,7 +8761,7 @@ Toch de instellingen aanpassen?</translation>
         <translation>Berekening</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="338"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="337"/>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Dit punt kan geen startpunt zijn.  Gelieve een ander startpunt te kiezen</translation>
     </message>
@@ -8799,7 +8799,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="42"/>
         <source>New:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="142"/>
@@ -8813,7 +8813,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="443"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="503"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="501"/>
         <source>Ready</source>
         <translation>Klaar</translation>
     </message>
@@ -8823,19 +8823,19 @@ Toch de instellingen aanpassen?</translation>
         <translation>Notities</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="458"/>
         <source>Invalid rotation point</source>
         <translation>Ongeldig draaipunt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="492"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="490"/>
         <source>Invalid angle formula</source>
         <translation>Ongeldige hoek formule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="388"/>
         <source>Enable to create a visibility group from original objects</source>
-        <translation type="unfinished"></translation>
+        <translation>Inschakelen om een zichtbaarheidsgroep van de oorspronkelijke objecten te maken</translation>
     </message>
 </context>
 <context>
@@ -8914,23 +8914,23 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="145"/>
         <source>Show grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Draadrichting tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="155"/>
         <source>Boundary together with notches</source>
-        <translation type="unfinished"></translation>
+        <translation>Contour samen met inkepingen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="164"/>
         <source>Compatibility:</source>
-        <translation type="unfinished"></translation>
+        <translation>Compatibiliteit:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="176"/>
         <source>Not available</source>
         <comment>options</comment>
-        <translation type="unfinished"></translation>
+        <translation>Niet beschikbaar</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="345"/>
@@ -9011,23 +9011,23 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="174"/>
         <source>Tried to use out of range file format type number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geprobeerd een bestandsformaatnummer buiten het bereik te gebruiken.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="182"/>
         <source>Selected not present file format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geselecteerd bestandsformaat bestaat niet.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="199"/>
         <source>Selected not present file format type.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geselecteerd bestandsformaattype bestaat niet.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="380"/>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="927"/>
         <source>By standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Volgens standaard</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="468"/>
@@ -9141,7 +9141,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="125"/>
         <source>Not available</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet beschikbaar</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="137"/>
@@ -9151,12 +9151,12 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="157"/>
         <source>Show grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Draadrichting tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="167"/>
         <source>Hide ruler</source>
-        <translation type="unfinished"></translation>
+        <translation>Liniaal verbergen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="181"/>
@@ -9166,17 +9166,17 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="147"/>
         <source>Export unified</source>
-        <translation type="unfinished"></translation>
+        <translation>Unified exporteren</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="191"/>
         <source>Tiles scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Tegelschema</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="200"/>
         <source>Compatibility:</source>
-        <translation type="unfinished"></translation>
+        <translation>Compatibiliteit:</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="230"/>
@@ -9202,17 +9202,17 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="190"/>
         <source>Tried to use out of range file format type number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geprobeerd een bestandsformaatnummer buiten het bereik te gebruiken.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="198"/>
         <source>Selected not present file format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geselecteerd bestandsformaat bestaat niet.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="215"/>
         <source>Selected not present file format type.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geselecteerd bestandsformaattype bestaat niet.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="388"/>
@@ -9238,12 +9238,12 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="701"/>
         <source>By standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Volgens standaard</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="14"/>
         <source>Save manual layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Handmatige indeling opslaan</translation>
     </message>
 </context>
 <context>
@@ -9319,13 +9319,13 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2685"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5641"/>
         <source>External V mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Externe V-markering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2689"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5645"/>
         <source>Internal V mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Interne V-markering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2692"/>
@@ -9343,7 +9343,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2698"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5654"/>
         <source>Check mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Vinkje</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2702"/>
@@ -9355,7 +9355,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2707"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5665"/>
         <source>Turn point</source>
-        <translation type="unfinished"></translation>
+        <translation>Draaipunt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2713"/>
@@ -9430,12 +9430,12 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3048"/>
         <source>Edit passmark width</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasmerkbreedte bewerken</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3062"/>
         <source>Edit passmark angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasmerkhoek bewerken</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3467"/>
@@ -9634,7 +9634,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="697"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3824"/>
         <source>Fold line</source>
-        <translation type="unfinished"></translation>
+        <translation>Vouwlijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1386"/>
@@ -9649,44 +9649,44 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3075"/>
         <source>Edit notch visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Inkepingszichtbaarheid bewerken</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3087"/>
         <source>Edit fold line height</source>
-        <translation type="unfinished"></translation>
+        <translation>Vouwlijnhoogte bewerken</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3102"/>
         <source>Edit fold line width</source>
-        <translation type="unfinished"></translation>
+        <translation>Vouwlijnbreedte bewerken</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3117"/>
         <source>Edit fold line center position</source>
-        <translation type="unfinished"></translation>
+        <translation>Middenpositie vouwlijn bewerken</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3538"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3574"/>
         <source>Invalid mirror line start point!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig startpunt spiegellijn!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3545"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3581"/>
         <source>Invalid mirror line end point!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig eindpunt spiegellijn!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3554"/>
         <source>Start and end mirror line points must be unique!</source>
-        <translation type="unfinished"></translation>
+        <translation>Begin- en eindpunten van de spiegellijn moeten uniek zijn!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3590"/>
         <source>Mirror points must be neighbors!</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiegelpunten moeten buren zijn!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4387"/>
@@ -9707,88 +9707,88 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4449"/>
         <source>Two ways (Up/Down)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Twee richtingen (omhoog/omlaag)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4451"/>
         <source>One way (Up)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Één richting (omhoog)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4453"/>
         <source>One way (Down)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Één richting (omlaag)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4455"/>
         <source>Four ways</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vier richtingen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4457"/>
         <source>Two ways (Up/Left)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Twee richtingen (omhoog/links)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4459"/>
         <source>Two ways (Up/Right)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Twee richtingen (omhoog/rechts)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4461"/>
         <source>Two ways (Down/Left)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Twee richtingen (omlaag/links)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4463"/>
         <source>Two ways (Down/Right)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Twee richtingen (omlaag/rechts)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4465"/>
         <source>Three ways (Up/Down/Left)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Drie richtingen (omhoog/omlaag/links)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4467"/>
         <source>Three ways (Up/Down/Right)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Drie richtingen (omhoog/omlaag/rechts)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4469"/>
         <source>Three ways (Up/Left/Right)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Drie richtingen (omhoog/links/rechts)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4471"/>
         <source>Three ways (Down/Left/Right)</source>
         <comment>grainline direction</comment>
-        <translation type="unfinished"></translation>
+        <translation>Drie richtingen (omlaag/links/rechts)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4656"/>
         <source>Two arrows (text above)</source>
-        <translation type="unfinished"></translation>
+        <translation>Twee pijlen (tekst erboven)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4658"/>
         <source>Two arrows (text under)</source>
-        <translation type="unfinished"></translation>
+        <translation>Twee pijlen (tekst eronder)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4660"/>
         <source>Two arrows</source>
-        <translation type="unfinished"></translation>
+        <translation>Twee pijlen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4661"/>
@@ -9798,22 +9798,22 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4662"/>
         <source>Three dots</source>
-        <translation type="unfinished"></translation>
+        <translation>Drie punten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4663"/>
         <source>Three X</source>
-        <translation type="unfinished"></translation>
+        <translation>Drie X</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5290"/>
         <source>Measurement %1 value alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Alias waarde maat %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5600"/>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplicaat</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5787"/>
@@ -9871,7 +9871,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5275"/>
         <source>Waist label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Tailleetiket</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5288"/>
@@ -9881,55 +9881,55 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3513"/>
         <source>Invalid segment!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig segment!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5240"/>
         <source>Dimension X</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie X</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5244"/>
         <source>Dimension Y</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie Y</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5248"/>
         <source>Dimension Z</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie Z</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5252"/>
         <source>Dimension W</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie W</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5258"/>
         <source>Dimension X label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Label dimensie X</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5264"/>
         <source>Dimension Y label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Label dimensie Y</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5270"/>
         <source>Dimension Z label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Label dimensie Z</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5276"/>
         <source>Dimension W label</source>
         <comment>dimension</comment>
-        <translation type="unfinished"></translation>
+        <translation>Label dimensie W</translation>
     </message>
 </context>
 <context>
@@ -9937,17 +9937,17 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectlanguage.ui" line="14"/>
         <source>Select language</source>
-        <translation type="unfinished"></translation>
+        <translation>Taal selecteren</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectlanguage.ui" line="24"/>
         <source>Select user interface language</source>
-        <translation type="unfinished"></translation>
+        <translation>Taal voor gebruikersinterface selecteren</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectlanguage.ui" line="33"/>
         <source>Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Taal:</translation>
     </message>
 </context>
 <context>
@@ -9956,19 +9956,19 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="14"/>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="35"/>
         <source>Select measurements type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type maten selecteren</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="52"/>
         <source>Individual</source>
         <comment>measurements type</comment>
-        <translation type="unfinished">Individueel</translation>
+        <translation>Individueel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="72"/>
         <source>Multisize</source>
         <comment>measurements type</comment>
-        <translation type="unfinished">Multimaten</translation>
+        <translation>Meerdere maten</translation>
     </message>
 </context>
 <context>
@@ -10068,7 +10068,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="321"/>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="459"/>
         <source>Custom name</source>
-        <translation type="unfinished"></translation>
+        <translation>Aangepaste naam</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="54"/>
@@ -10081,17 +10081,17 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.cpp" line="416"/>
         <source>Please, provide correct data for dimension %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef correcte gegevens op voor dimensie %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.cpp" line="422"/>
         <source>Please, provide custom name for dimension %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef een aangepaste naam op voor dimensie %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="152"/>
         <source>A body measurement measured in units of length.</source>
-        <translation type="unfinished"></translation>
+        <translation>Een lichamelijke meting in lengde-eenheden.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="155"/>
@@ -10099,14 +10099,14 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="434"/>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="572"/>
         <source>Body Measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>Lichamelijke meting</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="293"/>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="431"/>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="569"/>
         <source>A body measurement measured in units of length. Circumference.</source>
-        <translation type="unfinished"></translation>
+        <translation>Een lichamelijke meting in lengde-eenheden. Omtrek.</translation>
     </message>
 </context>
 <context>
@@ -10546,7 +10546,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="54"/>
         <source>New point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="123"/>
@@ -11098,7 +11098,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="105"/>
         <source>Select unique detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Uniek detail selecteren</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="174"/>
@@ -11146,7 +11146,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vlayout/vfoldline.cpp" line="369"/>
         <source>Cut On Fold</source>
-        <translation type="unfinished"></translation>
+        <translation>Op vouw knippen</translation>
     </message>
 </context>
 <context>
@@ -11233,12 +11233,12 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/hideallbackgroundimages.cpp" line="38"/>
         <source>hide all background images</source>
-        <translation type="unfinished"></translation>
+        <translation>alle achtergrondafbeeldingen verbergen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/hideallbackgroundimages.cpp" line="42"/>
         <source>show all background images</source>
-        <translation type="unfinished"></translation>
+        <translation>alle achtergrondafbeeldingen tonen</translation>
     </message>
 </context>
 <context>
@@ -11246,12 +11246,12 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/hidebackgroundimage.cpp" line="39"/>
         <source>hide a background image</source>
-        <translation type="unfinished"></translation>
+        <translation>een achtergrondafbeelding verbergen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/hidebackgroundimage.cpp" line="43"/>
         <source>show a background image</source>
-        <translation type="unfinished"></translation>
+        <translation>een achtergrondafbeelding tonen</translation>
     </message>
 </context>
 <context>
@@ -11259,12 +11259,12 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/holdallbackgroundimages.cpp" line="38"/>
         <source>hold all background images</source>
-        <translation type="unfinished"></translation>
+        <translation>alle achtergrondafbeeldingen vergrendelen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/holdallbackgroundimages.cpp" line="42"/>
         <source>unhold background images</source>
-        <translation type="unfinished"></translation>
+        <translation>achtergrondafbeeldingen ontgrendelen</translation>
     </message>
 </context>
 <context>
@@ -11272,12 +11272,12 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/holdbackgroundimage.cpp" line="39"/>
         <source>hold background image</source>
-        <translation type="unfinished"></translation>
+        <translation>achtergrondafbeelding vergrendelen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/holdbackgroundimage.cpp" line="43"/>
         <source>unhold background image</source>
-        <translation type="unfinished"></translation>
+        <translation>achtergrondafbeelding ontgrendelen</translation>
     </message>
 </context>
 <context>
@@ -11458,7 +11458,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="1050"/>
         <source>Activate known measurements mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bekende matenmodus activeren.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="1220"/>
@@ -11483,7 +11483,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="1095"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Testmodus ondersteunt het openen van meerdere bestanden niet.</translation>
     </message>
 </context>
 <context>
@@ -11628,67 +11628,67 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="550"/>
         <source>Point tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Puntgereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="553"/>
         <source>Tools for creating points</source>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschappen voor het maken van punten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="570"/>
         <source>Selecting tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Selectiegereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="591"/>
         <source>Line tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijngereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="594"/>
         <source>Tools for creating segments</source>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschappen voor het maken van segmenten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="612"/>
         <source>Curve tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Curvegereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="615"/>
         <source>Tools for creating curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschappen voor het maken van curves</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="632"/>
         <source>Operation tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerkingsgereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="649"/>
         <source>Detail tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Detailgereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="652"/>
         <source>Tools for creating detail</source>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschappen voor het maken van details</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="669"/>
         <source>Layout actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Indelingsacties</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="696"/>
         <source>Pen options</source>
-        <translation type="unfinished"></translation>
+        <translation>Penopties</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="707"/>
         <source>Dependency tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Afhankelijkheidsboom</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="719"/>
@@ -11739,94 +11739,94 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1185"/>
         <source>Show Segment Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Segmentlabels tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1188"/>
         <source>Allow segment labels to appear. Uncheck to hide them in all cases.</source>
-        <translation type="unfinished"></translation>
+        <translation>Segmentlabels toestaan te verschijnen. Uitvinken om ze altijd te verbergen.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1300"/>
         <source>Load Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Maten laden</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1679"/>
         <source>Interactive tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Interactieve gereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1682"/>
         <source>Ctrl+D</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+D</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1693"/>
         <source>Export font corrections</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettertypecorrecties exporteren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2583"/>
         <source>Arc start point</source>
-        <translation type="unfinished"></translation>
+        <translation>Beginpunt boog</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2601"/>
         <source>Arc end point</source>
-        <translation type="unfinished"></translation>
+        <translation>Eindpunt boog</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2615"/>
         <source>Boundary together with notches</source>
-        <translation type="unfinished"></translation>
+        <translation>Contour samen met inkepingen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2623"/>
         <source>Settings Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellingenmap</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2634"/>
         <source>Reload labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Labels herladen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2637"/>
         <source>Reload piece labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Stukklabels herladen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2651"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="8552"/>
         <source>Auto-arrange labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Labels automatisch rangschikken</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2654"/>
         <source>Auto-arrange point labels to reduce overlaps</source>
-        <translation type="unfinished"></translation>
+        <translation>Puntlabels automatisch rangschikken om overlappingen te verminderen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2665"/>
         <source>Install single line font</source>
-        <translation type="unfinished"></translation>
+        <translation>Enkellijnlettertype installeren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2683"/>
         <source>Elliptical arc with given length</source>
-        <translation type="unfinished"></translation>
+        <translation>Elliptische boog met opgegeven lengte</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2701"/>
         <source>Parallel curve tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Parallelle curve gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2719"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2722"/>
         <source>Graduated curve tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Getrapte curve gereedschap</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
@@ -12065,7 +12065,7 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1684"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1964"/>
         <source>Select one or more objects, &lt;b&gt;%1&lt;/b&gt; - confirm selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer één of meer objecten, &lt;b&gt;%1&lt;/b&gt; - selectie bevestigen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1844"/>
@@ -12963,7 +12963,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1303"/>
         <source>Connect measurements file to pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Maatbestand koppelen aan patroon</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1314"/>
@@ -13043,17 +13043,17 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3453"/>
         <source>Point at the intersections of lines/axis tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt op snijpunten van lijnen/as gereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3496"/>
         <source>Point segmenting curves/arcs tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt dat curves/bogen segmenteert gereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3510"/>
         <source>Points intersecting with 2 curves/arcs/circles tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Punten op snijpunten van 2 curves/bogen/cirkels gereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4318"/>
@@ -13194,17 +13194,17 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1711"/>
         <source>Tool &quot;Select&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &quot;Selecteren&quot;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1728"/>
         <source>Layout settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Indelingsinstellingen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1749"/>
         <source>Layout export as</source>
-        <translation type="unfinished"></translation>
+        <translation>Indeling exporteren als</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2547"/>
@@ -13422,27 +13422,27 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="182"/>
         <source>Manual Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Handmatige indeling</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1601"/>
         <source>Open Puzzle</source>
-        <translation type="unfinished"></translation>
+        <translation>Puzzle openen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1604"/>
         <source>Open the Puzzle app</source>
-        <translation type="unfinished"></translation>
+        <translation>De Puzzle app openen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1615"/>
         <source>Create</source>
-        <translation type="unfinished"></translation>
+        <translation>Aanmaken</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1618"/>
         <source>Create manual layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Handmatige indeling aanmaken</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1629"/>
@@ -13452,23 +13452,23 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1632"/>
         <source>Update manual layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Handmatige indeling bijwerken</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4678"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4753"/>
         <source>Unable to prepare raw layout data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ruwe indelingsgegevens niet voorbereiden.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4685"/>
         <source>Manual layout files</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestanden handmatige indeling</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4692"/>
         <source>Select manual layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Handmatige indeling selecteren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4794"/>
@@ -13478,7 +13478,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6195"/>
         <source>The pattern has been modified. Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Het patroon is gewijzigd. Wilt u uw wijzigingen opslaan?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7819"/>
@@ -13528,12 +13528,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5580"/>
         <source>Could not create recipe file. %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan receptbestand niet aanmaken. %1</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1640"/>
         <source>Shop</source>
-        <translation type="unfinished"></translation>
+        <translation>Winkel</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7290"/>
@@ -13543,151 +13543,153 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7292"/>
         <source>Save draw</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekening opslaan</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2421"/>
         <source>Draw export</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekening exporteren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="541"/>
         <source>Background images</source>
-        <translation type="unfinished"></translation>
+        <translation>Achtergrondafbeeldingen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1651"/>
         <source>Add background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Achtergrondafbeelding toevoegen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1795"/>
         <source>Unable to add background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan achtergrondafbeelding niet toevoegen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1815"/>
         <source>Invalid image. Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige afbeelding. Fout: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1999"/>
         <source>Select point of the center of the elliptical arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Middelpunt van de elliptische boog selecteren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2116"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3262"/>
         <source>Pen style:</source>
-        <translation type="unfinished">Pen stijl:</translation>
+        <translation>Penstijl:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2117"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3286"/>
         <source>Color:</source>
-        <translation type="unfinished">Kleur:</translation>
+        <translation>Kleur:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3267"/>
         <source>Sets the &lt;b&gt;default pen style&lt;/b&gt; for all newly created objects. This style is applied the first time an object is drawn.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stelt de &lt;b&gt;standaard penstijl&lt;/b&gt; in voor alle nieuw aangemaakte objecten. Deze stijl wordt de eerste keer toegepast wanneer een object wordt getekend.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3290"/>
         <source>Defines the &lt;b&gt;global object color property&lt;/b&gt;. This color is applied automatically the first time a new object is drawn.</source>
-        <translation type="unfinished"></translation>
+        <translation>Definieert de &lt;b&gt;globale objectkleureigenschap&lt;/b&gt;. Deze kleur wordt automatisch toegepast de eerste keer dat een nieuw object wordt getekend.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3426"/>
         <source>Point at a given distance tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt op een opgegeven afstand gereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3440"/>
         <source>Perpendicular/Bisector tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Loodlijn/bissectrice gereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3466"/>
         <source>Triangular tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Driehoeksgereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3480"/>
         <source>Point intersecting with axis tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt op snijpunt met as gereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3525"/>
         <source>Points intersecting with arcs/curves and tangents/segments tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Punten op snijpunten van bogen/curves en raaklijn/segmenten gereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3585"/>
         <source>Curves and arcs tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Curves en bogen gereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3618"/>
         <source>Flipping objects tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Objecten spiegelen gereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3631"/>
         <source>Rotating/moving objects tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Objecten draaien/verplaatsen gereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3666"/>
         <source>Merge/duplicate pieces tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Stukken samenvoegen/dupliceren gereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3681"/>
         <source>Adding objects for Details mode tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Objecten toevoegen voor Details modus gereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4761"/>
         <source>Select background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Achtergrondafbeelding selecteren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4821"/>
         <source>All Single-Line Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle enkellijnlettertypen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4822"/>
         <source>TrueType Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>TrueType-lettertypen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4823"/>
         <source>OpenType Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>OpenType-lettertypen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4824"/>
         <source>SVG Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>SVG-lettertypen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4825"/>
         <source>All Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle bestanden</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4830"/>
         <source>Select Font Files to Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettertypebestanden selecteren om te installeren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4864"/>
         <source>Failed to install font file: %1
 
 Reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettertypebestand installeren mislukt: %1
+
+Reden: %2</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4870"/>
@@ -13695,28 +13697,31 @@ Reason: %2</source>
 
 Successful Installations: %1
 Failed Installations: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Overzicht lettertype-installatie:
+
+Succesvolle installaties: %1
+Mislukte installaties: %2</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4876"/>
         <source>Installation Complete with Errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Installatie voltooid met fouten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4880"/>
         <source>Installation Successful</source>
-        <translation type="unfinished"></translation>
+        <translation>Installatie geslaagd</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5497"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5537"/>
         <source>Unable to save image. Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan afbeelding niet opslaan. Fout: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5503"/>
         <source>Unable to save image. No data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan afbeelding niet opslaan. Geen gegevens.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5509"/>
@@ -13726,7 +13731,7 @@ Failed Installations: %2</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="8502"/>
         <source>Auto-Arrange Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Labels automatisch rangschikken</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2362"/>
@@ -13738,7 +13743,7 @@ Failed Installations: %2</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5526"/>
         <source>Save Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeelding opslaan</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2385"/>
@@ -13748,7 +13753,7 @@ Failed Installations: %2</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1665"/>
         <source>Show accuracy radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Nauwkeurigheidsstraal tonen</translation>
     </message>
 </context>
 <context>
@@ -13924,17 +13929,21 @@ Failed Installations: %2</source>
 Missing: %1
 
 Would you like to select another file?</source>
-        <translation type="unfinished"></translation>
+        <translation>Maatbestand bevat niet alle vereiste maten.
+
+Ontbreekt: %1
+
+Wilt u een ander bestand selecteren?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1450"/>
         <source>Missing Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Ontbrekende maten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1473"/>
         <source>Select Measurement File</source>
-        <translation type="unfinished"></translation>
+        <translation>Maatbestand selecteren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1465"/>
@@ -13969,7 +13978,7 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/movebackgroundimage.cpp" line="40"/>
         <source>move background image</source>
-        <translation type="unfinished"></translation>
+        <translation>achtergrondafbeelding verplaatsen</translation>
     </message>
 </context>
 <context>
@@ -14006,7 +14015,7 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/libs/vtools/undocommands/label/movesegmentlabel.cpp" line="101"/>
         <source>move segment label</source>
-        <translation type="unfinished"></translation>
+        <translation>segmentlabel verplaatsen</translation>
     </message>
 </context>
 <context>
@@ -14030,7 +14039,7 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/libs/vtools/undocommands/movetool.cpp" line="218"/>
         <source>move tool down in history</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschap omlaag in geschiedenis verplaatsen</translation>
     </message>
 </context>
 <context>
@@ -14038,7 +14047,7 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/libs/vtools/undocommands/movetool.cpp" line="41"/>
         <source>move tool up in history</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschap omhoog in geschiedenis verplaatsen</translation>
     </message>
 </context>
 <context>
@@ -14046,7 +14055,7 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/opaquebackgroundimage.cpp" line="37"/>
         <source>change a background image opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>doorzichtigheid achtergrondafbeelding wijzigen</translation>
     </message>
 </context>
 <context>
@@ -14289,40 +14298,40 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="336"/>
         <source>send crash report</source>
-        <translation type="unfinished"></translation>
+        <translation>crashrapport verzenden</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="343"/>
         <source>user email in case of crash</source>
-        <translation type="unfinished"></translation>
+        <translation>e-mailadres gebruiker bij crash</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="390"/>
         <source>System</source>
         <comment>theme</comment>
-        <translation type="unfinished"></translation>
+        <translation>Systeem</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="391"/>
         <source>Dark</source>
         <comment>theme</comment>
-        <translation type="unfinished"></translation>
+        <translation>Donker</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="392"/>
         <source>Light</source>
         <comment>theme</comment>
-        <translation type="unfinished"></translation>
+        <translation>Licht</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="399"/>
         <source>Tool icon cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschapspictogram cursor</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="400"/>
         <source>Arrow cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>Pijlcursor</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="406"/>
@@ -14368,7 +14377,7 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="116"/>
         <source>Piece label language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Taal stukklabel:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="198"/>
@@ -14378,27 +14387,27 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="221"/>
         <source>Enable to translate formula according to locale</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule vertalen naar locale inschakelen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="224"/>
         <source>Translate formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule vertalen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="237"/>
         <source>Enable Garbage Collector</source>
-        <translation type="unfinished"></translation>
+        <translation>Vuilnisverzamelaar inschakelen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="265"/>
         <source>Toolbox icon size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Grootte pictogrammen gereedschapskist:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="272"/>
         <source>Small</source>
-        <translation type="unfinished"></translation>
+        <translation>Klein</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="285"/>
@@ -14408,33 +14417,33 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="321"/>
         <source>Theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>Thema:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="345"/>
         <source>Pointer mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aanwijzermodus:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="364"/>
         <source>Use tool groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschapsgroepen gebruiken</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="408"/>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="456"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Sneltoetsen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="451"/>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Actie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="479"/>
         <source>Restore defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaardwaarden herstellen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="489"/>
@@ -14509,32 +14518,32 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="672"/>
         <source>Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Privacy</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="678"/>
         <source>Usage statistic</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruiksstatistiek</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="684"/>
         <source>Send usage statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruiksstatistieken verzenden</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="691"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
-        <translation type="unfinished"></translation>
+        <translation>Help mee de kwaliteit van Valentina te verbeteren door automatisch gebruiksstatistieken te verzenden. De verzonden gegevens bevatten &lt;span style=&quot; font-weight:700;&quot;&gt;geen mogelijk gevoelige informatie&lt;/span&gt; zoals gebruikersnamen, e-mailadressen, bestandsinhoud of bestandspaden.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="704"/>
         <source>Crash reports</source>
-        <translation type="unfinished"></translation>
+        <translation>Crashrapporten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="710"/>
         <source>Send automatic crash reports</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatische crashrapporten verzenden</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="719"/>
@@ -14544,7 +14553,7 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="735"/>
         <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het melden van crashes helpt ons Valentina betrouwbaarder te maken. Alle informatie wordt vertrouwelijk behandeld en wordt alleen gebruikt om toekomstige versies van dit programma te verbeteren. Activeer het automatisch verzenden van crashrapporten en vul uw e-mailadres in (optioneel). Als u dit invult, kunnen wij contact met u opnemen met aanvullende informatie over de crash.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="313"/>
@@ -14554,7 +14563,7 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="234"/>
         <source>Enable collecting unused objects when open pattern file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzamelen van ongebruikte objecten inschakelen bij openen patroonbestand.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="371"/>
@@ -14569,22 +14578,22 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="387"/>
         <source>Automatically check for updates each time the application starts</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch op updates controleren elke keer dat de toepassing start</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="390"/>
         <source>Automatically check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch op updates controleren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="208"/>
         <source>Disable if you want to skip interactive part of creating tools. And go straight to editing formulas instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitschakelen als u het interactieve deel van het aanmaken van gereedschappen wilt overslaan en direct naar het bewerken van formules wilt gaan.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="211"/>
         <source>Interactive tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Interactieve gereedschappen</translation>
     </message>
 </context>
 <context>
@@ -14622,17 +14631,17 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="179"/>
         <source>My SVG Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Mijn SVG-lettertypen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="186"/>
         <source>My font corrections</source>
-        <translation type="unfinished"></translation>
+        <translation>Mijn lettertypecorrecties</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="193"/>
         <source>My known measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Mijn bekende maten</translation>
     </message>
 </context>
 <context>
@@ -14700,12 +14709,12 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="82"/>
         <source>This setting has no effect since the value is overridden by the command-line option</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze instelling heeft geen effect omdat de waarde wordt overschreven door de opdrachtregeloptie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="226"/>
         <source>Show a notch both in the seam allowance and on the seam line. If you want to see a notch on a piece without seam allowance, enable built-in seam allowance and set the length of a notch manually.</source>
-        <translation type="unfinished"></translation>
+        <translation>Een inkeping tonen zowel in de naadtoeslag als op de naadlijn. Als u een inkeping op een stuk zonder naadtoeslag wilt zien, schakel ingebouwde naadtoeslag in en stel de lengte van een inkeping handmatig in.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="272"/>
@@ -14715,32 +14724,32 @@ Would you like to select another file?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="298"/>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettertype</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="332"/>
         <source>Outline font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Contourlettertype:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="352"/>
         <source>Single-line font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Enkellijnlettertype:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="368"/>
         <source>Allow single stroke outline fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Enkelstrook contourlettertypen toestaan</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="375"/>
         <source>When this option is activated, the application will utilize SVG Fonts present in your system to render piece label text, instead of using outline fonts.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wanneer deze optie is geactiveerd, gebruikt de toepassing SVG-lettertypen in uw systeem om stukklabeltekst weer te geven, in plaats van contourlettertypen.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="378"/>
         <source>Use single-line fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Enkellijnlettertypen gebruiken</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="388"/>
@@ -14848,7 +14857,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="504"/>
         <source>Background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Achtergrondafbeelding</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="510"/>
@@ -14858,17 +14867,17 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="517"/>
         <source>Opacity value by default</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard doorzichtigheidswaarde</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="216"/>
         <source>By default export to DXF-AAMA sew line on Draw layer for all new created workpieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard exporteren naar DXF-AAMA naadlijn op Teken-laag voor alle nieuw gemaakte werkstukken</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="219"/>
         <source>Sew line on drawing</source>
-        <translation type="unfinished"></translation>
+        <translation>Naadlijn op tekening</translation>
     </message>
 </context>
 <context>
@@ -14876,12 +14885,12 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/puzzle/vpcommandline.cpp" line="73"/>
         <source>Valentina&apos;s manual layout editor.</source>
-        <translation type="unfinished"></translation>
+        <translation>Handmatige indelingseditor van Valentina.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpcommandline.cpp" line="76"/>
         <source>The manual layout file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het bestand van de handmatige indeling.</translation>
     </message>
 </context>
 <context>
@@ -14924,7 +14933,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="100"/>
         <source>Theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>Thema:</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="122"/>
@@ -14951,22 +14960,22 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="152"/>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettertype</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="158"/>
         <source>Allow single stroke outline fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Enkelstrook contourlettertypen toestaan</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="165"/>
         <source>When this option is activated, the application will utilize SVG Fonts present in your system to render piece label text, instead of using outline fonts.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wanneer deze optie is geactiveerd, gebruikt de toepassing SVG-lettertypen in uw systeem om stukklabeltekst weer te geven, in plaats van contourlettertypen.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="168"/>
         <source>Use single-line fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Enkellijnlettertypen gebruiken</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="178"/>
@@ -14982,17 +14991,17 @@ Deze optie wordt actief na een herstart..</translation>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="240"/>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="288"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Sneltoetsen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="283"/>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Actie</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="311"/>
         <source>Restore defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaardwaarden herstellen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="321"/>
@@ -15067,32 +15076,32 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="523"/>
         <source>Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Privacy</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="529"/>
         <source>Usage statistic</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruiksstatistiek</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="535"/>
         <source>Send usage statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruiksstatistieken verzenden</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="542"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
-        <translation type="unfinished"></translation>
+        <translation>Help mee de kwaliteit van Valentina te verbeteren door automatisch gebruiksstatistieken te verzenden. De verzonden gegevens bevatten &lt;span style=&quot; font-weight:700;&quot;&gt;geen mogelijk gevoelige informatie&lt;/span&gt; zoals gebruikersnamen, e-mailadressen, bestandsinhoud of bestandspaden.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="555"/>
         <source>Crash reports</source>
-        <translation type="unfinished"></translation>
+        <translation>Crashrapporten</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="561"/>
         <source>Send automatic crash reports</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatische crashrapporten verzenden</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="570"/>
@@ -15102,12 +15111,12 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="586"/>
         <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het melden van crashes helpt ons Valentina betrouwbaarder te maken. Alle informatie wordt vertrouwelijk behandeld en wordt alleen gebruikt om toekomstige versies van dit programma te verbeteren. Activeer het automatisch verzenden van crashrapporten en vul uw e-mailadres in (optioneel). Als u dit invult, kunnen wij contact met u opnemen met aanvullende informatie over de crash.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="196"/>
         <source>undo limit</source>
-        <translation type="unfinished"></translation>
+        <translation>ongedaanlimiet</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="203"/>
@@ -15122,30 +15131,30 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="253"/>
         <source>send crash report</source>
-        <translation type="unfinished"></translation>
+        <translation>crashrapport verzenden</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="260"/>
         <source>user email in case of crash</source>
-        <translation type="unfinished"></translation>
+        <translation>e-mailadres gebruiker bij crash</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="298"/>
         <source>System</source>
         <comment>theme</comment>
-        <translation type="unfinished"></translation>
+        <translation>Systeem</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="299"/>
         <source>Dark</source>
         <comment>theme</comment>
-        <translation type="unfinished"></translation>
+        <translation>Donker</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.cpp" line="300"/>
         <source>Light</source>
         <comment>theme</comment>
-        <translation type="unfinished"></translation>
+        <translation>Licht</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="200"/>
@@ -15155,12 +15164,12 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="206"/>
         <source>Automatically check for updates each time the application starts</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch op updates controleren elke keer dat de toepassing start</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="209"/>
         <source>Automatically check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch op updates controleren</translation>
     </message>
 </context>
 <context>
@@ -15168,13 +15177,13 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="22"/>
         <source>Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="31"/>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="436"/>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formaat</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="51"/>
@@ -15243,22 +15252,22 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="301"/>
         <source>Warning superposition of pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarschuwing overlapping van stukken</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="308"/>
         <source>Warning pieces out of bound</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarschuwing stukken buiten grens</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="315"/>
         <source>Warning piece gape position</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarschuwing stukafstandspositie</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="322"/>
         <source>Sticky edges</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleverige randen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="329"/>
@@ -15268,32 +15277,32 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="344"/>
         <source>Pieces gap</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruimte tussen stukken</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="404"/>
         <source>Tiles</source>
-        <translation type="unfinished"></translation>
+        <translation>Tegels</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="416"/>
         <source>Show Tiles on sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Tegels op blad tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="423"/>
         <source>Show watermark preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Watermerkvoorvertoning tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.ui" line="426"/>
         <source>Show watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Watermerk tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.cpp" line="182"/>
         <source>default layout settings</source>
-        <translation type="unfinished"></translation>
+        <translation>standaard indelingsinstellingen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferenceslayoutpage.cpp" line="396"/>
@@ -15356,17 +15365,17 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="164"/>
         <source>My SVG Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Mijn SVG-lettertypen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="171"/>
         <source>My font corrections</source>
-        <translation type="unfinished"></translation>
+        <translation>Mijn lettertypecorrecties</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="178"/>
         <source>My known measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Mijn bekende maten</translation>
     </message>
 </context>
 <context>
@@ -15382,12 +15391,12 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/libs/vmisc/vmainbase.h" line="54"/>
         <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitvoerbaar bestand &apos;%1&apos; vereist Qt %2, maar Qt %3 gevonden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vmainbase.h" line="59"/>
         <source>Incompatible Qt Library Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout: incompatibele Qt-bibliotheek</translation>
     </message>
 </context>
 <context>
@@ -15533,22 +15542,22 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece_p.h" line="178"/>
         <source>VLayoutPieceData prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>VLayoutPieceData prefix-mismatch fout: actualStreamHeader = 0x%1 en streamHeader = 0x%2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece_p.h" line="190"/>
         <source>VLayoutPieceData compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>VLayoutPieceData compatibiliteitsfout: actualClassVersion = %1 en classVersion = %2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vwidgets/vpiecegrainline_p.h" line="104"/>
         <source>VPieceGrainlinePrivate prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>VPieceGrainlinePrivate prefix-mismatch fout: actualStreamHeader = 0x%1 en streamHeader = 0x%2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vwidgets/vpiecegrainline_p.h" line="117"/>
         <source>VPieceGrainlinePrivate compatibility error: actualClassVersion = %1 and classVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>VPieceGrainlinePrivate compatibiliteitsfout: actualClassVersion = %1 en classVersion = %2</translation>
     </message>
 </context>
 <context>
@@ -15653,12 +15662,12 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="185"/>
         <source>Error: notch for point &apos;%1&apos; in piece &apos;%2&apos;. Width is less than minimal allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout: inkeping voor punt &apos;%1&apos; in stuk &apos;%2&apos;. Breedte is kleiner dan minimaal toegestaan.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="828"/>
         <source>Piece &apos;%1&apos;. Notch collapse for point &apos;%2&apos;. Provide a manual angle value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;. Inkeping instorting voor punt &apos;%2&apos;. Geef een handmatige hoekwaarde op.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="228"/>
@@ -15698,27 +15707,27 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1232"/>
         <source>Point</source>
-        <translation type="unfinished">Punt</translation>
+        <translation>Punt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1233"/>
         <source>Spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Spline</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1234"/>
         <source>Spline path</source>
-        <translation type="unfinished">Vrijvormkrommings pad</translation>
+        <translation>Splinepad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1235"/>
         <source>Arc</source>
-        <translation type="unfinished">Boog</translation>
+        <translation>Boog</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1236"/>
         <source>Elliptical arc</source>
-        <translation type="unfinished">Ellipsvormige boog</translation>
+        <translation>Elliptische boog</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vbank.cpp" line="422"/>
@@ -15751,17 +15760,17 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiecenode.cpp" line="422"/>
         <source>Cannot calculate passmark width for point &apos;%1&apos;. Reason: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan pasmerkbreedte niet berekenen voor punt &apos;%1&apos;. Reden: %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiecenode.cpp" line="455"/>
         <source>Cannot calculate passmark angle for point &apos;%1&apos;. Reason: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan pasmerkhoek niet berekenen voor punt &apos;%1&apos;. Reden: %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiecenode.cpp" line="486"/>
         <source>Cannot calculate passmark visibility for point &apos;%1&apos;. Reason: %2. Visibility trigger will be ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan pasmerkzichtbaarheid niet berekenen voor punt &apos;%1&apos;. Reden: %2. Zichtbaarheidsschakelaar wordt genegeerd.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiecenode.cpp" line="388"/>
@@ -15857,22 +15866,22 @@ Deze optie wordt actief na een herstart..</translation>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="549"/>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="695"/>
         <source>Failed to prepare final measurement placeholder. Parser error at line %1: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan tijdelijke aanduiding eindmaat niet voorbereiden. Parserfout op regel %1: %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="850"/>
         <source>Failed to prepare full piece area placeholder. %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan tijdelijke aanduiding volledig stukoppervlak niet voorbereiden. %1.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="864"/>
         <source>Failed to prepare piece seam line area placeholder. %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan tijdelijke aanduiding naadlijnoppervlak stuk niet voorbereiden. %1.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="984"/>
         <source>Incorrect use of placeholder %1. This placeholder is not available in pattern label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Onjuist gebruik van tijdelijke aanduiding %1. Deze tijdelijke aanduiding is niet beschikbaar in het patroonetiket.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="441"/>
@@ -15901,17 +15910,17 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="374"/>
         <source>Cannot calculate fold line height for piece &apos;%1&apos;. Reason: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan vouwlijnhoogte niet berekenen voor stuk &apos;%1&apos;. Reden: %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="395"/>
         <source>Cannot calculate fold line width for piece &apos;%1&apos;. Reason: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan vouwlijnbreedte niet berekenen voor stuk &apos;%1&apos;. Reden: %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="417"/>
         <source>Cannot calculate fold line center position for piece &apos;%1&apos;. Reason: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan vouwlijncentrumpositie niet berekenen voor stuk &apos;%1&apos;. Reden: %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="558"/>
@@ -15919,32 +15928,34 @@ Deze optie wordt actief na een herstart..</translation>
         <source>Piece &apos;%1&apos;. Unable to load default piece label template.
 %2
 %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;. Kan standaard stukklabelsjabloon niet laden.
+%2
+%3</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1382"/>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;. Draadrichting is niet geldig.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="3171"/>
         <source>Piece &apos;%1&apos;. Fold line is not valid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;. Vouwlijn is niet geldig.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1436"/>
         <source>Invalid global value for a passmark length. Piece &apos;%1&apos;. Length is less than minimal allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige globale waarde voor pasmerklengte. Stuk &apos;%1&apos;. Lengte is kleiner dan minimaal toegestaan.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/undocommands/vpundopiecemove.cpp" line="132"/>
         <source>move pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>stukken verplaatsen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/undocommands/vpundopiecerotate.cpp" line="165"/>
         <source>rotate pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>stukken draaien</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="210"/>
@@ -15963,35 +15974,35 @@ Deze optie wordt actief na een herstart..</translation>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="390"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="736"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve &apos;%1&apos;. Lengte van snijsegment is te klein. Optimaliseer naar minimale waarde.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="407"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="754"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve &apos;%1&apos;. Lengte van snijsegment is te groot. Optimaliseer naar maximale waarde.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="104"/>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="113"/>
         <source>Point &apos;%1&apos; repeats twice</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt &apos;%1&apos; wordt tweemaal herhaald</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="126"/>
         <source>Points &apos;%1&apos; and &apos;%2&apos; have the same coordinates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Punten &apos;%1&apos; en &apos;%2&apos; hebben dezelfde coördinaten.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="159"/>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="168"/>
         <source>Leave only one copy of curve &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat slechts één kopie van curve &apos;%1&apos; staan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="969"/>
         <source>Point &apos;%1&apos; does not lie on a curve &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt &apos;%1&apos; ligt niet op curve &apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/utils.cpp" line="119"/>
@@ -16017,112 +16028,112 @@ Deze optie wordt actief na een herstart..</translation>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="446"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="710"/>
         <source>No data for the X dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gegevens voor dimensie X.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="447"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="711"/>
         <source>No data for the Y dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gegevens voor dimensie Y.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="448"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="712"/>
         <source>No data for the Z dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gegevens voor dimensie Z.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="449"/>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="713"/>
         <source>No data for the W dimension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gegevens voor dimensie W.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/undocommands/vpundopiecezvaluemove.cpp" line="66"/>
         <source>z value move piece</source>
-        <translation type="unfinished"></translation>
+        <translation>z-waarde stuk verplaatsen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/undocommands/vpundopiecezvaluemove.cpp" line="275"/>
         <source>z value move pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>z-waarde stukken verplaatsen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="384"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="730"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve &apos;%1&apos;. Lengte van snijsegment (%2) is te klein. Optimaliseer naar minimale waarde.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezier.cpp" line="402"/>
         <location filename="../../src/libs/vgeometry/vellipticalarc.cpp" line="749"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve &apos;%1&apos;. Lengte van snijsegment (%2) is te groot. Optimaliseer naar maximale waarde.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1684"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;. Intern pad &apos;%2&apos; kruist intern pad &apos;%3&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1599"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting contour.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;. Intern pad &apos;%2&apos; kruist snijcontour.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1471"/>
         <source>Invalid global value for a passmark width. Piece &apos;%1&apos;. Width is less than minimal allowed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige globale waarde voor pasmerkbreedte. Stuk &apos;%1&apos;. Breedte is kleiner dan minimaal toegestaan.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1610"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting contour.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;. Intern pad &apos;%2&apos; ligt niet binnen snijcontour.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="428"/>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout in intern pad &apos;%1&apos;. Er is geen snijpunt van het eerste punt met het snijcontour</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="447"/>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting contour</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout in intern pad &apos;%1&apos;. Er is geen snijpunt van het laatste punt met het snijcontour</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/variables/vpiecearea.cpp" line="134"/>
         <source>Unknown</source>
         <comment>piece area</comment>
-        <translation type="unfinished"></translation>
+        <translation>Onbekend</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vabstractpiece.h" line="819"/>
         <location filename="../../src/libs/vlayout/vabstractpiece.h" line="833"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path at %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;. Kan volledig naadpad niet genereren bij %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vabstractpiece.h" line="821"/>
         <location filename="../../src/libs/vlayout/vabstractpiece.h" line="835"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;. Kan volledig naadpad niet genereren.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vabstractpiece.h" line="877"/>
         <location filename="../../src/libs/vlayout/vabstractpiece.h" line="897"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path at %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;. Kan volledig naadtoeslagpad niet genereren bij %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vabstractpiece.h" line="879"/>
         <location filename="../../src/libs/vlayout/vabstractpiece.h" line="899"/>
         <source>Piece &apos;%1&apos;. Unable to generate full seam allowance path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;. Kan volledig naadtoeslagpad niet genereren.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/undocommands/renamepiece.cpp" line="40"/>
         <source>rename detail</source>
-        <translation type="unfinished"></translation>
+        <translation>detail hernoemen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolcubicbezier.cpp" line="120"/>
@@ -16130,7 +16141,7 @@ Deze optie wordt actief na een herstart..</translation>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolspline.cpp" line="192"/>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolsplinepath.cpp" line="172"/>
         <source>Curve &apos;%1&apos; with id %2 has not unique name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve &apos;%1&apos; met id %2 heeft geen unieke naam.</translation>
     </message>
 </context>
 <context>
@@ -16397,7 +16408,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/renamebackgroundimage.cpp" line="37"/>
         <source>rename background image</source>
-        <translation type="unfinished"></translation>
+        <translation>achtergrondafbeelding hernoemen</translation>
     </message>
 </context>
 <context>
@@ -16417,7 +16428,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/renamepp.cpp" line="47"/>
         <source>rename pattern block</source>
-        <translation type="unfinished"></translation>
+        <translation>patroonblok hernoemen</translation>
     </message>
 </context>
 <context>
@@ -16433,7 +16444,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/resetbackgroundimage.cpp" line="36"/>
         <source>reset background image transformation</source>
-        <translation type="unfinished"></translation>
+        <translation>transformatie achtergrondafbeelding herstellen</translation>
     </message>
 </context>
 <context>
@@ -16441,7 +16452,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/rotatebackgroundimage.cpp" line="39"/>
         <source>rotate background image</source>
-        <translation type="unfinished"></translation>
+        <translation>achtergrondafbeelding draaien</translation>
     </message>
 </context>
 <context>
@@ -16491,7 +16502,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/savetooloptions.cpp" line="43"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
 </context>
 <context>
@@ -16499,7 +16510,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/scalebackgroundimage.cpp" line="39"/>
         <source>scale background image</source>
-        <translation type="unfinished"></translation>
+        <translation>achtergrondafbeelding schalen</translation>
     </message>
 </context>
 <context>
@@ -16528,7 +16539,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="31"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New to create a new known measurements file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Selecteer Nieuw om een nieuw bestand met bekende maten aan te maken.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="58"/>
@@ -16538,12 +16549,12 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="72"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zoekgeschiedenis &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="82"/>
         <source>Alt+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+Down</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="92"/>
@@ -16554,52 +16565,52 @@ Deze optie wordt actief na een herstart..</translation>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="109"/>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1965"/>
         <source>0 results</source>
-        <translation type="unfinished"></translation>
+        <translation>0 resultaten</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="136"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hoofdlettergevoelig &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="167"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hele woorden &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="201"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Reguliere expressies &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="232"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Unicode-eigenschappen gebruiken &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;De betekenis van de tekenklassen \w, \d, enzovoort, en hun tegenhangers (\W, \D, enzovoort) wordt gewijzigd van alleen ASCII-tekens naar elk teken met de bijbehorende Unicode-eigenschap. Zo wordt \d gewijzigd om elk teken te matchen met de Unicode-eigenschap Nd (decimaal cijfer); \w om elk teken te matchen met de Unicode-eigenschap L (letter) of N (cijfer), plus underscore, enzovoort. Deze optie komt overeen met de /u-modifier in Perl reguliere expressies.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="238"/>
         <source>Alt+U</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+U</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="258"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vorige zoeken &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="268"/>
         <source>Shift+F3</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+F3</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="278"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Volgende zoeken %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="288"/>
         <source>F3</source>
-        <translation type="unfinished"></translation>
+        <translation>F3</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="320"/>
@@ -16681,12 +16692,12 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="507"/>
         <source>Measurement&apos;s human-readable name</source>
-        <translation type="unfinished"></translation>
+        <translation>Leesbare naam van de maat</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="514"/>
         <source>Group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Groep:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="531"/>
@@ -16707,7 +16718,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="628"/>
         <source>Diagram</source>
-        <translation type="unfinished"></translation>
+        <translation>Diagram</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="647"/>
@@ -16717,7 +16728,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="752"/>
         <source>Add images</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeeldingen toevoegen</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="769"/>
@@ -16737,27 +16748,27 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1234"/>
         <source>Always on top</source>
-        <translation type="unfinished"></translation>
+        <translation>Altijd bovenaan</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1237"/>
         <source>Keep window always on top</source>
-        <translation type="unfinished"></translation>
+        <translation>Venster altijd bovenaan houden</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1245"/>
         <source>Settings Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellingenmap</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="786"/>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeelding opslaan</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="801"/>
         <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="855"/>
@@ -16902,7 +16913,7 @@ Deze optie wordt actief na een herstart..</translation>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="670"/>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="723"/>
         <source>Known measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Bekende maten</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="670"/>
@@ -16917,7 +16928,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="725"/>
         <source>known measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>bekende maten</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="743"/>
@@ -16947,28 +16958,28 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="626"/>
         <source>Invalid image. Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige afbeelding. Fout: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1047"/>
         <source>Measurement images</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeeldingen van maten</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1113"/>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1150"/>
         <source>Unable to save image. Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan afbeelding niet opslaan. Fout: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1134"/>
         <source>Save Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeelding opslaan</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1198"/>
         <source>Unable to show image. Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan afbeelding niet tonen. Fout: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1811"/>
@@ -16993,7 +17004,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2110"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Maten zijn gewijzigd. Wilt u uw wijzigingen opslaan?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2118"/>
@@ -17029,7 +17040,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2325"/>
         <source>Unknown measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekende maat</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2333"/>
@@ -17040,7 +17051,7 @@ Deze optie wordt actief na een herstart..</translation>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2476"/>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2657"/>
         <source>Unnamed image %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeelding zonder naam %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2514"/>
@@ -17050,7 +17061,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2633"/>
         <source>Length units</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengde-eenheden</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2634"/>
@@ -17065,7 +17076,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2694"/>
         <source>Measurement name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maatnaam is leeg.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2699"/>
@@ -17075,12 +17086,12 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2704"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maat &apos;%1&apos; voldoet niet aan het regex-patroon.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2709"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maat &apos;%1&apos; wordt al gebruikt in het bestand.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2727"/>
@@ -17097,12 +17108,12 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2753"/>
         <source>Error in row %1. The measurement name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout in rij %1. De maatnaam is leeg.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2794"/>
         <source>Error in row %1. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout in rij %1. %2</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2807"/>
@@ -18023,12 +18034,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="828"/>
         <source>Optional text alias for this value. Useful for referencing in pattern piece labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Optionele tekstalias voor deze waarde. Nuttig voor verwijzingen in patroonstukklabels</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="923"/>
         <source>Known measurements:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bekende maten:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="955"/>
@@ -18038,22 +18049,22 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1307"/>
         <source>Add image</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeelding toevoegen</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1324"/>
         <source>Remove image</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeelding verwijderen</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1341"/>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeelding opslaan</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1390"/>
         <source>&amp;Open</source>
-        <translation type="unfinished">&amp;Open</translation>
+        <translation>&amp;Openen</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1608"/>
@@ -18089,27 +18100,27 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1721"/>
         <source>Create Known Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Bekende maten aanmaken</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1732"/>
         <source>Edit current Known Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Huidige bekende maten bewerken</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1743"/>
         <source>Always on top</source>
-        <translation type="unfinished"></translation>
+        <translation>Altijd bovenaan</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1746"/>
         <source>Keep window always on top</source>
-        <translation type="unfinished"></translation>
+        <translation>Venster altijd bovenaan houden</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1754"/>
         <source>Settings Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellingenmap</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="372"/>
@@ -18144,28 +18155,28 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1529"/>
         <source>Measurement image</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeelding maat</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1543"/>
         <source>Invalid image. Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige afbeelding. Fout: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1620"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1651"/>
         <source>Unable to save image. Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan afbeelding niet opslaan. Fout: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1635"/>
         <source>Save Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbeelding opslaan</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1684"/>
         <source>Unable to show image. Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan afbeelding niet tonen. Fout: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="2679"/>
@@ -18175,7 +18186,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="2988"/>
         <source>Unknown known measurements: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekende bekende maten: %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="3405"/>
@@ -18185,17 +18196,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="3535"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Maten zijn gewijzigd. Wilt u uw wijzigingen opslaan?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4414"/>
         <source>Measurement &apos;%1&apos; already present in the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maat &apos;%1&apos; is al aanwezig in het bestand.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4847"/>
         <source>Unknown measurement</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekende maat</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4883"/>
@@ -18205,7 +18216,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4892"/>
         <source>Invalid link</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige koppeling</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4958"/>
@@ -18220,7 +18231,7 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5007"/>
         <source>Shift</source>
         <comment>measurement column</comment>
-        <translation type="unfinished"></translation>
+        <translation>Verschuiving</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5401"/>
@@ -18275,104 +18286,104 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="37"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New to create a measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Selecteer Nieuw om een maatbestand aan te maken.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="78"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zoekgeschiedenis &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="88"/>
         <source>Alt+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+Down</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="115"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5313"/>
         <source>0 results</source>
-        <translation type="unfinished"></translation>
+        <translation>0 resultaten</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="142"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hoofdlettergevoelig &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="173"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hele woorden &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="207"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Reguliere expressies &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="238"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Unicode-eigenschappen gebruiken &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;De betekenis van de tekenklassen \w, \d, enzovoort, en hun tegenhangers (\W, \D, enzovoort) wordt gewijzigd van alleen ASCII-tekens naar elk teken met de bijbehorende Unicode-eigenschap. Zo wordt \d gewijzigd om elk teken te matchen met de Unicode-eigenschap Nd (decimaal cijfer); \w om elk teken te matchen met de Unicode-eigenschap L (letter) of N (cijfer), plus underscore, enzovoort. Deze optie komt overeen met de /u-modifier in Perl reguliere expressies.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="244"/>
         <source>Alt+U</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+U</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="264"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vorige zoeken &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="274"/>
         <source>Shift+F3</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+F3</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="284"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Volgende zoeken %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="294"/>
         <source>F3</source>
-        <translation type="unfinished"></translation>
+        <translation>F3</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1699"/>
         <source>Add separator</source>
-        <translation type="unfinished"></translation>
+        <translation>Scheidingsteken toevoegen</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1710"/>
         <source>Dimension custom names</source>
-        <translation type="unfinished"></translation>
+        <translation>Aangepaste dimensienamen</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4399"/>
         <source>Measurement name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maatnaam is leeg.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4409"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maat &apos;%1&apos; voldoet niet aan het regex-patroon.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4469"/>
         <source>Error in row %1. The measurement name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout in rij %1. De maatnaam is leeg.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4607"/>
         <source>The measurement name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>De maatnaam is leeg.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4502"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4558"/>
         <source>Error in row %1. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout in rij %1. %2</translation>
     </message>
 </context>
 <context>
@@ -18385,7 +18396,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="24"/>
         <source>Fold line</source>
-        <translation type="unfinished"></translation>
+        <translation>Vouwlijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="32"/>
@@ -18427,7 +18438,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="223"/>
         <source>Manual shape</source>
-        <translation type="unfinished"></translation>
+        <translation>Handmatige vorm</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="232"/>
@@ -18482,13 +18493,13 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="688"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>Midden</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="748"/>
         <source>Center:</source>
         <comment>notch angle</comment>
-        <translation type="unfinished"></translation>
+        <translation>Midden:</translation>
     </message>
 </context>
 <context>
@@ -18496,7 +18507,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="39"/>
         <source>Grainline enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Draadrichting ingeschakeld</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="96"/>
@@ -18738,7 +18749,7 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="464"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1142"/>
         <source>Font size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettergrootte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1125"/>
@@ -18748,7 +18759,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="230"/>
         <source>Pattern label data</source>
-        <translation type="unfinished"></translation>
+        <translation>Patroonetiketgegevens</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="245"/>
@@ -18823,7 +18834,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="447"/>
         <source>Piece label visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Stukklabel zichtbaar</translation>
     </message>
 </context>
 <context>
@@ -18868,17 +18879,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="333"/>
         <source>Clockwise opening</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechtsom opening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="343"/>
         <source>Not Mirrored</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet gespiegeld</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="351"/>
         <source>Manual shape</source>
-        <translation type="unfinished"></translation>
+        <translation>Handmatige vorm</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="360"/>
@@ -18911,17 +18922,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1039"/>
         <source>Control</source>
-        <translation type="unfinished">Controle</translation>
+        <translation>Besturing</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1093"/>
         <source>Visible</source>
-        <translation type="unfinished">Zichtbaar</translation>
+        <translation>Zichtbaar</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1193"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a notch visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak een formule die de zichtbaarheid regelt. Waarden anders dan &quot;0&quot; maken een inkeping zichtbaar</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1268"/>
@@ -18966,13 +18977,13 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="135"/>
         <source>External V mark</source>
         <comment>notch type</comment>
-        <translation type="unfinished"></translation>
+        <translation>Externe V-markering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="151"/>
         <source>Internal V mark</source>
         <comment>notch type</comment>
-        <translation type="unfinished"></translation>
+        <translation>Interne V-markering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="161"/>
@@ -18990,7 +19001,7 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="181"/>
         <source>Check mark</source>
         <comment>notch type</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vinkje</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="248"/>
@@ -19106,67 +19117,67 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="102"/>
         <source>Show full piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Volledig stuk tonen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="117"/>
         <source>Reverse node direction</source>
-        <translation type="unfinished"></translation>
+        <translation>Knooppuntrichting omdraaien</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="136"/>
         <source>Excluded node</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitgesloten knooppunt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="155"/>
         <source>Turn point</source>
-        <translation type="unfinished"></translation>
+        <translation>Draaipunt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="174"/>
         <source>Check node uniqness</source>
-        <translation type="unfinished"></translation>
+        <translation>Uniekheid knooppunt controleren</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="193"/>
         <source>Notch</source>
-        <translation type="unfinished"></translation>
+        <translation>Inkeping</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="212"/>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplicaat</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="231"/>
         <source>Delete node</source>
-        <translation type="unfinished"></translation>
+        <translation>Knooppunt verwijderen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="338"/>
         <source>Mirror line</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiegellijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="368"/>
         <source>Show mirror line</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiegellijn tonen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="521"/>
         <source>When the number of copies is greater than 1 and either &apos;Force Flipping&apos; or &apos;Forbid Flipping&apos; is selected, each even-numbered copy of the piece will be flipped vertically. The &apos;Force Flipping&apos; or &apos;Forbid Flipping&apos; setting will also toggle for each copy, applying the opposite of the initially selected option for each subsequent copy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wanneer het aantal kopieën groter is dan 1 en &apos;Spiegelen afdwingen&apos; of &apos;Spiegelen verbieden&apos; is geselecteerd, wordt elke even kopie van het stuk verticaal gespiegeld. De instelling &apos;Spiegelen afdwingen&apos; of &apos;Spiegelen verbieden&apos; wisselt ook voor elke kopie, waarbij de tegenovergestelde optie wordt toegepast voor elke volgende kopie.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="524"/>
         <source>Symmetrical copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Symmetrische kopie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="531"/>
         <source>Force piece to always follow grainline direction regardless of layout settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk dwingen om altijd de draadrichting te volgen, ongeacht indelingsinstellingen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="534"/>
@@ -19182,7 +19193,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="602"/>
         <source>Activates true zero seam allowance width. This also disables intersection checks between the seam line and seam allowance.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activeert ware nul naadtoeslagbreedte. Dit schakelt ook snijpuntcontroles uit tussen de naadlijn en naadtoeslag.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="657"/>
@@ -19360,7 +19371,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="605"/>
         <source>True zero width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ware nulbreedte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1264"/>
@@ -19371,17 +19382,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="395"/>
         <source>Piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="403"/>
         <source>Universally Unique IDentifier of piece. Used to identifier piece while updating manual layout. Left empty to generate new value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Universeel uniek identificatienummer van stuk. Gebruikt om stuk te identificeren bij bijwerken handmatige indeling. Leeg laten om een nieuwe waarde te genereren.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="440"/>
         <source>Gradation label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Graderingsklabel:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="473"/>
@@ -19391,22 +19402,22 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="92"/>
         <source>On drawing</source>
-        <translation type="unfinished"></translation>
+        <translation>Op tekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="482"/>
         <source>Short name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Korte naam:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="489"/>
         <source>Name used to generate a variable</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam gebruikt om een variabele te genereren</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="89"/>
         <source>Export to DXF-AAMA sew line on Draw layer</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteren naar DXF-AAMA naadlijn op Teken-laag</translation>
     </message>
 </context>
 <context>
@@ -19563,12 +19574,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="84"/>
         <source>Default known measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard bekende maten</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="90"/>
         <source>Known measurements:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bekende maten:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="116"/>
@@ -19578,12 +19589,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="122"/>
         <source>Enable to translate formula according to locale</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule vertalen naar locale inschakelen</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="125"/>
         <source>Translate formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Formule vertalen</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="138"/>
@@ -19603,53 +19614,53 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="181"/>
         <source>Theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>Thema:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="230"/>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="278"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Sneltoetsen</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="273"/>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Actie</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="301"/>
         <source>Restore defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaardwaarden herstellen</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="311"/>
         <source>Privacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Privacy</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="317"/>
         <source>Usage statistic</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruiksstatistiek</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="323"/>
         <source>Send usage statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruiksstatistieken verzenden</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="330"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
-        <translation type="unfinished"></translation>
+        <translation>Help mee de kwaliteit van Valentina te verbeteren door automatisch gebruiksstatistieken te verzenden. De verzonden gegevens bevatten &lt;span style=&quot; font-weight:700;&quot;&gt;geen mogelijk gevoelige informatie&lt;/span&gt; zoals gebruikersnamen, e-mailadressen, bestandsinhoud of bestandspaden.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="343"/>
         <source>Crash reports</source>
-        <translation type="unfinished"></translation>
+        <translation>Crashrapporten</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="349"/>
         <source>Send automatic crash reports</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatische crashrapporten verzenden</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="358"/>
@@ -19659,17 +19670,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="374"/>
         <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het melden van crashes helpt ons Valentina betrouwbaarder te maken. Alle informatie wordt vertrouwelijk behandeld en wordt alleen gebruikt om toekomstige versies van dit programma te verbeteren. Activeer het automatisch verzenden van crashrapporten en vul uw e-mailadres in (optioneel). Als u dit invult, kunnen wij contact met u opnemen met aanvullende informatie over de crash.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="228"/>
         <source>send crash report</source>
-        <translation type="unfinished"></translation>
+        <translation>crashrapport verzenden</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="235"/>
         <source>user email in case of crash</source>
-        <translation type="unfinished"></translation>
+        <translation>e-mailadres gebruiker bij crash</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="272"/>
@@ -19680,19 +19691,19 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="294"/>
         <source>System</source>
         <comment>theme</comment>
-        <translation type="unfinished"></translation>
+        <translation>Systeem</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="295"/>
         <source>Dark</source>
         <comment>theme</comment>
-        <translation type="unfinished"></translation>
+        <translation>Donker</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="296"/>
         <source>Light</source>
         <comment>theme</comment>
-        <translation type="unfinished"></translation>
+        <translation>Licht</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="381"/>
@@ -19702,7 +19713,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.cpp" line="391"/>
         <source>Known measurements %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bekende maten %1</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="167"/>
@@ -19722,12 +19733,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="209"/>
         <source>Automatically check for updates each time the application starts</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch op updates controleren elke keer dat de toepassing start</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="212"/>
         <source>Automatically check for updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch op updates controleren</translation>
     </message>
 </context>
 <context>
@@ -19740,7 +19751,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencespathpage.ui" line="20"/>
         <source>Paths that Tape uses</source>
-        <translation type="unfinished"></translation>
+        <translation>Paden die Tape gebruikt</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencespathpage.ui" line="45"/>
@@ -19770,7 +19781,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencespathpage.cpp" line="158"/>
         <source>My known measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Mijn bekende maten</translation>
     </message>
 </context>
 <context>
@@ -19785,7 +19796,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/togglepiecestate.cpp" line="181"/>
         <source>detail hide main path</source>
-        <translation type="unfinished"></translation>
+        <translation>detail hoofdpad verbergen</translation>
     </message>
 </context>
 <context>
@@ -19809,7 +19820,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/togglepiecestate.cpp" line="227"/>
         <source>show full piece</source>
-        <translation type="unfinished"></translation>
+        <translation>volledig stuk tonen</translation>
     </message>
 </context>
 <context>
@@ -19850,7 +19861,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vformat/vdimensions.cpp" line="277"/>
         <source>Units are invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>Eenheden zijn ongeldig</translation>
     </message>
     <message>
         <location filename="../../src/libs/vformat/vdimensions.cpp" line="289"/>
@@ -19960,12 +19971,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="307"/>
         <source>This file was created with an outdated version of the app and cannot be opened. Please re-save it using a newer version of the app that is compatible with this one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit bestand is aangemaakt met een verouderde versie van de app en kan niet worden geopend. Sla het opnieuw op met een nieuwere versie van de app die compatibel is met deze versie.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="313"/>
         <source>This file was created with a newer version of the app and cannot be opened. Please update your app to the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit bestand is aangemaakt met een nieuwere versie van de app en kan niet worden geopend. Werk uw app bij naar de nieuwste versie.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="317"/>
@@ -20000,7 +20011,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="218"/>
         <source>Schema file %3 invalid in line %1 column %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Schemabestand %3 ongeldig in regel %1 kolom %2</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="251"/>
@@ -20011,7 +20022,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="91"/>
         <source>Error opening a temp file: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij openen tijdelijk bestand: %1.</translation>
     </message>
 </context>
 <context>
@@ -20024,22 +20035,22 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezierpath.cpp" line="191"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve &apos;%1&apos;. Lengte van snijsegment (%2) is te klein. Optimaliseer naar minimale waarde.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezierpath.cpp" line="197"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve &apos;%1&apos;. Lengte van snijsegment is te klein. Optimaliseer naar minimale waarde.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezierpath.cpp" line="208"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve &apos;%1&apos;. Lengte van snijsegment (%2) is te groot. Optimaliseer naar maximale waarde.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vabstractcubicbezierpath.cpp" line="213"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve &apos;%1&apos;. Lengte van snijsegment is te groot. Optimaliseer naar maximale waarde.</translation>
     </message>
 </context>
 <context>
@@ -20194,12 +20205,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vwidgets/vabstractmainwindow.cpp" line="278"/>
         <source>The file has no write permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het bestand heeft geen schrijfrechten.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vwidgets/vabstractmainwindow.cpp" line="279"/>
         <source>Do you want to change the permissions?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wilt u de rechten wijzigen?</translation>
     </message>
 </context>
 <context>
@@ -20242,7 +20253,7 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="765"/>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="1248"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
 </context>
 <context>
@@ -20296,7 +20307,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/vabstractpoint.cpp" line="118"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
 </context>
 <context>
@@ -20317,7 +20328,7 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="313"/>
         <source>Zoom original</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Originele zoom</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="315"/>
@@ -20335,25 +20346,25 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="319"/>
         <source>Increase point label font size</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lettergrootte puntlabel vergroten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="321"/>
         <source>Decrease point label font size</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lettergrootte puntlabel verkleinen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="323"/>
         <source>Original point label font size</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Originele lettergrootte puntlabel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="325"/>
         <source>Hide point labels</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Puntlabels verbergen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="327"/>
@@ -20365,7 +20376,7 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="329"/>
         <source>Redo</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Opnieuw</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="331"/>
@@ -20431,409 +20442,409 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="351"/>
         <source>Interactive tools mode</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Interactieve gereedschapsmodus</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="353"/>
         <source>Open Table of variables dialog</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dialoogvenster variabelentabel openen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="355"/>
         <source>Quit app</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>App afsluiten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="357"/>
         <source>Activate last used tool</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Laatst gebruikte gereedschap activeren</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="359"/>
         <source>Show curve details</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Curvedetails tonen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="361"/>
         <source>Show/hide segment labels</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Segmentlabels tonen/verbergen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="363"/>
         <source>Open final measurements dialog</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dialoogvenster eindmaten openen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="365"/>
         <source>Reload piece labels</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Stukklabels herladen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="367"/>
         <source>Case sensitive match</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hoofdlettergevoelige overeenkomst</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="369"/>
         <source>Whole word match</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Volledige woordovereenkomst</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="371"/>
         <source>Regex match</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Regex-overeenkomst</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="373"/>
         <source>Search history</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zoekgeschiedenis</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="375"/>
         <source>Regex match by unicode properties</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Regex-overeenkomst op Unicode-eigenschappen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="377"/>
         <source>Find next match</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Volgende overeenkomst zoeken</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="379"/>
         <source>Find previus match</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vorige overeenkomst zoeken</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="381"/>
         <source>Tool &apos;Point at distance and angle&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Punt op afstand en hoek&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="383"/>
         <source>Tool &apos;Line between points&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Lijn tussen punten&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="385"/>
         <source>Tool &apos;Point at distance along line&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Punt op afstand langs lijn&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="387"/>
         <source>Tool &apos;Special point on shoulder&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Speciaal punt op schouder&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="389"/>
         <source>Tool &apos;Point along perpendicular&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Punt langs loodlijn&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="391"/>
         <source>Tool &apos;Point along bisector&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Punt langs bissectrice&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="393"/>
         <source>Tool &apos;Point at line intersection&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Punt op lijnsnijpunt&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="395"/>
         <source>Tool &apos;Simple curve&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Eenvoudige curve&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="397"/>
         <source>Tool &apos;Curve which uses point as control handle&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Curve met punt als controlepunt&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="399"/>
         <source>Tool &apos;Arc&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Boog&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="401"/>
         <source>Tool &apos;Curved path&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Gekromd pad&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="403"/>
         <source>Tool &apos;Curved path which uses point as control handle&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Gekromd pad met punt als controlepunt&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="405"/>
         <source>Tool &apos;Point of intersection circle and segment&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Snijpunt cirkel en segment&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="407"/>
         <source>Tool &apos;Workpiece tool&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Werkstukgereedschap&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="409"/>
         <source>Tool &apos;Internal path tool&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Intern padgereedschap&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="411"/>
         <source>Tool &apos;Perpendicular point along line&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Loodrecht punt langs lijn&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="413"/>
         <source>Tool &apos;Triangle&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Driehoek&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="415"/>
         <source>Tool &apos;Point from X and Y of two other points&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Punt van X en Y van twee andere punten&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="417"/>
         <source>Tool &apos;Segmenting a simple curve&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Eenvoudige curve segmenteren&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="419"/>
         <source>Tool &apos;Segment a curved path&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Gekromd pad segmenteren&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="421"/>
         <source>Tool &apos;Piece union&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Stukken samenvoegen&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="423"/>
         <source>Tool &apos;Duplicate piece&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Stuk dupliceren&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="425"/>
         <source>Tool &apos;Segment an arc&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Boog segmenteren&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="427"/>
         <source>Tool &apos;Point of intersection line and axis&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Snijpunt lijn en as&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="429"/>
         <source>Tool &apos;Point of intersection curve and axis&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Snijpunt curve en as&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="431"/>
         <source>Tool &apos;Point of intersection arc and axis&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Snijpunt boog en as&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="433"/>
         <source>Layout settings</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Indelingsinstellingen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="435"/>
         <source>Tool &apos;Point of intersection arcs&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Snijpunt bogen&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="437"/>
         <source>Tool &apos;Point of intersection circles&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Snijpunt cirkels&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="439"/>
         <source>Tool &apos;Point intersection curves&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Snijpunt curves&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="441"/>
         <source>Tool &apos;Point from circle and tangent&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Punt van cirkel en raaklijn&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="443"/>
         <source>Tool &apos;Point from arc and tangent&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Punt van boog en raaklijn&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="445"/>
         <source>Tool &apos;Arc with given length&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Boog met opgegeven lengte&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="447"/>
         <source>Tool &apos;True darts&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Echte abnaaien&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="449"/>
         <source>Tool &apos;Visibility group&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Zichtbaarheidsgroep&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="451"/>
         <source>Tool &apos;Rotate objects&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Objecten draaien&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="453"/>
         <source>Tool &apos;Flipping objects by line&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Objecten spiegelen over lijn&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="455"/>
         <source>Tool &apos;Flipping objects by axis&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Objecten spiegelen over as&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="457"/>
         <source>Tool &apos;Move objects&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Objecten verplaatsen&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="459"/>
         <source>Tool &apos;Midpoint between two points&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Middelpunt tussen twee punten&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="461"/>
         <source>Export draw as</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Tekening exporteren als</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="463"/>
         <source>Export layout as</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Indeling exporteren als</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="465"/>
         <source>Export details as</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Details exporteren als</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="467"/>
         <source>Tool &apos;Elliptical Arc&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Elliptische boog&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="469"/>
         <source>Tool &apos;Pin&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Speld&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="471"/>
         <source>Tool &apos;Insert node&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Knooppunt invoegen&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="473"/>
         <source>Tool &apos;Place label&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Label plaatsen&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="475"/>
         <source>Tool &apos;Arc start&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Boogstart&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="477"/>
         <source>Tool &apos;Arc end&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Boogeinde&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="479"/>
         <source>Tool &apos;Elliptical arc with given length&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Elliptische boog met opgegeven lengte&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="481"/>
         <source>Tool &apos;Parallel curve&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Parallelle curve&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="483"/>
         <source>Tool &apos;Graduated curve&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap &apos;Getrapte curve&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="485"/>
         <source>Auto-arrange labels</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Labels automatisch rangschikken</translation>
     </message>
 </context>
 <context>
@@ -21000,25 +21011,25 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vgeometry/varc.cpp" line="635"/>
         <location filename="../../src/libs/vgeometry/varc.cpp" line="689"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too small. Optimize it to minimal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve &apos;%1&apos;. Lengte van snijsegment (%2) is te klein. Optimaliseer naar minimale waarde.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/varc.cpp" line="641"/>
         <location filename="../../src/libs/vgeometry/varc.cpp" line="695"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too small. Optimize it to minimal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve &apos;%1&apos;. Lengte van snijsegment is te klein. Optimaliseer naar minimale waarde.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/varc.cpp" line="652"/>
         <location filename="../../src/libs/vgeometry/varc.cpp" line="706"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment (%2) is too big. Optimize it to maximal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve &apos;%1&apos;. Lengte van snijsegment (%2) is te groot. Optimaliseer naar maximale waarde.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/varc.cpp" line="657"/>
         <location filename="../../src/libs/vgeometry/varc.cpp" line="711"/>
         <source>Curve &apos;%1&apos;. Length of a cut segment is too big. Optimize it to maximal value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve &apos;%1&apos;. Lengte van snijsegment is te groot. Optimaliseer naar maximale waarde.</translation>
     </message>
 </context>
 <context>
@@ -21026,7 +21037,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/backgroundimage/vbackgroundimageitem.cpp" line="420"/>
         <source>Hold</source>
-        <translation type="unfinished"></translation>
+        <translation>Vergrendelen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/backgroundimage/vbackgroundimageitem.cpp" line="424"/>
@@ -21046,12 +21057,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/backgroundimage/vbackgroundimageitem.cpp" line="437"/>
         <source>Save as …</source>
-        <translation type="unfinished"></translation>
+        <translation>Opslaan als…</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/backgroundimage/vbackgroundimageitem.cpp" line="449"/>
         <source>Reset transformation</source>
-        <translation type="unfinished"></translation>
+        <translation>Transformatie herstellen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/backgroundimage/vbackgroundimageitem.cpp" line="452"/>
@@ -21065,37 +21076,37 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="87"/>
         <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="161"/>
         <source>Unexpected mime type: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Onverwacht MIME-type: %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="96"/>
         <source>Couldn&apos;t read the image. Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan afbeelding niet lezen. Fout: %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="145"/>
         <source>No data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gegevens.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="151"/>
         <source>Invalid id.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig id.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="169"/>
         <source>Content type is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhoudstype is leeg.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="185"/>
         <source>Not image.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen afbeelding.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="179"/>
         <source>Content type mismatch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhoudstype komt niet overeen.</translation>
     </message>
 </context>
 <context>
@@ -21103,17 +21114,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vlayout/vbank.cpp" line="371"/>
         <source>Error of preparing data for layout: Detail &apos;%1&apos; square &lt;= 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij voorbereiden gegevens voor indeling: Stuk &apos;%1&apos; oppervlak &lt;= 0</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vbank.cpp" line="395"/>
         <source>Error of preparing data for layout: Layout paper sheet &lt;= 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij voorbereiden gegevens voor indeling: Papierblad indeling &lt;= 0</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vbank.cpp" line="403"/>
         <source>Error of preparing data for layout: List of details is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij voorbereiden gegevens voor indeling: Lijst van details is leeg</translation>
     </message>
 </context>
 <context>
@@ -21121,17 +21132,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vlayout/vboundary.cpp" line="345"/>
         <source>Piece &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vboundary.cpp" line="353"/>
         <source>Unable to insert notch for point &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan inkeping niet invoegen voor punt &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vboundary.cpp" line="357"/>
         <source>Unable to insert notch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan inkeping niet invoegen.</translation>
     </message>
 </context>
 <context>
@@ -21500,17 +21511,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="661"/>
         <source>Number corresponding to compatibility mode for DXF AAMA/ASTM format (default = 0, export mode):</source>
-        <translation type="unfinished"></translation>
+        <translation>Getal overeenkomend met compatibiliteitsmodus voor DXF AAMA/ASTM-formaat (standaard = 0, exportmodus):</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="664"/>
         <source>Mode number</source>
-        <translation type="unfinished"></translation>
+        <translation>Modusnummer</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="666"/>
         <source>Show/hide grainline when export layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Draadrichting tonen/verbergen bij exporteren indeling.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="667"/>
@@ -21535,17 +21546,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="698"/>
         <source>Override the global curve approximation scale setting from the application preferences. The value must be between %1 and %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>De globale instelling voor curve-approximatieschaal overschrijven vanuit de toepassingsvoorkeuren. De waarde moet tussen %1 en %2 liggen.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="703"/>
         <source>Curve approximation</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve-approximatie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="772"/>
         <source>Export boundary together with notches (export mode).</source>
-        <translation type="unfinished"></translation>
+        <translation>Contour samen met inkepingen exporteren (exportmodus).</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="808"/>
@@ -21829,77 +21840,77 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpcommandline.cpp" line="106"/>
         <source>The raw layout data file</source>
-        <translation type="unfinished"></translation>
+        <translation>Het bestand met ruwe indelingsgegevens</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="125"/>
         <source>Invalid page height value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige paginahoogtewaarde.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="134"/>
         <source>Invalid page width value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige paginabreedtewaarde.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="159"/>
         <source>Invalid gap width.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige tussenruimtebreedte.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="1014"/>
         <source>Invalid layout page left margin.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige linkermarge indelingspagina.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="1026"/>
         <source>Invalid layout page right margin.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige rechtermarge indelingspagina.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="1038"/>
         <source>Invalid layout page top margin.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige bovenmarge indelingspagina.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="1050"/>
         <source>Invalid layout page bottom margin.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige ondermarge indelingspagina.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="565"/>
         <source>Invalid tiled page left margin.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige linkermarge tegelblad.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="577"/>
         <source>Invalid tiled page right margin.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige rechtermarge tegelblad.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="589"/>
         <source>Invalid tiled page top margin.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige bovenmarge tegelblad.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="601"/>
         <source>Invalid tiled page bottom margin.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldige ondermarge tegelblad.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="780"/>
         <source>Layout units (as paper&apos;s one except px, export mode). Default units cm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Indelingseenheden (als papier, behalve px, exportmodus). Standaard eenheden cm.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpcommandline.cpp" line="105"/>
         <source>Load pattern pieces from the raw layout data file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Patroonstukken laden vanuit het bestand met ruwe indelingsgegevens.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="727"/>
         <source>Ignore printer margins (export mode). Use if need full paper space. In case of later printing you must account for the margins themselves.</source>
-        <translation type="unfinished"></translation>
+        <translation>Printermarges negeren (exportmodus). Gebruik als volledige papierruimte nodig is. Bij later afdrukken moet u zelf rekening houden met de marges.</translation>
     </message>
 </context>
 <context>
@@ -21917,7 +21928,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="267"/>
         <source>Can&apos;t cast object to the requested type. Object id = %1, actual type = %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan object niet converteren naar het gevraagde type. Object-id = %1, werkelijk type = %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="294"/>
@@ -21965,209 +21976,209 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="294"/>
         <source>Dependency tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Afhankelijkheidsboom</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="902"/>
         <source>Piece &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="987"/>
         <source>True darts</source>
         <comment>operation</comment>
-        <translation type="unfinished">Coupenaden</translation>
+        <translation>Echte abnaaien</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="989"/>
         <source>Rotation</source>
         <comment>operation</comment>
-        <translation type="unfinished">Rotatie</translation>
+        <translation>Rotatie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="991"/>
         <source>Flipping by line</source>
         <comment>operation</comment>
-        <translation type="unfinished">Kantelen via de lijn</translation>
+        <translation>Spiegelen over lijn</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="993"/>
         <source>Flipping by axis</source>
         <comment>operation</comment>
-        <translation type="unfinished">Kantelen via de aslijn</translation>
+        <translation>Spiegelen over as</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="995"/>
         <source>Move</source>
         <comment>operation</comment>
-        <translation type="unfinished">Verplaast</translation>
+        <translation>Verplaatsen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="997"/>
         <source>Union details</source>
         <comment>operation</comment>
-        <translation type="unfinished"></translation>
+        <translation>Details samenvoegen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1013"/>
         <source>Base point</source>
-        <translation type="unfinished">Basis punt</translation>
+        <translation>Basispunt</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1015"/>
         <source>Point at distance and angle</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt op afstand en hoek</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1017"/>
         <source>Point along line</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt langs lijn</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1019"/>
         <source>Shoulder point</source>
-        <translation type="unfinished"></translation>
+        <translation>Schouderpunt</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1021"/>
         <source>Point along perpendicular</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt langs loodlijn</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1023"/>
         <source>Bisector</source>
-        <translation type="unfinished"></translation>
+        <translation>Bissectrice</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1025"/>
         <source>Point at line intersection</source>
-        <translation type="unfinished">Punt op lijnkruising</translation>
+        <translation>Punt op lijnsnijpunt</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1028"/>
         <source>Spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Spline</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1030"/>
         <source>Arc</source>
-        <translation type="unfinished">Boog</translation>
+        <translation>Boog</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1032"/>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1071"/>
         <source>Elliptical arc with given length</source>
-        <translation type="unfinished"></translation>
+        <translation>Elliptische boog met opgegeven lengte</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1034"/>
         <source>Parallel curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Parallelle curve</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1036"/>
         <source>Graduated curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Getrapte curve</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1039"/>
         <source>Spline path</source>
-        <translation type="unfinished">Vrijvormkrommings pad</translation>
+        <translation>Splinepad</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1041"/>
         <source>Point of intersection circle and segment</source>
-        <translation type="unfinished">Kruispunt van cirkel en segment</translation>
+        <translation>Snijpunt cirkel en segment</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1043"/>
         <source>Perpendicular point along line</source>
-        <translation type="unfinished">Haakse hoek punt langs lijn</translation>
+        <translation>Loodrecht punt langs lijn</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1045"/>
         <source>Point located at the triangle&apos;s right-angled corner, lying along the axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt in de rechthoekige hoek van de driehoek, langs de as</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1047"/>
         <source>Point from X and Y of two other points</source>
-        <translation type="unfinished">Punt van X en Y van twee andere punten</translation>
+        <translation>Punt van X en Y van twee andere punten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1049"/>
         <source>Point segmenting an arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt dat een boog segmenteert</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1051"/>
         <source>Point segmenting a spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt dat een spline segmenteert</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1053"/>
         <source>Point segmenting a spline path</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt dat een splinepad segmenteert</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1055"/>
         <source>Point of intersection line and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Snijpunt lijn en as</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1057"/>
         <source>Point of intersection curve and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Snijpunt curve en as</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1059"/>
         <source>Point of intersection arcs</source>
-        <translation type="unfinished">Kruispunt van bogen</translation>
+        <translation>Snijpunt bogen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1061"/>
         <source>Point of intersection circles</source>
-        <translation type="unfinished">Kruispunt van cirkels</translation>
+        <translation>Snijpunt cirkels</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1063"/>
         <source>Point of intersection curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Snijpunt curves</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1065"/>
         <source>Point from circle and tangent</source>
-        <translation type="unfinished"></translation>
+        <translation>Punt van cirkel en raaklijn</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1067"/>
         <source>Point from arc and tangent</source>
-        <translation type="unfinished">Kruispunt van boog en raaklijn</translation>
+        <translation>Punt van boog en raaklijn</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1069"/>
         <source>Elliptical arc</source>
-        <translation type="unfinished">Ellipsvormige boog</translation>
+        <translation>Elliptische boog</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1073"/>
         <source>Line connecting two points</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijn die twee punten verbindt</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1097"/>
         <source>Union details operation creating piece &apos;%1&apos;. Source objects cannot be deleted while this operation exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerking details samenvoegen maakt stuk &apos;%1&apos;. Bronobjecten kunnen niet worden verwijderd zolang deze bewerking bestaat</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1107"/>
         <source>Union details operation. Source objects cannot be deleted while this operation exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewerking details samenvoegen. Bronobjecten kunnen niet worden verwijderd zolang deze bewerking bestaat</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1121"/>
         <source>Line_%1_%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijn_%1_%2</translation>
     </message>
 </context>
 <context>
@@ -22256,7 +22267,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="728"/>
         <source>Parsing error in file %3 at line %1, column %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Parserfout in bestand %3 op regel %1, kolom %2</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="858"/>
@@ -22303,22 +22314,22 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="355"/>
         <source>Pending</source>
-        <translation type="unfinished"></translation>
+        <translation>In behandeling</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="380"/>
         <source>Cannot Delete Object</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan object niet verwijderen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="381"/>
         <source>This object cannot be deleted because it is being used by other items.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit object kan niet worden verwijderd omdat het door andere items wordt gebruikt.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="382"/>
         <source>Please resolve the dependencies before attempting to delete this object.</source>
-        <translation type="unfinished"></translation>
+        <translation>Los de afhankelijkheden op voordat u dit object probeert te verwijderen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="445"/>
@@ -22351,22 +22362,22 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1045"/>
         <source>Piece &apos;%1&apos;. Piece System Text is missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;. Systeemsysteemtekst ontbreekt.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1201"/>
         <source>Style System Text is missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stijlsysteemsysteemtekst ontbreekt.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2074"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; or &apos;Size:&apos; identifier is missing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;. Identifier &apos;Piece Name:&apos; of &apos;Size:&apos; ontbreekt.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2109"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; identifier requires &apos;Size:&apos; identifier to be present.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;. Identifier &apos;Piece Name:&apos; vereist aanwezigheid van identifier &apos;Size:&apos;.</translation>
     </message>
 </context>
 <context>
@@ -22382,7 +22393,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vlayout/vfoldline.cpp" line="795"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig SVG-lettertype &apos;%1&apos;. Terugvallen op contourlettertype.</translation>
     </message>
 </context>
 <context>
@@ -22390,72 +22401,72 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="515"/>
         <source>Could not determine the system font installation path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan systeempad voor lettertype-installatie niet bepalen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="521"/>
         <source>Failed to create destination directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan doelmap niet aanmaken: %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="490"/>
         <source>Failed to copy file from %1 to %2. Possible reasons: permission denied, file locked, or general I/O error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan bestand niet kopiëren van %1 naar %2. Mogelijke redenen: toestemming geweigerd, bestand vergrendeld of algemene I/O-fout.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="280"/>
         <source>Font copy succeeded, but Linux font cache rebuild failed. Font may not be immediately visible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiëren lettertype geslaagd, maar herbouwen Linux-lettertypecache mislukt. Lettertype is mogelijk niet direct zichtbaar.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="288"/>
         <source>Font copy succeeded, but Windows Registry registration failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiëren lettertype geslaagd, maar Windows Register-registratie mislukt.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="371"/>
         <source>Font loaded, but could not determine font family name to install font corrections.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettertype geladen, maar kan lettertypefamilienaam niet bepalen om lettertypecorrecties te installeren.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="397"/>
         <source>Font correction file already exists at destination: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettertypecorrectiebestand bestaat al op bestemming: %1.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="402"/>
         <source>Failed to copy font correction file from %1 to %2. Possible reasons: permission denied, file locked, or general I/O error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan lettertypecorrectiebestand niet kopiëren van %1 naar %2. Mogelijke redenen: toestemming geweigerd, bestand vergrendeld of algemene I/O-fout.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="434"/>
         <source>Skipped existing font (User choice: No to All): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestaand lettertype overgeslagen (gebruikerskeuze: Nee voor alles): %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="443"/>
         <source>Font Already Exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettertype bestaat al</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="444"/>
         <source>The font &apos;%1&apos; is already installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettertype &apos;%1&apos; is al geïnstalleerd.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="445"/>
         <source>Do you want to replace it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wilt u het vervangen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="474"/>
         <source>Installation cancelled by user. Font not replaced.</source>
-        <translation type="unfinished"></translation>
+        <translation>Installatie geannuleerd door gebruiker. Lettertype niet vervangen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="481"/>
         <source>Failed to remove existing file: %1. Check permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan bestaand bestand niet verwijderen: %1. Controleer rechten.</translation>
     </message>
 </context>
 <context>
@@ -22556,7 +22567,7 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="488"/>
         <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="503"/>
         <source>Can&apos;t find image by id &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan afbeelding niet vinden op id &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="520"/>
@@ -22566,7 +22577,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vformat/knownmeasurements/vknownmeasurementsdocument.cpp" line="563"/>
         <source>The image id is empty!</source>
-        <translation type="unfinished"></translation>
+        <translation>Het afbeeldings-id is leeg!</translation>
     </message>
 </context>
 <context>
@@ -22602,7 +22613,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="395"/>
         <source>Export raw layout data failed. %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteren ruwe indelingsgegevens mislukt. %1.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="495"/>
@@ -22612,18 +22623,18 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="353"/>
         <source>Can&apos;t create an AAMA dxf file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen AAMA dxf-bestand aanmaken.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="373"/>
         <source>Can&apos;t create an ASTM dxf file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen ASTM dxf-bestand aanmaken.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="415"/>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="434"/>
         <source>Can&apos;t create an HP-GL file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen HP-GL-bestand aanmaken.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="567"/>
@@ -22653,12 +22664,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="611"/>
         <source>Raw Layout Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruwe indelingsgegevens</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="329"/>
         <source>Can&apos;t create a flat dxf file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen plat dxf-bestand aanmaken.</translation>
     </message>
 </context>
 <context>
@@ -22671,7 +22682,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1974"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig SVG-lettertype &apos;%1&apos;. Terugvallen op contourlettertype.</translation>
     </message>
 </context>
 <context>
@@ -22722,7 +22733,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1500"/>
         <source>Dimension is not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensie is niet geldig</translation>
     </message>
     <message>
         <location filename="../../src/libs/vformat/vmeasurements.cpp" line="1208"/>
@@ -22805,17 +22816,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="407"/>
         <source>Show full piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Volledig stuk tonen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="423"/>
         <source>Reset piece label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Stukklabelsjabloon herstellen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="432"/>
         <source>Pending</source>
-        <translation type="unfinished"></translation>
+        <translation>In behandeling</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="457"/>
@@ -22895,17 +22906,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="482"/>
         <source>External V mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Externe V-markering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="484"/>
         <source>Internal V mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Interne V-markering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="490"/>
         <source>Check mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Vinkje</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="486"/>
@@ -22920,7 +22931,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="492"/>
         <source>Turn point</source>
-        <translation type="unfinished"></translation>
+        <translation>Draaipunt</translation>
     </message>
 </context>
 <context>
@@ -22968,12 +22979,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="735"/>
         <source>Export mode doesn&apos;t support opening several files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportmodus ondersteunt het openen van meerdere bestanden niet.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="742"/>
         <source>Import raw layout data does not support opening several layout files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Importeren ruwe indelingsgegevens ondersteunt het openen van meerdere indelingsbestanden niet.</translation>
     </message>
 </context>
 <context>
@@ -22982,13 +22993,13 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/app/puzzle/carousel/vpcarrousel.cpp" line="97"/>
         <location filename="../../src/app/puzzle/carousel/vpcarrousel.cpp" line="169"/>
         <source>Unplaced pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet-geplaatste stukken</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/carousel/vpcarrousel.cpp" line="300"/>
         <location filename="../../src/app/puzzle/carousel/vpcarrousel.cpp" line="303"/>
         <source>Pieces of</source>
-        <translation type="unfinished"></translation>
+        <translation>Stukken van</translation>
     </message>
 </context>
 <context>
@@ -22996,7 +23007,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="257"/>
         <source>Move to Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Naar blad verplaatsen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="260"/>
@@ -23006,12 +23017,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="263"/>
         <source>Remove from Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Van blad verwijderen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="243"/>
         <source>Move to</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaatsen naar</translation>
     </message>
 </context>
 <context>
@@ -23019,12 +23030,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="26"/>
         <source>About Puzzle</source>
-        <translation type="unfinished"></translation>
+        <translation>Over Puzzle</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="100"/>
         <source>Puzzle version</source>
-        <translation type="unfinished"></translation>
+        <translation>Puzzle versie</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="118"/>
@@ -23039,7 +23050,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="273"/>
         <source>Special thanks</source>
-        <translation type="unfinished"></translation>
+        <translation>Speciale dank</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="317"/>
@@ -23049,7 +23060,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="324"/>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Credits</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="66"/>
@@ -23079,103 +23090,103 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="504"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="656"/>
         <source>Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwart</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="505"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="657"/>
         <source>White</source>
-        <translation type="unfinished"></translation>
+        <translation>Wit</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="506"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="658"/>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Rood</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="507"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="659"/>
         <source>Dark red</source>
-        <translation type="unfinished"></translation>
+        <translation>Donkerrood</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="508"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="660"/>
         <source>Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Groen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="509"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="661"/>
         <source>Dark green</source>
-        <translation type="unfinished"></translation>
+        <translation>Donkergroen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="510"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="662"/>
         <source>Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Blauw</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="511"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="663"/>
         <source>Dark blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Donkerblauw</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="512"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="664"/>
         <source>Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Cyaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="513"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="665"/>
         <source>Dark cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Donkercyaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="514"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="666"/>
         <source>Magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Magenta</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="515"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="667"/>
         <source>Dark magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Donkermagenta</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="516"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="668"/>
         <source>Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Geel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="517"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="669"/>
         <source>Dark yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Donkergeel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="518"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="670"/>
         <source>Gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Grijs</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="519"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="671"/>
         <source>Dark gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Donkergrijs</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="520"/>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="672"/>
         <source>Light gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Lichtgrijs</translation>
     </message>
 </context>
 <context>
@@ -23207,12 +23218,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="325"/>
         <source>Move to</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaatsen naar</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/scene/vpgraphicspiece.cpp" line="339"/>
         <source>Remove from Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Van blad verwijderen</translation>
     </message>
 </context>
 <context>
@@ -23220,7 +23231,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/scene/vpgraphicssheet.cpp" line="900"/>
         <source>FOLD</source>
-        <translation type="unfinished"></translation>
+        <translation>VOUW</translation>
     </message>
 </context>
 <context>
@@ -23228,7 +23239,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/layout/vplayout.cpp" line="76"/>
         <source>Sheet %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad %1</translation>
     </message>
 </context>
 <context>
@@ -23236,37 +23247,37 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="497"/>
         <source>Piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="655"/>
         <source>Error in line %1. Grainline main line is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout in regel %1. Hoofdlijn draadrichting is leeg.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1057"/>
         <source>Got empty attribute &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Leeg attribuut &apos;%1&apos; ontvangen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="628"/>
         <source>Error in line %1. Seam allowance is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout in regel %1. Naadtoeslag is leeg.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="747"/>
         <source>Error in line %1. Internal path shape is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout in regel %1. Vorm intern pad is leeg.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1044"/>
         <source>Unexpected tag %1 in line %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Onverwacht label %1 in regel %2</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="477"/>
         <source>Piece %1 invalid. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk %1 ongeldig. %2</translation>
     </message>
 </context>
 <context>
@@ -23274,17 +23285,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/scene/vpmaingraphicsview.cpp" line="329"/>
         <source>Restore transformation origin</source>
-        <translation type="unfinished"></translation>
+        <translation>Transformatie-oorsprong herstellen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/scene/vpmaingraphicsview.cpp" line="333"/>
         <source>Remove sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad verwijderen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/scene/vpmaingraphicsview.cpp" line="616"/>
         <source>Remove pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Stukken verwijderen</translation>
     </message>
 </context>
 <context>
@@ -23292,7 +23303,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="14"/>
         <source>Puzzle</source>
-        <translation type="unfinished"></translation>
+        <translation>Puzzle</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="47"/>
@@ -23317,30 +23328,30 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="159"/>
         <source>Piece Carrousel</source>
-        <translation type="unfinished"></translation>
+        <translation>Stukkencarrousel</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="198"/>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2243"/>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigenschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="243"/>
         <source>Current piece properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigenschappen huidig stuk</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="294"/>
         <source>Current piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Huidig stuk</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="322"/>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="838"/>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1752"/>
         <source>Infos</source>
-        <translation type="unfinished"></translation>
+        <translation>Informatie</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="328"/>
@@ -23352,12 +23363,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="687"/>
         <source>Show Seamline</source>
-        <translation type="unfinished"></translation>
+        <translation>Naadlijn tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="668"/>
         <source>Geometry</source>
-        <translation type="unfinished"></translation>
+        <translation>Geometrie</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="548"/>
@@ -23372,33 +23383,33 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="475"/>
         <source>Placement</source>
-        <translation type="unfinished"></translation>
+        <translation>Plaatsing</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="748"/>
         <source>No piece selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen stuk geselecteerd</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="783"/>
         <source>Sheet properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Bladeigenschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="828"/>
         <source>Current sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Huidig blad</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="864"/>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1365"/>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formaat</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1108"/>
         <source>Remove unused length</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongebruikte lengte verwijderen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1118"/>
@@ -23433,22 +23444,22 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1215"/>
         <source>Placement Grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Plaatsingsgrid</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1226"/>
         <source>Show Grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Grid tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1233"/>
         <source>Column width</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolombreedte</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1247"/>
         <source>Row height</source>
-        <translation type="unfinished"></translation>
+        <translation>Rijhoogte</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1622"/>
@@ -23464,7 +23475,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1816"/>
         <source>Sticky edges</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleverige randen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1266"/>
@@ -23477,27 +23488,27 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1272"/>
         <source>Export Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad exporteren</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1307"/>
         <source>Tiles properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Tegeleigenschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1352"/>
         <source>Tiled Pdf Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Tegel-PDF exporteren</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1628"/>
         <source>Show Tiles on sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Tegels op blad tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1697"/>
         <source>Layout properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Indelingseigenschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1742"/>
@@ -23512,17 +23523,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1795"/>
         <source>Warning superposition of pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarschuwing overlapping van stukken</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1802"/>
         <source>Warning pieces out of bound</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarschuwing stukken buiten grens</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2060"/>
         <source>zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>zoom</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1861"/>
@@ -23543,12 +23554,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2162"/>
         <source>Save &amp;As</source>
-        <translation type="unfinished"></translation>
+        <translation>Opslaan &amp;als</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2176"/>
         <source>&amp;Import Raw Layout Data</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ruwe indelingsgegevens importeren</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2190"/>
@@ -23568,7 +23579,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2226"/>
         <source>About &amp;Puzzle</source>
-        <translation type="unfinished"></translation>
+        <translation>Over &amp;Puzzle</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2257"/>
@@ -23583,7 +23594,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2285"/>
         <source>Zoom 1:1</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom 1:1</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2299"/>
@@ -23593,7 +23604,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2302"/>
         <source>Zoom sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad zoomen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2310"/>
@@ -23616,12 +23627,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="655"/>
         <source>Fail to create layout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aanmaken indeling mislukt.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3469"/>
         <source>Could not extract data from file &apos;%1&apos;. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen gegevens extraheren uit bestand &apos;%1&apos;. %2</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="948"/>
@@ -23649,12 +23660,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1850"/>
         <source>untitled %1.vlt</source>
-        <translation type="unfinished"></translation>
+        <translation>naamloos %1.vlt</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1850"/>
         <source>untitled.vlt</source>
-        <translation type="unfinished"></translation>
+        <translation>naamloos.vlt</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1857"/>
@@ -23686,13 +23697,13 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1952"/>
         <source>Layout has been modified. Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Indeling is gewijzigd. Wilt u uw wijzigingen opslaan?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3802"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3864"/>
         <source>Layout files</source>
-        <translation type="unfinished"></translation>
+        <translation>Indelingsbestanden</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3806"/>
@@ -23709,7 +23720,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3866"/>
         <source>layout</source>
-        <translation type="unfinished"></translation>
+        <translation>indeling</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3878"/>
@@ -23734,7 +23745,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3949"/>
         <source>Raw Layout files</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestanden ruwe indeling</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3967"/>
@@ -23744,12 +23755,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="62"/>
         <source>&amp;Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Blad</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="90"/>
         <source>&amp;Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Indeling</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="101"/>
@@ -23759,43 +23770,43 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="371"/>
         <source>Gradation id:</source>
-        <translation type="unfinished"></translation>
+        <translation>Graderingsid:</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="385"/>
         <source>Copy number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopienummer:</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="402"/>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="415"/>
         <source>Out of bound</source>
-        <translation type="unfinished"></translation>
+        <translation>Buiten grens</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="429"/>
         <source>Superposition of pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Overlapping van stukken</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="443"/>
         <source>Piece gape</source>
-        <translation type="unfinished"></translation>
+        <translation>Stukafstand</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="459"/>
         <source>Transformation</source>
-        <translation type="unfinished"></translation>
+        <translation>Transformatie</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="469"/>
         <source>Translate</source>
         <comment>Translate piece</comment>
-        <translation type="unfinished"></translation>
+        <translation>Verschuiven</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="483"/>
@@ -23812,42 +23823,42 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="528"/>
         <source>Relative translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Relatieve verschuiving</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="542"/>
         <source>Rotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Draaien</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="651"/>
         <source>Apply to each piece separately</source>
-        <translation type="unfinished"></translation>
+        <translation>Afzonderlijk op elk stuk toepassen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="677"/>
         <source>Show full piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Volledig stuk tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="697"/>
         <source>Show mirror line</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiegellijn tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="707"/>
         <source>Show grainline</source>
-        <translation type="unfinished"></translation>
+        <translation>Draadrichting tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="717"/>
         <source>Vertically flipped</source>
-        <translation type="unfinished"></translation>
+        <translation>Verticaal gespiegeld</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="724"/>
         <source>Horizontally flipped</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontaal gespiegeld</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="884"/>
@@ -23874,17 +23885,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1033"/>
         <source>Grainline orientation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Draadrichtingsoriëntatie:</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1045"/>
         <source>Force the grainline orientation to always be horizontal</source>
-        <translation type="unfinished"></translation>
+        <translation>Draadrichting dwingen altijd horizontaal te zijn</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1068"/>
         <source>Force the grainline orientation to always be vertical</source>
-        <translation type="unfinished"></translation>
+        <translation>Draadrichting dwingen altijd verticaal te zijn</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1205"/>
@@ -23900,32 +23911,32 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1635"/>
         <source>Show watermark preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Watermerkvoorvertoning tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1638"/>
         <source>Show watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Watermerk tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1648"/>
         <source>Print tiles scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Tegelschema afdrukken</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1655"/>
         <source>Print text as paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst als paden afdrukken</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1809"/>
         <source>Warning piece gape position</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarschuwing stukafstandspositie</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1830"/>
         <source>Boundary together with notches</source>
-        <translation type="unfinished"></translation>
+        <translation>Contour samen met inkepingen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1837"/>
@@ -23935,22 +23946,22 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1846"/>
         <source>Pieces gap:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruimte tussen stukken:</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2040"/>
         <source>Export Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Indeling exporteren</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2093"/>
         <source>Undo commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongedaan maken-opdrachten</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2318"/>
         <source>Add Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad toevoegen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2329"/>
@@ -24004,17 +24015,17 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2527"/>
         <source>Settings Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellingenmap</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="534"/>
         <source>Unable to read a layout file. %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan indelingsbestand niet lezen. %1</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="544"/>
         <source>Failed to read %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Lezen van %1 mislukt</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="760"/>
@@ -24069,44 +24080,44 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2741"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3255"/>
         <source>Failed in flushing page to disk, disk full?</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij wegschrijven pagina naar schijf, schijf vol?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3090"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3117"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3146"/>
         <source>The layout is invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>De indeling is ongeldig.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3091"/>
         <source>The layout is invalid. Piece out of bound. Do you want to continue export?</source>
-        <translation type="unfinished"></translation>
+        <translation>De indeling is ongeldig. Stuk buiten grens. Wilt u doorgaan met exporteren?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3118"/>
         <source>The layout is invalid. Pieces superposition. Do you want to continue export?</source>
-        <translation type="unfinished"></translation>
+        <translation>De indeling is ongeldig. Stukken overlappen. Wilt u doorgaan met exporteren?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3147"/>
         <source>The layout is invalid. One or several pieces are closer than minimally allowed. Do you want to continue export?</source>
-        <translation type="unfinished"></translation>
+        <translation>De indeling is ongeldig. Een of meerdere stukken liggen dichter dan minimaal toegestaan. Wilt u doorgaan met exporteren?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4236"/>
         <source>Sheet %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad %1</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3545"/>
         <source>translate pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>stukken verschuiven</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3662"/>
         <source>rotate pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>stukken draaien</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4440"/>
@@ -24159,52 +24170,52 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4635"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4673"/>
         <source>Unable to get sheet page settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan paginainstellingen blad niet ophalen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1662"/>
         <source>Show tile number</source>
-        <translation type="unfinished"></translation>
+        <translation>Tegelnummer tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2107"/>
         <source>Z value</source>
-        <translation type="unfinished"></translation>
+        <translation>Z-waarde</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2486"/>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Onderaan</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2497"/>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Omlaag</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2508"/>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Omhoog</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2519"/>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Bovenaan</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1645"/>
         <source>Has effect only when print in application. To export with tiles scheme use separate setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Heeft alleen effect bij afdrukken in de toepassing. Gebruik een aparte instelling voor exporteren met tegelschema</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4490"/>
         <source>sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>blad</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3491"/>
         <source>Piece %1 invalid. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk %1 ongeldig. %2</translation>
     </message>
 </context>
 <context>
@@ -24213,17 +24224,17 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="486"/>
         <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="492"/>
         <source>Seam line is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Naadlijn is leeg</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="498"/>
         <source>Seam allowance line is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Naadtoeslag is leeg</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/layout/vppiece.cpp" line="504"/>
         <source>Grainline is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Draadrichting is leeg</translation>
     </message>
 </context>
 <context>
@@ -24241,12 +24252,12 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/vptilefactory.cpp" line="1451"/>
         <source>Warning: Multiple single stroke outline fonts detected (%1). The font &quot;%2&quot; was selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarschuwing: Meerdere enkelvoudige streepcontourlettertypen gedetecteerd (%1). Lettertype &quot;%2&quot; werd geselecteerd.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vptilefactory.cpp" line="1513"/>
         <source>Warning: Multiple single-line SVG fonts detected (%1). The font &quot;%2&quot; was selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarschuwing: Meerdere enkellijn-SVG-lettertypen gedetecteerd (%1). Lettertype &quot;%2&quot; werd geselecteerd.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vptilefactory.cpp" line="480"/>
@@ -24268,7 +24279,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/undocommands/vpundoaddsheet.cpp" line="40"/>
         <source>add sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>blad toevoegen</translation>
     </message>
 </context>
 <context>
@@ -24276,7 +24287,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/undocommands/vpundomovepieceonsheet.cpp" line="49"/>
         <source>move piece on sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>stuk op blad verplaatsen</translation>
     </message>
 </context>
 <context>
@@ -24284,7 +24295,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/undocommands/vpundooriginmove.cpp" line="44"/>
         <source>move transformation origin</source>
-        <translation type="unfinished"></translation>
+        <translation>transformatie-oorsprong verplaatsen</translation>
     </message>
 </context>
 <context>
@@ -24292,7 +24303,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/undocommands/vpundopiecemove.cpp" line="44"/>
         <source>move piece</source>
-        <translation type="unfinished"></translation>
+        <translation>stuk verplaatsen</translation>
     </message>
 </context>
 <context>
@@ -24300,7 +24311,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/undocommands/vpundopiecerotate.cpp" line="59"/>
         <source>rotate piece</source>
-        <translation type="unfinished"></translation>
+        <translation>stuk draaien</translation>
     </message>
 </context>
 <context>
@@ -24308,7 +24319,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/puzzle/undocommands/vpundoremovesheet.cpp" line="48"/>
         <source>add sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>blad toevoegen</translation>
     </message>
 </context>
 <context>
@@ -24326,7 +24337,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1017"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built-in seam allowance. User must manually provide length.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan inkeping niet berekenen voor punt &apos;%1&apos; in stuk &apos;%2&apos; met ingebouwde naadtoeslag. Gebruiker moet handmatig de lengte opgeven.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1134"/>
@@ -24503,13 +24514,13 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3287"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3293"/>
         <source>Error creating or updating a parallel curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij aanmaken of bijwerken parallelle curve</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3362"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3368"/>
         <source>Error creating or updating a graduated curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij aanmaken of bijwerken getrapte curve</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3449"/>
@@ -24533,7 +24544,7 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3670"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3676"/>
         <source>Error creating or updating elliptical arc with length</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij aanmaken of bijwerken elliptische boog met lengte</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3703"/>
@@ -24705,12 +24716,12 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2225"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2231"/>
         <source>Error creating or updating place label</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij aanmaken of bijwerken plaatslabel</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4679"/>
         <source>Can&apos;t find increment &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan toeslag &apos;%1&apos; niet vinden</translation>
     </message>
 </context>
 <context>
@@ -24734,34 +24745,34 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="55"/>
         <source>Unexpected mime type: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Onverwacht MIME-type: %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="62"/>
         <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="149"/>
         <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="180"/>
         <source>Couldn&apos;t read the image. Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan afbeelding niet lezen. Fout: %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="104"/>
         <source>No data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen gegevens.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="110"/>
         <source>Content type is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhoudstype is leeg.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="126"/>
         <source>Not image.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen afbeelding.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="120"/>
         <source>Content type mismatch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhoudstype komt niet overeen.</translation>
     </message>
 </context>
 <context>
@@ -24794,7 +24805,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vformat/vpatternrecipe.cpp" line="542"/>
         <source>Unable to create record for final measurement &apos;%1&apos;. Error: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan record niet aanmaken voor eindmaat &apos;%1&apos;. Fout: %2</translation>
     </message>
 </context>
 <context>
@@ -24895,7 +24906,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vlayout/vprintlayout.cpp" line="386"/>
         <source>Failed in flushing page to disk, disk full?</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij wegschrijven pagina naar schijf, schijf vol?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vprintlayout.cpp" line="479"/>
@@ -24915,7 +24926,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vlayout/vprintlayout.cpp" line="586"/>
         <source>Cannot set printer tiled page size</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan tegelblad grootte printer niet instellen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vprintlayout.cpp" line="594"/>
@@ -24951,13 +24962,14 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vlayout/vrawlayout.cpp" line="166"/>
         <source>VRawLayout::ReadFile() failed. Raw layout format prefix mismatch error.</source>
-        <translation type="unfinished"></translation>
+        <translation>VRawLayout::ReadFile() mislukt. Fout: prefix-mismatch ruw indelingsformaat.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vrawlayout.cpp" line="176"/>
         <source>VRawLayout::ReadFile() failed.
 Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = %2</source>
-        <translation type="unfinished"></translation>
+        <translation>VRawLayout::ReadFile() mislukt.
+Compatibiliteitsfout ruw indelingsformaat: actualFileVersion = %1 en fileVersion = %2</translation>
     </message>
 </context>
 <context>
@@ -24970,12 +24982,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vmisc/dialogs/vshortcutdialog.cpp" line="119"/>
         <source>Shortcut Already Used</source>
-        <translation type="unfinished"></translation>
+        <translation>Sneltoets al in gebruik</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/vshortcutdialog.cpp" line="120"/>
         <source>&quot;%1&quot; is already bound to &quot;%2&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;%1&quot; is al gekoppeld aan &quot;%2&quot;</translation>
     </message>
 </context>
 <context>
@@ -24983,7 +24995,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vformat/vsinglelineoutlinechar.cpp" line="151"/>
         <source>Failed to open file for writing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan bestand niet openen voor schrijven.</translation>
     </message>
 </context>
 <context>
@@ -25011,12 +25023,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vmisc/svgfont/vsvgfontreader.cpp" line="164"/>
         <location filename="../../src/libs/vmisc/svgfont/vsvgfontreader.cpp" line="208"/>
         <source>Incorrect file</source>
-        <translation type="unfinished"></translation>
+        <translation>Onjuist bestand</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/svgfont/vsvgfontreader.cpp" line="324"/>
         <source>Unexpected tag %1 in line %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Onverwacht label %1 in regel %2</translation>
     </message>
 </context>
 <context>
@@ -25024,27 +25036,27 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vmisc/vtablesearch.cpp" line="384"/>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoofdlettergevoelig</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vtablesearch.cpp" line="389"/>
         <source>Words</source>
-        <translation type="unfinished"></translation>
+        <translation>Woorden</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vtablesearch.cpp" line="394"/>
         <source>Regex</source>
-        <translation type="unfinished"></translation>
+        <translation>Regex</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vtablesearch.cpp" line="399"/>
         <source>Match case and words</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoofdlettergevoelig en woorden</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vtablesearch.cpp" line="404"/>
         <source>Match case and regex</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoofdlettergevoelig en regex</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vtablesearch.cpp" line="407"/>
@@ -25057,22 +25069,22 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="890"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongeldig SVG-lettertype &apos;%1&apos;. Terugvallen op contourlettertype.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="948"/>
         <source>Piece &apos;%1&apos;. Not enough space for pattern info label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;. Niet genoeg ruimte voor patrooninformatie-etiket.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="951"/>
         <source>Piece &apos;%1&apos;. Not enough space for piece info label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;. Niet genoeg ruimte voor stukinformatie-etiket.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="955"/>
         <source>Piece &apos;%1&apos;. Not enough space for label.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stuk &apos;%1&apos;. Niet genoeg ruimte voor etiket.</translation>
     </message>
 </context>
 <context>
@@ -25107,7 +25119,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="549"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
 </context>
 <context>
@@ -25116,7 +25128,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="902"/>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="952"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
 </context>
 <context>
@@ -25124,12 +25136,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="203"/>
         <source>Length</source>
-        <translation type="unfinished">Lengte</translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="205"/>
         <source>Label</source>
-        <translation type="unfinished">Label</translation>
+        <translation>Etiket</translation>
     </message>
 </context>
 <context>
@@ -25137,7 +25149,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="687"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
 </context>
 <context>
@@ -25160,7 +25172,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolalongline.cpp" line="196"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
 </context>
 <context>
@@ -25232,7 +25244,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="157"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="418"/>
@@ -25257,12 +25269,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="794"/>
         <source>Segment 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Segment 1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="796"/>
         <source>Segment 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Segment 2</translation>
     </message>
 </context>
 <context>
@@ -25270,7 +25282,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcut.cpp" line="191"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
 </context>
 <context>
@@ -25283,7 +25295,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="376"/>
         <source>Elliptical arc</source>
-        <translation type="unfinished">Ellipsvormige boog</translation>
+        <translation>Elliptische boog</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="377"/>
@@ -25313,12 +25325,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="382"/>
         <source>radius1</source>
-        <translation type="unfinished"></translation>
+        <translation>straal1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="383"/>
         <source>radius2</source>
-        <translation type="unfinished"></translation>
+        <translation>straal2</translation>
     </message>
 </context>
 <context>
@@ -25420,7 +25432,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/tooldoublepoint/vtooldoublepoint.cpp" line="534"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
 </context>
 <context>
@@ -25462,32 +25474,32 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.cpp" line="470"/>
         <source>Length</source>
-        <translation type="unfinished">Lengte</translation>
+        <translation>Lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.cpp" line="473"/>
         <source>Radius1</source>
-        <translation type="unfinished"></translation>
+        <translation>Straal1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.cpp" line="475"/>
         <source>Radius2</source>
-        <translation type="unfinished"></translation>
+        <translation>Straal2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.cpp" line="477"/>
         <source>Start angle</source>
-        <translation type="unfinished">Start hoek</translation>
+        <translation>Beginhoek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.cpp" line="479"/>
         <source>End angle</source>
-        <translation type="unfinished">Einde straal</translation>
+        <translation>Eindhoek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.cpp" line="481"/>
         <source>Label</source>
-        <translation type="unfinished">Label</translation>
+        <translation>Etiket</translation>
     </message>
 </context>
 <context>
@@ -25526,7 +25538,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolgraduatedcurve.cpp" line="111"/>
         <source>Offset %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Offset %1</translation>
     </message>
 </context>
 <context>
@@ -25549,7 +25561,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolheight.cpp" line="334"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
 </context>
 <context>
@@ -25567,7 +25579,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vtoolline.cpp" line="461"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
 </context>
 <context>
@@ -25580,7 +25592,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoollineintersect.cpp" line="358"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoollineintersect.cpp" line="152"/>
@@ -25608,7 +25620,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.cpp" line="398"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.cpp" line="139"/>
@@ -25636,7 +25648,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollinepoint.cpp" line="252"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
 </context>
 <context>
@@ -26198,7 +26210,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3225"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3605"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam1:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3192"/>
@@ -26206,7 +26218,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3226"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3606"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam2:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3207"/>
@@ -26302,42 +26314,42 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3352"/>
         <source>First arc. Left sub arc name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste boog. Naam linker deelboog:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3353"/>
         <source>First arc. Right sub arc name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste boog. Naam rechter deelboog:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3354"/>
         <source>First arc. Left sub arc alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste boog. Alias linker deelboog:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3355"/>
         <source>First arc. Right sub arc alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste boog. Alias rechter deelboog:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3356"/>
         <source>Second arc. Left sub arc name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede boog. Naam linker deelboog:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3357"/>
         <source>Second arc. Right sub arc name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede boog. Naam rechter deelboog:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3358"/>
         <source>Second arc. Left sub arc alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede boog. Alias linker deelboog:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3359"/>
         <source>Second arc. Right sub arc alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede boog. Alias rechter deelboog:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3371"/>
@@ -26382,42 +26394,42 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3391"/>
         <source>First curve. Left sub curve name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste curve. Naam linker deelcurve:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3392"/>
         <source>First curve. Right sub curve name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste curve. Naam rechter deelcurve:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3393"/>
         <source>First curve. Left sub curve alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste curve. Alias linker deelcurve:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3394"/>
         <source>First curve. Right sub curve alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerste curve. Alias rechter deelcurve:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3395"/>
         <source>Second curve. Left sub curve name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede curve. Naam linker deelcurve:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3396"/>
         <source>Second curve. Right sub curve name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede curve. Naam rechter deelcurve:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3397"/>
         <source>Second curve. Left sub curve alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede curve. Alias linker deelcurve:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3398"/>
         <source>Second curve. Right sub curve alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tweede curve. Alias rechter deelcurve:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3410"/>
@@ -26438,38 +26450,38 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3721"/>
         <source>Elliptical arc with given length</source>
-        <translation type="unfinished"></translation>
+        <translation>Elliptische boog met opgegeven lengte</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3727"/>
         <source>Radius1:</source>
-        <translation type="unfinished">Straal1:</translation>
+        <translation>Straal1:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3728"/>
         <source>Radius2:</source>
-        <translation type="unfinished">Straal2:</translation>
+        <translation>Straal2:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3747"/>
         <source>Parallel curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Parallelle curve</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3751"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3774"/>
         <source>Full name:</source>
-        <translation type="unfinished">Volledige naam:</translation>
+        <translation>Volledige naam:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3753"/>
         <source>Width:</source>
-        <translation type="unfinished">Breedte:</translation>
+        <translation>Breedte:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3770"/>
         <source>Graduated curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Getrapte curve</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3108"/>
@@ -26659,19 +26671,19 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3696"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3708"/>
         <source>Background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Achtergrondafbeelding</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3699"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3711"/>
         <source>Hold:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vergrendeld:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3700"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3712"/>
         <source>Visible:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zichtbaar:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3701"/>
@@ -26716,7 +26728,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.cpp" line="410"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.cpp" line="219"/>
@@ -26729,7 +26741,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectionarcs.cpp" line="167"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectionarcs.cpp" line="535"/>
@@ -26750,7 +26762,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="173"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="632"/>
@@ -26765,22 +26777,22 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="1425"/>
         <source>Curve 1 segment 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve 1 segment 1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="1427"/>
         <source>Curve 1 segment 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve 1 segment 2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="1429"/>
         <source>Curve 2 segment 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve 2 segment 1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="1431"/>
         <source>Curve 2 segment 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve 2 segment 2</translation>
     </message>
 </context>
 <context>
@@ -26872,12 +26884,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1839"/>
         <source>Show full piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Volledig stuk tonen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1851"/>
         <source>Reset piece label template</source>
-        <translation type="unfinished"></translation>
+        <translation>Stukklabelsjabloon herstellen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1854"/>
@@ -26935,7 +26947,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolshoulderpoint.cpp" line="379"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>gereedschapsopties opslaan</translation>
     </message>
 </context>
 <context>
@@ -28288,7 +28300,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="66"/>
         <source>Offset_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Offset_</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="116"/>
@@ -28528,13 +28540,13 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="97"/>
         <source>PieceArea_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>StukOppervlak_</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="99"/>
         <source>PieceSeamLineArea_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>StukNaadlijnOppervlak_</translation>
     </message>
 </context>
 <context>
@@ -28569,13 +28581,13 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="41"/>
         <source>Transformation</source>
-        <translation type="unfinished"></translation>
+        <translation>Transformatie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="51"/>
         <source>Translate</source>
         <comment>Translate piece</comment>
-        <translation type="unfinished"></translation>
+        <translation>Verschuiven</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="59"/>
@@ -28590,7 +28602,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="104"/>
         <source>Relative translation</source>
-        <translation type="unfinished"></translation>
+        <translation>Relatieve verschuiving</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="115"/>
@@ -28610,12 +28622,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="168"/>
         <source>Scale proportionally</source>
-        <translation type="unfinished"></translation>
+        <translation>Proportioneel schalen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="179"/>
         <source>Rotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Draaien</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="185"/>
@@ -28630,18 +28642,18 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="303"/>
         <source>Z Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Z-waarde</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.cpp" line="233"/>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.cpp" line="774"/>
         <source>Background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Achtergrondafbeelding</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.cpp" line="347"/>
         <source>Hold</source>
-        <translation type="unfinished"></translation>
+        <translation>Vergrendelen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.cpp" line="351"/>
@@ -28651,7 +28663,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.cpp" line="355"/>
         <source>Reset transformation</source>
-        <translation type="unfinished"></translation>
+        <translation>Transformatie herstellen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.cpp" line="358"/>
@@ -28661,12 +28673,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.cpp" line="361"/>
         <source>Hold All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles vergrendelen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.cpp" line="363"/>
         <source>Unhold All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles ontgrendelen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.cpp" line="367"/>
@@ -28708,57 +28720,57 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="22"/>
         <source>Filter</source>
-        <translation type="unfinished">Filter</translation>
+        <translation>Filter</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="32"/>
         <source>Go to object automatically on node selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch naar object gaan bij knooppuntselectie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="62"/>
         <source>Move to earliest possible position in history</source>
-        <translation type="unfinished"></translation>
+        <translation>Naar vroegst mogelijke positie in geschiedenis verplaatsen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="75"/>
         <source>Move earlier in history</source>
-        <translation type="unfinished"></translation>
+        <translation>Eerder in geschiedenis verplaatsen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="88"/>
         <source>Move later in history</source>
-        <translation type="unfinished"></translation>
+        <translation>Later in geschiedenis verplaatsen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="101"/>
         <source>Move to latest possible position in history</source>
-        <translation type="unfinished"></translation>
+        <translation>Naar laatste mogelijke positie in geschiedenis verplaatsen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="667"/>
         <source>Expand All</source>
-        <translation type="unfinished">Uitbreiden van alles</translation>
+        <translation>Alles uitvouwen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="668"/>
         <source>Collapse All</source>
-        <translation type="unfinished">In elkaar storten van alles</translation>
+        <translation>Alles samenvouwen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="670"/>
         <source>Copy ID</source>
-        <translation type="unfinished"></translation>
+        <translation>ID kopiëren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="672"/>
         <source>Go to Object</source>
-        <translation type="unfinished"></translation>
+        <translation>Naar object gaan</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="674"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijderen</translation>
     </message>
 </context>
 <context>
@@ -28890,7 +28902,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolalongline.cpp" line="115"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte = %1%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie lengte voltooien, &lt;b&gt;%3&lt;/b&gt; - overslaan</translation>
     </message>
 </context>
 <context>
@@ -28898,17 +28910,17 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolarc.cpp" line="89"/>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Boog&lt;/b&gt;: straal = %1%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie straal voltooien, &lt;b&gt;%3&lt;/b&gt; - overslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolarc.cpp" line="107"/>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first angle, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Boog&lt;/b&gt;: straal = %1%2, eerste hoek = %3°; &lt;b&gt;Muisklik&lt;/b&gt; - selectie eerste hoek voltooien, &lt;b&gt;%4&lt;/b&gt; - hoek vastzetten, &lt;b&gt;%5&lt;/b&gt; - overslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolarc.cpp" line="124"/>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, second angle = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - sticking end, &lt;b&gt;%7&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Boog&lt;/b&gt;: straal = %1%2, eerste hoek = %3°, tweede hoek = %4°; &lt;b&gt;Muisklik&lt;/b&gt; - aanmaken voltooien, &lt;b&gt;%5&lt;/b&gt; - hoek vastzetten, &lt;b&gt;%6&lt;/b&gt; - einde vastzetten, &lt;b&gt;%7&lt;/b&gt; - overslaan</translation>
     </message>
 </context>
 <context>
@@ -28916,17 +28928,17 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolarcwithlength.cpp" line="87"/>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Boog&lt;/b&gt;: straal = %1%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie straal voltooien, &lt;b&gt;%3&lt;/b&gt; - overslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolarcwithlength.cpp" line="105"/>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first angle, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Boog&lt;/b&gt;: straal = %1%2, eerste hoek = %3°; &lt;b&gt;Muisklik&lt;/b&gt; - selectie eerste hoek voltooien, &lt;b&gt;%4&lt;/b&gt; - hoek vastzetten, &lt;b&gt;%5&lt;/b&gt; - overslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolarcwithlength.cpp" line="124"/>
         <source>&lt;b&gt;Arc&lt;/b&gt;: radius = %1%2, first angle = %3°, arc length = %4%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%5&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Boog&lt;/b&gt;: straal = %1%2, eerste hoek = %3°, booglengte = %4%2; &lt;b&gt;Muisklik&lt;/b&gt; - aanmaken voltooien, &lt;b&gt;%5&lt;/b&gt; - overslaan</translation>
     </message>
 </context>
 <context>
@@ -28934,7 +28946,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolbisector.cpp" line="128"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte = %1%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie lengte voltooien, &lt;b&gt;%3&lt;/b&gt; - overslaan</translation>
     </message>
 </context>
 <context>
@@ -28976,7 +28988,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolcutarc.cpp" line="104"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte = %1%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie lengte voltooien, &lt;b&gt;%3&lt;/b&gt; - overslaan</translation>
     </message>
 </context>
 <context>
@@ -28984,7 +28996,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolcutspline.cpp" line="98"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte = %1%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie lengte voltooien, &lt;b&gt;%3&lt;/b&gt; - overslaan</translation>
     </message>
 </context>
 <context>
@@ -28992,7 +29004,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolcutsplinepath.cpp" line="97"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte = %1%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie lengte voltooien, &lt;b&gt;%3&lt;/b&gt; - overslaan</translation>
     </message>
 </context>
 <context>
@@ -29000,27 +29012,27 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="86"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elliptische boog&lt;/b&gt;: straal1 = %1%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie eerste straal voltooien, &lt;b&gt;%3&lt;/b&gt; - overslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="103"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%4&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elliptische boog&lt;/b&gt;: straal1 = %1%2, straal2 = %3%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie tweede straal voltooien, &lt;b&gt;%4&lt;/b&gt; - overslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="119"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elliptische boog&lt;/b&gt;: straal1 = %1%2, straal2 = %3%2, hoek1 = %4°; &lt;b&gt;Muisklik&lt;/b&gt; - selectie eerste straal voltooien, &lt;b&gt;%5&lt;/b&gt; - hoek vastzetten, &lt;b&gt;%6&lt;/b&gt; - overslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="164"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°, rotation = %6°; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%7&lt;/b&gt; - sticking angle, &lt;b&gt;%8&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elliptische boog&lt;/b&gt;: straal1 = %1%2, straal2 = %3%2, hoek1 = %4°, hoek2 = %5°, rotatie = %6°; &lt;b&gt;Muisklik&lt;/b&gt; - aanmaken voltooien, &lt;b&gt;%7&lt;/b&gt; - hoek vastzetten, &lt;b&gt;%8&lt;/b&gt; - overslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="141"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%6&lt;/b&gt; - sticking angle, &lt;b&gt;%7&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elliptische boog&lt;/b&gt;: straal1 = %1%2, straal2 = %3%2, hoek1 = %4°, hoek2 = %5°; &lt;b&gt;Muisklik&lt;/b&gt; - selectie tweede straal voltooien, &lt;b&gt;%6&lt;/b&gt; - hoek vastzetten, &lt;b&gt;%7&lt;/b&gt; - overslaan</translation>
     </message>
 </context>
 <context>
@@ -29028,27 +29040,27 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarcwithlength.cpp" line="83"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elliptische boog&lt;/b&gt;: straal1 = %1%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie eerste straal voltooien, &lt;b&gt;%3&lt;/b&gt; - overslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarcwithlength.cpp" line="100"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%4&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elliptische boog&lt;/b&gt;: straal1 = %1%2, straal2 = %3%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie tweede straal voltooien, &lt;b&gt;%4&lt;/b&gt; - overslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarcwithlength.cpp" line="117"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elliptische boog&lt;/b&gt;: straal1 = %1%2, straal2 = %3%2, hoek1 = %4°; &lt;b&gt;Muisklik&lt;/b&gt; - selectie eerste straal voltooien, &lt;b&gt;%5&lt;/b&gt; - hoek vastzetten, &lt;b&gt;%6&lt;/b&gt; - overslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarcwithlength.cpp" line="140"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, arc length = %5%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the arc length, &lt;b&gt;%6&lt;/b&gt; - sticking angle, &lt;b&gt;%7&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elliptische boog&lt;/b&gt;: straal1 = %1%2, straal2 = %3%2, hoek1 = %4°, booglengte = %5%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie booglengte voltooien, &lt;b&gt;%6&lt;/b&gt; - hoek vastzetten, &lt;b&gt;%7&lt;/b&gt; - overslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarcwithlength.cpp" line="168"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, arc length = %5%2, rotation = %6°; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%7&lt;/b&gt; - sticking angle, &lt;b&gt;%8&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elliptische boog&lt;/b&gt;: straal1 = %1%2, straal2 = %3%2, hoek1 = %4°, booglengte = %5%2, rotatie = %6°; &lt;b&gt;Muisklik&lt;/b&gt; - aanmaken voltooien, &lt;b&gt;%7&lt;/b&gt; - hoek vastzetten, &lt;b&gt;%8&lt;/b&gt; - overslaan</translation>
     </message>
 </context>
 <context>
@@ -29072,7 +29084,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolgraduatedcurve.cpp" line="100"/>
         <source>&lt;b&gt;Graduated curve&lt;/b&gt;: offsets = %1; &lt;b&gt;Mouse click&lt;/b&gt; - selecting next width, &lt;b&gt;%2&lt;/b&gt; - negative width, &lt;b&gt;%3&lt;/b&gt; - finish</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Getrapte curve&lt;/b&gt;: offsets = %1; &lt;b&gt;Muisklik&lt;/b&gt; - volgende breedte selecteren, &lt;b&gt;%2&lt;/b&gt; - negatieve breedte, &lt;b&gt;%3&lt;/b&gt; - voltooien</translation>
     </message>
 </context>
 <context>
@@ -29109,7 +29121,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolnormal.cpp" line="110"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte = %1%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie lengte voltooien, &lt;b&gt;%3&lt;/b&gt; - overslaan</translation>
     </message>
 </context>
 <context>
@@ -29117,7 +29129,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolparallelcurve.cpp" line="75"/>
         <source>&lt;b&gt;Parallel curve&lt;/b&gt;: width = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the width, &lt;b&gt;%3&lt;/b&gt; - negative width, &lt;b&gt;%4&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Parallelle curve&lt;/b&gt;: breedte = %1%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie breedte voltooien, &lt;b&gt;%3&lt;/b&gt; - negatieve breedte, &lt;b&gt;%4&lt;/b&gt; - overslaan</translation>
     </message>
 </context>
 <context>
@@ -29125,7 +29137,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolpointfromcircleandtangent.cpp" line="100"/>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Straal = %1%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie straal voltooien, &lt;b&gt;%3&lt;/b&gt; - overslaan</translation>
     </message>
 </context>
 <context>
@@ -29133,7 +29145,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolpointofcontact.cpp" line="107"/>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Straal = %1%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie straal voltooien, &lt;b&gt;%3&lt;/b&gt; - overslaan</translation>
     </message>
 </context>
 <context>
@@ -29141,12 +29153,12 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolpointofintersectioncircles.cpp" line="108"/>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Straal = %1%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie tweede straal voltooien, &lt;b&gt;%3&lt;/b&gt; - overslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolpointofintersectioncircles.cpp" line="124"/>
         <source>Radius = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Straal = %1%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie eerste straal voltooien, &lt;b&gt;%3&lt;/b&gt; - overslaan</translation>
     </message>
 </context>
 <context>
@@ -29166,7 +29178,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolshoulderpoint.cpp" line="115"/>
         <source>Length = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the length, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengte = %1%2; &lt;b&gt;Muisklik&lt;/b&gt; - selectie lengte voltooien, &lt;b&gt;%3&lt;/b&gt; - overslaan</translation>
     </message>
 </context>
 <context>
@@ -29455,107 +29467,107 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="130"/>
         <source>Black</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zwart</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="131"/>
         <source>Red</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Rood</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="132"/>
         <source>Dark red</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Donkerrood</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="133"/>
         <source>Green</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Groen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="134"/>
         <source>Dark green</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Donkergroen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="135"/>
         <source>Blue</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Blauw</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="136"/>
         <source>Dark blue</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Donkerblauw</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="137"/>
         <source>Cyan</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Cyaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="138"/>
         <source>Dark cyan</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Donkercyaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="139"/>
         <source>Magenta</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Magenta</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="140"/>
         <source>Dark magenta</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Donkermagenta</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="141"/>
         <source>Yellow</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Geel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="142"/>
         <source>Dark yellow</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Donkergeel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="143"/>
         <source>Gray</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Grijs</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="144"/>
         <source>Dark gray</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Donkergrijs</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="145"/>
         <source>Light gray</source>
         <comment>color</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lichtgrijs</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="406"/>
         <source>Do you want to change the permissions?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wilt u de rechten wijzigen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="499"/>
         <source>The watermark has been modified. Do you want to save your changes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Het watermerk is gewijzigd. Wilt u uw wijzigingen opslaan?</translation>
     </message>
 </context>
 <context>
@@ -29563,7 +29575,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/zvaluemovebackgroundimage.cpp" line="60"/>
         <source>z value move a background image</source>
-        <translation type="unfinished"></translation>
+        <translation>z-waarde achtergrondafbeelding verplaatsen</translation>
     </message>
 </context>
 <context>
