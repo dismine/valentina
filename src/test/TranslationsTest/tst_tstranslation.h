@@ -37,6 +37,7 @@ class TST_TSTranslation : public TST_AbstractTranslation
 
 public:
     explicit TST_TSTranslation(QObject *parent = nullptr);
+    ~TST_TSTranslation() override = default;
 
 private slots:
     void CheckEmptyToolButton_data();

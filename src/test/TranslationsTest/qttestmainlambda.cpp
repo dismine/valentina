@@ -28,6 +28,9 @@
 
 #include <QtTest>
 
+#include <span>
+#include <vector>
+
 #include "tst_buitinregexp.h"
 #include "tst_qmuparsererrormsg.h"
 #include "tst_tslocaletranslation.h"
@@ -46,16 +49,41 @@ auto main(int argc, char **argv) -> int
 {
     TestVApplication const app(argc, argv); // For QPrinter
 
-    int status = 0;
-    auto ASSERT_TEST = [&status, argc, argv](QObject *obj)
+    // Collect -locale <value> / -locale <v1,v2,...> arguments and strip them
+    // from the argv forwarded to QTest::qExec so Qt Test does not reject them.
+    const auto args = std::span(argv, static_cast<std::size_t>(argc));
+
+    QStringList localeFilter;
+    std::vector<const char *> filteredArgv;
+    filteredArgv.reserve(args.size());
+    filteredArgv.push_back(args[0]);
+
+    for (std::size_t i = 1; i < args.size(); ++i)
     {
-        status |= QTest::qExec(obj, argc, argv);
+        if (QByteArray(args[i]) == "-locale" && i + 1 < args.size())
+        {
+            ++i;
+            localeFilter += QString::fromLocal8Bit(args[i]).split(u',', Qt::SkipEmptyParts);
+        }
+        else
+        {
+            filteredArgv.push_back(args[i]);
+        }
+    }
+
+    int filteredArgc = static_cast<int>(filteredArgv.size());
+
+    int status = 0;
+    auto ASSERT_TEST = [&status, &filteredArgc, &filteredArgv](QObject *obj) -> void
+    {
+        // NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
+        status |= QTest::qExec(obj, filteredArgc, const_cast<char **>(filteredArgv.data()));
         delete obj;
     };
 
     ASSERT_TEST(new TST_TSTranslation());
 
-    const QStringList locales = SupportedLocales();
+    const QStringList locales = localeFilter.isEmpty() ? SupportedLocales() : localeFilter;
     for (const auto &locale : locales)
     {
         ASSERT_TEST(new TST_TSLocaleTranslation(locale));
