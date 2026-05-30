@@ -71,7 +71,7 @@ auto main(int argc, char **argv) -> int
         }
     }
 
-    int filteredArgc = static_cast<int>(filteredArgv.size());
+    auto filteredArgc = static_cast<int>(filteredArgv.size());
 
     int status = 0;
     auto ASSERT_TEST = [&status, &filteredArgc, &filteredArgv](QObject *obj) -> void
