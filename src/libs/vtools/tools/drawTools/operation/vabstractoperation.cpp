@@ -874,7 +874,7 @@ void VAbstractOperation::SaveSourceDestination(QDomElement &tag,
                                                const QVector<SourceItem> &source,
                                                const QVector<DestinationItem> &destination)
 {
-    VAbstractPattern::RemoveAllChildren(tag);
+    doc->RemoveAllChildren(tag);
 
     QDomElement tagObjects = doc->createElement(TagSource);
     for (const auto &sItem : std::as_const(source))

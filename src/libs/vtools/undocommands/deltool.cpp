@@ -140,7 +140,7 @@ void DelTool::UpdateGroups(const QMap<quint32, VGroupData> &groups) const
     QDomElement groupsTag = Doc()->CreateGroups(nameActivDraw);
     if (not groupsTag.isNull())
     {
-        VDomDocument::RemoveAllChildren(groupsTag);
+        Doc()->RemoveAllChildren(groupsTag);
 
         auto i = groups.constBegin();
         while (i != groups.constEnd())

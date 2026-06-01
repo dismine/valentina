@@ -990,12 +990,10 @@ auto VDomDocument::UniqueTag(const QString &tagName) const -> QDomElement
  */
 void VDomDocument::RemoveAllChildren(QDomElement &domElement)
 {
-    QDomNode child = domElement.firstChild();
-    while (!child.isNull())
+    m_watcher->waitForFinished();
+    while (domElement.hasChildNodes())
     {
-        QDomNode const next = child.nextSibling();
-        domElement.removeChild(child);
-        child = next;
+        domElement.removeChild(domElement.firstChild());
     }
 }
 

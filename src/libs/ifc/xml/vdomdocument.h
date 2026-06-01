@@ -126,8 +126,6 @@ public:
     auto Patch() const -> QString;
     virtual auto GetFormatVersionStr() const -> QString;
     static auto GetFormatVersion(const QString &version) -> unsigned;
-    static void RemoveAllChildren(QDomElement &domElement);
-
     auto ParentNodeById(const quint32 &nodeId) -> QDomNode;
     auto CloneNodeById(const quint32 &nodeId) -> QDomElement;
     auto NodeById(const quint32 &nodeId, const QString &tagName = QString()) -> QDomElement;
@@ -140,6 +138,7 @@ public:
     void TestUniqueId() const;
 
     void RefreshElementIdCache();
+    void RemoveAllChildren(QDomElement &domElement);
 
     virtual void Clear();
 
