@@ -3210,7 +3210,8 @@ void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &pa
         }
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
-            Q_UNUSED(e)
+            qDebug() << "Broken relation. Parent was deleted, but the node object is still here. Node spline id ="
+                     << initData.id << "." << e.ErrorMessage();
             return; // Just ignore
         }
 
@@ -3258,7 +3259,8 @@ void VPattern::ParseNodeSplinePath(const QDomElement &domElement, const Document
         }
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
-            Q_UNUSED(e)
+            qDebug() << "Broken relation. Parent was deleted, but the node object is still here. Node spline path id ="
+                     << initData.id << "." << e.ErrorMessage();
             return; // Just ignore
         }
         VNodeSplinePath::Create(initData);
@@ -3407,7 +3409,8 @@ void VPattern::ParseNodeEllipticalArc(const QDomElement &domElement, const Docum
         }
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
-            Q_UNUSED(e)
+            qDebug() << "Broken relation. Parent was deleted, but the node object is still here. Node elliptical arc id ="
+                     << initData.id << "." << e.ErrorMessage();
             return; // Just ignore
         }
         arc->setIdObject(initData.idObject);
@@ -3446,7 +3449,8 @@ void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse
         }
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
-            Q_UNUSED(e)
+            qDebug() << "Broken relation. Parent was deleted, but the node object is still here. Node arc id ="
+                     << initData.id << "." << e.ErrorMessage();
             return; // Just ignore
         }
         arc->setIdObject(initData.idObject);

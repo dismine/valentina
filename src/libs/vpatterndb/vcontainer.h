@@ -259,7 +259,13 @@ template <typename T> auto VContainer::GeometricObject(const quint32 &id) const 
     }
 
     QSharedPointer<T> obj = qSharedPointerDynamicCast<T>(gObj);
-    SCASSERT(obj.isNull() == false)
+    if (obj.isNull())
+    {
+        const QString msg = tr("Can't cast object to the requested type. Object id = %1, actual type = %2.")
+                                .arg(id)
+                                .arg(static_cast<int>(gObj->getType()));
+        throw VExceptionBadId(msg, id);
+    }
     return obj;
 }
 
