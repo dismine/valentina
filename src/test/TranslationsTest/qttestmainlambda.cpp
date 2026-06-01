@@ -28,7 +28,6 @@
 
 #include <QtTest>
 
-#include <span>
 #include <vector>
 
 #include "tst_buitinregexp.h"
@@ -51,23 +50,23 @@ auto main(int argc, char **argv) -> int
 
     // Collect -locale <value> / -locale <v1,v2,...> arguments and strip them
     // from the argv forwarded to QTest::qExec so Qt Test does not reject them.
-    const auto args = std::span(argv, static_cast<std::size_t>(argc));
+    const auto argCount = static_cast<std::size_t>(argc);
 
     QStringList localeFilter;
     std::vector<const char *> filteredArgv;
-    filteredArgv.reserve(args.size());
-    filteredArgv.push_back(args[0]);
+    filteredArgv.reserve(argCount);
+    filteredArgv.push_back(argv[0]);
 
-    for (std::size_t i = 1; i < args.size(); ++i)
+    for (std::size_t i = 1; i < argCount; ++i)
     {
-        if (QByteArray(args[i]) == "-locale" && i + 1 < args.size())
+        if (QByteArray(argv[i]) == "-locale" && i + 1 < argCount)
         {
             ++i;
-            localeFilter += QString::fromLocal8Bit(args[i]).split(u',', Qt::SkipEmptyParts);
+            localeFilter += QString::fromLocal8Bit(argv[i]).split(u',', Qt::SkipEmptyParts);
         }
         else
         {
-            filteredArgv.push_back(args[i]);
+            filteredArgv.push_back(argv[i]);
         }
     }
 
