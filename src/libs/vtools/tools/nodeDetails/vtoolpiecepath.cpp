@@ -279,6 +279,11 @@ VToolPiecePath::VToolPiecePath(const VToolPiecePathInitData &initData, QObject *
 //---------------------------------------------------------------------------------------------------------------------
 void VToolPiecePath::RefreshGeometry()
 {
+    if (!VAbstractTool::data.ContainsPiecePath(m_id))
+    {
+        return;
+    }
+
     const VPiecePath path = VAbstractTool::data.GetPiecePath(m_id);
     if (path.GetType() != PiecePathType::InternalPath)
     {

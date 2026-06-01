@@ -29,6 +29,8 @@
 - [Valentina app] New action Auto-arrange labels (Ctrl+Shift+A). Automatically repositions point labels in Draw and Details mode to reduce overlaps.
 
 # Valentina 1.0.2 (unreleased)
+- [Valentina app] Fixed crash when undoing a piece path operation while a dialog is open.
+- [Valentina app] Fixed accessibility warning on macOS when a QTableWidget had no selection.
 - [Valentina app] Fixed crash when inserting nodes after undo/redo of piece operations.
 - [Tape app] Fix crash in SyncKnownMeasurements caused by wrong deletion order in TMainWindow destructor.
 - [Valentina app] Fixed crash on Windows when undoing or redoing tool addition with the property browser open.

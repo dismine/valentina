@@ -131,6 +131,7 @@ public:
     static auto GetFakeGObject(quint32 id) -> QSharedPointer<VGObject>;
     auto GetPiece(quint32 id) const -> VPiece;
     auto GetPiecePath(quint32 id) const -> VPiecePath;
+    auto ContainsPiecePath(quint32 id) const -> bool;
     auto GetPieceForPiecePath(quint32 id) const -> quint32;
     template <typename T> auto GetVariable(const QString &name) const -> QSharedPointer<T>;
     auto getId() const -> quint32;
