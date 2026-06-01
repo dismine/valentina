@@ -471,7 +471,7 @@ void VToolSplinePath::InitControlPoints(const VSplinePath *splPath)
  */
 void VToolSplinePath::UpdatePathPoints(VAbstractPattern *doc, QDomElement &element, const VSplinePath &path)
 {
-    VDomDocument::RemoveAllChildren(element);
+    doc->RemoveAllChildren(element);
     for (qint32 i = 0; i < path.CountPoints(); ++i)
     {
         AddPathPoint(doc, element, path.at(i));

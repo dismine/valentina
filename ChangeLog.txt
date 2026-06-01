@@ -1,4 +1,5 @@
 # Valentina 1.0.2 (unreleased)
+- [Valentina app] Fixed crash when loading old-format pattern files containing piece elements without a version attribute.
 - [Valentina app] Fixed crash when undoing a piece path operation while a dialog is open.
 - [Valentina app] Fixed accessibility warning on macOS when a QTableWidget had no selection.
 - [Valentina app] Fixed crash when inserting nodes after undo/redo of piece operations.

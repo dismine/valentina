@@ -744,7 +744,7 @@ void VAbstractOperation::UpdateNamePosition(quint32 id, const QPointF &pos)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractOperation::SaveSourceDestination(QDomElement &tag)
 {
-    VAbstractPattern::RemoveAllChildren(tag);
+    doc->RemoveAllChildren(tag);
 
     QDomElement tagObjects = doc->createElement(TagSource);
     for (const auto &sItem : qAsConst(source))

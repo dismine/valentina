@@ -60,7 +60,7 @@ void SavePieceOptions::undo()
     if (domElement.isElement())
     {
         VToolSeamAllowance::AddAttributes(doc, domElement, nodeId, m_oldDet);
-        VAbstractPattern::RemoveAllChildren(domElement); // Very important to clear before rewrite
+        doc->RemoveAllChildren(domElement); // Very important to clear before rewrite
         VToolSeamAllowance::AddPatternPieceData(doc, domElement, m_oldDet);
         VToolSeamAllowance::AddPatternInfo(doc, domElement, m_oldDet);
         VToolSeamAllowance::AddGrainline(doc, domElement, m_oldDet);
@@ -108,7 +108,7 @@ void SavePieceOptions::redo()
     if (domElement.isElement())
     {
         VToolSeamAllowance::AddAttributes(doc, domElement, nodeId, m_newDet);
-        VAbstractPattern::RemoveAllChildren(domElement); // Very important to clear before rewrite
+        doc->RemoveAllChildren(domElement); // Very important to clear before rewrite
         VToolSeamAllowance::AddPatternPieceData(doc, domElement, m_newDet);
         VToolSeamAllowance::AddPatternInfo(doc, domElement, m_newDet);
         VToolSeamAllowance::AddGrainline(doc, domElement, m_newDet);
