@@ -42,7 +42,7 @@ class VToolRecord
 public:
     VToolRecord();
     VToolRecord(const quint32 &id, const Tool &typeTool, const QString &nameDraw);
-    auto operator==(const VToolRecord &record) const -> bool;
+    auto operator==(const VToolRecord &record) const noexcept -> bool;
     auto operator=(const VToolRecord &record) -> VToolRecord &;
     VToolRecord(const VToolRecord &record);
     ~VToolRecord() = default;
@@ -130,7 +130,7 @@ inline void VToolRecord::setNameDraw(const QString &value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-inline auto VToolRecord::operator==(const VToolRecord &record) const -> bool
+inline auto VToolRecord::operator==(const VToolRecord &record) const noexcept -> bool
 {
     // Id should be enough
     return id == record.getId()/* && typeTool == record.getTypeTool() && nameDraw == record.getNameDraw()*/;
