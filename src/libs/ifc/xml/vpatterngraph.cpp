@@ -55,6 +55,11 @@ auto VPatternGraph::AddVertex(const VNode &node) -> bool
 {
     QWriteLocker const locker(&m_lock);
 
+    if (!m_graphRebuildEnabled)
+    {
+        return false;
+    }
+
     // Check if ID already exists
     if (m_idToVertex.contains(node.id))
     {
@@ -79,6 +84,11 @@ auto VPatternGraph::AddVertex(const VNode &node) -> bool
 auto VPatternGraph::AddEdge(vidtype fromId, vidtype toId) -> bool
 {
     QWriteLocker const locker(&m_lock);
+
+    if (!m_graphRebuildEnabled)
+    {
+        return false;
+    }
 
     if (!m_idToVertex.contains(fromId) || !m_idToVertex.contains(toId))
     {
@@ -466,6 +476,14 @@ void VPatternGraph::Clear()
     m_graph = Graph{};
     m_idToVertex.clear();
     m_vertexToId.clear();
+    m_graphRebuildEnabled = true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPatternGraph::SetGraphRebuildEnabled(bool enabled)
+{
+    QWriteLocker const locker(&m_lock);
+    m_graphRebuildEnabled = enabled;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

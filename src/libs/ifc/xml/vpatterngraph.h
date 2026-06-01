@@ -99,6 +99,8 @@ public:
 
     void Clear();
 
+    void SetGraphRebuildEnabled(bool enabled);
+
     template<typename Func>
     void WithReadLock(Func &&func) const;
 
@@ -133,6 +135,10 @@ private:
     // Fast bidirectional mapping between node IDs and internal vertex IDs
     QHash<vidtype, vertex_id_t> m_idToVertex{}; // node ID -> vertex_id_t
     QHash<vertex_id_t, vidtype> m_vertexToId{}; // vertex_id_t -> node ID
+
+    // When false, AddVertex/AddEdge are no-ops. Set to false during LitePPParse,
+    // where the graph structure does not change (only geometric data is updated).
+    bool m_graphRebuildEnabled{true};
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -682,7 +682,9 @@ void VPattern::LiteParseTree(const Document &parse)
         switch (parse)
         {
             case Document::LitePPParse:
+                PatternGraph()->SetGraphRebuildEnabled(false);
                 ParseCurrentPP();
+                PatternGraph()->SetGraphRebuildEnabled(true);
                 break;
             case Document::FullLiteParse:
             case Document::LiteParse:
