@@ -12,7 +12,7 @@ VALENTINA_BRANCH=''    # for example 10x
 LANGUAGES="uk,de_DE,cs,he_IL,fr_FR,it_IT,nl,id,es,fi,ro_RO,zh_CN,pt_BR,el_GR,pl_PL,hr_HR,hu_HU,pt_PT,ja"
 
 # Certant languages like he_IL and zh_CN are not supported by math parser
-tx pull -r valentina-project.valentina_${VALENTINA_BRANCH}ts --mode=default -f --skip -l "${LANGUAGES}" &
+tx pull -r valentina-project.valentina_${VALENTINA_BRANCH}ts -w --mode=default -f --skip -l "${LANGUAGES}" &
 wait
 
 # cannot fix incorrect placing for pattern making systems

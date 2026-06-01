@@ -663,7 +663,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="287"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervertir les points</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="318"/>
@@ -5603,7 +5603,7 @@ Appliquer quand même les réglages ?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="185"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervertir les points</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="37"/>
@@ -6522,7 +6522,7 @@ Appliquer quand même les réglages ?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="280"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervertir les points</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="317"/>
@@ -6560,27 +6560,27 @@ Appliquer quand même les réglages ?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="69"/>
         <source>Rotation</source>
-        <translation type="unfinished">Rotation</translation>
+        <translation>Rotation</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="158"/>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom de groupe invalide</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="217"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Par défaut</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="307"/>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Étiquette invalide</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="307"/>
         <source>Invalid name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom invalide</translation>
     </message>
 </context>
 <context>
@@ -8209,7 +8209,7 @@ Appliquer quand même les réglages ?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="102"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervertir les points</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="139"/>
@@ -21926,7 +21926,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="267"/>
         <source>Can&apos;t cast object to the requested type. Object id = %1, actual type = %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de convertir l&apos;objet vers le type demandé. Identifiant de l&apos;objet = %1, type réel = %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="294"/>
