@@ -268,7 +268,7 @@ VDomDocument::VDomDocument(QObject *parent)
   : QObject(parent),
     QDomDocument(),
     m_elementIdCache(),
-    m_watcher(new QFutureWatcher<QHash<quint32, QDomElement>>(this))
+    m_watcher(new QFutureWatcher<QHash<quint32, QDomElement>>())
 {
     connect(qApp,
             &QCoreApplication::aboutToQuit,
@@ -284,7 +284,16 @@ VDomDocument::VDomDocument(QObject *parent)
 //---------------------------------------------------------------------------------------------------------------------
 VDomDocument::~VDomDocument()
 {
+    // Must be deleted explicitly before the QDomDocument base destructs. VDomDocument declares QObject before
+    // QDomDocument, so QDomDocument::~QDomDocument() runs before QObject::~QObject(). The QDomElement objects
+    // stored inside the QFutureWatcher's QFuture result must be released while the DOM nodes are still alive.
+    qCDebug(vXML) << "Destroying VDomDocument: stopping cache watcher, cache size"
+                  << m_elementIdCache.size();
     m_watcher->cancel();
+    m_watcher->waitForFinished();
+    m_elementIdCache.clear();
+    delete m_watcher;
+    m_watcher = nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

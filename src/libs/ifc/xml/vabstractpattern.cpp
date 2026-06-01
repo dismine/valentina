@@ -333,6 +333,8 @@ VAbstractPattern::~VAbstractPattern()
     // Must be deleted before the QDomDocument base destructs. VDomDocument declares QObject before QDomDocument, so
     // QDomDocument::~QDomDocument() runs before QObject::~QObject(). The QDomElement objects stored in
     // VPatternBlockMapper must be released while the DOM nodes are still alive to avoid a double-free.
+    qCDebug(vXML) << "Destroying VAbstractPattern: releasing block mapper"
+                  << m_patternBlockMapper->Size() << "blocks.";
     delete m_patternBlockMapper;
 
     qDeleteAll(toolsOnRemove);
