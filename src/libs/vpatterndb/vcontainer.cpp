@@ -219,6 +219,12 @@ auto VContainer::GetPiecePath(quint32 id) const -> VPiecePath
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VContainer::ContainsPiecePath(quint32 id) const -> bool
+{
+    return d->piecePaths->contains(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VContainer::GetPieceForPiecePath(quint32 id) const -> quint32
 {
     auto i = d->pieces->constBegin();

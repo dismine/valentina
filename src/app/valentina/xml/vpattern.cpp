@@ -719,7 +719,21 @@ void VPattern::LiteParseTree(const Document &parse)
     nameActivPP = namePP;
     qCDebug(vXML, "Current pattern piece %s", qUtf8Printable(nameActivPP));
     setCurrentData();
-    emit FullUpdateFromFile();
+    try
+    {
+        emit FullUpdateFromFile();
+    }
+    catch (VException &e)
+    {
+        qCCritical(vXML, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error updating scene after parsing.")),
+                   qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+        emit SetEnabledGUI(false);
+        if (not VApplication::IsGUIMode())
+        {
+            QCoreApplication::exit(V_EX_NOINPUT);
+        }
+        return;
+    }
     // Recalculate scene rect
     VMainGraphicsView::NewSceneRect(sceneDraw, VAbstractValApplication::VApp()->getSceneView());
     VMainGraphicsView::NewSceneRect(sceneDetail, VAbstractValApplication::VApp()->getSceneView());
