@@ -37,7 +37,6 @@
 #include <QKeyEvent>
 #include <QList>
 #include <QMessageLogger>
-#include <QPalette>
 #include <QPoint>
 #include <QPolygonF>
 #include <QRectF>
@@ -89,10 +88,7 @@ void VGraphicsSimpleTextItem::paint(QPainter *painter, const QStyleOptionGraphic
 void VGraphicsSimpleTextItem::SetEnabledState(bool enabled)
 {
     QGraphicsSimpleTextItem::setEnabled(enabled);
-    if (scene() != nullptr)
-    {
-        setBrush(scene()->palette().brush(enabled ? QPalette::Active : QPalette::Disabled, QPalette::Text));
-    }
+    RefreshColor();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -327,11 +323,9 @@ void VGraphicsSimpleTextItem::UpdateFontSize(int size)
 //---------------------------------------------------------------------------------------------------------------------
 void VGraphicsSimpleTextItem::RefreshColor()
 {
-    if (const QBrush newBrush = VSceneStylesheet::Color(m_hoverFlag ? m_textHoverColor : m_textColor);
-        brush() != newBrush)
-    {
-        setBrush(newBrush);
-    }
+    const QColor color = VSceneStylesheet::Color(m_hoverFlag ? m_textHoverColor : m_textColor);
+    setBrush(VSceneStylesheet::CorrectToolColor(this, color));
+    update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
