@@ -28,181 +28,51 @@
 #include "dialogcredits.h"
 #include "ui_dialogcredits.h"
 
-const QString DialogCredits::sponsors = QStringLiteral(R"(Альона
-Аліна Стельмах-Гордієнко
-Анастасія Микитюк
-Анна Капошко
-АннаДенесюк
-Валентина2025
-Віка Чебера
-Вікторія Гуцало
-Горгуля_85
-Елена Солнышкина
-Зоряна Касьян
-кира
-Лозова.Таня
-Любов Корнійчук
-Людмила Абрамова
+const QString DialogCredits::sponsors = QStringLiteral(R"(АннаДенесюк
 Людмила_Данилюк
-Лія Самосієнко
-марго
-Марина Прокопенко
 Марина Ярёменко
-Марія Харишин
 Наталя Думінська
-Наталія Субботська
-Олена
-Олена Дунаєвська
 Олена Жемчужина
-Олена Сівер
+Олена__Карась
 Оля Калун
-Оля Коваль
-Поліна Михайлюта
-Поліна Якубовська
-Софія
-Тамара Крупка
-Татьяна Донец
 Тетяна Надточій
-Юлия Горобец
-Ірина
-a.dor
-abulxoyr Ибн АбдулХаким
-Alena German
-Alena Minak
-Alina Damineva
-Alyssa SANTINI
-Anastasiia1303
-Anastasiia_Mostsepan
 anastasiianf
-Andre
-andrii yarovitsyn
-angelinaa22
 Anita Guiso
 Anna Rashevska
 Anna Yefimenko
-arven
-Aurelija Vindigienė
-AЗозуля
-BaudinoMarieNoelle@8469
-Bodnarchuk
-Boris Korotach
 Bortnovska
-Busybee1977
-Cansuakaydin
-Carlos Flores
-CarlosRomero
-Castera Line
 cecile LALLEMAND
 chaulieu
 Constance Cellier
-craftsbycatmarg
-Daniel Stefan Popescu
-DaphneLS
-Dariia28
-David Hagar
-Denarmin
-Dinara
-Dmytrashko.tanya
+Diana Holub
 DurielLightbane
-dyvosvit
-Edith Burgos
+Edwardo
 Eliane SIMON
-Elina Kondratenko
-ElinLundh
-ElodieNguyen
-emilialange
-Evvgenia
-fainakobita
-Fartukoff2020
-Fiono4ka
-Flavie Giraudeau
-Florine Vangeneberg
-fv
-G.VOVK
 Gabrielle Squelin
-Galina84
-GiovannyM
-Halyna Zinechko
-Hanna Panasiuk
-hello
 Himnish Sujan
-Innusha Tu
 Irina Konetzka
-ivanna sweet
-Ivette11
-Jarosław Grzesik
-Jennifer Jean Joseph
 Jennifet
-JessicaGoodyearDesign
-jonatan
-jules delarue
-Juls0912
-kasatkina.o
 Kateryna_Myasoyedova
-Klaudiusz Piotr Kusz
-Kristina_Kuvshyn
-Kseniya Pashkova
+Kozakova_Natalie1996
 Kyowashi
-LailaS
-LEONARDOVITH
-Liubov
-Ludmila@Yevchik
-Mafalda
-Maika
-manu iena
 mdrivero
-meryrose
 Monica Marques Carvalho
-msandovaldesigns
-Muriel Rogger
-Nadiia Puchko
-Nicolas
-Nina Staufert
-Olena Schramka
-OlenaErakova
-Olesia
-Olga Guzyuk
-olga39
-osteppy
-Patternporter
+Oleksandra
+Personalizzandia
 Piotr Jasiek
-ProgneSports
-qsrosales
-Ruben Bakker
 Ryan Hawker
-Sacha-Hugo Lagaude
-saifudinka
-scratchthedog
 shlomomintz
-Slavovna
-Slazeret
 SuzanA
-svetlana valvi
-Svitlana Cherhava
+Svit1104
 tammapatterns
-tanjashka
+Tanya_Pom08
 Tara Neplenbroek
-Tatiana Onyshchak
-Tetiana Dubyna
-Tetiana Olkhovska
-Tetiana Shevchuk
-tetiana17
-Tetyana Mazur
-The Sewing Site AI
 thebadjarvis
 tim-jacobs
-ukranastasio
-ulabaka
-Valeriya89
-Vanessa Focardi
-Veronika M
 vikakarr
-vio31
-Vivrafashion
 Volodymyr Chernega
-wlkORety
-Yuliya
-zubeikomaria
+yesalesya
+zosia81
 )");
 
 //---------------------------------------------------------------------------------------------------------------------
