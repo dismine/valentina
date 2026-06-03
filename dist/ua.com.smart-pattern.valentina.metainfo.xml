@@ -29,6 +29,23 @@
  <update_contact>contact@smart-pattern.com.ua</update_contact>
  <content_rating type="oars-1.1" />
  <releases>
+  <release version="1.0.2" type="stable" date="2026-06-03">
+    <description>
+      <p>
+        This is a stable maintenance release in the 1.0 series.
+      </p>
+      <ul>
+        <li>Valentina app. Fixed draw scene labels showing wrong color at startup and on theme switch when a custom theme is opposite the system theme.</li>
+        <li>Valentina app. Fixed crash during pattern parsing when a modeling node object has an unexpected type, caused by SCASSERT being compiled away in release builds.</li>
+        <li>Valentina app. Fixed crash when loading old-format pattern files containing piece elements without a version attribute.</li>
+        <li>Valentina app. Fixed crash when undoing a piece path operation while a dialog is open.</li>
+        <li>Valentina app. Fixed accessibility warning on macOS when a QTableWidget had no selection.</li>
+        <li>Valentina app. Fixed crash when inserting nodes after undo/redo of piece operations.</li>
+        <li>Tape app. Fix crash in SyncKnownMeasurements caused by wrong deletion order in TMainWindow destructor.</li>
+        <li>Valentina app. Fixed crash on Windows when undoing or redoing tool addition with the property browser open.</li>
+      </ul>
+    </description>
+  </release>
   <release version="1.0.1" type="stable" date="2026-05-16">
     <description>
       <p>

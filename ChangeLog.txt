@@ -1,4 +1,6 @@
-# Valentina 1.0.2 (unreleased)
+# Valentina 1.0.3 (unreleased)
+
+# Valentina 1.0.2 June 3, 2026
 - [Valentina app] Fixed draw scene labels showing wrong color at startup and on theme switch when a custom theme is opposite the system theme.
 - [Valentina app] Fixed crash during pattern parsing when a modeling node object has an unexpected type, caused by SCASSERT being compiled away in release builds.
 - [Valentina app] Fixed crash when loading old-format pattern files containing piece elements without a version attribute.
