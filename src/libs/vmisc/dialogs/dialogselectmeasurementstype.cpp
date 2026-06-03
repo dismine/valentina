@@ -55,6 +55,17 @@ DialogSelectMeasurementsType::DialogSelectMeasurementsType(QWidget *parent)
                 m_type = MeasurementsType::Multisize;
                 accept();
             });
+
+    // QToolButton defaults to Fixed size policy, which makes the layout honour
+    // sizeHint() exactly. The global custom stylesheet rule
+    //   QDialog QToolButton[autoRaise="false"][text] { width: 1.2em; }
+    // drives sizeHint() down to ~14 px.  Switching to Expanding lets the
+    // HBoxLayout distribute available width equally once we clear maxWidth in
+    // showEvent (after polishing has run).
+    for (auto *btn : {ui->toolButtonIndividualMeasurements, ui->toolButtonMultisizeMeasurements})
+    {
+        btn->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -76,7 +87,18 @@ void DialogSelectMeasurementsType::showEvent(QShowEvent *event)
     {
         return;
     }
-    // do your init stuff here
+
+    // Polishing applies the global rule
+    //   QDialog QToolButton[autoRaise="false"][text] { width: 1.2em; }
+    // via setFixedWidth(~14 px), which also clamps maximumWidth to 14.
+    // The Expanding policy (set in the constructor) can only take effect once
+    // maxWidth is cleared; then the HBoxLayout distributes space equally.
+    for (auto *btn : {ui->toolButtonIndividualMeasurements, ui->toolButtonMultisizeMeasurements})
+    {
+        btn->setMaximumWidth(QWIDGETSIZE_MAX);
+    }
+    layout()->invalidate();
+    layout()->activate();
 
     setMaximumSize(size());
     setMinimumSize(size());
