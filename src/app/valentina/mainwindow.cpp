@@ -587,7 +587,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_measurementsSyncTimer->setTimerType(Qt::VeryCoarseTimer);
     connect(m_measurementsSyncTimer, &QTimer::timeout, this,
-            [this]()
+            [this]() -> void
             {
                 if (isActiveWindow())
                 {
@@ -597,11 +597,14 @@ MainWindow::MainWindow(QWidget *parent)
                         asking = true;
                         m_mChangesAsked = true;
                         m_measurementsSyncTimer->stop();
-                        if (const auto answer = QMessageBox::question(
-                                this, tr("Measurements"),
-                                tr("Measurements were changed. Do you want to sync measurements now?"),
-                                QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-                            answer == QMessageBox::Yes)
+                        qCDebug(vMainWindow, "Asking user to sync measurements.");
+                        const auto answer = QMessageBox::question(
+                            this, tr("Measurements"),
+                            tr("Measurements were changed. Do you want to sync measurements now?"),
+                            QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+                        qCDebug(vMainWindow, "User answered sync prompt: %s",
+                                answer == QMessageBox::Yes ? "Yes" : "No");
+                        if (answer == QMessageBox::Yes)
                         {
                             SyncMeasurements();
                         }
@@ -930,12 +933,13 @@ auto MainWindow::UpdateMeasurements(const QString &patternPath, QString &path, q
 auto MainWindow::UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, qreal baseA, qreal baseB, qreal baseC)
     -> bool
 {
-    m_m = mFile;
-
-    if (m_m.isNull())
+    if (mFile.isNull())
     {
+        qCWarning(vMainWindow, "UpdateMeasurements called with null measurement file; keeping existing data.");
         return false;
     }
+
+    m_m = mFile;
 
     if (VAbstractValApplication::VApp()->GetMeasurementsType() != m_m->Type())
     {
@@ -2524,6 +2528,7 @@ void MainWindow::ShowMeasurements()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::MeasurementsChanged(const QString &path)
 {
+    qCDebug(vMainWindow, "Measurements file changed: %s", qUtf8Printable(path));
     m_mChanges = false;
     if (QFileInfo const checkFile(path); checkFile.exists())
     {
@@ -2558,6 +2563,7 @@ void MainWindow::SyncMeasurements()
     {
         const QString patternPath = VAbstractValApplication::VApp()->GetPatternPath();
         QString path = AbsoluteMPath(patternPath, doc->MPath());
+        qCDebug(vMainWindow, "Syncing measurements: %s", qUtf8Printable(path));
 
         // Temporarily remove the path to prevent infinite synchronization after a format conversion.
         m_watcher->removePath(path);
@@ -5292,6 +5298,11 @@ void MainWindow::PatternChangesWereSaved(bool saved)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::DimensionABaseChanged()
 {
+    if (m_m.isNull())
+    {
+        return;
+    }
+
     const qreal oldValue = m_currentDimensionA;
     m_currentDimensionA = m_dimensionA->currentData().toDouble();
     doc->SetDimensionAValue(m_currentDimensionA);
@@ -5317,6 +5328,11 @@ void MainWindow::DimensionABaseChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::DimensionBBaseChanged()
 {
+    if (m_m.isNull())
+    {
+        return;
+    }
+
     const qreal oldValue = m_currentDimensionB;
     m_currentDimensionB = m_dimensionB->currentData().toDouble();
     doc->SetDimensionBValue(m_currentDimensionB);
@@ -5351,7 +5367,7 @@ void MainWindow::GradationChanged()
 {
     m_gradation->stop();
 
-    if (m_m->isNull())
+    if (m_m.isNull())
     {
         const QString patternPath = VAbstractValApplication::VApp()->GetPatternPath();
         QString mPath = AbsoluteMPath(patternPath, doc->MPath());
