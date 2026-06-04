@@ -248,6 +248,7 @@ private slots:
     void ShowMeasurements();
     void MeasurementsChanged(const QString &path);
     void SyncMeasurements();
+    void MeasurementsSyncTimerTimeout();
 
     void CreateWatermark();
     void EditCurrentWatermark();

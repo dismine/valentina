@@ -586,32 +586,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_watcher, &QFileSystemWatcher::fileChanged, this, &MainWindow::MeasurementsChanged);
 
     m_measurementsSyncTimer->setTimerType(Qt::VeryCoarseTimer);
-    connect(m_measurementsSyncTimer, &QTimer::timeout, this,
-            [this]() -> void
-            {
-                if (isActiveWindow())
-                {
-                    static bool asking = false;
-                    if (not asking && m_mChanges && not m_mChangesAsked)
-                    {
-                        asking = true;
-                        m_mChangesAsked = true;
-                        m_measurementsSyncTimer->stop();
-                        qCDebug(vMainWindow, "Asking user to sync measurements.");
-                        const auto answer = QMessageBox::question(
-                            this, tr("Measurements"),
-                            tr("Measurements were changed. Do you want to sync measurements now?"),
-                            QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-                        qCDebug(vMainWindow, "User answered sync prompt: %s",
-                                answer == QMessageBox::Yes ? "Yes" : "No");
-                        if (answer == QMessageBox::Yes)
-                        {
-                            SyncMeasurements();
-                        }
-                        asking = false;
-                    }
-                }
-            });
+    connect(m_measurementsSyncTimer, &QTimer::timeout, this, &MainWindow::MeasurementsSyncTimerTimeout);
 
 #if defined(Q_OS_MAC)
     // On Mac deafault icon size is 32x32.
@@ -2590,6 +2565,33 @@ void MainWindow::SyncMeasurements()
         if (not m_watcher->files().contains(path))
         {
             m_watcher->addPath(path);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::MeasurementsSyncTimerTimeout()
+{
+    if (isActiveWindow())
+    {
+        static bool asking = false;
+        if (not asking && m_mChanges && not m_mChangesAsked)
+        {
+            asking = true;
+            m_mChangesAsked = true;
+            m_measurementsSyncTimer->stop();
+            qCDebug(vMainWindow, "Asking user to sync measurements.");
+            const auto answer = QMessageBox::question(
+                this, tr("Measurements"),
+                tr("Measurements were changed. Do you want to sync measurements now?"),
+                QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+            qCDebug(vMainWindow, "User answered sync prompt: %s",
+                    answer == QMessageBox::Yes ? "Yes" : "No");
+            if (answer == QMessageBox::Yes)
+            {
+                SyncMeasurements();
+            }
+            asking = false;
         }
     }
 }
