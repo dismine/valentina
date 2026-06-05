@@ -2085,72 +2085,118 @@ void VToolSeamAllowance::UpdateInternalPaths()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
 {
-    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-
-    const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-
-    VValentinaSettings  const*settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    const VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     const bool combineTogether = settings->IsBoundaryTogetherWithNotches();
+    const bool pieceShowMainPath = VAbstractApplication::VApp()->Settings()->IsPieceShowMainPath();
 
-    QFuture<QPainterPath> const futurePath = QtConcurrent::run(
-        [this, detail, combineTogether]() { return RenderSeamPath(detail, combineTogether, getData()); });
+    ApplyPieceGeometry(ComputePieceGeometry(combineTogether, pieceShowMainPath), updateChildren);
+}
 
-    QFuture<QPainterPath> futurePassmarks;
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::PrepareRefreshGeometry(bool combineTogether, bool pieceShowMainPath)
+{
+    // Runs off the GUI thread (e.g. via QtConcurrent for several pieces at once). Must not touch any
+    // QGraphicsItem; only ComputePieceGeometry() work happens here. The result is applied later by
+    // ApplyBatchGeometry() on the GUI thread.
+    try
+    {
+        m_batchGeometry = ComputePieceGeometry(combineTogether, pieceShowMainPath);
+    }
+    catch (const VExceptionBadId &)
+    {
+        m_batchGeometry = VToolSeamAllowanceGeometry(); // valid stays false -> piece skipped on apply
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::ApplyBatchGeometry(bool updateChildren)
+{
+    if (m_batchGeometry.valid)
+    {
+        ApplyPieceGeometry(m_batchGeometry, updateChildren);
+    }
+    m_batchGeometry = VToolSeamAllowanceGeometry();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VToolSeamAllowance::ComputePieceGeometry(bool combineTogether, bool pieceShowMainPath) const
+    -> VToolSeamAllowanceGeometry
+{
+    // Pure geometry computation: safe to run on a worker thread and concurrently for different
+    // pieces. It must not access any QGraphicsItem - everything GUI-related lives in
+    // ApplyPieceGeometry().
+    const VPiece detail = VAbstractTool::data.GetPiece(m_id);
+    const VContainer *data = getData();
+
+    VToolSeamAllowanceGeometry geom;
+    geom.combineTogether = combineTogether;
+    geom.pos = QPointF(detail.GetMx(), detail.GetMy());
+    geom.pieceName = detail.GetName();
+
+    geom.seamPath = RenderSeamPath(detail, combineTogether, data);
+
     if (!combineTogether)
     {
-        futurePassmarks = QtConcurrent::run([this, detail]() { return RenderPassmarks(detail, getData()); });
+        geom.passmarks = RenderPassmarks(detail, data);
     }
 
-    QFuture<VFoldLine> const futureFoldLine =
-        QtConcurrent::run([this, detail]() { return RenderFoldLine(detail, getData()); });
+    geom.foldLine = RenderFoldLine(detail, data);
+    geom.mirrorLine = RenderMirrorLine(detail, data, combineTogether);
 
-    QFuture<QPainterPath> const futureMirrorLine = QtConcurrent::run(
-        [this, detail, combineTogether]() { return RenderMirrorLine(detail, getData(), combineTogether); });
-
-    QFuture<QPainterPath> futureSeamAllowance;
-    QFuture<bool> futureSeamAllowanceValid;
-
-    if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
+    geom.hasSeamAllowance = detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn();
+    if (geom.hasSeamAllowance)
     {
-        futureSeamAllowance = QtConcurrent::run(
-            [this, detail, combineTogether]() { return RenderSeamAllowancePath(detail, combineTogether, getData()); });
-        futureSeamAllowanceValid =
-            QtConcurrent::run([this, detail]() { return detail.IsSeamAllowanceValid(getData()); });
+        geom.seamAllowance = RenderSeamAllowancePath(detail, combineTogether, data);
+        geom.seamAllowanceValid = detail.IsSeamAllowanceValid(data);
     }
 
-    this->setPos(detail.GetMx(), detail.GetMy());
+    geom.showMainPath = pieceShowMainPath || not detail.IsHideMainPath() || not detail.IsSeamAllowance() ||
+                        detail.IsSeamAllowanceBuiltIn();
+
+    geom.placeLabels = detail.PlaceLabelPath(data);
+
+    geom.valid = true;
+    return geom;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::ApplyPieceGeometry(const VToolSeamAllowanceGeometry &geom, bool updateChildren)
+{
+    // Applies a previously computed geometry snapshot to the scene items. Must run on the GUI thread.
+    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
+
+    this->setPos(geom.pos);
 
     QPainterPath path;
 
-    if (VAbstractApplication::VApp()->Settings()->IsPieceShowMainPath() || not detail.IsHideMainPath() ||
-        not detail.IsSeamAllowance() || detail.IsSeamAllowanceBuiltIn())
+    if (geom.showMainPath)
     {
         m_mainPath = QPainterPath();
         m_seamAllowance->setBrush(QBrush(VSceneStylesheet::PatternPieceStyle().PieceColor(), Qt::Dense7Pattern));
-        path = futurePath.result();
+        path = geom.seamPath;
     }
     else
     {
         m_seamAllowance->setBrush(QBrush(Qt::NoBrush)); // Disable if the main path was hidden
         // need for returning a bounding rect when main path is not visible
-        m_mainPath = futurePath.result();
+        m_mainPath = geom.seamPath;
         path = QPainterPath();
     }
 
     this->setPath(path);
 
-    m_placeLabels->setPath(detail.PlaceLabelPath(this->getData()));
+    m_placeLabels->setPath(geom.placeLabels);
 
-    if (detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn())
+    if (geom.hasSeamAllowance)
     {
-        if (not futureSeamAllowanceValid.result())
+        if (not geom.seamAllowanceValid)
         {
-            const QString errorMsg = QObject::tr("Piece '%1'. Seam allowance is not valid.").arg(detail.GetName());
+            const QString errorMsg = QObject::tr("Piece '%1'. Seam allowance is not valid.").arg(geom.pieceName);
             VAbstractApplication::VApp()->IsPedantic()
                 ? throw VException(errorMsg)
                 : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
-        path.addPath(futureSeamAllowance.result());
+        path.addPath(geom.seamAllowance);
         path.setFillRule(Qt::OddEvenFill);
         m_seamAllowance->setPath(path);
 
@@ -2163,9 +2209,9 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
         m_pieceBoundingRect = m_mainPath.controlPointRect();
     }
 
-    m_mirrorLine->setPath(futureMirrorLine.result());
+    m_mirrorLine->setPath(geom.mirrorLine);
 
-    UpdateFoldLine(futureFoldLine.result());
+    UpdateFoldLine(geom.foldLine);
 
     if (VAbstractApplication::VApp()->IsAppInGUIMode())
     {
@@ -2198,7 +2244,7 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
         }
     }
 
-    m_passmarks->setPath(!combineTogether ? futurePassmarks.result() : QPainterPath());
+    m_passmarks->setPath(!geom.combineTogether ? geom.passmarks : QPainterPath());
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 

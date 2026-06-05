@@ -852,69 +852,62 @@ void VPattern::SetPieceGeometryDirty(bool newPieceGeometryDirty)
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::RefreshDirtyPieceGeometry(const QList<vidtype> &list)
 {
-    if (!list.isEmpty())
+    m_pieceGeometryDirty = false;
+
+    if (list.isEmpty())
     {
-        if (m_refreshPieceGeometryWatcher->isRunning())
-        {
-            m_refreshPieceGeometryWatcher->cancel();
-            m_refreshPieceGeometryWatcher->waitForFinished();
-        }
-
-        auto future = QtConcurrent::run(
-            [this, list]()
-            {
-                RefreshPieceGeometryForList(list);
-                PostRefreshActions();
-            });
-
-        m_refreshPieceGeometryWatcher->setFuture(future);
+        return;
     }
 
-    m_pieceGeometryDirty = false;
+    // Resolve the piece tools and read the relevant settings on the GUI thread.
+    QVector<VToolSeamAllowance *> tools;
+    tools.reserve(list.size());
+    for (auto pieceId : std::as_const(list))
+    {
+        try
+        {
+            if (auto *piece = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(pieceId)))
+            {
+                tools.append(piece);
+            }
+        }
+        catch (const VExceptionBadId &)
+        {
+            // do nothing
+        }
+    }
+
+    if (tools.isEmpty())
+    {
+        return;
+    }
+
+    const bool combineTogether = VAbstractValApplication::VApp()->ValentinaSettings()->IsBoundaryTogetherWithNotches();
+    const bool pieceShowMainPath = VAbstractApplication::VApp()->Settings()->IsPieceShowMainPath();
+
+    // Recompute every piece's geometry in parallel. The GUI thread blocks until the whole batch is
+    // ready, so the worker threads only ever read piece data while the tools are guaranteed to stay
+    // alive (no piece can be deleted underneath them). This is what makes switching size in Detail
+    // mode fast for patterns with many pieces.
+    m_refreshPieceGeometryWatcher->setFuture(
+        QtConcurrent::map(tools, [combineTogether, pieceShowMainPath](VToolSeamAllowance *piece)
+                          { piece->PrepareRefreshGeometry(combineTogether, pieceShowMainPath); }));
+    m_refreshPieceGeometryWatcher->waitForFinished();
+
+    // Apply the precomputed geometry to the scene on the GUI thread.
+    for (auto *piece : std::as_const(tools))
+    {
+        piece->ApplyBatchGeometry();
+    }
+
+    emit CheckLayout();
+    VMainGraphicsView::NewSceneRect(sceneDetail, VAbstractValApplication::VApp()->getSceneView());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::SetGBBackupFilePath(const QString &fileName)
 {
     m_garbageCollectBackupFilePath = fileName;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::RefreshPieceGeometryForList(const QList<vidtype> &list) const
-{
-    for (auto pieceId : std::as_const(list))
-    {
-        QMetaObject::invokeMethod(
-            QApplication::instance(),
-            [pieceId]()
-            {
-                try
-                {
-                    if (auto *piece = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(pieceId)))
-                    {
-                        piece->RefreshGeometry();
-                    }
-                }
-                catch (const VExceptionBadId &)
-                {
-                    // do nothing
-                }
-            },
-            Qt::QueuedConnection);
-    }
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPattern::PostRefreshActions()
-{
-    QMetaObject::invokeMethod(
-        QApplication::instance(),
-        [this]()
-        {
-            emit CheckLayout();
-            VMainGraphicsView::NewSceneRect(sceneDetail, VAbstractValApplication::VApp()->getSceneView());
-        },
-        Qt::QueuedConnection);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

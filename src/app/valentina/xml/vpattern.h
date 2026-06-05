@@ -272,9 +272,6 @@ private:
     auto LastToolId() const -> quint32;
     auto PPLastToolId(int blockIndex) const -> quint32;
 
-    void PostRefreshActions();
-    void RefreshPieceGeometryForList(const QList<vidtype> &list) const;
-
     void GarbageCollector();
     void BackupBeforeGarbageCollector() const;
 
