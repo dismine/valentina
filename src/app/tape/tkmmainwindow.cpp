@@ -255,7 +255,11 @@ auto TKMMainWindow::LoadFile(const QString &path) -> bool
 
         if (ui->listWidget->count() > 0)
         {
+            // Block signals so selecting the first image does not overwrite the shared diagram label,
+            // which is also driven by the measurements tab.
+            ui->listWidget->blockSignals(true);
             ui->listWidget->setCurrentRow(0);
+            ui->listWidget->blockSignals(false);
         }
 
         Controls(); // Buttons remove, up, down
