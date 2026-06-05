@@ -4290,6 +4290,11 @@ void MainWindow::ActionDraw(bool checked)
         ui->dockWidgetBackgroundImages->setVisible(m_backgroundImagesActive);
 
         ui->dockWidgetDependencies->setVisible(m_dependenciesActive);
+
+        actionDockWidgetToolOptions->setEnabled(true);
+        actionDockWidgetGroups->setEnabled(true);
+        actionDockWidgetBackgroundImages->setEnabled(true);
+        actionDockWidgetDependencies->setEnabled(true);
     }
     else
     {
@@ -4362,6 +4367,9 @@ void MainWindow::ActionDetails(bool checked)
         ui->dockWidgetToolOptions->setVisible(m_toolOptionsActive);
         ui->dockWidgetBackgroundImages->setVisible(false);
         ui->dockWidgetDependencies->setVisible(false);
+
+        actionDockWidgetBackgroundImages->setDisabled(true);
+        actionDockWidgetDependencies->setDisabled(true);
 
         m_statusLabel->setText(QString());
 
@@ -4476,6 +4484,11 @@ void MainWindow::ActionLayout(bool checked)
     ui->dockWidgetGroups->setVisible(false);
     ui->dockWidgetBackgroundImages->setVisible(false);
     ui->dockWidgetDependencies->setVisible(false);
+
+    actionDockWidgetToolOptions->setDisabled(true);
+    actionDockWidgetGroups->setDisabled(true);
+    actionDockWidgetBackgroundImages->setDisabled(true);
+    actionDockWidgetDependencies->setDisabled(true);
 
     ShowPaper(ui->listWidget->currentRow());
 
