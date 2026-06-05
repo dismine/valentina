@@ -31,7 +31,13 @@
 - [Puzzle app] New option Print text as paths.
 - [Valentina app] New action Auto-arrange labels (Ctrl+Shift+A). Automatically repositions point labels in Draw and Details mode to reduce overlaps.
 
-# Valentina 1.0.2 (unreleased)
+# Valentina 1.0.3 (unreleased)
+- [Valentina app] Fixed crash on shutdown while sending the application close statistic, caused by a nested event loop running during application teardown.
+- [Valentina app] Fixed crash when syncing a multisize measurement file fails (e.g. user cancels the missing-measurements dialog): measurement pointer was nulled out but dimension comboboxes remained connected, causing a null dereference on the next dimension change event.
+
+# Valentina 1.0.2 June 3, 2026
+- [Valentina app] Fixed draw scene labels showing wrong color at startup and on theme switch when a custom theme is opposite the system theme.
+- [Valentina app] Fixed crash during pattern parsing when a modeling node object has an unexpected type, caused by SCASSERT being compiled away in release builds.
 - [Valentina app] Fixed crash when loading old-format pattern files containing piece elements without a version attribute.
 - [Valentina app] Fixed crash when undoing a piece path operation while a dialog is open.
 - [Valentina app] Fixed accessibility warning on macOS when a QTableWidget had no selection.

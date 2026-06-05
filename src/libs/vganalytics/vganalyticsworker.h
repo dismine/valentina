@@ -32,6 +32,7 @@
 
 #include <QDateTime>
 #include <QJsonObject>
+#include <QLoggingCategory>
 #include <QNetworkRequest>
 #include <QObject>
 #include <QQueue>
@@ -41,6 +42,8 @@
 #include <QtGlobal>
 
 class QNetworkReply;
+
+Q_DECLARE_LOGGING_CATEGORY(vAnalytics)
 
 struct QueryBuffer
 {

@@ -369,16 +369,10 @@ VApplication::~VApplication()
 {
     qCDebug(vApp, "Application closing.");
 
-    if (IsGUIMode() && settings->IsCollectStatistic())
-    {
-        auto *statistic = VGAnalytics::Instance();
-
-        QString const clientID = settings->GetClientID();
-        if (!clientID.isEmpty())
-        {
-            statistic->SendAppCloseEvent(m_uptimeTimer.elapsed());
-        }
-    }
+    // The close-event statistic is flushed from AboutToQuit(), while the event loop is still alive and
+    // all objects are intact. We must not flush it here: doing so pumps a nested event loop during
+    // application teardown, which delivered the network reply into half-destroyed objects and crashed
+    // in VGAnalyticsWorker::SendAnalyticsFinished().
 
     qInstallMessageHandler(nullptr); // Resore the message handler
     delete m_trVars;
@@ -766,6 +760,27 @@ void VApplication::AboutToQuit()
     // instance. Solution is to call sync() before quit.
     // Connect this slot with VApplication::aboutToQuit.
     Settings()->sync();
+
+    // Flush the close-event statistic while the event loop is still alive and all objects are intact.
+    // Doing this here (instead of in the destructor) avoids pumping a nested event loop during teardown.
+    SendAppCloseStatistic();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VApplication::SendAppCloseStatistic()
+{
+    if (m_appCloseEventSent || !IsGUIMode() || !settings->IsCollectStatistic())
+    {
+        return;
+    }
+
+    if (settings->GetClientID().isEmpty())
+    {
+        return;
+    }
+
+    m_appCloseEventSent = true;
+    VGAnalytics::Instance()->SendAppCloseEvent(m_uptimeTimer.elapsed());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
