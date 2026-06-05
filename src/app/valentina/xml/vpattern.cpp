@@ -316,6 +316,19 @@ void VPattern::Parse(const Document &parse)
     SCASSERT(sceneDetail != nullptr)
     PrepareForParse(parse);
 
+    // PrepareForParse() disables dependency-graph rebuilding only for a FullLiteParse (values-only
+    // reparse). Re-enable it once the parse finishes - even on exception - so later single-tool/GUI
+    // edits and LiteParse/FullParse runs keep updating the graph. FullParse/LiteParse leave
+    // rebuilding enabled via Clear().
+    auto graphRebuildGuard = qScopeGuard(
+        [this, parse]() -> void
+        {
+            if (parse == Document::FullLiteParse)
+            {
+                PatternGraph()->SetGraphRebuildEnabled(true);
+            }
+        });
+
     m_fileParsingCompleted = false;
     QDomNode domNode = documentElement().firstChild();
     while (not domNode.isNull())
@@ -4880,7 +4893,25 @@ void VPattern::PrepareForParse(const Document &parse)
     }
 
     CancelFormulaDependencyChecks();
-    PatternGraph()->Clear();
+
+    if (parse == Document::FullLiteParse)
+    {
+        // FullLiteParse is the only value-only reparse (size switch, measurement sync, increment
+        // edit): formulas and structure are unchanged, only variable values differ, objects keep
+        // their ids, and increments are not graph vertices. So keep the dependency graph built by the
+        // last full parse and skip rebuilding it - AddVertex/AddEdge/FindFormulaDependencies become
+        // no-ops while disabled; Parse() re-enables rebuilding once the parse finishes.
+        //
+        // LiteParse is intentionally NOT skipped: it follows a tool edit (SaveToolOptions), whose
+        // changed formula may add or remove dependency edges, so its graph must be rebuilt from
+        // scratch - just like a full parse. The parse type alone does not tell us that; the
+        // FullLiteParse-vs-LiteParse split is what carries the "values only" guarantee.
+        PatternGraph()->SetGraphRebuildEnabled(false);
+    }
+    else
+    {
+        PatternGraph()->Clear();
+    }
 
     if (parse == Document::FullParse)
     {

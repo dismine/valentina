@@ -1,5 +1,5 @@
 # Valentina 1.1.0 (unreleased)
-- [Valentina app] Faster size switching in Detail mode. Pieces now refresh immediately instead of after a fixed delay, their geometry is recomputed in parallel across all pieces, the gradation combo boxes are no longer rebuilt redundantly, and bursts of parses are coalesced by a single debounce timer.
+- [Valentina app] Faster size switching in Detail mode. Pieces now refresh immediately instead of after a fixed delay, their geometry is recomputed in parallel across all pieces, the gradation combo boxes are no longer rebuilt redundantly, bursts of parses are coalesced by a single debounce timer, and the dependency graph is no longer rebuilt on reparses that only change values (size switch, measurement sync).
 - [Valentina app] Fixed crash when syncing a multisize measurement file fails (e.g. user cancels the missing-measurements dialog): measurement pointer was nulled out but dimension comboboxes remained connected, causing a null dereference on the next dimension change event.
 - [Valentina app] Fixed draw scene labels showing wrong color at startup and on theme switch when a custom theme is opposite the system theme.
 - [Valentina app] Add canvas visualization for the Union Details tool.

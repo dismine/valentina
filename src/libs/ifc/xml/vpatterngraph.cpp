@@ -487,6 +487,13 @@ void VPatternGraph::SetGraphRebuildEnabled(bool enabled)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPatternGraph::IsGraphRebuildEnabled() const -> bool
+{
+    QReadLocker const locker(&m_lock);
+    return m_graphRebuildEnabled;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
      * @brief Get internal vertex_id_t for a node ID (for advanced use)
      * @param id Node ID

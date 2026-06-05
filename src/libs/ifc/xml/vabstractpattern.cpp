@@ -1396,6 +1396,14 @@ void VAbstractPattern::FindFormulaDependencies(const QString &formula,
         return;
     }
 
+    // The dependency-graph topology is fixed during a value-only (lite) reparse, so skip building
+    // edges here. AddEdge would no-op anyway, but returning early also avoids the per-formula
+    // tokenization and the QtConcurrent task spawned below.
+    if (m_patternGraph == nullptr || !m_patternGraph->IsGraphRebuildEnabled())
+    {
+        return;
+    }
+
     // Create a new watcher for this task
     auto *watcher = new QFutureWatcher<void>(this);
 
