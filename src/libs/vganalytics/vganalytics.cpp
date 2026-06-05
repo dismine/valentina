@@ -40,6 +40,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QLocale>
+#include <QLoggingCategory>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
@@ -296,6 +297,9 @@ void VGAnalytics::SendAppCloseEvent(qint64 engagementTimeMsec)
     };
 
     SendEvent(QStringLiteral("vapp_close"), params);
+
+    qCDebug(vAnalytics) << "Flushing close event before shutdown.";
+
     if (QNetworkReply *reply = d->SendAnalytics())
     {
         QTimer timer;
@@ -306,6 +310,12 @@ void VGAnalytics::SendAppCloseEvent(qint64 engagementTimeMsec)
         connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
         QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
         loop.exec(); // wait for finished
+
+        qCDebug(vAnalytics) << "Close event flush finished" << (timer.isActive() ? "(reply received)." : "(timed out).");
+    }
+    else
+    {
+        qCDebug(vAnalytics) << "Nothing to flush for close event.";
     }
 }
 

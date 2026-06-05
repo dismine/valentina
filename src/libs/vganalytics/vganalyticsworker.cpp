@@ -29,6 +29,7 @@
 #include "vganalytics.h"
 
 #include <QCoreApplication>
+#include <QLoggingCategory>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 
@@ -44,6 +45,8 @@
 #endif
 
 using namespace Qt::Literals::StringLiterals;
+
+Q_LOGGING_CATEGORY(vAnalytics, "v.analytics") // NOLINT
 
 const QLatin1String VGAnalyticsWorker::dateTimeFormat("yyyy,MM,dd-hh:mm::ss:zzz");
 
@@ -111,7 +114,19 @@ void VGAnalyticsWorker::LogMessage(enum VGAnalytics::LogLevel level, const QStri
         return;
     }
 
-    qDebug() << "[Analytics]" << message;
+    switch (level)
+    {
+        case VGAnalytics::Error:
+            qCWarning(vAnalytics).noquote() << message;
+            break;
+        case VGAnalytics::Info:
+            qCInfo(vAnalytics).noquote() << message;
+            break;
+        case VGAnalytics::Debug:
+        default:
+            qCDebug(vAnalytics).noquote() << message;
+            break;
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -275,8 +290,24 @@ void VGAnalyticsWorker::SendAnalyticsFinished()
 {
     auto *reply = qobject_cast<QNetworkReply *>(sender());
 
-    if (int const httpStausCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-        httpStausCode < 200 || httpStausCode > 299)
+    if (reply == nullptr)
+    {
+        // The signal was not emitted by a QNetworkReply, or the reply is already gone (e.g. the
+        // application is shutting down). Nothing safe to do here.
+        return;
+    }
+
+    // Make sure the reply is destroyed once we leave this slot, regardless of which branch we take.
+    reply->deleteLater();
+
+    int const httpStatusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+
+    // Unconditional breadcrumb (bypasses m_logLevel) so a crash/hang while flushing analytics leaves a
+    // trace in the log instead of cutting off silently.
+    qCDebug(vAnalytics) << "Reply finished. HTTP status =" << httpStatusCode
+                        << "queue size =" << m_messageQueue.size();
+
+    if (httpStatusCode < 200 || httpStatusCode > 299)
     {
         LogMessage(VGAnalytics::Error, QStringLiteral("Error posting message: %1").arg(reply->errorString()));
 
@@ -289,5 +320,4 @@ void VGAnalyticsWorker::SendAnalyticsFinished()
 
     m_messageQueue.dequeue();
     SendAnalytics();
-    reply->deleteLater();
 }

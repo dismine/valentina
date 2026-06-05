@@ -101,8 +101,11 @@ private:
     VKnownMeasurementsDatabase *m_knownMeasurementsDatabase{nullptr};
     QFileSystemWatcher *m_knownMeasurementsDatabaseWatcher{nullptr};
 
+    bool m_appCloseEventSent{false};
+
     static auto LogPath() -> QString;
     void BeginLogging();
+    void SendAppCloseStatistic();
 };
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -1,4 +1,5 @@
 # Valentina 1.0.3 (unreleased)
+- [Valentina app] Fixed crash on shutdown while sending the application close statistic, caused by a nested event loop running during application teardown.
 - [Valentina app] Fixed crash when syncing a multisize measurement file fails (e.g. user cancels the missing-measurements dialog): measurement pointer was nulled out but dimension comboboxes remained connected, causing a null dereference on the next dimension change event.
 
 # Valentina 1.0.2 June 3, 2026
