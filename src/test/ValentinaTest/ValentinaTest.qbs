@@ -80,6 +80,8 @@ VTestApp {
         "qttestmainlambda.cpp",
         "tst_dxf.cpp",
         "tst_dxf.h",
+        "tst_formulacache.cpp",
+        "tst_formulacache.h",
         "tst_svgfontwritingsystem.cpp",
         "tst_svgfontwritingsystem.h",
         "tst_vboundary.cpp",

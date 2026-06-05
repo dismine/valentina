@@ -29,12 +29,14 @@
 #include "vabstracttool.h"
 
 #include <QBrush>
+#include <QCache>
 #include <QDialog>
 #include <QFlags>
 #include <QGraphicsEllipseItem>
 #include <QGraphicsLineItem>
 #include <QHash>
 #include <QLineF>
+#include <QLocale>
 #include <QMessageBox>
 #include <QPen>
 #include <QPixmap>
@@ -42,8 +44,12 @@
 #include <QPointF>
 #include <QRectF>
 #include <QSharedPointer>
+#include <QThreadStorage>
 #include <QUndoStack>
 #include <QVector>
+#include <limits>
+#include <map>
+#include <memory>
 #include <qnumeric.h>
 
 #include "../dialogs/support/dialogeditwrongformula.h"
@@ -62,6 +68,7 @@
 #include "../vgeometry/vsplinepath.h"
 #include "../vmisc/exception/vexception.h"
 #include "../vpatterndb/calculator.h"
+#include "../vpatterndb/variables/vinternalvariable.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "../vwidgets/vmaingraphicsview.h"
@@ -82,6 +89,113 @@ using namespace Qt::Literals::StringLiterals;
 template <class T> class QSharedPointer;
 
 bool VAbstractTool::m_suppressContextMenu = false;
+
+namespace
+{
+// Per-thread cache of compiled qmuparser bytecode keyed by formula string. Reparsing a pattern (e.g.
+// switching size) re-evaluates every tool formula; without caching, each call builds a fresh
+// Calculator and recompiles the expression. Here the bytecode is compiled once and re-evaluated with
+// refreshed variable values. Bytecode is a pure function of the formula string, so the cache never
+// needs invalidation for value changes; a since-removed variable falls back to a fresh evaluation.
+//
+// QThreadStorage gives each thread its own cache (qmuparser's Eval is not thread-safe), matching the
+// pattern used in src/libs/vmisc/codecs/qiconvcodec.cpp.
+
+struct CachedFormula
+{
+    std::unique_ptr<Calculator> cal{};
+    std::map<QString, qreal *> usedVars{}; // variable name -> qreal* baked into the bytecode (owned by cal)
+};
+
+// LRU cap: when exceeded, QCache evicts the least-recently-used formula one at a time rather than
+// dropping every compiled entry, so a long session with many distinct formulas can't grow without
+// limit yet still keeps the hot ones around.
+constexpr int maxFormulaCacheSize = 4096;
+
+using FormulaCache = QCache<QString, CachedFormula>;
+
+Q_GLOBAL_STATIC(QThreadStorage<FormulaCache *>, formulaCache) // NOLINT
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ThreadFormulaCache() -> FormulaCache *
+{
+    QThreadStorage<FormulaCache *> *ts = formulaCache();
+    if (!ts->hasLocalData())
+    {
+        ts->setLocalData(new FormulaCache(maxFormulaCacheSize));
+    }
+    return ts->localData();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Evaluate a formula reusing cached compiled bytecode. Behaves like a fresh Calculator::EvalFormula()
+// but skips re-tokenization/recompilation when the formula has been seen before. Throws
+// qmu::QmuParserError exactly like the non-cached path (caller handles it).
+auto EvalCachedFormula(const QString &formula, const VContainer *data) -> qreal
+{
+    // Fast path for a plain numeric literal (mirrors Calculator::EvalFormula).
+    {
+        bool ok = false;
+        qreal const number = QLocale::c().toDouble(formula, &ok);
+        if (ok)
+        {
+            return number;
+        }
+    }
+
+    const QHash<QString, QSharedPointer<VInternalVariable>> *vars = data->DataVariables();
+    FormulaCache *cache = ThreadFormulaCache();
+
+    if (CachedFormula *entry = cache->object(formula); entry != nullptr) // object() also marks it most-recently-used
+    {
+        bool refreshed = true;
+        for (const auto &[name, ptr] : entry->usedVars)
+        {
+            if (auto var = vars->constFind(name); var != vars->constEnd())
+            {
+                *ptr = *var.value()->GetValue();
+            }
+            else if (name.startsWith('#'_L1))
+            {
+                *ptr = std::numeric_limits<qreal>::quiet_NaN();
+            }
+            else
+            {
+                refreshed = false; // a referenced variable disappeared -> recompute from scratch
+                break;
+            }
+        }
+
+        if (refreshed)
+        {
+            return entry->cal->Eval();
+        }
+
+        cache->remove(formula);
+    }
+
+    // Cache miss: compile once (may throw, like the non-cached path), then capture the used-variable
+    // pointers so later evaluations only refresh their values instead of recompiling.
+    auto cal = std::make_unique<Calculator>();
+    qreal const result = cal->EvalFormula(vars, formula);
+
+    try
+    {
+        auto entry = std::make_unique<CachedFormula>();
+        entry->usedVars = cal->GetUsedVar(); // leaves the parser in string-parse mode...
+        cal->Eval();                         // ...so recompile once to restore fast bytecode execution
+        entry->cal = std::move(cal);
+
+        cache->insert(formula, entry.release()); // QCache takes ownership and LRU-evicts when over capacity
+    }
+    catch (const qmu::QmuParserError &)
+    {
+        // Could not capture the compiled form; the result above is still valid, just don't cache it.
+    }
+
+    return result;
+}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
@@ -128,8 +242,7 @@ auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, const 
     qreal result = 0;
     try
     {
-        Calculator cal;
-        result = cal.EvalFormula(data->DataVariables(), formula);
+        result = EvalCachedFormula(formula, data);
 
         if (qIsInf(result) || qIsNaN(result))
         {
