@@ -263,6 +263,9 @@ auto TKMMainWindow::LoadFile(const QString &path) -> bool
 
         if (ui->listWidget->count() > 0)
         {
+            // Block signals so selecting the first image does not overwrite the shared diagram label,
+            // which is also driven by the measurements tab.
+            const QSignalBlocker blocker(ui->listWidget);
             ui->listWidget->setCurrentRow(0);
         }
 
