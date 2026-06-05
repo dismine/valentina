@@ -905,8 +905,8 @@ auto MainWindow::UpdateMeasurements(const QString &patternPath, QString &path, q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto MainWindow::UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, qreal baseA, qreal baseB, qreal baseC)
-    -> bool
+auto MainWindow::UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, qreal baseA, qreal baseB, qreal baseC,
+                                    bool rebuildGradation) -> bool
 {
     if (mFile.isNull())
     {
@@ -928,7 +928,7 @@ auto MainWindow::UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, 
 
     try
     {
-        ReadMeasurements(baseA, baseB, baseC);
+        ReadMeasurements(baseA, baseB, baseC, rebuildGradation);
     }
     catch (VExceptionEmptyParameter &e)
     {
@@ -945,11 +945,14 @@ auto MainWindow::UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void MainWindow::ReadMeasurements(qreal baseA, qreal baseB, qreal baseC)
+void MainWindow::ReadMeasurements(qreal baseA, qreal baseB, qreal baseC, bool rebuildGradation)
 {
     pattern->ClearVariables({VarType::Measurement, VarType::MeasurementSeparator});
 
-    if (not m_m->Dimensions().isEmpty())
+    // Rebuilding the dimension labels and gradation combo boxes is only needed when the measurement
+    // file itself (re)loads. On a plain size switch the gradation lists are unchanged and rebuilding
+    // them (with per-item QFontMetrics work) is redundant synchronous UI work on the hot path.
+    if (rebuildGradation && not m_m->Dimensions().isEmpty())
     {
         const QList<MeasurementDimension_p> dimensions = m_m->Dimensions().values();
 
@@ -5369,18 +5372,25 @@ void MainWindow::GradationChanged()
 {
     m_gradation->stop();
 
+    // Only a freshly (re)opened measurement file needs the dimension gradation combo boxes rebuilt.
+    // A plain size switch keeps the same gradation lists, so skip that redundant work.
+    bool reopened = false;
     if (m_m.isNull())
     {
         const QString patternPath = VAbstractValApplication::VApp()->GetPatternPath();
         QString mPath = AbsoluteMPath(patternPath, doc->MPath());
         m_m = OpenMeasurementFile(patternPath, mPath);
+        reopened = true;
     }
 
-    if (UpdateMeasurements(m_m, m_currentDimensionA, m_currentDimensionB, m_currentDimensionC))
+    if (UpdateMeasurements(m_m, m_currentDimensionA, m_currentDimensionB, m_currentDimensionC, reopened))
     {
         doc->LiteParseTree(Document::FullLiteParse);
         StoreDimensions();
-        emit m_sceneDetails->DimensionsChanged();
+        // A size switch is a discrete user action: refresh piece geometry immediately instead of
+        // waiting for the debounce timer started by the parse. RefreshPieceGeometry() also refreshes
+        // the piece labels, so the previous eager DimensionsChanged() emit is no longer needed.
+        doc->RefreshPieceGeometry();
     }
     else
     {

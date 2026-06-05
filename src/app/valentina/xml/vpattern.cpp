@@ -250,10 +250,16 @@ VPattern::VPattern(VContainer *data, VMainGraphicsScene *sceneDraw, VMainGraphic
     data(data),
     sceneDraw(sceneDraw),
     sceneDetail(sceneDetail),
-    m_refreshPieceGeometryWatcher(new QFutureWatcher<void>(this))
+    m_refreshPieceGeometryWatcher(new QFutureWatcher<void>(this)),
+    m_refreshGeometryTimer(new QTimer(this))
 {
     SCASSERT(sceneDraw != nullptr)
     SCASSERT(sceneDetail != nullptr)
+
+    m_refreshGeometryTimer->setSingleShot(true);
+    m_refreshGeometryTimer->setTimerType(Qt::CoarseTimer);
+    m_refreshGeometryTimer->setInterval(250ms);
+    connect(m_refreshGeometryTimer, &QTimer::timeout, this, &VPattern::RefreshPieceGeometry);
 
     connect(qApp,
             &QCoreApplication::aboutToQuit,
@@ -326,7 +332,10 @@ void VPattern::Parse(const Document &parse)
 
     if (VApplication::IsGUIMode())
     {
-        QTimer::singleShot(1s, Qt::VeryCoarseTimer, this, &VPattern::RefreshPieceGeometry);
+        // Restart the debounce timer so a burst of parses collapses into a single refresh that runs
+        // shortly after the last parse. Discrete actions (e.g. switching size) flush it immediately
+        // by calling RefreshPieceGeometry() directly, which cancels the pending timer.
+        m_refreshGeometryTimer->start();
     }
     else if (VApplication::CommandLine()->IsTestModeEnabled())
     {
@@ -339,6 +348,8 @@ void VPattern::Clear()
 {
     VAbstractPattern::Clear();
     updatePieces.clear();
+
+    m_refreshGeometryTimer->stop(); // Drop any pending refresh; it would run against a cleared document.
 
     if (m_refreshPieceGeometryWatcher->isRunning())
     {
@@ -4258,6 +4269,10 @@ auto VPattern::PPLastToolId(int blockIndex) const -> quint32
 //---------------------------------------------------------------------------------------------------------------------
 void VPattern::RefreshPieceGeometry()
 {
+    // Whether triggered by the debounce timer or called directly for an immediate flush, make sure
+    // no pending timer fire follows and triggers a redundant refresh.
+    m_refreshGeometryTimer->stop();
+
     if (!VAbstractApplication::VApp()->IsAppInGUIMode()
         || VAbstractValApplication::VApp()->GetDrawMode() == Draw::Modeling)
     {

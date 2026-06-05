@@ -452,9 +452,10 @@ private:
 
     auto LoadMeasurements(const QString &patternPath, QString &path) -> bool;
     auto UpdateMeasurements(const QString &patternPath, QString &path, qreal baseA, qreal baseB, qreal baseC) -> bool;
-    auto UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, qreal baseA, qreal baseB, qreal baseC) -> bool;
+    auto UpdateMeasurements(const QSharedPointer<VMeasurements> &mFile, qreal baseA, qreal baseB, qreal baseC,
+                            bool rebuildGradation = true) -> bool;
 
-    void ReadMeasurements(qreal baseA, qreal baseB, qreal baseC);
+    void ReadMeasurements(qreal baseA, qreal baseB, qreal baseC, bool rebuildGradation = true);
 
     void ReopenFilesAfterCrash(QStringList &args);
     auto DoExport(const VCommandLinePtr &expParams) -> bool;
