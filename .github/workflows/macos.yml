@@ -12,7 +12,7 @@ on:
 
 env:
   SOURCE_DIR: ${{ github.workspace }}
-  VALENTINA_VERSION: 1_0_0
+  VALENTINA_VERSION: 1_0_2
   ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
   # Should contain the base64 of the certificate
   MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
