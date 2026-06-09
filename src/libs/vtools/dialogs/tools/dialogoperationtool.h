@@ -32,6 +32,9 @@
 #include "dialogtool.h"
 #include "../../tools/toolsdef.h"
 
+#include <QSet>
+#include <QUuid>
+
 class QAbstractButton;
 class QGroupBox;
 class QLabel;
@@ -109,6 +112,14 @@ protected:
 
     virtual void OnSourceObjectsSet() {}
 
+    void CheckState() override;
+
+    // True when the set of operated objects differs from the set the dialog was opened with. Compared by
+    // recordId (the same key SyncDestination() uses), so adding/removing - or removing and re-adding -
+    // an object counts as a change. Such a change forces a full reparse that recreates the tool, so
+    // Apply is disabled for it.
+    auto SourceObjectsChanged() const -> bool;
+
     void FillSourceList();
     auto SaveSourceObjects() const -> QVector<SourceItem>;
 
@@ -124,6 +135,11 @@ protected:
 private:
     QVector<SourceItem> m_sourceObjects{};
     QVector<DestinationItem> m_destination{};
+
+    /** @brief m_baselineSourceRecords operated-object recordIds captured when the dialog was first
+     * populated. Used to detect object-set changes (see SourceObjectsChanged). */
+    QSet<QUuid> m_baselineSourceRecords{};
+    bool m_sourceBaselineCaptured{false};
 
     bool stage1{true};
     bool flagName{true};

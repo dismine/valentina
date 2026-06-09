@@ -110,8 +110,24 @@ auto DialogOperationTool::GetSourceObjects() const -> QVector<SourceItem>
 void DialogOperationTool::SetSourceObjects(const QVector<SourceItem> &value)
 {
     m_sourceObjects = value;
+
+    if (!m_sourceBaselineCaptured)
+    {
+        // First call populates the dialog from the tool; remember the committed object set (by recordId)
+        // so later edits (add/remove) can be detected. Subsequent calls (add/remove/rename) must not move
+        // the baseline.
+        m_baselineSourceRecords.clear();
+        m_baselineSourceRecords.reserve(value.size());
+        for (const auto &item : value)
+        {
+            m_baselineSourceRecords.insert(item.recordId);
+        }
+        m_sourceBaselineCaptured = true;
+    }
+
     FillSourceList();
     OnSourceObjectsSet();
+    CheckState(); // adding/removing objects toggles the Apply button (see CheckState)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -514,4 +530,47 @@ auto DialogOperationTool::SaveSourceObjects() const -> QVector<SourceItem>
     }
 
     return objects;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogOperationTool::SourceObjectsChanged() const -> bool
+{
+    if (!m_sourceBaselineCaptured)
+    {
+        return false;
+    }
+
+    QSet<QUuid> current;
+    current.reserve(m_sourceObjects.size());
+    for (const auto &item : m_sourceObjects)
+    {
+        current.insert(item.recordId);
+    }
+    return current != m_baselineSourceRecords;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogOperationTool::CheckState()
+{
+    DialogTool::CheckState();
+
+    if (bApply == nullptr)
+    {
+        return;
+    }
+
+    // Adding or removing operated objects forces a full reparse that recreates this tool and would
+    // orphan the open dialog (breaking further Apply/Save). Disable Apply for such structural changes
+    // while editing an existing tool - the user commits them with OK. Parameter-only edits (angle,
+    // length, origin, rename) reparse lite and keep working with Apply.
+    if (GetToolId() != NULL_ID && SourceObjectsChanged())
+    {
+        bApply->setEnabled(false);
+        bApply->setToolTip(tr("Adding or removing objects can't be applied while the dialog stays open. "
+                              "Use OK to confirm."));
+    }
+    else
+    {
+        bApply->setToolTip(QString());
+    }
 }
