@@ -1,4 +1,5 @@
 # Valentina 1.0.3 (unreleased)
+- [Tape app] Fixed sluggish image size scale control in the known measurements editor by no longer rebuilding the whole image list on every value change.
 - [Tape app] Fixed image list in the known measurements editor showing a single column until the Images tab was activated or the image size value was changed.
 - [Tape app] Fixed wrong diagram image shown for the selected measurement after opening the known measurements editor.
 - [Valentina app] Fixed crash on shutdown while sending the application close statistic, caused by a nested event loop running during application teardown.
