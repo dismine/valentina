@@ -321,6 +321,7 @@ void DialogFlippingByLine::OnSourceObjectsSet()
     if (auto *operation = qobject_cast<VisToolFlippingByLine *>(vis))
     {
         operation->SetObjects(SourceToObjects(SourceObjects()));
+        operation->RefreshGeometry();
     }
     else
     {

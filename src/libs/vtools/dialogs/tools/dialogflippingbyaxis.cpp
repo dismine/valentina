@@ -300,6 +300,7 @@ void DialogFlippingByAxis::OnSourceObjectsSet()
     if (auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis))
     {
         operation->SetObjects(SourceToObjects(SourceObjects()));
+        operation->RefreshGeometry();
     }
     else
     {

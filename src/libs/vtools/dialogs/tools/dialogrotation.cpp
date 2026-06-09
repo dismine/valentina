@@ -384,6 +384,7 @@ void DialogRotation::OnSourceObjectsSet()
     if (auto *operation = qobject_cast<VisToolRotation *>(vis))
     {
         operation->SetObjects(SourceToObjects(SourceObjects()));
+        operation->RefreshGeometry();
     }
     else
     {

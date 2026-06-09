@@ -512,6 +512,7 @@ void DialogMove::OnSourceObjectsSet()
     if (auto *operation = qobject_cast<VisToolMove *>(vis))
     {
         operation->SetObjects(SourceToObjects(SourceObjects()));
+        operation->RefreshGeometry();
     }
     else
     {
