@@ -283,8 +283,10 @@ void DialogOperationTool::CurrentObjectChanged(int row) const
                                  m_destination.cend(),
                                  [recordId](const DestinationItem &item) -> bool { return item.recordId == recordId; });
 
-    if (const quint32 targetId = it != m_destination.cend() ? it->id : NULL_ID;
-        !IsSafeToRemoveGroupObject(targetId, m_doc))
+    // A source object that is not yet present in the destination list has not been committed to the
+    // pattern, so no other tool can depend on it - it is always safe to remove. Only check safety for
+    // objects that already exist in the pattern.
+    if (it != m_destination.cend() && !IsSafeToRemoveGroupObject(it->id, m_doc))
     {
         Widgets().removeObject->setDisabled(true);
         return;
@@ -473,8 +475,10 @@ void DialogOperationTool::RemoveObject()
                                  m_destination.cend(),
                                  [recordId](const DestinationItem &item) -> bool { return item.recordId == recordId; });
 
-    if (const quint32 targetId = it != m_destination.cend() ? it->id : NULL_ID;
-        !IsSafeToRemoveGroupObject(targetId, m_doc))
+    // A source object that is not yet present in the destination list has not been committed to the
+    // pattern, so no other tool can depend on it - it is always safe to remove. Only check safety for
+    // objects that already exist in the pattern.
+    if (it != m_destination.cend() && !IsSafeToRemoveGroupObject(it->id, m_doc))
     {
         Widgets().removeObject->setDisabled(true);
         return;
