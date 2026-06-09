@@ -1599,7 +1599,6 @@ void TKMMainWindow::SaveImageTitle()
 void TKMMainWindow::SaveImageSizeScale()
 {
     auto *item = ui->listWidget->currentItem();
-    int const row = ui->listWidget->currentRow();
 
     if (item == nullptr)
     {
@@ -1610,15 +1609,10 @@ void TKMMainWindow::SaveImageSizeScale()
 
     MeasurementsWereSaved(false);
 
+    // The size scale does not affect the list thumbnails (scaled to a fixed iconSize) or any
+    // visible widget, so there is no need to rebuild the image list or the measurement panel
+    // here. Just invalidate the cache; it is reloaded lazily on the next access.
     m_known = VKnownMeasurements();
-    RefreshImages();
-
-    {
-        const QSignalBlocker blocker(ui->listWidget);
-        ui->listWidget->setCurrentRow(row);
-    }
-
-    ShowMData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
