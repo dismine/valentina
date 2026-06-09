@@ -67,6 +67,8 @@ DialogMDataBase::DialogMDataBase(const QUuid &id, const QStringList &usedMeasure
     connect(ui->treeWidget, &QTreeWidget::itemClicked, this, &DialogMDataBase::ShowDescription);
     connect(ui->treeWidget, &QTreeWidget::customContextMenuRequested, this, &DialogMDataBase::TreeMenu);
     connect(ui->lineEditSearch, &QLineEdit::textChanged, this, &DialogMDataBase::FilterMeasurements);
+    connect(MApplication::VApp(), &MApplication::KnownMeasurementsDatabaseRefreshed, this,
+            &DialogMDataBase::RefreshDescription);
 
     ReadSettings();
 }
@@ -247,11 +249,22 @@ void DialogMDataBase::ShowDescription(QTreeWidgetItem *item, int column)
 {
     if ((column != 0 && column != -1) || item == nullptr || item->childCount() != 0)
     {
+        m_descriptionItem = nullptr;
         ui->textEdit->clear();
         return;
     }
 
+    m_descriptionItem = item;
     ui->textEdit->setHtml(ItemFullDescription(item));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogMDataBase::RefreshDescription()
+{
+    if (m_descriptionItem != nullptr)
+    {
+        ui->textEdit->setHtml(ItemFullDescription(m_descriptionItem));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

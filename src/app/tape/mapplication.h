@@ -88,6 +88,9 @@ public:
 
     void Preferences(QWidget *parent = nullptr);
 
+signals:
+    void KnownMeasurementsDatabaseRefreshed();
+
 public slots:
     void ProcessCMD();
 

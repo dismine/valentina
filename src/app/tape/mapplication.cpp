@@ -997,6 +997,8 @@ void MApplication::SyncKnownMeasurements()
             w->SyncKnownMeasurements();
         }
     }
+
+    emit KnownMeasurementsDatabaseRefreshed();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

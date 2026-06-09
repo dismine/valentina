@@ -63,6 +63,7 @@ private slots:
     void TreeMenu(const QPoint &pos);
     void Recheck();
     void FilterMeasurements(const QString &search);
+    void RefreshDescription();
 
 private:
     // cppcheck-suppress unknownMacro
@@ -74,6 +75,7 @@ private:
     QList<QTreeWidgetItem *> m_groups{};
     QUuid m_knownId;
     QTreeWidgetItem *m_generalGroup{nullptr};
+    QTreeWidgetItem *m_descriptionItem{nullptr};
 
     void InitDataBase(const QStringList &usedMeasurements = QStringList());
     auto InitGroup(const QString &groupName, const QMap<int, VKnownMeasurement> &mlist,
