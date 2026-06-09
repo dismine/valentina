@@ -202,9 +202,14 @@ void DialogRotation::SetAngle(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(formulaAngle);
 
-    auto *operation = qobject_cast<VisToolRotation *>(vis);
-    SCASSERT(operation != nullptr)
-    operation->SetAngle(formulaAngle);
+    if (auto *operation = qobject_cast<VisToolRotation *>(vis))
+    {
+        operation->SetAngle(formulaAngle);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditFormula);
 }
@@ -376,9 +381,14 @@ void DialogRotation::FXAngle()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogRotation::OnSourceObjectsSet()
 {
-    auto *operation = qobject_cast<VisToolRotation *>(vis);
-    SCASSERT(operation != nullptr)
-    operation->SetObjects(SourceToObjects(SourceObjects()));
+    if (auto *operation = qobject_cast<VisToolRotation *>(vis))
+    {
+        operation->SetObjects(SourceToObjects(SourceObjects()));
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

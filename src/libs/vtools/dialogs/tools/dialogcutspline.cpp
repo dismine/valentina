@@ -181,9 +181,14 @@ void DialogCutSpline::SetFormula(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(m_formula);
 
-    auto *path = qobject_cast<VisToolCutSpline *>(vis);
-    SCASSERT(path != nullptr)
-    path->SetLength(m_formula);
+    if (auto *path = qobject_cast<VisToolCutSpline *>(vis))
+    {
+        path->SetLength(m_formula);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditFormula);
 }

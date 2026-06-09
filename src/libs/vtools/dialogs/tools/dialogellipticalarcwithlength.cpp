@@ -207,9 +207,14 @@ void DialogEllipticalArcWithLength::SetRadius1(const QString &value)
     }
     ui->plainTextEditRadius1->setPlainText(m_radius1);
 
-    auto *path = qobject_cast<VisToolEllipticalArcWithLength *>(vis);
-    SCASSERT(path != nullptr)
-    path->SetRadius1(m_radius1);
+    if (auto *path = qobject_cast<VisToolEllipticalArcWithLength *>(vis))
+    {
+        path->SetRadius1(m_radius1);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditRadius1);
 }
@@ -233,9 +238,14 @@ void DialogEllipticalArcWithLength::SetRadius2(const QString &value)
     }
     ui->plainTextEditRadius2->setPlainText(m_radius2);
 
-    auto *path = qobject_cast<VisToolEllipticalArcWithLength *>(vis);
-    SCASSERT(path != nullptr)
-    path->SetRadius2(m_radius2);
+    if (auto *path = qobject_cast<VisToolEllipticalArcWithLength *>(vis))
+    {
+        path->SetRadius2(m_radius2);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditRadius2);
 }
@@ -259,9 +269,14 @@ void DialogEllipticalArcWithLength::SetF1(const QString &value)
     }
     ui->plainTextEditF1->setPlainText(m_f1);
 
-    auto *path = qobject_cast<VisToolEllipticalArcWithLength *>(vis);
-    SCASSERT(path != nullptr)
-    path->SetF1(m_f1);
+    if (auto *path = qobject_cast<VisToolEllipticalArcWithLength *>(vis))
+    {
+        path->SetF1(m_f1);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditF1);
 }
@@ -285,9 +300,14 @@ void DialogEllipticalArcWithLength::SetLength(const QString &value)
     }
     ui->plainTextEditLength->setPlainText(m_length);
 
-    auto *path = qobject_cast<VisToolEllipticalArcWithLength *>(vis);
-    SCASSERT(path != nullptr)
-    path->SetLength(m_length);
+    if (auto *path = qobject_cast<VisToolEllipticalArcWithLength *>(vis))
+    {
+        path->SetLength(m_length);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditLength);
 }
@@ -312,9 +332,14 @@ void DialogEllipticalArcWithLength::SetRotationAngle(const QString &value)
     }
     ui->plainTextEditRotationAngle->setPlainText(m_rotationAngle);
 
-    auto *path = qobject_cast<VisToolEllipticalArcWithLength *>(vis);
-    SCASSERT(path != nullptr)
-    path->SetRotationAngle(m_rotationAngle);
+    if (auto *path = qobject_cast<VisToolEllipticalArcWithLength *>(vis))
+    {
+        path->SetRotationAngle(m_rotationAngle);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditRotationAngle);
 }

@@ -414,9 +414,14 @@ void DialogPointOfContact::SetRadius(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(m_radius);
 
-    auto *line = qobject_cast<VisToolPointOfContact *>(vis);
-    SCASSERT(line != nullptr)
-    line->SetRadius(m_radius);
+    if (auto *line = qobject_cast<VisToolPointOfContact *>(vis))
+    {
+        line->SetRadius(m_radius);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditFormula);
 }

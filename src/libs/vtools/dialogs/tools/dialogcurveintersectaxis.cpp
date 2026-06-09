@@ -175,9 +175,14 @@ void DialogCurveIntersectAxis::SetAngle(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(formulaAngle);
 
-    auto *line = qobject_cast<VisToolCurveIntersectAxis *>(vis);
-    SCASSERT(line != nullptr)
-    line->SetAngle(formulaAngle);
+    if (auto *line = qobject_cast<VisToolCurveIntersectAxis *>(vis))
+    {
+        line->SetAngle(formulaAngle);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditFormula);
 }

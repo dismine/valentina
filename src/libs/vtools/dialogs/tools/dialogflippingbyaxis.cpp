@@ -161,9 +161,14 @@ auto DialogFlippingByAxis::GetOriginPointId() const -> quint32
 void DialogFlippingByAxis::SetOriginPointId(quint32 value)
 {
     ChangeCurrentData(ui->comboBoxOriginPoint, value);
-    auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
-    SCASSERT(operation != nullptr)
-    operation->SetOriginPointId(value);
+    if (auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis))
+    {
+        operation->SetOriginPointId(value);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -180,9 +185,14 @@ void DialogFlippingByAxis::SetAxisType(AxisType type)
     {
         ui->comboBoxAxisType->setCurrentIndex(index);
 
-        auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
-        SCASSERT(operation != nullptr)
-        operation->SetAxisType(type);
+        if (auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis))
+        {
+            operation->SetAxisType(type);
+        }
+        else
+        {
+            qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+        }
     }
 }
 
@@ -287,9 +297,14 @@ void DialogFlippingByAxis::ChosenObject(quint32 id, const SceneObject &type)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByAxis::OnSourceObjectsSet()
 {
-    auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis);
-    SCASSERT(operation != nullptr)
-    operation->SetObjects(SourceToObjects(SourceObjects()));
+    if (auto *operation = qobject_cast<VisToolFlippingByAxis *>(vis))
+    {
+        operation->SetObjects(SourceToObjects(SourceObjects()));
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

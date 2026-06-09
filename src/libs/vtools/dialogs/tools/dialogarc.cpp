@@ -178,9 +178,14 @@ void DialogArc::SetF2(const QString &value)
     }
     ui->plainTextEditF2->setPlainText(m_f2);
 
-    auto *path = qobject_cast<VisToolArc *>(vis);
-    SCASSERT(path != nullptr)
-    path->SetF2(m_f2);
+    if (auto *path = qobject_cast<VisToolArc *>(vis))
+    {
+        path->SetF2(m_f2);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditF2);
 }
@@ -343,9 +348,14 @@ void DialogArc::SetF1(const QString &value)
     }
     ui->plainTextEditF1->setPlainText(m_f1);
 
-    auto *path = qobject_cast<VisToolArc *>(vis);
-    SCASSERT(path != nullptr)
-    path->SetF1(m_f1);
+    if (auto *path = qobject_cast<VisToolArc *>(vis))
+    {
+        path->SetF1(m_f1);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditF1);
 }
@@ -366,9 +376,14 @@ void DialogArc::SetRadius(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(m_radius);
 
-    auto *path = qobject_cast<VisToolArc *>(vis);
-    SCASSERT(path != nullptr)
-    path->SetRadius(m_radius);
+    if (auto *path = qobject_cast<VisToolArc *>(vis))
+    {
+        path->SetRadius(m_radius);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditFormula);
 }

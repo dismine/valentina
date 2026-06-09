@@ -160,9 +160,14 @@ auto DialogFlippingByLine::GetFirstLinePointId() const -> quint32
 void DialogFlippingByLine::SetFirstLinePointId(quint32 value)
 {
     ChangeCurrentData(ui->comboBoxFirstLinePoint, value);
-    auto *operation = qobject_cast<VisToolFlippingByLine *>(vis);
-    SCASSERT(operation != nullptr)
-    operation->SetFirstLinePointId(value);
+    if (auto *operation = qobject_cast<VisToolFlippingByLine *>(vis))
+    {
+        operation->SetFirstLinePointId(value);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -175,9 +180,14 @@ auto DialogFlippingByLine::GetSecondLinePointId() const -> quint32
 void DialogFlippingByLine::SetSecondLinePointId(quint32 value)
 {
     ChangeCurrentData(ui->comboBoxSecondLinePoint, value);
-    auto *operation = qobject_cast<VisToolFlippingByLine *>(vis);
-    SCASSERT(operation != nullptr)
-    operation->SetSecondLinePointId(value);
+    if (auto *operation = qobject_cast<VisToolFlippingByLine *>(vis))
+    {
+        operation->SetSecondLinePointId(value);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -308,9 +318,14 @@ void DialogFlippingByLine::ChooseLinePoint(quint32 id)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogFlippingByLine::OnSourceObjectsSet()
 {
-    auto *operation = qobject_cast<VisToolFlippingByLine *>(vis);
-    SCASSERT(operation != nullptr)
-    operation->SetObjects(SourceToObjects(SourceObjects()));
+    if (auto *operation = qobject_cast<VisToolFlippingByLine *>(vis))
+    {
+        operation->SetObjects(SourceToObjects(SourceObjects()));
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

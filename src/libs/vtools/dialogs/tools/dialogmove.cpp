@@ -220,9 +220,14 @@ void DialogMove::SetAngle(const QString &value)
     }
     ui->plainTextEditAngle->setPlainText(formulaAngle);
 
-    auto *operation = qobject_cast<VisToolMove *>(vis);
-    SCASSERT(operation != nullptr)
-    operation->SetAngle(formulaAngle);
+    if (auto *operation = qobject_cast<VisToolMove *>(vis))
+    {
+        operation->SetAngle(formulaAngle);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditAngle);
 }
@@ -246,9 +251,14 @@ void DialogMove::SetLength(const QString &value)
     }
     ui->plainTextEditLength->setPlainText(formulaLength);
 
-    auto *operation = qobject_cast<VisToolMove *>(vis);
-    SCASSERT(operation != nullptr)
-    operation->SetLength(formulaLength);
+    if (auto *operation = qobject_cast<VisToolMove *>(vis))
+    {
+        operation->SetLength(formulaLength);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditLength);
 }
@@ -272,9 +282,14 @@ void DialogMove::SetRotationAngle(const QString &value)
     }
     ui->plainTextEditRotationAngle->setPlainText(formulaRotationAngle);
 
-    auto *operation = qobject_cast<VisToolMove *>(vis);
-    SCASSERT(operation != nullptr)
-    operation->SetRotationAngle(formulaRotationAngle);
+    if (auto *operation = qobject_cast<VisToolMove *>(vis))
+    {
+        operation->SetRotationAngle(formulaRotationAngle);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditRotationAngle);
 }
@@ -289,9 +304,14 @@ auto DialogMove::GetRotationOrigPointId() const -> quint32
 void DialogMove::SetRotationOrigPointId(const quint32 &value)
 {
     ChangeCurrentData(ui->comboBoxRotationOriginPoint, value);
-    auto *operation = qobject_cast<VisToolMove *>(vis);
-    SCASSERT(operation != nullptr)
-    operation->SetRotationOriginPointId(value);
+    if (auto *operation = qobject_cast<VisToolMove *>(vis))
+    {
+        operation->SetRotationOriginPointId(value);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -489,9 +509,14 @@ void DialogMove::FXLength()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogMove::OnSourceObjectsSet()
 {
-    auto *operation = qobject_cast<VisToolMove *>(vis);
-    SCASSERT(operation != nullptr)
-    operation->SetObjects(SourceToObjects(SourceObjects()));
+    if (auto *operation = qobject_cast<VisToolMove *>(vis))
+    {
+        operation->SetObjects(SourceToObjects(SourceObjects()));
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

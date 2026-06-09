@@ -194,9 +194,14 @@ void DialogPointOfIntersectionCircles::SetFirstCircleRadius(const QString &value
     }
     ui->plainTextEditCircle1Radius->setPlainText(formula);
 
-    auto *point = qobject_cast<VisToolPointOfIntersectionCircles *>(vis);
-    SCASSERT(point != nullptr)
-    point->SetC1Radius(formula);
+    if (auto *point = qobject_cast<VisToolPointOfIntersectionCircles *>(vis))
+    {
+        point->SetC1Radius(formula);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditCircle1Radius);
 }
@@ -220,9 +225,14 @@ void DialogPointOfIntersectionCircles::SetSecondCircleRadius(const QString &valu
     }
     ui->plainTextEditCircle2Radius->setPlainText(formula);
 
-    auto *point = qobject_cast<VisToolPointOfIntersectionCircles *>(vis);
-    SCASSERT(point != nullptr)
-    point->SetC2Radius(formula);
+    if (auto *point = qobject_cast<VisToolPointOfIntersectionCircles *>(vis))
+    {
+        point->SetC2Radius(formula);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditCircle2Radius);
 }

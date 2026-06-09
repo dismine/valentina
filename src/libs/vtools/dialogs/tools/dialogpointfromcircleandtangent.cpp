@@ -161,9 +161,14 @@ void DialogPointFromCircleAndTangent::SetCircleRadius(const QString &value)
     }
     ui->plainTextEditRadius->setPlainText(formula);
 
-    auto *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis);
-    SCASSERT(point != nullptr)
-    point->SetCRadius(formula);
+    if (auto *point = qobject_cast<VisToolPointFromCircleAndTangent *>(vis))
+    {
+        point->SetCRadius(formula);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditRadius);
 }

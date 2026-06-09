@@ -135,9 +135,14 @@ void DialogParallelCurve::SetFormulaWidth(const QString &value)
     }
     ui->plainTextEditWidth->setPlainText(m_width);
 
-    auto *path = qobject_cast<VisToolParallelCurve *>(vis);
-    SCASSERT(path != nullptr)
-    path->SetOffsetWidth(m_width);
+    if (auto *path = qobject_cast<VisToolParallelCurve *>(vis))
+    {
+        path->SetOffsetWidth(m_width);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditWidth);
 }

@@ -273,9 +273,14 @@ void DialogBisector::SetFormula(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(m_formula);
 
-    auto *line = qobject_cast<VisToolBisector *>(vis);
-    SCASSERT(line != nullptr)
-    line->SetLength(m_formula);
+    if (auto *line = qobject_cast<VisToolBisector *>(vis))
+    {
+        line->SetLength(m_formula);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditFormula);
 }

@@ -263,9 +263,14 @@ void DialogEndLine::SetFormula(const QString &value)
     }
     ui->plainTextEditFormula->setPlainText(formulaLength);
 
-    auto *line = qobject_cast<VisToolEndLine *>(vis);
-    SCASSERT(line != nullptr)
-    line->SetLength(formulaLength);
+    if (auto *line = qobject_cast<VisToolEndLine *>(vis))
+    {
+        line->SetLength(formulaLength);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditFormula);
 }
@@ -287,9 +292,14 @@ void DialogEndLine::SetAngle(const QString &value)
     }
     ui->plainTextEditAngle->setPlainText(formulaAngle);
 
-    auto *line = qobject_cast<VisToolEndLine *>(vis);
-    SCASSERT(line != nullptr)
-    line->SetAngle(formulaAngle);
+    if (auto *line = qobject_cast<VisToolEndLine *>(vis))
+    {
+        line->SetAngle(formulaAngle);
+    }
+    else
+    {
+        qCWarning(vDialog, "%s: visualization unavailable, skipping preview update.", Q_FUNC_INFO);
+    }
 
     MoveCursorToEnd(ui->plainTextEditAngle);
 }
