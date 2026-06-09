@@ -32,6 +32,7 @@
 - [Valentina app] New action Auto-arrange labels (Ctrl+Shift+A). Automatically repositions point labels in Draw and Details mode to reduce overlaps.
 
 # Valentina 1.0.3 (unreleased)
+- [Tape app] Fixed image list in the known measurements editor showing a single column until the Images tab was activated or the image size value was changed.
 - [Tape app] Fixed wrong diagram image shown for the selected measurement after opening the known measurements editor.
 - [Valentina app] Fixed crash on shutdown while sending the application close statistic, caused by a nested event loop running during application teardown.
 - [Valentina app] Fixed crash when syncing a multisize measurement file fails (e.g. user cancels the missing-measurements dialog): measurement pointer was nulled out but dimension comboboxes remained connected, causing a null dereference on the next dimension change event.

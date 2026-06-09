@@ -1724,6 +1724,10 @@ void TKMMainWindow::RefreshMeasurementImagePreview(int index)
     else if (index == ui->tabWidget->indexOf(ui->tabImages))
     {
         ShowImageData();
+        // The image list is populated while the Images tab is still hidden, so its viewport has no
+        // valid width and the IconMode flow lays every item into a single column. Force a relayout
+        // now that the tab is visible and the viewport has its real size.
+        ui->listWidget->doItemsLayout();
         lastSelectedTab = ui->tabWidget->indexOf(ui->tabImages);
         ui->actionAddKnown->setEnabled(false);
     }
