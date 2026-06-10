@@ -115,7 +115,6 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QFuture>
-#include <QFutureWatcher>
 #include <QMessageBox>
 #include <QScopeGuard>
 #include <QTimer>
@@ -250,7 +249,6 @@ VPattern::VPattern(VContainer *data, VMainGraphicsScene *sceneDraw, VMainGraphic
     data(data),
     sceneDraw(sceneDraw),
     sceneDetail(sceneDetail),
-    m_refreshPieceGeometryWatcher(new QFutureWatcher<void>(this)),
     m_refreshGeometryTimer(new QTimer(this))
 {
     SCASSERT(sceneDraw != nullptr)
@@ -260,15 +258,6 @@ VPattern::VPattern(VContainer *data, VMainGraphicsScene *sceneDraw, VMainGraphic
     m_refreshGeometryTimer->setTimerType(Qt::CoarseTimer);
     m_refreshGeometryTimer->setInterval(250ms);
     connect(m_refreshGeometryTimer, &QTimer::timeout, this, &VPattern::RefreshPieceGeometry);
-
-    connect(qApp,
-            &QCoreApplication::aboutToQuit,
-            m_refreshPieceGeometryWatcher,
-            [this]() -> void
-            {
-                m_refreshPieceGeometryWatcher->cancel();
-                m_refreshPieceGeometryWatcher->waitForFinished();
-            });
 
     connect(this, &VAbstractPattern::PatternDependencyGraphCompleted, this, &VPattern::CollectGarbage);
 }
@@ -363,12 +352,6 @@ void VPattern::Clear()
     updatePieces.clear();
 
     m_refreshGeometryTimer->stop(); // Drop any pending refresh; it would run against a cleared document.
-
-    if (m_refreshPieceGeometryWatcher->isRunning())
-    {
-        m_refreshPieceGeometryWatcher->cancel();
-        m_refreshPieceGeometryWatcher->waitForFinished();
-    }
 
     m_pieceGeometryDirty = true;
 
@@ -898,16 +881,17 @@ void VPattern::RefreshDirtyPieceGeometry(const QList<vidtype> &list)
     const bool combineTogether = VAbstractValApplication::VApp()->ValentinaSettings()->IsBoundaryTogetherWithNotches();
     const bool pieceShowMainPath = VAbstractApplication::VApp()->Settings()->IsPieceShowMainPath();
 
-    // Recompute every piece's geometry in parallel. The GUI thread blocks until the whole batch is
-    // ready, so the worker threads only ever read piece data while the tools are guaranteed to stay
-    // alive (no piece can be deleted underneath them). This is what makes switching size in Detail
-    // mode fast for patterns with many pieces.
-    m_refreshPieceGeometryWatcher->setFuture(
-        QtConcurrent::map(pieceTools, [combineTogether, pieceShowMainPath](VToolSeamAllowance *piece)
-                          { piece->PrepareRefreshGeometry(combineTogether, pieceShowMainPath); }));
-    m_refreshPieceGeometryWatcher->waitForFinished();
+    // Recompute every piece's geometry serially. The render pipeline reads shared VContainer data
+    // and evaluates formulas through qmuparser, neither of which is thread-safe, so the pieces must
+    // not be computed concurrently (doing so caused intermittent heap corruption on patterns with
+    // many pieces). The two-phase Prepare/Apply split is kept so the compute stays cleanly separated
+    // from the scene update, but both phases run on the GUI thread.
+    for (auto *piece : std::as_const(pieceTools))
+    {
+        piece->PrepareRefreshGeometry(combineTogether, pieceShowMainPath);
+    }
 
-    // Apply the precomputed geometry to the scene on the GUI thread.
+    // Apply the precomputed geometry to the scene.
     for (auto *piece : std::as_const(pieceTools))
     {
         piece->ApplyBatchGeometry();

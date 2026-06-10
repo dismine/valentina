@@ -143,8 +143,6 @@ private:
     VMainGraphicsScene *sceneDetail;
     QList<vidtype> updatePieces{};
 
-    QFutureWatcher<void> *m_refreshPieceGeometryWatcher;
-
     /** @brief Debounce timer that coalesces piece geometry refreshes after a burst of parses
      * (file open, interactive tool edits, measurement sync). A single restartable timer replaces
      * the previous per-parse QTimer::singleShot so rapid parses collapse into one refresh. */
