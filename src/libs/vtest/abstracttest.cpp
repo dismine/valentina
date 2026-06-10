@@ -40,6 +40,7 @@
 #include <QLineF>
 #include <QPointF>
 #include <QProcess>
+#include <QProcessEnvironment>
 #include <QScopedPointer>
 #include <QStringList>
 #include <QVector>
@@ -394,6 +395,26 @@ auto AbstractTest::Run(int exit, const QString &program, const QStringList &argu
 
     QScopedPointer<QProcess> const process(new QProcess());
     process->setWorkingDirectory(info.absoluteDir().absolutePath());
+
+#if defined(Q_OS_MACOS)
+    // Bundled helper apps (Tape/Puzzle/Valentina) are self-contained and resolve Qt through their own @rpath. The qbs
+    // autotest run environment exports DYLD_* vars so the un-bundled test binary can find Qt/project libs; if inherited
+    // by the bundled subprocess they make dyld load a second copy of QtCore into the same process (duplicate-class
+    // warnings + cross-thread crashes). Strip them for the child so it relies solely on its baked rpaths.
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    const QStringList dyldVars{
+        QStringLiteral("DYLD_FRAMEWORK_PATH"),           QStringLiteral("DYLD_FALLBACK_FRAMEWORK_PATH"),
+        QStringLiteral("DYLD_LIBRARY_PATH"),             QStringLiteral("DYLD_FALLBACK_LIBRARY_PATH"),
+        QStringLiteral("DYLD_VERSIONED_FRAMEWORK_PATH"), QStringLiteral("DYLD_VERSIONED_LIBRARY_PATH"),
+        QStringLiteral("DYLD_IMAGE_SUFFIX"),
+    };
+    for (const auto &var : dyldVars)
+    {
+        env.remove(var);
+    }
+    process->setProcessEnvironment(env);
+#endif
+
     process->start(program, arguments);
 
     if (not process->waitForStarted(msecs))
