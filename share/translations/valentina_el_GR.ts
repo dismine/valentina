@@ -422,21 +422,25 @@
     <name>DialogAboutApp</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="29"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="242"/>
         <source>About Valentina</source>
         <translation>Σχετικά με το Valentina</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="109"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="243"/>
         <source>Valentina version</source>
         <translation>Έκδοση Valentina</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="245"/>
         <source>Special thanks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="247"/>
         <source>Credits</source>
         <translation type="unfinished"></translation>
     </message>
@@ -456,6 +460,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="244"/>
         <source>Build revision:</source>
         <translation>Αναθεώρηση έκδοσης:</translation>
     </message>
@@ -466,6 +471,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="301"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="246"/>
         <source>Check For Updates</source>
         <translation>Έλεγχος για ενημερώσεις</translation>
     </message>
@@ -532,21 +538,25 @@
     <name>DialogAddBackgroundImage</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaddbackgroundimage.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaddbackgroundimage.h" line="83"/>
         <source>Background image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaddbackgroundimage.ui" line="26"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaddbackgroundimage.h" line="84"/>
         <source>Name:</source>
         <translation>Όνομα:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaddbackgroundimage.ui" line="38"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaddbackgroundimage.h" line="86"/>
         <source>Determine should an image built in or added as path to the file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaddbackgroundimage.ui" line="41"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaddbackgroundimage.h" line="88"/>
         <source>Built in</source>
         <translation type="unfinished"></translation>
     </message>
@@ -563,6 +573,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="201"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="340"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -601,6 +612,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="327"/>
         <source>Point at distance along line</source>
         <translation>Σημείο με απόσταση κατα μήκος της γραμμής</translation>
     </message>
@@ -615,81 +627,97 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="328"/>
         <source>Length:</source>
         <translation>Μήκος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="330"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="150"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="334"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="176"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="337"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="230"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="342"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="347"/>
         <source>First point:</source>
         <translation>Πρώτο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="349"/>
         <source>First point of the line</source>
         <translation>Πρώτο σημείο της γραμμής</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="287"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="352"/>
         <source>Swap points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="318"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="354"/>
         <source>Second point:</source>
         <translation>Δεύτερο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="331"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="356"/>
         <source>Second point of the line</source>
         <translation>Δεύτερο σημείο της γραμμής</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="338"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="358"/>
         <source>Type of line:</source>
         <translation>Τύπος γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="376"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="362"/>
         <source>Line color:</source>
         <translation>Χρώμα γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="344"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="240"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="346"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="363"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="364"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -698,6 +726,7 @@
     <name>DialogArc</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="435"/>
         <source>Arc</source>
         <translation>Τόξο</translation>
     </message>
@@ -713,6 +742,9 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="371"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="550"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="448"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="462"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="476"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -757,22 +789,23 @@
         <translation type="vanished">Χρώμα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="483"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="498"/>
         <source>Edit radius</source>
         <translation>Επεξεργασία ακτίνας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="497"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="512"/>
         <source>Edit first angle</source>
         <translation>Επεξεργασία πρώτης γωνίας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="511"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="526"/>
         <source>Edit second angle</source>
         <translation>Επεξεργασία δεύτερης γωνίας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="436"/>
         <source>Radius:</source>
         <translation>Ακτίνα:</translation>
     </message>
@@ -780,6 +813,9 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="102"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="281"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="438"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="452"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="466"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
@@ -787,6 +823,9 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="144"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="323"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="502"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="442"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="456"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="470"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
@@ -796,6 +835,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="261"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="450"/>
         <source>First angle:</source>
         <translation>Πρώτη γωνία:</translation>
     </message>
@@ -803,56 +843,69 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="170"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="349"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="528"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="445"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="459"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="473"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="464"/>
         <source>Second angle:</source>
         <translation>Δεύτερη γωνία:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="585"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="478"/>
         <source>Center point:</source>
         <translation>Κεντρικό σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="592"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="480"/>
         <source>Select center point of the arc</source>
         <translation>Επιλέξτε το κεντρικό σημείο του τόξου</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="628"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="483"/>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="599"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="482"/>
         <source>Pen style:</source>
         <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="635"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="484"/>
         <source>Approximation scale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="642"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="486"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="489"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="658"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="488"/>
         <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="695"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="490"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -875,6 +928,9 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="189"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="368"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="547"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="454"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="468"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -907,17 +963,17 @@
         <translation type="vanished">Χρώμα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="427"/>
         <source>Edit radius</source>
         <translation>Επεξεργασία ακτίνας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="426"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="441"/>
         <source>Edit the first angle</source>
         <translation>Επεξεργασία της πρώτης γωνίας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="455"/>
         <source>Edit the arc length</source>
         <translation>Επεξεργασία του μήκους τόξου</translation>
     </message>
@@ -935,6 +991,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="428"/>
         <source>Radius:</source>
         <translation>Ακτίνα:</translation>
     </message>
@@ -942,6 +999,9 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="99"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="278"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="457"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="430"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="444"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="458"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
@@ -949,6 +1009,9 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="141"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="320"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="499"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="434"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="448"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="462"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
@@ -956,61 +1019,75 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="167"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="346"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="525"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="437"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="451"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="465"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="258"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="442"/>
         <source>First angle:</source>
         <translation>Πρώτη γωνία:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="437"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="456"/>
         <source>Length:</source>
         <translation>Μήκος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="582"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="470"/>
         <source>Center point:</source>
         <translation>Κεντρικό σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="592"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="471"/>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="599"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="472"/>
         <source>Pen style:</source>
         <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="628"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="473"/>
         <source>Approximation scale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="635"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="475"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="478"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="427"/>
         <source>Arc with length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="651"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="477"/>
         <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="688"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="479"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1019,41 +1096,49 @@
     <name>DialogAskCollectStatistic</name>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="131"/>
         <source>Privacy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="24"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="132"/>
         <source>Usage statistic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="30"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="133"/>
         <source>Send usage statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="40"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="134"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="135"/>
         <source>Crash reports</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="136"/>
         <source>Send automatic crash reports</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="71"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="137"/>
         <source>Email:</source>
         <translation>Διεύθυνση email:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="87"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="138"/>
         <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1070,6 +1155,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="315"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -1121,6 +1207,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="302"/>
         <source>Point along bisector</source>
         <translation>Σημείο κατα μήκος της διχοτόμου</translation>
     </message>
@@ -1135,71 +1222,85 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="303"/>
         <source>Length:</source>
         <translation>Μήκος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="305"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="309"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="312"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="317"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="319"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="321"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="322"/>
         <source>First point:</source>
         <translation>Πρώτο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="323"/>
         <source>Second point:</source>
         <translation>Δεύτερο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="282"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="324"/>
         <source>Third point:</source>
         <translation>Τρίτο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="292"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="325"/>
         <source>Type of line:</source>
         <translation>Τύπος γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="321"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="326"/>
         <source>Line color:</source>
         <translation>Χρώμα γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="327"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="351"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="328"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1209,46 +1310,56 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="24"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="142"/>
         <source>Rename…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="144"/>
         <source>Base name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="48"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="146"/>
         <source>New name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="58"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="147"/>
         <source>Text:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="65"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="149"/>
         <source>Use %n, %0n, %00n, %000n for counting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="151"/>
         <source>Position:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="84"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="152"/>
         <source>Append</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="97"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="153"/>
         <source>Prepend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="107"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="154"/>
         <source>Replace</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1262,16 +1373,19 @@
     <name>DialogCredits</name>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogcredits.h" line="95"/>
         <source>Credits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogcredits.h" line="96"/>
         <source>Sponsors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogcredits.h" line="98"/>
         <source>Authors</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1280,6 +1394,7 @@
     <name>DialogCubicBezier</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="106"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="204"/>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
     </message>
@@ -1289,21 +1404,25 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="37"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="199"/>
         <source>First point:</source>
         <translation>Πρώτο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="47"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="200"/>
         <source>Second point:</source>
         <translation>Δεύτερο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="57"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="201"/>
         <source>Third point:</source>
         <translation>Τρίτο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="67"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="202"/>
         <source>Fourth point:</source>
         <translation>Τέταρτο σημείο:</translation>
     </message>
@@ -1328,36 +1447,43 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="198"/>
         <source>Tool cubic bezier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="77"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="203"/>
         <source>Pen Style:</source>
         <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="120"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="205"/>
         <source>Approximation Scale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="207"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="210"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="209"/>
         <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="211"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1366,16 +1492,19 @@
     <name>DialogCubicBezierPath</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="93"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="332"/>
         <source>Point:</source>
         <translation>Σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="122"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="334"/>
         <source>List of points</source>
         <translation>Λίστα σημείων</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="252"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="349"/>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
     </message>
@@ -1385,61 +1514,73 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="330"/>
         <source>Tool cubic bezier path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="36"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="331"/>
         <source>New point:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="134"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="337"/>
         <source>Move on top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="151"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="340"/>
         <source>Move up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="168"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="343"/>
         <source>Move down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="346"/>
         <source>Move on bottom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="348"/>
         <source>Pen style:</source>
         <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="350"/>
         <source>Approximation scale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="273"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="352"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="355"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="289"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="354"/>
         <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="319"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="356"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1456,6 +1597,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="348"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -1480,12 +1622,13 @@
         <translation type="vanished">Εμφάνιση γραμμής απο το πρώτο ως αυτό το σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="290"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="295"/>
         <source>Select axis point</source>
         <translation>Επιλογή σημείου άξονα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="335"/>
         <source>Point intersect curve and axis</source>
         <translation>Σημείο τομής καμπύλης και άξονα</translation>
     </message>
@@ -1498,102 +1641,121 @@
         <translation type="vanished">Χρώμα γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="346"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="351"/>
         <source>Edit angle</source>
         <translation>Επεξεργασία γωνίας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="336"/>
         <source>Angle:</source>
         <translation>Γωνία:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="338"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="342"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="173"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="345"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="350"/>
         <source>Axis point:</source>
         <translation>Σημείο άξονα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="354"/>
         <source>Curve:</source>
         <translation>Καμπύλη:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="263"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="355"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="276"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="357"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="279"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="359"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="286"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="360"/>
         <source>Type of line:</source>
         <translation>Τύπος γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="315"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="361"/>
         <source>Line color:</source>
         <translation>Χρώμα γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="357"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="364"/>
         <source>Name1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="364"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="365"/>
         <source>Choose unique name for left sub curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="366"/>
         <source>Name2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="378"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="367"/>
         <source>Choose unique name for right sub curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="368"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="401"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="369"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="322"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="362"/>
         <source>Alias1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="336"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="363"/>
         <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1610,6 +1772,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="300"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -1623,6 +1786,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="287"/>
         <source>Segment an arc</source>
         <translation>Κόψιμο τόξου</translation>
     </message>
@@ -1641,41 +1805,49 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="288"/>
         <source>Length:</source>
         <translation>Μήκος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="290"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="294"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="297"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="302"/>
         <source>Arc:</source>
         <translation>Τόξο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="303"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="305"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="307"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
@@ -1685,41 +1857,49 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="314"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="308"/>
         <source>Alias1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="274"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="309"/>
         <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="288"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="310"/>
         <source>Name1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="295"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="311"/>
         <source>Name2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="302"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="312"/>
         <source>Choose unique name for left sub curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="309"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="313"/>
         <source>Choose unique name for right sub curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="332"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="315"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1736,6 +1916,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="295"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -1753,6 +1934,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="282"/>
         <source>Segmenting a simple curve</source>
         <translation>Διατομή απλής καμπύλης</translation>
     </message>
@@ -1761,42 +1943,49 @@
         <translation type="vanished">Χρώμα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.cpp" line="406"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.cpp" line="411"/>
         <source>Edit length</source>
         <translation>Επεξεργασία μήκους</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="283"/>
         <source>Length:</source>
         <translation>Μήκος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="285"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="289"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="292"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="297"/>
         <source>Curve:</source>
         <translation>Καμπύλη:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="298"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="300"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
@@ -1810,46 +1999,55 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="309"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="302"/>
         <source>Choose unique label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="303"/>
         <source>Alias1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="270"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="304"/>
         <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="280"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="305"/>
         <source>Name1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="287"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="306"/>
         <source>Name2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="294"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="307"/>
         <source>Choose unique name for left sub curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="301"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="308"/>
         <source>Choose unique name for right sub curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="324"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="310"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1866,6 +2064,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="297"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -1883,6 +2082,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="284"/>
         <source>Segment a curved path</source>
         <translation>Διαχωρίστε ένα καμπύλο μονοπάτι</translation>
     </message>
@@ -1891,47 +2091,55 @@
         <translation type="vanished">Χρώμα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.cpp" line="404"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.cpp" line="409"/>
         <source>Edit length</source>
         <translation>Επεξεργασία μήκους</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="285"/>
         <source>Length:</source>
         <translation>Μήκος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="287"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="291"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="294"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="299"/>
         <source>Curve:</source>
         <translation>Καμπύλη:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="300"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="302"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="304"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
@@ -1941,41 +2149,49 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="311"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="305"/>
         <source>Name1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="267"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="306"/>
         <source>Choose unique name for left sub curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="274"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="307"/>
         <source>Name2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="281"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="308"/>
         <source>Alias1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="295"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="309"/>
         <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="309"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="310"/>
         <source>Choose unique name for right sub curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="332"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="312"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1984,16 +2200,19 @@
     <name>DialogDateTimeFormats</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogdatetimeformats.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogdatetimeformats.h" line="105"/>
         <source>Label date time editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogdatetimeformats.ui" line="29"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogdatetimeformats.h" line="106"/>
         <source>Format:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogdatetimeformats.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogdatetimeformats.h" line="110"/>
         <source>Insert a format</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2299,6 +2518,7 @@
     <name>DialogDuplicateDetail</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogduplicatedetail.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogduplicatedetail.h" line="64"/>
         <source>Dialog duplicate detail</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2312,78 +2532,93 @@
     <name>DialogEditLabel</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="370"/>
         <source>Edit label template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="35"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="372"/>
         <source>Clear current and begin new label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="67"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="375"/>
         <source>Import from label template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="89"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="378"/>
         <source>Export label as template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="416"/>
         <source>Edit</source>
         <translation type="unfinished">Επεξεργασία</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="228"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="393"/>
         <source>Bold</source>
         <comment>Font formating</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="396"/>
         <source>Italic</source>
         <comment>Font formating</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="399"/>
         <source>Aligns with the left edge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="402"/>
         <source>Centers horizontally in the available space</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="304"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="405"/>
         <source>Aligns with the right edge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="329"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="408"/>
         <source>Additional font size. Use to make a line bigger.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="384"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="410"/>
         <source>Text:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="396"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="411"/>
         <source>Line of text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="409"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="413"/>
         <source>Insert placeholders</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="424"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="417"/>
         <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2557,26 +2792,31 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="415"/>
         <source>Insert…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="138"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="381"/>
         <source>Move on top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="155"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="384"/>
         <source>Move up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="172"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="387"/>
         <source>Move down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="189"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="390"/>
         <source>Move on bottom</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2788,6 +3028,7 @@
     <name>DialogEditWrongFormula</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="332"/>
         <source>Edit formula</source>
         <translation>Επεξεργασία φόρμουλας</translation>
     </message>
@@ -2797,6 +3038,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="95"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="335"/>
         <source>Insert variable into formula</source>
         <translation>Εισαγωγή μεταβλητής στη φόρμουλα</translation>
     </message>
@@ -2810,6 +3052,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="191"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="344"/>
         <source>Input data</source>
         <translation>Εισαγωγή δεδομένων</translation>
     </message>
@@ -2819,16 +3062,19 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="204"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="345"/>
         <source>Measurements</source>
         <translation>Μετρήσεις</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="220"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="346"/>
         <source>Increments</source>
         <translation>Αυξήσεις</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="348"/>
         <source>Length of lines</source>
         <translation>Μήκη γραμμών</translation>
     </message>
@@ -2838,16 +3084,19 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="259"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="349"/>
         <source>Length of curves</source>
         <translation>Μήκη καμπυλών</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="275"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="350"/>
         <source>Angle of lines</source>
         <translation>Γωνία γραμμών</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="348"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="357"/>
         <source>Hide empty measurements</source>
         <translation>Απόκρυψη κενών μετρήσεων</translation>
     </message>
@@ -2884,6 +3133,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="288"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="351"/>
         <source>Radius of arcs</source>
         <translation>Ακτίνα τόξων</translation>
     </message>
@@ -2893,6 +3143,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="301"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="352"/>
         <source>Angles of curves</source>
         <translation>Γωνίες καμπυλών</translation>
     </message>
@@ -2912,51 +3163,61 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="333"/>
         <source>Formula:</source>
         <translation>Φόρμουλα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="137"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="339"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="168"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="342"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="359"/>
         <source>Name</source>
         <translation>Όνομα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="376"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="361"/>
         <source>Full name</source>
         <translation>Πλήρες όνομα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="328"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="355"/>
         <source>Functions</source>
         <translation>Λειτουργίες</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="353"/>
         <source>Lengths to control points</source>
         <translation>Μήκη των σημείων ελέγχου</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="341"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="356"/>
         <source>Filter list by keyword</source>
         <translation>Φιλτράρισμα λίστας με λέξη κλειδί</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="347"/>
         <source>Preview calculations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="315"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="354"/>
         <source>Pieces areas</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2975,6 +3236,7 @@
     <name>DialogEllipticalArc</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="586"/>
         <source>Radius1:</source>
         <translation>Ακτίνα1:</translation>
     </message>
@@ -2984,6 +3246,11 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="469"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="654"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="839"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="588"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="602"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="616"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="630"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="644"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
@@ -2993,12 +3260,19 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="511"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="696"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="881"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="592"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="606"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="620"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="634"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="648"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="173"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="358"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="595"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="609"/>
         <source>Calulation</source>
         <translation>Υπολογισμός</translation>
     </message>
@@ -3008,16 +3282,23 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="565"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="750"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="935"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="598"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="612"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="626"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="640"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="654"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού σε πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="264"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="600"/>
         <source>Radius2:</source>
         <translation>Ακτίνα2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="449"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="614"/>
         <source>First angle:</source>
         <translation>Πρώτη γωνία:</translation>
     </message>
@@ -3025,91 +3306,106 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="543"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="728"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="913"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="623"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="637"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="651"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="634"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="628"/>
         <source>Second angle:</source>
         <translation>Δεύτερη γωνία:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="819"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="642"/>
         <source>Rotation angle:</source>
         <translation>Γωνία περιστροφής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="970"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="656"/>
         <source>Center point:</source>
         <translation>Κεντρικό σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="977"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="658"/>
         <source>Select center point of the arc</source>
         <translation>Επιλέξτε το κεντρικό σημείο του τόξου</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="984"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="660"/>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="477"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="502"/>
         <source>Edit radius1</source>
         <translation>Επεξεργασία ακτίνας1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="491"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="516"/>
         <source>Edit radius2</source>
         <translation>Επεξεργασία ακτίνας2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="505"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="530"/>
         <source>Edit first angle</source>
         <translation>Επεξεργασία πρώτης γωνίας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="519"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="544"/>
         <source>Edit second angle</source>
         <translation>Επεξεργασία δεύτερης γωνίας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="533"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="558"/>
         <source>Edit rotation angle</source>
         <translation>Αλλαγή γωνίας περιστροφής</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="585"/>
         <source>Elliptical arc</source>
         <translation>Ελλειπτικό τόξο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="991"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="661"/>
         <source>Pen style:</source>
         <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="667"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1020"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="662"/>
         <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1076"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="668"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1030"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="663"/>
         <source>Approximation scale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1037"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="665"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3118,16 +3414,19 @@
     <name>DialogEllipticalArcWithLength</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="586"/>
         <source>Elliptical arc with length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="665"/>
         <source>Tool</source>
         <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="587"/>
         <source>Radius1:</source>
         <translation type="unfinished">Ακτίνα1:</translation>
     </message>
@@ -3137,6 +3436,11 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="469"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="648"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="827"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="589"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="603"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="617"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="631"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="645"/>
         <source>Formula wizard</source>
         <translation type="unfinished">Βοηθός φόρμουλας</translation>
     </message>
@@ -3146,6 +3450,11 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="511"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="690"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="869"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="607"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="621"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="635"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="649"/>
         <source>Value</source>
         <translation type="unfinished">Τιμή</translation>
     </message>
@@ -3155,16 +3464,23 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="559"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="738"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="923"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="599"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="613"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="627"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="641"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="655"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="264"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="601"/>
         <source>Radius2:</source>
         <translation type="unfinished">Ακτίνα2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="449"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="615"/>
         <source>First angle:</source>
         <translation type="unfinished">Πρώτη γωνία:</translation>
     </message>
@@ -3174,76 +3490,90 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="537"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="716"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="901"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="596"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="610"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="624"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="638"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="652"/>
         <source>Calculation</source>
         <translation type="unfinished">Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="628"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="629"/>
         <source>Length:</source>
         <translation type="unfinished">Μήκος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="807"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="643"/>
         <source>Rotation angle:</source>
         <translation type="unfinished">Γωνία περιστροφής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="958"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="657"/>
         <source>Center point:</source>
         <translation type="unfinished">Κεντρικό σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="968"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="658"/>
         <source>Color:</source>
         <translation type="unfinished">Χρώμα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="975"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="659"/>
         <source>Pen style:</source>
         <translation type="unfinished">Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1004"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="660"/>
         <source>Approximation scale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1011"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="662"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1027"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="664"/>
         <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1064"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="666"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="563"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="588"/>
         <source>Edit radius1</source>
         <translation type="unfinished">Επεξεργασία ακτίνας1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="577"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="602"/>
         <source>Edit radius2</source>
         <translation type="unfinished">Επεξεργασία ακτίνας2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="591"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="616"/>
         <source>Edit the first angle</source>
         <translation type="unfinished">Επεξεργασία της πρώτης γωνίας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="605"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="630"/>
         <source>Edit the elliptical arc length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="619"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="644"/>
         <source>Edit rotation angle</source>
         <translation type="unfinished">Αλλαγή γωνίας περιστροφής</translation>
     </message>
@@ -3261,6 +3591,8 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="216"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="410"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="375"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="389"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -3294,6 +3626,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="20"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="362"/>
         <source>Point at distance and angle</source>
         <translation>Σημείο με απόσταση και γωνία</translation>
     </message>
@@ -3313,69 +3646,85 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="88"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="363"/>
         <source>Length:</source>
         <translation>Μήκος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="117"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="311"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="365"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="379"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="165"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="369"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="383"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="197"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="391"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="372"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="386"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="377"/>
         <source>Angle:</source>
         <translation>Γωνία:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="445"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="391"/>
         <source>Base point:</source>
         <translation>Βασικό σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="461"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="392"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="468"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="394"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="471"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="396"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="484"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="397"/>
         <source>Type of line:</source>
         <translation>Τύπος γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="519"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="398"/>
         <source>Line color:</source>
         <translation>Χρώμα γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="37"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="399"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="549"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="400"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3392,51 +3741,61 @@
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="36"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="198"/>
         <source>With header</source>
         <translation>Με επικεφαλίδα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="51"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="199"/>
         <source>Codec:</source>
         <translation>Κωδικοποιητής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="92"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="200"/>
         <source>Separator</source>
         <translation>Διαχωριστής</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="116"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="201"/>
         <source>Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="148"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="203"/>
         <source>Comma</source>
         <translation>κόμμα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="132"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="202"/>
         <source>Semicolon</source>
         <translation>Άνω τελεία</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="167"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="204"/>
         <source>Space</source>
         <translation>Κενό</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="196"/>
         <source>Options</source>
         <translation>Επιλογές</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="180"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="205"/>
         <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="30"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="197"/>
         <source>Global</source>
         <comment>Options</comment>
         <translation type="unfinished"></translation>
@@ -3446,77 +3805,93 @@
     <name>DialogFinalMeasurements</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="441"/>
         <source>Final measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="51"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="448"/>
         <source>Search</source>
         <translation type="unfinished">Αναζήτηση</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="319"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="478"/>
         <source>Name</source>
         <translation type="unfinished">Όνομα</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="324"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="480"/>
         <source>The calculated value</source>
         <translation type="unfinished">Η υπολογισμένη τιμή</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="329"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="482"/>
         <source>Formula</source>
         <translation type="unfinished">Φόρμουλα</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="341"/>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="344"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="484"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="486"/>
         <source>Details</source>
         <translation type="unfinished">Λεπτομέρειες</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="402"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="487"/>
         <source>Name:</source>
         <translation type="unfinished">Όνομα:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="416"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="488"/>
         <source>Calculated value:</source>
         <translation type="unfinished">Υπολογισμένη τιμή:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="430"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="489"/>
         <source>Formula:</source>
         <translation type="unfinished">Φόρμουλα:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="454"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="491"/>
         <source>Calculation</source>
         <translation type="unfinished">Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="482"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="494"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="517"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="497"/>
         <source>Formula wizard</source>
         <translation type="unfinished">Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="539"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="499"/>
         <source>Description:</source>
         <translation type="unfinished">Περιγραφή:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="570"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="501"/>
         <source>Move measurement up</source>
         <translation type="unfinished">Μετακίνηση μέτρησης προς τα πάνω</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="587"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="504"/>
         <source>Move measurement down</source>
         <translation type="unfinished">Μετακίνηση μέτρησης προς τα κάτω</translation>
     </message>
@@ -3574,62 +3949,74 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="443"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="41"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="446"/>
         <source>Alt+Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="68"/>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.cpp" line="807"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="449"/>
         <source>0 results</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="95"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="451"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="126"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="454"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="160"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="457"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="191"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="460"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="197"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="463"/>
         <source>Alt+U</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="466"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="226"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="469"/>
         <source>Shift+F3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="236"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="472"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="475"/>
         <source>F3</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3642,6 +4029,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="197"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="330"/>
         <source>Origin point:</source>
         <translation>Σημείο αρχής:</translation>
     </message>
@@ -3651,99 +4039,115 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="207"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="331"/>
         <source>Axis type:</source>
         <translation>Τύπος άξονα:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="224"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="234"/>
         <source>Select origin point</source>
         <translation>Επιλογή σημείου αρχής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="271"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="281"/>
         <source>Select origin point that is not part of the list of objects</source>
         <translation>Επιλέξτε σημείο προέλευσης που δεν είναι μέρος της λίστας αντικειμένων</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="358"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="374"/>
         <source>Vertical axis</source>
         <translation>Κάθετος άξονας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="375"/>
         <source>Horizontal axis</source>
         <translation>Οριζόντιος άξονας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="241"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="325"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="337"/>
         <source>Flipping by axis</source>
         <translation>Αναστροφή κατά άξονα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="222"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="335"/>
         <source>Visibility Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="125"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="336"/>
         <source>Name:</source>
         <translation>Όνομα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="251"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="338"/>
         <source>Tags:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="258"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="340"/>
         <source>Separate each tag with comma.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="261"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="342"/>
         <source>Add tags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="344"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="326"/>
         <source>New:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="142"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="328"/>
         <source>Pen style:</source>
         <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="177"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="329"/>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="369"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="343"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="385"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="295"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="345"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="341"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="357"/>
         <source>Invalid point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="219"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="333"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3756,6 +4160,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="197"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="330"/>
         <source>First line point:</source>
         <translation>Πρώτο σημείο γραμμής:</translation>
     </message>
@@ -3765,109 +4170,125 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="207"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="331"/>
         <source>Second line point:</source>
         <translation>Δεύτερο σημείο γραμμής:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="218"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="228"/>
         <source>Select first line point</source>
         <translation>Επιλογή πρώτου σημείου γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="273"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="283"/>
         <source>Select first line point that is not part of the list of objects</source>
         <translation>Επιλέξτε πρώτο σημείο γραμμής που δεν είναι μέρος της λίστας αντικειμένων</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="277"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="287"/>
         <source>Select second line point</source>
         <translation>Επιλογή δεύτερου σημείου γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="290"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="300"/>
         <source>Select second line point that is not part of the list of objects</source>
         <translation>Επιλέξτε δεύτερο σημείο γραμμής που δεν είναι μέρος της λίστας αντικειμένων</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="241"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="325"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="337"/>
         <source>Flipping by line</source>
         <translation>Αναστροφή κατά γραμμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="222"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="335"/>
         <source>Visibility Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="125"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="336"/>
         <source>Name:</source>
         <translation>Όνομα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="251"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="338"/>
         <source>Tags:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="258"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="340"/>
         <source>Separate each tag with comma.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="261"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="342"/>
         <source>Add tags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="344"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="326"/>
         <source>New:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="142"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="328"/>
         <source>Pen style:</source>
         <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="177"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="329"/>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="402"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="343"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="418"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="295"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="345"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="375"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="391"/>
         <source>Invalid line points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="382"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="398"/>
         <source>Invalid first line point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="389"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="405"/>
         <source>Invalid second line point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="219"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="333"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3876,123 +4297,149 @@
     <name>DialogGraduatedCurve</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="20"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="435"/>
         <source>Graduated curve tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="34"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="476"/>
         <source>Tool</source>
         <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="40"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="436"/>
         <source>Offsets</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="438"/>
         <source>Name</source>
         <translation type="unfinished">Όνομα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="80"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="440"/>
         <source>Calculated value</source>
         <translation type="unfinished">Υπολογισμένη τιμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="85"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="442"/>
         <source>Formula</source>
         <translation type="unfinished">Φόρμουλα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="100"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="444"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="446"/>
         <source>Details</source>
         <translation type="unfinished">Λεπτομέρειες</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="448"/>
         <source>Move offset up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="131"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="451"/>
         <source>Move offset down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="206"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="472"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="453"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="474"/>
         <source>Name:</source>
         <translation type="unfinished">Όνομα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="216"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="454"/>
         <source>Unique offset name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="226"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="455"/>
         <source>Calculated value:</source>
         <translation type="unfinished">Υπολογισμένη τιμή:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="233"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="456"/>
         <source>Formula:</source>
         <translation type="unfinished">Φόρμουλα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="257"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="458"/>
         <source>Calculation</source>
         <translation type="unfinished">Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="461"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="314"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="464"/>
         <source>Formula wizard</source>
         <translation type="unfinished">Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="361"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="466"/>
         <source>Description:</source>
         <translation type="unfinished">Περιγραφή:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="396"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="467"/>
         <source>Curve:</source>
         <translation type="unfinished">Καμπύλη:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="406"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="468"/>
         <source>Pen style:</source>
         <translation type="unfinished">Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="435"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="469"/>
         <source>Color:</source>
         <translation type="unfinished">Χρώμα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="449"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="470"/>
         <source>Approximation scale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="456"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="472"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="482"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="475"/>
         <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="512"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="477"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4028,11 +4475,13 @@
     <name>DialogGroup</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="91"/>
         <source>Group</source>
         <translation>Ομάδα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="26"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="92"/>
         <source>Group name:</source>
         <translation>Όνομα ομάδας:</translation>
     </message>
@@ -4042,6 +4491,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="36"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="96"/>
         <source>Choose group name</source>
         <translation>Επιλογή ονόματος ομάδας</translation>
     </message>
@@ -4052,16 +4502,19 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="46"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="97"/>
         <source>Tags:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="99"/>
         <source>Separate each tag with comma.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="56"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="101"/>
         <source>Add tags</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4104,6 +4557,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="182"/>
         <source>Perpendicular point along line</source>
         <translation>Κάθετο σημείο κατα μήκος της γραμμής</translation>
     </message>
@@ -4117,51 +4571,61 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="46"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="183"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="185"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="56"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="187"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="69"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="188"/>
         <source>Base point:</source>
         <translation>Βασικό σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="85"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="189"/>
         <source>First point of line:</source>
         <translation>Πρώτο σημείο της γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="190"/>
         <source>Second point of line:</source>
         <translation>Δεύτερο σημείο της γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="191"/>
         <source>Type of line:</source>
         <translation>Τύπος γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="140"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="192"/>
         <source>Line color:</source>
         <translation>Χρώμα γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="193"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="155"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="194"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4310,30 +4774,40 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="46"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="49"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1144"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1146"/>
         <source>Increments</source>
         <translation>Αυξήσεις</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="350"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1058"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1104"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1184"/>
         <source>Name</source>
         <translation>Όνομα</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="355"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1063"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1106"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1186"/>
         <source>The calculated value</source>
         <translation>Η υπολογισμένη τιμή</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1434"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1437"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1232"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1234"/>
         <source>Lines</source>
         <translation>Γραμμές</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1462"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1504"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1229"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1237"/>
         <source>Line</source>
         <translation>Γραμμή</translation>
     </message>
@@ -4341,6 +4815,9 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1467"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1551"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1231"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1255"/>
         <source>Length</source>
         <translation>Μήκος</translation>
     </message>
@@ -4348,40 +4825,53 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1546"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1588"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1630"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1261"/>
         <source>Curve</source>
         <translation>Καμπύλη</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1672"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1269"/>
         <source>Arc</source>
         <translation>Τόξο</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="20"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1067"/>
         <source>Tables of Variables</source>
         <translation>Πίνακες Μεταβλητών</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1476"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1479"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1240"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1242"/>
         <source>Lines angles</source>
         <translation>Γωνίες γραμμών</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1509"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1635"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1239"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1263"/>
         <source>Angle</source>
         <translation>Γωνία</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1518"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1521"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1248"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1250"/>
         <source>Lengths curves</source>
         <translation>Μήκη καμπυλών</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1602"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1605"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1264"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1266"/>
         <source>Angles curves</source>
         <translation>Γωνίες καμπυλών</translation>
     </message>
@@ -4392,11 +4882,14 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1644"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1647"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1272"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1274"/>
         <source>Radiuses arcs</source>
         <translation>Ακτίνες τόξων</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1677"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1271"/>
         <source>Radius</source>
         <translation>Ακτίνα</translation>
     </message>
@@ -4407,6 +4900,8 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="360"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1068"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1108"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1188"/>
         <source>Formula</source>
         <translation>Φόρμουλα</translation>
     </message>
@@ -4415,48 +4910,66 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="375"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1080"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1083"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1110"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1112"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1190"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1192"/>
         <source>Details</source>
         <translation>Λεπτομέρειες</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="389"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1097"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1194"/>
         <source>Move measurement up</source>
         <translation>Μετακίνηση μέτρησης προς τα πάνω</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="406"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1117"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1197"/>
         <source>Move measurement down</source>
         <translation>Μετακίνηση μέτρησης προς τα κάτω</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="526"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1228"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1125"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1205"/>
         <source>Name:</source>
         <translation>Όνομα:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="550"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1128"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1207"/>
         <source>Calculated value:</source>
         <translation>Υπολογισμένη τιμή:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="564"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1259"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1129"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1208"/>
         <source>Formula:</source>
         <translation>Φόρμουλα:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="616"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1311"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1134"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1213"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="667"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1362"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1139"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1218"/>
         <source>Description:</source>
         <translation>Περιγραφή:</translation>
     </message>
@@ -4580,18 +5093,23 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="536"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1126"/>
         <source>Unique increment name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="588"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1283"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1131"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1210"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="645"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1340"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1137"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1216"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
@@ -4606,12 +5124,16 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="82"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="790"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1074"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1154"/>
         <source>Search</source>
         <translation>Αναζήτηση</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1560"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1563"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1256"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1258"/>
         <source>Curves control point lengths</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4623,23 +5145,30 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="695"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1403"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1220"/>
         <source>Refresh a pattern with all changes you made</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="698"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1406"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1222"/>
         <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="754"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="757"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1224"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1226"/>
         <source>Preview calculations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1238"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1206"/>
         <source>Unique variable name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4656,12 +5185,16 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="63"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="771"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1069"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1149"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="72"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="780"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1072"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1152"/>
         <source>Alt+Down</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4670,60 +5203,80 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="807"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1033"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1067"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1075"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1155"/>
         <source>0 results</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="126"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="834"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1077"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1157"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="157"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="865"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1080"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1160"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="191"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="899"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1083"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1163"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="222"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="930"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1086"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1166"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="228"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="936"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1089"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1169"/>
         <source>Alt+U</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="248"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="956"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1092"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1172"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="257"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="965"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1095"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1175"/>
         <source>Shift+F3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="267"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="975"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1098"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1178"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="276"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="984"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1181"/>
         <source>F3</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4731,6 +5284,8 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="459"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1167"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1760"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1120"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1200"/>
         <source>Export to CSV</source>
         <translation type="unfinished">Εξαγωγή σε CSV</translation>
     </message>
@@ -4738,12 +5293,16 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="475"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1177"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1694"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1123"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1203"/>
         <source>Import from CSV</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="543"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1415"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1223"/>
         <source>Units:</source>
         <translation>Μονάδες μέτρησης:</translation>
     </message>
@@ -4772,37 +5331,44 @@
     <name>DialogIncrementsCSVColumns</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="163"/>
         <source>Import increments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="26"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="164"/>
         <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="165"/>
         <source>Input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="48"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="166"/>
         <source>Import</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="67"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="167"/>
         <source>Columns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="96"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="168"/>
         <source>Description:</source>
         <translation type="unfinished">Περιγραφή:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="111"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="510"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="169"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4856,6 +5422,7 @@
     <name>DialogInsertNode</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialoginsertnode.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoginsertnode.h" line="100"/>
         <source>Piece:</source>
         <translation>Κομμάτι:</translation>
     </message>
@@ -4866,6 +5433,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialoginsertnode.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoginsertnode.h" line="99"/>
         <source>Insert nodes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4876,6 +5444,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialoginsertnode.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoginsertnode.h" line="101"/>
         <source>Number:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4884,16 +5453,19 @@
     <name>DialogKnownMaterials</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogknownmaterials.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogknownmaterials.h" line="116"/>
         <source>Known materials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogknownmaterials.ui" line="33"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogknownmaterials.h" line="117"/>
         <source>Material:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogknownmaterials.ui" line="49"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogknownmaterials.h" line="118"/>
         <source>Name of material</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5019,6 +5591,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutprogress.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutprogress.h" line="109"/>
         <source>Create a Layout</source>
         <translation>Δημιουργία σχεδίου</translation>
     </message>
@@ -5028,11 +5601,13 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutprogress.ui" line="36"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutprogress.h" line="110"/>
         <source>Nesting. Please, wait.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutprogress.ui" line="81"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutprogress.h" line="111"/>
         <source>Time left:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5051,16 +5626,19 @@
     <name>DialogLayoutScale</name>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="255"/>
         <source>Layout scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="29"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="256"/>
         <source>Margins</source>
         <translation>Περιθώρια</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="44"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="257"/>
         <source>Left:</source>
         <translation>Αριστερά:</translation>
     </message>
@@ -5069,36 +5647,46 @@
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="74"/>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="97"/>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="120"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="258"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="262"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="264"/>
         <source>cm</source>
         <translation>εκ</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="67"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="259"/>
         <source>Right:</source>
         <translation>Δεξιά:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="90"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="261"/>
         <source>Top:</source>
         <translation>Επάνω:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="113"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="263"/>
         <source>Bottom:</source>
         <translation>Κάτω:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="135"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="265"/>
         <source>Scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="266"/>
         <source>Horizontal:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="150"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="267"/>
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5111,16 +5699,19 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="70"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="591"/>
         <source>Templates:</source>
         <translation>Πρότυπα:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="147"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="592"/>
         <source>Width:</source>
         <translation>Φάρδος:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="160"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="593"/>
         <source>Height:</source>
         <translation>Ύψος:</translation>
     </message>
@@ -5150,16 +5741,19 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="532"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="628"/>
         <source>Three groups: big, middle, small</source>
         <translation>Τρείς ομάδες: μεγάλα, μεσαία, μικρά</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="542"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="629"/>
         <source>Two groups: big, small</source>
         <translation>Δύο ομάδες: μεγάλα, μικρά</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="555"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="630"/>
         <source>Descending area</source>
         <translation>Σμίκρυνση περιοχής</translation>
     </message>
@@ -5188,26 +5782,31 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="589"/>
         <source>Create a layout</source>
         <translation>Δημιουργία σχεδίου</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="590"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="635"/>
         <source>Auto crop unused length</source>
         <translation>Αυτόματη περικοπή αχρησιμοποίητου μήκους</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="604"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="637"/>
         <source>Unite pages (if possible)</source>
         <translation>Ενοποίηση σελίδων (αν είναι δυνατό)</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="409"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="611"/>
         <source>Gap width:</source>
         <translation>Φάρδος περιθωρίου:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="479"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="620"/>
         <source>Save length of the sheet</source>
         <translation>Αποθήκευση μήκους του φύλλου</translation>
     </message>
@@ -5241,6 +5840,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="44"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="590"/>
         <source>Paper format</source>
         <translation>Μορφή χαρτιού</translation>
     </message>
@@ -5250,21 +5850,25 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="255"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="596"/>
         <source>Left:</source>
         <translation>Αριστερά:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="269"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="597"/>
         <source>Right:</source>
         <translation>Δεξιά:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="283"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="598"/>
         <source>Top:</source>
         <translation>Επάνω:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="297"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="599"/>
         <source>Bottom:</source>
         <translation>Κάτω:</translation>
     </message>
@@ -5299,6 +5903,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="391"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="609"/>
         <source>Layout options</source>
         <translation>Επιλογές τοποθέτησης</translation>
     </message>
@@ -5308,6 +5913,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="524"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="627"/>
         <source>Rule for choosing the next workpiece</source>
         <translation>Κανόνας για την επιλογή του επόμενου κομματιού εργασίας</translation>
     </message>
@@ -5317,16 +5923,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="621"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="641"/>
         <source>Divide into strips</source>
         <translation>Διαίρεση σε λωρίδες</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="633"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="642"/>
         <source>Multiplier</source>
         <translation>Πολλαπλασιαστής</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="640"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="644"/>
         <source>Set multiplier for length of the biggest workpiece in layout.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5336,11 +5945,13 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="618"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="639"/>
         <source>Enabling for sheets that have big height will speed up creating.</source>
         <translation>Η ενεργοποίηση φύλλων μεγάλου μεγέθους θα επιταχύνει τη δημιουργία.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="228"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="594"/>
         <source>Printer:</source>
         <translation>Εκτυπωτής:</translation>
     </message>
@@ -5352,26 +5963,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="601"/>
         <source>Text</source>
         <translation>Κείμενο</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="333"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="603"/>
         <source>Text will be converted to paths</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="336"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="605"/>
         <source>Export text as paths</source>
         <translation>Εξαγωγή κειμένου ως μονοπάτια</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="246"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="595"/>
         <source>Margins</source>
         <translation>Περιθώρια</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="320"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="600"/>
         <source>Ignore margins</source>
         <translation>Αγνόηση περιθωρίων</translation>
     </message>
@@ -5384,77 +6000,92 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="503"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="625"/>
         <source>Follow grainline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="399"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="610"/>
         <source>Time:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="346"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="606"/>
         <source>Boundary together with notches</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="353"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="607"/>
         <source>Debug</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="608"/>
         <source>Show layout allowance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="416"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="613"/>
         <source>Time given for the algorithm to find best layout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="454"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="616"/>
         <source>Efficiency:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="461"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="618"/>
         <source>Set layout efficiency coefficient. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="510"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="626"/>
         <source>Manual priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="573"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="632"/>
         <source>Nest quantity of copies according to piece settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="576"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="634"/>
         <source>Nest quantity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="597"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="636"/>
         <source>Auto crop unused width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="489"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="624"/>
         <source>Prefer one sheet solution</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="419"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="615"/>
         <source> min</source>
         <comment>minutes</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="486"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="622"/>
         <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5484,6 +6115,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="204"/>
         <source>Line between points</source>
         <translation>Γραμμή ανάμεσα σε σημεία</translation>
     </message>
@@ -5493,36 +6125,43 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="208"/>
         <source>First point:</source>
         <translation>Πρώτο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="88"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="207"/>
         <source>Second point:</source>
         <translation>Δεύτερο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="52"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="205"/>
         <source>Type of line:</source>
         <translation>Τύπος γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="206"/>
         <source>Line color:</source>
         <translation>Χρώμα γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="210"/>
         <source>Swap points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="37"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="212"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="213"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5535,6 +6174,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="64"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="216"/>
         <source>First line</source>
         <translation>Πρώτη γραμμή</translation>
     </message>
@@ -5548,6 +6188,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="219"/>
         <source>Second line</source>
         <translation>Δεύτερη γραμμή</translation>
     </message>
@@ -5568,43 +6209,53 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="210"/>
         <source>Point at line intersection</source>
         <translation>Σημείο στην τομή γραμμής</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="45"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="211"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="52"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="213"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="55"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="215"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="78"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="117"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="220"/>
         <source>First point:</source>
         <translation>Πρώτο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="88"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="218"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="221"/>
         <source>Second point:</source>
         <translation>Δεύτερο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="222"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="156"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="223"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5621,6 +6272,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="313"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -5630,6 +6282,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="254"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="321"/>
         <source>First point of line</source>
         <translation>Πρώτο σημείο της γραμμής</translation>
     </message>
@@ -5651,31 +6304,35 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="329"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="334"/>
         <source>Show line from first point to this point</source>
         <translation>Εμφάνιση γραμμής απο το πρώτο ως αυτό το σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="304"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="309"/>
         <source>Select second point of line</source>
         <translation>Επιλέξτε το δεύτερο σημείο της γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="316"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="321"/>
         <source>Select axis point</source>
         <translation>Επιλογή σημείου άξονα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="300"/>
         <source>Point intersect line and axis</source>
         <translation>Σημείο στην τομή γραμμής και άξονα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="317"/>
         <source>Axis Point</source>
         <translation>Σημείο άξονα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="274"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="325"/>
         <source>Second point of line</source>
         <translation>Δεύτερο σημείο της γραμμής</translation>
     </message>
@@ -5684,77 +6341,91 @@ Apply settings anyway?</source>
         <translation type="vanished">Χρώμα γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="397"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="402"/>
         <source>Edit angle</source>
         <translation>Επεξεργασία γωνίας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="301"/>
         <source>Angle:</source>
         <translation>Γωνία:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="303"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="307"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="173"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="310"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="315"/>
         <source>Axis point:</source>
         <translation>Σημείο άξονα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="319"/>
         <source>First line point:</source>
         <translation>Πρώτο σημείο γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="267"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="323"/>
         <source>Second line point:</source>
         <translation>Δεύτερο σημείο γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="287"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="327"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="300"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="329"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="303"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="331"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="310"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="332"/>
         <source>Type of line:</source>
         <translation>Τύπος γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="342"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="336"/>
         <source>Line color:</source>
         <translation>Χρώμα γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="337"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="372"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="338"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5847,29 +6518,29 @@ Apply settings anyway?</source>
         <translation type="vanished">Διαστάσεις σχεδίασης πατρόν</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="153"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="330"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="155"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="343"/>
         <source>General</source>
         <comment>Measurement section</comment>
         <translation>Γενικά</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="265"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="278"/>
         <source>Collapse All</source>
         <translation>Σύμπτηξη Όλων</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="268"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="281"/>
         <source>Expand All</source>
         <translation>Ανάπτυξη Όλων</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="278"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="291"/>
         <source>Check all</source>
         <translation>Επιλογή όλων</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="278"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="291"/>
         <source>Uncheck all</source>
         <translation>Αποεπιλογή όλων</translation>
     </message>
@@ -6013,6 +6684,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="256"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="577"/>
         <source>Angle:</source>
         <translation>Γωνία:</translation>
     </message>
@@ -6020,6 +6692,9 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="276"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="455"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="634"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="579"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="607"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
@@ -6027,6 +6702,9 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="318"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="497"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="676"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="583"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="597"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="611"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
@@ -6034,11 +6712,15 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="366"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="545"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="724"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="589"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="603"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="617"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού σε πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="435"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="591"/>
         <source>Length:</source>
         <translation>Μήκος:</translation>
     </message>
@@ -6047,12 +6729,12 @@ Apply settings anyway?</source>
         <translation type="vanished">Κατάληξη:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="451"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="471"/>
         <source>Edit angle</source>
         <translation>Επεξεργασία γωνίας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="479"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="499"/>
         <source>Edit length</source>
         <translation>Επεξεργασία μήκους</translation>
     </message>
@@ -6060,27 +6742,34 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="344"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="523"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="702"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="586"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="600"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="614"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="17"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="787"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="566"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="625"/>
         <source>Move</source>
         <translation>Μετακίνηση</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="614"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="605"/>
         <source>Rotation angle:</source>
         <translation>Γωνία περιστροφής:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="465"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="485"/>
         <source>Edit rotation angle</source>
         <translation>Αλλαγή γωνίας περιστροφής</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="753"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="619"/>
         <source>Rotation origin point:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6091,88 +6780,103 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="768"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="623"/>
         <source>Visibility Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="138"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="780"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="574"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="624"/>
         <source>Name:</source>
         <translation>Όνομα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="797"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="626"/>
         <source>Tags:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="804"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="628"/>
         <source>Separate each tag with comma.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="807"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="630"/>
         <source>Add tags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="632"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="45"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="567"/>
         <source>New:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="569"/>
         <source>Bulk rename</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="119"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="572"/>
         <source>Remove object</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="152"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="575"/>
         <source>Pen style:</source>
         <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="193"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="576"/>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="820"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="617"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="631"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="643"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="841"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="633"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="558"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="584"/>
         <source>Invalid angle formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="574"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="600"/>
         <source>Invalid rotation angle formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="590"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="616"/>
         <source>Invalid length formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="765"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="621"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6181,16 +6885,19 @@ Apply settings anyway?</source>
     <name>DialogMoveSteps</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogmovesteps.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogmovesteps.h" line="87"/>
         <source>Move steps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogmovesteps.ui" line="29"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogmovesteps.h" line="88"/>
         <source>Move Tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogmovesteps.ui" line="41"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogmovesteps.h" line="89"/>
         <source>Steps:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6262,6 +6969,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="52"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="97"/>
         <source>Units:</source>
         <translation>Μονάδες μέτρησης:</translation>
     </message>
@@ -6282,21 +6990,25 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="35"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="92"/>
         <source>Pattern piece name:</source>
         <translation>Όνομα κομματιού πατρόν:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="94"/>
         <source>Unique pattern piece name</source>
         <translation>Μοναδικό όνομα κομματιού πατρόν</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="45"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="96"/>
         <source>Choose unique pattern piece name.</source>
         <translation>Επιλογή μοναδικού ονόματος για κομμάτι του πατρόν.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="91"/>
         <source>New pattern</source>
         <translation>Νέο πατρόν</translation>
     </message>
@@ -6326,6 +7038,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="475"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στο πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -6360,6 +7073,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="462"/>
         <source>Point along perpendicular</source>
         <translation>Σημείο κατα μήκος της καθέτου</translation>
     </message>
@@ -6382,76 +7096,91 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="463"/>
         <source>Length:</source>
         <translation>Μήκος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="465"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="144"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="469"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="472"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="477"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="479"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="481"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="482"/>
         <source>First point:</source>
         <translation>Πρώτο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="280"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="484"/>
         <source>Swap points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="317"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="486"/>
         <source>Second point:</source>
         <translation>Δεύτερο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="343"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="487"/>
         <source>Additional angle degrees:</source>
         <translation>Πρόσθετες μοίρες γωνίας:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="537"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="488"/>
         <source>Type of line:</source>
         <translation>Τύπος γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="566"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="489"/>
         <source>Line color:</source>
         <translation>Χρώμα γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="490"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="596"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="491"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6464,23 +7193,28 @@ Apply settings anyway?</source>
         <translation type="unfinished">Περιστροφή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="174"/>
         <source>Invalid group name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="233"/>
         <source>Default</source>
         <translation type="unfinished">Προεπιλογή</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="307"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="325"/>
         <source>Invalid label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="307"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="325"/>
         <source>Invalid name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="573"/>
+        <source>Adding or removing objects can&apos;t be applied while the dialog stays open. Use OK to confirm.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6488,81 +7222,96 @@ Apply settings anyway?</source>
     <name>DialogParallelCurve</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="283"/>
         <source>Parallel curve tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="307"/>
         <source>Tool</source>
         <translation type="unfinished">Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="284"/>
         <source>Width:</source>
         <translation type="unfinished">Φάρδος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="286"/>
         <source>Formula wizard</source>
         <translation type="unfinished">Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="290"/>
         <source>Value</source>
         <translation type="unfinished">Τιμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="167"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="293"/>
         <source>Calculation</source>
         <translation type="unfinished">Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="189"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="296"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="224"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="298"/>
         <source>Curve:</source>
         <translation type="unfinished">Καμπύλη:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="299"/>
         <source>Color:</source>
         <translation type="unfinished">Χρώμα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="241"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="300"/>
         <source>Pen style:</source>
         <translation type="unfinished">Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="270"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="301"/>
         <source>Approximation scale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="277"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="303"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="293"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="305"/>
         <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="314"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="306"/>
         <source>Name:</source>
         <translation type="unfinished">Όνομα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="340"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="308"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.cpp" line="316"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.cpp" line="321"/>
         <source>Edit width to parallel curve</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6571,16 +7320,19 @@ Apply settings anyway?</source>
     <name>DialogPatternMaterials</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpatternmaterials.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpatternmaterials.h" line="74"/>
         <source>Dialog</source>
         <translation type="unfinished">Διάλογος</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpatternmaterials.ui" line="48"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpatternmaterials.h" line="76"/>
         <source>Placeholder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpatternmaterials.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpatternmaterials.h" line="78"/>
         <source>Value</source>
         <translation type="unfinished">Τιμή</translation>
     </message>
@@ -6589,6 +7341,7 @@ Apply settings anyway?</source>
     <name>DialogPatternProperties</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="303"/>
         <source>Pattern properties</source>
         <translation>Ιδιότητες πατρόν</translation>
     </message>
@@ -6602,6 +7355,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="318"/>
         <source>Pattern description</source>
         <translation>Περιγραφή πατρόν</translation>
     </message>
@@ -6643,52 +7397,63 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="297"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="327"/>
         <source>Security</source>
         <translation>Ασφάλεια</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="303"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="326"/>
         <source>Open only for read</source>
         <translation>Άνοιγμα μόνο για ανάγνωση</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="259"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="321"/>
         <source>Call context menu for edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="121"/>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="138"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="310"/>
         <source>Name of measurement or increment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="131"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="309"/>
         <source>Passmark width:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="150"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="311"/>
         <source>Default piece label template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="169"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="313"/>
         <source>Path to default label template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="315"/>
         <source>Select path to label template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="188"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="317"/>
         <source>Browse…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="262"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="323"/>
         <source>No image</source>
         <translation>Χωρίς εικόνα</translation>
     </message>
@@ -6744,11 +7509,14 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="36"/>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="156"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="304"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="312"/>
         <source>Path:</source>
         <translation>Διαδρομή:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="77"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="305"/>
         <source>Show in Explorer</source>
         <translation>Εμφάνιση στην Εξερεύνηση</translation>
     </message>
@@ -6813,21 +7581,25 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="325"/>
         <source>Pattern</source>
         <translation type="unfinished">Πατρόν</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="284"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="324"/>
         <source>For technical notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="97"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="306"/>
         <source>Label language:</source>
         <translation>Γλώσσα ετικέτας:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="307"/>
         <source>Passmark length:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6996,88 +7768,105 @@ Apply settings anyway?</source>
     <name>DialogPiecePath</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1413"/>
         <source>Piece path tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1458"/>
         <source>Path</source>
         <translation>Μονοπάτι</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="39"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1414"/>
         <source>Name:</source>
         <translation>Όνομα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="46"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1415"/>
         <source>Unnamed path</source>
         <translation>Ανώνυμο μονοπάτι</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="49"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1416"/>
         <source>Create name for your path</source>
         <translation>Δημιουργία ονόματος για το μονοπάτι σας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="56"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1417"/>
         <source>Type:</source>
         <translation>Τύπος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="89"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1419"/>
         <source>Piece:</source>
         <translation>Κομμάτι:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="66"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1418"/>
         <source>Type of pen:</source>
         <translation>Τύπος πένας:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="120"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1423"/>
         <source>Reverse node direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="139"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1426"/>
         <source>Excluded node</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1429"/>
         <source>Turn point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="177"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1432"/>
         <source>Check node uniqness</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="196"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1435"/>
         <source>Notch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="215"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1438"/>
         <source>Delete node</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="339"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1457"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2216"/>
         <source>Ready!</source>
         <translation>Έτοιμο!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="356"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1509"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2069"/>
         <source>Seam allowance</source>
         <translation>Περιθώριο ραφής</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="407"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1459"/>
         <source>Width:</source>
         <translation>Φάρδος:</translation>
     </message>
@@ -7090,6 +7879,14 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1888"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2105"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2352"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1461"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1480"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1497"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1560"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1574"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1588"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1602"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1622"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
@@ -7102,6 +7899,14 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1942"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2153"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2394"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1464"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1483"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1500"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1563"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1577"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1591"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1605"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1625"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
@@ -7112,6 +7917,12 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1524"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1749"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1974"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1467"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1486"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1503"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1566"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1580"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1594"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
@@ -7124,53 +7935,72 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1999"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2210"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2448"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1470"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1489"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1506"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1569"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1583"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1597"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1612"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1632"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού σε πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="547"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1472"/>
         <source>Nodes</source>
         <translation>Κόμβοι</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="555"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1473"/>
         <source>Node:</source>
         <translation>Κόμβος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="629"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1474"/>
         <source>Before:</source>
         <translation>Πριν:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="652"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="850"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1476"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1493"/>
         <source>Return to default width</source>
         <translation>Επιστροφή στο προεπιλεγμένο πλάτος</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="655"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="853"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1478"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1495"/>
         <source>Default</source>
         <translation>Προεπιλογή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="827"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1491"/>
         <source>After:</source>
         <translation>Μετά:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="982"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1508"/>
         <source>Angle:</source>
         <translation>Γωνία:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2182"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1608"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a notch visible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2420"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1628"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7231,58 +8061,70 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1028"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1619"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2074"/>
         <source>Passmarks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1039"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1510"/>
         <source>Passmark:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1075"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1512"/>
         <source>One line</source>
         <translation>Μια γραμμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1088"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1513"/>
         <source>Two lines</source>
         <translation>Δυο γραμμές</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1514"/>
         <source>Three lines</source>
         <translation>Τρείς γραμμές</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1805"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1527"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1585"/>
         <source>Angle</source>
         <translation>Γωνία</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1201"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1528"/>
         <source>Straightforward</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1214"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1529"/>
         <source>Bisector</source>
         <translation>Διχοτόμος</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1066"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1511"/>
         <source>Marks</source>
         <translation>Σημάδια</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1515"/>
         <source>T mark</source>
         <translation>Σημάδι Τ</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1130"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1519"/>
         <source>V mark</source>
         <translation>Σημάδι V</translation>
     </message>
@@ -7299,11 +8141,14 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1227"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1275"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1531"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1543"/>
         <source>Select if need designate the corner point as a passmark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1230"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1533"/>
         <source>Intersection</source>
         <translation>Διατομή</translation>
     </message>
@@ -7314,81 +8159,99 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="325"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1455"/>
         <source>Cut on fabric</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="332"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1338"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1456"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1555"/>
         <source>Not Mirrored</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1055"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1556"/>
         <source>Type</source>
         <translation>Τύπος</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1176"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1526"/>
         <source>Check mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1243"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1291"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1535"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1547"/>
         <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1246"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1537"/>
         <source>Intersection (only left)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1259"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1307"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1539"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1551"/>
         <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1262"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1541"/>
         <source>Intersection (only right)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1328"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1554"/>
         <source>Clockwise opening</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1346"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1599"/>
         <source>Manual shape</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1355"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1557"/>
         <source>Length</source>
         <translation>Μήκος</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1415"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1558"/>
         <source>Length:</source>
         <comment>notch depth</comment>
         <translation>Μήκος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1580"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1571"/>
         <source>Width</source>
         <translation>Φάρδος</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1640"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1572"/>
         <source>Width:</source>
         <comment>notch width</comment>
         <translation>Φάρδος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1865"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1586"/>
         <source>Angle:</source>
         <comment>notch angle</comment>
         <translation>Γωνία:</translation>
@@ -7396,18 +8259,24 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2028"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2278"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1614"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1634"/>
         <source>Control</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2082"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2329"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1600"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1620"/>
         <source>Visible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2188"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2426"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1610"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1630"/>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7418,51 +8287,61 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1278"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1545"/>
         <source>Intersection 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1294"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1549"/>
         <source>Intersection 2 (only left)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1310"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1553"/>
         <source>Intersection 2 (only right)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="242"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1441"/>
         <source>Move on top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="259"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1444"/>
         <source>Move up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="276"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1447"/>
         <source>Move down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="293"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1450"/>
         <source>Move on bottom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1420"/>
         <source>Continue the first point to the cutting contour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="108"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1421"/>
         <source>Continue the last point to the cutting contour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="322"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1453"/>
         <source>The path is a cut contour. Use to control export to DXF-AAMA</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7473,11 +8352,13 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2254"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1616"/>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2257"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1618"/>
         <source>Show the second passmark on seam line</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7508,26 +8389,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1517"/>
         <source>Acute angle that looks inside of piece</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1521"/>
         <source>Acute angle that looks outside of piece</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1146"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1523"/>
         <source>V mark 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1156"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1524"/>
         <source>U mark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1166"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1525"/>
         <source>Box mark</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7546,21 +8432,25 @@ Apply settings anyway?</source>
     <name>DialogPin</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="21"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpin.h" line="91"/>
         <source>Pin tool</source>
         <translation>Εργαλειο πινέζας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="29"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpin.h" line="93"/>
         <source>Point:</source>
         <translation>Σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="39"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpin.h" line="94"/>
         <source>Piece:</source>
         <translation>Κομμάτι:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpin.h" line="89"/>
         <source>Pin</source>
         <translation>Πινέζα</translation>
     </message>
@@ -7574,6 +8464,7 @@ Apply settings anyway?</source>
     <name>DialogPlaceLabel</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="480"/>
         <source>Width:</source>
         <translation type="unfinished">Φάρδος:</translation>
     </message>
@@ -7582,6 +8473,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="281"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="463"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="702"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="482"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="496"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="510"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="530"/>
         <source>Formula wizard</source>
         <translation type="unfinished">Βοηθός φόρμουλας</translation>
     </message>
@@ -7590,6 +8485,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="323"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="505"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="744"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="486"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="500"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="514"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="534"/>
         <source>Value</source>
         <translation type="unfinished">Τιμή</translation>
     </message>
@@ -7597,6 +8496,9 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="170"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="352"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="534"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="489"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="503"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="517"/>
         <source>Calculation</source>
         <translation type="unfinished">Υπολογισμός</translation>
     </message>
@@ -7605,36 +8507,46 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="374"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="559"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="798"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="492"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="506"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="521"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="541"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="261"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="494"/>
         <source>Height:</source>
         <translation type="unfinished">Ύψος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="443"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="508"/>
         <source>Angle:</source>
         <translation type="unfinished">Γωνία:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="540"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="519"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="588"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="523"/>
         <source>Point:</source>
         <translation type="unfinished">Σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="598"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="524"/>
         <source>Piece:</source>
         <translation type="unfinished">Κομμάτι:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="608"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="525"/>
         <source>Type:</source>
         <translation type="unfinished">Τύπος:</translation>
     </message>
@@ -7697,31 +8609,38 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="479"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="527"/>
         <source>Place label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="620"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="526"/>
         <source>Not mirrored</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="628"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="543"/>
         <source>Control</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="679"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="528"/>
         <source>Visible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="770"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="537"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="776"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="539"/>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7745,6 +8664,7 @@ Apply settings anyway?</source>
     <name>DialogPointFromArcAndTangent</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="161"/>
         <source>Point from arc and tangent</source>
         <translation>Σημείο απο τόξο και εφαπτoμένη</translation>
     </message>
@@ -7775,41 +8695,49 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="162"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="50"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="164"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="166"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="66"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="167"/>
         <source>Tangent point:</source>
         <translation>Σημείο εφαπτομένης:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="95"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="168"/>
         <source>Arc:</source>
         <translation>Τόξο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="118"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="169"/>
         <source>Take:</source>
         <translation>Πάρε:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="170"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="129"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="171"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7818,6 +8746,7 @@ Apply settings anyway?</source>
     <name>DialogPointFromCircleAndTangent</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="274"/>
         <source>Point from circle and tangent</source>
         <translation>Σημείο απο κύκλο και εφαπτομένη</translation>
     </message>
@@ -7827,6 +8756,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="189"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="287"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -7851,82 +8781,94 @@ Apply settings anyway?</source>
         <translation type="vanished">Πάρε</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="265"/>
         <source>Select a circle center</source>
         <translation>Επιλέξτε ένα κέντρο κύκλου</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="321"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="326"/>
         <source>Edit radius</source>
         <translation>Επεξεργασία ακτίνας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="345"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="350"/>
         <source>Error</source>
         <translation>Σφάλμα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="346"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="351"/>
         <source>Radius can&apos;t be negative</source>
         <translation>Η τιμή της ακτίνας δε μπορεί να είναι αρνητική</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="275"/>
         <source>Radius:</source>
         <translation>Ακτίνα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="277"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="281"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="167"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="284"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="225"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="289"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="232"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="291"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="235"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="293"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="248"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="294"/>
         <source>Center of the circle:</source>
         <translation>Κέντρο του κύκλου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="277"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="295"/>
         <source>Tangent point:</source>
         <translation>Σημείο εφαπτομένης:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="300"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="296"/>
         <source>Take:</source>
         <translation>Πάρε:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="297"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="326"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="298"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7943,6 +8885,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="296"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -7974,6 +8917,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="283"/>
         <source>Point at intersection of arc and line</source>
         <translation>Σημείο στην τομή τόξου και γραμμής</translation>
     </message>
@@ -7984,61 +8928,73 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="284"/>
         <source>Radius:</source>
         <translation>Ακτίνα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="286"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="144"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="290"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="293"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="298"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="300"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="302"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="303"/>
         <source>Center of arc:</source>
         <translation>Κέντρο του κύκλου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="279"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="304"/>
         <source>Top of the line:</source>
         <translation>Κορυφή γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="305"/>
         <source>End of the line:</source>
         <translation>Τέλος γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="306"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="307"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8059,6 +9015,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="179"/>
         <source>Point from X and Y of two other points</source>
         <translation>Σημείο απο τα Χ και Υ δύο άλλων σημείων</translation>
     </message>
@@ -8077,41 +9034,49 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="180"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="56"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="182"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="184"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="72"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="185"/>
         <source>X: vertical point:</source>
         <translation>X: κάθετο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="187"/>
         <source>Swap points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="139"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="189"/>
         <source>Y: horizontal point:</source>
         <translation>Υ: οριζόντιο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="190"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="150"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="191"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8149,11 +9114,13 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="275"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="49"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="277"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
@@ -8163,82 +9130,103 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="65"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="280"/>
         <source>First arc:</source>
         <translation>Πρώτο τόξο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="81"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="281"/>
         <source>Second arc:</source>
         <translation>Δεύτερο τόξο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="91"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="282"/>
         <source>Take:</source>
         <translation>Πάρε:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="274"/>
         <source>Tool point of intersetion arcs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="297"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="52"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="279"/>
         <source>Choose unique label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="283"/>
         <source>Arc 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="109"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="202"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="284"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="293"/>
         <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="123"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="216"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="295"/>
         <source>Name1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="137"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="195"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="286"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="292"/>
         <source>Alias1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="144"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="287"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="296"/>
         <source>Name2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="151"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="181"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="288"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="291"/>
         <source>Choose unique name for left sub arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="158"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="209"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="289"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="294"/>
         <source>Choose unique name for right sub arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="168"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="290"/>
         <source>Arc 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="298"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8256,6 +9244,8 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="189"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="369"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="365"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="379"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -8284,103 +9274,120 @@ Apply settings anyway?</source>
         <translation type="vanished">Πάρε</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="279"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="330"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="289"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="340"/>
         <source>Select second circle center</source>
         <translation>Επιλέξτε κέντρο δεύτερου κύκλου</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="401"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="411"/>
         <source>Edit first circle radius</source>
         <translation>Επεξεργασία πρώτης ακτίνας κύκλου</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="415"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="425"/>
         <source>Edit second circle radius</source>
         <translation>Επεξεργασία δεύτερης ακτίνας κύκλου</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="439"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="449"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="470"/>
         <source>Error</source>
         <translation>Σφάλμα</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="440"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="461"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="450"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="471"/>
         <source>Radius can&apos;t be negative</source>
         <translation>Η τιμή της ακτίνας δε μπορεί να είναι αρνητική</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="353"/>
         <source>Radius of the first circle:</source>
         <translation>Ακτίνα πρώτου κύκλου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="99"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="279"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="355"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="369"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="141"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="321"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="373"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="167"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="347"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="362"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="376"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="259"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="367"/>
         <source>Radius of the second circle:</source>
         <translation>Ακτίνα του δεύτερου κύκλου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="405"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="381"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="383"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="415"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="385"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="428"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="386"/>
         <source>Center of the first circle:</source>
         <translation>Κέντρο του πρώτου κύκλου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="457"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="387"/>
         <source>Center of the second circle:</source>
         <translation>Κέντρο του δεύτερου κύκλου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="480"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="388"/>
         <source>Take:</source>
         <translation>Πάρε:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="352"/>
         <source>Tool point of intersection circles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="389"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="506"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="390"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8389,41 +9396,49 @@ Apply settings anyway?</source>
     <name>DialogPointOfIntersectionCurves</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="291"/>
         <source>Tool point of intersection curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="292"/>
         <source>First curve:</source>
         <translation>Πρώτη καμπύλη:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="62"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="296"/>
         <source>Second curve:</source>
         <translation>Δεύτερη καμπύλη:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="78"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="297"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="91"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="299"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="94"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="301"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="302"/>
         <source>Vertical correction:</source>
         <translation>Κάθετη διόρθωση:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="303"/>
         <source>Horizontal correction:</source>
         <translation>Οριζόντια διόρθωση:</translation>
     </message>
@@ -8434,57 +9449,73 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="318"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="143"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="236"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="306"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="316"/>
         <source>Name1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="164"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="317"/>
         <source>Name2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="171"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="201"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="309"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="312"/>
         <source>Choose unique name for left sub curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="178"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="229"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="310"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="315"/>
         <source>Choose unique name for right sub curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="254"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="319"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="123"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="304"/>
         <source>Curve 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="157"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="215"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="307"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="313"/>
         <source>Alias1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="129"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="222"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="305"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="314"/>
         <source>Alias2:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="188"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="311"/>
         <source>Curve 2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8493,21 +9524,25 @@ Apply settings anyway?</source>
     <name>DialogPreferences</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpreferences.h" line="114"/>
         <source>Preferences</source>
         <translation>Προτιμήσεις</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="60"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpreferences.h" line="119"/>
         <source>Configuration</source>
         <translation>Ρυθμίσεις</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpreferences.h" line="121"/>
         <source>Pattern</source>
         <translation>Πατρόν</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="90"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpreferences.h" line="123"/>
         <source>Paths</source>
         <translation>Μονοπάτια</translation>
     </message>
@@ -8594,21 +9629,26 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="410"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="406"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="431"/>
         <source>Rotation</source>
         <translation>Περιστροφή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="240"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="411"/>
         <source>Angle:</source>
         <translation>Γωνία:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="413"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="302"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="417"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
@@ -8618,11 +9658,13 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="350"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="423"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="376"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="425"/>
         <source>Origin Point:</source>
         <translation>Αρχικό σημείο:</translation>
     </message>
@@ -8631,12 +9673,12 @@ Apply settings anyway?</source>
         <translation type="vanished">Κατάληξη:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="366"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="371"/>
         <source>Edit angle</source>
         <translation>Επεξεργασία γωνίας</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="252"/>
         <source>Select origin point</source>
         <translation>Επιλογή σημείου αρχής</translation>
     </message>
@@ -8646,83 +9688,97 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="328"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="420"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="337"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="342"/>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="391"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="429"/>
         <source>Visibility Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="125"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="420"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="408"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="432"/>
         <source>Name:</source>
         <translation>Όνομα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="403"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="430"/>
         <source>Tags:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="427"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="434"/>
         <source>Separate each tag with comma.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="430"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="436"/>
         <source>Add tags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="438"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="407"/>
         <source>New:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="142"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="409"/>
         <source>Pen style:</source>
         <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="177"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="410"/>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="443"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="501"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="437"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="512"/>
         <source>Ready</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="464"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="439"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="458"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="469"/>
         <source>Invalid rotation point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="490"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="501"/>
         <source>Invalid angle formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="388"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="427"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8731,21 +9787,25 @@ Apply settings anyway?</source>
     <name>DialogSaveLAyout</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="524"/>
         <source>Save Layout</source>
         <translation>Αποθήκευση Τοποθέτησης</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="581"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="558"/>
         <source>File name:</source>
         <translation>Όνομα αρχείου:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="26"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="525"/>
         <source>Path:</source>
         <translation>Διαδρομή:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="534"/>
         <source>File format:</source>
         <translation>Τύπος αρχείου:</translation>
     </message>
@@ -8759,6 +9819,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="39"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="527"/>
         <source>Destination folder</source>
         <translation>Φάκελος προορισμού</translation>
     </message>
@@ -8768,12 +9829,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="55"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="531"/>
         <source>Select path to destination folder</source>
         <translation>Επιλογή διαδρομής για φάκελο προορισμού</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="594"/>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="597"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="560"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="562"/>
         <source>File base name</source>
         <translation>Όνομα αρχείου βάσης</translation>
     </message>
@@ -8787,72 +9851,86 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="529"/>
         <source>Path to destination folder</source>
         <translation>Διαδρομή για φάκελο προορισμού</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="125"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="536"/>
         <source>Binary form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="135"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="537"/>
         <source>Text as paths</source>
         <translation>Κείμενο ως μονοπάτια</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="145"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="538"/>
         <source>Show grainline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="155"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="539"/>
         <source>Boundary together with notches</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="164"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="540"/>
         <source>Compatibility:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="176"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="541"/>
         <source>Not available</source>
         <comment>options</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="345"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="545"/>
         <source>Margins</source>
         <translation type="unfinished">Περιθώρια</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="378"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="547"/>
         <source>Right:</source>
         <translation type="unfinished">Δεξιά:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="365"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="546"/>
         <source>Left:</source>
         <translation type="unfinished">Αριστερά:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="551"/>
         <source>Top:</source>
         <translation type="unfinished">Επάνω:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="463"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="553"/>
         <source>Bottom:</source>
         <translation type="unfinished">Κάτω:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="488"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="555"/>
         <source>Paper format</source>
         <translation type="unfinished">Μορφή χαρτιού</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="58"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="533"/>
         <source>Browse…</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8861,36 +9939,46 @@ Apply settings anyway?</source>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="404"/>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="447"/>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="470"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="548"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="550"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="552"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="554"/>
         <source>cm</source>
         <translation type="unfinished">εκ</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="494"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="556"/>
         <source>Templates:</source>
         <translation>Πρότυπα:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="504"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="557"/>
         <source>Orientation:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="116"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="535"/>
         <source>Options</source>
         <translation>Επιλογές</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="202"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="542"/>
         <source>Scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="210"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="543"/>
         <source>Horizontal:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="544"/>
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9429,6 +10517,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogseamallowance.h" line="62"/>
         <source>Workpiece tool</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9813,16 +10902,19 @@ Apply settings anyway?</source>
     <name>DialogSelectLanguage</name>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectlanguage.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectlanguage.h" line="82"/>
         <source>Select language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectlanguage.ui" line="24"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectlanguage.h" line="83"/>
         <source>Select user interface language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectlanguage.ui" line="33"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectlanguage.h" line="84"/>
         <source>Language:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9832,17 +10924,21 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="14"/>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="35"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="105"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="106"/>
         <source>Select measurements type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="52"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="107"/>
         <source>Individual</source>
         <comment>measurements type</comment>
         <translation type="unfinished">Ατομικές</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="72"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="108"/>
         <source>Multisize</source>
         <comment>measurements type</comment>
         <translation type="unfinished"></translation>
@@ -9998,6 +11094,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="328"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -10037,6 +11134,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="315"/>
         <source>Special point on shoulder</source>
         <translation>Ειδικό σημειο στον ώμο</translation>
     </message>
@@ -10051,71 +11149,85 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="316"/>
         <source>Length:</source>
         <translation>Μήκος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="318"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="144"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="322"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="325"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="330"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="332"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="334"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="335"/>
         <source>First point:</source>
         <translation>Πρώτο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="279"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="336"/>
         <source>Second point:</source>
         <translation>Δεύτερο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="337"/>
         <source>Third point:</source>
         <translation>Τρίτο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="337"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="338"/>
         <source>Type of line:</source>
         <translation>Τύπος γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="372"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="339"/>
         <source>Line color:</source>
         <translation>Χρώμα γραμμής:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="340"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="402"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="341"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10124,51 +11236,61 @@ Apply settings anyway?</source>
     <name>DialogSinglePoint</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="163"/>
         <source>Single point</source>
         <translation>Μονό σημείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="171"/>
         <source>Coordinates on the sheet</source>
         <translation>Συντεταγμένες της σελίδας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="173"/>
         <source>Coordinates</source>
         <translation>Συντεταγμένες</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="88"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="174"/>
         <source>Y coordinate</source>
         <translation>συντεταγμένη Υ</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="95"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="175"/>
         <source>X coordinate</source>
         <translation>συντεταγμένη Χ</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="64"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="169"/>
         <source>Point label</source>
         <translation>Ετικέτα σημείου</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="45"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="165"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="51"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="168"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="37"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="176"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="125"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="177"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10210,6 +11332,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="588"/>
         <source>Simple curve</source>
         <translation>Απλή καμπύλη</translation>
     </message>
@@ -10223,23 +11346,29 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="873"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="650"/>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="49"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="589"/>
         <source>First point:</source>
         <translation>Πρώτο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="68"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="464"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="590"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="620"/>
         <source>Control point</source>
         <translation>Σημείο ελέγχου</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="300"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="696"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="605"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="635"/>
         <source>Angle:</source>
         <translation>Γωνία:</translation>
     </message>
@@ -10249,6 +11378,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="445"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="619"/>
         <source>Second point:</source>
         <translation>Δεύτερο σημείο:</translation>
     </message>
@@ -10263,6 +11393,8 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="121"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="517"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="591"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="621"/>
         <source>Length:</source>
         <translation>Μήκος:</translation>
     </message>
@@ -10271,6 +11403,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="320"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="537"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="716"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="607"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="623"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="637"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
@@ -10279,6 +11415,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="362"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="579"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="758"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="597"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="611"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="627"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="641"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
@@ -10291,6 +11431,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="410"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="627"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="806"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="603"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="617"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="633"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="647"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -10327,36 +11471,46 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="388"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="605"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="784"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="600"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="614"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="630"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="644"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="844"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="649"/>
         <source>Pen style:</source>
         <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="887"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="651"/>
         <source>Approximation scale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="894"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="653"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="656"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="910"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="655"/>
         <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="940"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="657"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10365,6 +11519,7 @@ Apply settings anyway?</source>
     <name>DialogSplinePath</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="700"/>
         <source>Curved path</source>
         <translation>Καμπύλο μονοπάτι</translation>
     </message>
@@ -10390,6 +11545,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="869"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="762"/>
         <source>List of points</source>
         <translation>Λίστα σημείων</translation>
     </message>
@@ -10412,27 +11568,33 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="999"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="777"/>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="702"/>
         <source>Point:</source>
         <translation>Σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="54"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="701"/>
         <source>New point:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="123"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="703"/>
         <source>First control point</source>
         <translation>Πρώτο σημείο ελέγχου</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="355"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="726"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="718"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="747"/>
         <source>Angle:</source>
         <translation>Γωνία:</translation>
     </message>
@@ -10442,6 +11604,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="494"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="732"/>
         <source>Second control point</source>
         <translation>Δεύτερο σημείο ελέγχου</translation>
     </message>
@@ -10452,6 +11615,8 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="176"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="547"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="704"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="733"/>
         <source>Length:</source>
         <translation>Μήκος:</translation>
     </message>
@@ -10460,6 +11625,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="375"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="567"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="746"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="706"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="720"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="735"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="749"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
@@ -10468,6 +11637,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="417"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="609"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="788"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="710"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="724"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="739"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="753"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="905"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="915"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="942"/>
@@ -10484,6 +11657,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="465"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="657"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="836"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="716"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="730"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="745"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="759"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού στ πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -10525,56 +11702,70 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="443"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="635"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="814"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="713"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="727"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="742"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="756"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="881"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="765"/>
         <source>Move on top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="898"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="768"/>
         <source>Move up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="915"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="771"/>
         <source>Move down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="932"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="774"/>
         <source>Move on bottom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="970"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="776"/>
         <source>Pen style:</source>
         <translation>Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1013"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="778"/>
         <source>Approximation scale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1020"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="780"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="46"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="783"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1036"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="782"/>
         <source>Alias:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1062"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="784"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10731,6 +11922,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="170"/>
         <source>Triangle tool</source>
         <translation>Εργαλείο τριγώνου</translation>
     </message>
@@ -10748,46 +11940,55 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="46"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="171"/>
         <source>Point label:</source>
         <translation>Ετικέτα σημείου:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="173"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="56"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="175"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="69"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="176"/>
         <source>First point of axis:</source>
         <translation>Πρώτο σημείο του άξονα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="85"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="177"/>
         <source>Second point of axis:</source>
         <translation>Δεύτερο σημείο του άξονα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="178"/>
         <source>First point:</source>
         <translation>Πρώτο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="117"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="179"/>
         <source>Second point:</source>
         <translation>Δεύτερο σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="180"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="128"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="181"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10796,6 +11997,7 @@ Apply settings anyway?</source>
     <name>DialogTrueDarts</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="194"/>
         <source>True darts</source>
         <translation>Εξομάλυνση πενσών</translation>
     </message>
@@ -10865,58 +12067,71 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="195"/>
         <source>First base point:</source>
         <translation>Πρώτο σημείο αναφοράς:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="196"/>
         <source>Second base point:</source>
         <translation>Δεύτερο σημείο αναφοράς:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="197"/>
         <source>First dart point:</source>
         <translation>Πρώτο σημείο πένσας:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="85"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="198"/>
         <source>Second dart point:</source>
         <translation>Δεύτερο σημείο πένσας:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="199"/>
         <source>Third dart point:</source>
         <translation>Τρίτο σημείο πένσας:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="130"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="200"/>
         <source>First new dart point:</source>
         <translation>Πρώτο νέο σημείο πένσας:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="137"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="154"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="202"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="207"/>
         <source>Unique label</source>
         <translation>Μοναδική ετικέτα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="140"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="157"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="204"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="209"/>
         <source>Choose unique label.</source>
         <translation>Επιλογή μοναδικής ετικέτας.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="147"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="205"/>
         <source>Second new dart point:</source>
         <translation>Δεύτερο νέο σημείο πένσας:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="210"/>
         <source>Tool</source>
         <translation>Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="165"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="211"/>
         <source>Notes</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10925,6 +12140,7 @@ Apply settings anyway?</source>
     <name>DialogUndo</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogundo.h" line="85"/>
         <source>Broken formula</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10934,21 +12150,25 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="44"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogundo.h" line="87"/>
         <source>&amp;Undo</source>
         <translation>&amp;Αναίρεση</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="51"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogundo.h" line="88"/>
         <source>&amp;Fix formula</source>
         <translation>&amp;Επιδιόρθωση φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="58"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogundo.h" line="89"/>
         <source>&amp;Cancel</source>
         <translation>Ακύρωση</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogundo.h" line="86"/>
         <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
         <translation>Σφάλμα κατα τον υπολογισμό της φόρμουλας. Μπορείτε να δοκιμάσετε να αναιρέσετε την τελευταια λειτουργία ή να επιδιορθώσετε τη χαλασμένη φόρμουλα.</translation>
     </message>
@@ -10957,6 +12177,7 @@ Apply settings anyway?</source>
     <name>DialogUnionDetails</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoguniondetails.h" line="71"/>
         <source>Union tool</source>
         <translation>Εργαλείο ένωσης</translation>
     </message>
@@ -10997,11 +12218,13 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.ui" line="30"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoguniondetails.h" line="72"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want to unite details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.ui" line="37"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoguniondetails.h" line="73"/>
         <source>Retain original pieces</source>
         <translation>Διατήρηση αρχικών κομματιών</translation>
     </message>
@@ -11018,6 +12241,7 @@ Apply settings anyway?</source>
     <name>FvUpdateWindow</name>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="104"/>
         <source>Software Update</source>
         <translation>Αναβάθμιση προγράμματος</translation>
     </message>
@@ -11027,26 +12251,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="39"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="106"/>
         <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="48"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="107"/>
         <source>Skip This Version</source>
         <translation>Παράλειψη έκδοσης</translation>
     </message>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="68"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="108"/>
         <source>Remind Me Later</source>
         <translation>Υπενθύμιση αργότερα</translation>
     </message>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="78"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="109"/>
         <source>Get Update</source>
         <translation>Λήψη ενημέρωσης</translation>
     </message>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="105"/>
         <source>%1 update is available!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11211,7 +12440,7 @@ Apply settings anyway?</source>
         <translation>Επεξεργαστής μετρήσεων του Valentina.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1031"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1033"/>
         <source>The measurement file.</source>
         <translation>Το αρχείο μετρήσεων.</translation>
     </message>
@@ -11232,12 +12461,12 @@ Apply settings anyway?</source>
         <translation type="vanished">Η μονάδα του πατρόν</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1281"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1283"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1077"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1079"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Δεν μπορεί να αρχίσει να ακούει τις εισερχόμενες συνδέσεις στο όνομα &apos;%1&apos;</translation>
     </message>
@@ -11246,77 +12475,77 @@ Apply settings anyway?</source>
         <translation type="vanished">Η δοκιμαστική λειτουργία δεν υποστηρίζει το άνοιγμα πολλών αρχείων.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1197"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1199"/>
         <source>Please, provide one input file.</source>
         <translation>Παρακαλώ, δώστε ένα αρχείο εισόδου.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1053"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1055"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1056"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1058"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1035"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1037"/>
         <source>Set base for dimension A in the table units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1036"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1038"/>
         <source>The dimension A base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1039"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1041"/>
         <source>Set base for dimension B in the table units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1040"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1042"/>
         <source>The dimension B base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1043"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1045"/>
         <source>Set base for dimension C in the table units.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1044"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1046"/>
         <source>The dimension C base</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1047"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1049"/>
         <source>Set pattern file units: cm, mm, inch.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1048"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1050"/>
         <source>The pattern units</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1050"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1052"/>
         <source>Activate known measurements mode.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1220"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1222"/>
         <source>Invalid dimension A base value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1241"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1243"/>
         <source>Invalid dimension B base value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1262"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1264"/>
         <source>Invalid dimension C base value.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11326,7 +12555,7 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1095"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1097"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11335,6 +12564,7 @@ Apply settings anyway?</source>
     <name>MainWindow</name>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1413"/>
         <source>Valentina</source>
         <translation>Valentina</translation>
     </message>
@@ -11348,26 +12578,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1953"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1616"/>
         <source>Point along perpendicular</source>
         <translation>Σημείο κατα μήκος της κάθετης γραμμής</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2043"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1621"/>
         <source>Perpendicular point along line</source>
         <translation>Κάθετο σημείο κατα μήκος της γραμμής</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1971"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1617"/>
         <source>Point along bisector</source>
         <translation>Σημείο κατα μήκος της διχοτόμου</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1773"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1606"/>
         <source>Point at distance and angle</source>
         <translation>Σημείο με απόσταση και γωνία</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1935"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1615"/>
         <source>Point at distance along line</source>
         <translation>Σημείο με απόσταση κατα μήκος της γραμμής</translation>
     </message>
@@ -11381,11 +12616,13 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2115"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1625"/>
         <source>Line between points</source>
         <translation>Γραμμή ανάμεσα σε σημεία</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2097"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1624"/>
         <source>Point at line intersection</source>
         <translation>Σημείο στην τομή γραμμής</translation>
     </message>
@@ -11403,6 +12640,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1845"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1610"/>
         <source>Arc</source>
         <translation>Τόξο</translation>
     </message>
@@ -11416,260 +12654,312 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="60"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1670"/>
         <source>&amp;File</source>
         <translation>&amp;Αρχείο</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="93"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1672"/>
         <source>&amp;Help</source>
         <translation>&amp;Βοήθεια</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1673"/>
         <source>&amp;Pattern piece</source>
         <translation>&amp;Πατρόν</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="136"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2585"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2588"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1674"/>
         <source>Measurements</source>
         <translation>Μετρήσεις</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="152"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1675"/>
         <source>Window</source>
         <translation>Παράθυρο</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="205"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1680"/>
         <source>Toolbar files</source>
         <translation>Αρχεία μπάρας εργαλείων</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="232"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1681"/>
         <source>ToolBar modes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="257"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1682"/>
         <source>Toolbar pattern</source>
         <translation>Πατρόν μπάρας εργαλείων</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="277"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1683"/>
         <source>Toolbar options</source>
         <translation>Επιλογές μπάρας εργαλείων</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="299"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1684"/>
         <source>Toolbar tools</source>
         <translation>Εργαλεία μπάρας εργαλείων</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="322"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1685"/>
         <source>Tool options</source>
         <translation>Επιλογές εργαλείων</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="550"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1706"/>
         <source>Point tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="553"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1708"/>
         <source>Tools for creating points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="570"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1710"/>
         <source>Selecting tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="591"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1711"/>
         <source>Line tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="594"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1713"/>
         <source>Tools for creating segments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="612"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1715"/>
         <source>Curve tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="615"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1717"/>
         <source>Tools for creating curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="632"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1719"/>
         <source>Operation tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="649"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1720"/>
         <source>Detail tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="652"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1722"/>
         <source>Tools for creating detail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="669"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1724"/>
         <source>Layout actions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="696"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1728"/>
         <source>Pen options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="707"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1729"/>
         <source>Dependency tree</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="719"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1414"/>
         <source>New</source>
         <translation>Νέο</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="722"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1415"/>
         <source>&amp;New</source>
         <translation>&amp;Νέο</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="725"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1417"/>
         <source>Create a new pattern</source>
         <translation>Δημιουργία νέου πατρόν</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="739"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1419"/>
         <source>Open</source>
         <translation>Άνοιγμα</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="742"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1420"/>
         <source>&amp;Open</source>
         <translation>&amp;Άνοιγμα</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="745"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1422"/>
         <source>Open file with pattern</source>
         <translation>Άνοιγμα αρχείου με πατρόν</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="762"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6223"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6246"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1427"/>
         <source>Save</source>
         <translation>Αποθήκευση</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="765"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1428"/>
         <source>&amp;Save</source>
         <translation>&amp;Αποθήκευση</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="768"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1430"/>
         <source>Save pattern</source>
         <translation>Αποθήκευση πατρόν</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1502"/>
         <source>Show Segment Labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1188"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1504"/>
         <source>Allow segment labels to appear. Uncheck to hide them in all cases.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1300"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1526"/>
         <source>Load Measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1679"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1592"/>
         <source>Interactive tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1682"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1594"/>
         <source>Ctrl+D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1693"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1596"/>
         <source>Export font corrections</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2583"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1651"/>
         <source>Arc start point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2601"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1652"/>
         <source>Arc end point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2615"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1653"/>
         <source>Boundary together with notches</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2623"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1654"/>
         <source>Settings Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2634"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1655"/>
         <source>Reload labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2637"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1657"/>
         <source>Reload piece labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2651"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8570"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1659"/>
         <source>Auto-arrange labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2654"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1661"/>
         <source>Auto-arrange point labels to reduce overlaps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2665"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1663"/>
         <source>Install single line font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2683"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1664"/>
         <source>Elliptical arc with given length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2701"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1665"/>
         <source>Parallel curve tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2719"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2722"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1666"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1668"/>
         <source>Graduated curve tool</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11679,38 +12969,45 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="788"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1434"/>
         <source>Save not yet saved pattern</source>
         <translation>Το πατρόν δεν έχει αποθηκευθεί ακόμα</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="812"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1436"/>
         <source>Draw</source>
         <translation>Σχεδίαση</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="836"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2081"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4355"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2084"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4363"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1440"/>
         <source>Details</source>
         <translation>Λεπτομέρειες</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="863"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1446"/>
         <source>Pointer tools</source>
         <translation>Εργαλεία δείκτη</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="881"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1448"/>
         <source>New pattern piece</source>
         <translation>Νέο κομμάτι πατρόν</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="884"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1450"/>
         <source>Add new pattern piece</source>
         <translation>Προσθήκη νέου κομματιού πατρόν</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="905"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1454"/>
         <source>Change the label of pattern piece</source>
         <translation>Αλλαγή ετικέτας πατρόν</translation>
     </message>
@@ -11724,48 +13021,58 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1676"/>
         <source>History</source>
         <translation>Ιστορικό</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="964"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1464"/>
         <source>About &amp;Qt</source>
         <translation>Σχετικά &amp;Qt</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="978"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1465"/>
         <source>&amp;About Valentina</source>
         <translation>&amp;Σχετικά με το Valentina</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="992"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1466"/>
         <source>E&amp;xit</source>
         <translation>Έ&amp;ξοδος</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="995"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1468"/>
         <source>Exit the application</source>
         <translation>Έξοδος απο την εφαρμογή</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1006"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="616"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1470"/>
         <source>Preferences</source>
         <translation>Προτιμήσεις</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1020"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1471"/>
         <source>Pattern properties</source>
         <translation>Ιδιότητες πατρόν</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="479"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1037"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1472"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1700"/>
         <source>Zoom in</source>
         <translation>Μεγέθυνση</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1040"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1474"/>
         <source>zoom in</source>
         <translation>μεγέθυνση</translation>
     </message>
@@ -11773,6 +13080,9 @@ Apply settings anyway?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="492"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1057"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1060"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1476"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1478"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1703"/>
         <source>Zoom out</source>
         <translation>Σμίκρυνση</translation>
     </message>
@@ -11790,6 +13100,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1097"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1484"/>
         <source>Zoom fit best</source>
         <translation>Προσαρμογή zoom</translation>
     </message>
@@ -11807,6 +13118,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1487"/>
         <source>Report bug</source>
         <translation>Αναφορά σφάλματος</translation>
     </message>
@@ -11823,63 +13135,63 @@ Apply settings anyway?</source>
         <translation type="vanished">Εμφάνιση βοήθειας online</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5245"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5606"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5261"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5629"/>
         <source>Pattern piece %1</source>
         <translation>Κομμάτι πατρόν %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1256"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1284"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1295"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1309"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1259"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1287"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1298"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1312"/>
         <source>Select point</source>
         <translation>Επιλογή σημείου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1269"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1272"/>
         <source>Select first point</source>
         <translation>Επιλέξτε πρώτο σημείο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1323"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1471"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1835"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1326"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1474"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1838"/>
         <source>Select first point of line</source>
         <translation>Επιλέξτε το πρώτο σημείο της γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1337"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1340"/>
         <source>Select first point of angle</source>
         <translation>Επιλογή πρώτου σημείου γωνίας</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1351"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1354"/>
         <source>Select first point of first line</source>
         <translation>Επιλέξτε το πρώτο σημείο της πρώτης γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1365"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1368"/>
         <source>Select first point curve</source>
         <translation>Επιλέξτε το πρώτο σημείο καμπύλης</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1389"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1392"/>
         <source>Select simple curve</source>
         <translation>Επιλογή απλής καμπύλης</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1403"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1406"/>
         <source>Select point of center of arc</source>
         <translation>Επιλέξτε το κεντρικό σημείο του τόξου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1432"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1435"/>
         <source>Select point of curve path</source>
         <translation>Επιλέξτε σημείο σε καμπύλο μονοπάτι</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1457"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1460"/>
         <source>Select curve path</source>
         <translation>Επέλεξε διαδρομή καμπύλης</translation>
     </message>
@@ -11888,47 +13200,47 @@ Apply settings anyway?</source>
         <translation type="vanished">Επιλέξτε σημεία, τόξα, καμπύλες δεξιόστροφα.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1529"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1532"/>
         <source>Select base point</source>
         <translation>Επιλέξτε σημείο αναφοράς</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1543"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1546"/>
         <source>Select first point of axis</source>
         <translation>Επιλέξτε το πρώτο σημείο του άξονα</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1572"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1591"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1575"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1594"/>
         <source>Select detail</source>
         <translation>Επιλογή λεπτομέρειας</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1627"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1639"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1651"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1663"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1943"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1630"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1642"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1654"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1666"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1946"/>
         <source>Select one or more objects, &lt;b&gt;%1&lt;/b&gt; - confirm selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1823"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1857"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1956"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1966"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1826"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1860"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1959"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1969"/>
         <source>Select arc</source>
         <translation>Επιλέξτε τόξο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1845"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1990"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2001"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1848"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1993"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2004"/>
         <source>Select curve</source>
         <translation>Επιλέξτε καμπύλη</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6650"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6673"/>
         <source>About Qt</source>
         <translation>Σχετικά με το Qt</translation>
     </message>
@@ -11949,68 +13261,68 @@ Apply settings anyway?</source>
         <translation type="vanished">Αρχεία πατρόν (*.val)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4498"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4514"/>
         <source>pattern</source>
         <translation>πατρόν</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4505"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4521"/>
         <source>Save as</source>
         <translation>Αποθήκευση ως</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2992"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2995"/>
         <source>Could not save file</source>
         <translation>Δεν είναι δυνατή η αποθήκευση αρχείου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2357"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2624"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4605"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7483"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2360"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2627"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4621"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7506"/>
         <source>Open file</source>
         <translation>Άνοιγμα αρχείου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3115"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3143"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3118"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3146"/>
         <source>Error parsing file.</source>
         <translation>Σφάλμα κατά την ανάλυση του αρχείου.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3122"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3125"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Σφάλμα λόγω αδυναμίας μετατροπής της τιμής.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3129"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5086"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3132"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5102"/>
         <source>Error empty parameter.</source>
         <translation>Σφάλμα κενής παραμέτρου.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3100"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3136"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3103"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3139"/>
         <source>Error wrong id.</source>
         <translation>Σφάλμα λόγω λάθους ταυτότητας.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3150"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3153"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5075"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5091"/>
         <source>Bad id.</source>
         <translation>Κακή ταυτότητα.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6054"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6077"/>
         <source>File saved</source>
         <translation>Αποθηκευμένο αρχείο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8025"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8048"/>
         <source>untitled.val</source>
         <translation>Ανώνυμο.val</translation>
     </message>
@@ -12021,24 +13333,24 @@ Do you want to save your changes?</source>
 Θέλετε να αποθηκελυσετε τις αλλαγές;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2069"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6270"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2072"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6293"/>
         <source>&amp;Undo</source>
         <translation>&amp;Αναίρεση</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2070"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6285"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2073"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6308"/>
         <source>&amp;Redo</source>
         <translation>&amp;Ακύρωση αναίρεσης</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6824"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6847"/>
         <source>Pattern piece:</source>
         <translation>Κομμάτι πατρόν:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6826"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6849"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Εισάγετε μια νέα ετικέτα για το κομμάτι πατρόν.</translation>
     </message>
@@ -12057,8 +13369,8 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="887"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="935"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6925"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7116"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6948"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7139"/>
         <source>File error.</source>
         <translation>Σφάλμα στο αρχείο.</translation>
     </message>
@@ -12067,12 +13379,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">Το αρχείο φορτώθηκε</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7445"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7468"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation>Το Valentina δεν τερματίστηκε σωστά. Θέλετε να ανοίξετε εκ νέου τα αρχεία (%1) που είχατε ανοιχτά;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7447"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7470"/>
         <source>Reopen files.</source>
         <translation>Άνοιγμα αρχείων εκ νέου.</translation>
     </message>
@@ -12086,11 +13398,13 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1989"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1618"/>
         <source>Special point on shoulder</source>
         <translation>Ειδικό σημειο στον ώμο</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2007"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1619"/>
         <source>Triangle tool</source>
         <translation>Εργαλείο τριγώνου</translation>
     </message>
@@ -12100,41 +13414,49 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2025"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1620"/>
         <source>Point from X and Y of two other points</source>
         <translation>Σημείο απο τα Χ και Υ δύο άλλων σημείων</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2061"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1622"/>
         <source>Point intersect line and axis</source>
         <translation>Σημείο στην τομή γραμμής και άξονα</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2133"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1626"/>
         <source>Simple curve</source>
         <translation>Απλή καμπύλη</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2187"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1629"/>
         <source>Curved path</source>
         <translation>Καμπύλο μονοπάτι</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2151"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1627"/>
         <source>Segmenting a simple curve</source>
         <translation>Διατομή απλής καμπύλης</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1917"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1614"/>
         <source>Segment a curved path</source>
         <translation>Διαχωρίστε ένα καμπύλο μονοπάτι</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1863"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1611"/>
         <source>Point intersect curve and axis</source>
         <translation>Σημείο τομής καμπύλης και άξονα</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1827"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1609"/>
         <source>Segment an arc</source>
         <translation>Κόψιμο τόξου</translation>
     </message>
@@ -12148,6 +13470,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2457"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1644"/>
         <source>Union tool</source>
         <translation>Εργαλείο ένωσης</translation>
     </message>
@@ -12157,47 +13480,56 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1142"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1494"/>
         <source>Last Tool</source>
         <translation>Τελευταίο Εργαλείο</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1145"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1496"/>
         <source>Activate last used tool again</source>
         <translation>Επανενεργοποίηση τελευταίου εργαλείου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1558"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1561"/>
         <source>Select point for X value (vertical)</source>
         <translation>Επιλέξτε σημείο για τιμή Χ (κάθετα)</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="164"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1677"/>
         <source>Mode</source>
         <translation>Λειτουργία</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="860"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1444"/>
         <source>Pointer</source>
         <translation>Δείκτης</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="902"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1452"/>
         <source>Config pattern piece</source>
         <translation>Διαμόρφωση κομματιού πατρόν</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="64"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="950"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1671"/>
         <source>Layout</source>
         <translation>Τοποθέτηση</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1162"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1498"/>
         <source>Show Curve Details</source>
         <translation>Εμφάνιση λεπτομερειών καμπύλης</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1165"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1500"/>
         <source>Show/hide control points and curve direction</source>
         <translation>Εμφάνιση/απόκρυψη σημείων ελέγχου και κατεύθυνσης καμπύλης</translation>
     </message>
@@ -12207,26 +13539,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1791"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1607"/>
         <source>Point of intersection arcs</source>
         <translation>Σημείο σε τομή τόξων</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2241"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1632"/>
         <source>Point of intersection circles</source>
         <translation>Σημείο σε τομή κύκλων</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2277"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1634"/>
         <source>Point from circle and tangent</source>
         <translation>Σημείο από κύκλο και εφαπτομένη</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2259"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1633"/>
         <source>Point from arc and tangent</source>
         <translation>Σημείο από τόξο και εφαπτόμενη</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1631"/>
         <source>Arc with given length</source>
         <translation>Τόξο με δεδομένο μήκος</translation>
     </message>
@@ -12236,6 +13573,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="337"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1686"/>
         <source>Layout pages</source>
         <translation>Σελίδες διάταξης</translation>
     </message>
@@ -12257,26 +13595,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1202"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1506"/>
         <source>Print</source>
         <translation>Εκτύπωση</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1222"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1510"/>
         <source>Print tiled PDF</source>
         <translation>Εκτύπωση τεμαχισμένου PDF</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1225"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1512"/>
         <source>Split and print a layout into smaller pages (for regular printers)</source>
         <translation>Διαχωρισμός και εκτύπωση της διάταξης σε μικρότερες σελίδες (για κανονικούς εκτυπωτές)</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1242"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1514"/>
         <source>Print preview</source>
         <translation>Προεπισκόπιση εκτύπωσης</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1516"/>
         <source>Print preview original layout</source>
         <translation>Προεπισκόπιση εκτύπωσης της αρχικής τοποθέτησης</translation>
     </message>
@@ -12287,11 +13630,13 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1286"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1752"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1524"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1604"/>
         <source>Export original layout</source>
         <translation>Εξαγωγή αρχικής διάταξης</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1869"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1872"/>
         <source>Select first an arc</source>
         <translation>Επιλέξτε πρώτα ένα τόξο</translation>
     </message>
@@ -12304,17 +13649,17 @@ Do you want to save your changes?</source>
         <translation type="vanished">Επιλέξτε σημείο στην εφαπτομένη</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1924"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1927"/>
         <source>Select point of the center of the arc</source>
         <translation>Επιλέξτε το κεντρικό σημείο του τόξου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1934"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1937"/>
         <source>Select the first base line point</source>
         <translation>Επιλέξτε το πρώτο σημείο αναφοράς της γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4325"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4333"/>
         <source>Detail mode</source>
         <translation>Λειτουργία λεπτομερειών</translation>
     </message>
@@ -12323,12 +13668,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">Δε μπορείτε ακόμα να χρησιμοποιήσετε τη λειτουργία λεπτομερειών. Παρακαλώ, δημιουργήστε τουλάχιστον ένα κομμάτι εργασίας.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4410"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4423"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4446"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4638"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4717"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7373"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4421"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4434"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4457"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4654"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4733"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7396"/>
         <source>Layout mode</source>
         <translation>Λειτουργία τοποθέτησης</translation>
     </message>
@@ -12337,7 +13682,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Δε μπορείτε ακόμα να χρησιμοποιήσετε τη λειτουργία τοποθέτησης. Παρακαλώ, δημιουργήστε τουλάχιστον ένα κομμάτι εργασίας.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6212"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6235"/>
         <source>Unsaved changes</source>
         <translation>Αλλαγές χωρίς αποθήκευση</translation>
     </message>
@@ -12366,7 +13711,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ατομικές μετρήσεις (*.vit);;Στάνταρ μετρήσεις (*.vst)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2383"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2386"/>
         <source>Measurements loaded</source>
         <translation>Οι μετρήσεις φορτώθηκαν</translation>
     </message>
@@ -12375,12 +13720,13 @@ Do you want to save your changes?</source>
         <translation type="vanished">Στάνταρ μετρήσεις (*.vst);;Ατομικές μετρήσεις (*.vit)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7673"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7696"/>
         <source>You can&apos;t export empty scene.</source>
         <translation>Δεν μπορείς να εξάγεις άδεια σκηνή.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1731"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1600"/>
         <source>Create new Layout</source>
         <translation>Δημιουργία νέας Διάταξης</translation>
     </message>
@@ -12398,12 +13744,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">%1, %2 (%3)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4532"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4548"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Αποτυχία κλειδώματος. Το αρχείο έχει ήδη ανοιχτεί σε ένα άλλο παράθυρο.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3034"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3037"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Αποτυχία κλειδώματος. Αυτό το αρχείο έχει ήδη ανοιχτεί σε ένα άλλο παράθυρο. Αναμένετε συγκρούσεις όταν τρέχετε 2 αντίγραφα του προγράμματος.</translation>
     </message>
@@ -12412,7 +13758,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Το αρχείο μετρήσεων περιλαμβάνει μη έγκυρες γνωστές μετρήσεις.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7593"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7616"/>
         <source>Measurement file has unknown format.</source>
         <translation>Το αρχείο μετρήσεων είναι άγνωστης μορφής.</translation>
     </message>
@@ -12434,18 +13780,18 @@ Do you want to save your changes?</source>
         <translation type="vanished">Οι μετρήσεις συγχρονίστηκαν.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2562"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2565"/>
         <source>Couldn&apos;t sync measurements.</source>
         <translation>Δεν ήταν δυνατός ο συγχρονισμός των μετρήσεων.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5387"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5410"/>
         <source>Couldn&apos;t update measurements.</source>
         <translation>Δεν ήταν δυνατή η ενημέρωση των μετρήσεων.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7043"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7060"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7066"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7083"/>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
         <translation>Το αρχείο μετρήσεων &apos;%1&apos; δε βρέθηκε.</translation>
     </message>
@@ -12454,7 +13800,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Το αρχείο μετρήσεων &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; δε βρέθηκε. Θέλετε να ενημερώσετε τη θέση του αρχείου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7514"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7537"/>
         <source>Loading measurements file</source>
         <translation>Φόρτωση αρχείου μετρήσεων</translation>
     </message>
@@ -12471,9 +13817,9 @@ Do you want to save your changes?</source>
         <translation type="vanished">Δεν ήταν δυνατός ο ορισμός μεγέθους. Το αρχείο δεν ανοίχτηκε.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7856"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7899"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7942"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7879"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7922"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7965"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12482,60 +13828,67 @@ Do you want to save your changes?</source>
         <translation type="vanished">Δεν ήταν δυνατός ο ορισμός ύψους. Το αρχείο δεν ανοίχτηκε.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7356"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7412"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7721"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7761"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7379"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7435"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7744"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7784"/>
         <source>Export error.</source>
         <translation>Σφάλμα εξαγωγής.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7969"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7992"/>
         <source>Please, provide one input file.</source>
         <translation>Παρακαλώ, δώστε ένα αρχείο εισόδου.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1205"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1508"/>
         <source>Print an original layout</source>
         <translation>Εκτύπωση μίας αρχικής διάταξης</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1262"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1518"/>
         <source>Preview tiled PDF</source>
         <translation>Προεπισκόπιση τεμαχισμένου PDF</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1265"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1520"/>
         <source>Print preview tiled layout</source>
         <translation>Προεπισκόπηση εκτύπωσης τεμαχισμένης διάταξης</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="815"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1438"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with pattern pieces. These pattern pieces are base for going to the next stage &amp;quot;Details mode&amp;quot;. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="839"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1442"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with details. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail on the stage &amp;quot;Draw mode&amp;quot;. Details created on this stage will be used for creating a layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="953"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1462"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for creating a layout of details. This mode avaliable if was created at least one detail on the stage &amp;quot;Details mode&amp;quot;. The layout can be exported to your prefered file format and saved to your harddirve.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2444"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2447"/>
         <source>Measurements unloaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2451"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2454"/>
         <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2403"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1641"/>
         <source>True darts</source>
         <translation>Εξομάλυνση πενσών</translation>
     </message>
@@ -12559,7 +13912,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Αποθήκευση...</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6228"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6251"/>
         <source>Don&apos;t Save</source>
         <translation>Χωρίς αποθήκευση</translation>
     </message>
@@ -12581,11 +13934,12 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1881"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1612"/>
         <source>Point intersection curves</source>
         <translation>Σημείο τομής καμπυλών</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1891"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1894"/>
         <source>Select first curve</source>
         <translation>Επιλογή πρώτης καμπύλης</translation>
     </message>
@@ -12599,16 +13953,17 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2169"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1628"/>
         <source>Curve tool which uses point as control handle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1375"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1378"/>
         <source>Select first curve point</source>
         <translation>Επιλέξτε πρώτο σημείο καμπύλης</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1443"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1446"/>
         <source>Select point of cubic bezier path</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12630,6 +13985,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2349"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1638"/>
         <source>Rotate objects</source>
         <translation>Περιστροφή αντικειμένων</translation>
     </message>
@@ -12637,6 +13993,9 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1122"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1125"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1128"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1489"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1490"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1492"/>
         <source>Close pattern</source>
         <translation>Κλείσιμο πατρόν</translation>
     </message>
@@ -12646,46 +14005,50 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2079"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1623"/>
         <source>Midpoint between two points</source>
         <translation>Μεσαίο σημείο ανάμεσα απο δύο σημεία</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="401"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1690"/>
         <source>Group</source>
         <translation>Ομάδα</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2077"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4285"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2080"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4288"/>
         <source>Contains all visibility groups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2082"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4357"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2085"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4365"/>
         <source>Show which details will go in layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1077"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1080"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1480"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1482"/>
         <source>Original zoom</source>
         <translation>Αρχικό zoom</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1880"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1883"/>
         <source>Select first circle center</source>
         <translation>Επιλέξτε το κέντρο του πρώτου κύκλου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1902"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1913"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1905"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1916"/>
         <source>Select point on tangent</source>
         <translation>Επιλέξτε σημείο στην εφαπτομένη</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2072"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3243"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2075"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3246"/>
         <source>Pattern Piece:</source>
         <translation>Κομμάτι πατρόν:</translation>
     </message>
@@ -12698,338 +14061,375 @@ Do you want to save your changes?</source>
         <translation type="vanished">Μέγεθος:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7509"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7532"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2331"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1637"/>
         <source>Flipping objects by line</source>
         <translation>Αντιστροφή αντικειμένων με γραμμή</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2313"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1636"/>
         <source>Flipping objects by axis</source>
         <translation>Αντιστροφή αντικειμένων με άξονα</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2367"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1639"/>
         <source>Move objects</source>
         <translation>Μετακίνηση αντικειμένων</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2586"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2589"/>
         <source>Measurements were changed. Do you want to sync measurements now?</source>
         <translation>Έγινε αλλαγή των μετρήσεων. Θέλετε να συγχρονίσετε τις μετρήσεις τώρα;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2548"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2551"/>
         <source>Measurements have been synced</source>
         <translation>Οι μετρήσεις συγχρονίστηκαν</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2205"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1630"/>
         <source>Elliptical Arc</source>
         <translation>Ελλειπτικό Τόξο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1417"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1420"/>
         <source>Select point of center of elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1485"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1488"/>
         <source>Select main path objects clockwise.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4575"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4591"/>
         <source>Could not save the file</source>
         <translation>Δεν ήταν δυνατή η αποθήκευση του αρχείου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8075"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8098"/>
         <source>read only</source>
         <translation>μόνο για ανάγνωση</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="926"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1456"/>
         <source>Variables Table</source>
         <translation>Πίνακας μεταβλητών</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="929"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1458"/>
         <source>Contains information about increments and internal variables</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1303"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1528"/>
         <source>Connect measurements file to pattern</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1314"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1530"/>
         <source>Open Tape</source>
         <translation>Άνοιγμα Tape</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1331"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1534"/>
         <source>Edit Current</source>
         <translation>Επεξεργασία Τρέχοντος</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1334"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1536"/>
         <source>Edit linked to the pattern measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1352"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1538"/>
         <source>Sync</source>
         <translation>Συγχρονισμός</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1355"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1540"/>
         <source>Synchronize linked to the pattern measurements after change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1369"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1542"/>
         <source>Unload Current</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1372"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1544"/>
         <source>Unload measurements if they were not used in a pattern file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2341"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7555"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7569"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2344"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7578"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7592"/>
         <source>Individual measurements</source>
         <translation>Ατομικές μετρήσεις</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2347"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7555"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7569"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2350"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7578"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7592"/>
         <source>Multisize measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4504"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4591"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4520"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4607"/>
         <source>Pattern files</source>
         <translation>Αρχεία πατρόν</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2511"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1647"/>
         <source>Pin tool</source>
         <translation>Εργαλειο πινέζας</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1506"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1509"/>
         <source>Select pin point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2529"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1648"/>
         <source>Insert node tool</source>
         <translation>Εισάγετε εργαλείο κόμβου</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1317"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1532"/>
         <source>Open Tape app for creating or editing measurements file</source>
         <translation>Ανοίξτε την εφαρμογή Tape για δημιουργία ή διόρθωση του αρχείου μετρήσεων</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3461"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3464"/>
         <source>Point at the intersections of lines/axis tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3504"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3507"/>
         <source>Point segmenting curves/arcs tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3518"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3521"/>
         <source>Points intersecting with 2 curves/arcs/circles tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4326"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4334"/>
         <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4411"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4422"/>
         <source>You can&apos;t use Layout mode yet. Please, create at least one workpiece.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4424"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4435"/>
         <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4447"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4458"/>
         <source>You can&apos;t use Layout mode yet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1386"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1546"/>
         <source>Zoom fit best current</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1389"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1548"/>
         <source>zoom fit best current pattern piece</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2565"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1650"/>
         <source>Export details skiping the Layout stage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4639"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4718"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7374"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4655"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4734"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7397"/>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4652"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4731"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7387"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4668"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4747"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7410"/>
         <source>Export details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4652"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4731"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7387"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4668"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4747"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7410"/>
         <source>Can&apos;t export details.</source>
         <translation>Δεν μπορεί να γίνει εξαγωγή λεπτομερειών.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1400"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1550"/>
         <source>Label template editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2439"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1643"/>
         <source>Workpiece tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2493"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1646"/>
         <source>Internal path tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="785"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1432"/>
         <source>Save &amp;As…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1108"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1485"/>
         <source>Report Bug…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1283"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1522"/>
         <source>Export As…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6222"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6245"/>
         <source>Save…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1411"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1551"/>
         <source>Final measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1425"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1552"/>
         <source>Export Final Measurements to CSV</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7683"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7706"/>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7789"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7812"/>
         <source>Export final measurements error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7790"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7813"/>
         <source>Destination path is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1436"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1553"/>
         <source>Next pattern piece</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1439"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1555"/>
         <source>Ctrl+PgDown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1450"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1557"/>
         <source>Previous pattern piece</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1453"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1559"/>
         <source>Ctrl+PgUp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1711"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1597"/>
         <source>Tool &quot;Select&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1728"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1598"/>
         <source>Layout settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1749"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1602"/>
         <source>Layout export as</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2547"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1649"/>
         <source>Place label tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2475"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1645"/>
         <source>Duplicate detail tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1516"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1519"/>
         <source>Select placelabel center point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7074"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7097"/>
         <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3201"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3204"/>
         <source>Scale:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13039,460 +14439,492 @@ Do you want to save your changes?</source>
         <translation>Δημιουργήστε νέο κομμάτι πατρόν για να ξεκινήσετε να δουλεύετε.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2071"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2074"/>
         <source>Changes applied.</source>
         <translation>Οι αλλαγές εφαρμόστηκαν.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6198"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6221"/>
         <source>Cannot save settings. Access denied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="748"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1425"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6173"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6196"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1497"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1500"/>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1615"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1618"/>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2295"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1635"/>
         <source>Point of intersection circle and segment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1467"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1561"/>
         <source>Increase label font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1481"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1562"/>
         <source>Decrease label font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1495"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1563"/>
         <source>Original label font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1509"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1564"/>
         <source>Hide labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2076"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4283"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2079"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4286"/>
         <source>Groups of visibility</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1523"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5580"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5603"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1565"/>
         <source>Export recipe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5578"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5601"/>
         <source>Recipe files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5580"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5603"/>
         <source>recipe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5593"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5616"/>
         <source>Could not save recipe. %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1899"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1613"/>
         <source>Curved path tool which uses point as control handle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1809"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1608"/>
         <source>Point of intersection arc and axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1537"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1566"/>
         <source>Show main path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1540"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1568"/>
         <source>Globally show pieces main path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="413"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8485"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8508"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1691"/>
         <source>Pattern messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="425"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1693"/>
         <source>Clear all messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="469"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1698"/>
         <source>Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8460"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8483"/>
         <source>DEBUG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8463"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8486"/>
         <source>WARNING</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8466"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8489"/>
         <source>CRITICAL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8469"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8492"/>
         <source>FATAL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8472"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8495"/>
         <source>INFO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="438"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1696"/>
         <source>Auto refresh the list with each parse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="172"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1678"/>
         <source>Watermark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1554"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1570"/>
         <source>Load</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1568"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1571"/>
         <source>Remove</source>
         <translation>Αφαίρεση</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1579"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1572"/>
         <source>Edit current</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1590"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1573"/>
         <source>Editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1575"/>
         <source>Create or edit a watermark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2621"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2624"/>
         <source>Watermark files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="182"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1679"/>
         <source>Manual Layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1601"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1577"/>
         <source>Open Puzzle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1604"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1579"/>
         <source>Open the Puzzle app</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1615"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1581"/>
         <source>Create</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1618"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1583"/>
         <source>Create manual layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1629"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1585"/>
         <source>Update</source>
         <translation>Ενημέρωση</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1632"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1587"/>
         <source>Update manual layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4686"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4761"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4702"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4777"/>
         <source>Unable to prepare raw layout data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4693"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4709"/>
         <source>Manual layout files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4700"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4716"/>
         <source>Select manual layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4802"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4818"/>
         <source>Select folder</source>
         <translation>Επιλογή φακέλου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6213"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6236"/>
         <source>The pattern has been modified. Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7837"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7860"/>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7844"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7867"/>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7850"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7873"/>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7880"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7903"/>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7887"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7910"/>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7893"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7916"/>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7923"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7946"/>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7930"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7953"/>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7936"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7959"/>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5598"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5621"/>
         <source>Could not create recipe file. %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1640"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1589"/>
         <source>Shop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7308"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7331"/>
         <source>Scalable Vector Graphics files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7310"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7333"/>
         <source>Save draw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2421"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1642"/>
         <source>Draw export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="541"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1705"/>
         <source>Background images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1651"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1590"/>
         <source>Add background image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1774"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1777"/>
         <source>Unable to add background image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1794"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1797"/>
         <source>Invalid image. Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1978"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1981"/>
         <source>Select point of the center of the elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2095"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3270"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2098"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3273"/>
         <source>Pen style:</source>
         <translation type="unfinished">Στυλ μαρκαδόρου:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2096"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3294"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2099"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3297"/>
         <source>Color:</source>
         <translation type="unfinished">Χρώμα:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3275"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3278"/>
         <source>Sets the &lt;b&gt;default pen style&lt;/b&gt; for all newly created objects. This style is applied the first time an object is drawn.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3298"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3301"/>
         <source>Defines the &lt;b&gt;global object color property&lt;/b&gt;. This color is applied automatically the first time a new object is drawn.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3434"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3437"/>
         <source>Point at a given distance tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3448"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3451"/>
         <source>Perpendicular/Bisector tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3474"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3477"/>
         <source>Triangular tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3488"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3491"/>
         <source>Point intersecting with axis tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3533"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3536"/>
         <source>Points intersecting with arcs/curves and tangents/segments tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3593"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3596"/>
         <source>Curves and arcs tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3626"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3629"/>
         <source>Flipping objects tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3639"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3642"/>
         <source>Rotating/moving objects tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3674"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3677"/>
         <source>Merge/duplicate pieces tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3689"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3692"/>
         <source>Adding objects for Details mode tools</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4769"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4785"/>
         <source>Select background image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4829"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4845"/>
         <source>All Single-Line Fonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4830"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4846"/>
         <source>TrueType Fonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4831"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4847"/>
         <source>OpenType Fonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4832"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4848"/>
         <source>SVG Fonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4833"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4849"/>
         <source>All Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4838"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4854"/>
         <source>Select Font Files to Install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4872"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4888"/>
         <source>Failed to install font file: %1
 
 Reason: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4878"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4894"/>
         <source>Font Installation Summary:
 
 Successful Installations: %1
@@ -13500,55 +14932,57 @@ Failed Installations: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4884"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4900"/>
         <source>Installation Complete with Errors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4888"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4904"/>
         <source>Installation Successful</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5515"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5555"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5538"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5578"/>
         <source>Unable to save image. Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5521"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5544"/>
         <source>Unable to save image. No data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5527"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5550"/>
         <source>untitled</source>
         <translation>ανώνυμο</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8520"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8543"/>
         <source>Auto-Arrange Labels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2341"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2347"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5540"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2344"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2350"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5563"/>
         <source>All files</source>
         <translation>Όλα τα αρχεία</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5544"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5567"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2385"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1640"/>
         <source>Visibility group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1665"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1591"/>
         <source>Show accuracy radius</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13965,61 +15399,73 @@ Would you like to select another file?</source>
     <name>PreferencesConfigurationPage</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="45"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="632"/>
         <source>Save</source>
         <translation>Αποθήκευση</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="51"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="633"/>
         <source>Auto-save modified pattern</source>
         <translation>Αυτόματη αποθήκευση τροποποιημένου πατρόν</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="61"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="634"/>
         <source>Interval:</source>
         <translation type="unfinished">Χρονικό διάστημα:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="90"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="636"/>
         <source>Language</source>
         <translation>Γλώσσα</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="637"/>
         <source>GUI language:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="123"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="639"/>
         <source>Decimal separator parts:</source>
         <translation type="unfinished">Υποδιαστολές:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="140"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="640"/>
         <source>Default unit:</source>
         <translation type="unfinished">Προεπιλεγμένη μονάδα:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="150"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="641"/>
         <source>Label language:</source>
         <translation>Γλώσσα ετικέτας:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="166"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="642"/>
         <source>Pattern editing</source>
         <translation>Επεξεργασία πατρόν</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="178"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="643"/>
         <source>Reset warnings</source>
         <translation>Επαναφορά προειδοποιήσεων</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="661"/>
         <source>Toolbar</source>
         <translation>Γραμμή εργαλείων</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="662"/>
         <source>The text appears under the icon (recommended for beginners).</source>
         <translation>Το κείμενο εμφανίζεται κάτω απο το εικονίδιο (συνιστάται για αρχάριους).</translation>
     </message>
@@ -14083,11 +15529,13 @@ Would you like to select another file?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="645"/>
         <source>Update a pattern only after a curve release</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="188"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="647"/>
         <source>Free curve mode</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14098,233 +15546,281 @@ Would you like to select another file?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="24"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="676"/>
         <source>General</source>
         <translation>Γενικά</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="74"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="635"/>
         <source>min</source>
         <comment>minutes</comment>
         <translation>λεπτά</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="116"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="638"/>
         <source>Piece label language:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="198"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="648"/>
         <source>Double click calls Zoom fit best for current pattern piece</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="221"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="654"/>
         <source>Enable to translate formula according to locale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="224"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="656"/>
         <source>Translate formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="660"/>
         <source>Enable Garbage Collector</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="265"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="663"/>
         <source>Toolbox icon size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="272"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="664"/>
         <source>Small</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="665"/>
         <source>Normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="321"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="667"/>
         <source>Theme:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="345"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="668"/>
         <source>Pointer mode:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="364"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="669"/>
         <source>Use tool groups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="408"/>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="456"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="680"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="682"/>
         <source>Shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="451"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="678"/>
         <source>Action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="479"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="681"/>
         <source>Restore defaults</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="489"/>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="623"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="703"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="705"/>
         <source>Scrolling</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="495"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="683"/>
         <source>Animation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="504"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="684"/>
         <source>Duration:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="511"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="686"/>
         <source>Scrolling animation duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="514"/>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="540"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="688"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="693"/>
         <source>ms</source>
         <comment>milliseconds</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="530"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="689"/>
         <source>Update interval:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="537"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="691"/>
         <source>Time in milliseconds between each animation update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="559"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="694"/>
         <source>Mouse scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="568"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="695"/>
         <source>Sensor:</source>
         <comment>sensor mouse</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="575"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="697"/>
         <source>Scale scrolling sensitivity for mouse with sensor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="594"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="699"/>
         <source>Wheel:</source>
         <comment>mouse wheel</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="601"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="701"/>
         <source>Scale scrolling sensitivity for mouse with wheel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="632"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="704"/>
         <source>Acceleration:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="672"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="713"/>
         <source>Privacy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="678"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="706"/>
         <source>Usage statistic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="684"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="707"/>
         <source>Send usage statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="691"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="708"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="704"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="709"/>
         <source>Crash reports</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="710"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="710"/>
         <source>Send automatic crash reports</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="719"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="711"/>
         <source>Email:</source>
         <translation>Διεύθυνση email:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="735"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="712"/>
         <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="313"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="666"/>
         <source>User Interface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="658"/>
         <source>Enable collecting unused objects when open pattern file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="670"/>
         <source>Don&apos;t use the native file dialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="381"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="671"/>
         <source>Update</source>
         <translation>Ενημέρωση</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="387"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="673"/>
         <source>Automatically check for updates each time the application starts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="390"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="675"/>
         <source>Automatically check for updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="208"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="650"/>
         <source>Disable if you want to skip interactive part of creating tools. And go straight to editing formulas instead.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="211"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="652"/>
         <source>Interactive tools</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14333,26 +15829,31 @@ Would you like to select another file?</source>
     <name>PreferencesPathPage</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="20"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespathpage.h" line="105"/>
         <source>Paths that Valentina uses</source>
         <translation>Διαδρομές φακέλων που χρησιμοποιεί το Valentina</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="45"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespathpage.h" line="107"/>
         <source>Type</source>
         <translation>Τύπος</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="50"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespathpage.h" line="109"/>
         <source>Path</source>
         <translation>Μονοπάτι</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="72"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespathpage.h" line="110"/>
         <source>Default</source>
         <translation>Προεπιλογή</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespathpage.h" line="111"/>
         <source>Edit</source>
         <translation type="unfinished">Επεξεργασία</translation>
     </message>
@@ -14381,177 +15882,213 @@ Would you like to select another file?</source>
     <name>PreferencesPatternPage</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="47"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="477"/>
         <source>Graphical output</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="478"/>
         <source>Use antialiasing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="178"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="496"/>
         <source>Undo</source>
         <translation>Αναίρεση</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="187"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="497"/>
         <source>Count steps (0 - no limit):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="200"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="498"/>
         <source>Workpiece</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="209"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="502"/>
         <source>Forbid flipping</source>
         <translation>Αποτροπή αντιστροφής</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="229"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="510"/>
         <source>Show second passmark on seam line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="206"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="500"/>
         <source>By default forbid flipping for all new created workpieces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="236"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="512"/>
         <source>By default hide the main path if the seam allowance was enabled</source>
         <translation>Από προεπιλογή, απόκρυψη του κύριου μονοπατιού αν το περιθώριο ραφής ήταν ενεργοποιημένο</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="239"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="514"/>
         <source>Hide main path</source>
         <translation>Απόκρυψη κύριου μονοπατιού</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="312"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="518"/>
         <source>Size:</source>
         <translation>Μέγεθος:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="515"/>
         <source>Seam allowance</source>
         <translation>Περιθώριο ραφής</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="485"/>
         <source>This setting has no effect since the value is overridden by the command-line option</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="226"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="508"/>
         <source>Show a notch both in the seam allowance and on the seam line. If you want to see a notch on a piece without seam allowance, enable built-in seam allowance and set the length of a notch manually.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="272"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="516"/>
         <source>Default value:</source>
         <translation>Προεπιλεγμένη τιμή:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="298"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="517"/>
         <source>Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="332"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="519"/>
         <source>Outline font:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="352"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="520"/>
         <source>Single-line font:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="368"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="521"/>
         <source>Allow single stroke outline fonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="375"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="523"/>
         <source>When this option is activated, the application will utilize SVG Fonts present in your system to render piece label text, instead of using outline fonts.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="378"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="525"/>
         <source>Use single-line fonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="388"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="526"/>
         <source>Label data/time format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="397"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="527"/>
         <source>Date:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="409"/>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="430"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="528"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="530"/>
         <source>Edit formats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="418"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="529"/>
         <source>Time:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="442"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="531"/>
         <source>Materials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="450"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="532"/>
         <source>Known materials:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="463"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="534"/>
         <source>Manage list of known materials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="466"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="536"/>
         <source>Manage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="488"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="538"/>
         <source>When manage pattern materials save them to known materials list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="491"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="540"/>
         <source>Remeber pattern materials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="98"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="487"/>
         <source>Curve approximation:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="489"/>
         <source>Set default curve approximation scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="134"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="492"/>
         <source>Bold line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="137"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="494"/>
         <source>Line width:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14567,12 +16104,14 @@ Would you like to select another file?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="60"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="480"/>
         <source>Use OpenGL to render a scene.
 This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="64"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="483"/>
         <source>Use OpenGL render</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14588,26 +16127,31 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="504"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="541"/>
         <source>Background image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="510"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="542"/>
         <source>Opacity:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="517"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="544"/>
         <source>Opacity value by default</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="216"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="504"/>
         <source>By default export to DXF-AAMA sew line on Draw layer for all new created workpieces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="219"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="506"/>
         <source>Sew line on drawing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15447,7 +16991,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="667"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2148"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2194"/>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15635,7 +17179,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="558"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2466"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2512"/>
         <source>Piece &apos;%1&apos;. Unable to load default piece label template.
 %2
 %3</source>
@@ -15647,7 +17191,7 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="3171"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="3217"/>
         <source>Piece &apos;%1&apos;. Fold line is not valid.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16246,7 +17790,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="109"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1965"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1966"/>
         <source>0 results</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16297,21 +17841,21 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="320"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2721"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2722"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Όνομα</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="325"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2723"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2724"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Πλήρες όνομα</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="330"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2725"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2726"/>
         <source>Group</source>
         <comment>measurement column</comment>
         <translation>Ομάδα</translation>
@@ -16552,7 +18096,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1209"/>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1212"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="846"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="849"/>
         <source>Import from CSV</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16572,234 +18116,234 @@ This option will take an affect after restart.</source>
         <translation>Το αρχείο &apos;%1&apos; δεν υπάρχει!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="275"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="278"/>
         <source>File error.</source>
         <translation>Σφάλμα στο αρχείο.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="311"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="314"/>
         <source>untitled %1</source>
         <translation>ανώνυμο %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="311"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1124"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="314"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1127"/>
         <source>untitled</source>
         <translation>ανώνυμο</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="319"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="322"/>
         <source>read only</source>
         <translation>μόνο για ανάγνωση</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="670"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="723"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="673"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="726"/>
         <source>Known measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="670"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="673"/>
         <source>All files</source>
         <translation>Όλα τα αρχεία</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="706"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="709"/>
         <source>Could not save the file</source>
         <translation>Δεν ήταν δυνατή η αποθήκευση του αρχείου</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="725"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="728"/>
         <source>known measurements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="743"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="746"/>
         <source>Save as</source>
         <translation>Αποθήκευση ως</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="763"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="766"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Αποτυχία κλειδώματος. Το αρχείο έχει ήδη ανοιχτεί σε ένα άλλο παράθυρο.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="779"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="782"/>
         <source>Could not save file</source>
         <translation>Δεν είναι δυνατή η αποθήκευση αρχείου</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="805"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="808"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Αποτυχία κλειδώματος. Αυτό το αρχείο έχει ήδη ανοιχτεί σε ένα άλλο παράθυρο. Αναμένετε συγκρούσεις όταν τρέχετε 2 αντίγραφα του προγράμματος.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="843"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="846"/>
         <source>Comma-Separated Values</source>
         <translation>Τιμές χωρισμένες με κόμμα</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="626"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="629"/>
         <source>Invalid image. Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1047"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1050"/>
         <source>Measurement images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1113"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1150"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1116"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1153"/>
         <source>Unable to save image. Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1134"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1137"/>
         <source>Save Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1198"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1201"/>
         <source>Unable to show image. Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1811"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1812"/>
         <source>About Qt</source>
         <translation>Σχετικά με το Qt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2057"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2058"/>
         <source>Empty</source>
         <translation>Κενό</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2058"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2059"/>
         <source>File was not saved yet.</source>
         <translation>Το αρχείο δεν αποθηκεύτηκε ακόμα.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2109"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2110"/>
         <source>Unsaved changes</source>
         <translation>Αλλαγές χωρίς αποθήκευση</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2110"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2111"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2118"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2119"/>
         <source>Save…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2118"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2119"/>
         <source>Save</source>
         <translation>Αποθήκευση</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2123"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2124"/>
         <source>Don&apos;t Save</source>
         <translation>Χωρίς αποθήκευση</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2202"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2203"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2223"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2224"/>
         <source>Cannot save settings. Access denied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2252"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2253"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation>Κενό</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2325"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2326"/>
         <source>Unknown measurement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2333"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2334"/>
         <source>&amp;New Window</source>
         <translation>&amp;Νέο παράθυρο</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2476"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2657"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2477"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2658"/>
         <source>Unnamed image %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2514"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2515"/>
         <source>Open file</source>
         <translation>Άνοιγμα αρχείου</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2633"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2634"/>
         <source>Length units</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2634"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2635"/>
         <source>Degrees</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2649"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2650"/>
         <source>None</source>
         <translation>Κανένα</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2694"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2695"/>
         <source>Measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2699"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2700"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2704"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2705"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2709"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2710"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2727"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2728"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation>Φόρμουλα</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2729"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2730"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Περιγραφή</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2753"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2754"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2794"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2795"/>
         <source>Error in row %1. %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2807"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2808"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -18029,63 +19573,75 @@ Do you want to save your changes?</source>
     <name>TabFoldLine</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="544"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="24"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="562"/>
         <source>Fold line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="545"/>
         <source>Type:</source>
         <translation>Τύπος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="67"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="547"/>
         <source>Bold</source>
         <comment>Font formating</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="86"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="550"/>
         <source>Italic</source>
         <comment>Font formating</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="105"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="553"/>
         <source>Aligns with the left edge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="556"/>
         <source>Centers horizontally in the available space</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="149"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="559"/>
         <source>Aligns with the right edge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="186"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="561"/>
         <source>Label:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="605"/>
         <source>Manual shape</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="232"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="563"/>
         <source>Height</source>
         <translation>Ύψος</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="292"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="564"/>
         <source>Height:</source>
         <comment>notch depth</comment>
         <translation>Ύψος:</translation>
@@ -18094,6 +19650,9 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="315"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="543"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="771"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="566"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="580"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="594"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
@@ -18101,6 +19660,9 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="372"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="600"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="828"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="569"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="583"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="597"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
@@ -18108,6 +19670,9 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="404"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="632"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="860"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="572"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="586"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="600"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
@@ -18115,27 +19680,34 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="429"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="657"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="885"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="575"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="589"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="603"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού σε πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="577"/>
         <source>Width</source>
         <translation>Φάρδος</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="520"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="578"/>
         <source>Width:</source>
         <comment>notch width</comment>
         <translation>Φάρδος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="688"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="591"/>
         <source>Center</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="748"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="592"/>
         <source>Center:</source>
         <comment>notch angle</comment>
         <translation type="unfinished"></translation>
@@ -18145,65 +19717,81 @@ Do you want to save your changes?</source>
     <name>TabGrainline</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="39"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="361"/>
         <source>Grainline enabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="96"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="362"/>
         <source>Rotation:</source>
         <translation type="unfinished">Περιστροφή:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="116"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="305"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="364"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="378"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="164"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="353"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="368"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="382"/>
         <source>Value</source>
         <translation type="unfinished">Τιμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="190"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="379"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="385"/>
         <source>Calculation</source>
         <translation type="unfinished">Υπολογισμός</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="215"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="404"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="374"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="388"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού σε πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="376"/>
         <source>Length:</source>
         <translation type="unfinished">Μήκος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="434"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="390"/>
         <source>Center pin:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="458"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="391"/>
         <source>Top pin:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="468"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="392"/>
         <source>Bottom pin:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="498"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="393"/>
         <source>Arrows:</source>
         <translation type="unfinished">Τόξα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="513"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="394"/>
         <source>Visible</source>
         <translation type="unfinished"></translation>
     </message>
@@ -18212,32 +19800,39 @@ Do you want to save your changes?</source>
     <name>TabLabels</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1152"/>
         <source>Piece label data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="92"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1141"/>
         <source>Letter:</source>
         <translation type="unfinished">Γράμμα:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1142"/>
         <source>Letter of pattern piece</source>
         <translation>Γράμμα του κομματιού πατρόν</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="129"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1144"/>
         <source>Placement:</source>
         <translation type="unfinished">Τοποθέτηση:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="431"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1275"/>
         <source>Labels</source>
         <translation>Ετικέτες</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="528"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1206"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1180"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1230"/>
         <source>Width:</source>
         <translation>Φάρδος:</translation>
     </message>
@@ -18248,6 +19843,12 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1226"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1415"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1662"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1182"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1196"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1213"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1232"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1246"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1263"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
@@ -18258,6 +19859,12 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1274"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1463"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1710"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1186"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1200"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1236"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1267"/>
         <source>Value</source>
         <translation type="unfinished">Τιμή</translation>
     </message>
@@ -18268,6 +19875,12 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1300"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1489"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1736"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1189"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1203"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1220"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1239"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1270"/>
         <source>Calculation</source>
         <translation type="unfinished">Υπολογισμός</translation>
     </message>
@@ -18278,200 +19891,252 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1325"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1514"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1761"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1206"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1242"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1256"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1273"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού σε πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="717"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1395"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1194"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1244"/>
         <source>Height:</source>
         <translation type="unfinished">Ύψος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="866"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1544"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1208"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1258"/>
         <source>Center pin:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="890"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1568"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1209"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1259"/>
         <source>Top left pin:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="900"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1578"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1210"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1260"/>
         <source>Bottom right pin:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="964"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1642"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1211"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1261"/>
         <source>Angle:</source>
         <translation type="unfinished">Γωνία:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1128"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1228"/>
         <source>Pattern label visible</source>
         <translation type="unfinished">Εμφάνιση ετικέτας πατρόν</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="51"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="238"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1135"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1153"/>
         <source>Label template:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="61"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="248"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1139"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1157"/>
         <source>Edit template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="83"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="276"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1140"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1158"/>
         <source>Label data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="109"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1143"/>
         <source>Quantity:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="136"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1145"/>
         <source>on fold</source>
         <translation type="unfinished">στη δίπλωση</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="157"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1147"/>
         <source>Annotation:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="164"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1148"/>
         <source>A text field to add comments in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="171"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1149"/>
         <source>Orientation:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1150"/>
         <source>Rotation:</source>
         <translation type="unfinished">Περιστροφή:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="199"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1151"/>
         <source>Tilt:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1146"/>
         <source>Fold position:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="58"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1137"/>
         <source>Edit piece label template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="444"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1176"/>
         <source>Options to control position a detail label. &lt;b&gt;Not available if a detail label template is empty&lt;/b&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="464"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1142"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1179"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1229"/>
         <source>Font size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1125"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1226"/>
         <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="230"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1174"/>
         <source>Pattern label data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1155"/>
         <source>Edit pattern label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1159"/>
         <source>Pattern name:</source>
         <translation>Όνομα πατρόν:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="299"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1160"/>
         <source>Pattern number:</source>
         <translation>Αριθμός πατρόν:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="313"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1161"/>
         <source>Company/Designer name:</source>
         <translation>Όνομα Επιχείρησης/Σχεδιαστή:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1162"/>
         <source>Customer name:</source>
         <translation>Όνομα πελάτη:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="341"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1163"/>
         <source>Date format:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="351"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1164"/>
         <source>Time format:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="361"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1165"/>
         <source>Customer birth date:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="368"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1166"/>
         <source>yyyy-MM-dd</source>
         <translation>χχχχ-ΜΜ-ηη</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="375"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1167"/>
         <source>Customer email:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="388"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1168"/>
         <source>Materials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="397"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1169"/>
         <source>Pattern materials:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="404"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1171"/>
         <source>Manage list of pattern materials</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="407"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1173"/>
         <source>Manage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="447"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1178"/>
         <source>Piece label visible</source>
         <translation type="unfinished"></translation>
     </message>
@@ -18480,164 +20145,196 @@ Do you want to save your changes?</source>
     <name>TabPassmarks</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="40"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="731"/>
         <source>Passmark:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="197"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="813"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="751"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="809"/>
         <source>Angle</source>
         <translation>Γωνία</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="206"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="752"/>
         <source>Straightforward</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="219"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="753"/>
         <source>Bisector</source>
         <translation>Διχοτόμος</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="71"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="735"/>
         <source>Marks</source>
         <translation>Σημάδια</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="232"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="280"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="755"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="767"/>
         <source>Select if need designate the corner point as a passmark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="235"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="757"/>
         <source>Intersection</source>
         <translation>Διατομή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="333"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="778"/>
         <source>Clockwise opening</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="343"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="779"/>
         <source>Not Mirrored</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="351"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="823"/>
         <source>Manual shape</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="360"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="781"/>
         <source>Length</source>
         <translation>Μήκος</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="420"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="782"/>
         <source>Length:</source>
         <comment>notch depth</comment>
         <translation>Μήκος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="585"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="795"/>
         <source>Width</source>
         <translation>Φάρδος</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="645"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="796"/>
         <source>Width:</source>
         <comment>notch width</comment>
         <translation>Φάρδος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="873"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="810"/>
         <source>Angle:</source>
         <comment>notch angle</comment>
         <translation>Γωνία:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1039"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="838"/>
         <source>Control</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1093"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="824"/>
         <source>Visible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1193"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="832"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a notch visible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1268"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="842"/>
         <source>Show the second passmark on seam line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1265"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="840"/>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="60"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="780"/>
         <source>Type</source>
         <translation>Τύπος</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="80"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="736"/>
         <source>One line</source>
         <comment>notch type</comment>
         <translation>Μια γραμμή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="93"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="737"/>
         <source>Two lines</source>
         <comment>notch type</comment>
         <translation>Δυο γραμμές</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="106"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="738"/>
         <source>Three lines</source>
         <comment>notch type</comment>
         <translation>Τρείς γραμμές</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="119"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="739"/>
         <source>T mark</source>
         <comment>notch type</comment>
         <translation>Σημάδι Τ</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="135"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="743"/>
         <source>External V mark</source>
         <comment>notch type</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="151"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="747"/>
         <source>Internal V mark</source>
         <comment>notch type</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="161"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="748"/>
         <source>U mark</source>
         <comment>notch type</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="171"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="749"/>
         <source>Box mark</source>
         <comment>notch type</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="181"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="750"/>
         <source>Check mark</source>
         <comment>notch type</comment>
         <translation type="unfinished"></translation>
@@ -18645,42 +20342,52 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="248"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="296"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="759"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="771"/>
         <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="251"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="761"/>
         <source>Intersection (only left)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="264"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="312"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="763"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="775"/>
         <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="267"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="765"/>
         <source>Intersection (only right)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="283"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="769"/>
         <source>Intersection 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="299"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="773"/>
         <source>Intersection 2 (only left)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="315"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="777"/>
         <source>Intersection 2 (only right)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="148"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="745"/>
         <source>Acute angle that looks outside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -18689,6 +20396,10 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="668"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="896"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1116"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="784"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="798"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="812"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="826"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
@@ -18697,6 +20408,10 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="725"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="953"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1164"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="787"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="801"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="815"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="829"/>
         <source>Value</source>
         <translation>Τιμή</translation>
     </message>
@@ -18704,6 +20419,9 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="529"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="757"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="985"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="790"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="804"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="818"/>
         <source>Calculation</source>
         <translation>Υπολογισμός</translation>
     </message>
@@ -18712,16 +20430,22 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="782"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1010"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1221"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="793"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="807"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="821"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="836"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού σε πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="47"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="733"/>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="132"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="741"/>
         <source>Acute angle that looks inside of piece</source>
         <translation type="unfinished"></translation>
     </message>
@@ -18730,112 +20454,135 @@ Do you want to save your changes?</source>
     <name>TabPaths</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="991"/>
         <source>Main path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="67"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="943"/>
         <source>All objects in path should follow in clockwise direction.</source>
         <translation>Όλα τα αντικείμενα του μονοπατιού θα πρέπει να ακολουθούν ωρολογιακή φορά.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="501"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1009"/>
         <source>Forbid piece be mirrored in a layout.</source>
         <translation type="unfinished">Περιορισμός καθρεφτίσματος κομματιού στην τοποθέτηση.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="504"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1011"/>
         <source>Forbid flipping</source>
         <translation>Αποτροπή αντιστροφής</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="381"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="990"/>
         <source>Ready!</source>
         <translation type="unfinished">Έτοιμο!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="952"/>
         <source>Show full piece</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="117"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="954"/>
         <source>Reverse node direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="136"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="957"/>
         <source>Excluded node</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="155"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="960"/>
         <source>Turn point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="174"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="963"/>
         <source>Check node uniqness</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="193"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="966"/>
         <source>Notch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="212"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="969"/>
         <source>Duplicate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="231"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="972"/>
         <source>Delete node</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="338"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="986"/>
         <source>Mirror line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="368"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="989"/>
         <source>Show mirror line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="521"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1017"/>
         <source>When the number of copies is greater than 1 and either &apos;Force Flipping&apos; or &apos;Forbid Flipping&apos; is selected, each even-numbered copy of the piece will be flipped vertically. The &apos;Force Flipping&apos; or &apos;Forbid Flipping&apos; setting will also toggle for each copy, applying the opposite of the initially selected option for each subsequent copy.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="524"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1019"/>
         <source>Symmetrical copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="531"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1021"/>
         <source>Force piece to always follow grainline direction regardless of layout settings.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="534"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1023"/>
         <source>Follow grainline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="555"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="561"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1025"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1092"/>
         <source>Seam allowance</source>
         <translation>Περιθώριο ραφής</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="602"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1032"/>
         <source>Activates true zero seam allowance width. This also disables intersection checks between the seam line and seam allowance.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="657"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1035"/>
         <source>Width:</source>
         <translation>Φάρδος:</translation>
     </message>
@@ -18843,6 +20590,9 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="677"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="916"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1106"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1037"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1057"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1075"/>
         <source>Formula wizard</source>
         <translation>Βοηθός φόρμουλας</translation>
     </message>
@@ -18850,6 +20600,9 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="719"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="958"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1148"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1041"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1061"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1079"/>
         <source>Value</source>
         <translation type="unfinished">Τιμή</translation>
     </message>
@@ -18857,6 +20610,9 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="745"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="984"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1174"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1044"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1064"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1082"/>
         <source>Calculation</source>
         <translation type="unfinished">Υπολογισμός</translation>
     </message>
@@ -18864,197 +20620,241 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="767"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1006"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1196"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1047"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1067"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1085"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση πλήρους υπολογισμού σε πλαίσιο μηνύματος&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="792"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1049"/>
         <source>Nodes</source>
         <translation type="unfinished">Κόμβοι</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="809"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1050"/>
         <source>Node:</source>
         <translation>Κόμβος:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="886"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1051"/>
         <source>Before:</source>
         <translation>Πριν:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="906"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1096"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1053"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1071"/>
         <source>Return to default width</source>
         <translation type="unfinished">Επιστροφή στο προεπιλεγμένο πλάτος</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="909"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1099"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1055"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1073"/>
         <source>Default</source>
         <translation>Προεπιλογή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1076"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1069"/>
         <source>After:</source>
         <translation>Μετά:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1087"/>
         <source>Angle:</source>
         <translation type="unfinished">Γωνία:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="346"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1298"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="987"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1089"/>
         <source>Start point:</source>
         <translation>Αρχικό σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="356"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="988"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1090"/>
         <source>End point:</source>
         <translation>Τελικό σημείο:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1318"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1091"/>
         <source>Include as:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1360"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1093"/>
         <source>Internal paths</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="574"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1027"/>
         <source>The seam allowance is part of main path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="577"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1029"/>
         <source>Built in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="945"/>
         <source>Hide the main path if the seam allowance is enabled</source>
         <translation>Απόκρυψη του κύριου μονοπατιού αν το περιθώριο ραφής είναι ενεργοποιημένο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="947"/>
         <source>Hide main path</source>
         <translation>Απόκρυψη κύριου μονοπατιού</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="433"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="998"/>
         <source>Name of detail:</source>
         <translation>Όνομα της λεπτομέρειας:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="416"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="995"/>
         <source>Detail</source>
         <translation>Λεπτομέρεια</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="419"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="996"/>
         <source>Name can&apos;t be empty</source>
         <translation>Το όνομα δε μπορεί να είναι κενό</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="511"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1013"/>
         <source>Force piece to be always flipped in a layout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="514"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1015"/>
         <source>Force flipping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="258"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="975"/>
         <source>Move on top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="275"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="978"/>
         <source>Move up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="292"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="981"/>
         <source>Move down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="309"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="984"/>
         <source>Move on bottom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="426"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="997"/>
         <source>Priority:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="454"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1001"/>
         <source>Controls priority in layout. 0 - no priority.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="587"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1030"/>
         <source>Automatic</source>
         <comment>seam allowance</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="605"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1034"/>
         <source>True zero width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1264"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1088"/>
         <source>Custom</source>
         <comment>seam allowance</comment>
         <translation>Προσαρμογή</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="395"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1024"/>
         <source>Piece</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="403"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="993"/>
         <source>Universally Unique IDentifier of piece. Used to identifier piece while updating manual layout. Left empty to generate new value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="999"/>
         <source>Gradation label:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="473"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1003"/>
         <source>Insert…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="92"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="951"/>
         <source>On drawing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="482"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1004"/>
         <source>Short name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="489"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1006"/>
         <source>Name used to generate a variable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="89"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="949"/>
         <source>Export to DXF-AAMA sew line on Draw layer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19063,6 +20863,7 @@ Do you want to save your changes?</source>
     <name>TabPlaceLabels</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabplacelabels.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabplacelabels.h" line="46"/>
         <source>Dialog</source>
         <translation type="unfinished">Διάλογος</translation>
     </message>
@@ -19873,24 +21674,24 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractPattern</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1482"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1490"/>
         <source>Can&apos;t find tool in table.</source>
         <translation>Δεν είναι δυνατή η εύρεση του εργαλείου στον πίνακα.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1992"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2000"/>
         <source>Error creating or updating group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2060"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2068"/>
         <source>measurement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2304"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2487"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2545"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2312"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2495"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2553"/>
         <source>New group</source>
         <translation>Νέα ομάδα</translation>
     </message>
@@ -20464,37 +22265,37 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="271"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="384"/>
         <source>black</source>
         <translation>μαύρο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="222"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="335"/>
         <source>green</source>
         <translation>πράσινο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="225"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="338"/>
         <source>blue</source>
         <translation>μπλε</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="228"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="341"/>
         <source>dark red</source>
         <translation>σκούρο κόκκινο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="231"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="344"/>
         <source>dark green</source>
         <translation>σκούρο πράσινο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="234"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="347"/>
         <source>dark blue</source>
         <translation>σκούρο μπλε</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="237"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="350"/>
         <source>yellow</source>
         <translation>κίτρινο</translation>
     </message>
@@ -20507,57 +22308,57 @@ Do you want to save your changes?</source>
         <translation type="vanished">Θέλετε σίγουρα να κάνετε διαγραφή;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="240"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="353"/>
         <source>light salmon</source>
         <translation>ανοιχτό σωμόν</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="243"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="356"/>
         <source>goldenrod</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="246"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="359"/>
         <source>orange</source>
         <translation>πορτοκαλί</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="249"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="362"/>
         <source>deep pink</source>
         <translation>βαθύ ροζ</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="252"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="365"/>
         <source>violet</source>
         <translation>μωβ</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="255"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="368"/>
         <source>dark violet</source>
         <translation>σκούρο μωβ</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="258"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="371"/>
         <source>medium sea green</source>
         <translation>πράσινο θαλλασί</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="261"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="374"/>
         <source>lime</source>
         <translation>πρασινοκίτρινο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="264"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="377"/>
         <source>deep sky blue</source>
         <translation>βαθύ μπλε του ουρανού</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="267"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="380"/>
         <source>corn flower blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="162"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="275"/>
         <source>Edit wrong formula</source>
         <translation type="unfinished">Επεξεργασία εσφαλμένης φόρμουλας</translation>
     </message>
@@ -20565,52 +22366,52 @@ Do you want to save your changes?</source>
 <context>
     <name>VApplication</name>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="442"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="436"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="448"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="442"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Σφάλμα κακής ταυτότητας. Το πρόγραμμα θα τερματιστεί.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="454"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="448"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Σφάλμα λόγω αδυναμίας μετατροπής της τιμής. Το πρόγραμμα θα τερματιστεί.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="460"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="454"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Σφάλμα λόγω κενής παραμέτρου. Το πρόγραμμα θα τερματιστεί.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="466"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="460"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Σφάλμα λόγω λάθους ταυτότητας. Το πρόγραμμα θα τερματιστεί.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="485"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="479"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Υπάρχει σφάλμα!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="499"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="493"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="504"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="498"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="479"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="473"/>
         <source>Invalid notch.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="491"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="485"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -23797,79 +25598,79 @@ Do you want to save your changes?</source>
         <translation type="vanished">Σφάλμα λόγω μη μοναδικής ταυτότητας.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="618"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="646"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="710"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="754"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="642"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="670"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="734"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="778"/>
         <source>Error parsing file.</source>
         <translation>Σφάλμα κατά την ανάλυση του αρχείου.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="625"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="721"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="649"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="745"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Σφάλμα λόγω αδυναμίας μετατροπής της τιμής.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="632"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="732"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="656"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="756"/>
         <source>Error empty parameter.</source>
         <translation>Σφάλμα κενής παραμέτρου.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="639"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="743"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="663"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="767"/>
         <source>Error wrong id.</source>
         <translation>Σφάλμα λόγω λάθους ταυτότητας.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="653"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="765"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="677"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="789"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="784"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="808"/>
         <source>Error updating scene after parsing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1181"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1198"/>
         <source>Error creating or updating detail</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση λεπτομέρειας</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1803"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1820"/>
         <source>Error creating or updating single point</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση ενός σημείου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1848"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1854"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1865"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1871"/>
         <source>Error creating or updating point of end line</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση σημείου στο τέλος γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1898"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1904"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1915"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1921"/>
         <source>Error creating or updating point along line</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση σημείου κατα μήκος τηςγραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1943"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1949"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1960"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1966"/>
         <source>Error creating or updating point of shoulder</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση σημείου του σημείου ώμου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1988"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1994"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2005"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2011"/>
         <source>Error creating or updating point of normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2033"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2039"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2050"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2056"/>
         <source>Error creating or updating point of bisector</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση σημείου του σημείου της διχοτόμου</translation>
     </message>
@@ -23878,288 +25679,288 @@ Do you want to save your changes?</source>
         <translation type="vanished">Σφάλμα κατα τη δημιουργία ή ενημέρωση του σημείου της τομής με γραμμή</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2109"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2115"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2126"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2132"/>
         <source>Error creating or updating point of contact</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση του σημείου επαφής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2145"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2162"/>
         <source>Error creating or updating modeling point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2277"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2294"/>
         <source>Error creating or updating height</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση σημείου του ύψους</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2308"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2325"/>
         <source>Error creating or updating triangle</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση σημείου τριγώνου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2338"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2355"/>
         <source>Error creating or updating point of intersection</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση σημείου διχοτόμου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2394"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2400"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2411"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2417"/>
         <source>Error creating or updating cut spline point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2456"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2462"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2473"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2479"/>
         <source>Error creating or updating cut spline path point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2518"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2524"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2535"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2541"/>
         <source>Error creating or updating cut arc point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2565"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2571"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2582"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2588"/>
         <source>Error creating or updating point of intersection line and axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2632"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2638"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2649"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2655"/>
         <source>Error creating or updating point of intersection curve and axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1679"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1696"/>
         <source>Error creating or updating line</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση γραμμής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2974"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3037"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2991"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3054"/>
         <source>Error creating or updating simple curve</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση απλής καμπύλης</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3165"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3244"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3182"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3261"/>
         <source>Error creating or updating curve path</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση μονοπατιού καμπύλης</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3303"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3309"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3320"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3326"/>
         <source>Error creating or updating a parallel curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3378"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3384"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3395"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3401"/>
         <source>Error creating or updating a graduated curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3465"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3482"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3490"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3507"/>
         <source>Error creating or updating modeling curve path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3537"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3543"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3766"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3772"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3554"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3560"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3783"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3789"/>
         <source>Error creating or updating simple arc</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση απλού τόξου</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3686"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3692"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3703"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3709"/>
         <source>Error creating or updating elliptical arc with length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3719"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3736"/>
         <source>Error creating or updating modeling arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4454"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4475"/>
         <source>Error creating or updating union details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2695"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2712"/>
         <source>Error creating or updating point of intersection arcs</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση του σημείου τομής τόξων</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2738"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2755"/>
         <source>Error creating or updating point of intersection circles</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση του σημείου τομής κύκλων</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2842"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2859"/>
         <source>Error creating or updating point from circle and tangent</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση σημείου απο κύκλο και εφαπτομένη</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2873"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2890"/>
         <source>Error creating or updating point from arc and tangent</source>
         <translation>Σφάλμα κατα τη δημιουργία ή ενημέρωση σημείου απο τόξο και εφαπτομένη</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2924"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2941"/>
         <source>Error creating or updating true darts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="942"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1039"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1108"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="959"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1056"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1125"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1646"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1663"/>
         <source>Unknown point type &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4341"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4362"/>
         <source>Unknown spline type &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4376"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4397"/>
         <source>Unknown arc type &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4460"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4481"/>
         <source>Unknown tools type &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="556"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="580"/>
         <source>Error not unique id.</source>
         <translation>Σφάλμα λόγω μη μοναδικής ταυτότητας.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2802"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2819"/>
         <source>Error creating or updating point of intersection curves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3043"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3060"/>
         <source>Error creating or updating simple interactive spline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3250"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3267"/>
         <source>Error creating or updating interactive spline path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3097"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3114"/>
         <source>Error creating or updating cubic bezier curve</source>
         <translation>Σφάλμα στη δημιουργία ή ενημέρωση της κυβικής καμπύλης Bezier</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3440"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3457"/>
         <source>Error creating or updating cubic bezier path curve</source>
         <translation>Σφάλμα στη δημιουργία ή ενημέρωση της</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3815"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3821"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3832"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3838"/>
         <source>Error creating or updating operation of rotation</source>
         <translation>Σφάλμα στη δημιουργία ή ενημέρωση της λειτουργίας περιστροφής</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4492"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4513"/>
         <source>Unknown operation type &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3856"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3873"/>
         <source>Error creating or updating operation of flipping by line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3891"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3908"/>
         <source>Error creating or updating operation of flipping by axis</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3940"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3946"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3957"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3963"/>
         <source>Error creating or updating operation of moving</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2070"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2087"/>
         <source>Error creating or updating point of line intersection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3597"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3603"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3614"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3620"/>
         <source>Error creating or updating simple elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4413"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4434"/>
         <source>Unknown elliptical arc type &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3630"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3647"/>
         <source>Error creating or updating modeling elliptical arc</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1125"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1142"/>
         <source>Detail</source>
         <translation type="unfinished">Λεπτομέρεια</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4526"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4547"/>
         <source>Unnamed path</source>
         <translation>Ανώνυμο μονοπάτι</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4519"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4542"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4540"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4563"/>
         <source>Error creating or updating a piece path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2172"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2189"/>
         <source>Error creating or updating pin point</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4520"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4541"/>
         <source>Piece path doesn&apos;t contain nodes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2241"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2247"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2258"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2264"/>
         <source>Error creating or updating place label</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4695"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4716"/>
         <source>Can&apos;t find increment &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -24411,6 +26212,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VShortcutDialog</name>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/vshortcutdialog.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_vshortcutdialog.h" line="58"/>
         <source>Dialog</source>
         <translation>Διάλογος</translation>
     </message>
@@ -26337,7 +28139,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2836"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2882"/>
         <source>Tool was used after deleting.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -27906,72 +29708,86 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VWidgetBackgroundImages</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="367"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="41"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="368"/>
         <source>Transformation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="51"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="372"/>
         <source>Translate</source>
         <comment>Translate piece</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="369"/>
         <source>Horizontal:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="370"/>
         <source>Vertical:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="104"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="371"/>
         <source>Relative translation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="115"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="376"/>
         <source>Scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="123"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="373"/>
         <source>Width:</source>
         <translation>Φάρδος:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="146"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="374"/>
         <source>Height:</source>
         <translation>Ύψος:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="168"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="375"/>
         <source>Scale proportionally</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="179"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="379"/>
         <source>Rotate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="377"/>
         <source>Rotation</source>
         <translation>Περιστροφή</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="378"/>
         <source>Angle:</source>
         <translation>Γωνία:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="303"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="380"/>
         <source>Z Value</source>
         <translation type="unfinished"></translation>
     </message>
@@ -28050,31 +29866,37 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VWidgetDependencies</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="22"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="114"/>
         <source>Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="116"/>
         <source>Go to object automatically on node selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="62"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="119"/>
         <source>Move to earliest possible position in history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="122"/>
         <source>Move earlier in history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="88"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="125"/>
         <source>Move later in history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="128"/>
         <source>Move to latest possible position in history</source>
         <translation type="unfinished"></translation>
     </message>
@@ -28108,6 +29930,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VWidgetDetails</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdetails.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdetails.h" line="66"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
@@ -28148,6 +29971,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdetails.ui" line="26"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdetails.h" line="70"/>
         <source>Hide not in layout</source>
         <translation type="unfinished"></translation>
     </message>
@@ -28200,16 +30024,19 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetgroups.ui" line="26"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetgroups.h" line="85"/>
         <source>Tags:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetgroups.ui" line="33"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetgroups.h" line="87"/>
         <source>Separate each tag with comma.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetgroups.ui" line="36"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetgroups.h" line="89"/>
         <source>Filter by tags</source>
         <translation type="unfinished"></translation>
     </message>
@@ -28550,109 +30377,131 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>WatermarkWindow</name>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="321"/>
         <source>Watermark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="54"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="327"/>
         <source>Opacity:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="88"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="328"/>
         <source>Text</source>
         <translation>Κείμενο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="329"/>
         <source>Text:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="116"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="331"/>
         <source>watermark text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="126"/>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="256"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="332"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="343"/>
         <source>Rotation:</source>
         <translation>Περιστροφή:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="152"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="333"/>
         <source>Font:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="161"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="334"/>
         <source>The quick brown fox jumps over the lazy dog</source>
         <extracomment>Use native text to test a font options</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="171"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="336"/>
         <source>Edit font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="216"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="339"/>
         <source>Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="228"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="340"/>
         <source>Path:</source>
         <translation>Διαδρομή:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="341"/>
         <source>path to image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="342"/>
         <source>Browse…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="276"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="344"/>
         <source>Gray color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="313"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="345"/>
         <source>&amp;File</source>
         <translation>&amp;Αρχείο</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="346"/>
         <source>Operations</source>
         <translation>Λειτουργίες</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="347"/>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="507"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="322"/>
         <source>Save</source>
         <translation>Αποθήκευση</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="355"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="323"/>
         <source>Save &amp;As…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="363"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="324"/>
         <source>E&amp;xit</source>
         <translation>Έ&amp;ξοδος</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="325"/>
         <source>Open</source>
         <translation>Άνοιγμα</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="379"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="326"/>
         <source>New</source>
         <translation>Νέο</translation>
     </message>
@@ -28787,6 +30636,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="200"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="338"/>
         <source>Color:</source>
         <translation>Χρώμα:</translation>
     </message>

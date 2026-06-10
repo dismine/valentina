@@ -426,21 +426,25 @@
     <name>DialogAboutApp</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="29"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="242"/>
         <source>About Valentina</source>
         <translation>Over Valentina</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="109"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="243"/>
         <source>Valentina version</source>
         <translation>Valentina versie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="245"/>
         <source>Special thanks</source>
         <translation>Speciale dank</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="247"/>
         <source>Credits</source>
         <translation>Credits</translation>
     </message>
@@ -464,6 +468,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="244"/>
         <source>Build revision:</source>
         <translation>Herziene uitgave gebouwd:</translation>
     </message>
@@ -474,6 +479,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="301"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="246"/>
         <source>Check For Updates</source>
         <translation>Kijk voor Opwaarderingen</translation>
     </message>
@@ -544,21 +550,25 @@
     <name>DialogAddBackgroundImage</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaddbackgroundimage.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaddbackgroundimage.h" line="83"/>
         <source>Background image</source>
         <translation>Achtergrondafbeelding</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaddbackgroundimage.ui" line="26"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaddbackgroundimage.h" line="84"/>
         <source>Name:</source>
         <translation>Naam:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaddbackgroundimage.ui" line="38"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaddbackgroundimage.h" line="86"/>
         <source>Determine should an image built in or added as path to the file.</source>
         <translation>Bepaal of een afbeelding ingesloten of als bestandspad wordt toegevoegd.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaddbackgroundimage.ui" line="41"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaddbackgroundimage.h" line="88"/>
         <source>Built in</source>
         <translation>Ingebouwd</translation>
     </message>
@@ -575,6 +585,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="201"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="340"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -613,6 +624,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="327"/>
         <source>Point at distance along line</source>
         <translation>Punt op afstand langs lijn</translation>
     </message>
@@ -627,81 +639,97 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="328"/>
         <source>Length:</source>
         <translation>Lengte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="330"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="150"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="334"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="176"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="337"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="230"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="342"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="347"/>
         <source>First point:</source>
         <translation>Eerste punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="349"/>
         <source>First point of the line</source>
         <translation>Eerste punt van de lijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="287"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="352"/>
         <source>Swap points</source>
         <translation>Punten omwisselen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="318"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="354"/>
         <source>Second point:</source>
         <translation>Tweede punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="331"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="356"/>
         <source>Second point of the line</source>
         <translation>Tweede punt van de lijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="338"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="358"/>
         <source>Type of line:</source>
         <translation>Soort lijn:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="376"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="362"/>
         <source>Line color:</source>
         <translation>Lijnkleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="344"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="240"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="346"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="363"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="364"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -710,6 +738,7 @@
     <name>DialogArc</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="435"/>
         <source>Arc</source>
         <translation>Boog</translation>
     </message>
@@ -725,6 +754,9 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="371"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="550"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="448"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="462"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="476"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -769,22 +801,23 @@
         <translation type="vanished">Kleur</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="483"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="498"/>
         <source>Edit radius</source>
         <translation>Verander straal</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="497"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="512"/>
         <source>Edit first angle</source>
         <translation>Verander eerste hoek</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="511"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="526"/>
         <source>Edit second angle</source>
         <translation>Verander tweede hoek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="436"/>
         <source>Radius:</source>
         <translation>Straal:</translation>
     </message>
@@ -792,6 +825,9 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="102"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="281"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="438"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="452"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="466"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
@@ -799,6 +835,9 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="144"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="323"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="502"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="442"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="456"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="470"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
@@ -808,6 +847,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="261"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="450"/>
         <source>First angle:</source>
         <translation>Eerste hoek:</translation>
     </message>
@@ -815,56 +855,69 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="170"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="349"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="528"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="445"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="459"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="473"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="464"/>
         <source>Second angle:</source>
         <translation>Tweede hoek:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="585"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="478"/>
         <source>Center point:</source>
         <translation>Middelpunt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="592"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="480"/>
         <source>Select center point of the arc</source>
         <translation>Selecteer het middelpunt van de boog</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="628"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="483"/>
         <source>Color:</source>
         <translation>Kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="599"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="482"/>
         <source>Pen style:</source>
         <translation>Pen stijl:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="635"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="484"/>
         <source>Approximation scale:</source>
         <translation>Schaal bij benadering:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="642"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="486"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="489"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="658"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="488"/>
         <source>Alias:</source>
         <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="695"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="490"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -887,6 +940,9 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="189"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="368"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="547"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="454"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="468"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -919,17 +975,17 @@
         <translation type="vanished">Kleur</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="427"/>
         <source>Edit radius</source>
         <translation>Verander straal</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="426"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="441"/>
         <source>Edit the first angle</source>
         <translation>Verander de eerste hoek</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="455"/>
         <source>Edit the arc length</source>
         <translation>Verander de booglengte</translation>
     </message>
@@ -947,6 +1003,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="428"/>
         <source>Radius:</source>
         <translation>Straal:</translation>
     </message>
@@ -954,6 +1011,9 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="99"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="278"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="457"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="430"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="444"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="458"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
@@ -961,6 +1021,9 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="141"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="320"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="499"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="434"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="448"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="462"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
@@ -968,61 +1031,75 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="167"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="346"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="525"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="437"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="451"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="465"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="258"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="442"/>
         <source>First angle:</source>
         <translation>Eerste hoek:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="437"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="456"/>
         <source>Length:</source>
         <translation>Lengte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="582"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="470"/>
         <source>Center point:</source>
         <translation>Middelpunt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="592"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="471"/>
         <source>Color:</source>
         <translation>Kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="599"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="472"/>
         <source>Pen style:</source>
         <translation>Pen stijl:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="628"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="473"/>
         <source>Approximation scale:</source>
         <translation>Schaal bij benadering:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="635"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="475"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="478"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="427"/>
         <source>Arc with length</source>
         <translation>Boog met lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="651"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="477"/>
         <source>Alias:</source>
         <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="688"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="479"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -1031,41 +1108,49 @@
     <name>DialogAskCollectStatistic</name>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="131"/>
         <source>Privacy</source>
         <translation>Privacy</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="24"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="132"/>
         <source>Usage statistic</source>
         <translation>Gebruiksstatistiek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="30"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="133"/>
         <source>Send usage statistics</source>
         <translation>Gebruiksstatistieken verzenden</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="40"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="134"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
         <translation>Help mee de kwaliteit van Valentina te verbeteren door automatisch gebruiksstatistieken te verzenden. De verzonden gegevens bevatten &lt;span style=&quot; font-weight:700;&quot;&gt;geen mogelijk gevoelige informatie&lt;/span&gt; zoals gebruikersnamen, e-mailadressen, bestandsinhoud of bestandspaden.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="135"/>
         <source>Crash reports</source>
         <translation>Crashrapporten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="136"/>
         <source>Send automatic crash reports</source>
         <translation>Automatische crashrapporten verzenden</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="71"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="137"/>
         <source>Email:</source>
         <translation>Emailadres:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="87"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="138"/>
         <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
         <translation>Het melden van crashes helpt ons Valentina betrouwbaarder te maken. Alle informatie wordt vertrouwelijk behandeld en wordt alleen gebruikt om toekomstige versies van dit programma te verbeteren. Activeer het automatisch verzenden van crashrapporten en vul uw e-mailadres in (optioneel). Als u dit invult, kunnen wij contact met u opnemen met aanvullende informatie over de crash.</translation>
     </message>
@@ -1082,6 +1167,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="315"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -1133,6 +1219,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="302"/>
         <source>Point along bisector</source>
         <translation>Punt langs bissectrice</translation>
     </message>
@@ -1147,71 +1234,85 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="303"/>
         <source>Length:</source>
         <translation>Lengte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="305"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="309"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="312"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="317"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="319"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="321"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="322"/>
         <source>First point:</source>
         <translation>Eerste punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="323"/>
         <source>Second point:</source>
         <translation>Tweede punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="282"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="324"/>
         <source>Third point:</source>
         <translation>Derde punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="292"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="325"/>
         <source>Type of line:</source>
         <translation>Soort lijn:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="321"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="326"/>
         <source>Line color:</source>
         <translation>Lijnkleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="327"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="351"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="328"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -1221,46 +1322,56 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="24"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="142"/>
         <source>Rename…</source>
         <translation>Hernoemen…</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="144"/>
         <source>Base name</source>
         <translation>Basisnaam</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="48"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="146"/>
         <source>New name</source>
         <translation>Nieuwe naam</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="58"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="147"/>
         <source>Text:</source>
         <translation>Tekst:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="65"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="149"/>
         <source>Use %n, %0n, %00n, %000n for counting</source>
         <translation>Gebruik %n, %0n, %00n, %000n voor nummering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="151"/>
         <source>Position:</source>
         <translation>Positie:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="84"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="152"/>
         <source>Append</source>
         <translation>Achteraan toevoegen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="97"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="153"/>
         <source>Prepend</source>
         <translation>Vooraan toevoegen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="107"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="154"/>
         <source>Replace</source>
         <translation>Vervangen</translation>
     </message>
@@ -1274,16 +1385,19 @@
     <name>DialogCredits</name>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogcredits.h" line="95"/>
         <source>Credits</source>
         <translation>Credits</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogcredits.h" line="96"/>
         <source>Sponsors</source>
         <translation>Sponsors</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogcredits.h" line="98"/>
         <source>Authors</source>
         <translation>Auteurs</translation>
     </message>
@@ -1296,6 +1410,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="106"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="204"/>
         <source>Color:</source>
         <translation>Kleur:</translation>
     </message>
@@ -1305,21 +1420,25 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="37"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="199"/>
         <source>First point:</source>
         <translation>Eerste punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="47"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="200"/>
         <source>Second point:</source>
         <translation>Tweede punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="57"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="201"/>
         <source>Third point:</source>
         <translation>Derde punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="67"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="202"/>
         <source>Fourth point:</source>
         <translation>Vierde punt:</translation>
     </message>
@@ -1344,36 +1463,43 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="198"/>
         <source>Tool cubic bezier</source>
         <translation>Kubisachtige bezier gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="77"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="203"/>
         <source>Pen Style:</source>
         <translation>Pen stijl:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="120"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="205"/>
         <source>Approximation Scale:</source>
         <translation>Schaal bij benadering:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="207"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="210"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="209"/>
         <source>Alias:</source>
         <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="211"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -1386,16 +1512,19 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="93"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="332"/>
         <source>Point:</source>
         <translation>Punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="122"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="334"/>
         <source>List of points</source>
         <translation>Lijst van de punten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="252"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="349"/>
         <source>Color:</source>
         <translation>Kleur:</translation>
     </message>
@@ -1409,61 +1538,73 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="330"/>
         <source>Tool cubic bezier path</source>
         <translation>Kubisachtige bezier gereedschaps pad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="36"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="331"/>
         <source>New point:</source>
         <translation>Nieuw punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="134"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="337"/>
         <source>Move on top</source>
         <translation>Verplaats naar bovenaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="151"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="340"/>
         <source>Move up</source>
         <translation>Verplaats naar boven</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="168"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="343"/>
         <source>Move down</source>
         <translation>Verplaats naar beneden</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="346"/>
         <source>Move on bottom</source>
         <translation>Verplaats naar onderaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="348"/>
         <source>Pen style:</source>
         <translation>Pen stijl:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="350"/>
         <source>Approximation scale:</source>
         <translation>Schaal bij benadering:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="273"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="352"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="355"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="289"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="354"/>
         <source>Alias:</source>
         <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="319"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="356"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -1480,6 +1621,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="348"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -1504,12 +1646,13 @@
         <translation type="vanished">Toon lijn vanaf het eerste punt naar dit punt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="290"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="295"/>
         <source>Select axis point</source>
         <translation>Selecteer aslijn punt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="335"/>
         <source>Point intersect curve and axis</source>
         <translation>Kruispunt kromming en aslijn</translation>
     </message>
@@ -1522,102 +1665,121 @@
         <translation type="vanished">Lijn kleur</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="346"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="351"/>
         <source>Edit angle</source>
         <translation>Verander de hoek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="336"/>
         <source>Angle:</source>
         <translation>Hoek:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="338"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="342"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="173"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="345"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="350"/>
         <source>Axis point:</source>
         <translation>Aslijn punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="354"/>
         <source>Curve:</source>
         <translation>Kromming:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="263"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="355"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="276"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="357"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="279"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="359"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="286"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="360"/>
         <source>Type of line:</source>
         <translation>Soort lijn:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="315"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="361"/>
         <source>Line color:</source>
         <translation>Lijnkleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="357"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="364"/>
         <source>Name1:</source>
         <translation>Naam1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="364"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="365"/>
         <source>Choose unique name for left sub curve</source>
         <translation>Kies een unieke naam voor de linker deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="366"/>
         <source>Name2:</source>
         <translation>Naam2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="378"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="367"/>
         <source>Choose unique name for right sub curve</source>
         <translation>Kies een unieke naam voor de rechter deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="368"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="401"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="369"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="322"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="362"/>
         <source>Alias1:</source>
         <translation>Alias1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="336"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="363"/>
         <source>Alias2:</source>
         <translation>Alias2:</translation>
     </message>
@@ -1634,6 +1796,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="300"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -1647,6 +1810,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="287"/>
         <source>Segment an arc</source>
         <translation>Opsplitsen van een boog</translation>
     </message>
@@ -1665,41 +1829,49 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="288"/>
         <source>Length:</source>
         <translation>Lengte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="290"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="294"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="297"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="302"/>
         <source>Arc:</source>
         <translation>Boog:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="303"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="305"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="307"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
@@ -1709,41 +1881,49 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="314"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="308"/>
         <source>Alias1:</source>
         <translation>Alias1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="274"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="309"/>
         <source>Alias2:</source>
         <translation>Alias2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="288"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="310"/>
         <source>Name1:</source>
         <translation>Naam1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="295"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="311"/>
         <source>Name2:</source>
         <translation>Naam2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="302"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="312"/>
         <source>Choose unique name for left sub curve</source>
         <translation>Kies een unieke naam voor de linker deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="309"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="313"/>
         <source>Choose unique name for right sub curve</source>
         <translation>Kies een unieke naam voor de rechter deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="332"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="315"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -1760,6 +1940,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="295"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -1777,6 +1958,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="282"/>
         <source>Segmenting a simple curve</source>
         <translation>Opsplitsen van een simpele kromming</translation>
     </message>
@@ -1785,42 +1967,49 @@
         <translation type="vanished">Kleur</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.cpp" line="406"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.cpp" line="411"/>
         <source>Edit length</source>
         <translation>Verander de lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="283"/>
         <source>Length:</source>
         <translation>Lengte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="285"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="289"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="292"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="297"/>
         <source>Curve:</source>
         <translation>Kromming:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="298"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="300"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
@@ -1834,46 +2023,55 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="309"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="302"/>
         <source>Choose unique label</source>
         <translation>Kies een uniek label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="303"/>
         <source>Alias1:</source>
         <translation>Alias1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="270"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="304"/>
         <source>Alias2:</source>
         <translation>Alias2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="280"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="305"/>
         <source>Name1:</source>
         <translation>Naam1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="287"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="306"/>
         <source>Name2:</source>
         <translation>Naam2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="294"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="307"/>
         <source>Choose unique name for left sub curve</source>
         <translation>Kies een unieke naam voor de linker deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="301"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="308"/>
         <source>Choose unique name for right sub curve</source>
         <translation>Kies een unieke naam voor de rechter deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="324"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="310"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -1890,6 +2088,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="297"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -1907,6 +2106,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="284"/>
         <source>Segment a curved path</source>
         <translation>Opsplitsen van een krommingspad</translation>
     </message>
@@ -1915,47 +2115,55 @@
         <translation type="vanished">Kleur</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.cpp" line="404"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.cpp" line="409"/>
         <source>Edit length</source>
         <translation>Verander de lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="285"/>
         <source>Length:</source>
         <translation>Lengte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="287"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="291"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="294"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="299"/>
         <source>Curve:</source>
         <translation>Kromming:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="300"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="302"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="304"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
@@ -1965,41 +2173,49 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="311"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="305"/>
         <source>Name1:</source>
         <translation>Naam1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="267"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="306"/>
         <source>Choose unique name for left sub curve</source>
         <translation>Kies een unieke naam voor de linker deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="274"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="307"/>
         <source>Name2:</source>
         <translation>Naam2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="281"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="308"/>
         <source>Alias1:</source>
         <translation>Alias1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="295"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="309"/>
         <source>Alias2:</source>
         <translation>Alias2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="309"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="310"/>
         <source>Choose unique name for right sub curve</source>
         <translation>Kies een unieke naam voor de rechter deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="332"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="312"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -2008,16 +2224,19 @@
     <name>DialogDateTimeFormats</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogdatetimeformats.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogdatetimeformats.h" line="105"/>
         <source>Label date time editor</source>
         <translation>Label datum tijd bewerker</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogdatetimeformats.ui" line="29"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogdatetimeformats.h" line="106"/>
         <source>Format:</source>
         <translation>Indeling:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogdatetimeformats.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogdatetimeformats.h" line="110"/>
         <source>Insert a format</source>
         <translation>Voeg formaat toe</translation>
     </message>
@@ -2347,6 +2566,7 @@
     <name>DialogDuplicateDetail</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogduplicatedetail.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogduplicatedetail.h" line="64"/>
         <source>Dialog duplicate detail</source>
         <translation>Dialoog dupliceer detail</translation>
     </message>
@@ -2360,78 +2580,93 @@
     <name>DialogEditLabel</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="370"/>
         <source>Edit label template</source>
         <translation>Verander label sjabloon</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="35"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="372"/>
         <source>Clear current and begin new label</source>
         <translation>Maak huidige schoon en begin een nieuw label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="67"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="375"/>
         <source>Import from label template</source>
         <translation>Invoeren vanaf label sjabloon</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="89"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="378"/>
         <source>Export label as template</source>
         <translation>Exporteer label als een sjabloon</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="416"/>
         <source>Edit</source>
         <translation>Verander</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="228"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="393"/>
         <source>Bold</source>
         <comment>Font formating</comment>
         <translation>Vet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="396"/>
         <source>Italic</source>
         <comment>Font formating</comment>
         <translation>Schuin</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="399"/>
         <source>Aligns with the left edge</source>
         <translation>Uitgelijnd op de linkerrand</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="402"/>
         <source>Centers horizontally in the available space</source>
         <translation>Horizontaal gecentreerd in de beschikbare ruimte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="304"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="405"/>
         <source>Aligns with the right edge</source>
         <translation>Uitgelijnd op de rechterrand</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="329"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="408"/>
         <source>Additional font size. Use to make a line bigger.</source>
         <translation>Extra lettertype grootte. Gebruik om een lijn groter te maken.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="384"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="410"/>
         <source>Text:</source>
         <translation>Tekst:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="396"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="411"/>
         <source>Line of text</source>
         <translation>Tekstlijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="409"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="413"/>
         <source>Insert placeholders</source>
         <translation>Voeg tijdelijke aanduidingen toe</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="424"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="417"/>
         <source>Preview</source>
         <translation>Voorbeeld</translation>
     </message>
@@ -2605,26 +2840,31 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="415"/>
         <source>Insert…</source>
         <translation>Voeg in…</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="138"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="381"/>
         <source>Move on top</source>
         <translation>Verplaats naar bovenaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="155"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="384"/>
         <source>Move up</source>
         <translation>Verplaats naar boven</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="172"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="387"/>
         <source>Move down</source>
         <translation>Verplaats naar beneden</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="189"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="390"/>
         <source>Move on bottom</source>
         <translation>Verplaats naar onderaan</translation>
     </message>
@@ -2836,6 +3076,7 @@
     <name>DialogEditWrongFormula</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="332"/>
         <source>Edit formula</source>
         <translation>Verander formule</translation>
     </message>
@@ -2845,6 +3086,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="95"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="335"/>
         <source>Insert variable into formula</source>
         <translation>Voeg variabele toe aan de formule</translation>
     </message>
@@ -2858,6 +3100,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="191"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="344"/>
         <source>Input data</source>
         <translation>Breng gegevens in</translation>
     </message>
@@ -2867,16 +3110,19 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="204"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="345"/>
         <source>Measurements</source>
         <translation>Maten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="220"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="346"/>
         <source>Increments</source>
         <translation>Vergroten of verkleinen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="348"/>
         <source>Length of lines</source>
         <translation>Lijnlengte</translation>
     </message>
@@ -2886,16 +3132,19 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="259"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="349"/>
         <source>Length of curves</source>
         <translation>Krommingslengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="275"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="350"/>
         <source>Angle of lines</source>
         <translation>Hoek van de lijnen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="348"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="357"/>
         <source>Hide empty measurements</source>
         <translation>Verberg lege maten</translation>
     </message>
@@ -2932,6 +3181,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="288"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="351"/>
         <source>Radius of arcs</source>
         <translation>Straal van de boog</translation>
     </message>
@@ -2941,6 +3191,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="301"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="352"/>
         <source>Angles of curves</source>
         <translation>Hoek van de kromming</translation>
     </message>
@@ -2960,51 +3211,61 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="333"/>
         <source>Formula:</source>
         <translation>Formule:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="137"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="339"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="168"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="342"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="359"/>
         <source>Name</source>
         <translation>Naam</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="376"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="361"/>
         <source>Full name</source>
         <translation>Volledige naam</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="328"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="355"/>
         <source>Functions</source>
         <translation>Funkties</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="353"/>
         <source>Lengths to control points</source>
         <translation>Afstand tot controlepunten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="341"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="356"/>
         <source>Filter list by keyword</source>
         <translation>Filter de lijst met een sleutelwoord</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="347"/>
         <source>Preview calculations</source>
         <translation>Voorbeeld berekeningen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="315"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="354"/>
         <source>Pieces areas</source>
         <translation>Oppervlakten stukken</translation>
     </message>
@@ -3023,6 +3284,7 @@
     <name>DialogEllipticalArc</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="586"/>
         <source>Radius1:</source>
         <translation>Straal1:</translation>
     </message>
@@ -3032,6 +3294,11 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="469"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="654"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="839"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="588"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="602"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="616"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="630"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="644"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
@@ -3041,12 +3308,19 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="511"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="696"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="881"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="592"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="606"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="620"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="634"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="648"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="173"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="358"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="595"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="609"/>
         <source>Calulation</source>
         <translation>Berekening</translation>
     </message>
@@ -3056,16 +3330,23 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="565"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="750"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="935"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="598"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="612"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="626"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="640"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="654"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Laat hele berekening zien in berichtenbox&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="264"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="600"/>
         <source>Radius2:</source>
         <translation>Straal2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="449"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="614"/>
         <source>First angle:</source>
         <translation>Eerste hoek:</translation>
     </message>
@@ -3073,91 +3354,106 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="543"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="728"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="913"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="623"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="637"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="651"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="634"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="628"/>
         <source>Second angle:</source>
         <translation>Tweede hoek:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="819"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="642"/>
         <source>Rotation angle:</source>
         <translation>Hoek van draaiing:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="970"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="656"/>
         <source>Center point:</source>
         <translation>Middelpunt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="977"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="658"/>
         <source>Select center point of the arc</source>
         <translation>Kies middelpunt van boog</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="984"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="660"/>
         <source>Color:</source>
         <translation>Kleur:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="477"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="502"/>
         <source>Edit radius1</source>
         <translation>Bewerk straal1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="491"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="516"/>
         <source>Edit radius2</source>
         <translation>Bewerk straal2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="505"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="530"/>
         <source>Edit first angle</source>
         <translation>Bewerk eerste hoek</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="519"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="544"/>
         <source>Edit second angle</source>
         <translation>Bewerk tweede hoek</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="533"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="558"/>
         <source>Edit rotation angle</source>
         <translation>Bewerk de draaihoek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="585"/>
         <source>Elliptical arc</source>
         <translation>Ellipsvormige boog</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="991"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="661"/>
         <source>Pen style:</source>
         <translation>Pen stijl:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="667"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1020"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="662"/>
         <source>Alias:</source>
         <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1076"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="668"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1030"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="663"/>
         <source>Approximation scale:</source>
         <translation>Schaal bij benadering:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1037"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="665"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
@@ -3166,16 +3462,19 @@
     <name>DialogEllipticalArcWithLength</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="586"/>
         <source>Elliptical arc with length</source>
         <translation>Elliptische boog met lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="665"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="587"/>
         <source>Radius1:</source>
         <translation>Straal1:</translation>
     </message>
@@ -3185,6 +3484,11 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="469"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="648"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="827"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="589"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="603"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="617"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="631"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="645"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
@@ -3194,6 +3498,11 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="511"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="690"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="869"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="607"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="621"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="635"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="649"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
@@ -3203,16 +3512,23 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="559"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="738"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="923"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="599"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="613"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="627"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="641"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="655"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Volledige berekening tonen in berichtvenster&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="264"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="601"/>
         <source>Radius2:</source>
         <translation>Straal2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="449"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="615"/>
         <source>First angle:</source>
         <translation>Eerste hoek:</translation>
     </message>
@@ -3222,76 +3538,90 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="537"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="716"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="901"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="596"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="610"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="624"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="638"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="652"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="628"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="629"/>
         <source>Length:</source>
         <translation>Lengte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="807"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="643"/>
         <source>Rotation angle:</source>
         <translation>Hoek van draaiing:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="958"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="657"/>
         <source>Center point:</source>
         <translation>Middelpunt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="968"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="658"/>
         <source>Color:</source>
         <translation>Kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="975"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="659"/>
         <source>Pen style:</source>
         <translation>Penstijl:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1004"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="660"/>
         <source>Approximation scale:</source>
         <translation>Schaal bij benadering:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1011"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="662"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1027"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="664"/>
         <source>Alias:</source>
         <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1064"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="666"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="563"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="588"/>
         <source>Edit radius1</source>
         <translation>Bewerk straal1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="577"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="602"/>
         <source>Edit radius2</source>
         <translation>Bewerk straal2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="591"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="616"/>
         <source>Edit the first angle</source>
         <translation>Verander de eerste hoek</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="605"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="630"/>
         <source>Edit the elliptical arc length</source>
         <translation>Elliptische booglengte bewerken</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="619"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="644"/>
         <source>Edit rotation angle</source>
         <translation>Draaihoek bewerken</translation>
     </message>
@@ -3309,6 +3639,8 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="216"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="410"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="375"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="389"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -3342,6 +3674,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="20"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="362"/>
         <source>Point at distance and angle</source>
         <translation>Punt op afstand en hoek</translation>
     </message>
@@ -3361,69 +3694,85 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="88"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="363"/>
         <source>Length:</source>
         <translation>Lengte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="117"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="311"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="365"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="379"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="165"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="369"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="383"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="197"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="391"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="372"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="386"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="377"/>
         <source>Angle:</source>
         <translation>Hoek:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="445"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="391"/>
         <source>Base point:</source>
         <translation>Basis punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="461"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="392"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="468"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="394"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="471"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="396"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="484"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="397"/>
         <source>Type of line:</source>
         <translation>Soort lijn:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="519"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="398"/>
         <source>Line color:</source>
         <translation>Lijnkleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="37"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="399"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="549"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="400"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -3440,51 +3789,61 @@
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="36"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="198"/>
         <source>With header</source>
         <translation>Met hoofdtitel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="51"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="199"/>
         <source>Codec:</source>
         <translation>Codec:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="92"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="200"/>
         <source>Separator</source>
         <translation>Scheidingsteken</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="116"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="201"/>
         <source>Tab</source>
         <translation>Tabtoets</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="148"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="203"/>
         <source>Comma</source>
         <translation>Komma</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="132"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="202"/>
         <source>Semicolon</source>
         <translation>Puntkomma</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="167"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="204"/>
         <source>Space</source>
         <translation>Spatie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="196"/>
         <source>Options</source>
         <translation>Opties</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="180"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="205"/>
         <source>Preview</source>
         <translation>Voorbeeld</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="30"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="197"/>
         <source>Global</source>
         <comment>Options</comment>
         <translation>Globaal</translation>
@@ -3494,77 +3853,93 @@
     <name>DialogFinalMeasurements</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="441"/>
         <source>Final measurements</source>
         <translation>Uiteindelijke maten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="51"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="448"/>
         <source>Search</source>
         <translation>Zoek</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="319"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="478"/>
         <source>Name</source>
         <translation>Naam</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="324"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="480"/>
         <source>The calculated value</source>
         <translation>De berekende waarde</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="329"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="482"/>
         <source>Formula</source>
         <translation>Formule</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="341"/>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="344"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="484"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="486"/>
         <source>Details</source>
         <translation>Details</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="402"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="487"/>
         <source>Name:</source>
         <translation>Naam:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="416"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="488"/>
         <source>Calculated value:</source>
         <translation>Berekende waarde:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="430"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="489"/>
         <source>Formula:</source>
         <translation>`Formule:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="454"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="491"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="482"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="494"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="517"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="497"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="539"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="499"/>
         <source>Description:</source>
         <translation>Beschrijving:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="570"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="501"/>
         <source>Move measurement up</source>
         <translation>Verplaats maat naar omhoog</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="587"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="504"/>
         <source>Move measurement down</source>
         <translation>Verplaats maat naar omlaag</translation>
     </message>
@@ -3622,62 +3997,74 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="443"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zoekgeschiedenis &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="41"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="446"/>
         <source>Alt+Down</source>
         <translation>Alt+Down</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="68"/>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.cpp" line="807"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="449"/>
         <source>0 results</source>
         <translation>0 resultaten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="95"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="451"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hoofdlettergevoelig &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="126"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="454"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hele woorden &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="160"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="457"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Reguliere expressies &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="191"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="460"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Unicode-eigenschappen gebruiken &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;De betekenis van de tekenklassen \w, \d, enzovoort, en hun tegenhangers (\W, \D, enzovoort) wordt gewijzigd van alleen ASCII-tekens naar elk teken met de bijbehorende Unicode-eigenschap. Zo wordt \d gewijzigd om elk teken te matchen met de Unicode-eigenschap Nd (decimaal cijfer); \w om elk teken te matchen met de Unicode-eigenschap L (letter) of N (cijfer), plus underscore, enzovoort. Deze optie komt overeen met de /u-modifier in Perl reguliere expressies.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="197"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="463"/>
         <source>Alt+U</source>
         <translation>Alt+U</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="466"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vorige zoeken &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="226"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="469"/>
         <source>Shift+F3</source>
         <translation>Shift+F3</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="236"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="472"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Volgende zoeken %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="475"/>
         <source>F3</source>
         <translation>F3</translation>
     </message>
@@ -3690,6 +4077,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="197"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="330"/>
         <source>Origin point:</source>
         <translation>Startpunt:</translation>
     </message>
@@ -3699,99 +4087,115 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="207"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="331"/>
         <source>Axis type:</source>
         <translation>Aslijn-type:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="224"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="234"/>
         <source>Select origin point</source>
         <translation>Selecteer het startpunt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="271"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="281"/>
         <source>Select origin point that is not part of the list of objects</source>
         <translation>Selecteer een startpunt dat geen onderdeel is van de gekozen objecten</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="358"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="374"/>
         <source>Vertical axis</source>
         <translation>Verticale aslijn</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="375"/>
         <source>Horizontal axis</source>
         <translation>Horizontale aslijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="241"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="325"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="337"/>
         <source>Flipping by axis</source>
         <translation>Kantelen via de aslijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="222"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="335"/>
         <source>Visibility Group</source>
         <translation>Zichtbaarheid groep</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="125"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="336"/>
         <source>Name:</source>
         <translation>Naam:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="251"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="338"/>
         <source>Tags:</source>
         <translation>Etiketten:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="258"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="340"/>
         <source>Separate each tag with comma.</source>
         <translation>Plaats een komma tussen ieder etiket.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="261"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="342"/>
         <source>Add tags</source>
         <translation>Etiket toevoegen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="344"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="326"/>
         <source>New:</source>
         <translation>Nieuw:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="142"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="328"/>
         <source>Pen style:</source>
         <translation>Pen stijl:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="177"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="329"/>
         <source>Color:</source>
         <translation>Kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="369"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="343"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="385"/>
         <source>Ready</source>
         <translation>Klaar</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="295"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="345"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="341"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="357"/>
         <source>Invalid point</source>
         <translation>Ongeldig punt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="219"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="333"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation>Inschakelen om een zichtbaarheidsgroep van de oorspronkelijke objecten te maken</translation>
     </message>
@@ -3804,6 +4208,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="197"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="330"/>
         <source>First line point:</source>
         <translation>Eerste punt van de lijn:</translation>
     </message>
@@ -3813,109 +4218,125 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="207"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="331"/>
         <source>Second line point:</source>
         <translation>Tweede punt van de lijn:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="218"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="228"/>
         <source>Select first line point</source>
         <translation>Kies het eerste punt van de lijn</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="273"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="283"/>
         <source>Select first line point that is not part of the list of objects</source>
         <translation>Het eerste punt van de lijn mag geen deel uitmaken van de gekozen objecten</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="277"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="287"/>
         <source>Select second line point</source>
         <translation>Kies het tweede punt van de lijn</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="290"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="300"/>
         <source>Select second line point that is not part of the list of objects</source>
         <translation>het tweede punt van de lijn mag geen deel uitmaken van de gekozen objecten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="241"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="325"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="337"/>
         <source>Flipping by line</source>
         <translation>Kantelen via de lijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="222"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="335"/>
         <source>Visibility Group</source>
         <translation>Zichtbaarheid groep</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="125"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="336"/>
         <source>Name:</source>
         <translation>Naam:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="251"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="338"/>
         <source>Tags:</source>
         <translation>Etiketten:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="258"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="340"/>
         <source>Separate each tag with comma.</source>
         <translation>Plaats een komma tussen ieder etiket.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="261"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="342"/>
         <source>Add tags</source>
         <translation>Etiket toevoegen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="344"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="326"/>
         <source>New:</source>
         <translation>Nieuw:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="142"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="328"/>
         <source>Pen style:</source>
         <translation>Pen stijl:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="177"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="329"/>
         <source>Color:</source>
         <translation>Kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="402"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="343"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="418"/>
         <source>Ready</source>
         <translation>Klaar</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="295"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="345"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="375"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="391"/>
         <source>Invalid line points</source>
         <translation>Ongeldig lijnpunt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="382"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="398"/>
         <source>Invalid first line point</source>
         <translation>Ongeldig eerste lijnpunt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="389"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="405"/>
         <source>Invalid second line point</source>
         <translation>Ongeldig tweede lijnpunt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="219"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="333"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation>Inschakelen om een zichtbaarheidsgroep van de oorspronkelijke objecten te maken</translation>
     </message>
@@ -3924,123 +4345,149 @@
     <name>DialogGraduatedCurve</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="20"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="435"/>
         <source>Graduated curve tool</source>
         <translation>Getrapte curve gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="34"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="476"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="40"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="436"/>
         <source>Offsets</source>
         <translation>Offsets</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="438"/>
         <source>Name</source>
         <translation>Naam</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="80"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="440"/>
         <source>Calculated value</source>
         <translation>Berekende waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="85"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="442"/>
         <source>Formula</source>
         <translation>Formule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="100"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="444"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="446"/>
         <source>Details</source>
         <translation>Details</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="448"/>
         <source>Move offset up</source>
         <translation>Offset omhoog verplaatsen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="131"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="451"/>
         <source>Move offset down</source>
         <translation>Offset omlaag verplaatsen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="206"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="472"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="453"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="474"/>
         <source>Name:</source>
         <translation>Naam:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="216"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="454"/>
         <source>Unique offset name</source>
         <translation>Unieke offsetnaam</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="226"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="455"/>
         <source>Calculated value:</source>
         <translation>Berekende waarde:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="233"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="456"/>
         <source>Formula:</source>
         <translation>Formule:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="257"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="458"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="461"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Volledige berekening tonen in berichtvenster&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="314"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="464"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="361"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="466"/>
         <source>Description:</source>
         <translation>Beschrijving:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="396"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="467"/>
         <source>Curve:</source>
         <translation>Kromming:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="406"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="468"/>
         <source>Pen style:</source>
         <translation>Penstijl:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="435"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="469"/>
         <source>Color:</source>
         <translation>Kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="449"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="470"/>
         <source>Approximation scale:</source>
         <translation>Schaal bij benadering:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="456"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="472"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="482"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="475"/>
         <source>Alias:</source>
         <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="512"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="477"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -4076,11 +4523,13 @@
     <name>DialogGroup</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="91"/>
         <source>Group</source>
         <translation>Groep</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="26"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="92"/>
         <source>Group name:</source>
         <translation>Groep naam:</translation>
     </message>
@@ -4090,6 +4539,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="36"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="96"/>
         <source>Choose group name</source>
         <translation>Kies groep naam</translation>
     </message>
@@ -4100,16 +4550,19 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="46"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="97"/>
         <source>Tags:</source>
         <translation>Etiket:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="99"/>
         <source>Separate each tag with comma.</source>
         <translation>Plaats een komma tussen ieder etiket.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="56"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="101"/>
         <source>Add tags</source>
         <translation>Etiket toevoegen</translation>
     </message>
@@ -4152,6 +4605,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="182"/>
         <source>Perpendicular point along line</source>
         <translation>Haakse hoek punt langs lijn</translation>
     </message>
@@ -4165,51 +4619,61 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="46"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="183"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="185"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="56"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="187"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="69"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="188"/>
         <source>Base point:</source>
         <translation>Basis punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="85"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="189"/>
         <source>First point of line:</source>
         <translation>Eerste punt van de lijn:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="190"/>
         <source>Second point of line:</source>
         <translation>Tweede punt van de lijn:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="191"/>
         <source>Type of line:</source>
         <translation>Soort lijn:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="140"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="192"/>
         <source>Line color:</source>
         <translation>Lijnkleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="193"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="155"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="194"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -4378,30 +4842,40 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="46"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="49"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1144"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1146"/>
         <source>Increments</source>
         <translation>Vergroten of verkleinen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="350"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1058"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1104"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1184"/>
         <source>Name</source>
         <translation>Naam</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="355"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1063"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1106"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1186"/>
         <source>The calculated value</source>
         <translation>Berekende waarde</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1434"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1437"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1232"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1234"/>
         <source>Lines</source>
         <translation>Lijnen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1462"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1504"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1229"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1237"/>
         <source>Line</source>
         <translation>Lijn</translation>
     </message>
@@ -4409,6 +4883,9 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1467"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1551"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1231"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1255"/>
         <source>Length</source>
         <translation>Lengte</translation>
     </message>
@@ -4416,40 +4893,53 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1546"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1588"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1630"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1261"/>
         <source>Curve</source>
         <translation>Kromming</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1672"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1269"/>
         <source>Arc</source>
         <translation>Boog</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="20"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1067"/>
         <source>Tables of Variables</source>
         <translation>Tabellen van variabelen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1476"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1479"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1240"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1242"/>
         <source>Lines angles</source>
         <translation>Lijnen hoek</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1509"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1635"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1239"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1263"/>
         <source>Angle</source>
         <translation>Hoek</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1518"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1521"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1248"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1250"/>
         <source>Lengths curves</source>
         <translation>Lengtes van kromming</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1602"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1605"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1264"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1266"/>
         <source>Angles curves</source>
         <translation>Hoeken van krommingen</translation>
     </message>
@@ -4460,11 +4950,14 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1644"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1647"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1272"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1274"/>
         <source>Radiuses arcs</source>
         <translation>Stralen van bogen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1677"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1271"/>
         <source>Radius</source>
         <translation>Straal</translation>
     </message>
@@ -4475,6 +4968,8 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="360"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1068"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1108"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1188"/>
         <source>Formula</source>
         <translation>Formule</translation>
     </message>
@@ -4483,48 +4978,66 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="375"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1080"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1083"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1110"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1112"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1190"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1192"/>
         <source>Details</source>
         <translation>Details</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="389"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1097"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1194"/>
         <source>Move measurement up</source>
         <translation>Verplaats maten omhoog</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="406"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1117"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1197"/>
         <source>Move measurement down</source>
         <translation>Verplaats maten omlaag</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="526"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1228"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1125"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1205"/>
         <source>Name:</source>
         <translation>Naam:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="550"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1128"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1207"/>
         <source>Calculated value:</source>
         <translation>Berekende waarde:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="564"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1259"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1129"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1208"/>
         <source>Formula:</source>
         <translation>Formule:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="616"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1311"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1134"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1213"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="667"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1362"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1139"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1218"/>
         <source>Description:</source>
         <translation>Beschrijving:</translation>
     </message>
@@ -4648,18 +5161,23 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="536"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1126"/>
         <source>Unique increment name</source>
         <translation>Unieke verkleining/vergroting naam</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="588"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1283"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1131"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1210"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="645"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1340"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1137"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1216"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
@@ -4674,12 +5192,16 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="82"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="790"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1074"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1154"/>
         <source>Search</source>
         <translation>Zoek</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1560"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1563"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1256"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1258"/>
         <source>Curves control point lengths</source>
         <translation>Kromming begrensd door controlepunten</translation>
     </message>
@@ -4691,23 +5213,30 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="695"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1403"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1220"/>
         <source>Refresh a pattern with all changes you made</source>
         <translation>Herstel een patroon met alle veranderingen welke je gemaakt hebt</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="698"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1406"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1222"/>
         <source>Refresh</source>
         <translation>Herstel</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="754"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="757"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1224"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1226"/>
         <source>Preview calculations</source>
         <translation>Voorbeeld berekeningen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1238"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1206"/>
         <source>Unique variable name</source>
         <translation>Unieke variabele naam</translation>
     </message>
@@ -4724,12 +5253,16 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="63"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="771"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1069"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1149"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zoekgeschiedenis &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="72"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="780"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1072"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1152"/>
         <source>Alt+Down</source>
         <translation>Alt+Down</translation>
     </message>
@@ -4738,60 +5271,80 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="807"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1033"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1067"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1075"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1155"/>
         <source>0 results</source>
         <translation>0 resultaten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="126"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="834"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1077"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1157"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hoofdlettergevoelig &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="157"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="865"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1080"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1160"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hele woorden &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="191"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="899"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1083"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1163"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Reguliere expressies &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="222"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="930"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1086"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1166"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Unicode-eigenschappen gebruiken &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;De betekenis van de tekenklassen \w, \d, enzovoort, en hun tegenhangers (\W, \D, enzovoort) wordt gewijzigd van alleen ASCII-tekens naar elk teken met de bijbehorende Unicode-eigenschap. Zo wordt \d gewijzigd om elk teken te matchen met de Unicode-eigenschap Nd (decimaal cijfer); \w om elk teken te matchen met de Unicode-eigenschap L (letter) of N (cijfer), plus underscore, enzovoort. Deze optie komt overeen met de /u-modifier in Perl reguliere expressies.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="228"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="936"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1089"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1169"/>
         <source>Alt+U</source>
         <translation>Alt+U</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="248"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="956"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1092"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1172"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vorige zoeken &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="257"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="965"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1095"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1175"/>
         <source>Shift+F3</source>
         <translation>Shift+F3</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="267"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="975"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1098"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1178"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Volgende zoeken %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="276"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="984"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1181"/>
         <source>F3</source>
         <translation>F3</translation>
     </message>
@@ -4799,6 +5352,8 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="459"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1167"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1760"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1120"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1200"/>
         <source>Export to CSV</source>
         <translation>Exporteer naar CSV</translation>
     </message>
@@ -4806,12 +5361,16 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="475"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1177"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1694"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1123"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1203"/>
         <source>Import from CSV</source>
         <translation>Importeer van CSV</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="543"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1415"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1223"/>
         <source>Units:</source>
         <translation>Eenheden:</translation>
     </message>
@@ -4840,37 +5399,44 @@
     <name>DialogIncrementsCSVColumns</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="163"/>
         <source>Import increments</source>
         <translation>Toeslagen importeren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="26"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="164"/>
         <source>Preview</source>
         <translation>Voorbeeld</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="165"/>
         <source>Input</source>
         <translation>Ingave</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="48"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="166"/>
         <source>Import</source>
         <translation>Importeer</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="67"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="167"/>
         <source>Columns</source>
         <translation>Kolommen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="96"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="168"/>
         <source>Description:</source>
         <translation>Beschrijving:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="111"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="510"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="169"/>
         <source>Ready</source>
         <translation>Klaar</translation>
     </message>
@@ -4924,6 +5490,7 @@
     <name>DialogInsertNode</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialoginsertnode.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoginsertnode.h" line="100"/>
         <source>Piece:</source>
         <translation>Onderdeel:</translation>
     </message>
@@ -4934,6 +5501,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialoginsertnode.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoginsertnode.h" line="99"/>
         <source>Insert nodes</source>
         <translation>Knooppunt invoegen</translation>
     </message>
@@ -4944,6 +5512,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialoginsertnode.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoginsertnode.h" line="101"/>
         <source>Number:</source>
         <translation>Nummer:</translation>
     </message>
@@ -4952,16 +5521,19 @@
     <name>DialogKnownMaterials</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogknownmaterials.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogknownmaterials.h" line="116"/>
         <source>Known materials</source>
         <translation>Bekende materialen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogknownmaterials.ui" line="33"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogknownmaterials.h" line="117"/>
         <source>Material:</source>
         <translation>Materiaal:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogknownmaterials.ui" line="49"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogknownmaterials.h" line="118"/>
         <source>Name of material</source>
         <translation>Naam van het materiaal</translation>
     </message>
@@ -5087,6 +5659,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutprogress.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutprogress.h" line="109"/>
         <source>Create a Layout</source>
         <translation>Maak een opmaak</translation>
     </message>
@@ -5100,11 +5673,13 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutprogress.ui" line="36"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutprogress.h" line="110"/>
         <source>Nesting. Please, wait.</source>
         <translation>Inpassen. Eventjes wachten...</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutprogress.ui" line="81"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutprogress.h" line="111"/>
         <source>Time left:</source>
         <translation>Resterende tijd:</translation>
     </message>
@@ -5123,16 +5698,19 @@
     <name>DialogLayoutScale</name>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="255"/>
         <source>Layout scale</source>
         <translation>Schaal van de opmaak</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="29"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="256"/>
         <source>Margins</source>
         <translation>Marges</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="44"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="257"/>
         <source>Left:</source>
         <translation>Links:</translation>
     </message>
@@ -5141,36 +5719,46 @@
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="74"/>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="97"/>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="120"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="258"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="262"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="264"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="67"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="259"/>
         <source>Right:</source>
         <translation>Rechts:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="90"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="261"/>
         <source>Top:</source>
         <translation>Bovenaan:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="113"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="263"/>
         <source>Bottom:</source>
         <translation>Onderaan:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="135"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="265"/>
         <source>Scale</source>
         <translation>Schaal</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="266"/>
         <source>Horizontal:</source>
         <translation>Horizontaal:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="150"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="267"/>
         <source>Vertical:</source>
         <translation>Vertikaal:</translation>
     </message>
@@ -5183,16 +5771,19 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="70"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="591"/>
         <source>Templates:</source>
         <translation>Sjablonen:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="147"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="592"/>
         <source>Width:</source>
         <translation>Breedte:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="160"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="593"/>
         <source>Height:</source>
         <translation>Hoogte:</translation>
     </message>
@@ -5222,16 +5813,19 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="532"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="628"/>
         <source>Three groups: big, middle, small</source>
         <translation>Drie groepen: groot, middel en klein</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="542"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="629"/>
         <source>Two groups: big, small</source>
         <translation>Twee groepen: groot, klein</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="555"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="630"/>
         <source>Descending area</source>
         <translation>Kleiner wordend gebied</translation>
     </message>
@@ -5260,26 +5854,31 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="589"/>
         <source>Create a layout</source>
         <translation>Maak een opmaak</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="590"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="635"/>
         <source>Auto crop unused length</source>
         <translation>Automatisch inkorten van ongebruikte lengte</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="604"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="637"/>
         <source>Unite pages (if possible)</source>
         <translation>Voeg pagina&apos;s samen( wanneer mogeljk)</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="409"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="611"/>
         <source>Gap width:</source>
         <translation>Tussenruimte:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="479"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="620"/>
         <source>Save length of the sheet</source>
         <translation>Sla de lengte van het blad op</translation>
     </message>
@@ -5325,6 +5924,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="44"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="590"/>
         <source>Paper format</source>
         <translation>Papier Formaat</translation>
     </message>
@@ -5334,21 +5934,25 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="255"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="596"/>
         <source>Left:</source>
         <translation>Links:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="269"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="597"/>
         <source>Right:</source>
         <translation>Rechts:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="283"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="598"/>
         <source>Top:</source>
         <translation>Bovenaan:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="297"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="599"/>
         <source>Bottom:</source>
         <translation>Onderaan:</translation>
     </message>
@@ -5386,6 +5990,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="391"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="609"/>
         <source>Layout options</source>
         <translation>Opmaak opties</translation>
     </message>
@@ -5395,6 +6000,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="524"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="627"/>
         <source>Rule for choosing the next workpiece</source>
         <translation>Regel voor het kiezen van het volgende werkstuk</translation>
     </message>
@@ -5404,16 +6010,19 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="621"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="641"/>
         <source>Divide into strips</source>
         <translation>Verdeel in strepen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="633"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="642"/>
         <source>Multiplier</source>
         <translation>Vermenigvuldiger</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="640"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="644"/>
         <source>Set multiplier for length of the biggest workpiece in layout.</source>
         <translation>Stel vermenigvuldiger in op de lengte van het grootste werkstuk in de opmaak.</translation>
     </message>
@@ -5423,11 +6032,13 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="618"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="639"/>
         <source>Enabling for sheets that have big height will speed up creating.</source>
         <translation>Het mogelijk maken om van grote afmetingen van papier het creatieproces te versnellen.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="228"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="594"/>
         <source>Printer:</source>
         <translation>Printer:</translation>
     </message>
@@ -5439,26 +6050,31 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="601"/>
         <source>Text</source>
         <translation>Tekst</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="333"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="603"/>
         <source>Text will be converted to paths</source>
         <translation>tekst zal omgezet worden naar paden</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="336"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="605"/>
         <source>Export text as paths</source>
         <translation>Exporteer tekst als paden</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="246"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="595"/>
         <source>Margins</source>
         <translation>Marges</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="320"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="600"/>
         <source>Ignore margins</source>
         <translation>Negeer marges</translation>
     </message>
@@ -5473,77 +6089,92 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="503"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="625"/>
         <source>Follow grainline</source>
         <translation>Langs de recht-van-draad</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="399"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="610"/>
         <source>Time:</source>
         <translation>Tijd:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="346"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="606"/>
         <source>Boundary together with notches</source>
         <translation>Contour samen met inkepingen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="353"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="607"/>
         <source>Debug</source>
         <translation>Debug</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="608"/>
         <source>Show layout allowance</source>
         <translation>Indelingstoeslag tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="416"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="613"/>
         <source>Time given for the algorithm to find best layout.</source>
         <translation>Tijd toegekend aan het algoritme om de beste opmaak te vinden.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="454"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="616"/>
         <source>Efficiency:</source>
         <translation>Efficiëntie:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="461"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="618"/>
         <source>Set layout efficiency coefficient. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made.</source>
         <translation>Indelingsefficiëntiecoëfficiënt instellen. De coëfficiënt is de verhouding van het oppervlak bezet door de stukken tot de begrenzende rechthoek van alle stukken. Als de nestfactor het vereiste niveau bereikt, stopt het proces. Bij waarde 0 wordt geen controle uitgevoerd.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="510"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="626"/>
         <source>Manual priority</source>
         <translation>Manuele voorrang</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="573"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="632"/>
         <source>Nest quantity of copies according to piece settings.</source>
         <translation>Inpas hoeveelheid van de kopiëen volgens de instellingen van het stuk.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="576"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="634"/>
         <source>Nest quantity</source>
         <translation>Inpas hoeveelheid</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="597"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="636"/>
         <source>Auto crop unused width</source>
         <translation>Automatisch inkorten van ongebruikte breedte</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="489"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="624"/>
         <source>Prefer one sheet solution</source>
         <translation>Verkies een 1-blad oplossing</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="419"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="615"/>
         <source> min</source>
         <comment>minutes</comment>
         <translation>min</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="486"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="622"/>
         <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation>Deze optie aanzetten om 1-blad oplossingen te verkrijgen.</translation>
     </message>
@@ -5573,6 +6204,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="204"/>
         <source>Line between points</source>
         <translation>Lijn tussen punten</translation>
     </message>
@@ -5582,36 +6214,43 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="208"/>
         <source>First point:</source>
         <translation>Eerste punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="88"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="207"/>
         <source>Second point:</source>
         <translation>Tweede punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="52"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="205"/>
         <source>Type of line:</source>
         <translation>Soort lijn:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="206"/>
         <source>Line color:</source>
         <translation>Lijnkleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="210"/>
         <source>Swap points</source>
         <translation>Punten omwisselen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="37"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="212"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="213"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -5624,6 +6263,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="64"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="216"/>
         <source>First line</source>
         <translation>Eerste lijn</translation>
     </message>
@@ -5637,6 +6277,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="219"/>
         <source>Second line</source>
         <translation>Tweede lijn</translation>
     </message>
@@ -5657,43 +6298,53 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="210"/>
         <source>Point at line intersection</source>
         <translation>Punt op lijnkruising</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="45"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="211"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="52"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="213"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="55"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="215"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="78"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="117"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="220"/>
         <source>First point:</source>
         <translation>Eerste punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="88"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="218"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="221"/>
         <source>Second point:</source>
         <translation>Tweede punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="222"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="156"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="223"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -5710,6 +6361,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="313"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -5719,6 +6371,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="254"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="321"/>
         <source>First point of line</source>
         <translation>Eerste punt van de lijn</translation>
     </message>
@@ -5740,31 +6393,35 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="329"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="334"/>
         <source>Show line from first point to this point</source>
         <translation>Toon lijn vanaf het eerste punt naar dit punt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="304"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="309"/>
         <source>Select second point of line</source>
         <translation>Selecteer tweede punt van lijn</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="316"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="321"/>
         <source>Select axis point</source>
         <translation>Selecteer aslijn punt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="300"/>
         <source>Point intersect line and axis</source>
         <translation>Kruispunt lijn en aslijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="317"/>
         <source>Axis Point</source>
         <translation>Aslijn punt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="274"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="325"/>
         <source>Second point of line</source>
         <translation>Tweede punt van de lijn</translation>
     </message>
@@ -5773,77 +6430,91 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Lijn kleur</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="397"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="402"/>
         <source>Edit angle</source>
         <translation>Verander de hoek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="301"/>
         <source>Angle:</source>
         <translation>Hoek:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="303"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="307"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="173"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="310"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="315"/>
         <source>Axis point:</source>
         <translation>Aslijn punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="319"/>
         <source>First line point:</source>
         <translation>Eerste lijnpunt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="267"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="323"/>
         <source>Second line point:</source>
         <translation>Tweede lijnpunt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="287"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="327"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="300"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="329"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="303"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="331"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="310"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="332"/>
         <source>Type of line:</source>
         <translation>Soort lijn:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="342"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="336"/>
         <source>Line color:</source>
         <translation>Lijnkleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="337"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="372"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="338"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -5946,29 +6617,29 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Patroonteken maten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="153"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="330"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="155"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="343"/>
         <source>General</source>
         <comment>Measurement section</comment>
         <translation>Algemeen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="265"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="278"/>
         <source>Collapse All</source>
         <translation>In elkaar storten van alles</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="268"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="281"/>
         <source>Expand All</source>
         <translation>Uitbreiden van alles</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="278"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="291"/>
         <source>Check all</source>
         <translation> Alles aanvinken</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="278"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="291"/>
         <source>Uncheck all</source>
         <translation>Alles uitvinken</translation>
     </message>
@@ -6112,6 +6783,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="256"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="577"/>
         <source>Angle:</source>
         <translation>Hoek:</translation>
     </message>
@@ -6119,6 +6791,9 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="276"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="455"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="634"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="579"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="607"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
@@ -6126,6 +6801,9 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="318"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="497"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="676"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="583"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="597"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="611"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
@@ -6133,11 +6811,15 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="366"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="545"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="724"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="589"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="603"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="617"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Laat hele berekening zien in berichtenbox&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="435"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="591"/>
         <source>Length:</source>
         <translation>Lengte:</translation>
     </message>
@@ -6146,12 +6828,12 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Achtervoegsel:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="451"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="471"/>
         <source>Edit angle</source>
         <translation>Bewerk de hoek</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="479"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="499"/>
         <source>Edit length</source>
         <translation>Bewerk de lengte</translation>
     </message>
@@ -6159,27 +6841,34 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="344"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="523"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="702"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="586"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="600"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="614"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="17"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="787"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="566"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="625"/>
         <source>Move</source>
         <translation>Verplaast</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="614"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="605"/>
         <source>Rotation angle:</source>
         <translation>Hoek van draaiing:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="465"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="485"/>
         <source>Edit rotation angle</source>
         <translation>Bewerk de grootte van de hoek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="753"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="619"/>
         <source>Rotation origin point:</source>
         <translation>Rotatie startpunt:</translation>
     </message>
@@ -6190,88 +6879,103 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="768"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="623"/>
         <source>Visibility Group</source>
         <translation>Zichtbaarheid groep</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="138"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="780"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="574"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="624"/>
         <source>Name:</source>
         <translation>Naam:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="797"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="626"/>
         <source>Tags:</source>
         <translation>Etiket:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="804"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="628"/>
         <source>Separate each tag with comma.</source>
         <translation>Plaats een komma tussen ieder etiket.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="807"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="630"/>
         <source>Add tags</source>
         <translation>Etiket toevoegen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="632"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="45"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="567"/>
         <source>New:</source>
         <translation>Nieuw:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="569"/>
         <source>Bulk rename</source>
         <translation>Massaal hernoemen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="119"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="572"/>
         <source>Remove object</source>
         <translation>Object verwijderen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="152"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="575"/>
         <source>Pen style:</source>
         <translation>Pen stijl:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="193"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="576"/>
         <source>Color:</source>
         <translation>Kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="820"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="617"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="631"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="643"/>
         <source>Ready</source>
         <translation>Klaar</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="841"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="633"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="558"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="584"/>
         <source>Invalid angle formula</source>
         <translation>Ongeldige hoek formule</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="574"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="600"/>
         <source>Invalid rotation angle formula</source>
         <translation>Ongeldige draaihoek formule</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="590"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="616"/>
         <source>Invalid length formula</source>
         <translation>Ongeldige lengte formule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="765"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="621"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation>Inschakelen om een zichtbaarheidsgroep van de oorspronkelijke objecten te maken</translation>
     </message>
@@ -6280,16 +6984,19 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogMoveSteps</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogmovesteps.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogmovesteps.h" line="87"/>
         <source>Move steps</source>
         <translation>Stappen verplaatsen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogmovesteps.ui" line="29"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogmovesteps.h" line="88"/>
         <source>Move Tool</source>
         <translation>Verplaatsgereedschap</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogmovesteps.ui" line="41"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogmovesteps.h" line="89"/>
         <source>Steps:</source>
         <translation>Stappen:</translation>
     </message>
@@ -6361,6 +7068,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="52"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="97"/>
         <source>Units:</source>
         <translation>Eenheden:</translation>
     </message>
@@ -6381,21 +7089,25 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="35"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="92"/>
         <source>Pattern piece name:</source>
         <translation>Patroondeel naam:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="94"/>
         <source>Unique pattern piece name</source>
         <translation>Unieke patroondeel naam</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="45"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="96"/>
         <source>Choose unique pattern piece name.</source>
         <translation>Kies unieke patroondeel naam.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="91"/>
         <source>New pattern</source>
         <translation>Nieuw patroon</translation>
     </message>
@@ -6425,6 +7137,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="475"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -6459,6 +7172,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="462"/>
         <source>Point along perpendicular</source>
         <translation>Punt langs haakse hoek</translation>
     </message>
@@ -6481,76 +7195,91 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="463"/>
         <source>Length:</source>
         <translation>Lengte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="465"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="144"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="469"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="472"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="477"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="479"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="481"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="482"/>
         <source>First point:</source>
         <translation>Eerste punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="280"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="484"/>
         <source>Swap points</source>
         <translation>Punten omwisselen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="317"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="486"/>
         <source>Second point:</source>
         <translation>Tweede punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="343"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="487"/>
         <source>Additional angle degrees:</source>
         <translation>Aanvullende graden hoek:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="537"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="488"/>
         <source>Type of line:</source>
         <translation>Soort lijn:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="566"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="489"/>
         <source>Line color:</source>
         <translation>Lijnkleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="490"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="596"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="491"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -6563,105 +7292,125 @@ Toch de instellingen aanpassen?</translation>
         <translation>Rotatie</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="174"/>
         <source>Invalid group name</source>
         <translation>Ongeldige groepsnaam</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="233"/>
         <source>Default</source>
         <translation>Standaard</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="307"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="325"/>
         <source>Invalid label</source>
         <translation>Ongeldig label</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="307"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="325"/>
         <source>Invalid name</source>
         <translation>Ongeldige naam</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="573"/>
+        <source>Adding or removing objects can&apos;t be applied while the dialog stays open. Use OK to confirm.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogParallelCurve</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="283"/>
         <source>Parallel curve tool</source>
         <translation>Parallelle curve gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="307"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="284"/>
         <source>Width:</source>
         <translation>Breedte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="286"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="290"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="167"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="293"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="189"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="296"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Volledige berekening tonen in berichtvenster&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="224"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="298"/>
         <source>Curve:</source>
         <translation>Kromming:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="299"/>
         <source>Color:</source>
         <translation>Kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="241"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="300"/>
         <source>Pen style:</source>
         <translation>Penstijl:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="270"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="301"/>
         <source>Approximation scale:</source>
         <translation>Schaal bij benadering:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="277"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="303"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="293"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="305"/>
         <source>Alias:</source>
         <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="314"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="306"/>
         <source>Name:</source>
         <translation>Naam:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="340"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="308"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.cpp" line="316"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.cpp" line="321"/>
         <source>Edit width to parallel curve</source>
         <translation>Breedte naar parallelle curve bewerken</translation>
     </message>
@@ -6670,16 +7419,19 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogPatternMaterials</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpatternmaterials.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpatternmaterials.h" line="74"/>
         <source>Dialog</source>
         <translation>Dialoog</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpatternmaterials.ui" line="48"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpatternmaterials.h" line="76"/>
         <source>Placeholder</source>
         <translation>Tijdelijke aanduidingen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpatternmaterials.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpatternmaterials.h" line="78"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
@@ -6688,6 +7440,7 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogPatternProperties</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="303"/>
         <source>Pattern properties</source>
         <translation>Patroon eigenschappen</translation>
     </message>
@@ -6701,6 +7454,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="318"/>
         <source>Pattern description</source>
         <translation>Patroon beschrijving</translation>
     </message>
@@ -6742,52 +7496,63 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="297"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="327"/>
         <source>Security</source>
         <translation>Veiligheid</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="303"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="326"/>
         <source>Open only for read</source>
         <translation>Open alleen om te lezen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="259"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="321"/>
         <source>Call context menu for edit</source>
         <translation>Vraag het context menu op om te veranderen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="121"/>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="138"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="310"/>
         <source>Name of measurement or increment</source>
         <translation>Naam van maat of toeslag</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="131"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="309"/>
         <source>Passmark width:</source>
         <translation>Pasmerkbreedte:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="150"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="311"/>
         <source>Default piece label template</source>
         <translation>Standaard stukklabelsjabloon</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="169"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="313"/>
         <source>Path to default label template</source>
         <translation>Pad naar standaard labelsjabloon</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="315"/>
         <source>Select path to label template</source>
         <translation>Pad naar labelsjabloon selecteren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="188"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="317"/>
         <source>Browse…</source>
         <translation>Doorbladeren…</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="262"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="323"/>
         <source>No image</source>
         <translation>Geen afbeelding</translation>
     </message>
@@ -6843,11 +7608,14 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="36"/>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="156"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="304"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="312"/>
         <source>Path:</source>
         <translation>Pad:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="77"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="305"/>
         <source>Show in Explorer</source>
         <translation>Toon in Explorer</translation>
     </message>
@@ -6916,21 +7684,25 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="325"/>
         <source>Pattern</source>
         <translation>Patroon</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="284"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="324"/>
         <source>For technical notes</source>
         <translation>Voor technische aantekeningen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="97"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="306"/>
         <source>Label language:</source>
         <translation>Taal label:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="307"/>
         <source>Passmark length:</source>
         <translation>Pasmerklengte:</translation>
     </message>
@@ -7107,88 +7879,105 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogPiecePath</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1413"/>
         <source>Piece path tool</source>
         <translation>Gereedschap om pad van onderdeel te bepalen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1458"/>
         <source>Path</source>
         <translation>Pad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="39"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1414"/>
         <source>Name:</source>
         <translation>Naam:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="46"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1415"/>
         <source>Unnamed path</source>
         <translation>Onbenoemd pad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="49"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1416"/>
         <source>Create name for your path</source>
         <translation>Maak een naam voor jouw pad aan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="56"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1417"/>
         <source>Type:</source>
         <translation>Type:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="89"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1419"/>
         <source>Piece:</source>
         <translation>Onderdeel:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="66"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1418"/>
         <source>Type of pen:</source>
         <translation>Soort lijn:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="120"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1423"/>
         <source>Reverse node direction</source>
         <translation>Knooppuntrichting omdraaien</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="139"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1426"/>
         <source>Excluded node</source>
         <translation>Uitgesloten knooppunt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1429"/>
         <source>Turn point</source>
         <translation>Draaipunt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="177"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1432"/>
         <source>Check node uniqness</source>
         <translation>Uniekheid knooppunt controleren</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="196"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1435"/>
         <source>Notch</source>
         <translation>Inkeping</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="215"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1438"/>
         <source>Delete node</source>
         <translation>Knooppunt verwijderen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="339"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1457"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2216"/>
         <source>Ready!</source>
         <translation>Klaar!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="356"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1509"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2069"/>
         <source>Seam allowance</source>
         <translation>Naadtoeslag</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="407"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1459"/>
         <source>Width:</source>
         <translation>Breedte:</translation>
     </message>
@@ -7201,6 +7990,14 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1888"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2105"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2352"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1461"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1480"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1497"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1560"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1574"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1588"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1602"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1622"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
@@ -7213,6 +8010,14 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1942"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2153"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2394"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1464"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1483"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1500"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1563"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1577"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1591"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1605"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1625"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
@@ -7223,6 +8028,12 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1524"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1749"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1974"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1467"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1486"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1503"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1566"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1580"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1594"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
@@ -7235,53 +8046,72 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1999"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2210"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2448"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1470"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1489"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1506"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1569"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1583"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1597"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1612"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1632"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Laat hele berekening zien in berichtenbox&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="547"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1472"/>
         <source>Nodes</source>
         <translation>Knooppunten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="555"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1473"/>
         <source>Node:</source>
         <translation>Knooppunt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="629"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1474"/>
         <source>Before:</source>
         <translation>Vooraf:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="652"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="850"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1476"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1493"/>
         <source>Return to default width</source>
         <translation>Terug naar standaard breedte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="655"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="853"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1478"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1495"/>
         <source>Default</source>
         <translation>Standaard</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="827"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1491"/>
         <source>After:</source>
         <translation>Nadat:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="982"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1508"/>
         <source>Angle:</source>
         <translation>Hoek:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2182"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1608"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a notch visible</source>
         <translation>Maak een formule die de zichtbaarheid regelt. Waarden anders dan &quot;0&quot; maken een inkeping zichtbaar</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2420"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1628"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible</source>
         <translation>Maak een formule die de zichtbaarheid regelt. Waarden anders dan &quot;0&quot; maken een pad zichtbaar</translation>
     </message>
@@ -7342,58 +8172,70 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1028"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1619"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2074"/>
         <source>Passmarks</source>
         <translation>Pasmarkeringen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1039"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1510"/>
         <source>Passmark:</source>
         <translation>Pasmarkering:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1075"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1512"/>
         <source>One line</source>
         <translation>Een lijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1088"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1513"/>
         <source>Two lines</source>
         <translation>Twee lijnen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1514"/>
         <source>Three lines</source>
         <translation>Drie lijnen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1805"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1527"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1585"/>
         <source>Angle</source>
         <translation>Hoek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1201"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1528"/>
         <source>Straightforward</source>
         <translation>Rechttoe rechtaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1214"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1529"/>
         <source>Bisector</source>
         <translation>Bissectrice</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1066"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1511"/>
         <source>Marks</source>
         <translation>Markeringen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1515"/>
         <source>T mark</source>
         <translation>T markering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1130"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1519"/>
         <source>V mark</source>
         <translation>V markering</translation>
     </message>
@@ -7410,11 +8252,14 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1227"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1275"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1531"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1543"/>
         <source>Select if need designate the corner point as a passmark</source>
         <translation>Selecteer wanneer nodig het benoemde hoekpunt als een pas markering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1230"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1533"/>
         <source>Intersection</source>
         <translation>Kruispunt</translation>
     </message>
@@ -7425,81 +8270,99 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="325"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1455"/>
         <source>Cut on fabric</source>
         <translation>Knip in stof</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="332"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1338"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1456"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1555"/>
         <source>Not Mirrored</source>
         <translation>Niet gespiegeld</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1055"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1556"/>
         <source>Type</source>
         <translation>Soort</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1176"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1526"/>
         <source>Check mark</source>
         <translation>Vinkje</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1243"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1291"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1535"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1547"/>
         <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
         <translation>Selecteer en wanneer nodig, wijs de hoek punt aan als een pas markering. Toon alleen de linker pas markering.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1246"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1537"/>
         <source>Intersection (only left)</source>
         <translation>Kruispunt ( alleen links)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1259"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1307"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1539"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1551"/>
         <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
         <translation>Selecteer en wanneer nodig, wijs de hoek punt aan als een pas markering. Toon alleen de rechter pas markering.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1262"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1541"/>
         <source>Intersection (only right)</source>
         <translation>Kruispunt ( alleen rechts)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1328"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1554"/>
         <source>Clockwise opening</source>
         <translation>Rechtsom opening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1346"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1599"/>
         <source>Manual shape</source>
         <translation>Handmatige vorm</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1355"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1557"/>
         <source>Length</source>
         <translation>Lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1415"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1558"/>
         <source>Length:</source>
         <comment>notch depth</comment>
         <translation>Lengte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1580"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1571"/>
         <source>Width</source>
         <translation>Breedte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1640"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1572"/>
         <source>Width:</source>
         <comment>notch width</comment>
         <translation>Breedte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1865"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1586"/>
         <source>Angle:</source>
         <comment>notch angle</comment>
         <translation>Hoek:</translation>
@@ -7507,18 +8370,24 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2028"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2278"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1614"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1634"/>
         <source>Control</source>
         <translation>Controle</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2082"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2329"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1600"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1620"/>
         <source>Visible</source>
         <translation>Zichtbaar</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2188"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2426"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1610"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1630"/>
         <source>1</source>
         <translation>1</translation>
     </message>
@@ -7529,51 +8398,61 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1278"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1545"/>
         <source>Intersection 2</source>
         <translation>Kruispunt 2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1294"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1549"/>
         <source>Intersection 2 (only left)</source>
         <translation>Kruispunt 2 (enkel links)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1310"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1553"/>
         <source>Intersection 2 (only right)</source>
         <translation>Kruispunt 2 (enkel rechts)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="242"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1441"/>
         <source>Move on top</source>
         <translation>Verplaats naar bovenaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="259"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1444"/>
         <source>Move up</source>
         <translation>Verplaats naar boven</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="276"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1447"/>
         <source>Move down</source>
         <translation>Verplaats naar beneden</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="293"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1450"/>
         <source>Move on bottom</source>
         <translation>Verplaats naar onderaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1420"/>
         <source>Continue the first point to the cutting contour</source>
         <translation>Verleng eerste punt naar de snijlijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="108"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1421"/>
         <source>Continue the last point to the cutting contour</source>
         <translation>Verleng laatste punt naar de snijlijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="322"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1453"/>
         <source>The path is a cut contour. Use to control export to DXF-AAMA</source>
         <translation>Het pad is een snijlijn. Gebruik het om de uitvoer naar DXF-AAMA te controleren</translation>
     </message>
@@ -7584,11 +8463,13 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2254"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1616"/>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
         <translation>Deze optie heeft alleen effect als de optie om een tweede knipje te laten zien op de zoomlijn aangevinkt is in de algemene opties. Deze optie staat het vervolgens toe om het tweede knipje voor dit specifieke knipje, uit te zetten.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2257"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1618"/>
         <source>Show the second passmark on seam line</source>
         <translation>Toon de tweede pasmarkering op de naadlijn</translation>
     </message>
@@ -7619,26 +8500,31 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1517"/>
         <source>Acute angle that looks inside of piece</source>
         <translation>Scherpe hoek naar de binnenkant van een patroondeel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1521"/>
         <source>Acute angle that looks outside of piece</source>
         <translation>Scherpe hoek naar de buitenkant van een patroondeel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1146"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1523"/>
         <source>V mark 2</source>
         <translation>V markering 2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1156"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1524"/>
         <source>U mark</source>
         <translation>U markering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1166"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1525"/>
         <source>Box mark</source>
         <translation>Vierkante markering</translation>
     </message>
@@ -7657,21 +8543,25 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogPin</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="21"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpin.h" line="91"/>
         <source>Pin tool</source>
         <translation>Pin gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="29"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpin.h" line="93"/>
         <source>Point:</source>
         <translation>Punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="39"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpin.h" line="94"/>
         <source>Piece:</source>
         <translation>Stuk:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpin.h" line="89"/>
         <source>Pin</source>
         <translation>Pin</translation>
     </message>
@@ -7685,6 +8575,7 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogPlaceLabel</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="480"/>
         <source>Width:</source>
         <translation>Breedte:</translation>
     </message>
@@ -7693,6 +8584,10 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="281"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="463"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="702"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="482"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="496"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="510"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="530"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
@@ -7701,6 +8596,10 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="323"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="505"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="744"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="486"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="500"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="514"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="534"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
@@ -7708,6 +8607,9 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="170"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="352"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="534"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="489"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="503"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="517"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
@@ -7716,36 +8618,46 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="374"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="559"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="798"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="492"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="506"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="521"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="541"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="261"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="494"/>
         <source>Height:</source>
         <translation>Hoogte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="443"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="508"/>
         <source>Angle:</source>
         <translation>Hoek:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="540"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="519"/>
         <source>0</source>
         <translation>0</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="588"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="523"/>
         <source>Point:</source>
         <translation>Punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="598"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="524"/>
         <source>Piece:</source>
         <translation>Onderdeel:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="608"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="525"/>
         <source>Type:</source>
         <translation>Type:</translation>
     </message>
@@ -7808,31 +8720,38 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="479"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="527"/>
         <source>Place label</source>
         <translation>Plaats label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="620"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="526"/>
         <source>Not mirrored</source>
         <translation>Niet gespiegeld</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="628"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="543"/>
         <source>Control</source>
         <translation>Controle</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="679"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="528"/>
         <source>Visible</source>
         <translation>Zichtbaar</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="770"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="537"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
         <translation>Maak formule aan die de zichtbaarheid reguleert. Waarden verschillend van &apos;0&apos; maken een pad zichtbaar.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="776"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="539"/>
         <source>1</source>
         <translation>1</translation>
     </message>
@@ -7856,6 +8775,7 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogPointFromArcAndTangent</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="161"/>
         <source>Point from arc and tangent</source>
         <translation>Kruispunt van boog en raaklijn</translation>
     </message>
@@ -7886,41 +8806,49 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="162"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="50"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="164"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="166"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="66"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="167"/>
         <source>Tangent point:</source>
         <translation>Raaklijn punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="95"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="168"/>
         <source>Arc:</source>
         <translation>Boog:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="118"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="169"/>
         <source>Take:</source>
         <translation>Kies:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="170"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="129"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="171"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -7929,6 +8857,7 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogPointFromCircleAndTangent</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="274"/>
         <source>Point from circle and tangent</source>
         <translation>Punt van cirkel en raaklijn</translation>
     </message>
@@ -7938,6 +8867,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="189"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="287"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -7962,82 +8892,94 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Kies</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="265"/>
         <source>Select a circle center</source>
         <translation>Selecteer een cirkel midden</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="321"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="326"/>
         <source>Edit radius</source>
         <translation>Verander straal</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="345"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="350"/>
         <source>Error</source>
         <translation>Fout</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="346"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="351"/>
         <source>Radius can&apos;t be negative</source>
         <translation>Straal kan niet negatief zijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="275"/>
         <source>Radius:</source>
         <translation>Straal:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="277"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="281"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="167"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="284"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="225"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="289"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="232"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="291"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="235"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="293"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="248"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="294"/>
         <source>Center of the circle:</source>
         <translation>Midden van de cirkel:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="277"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="295"/>
         <source>Tangent point:</source>
         <translation>Raaklijn punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="300"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="296"/>
         <source>Take:</source>
         <translation>Kies:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="297"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="326"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="298"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -8054,6 +8996,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="296"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -8085,6 +9028,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="283"/>
         <source>Point at intersection of arc and line</source>
         <translation>Kruispunt van boog en lijn</translation>
     </message>
@@ -8095,61 +9039,73 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="284"/>
         <source>Radius:</source>
         <translation>Straal:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="286"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="144"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="290"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="293"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="298"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="300"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="302"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="303"/>
         <source>Center of arc:</source>
         <translation>Midden van de boog:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="279"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="304"/>
         <source>Top of the line:</source>
         <translation>Bovenkant van de lijn:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="305"/>
         <source>End of the line:</source>
         <translation>Einde van de lijn:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="306"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="307"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -8170,6 +9126,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="179"/>
         <source>Point from X and Y of two other points</source>
         <translation>Punt van X en Y van twee andere punten</translation>
     </message>
@@ -8188,41 +9145,49 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="180"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="56"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="182"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="184"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="72"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="185"/>
         <source>X: vertical point:</source>
         <translation>X: verticaal punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="187"/>
         <source>Swap points</source>
         <translation>Punten omwisselen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="139"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="189"/>
         <source>Y: horizontal point:</source>
         <translation>Y: horizontaal punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="190"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="150"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="191"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -8260,11 +9225,13 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="275"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="49"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="277"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
@@ -8274,82 +9241,103 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="65"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="280"/>
         <source>First arc:</source>
         <translation>Eerste boog:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="81"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="281"/>
         <source>Second arc:</source>
         <translation>Tweede boog:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="91"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="282"/>
         <source>Take:</source>
         <translation>Kies:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="274"/>
         <source>Tool point of intersetion arcs</source>
         <translation>Kruispunt van bogen gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="297"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="52"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="279"/>
         <source>Choose unique label</source>
         <translation>Kies een uniek label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="283"/>
         <source>Arc 1</source>
         <translation>Boog 1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="109"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="202"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="284"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="293"/>
         <source>Alias2:</source>
         <translation>Alias2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="123"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="216"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="295"/>
         <source>Name1:</source>
         <translation>Naam1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="137"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="195"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="286"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="292"/>
         <source>Alias1:</source>
         <translation>Alias1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="144"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="287"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="296"/>
         <source>Name2:</source>
         <translation>Naam2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="151"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="181"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="288"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="291"/>
         <source>Choose unique name for left sub arc</source>
         <translation>Kies een unieke naam voor de linker deelboog</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="158"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="209"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="289"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="294"/>
         <source>Choose unique name for right sub arc</source>
         <translation>Kies een unieke naam voor de rechter deelboog</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="168"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="290"/>
         <source>Arc 2</source>
         <translation>Boog 2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="298"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -8367,6 +9355,8 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="189"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="369"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="365"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="379"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -8395,103 +9385,120 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Kies</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="279"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="330"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="289"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="340"/>
         <source>Select second circle center</source>
         <translation>Selecteer midden tweede cirkel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="401"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="411"/>
         <source>Edit first circle radius</source>
         <translation>Verander eerste cirkel straal</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="415"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="425"/>
         <source>Edit second circle radius</source>
         <translation>Verander tweede cirkel straal</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="439"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="449"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="470"/>
         <source>Error</source>
         <translation>Fout</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="440"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="461"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="450"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="471"/>
         <source>Radius can&apos;t be negative</source>
         <translation>Straal kan niet negatief zijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="353"/>
         <source>Radius of the first circle:</source>
         <translation>Straal van de eerste cirkel:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="99"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="279"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="355"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="369"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="141"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="321"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="373"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="167"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="347"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="362"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="376"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="259"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="367"/>
         <source>Radius of the second circle:</source>
         <translation>Straal van de tweede cirkel:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="405"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="381"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="383"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="415"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="385"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="428"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="386"/>
         <source>Center of the first circle:</source>
         <translation>Midden van de eerste cirkel:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="457"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="387"/>
         <source>Center of the second circle:</source>
         <translation>Midden van de tweede cirkel:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="480"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="388"/>
         <source>Take:</source>
         <translation>Kies:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="352"/>
         <source>Tool point of intersection circles</source>
         <translation>Gereedschap kruispunt van cirkels</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="389"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="506"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="390"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -8500,41 +9507,49 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogPointOfIntersectionCurves</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="291"/>
         <source>Tool point of intersection curves</source>
         <translation>Gereedschap kruispunt van krommingen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="292"/>
         <source>First curve:</source>
         <translation>Eerste kromming:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="62"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="296"/>
         <source>Second curve:</source>
         <translation>Tweede kromming:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="78"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="297"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="91"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="299"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="94"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="301"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="302"/>
         <source>Vertical correction:</source>
         <translation>Verticale correctie:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="303"/>
         <source>Horizontal correction:</source>
         <translation>Horizontale correctie:</translation>
     </message>
@@ -8545,57 +9560,73 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="318"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="143"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="236"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="306"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="316"/>
         <source>Name1:</source>
         <translation>Naam1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="164"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="317"/>
         <source>Name2:</source>
         <translation>Naam2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="171"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="201"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="309"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="312"/>
         <source>Choose unique name for left sub curve</source>
         <translation>Kies een unieke naam voor de linker deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="178"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="229"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="310"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="315"/>
         <source>Choose unique name for right sub curve</source>
         <translation>Kies een unieke naam voor de rechter deelcurve</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="254"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="319"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="123"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="304"/>
         <source>Curve 1</source>
         <translation>Kromme 1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="157"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="215"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="307"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="313"/>
         <source>Alias1:</source>
         <translation>Alias1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="129"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="222"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="305"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="314"/>
         <source>Alias2:</source>
         <translation>Alias2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="188"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="311"/>
         <source>Curve 2</source>
         <translation>Kromme 2</translation>
     </message>
@@ -8604,21 +9635,25 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogPreferences</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpreferences.h" line="114"/>
         <source>Preferences</source>
         <translation>Voorkeuren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="60"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpreferences.h" line="119"/>
         <source>Configuration</source>
         <translation>Configuratie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpreferences.h" line="121"/>
         <source>Pattern</source>
         <translation>Patroon</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="90"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpreferences.h" line="123"/>
         <source>Paths</source>
         <translation>Paden</translation>
     </message>
@@ -8705,21 +9740,26 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="410"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="406"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="431"/>
         <source>Rotation</source>
         <translation>Rotatie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="240"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="411"/>
         <source>Angle:</source>
         <translation>Hoek:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="413"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="302"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="417"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
@@ -8729,11 +9769,13 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="350"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="423"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten venster&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="376"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="425"/>
         <source>Origin Point:</source>
         <translation>Startpunt:</translation>
     </message>
@@ -8742,12 +9784,12 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Achtervoegsel:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="366"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="371"/>
         <source>Edit angle</source>
         <translation>Verander de hoek</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="252"/>
         <source>Select origin point</source>
         <translation>Selecteer het startpunt</translation>
     </message>
@@ -8757,83 +9799,97 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="328"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="420"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="337"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="342"/>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Dit punt kan geen startpunt zijn.  Gelieve een ander startpunt te kiezen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="391"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="429"/>
         <source>Visibility Group</source>
         <translation>Zichtbaarheid groep</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="125"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="420"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="408"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="432"/>
         <source>Name:</source>
         <translation>Naam:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="403"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="430"/>
         <source>Tags:</source>
         <translation>Etiket:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="427"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="434"/>
         <source>Separate each tag with comma.</source>
         <translation>Plaats een komma tussen ieder etiket.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="430"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="436"/>
         <source>Add tags</source>
         <translation>Etiket toevoegen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="438"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="407"/>
         <source>New:</source>
         <translation>Nieuw:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="142"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="409"/>
         <source>Pen style:</source>
         <translation>Pen stijl:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="177"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="410"/>
         <source>Color:</source>
         <translation>Kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="443"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="501"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="437"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="512"/>
         <source>Ready</source>
         <translation>Klaar</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="464"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="439"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="458"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="469"/>
         <source>Invalid rotation point</source>
         <translation>Ongeldig draaipunt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="490"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="501"/>
         <source>Invalid angle formula</source>
         <translation>Ongeldige hoek formule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="388"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="427"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation>Inschakelen om een zichtbaarheidsgroep van de oorspronkelijke objecten te maken</translation>
     </message>
@@ -8842,21 +9898,25 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogSaveLAyout</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="524"/>
         <source>Save Layout</source>
         <translation>Sla opmaak op</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="581"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="558"/>
         <source>File name:</source>
         <translation>Bestand naam:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="26"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="525"/>
         <source>Path:</source>
         <translation>Pad:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="534"/>
         <source>File format:</source>
         <translation>Bestandsindeling:</translation>
     </message>
@@ -8870,6 +9930,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="39"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="527"/>
         <source>Destination folder</source>
         <translation>Doelmap</translation>
     </message>
@@ -8879,12 +9940,15 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="55"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="531"/>
         <source>Select path to destination folder</source>
         <translation>Selecteer pad naar doelman</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="594"/>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="597"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="560"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="562"/>
         <source>File base name</source>
         <translation>Basis bestandsnaam</translation>
     </message>
@@ -8898,72 +9962,86 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="529"/>
         <source>Path to destination folder</source>
         <translation>Pad naar doelmap</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="125"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="536"/>
         <source>Binary form</source>
         <translation>Binary formulier</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="135"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="537"/>
         <source>Text as paths</source>
         <translation>Tekst als paden</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="145"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="538"/>
         <source>Show grainline</source>
         <translation>Draadrichting tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="155"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="539"/>
         <source>Boundary together with notches</source>
         <translation>Contour samen met inkepingen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="164"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="540"/>
         <source>Compatibility:</source>
         <translation>Compatibiliteit:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="176"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="541"/>
         <source>Not available</source>
         <comment>options</comment>
         <translation>Niet beschikbaar</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="345"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="545"/>
         <source>Margins</source>
         <translation>Marges</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="378"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="547"/>
         <source>Right:</source>
         <translation>Rechts:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="365"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="546"/>
         <source>Left:</source>
         <translation>Links:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="551"/>
         <source>Top:</source>
         <translation>Bovenaan:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="463"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="553"/>
         <source>Bottom:</source>
         <translation>Onderaan:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="488"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="555"/>
         <source>Paper format</source>
         <translation>Papier formaat</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="58"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="533"/>
         <source>Browse…</source>
         <translation>Doorbladeren…</translation>
     </message>
@@ -8972,36 +10050,46 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="404"/>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="447"/>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="470"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="548"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="550"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="552"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="554"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="494"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="556"/>
         <source>Templates:</source>
         <translation>Sjablonen:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="504"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="557"/>
         <source>Orientation:</source>
         <translation>Orientatie:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="116"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="535"/>
         <source>Options</source>
         <translation>Opties</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="202"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="542"/>
         <source>Scale</source>
         <translation>Schaal</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="210"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="543"/>
         <source>Horizontal:</source>
         <translation>Horizontaal:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="544"/>
         <source>Vertical:</source>
         <translation>Vertikaal:</translation>
     </message>
@@ -9552,6 +10640,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogseamallowance.h" line="62"/>
         <source>Workpiece tool</source>
         <translation>Werkstuk gereedschap</translation>
     </message>
@@ -9936,16 +11025,19 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogSelectLanguage</name>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectlanguage.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectlanguage.h" line="82"/>
         <source>Select language</source>
         <translation>Taal selecteren</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectlanguage.ui" line="24"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectlanguage.h" line="83"/>
         <source>Select user interface language</source>
         <translation>Taal voor gebruikersinterface selecteren</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectlanguage.ui" line="33"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectlanguage.h" line="84"/>
         <source>Language:</source>
         <translation>Taal:</translation>
     </message>
@@ -9955,17 +11047,21 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="14"/>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="35"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="105"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="106"/>
         <source>Select measurements type</source>
         <translation>Type maten selecteren</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="52"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="107"/>
         <source>Individual</source>
         <comment>measurements type</comment>
         <translation>Individueel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="72"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="108"/>
         <source>Multisize</source>
         <comment>measurements type</comment>
         <translation>Meerdere maten</translation>
@@ -10121,6 +11217,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="328"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -10160,6 +11257,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="315"/>
         <source>Special point on shoulder</source>
         <translation>Speciaal punt op schouder</translation>
     </message>
@@ -10174,71 +11272,85 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="316"/>
         <source>Length:</source>
         <translation>Lengte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="318"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="144"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="322"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="325"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="330"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="332"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="334"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="335"/>
         <source>First point:</source>
         <translation>Eerste punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="279"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="336"/>
         <source>Second point:</source>
         <translation>Tweede punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="337"/>
         <source>Third point:</source>
         <translation>Derde punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="337"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="338"/>
         <source>Type of line:</source>
         <translation>Soort lijn:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="372"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="339"/>
         <source>Line color:</source>
         <translation>Lijnkleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="340"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="402"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="341"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -10247,51 +11359,61 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogSinglePoint</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="163"/>
         <source>Single point</source>
         <translation>Enkel punt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="171"/>
         <source>Coordinates on the sheet</source>
         <translation>Coördinaten op het blad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="173"/>
         <source>Coordinates</source>
         <translation>Coördinaten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="88"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="174"/>
         <source>Y coordinate</source>
         <translation>Y coördinaat</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="95"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="175"/>
         <source>X coordinate</source>
         <translation>X coördinaat</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="64"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="169"/>
         <source>Point label</source>
         <translation>Punt label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="45"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="165"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="51"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="168"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="37"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="176"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="125"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="177"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -10333,6 +11455,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="588"/>
         <source>Simple curve</source>
         <translation>Simpele kromming</translation>
     </message>
@@ -10346,23 +11469,29 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="873"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="650"/>
         <source>Color:</source>
         <translation>Kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="49"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="589"/>
         <source>First point:</source>
         <translation>Eerste punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="68"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="464"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="590"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="620"/>
         <source>Control point</source>
         <translation>Controle punt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="300"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="696"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="605"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="635"/>
         <source>Angle:</source>
         <translation>Hoek:</translation>
     </message>
@@ -10372,6 +11501,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="445"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="619"/>
         <source>Second point:</source>
         <translation>Tweede punt:</translation>
     </message>
@@ -10386,6 +11516,8 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="121"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="517"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="591"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="621"/>
         <source>Length:</source>
         <translation>Lengte:</translation>
     </message>
@@ -10394,6 +11526,10 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="320"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="537"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="716"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="607"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="623"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="637"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
@@ -10402,6 +11538,10 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="362"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="579"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="758"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="597"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="611"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="627"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="641"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
@@ -10414,6 +11554,10 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="410"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="627"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="806"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="603"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="617"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="633"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="647"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten venster&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -10450,36 +11594,46 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="388"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="605"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="784"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="600"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="614"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="630"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="644"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="844"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="649"/>
         <source>Pen style:</source>
         <translation>Pen stijl:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="887"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="651"/>
         <source>Approximation scale:</source>
         <translation>Schaal bij benadering:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="894"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="653"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="656"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="910"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="655"/>
         <source>Alias:</source>
         <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="940"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="657"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -10488,6 +11642,7 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogSplinePath</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="700"/>
         <source>Curved path</source>
         <translation>Krommingspad</translation>
     </message>
@@ -10513,6 +11668,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="869"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="762"/>
         <source>List of points</source>
         <translation>Lijst van punten</translation>
     </message>
@@ -10535,27 +11691,33 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="999"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="777"/>
         <source>Color:</source>
         <translation>Kleur:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="702"/>
         <source>Point:</source>
         <translation>Punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="54"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="701"/>
         <source>New point:</source>
         <translation>Nieuw punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="123"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="703"/>
         <source>First control point</source>
         <translation>Eerste controlepunt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="355"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="726"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="718"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="747"/>
         <source>Angle:</source>
         <translation>Hoek:</translation>
     </message>
@@ -10565,6 +11727,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="494"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="732"/>
         <source>Second control point</source>
         <translation>Tweede controlepunt</translation>
     </message>
@@ -10579,6 +11742,8 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="176"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="547"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="704"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="733"/>
         <source>Length:</source>
         <translation>Lengte:</translation>
     </message>
@@ -10587,6 +11752,10 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="375"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="567"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="746"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="706"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="720"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="735"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="749"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
@@ -10595,6 +11764,10 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="417"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="609"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="788"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="710"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="724"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="739"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="753"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="905"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="915"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="942"/>
@@ -10611,6 +11784,10 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="465"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="657"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="836"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="716"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="730"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="745"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="759"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten venster&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -10652,56 +11829,70 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="443"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="635"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="814"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="713"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="727"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="742"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="756"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="881"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="765"/>
         <source>Move on top</source>
         <translation>Verplaats naar bovenaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="898"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="768"/>
         <source>Move up</source>
         <translation>Verplaats naar boven</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="915"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="771"/>
         <source>Move down</source>
         <translation>Verplaats naar beneden</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="932"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="774"/>
         <source>Move on bottom</source>
         <translation>Verplaats naar onderaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="970"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="776"/>
         <source>Pen style:</source>
         <translation>Pen stijl:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1013"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="778"/>
         <source>Approximation scale:</source>
         <translation>Schaal bij benadering:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1020"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="780"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Bepaal de schaal bij benadering voor deze kromming, 0 - gebruik algemene waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="46"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="783"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1036"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="782"/>
         <source>Alias:</source>
         <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1062"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="784"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -10862,6 +12053,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="170"/>
         <source>Triangle tool</source>
         <translation>Driehoek gereedschap</translation>
     </message>
@@ -10879,46 +12071,55 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="46"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="171"/>
         <source>Point label:</source>
         <translation>Punt label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="173"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="56"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="175"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="69"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="176"/>
         <source>First point of axis:</source>
         <translation>Eerste punt van de aslijn:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="85"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="177"/>
         <source>Second point of axis:</source>
         <translation>Tweede punt van de aslijn:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="178"/>
         <source>First point:</source>
         <translation>Eerste punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="117"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="179"/>
         <source>Second point:</source>
         <translation>Tweede punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="180"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="128"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="181"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -10927,6 +12128,7 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogTrueDarts</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="194"/>
         <source>True darts</source>
         <translation>Coupenaden</translation>
     </message>
@@ -10996,58 +12198,71 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="195"/>
         <source>First base point:</source>
         <translation>Eerste basis punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="196"/>
         <source>Second base point:</source>
         <translation>Tweede basis punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="197"/>
         <source>First dart point:</source>
         <translation>Eerste figuurnaad punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="85"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="198"/>
         <source>Second dart point:</source>
         <translation>Tweede figuurnaad punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="199"/>
         <source>Third dart point:</source>
         <translation>Derde figuurnaad punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="130"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="200"/>
         <source>First new dart point:</source>
         <translation>Eerste nieuwe figuurnaad punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="137"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="154"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="202"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="207"/>
         <source>Unique label</source>
         <translation>Unieke label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="140"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="157"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="204"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="209"/>
         <source>Choose unique label.</source>
         <translation>Kies unieke label.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="147"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="205"/>
         <source>Second new dart point:</source>
         <translation>Tweede nieuwe figuurnaad punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="210"/>
         <source>Tool</source>
         <translation>Gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="165"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="211"/>
         <source>Notes</source>
         <translation>Notities</translation>
     </message>
@@ -11056,6 +12271,7 @@ Toch de instellingen aanpassen?</translation>
     <name>DialogUndo</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogundo.h" line="85"/>
         <source>Broken formula</source>
         <translation>Incorrecte formule</translation>
     </message>
@@ -11065,21 +12281,25 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="44"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogundo.h" line="87"/>
         <source>&amp;Undo</source>
         <translation>&amp;Ongedaan maken</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="51"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogundo.h" line="88"/>
         <source>&amp;Fix formula</source>
         <translation>&amp;Verbeter formule</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="58"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogundo.h" line="89"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Annuleer</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogundo.h" line="86"/>
         <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
         <translation>Fout tijdens het berekenen van de formule. Je kunt proberen om de laatste actie ongedaan te maken of de formule te herstellen.</translation>
     </message>
@@ -11092,6 +12312,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoguniondetails.h" line="71"/>
         <source>Union tool</source>
         <translation>Samenvoegend gereedschap</translation>
     </message>
@@ -11132,11 +12353,13 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.ui" line="30"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoguniondetails.h" line="72"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want to unite details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Wil je echt details verenigen?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.ui" line="37"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoguniondetails.h" line="73"/>
         <source>Retain original pieces</source>
         <translation>Behouden van originele stukken</translation>
     </message>
@@ -11153,6 +12376,7 @@ Toch de instellingen aanpassen?</translation>
     <name>FvUpdateWindow</name>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="104"/>
         <source>Software Update</source>
         <translation>Software Opwaardering</translation>
     </message>
@@ -11162,26 +12386,31 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="39"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="106"/>
         <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
         <translation>%1 %2 is nu verkrijgbaar - je hebt %3. Wil je het nu downloaden?</translation>
     </message>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="48"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="107"/>
         <source>Skip This Version</source>
         <translation>Sla deze versie over</translation>
     </message>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="68"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="108"/>
         <source>Remind Me Later</source>
         <translation>Herinner me later</translation>
     </message>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="78"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="109"/>
         <source>Get Update</source>
         <translation>Krijg opwaardering</translation>
     </message>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="105"/>
         <source>%1 update is available!</source>
         <translation>%1 bijwerking is beschikbaar!</translation>
     </message>
@@ -11346,7 +12575,7 @@ Toch de instellingen aanpassen?</translation>
         <translation>Valentina&apos;s maten editor.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1031"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1033"/>
         <source>The measurement file.</source>
         <translation>Het maten bestand.</translation>
     </message>
@@ -11371,12 +12600,12 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Gebruik voor eenheid testing. Laat het programma lopen en open een bestand zonder het te vertonen in een venster.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1281"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1283"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation>Ongeldig basis maat argument. Moet bestaan uit: cm, mm, of inches.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1077"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1079"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Kan niet beginnen met verwerken van inkomende connecties op naam &apos;%1&apos;</translation>
     </message>
@@ -11385,7 +12614,7 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Test modus ondersteunt niet het openen van verschillende bestanden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1197"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1199"/>
         <source>Please, provide one input file.</source>
         <translation>Alsublieft, verstrek één invoer bestand.</translation>
     </message>
@@ -11406,72 +12635,72 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Open met de basis hoogte. Geldige waardes: %1cm.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1053"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1055"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Gebruik voor eenheid testing. Laat het programma lopen en open een bestand zonder het hoofdvenster te vertonen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1056"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1058"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Schakel hoog-dpi-schaling uit. Gebruik deze optie als je problemen hebt met schaalverandering (als default is ingeschakeld). Als alternatief kun je %1 omgevingsvariabele gebruiken.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1035"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1037"/>
         <source>Set base for dimension A in the table units.</source>
         <translation>Zet de basis voor dimensie A in de tabel eenheden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1036"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1038"/>
         <source>The dimension A base</source>
         <translation>Dimensie A basis</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1039"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1041"/>
         <source>Set base for dimension B in the table units.</source>
         <translation>Zet de basis voor dimensie B in de tabel eenheden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1040"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1042"/>
         <source>The dimension B base</source>
         <translation>Dimensie B basis</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1043"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1045"/>
         <source>Set base for dimension C in the table units.</source>
         <translation>Zet de basis voor dimensie C in de tabel eenheden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1044"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1046"/>
         <source>The dimension C base</source>
         <translation>Dimensie C basis</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1047"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1049"/>
         <source>Set pattern file units: cm, mm, inch.</source>
         <translation>Stel patroon bestand eenheid in: cm, mm, inches.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1048"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1050"/>
         <source>The pattern units</source>
         <translation>Patroon eenheden</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1050"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1052"/>
         <source>Activate known measurements mode.</source>
         <translation>Bekende matenmodus activeren.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1220"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1222"/>
         <source>Invalid dimension A base value.</source>
         <translation>Ongeldige waarde voor dimensie A basis.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1241"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1243"/>
         <source>Invalid dimension B base value.</source>
         <translation>Ongeldige waarde voor dimensie B basis.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1262"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1264"/>
         <source>Invalid dimension C base value.</source>
         <translation>Ongeldige waarde voor dimensie C basis.</translation>
     </message>
@@ -11481,7 +12710,7 @@ Toch de instellingen aanpassen?</translation>
         <translation>Formule waarschuwing: %1. Programma wordt gestopt.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1095"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1097"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
         <translation>Testmodus ondersteunt het openen van meerdere bestanden niet.</translation>
     </message>
@@ -11490,6 +12719,7 @@ Toch de instellingen aanpassen?</translation>
     <name>MainWindow</name>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1413"/>
         <source>Valentina</source>
         <translation>Valentina</translation>
     </message>
@@ -11503,26 +12733,31 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1953"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1616"/>
         <source>Point along perpendicular</source>
         <translation>Loodlijn met punt</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2043"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1621"/>
         <source>Perpendicular point along line</source>
         <translation>Haakse hoek punt langs lijn</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1971"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1617"/>
         <source>Point along bisector</source>
         <translation>Punt langs bissectrice</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1773"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1606"/>
         <source>Point at distance and angle</source>
         <translation>Punt op afstand en hoek</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1935"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1615"/>
         <source>Point at distance along line</source>
         <translation>Punt op afstand langs lijn</translation>
     </message>
@@ -11536,11 +12771,13 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2115"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1625"/>
         <source>Line between points</source>
         <translation>Lijn tussen punten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2097"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1624"/>
         <source>Point at line intersection</source>
         <translation>Punt op lijnkruising</translation>
     </message>
@@ -11558,6 +12795,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1845"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1610"/>
         <source>Arc</source>
         <translation>Boog</translation>
     </message>
@@ -11571,260 +12809,312 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="60"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1670"/>
         <source>&amp;File</source>
         <translation>&amp;Bestand</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="93"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1672"/>
         <source>&amp;Help</source>
         <translation>&amp;Help</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1673"/>
         <source>&amp;Pattern piece</source>
         <translation>&amp;Patroondeel</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="136"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2585"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2588"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1674"/>
         <source>Measurements</source>
         <translation>Maten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="152"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1675"/>
         <source>Window</source>
         <translation>Venster</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="205"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1680"/>
         <source>Toolbar files</source>
         <translation>Werkbalk bestanden</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="232"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1681"/>
         <source>ToolBar modes</source>
         <translation>Werkbalk modus</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="257"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1682"/>
         <source>Toolbar pattern</source>
         <translation>Werkbalk patroon</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="277"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1683"/>
         <source>Toolbar options</source>
         <translation>Werkbalk opties</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="299"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1684"/>
         <source>Toolbar tools</source>
         <translation>Werkbalk gereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="322"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1685"/>
         <source>Tool options</source>
         <translation>Gereedschap opties</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="550"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1706"/>
         <source>Point tools</source>
         <translation>Puntgereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="553"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1708"/>
         <source>Tools for creating points</source>
         <translation>Gereedschappen voor het maken van punten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="570"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1710"/>
         <source>Selecting tools</source>
         <translation>Selectiegereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="591"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1711"/>
         <source>Line tools</source>
         <translation>Lijngereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="594"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1713"/>
         <source>Tools for creating segments</source>
         <translation>Gereedschappen voor het maken van segmenten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="612"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1715"/>
         <source>Curve tools</source>
         <translation>Curvegereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="615"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1717"/>
         <source>Tools for creating curves</source>
         <translation>Gereedschappen voor het maken van curves</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="632"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1719"/>
         <source>Operation tools</source>
         <translation>Bewerkingsgereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="649"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1720"/>
         <source>Detail tools</source>
         <translation>Detailgereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="652"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1722"/>
         <source>Tools for creating detail</source>
         <translation>Gereedschappen voor het maken van details</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="669"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1724"/>
         <source>Layout actions</source>
         <translation>Indelingsacties</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="696"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1728"/>
         <source>Pen options</source>
         <translation>Penopties</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="707"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1729"/>
         <source>Dependency tree</source>
         <translation>Afhankelijkheidsboom</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="719"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1414"/>
         <source>New</source>
         <translation>Nieuw</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="722"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1415"/>
         <source>&amp;New</source>
         <translation>&amp;Nieuw</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="725"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1417"/>
         <source>Create a new pattern</source>
         <translation>Maak een nieuw patroon</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="739"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1419"/>
         <source>Open</source>
         <translation>Open</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="742"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1420"/>
         <source>&amp;Open</source>
         <translation>&amp;Open</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="745"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1422"/>
         <source>Open file with pattern</source>
         <translation>Open bestand met patroon</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="762"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6223"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6246"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1427"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="765"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1428"/>
         <source>&amp;Save</source>
         <translation>&amp;Opslaan</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="768"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1430"/>
         <source>Save pattern</source>
         <translation>Opslaan patroon</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1502"/>
         <source>Show Segment Labels</source>
         <translation>Segmentlabels tonen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1188"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1504"/>
         <source>Allow segment labels to appear. Uncheck to hide them in all cases.</source>
         <translation>Segmentlabels toestaan te verschijnen. Uitvinken om ze altijd te verbergen.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1300"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1526"/>
         <source>Load Measurements</source>
         <translation>Maten laden</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1679"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1592"/>
         <source>Interactive tools</source>
         <translation>Interactieve gereedschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1682"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1594"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1693"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1596"/>
         <source>Export font corrections</source>
         <translation>Lettertypecorrecties exporteren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2583"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1651"/>
         <source>Arc start point</source>
         <translation>Beginpunt boog</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2601"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1652"/>
         <source>Arc end point</source>
         <translation>Eindpunt boog</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2615"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1653"/>
         <source>Boundary together with notches</source>
         <translation>Contour samen met inkepingen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2623"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1654"/>
         <source>Settings Directory</source>
         <translation>Instellingenmap</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2634"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1655"/>
         <source>Reload labels</source>
         <translation>Labels herladen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2637"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1657"/>
         <source>Reload piece labels</source>
         <translation>Stukklabels herladen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2651"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8570"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1659"/>
         <source>Auto-arrange labels</source>
         <translation>Labels automatisch rangschikken</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2654"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1661"/>
         <source>Auto-arrange point labels to reduce overlaps</source>
         <translation>Puntlabels automatisch rangschikken om overlappingen te verminderen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2665"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1663"/>
         <source>Install single line font</source>
         <translation>Enkellijnlettertype installeren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2683"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1664"/>
         <source>Elliptical arc with given length</source>
         <translation>Elliptische boog met opgegeven lengte</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2701"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1665"/>
         <source>Parallel curve tool</source>
         <translation>Parallelle curve gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2719"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2722"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1666"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1668"/>
         <source>Graduated curve tool</source>
         <translation>Getrapte curve gereedschap</translation>
     </message>
@@ -11834,38 +13124,45 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="788"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1434"/>
         <source>Save not yet saved pattern</source>
         <translation>Sla nog niet opgeslagen patroon op</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="812"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1436"/>
         <source>Draw</source>
         <translation>Teken</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="836"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2081"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4355"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2084"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4363"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1440"/>
         <source>Details</source>
         <translation>Details</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="863"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1446"/>
         <source>Pointer tools</source>
         <translation>Aanwijzer gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="881"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1448"/>
         <source>New pattern piece</source>
         <translation>Nieuw patroondeel</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="884"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1450"/>
         <source>Add new pattern piece</source>
         <translation>Voeg nieuw patroondeel toe</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="905"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1454"/>
         <source>Change the label of pattern piece</source>
         <translation>Verander het label van patroondeel</translation>
     </message>
@@ -11879,48 +13176,58 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1676"/>
         <source>History</source>
         <translation>Geschiedenis</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="964"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1464"/>
         <source>About &amp;Qt</source>
         <translation>Over &amp;Qt</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="978"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1465"/>
         <source>&amp;About Valentina</source>
         <translation>&amp;Over Valentina</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="992"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1466"/>
         <source>E&amp;xit</source>
         <translation>E&amp;xit</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="995"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1468"/>
         <source>Exit the application</source>
         <translation>Stop met de toepassing</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1006"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="616"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1470"/>
         <source>Preferences</source>
         <translation>Voorkeuren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1020"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1471"/>
         <source>Pattern properties</source>
         <translation>Patroon eigenschappen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="479"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1037"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1472"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1700"/>
         <source>Zoom in</source>
         <translation>Inzoomen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1040"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1474"/>
         <source>zoom in</source>
         <translation>inzoomen</translation>
     </message>
@@ -11928,6 +13235,9 @@ Toch de instellingen aanpassen?</translation>
         <location filename="../../src/app/valentina/mainwindow.ui" line="492"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1057"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1060"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1476"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1478"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1703"/>
         <source>Zoom out</source>
         <translation>Uitzoomen</translation>
     </message>
@@ -11945,6 +13255,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1097"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1484"/>
         <source>Zoom fit best</source>
         <translation>Zoom  naar best passend</translation>
     </message>
@@ -11962,6 +13273,7 @@ Toch de instellingen aanpassen?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1487"/>
         <source>Report bug</source>
         <translation>Rapporteer fout</translation>
     </message>
@@ -11978,63 +13290,63 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Toon online help</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5245"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5606"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5261"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5629"/>
         <source>Pattern piece %1</source>
         <translation>Patroondeel %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1256"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1284"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1295"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1309"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1259"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1287"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1298"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1312"/>
         <source>Select point</source>
         <translation>Selecteer punt</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1269"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1272"/>
         <source>Select first point</source>
         <translation>Selecteer eerste punt</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1323"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1471"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1835"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1326"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1474"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1838"/>
         <source>Select first point of line</source>
         <translation>Selecteer eerste punt van lijn</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1337"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1340"/>
         <source>Select first point of angle</source>
         <translation>Selecteer eerste punt van hoek</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1351"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1354"/>
         <source>Select first point of first line</source>
         <translation>Selecteer eerste punt van eerste lijn</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1365"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1368"/>
         <source>Select first point curve</source>
         <translation>Selecteer eerste punt kromming</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1389"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1392"/>
         <source>Select simple curve</source>
         <translation>Selecteer simpele kromming</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1403"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1406"/>
         <source>Select point of center of arc</source>
         <translation>Selecteer middelpunt van boog</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1432"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1435"/>
         <source>Select point of curve path</source>
         <translation>Selecteer punt van krommingspad</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1457"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1460"/>
         <source>Select curve path</source>
         <translation>Selecteer krommingspad</translation>
     </message>
@@ -12043,47 +13355,47 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Selecteer punten, bogen, krommingen met de klok mee.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1529"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1532"/>
         <source>Select base point</source>
         <translation>Selecteer basis punt</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1543"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1546"/>
         <source>Select first point of axis</source>
         <translation>Selecteer eerste punt van de aslijn</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1572"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1591"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1575"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1594"/>
         <source>Select detail</source>
         <translation>Selecteer een detail</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1627"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1639"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1651"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1663"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1943"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1630"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1642"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1654"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1666"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1946"/>
         <source>Select one or more objects, &lt;b&gt;%1&lt;/b&gt; - confirm selection</source>
         <translation>Selecteer één of meer objecten, &lt;b&gt;%1&lt;/b&gt; - selectie bevestigen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1823"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1857"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1956"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1966"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1826"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1860"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1959"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1969"/>
         <source>Select arc</source>
         <translation>Selecteer een boog</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1845"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1990"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2001"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1848"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1993"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2004"/>
         <source>Select curve</source>
         <translation>Selecteer een kromming</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6650"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6673"/>
         <source>About Qt</source>
         <translation>Over Qt</translation>
     </message>
@@ -12104,68 +13416,68 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Patroon bestanden (*.val)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4498"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4514"/>
         <source>pattern</source>
         <translation>patroon</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4505"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4521"/>
         <source>Save as</source>
         <translation>Opslaan als</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2992"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2995"/>
         <source>Could not save file</source>
         <translation>Kon bestand niet opslaan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2357"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2624"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4605"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7483"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2360"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2627"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4621"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7506"/>
         <source>Open file</source>
         <translation>Open bestand</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3115"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3143"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3118"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3146"/>
         <source>Error parsing file.</source>
         <translation>Fout bij opsplitsen bestand.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3122"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3125"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Fout. Kan waarde niet omzetten.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3129"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5086"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3132"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5102"/>
         <source>Error empty parameter.</source>
         <translation>Fout. Lege parameter.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3100"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3136"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3103"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3139"/>
         <source>Error wrong id.</source>
         <translation>Fout. Verkeerde id.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3150"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3153"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Fout bij opsplitsen bestand (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5075"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5091"/>
         <source>Bad id.</source>
         <translation>Slechte id.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6054"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6077"/>
         <source>File saved</source>
         <translation>Bestand opgeslagen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8025"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8048"/>
         <source>untitled.val</source>
         <translation>naamloos.val</translation>
     </message>
@@ -12175,24 +13487,24 @@ Do you want to save your changes?</source>
         <translation type="vanished">Het patroon is aangepast. Wil je de veranderingen opslaan?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2069"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6270"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2072"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6293"/>
         <source>&amp;Undo</source>
         <translation>&amp;Ongedaan maken</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2070"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6285"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2073"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6308"/>
         <source>&amp;Redo</source>
         <translation>&amp;Opnieuw</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6824"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6847"/>
         <source>Pattern piece:</source>
         <translation>Patroondeel:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6826"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6849"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Schrijf een nieuw label voor het patroondeel.</translation>
     </message>
@@ -12211,8 +13523,8 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="887"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="935"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6925"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7116"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6948"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7139"/>
         <source>File error.</source>
         <translation>Bestandsfout.</translation>
     </message>
@@ -12221,12 +13533,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">Bestand geladen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7445"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7468"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation>Valentina  is niet correct gesloten. Wil je de geopende bestanden(%1) heropenen?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7447"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7470"/>
         <source>Reopen files.</source>
         <translation>Heropen bestanden.</translation>
     </message>
@@ -12240,11 +13552,13 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1989"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1618"/>
         <source>Special point on shoulder</source>
         <translation>Speciaal punt op schouder</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2007"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1619"/>
         <source>Triangle tool</source>
         <translation>Driehoek gereedschap</translation>
     </message>
@@ -12254,41 +13568,49 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2025"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1620"/>
         <source>Point from X and Y of two other points</source>
         <translation>Punt van X en Y van twee andere punten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2061"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1622"/>
         <source>Point intersect line and axis</source>
         <translation>Kruispunt lijn en aslijn</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2133"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1626"/>
         <source>Simple curve</source>
         <translation>Simpele kromming</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2187"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1629"/>
         <source>Curved path</source>
         <translation>Krommingspad</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2151"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1627"/>
         <source>Segmenting a simple curve</source>
         <translation>Opsplitsing van een simpele kromming</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1917"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1614"/>
         <source>Segment a curved path</source>
         <translation>Opsplitsing van een krommingspad</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1863"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1611"/>
         <source>Point intersect curve and axis</source>
         <translation>Kruispunt kromming en aslijn</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1827"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1609"/>
         <source>Segment an arc</source>
         <translation>Opsplitsen van een boog</translation>
     </message>
@@ -12302,6 +13624,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2457"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1644"/>
         <source>Union tool</source>
         <translation>Samenvoegend gereedschap</translation>
     </message>
@@ -12311,47 +13634,56 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1142"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1494"/>
         <source>Last Tool</source>
         <translation>Laatste gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1145"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1496"/>
         <source>Activate last used tool again</source>
         <translation>Activeer laatst gebruikte gereedschap</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1558"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1561"/>
         <source>Select point for X value (vertical)</source>
         <translation>Selecteer punt voor X waarde (verticaal)</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="164"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1677"/>
         <source>Mode</source>
         <translation>Modus</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="860"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1444"/>
         <source>Pointer</source>
         <translation>Aanwijzer</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="902"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1452"/>
         <source>Config pattern piece</source>
         <translation>Configureer patroondeel</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="64"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="950"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1671"/>
         <source>Layout</source>
         <translation>Opmaak</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1162"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1498"/>
         <source>Show Curve Details</source>
         <translation>Toon kromming details</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1165"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1500"/>
         <source>Show/hide control points and curve direction</source>
         <translation>Toon/verberg controle punten en kromming richting</translation>
     </message>
@@ -12361,26 +13693,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1791"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1607"/>
         <source>Point of intersection arcs</source>
         <translation>Kruispunt van bogen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2241"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1632"/>
         <source>Point of intersection circles</source>
         <translation>Kruispunt van cirkels</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2277"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1634"/>
         <source>Point from circle and tangent</source>
         <translation>Kruispunt van cirkel en raaklijn</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2259"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1633"/>
         <source>Point from arc and tangent</source>
         <translation>Kruispunt van boog en raaklijn</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1631"/>
         <source>Arc with given length</source>
         <translation>Boog met gegeven lengte</translation>
     </message>
@@ -12390,6 +13727,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="337"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1686"/>
         <source>Layout pages</source>
         <translation>Opmaak pagina&apos;s</translation>
     </message>
@@ -12411,26 +13749,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1202"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1506"/>
         <source>Print</source>
         <translation>Afdrukken</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1222"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1510"/>
         <source>Print tiled PDF</source>
         <translation>Druk gestapelde PDF af</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1225"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1512"/>
         <source>Split and print a layout into smaller pages (for regular printers)</source>
         <translation>Verdeel en sla een opmaak op in kleinere pagina&apos;s ( voor normale printers)</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1242"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1514"/>
         <source>Print preview</source>
         <translation>Druk voorbeeldweergave af</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1516"/>
         <source>Print preview original layout</source>
         <translation>Druk voorbeeldweergave van originele opmaak af</translation>
     </message>
@@ -12441,11 +13784,13 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1286"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1752"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1524"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1604"/>
         <source>Export original layout</source>
         <translation>Export originele opmaak</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1869"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1872"/>
         <source>Select first an arc</source>
         <translation>Selecteer eerst een boog</translation>
     </message>
@@ -12458,17 +13803,17 @@ Do you want to save your changes?</source>
         <translation type="vanished">Selecteer een punt op raaklijn</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1924"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1927"/>
         <source>Select point of the center of the arc</source>
         <translation>Selecteer middelste punt van boog</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1934"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1937"/>
         <source>Select the first base line point</source>
         <translation>Selecteer de eerste basislijn punt</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4325"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4333"/>
         <source>Detail mode</source>
         <translation>Detail modus</translation>
     </message>
@@ -12477,12 +13822,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">U kunt de Detail modus nu niet gebruiken. Alstublieft, creëer tenminste éen werkstuk.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4410"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4423"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4446"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4638"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4717"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7373"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4421"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4434"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4457"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4654"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4733"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7396"/>
         <source>Layout mode</source>
         <translation>Opmaak modus</translation>
     </message>
@@ -12491,7 +13836,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">U kunt de Opmaak modus nu niet gebruiken. Alstublieft, creëer tenminste éen werkstuk.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6212"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6235"/>
         <source>Unsaved changes</source>
         <translation>Niet opgeslagen veranderingen</translation>
     </message>
@@ -12520,7 +13865,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Individuele maten (*.vit);;Standaard maten (*vst)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2383"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2386"/>
         <source>Measurements loaded</source>
         <translation>Maten geladen</translation>
     </message>
@@ -12529,12 +13874,13 @@ Do you want to save your changes?</source>
         <translation type="vanished">Standaard maten(*.vst);;Individuele maten(*.vit)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7673"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7696"/>
         <source>You can&apos;t export empty scene.</source>
         <translation>U kunt geen lege beelden exporteren.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1731"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1600"/>
         <source>Create new Layout</source>
         <translation>Maak een nieuwe opmaak</translation>
     </message>
@@ -12552,12 +13898,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">%1, %2 (%3)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4532"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4548"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Afsluiten is mislukt. Dit bestand is al geopend in een ander venster.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3034"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3037"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Afsluiten is mislukt. Dit bestand is al geopend in een ander venster. Verwacht een conflict als 2 kopieën van het programma gaan lopen.</translation>
     </message>
@@ -12566,7 +13912,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Maten bestand bevat ongeldige bekende ma(a)t(en).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7593"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7616"/>
         <source>Measurement file has unknown format.</source>
         <translation>Maten bestand heeft een onbekende indeling.</translation>
     </message>
@@ -12588,18 +13934,18 @@ Do you want to save your changes?</source>
         <translation type="vanished">Maten zijn gesynchroniseerd</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2562"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2565"/>
         <source>Couldn&apos;t sync measurements.</source>
         <translation>Kan maten niet synchroniseren.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5387"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5410"/>
         <source>Couldn&apos;t update measurements.</source>
         <translation>Kan maten niet bijwerken.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7043"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7060"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7066"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7083"/>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
         <translation>Het maten bestand &apos;%1&apos; kon niet gevonden worden.</translation>
     </message>
@@ -12608,7 +13954,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Het maten bestand&lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; kon niet gevonden worden. Wil je de bestanden locatie bijwerken?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7514"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7537"/>
         <source>Loading measurements file</source>
         <translation>Laden maten bestand</translation>
     </message>
@@ -12625,9 +13971,9 @@ Do you want to save your changes?</source>
         <translation type="vanished">Kon maat niet instellen. Bestand was niet geopend.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7856"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7899"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7942"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7879"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7922"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7965"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation>De methode %1 werkt niet in GUI modus</translation>
     </message>
@@ -12644,45 +13990,51 @@ Do you want to save your changes?</source>
         <translation type="vanished">Kon hoogte niet instellen. Bestand was niet geopend.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7356"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7412"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7721"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7761"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7379"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7435"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7744"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7784"/>
         <source>Export error.</source>
         <translation>Export fout.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7969"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7992"/>
         <source>Please, provide one input file.</source>
         <translation>Alsublieft, verstrek éen invoer bestand.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1205"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1508"/>
         <source>Print an original layout</source>
         <translation>Druk een originele opmaak af</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1262"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1518"/>
         <source>Preview tiled PDF</source>
         <translation>Bekijk vooraf gestapelde PDF</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1265"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1520"/>
         <source>Print preview tiled layout</source>
         <translation>Voorbeeldweergave gestapelde opmaak</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="815"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1438"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with pattern pieces. These pattern pieces are base for going to the next stage &amp;quot;Details mode&amp;quot;. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modus voor het werken met patroon delen. Deze patroondelen zijn de basis om naar de volgende fase te gaan &amp;quote; Details modus&amp;quote;. Voor het mogelijk maken van de &amp;quote;Details modus&amp;quote; moet je op zijn minst een detail maken.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="839"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1442"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with details. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail on the stage &amp;quot;Draw mode&amp;quot;. Details created on this stage will be used for creating a layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Modus voor het werken met details. Voordat het mogelijk is om &amp;quote; Details modus&amp;quote;. uit te voeren, moet je in ieder geval een detail creeren op het werkgebied  &amp;quote;Draw modus&amp;quote; Details die op dit werkgebied gemaakt zijn worden gebruikt voor het creëren van een layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="953"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1462"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for creating a layout of details. This mode avaliable if was created at least one detail on the stage &amp;quot;Details mode&amp;quot;. The layout can be exported to your prefered file format and saved to your harddirve.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt; &lt;body&gt;&lt;p&gt;Modus voor het maken van een lay-out van details. Deze modus is beschikbaar als ten minste één detail in het werkgebied is gemaakt. &amp;quot;Details mode&amp;quot;.De lay-out kan worden geëxporteerd naar de bestandsindeling van uw voorkeur en opgeslagen naar uw harddrive.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -12695,17 +14047,18 @@ Do you want to save your changes?</source>
         <translation type="vanished">Maten niet laden wanneer ze niet in een patroon bestand gebruikt worden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2444"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2447"/>
         <source>Measurements unloaded</source>
         <translation>Maten niet geladen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2451"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2454"/>
         <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
         <translation>kan maten niet ontladen. Sommigen worden gebruikt in het patroon.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2403"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1641"/>
         <source>True darts</source>
         <translation>Coupenaden</translation>
     </message>
@@ -12729,7 +14082,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Sla op...</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6228"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6251"/>
         <source>Don&apos;t Save</source>
         <translation>Niet opslaan</translation>
     </message>
@@ -12763,11 +14116,12 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1881"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1612"/>
         <source>Point intersection curves</source>
         <translation>Kruispunt krommingen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1891"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1894"/>
         <source>Select first curve</source>
         <translation>Selecteer eerste kromming</translation>
     </message>
@@ -12781,16 +14135,17 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2169"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1628"/>
         <source>Curve tool which uses point as control handle</source>
         <translation>Kromming met een punt als controle knop</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1375"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1378"/>
         <source>Select first curve point</source>
         <translation>Selecteer eerste krommingspunt</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1443"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1446"/>
         <source>Select point of cubic bezier path</source>
         <translation>Selecteer punt van kubusachtige bezier pad</translation>
     </message>
@@ -12816,6 +14171,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2349"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1638"/>
         <source>Rotate objects</source>
         <translation>Draai objecten</translation>
     </message>
@@ -12823,6 +14179,9 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1122"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1125"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1128"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1489"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1490"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1492"/>
         <source>Close pattern</source>
         <translation>Sluit patroon</translation>
     </message>
@@ -12836,23 +14195,25 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2079"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1623"/>
         <source>Midpoint between two points</source>
         <translation>Middelpunt tussen 2 punten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="401"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1690"/>
         <source>Group</source>
         <translation>Groep</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2077"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4285"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2080"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4288"/>
         <source>Contains all visibility groups</source>
         <translation>Bevat alle zichtbare groepen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2082"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4357"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2085"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4365"/>
         <source>Show which details will go in layout</source>
         <translation>Toont welke details in de opmaak gaat</translation>
     </message>
@@ -12863,23 +14224,25 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1077"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1080"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1480"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1482"/>
         <source>Original zoom</source>
         <translation>Originele zoom</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1880"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1883"/>
         <source>Select first circle center</source>
         <translation>Selecteer eerste cirkel midden</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1902"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1913"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1905"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1916"/>
         <source>Select point on tangent</source>
         <translation>Selecteer een punt op raaklijn</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2072"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3243"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2075"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3246"/>
         <source>Pattern Piece:</source>
         <translation>Patroondeel:</translation>
     </message>
@@ -12892,27 +14255,30 @@ Do you want to save your changes?</source>
         <translation type="vanished">Maat:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7509"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7532"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation>Het maten bestand&lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; kon niet gevonden worden. Wil je de bestanden locatie bijwerken?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2331"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1637"/>
         <source>Flipping objects by line</source>
         <translation>Kantelen t.o.v. lijn</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2313"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1636"/>
         <source>Flipping objects by axis</source>
         <translation>Kantelen t.o.v. aslijn</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2367"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1639"/>
         <source>Move objects</source>
         <translation>Verplaatsen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2586"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2589"/>
         <source>Measurements were changed. Do you want to sync measurements now?</source>
         <translation>Maten zijn gewijzigd. Wil je ze nu synchroniseren?</translation>
     </message>
@@ -12921,313 +14287,347 @@ Do you want to save your changes?</source>
         <translation type="vanished">Graderen ondersteunt geen inches</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2548"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2551"/>
         <source>Measurements have been synced</source>
         <translation>Maten zijn gesynchroniseerd</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2205"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1630"/>
         <source>Elliptical Arc</source>
         <translation>Ellipsvormige boog</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1417"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1420"/>
         <source>Select point of center of elliptical arc</source>
         <translation>Selecteer het middelpunt van de ellipsvormige boog</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1485"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1488"/>
         <source>Select main path objects clockwise.</source>
         <translation>Selecteer hoofdpad objecten met de klok mee.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4575"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4591"/>
         <source>Could not save the file</source>
         <translation>Het bestand is niet bewaard</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8075"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8098"/>
         <source>read only</source>
         <translation>alleen lezen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="926"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1456"/>
         <source>Variables Table</source>
         <translation>Tabel met variabelen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="929"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1458"/>
         <source>Contains information about increments and internal variables</source>
         <translation>Bevat informatie over vergroten/verkleinen en interne variabelen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1303"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1528"/>
         <source>Connect measurements file to pattern</source>
         <translation>Maatbestand koppelen aan patroon</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1314"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1530"/>
         <source>Open Tape</source>
         <translation>Open Tape</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1331"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1534"/>
         <source>Edit Current</source>
         <translation>Wijzig huidige</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1334"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1536"/>
         <source>Edit linked to the pattern measurements</source>
         <translation>Wijziging gerelateerd aan patroon-maten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1352"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1538"/>
         <source>Sync</source>
         <translation>Synchroniseer</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1355"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1540"/>
         <source>Synchronize linked to the pattern measurements after change</source>
         <translation>Synchroniseer maten gelinked aan het patroon na wijziging</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1369"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1542"/>
         <source>Unload Current</source>
         <translation>Verwijder huidige</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1372"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1544"/>
         <source>Unload measurements if they were not used in a pattern file</source>
         <translation>Laad maten niet als ze niet gebruikt worden in een patroon-bestand</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2341"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7555"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7569"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2344"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7578"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7592"/>
         <source>Individual measurements</source>
         <translation>Individuele maten</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2347"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7555"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7569"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2350"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7578"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7592"/>
         <source>Multisize measurements</source>
         <translation>Multimaten maten</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4504"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4591"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4520"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4607"/>
         <source>Pattern files</source>
         <translation>Patroonbestanden</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2511"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1647"/>
         <source>Pin tool</source>
         <translation>Pin</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1506"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1509"/>
         <source>Select pin point</source>
         <translation>Selecteer de pinpunten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2529"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1648"/>
         <source>Insert node tool</source>
         <translation>Voeg knooppunt toe</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1317"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1532"/>
         <source>Open Tape app for creating or editing measurements file</source>
         <translation>Open de Tape app om een matenbestand te wijzigen of aan te maken</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3461"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3464"/>
         <source>Point at the intersections of lines/axis tools</source>
         <translation>Punt op snijpunten van lijnen/as gereedschappen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3504"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3507"/>
         <source>Point segmenting curves/arcs tools</source>
         <translation>Punt dat curves/bogen segmenteert gereedschappen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3518"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3521"/>
         <source>Points intersecting with 2 curves/arcs/circles tools</source>
         <translation>Punten op snijpunten van 2 curves/bogen/cirkels gereedschappen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4326"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4334"/>
         <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
         <translation>Je kunt Detail mode nog niet gebruiken. Creëer alsjeblieft eerst één werkstuk.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4411"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4422"/>
         <source>You can&apos;t use Layout mode yet. Please, create at least one workpiece.</source>
         <translation>Je kunt opmaak mode nog niet gebruiken. Creëer alsjeblieft eerst één werkstuk.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4424"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4435"/>
         <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
         <translation>Je kunt de opmaak mode nog niet gebruiken. Voeg eerst één werkstuk toe aan de layout.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4447"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4458"/>
         <source>You can&apos;t use Layout mode yet.</source>
         <translation>Je kunt opmaak mode nog niet gebruiken.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1386"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1546"/>
         <source>Zoom fit best current</source>
         <translation>Best passende zoom</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1389"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1548"/>
         <source>zoom fit best current pattern piece</source>
         <translation>Best passende zoom voor huidig patroondeel</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2565"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1650"/>
         <source>Export details skiping the Layout stage</source>
         <translation>Exporteer de details en sla Opmaak stadium over</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4639"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4718"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7374"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4655"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4734"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7397"/>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation>Er zijn te weinig details om te exporteren. Alstublieft, zorg dat er ten minste een detail in Opmaak bevat.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4652"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4731"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7387"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4668"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4747"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7410"/>
         <source>Export details</source>
         <translation>Exporteer details</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4652"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4731"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7387"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4668"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4747"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7410"/>
         <source>Can&apos;t export details.</source>
         <translation>Kan geen details exporteren.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1400"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1550"/>
         <source>Label template editor</source>
         <translation>Label sjabloon bewerker</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2439"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1643"/>
         <source>Workpiece tool</source>
         <translation>Werkstuk gereedschap</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2493"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1646"/>
         <source>Internal path tool</source>
         <translation>Binnenlijnen tekenen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="785"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1432"/>
         <source>Save &amp;As…</source>
         <translation>Opslaan &amp;als…</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1108"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1485"/>
         <source>Report Bug…</source>
         <translation>Rapporteer fout…</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1283"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1522"/>
         <source>Export As…</source>
         <translation>Exporteer als…</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6222"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6245"/>
         <source>Save…</source>
         <translation>Opslaan…</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1411"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1551"/>
         <source>Final measurements</source>
         <translation>Uiteindelijke maten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1425"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1552"/>
         <source>Export Final Measurements to CSV</source>
         <translation>Exporteer uiteindelijke maten naar CSV</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7683"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7706"/>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
         <translation>U kunt geen lege scenes exporteren. A.u.b, betrek tenminste één detail in de opmaak.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7789"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7812"/>
         <source>Export final measurements error.</source>
         <translation>Exporteer uiteindelijke maten fout.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7790"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7813"/>
         <source>Destination path is empty.</source>
         <translation>Bestemmings pad is leeg.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1436"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1553"/>
         <source>Next pattern piece</source>
         <translation>Volgend patroondeel</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1439"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1555"/>
         <source>Ctrl+PgDown</source>
         <translation>Ctrl+PgDown</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1450"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1557"/>
         <source>Previous pattern piece</source>
         <translation>Vorig patroondeel</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1453"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1559"/>
         <source>Ctrl+PgUp</source>
         <translation>Ctrl+PgUp</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1711"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1597"/>
         <source>Tool &quot;Select&quot;</source>
         <translation>Gereedschap &quot;Selecteren&quot;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1728"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1598"/>
         <source>Layout settings</source>
         <translation>Indelingsinstellingen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1749"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1602"/>
         <source>Layout export as</source>
         <translation>Indeling exporteren als</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2547"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1649"/>
         <source>Place label tool</source>
         <translation>Plaats label</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2475"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1645"/>
         <source>Duplicate detail tool</source>
         <translation>Dupliceer detail gereedschap</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1516"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1519"/>
         <source>Select placelabel center point</source>
         <translation>Selecteer middelpunt labelplaats</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7074"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7097"/>
         <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
         <translation>Het maten bestand &apos;%1&apos; kon niet gevonden worden of geeft niet genoeg informatie.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3201"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3204"/>
         <source>Scale:</source>
         <translation>Schaal:</translation>
     </message>
@@ -13237,453 +14637,485 @@ Do you want to save your changes?</source>
         <translation>Start een nieuw patroondeel op.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2071"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2074"/>
         <source>Changes applied.</source>
         <translation>Wijzigingen zijn toegepast.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6198"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6221"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Kan instellingen niet opslaan. Toegang geweigerd.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="748"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1425"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6173"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6196"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Kan instellingen niet inlezen wegens een niet-conform .INI-bestand.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1497"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1500"/>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
         <translation>Selecteer pad objecten, &lt;b&gt;%1&lt;/b&gt; - draai richting kromming om</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1615"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1618"/>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation>Selecteer één of meer objecten, houd &lt;b&gt;%1&lt;/b&gt; vast - voor meerdere selecties, &lt;b&gt;%2&lt;/b&gt; - beëindig creatie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2295"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1635"/>
         <source>Point of intersection circle and segment</source>
         <translation>Kruispunt van cirkel en segment</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1467"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1561"/>
         <source>Increase label font</source>
         <translation>Vergroot fontgrootte label</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1481"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1562"/>
         <source>Decrease label font</source>
         <translation>Verklein fontgrootte label</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1495"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1563"/>
         <source>Original label font</source>
         <translation>Originele label fontgrootte</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1509"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1564"/>
         <source>Hide labels</source>
         <translation>Verberg labels</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2076"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4283"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2079"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4286"/>
         <source>Groups of visibility</source>
         <translation>Zichtbaarheid van groepen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1523"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5580"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5603"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1565"/>
         <source>Export recipe</source>
         <translation>Exporteer recept</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5578"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5601"/>
         <source>Recipe files</source>
         <translation>Recept bestanden</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5580"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5603"/>
         <source>recipe</source>
         <translation>Recept</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5593"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5616"/>
         <source>Could not save recipe. %1</source>
         <translation>Kon het recept %1 niet bewaren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1899"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1613"/>
         <source>Curved path tool which uses point as control handle</source>
         <translation>Krommingpad met een punt als controle knop</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1809"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1608"/>
         <source>Point of intersection arc and axis</source>
         <translation>Kruispunt boog en aslijn</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1537"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1566"/>
         <source>Show main path</source>
         <translation>Toon hoofdpad</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1540"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1568"/>
         <source>Globally show pieces main path</source>
         <translation>Toon globaal het hoofdpad van stukken</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="413"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8485"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8508"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1691"/>
         <source>Pattern messages</source>
         <translation>Patroon berichten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="425"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1693"/>
         <source>Clear all messages</source>
         <translation>Wis alle berichten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="469"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1698"/>
         <source>Filter</source>
         <translation>Filter</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8460"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8483"/>
         <source>DEBUG</source>
         <translation>DEBUG</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8463"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8486"/>
         <source>WARNING</source>
         <translation>VERWITTIGING</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8466"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8489"/>
         <source>CRITICAL</source>
         <translation>KRITIEK</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8469"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8492"/>
         <source>FATAL</source>
         <translation>FATAAL</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8472"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8495"/>
         <source>INFO</source>
         <translation>INFO</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="438"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1696"/>
         <source>Auto refresh the list with each parse</source>
         <translation>Hervul de lijst automatisch na elke opsplitsing</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="172"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1678"/>
         <source>Watermark</source>
         <translation>Watermerk</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1554"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1570"/>
         <source>Load</source>
         <translation>Laden</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1568"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1571"/>
         <source>Remove</source>
         <translation>Verwijder</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1579"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1572"/>
         <source>Edit current</source>
         <translation>Bewerk huidig</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1590"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1573"/>
         <source>Editor</source>
         <translation>Editor</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1575"/>
         <source>Create or edit a watermark</source>
         <translation>Maak of wijzig een watermerk</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2621"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2624"/>
         <source>Watermark files</source>
         <translation>Watermerk bestanden</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="182"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1679"/>
         <source>Manual Layout</source>
         <translation>Handmatige indeling</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1601"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1577"/>
         <source>Open Puzzle</source>
         <translation>Puzzle openen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1604"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1579"/>
         <source>Open the Puzzle app</source>
         <translation>De Puzzle app openen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1615"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1581"/>
         <source>Create</source>
         <translation>Aanmaken</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1618"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1583"/>
         <source>Create manual layout</source>
         <translation>Handmatige indeling aanmaken</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1629"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1585"/>
         <source>Update</source>
         <translation>Opwaardering</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1632"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1587"/>
         <source>Update manual layout</source>
         <translation>Handmatige indeling bijwerken</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4686"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4761"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4702"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4777"/>
         <source>Unable to prepare raw layout data.</source>
         <translation>Kan ruwe indelingsgegevens niet voorbereiden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4693"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4709"/>
         <source>Manual layout files</source>
         <translation>Bestanden handmatige indeling</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4700"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4716"/>
         <source>Select manual layout</source>
         <translation>Handmatige indeling selecteren</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4802"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4818"/>
         <source>Select folder</source>
         <translation>Selecteer map</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6213"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6236"/>
         <source>The pattern has been modified. Do you want to save your changes?</source>
         <translation>Het patroon is gewijzigd. Wilt u uw wijzigingen opslaan?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7837"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7860"/>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
         <translation>Niet ondersteunde dimensie A waarde &apos;%1&apos; voor dit patroonbestand.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7844"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7867"/>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
         <translation>Kan dimensie A niet instellen. Heb een bestand nodig met multimaat maten metingen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7850"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7873"/>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
         <translation>Kan dimensie A niet instellen. Bestand was niet geopend.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7880"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7903"/>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
         <translation>Niet ondersteunde dimensie B waarde &apos;%1&apos; voor dit patroonbestand.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7887"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7910"/>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
         <translation>Kan dimensie B niet instellen. Heb een bestand nodig met multimaat maten metingen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7893"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7916"/>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
         <translation>Kan dimensie B niet instellen. Bestand was niet geopend.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7923"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7946"/>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
         <translation>Niet ondersteunde dimensie C waarde &apos;%1&apos; voor dit patroonbestand.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7930"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7953"/>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
         <translation>Kan dimensie C niet instellen. Heb een bestand nodig met multimaat maten metingen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7936"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7959"/>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation>Kan dimensie C niet instellen. Bestand was niet geopend.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5598"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5621"/>
         <source>Could not create recipe file. %1</source>
         <translation>Kan receptbestand niet aanmaken. %1</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1640"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1589"/>
         <source>Shop</source>
         <translation>Winkel</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7308"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7331"/>
         <source>Scalable Vector Graphics files</source>
         <translation>Scalable Vector Graphics bestanden</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7310"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7333"/>
         <source>Save draw</source>
         <translation>Tekening opslaan</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2421"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1642"/>
         <source>Draw export</source>
         <translation>Tekening exporteren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="541"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1705"/>
         <source>Background images</source>
         <translation>Achtergrondafbeeldingen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1651"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1590"/>
         <source>Add background image</source>
         <translation>Achtergrondafbeelding toevoegen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1774"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1777"/>
         <source>Unable to add background image</source>
         <translation>Kan achtergrondafbeelding niet toevoegen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1794"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1797"/>
         <source>Invalid image. Error: %1</source>
         <translation>Ongeldige afbeelding. Fout: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1978"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1981"/>
         <source>Select point of the center of the elliptical arc</source>
         <translation>Middelpunt van de elliptische boog selecteren</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2095"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3270"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2098"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3273"/>
         <source>Pen style:</source>
         <translation>Penstijl:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2096"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3294"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2099"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3297"/>
         <source>Color:</source>
         <translation>Kleur:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3275"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3278"/>
         <source>Sets the &lt;b&gt;default pen style&lt;/b&gt; for all newly created objects. This style is applied the first time an object is drawn.</source>
         <translation>Stelt de &lt;b&gt;standaard penstijl&lt;/b&gt; in voor alle nieuw aangemaakte objecten. Deze stijl wordt de eerste keer toegepast wanneer een object wordt getekend.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3298"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3301"/>
         <source>Defines the &lt;b&gt;global object color property&lt;/b&gt;. This color is applied automatically the first time a new object is drawn.</source>
         <translation>Definieert de &lt;b&gt;globale objectkleureigenschap&lt;/b&gt;. Deze kleur wordt automatisch toegepast de eerste keer dat een nieuw object wordt getekend.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3434"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3437"/>
         <source>Point at a given distance tools</source>
         <translation>Punt op een opgegeven afstand gereedschappen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3448"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3451"/>
         <source>Perpendicular/Bisector tools</source>
         <translation>Loodlijn/bissectrice gereedschappen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3474"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3477"/>
         <source>Triangular tools</source>
         <translation>Driehoeksgereedschappen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3488"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3491"/>
         <source>Point intersecting with axis tools</source>
         <translation>Punt op snijpunt met as gereedschappen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3533"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3536"/>
         <source>Points intersecting with arcs/curves and tangents/segments tools</source>
         <translation>Punten op snijpunten van bogen/curves en raaklijn/segmenten gereedschappen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3593"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3596"/>
         <source>Curves and arcs tools</source>
         <translation>Curves en bogen gereedschappen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3626"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3629"/>
         <source>Flipping objects tools</source>
         <translation>Objecten spiegelen gereedschappen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3639"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3642"/>
         <source>Rotating/moving objects tools</source>
         <translation>Objecten draaien/verplaatsen gereedschappen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3674"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3677"/>
         <source>Merge/duplicate pieces tools</source>
         <translation>Stukken samenvoegen/dupliceren gereedschappen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3689"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3692"/>
         <source>Adding objects for Details mode tools</source>
         <translation>Objecten toevoegen voor Details modus gereedschappen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4769"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4785"/>
         <source>Select background image</source>
         <translation>Achtergrondafbeelding selecteren</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4829"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4845"/>
         <source>All Single-Line Fonts</source>
         <translation>Alle enkellijnlettertypen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4830"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4846"/>
         <source>TrueType Fonts</source>
         <translation>TrueType-lettertypen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4831"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4847"/>
         <source>OpenType Fonts</source>
         <translation>OpenType-lettertypen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4832"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4848"/>
         <source>SVG Fonts</source>
         <translation>SVG-lettertypen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4833"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4849"/>
         <source>All Files</source>
         <translation>Alle bestanden</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4838"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4854"/>
         <source>Select Font Files to Install</source>
         <translation>Lettertypebestanden selecteren om te installeren</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4872"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4888"/>
         <source>Failed to install font file: %1
 
 Reason: %2</source>
@@ -13692,7 +15124,7 @@ Reason: %2</source>
 Reden: %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4878"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4894"/>
         <source>Font Installation Summary:
 
 Successful Installations: %1
@@ -13703,55 +15135,57 @@ Succesvolle installaties: %1
 Mislukte installaties: %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4884"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4900"/>
         <source>Installation Complete with Errors</source>
         <translation>Installatie voltooid met fouten</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4888"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4904"/>
         <source>Installation Successful</source>
         <translation>Installatie geslaagd</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5515"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5555"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5538"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5578"/>
         <source>Unable to save image. Error: %1</source>
         <translation>Kan afbeelding niet opslaan. Fout: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5521"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5544"/>
         <source>Unable to save image. No data.</source>
         <translation>Kan afbeelding niet opslaan. Geen gegevens.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5527"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5550"/>
         <source>untitled</source>
         <translation>naamloos</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8520"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8543"/>
         <source>Auto-Arrange Labels</source>
         <translation>Labels automatisch rangschikken</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2341"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2347"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5540"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2344"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2350"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5563"/>
         <source>All files</source>
         <translation>Alle bestanden</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5544"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5567"/>
         <source>Save Image</source>
         <translation>Afbeelding opslaan</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2385"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1640"/>
         <source>Visibility group</source>
         <translation>Zichtbaarheid groep</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1665"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1591"/>
         <source>Show accuracy radius</source>
         <translation>Nauwkeurigheidsstraal tonen</translation>
     </message>
@@ -14232,61 +15666,73 @@ Wilt u een ander bestand selecteren?</translation>
     <name>PreferencesConfigurationPage</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="45"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="632"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="51"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="633"/>
         <source>Auto-save modified pattern</source>
         <translation>Automatisch opgeslagen van veranderd patroon</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="61"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="634"/>
         <source>Interval:</source>
         <translation>Interval:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="90"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="636"/>
         <source>Language</source>
         <translation>Taal</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="637"/>
         <source>GUI language:</source>
         <translation>GUI taal:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="123"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="639"/>
         <source>Decimal separator parts:</source>
         <translation>Decimale gescheiden delen:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="140"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="640"/>
         <source>Default unit:</source>
         <translation>Standaardwaarde eenheid:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="150"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="641"/>
         <source>Label language:</source>
         <translation>Taal label:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="166"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="642"/>
         <source>Pattern editing</source>
         <translation>Patroon verandering</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="178"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="643"/>
         <source>Reset warnings</source>
         <translation>Opnieuw instellen van waarschuwingen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="661"/>
         <source>Toolbar</source>
         <translation>Werkbalk</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="662"/>
         <source>The text appears under the icon (recommended for beginners).</source>
         <translation>De tekst verschijnt onder het icoon. (Aanbevolen voor beginners).</translation>
     </message>
@@ -14350,11 +15796,13 @@ Wilt u een ander bestand selecteren?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="645"/>
         <source>Update a pattern only after a curve release</source>
         <translation>Werk een patroon alleen bij na het vrijgeven van een kromming</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="188"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="647"/>
         <source>Free curve mode</source>
         <translation>Laat krommings mode los</translation>
     </message>
@@ -14365,233 +15813,281 @@ Wilt u een ander bestand selecteren?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="24"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="676"/>
         <source>General</source>
         <translation>Algemeen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="74"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="635"/>
         <source>min</source>
         <comment>minutes</comment>
         <translation>min</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="116"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="638"/>
         <source>Piece label language:</source>
         <translation>Taal stukklabel:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="198"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="648"/>
         <source>Double click calls Zoom fit best for current pattern piece</source>
         <translation>Dubbelklikken roept &apos;Best passende zoom&apos; op voor huidig patroondeel</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="221"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="654"/>
         <source>Enable to translate formula according to locale</source>
         <translation>Formule vertalen naar locale inschakelen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="224"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="656"/>
         <source>Translate formula</source>
         <translation>Formule vertalen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="660"/>
         <source>Enable Garbage Collector</source>
         <translation>Vuilnisverzamelaar inschakelen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="265"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="663"/>
         <source>Toolbox icon size:</source>
         <translation>Grootte pictogrammen gereedschapskist:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="272"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="664"/>
         <source>Small</source>
         <translation>Klein</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="665"/>
         <source>Normal</source>
         <translation>Normaal</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="321"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="667"/>
         <source>Theme:</source>
         <translation>Thema:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="345"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="668"/>
         <source>Pointer mode:</source>
         <translation>Aanwijzermodus:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="364"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="669"/>
         <source>Use tool groups</source>
         <translation>Gereedschapsgroepen gebruiken</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="408"/>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="456"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="680"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="682"/>
         <source>Shortcuts</source>
         <translation>Sneltoetsen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="451"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="678"/>
         <source>Action</source>
         <translation>Actie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="479"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="681"/>
         <source>Restore defaults</source>
         <translation>Standaardwaarden herstellen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="489"/>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="623"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="703"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="705"/>
         <source>Scrolling</source>
         <translation>Scrollen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="495"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="683"/>
         <source>Animation</source>
         <translation>Animatie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="504"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="684"/>
         <source>Duration:</source>
         <translation>Duur:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="511"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="686"/>
         <source>Scrolling animation duration</source>
         <translation>Duur van het scrollen van een animatie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="514"/>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="540"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="688"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="693"/>
         <source>ms</source>
         <comment>milliseconds</comment>
         <translation>msec</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="530"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="689"/>
         <source>Update interval:</source>
         <translation>Bijwerken interval:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="537"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="691"/>
         <source>Time in milliseconds between each animation update</source>
         <translation>Tijd in milliseconden tussen bijgewerkte animaties</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="559"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="694"/>
         <source>Mouse scale</source>
         <translation>Muisschaal</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="568"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="695"/>
         <source>Sensor:</source>
         <comment>sensor mouse</comment>
         <translation>Sensor:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="575"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="697"/>
         <source>Scale scrolling sensitivity for mouse with sensor</source>
         <translation>Schaal scroll gevoeligheid voor muis met een sensor</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="594"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="699"/>
         <source>Wheel:</source>
         <comment>mouse wheel</comment>
         <translation>Wiel:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="601"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="701"/>
         <source>Scale scrolling sensitivity for mouse with wheel</source>
         <translation>Schaal scroll gevoeligheid voor muis met een wiel</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="632"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="704"/>
         <source>Acceleration:</source>
         <translation>Versnelling:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="672"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="713"/>
         <source>Privacy</source>
         <translation>Privacy</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="678"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="706"/>
         <source>Usage statistic</source>
         <translation>Gebruiksstatistiek</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="684"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="707"/>
         <source>Send usage statistics</source>
         <translation>Gebruiksstatistieken verzenden</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="691"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="708"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
         <translation>Help mee de kwaliteit van Valentina te verbeteren door automatisch gebruiksstatistieken te verzenden. De verzonden gegevens bevatten &lt;span style=&quot; font-weight:700;&quot;&gt;geen mogelijk gevoelige informatie&lt;/span&gt; zoals gebruikersnamen, e-mailadressen, bestandsinhoud of bestandspaden.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="704"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="709"/>
         <source>Crash reports</source>
         <translation>Crashrapporten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="710"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="710"/>
         <source>Send automatic crash reports</source>
         <translation>Automatische crashrapporten verzenden</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="719"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="711"/>
         <source>Email:</source>
         <translation>Emailadres:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="735"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="712"/>
         <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
         <translation>Het melden van crashes helpt ons Valentina betrouwbaarder te maken. Alle informatie wordt vertrouwelijk behandeld en wordt alleen gebruikt om toekomstige versies van dit programma te verbeteren. Activeer het automatisch verzenden van crashrapporten en vul uw e-mailadres in (optioneel). Als u dit invult, kunnen wij contact met u opnemen met aanvullende informatie over de crash.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="313"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="666"/>
         <source>User Interface</source>
         <translation>Gebruikers Interface</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="658"/>
         <source>Enable collecting unused objects when open pattern file.</source>
         <translation>Verzamelen van ongebruikte objecten inschakelen bij openen patroonbestand.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="670"/>
         <source>Don&apos;t use the native file dialog</source>
         <translation>Gebruik systeem bestands dialoog niet</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="381"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="671"/>
         <source>Update</source>
         <translation>Opwaardering</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="387"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="673"/>
         <source>Automatically check for updates each time the application starts</source>
         <translation>Automatisch op updates controleren elke keer dat de toepassing start</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="390"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="675"/>
         <source>Automatically check for updates</source>
         <translation>Automatisch op updates controleren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="208"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="650"/>
         <source>Disable if you want to skip interactive part of creating tools. And go straight to editing formulas instead.</source>
         <translation>Uitschakelen als u het interactieve deel van het aanmaken van gereedschappen wilt overslaan en direct naar het bewerken van formules wilt gaan.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="211"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="652"/>
         <source>Interactive tools</source>
         <translation>Interactieve gereedschappen</translation>
     </message>
@@ -14600,26 +16096,31 @@ Wilt u een ander bestand selecteren?</translation>
     <name>PreferencesPathPage</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="20"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespathpage.h" line="105"/>
         <source>Paths that Valentina uses</source>
         <translation>Pad welke Valentina gebruikt</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="45"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespathpage.h" line="107"/>
         <source>Type</source>
         <translation>Soort</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="50"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespathpage.h" line="109"/>
         <source>Path</source>
         <translation>Pad</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="72"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespathpage.h" line="110"/>
         <source>Default</source>
         <translation>Standaardwaarde</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespathpage.h" line="111"/>
         <source>Edit</source>
         <translation>Verander</translation>
     </message>
@@ -14648,177 +16149,213 @@ Wilt u een ander bestand selecteren?</translation>
     <name>PreferencesPatternPage</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="47"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="477"/>
         <source>Graphical output</source>
         <translation>Grafische voltooiing</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="478"/>
         <source>Use antialiasing</source>
         <translation>Gebruik anti-aliasing</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="178"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="496"/>
         <source>Undo</source>
         <translation>Ongedaan maken</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="187"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="497"/>
         <source>Count steps (0 - no limit):</source>
         <translation>Tel stappen (0 - geen limiet):</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="200"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="498"/>
         <source>Workpiece</source>
         <translation>Werkstuk</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="209"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="502"/>
         <source>Forbid flipping</source>
         <translation>Kantelen niet toegestaan</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="229"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="510"/>
         <source>Show second passmark on seam line</source>
         <translation>Toon tweede pasmarkering op de naadlijn</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="206"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="500"/>
         <source>By default forbid flipping for all new created workpieces</source>
         <translation>Standaard is het kantelen voor alle nieuwe werkstukken uitgeschakeld</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="236"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="512"/>
         <source>By default hide the main path if the seam allowance was enabled</source>
         <translation>Verberg standaard het hoofdpad als de naadtoeslag is ingeschakeld</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="239"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="514"/>
         <source>Hide main path</source>
         <translation>Verberg hoofdpad</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="312"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="518"/>
         <source>Size:</source>
         <translation>Maat:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="515"/>
         <source>Seam allowance</source>
         <translation>Naadtoeslag</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="485"/>
         <source>This setting has no effect since the value is overridden by the command-line option</source>
         <translation>Deze instelling heeft geen effect omdat de waarde wordt overschreven door de opdrachtregeloptie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="226"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="508"/>
         <source>Show a notch both in the seam allowance and on the seam line. If you want to see a notch on a piece without seam allowance, enable built-in seam allowance and set the length of a notch manually.</source>
         <translation>Een inkeping tonen zowel in de naadtoeslag als op de naadlijn. Als u een inkeping op een stuk zonder naadtoeslag wilt zien, schakel ingebouwde naadtoeslag in en stel de lengte van een inkeping handmatig in.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="272"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="516"/>
         <source>Default value:</source>
         <translation>Standaard waarde:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="298"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="517"/>
         <source>Font</source>
         <translation>Lettertype</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="332"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="519"/>
         <source>Outline font:</source>
         <translation>Contourlettertype:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="352"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="520"/>
         <source>Single-line font:</source>
         <translation>Enkellijnlettertype:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="368"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="521"/>
         <source>Allow single stroke outline fonts</source>
         <translation>Enkelstrook contourlettertypen toestaan</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="375"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="523"/>
         <source>When this option is activated, the application will utilize SVG Fonts present in your system to render piece label text, instead of using outline fonts.</source>
         <translation>Wanneer deze optie is geactiveerd, gebruikt de toepassing SVG-lettertypen in uw systeem om stukklabeltekst weer te geven, in plaats van contourlettertypen.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="378"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="525"/>
         <source>Use single-line fonts</source>
         <translation>Enkellijnlettertypen gebruiken</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="388"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="526"/>
         <source>Label data/time format</source>
         <translation>Label datum/tijd indeling</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="397"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="527"/>
         <source>Date:</source>
         <translation>Datum:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="409"/>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="430"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="528"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="530"/>
         <source>Edit formats</source>
         <translation>Verander indelingen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="418"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="529"/>
         <source>Time:</source>
         <translation>Tijd:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="442"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="531"/>
         <source>Materials</source>
         <translation>Materialen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="450"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="532"/>
         <source>Known materials:</source>
         <translation>Bekende materialen:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="463"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="534"/>
         <source>Manage list of known materials</source>
         <translation>Beheren van bekende materialen llijst</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="466"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="536"/>
         <source>Manage</source>
         <translation>Beheren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="488"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="538"/>
         <source>When manage pattern materials save them to known materials list</source>
         <translation>Wanneer beheren van patroon materialen sla deze op bij bekende materialen lijst</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="491"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="540"/>
         <source>Remeber pattern materials</source>
         <translation>Herinner patroon materialen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="98"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="487"/>
         <source>Curve approximation:</source>
         <translation>Krommings benadering:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="489"/>
         <source>Set default curve approximation scale</source>
         <translation>Stel standaard krommingsbenadering schaal in</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="134"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="492"/>
         <source>Bold line width</source>
         <translation>Vette lijnbreedte</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="137"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="494"/>
         <source>Line width:</source>
         <translation>Lijnbreedte:</translation>
     </message>
@@ -14834,6 +16371,7 @@ Wilt u een ander bestand selecteren?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="60"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="480"/>
         <source>Use OpenGL to render a scene.
 This option will take an affect after restart.</source>
         <translation>Gebruik OpenGL om een scene weer te geven.
@@ -14841,6 +16379,7 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="64"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="483"/>
         <source>Use OpenGL render</source>
         <translation>Gebruik OpenGL weergever</translation>
     </message>
@@ -14856,26 +16395,31 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="504"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="541"/>
         <source>Background image</source>
         <translation>Achtergrondafbeelding</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="510"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="542"/>
         <source>Opacity:</source>
         <translation>Doorzichtigheid:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="517"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="544"/>
         <source>Opacity value by default</source>
         <translation>Standaard doorzichtigheidswaarde</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="216"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="504"/>
         <source>By default export to DXF-AAMA sew line on Draw layer for all new created workpieces</source>
         <translation>Standaard exporteren naar DXF-AAMA naadlijn op Teken-laag voor alle nieuw gemaakte werkstukken</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="219"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="506"/>
         <source>Sew line on drawing</source>
         <translation>Naadlijn op tekening</translation>
     </message>
@@ -15736,7 +17280,7 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="667"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2148"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2194"/>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation>Naadtoslag van patroondeel &apos;%1&apos; is niet geldig.</translation>
     </message>
@@ -15924,7 +17468,7 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="558"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2466"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2512"/>
         <source>Piece &apos;%1&apos;. Unable to load default piece label template.
 %2
 %3</source>
@@ -15938,7 +17482,7 @@ Deze optie wordt actief na een herstart..</translation>
         <translation>Stuk &apos;%1&apos;. Draadrichting is niet geldig.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="3171"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="3217"/>
         <source>Piece &apos;%1&apos;. Fold line is not valid.</source>
         <translation>Stuk &apos;%1&apos;. Vouwlijn is niet geldig.</translation>
     </message>
@@ -16563,7 +18107,7 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="109"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1965"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1966"/>
         <source>0 results</source>
         <translation>0 resultaten</translation>
     </message>
@@ -16614,21 +18158,21 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="320"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2721"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2722"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Naam</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="325"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2723"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2724"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Volledige naam</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="330"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2725"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2726"/>
         <source>Group</source>
         <comment>measurement column</comment>
         <translation>Groep</translation>
@@ -16869,7 +18413,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1209"/>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1212"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="846"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="849"/>
         <source>Import from CSV</source>
         <translation>Importeer van CSV</translation>
     </message>
@@ -16889,234 +18433,234 @@ Deze optie wordt actief na een herstart..</translation>
         <translation>Bestand &apos;%1&apos; bestaat niet!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="275"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="278"/>
         <source>File error.</source>
         <translation>Bestandsfout.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="311"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="314"/>
         <source>untitled %1</source>
         <translation>naamloos %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="311"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1124"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="314"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1127"/>
         <source>untitled</source>
         <translation>naamloos</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="319"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="322"/>
         <source>read only</source>
         <translation>alleen lezen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="670"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="723"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="673"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="726"/>
         <source>Known measurements</source>
         <translation>Bekende maten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="670"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="673"/>
         <source>All files</source>
         <translation>Alle bestanden</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="706"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="709"/>
         <source>Could not save the file</source>
         <translation>Het bestand is niet bewaard</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="725"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="728"/>
         <source>known measurements</source>
         <translation>bekende maten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="743"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="746"/>
         <source>Save as</source>
         <translation>Opslaan als</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="763"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="766"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Afsluiten is mislukt. Dit bestand is al geopend in een ander venster.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="779"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="782"/>
         <source>Could not save file</source>
         <translation>Kon bestand niet opslaan</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="805"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="808"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Afsluiten is mislukt. Dit bestand is al geopend in een ander venster. Verwacht een conflict als 2 kopieën van het programma gaan lopen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="843"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="846"/>
         <source>Comma-Separated Values</source>
         <translation>Komma-scheidingsteken waardes</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="626"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="629"/>
         <source>Invalid image. Error: %1</source>
         <translation>Ongeldige afbeelding. Fout: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1047"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1050"/>
         <source>Measurement images</source>
         <translation>Afbeeldingen van maten</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1113"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1150"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1116"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1153"/>
         <source>Unable to save image. Error: %1</source>
         <translation>Kan afbeelding niet opslaan. Fout: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1134"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1137"/>
         <source>Save Image</source>
         <translation>Afbeelding opslaan</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1198"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1201"/>
         <source>Unable to show image. Error: %1</source>
         <translation>Kan afbeelding niet tonen. Fout: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1811"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1812"/>
         <source>About Qt</source>
         <translation>Over Qt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2057"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2058"/>
         <source>Empty</source>
         <translation>Leeg</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2058"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2059"/>
         <source>File was not saved yet.</source>
         <translation>Bestand was nog niet opgeslagen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2109"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2110"/>
         <source>Unsaved changes</source>
         <translation>Niet opgeslagen veranderingen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2110"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2111"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
         <translation>Maten zijn gewijzigd. Wilt u uw wijzigingen opslaan?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2118"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2119"/>
         <source>Save…</source>
         <translation>Opslaan…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2118"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2119"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2123"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2124"/>
         <source>Don&apos;t Save</source>
         <translation>Niet opslaan</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2202"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2203"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Kan instellingen niet inlezen wegens een niet-conform .INI-bestand.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2223"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2224"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Kan instellingen niet opslaan. Toegang geweigerd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2252"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2253"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation>Leeg</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2325"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2326"/>
         <source>Unknown measurement</source>
         <translation>Onbekende maat</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2333"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2334"/>
         <source>&amp;New Window</source>
         <translation>&amp;Nieuw Venster</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2476"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2657"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2477"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2658"/>
         <source>Unnamed image %1</source>
         <translation>Afbeelding zonder naam %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2514"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2515"/>
         <source>Open file</source>
         <translation>Open bestand</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2633"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2634"/>
         <source>Length units</source>
         <translation>Lengde-eenheden</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2634"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2635"/>
         <source>Degrees</source>
         <translation>Graden</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2649"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2650"/>
         <source>None</source>
         <translation>Geen</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2694"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2695"/>
         <source>Measurement name is empty.</source>
         <translation>Maatnaam is leeg.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2699"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2700"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Geïmporteerd bestand mag geen tweemaal dezelfde naam bevatten.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2704"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2705"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation>Maat &apos;%1&apos; voldoet niet aan het regex-patroon.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2709"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2710"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation>Maat &apos;%1&apos; wordt al gebruikt in het bestand.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2727"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2728"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation>Formule</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2729"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2730"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Beschrijving</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2753"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2754"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation>Fout in rij %1. De maatnaam is leeg.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2794"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2795"/>
         <source>Error in row %1. %2</source>
         <translation>Fout in rij %1. %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2807"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2808"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Individuele maten vereisen ten minste 2 kolommen.</translation>
     </message>
@@ -18390,63 +19934,75 @@ Wil je deze veranderingen opslaan?</translation>
     <name>TabFoldLine</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="544"/>
         <source>Form</source>
         <translation>Vorm</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="24"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="562"/>
         <source>Fold line</source>
         <translation>Vouwlijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="545"/>
         <source>Type:</source>
         <translation>Type:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="67"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="547"/>
         <source>Bold</source>
         <comment>Font formating</comment>
         <translation>Vet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="86"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="550"/>
         <source>Italic</source>
         <comment>Font formating</comment>
         <translation>Schuin</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="105"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="553"/>
         <source>Aligns with the left edge</source>
         <translation>Uitgelijnd op de linkerrand</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="556"/>
         <source>Centers horizontally in the available space</source>
         <translation>Horizontaal gecentreerd in de beschikbare ruimte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="149"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="559"/>
         <source>Aligns with the right edge</source>
         <translation>Uitgelijnd op de rechterrand</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="186"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="561"/>
         <source>Label:</source>
         <translation>Label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="605"/>
         <source>Manual shape</source>
         <translation>Handmatige vorm</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="232"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="563"/>
         <source>Height</source>
         <translation>Hoogte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="292"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="564"/>
         <source>Height:</source>
         <comment>notch depth</comment>
         <translation>Hoogte:</translation>
@@ -18455,6 +20011,9 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="315"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="543"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="771"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="566"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="580"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="594"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
@@ -18462,6 +20021,9 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="372"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="600"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="828"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="569"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="583"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="597"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
@@ -18469,6 +20031,9 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="404"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="632"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="860"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="572"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="586"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="600"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
@@ -18476,27 +20041,34 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="429"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="657"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="885"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="575"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="589"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="603"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="577"/>
         <source>Width</source>
         <translation>Breedte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="520"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="578"/>
         <source>Width:</source>
         <comment>notch width</comment>
         <translation>Breedte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="688"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="591"/>
         <source>Center</source>
         <translation>Midden</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="748"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="592"/>
         <source>Center:</source>
         <comment>notch angle</comment>
         <translation>Midden:</translation>
@@ -18506,65 +20078,81 @@ Wil je deze veranderingen opslaan?</translation>
     <name>TabGrainline</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="39"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="361"/>
         <source>Grainline enabled</source>
         <translation>Draadrichting ingeschakeld</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="96"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="362"/>
         <source>Rotation:</source>
         <translation>Draaiing:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="116"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="305"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="364"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="378"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="164"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="353"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="368"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="382"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="190"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="379"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="385"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="215"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="404"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="374"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="388"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;oont volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="376"/>
         <source>Length:</source>
         <translation>Lengte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="434"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="390"/>
         <source>Center pin:</source>
         <translation>Middelste punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="458"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="391"/>
         <source>Top pin:</source>
         <translation>Bovenste pin:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="468"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="392"/>
         <source>Bottom pin:</source>
         <translation>Onderste pin:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="498"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="393"/>
         <source>Arrows:</source>
         <translation>Pijlen:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="513"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="394"/>
         <source>Visible</source>
         <translation>Zichtbaar</translation>
     </message>
@@ -18573,32 +20161,39 @@ Wil je deze veranderingen opslaan?</translation>
     <name>TabLabels</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1152"/>
         <source>Piece label data</source>
         <translation>Gegevens op label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="92"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1141"/>
         <source>Letter:</source>
         <translation>Letter:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1142"/>
         <source>Letter of pattern piece</source>
         <translation>Letter van patroondeel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="129"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1144"/>
         <source>Placement:</source>
         <translation>Positie:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="431"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1275"/>
         <source>Labels</source>
         <translation>Labels</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="528"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1206"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1180"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1230"/>
         <source>Width:</source>
         <translation>Breedte:</translation>
     </message>
@@ -18609,6 +20204,12 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1226"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1415"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1662"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1182"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1196"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1213"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1232"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1246"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1263"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
@@ -18619,6 +20220,12 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1274"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1463"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1710"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1186"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1200"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1236"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1267"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
@@ -18629,6 +20236,12 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1300"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1489"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1736"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1189"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1203"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1220"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1239"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1270"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
@@ -18639,200 +20252,252 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1325"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1514"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1761"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1206"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1242"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1256"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1273"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="717"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1395"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1194"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1244"/>
         <source>Height:</source>
         <translation>Hoogte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="866"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1544"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1208"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1258"/>
         <source>Center pin:</source>
         <translation>Middelste punt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="890"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1568"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1209"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1259"/>
         <source>Top left pin:</source>
         <translation>Pin linksboven:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="900"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1578"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1210"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1260"/>
         <source>Bottom right pin:</source>
         <translation>Pin rechtsonder:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="964"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1642"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1211"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1261"/>
         <source>Angle:</source>
         <translation>Hoek:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1128"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1228"/>
         <source>Pattern label visible</source>
         <translation>Patroonlabel zichtbaar</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="51"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="238"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1135"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1153"/>
         <source>Label template:</source>
         <translation>Sjabloon label:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="61"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="248"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1139"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1157"/>
         <source>Edit template</source>
         <translation>Verander sjabloon</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="83"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="276"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1140"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1158"/>
         <source>Label data</source>
         <translation>Gegevens label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="109"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1143"/>
         <source>Quantity:</source>
         <translation>Kwantiteit:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="136"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1145"/>
         <source>on fold</source>
         <translation>op vouw</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="157"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1147"/>
         <source>Annotation:</source>
         <translation>Aantekening:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="164"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1148"/>
         <source>A text field to add comments in</source>
         <translation>Een tekstveld om opmerkingen in te voegen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="171"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1149"/>
         <source>Orientation:</source>
         <translation>Orientatie:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1150"/>
         <source>Rotation:</source>
         <translation>Draaiing:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="199"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1151"/>
         <source>Tilt:</source>
         <translation>Tillen:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1146"/>
         <source>Fold position:</source>
         <translation>Vouw positie:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="58"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1137"/>
         <source>Edit piece label template</source>
         <translation>Verander label sjabloon van patroondeel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="444"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1176"/>
         <source>Options to control position a detail label. &lt;b&gt;Not available if a detail label template is empty&lt;/b&gt;.</source>
         <translation>Opties om de positie van een detail label te controleren. &lt;b&gt;Niet beschikbaar als een detail label leeg is&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="464"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1142"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1179"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1229"/>
         <source>Font size:</source>
         <translation>Lettergrootte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1125"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1226"/>
         <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
         <translation>Opties om de positie van een patroon label te controleren. &lt;b&gt;Niet beschikbaar als een patroon label sjabloon leeg is.&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="230"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1174"/>
         <source>Pattern label data</source>
         <translation>Patroonetiketgegevens</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1155"/>
         <source>Edit pattern label</source>
         <translation>Verander patroon label</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1159"/>
         <source>Pattern name:</source>
         <translation>Patroon naam:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="299"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1160"/>
         <source>Pattern number:</source>
         <translation>Patroon nummer:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="313"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1161"/>
         <source>Company/Designer name:</source>
         <translation>Bedrijfs/ontwerpers naam:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1162"/>
         <source>Customer name:</source>
         <translation>Klant naam:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="341"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1163"/>
         <source>Date format:</source>
         <translation>Datum indeling:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="351"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1164"/>
         <source>Time format:</source>
         <translation>Tijdsindeling:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="361"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1165"/>
         <source>Customer birth date:</source>
         <translation>Klant geboortedatum:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="368"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1166"/>
         <source>yyyy-MM-dd</source>
         <translation>yyyy-MM-dd</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="375"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1167"/>
         <source>Customer email:</source>
         <translation>Klant e-mail:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="388"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1168"/>
         <source>Materials</source>
         <translation>Materialen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="397"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1169"/>
         <source>Pattern materials:</source>
         <translation>Patroon materialen:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="404"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1171"/>
         <source>Manage list of pattern materials</source>
         <translation>Beheren van patroon materiaallijst</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="407"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1173"/>
         <source>Manage</source>
         <translation>Beheren</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="447"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1178"/>
         <source>Piece label visible</source>
         <translation>Stukklabel zichtbaar</translation>
     </message>
@@ -18841,164 +20506,196 @@ Wil je deze veranderingen opslaan?</translation>
     <name>TabPassmarks</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="40"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="731"/>
         <source>Passmark:</source>
         <translation>Pasmarkering:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="197"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="813"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="751"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="809"/>
         <source>Angle</source>
         <translation>Hoek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="206"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="752"/>
         <source>Straightforward</source>
         <translation>Rechttoe rechtaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="219"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="753"/>
         <source>Bisector</source>
         <translation>Bisector</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="71"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="735"/>
         <source>Marks</source>
         <translation>Markeringen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="232"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="280"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="755"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="767"/>
         <source>Select if need designate the corner point as a passmark</source>
         <translation>Selecteer wanneer nodig de benoemde hoekpunt als een pas markering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="235"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="757"/>
         <source>Intersection</source>
         <translation>Kruispunt van lijnen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="333"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="778"/>
         <source>Clockwise opening</source>
         <translation>Rechtsom opening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="343"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="779"/>
         <source>Not Mirrored</source>
         <translation>Niet gespiegeld</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="351"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="823"/>
         <source>Manual shape</source>
         <translation>Handmatige vorm</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="360"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="781"/>
         <source>Length</source>
         <translation>Lengte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="420"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="782"/>
         <source>Length:</source>
         <comment>notch depth</comment>
         <translation>Lengte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="585"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="795"/>
         <source>Width</source>
         <translation>Breedte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="645"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="796"/>
         <source>Width:</source>
         <comment>notch width</comment>
         <translation>Breedte:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="873"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="810"/>
         <source>Angle:</source>
         <comment>notch angle</comment>
         <translation>Hoek:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1039"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="838"/>
         <source>Control</source>
         <translation>Besturing</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1093"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="824"/>
         <source>Visible</source>
         <translation>Zichtbaar</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1193"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="832"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a notch visible</source>
         <translation>Maak een formule die de zichtbaarheid regelt. Waarden anders dan &quot;0&quot; maken een inkeping zichtbaar</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1268"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="842"/>
         <source>Show the second passmark on seam line</source>
         <translation>Toon de tweede pasmarkering op de naadlijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1265"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="840"/>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
         <translation>Deze optie heeft alleen effect als de optie om een tweede knipje te laten zien op de zoomlijn aangevinkt is in de algemene opties. Deze optie staat het vervolgens toe om het tweede knipje voor dit specifieke knipje, uit te zetten.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="60"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="780"/>
         <source>Type</source>
         <translation>Soort</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="80"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="736"/>
         <source>One line</source>
         <comment>notch type</comment>
         <translation>Een lijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="93"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="737"/>
         <source>Two lines</source>
         <comment>notch type</comment>
         <translation>Twee lijnen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="106"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="738"/>
         <source>Three lines</source>
         <comment>notch type</comment>
         <translation>Drie lijnen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="119"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="739"/>
         <source>T mark</source>
         <comment>notch type</comment>
         <translation>T markering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="135"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="743"/>
         <source>External V mark</source>
         <comment>notch type</comment>
         <translation>Externe V-markering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="151"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="747"/>
         <source>Internal V mark</source>
         <comment>notch type</comment>
         <translation>Interne V-markering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="161"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="748"/>
         <source>U mark</source>
         <comment>notch type</comment>
         <translation>U markering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="171"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="749"/>
         <source>Box mark</source>
         <comment>notch type</comment>
         <translation>Vierkante markering</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="181"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="750"/>
         <source>Check mark</source>
         <comment>notch type</comment>
         <translation>Vinkje</translation>
@@ -19006,42 +20703,52 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="248"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="296"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="759"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="771"/>
         <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
         <translation>Selecteer en wanneer nodig, wijs de hoek punt aan als een pas markering. Toon alleen de linker pas markering.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="251"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="761"/>
         <source>Intersection (only left)</source>
         <translation>Kruispunt ( alleen links)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="264"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="312"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="763"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="775"/>
         <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
         <translation>Selecteer en wanneer nodig, wijs de hoek punt aan als een pas markering. Toon alleen de rechter pas markering.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="267"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="765"/>
         <source>Intersection (only right)</source>
         <translation>Kruispunt ( alleen rechts)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="283"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="769"/>
         <source>Intersection 2</source>
         <translation>Intersectie 2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="299"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="773"/>
         <source>Intersection 2 (only left)</source>
         <translation>Intersectie 2 (enkel links)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="315"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="777"/>
         <source>Intersection 2 (only right)</source>
         <translation>Intersectie 2 (enkel rechts)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="148"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="745"/>
         <source>Acute angle that looks outside of piece</source>
         <translation>Scherpe hoek naar de buitenkant van een patroondeel</translation>
     </message>
@@ -19050,6 +20757,10 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="668"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="896"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1116"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="784"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="798"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="812"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="826"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
@@ -19058,6 +20769,10 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="725"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="953"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1164"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="787"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="801"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="815"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="829"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
@@ -19065,6 +20780,9 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="529"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="757"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="985"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="790"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="804"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="818"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
@@ -19073,16 +20791,22 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="782"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1010"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1221"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="793"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="807"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="821"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="836"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; Toon volledige berekening in berichten box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="47"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="733"/>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
         <translation>Lijst van alle gedefiniëerde markeerpunten. Om een markeerpunt te definiëren ga terug naar de hoofdpad tab, roep de context menu op (rechter muisknop) voor een punt en maak er een markeerpunt.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="132"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="741"/>
         <source>Acute angle that looks inside of piece</source>
         <translation>Scherpe hoek naar de binnenkant van een patroondeel</translation>
     </message>
@@ -19091,112 +20815,135 @@ Wil je deze veranderingen opslaan?</translation>
     <name>TabPaths</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="991"/>
         <source>Main path</source>
         <translation>Hoofdpad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="67"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="943"/>
         <source>All objects in path should follow in clockwise direction.</source>
         <translation>Alle objecten op dit pad moeten in de richting van &apos;met de klok mee&apos; volgen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="501"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1009"/>
         <source>Forbid piece be mirrored in a layout.</source>
         <translation>Het stuk kan niet gespiegeld worden in de opmaak modus.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="504"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1011"/>
         <source>Forbid flipping</source>
         <translation>Kantelen niet toegestaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="381"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="990"/>
         <source>Ready!</source>
         <translation>Klaar!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="952"/>
         <source>Show full piece</source>
         <translation>Volledig stuk tonen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="117"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="954"/>
         <source>Reverse node direction</source>
         <translation>Knooppuntrichting omdraaien</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="136"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="957"/>
         <source>Excluded node</source>
         <translation>Uitgesloten knooppunt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="155"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="960"/>
         <source>Turn point</source>
         <translation>Draaipunt</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="174"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="963"/>
         <source>Check node uniqness</source>
         <translation>Uniekheid knooppunt controleren</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="193"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="966"/>
         <source>Notch</source>
         <translation>Inkeping</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="212"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="969"/>
         <source>Duplicate</source>
         <translation>Duplicaat</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="231"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="972"/>
         <source>Delete node</source>
         <translation>Knooppunt verwijderen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="338"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="986"/>
         <source>Mirror line</source>
         <translation>Spiegellijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="368"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="989"/>
         <source>Show mirror line</source>
         <translation>Spiegellijn tonen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="521"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1017"/>
         <source>When the number of copies is greater than 1 and either &apos;Force Flipping&apos; or &apos;Forbid Flipping&apos; is selected, each even-numbered copy of the piece will be flipped vertically. The &apos;Force Flipping&apos; or &apos;Forbid Flipping&apos; setting will also toggle for each copy, applying the opposite of the initially selected option for each subsequent copy.</source>
         <translation>Wanneer het aantal kopieën groter is dan 1 en &apos;Spiegelen afdwingen&apos; of &apos;Spiegelen verbieden&apos; is geselecteerd, wordt elke even kopie van het stuk verticaal gespiegeld. De instelling &apos;Spiegelen afdwingen&apos; of &apos;Spiegelen verbieden&apos; wisselt ook voor elke kopie, waarbij de tegenovergestelde optie wordt toegepast voor elke volgende kopie.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="524"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1019"/>
         <source>Symmetrical copy</source>
         <translation>Symmetrische kopie</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="531"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1021"/>
         <source>Force piece to always follow grainline direction regardless of layout settings.</source>
         <translation>Stuk dwingen om altijd de draadrichting te volgen, ongeacht indelingsinstellingen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="534"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1023"/>
         <source>Follow grainline</source>
         <translation>Langs de recht-van-draad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="555"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="561"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1025"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1092"/>
         <source>Seam allowance</source>
         <translation>Naadtoeslag</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="602"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1032"/>
         <source>Activates true zero seam allowance width. This also disables intersection checks between the seam line and seam allowance.</source>
         <translation>Activeert ware nul naadtoeslagbreedte. Dit schakelt ook snijpuntcontroles uit tussen de naadlijn en naadtoeslag.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="657"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1035"/>
         <source>Width:</source>
         <translation>Breedte:</translation>
     </message>
@@ -19204,6 +20951,9 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="677"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="916"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1106"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1037"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1057"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1075"/>
         <source>Formula wizard</source>
         <translation>Formule assistent</translation>
     </message>
@@ -19211,6 +20961,9 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="719"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="958"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1148"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1041"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1061"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1079"/>
         <source>Value</source>
         <translation>Waarde</translation>
     </message>
@@ -19218,6 +20971,9 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="745"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="984"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1174"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1044"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1064"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1082"/>
         <source>Calculation</source>
         <translation>Berekening</translation>
     </message>
@@ -19225,197 +20981,241 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="767"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1006"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1196"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1047"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1067"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1085"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Toon volledige berekening in berichten box &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="792"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1049"/>
         <source>Nodes</source>
         <translation>Knooppunten</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="809"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1050"/>
         <source>Node:</source>
         <translation>Knooppunt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="886"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1051"/>
         <source>Before:</source>
         <translation>Vooraf:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="906"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1096"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1053"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1071"/>
         <source>Return to default width</source>
         <translation>Terug naar standaard breedte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="909"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1099"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1055"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1073"/>
         <source>Default</source>
         <translation>Standaard</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1076"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1069"/>
         <source>After:</source>
         <translation>Nadat:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1087"/>
         <source>Angle:</source>
         <translation>Hoek:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="346"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1298"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="987"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1089"/>
         <source>Start point:</source>
         <translation>Startpunt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="356"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="988"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1090"/>
         <source>End point:</source>
         <translation>Eindpunt:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1318"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1091"/>
         <source>Include as:</source>
         <translation>Hoort bij:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1360"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1093"/>
         <source>Internal paths</source>
         <translation>Binnenlijnen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="574"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1027"/>
         <source>The seam allowance is part of main path</source>
         <translation>De naadtoeslag is deel van het hoofdpad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="577"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1029"/>
         <source>Built in</source>
         <translation>Ingebouwd</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="945"/>
         <source>Hide the main path if the seam allowance is enabled</source>
         <translation>Verberg de hoofdpad wanneer naadtoeslag is ingeschakeld</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="947"/>
         <source>Hide main path</source>
         <translation>Verberg hoofdpad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="433"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="998"/>
         <source>Name of detail:</source>
         <translation>Detailnaam:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="416"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="995"/>
         <source>Detail</source>
         <translation>Detail</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="419"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="996"/>
         <source>Name can&apos;t be empty</source>
         <translation>Naam mag niet leeg zijn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="511"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1013"/>
         <source>Force piece to be always flipped in a layout.</source>
         <translation>Verplicht het stuk om altijd gespiegeld te worden in de opmaak.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="514"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1015"/>
         <source>Force flipping</source>
         <translation>Forceer kantelen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="258"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="975"/>
         <source>Move on top</source>
         <translation>Verplaats naar boven</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="275"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="978"/>
         <source>Move up</source>
         <translation>Verplaats naar boven</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="292"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="981"/>
         <source>Move down</source>
         <translation>Verplaats naar beneden</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="309"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="984"/>
         <source>Move on bottom</source>
         <translation>Verplaats naar onderaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="426"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="997"/>
         <source>Priority:</source>
         <translation>Voorrang:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="454"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1001"/>
         <source>Controls priority in layout. 0 - no priority.</source>
         <translation>Controlleert voorrang in opmaak. 0 - geen voorrang.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="587"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1030"/>
         <source>Automatic</source>
         <comment>seam allowance</comment>
         <translation>Automatisch</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="605"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1034"/>
         <source>True zero width</source>
         <translation>Ware nulbreedte</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1264"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1088"/>
         <source>Custom</source>
         <comment>seam allowance</comment>
         <translation>Op maat</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="395"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1024"/>
         <source>Piece</source>
         <translation>Stuk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="403"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="993"/>
         <source>Universally Unique IDentifier of piece. Used to identifier piece while updating manual layout. Left empty to generate new value.</source>
         <translation>Universeel uniek identificatienummer van stuk. Gebruikt om stuk te identificeren bij bijwerken handmatige indeling. Leeg laten om een nieuwe waarde te genereren.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="999"/>
         <source>Gradation label:</source>
         <translation>Graderingsklabel:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="473"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1003"/>
         <source>Insert…</source>
         <translation>Voeg in…</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="92"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="951"/>
         <source>On drawing</source>
         <translation>Op tekening</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="482"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1004"/>
         <source>Short name:</source>
         <translation>Korte naam:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="489"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1006"/>
         <source>Name used to generate a variable</source>
         <translation>Naam gebruikt om een variabele te genereren</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="89"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="949"/>
         <source>Export to DXF-AAMA sew line on Draw layer</source>
         <translation>Exporteren naar DXF-AAMA naadlijn op Teken-laag</translation>
     </message>
@@ -19424,6 +21224,7 @@ Wil je deze veranderingen opslaan?</translation>
     <name>TabPlaceLabels</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabplacelabels.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabplacelabels.h" line="46"/>
         <source>Dialog</source>
         <translation>Dialoog</translation>
     </message>
@@ -20259,24 +22060,24 @@ Wil je deze veranderingen opslaan?</translation>
 <context>
     <name>VAbstractPattern</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1482"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1490"/>
         <source>Can&apos;t find tool in table.</source>
         <translation>Kan gereedschap niet vinden in tabel.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1992"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2000"/>
         <source>Error creating or updating group</source>
         <translation>Fout bij het maken of bijwerken van groep</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2060"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2068"/>
         <source>measurement</source>
         <translation>maten</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2304"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2487"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2545"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2312"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2495"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2553"/>
         <source>New group</source>
         <translation>Nieuwe naam</translation>
     </message>
@@ -20850,37 +22651,37 @@ Wil je deze veranderingen opslaan?</translation>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="271"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="384"/>
         <source>black</source>
         <translation>zwart</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="222"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="335"/>
         <source>green</source>
         <translation>groen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="225"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="338"/>
         <source>blue</source>
         <translation>blauw</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="228"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="341"/>
         <source>dark red</source>
         <translation>donkerrood</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="231"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="344"/>
         <source>dark green</source>
         <translation>donkergroen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="234"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="347"/>
         <source>dark blue</source>
         <translation>donkerblauw</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="237"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="350"/>
         <source>yellow</source>
         <translation>geel</translation>
     </message>
@@ -20893,7 +22694,7 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Wil je dit echt verwijderen?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="240"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="353"/>
         <source>light salmon</source>
         <translation>lichtzalm</translation>
     </message>
@@ -20902,52 +22703,52 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">goudrood</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="243"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="356"/>
         <source>goldenrod</source>
         <translation>goudrood</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="246"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="359"/>
         <source>orange</source>
         <translation>oranje</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="249"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="362"/>
         <source>deep pink</source>
         <translation>diep rose</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="252"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="365"/>
         <source>violet</source>
         <translation>violet</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="255"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="368"/>
         <source>dark violet</source>
         <translation>donker violet</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="258"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="371"/>
         <source>medium sea green</source>
         <translation>midden zeegroen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="261"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="374"/>
         <source>lime</source>
         <translation>citroengeel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="264"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="377"/>
         <source>deep sky blue</source>
         <translation>diep luchtblauw</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="267"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="380"/>
         <source>corn flower blue</source>
         <translation>korenbloem blauw</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="162"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="275"/>
         <source>Edit wrong formula</source>
         <translation>Wijzig verkeerde formule</translation>
     </message>
@@ -20955,52 +22756,52 @@ Wil je deze veranderingen opslaan?</translation>
 <context>
     <name>VApplication</name>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="442"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="436"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Fout bij opsplitsen bestand. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="448"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="442"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Fout slechte ID. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="454"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="448"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Fout kan waarde niet omzetten. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="460"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="454"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Fout lege parameter. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="466"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="460"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Fout verkeerde ID. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="485"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="479"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Er gaat iets verkeerd!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="499"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="493"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Fout bij opsplitsen: %1. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="504"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="498"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Uitgeworpen uitzondering: %1. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="479"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="473"/>
         <source>Invalid notch.</source>
         <translation>Ongeldige inkeping.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="491"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="485"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Formule waarschuwing: %1. Programma wordt gestopt.</translation>
     </message>
@@ -24362,79 +26163,79 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Fout geen unieke ID.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="618"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="646"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="710"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="754"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="642"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="670"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="734"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="778"/>
         <source>Error parsing file.</source>
         <translation>Fout bij opsplitsen bestand.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="625"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="721"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="649"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="745"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Fout kan waarde niet omzetten.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="632"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="732"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="656"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="756"/>
         <source>Error empty parameter.</source>
         <translation>Fout lege parameter.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="639"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="743"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="663"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="767"/>
         <source>Error wrong id.</source>
         <translation>Fout verkeerde ID.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="653"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="765"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="677"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="789"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Fout bij opsplitsen bestand (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="784"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="808"/>
         <source>Error updating scene after parsing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1181"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1198"/>
         <source>Error creating or updating detail</source>
         <translation>Fout bij het maken of bijwerken van detail</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1803"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1820"/>
         <source>Error creating or updating single point</source>
         <translation>Fout bij het maken of bijwerken van een enkele punt</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1848"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1854"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1865"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1871"/>
         <source>Error creating or updating point of end line</source>
         <translation>Fout bij het maken of bijwerken van eindpunt van een lijn</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1898"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1904"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1915"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1921"/>
         <source>Error creating or updating point along line</source>
         <translation>Fout bij het maken of bijwerken van een punt langs een lijn</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1943"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1949"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1960"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1966"/>
         <source>Error creating or updating point of shoulder</source>
         <translation>Fout bij het maken of bijwerken van schouderpunt</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1988"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1994"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2005"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2011"/>
         <source>Error creating or updating point of normal</source>
         <translation>Fout bij het maken of bijwerken van een normaal punt</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2033"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2039"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2050"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2056"/>
         <source>Error creating or updating point of bisector</source>
         <translation>Fout bij het maken of bijwerken van punt van bisector</translation>
     </message>
@@ -24443,288 +26244,288 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Fout bij het maken of bijwerken van het punt van kruising van lijnen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2109"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2115"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2126"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2132"/>
         <source>Error creating or updating point of contact</source>
         <translation>Fout bij het maken of bijwerken van punt van contact</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2145"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2162"/>
         <source>Error creating or updating modeling point</source>
         <translation>Fout bij het maken of bijwerken van vormgevend punt</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2277"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2294"/>
         <source>Error creating or updating height</source>
         <translation>Fout bij het maken of bijwerken van hoogte</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2308"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2325"/>
         <source>Error creating or updating triangle</source>
         <translation>Fout bij het maken of bijwerken van driehoek</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2338"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2355"/>
         <source>Error creating or updating point of intersection</source>
         <translation>Fout bij het maken of bijwerken van het punt van een kruising</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2394"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2400"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2411"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2417"/>
         <source>Error creating or updating cut spline point</source>
         <translation>Fout bij het maken of bijwerken van geknipte vrijevormkrommings punt</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2456"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2462"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2473"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2479"/>
         <source>Error creating or updating cut spline path point</source>
         <translation>Fout bij het maken of bijwerken van geknipte vrijevormkrommings pad punt</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2518"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2524"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2535"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2541"/>
         <source>Error creating or updating cut arc point</source>
         <translation>Fout bij het maken of bijwerken van geknipte boog punt</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2565"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2571"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2582"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2588"/>
         <source>Error creating or updating point of intersection line and axis</source>
         <translation>Fout bij het maken of bijwerken van het kruispunt tussen lijn en aslijn</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2632"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2638"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2649"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2655"/>
         <source>Error creating or updating point of intersection curve and axis</source>
         <translation>Fout bij het maken of bijwerken van het kruispunt tussen kromming en aslijn</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1679"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1696"/>
         <source>Error creating or updating line</source>
         <translation>Fout bij het maken of bijwerken van lijnen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2974"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3037"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2991"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3054"/>
         <source>Error creating or updating simple curve</source>
         <translation>Fout bij het maken of bijwerken van een simpele kromming</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3165"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3244"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3182"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3261"/>
         <source>Error creating or updating curve path</source>
         <translation>Fout bij het maken of bijwerken van een krommingspad</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3303"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3309"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3320"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3326"/>
         <source>Error creating or updating a parallel curve</source>
         <translation>Fout bij aanmaken of bijwerken parallelle curve</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3378"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3384"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3395"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3401"/>
         <source>Error creating or updating a graduated curve</source>
         <translation>Fout bij aanmaken of bijwerken getrapte curve</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3465"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3482"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation>Fout bij het maken of bijwerken van modelleren van simpele kromming</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3490"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3507"/>
         <source>Error creating or updating modeling curve path</source>
         <translation>Fout bij het maken of bijwerken van vormgeven van krommingspad</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3537"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3543"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3766"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3772"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3554"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3560"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3783"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3789"/>
         <source>Error creating or updating simple arc</source>
         <translation>Fout bij het maken of bijwerken van een simpele boog</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3686"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3692"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3703"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3709"/>
         <source>Error creating or updating elliptical arc with length</source>
         <translation>Fout bij aanmaken of bijwerken elliptische boog met lengte</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3719"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3736"/>
         <source>Error creating or updating modeling arc</source>
         <translation>Fout bij het maken of bijwerken van vormgeven van een boog</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4454"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4475"/>
         <source>Error creating or updating union details</source>
         <translation>Fout bij het maken of bijwerken van samengevoegde details</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2695"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2712"/>
         <source>Error creating or updating point of intersection arcs</source>
         <translation>Fout bij het maken of bewerken van de kruising van bogen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2738"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2755"/>
         <source>Error creating or updating point of intersection circles</source>
         <translation>Fout bij het maken of bijwerken van een kruising van cirkels</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2842"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2859"/>
         <source>Error creating or updating point from circle and tangent</source>
         <translation>Fout bij het maken of bijwerken van punt van cirkel en raaklijn</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2873"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2890"/>
         <source>Error creating or updating point from arc and tangent</source>
         <translation>Fout bij het maken of bijwerken van het punt boog en raaklijn</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2924"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2941"/>
         <source>Error creating or updating true darts</source>
         <translation>Fout bij het maken of bijwerken van coupenaden</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="942"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1039"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1108"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="959"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1056"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1125"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
         <translation>Verkeerde etiket naam &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1646"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1663"/>
         <source>Unknown point type &apos;%1&apos;.</source>
         <translation>Onbekende punt type &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4341"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4362"/>
         <source>Unknown spline type &apos;%1&apos;.</source>
         <translation>Onbekend vrijvormkromming type &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4376"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4397"/>
         <source>Unknown arc type &apos;%1&apos;.</source>
         <translation>Onbekende boog type &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4460"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4481"/>
         <source>Unknown tools type &apos;%1&apos;.</source>
         <translation>Onbekende gereedschap type &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="556"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="580"/>
         <source>Error not unique id.</source>
         <translation>Fout geen unieke ID.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2802"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2819"/>
         <source>Error creating or updating point of intersection curves</source>
         <translation>Fout bij het maken of bijwerken van kruispunt van krommingen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3043"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3060"/>
         <source>Error creating or updating simple interactive spline</source>
         <translation>Fout bij het maken of bijwerken van simpele interactieve vrijvormkromming</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3250"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3267"/>
         <source>Error creating or updating interactive spline path</source>
         <translation>Fout bij het maken of bijwerken van interactieve vrijevormkrommings pad</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3097"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3114"/>
         <source>Error creating or updating cubic bezier curve</source>
         <translation>Fout bij het maken of bijwerken van kubusachtige bezier kromming</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3440"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3457"/>
         <source>Error creating or updating cubic bezier path curve</source>
         <translation>Fout bij het maken of bijwerken van kubusachtige bezier pad kromming</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3815"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3821"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3832"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3838"/>
         <source>Error creating or updating operation of rotation</source>
         <translation>Fout bij het maken van of bijwerken van actie van draaiing</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4492"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4513"/>
         <source>Unknown operation type &apos;%1&apos;.</source>
         <translation>Onbekende  bewerkingstype &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3856"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3873"/>
         <source>Error creating or updating operation of flipping by line</source>
         <translation>Fout bij het maken of bijwerken van de bewerking van kantelen via een lijn</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3891"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3908"/>
         <source>Error creating or updating operation of flipping by axis</source>
         <translation>Fout bij het maken of bijwerken van de bewerking van kantelen via een aslijn</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3940"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3946"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3957"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3963"/>
         <source>Error creating or updating operation of moving</source>
         <translation>Fout bij het maken of bijwerken van de bewerking van een verplaatsing</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2070"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2087"/>
         <source>Error creating or updating point of line intersection</source>
         <translation>Fout bij het maken of bijwerken van een kruispunt van een lijn</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3597"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3603"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3614"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3620"/>
         <source>Error creating or updating simple elliptical arc</source>
         <translation>Fout bij het maken of bijwerken van een simpele ellipsvormige boog</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4413"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4434"/>
         <source>Unknown elliptical arc type &apos;%1&apos;.</source>
         <translation>Onbekende ellipsvormige boog type &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3630"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3647"/>
         <source>Error creating or updating modeling elliptical arc</source>
         <translation>Fot bij het maken of bijwerken van vormgeven van een ellipsvormige boog</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1125"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1142"/>
         <source>Detail</source>
         <translation>Detail</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4526"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4547"/>
         <source>Unnamed path</source>
         <translation>Onbenoemd pad</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4519"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4542"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4540"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4563"/>
         <source>Error creating or updating a piece path</source>
         <translation>Fout bij het maken of bijwerken van een pad deel</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2172"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2189"/>
         <source>Error creating or updating pin point</source>
         <translation>Fout bij het maken of bijwerken van een pin punt</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4520"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4541"/>
         <source>Piece path doesn&apos;t contain nodes</source>
         <translation>Patroondeel pad bevat geen knooppunten</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2241"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2247"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2258"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2264"/>
         <source>Error creating or updating place label</source>
         <translation>Fout bij aanmaken of bijwerken plaatslabel</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4695"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4716"/>
         <source>Can&apos;t find increment &apos;%1&apos;</source>
         <translation>Kan toeslag &apos;%1&apos; niet vinden</translation>
     </message>
@@ -24981,6 +26782,7 @@ Compatibiliteitsfout ruw indelingsformaat: actualFileVersion = %1 en fileVersion
     <name>VShortcutDialog</name>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/vshortcutdialog.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_vshortcutdialog.h" line="58"/>
         <source>Dialog</source>
         <translation>Dialoog</translation>
     </message>
@@ -26927,7 +28729,7 @@ Compatibiliteitsfout ruw indelingsformaat: actualFileVersion = %1 en fileVersion
         <translation>De id (%1) is niet uniek.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2836"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2882"/>
         <source>Tool was used after deleting.</source>
         <translation>Gereedschap werd gebruikt na verwijdering.</translation>
     </message>
@@ -28580,72 +30382,86 @@ Compatibiliteitsfout ruw indelingsformaat: actualFileVersion = %1 en fileVersion
     <name>VWidgetBackgroundImages</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="367"/>
         <source>Form</source>
         <translation>Vorm</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="41"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="368"/>
         <source>Transformation</source>
         <translation>Transformatie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="51"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="372"/>
         <source>Translate</source>
         <comment>Translate piece</comment>
         <translation>Verschuiven</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="369"/>
         <source>Horizontal:</source>
         <translation>Horizontaal:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="370"/>
         <source>Vertical:</source>
         <translation>Vertikaal:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="104"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="371"/>
         <source>Relative translation</source>
         <translation>Relatieve verschuiving</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="115"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="376"/>
         <source>Scale</source>
         <translation>Schaal</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="123"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="373"/>
         <source>Width:</source>
         <translation>Breedte:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="146"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="374"/>
         <source>Height:</source>
         <translation>Hoogte:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="168"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="375"/>
         <source>Scale proportionally</source>
         <translation>Proportioneel schalen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="179"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="379"/>
         <source>Rotate</source>
         <translation>Draaien</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="377"/>
         <source>Rotation</source>
         <translation>Rotatie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="378"/>
         <source>Angle:</source>
         <translation>Hoek:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="303"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="380"/>
         <source>Z Value</source>
         <translation>Z-waarde</translation>
     </message>
@@ -28724,31 +30540,37 @@ Compatibiliteitsfout ruw indelingsformaat: actualFileVersion = %1 en fileVersion
     <name>VWidgetDependencies</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="22"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="114"/>
         <source>Filter</source>
         <translation>Filter</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="116"/>
         <source>Go to object automatically on node selection</source>
         <translation>Automatisch naar object gaan bij knooppuntselectie</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="62"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="119"/>
         <source>Move to earliest possible position in history</source>
         <translation>Naar vroegst mogelijke positie in geschiedenis verplaatsen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="122"/>
         <source>Move earlier in history</source>
         <translation>Eerder in geschiedenis verplaatsen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="88"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="125"/>
         <source>Move later in history</source>
         <translation>Later in geschiedenis verplaatsen</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="128"/>
         <source>Move to latest possible position in history</source>
         <translation>Naar laatste mogelijke positie in geschiedenis verplaatsen</translation>
     </message>
@@ -28782,6 +30604,7 @@ Compatibiliteitsfout ruw indelingsformaat: actualFileVersion = %1 en fileVersion
     <name>VWidgetDetails</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdetails.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdetails.h" line="66"/>
         <source>Form</source>
         <translation>Vorm</translation>
     </message>
@@ -28822,6 +30645,7 @@ Compatibiliteitsfout ruw indelingsformaat: actualFileVersion = %1 en fileVersion
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdetails.ui" line="26"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdetails.h" line="70"/>
         <source>Hide not in layout</source>
         <translation>Verberg niet in opmaak</translation>
     </message>
@@ -28878,16 +30702,19 @@ Compatibiliteitsfout ruw indelingsformaat: actualFileVersion = %1 en fileVersion
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetgroups.ui" line="26"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetgroups.h" line="85"/>
         <source>Tags:</source>
         <translation>Etiket:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetgroups.ui" line="33"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetgroups.h" line="87"/>
         <source>Separate each tag with comma.</source>
         <translation>Plaats een komma tussen ieder etiket.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetgroups.ui" line="36"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetgroups.h" line="89"/>
         <source>Filter by tags</source>
         <translation>Filter per etiket</translation>
     </message>
@@ -29228,109 +31055,131 @@ Compatibiliteitsfout ruw indelingsformaat: actualFileVersion = %1 en fileVersion
     <name>WatermarkWindow</name>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="321"/>
         <source>Watermark</source>
         <translation>Watermerk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="54"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="327"/>
         <source>Opacity:</source>
         <translation>Doorzichtigheid:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="88"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="328"/>
         <source>Text</source>
         <translation>Tekst</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="329"/>
         <source>Text:</source>
         <translation>Tekst:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="116"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="331"/>
         <source>watermark text</source>
         <translation>watermerk tekst</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="126"/>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="256"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="332"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="343"/>
         <source>Rotation:</source>
         <translation>Draaiing:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="152"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="333"/>
         <source>Font:</source>
         <translation>Lettertype:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="161"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="334"/>
         <source>The quick brown fox jumps over the lazy dog</source>
         <extracomment>Use native text to test a font options</extracomment>
         <translation>Pa&apos;s wijze lynx bezag vroom het fikse aquaduct</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="171"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="336"/>
         <source>Edit font</source>
         <translation>Lettertype wijzigen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="216"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="339"/>
         <source>Image</source>
         <translation>Afbeelding</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="228"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="340"/>
         <source>Path:</source>
         <translation>Pad:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="341"/>
         <source>path to image</source>
         <translation>Afbeeldingen pad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="342"/>
         <source>Browse…</source>
         <translation>Doorbladeren…</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="276"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="344"/>
         <source>Gray color</source>
         <translation>Grijze kleur</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="313"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="345"/>
         <source>&amp;File</source>
         <translation>&amp;Bestand</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="346"/>
         <source>Operations</source>
         <translation>Operaties</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="347"/>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="507"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="322"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="355"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="323"/>
         <source>Save &amp;As…</source>
         <translation>Opslaan &amp;als…</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="363"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="324"/>
         <source>E&amp;xit</source>
         <translation>E&amp;xit</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="325"/>
         <source>Open</source>
         <translation>Open</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="379"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="326"/>
         <source>New</source>
         <translation>Nieuw</translation>
     </message>
@@ -29465,6 +31314,7 @@ Compatibiliteitsfout ruw indelingsformaat: actualFileVersion = %1 en fileVersion
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="200"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="338"/>
         <source>Color:</source>
         <translation>Kleur:</translation>
     </message>

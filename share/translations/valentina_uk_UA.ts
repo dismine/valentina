@@ -426,21 +426,25 @@
     <name>DialogAboutApp</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="29"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="242"/>
         <source>About Valentina</source>
         <translation>Про Valentina</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="109"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="243"/>
         <source>Valentina version</source>
         <translation>Версія Valentina</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="245"/>
         <source>Special thanks</source>
         <translation>Особлива подяка</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="247"/>
         <source>Credits</source>
         <translation>Подяки</translation>
     </message>
@@ -464,6 +468,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="244"/>
         <source>Build revision:</source>
         <translation>Ревізія:</translation>
     </message>
@@ -474,6 +479,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="301"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="246"/>
         <source>Check For Updates</source>
         <translation>Перевірити наявність оновлень</translation>
     </message>
@@ -544,21 +550,25 @@
     <name>DialogAddBackgroundImage</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaddbackgroundimage.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaddbackgroundimage.h" line="83"/>
         <source>Background image</source>
         <translation>Фонове зображення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaddbackgroundimage.ui" line="26"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaddbackgroundimage.h" line="84"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaddbackgroundimage.ui" line="38"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaddbackgroundimage.h" line="86"/>
         <source>Determine should an image built in or added as path to the file.</source>
         <translation>Визначте, чи має зображення бути вбудованим, або доданим як шлях до файлу.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaddbackgroundimage.ui" line="41"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaddbackgroundimage.h" line="88"/>
         <source>Built in</source>
         <translation>Вбудована</translation>
     </message>
@@ -575,6 +585,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="201"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="340"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
@@ -613,6 +624,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="327"/>
         <source>Point at distance along line</source>
         <translation>Точка вздовж лінії</translation>
     </message>
@@ -627,81 +639,97 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="328"/>
         <source>Length:</source>
         <translation>Довжина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="330"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="150"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="334"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="176"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="337"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="230"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="342"/>
         <source>Point label:</source>
         <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="347"/>
         <source>First point:</source>
         <translation>Перша точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="349"/>
         <source>First point of the line</source>
         <translation>Перша точка лінії</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="287"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="352"/>
         <source>Swap points</source>
         <translation>Поміняти точки місцями</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="318"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="354"/>
         <source>Second point:</source>
         <translation>Друга точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="331"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="356"/>
         <source>Second point of the line</source>
         <translation>Друга точка лінії</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="338"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="358"/>
         <source>Type of line:</source>
         <translation>Тип лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="376"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="362"/>
         <source>Line color:</source>
         <translation>Колір лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="344"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="240"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="346"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="363"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="364"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -710,6 +738,7 @@
     <name>DialogArc</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="435"/>
         <source>Arc</source>
         <translation>Дуга</translation>
     </message>
@@ -725,6 +754,9 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="371"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="550"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="448"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="462"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="476"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
@@ -769,22 +801,23 @@
         <translation type="vanished">Колір</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="483"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="498"/>
         <source>Edit radius</source>
         <translation>Редагувати радіус</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="497"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="512"/>
         <source>Edit first angle</source>
         <translation>Редагувати перший кут</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="511"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="526"/>
         <source>Edit second angle</source>
         <translation>Редагувати другий кут</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="436"/>
         <source>Radius:</source>
         <translation>Радіус:</translation>
     </message>
@@ -792,6 +825,9 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="102"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="281"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="438"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="452"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="466"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
@@ -799,6 +835,9 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="144"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="323"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="502"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="442"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="456"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="470"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
@@ -808,6 +847,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="261"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="450"/>
         <source>First angle:</source>
         <translation>Перший кут:</translation>
     </message>
@@ -815,56 +855,69 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="170"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="349"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="528"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="445"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="459"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="473"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="464"/>
         <source>Second angle:</source>
         <translation>Другий кут:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="585"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="478"/>
         <source>Center point:</source>
         <translation>Точка центру:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="592"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="480"/>
         <source>Select center point of the arc</source>
         <translation>Виберіть центральну точку дуги</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="628"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="483"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="599"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="482"/>
         <source>Pen style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="635"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="484"/>
         <source>Approximation scale:</source>
         <translation>Масштаб наближення:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="642"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="486"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Встановити масштаб наближення для цієї кривої, 0 - використовувати глобальне значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="489"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="658"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="488"/>
         <source>Alias:</source>
         <translation>Псевдонім:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="695"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="490"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -887,6 +940,9 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="189"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="368"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="547"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="454"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="468"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
@@ -919,17 +975,17 @@
         <translation type="vanished">Колір</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="427"/>
         <source>Edit radius</source>
         <translation>Редагувати радіус</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="426"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="441"/>
         <source>Edit the first angle</source>
         <translation>Редагувати перший кут</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="455"/>
         <source>Edit the arc length</source>
         <translation>Редагувати довжину дуги</translation>
     </message>
@@ -947,6 +1003,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="428"/>
         <source>Radius:</source>
         <translation>Радіус:</translation>
     </message>
@@ -954,6 +1011,9 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="99"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="278"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="457"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="430"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="444"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="458"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
@@ -961,6 +1021,9 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="141"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="320"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="499"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="434"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="448"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="462"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
@@ -968,61 +1031,75 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="167"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="346"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="525"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="437"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="451"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="465"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="258"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="442"/>
         <source>First angle:</source>
         <translation>Перший кут:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="437"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="456"/>
         <source>Length:</source>
         <translation>Довжина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="582"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="470"/>
         <source>Center point:</source>
         <translation>Точка центру:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="592"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="471"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="599"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="472"/>
         <source>Pen style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="628"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="473"/>
         <source>Approximation scale:</source>
         <translation>Масштаб апроксимації:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="635"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="475"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Встановити масштаб наближення для цієї кривої, 0 - використовувати глобальне значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="478"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="427"/>
         <source>Arc with length</source>
         <translation>Дуга за заданою довжиною</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="651"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="477"/>
         <source>Alias:</source>
         <translation>Псевдонім:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="688"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="479"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -1031,41 +1108,49 @@
     <name>DialogAskCollectStatistic</name>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="131"/>
         <source>Privacy</source>
         <translation>Приватність</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="24"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="132"/>
         <source>Usage statistic</source>
         <translation>Статистика про користування</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="30"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="133"/>
         <source>Send usage statistics</source>
         <translation>Надсилати статистику про користування</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="40"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="134"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
         <translation>Будь ласка, допоможіть поліпшити якість роботи Valentina, автоматично надсилаючи статистику користування. Надіслані дані не містять &lt;span style=&quot; font-weight:700;&quot;&gt;жодної потенційно конфіденційної інформації&lt;/span&gt;, такої як імена користувачів, адреси електронної пошти, вміст файлів або шляхи до них.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="135"/>
         <source>Crash reports</source>
         <translation>Звіти про збої</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="136"/>
         <source>Send automatic crash reports</source>
         <translation>Надсилати автозвіти про збої</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="71"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="137"/>
         <source>Email:</source>
         <translation>Email:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogaskcollectstatistic.ui" line="87"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogaskcollectstatistic.h" line="138"/>
         <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
         <translation>Повідомлення про збої допоможуть нам зробити Валентину більш надійною. Вся інформація обробляється як конфіденційна і використовується тільки для поліпшення майбутніх версій цієї програми. Будь ласка, активуйте автоматичну відправку звітів про аварії і введіть свою адресу електронної пошти (необов&apos;язково). Якщо вона буде вказана, ми можемо зв&apos;язатися з вами для отримання додаткової інформації про збій.</translation>
     </message>
@@ -1082,6 +1167,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="315"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
@@ -1133,6 +1219,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="302"/>
         <source>Point along bisector</source>
         <translation>Точка бісектриси кута</translation>
     </message>
@@ -1147,71 +1234,85 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="303"/>
         <source>Length:</source>
         <translation>Довжина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="305"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="309"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="312"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="317"/>
         <source>Point label:</source>
         <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="319"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="321"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="322"/>
         <source>First point:</source>
         <translation>Перша точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="323"/>
         <source>Second point:</source>
         <translation>Друга точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="282"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="324"/>
         <source>Third point:</source>
         <translation>Третя точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="292"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="325"/>
         <source>Type of line:</source>
         <translation>Тип лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="321"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="326"/>
         <source>Line color:</source>
         <translation>Колір лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="327"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="351"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="328"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -1221,46 +1322,56 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="24"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="142"/>
         <source>Rename…</source>
         <translation>Перейменувати…</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="144"/>
         <source>Base name</source>
         <translation>Базова назва</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="48"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="146"/>
         <source>New name</source>
         <translation>Нова назва</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="58"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="147"/>
         <source>Text:</source>
         <translation>Текст:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="65"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="149"/>
         <source>Use %n, %0n, %00n, %000n for counting</source>
         <translation>Використовуйте %n, %0n, %00n, %000n для відліку</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="151"/>
         <source>Position:</source>
         <translation>Позиція:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="84"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="152"/>
         <source>Append</source>
         <translation>З кінця</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="97"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="153"/>
         <source>Prepend</source>
         <translation>З початку</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="107"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="154"/>
         <source>Replace</source>
         <translation>Замінити</translation>
     </message>
@@ -1274,16 +1385,19 @@
     <name>DialogCredits</name>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogcredits.h" line="95"/>
         <source>Credits</source>
         <translation>Подяки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogcredits.h" line="96"/>
         <source>Sponsors</source>
         <translation>Спонсори</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogcredits.h" line="98"/>
         <source>Authors</source>
         <translation>Автори</translation>
     </message>
@@ -1296,6 +1410,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="106"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="204"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
@@ -1305,21 +1420,25 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="37"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="199"/>
         <source>First point:</source>
         <translation>Перша точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="47"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="200"/>
         <source>Second point:</source>
         <translation>Друга точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="57"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="201"/>
         <source>Third point:</source>
         <translation>Третя точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="67"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="202"/>
         <source>Fourth point:</source>
         <translation>Четверта точка:</translation>
     </message>
@@ -1344,36 +1463,43 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="198"/>
         <source>Tool cubic bezier</source>
         <translation>Інструмент кубічна крива Безьє</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="77"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="203"/>
         <source>Pen Style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="120"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="205"/>
         <source>Approximation Scale:</source>
         <translation>Масштаб наближення:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="207"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Встановити масштаб наближення для цієї кривої, 0 - використовувати глобальне значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="210"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="209"/>
         <source>Alias:</source>
         <translation>Псевдонім:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="211"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -1386,16 +1512,19 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="93"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="332"/>
         <source>Point:</source>
         <translation>Точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="122"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="334"/>
         <source>List of points</source>
         <translation>Список точок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="252"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="349"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
@@ -1409,61 +1538,73 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="330"/>
         <source>Tool cubic bezier path</source>
         <translation>Інструмент складна кубічна крива Безьє</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="36"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="331"/>
         <source>New point:</source>
         <translation>Нова точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="134"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="337"/>
         <source>Move on top</source>
         <translation>Перемістити вгору</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="151"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="340"/>
         <source>Move up</source>
         <translation>Перемістити вище</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="168"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="343"/>
         <source>Move down</source>
         <translation>Перемістити нижче</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="346"/>
         <source>Move on bottom</source>
         <translation>Перемістити вниз</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="348"/>
         <source>Pen style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="350"/>
         <source>Approximation scale:</source>
         <translation>Масштаб апроксимації:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="273"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="352"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Встановити масштаб наближення для цієї кривої, 0 - використовувати глобальне значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="355"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="289"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="354"/>
         <source>Alias:</source>
         <translation>Псевдонім:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="319"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="356"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -1480,6 +1621,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="348"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
@@ -1504,12 +1646,13 @@
         <translation type="vanished">Показати лінію від першої точки до цієї</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="290"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="295"/>
         <source>Select axis point</source>
         <translation>Виберіть точку осі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="335"/>
         <source>Point intersect curve and axis</source>
         <translation>Точка перетину кривої й осі</translation>
     </message>
@@ -1522,102 +1665,121 @@
         <translation type="vanished">Колір лінії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="346"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="351"/>
         <source>Edit angle</source>
         <translation>Редагувати кут</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="336"/>
         <source>Angle:</source>
         <translation>Кут:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="338"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="342"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="173"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="345"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="350"/>
         <source>Axis point:</source>
         <translation>Точка осі:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="354"/>
         <source>Curve:</source>
         <translation>Крива:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="263"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="355"/>
         <source>Point label:</source>
         <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="276"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="357"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="279"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="359"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="286"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="360"/>
         <source>Type of line:</source>
         <translation>Тип лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="315"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="361"/>
         <source>Line color:</source>
         <translation>Колір лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="357"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="364"/>
         <source>Name1:</source>
         <translation>Ім&apos;я1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="364"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="365"/>
         <source>Choose unique name for left sub curve</source>
         <translation>Виберіть унікальне ім&apos;я для лівої підкривої</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="366"/>
         <source>Name2:</source>
         <translation>Ім&apos;я2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="378"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="367"/>
         <source>Choose unique name for right sub curve</source>
         <translation>Виберіть унікальне ім&apos;я для правої підкривої</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="368"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="401"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="369"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="322"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="362"/>
         <source>Alias1:</source>
         <translation>Псевдонім 1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="336"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="363"/>
         <source>Alias2:</source>
         <translation>Псевдонім 2:</translation>
     </message>
@@ -1634,6 +1796,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="300"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
@@ -1647,6 +1810,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="287"/>
         <source>Segment an arc</source>
         <translation>Сегмент дуги</translation>
     </message>
@@ -1665,41 +1829,49 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="288"/>
         <source>Length:</source>
         <translation>Довжина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="290"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="294"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="297"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="302"/>
         <source>Arc:</source>
         <translation>Дуга:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="303"/>
         <source>Point label:</source>
         <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="305"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="307"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
@@ -1709,41 +1881,49 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="314"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="308"/>
         <source>Alias1:</source>
         <translation>Псевдонім 1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="274"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="309"/>
         <source>Alias2:</source>
         <translation>Псевдонім 2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="288"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="310"/>
         <source>Name1:</source>
         <translation>Ім&apos;я1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="295"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="311"/>
         <source>Name2:</source>
         <translation>Ім&apos;я2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="302"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="312"/>
         <source>Choose unique name for left sub curve</source>
         <translation>Виберіть унікальне ім&apos;я для лівої підкривої</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="309"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="313"/>
         <source>Choose unique name for right sub curve</source>
         <translation>Виберіть унікальне ім&apos;я для правої підкривої</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="332"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="315"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -1760,6 +1940,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="295"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
@@ -1777,6 +1958,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="282"/>
         <source>Segmenting a simple curve</source>
         <translation>Сегментація простої кривої</translation>
     </message>
@@ -1785,42 +1967,49 @@
         <translation type="vanished">Колір</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.cpp" line="406"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.cpp" line="411"/>
         <source>Edit length</source>
         <translation>Редагувати довжину</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="283"/>
         <source>Length:</source>
         <translation>Довжина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="285"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="289"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="292"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="297"/>
         <source>Curve:</source>
         <translation>Крива:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="298"/>
         <source>Point label:</source>
         <translation>Мітка точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="300"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
@@ -1834,46 +2023,55 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="309"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="302"/>
         <source>Choose unique label</source>
         <translation>Виберіть унікальну мітку</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="303"/>
         <source>Alias1:</source>
         <translation>Псевдонім 1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="270"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="304"/>
         <source>Alias2:</source>
         <translation>Псевдонім 2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="280"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="305"/>
         <source>Name1:</source>
         <translation>Ім&apos;я1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="287"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="306"/>
         <source>Name2:</source>
         <translation>Ім&apos;я2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="294"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="307"/>
         <source>Choose unique name for left sub curve</source>
         <translation>Виберіть унікальне ім&apos;я для лівої підкривої</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="301"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="308"/>
         <source>Choose unique name for right sub curve</source>
         <translation>Виберіть унікальне ім&apos;я для правої підкривої</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="324"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="310"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -1890,6 +2088,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="297"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
@@ -1907,6 +2106,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="284"/>
         <source>Segment a curved path</source>
         <translation>Сегментація складної кривої</translation>
     </message>
@@ -1915,47 +2115,55 @@
         <translation type="vanished">Колір</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.cpp" line="404"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.cpp" line="409"/>
         <source>Edit length</source>
         <translation>Редагувати довжину</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="285"/>
         <source>Length:</source>
         <translation>Довжина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="287"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="291"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="294"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="299"/>
         <source>Curve:</source>
         <translation>Крива:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="300"/>
         <source>Point label:</source>
         <translation>Мітка точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="302"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="304"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
@@ -1965,41 +2173,49 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="311"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="305"/>
         <source>Name1:</source>
         <translation>Ім&apos;я1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="267"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="306"/>
         <source>Choose unique name for left sub curve</source>
         <translation>Виберіть унікальне ім&apos;я для лівої підкривої</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="274"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="307"/>
         <source>Name2:</source>
         <translation>Ім&apos;я2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="281"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="308"/>
         <source>Alias1:</source>
         <translation>Псевдонім 1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="295"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="309"/>
         <source>Alias2:</source>
         <translation>Псевдонім 2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="309"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="310"/>
         <source>Choose unique name for right sub curve</source>
         <translation>Виберіть унікальне ім&apos;я для правої підкривої</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="332"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="312"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -2008,16 +2224,19 @@
     <name>DialogDateTimeFormats</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogdatetimeformats.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogdatetimeformats.h" line="105"/>
         <source>Label date time editor</source>
         <translation>Редактор мітки дати та часу</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogdatetimeformats.ui" line="29"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogdatetimeformats.h" line="106"/>
         <source>Format:</source>
         <translation>Формат:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogdatetimeformats.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogdatetimeformats.h" line="110"/>
         <source>Insert a format</source>
         <translation>Вставте формат</translation>
     </message>
@@ -2347,6 +2566,7 @@
     <name>DialogDuplicateDetail</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogduplicatedetail.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogduplicatedetail.h" line="64"/>
         <source>Dialog duplicate detail</source>
         <translation>Діалог дублікат деталі</translation>
     </message>
@@ -2360,78 +2580,93 @@
     <name>DialogEditLabel</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="370"/>
         <source>Edit label template</source>
         <translation>Редагувати шаблон мітки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="35"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="372"/>
         <source>Clear current and begin new label</source>
         <translation>Очистити поточну та почати нову мітку</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="67"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="375"/>
         <source>Import from label template</source>
         <translation>Імпортувати з шаблону мітки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="89"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="378"/>
         <source>Export label as template</source>
         <translation>Експортувати мітку як шаблон</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="416"/>
         <source>Edit</source>
         <translation>Редагувати</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="228"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="393"/>
         <source>Bold</source>
         <comment>Font formating</comment>
         <translation>Жирний</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="396"/>
         <source>Italic</source>
         <comment>Font formating</comment>
         <translation>Курсив</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="399"/>
         <source>Aligns with the left edge</source>
         <translation>Вирівнювання за лівим краєм</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="402"/>
         <source>Centers horizontally in the available space</source>
         <translation>Центрує горизонтально у доступному просторі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="304"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="405"/>
         <source>Aligns with the right edge</source>
         <translation>Вирівнювання по правому краю</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="329"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="408"/>
         <source>Additional font size. Use to make a line bigger.</source>
         <translation>Додатковий розмір шрифту. Використовуйте, щоб зробити лінію більшою.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="384"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="410"/>
         <source>Text:</source>
         <translation>Текст:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="396"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="411"/>
         <source>Line of text</source>
         <translation>Рядок тексту</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="409"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="413"/>
         <source>Insert placeholders</source>
         <translation>Вставте заповнювачі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="424"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="417"/>
         <source>Preview</source>
         <translation>Попередній перегляд</translation>
     </message>
@@ -2605,26 +2840,31 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="415"/>
         <source>Insert…</source>
         <translation>Вставити…</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="138"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="381"/>
         <source>Move on top</source>
         <translation>Перемістити на вершину</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="155"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="384"/>
         <source>Move up</source>
         <translation>Перемістити вгору</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="172"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="387"/>
         <source>Move down</source>
         <translation>Перемістити вниз</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.ui" line="189"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditlabel.h" line="390"/>
         <source>Move on bottom</source>
         <translation>Перемістити до низу</translation>
     </message>
@@ -2836,6 +3076,7 @@
     <name>DialogEditWrongFormula</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="332"/>
         <source>Edit formula</source>
         <translation>Редагувати формулу</translation>
     </message>
@@ -2845,6 +3086,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="95"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="335"/>
         <source>Insert variable into formula</source>
         <translation>Вставити змінну у формулу</translation>
     </message>
@@ -2858,6 +3100,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="191"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="344"/>
         <source>Input data</source>
         <translation>Вхідні дані</translation>
     </message>
@@ -2867,16 +3110,19 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="204"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="345"/>
         <source>Measurements</source>
         <translation>Мірки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="220"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="346"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="348"/>
         <source>Length of lines</source>
         <translation>Довжина ліній</translation>
     </message>
@@ -2886,16 +3132,19 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="259"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="349"/>
         <source>Length of curves</source>
         <translation>Довжина кривих</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="275"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="350"/>
         <source>Angle of lines</source>
         <translation>Кут ліній</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="348"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="357"/>
         <source>Hide empty measurements</source>
         <translation>Сховати порожні мірки</translation>
     </message>
@@ -2932,6 +3181,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="288"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="351"/>
         <source>Radius of arcs</source>
         <translation>Радіус дуг</translation>
     </message>
@@ -2941,6 +3191,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="301"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="352"/>
         <source>Angles of curves</source>
         <translation>Кути кривих</translation>
     </message>
@@ -2960,51 +3211,61 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="333"/>
         <source>Formula:</source>
         <translation>Формула:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="137"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="339"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="168"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="342"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="359"/>
         <source>Name</source>
         <translation>Ім&apos;я</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="376"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="361"/>
         <source>Full name</source>
         <translation>Повне ім&apos;я</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="328"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="355"/>
         <source>Functions</source>
         <translation>Функції</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="353"/>
         <source>Lengths to control points</source>
         <translation>Довжини до контрольних точок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="341"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="356"/>
         <source>Filter list by keyword</source>
         <translation>Фільтрувати список за ключовим словом</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="347"/>
         <source>Preview calculations</source>
         <translation>Попередні розрахунки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="315"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="354"/>
         <source>Pieces areas</source>
         <translation>Площі деталей</translation>
     </message>
@@ -3023,6 +3284,7 @@
     <name>DialogEllipticalArc</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="586"/>
         <source>Radius1:</source>
         <translation>Радіус1:</translation>
     </message>
@@ -3032,6 +3294,11 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="469"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="654"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="839"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="588"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="602"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="616"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="630"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="644"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
@@ -3041,12 +3308,19 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="511"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="696"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="881"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="592"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="606"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="620"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="634"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="648"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="173"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="358"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="595"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="609"/>
         <source>Calulation</source>
         <translation>Розрахунок</translation>
     </message>
@@ -3056,16 +3330,23 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="565"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="750"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="935"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="598"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="612"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="626"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="640"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="654"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="264"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="600"/>
         <source>Radius2:</source>
         <translation>Радіус2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="449"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="614"/>
         <source>First angle:</source>
         <translation>Перший кут:</translation>
     </message>
@@ -3073,91 +3354,106 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="543"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="728"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="913"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="623"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="637"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="651"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="634"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="628"/>
         <source>Second angle:</source>
         <translation>Другий кут:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="819"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="642"/>
         <source>Rotation angle:</source>
         <translation>Кут обертання:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="970"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="656"/>
         <source>Center point:</source>
         <translation>Точка центру:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="977"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="658"/>
         <source>Select center point of the arc</source>
         <translation>Виберіть центральну точку дуги</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="984"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="660"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="477"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="502"/>
         <source>Edit radius1</source>
         <translation>Редагувати радіус1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="491"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="516"/>
         <source>Edit radius2</source>
         <translation>Редагувати радіус2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="505"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="530"/>
         <source>Edit first angle</source>
         <translation>Редагувати перший кут</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="519"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="544"/>
         <source>Edit second angle</source>
         <translation>Редагувати другий кут</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="533"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.cpp" line="558"/>
         <source>Edit rotation angle</source>
         <translation>Редагувати кут обертання</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="585"/>
         <source>Elliptical arc</source>
         <translation>Еліптична дуга</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="991"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="661"/>
         <source>Pen style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="667"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1020"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="662"/>
         <source>Alias:</source>
         <translation>Псевдонім:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1076"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="668"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1030"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="663"/>
         <source>Approximation scale:</source>
         <translation>Масштаб наближення:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1037"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="665"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Встановити масштаб наближення для цієї кривої, 0 - використовувати глобальне значення</translation>
     </message>
@@ -3166,16 +3462,19 @@
     <name>DialogEllipticalArcWithLength</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="586"/>
         <source>Elliptical arc with length</source>
         <translation>Еліптична дуга за довжиною</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="665"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="587"/>
         <source>Radius1:</source>
         <translation>Радіус1:</translation>
     </message>
@@ -3185,6 +3484,11 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="469"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="648"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="827"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="589"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="603"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="617"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="631"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="645"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
@@ -3194,6 +3498,11 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="511"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="690"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="869"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="607"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="621"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="635"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="649"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
@@ -3203,16 +3512,23 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="559"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="738"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="923"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="599"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="613"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="627"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="641"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="655"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показати повне обчислення у вікні повідомлення&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="264"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="601"/>
         <source>Radius2:</source>
         <translation>Радіус2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="449"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="615"/>
         <source>First angle:</source>
         <translation>Перший кут:</translation>
     </message>
@@ -3222,76 +3538,90 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="537"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="716"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="901"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="596"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="610"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="624"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="638"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="652"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="628"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="629"/>
         <source>Length:</source>
         <translation>Довжина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="807"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="643"/>
         <source>Rotation angle:</source>
         <translation>Кут обертання:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="958"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="657"/>
         <source>Center point:</source>
         <translation>Точка центру:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="968"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="658"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="975"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="659"/>
         <source>Pen style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1004"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="660"/>
         <source>Approximation scale:</source>
         <translation>Масштаб апроксимації:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1011"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="662"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Встановити масштаб наближення для цієї кривої, 0 - використовувати глобальне значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1027"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="664"/>
         <source>Alias:</source>
         <translation>Псевдонім:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1064"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="666"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="563"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="588"/>
         <source>Edit radius1</source>
         <translation>Редагувати радіус1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="577"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="602"/>
         <source>Edit radius2</source>
         <translation>Редагувати радіус2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="591"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="616"/>
         <source>Edit the first angle</source>
         <translation>Редагувати перший кут</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="605"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="630"/>
         <source>Edit the elliptical arc length</source>
         <translation>Редагувати довжину еліптичної дуги</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="619"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="644"/>
         <source>Edit rotation angle</source>
         <translation>Редагувати кут обертання</translation>
     </message>
@@ -3309,6 +3639,8 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="216"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="410"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="375"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="389"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
@@ -3342,6 +3674,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="20"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="362"/>
         <source>Point at distance and angle</source>
         <translation>Точка на кінці лінії</translation>
     </message>
@@ -3361,69 +3694,85 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="88"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="363"/>
         <source>Length:</source>
         <translation>Довжина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="117"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="311"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="365"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="379"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="165"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="369"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="383"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="197"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="391"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="372"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="386"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="377"/>
         <source>Angle:</source>
         <translation>Кут:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="445"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="391"/>
         <source>Base point:</source>
         <translation>Базова точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="461"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="392"/>
         <source>Point label:</source>
         <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="468"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="394"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="471"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="396"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="484"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="397"/>
         <source>Type of line:</source>
         <translation>Тип лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="519"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="398"/>
         <source>Line color:</source>
         <translation>Колір лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="37"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="399"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="549"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="400"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -3440,51 +3789,61 @@
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="36"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="198"/>
         <source>With header</source>
         <translation>Із заголовком</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="51"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="199"/>
         <source>Codec:</source>
         <translation>Кодек:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="92"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="200"/>
         <source>Separator</source>
         <translation>Розділювач</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="116"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="201"/>
         <source>Tab</source>
         <translation>Табуляція</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="148"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="203"/>
         <source>Comma</source>
         <translation>Кома</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="132"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="202"/>
         <source>Semicolon</source>
         <translation>Крапка з комою</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="167"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="204"/>
         <source>Space</source>
         <translation>Пробіл</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="196"/>
         <source>Options</source>
         <translation>Параметри</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="180"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="205"/>
         <source>Preview</source>
         <translation>Попередній перегляд</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="30"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="197"/>
         <source>Global</source>
         <comment>Options</comment>
         <translation>Глобальні</translation>
@@ -3494,77 +3853,93 @@
     <name>DialogFinalMeasurements</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="441"/>
         <source>Final measurements</source>
         <translation>Фінальні вимірювання</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="51"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="448"/>
         <source>Search</source>
         <translation>Пошук</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="319"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="478"/>
         <source>Name</source>
         <translation>Ім&apos;я</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="324"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="480"/>
         <source>The calculated value</source>
         <translation>Розраховане значення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="329"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="482"/>
         <source>Formula</source>
         <translation>Формула</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="341"/>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="344"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="484"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="486"/>
         <source>Details</source>
         <translation>Деталі</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="402"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="487"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="416"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="488"/>
         <source>Calculated value:</source>
         <translation>Розраховане значення:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="430"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="489"/>
         <source>Formula:</source>
         <translation>Формула:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="454"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="491"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="482"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="494"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="517"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="497"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="539"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="499"/>
         <source>Description:</source>
         <translation>Опис:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="570"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="501"/>
         <source>Move measurement up</source>
         <translation>Перемістити мірку вгору</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="587"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="504"/>
         <source>Move measurement down</source>
         <translation>Перемістити мірку вниз</translation>
     </message>
@@ -3622,62 +3997,74 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="443"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Історія пошуку &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="41"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="446"/>
         <source>Alt+Down</source>
         <translation>Alt+Down</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="68"/>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.cpp" line="807"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="449"/>
         <source>0 results</source>
         <translation>0 результатів</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="95"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="451"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Враховувати регістр &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="126"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="454"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Збіг за словами &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="160"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="457"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Збіг за регулярним виразом &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="191"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="460"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Використовувати властивості Unicode &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;Значення класів символів \w, \d тощо, а також значення їх аналогів (\W, \D тощо) змінено з відповідності лише символам ASCII на відповідність будь-якому символу з властивістю Unicode. Наприклад, \d відповідатиме будь-якому символу з властивістю Unicode Nd (десяткова цифра); \w буде відповідати будь-якому символу з властивістю Unicode L (буква) або N (цифра) плюс знак підкреслення тощо. Ця опція відповідає модифікатору /u у регулярних виразах Perl.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="197"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="463"/>
         <source>Alt+U</source>
         <translation>Alt+U</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="466"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Знайти попередню &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="226"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="469"/>
         <source>Shift+F3</source>
         <translation>Shift+F3</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="236"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="472"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Знайти наступну %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="475"/>
         <source>F3</source>
         <translation>F3</translation>
     </message>
@@ -3690,6 +4077,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="197"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="330"/>
         <source>Origin point:</source>
         <translation>Початкова точка:</translation>
     </message>
@@ -3699,99 +4087,115 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="207"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="331"/>
         <source>Axis type:</source>
         <translation>Тип вісі:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="224"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="234"/>
         <source>Select origin point</source>
         <translation>Виберіть початкову точку</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="271"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="281"/>
         <source>Select origin point that is not part of the list of objects</source>
         <translation>Виберіть початкову точку, що не є частиною списку об&apos;єктів</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="358"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="374"/>
         <source>Vertical axis</source>
         <translation>Вертикальна вісь</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="375"/>
         <source>Horizontal axis</source>
         <translation>Горизонтальна вісь</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="241"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="325"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="337"/>
         <source>Flipping by axis</source>
         <translation>Відзеркалити по вісі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="222"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="335"/>
         <source>Visibility Group</source>
         <translation>Група видимості</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="125"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="336"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="251"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="338"/>
         <source>Tags:</source>
         <translation>Теги:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="258"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="340"/>
         <source>Separate each tag with comma.</source>
         <translation>Розділіть кожен тег комою.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="261"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="342"/>
         <source>Add tags</source>
         <translation>Додайте теги</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="344"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="326"/>
         <source>New:</source>
         <translation>Нова:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="142"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="328"/>
         <source>Pen style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="177"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="329"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="369"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="343"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="385"/>
         <source>Ready</source>
         <translation>Готово</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="295"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="345"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="341"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="357"/>
         <source>Invalid point</source>
         <translation>Неправильна точка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="219"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="333"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation>Увімкніть для створення групи видимості з вихідних об&apos;єктів</translation>
     </message>
@@ -3804,6 +4208,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="197"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="330"/>
         <source>First line point:</source>
         <translation>Перша точка лінії:</translation>
     </message>
@@ -3813,109 +4218,125 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="207"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="331"/>
         <source>Second line point:</source>
         <translation>Друга точка лінії:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="218"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="228"/>
         <source>Select first line point</source>
         <translation>Виберіть першу точку лінії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="273"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="283"/>
         <source>Select first line point that is not part of the list of objects</source>
         <translation>Виберіть першу точку лінії, що не є частиною списку об&apos;єктів</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="277"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="287"/>
         <source>Select second line point</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="290"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="300"/>
         <source>Select second line point that is not part of the list of objects</source>
         <translation>Виберіть другу точку лінії, що не є частиною списку об&apos;єктів</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="241"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="325"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="337"/>
         <source>Flipping by line</source>
         <translation>Відзеркалити по лінії</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="222"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="335"/>
         <source>Visibility Group</source>
         <translation>Група видимості</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="125"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="336"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="251"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="338"/>
         <source>Tags:</source>
         <translation>Теги:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="258"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="340"/>
         <source>Separate each tag with comma.</source>
         <translation>Розділіть кожен тег комою.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="261"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="342"/>
         <source>Add tags</source>
         <translation>Додайте теги</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="344"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="326"/>
         <source>New:</source>
         <translation>Нова:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="142"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="328"/>
         <source>Pen style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="177"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="329"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="402"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="343"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="418"/>
         <source>Ready</source>
         <translation>Готово</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="295"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="345"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="375"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="391"/>
         <source>Invalid line points</source>
         <translation>Недійсні точки лінії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="382"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="398"/>
         <source>Invalid first line point</source>
         <translation>Недійсна перша точка лінії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="389"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="405"/>
         <source>Invalid second line point</source>
         <translation>Недійсна друга точка лінії</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="219"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="333"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation>Увімкніть для створення групи видимості з вихідних об&apos;єктів</translation>
     </message>
@@ -3924,123 +4345,149 @@
     <name>DialogGraduatedCurve</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="20"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="435"/>
         <source>Graduated curve tool</source>
         <translation>Інструмент Градієнтна крива</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="34"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="476"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="40"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="436"/>
         <source>Offsets</source>
         <translation>Зміщення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="438"/>
         <source>Name</source>
         <translation>Ім&apos;я</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="80"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="440"/>
         <source>Calculated value</source>
         <translation>Розраховане значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="85"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="442"/>
         <source>Formula</source>
         <translation>Формула</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="100"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="444"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="446"/>
         <source>Details</source>
         <translation>Деталі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="448"/>
         <source>Move offset up</source>
         <translation>Перемістити зміщення вгору</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="131"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="451"/>
         <source>Move offset down</source>
         <translation>Перемістити зміщення вниз</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="206"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="472"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="453"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="474"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="216"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="454"/>
         <source>Unique offset name</source>
         <translation>Унікальна назва зміщення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="226"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="455"/>
         <source>Calculated value:</source>
         <translation>Розраховане значення:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="233"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="456"/>
         <source>Formula:</source>
         <translation>Формула:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="257"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="458"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="461"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показати повне обчислення у вікні повідомлення&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="314"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="464"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="361"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="466"/>
         <source>Description:</source>
         <translation>Опис:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="396"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="467"/>
         <source>Curve:</source>
         <translation>Крива:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="406"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="468"/>
         <source>Pen style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="435"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="469"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="449"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="470"/>
         <source>Approximation scale:</source>
         <translation>Масштаб апроксимації:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="456"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="472"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Встановити масштаб наближення для цієї кривої, 0 - використовувати глобальне значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="482"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="475"/>
         <source>Alias:</source>
         <translation>Псевдонім:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="512"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="477"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -4076,11 +4523,13 @@
     <name>DialogGroup</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="91"/>
         <source>Group</source>
         <translation>Група</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="26"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="92"/>
         <source>Group name:</source>
         <translation>Назва групи:</translation>
     </message>
@@ -4090,6 +4539,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="36"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="96"/>
         <source>Choose group name</source>
         <translation>Виберіть назву групи</translation>
     </message>
@@ -4100,16 +4550,19 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="46"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="97"/>
         <source>Tags:</source>
         <translation>Теги:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="99"/>
         <source>Separate each tag with comma.</source>
         <translation>Розділіть кожен тег комою.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="56"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="101"/>
         <source>Add tags</source>
         <translation>Додайте теги</translation>
     </message>
@@ -4152,6 +4605,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="182"/>
         <source>Perpendicular point along line</source>
         <translation>Перпендикулярна точка вздовж лінії</translation>
     </message>
@@ -4165,51 +4619,61 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="46"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="183"/>
         <source>Point label:</source>
         <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="185"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="56"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="187"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="69"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="188"/>
         <source>Base point:</source>
         <translation>Базова точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="85"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="189"/>
         <source>First point of line:</source>
         <translation>Перша точка лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="190"/>
         <source>Second point of line:</source>
         <translation>Друга точка лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="191"/>
         <source>Type of line:</source>
         <translation>Тип лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="140"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="192"/>
         <source>Line color:</source>
         <translation>Колір лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="193"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="155"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="194"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -4378,30 +4842,40 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="46"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="49"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1144"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1146"/>
         <source>Increments</source>
         <translation>Прибавки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="350"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1058"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1104"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1184"/>
         <source>Name</source>
         <translation>Позначення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="355"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1063"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1106"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1186"/>
         <source>The calculated value</source>
         <translation>Розраховане значення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1434"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1437"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1232"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1234"/>
         <source>Lines</source>
         <translation>Лінії</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1462"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1504"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1229"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1237"/>
         <source>Line</source>
         <translation>Лінія</translation>
     </message>
@@ -4409,6 +4883,9 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1467"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1551"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1231"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1255"/>
         <source>Length</source>
         <translation>Довжина</translation>
     </message>
@@ -4416,40 +4893,53 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1546"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1588"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1630"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1261"/>
         <source>Curve</source>
         <translation>Крива</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1672"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1269"/>
         <source>Arc</source>
         <translation>Дуга</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="20"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1067"/>
         <source>Tables of Variables</source>
         <translation>Таблиці змінних</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1476"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1479"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1240"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1242"/>
         <source>Lines angles</source>
         <translation>Кути ліній</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1509"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1635"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1239"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1263"/>
         <source>Angle</source>
         <translation>Кут</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1518"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1521"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1248"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1250"/>
         <source>Lengths curves</source>
         <translation>Довжни кривих</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1602"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1605"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1264"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1266"/>
         <source>Angles curves</source>
         <translation>Кути кривих</translation>
     </message>
@@ -4460,11 +4950,14 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1644"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1647"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1272"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1274"/>
         <source>Radiuses arcs</source>
         <translation>Радіуси дуг</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1677"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1271"/>
         <source>Radius</source>
         <translation>Радіус</translation>
     </message>
@@ -4475,6 +4968,8 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="360"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1068"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1108"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1188"/>
         <source>Formula</source>
         <translation>Формула</translation>
     </message>
@@ -4483,48 +4978,66 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="375"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1080"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1083"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1110"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1112"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1190"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1192"/>
         <source>Details</source>
         <translation>Деталь</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="389"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1097"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1194"/>
         <source>Move measurement up</source>
         <translation>Перемістити мірку вгору</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="406"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1117"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1197"/>
         <source>Move measurement down</source>
         <translation>Перемістити мірку вниз</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="526"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1228"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1125"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1205"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="550"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1128"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1207"/>
         <source>Calculated value:</source>
         <translation>Розраховане значення:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="564"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1259"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1129"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1208"/>
         <source>Formula:</source>
         <translation>Формула:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="616"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1311"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1134"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1213"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="667"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1362"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1139"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1218"/>
         <source>Description:</source>
         <translation>Опис:</translation>
     </message>
@@ -4648,18 +5161,23 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="536"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1126"/>
         <source>Unique increment name</source>
         <translation>Унікальна назва прибавки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="588"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1283"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1131"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1210"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="645"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1340"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1137"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1216"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
@@ -4674,12 +5192,16 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="82"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="790"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1074"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1154"/>
         <source>Search</source>
         <translation>Пошук</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1560"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1563"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1256"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1258"/>
         <source>Curves control point lengths</source>
         <translation>Довжини контрольних точок кривих</translation>
     </message>
@@ -4691,23 +5213,30 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="695"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1403"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1220"/>
         <source>Refresh a pattern with all changes you made</source>
         <translation>Оновити викрійку з усіма внесеними змінами</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="698"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1406"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1222"/>
         <source>Refresh</source>
         <translation>Оновити</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="754"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="757"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1224"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1226"/>
         <source>Preview calculations</source>
         <translation>Попередні розрахунки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1238"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1206"/>
         <source>Unique variable name</source>
         <translation>Унікальна назва змінної</translation>
     </message>
@@ -4724,12 +5253,16 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="63"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="771"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1069"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1149"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Історія пошуку &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="72"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="780"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1072"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1152"/>
         <source>Alt+Down</source>
         <translation>Alt+Down</translation>
     </message>
@@ -4738,60 +5271,80 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="807"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1033"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1067"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1075"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1155"/>
         <source>0 results</source>
         <translation>0 результатів</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="126"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="834"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1077"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1157"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Враховувати регістр &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="157"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="865"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1080"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1160"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Враховувати слова &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="191"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="899"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1083"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1163"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Збіг за регулярним виразом &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="222"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="930"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1086"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1166"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Використовувати властивості Unicode &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;Значення класів символів \w, \d тощо, а також значення їх аналогів (\W, \D тощо) змінено з відповідності лише символам ASCII на відповідність будь-якому символу з властивістю Unicode. Наприклад, \d відповідатиме будь-якому символу з властивістю Unicode Nd (десяткова цифра); \w буде відповідати будь-якому символу з властивістю Unicode L (буква) або N (цифра) плюс знак підкреслення, і так далі. Ця опція відповідає модифікатору /u у регулярних виразах Perl.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="228"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="936"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1089"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1169"/>
         <source>Alt+U</source>
         <translation>Alt+U</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="248"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="956"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1092"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1172"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Знайти попередню &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="257"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="965"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1095"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1175"/>
         <source>Shift+F3</source>
         <translation>Shift+F3</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="267"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="975"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1098"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1178"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Знайти наступну %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="276"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="984"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1181"/>
         <source>F3</source>
         <translation>F3</translation>
     </message>
@@ -4799,6 +5352,8 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="459"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1167"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1760"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1120"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1200"/>
         <source>Export to CSV</source>
         <translation>Експортувати до CSV</translation>
     </message>
@@ -4806,12 +5361,16 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="475"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1177"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1694"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1123"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1203"/>
         <source>Import from CSV</source>
         <translation>Імпорт із CSV</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="543"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1415"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1223"/>
         <source>Units:</source>
         <translation>Одинці виміру:</translation>
     </message>
@@ -4840,37 +5399,44 @@
     <name>DialogIncrementsCSVColumns</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="163"/>
         <source>Import increments</source>
         <translation>Імпортувати прибавки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="26"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="164"/>
         <source>Preview</source>
         <translation>Попередній перегляд</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="165"/>
         <source>Input</source>
         <translation>Вхідні дані</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="48"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="166"/>
         <source>Import</source>
         <translation>Імпорт</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="67"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="167"/>
         <source>Columns</source>
         <translation>Колонки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="96"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="168"/>
         <source>Description:</source>
         <translation>Опис:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="111"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="510"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="169"/>
         <source>Ready</source>
         <translation>Готово</translation>
     </message>
@@ -4924,6 +5490,7 @@
     <name>DialogInsertNode</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialoginsertnode.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoginsertnode.h" line="100"/>
         <source>Piece:</source>
         <translation>Деталь:</translation>
     </message>
@@ -4934,6 +5501,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialoginsertnode.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoginsertnode.h" line="99"/>
         <source>Insert nodes</source>
         <translation>Вставити вузли</translation>
     </message>
@@ -4944,6 +5512,7 @@
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialoginsertnode.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoginsertnode.h" line="101"/>
         <source>Number:</source>
         <translation>Кількість:</translation>
     </message>
@@ -4952,16 +5521,19 @@
     <name>DialogKnownMaterials</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogknownmaterials.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogknownmaterials.h" line="116"/>
         <source>Known materials</source>
         <translation>Відомі матеріали</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogknownmaterials.ui" line="33"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogknownmaterials.h" line="117"/>
         <source>Material:</source>
         <translation>Матеріал:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogknownmaterials.ui" line="49"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogknownmaterials.h" line="118"/>
         <source>Name of material</source>
         <translation>Назва матеріалу</translation>
     </message>
@@ -5087,6 +5659,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutprogress.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutprogress.h" line="109"/>
         <source>Create a Layout</source>
         <translation>Створити розкладку</translation>
     </message>
@@ -5100,11 +5673,13 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutprogress.ui" line="36"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutprogress.h" line="110"/>
         <source>Nesting. Please, wait.</source>
         <translation>Укладання. Будь ласка, зачекайте.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutprogress.ui" line="81"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutprogress.h" line="111"/>
         <source>Time left:</source>
         <translation>Часу лишилося:</translation>
     </message>
@@ -5123,16 +5698,19 @@
     <name>DialogLayoutScale</name>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="255"/>
         <source>Layout scale</source>
         <translation>Масштаб розкладки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="29"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="256"/>
         <source>Margins</source>
         <translation>Поля</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="44"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="257"/>
         <source>Left:</source>
         <translation>Ліве:</translation>
     </message>
@@ -5141,36 +5719,46 @@
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="74"/>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="97"/>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="120"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="258"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="262"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="264"/>
         <source>cm</source>
         <translation>см</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="67"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="259"/>
         <source>Right:</source>
         <translation>Праве:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="90"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="261"/>
         <source>Top:</source>
         <translation>Верхнє:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="113"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="263"/>
         <source>Bottom:</source>
         <translation>Нижнє:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="135"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="265"/>
         <source>Scale</source>
         <translation>Масштаб</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="266"/>
         <source>Horizontal:</source>
         <translation>По горизонталі:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/dialoglayoutscale.ui" line="150"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_dialoglayoutscale.h" line="267"/>
         <source>Vertical:</source>
         <translation>По вертикалі:</translation>
     </message>
@@ -5183,16 +5771,19 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="70"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="591"/>
         <source>Templates:</source>
         <translation>Шаблони:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="147"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="592"/>
         <source>Width:</source>
         <translation>Ширина:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="160"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="593"/>
         <source>Height:</source>
         <translation>Висота:</translation>
     </message>
@@ -5222,16 +5813,19 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="532"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="628"/>
         <source>Three groups: big, middle, small</source>
         <translation>Три групи: великі, середні, малі</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="542"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="629"/>
         <source>Two groups: big, small</source>
         <translation>Дві групи: великі, малі</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="555"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="630"/>
         <source>Descending area</source>
         <translation>За спаданням площі</translation>
     </message>
@@ -5260,26 +5854,31 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="589"/>
         <source>Create a layout</source>
         <translation>Створити розкладку</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="590"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="635"/>
         <source>Auto crop unused length</source>
         <translation>Автоматично обрізати невикористану довжину</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="604"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="637"/>
         <source>Unite pages (if possible)</source>
         <translation>Об&apos;єднати сторінки (якщо можливо)</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="409"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="611"/>
         <source>Gap width:</source>
         <translation>Ширина розриву:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="479"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="620"/>
         <source>Save length of the sheet</source>
         <translation>Зберегти довжину аркуша</translation>
     </message>
@@ -5325,6 +5924,7 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="44"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="590"/>
         <source>Paper format</source>
         <translation>Формат листа</translation>
     </message>
@@ -5334,21 +5934,25 @@
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="255"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="596"/>
         <source>Left:</source>
         <translation>Ліве:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="269"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="597"/>
         <source>Right:</source>
         <translation>Праве:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="283"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="598"/>
         <source>Top:</source>
         <translation>Верхнє:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="297"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="599"/>
         <source>Bottom:</source>
         <translation>Нижнє:</translation>
     </message>
@@ -5386,6 +5990,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="391"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="609"/>
         <source>Layout options</source>
         <translation>Параметри розкладки</translation>
     </message>
@@ -5395,6 +6000,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="524"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="627"/>
         <source>Rule for choosing the next workpiece</source>
         <translation>Принцип вибору настпної деталі</translation>
     </message>
@@ -5404,16 +6010,19 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="621"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="641"/>
         <source>Divide into strips</source>
         <translation>Розділити на смуги</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="633"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="642"/>
         <source>Multiplier</source>
         <translation>Множник</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="640"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="644"/>
         <source>Set multiplier for length of the biggest workpiece in layout.</source>
         <translation>Встановить множник для найбільшої деталі в розкладці.</translation>
     </message>
@@ -5423,11 +6032,13 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="618"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="639"/>
         <source>Enabling for sheets that have big height will speed up creating.</source>
         <translation>Увімкнення для листів, що мають велику довжину пришвидшує створення.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="228"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="594"/>
         <source>Printer:</source>
         <translation>Принтер:</translation>
     </message>
@@ -5439,26 +6050,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="601"/>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="333"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="603"/>
         <source>Text will be converted to paths</source>
         <translation>Текст буде перетворено на контури</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="336"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="605"/>
         <source>Export text as paths</source>
         <translation>Експортувати текст у вигляді контурів</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="246"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="595"/>
         <source>Margins</source>
         <translation>Поля</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="320"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="600"/>
         <source>Ignore margins</source>
         <translation>Ігнорувати поля</translation>
     </message>
@@ -5473,77 +6089,92 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="503"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="625"/>
         <source>Follow grainline</source>
         <translation>Дотримуватися нитки основи</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="399"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="610"/>
         <source>Time:</source>
         <translation>Час:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="346"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="606"/>
         <source>Boundary together with notches</source>
         <translation>Контур разом із надсічками</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="353"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="607"/>
         <source>Debug</source>
         <translation>Зневадження</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="608"/>
         <source>Show layout allowance</source>
         <translation>Показати припуски для розкладки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="416"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="613"/>
         <source>Time given for the algorithm to find best layout.</source>
         <translation>Час, що дається алгоритму, щоб знайти найкращу розкладку.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="454"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="616"/>
         <source>Efficiency:</source>
         <translation>Ефективність:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="461"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="618"/>
         <source>Set layout efficiency coefficient. Layout efficiency coefficient is the ratio of the area occupied by the pieces to the bounding rect of all pieces. If nesting reaches required level the process stops. If value is 0 no check will be made.</source>
         <translation>Встановити коефіцієнт ефективності розкладки. Коефіцієнт ефективності розкладки - це відношення площі, яку займають фігури, до прямокутника, що обмежує всі фігури. Якщо вкладеність досягає необхідного рівня, процес зупиняється. Якщо значення дорівнює 0, перевірка не виконується.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="510"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="626"/>
         <source>Manual priority</source>
         <translation>Ручний пріоритет</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="573"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="632"/>
         <source>Nest quantity of copies according to piece settings.</source>
         <translation>Розкласти кількість копій відповідно до налаштувань деталей.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="576"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="634"/>
         <source>Nest quantity</source>
         <translation>Розкласти кількість</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="597"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="636"/>
         <source>Auto crop unused width</source>
         <translation>Автоматично обрізати невикористану ширину</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="489"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="624"/>
         <source>Prefer one sheet solution</source>
         <translation>Віддавати перевагу рішенню з одним аркушем</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="419"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="615"/>
         <source> min</source>
         <comment>minutes</comment>
         <translation>хв</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="486"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="622"/>
         <source>Enable this option to prefer getting one sheet solutions.</source>
         <translation>Увімкніть цю опцію, щоб надати перевагу отриманню рішень на одному аркуші.</translation>
     </message>
@@ -5573,6 +6204,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="204"/>
         <source>Line between points</source>
         <translation>Лінія між двома точками</translation>
     </message>
@@ -5582,36 +6214,43 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="208"/>
         <source>First point:</source>
         <translation>Перша точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="88"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="207"/>
         <source>Second point:</source>
         <translation>Друга точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="52"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="205"/>
         <source>Type of line:</source>
         <translation>Тип лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="206"/>
         <source>Line color:</source>
         <translation>Колір лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="210"/>
         <source>Swap points</source>
         <translation>Поміняти точки місцями</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="37"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="212"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="213"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -5624,6 +6263,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="64"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="216"/>
         <source>First line</source>
         <translation>Перша лінія</translation>
     </message>
@@ -5637,6 +6277,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="219"/>
         <source>Second line</source>
         <translation>Друга лінія</translation>
     </message>
@@ -5657,43 +6298,53 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="210"/>
         <source>Point at line intersection</source>
         <translation>Точка перетину ліній</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="45"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="211"/>
         <source>Point label:</source>
         <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="52"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="213"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="55"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="215"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="78"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="117"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="220"/>
         <source>First point:</source>
         <translation>Перша точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="88"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="218"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="221"/>
         <source>Second point:</source>
         <translation>Друга точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="222"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="156"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="223"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -5710,6 +6361,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="313"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
@@ -5719,6 +6371,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="254"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="321"/>
         <source>First point of line</source>
         <translation>Перша точка лінії</translation>
     </message>
@@ -5740,31 +6393,35 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="329"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="334"/>
         <source>Show line from first point to this point</source>
         <translation>Показати лінію від першої точки до цієї</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="304"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="309"/>
         <source>Select second point of line</source>
         <translation>Виберіть другу точку лінії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="316"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="321"/>
         <source>Select axis point</source>
         <translation>Виберіть точку осі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="300"/>
         <source>Point intersect line and axis</source>
         <translation>Точка на перетині лінії і осі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="317"/>
         <source>Axis Point</source>
         <translation>Точка осі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="274"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="325"/>
         <source>Second point of line</source>
         <translation>Друга точка лінії</translation>
     </message>
@@ -5773,77 +6430,91 @@ Apply settings anyway?</source>
         <translation type="vanished">Колір лінії</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="397"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="402"/>
         <source>Edit angle</source>
         <translation>Редагувати кут</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="301"/>
         <source>Angle:</source>
         <translation>Кут:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="303"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="307"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="173"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="310"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="315"/>
         <source>Axis point:</source>
         <translation>Точка осі:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="319"/>
         <source>First line point:</source>
         <translation>Перша точка лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="267"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="323"/>
         <source>Second line point:</source>
         <translation>Друга точка лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="287"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="327"/>
         <source>Point label:</source>
         <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="300"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="329"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="303"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="331"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="310"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="332"/>
         <source>Type of line:</source>
         <translation>Тип лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="342"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="336"/>
         <source>Line color:</source>
         <translation>Колір лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="337"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="372"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="338"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -5946,29 +6617,29 @@ Apply settings anyway?</source>
         <translation type="vanished">Мірки лекала</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="153"/>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="330"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="155"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="343"/>
         <source>General</source>
         <comment>Measurement section</comment>
         <translation>Загальні</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="265"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="278"/>
         <source>Collapse All</source>
         <translation>Згорнути всі</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="268"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="281"/>
         <source>Expand All</source>
         <translation>Розкрити всі</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="278"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="291"/>
         <source>Check all</source>
         <translation>Позначити все</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="278"/>
+        <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="291"/>
         <source>Uncheck all</source>
         <translation>Прибрати виділення з усіх</translation>
     </message>
@@ -6112,6 +6783,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="256"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="577"/>
         <source>Angle:</source>
         <translation>Кут:</translation>
     </message>
@@ -6119,6 +6791,9 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="276"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="455"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="634"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="579"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="607"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
@@ -6126,6 +6801,9 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="318"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="497"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="676"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="583"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="597"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="611"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
@@ -6133,11 +6811,15 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="366"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="545"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="724"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="589"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="603"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="617"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="435"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="591"/>
         <source>Length:</source>
         <translation>Довжина:</translation>
     </message>
@@ -6146,12 +6828,12 @@ Apply settings anyway?</source>
         <translation type="vanished">Суфікс:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="451"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="471"/>
         <source>Edit angle</source>
         <translation>Редагувати кут</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="479"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="499"/>
         <source>Edit length</source>
         <translation>Редагувати довжину</translation>
     </message>
@@ -6159,27 +6841,34 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="344"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="523"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="702"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="586"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="600"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="614"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="17"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="787"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="566"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="625"/>
         <source>Move</source>
         <translation>Перемістити</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="614"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="605"/>
         <source>Rotation angle:</source>
         <translation>Кут обертання:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="465"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="485"/>
         <source>Edit rotation angle</source>
         <translation>Редагувати кут обертання</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="753"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="619"/>
         <source>Rotation origin point:</source>
         <translation>Початкова точка обертання:</translation>
     </message>
@@ -6190,88 +6879,103 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="768"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="623"/>
         <source>Visibility Group</source>
         <translation>Група видимості</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="138"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="780"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="574"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="624"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="797"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="626"/>
         <source>Tags:</source>
         <translation>Теги:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="804"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="628"/>
         <source>Separate each tag with comma.</source>
         <translation>Розділіть кожен тег комою.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="807"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="630"/>
         <source>Add tags</source>
         <translation>Додайте теги</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="632"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="45"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="567"/>
         <source>New:</source>
         <translation>Нова:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="569"/>
         <source>Bulk rename</source>
         <translation>Масове перейменування</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="119"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="572"/>
         <source>Remove object</source>
         <translation>Видалити об’єкт</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="152"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="575"/>
         <source>Pen style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="193"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="576"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="820"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="617"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="631"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="643"/>
         <source>Ready</source>
         <translation>Готово</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="841"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="633"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="558"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="584"/>
         <source>Invalid angle formula</source>
         <translation>Недійсна формула кута</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="574"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="600"/>
         <source>Invalid rotation angle formula</source>
         <translation>Недійсна формула кута повороту</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="590"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="616"/>
         <source>Invalid length formula</source>
         <translation>Недійсна формула довжини</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="765"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="621"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation>Увімкніть для створення групи видимості з вихідних об&apos;єктів</translation>
     </message>
@@ -6280,16 +6984,19 @@ Apply settings anyway?</source>
     <name>DialogMoveSteps</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogmovesteps.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogmovesteps.h" line="87"/>
         <source>Move steps</source>
         <translation>Кроків переміщення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogmovesteps.ui" line="29"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogmovesteps.h" line="88"/>
         <source>Move Tool</source>
         <translation>Переміщення інструменту</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogmovesteps.ui" line="41"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogmovesteps.h" line="89"/>
         <source>Steps:</source>
         <translation>Кроків:</translation>
     </message>
@@ -6361,6 +7068,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="52"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="97"/>
         <source>Units:</source>
         <translation>Одинці виміру:</translation>
     </message>
@@ -6381,21 +7089,25 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="35"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="92"/>
         <source>Pattern piece name:</source>
         <translation>Назва лекала:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="94"/>
         <source>Unique pattern piece name</source>
         <translation>Унікальна назва лекала</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="45"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="96"/>
         <source>Choose unique pattern piece name.</source>
         <translation>Виберіть унікальну назву лекала.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="91"/>
         <source>New pattern</source>
         <translation>Нове лекало</translation>
     </message>
@@ -6425,6 +7137,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="475"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
@@ -6459,6 +7172,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="462"/>
         <source>Point along perpendicular</source>
         <translation>Інструмент точка перпендикуляра</translation>
     </message>
@@ -6481,76 +7195,91 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="463"/>
         <source>Length:</source>
         <translation>Довжина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="465"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="144"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="469"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="472"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="477"/>
         <source>Point label:</source>
         <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="479"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="481"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="482"/>
         <source>First point:</source>
         <translation>Перша точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="280"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="484"/>
         <source>Swap points</source>
         <translation>Поміняти точки місцями</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="317"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="486"/>
         <source>Second point:</source>
         <translation>Друга точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="343"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="487"/>
         <source>Additional angle degrees:</source>
         <translation>Додатковий кут градуси:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="537"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="488"/>
         <source>Type of line:</source>
         <translation>Тип лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="566"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="489"/>
         <source>Line color:</source>
         <translation>Колір лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="490"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="596"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="491"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -6563,105 +7292,125 @@ Apply settings anyway?</source>
         <translation>Обертання</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="174"/>
         <source>Invalid group name</source>
         <translation>Неправильна назва групи</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="233"/>
         <source>Default</source>
         <translation>По замовчуванню</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="307"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="325"/>
         <source>Invalid label</source>
         <translation>Неправильна мітка</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="307"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="325"/>
         <source>Invalid name</source>
         <translation>Неправильне ім&apos;я</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="573"/>
+        <source>Adding or removing objects can&apos;t be applied while the dialog stays open. Use OK to confirm.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogParallelCurve</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="283"/>
         <source>Parallel curve tool</source>
         <translation>Інструмент Паралельна крива</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="307"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="284"/>
         <source>Width:</source>
         <translation>Ширина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="286"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="290"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="167"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="293"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="189"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="296"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показати повне обчислення у вікні повідомлення&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="224"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="298"/>
         <source>Curve:</source>
         <translation>Крива:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="299"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="241"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="300"/>
         <source>Pen style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="270"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="301"/>
         <source>Approximation scale:</source>
         <translation>Масштаб апроксимації:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="277"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="303"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Встановити масштаб наближення для цієї кривої, 0 - використовувати глобальне значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="293"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="305"/>
         <source>Alias:</source>
         <translation>Псевдонім:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="314"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="306"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="340"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="308"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.cpp" line="316"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.cpp" line="321"/>
         <source>Edit width to parallel curve</source>
         <translation>Редагувати ширину до паралельної кривої</translation>
     </message>
@@ -6670,16 +7419,19 @@ Apply settings anyway?</source>
     <name>DialogPatternMaterials</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpatternmaterials.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpatternmaterials.h" line="74"/>
         <source>Dialog</source>
         <translation>Діалог</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpatternmaterials.ui" line="48"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpatternmaterials.h" line="76"/>
         <source>Placeholder</source>
         <translation>Заповнювач</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpatternmaterials.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpatternmaterials.h" line="78"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
@@ -6688,6 +7440,7 @@ Apply settings anyway?</source>
     <name>DialogPatternProperties</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="303"/>
         <source>Pattern properties</source>
         <translation>Властивості лекала</translation>
     </message>
@@ -6701,6 +7454,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="318"/>
         <source>Pattern description</source>
         <translation>Опис лекала</translation>
     </message>
@@ -6742,52 +7496,63 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="297"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="327"/>
         <source>Security</source>
         <translation>Безпека</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="303"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="326"/>
         <source>Open only for read</source>
         <translation>Відкрити тільки для читання</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="259"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="321"/>
         <source>Call context menu for edit</source>
         <translation>Викличте контекстне меню для редагування</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="121"/>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="138"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="310"/>
         <source>Name of measurement or increment</source>
         <translation>Назва виміру або прибавки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="131"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="309"/>
         <source>Passmark width:</source>
         <translation>Ширина надсічки:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="150"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="311"/>
         <source>Default piece label template</source>
         <translation>Шаблон мітки деталі за замовчуванням</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="169"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="313"/>
         <source>Path to default label template</source>
         <translation>Шлях до шаблона мітки за замовчуванням</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="315"/>
         <source>Select path to label template</source>
         <translation>Вибрати шлях до шаблону мітки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="188"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="317"/>
         <source>Browse…</source>
         <translation>Огляд…</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="262"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="323"/>
         <source>No image</source>
         <translation>Зображення відсутнє</translation>
     </message>
@@ -6843,11 +7608,14 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="36"/>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="156"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="304"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="312"/>
         <source>Path:</source>
         <translation>Шлях:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="77"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="305"/>
         <source>Show in Explorer</source>
         <translation>Показати в Провіднику</translation>
     </message>
@@ -6916,21 +7684,25 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="325"/>
         <source>Pattern</source>
         <translation>Лекало</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="284"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="324"/>
         <source>For technical notes</source>
         <translation>Для технічних приміток</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="97"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="306"/>
         <source>Label language:</source>
         <translation>Мова назви точки:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="307"/>
         <source>Passmark length:</source>
         <translation>Довжина надсічки:</translation>
     </message>
@@ -7107,88 +7879,105 @@ Apply settings anyway?</source>
     <name>DialogPiecePath</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1413"/>
         <source>Piece path tool</source>
         <translation>Інструмент контур деталі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1458"/>
         <source>Path</source>
         <translation>Контур</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="39"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1414"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="46"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1415"/>
         <source>Unnamed path</source>
         <translation>Контур без назви</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="49"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1416"/>
         <source>Create name for your path</source>
         <translation>Створіть назву для вашого контуру</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="56"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1417"/>
         <source>Type:</source>
         <translation>Тип:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="89"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1419"/>
         <source>Piece:</source>
         <translation>Деталь:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="66"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1418"/>
         <source>Type of pen:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="120"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1423"/>
         <source>Reverse node direction</source>
         <translation>Зворотний напрямок вузла</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="139"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1426"/>
         <source>Excluded node</source>
         <translation>Виключений вузол</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1429"/>
         <source>Turn point</source>
         <translation>Точка повороту</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="177"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1432"/>
         <source>Check node uniqness</source>
         <translation>Перевіряти унікальність вузла</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="196"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1435"/>
         <source>Notch</source>
         <translation>Надсічка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="215"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1438"/>
         <source>Delete node</source>
         <translation>Видалити вузол</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="339"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1457"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2216"/>
         <source>Ready!</source>
         <translation>Готовий!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="356"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1509"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2069"/>
         <source>Seam allowance</source>
         <translation>Прибавка на шви</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="407"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1459"/>
         <source>Width:</source>
         <translation>Ширина:</translation>
     </message>
@@ -7201,6 +7990,14 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1888"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2105"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2352"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1461"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1480"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1497"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1560"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1574"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1588"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1602"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1622"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
@@ -7213,6 +8010,14 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1942"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2153"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2394"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1464"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1483"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1500"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1563"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1577"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1591"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1605"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1625"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
@@ -7223,6 +8028,12 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1524"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1749"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1974"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1467"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1486"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1503"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1566"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1580"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1594"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
@@ -7235,53 +8046,72 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1999"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2210"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2448"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1470"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1489"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1506"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1569"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1583"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1597"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1612"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1632"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="547"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1472"/>
         <source>Nodes</source>
         <translation>Вузли</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="555"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1473"/>
         <source>Node:</source>
         <translation>Вузол:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="629"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1474"/>
         <source>Before:</source>
         <translation>Перед:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="652"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="850"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1476"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1493"/>
         <source>Return to default width</source>
         <translation>Повернутися до ширини по замовчуванню</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="655"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="853"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1478"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1495"/>
         <source>Default</source>
         <translation>По замовчуванню</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="827"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1491"/>
         <source>After:</source>
         <translation>Після:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="982"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1508"/>
         <source>Angle:</source>
         <translation>Кут:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2182"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1608"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a notch visible</source>
         <translation>Створіть формулу, яка регулює видимість. Значення, які відрізняються від &quot;0&quot;, роблять надсічку видимою</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2420"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1628"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible</source>
         <translation>Створіть формулу, яка регулює видимість. Значення, які відрізняються від &quot;0&quot;, роблять шлях видимим</translation>
     </message>
@@ -7342,58 +8172,70 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1028"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1619"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2074"/>
         <source>Passmarks</source>
         <translation>Надсічки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1039"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1510"/>
         <source>Passmark:</source>
         <translation>Надсічка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1075"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1512"/>
         <source>One line</source>
         <translation>Одна лінія</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1088"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1513"/>
         <source>Two lines</source>
         <translation>Дві лінії</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1514"/>
         <source>Three lines</source>
         <translation>Три лінії</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1805"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1527"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1585"/>
         <source>Angle</source>
         <translation>Кут</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1201"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1528"/>
         <source>Straightforward</source>
         <translation>Пряма</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1214"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1529"/>
         <source>Bisector</source>
         <translation>Бісектриса</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1066"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1511"/>
         <source>Marks</source>
         <translation>Позначки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1515"/>
         <source>T mark</source>
         <translation>Т-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1130"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1519"/>
         <source>V mark</source>
         <translation>V-позначка</translation>
     </message>
@@ -7410,11 +8252,14 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1227"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1275"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1531"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1543"/>
         <source>Select if need designate the corner point as a passmark</source>
         <translation>Виберіть якщо потрібно позначити кутову точку як надсічку</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1230"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1533"/>
         <source>Intersection</source>
         <translation>Перетин</translation>
     </message>
@@ -7425,81 +8270,99 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="325"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1455"/>
         <source>Cut on fabric</source>
         <translation>Вирізати на тканині</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="332"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1338"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1456"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1555"/>
         <source>Not Mirrored</source>
         <translation>Не віддзеркалено</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1055"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1556"/>
         <source>Type</source>
         <translation>Тип</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1176"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1526"/>
         <source>Check mark</source>
         <translation>Позначка прапорець</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1243"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1291"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1535"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1547"/>
         <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
         <translation>Виберіть, якщо потрібно позначити кутову точку як надсічку. Показати лише ліву надсічку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1246"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1537"/>
         <source>Intersection (only left)</source>
         <translation>Перетин (тільки ліва)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1259"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1307"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1539"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1551"/>
         <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
         <translation>Виберіть, якщо потрібно позначити кутову точку як надсічку. Показати лише праву надсічку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1262"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1541"/>
         <source>Intersection (only right)</source>
         <translation>Перетин (тільки права)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1328"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1554"/>
         <source>Clockwise opening</source>
         <translation>Відкриття за годинниковою стрілкою</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1346"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1599"/>
         <source>Manual shape</source>
         <translation>Ручне керування формою</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1355"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1557"/>
         <source>Length</source>
         <translation>Довжина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1415"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1558"/>
         <source>Length:</source>
         <comment>notch depth</comment>
         <translation>Довжина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1580"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1571"/>
         <source>Width</source>
         <translation>Ширина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1640"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1572"/>
         <source>Width:</source>
         <comment>notch width</comment>
         <translation>Ширина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1865"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1586"/>
         <source>Angle:</source>
         <comment>notch angle</comment>
         <translation>Кут:</translation>
@@ -7507,18 +8370,24 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2028"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2278"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1614"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1634"/>
         <source>Control</source>
         <translation>Контроль</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2082"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2329"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1600"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1620"/>
         <source>Visible</source>
         <translation>Видимий</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2188"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2426"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1610"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1630"/>
         <source>1</source>
         <translation>1</translation>
     </message>
@@ -7529,51 +8398,61 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1278"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1545"/>
         <source>Intersection 2</source>
         <translation>Перетин 2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1294"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1549"/>
         <source>Intersection 2 (only left)</source>
         <translation>Перетин 2 (тільки ліва)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1310"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1553"/>
         <source>Intersection 2 (only right)</source>
         <translation>Перетин 2 (тільки права)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="242"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1441"/>
         <source>Move on top</source>
         <translation>Перемістити на вершину</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="259"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1444"/>
         <source>Move up</source>
         <translation>Перемістити вгору</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="276"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1447"/>
         <source>Move down</source>
         <translation>Перемістити вниз</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="293"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1450"/>
         <source>Move on bottom</source>
         <translation>Перемістити до низу</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1420"/>
         <source>Continue the first point to the cutting contour</source>
         <translation>Продовжити першу точку до контуру вирізання</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="108"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1421"/>
         <source>Continue the last point to the cutting contour</source>
         <translation>Продовжити останню точку до контуру вирізання</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="322"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1453"/>
         <source>The path is a cut contour. Use to control export to DXF-AAMA</source>
         <translation>Контур деталі – це контур вирізування. Використовується для керування експортом до DXF-AAMA</translation>
     </message>
@@ -7584,11 +8463,13 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2254"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1616"/>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
         <translation>Ця опція має ефект тільки коли друга надсічка на лінії шва включена в глобальних налаштуваннях. Ця опція допомагає виключати другу надсічку для цієї надсічки.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2257"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1618"/>
         <source>Show the second passmark on seam line</source>
         <translation>Показати другу надсічку на лінії шва</translation>
     </message>
@@ -7619,26 +8500,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1517"/>
         <source>Acute angle that looks inside of piece</source>
         <translation>Гострий кут, що дивиться всередину деталі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1521"/>
         <source>Acute angle that looks outside of piece</source>
         <translation>Гострий кут, що дивиться за межі деталі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1146"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1523"/>
         <source>V mark 2</source>
         <translation>V-позначка 2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1156"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1524"/>
         <source>U mark</source>
         <translation>U-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1166"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1525"/>
         <source>Box mark</source>
         <translation>Квадратна позначка</translation>
     </message>
@@ -7657,21 +8543,25 @@ Apply settings anyway?</source>
     <name>DialogPin</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="21"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpin.h" line="91"/>
         <source>Pin tool</source>
         <translation>Інструмент шпилька</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="29"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpin.h" line="93"/>
         <source>Point:</source>
         <translation>Точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="39"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpin.h" line="94"/>
         <source>Piece:</source>
         <translation>Деталь:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpin.h" line="89"/>
         <source>Pin</source>
         <translation>Шпилька</translation>
     </message>
@@ -7685,6 +8575,7 @@ Apply settings anyway?</source>
     <name>DialogPlaceLabel</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="480"/>
         <source>Width:</source>
         <translation>Ширина:</translation>
     </message>
@@ -7693,6 +8584,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="281"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="463"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="702"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="482"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="496"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="510"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="530"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
@@ -7701,6 +8596,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="323"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="505"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="744"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="486"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="500"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="514"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="534"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
@@ -7708,6 +8607,9 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="170"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="352"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="534"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="489"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="503"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="517"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
@@ -7716,36 +8618,46 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="374"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="559"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="798"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="492"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="506"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="521"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="541"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="261"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="494"/>
         <source>Height:</source>
         <translation>Висота:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="443"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="508"/>
         <source>Angle:</source>
         <translation>Кут:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="540"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="519"/>
         <source>0</source>
         <translation>0</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="588"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="523"/>
         <source>Point:</source>
         <translation>Точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="598"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="524"/>
         <source>Piece:</source>
         <translation>Деталь:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="608"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="525"/>
         <source>Type:</source>
         <translation>Тип:</translation>
     </message>
@@ -7808,31 +8720,38 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="479"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="527"/>
         <source>Place label</source>
         <translation>Мітка місця</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="620"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="526"/>
         <source>Not mirrored</source>
         <translation>Не віддзеркалено</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="628"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="543"/>
         <source>Control</source>
         <translation>Контроль</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="679"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="528"/>
         <source>Visible</source>
         <translation>Видимий</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="770"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="537"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible.</source>
         <translation>Створіть формулу, яка регулює видимість. Значення, які відрізняються від &quot;0&quot;, роблять шлях видимим.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="776"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="539"/>
         <source>1</source>
         <translation>1</translation>
     </message>
@@ -7856,6 +8775,7 @@ Apply settings anyway?</source>
     <name>DialogPointFromArcAndTangent</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="161"/>
         <source>Point from arc and tangent</source>
         <translation>Точка перетину дуги та дотичної</translation>
     </message>
@@ -7886,41 +8806,49 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="162"/>
         <source>Point label:</source>
         <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="50"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="164"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="166"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="66"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="167"/>
         <source>Tangent point:</source>
         <translation>Точка дотичної:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="95"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="168"/>
         <source>Arc:</source>
         <translation>Дуга:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="118"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="169"/>
         <source>Take:</source>
         <translation>Взяти:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="170"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="129"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="171"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -7929,6 +8857,7 @@ Apply settings anyway?</source>
     <name>DialogPointFromCircleAndTangent</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="274"/>
         <source>Point from circle and tangent</source>
         <translation>Точка перетину кола і дотичної</translation>
     </message>
@@ -7938,6 +8867,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="189"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="287"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
@@ -7962,82 +8892,94 @@ Apply settings anyway?</source>
         <translation type="vanished">Взяти</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="265"/>
         <source>Select a circle center</source>
         <translation>Виберіть центр кола</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="321"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="326"/>
         <source>Edit radius</source>
         <translation>Редагувати радіус</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="345"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="350"/>
         <source>Error</source>
         <translation>Помилка</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="346"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="351"/>
         <source>Radius can&apos;t be negative</source>
         <translation>Радіус не може мати від&apos;ємне значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="275"/>
         <source>Radius:</source>
         <translation>Радіус:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="277"/>
         <source>Formula wizard</source>
         <translation>Мастер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="141"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="281"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="167"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="284"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="225"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="289"/>
         <source>Point label:</source>
         <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="232"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="291"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="235"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="293"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="248"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="294"/>
         <source>Center of the circle:</source>
         <translation>Центр кола:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="277"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="295"/>
         <source>Tangent point:</source>
         <translation>Точка дотичної:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="300"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="296"/>
         <source>Take:</source>
         <translation>Взяти:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="297"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="326"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="298"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -8054,6 +8996,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="296"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
@@ -8085,6 +9028,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="283"/>
         <source>Point at intersection of arc and line</source>
         <translation>Точка на перетині дуги та лінії</translation>
     </message>
@@ -8095,61 +9039,73 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="284"/>
         <source>Radius:</source>
         <translation>Радіус:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="286"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="144"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="290"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="293"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="298"/>
         <source>Point label:</source>
         <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="300"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="302"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="303"/>
         <source>Center of arc:</source>
         <translation>Центер дуги:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="279"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="304"/>
         <source>Top of the line:</source>
         <translation>Початок лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="305"/>
         <source>End of the line:</source>
         <translation>Кінець лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="306"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="307"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -8170,6 +9126,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="179"/>
         <source>Point from X and Y of two other points</source>
         <translation>Точка на перетині Х і Y коодринат двох інших точок</translation>
     </message>
@@ -8188,41 +9145,49 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="180"/>
         <source>Point label:</source>
         <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="56"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="182"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="184"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="72"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="185"/>
         <source>X: vertical point:</source>
         <translation>Х: вертикальна точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="187"/>
         <source>Swap points</source>
         <translation>Поміняти точки місцями</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="139"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="189"/>
         <source>Y: horizontal point:</source>
         <translation>Y: горизонтальна точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="190"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="150"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="191"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -8260,11 +9225,13 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="275"/>
         <source>Point label:</source>
         <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="49"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="277"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
@@ -8274,82 +9241,103 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="65"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="280"/>
         <source>First arc:</source>
         <translation>Перша дуга:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="81"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="281"/>
         <source>Second arc:</source>
         <translation>Друга дуга:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="91"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="282"/>
         <source>Take:</source>
         <translation>Взяти:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="274"/>
         <source>Tool point of intersetion arcs</source>
         <translation>Інструмент точка перетину дуг</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="297"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="52"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="279"/>
         <source>Choose unique label</source>
         <translation>Виберіть унікальну мітку</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="283"/>
         <source>Arc 1</source>
         <translation>Дуга 1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="109"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="202"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="284"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="293"/>
         <source>Alias2:</source>
         <translation>Псевдонім 2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="123"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="216"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="295"/>
         <source>Name1:</source>
         <translation>Ім&apos;я1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="137"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="195"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="286"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="292"/>
         <source>Alias1:</source>
         <translation>Псевдонім 1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="144"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="287"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="296"/>
         <source>Name2:</source>
         <translation>Ім&apos;я2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="151"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="181"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="288"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="291"/>
         <source>Choose unique name for left sub arc</source>
         <translation>Виберіть унікальне ім&apos;я для лівої піддуги</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="158"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="209"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="289"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="294"/>
         <source>Choose unique name for right sub arc</source>
         <translation>Виберіть унікальне ім&apos;я для правої піддуги</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="168"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="290"/>
         <source>Arc 2</source>
         <translation>Дуга 2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="298"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -8367,6 +9355,8 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="189"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="369"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="365"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="379"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
@@ -8395,103 +9385,120 @@ Apply settings anyway?</source>
         <translation type="vanished">Взяти</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="279"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="330"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="289"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="340"/>
         <source>Select second circle center</source>
         <translation>Виберіть центр другого кола</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="401"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="411"/>
         <source>Edit first circle radius</source>
         <translation>Редагувати радіус першого кола</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="415"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="425"/>
         <source>Edit second circle radius</source>
         <translation>Редагувати радіус другого кола</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="439"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="449"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="470"/>
         <source>Error</source>
         <translation>Помилка</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="440"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="461"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="450"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="471"/>
         <source>Radius can&apos;t be negative</source>
         <translation>Радіус не може мати від&apos;ємне значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="353"/>
         <source>Radius of the first circle:</source>
         <translation>Радіус першого кола:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="99"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="279"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="355"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="369"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="141"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="321"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="359"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="373"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="167"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="347"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="362"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="376"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="259"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="367"/>
         <source>Radius of the second circle:</source>
         <translation>Радіус другого кола:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="405"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="381"/>
         <source>Point label:</source>
         <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="383"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="415"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="385"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="428"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="386"/>
         <source>Center of the first circle:</source>
         <translation>Центр першого кола:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="457"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="387"/>
         <source>Center of the second circle:</source>
         <translation>Центр другого кола:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="480"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="388"/>
         <source>Take:</source>
         <translation>Взяти:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="352"/>
         <source>Tool point of intersection circles</source>
         <translation>Інструмент точка перетину кіл</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="389"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="506"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="390"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -8500,41 +9507,49 @@ Apply settings anyway?</source>
     <name>DialogPointOfIntersectionCurves</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="291"/>
         <source>Tool point of intersection curves</source>
         <translation>Точка перетину кривих</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="292"/>
         <source>First curve:</source>
         <translation>Перша крива:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="62"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="296"/>
         <source>Second curve:</source>
         <translation>Друга крива:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="78"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="297"/>
         <source>Point label:</source>
         <translation>Мітка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="91"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="299"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="94"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="301"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="302"/>
         <source>Vertical correction:</source>
         <translation>Коррекція по вертикалі:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="303"/>
         <source>Horizontal correction:</source>
         <translation>Корекція по горизонталі:</translation>
     </message>
@@ -8545,57 +9560,73 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="318"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="143"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="236"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="306"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="316"/>
         <source>Name1:</source>
         <translation>Ім&apos;я1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="164"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="243"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="317"/>
         <source>Name2:</source>
         <translation>Ім&apos;я2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="171"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="201"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="309"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="312"/>
         <source>Choose unique name for left sub curve</source>
         <translation>Виберіть унікальне ім&apos;я для лівої підкривої</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="178"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="229"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="310"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="315"/>
         <source>Choose unique name for right sub curve</source>
         <translation>Виберіть унікальне ім&apos;я для правої підкривої</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="254"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="319"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="123"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="304"/>
         <source>Curve 1</source>
         <translation>Крива 1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="157"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="215"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="307"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="313"/>
         <source>Alias1:</source>
         <translation>Псевдонім 1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="129"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="222"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="305"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="314"/>
         <source>Alias2:</source>
         <translation>Псевдонім 2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="188"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="311"/>
         <source>Curve 2</source>
         <translation>Крива 2</translation>
     </message>
@@ -8604,21 +9635,25 @@ Apply settings anyway?</source>
     <name>DialogPreferences</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpreferences.h" line="114"/>
         <source>Preferences</source>
         <translation>Налаштування</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="60"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpreferences.h" line="119"/>
         <source>Configuration</source>
         <translation>Конфігурація</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpreferences.h" line="121"/>
         <source>Pattern</source>
         <translation>Лекало</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpreferences.ui" line="90"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpreferences.h" line="123"/>
         <source>Paths</source>
         <translation>Шляхи</translation>
     </message>
@@ -8707,21 +9742,26 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="410"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="406"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="431"/>
         <source>Rotation</source>
         <translation>Обертання</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="240"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="411"/>
         <source>Angle:</source>
         <translation>Кут:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="413"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="302"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="417"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
@@ -8731,11 +9771,13 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="350"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="423"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="376"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="425"/>
         <source>Origin Point:</source>
         <translation>Осьова точка:</translation>
     </message>
@@ -8744,12 +9786,12 @@ Apply settings anyway?</source>
         <translation type="vanished">Суфікс:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="366"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="371"/>
         <source>Edit angle</source>
         <translation>Редагувати кут</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="252"/>
         <source>Select origin point</source>
         <translation>Виберіть початкову точку</translation>
     </message>
@@ -8759,83 +9801,97 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="328"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="420"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="337"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="342"/>
         <source>This point cannot be origin point. Please, select another origin point</source>
         <translation>Ця точка може бути вихідною точкою. Будь ласка, виберіть іншу відправну точку операції</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="391"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="429"/>
         <source>Visibility Group</source>
         <translation>Група видимості</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="125"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="420"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="408"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="432"/>
         <source>Name:</source>
         <translation>Ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="403"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="430"/>
         <source>Tags:</source>
         <translation>Теги:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="427"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="434"/>
         <source>Separate each tag with comma.</source>
         <translation>Розділіть кожен тег комою.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="430"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="436"/>
         <source>Add tags</source>
         <translation>Додайте теги</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="438"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="407"/>
         <source>New:</source>
         <translation>Нова:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="142"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="409"/>
         <source>Pen style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="177"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="410"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="443"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="501"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="437"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="512"/>
         <source>Ready</source>
         <translation>Готово</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="464"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="439"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="458"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="469"/>
         <source>Invalid rotation point</source>
         <translation>Недійсна точка обертання</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="490"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="501"/>
         <source>Invalid angle formula</source>
         <translation>Недійсна формула кута</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="388"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="427"/>
         <source>Enable to create a visibility group from original objects</source>
         <translation>Увімкніть для створення групи видимості з вихідних об&apos;єктів</translation>
     </message>
@@ -8844,21 +9900,25 @@ Apply settings anyway?</source>
     <name>DialogSaveLAyout</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="524"/>
         <source>Save Layout</source>
         <translation>Зберегти розкладку</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="581"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="558"/>
         <source>File name:</source>
         <translation>Назва файлу:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="26"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="525"/>
         <source>Path:</source>
         <translation>Шлях:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="534"/>
         <source>File format:</source>
         <translation>Формат файлу:</translation>
     </message>
@@ -8872,6 +9932,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="39"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="527"/>
         <source>Destination folder</source>
         <translation>Тека призначення</translation>
     </message>
@@ -8881,12 +9942,15 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="55"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="531"/>
         <source>Select path to destination folder</source>
         <translation>Вибрати шлях до теки призначення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="594"/>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="597"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="560"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="562"/>
         <source>File base name</source>
         <translation>Базова назва файлу</translation>
     </message>
@@ -8900,72 +9964,86 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="42"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="529"/>
         <source>Path to destination folder</source>
         <translation>Шлях до теки призначення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="125"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="536"/>
         <source>Binary form</source>
         <translation>Бінарна форма</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="135"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="537"/>
         <source>Text as paths</source>
         <translation>Текст у вигляді контурів</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="145"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="538"/>
         <source>Show grainline</source>
         <translation>Показати нитку основи</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="155"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="539"/>
         <source>Boundary together with notches</source>
         <translation>Контур разом із надсічками</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="164"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="540"/>
         <source>Compatibility:</source>
         <translation>Сумісність:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="176"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="541"/>
         <source>Not available</source>
         <comment>options</comment>
         <translation>Недоступно</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="345"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="545"/>
         <source>Margins</source>
         <translation>Поля</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="378"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="547"/>
         <source>Right:</source>
         <translation>Праве:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="365"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="546"/>
         <source>Left:</source>
         <translation>Ліве:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="551"/>
         <source>Top:</source>
         <translation>Верхнє:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="463"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="553"/>
         <source>Bottom:</source>
         <translation>Нижнє:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="488"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="555"/>
         <source>Paper format</source>
         <translation>Формат паперу</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="58"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="533"/>
         <source>Browse…</source>
         <translation>Переглянути…</translation>
     </message>
@@ -8974,36 +10052,46 @@ Apply settings anyway?</source>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="404"/>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="447"/>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="470"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="548"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="550"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="552"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="554"/>
         <source>cm</source>
         <translation>см</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="494"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="556"/>
         <source>Templates:</source>
         <translation>Шаблони:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="504"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="557"/>
         <source>Orientation:</source>
         <translation>Орієнтація:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="116"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="535"/>
         <source>Options</source>
         <translation>Параметри</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="202"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="542"/>
         <source>Scale</source>
         <translation>Масштаб</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="210"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="543"/>
         <source>Horizontal:</source>
         <translation>По горизонталі:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="544"/>
         <source>Vertical:</source>
         <translation>По вертикалі:</translation>
     </message>
@@ -9554,6 +10642,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogseamallowance.h" line="62"/>
         <source>Workpiece tool</source>
         <translation>Інструмент деталь</translation>
     </message>
@@ -9938,16 +11027,19 @@ Apply settings anyway?</source>
     <name>DialogSelectLanguage</name>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectlanguage.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectlanguage.h" line="82"/>
         <source>Select language</source>
         <translation>Оберіть мову</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectlanguage.ui" line="24"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectlanguage.h" line="83"/>
         <source>Select user interface language</source>
         <translation>Виберіть мову інтерфейсу користувача</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectlanguage.ui" line="33"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectlanguage.h" line="84"/>
         <source>Language:</source>
         <translation>Мова:</translation>
     </message>
@@ -9957,17 +11049,21 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="14"/>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="35"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="105"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="106"/>
         <source>Select measurements type</source>
         <translation>Виберіть тип мірок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="52"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="107"/>
         <source>Individual</source>
         <comment>measurements type</comment>
         <translation>Індивідуальні</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="72"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="108"/>
         <source>Multisize</source>
         <comment>measurements type</comment>
         <translation>Багаторозмірні</translation>
@@ -10123,6 +11219,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="328"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
@@ -10162,6 +11259,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="315"/>
         <source>Special point on shoulder</source>
         <translation>Спеціальна точка на плече</translation>
     </message>
@@ -10176,71 +11274,85 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="316"/>
         <source>Length:</source>
         <translation>Довжина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="318"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="144"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="322"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="170"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="325"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="227"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="330"/>
         <source>Point label:</source>
         <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="332"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="334"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="335"/>
         <source>First point:</source>
         <translation>Перша точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="279"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="336"/>
         <source>Second point:</source>
         <translation>Друга точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="337"/>
         <source>Third point:</source>
         <translation>Третя точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="337"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="338"/>
         <source>Type of line:</source>
         <translation>Тип лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="372"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="339"/>
         <source>Line color:</source>
         <translation>Колір лінії:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="340"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="402"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="341"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -10249,51 +11361,61 @@ Apply settings anyway?</source>
     <name>DialogSinglePoint</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="163"/>
         <source>Single point</source>
         <translation>Точка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="171"/>
         <source>Coordinates on the sheet</source>
         <translation>Координати на листі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="173"/>
         <source>Coordinates</source>
         <translation>Координати</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="88"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="174"/>
         <source>Y coordinate</source>
         <translation>Y координата</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="95"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="175"/>
         <source>X coordinate</source>
         <translation>Х координата</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="64"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="169"/>
         <source>Point label</source>
         <translation>Назва точки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="45"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="165"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="51"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="168"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="37"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="176"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsinglepoint.ui" line="125"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsinglepoint.h" line="177"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -10335,6 +11457,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="588"/>
         <source>Simple curve</source>
         <translation>Проста крива</translation>
     </message>
@@ -10348,23 +11471,29 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="873"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="650"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="49"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="589"/>
         <source>First point:</source>
         <translation>Перша точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="68"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="464"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="590"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="620"/>
         <source>Control point</source>
         <translation>Контрольна точка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="300"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="696"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="605"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="635"/>
         <source>Angle:</source>
         <translation>Кут:</translation>
     </message>
@@ -10374,6 +11503,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="445"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="619"/>
         <source>Second point:</source>
         <translation>Друга точка:</translation>
     </message>
@@ -10388,6 +11518,8 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="121"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="517"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="591"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="621"/>
         <source>Length:</source>
         <translation>Довжина:</translation>
     </message>
@@ -10396,6 +11528,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="320"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="537"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="716"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="607"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="623"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="637"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
@@ -10404,6 +11540,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="362"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="579"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="758"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="597"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="611"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="627"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="641"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
@@ -10416,6 +11556,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="410"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="627"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="806"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="603"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="617"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="633"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="647"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
@@ -10452,36 +11596,46 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="388"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="605"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="784"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="600"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="614"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="630"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="644"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="844"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="649"/>
         <source>Pen style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="887"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="651"/>
         <source>Approximation scale:</source>
         <translation>Масштаб апроксимації:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="894"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="653"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Встановити масштаб наближення для цієї кривої, 0 - використовувати глобальне значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="656"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="910"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="655"/>
         <source>Alias:</source>
         <translation>Псевдонім:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="940"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="657"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -10490,6 +11644,7 @@ Apply settings anyway?</source>
     <name>DialogSplinePath</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="700"/>
         <source>Curved path</source>
         <translation>Складна крива</translation>
     </message>
@@ -10515,6 +11670,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="869"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="762"/>
         <source>List of points</source>
         <translation>Список точок</translation>
     </message>
@@ -10537,27 +11693,33 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="999"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="777"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="702"/>
         <source>Point:</source>
         <translation>Точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="54"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="701"/>
         <source>New point:</source>
         <translation>Нова точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="123"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="703"/>
         <source>First control point</source>
         <translation>Перша контрольна точка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="355"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="726"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="718"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="747"/>
         <source>Angle:</source>
         <translation>Кут:</translation>
     </message>
@@ -10567,6 +11729,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="494"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="732"/>
         <source>Second control point</source>
         <translation>Друга контрольна точка</translation>
     </message>
@@ -10581,6 +11744,8 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="176"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="547"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="704"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="733"/>
         <source>Length:</source>
         <translation>Довжина:</translation>
     </message>
@@ -10589,6 +11754,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="375"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="567"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="746"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="706"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="720"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="735"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="749"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
@@ -10597,6 +11766,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="417"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="609"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="788"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="710"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="724"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="739"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="753"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="905"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="915"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="942"/>
@@ -10613,6 +11786,10 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="465"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="657"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="836"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="716"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="730"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="745"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="759"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;р&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
@@ -10654,56 +11831,70 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="443"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="635"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="814"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="713"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="727"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="742"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="756"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="881"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="765"/>
         <source>Move on top</source>
         <translation>Перемістити вгору</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="898"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="768"/>
         <source>Move up</source>
         <translation>Перемістити вище</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="915"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="771"/>
         <source>Move down</source>
         <translation>Перемістити нижче</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="932"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="774"/>
         <source>Move on bottom</source>
         <translation>Перемістити вниз</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="970"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="776"/>
         <source>Pen style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1013"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="778"/>
         <source>Approximation scale:</source>
         <translation>Масштаб апроксимації:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1020"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="780"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
         <translation>Встановити масштаб наближення для цієї кривої, 0 - використовувати глобальне значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="46"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="783"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1036"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="782"/>
         <source>Alias:</source>
         <translation>Псевдонім:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1062"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="784"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -10865,6 +12056,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="170"/>
         <source>Triangle tool</source>
         <translation>Інструмент трикутник</translation>
     </message>
@@ -10882,46 +12074,55 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="46"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="171"/>
         <source>Point label:</source>
         <translation>Назва точки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="173"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="56"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="175"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="69"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="176"/>
         <source>First point of axis:</source>
         <translation>Перша точка вісі:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="85"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="177"/>
         <source>Second point of axis:</source>
         <translation>Друга точка вісі:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="178"/>
         <source>First point:</source>
         <translation>Перша точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="117"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="179"/>
         <source>Second point:</source>
         <translation>Друга точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="31"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="180"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="128"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="181"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -10930,6 +12131,7 @@ Apply settings anyway?</source>
     <name>DialogTrueDarts</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="194"/>
         <source>True darts</source>
         <translation>Виточка</translation>
     </message>
@@ -10999,58 +12201,71 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="195"/>
         <source>First base point:</source>
         <translation>Перша базова точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="196"/>
         <source>Second base point:</source>
         <translation>Друга базова точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="197"/>
         <source>First dart point:</source>
         <translation>Перша точка виточки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="85"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="198"/>
         <source>Second dart point:</source>
         <translation>Друга точка виточки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="114"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="199"/>
         <source>Third dart point:</source>
         <translation>Третя точка виточки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="130"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="200"/>
         <source>First new dart point:</source>
         <translation>Перша нова точка виточки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="137"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="154"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="202"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="207"/>
         <source>Unique label</source>
         <translation>Унікальна мітка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="140"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="157"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="204"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="209"/>
         <source>Choose unique label.</source>
         <translation>Виберіть унікальну мітку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="147"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="205"/>
         <source>Second new dart point:</source>
         <translation>Друга нова точка виточки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="28"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="210"/>
         <source>Tool</source>
         <translation>Інструмент</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="165"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="211"/>
         <source>Notes</source>
         <translation>Примітки</translation>
     </message>
@@ -11059,6 +12274,7 @@ Apply settings anyway?</source>
     <name>DialogUndo</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogundo.h" line="85"/>
         <source>Broken formula</source>
         <translation>Зламана формула</translation>
     </message>
@@ -11068,21 +12284,25 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="44"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogundo.h" line="87"/>
         <source>&amp;Undo</source>
         <translation>&amp;Анулювати дію</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="51"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogundo.h" line="88"/>
         <source>&amp;Fix formula</source>
         <translation>&amp;Виправити формулу</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="58"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogundo.h" line="89"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Скасувати дію</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogundo.h" line="86"/>
         <source>Error while calculation formula. You can try to undo last operation or fix broken formula.</source>
         <translation>Помилка під час обчислення формули. Ви можете спробувати скасувати останню операцію чи виправити поламану формулу.</translation>
     </message>
@@ -11095,6 +12315,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.ui" line="17"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoguniondetails.h" line="71"/>
         <source>Union tool</source>
         <translation>Інструмент об&apos;єднання</translation>
     </message>
@@ -11135,11 +12356,13 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.ui" line="30"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoguniondetails.h" line="72"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want to unite details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Чи ви справді хочете об&apos;єднати деталі?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.ui" line="37"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoguniondetails.h" line="73"/>
         <source>Retain original pieces</source>
         <translation>Зберегти оригінальні деталі</translation>
     </message>
@@ -11156,6 +12379,7 @@ Apply settings anyway?</source>
     <name>FvUpdateWindow</name>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="104"/>
         <source>Software Update</source>
         <translation>Оновлення програми</translation>
     </message>
@@ -11165,26 +12389,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="39"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="106"/>
         <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
         <translation>%1 %2 доступна - у вас встановлено %3. Бажаєте звантажити її зараз?</translation>
     </message>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="48"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="107"/>
         <source>Skip This Version</source>
         <translation>Пропустити цю версію</translation>
     </message>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="68"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="108"/>
         <source>Remind Me Later</source>
         <translation>Нагадати пізніше</translation>
     </message>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="78"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="109"/>
         <source>Get Update</source>
         <translation>Отримати оновлення</translation>
     </message>
     <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="105"/>
         <source>%1 update is available!</source>
         <translation>Доступне оновлення %1!</translation>
     </message>
@@ -11349,7 +12578,7 @@ Apply settings anyway?</source>
         <translation>Редактор мірок.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1031"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1033"/>
         <source>The measurement file.</source>
         <translation>Файл мірок.</translation>
     </message>
@@ -11374,12 +12603,12 @@ Apply settings anyway?</source>
         <translation type="vanished">Використовується для тестування. Запускає програму і відкриває файл без показу основного вікна.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1281"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1283"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation>Недійсний аргумент базового розміру. Має бути cm, mm, inch.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1077"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1079"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Не вдається почати слухати вхідні з&apos;єднання за іменем &apos;%1&apos;</translation>
     </message>
@@ -11388,7 +12617,7 @@ Apply settings anyway?</source>
         <translation type="vanished">Тестовий режим не підтримує одночасного відкриття кількох файлів.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1197"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1199"/>
         <source>Please, provide one input file.</source>
         <translation>Будь ласка, надайте один вхідний файл.</translation>
     </message>
@@ -11409,72 +12638,72 @@ Apply settings anyway?</source>
         <translation type="vanished">Відкрити з базовим розміром. Дійсні значення: %1 см.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1053"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1055"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Використовується для тестування. Запускає програму і відкриває файл без показу головного вікна.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1056"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1058"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Вимкнути масштабування з високим розширенням. Викличте цю функцію якщо маєте проблему з масштабуванням (за замовчуванням масштабування увімкнено). Альтернативно ви можете використовувати змінну середовища %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1035"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1037"/>
         <source>Set base for dimension A in the table units.</source>
         <translation>Установіть базу для виміру А в одиницях вимірювання таблиці.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1036"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1038"/>
         <source>The dimension A base</source>
         <translation>База виміру А</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1039"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1041"/>
         <source>Set base for dimension B in the table units.</source>
         <translation>Установіть базу для виміру B в одиницях вимірювання таблиці.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1040"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1042"/>
         <source>The dimension B base</source>
         <translation>База виміру B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1043"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1045"/>
         <source>Set base for dimension C in the table units.</source>
         <translation>Установіть базу для виміру C в одиницях вимірювання таблиці.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1044"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1046"/>
         <source>The dimension C base</source>
         <translation>База виміру C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1047"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1049"/>
         <source>Set pattern file units: cm, mm, inch.</source>
         <translation>Встановити одиниці виміру файлу лекала: см, мм, дюйми.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1048"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1050"/>
         <source>The pattern units</source>
         <translation>Одиниці виміру лекала</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1050"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1052"/>
         <source>Activate known measurements mode.</source>
         <translation>Активувати режим відомих вимірів.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1220"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1222"/>
         <source>Invalid dimension A base value.</source>
         <translation>Недійсне базове значення виміру A.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1241"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1243"/>
         <source>Invalid dimension B base value.</source>
         <translation>Недійсне базове значення виміру B.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1262"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1264"/>
         <source>Invalid dimension C base value.</source>
         <translation>Недійсне базове значення виміру C.</translation>
     </message>
@@ -11484,7 +12713,7 @@ Apply settings anyway?</source>
         <translation>Попередження у формулі: %1. Програму буде завершено.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1095"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1097"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
         <translation>Тестовий режим не підтримує одночасного відкриття кількох файлів.</translation>
     </message>
@@ -11493,6 +12722,7 @@ Apply settings anyway?</source>
     <name>MainWindow</name>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1413"/>
         <source>Valentina</source>
         <translation>Valentina</translation>
     </message>
@@ -11506,26 +12736,31 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1953"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1616"/>
         <source>Point along perpendicular</source>
         <translation>Інструмент точка перпендикуляра</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2043"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1621"/>
         <source>Perpendicular point along line</source>
         <translation>Перпендикулярна точка вздовж лінії</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1971"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1617"/>
         <source>Point along bisector</source>
         <translation>Інструмент точка бісектриси кута</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1773"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1606"/>
         <source>Point at distance and angle</source>
         <translation>Інструмент точка на кінці лінії</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1935"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1615"/>
         <source>Point at distance along line</source>
         <translation>Інструмент точка вздовж лінії</translation>
     </message>
@@ -11539,11 +12774,13 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2115"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1625"/>
         <source>Line between points</source>
         <translation>Лінія між двома точками</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2097"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1624"/>
         <source>Point at line intersection</source>
         <translation>Точка перетину ліній</translation>
     </message>
@@ -11561,6 +12798,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1845"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1610"/>
         <source>Arc</source>
         <translation>Дуга</translation>
     </message>
@@ -11574,260 +12812,312 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="60"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1670"/>
         <source>&amp;File</source>
         <translation>&amp;Файл</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="93"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1672"/>
         <source>&amp;Help</source>
         <translation>&amp;Довідка</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1673"/>
         <source>&amp;Pattern piece</source>
         <translation>&amp;Креслення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="136"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2585"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2588"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1674"/>
         <source>Measurements</source>
         <translation>Мірки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="152"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1675"/>
         <source>Window</source>
         <translation>Вікно</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="205"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1680"/>
         <source>Toolbar files</source>
         <translation>Панель інструментів файли</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="232"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1681"/>
         <source>ToolBar modes</source>
         <translation>Панель інструментів режими</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="257"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1682"/>
         <source>Toolbar pattern</source>
         <translation>Панель інструметнів лекала</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="277"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1683"/>
         <source>Toolbar options</source>
         <translation>Панель інструментів налаштування</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="299"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1684"/>
         <source>Toolbar tools</source>
         <translation>Панель інструментів</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="322"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1685"/>
         <source>Tool options</source>
         <translation>Параметри інструментів</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="550"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1706"/>
         <source>Point tools</source>
         <translation>Інструмент Точки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="553"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1708"/>
         <source>Tools for creating points</source>
         <translation>Інструмент створення точок</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="570"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1710"/>
         <source>Selecting tools</source>
         <translation>Інструменти вибору</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="591"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1711"/>
         <source>Line tools</source>
         <translation>Інструменти Лінії</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="594"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1713"/>
         <source>Tools for creating segments</source>
         <translation>Інструмент створення сегментів</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="612"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1715"/>
         <source>Curve tools</source>
         <translation>Інструменти Криві</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="615"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1717"/>
         <source>Tools for creating curves</source>
         <translation>Інструменти для створення кривих</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="632"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1719"/>
         <source>Operation tools</source>
         <translation>Операційні інструменти</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="649"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1720"/>
         <source>Detail tools</source>
         <translation>Інструменти Деталі</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="652"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1722"/>
         <source>Tools for creating detail</source>
         <translation>Інструменти для створення деталей</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="669"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1724"/>
         <source>Layout actions</source>
         <translation>Дії розкладки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="696"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1728"/>
         <source>Pen options</source>
         <translation>Параметри пера</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="707"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1729"/>
         <source>Dependency tree</source>
         <translation>Дерево залежностей</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="719"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1414"/>
         <source>New</source>
         <translation>Новий</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="722"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1415"/>
         <source>&amp;New</source>
         <translation>&amp;Новий</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="725"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1417"/>
         <source>Create a new pattern</source>
         <translation>Створити нове лекало</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="739"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1419"/>
         <source>Open</source>
         <translation>Відкрити</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="742"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1420"/>
         <source>&amp;Open</source>
         <translation>&amp;Відкрити</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="745"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1422"/>
         <source>Open file with pattern</source>
         <translation>Відкрити файл з лекалами</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="762"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6223"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6246"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1427"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="765"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1428"/>
         <source>&amp;Save</source>
         <translation>&amp;Зберегти</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="768"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1430"/>
         <source>Save pattern</source>
         <translation>Зберегти лекало</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1502"/>
         <source>Show Segment Labels</source>
         <translation>Показати мітки сегментів</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1188"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1504"/>
         <source>Allow segment labels to appear. Uncheck to hide them in all cases.</source>
         <translation>Дозволити відображення міток сегментів. Зніміть галочку, щоб приховати їх у всіх випадках.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1300"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1526"/>
         <source>Load Measurements</source>
         <translation>Завантажити мірки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1679"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1592"/>
         <source>Interactive tools</source>
         <translation>Інтерактивні інструменти</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1682"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1594"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1693"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1596"/>
         <source>Export font corrections</source>
         <translation>Експортувати коригування шрифтів</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2583"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1651"/>
         <source>Arc start point</source>
         <translation>Точка початку дуги</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2601"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1652"/>
         <source>Arc end point</source>
         <translation>Кінцева точка дуги</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2615"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1653"/>
         <source>Boundary together with notches</source>
         <translation>Контур разом із надсічками</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2623"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1654"/>
         <source>Settings Directory</source>
         <translation>Директорія налаштувань</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2634"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1655"/>
         <source>Reload labels</source>
         <translation>Перезавантажити мітки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2637"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1657"/>
         <source>Reload piece labels</source>
         <translation>Перезавантажити мітки деталі</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2651"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8570"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1659"/>
         <source>Auto-arrange labels</source>
         <translation>Автоматичне розміщення міток</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2654"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1661"/>
         <source>Auto-arrange point labels to reduce overlaps</source>
         <translation>Автоматично впорядковувати мітки точок, щоб зменшити їхнє перекриття</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2665"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1663"/>
         <source>Install single line font</source>
         <translation>Встановити монолінійний шрифт</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2683"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1664"/>
         <source>Elliptical arc with given length</source>
         <translation>Еліптична дуга заданої довжини</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2701"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1665"/>
         <source>Parallel curve tool</source>
         <translation>Інструмент Паралельна крива</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2719"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2722"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1666"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1668"/>
         <source>Graduated curve tool</source>
         <translation>Інструмент Градієнтна крива</translation>
     </message>
@@ -11837,38 +13127,45 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="788"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1434"/>
         <source>Save not yet saved pattern</source>
         <translation>Зберегти ще незбережене лекало</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="812"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1436"/>
         <source>Draw</source>
         <translation>Малювання</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="836"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2081"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4355"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2084"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4363"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1440"/>
         <source>Details</source>
         <translation>Деталі</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="863"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1446"/>
         <source>Pointer tools</source>
         <translation>Інструмент вказівник</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="881"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1448"/>
         <source>New pattern piece</source>
         <translation>Нове креслення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="884"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1450"/>
         <source>Add new pattern piece</source>
         <translation>Додати нове креслення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="905"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1454"/>
         <source>Change the label of pattern piece</source>
         <translation>Змінити назву креслення</translation>
     </message>
@@ -11882,48 +13179,58 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="158"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1676"/>
         <source>History</source>
         <translation>Історія</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="964"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1464"/>
         <source>About &amp;Qt</source>
         <translation>Про &amp;Qt</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="978"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1465"/>
         <source>&amp;About Valentina</source>
         <translation>&amp;Про Valentina</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="992"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1466"/>
         <source>E&amp;xit</source>
         <translation>Ви&amp;хід</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="995"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1468"/>
         <source>Exit the application</source>
         <translation>Закрити програму</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1006"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="616"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1470"/>
         <source>Preferences</source>
         <translation>Налаштування</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1020"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1471"/>
         <source>Pattern properties</source>
         <translation>Властивості лекала</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="479"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1037"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1472"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1700"/>
         <source>Zoom in</source>
         <translation>Збільшити</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1040"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1474"/>
         <source>zoom in</source>
         <translation>наблизити</translation>
     </message>
@@ -11931,6 +13238,9 @@ Apply settings anyway?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="492"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1057"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1060"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1476"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1478"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1703"/>
         <source>Zoom out</source>
         <translation>Зменшити</translation>
     </message>
@@ -11948,6 +13258,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1097"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1484"/>
         <source>Zoom fit best</source>
         <translation>Помістити все</translation>
     </message>
@@ -11965,6 +13276,7 @@ Apply settings anyway?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1487"/>
         <source>Report bug</source>
         <translation>Повідомити про помилку</translation>
     </message>
@@ -11981,63 +13293,63 @@ Apply settings anyway?</source>
         <translation type="vanished">Показати довідку</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5245"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5606"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5261"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5629"/>
         <source>Pattern piece %1</source>
         <translation>Креслення %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1256"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1284"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1295"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1309"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1259"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1287"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1298"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1312"/>
         <source>Select point</source>
         <translation>Виберість точку</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1269"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1272"/>
         <source>Select first point</source>
         <translation>Виберіть першу точку</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1323"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1471"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1835"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1326"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1474"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1838"/>
         <source>Select first point of line</source>
         <translation>Виберіть першу точку лінії</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1337"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1340"/>
         <source>Select first point of angle</source>
         <translation>Виберіть першу точку кута</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1351"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1354"/>
         <source>Select first point of first line</source>
         <translation>Виберіть першу точку першої лінії</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1365"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1368"/>
         <source>Select first point curve</source>
         <translation>Виберіть першу точку кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1389"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1392"/>
         <source>Select simple curve</source>
         <translation>Виберіть просту криву</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1403"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1406"/>
         <source>Select point of center of arc</source>
         <translation>Виберіть точку центру дуги</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1432"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1435"/>
         <source>Select point of curve path</source>
         <translation>Виберіть точку складної кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1457"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1460"/>
         <source>Select curve path</source>
         <translation>Виберіть складну криву</translation>
     </message>
@@ -12046,47 +13358,47 @@ Apply settings anyway?</source>
         <translation type="vanished">Виберіть точки, дуги, криві за годинниковою стрілкою.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1529"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1532"/>
         <source>Select base point</source>
         <translation>Виберіть базову точку</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1543"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1546"/>
         <source>Select first point of axis</source>
         <translation>Виберіть першу точку вісі</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1572"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1591"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1575"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1594"/>
         <source>Select detail</source>
         <translation>Виберіть деталь</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1627"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1639"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1651"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1663"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1943"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1630"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1642"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1654"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1666"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1946"/>
         <source>Select one or more objects, &lt;b&gt;%1&lt;/b&gt; - confirm selection</source>
         <translation>Виберіть один чи більше об&apos;єктів, &lt;b&gt;%1&lt;/b&gt; - підтвердити вибір</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1823"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1857"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1956"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1966"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1826"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1860"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1959"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1969"/>
         <source>Select arc</source>
         <translation>Виберіть дугу</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1845"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1990"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2001"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1848"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1993"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2004"/>
         <source>Select curve</source>
         <translation>Вибрати криву</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6650"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6673"/>
         <source>About Qt</source>
         <translation>Про Qt</translation>
     </message>
@@ -12107,68 +13419,68 @@ Apply settings anyway?</source>
         <translation type="vanished">Файл лекала (*.val)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4498"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4514"/>
         <source>pattern</source>
         <translation>лекало</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4505"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4521"/>
         <source>Save as</source>
         <translation>Зберегти як</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2992"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2995"/>
         <source>Could not save file</source>
         <translation>Не вдалося зберегти файл</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2357"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2624"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4605"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7483"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2360"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2627"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4621"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7506"/>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3115"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3143"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3118"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3146"/>
         <source>Error parsing file.</source>
         <translation>Помилка парсингу файла.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3122"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3125"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Помилка, не можу конвертувати значення.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3129"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5086"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3132"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5102"/>
         <source>Error empty parameter.</source>
         <translation>Помилка, пустий параметр.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3100"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3136"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3103"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3139"/>
         <source>Error wrong id.</source>
         <translation>Помикла, неправильний id.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3150"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3153"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Помилка парсингу файлу (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5075"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5091"/>
         <source>Bad id.</source>
         <translation>Поганий id.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6054"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6077"/>
         <source>File saved</source>
         <translation>Файл збережено</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8025"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8048"/>
         <source>untitled.val</source>
         <translation>безімений.val</translation>
     </message>
@@ -12178,24 +13490,24 @@ Do you want to save your changes?</source>
         <translation type="vanished">Лекало було змінено. Хочете зберегти свої зміни?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2069"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6270"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2072"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6293"/>
         <source>&amp;Undo</source>
         <translation>&amp;Анулювати дію</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2070"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6285"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2073"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6308"/>
         <source>&amp;Redo</source>
         <translation>&amp;Повторити</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6824"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6847"/>
         <source>Pattern piece:</source>
         <translation>Креслення:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6826"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6849"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Введіть нову назву для креслення.</translation>
     </message>
@@ -12214,8 +13526,8 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="887"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="935"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6925"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7116"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6948"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7139"/>
         <source>File error.</source>
         <translation>Помилка файла.</translation>
     </message>
@@ -12224,12 +13536,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">Файл завантажено</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7445"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7468"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation>Валентина була закрита неправильно. Хочете знову відкрити ці файли (%1)?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7447"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7470"/>
         <source>Reopen files.</source>
         <translation>Відкрити файли знову.</translation>
     </message>
@@ -12243,11 +13555,13 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1989"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1618"/>
         <source>Special point on shoulder</source>
         <translation>Спеціальна точка на плечі</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2007"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1619"/>
         <source>Triangle tool</source>
         <translation>Інструмент трикутник</translation>
     </message>
@@ -12257,41 +13571,49 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2025"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1620"/>
         <source>Point from X and Y of two other points</source>
         <translation>Точка на перетині Х і Y коодринат двох інших точок</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2061"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1622"/>
         <source>Point intersect line and axis</source>
         <translation>Точка на перетині лінії і осі</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2133"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1626"/>
         <source>Simple curve</source>
         <translation>Проста крива</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2187"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1629"/>
         <source>Curved path</source>
         <translation>Складна крива</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2151"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1627"/>
         <source>Segmenting a simple curve</source>
         <translation>Сегментація простої кривої</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1917"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1614"/>
         <source>Segment a curved path</source>
         <translation>Сегментація складної кривої</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1863"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1611"/>
         <source>Point intersect curve and axis</source>
         <translation>Точка перениту кривої і вісі</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1827"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1609"/>
         <source>Segment an arc</source>
         <translation>Сегмент дуги</translation>
     </message>
@@ -12305,6 +13627,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2457"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1644"/>
         <source>Union tool</source>
         <translation>Інструмент об&apos;єднання</translation>
     </message>
@@ -12314,47 +13637,56 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1142"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1494"/>
         <source>Last Tool</source>
         <translation>Останній інструмент</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1145"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1496"/>
         <source>Activate last used tool again</source>
         <translation>Активувати останній використаний інструмент знову</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1558"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1561"/>
         <source>Select point for X value (vertical)</source>
         <translation>Виберіть точку по вертикалі</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="164"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1677"/>
         <source>Mode</source>
         <translation>Режим</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="860"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1444"/>
         <source>Pointer</source>
         <translation>Вказівник</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="902"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1452"/>
         <source>Config pattern piece</source>
         <translation>Конфігурація креслення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="64"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="950"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1671"/>
         <source>Layout</source>
         <translation>Розкладка</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1162"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1498"/>
         <source>Show Curve Details</source>
         <translation>Показувати криві більш детально</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1165"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1500"/>
         <source>Show/hide control points and curve direction</source>
         <translation>Показувати/ховати контрольні точки і напрямок кривої</translation>
     </message>
@@ -12364,26 +13696,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1791"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1607"/>
         <source>Point of intersection arcs</source>
         <translation>Точка перетину дуг</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2241"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1632"/>
         <source>Point of intersection circles</source>
         <translation>Точка перетину кіл</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2277"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1634"/>
         <source>Point from circle and tangent</source>
         <translation>Точка перетину кола і дотичної</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2259"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1633"/>
         <source>Point from arc and tangent</source>
         <translation>Точка перетину дуги і дотичної</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1631"/>
         <source>Arc with given length</source>
         <translation>Дуга за заданою довжиною</translation>
     </message>
@@ -12393,6 +13730,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="337"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1686"/>
         <source>Layout pages</source>
         <translation>Сторінки розкладки</translation>
     </message>
@@ -12414,26 +13752,31 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1202"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1506"/>
         <source>Print</source>
         <translation>Друк</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1222"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1510"/>
         <source>Print tiled PDF</source>
         <translation>Друк PDF плиткою</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1225"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1512"/>
         <source>Split and print a layout into smaller pages (for regular printers)</source>
         <translation>Розділити і надрукувати розкладку на сторінках меншого розміру (для звичайних принтерів)</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1242"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1514"/>
         <source>Print preview</source>
         <translation>Попередній перегляд</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1516"/>
         <source>Print preview original layout</source>
         <translation>Попередній перегляд оригінальної розкладки</translation>
     </message>
@@ -12444,11 +13787,13 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1286"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1752"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1524"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1604"/>
         <source>Export original layout</source>
         <translation>Експортувати оригінальну розкладку</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1869"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1872"/>
         <source>Select first an arc</source>
         <translation>Виберіть першу дугу</translation>
     </message>
@@ -12461,17 +13806,17 @@ Do you want to save your changes?</source>
         <translation type="vanished">Виберіть точку на дотичній</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1924"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1927"/>
         <source>Select point of the center of the arc</source>
         <translation>Виберіть точку центра дуги</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1934"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1937"/>
         <source>Select the first base line point</source>
         <translation>Виберіть першу точку базової лінії</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4325"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4333"/>
         <source>Detail mode</source>
         <translation>Режим деталей</translation>
     </message>
@@ -12480,12 +13825,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ви не можете використовувати Режим деталі зараз. Будь ласка, створіть хоча б одну деталь.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4410"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4423"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4446"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4638"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4717"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7373"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4421"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4434"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4457"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4654"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4733"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7396"/>
         <source>Layout mode</source>
         <translation>Режим розкладки</translation>
     </message>
@@ -12494,7 +13839,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ви не можете використовувати Режим розкладки зараз. Будь ласка, створіть хоча б одну деталь.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6212"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6235"/>
         <source>Unsaved changes</source>
         <translation>Незбережені зміни</translation>
     </message>
@@ -12523,7 +13868,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Індивідуальні мірки (*.vit);;Стандартні мірки (*.vst)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2383"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2386"/>
         <source>Measurements loaded</source>
         <translation>Мірки завантажено</translation>
     </message>
@@ -12532,12 +13877,13 @@ Do you want to save your changes?</source>
         <translation type="vanished">Стандартні мірки (*.vst);;Індивідуальні мірки (*.vit)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7673"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7696"/>
         <source>You can&apos;t export empty scene.</source>
         <translation>Ви не можете експортувати порожню сцену.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1731"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1600"/>
         <source>Create new Layout</source>
         <translation>Створити нову розкладку</translation>
     </message>
@@ -12555,12 +13901,12 @@ Do you want to save your changes?</source>
         <translation type="vanished">%1, %2 (%3)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4532"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4548"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Не вдалося заблокувати. Цей файл вже відкрито в іншому вікні.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3034"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3037"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Не вдалося заблокувати. Цей файл вже відкрито в іншому вікні. Очікуйте колізій якщо відкрито 2 копії програми.</translation>
     </message>
@@ -12569,7 +13915,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Файл мірок містить недійсні відомі мірки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7593"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7616"/>
         <source>Measurement file has unknown format.</source>
         <translation>Файл мірок має невідомий формат.</translation>
     </message>
@@ -12591,18 +13937,18 @@ Do you want to save your changes?</source>
         <translation type="vanished">Мірки було синхронізовано</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2562"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2565"/>
         <source>Couldn&apos;t sync measurements.</source>
         <translation>Не вдалося синхронізувати мірки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5387"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5410"/>
         <source>Couldn&apos;t update measurements.</source>
         <translation>Не вдалося оновити мірки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7043"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7060"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7066"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7083"/>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
         <translation>Не вдалося знайти файл мірок &apos;%1&apos;.</translation>
     </message>
@@ -12611,7 +13957,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Не вдалося знайти файл мірок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt;. Хочете оновити розташування файлу</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7514"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7537"/>
         <source>Loading measurements file</source>
         <translation>Завантаження файлу мірок</translation>
     </message>
@@ -12628,9 +13974,9 @@ Do you want to save your changes?</source>
         <translation type="vanished">Не вдалося встановити розмір. Файл не було відкрито.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7856"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7899"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7942"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7879"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7922"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7965"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation>Метод %1 не працює в графічному режимі</translation>
     </message>
@@ -12647,45 +13993,51 @@ Do you want to save your changes?</source>
         <translation type="vanished">Не вдалося встановити зріст. Файл не було відкрито.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7356"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7412"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7721"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7761"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7379"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7435"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7744"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7784"/>
         <source>Export error.</source>
         <translation>Помилка експорту.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7969"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7992"/>
         <source>Please, provide one input file.</source>
         <translation>Будь ласка, надайте один вхідний файл.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1205"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1508"/>
         <source>Print an original layout</source>
         <translation>Друк оригінальної розкладки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1262"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1518"/>
         <source>Preview tiled PDF</source>
         <translation>Попередній перегляд PDF плиткою</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1265"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1520"/>
         <source>Print preview tiled layout</source>
         <translation>Попередній перегляд розкладки плиткою</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="815"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1438"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with pattern pieces. These pattern pieces are base for going to the next stage &amp;quot;Details mode&amp;quot;. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим для роботи з кресленнями. Ці креслення база для переходу на наступний етап &amp;quot;Режим деталей&amp;quot;. Перед тим як ви зможете використовувати &amp;quot;Режим деталей&amp;quot; необхідно створити принаймні одну деталь.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="839"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1442"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with details. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail on the stage &amp;quot;Draw mode&amp;quot;. Details created on this stage will be used for creating a layout. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим роботи з деталями. Перед тим як ви матимете можливість працювати у &amp;quot;Режимі деталей&amp;quot; необхідно створити принаймні одну деталь у &amp;quot;Режимі креслення&amp;quot;. Деталі, створенні на цьому етапі, будуть використанні для створення розкладок.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="953"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1462"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for creating a layout of details. This mode avaliable if was created at least one detail on the stage &amp;quot;Details mode&amp;quot;. The layout can be exported to your prefered file format and saved to your harddirve.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Режим для створення розкладок. Цей режим доступний коли створена принаймні одна деталь в &amp;quot;Режимі креслення&amp;quot;. Розкладки можуть бути експортованими в один з вибраних форматів і збережені на диск.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -12698,17 +14050,18 @@ Do you want to save your changes?</source>
         <translation type="vanished">Вивантажити мірки якщо вони не були використані у файлі.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2444"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2447"/>
         <source>Measurements unloaded</source>
         <translation>Мірки вивантажено</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2451"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2454"/>
         <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
         <translation>Не вдалося вивантажити мірки. Деякі з них використовуються у лекалі.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2403"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1641"/>
         <source>True darts</source>
         <translation>Виточка</translation>
     </message>
@@ -12732,7 +14085,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Зберегти...</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6228"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6251"/>
         <source>Don&apos;t Save</source>
         <translation>Не зберігати</translation>
     </message>
@@ -12766,11 +14119,12 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1881"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1612"/>
         <source>Point intersection curves</source>
         <translation>Точка перетину кривих</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1891"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1894"/>
         <source>Select first curve</source>
         <translation>Виберіть першу криву</translation>
     </message>
@@ -12784,16 +14138,17 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2169"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1628"/>
         <source>Curve tool which uses point as control handle</source>
         <translation>Інструмент крива, що використовує точки як контрольні точки</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1375"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1378"/>
         <source>Select first curve point</source>
         <translation>Виберіть першу точку кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1443"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1446"/>
         <source>Select point of cubic bezier path</source>
         <translation>Виберіть точку складної кривої</translation>
     </message>
@@ -12819,6 +14174,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2349"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1638"/>
         <source>Rotate objects</source>
         <translation>Повертати об&apos;єкти</translation>
     </message>
@@ -12826,6 +14182,9 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1122"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1125"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1128"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1489"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1490"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1492"/>
         <source>Close pattern</source>
         <translation>Закрити викрійку</translation>
     </message>
@@ -12839,23 +14198,25 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2079"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1623"/>
         <source>Midpoint between two points</source>
         <translation>Точка середини відстані між двома точками</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="401"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1690"/>
         <source>Group</source>
         <translation>Група</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2077"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4285"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2080"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4288"/>
         <source>Contains all visibility groups</source>
         <translation>Містить усі групи видимості</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2082"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4357"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2085"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4365"/>
         <source>Show which details will go in layout</source>
         <translation>Показує котрі деталі ввійдуть до розкладки</translation>
     </message>
@@ -12866,23 +14227,25 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1077"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1080"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1480"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1482"/>
         <source>Original zoom</source>
         <translation>Початковий масштаб</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1880"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1883"/>
         <source>Select first circle center</source>
         <translation>Виберіть центр першого кола</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1902"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1913"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1905"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1916"/>
         <source>Select point on tangent</source>
         <translation>Виберіть точку на дотичній</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2072"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3243"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2075"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3246"/>
         <source>Pattern Piece:</source>
         <translation>Креслення:</translation>
     </message>
@@ -12895,27 +14258,30 @@ Do you want to save your changes?</source>
         <translation type="vanished">Розмір:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7509"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7532"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation>Не вдалося знайти файл мірок &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt;. Хочете оновити розташування файлу?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2331"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1637"/>
         <source>Flipping objects by line</source>
         <translation>Відзеркалити обєкти по лінії</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2313"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1636"/>
         <source>Flipping objects by axis</source>
         <translation>Відзеркалити обєкти по вісі</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2367"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1639"/>
         <source>Move objects</source>
         <translation>Перемістити обєкти</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2586"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2589"/>
         <source>Measurements were changed. Do you want to sync measurements now?</source>
         <translation>Мірки були змінені. Бажаєте синхронізувати мірки зараз?</translation>
     </message>
@@ -12924,313 +14290,347 @@ Do you want to save your changes?</source>
         <translation type="vanished">Програма не підтримує стандарнту таблицю з дюймами</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2548"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2551"/>
         <source>Measurements have been synced</source>
         <translation>Мірки було синхронізовано</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2205"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1630"/>
         <source>Elliptical Arc</source>
         <translation>Еліптична дуга</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1417"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1420"/>
         <source>Select point of center of elliptical arc</source>
         <translation>Виберіть точку центру еліптичної дуги</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1485"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1488"/>
         <source>Select main path objects clockwise.</source>
         <translation>Виберіть основний контур за годиниковою стрілкою.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4575"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4591"/>
         <source>Could not save the file</source>
         <translation>Не вдалося зберегти файл</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8075"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8098"/>
         <source>read only</source>
         <translation>тільки читання</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="926"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1456"/>
         <source>Variables Table</source>
         <translation>Таблиця змінних</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="929"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1458"/>
         <source>Contains information about increments and internal variables</source>
         <translation>Містить інформацію про прибавки та внутрішні змінні</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1303"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1528"/>
         <source>Connect measurements file to pattern</source>
         <translation>Підключити файл мірок до викрійки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1314"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1530"/>
         <source>Open Tape</source>
         <translation>Відкрити Tape</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1331"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1534"/>
         <source>Edit Current</source>
         <translation>Редагувати поточні</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1334"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1536"/>
         <source>Edit linked to the pattern measurements</source>
         <translation>Редагувати пов&apos;язані з лекалом мірки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1352"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1538"/>
         <source>Sync</source>
         <translation>Синхронізувати</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1355"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1540"/>
         <source>Synchronize linked to the pattern measurements after change</source>
         <translation>Синхронізувати з&apos;єднані з лекалом мірки після зміни</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1369"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1542"/>
         <source>Unload Current</source>
         <translation>Вивантажити поточні</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1372"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1544"/>
         <source>Unload measurements if they were not used in a pattern file</source>
         <translation>Вивантажити мірки якщо вони не були використані в лекалі</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2341"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7555"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7569"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2344"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7578"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7592"/>
         <source>Individual measurements</source>
         <translation>Індивідуальні мірки</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2347"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7555"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7569"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2350"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7578"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7592"/>
         <source>Multisize measurements</source>
         <translation>Стандартні мірки</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4504"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4591"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4520"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4607"/>
         <source>Pattern files</source>
         <translation>Файли лекал</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2511"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1647"/>
         <source>Pin tool</source>
         <translation>Інструмент шпилька</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1506"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1509"/>
         <source>Select pin point</source>
         <translation>Виберіть точку шпильки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2529"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1648"/>
         <source>Insert node tool</source>
         <translation>Інструмент вставка вузла</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1317"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1532"/>
         <source>Open Tape app for creating or editing measurements file</source>
         <translation>Відкрити програму Tape для створення чи редагування файлу мірок</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3461"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3464"/>
         <source>Point at the intersections of lines/axis tools</source>
         <translation>Інструменти визначення точок перетину ліній/осей</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3504"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3507"/>
         <source>Point segmenting curves/arcs tools</source>
         <translation>Інструменти для визначення точки сегментування кривих/дуг</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3518"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3521"/>
         <source>Points intersecting with 2 curves/arcs/circles tools</source>
         <translation>Інструменти для визначення точок перетину за 2 кривими/дугами/колами</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4326"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4334"/>
         <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
         <translation>Ви не можете використовувати Режим деталі зараз. Будь ласка, створіть хоча б одну деталь.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4411"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4422"/>
         <source>You can&apos;t use Layout mode yet. Please, create at least one workpiece.</source>
         <translation>Ви не можете використовувати Режим розкладки зараз. Будь ласка, створіть хоча б одну деталь.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4424"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4435"/>
         <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
         <translation>Ви не можете використовувати Режим розкладки зараз. Будь ласка, створіть хоча б одну деталь.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4447"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4458"/>
         <source>You can&apos;t use Layout mode yet.</source>
         <translation>Ви не можете використовувати Режим розкладки зараз.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1386"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1546"/>
         <source>Zoom fit best current</source>
         <translation>Найкращий масштаб для поточної</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1389"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1548"/>
         <source>zoom fit best current pattern piece</source>
         <translation>найкращий масштаб для поточної деталі</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2565"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1650"/>
         <source>Export details skiping the Layout stage</source>
         <translation>Експортувати деталі, пропускаючи етап розкладки</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4639"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4718"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7374"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4655"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4734"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7397"/>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation>У вас недостатньо даних для експорту. Будь ласка, додайте принаймні одну деталь у розкладку.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4652"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4731"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7387"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4668"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4747"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7410"/>
         <source>Export details</source>
         <translation>Експорт деталей</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4652"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4731"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7387"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4668"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4747"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7410"/>
         <source>Can&apos;t export details.</source>
         <translation>Не вдається експортувати деталі.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1400"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1550"/>
         <source>Label template editor</source>
         <translation>Редактор шаблонів міток</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2439"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1643"/>
         <source>Workpiece tool</source>
         <translation>Інструмент деталь</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2493"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1646"/>
         <source>Internal path tool</source>
         <translation>Інструмент внутрішній контур</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="785"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1432"/>
         <source>Save &amp;As…</source>
         <translation>Зберегти &amp;як…</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1108"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1485"/>
         <source>Report Bug…</source>
         <translation>Повідомити про помилку…</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1283"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1522"/>
         <source>Export As…</source>
         <translation>Експортувати як…</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6222"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6245"/>
         <source>Save…</source>
         <translation>Зберегти…</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1411"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1551"/>
         <source>Final measurements</source>
         <translation>Фінальні вимірювання</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1425"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1552"/>
         <source>Export Final Measurements to CSV</source>
         <translation>Експортувати фінальні вимірювання в CSV</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7683"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7706"/>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
         <translation>Ви не можете експортувати порожню сцену. Будь ласка, додайте принаймні одну деталь у розкладку.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7789"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7812"/>
         <source>Export final measurements error.</source>
         <translation>Помилка експорту фінальних вимірів.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7790"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7813"/>
         <source>Destination path is empty.</source>
         <translation>Шлях призначення порожній.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1436"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1553"/>
         <source>Next pattern piece</source>
         <translation>Наступна деталь</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1439"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1555"/>
         <source>Ctrl+PgDown</source>
         <translation>Ctrl+PgDown</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1450"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1557"/>
         <source>Previous pattern piece</source>
         <translation>Попередня деталь</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1453"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1559"/>
         <source>Ctrl+PgUp</source>
         <translation>Ctrl+PgUp</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1711"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1597"/>
         <source>Tool &quot;Select&quot;</source>
         <translation>Інструмент &quot;Вибрати&quot;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1728"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1598"/>
         <source>Layout settings</source>
         <translation>Налаштування розкладки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1749"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1602"/>
         <source>Layout export as</source>
         <translation>Експортувати розкладку як</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2547"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1649"/>
         <source>Place label tool</source>
         <translation>Інструмент мітка місця</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2475"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1645"/>
         <source>Duplicate detail tool</source>
         <translation>Інструмент дублювання деталей</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1516"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1519"/>
         <source>Select placelabel center point</source>
         <translation>Виберіть центральну точку мітки місця</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7074"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7097"/>
         <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
         <translation>Файл вимірювань «%1» не знайдено або містить недостатньо інформації.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3201"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3204"/>
         <source>Scale:</source>
         <translation>Масштаб:</translation>
     </message>
@@ -13240,453 +14640,485 @@ Do you want to save your changes?</source>
         <translation>Створіть нове креслення для початку роботи.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2071"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2074"/>
         <source>Changes applied.</source>
         <translation>Зміни застосовано.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6198"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6221"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Не вдається зберегти налаштування. Доступ заборонено.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="748"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1425"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6173"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6196"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Неможливо прочитати налаштування з файлу .INI неправильного формату.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1497"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1500"/>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
         <translation>Виберіть об&apos;єкти контуру, &lt;b&gt;%1&lt;/b&gt; - обернути напрямок кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1615"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1618"/>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation>Виберіть один чи більше об&apos;єктів, затисніть &lt;b&gt;%1&lt;/b&gt; - масового вибору, &lt;b&gt;%2&lt;/b&gt; - завершити створення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2295"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1635"/>
         <source>Point of intersection circle and segment</source>
         <translation>Точка перетину кола і відрізка</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1467"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1561"/>
         <source>Increase label font</source>
         <translation>Збільшити шрифт мітки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1481"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1562"/>
         <source>Decrease label font</source>
         <translation>Зменшити шрифт мітки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1495"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1563"/>
         <source>Original label font</source>
         <translation>Оригінальний шрифт мітки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1509"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1564"/>
         <source>Hide labels</source>
         <translation>Сховати мітки</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2076"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4283"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2079"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4286"/>
         <source>Groups of visibility</source>
         <translation>Групи видимості</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1523"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5580"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5603"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1565"/>
         <source>Export recipe</source>
         <translation>Експортувати рецепт</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5578"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5601"/>
         <source>Recipe files</source>
         <translation>Файли рецептів</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5580"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5603"/>
         <source>recipe</source>
         <translation>рецепт</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5593"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5616"/>
         <source>Could not save recipe. %1</source>
         <translation>Не вдалося зберегти рецепт. %1</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1899"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1613"/>
         <source>Curved path tool which uses point as control handle</source>
         <translation>Інструмент складна крива, що використовує точки як контрольні точки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1809"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1608"/>
         <source>Point of intersection arc and axis</source>
         <translation>Точка перетину дуги і осі</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1537"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1566"/>
         <source>Show main path</source>
         <translation>Покажіть головний контур</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1540"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1568"/>
         <source>Globally show pieces main path</source>
         <translation>Глобально показати частини головного контуру</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="413"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8485"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8508"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1691"/>
         <source>Pattern messages</source>
         <translation>Повідомлення лекала</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="425"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1693"/>
         <source>Clear all messages</source>
         <translation>Очистити всі повідомлення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="469"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1698"/>
         <source>Filter</source>
         <translation>Фільтр</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8460"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8483"/>
         <source>DEBUG</source>
         <translation>НАЛАГОДЖЕННЯ</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8463"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8486"/>
         <source>WARNING</source>
         <translation>ПОПЕРЕДЖЕННЯ</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8466"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8489"/>
         <source>CRITICAL</source>
         <translation>КРИТИЧНО</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8469"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8492"/>
         <source>FATAL</source>
         <translation>ФАТАЛЬНО</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8472"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8495"/>
         <source>INFO</source>
         <translation>ІНФО</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="438"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1696"/>
         <source>Auto refresh the list with each parse</source>
         <translation>Автоматичне оновлення списку при кожному аналізі</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="172"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1678"/>
         <source>Watermark</source>
         <translation>Водяний знак</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1554"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1570"/>
         <source>Load</source>
         <translation>Завантажити</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1568"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1571"/>
         <source>Remove</source>
         <translation>Видалити</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1579"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1572"/>
         <source>Edit current</source>
         <translation>Редагувати поточні</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1590"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1573"/>
         <source>Editor</source>
         <translation>Редактор</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1593"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1575"/>
         <source>Create or edit a watermark</source>
         <translation>Створення або редагування водяного знака</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2621"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2624"/>
         <source>Watermark files</source>
         <translation>Файли з водяними знаками</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="182"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1679"/>
         <source>Manual Layout</source>
         <translation>Ручна розкладка</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1601"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1577"/>
         <source>Open Puzzle</source>
         <translation>Відкрити Puzzle</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1604"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1579"/>
         <source>Open the Puzzle app</source>
         <translation>Відкрийте програму Puzzle</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1615"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1581"/>
         <source>Create</source>
         <translation>Створити</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1618"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1583"/>
         <source>Create manual layout</source>
         <translation>Створити ручну розкладку</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1629"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1585"/>
         <source>Update</source>
         <translation>Оновити</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1632"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1587"/>
         <source>Update manual layout</source>
         <translation>Оновити ручну розкладку</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4686"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4761"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4702"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4777"/>
         <source>Unable to prepare raw layout data.</source>
         <translation>Не вдається підготувати вихідні дані розкладки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4693"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4709"/>
         <source>Manual layout files</source>
         <translation>Файли ручної розкладки</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4700"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4716"/>
         <source>Select manual layout</source>
         <translation>Вибрати ручну розкладку</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4802"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4818"/>
         <source>Select folder</source>
         <translation>Вибрати теку</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6213"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6236"/>
         <source>The pattern has been modified. Do you want to save your changes?</source>
         <translation>Лекало змінено. Хочете зберегти зміни?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7837"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7860"/>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
         <translation>Непідтримуване значення виміру A &quot;%1&quot; для цього файлу викрійки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7844"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7867"/>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
         <translation>Не вдалося встановити вимір А. Потрібен файл із багаторозмірними мірками.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7850"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7873"/>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
         <translation>Не вдалося встановити вимір A. Файл не було відкрито.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7880"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7903"/>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
         <translation>Непідтримуване значення виміру B &quot;%1&quot; для цього файлу викрійки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7887"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7910"/>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
         <translation>Не вдалося встановити вимір B. Потрібен файл із багаторозмірними мірками.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7893"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7916"/>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
         <translation>Не вдалося встановити вимір B. Файл не було відкрито.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7923"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7946"/>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
         <translation>Не підтримуване значення виміру C &quot;%1&quot; для цього файлу викрійки.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7930"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7953"/>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
         <translation>Не вдалося встановити вимір C. Потрібен файл із багаторозмірними мірками.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7936"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7959"/>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation>Не вдалося встановити вимір C. Файл не було відкрито.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5598"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5621"/>
         <source>Could not create recipe file. %1</source>
         <translation>Не вдалося створити файл рецепта. %1</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1640"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1589"/>
         <source>Shop</source>
         <translation>Магазин</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7308"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7331"/>
         <source>Scalable Vector Graphics files</source>
         <translation>Масштабовані файли векторної графіки</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7310"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7333"/>
         <source>Save draw</source>
         <translation>Зберегти малюнок</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2421"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1642"/>
         <source>Draw export</source>
         <translation>Експорт малюнку</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="541"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1705"/>
         <source>Background images</source>
         <translation>Фонові зображення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1651"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1590"/>
         <source>Add background image</source>
         <translation>Додати фонове зображення</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1774"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1777"/>
         <source>Unable to add background image</source>
         <translation>Не вдається додати фонове зображення</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1794"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1797"/>
         <source>Invalid image. Error: %1</source>
         <translation>Недійсне зображення. Помилка: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1978"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1981"/>
         <source>Select point of the center of the elliptical arc</source>
         <translation>Виберіть точку центру еліптичної дуги</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2095"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3270"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2098"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3273"/>
         <source>Pen style:</source>
         <translation>Тип пера:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2096"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3294"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2099"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3297"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3275"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3278"/>
         <source>Sets the &lt;b&gt;default pen style&lt;/b&gt; for all newly created objects. This style is applied the first time an object is drawn.</source>
         <translation>Встановлює &lt;b&gt;стиль пера за замовчуванням&lt;/b&gt; для всіх новостворених об&apos;єктів. Цей стиль застосовується під час першого створення об&apos;єкта.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3298"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3301"/>
         <source>Defines the &lt;b&gt;global object color property&lt;/b&gt;. This color is applied automatically the first time a new object is drawn.</source>
         <translation>Визначає &lt;b&gt;глобальний параметр об&apos;єкта&lt;/b&gt;. Цей колір застосовується автоматично при першому створенні нового об&apos;єкта.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3434"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3437"/>
         <source>Point at a given distance tools</source>
         <translation>Інструменти визначення точки на заданій відстані</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3448"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3451"/>
         <source>Perpendicular/Bisector tools</source>
         <translation>Інструменти Перпендикуляр/Бісектриса</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3474"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3477"/>
         <source>Triangular tools</source>
         <translation>Інструменти типу &quot;трикутник&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3488"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3491"/>
         <source>Point intersecting with axis tools</source>
         <translation>Інструменти для визначення точки перетину з віссю</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3533"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3536"/>
         <source>Points intersecting with arcs/curves and tangents/segments tools</source>
         <translation>Інструменти для визначення точок перетину дуг/кривих та дотичних/відрізків</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3593"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3596"/>
         <source>Curves and arcs tools</source>
         <translation>Інструменти для роботи з кривими та дугами</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3626"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3629"/>
         <source>Flipping objects tools</source>
         <translation>Інструменти перевертання об&apos;єктів</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3639"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3642"/>
         <source>Rotating/moving objects tools</source>
         <translation>Інструменти обертання/переміщення об&apos;єктів</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3674"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3677"/>
         <source>Merge/duplicate pieces tools</source>
         <translation>Інструменти об&apos;єднання/дублювання деталей</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3689"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3692"/>
         <source>Adding objects for Details mode tools</source>
         <translation>Інструменти додавання об&apos;єктів для режиму &quot;Деталей&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4769"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4785"/>
         <source>Select background image</source>
         <translation>Виберіть фонове зображення</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4829"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4845"/>
         <source>All Single-Line Fonts</source>
         <translation>Всі монолінійні шрифти</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4830"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4846"/>
         <source>TrueType Fonts</source>
         <translation>Шрифти TrueType</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4831"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4847"/>
         <source>OpenType Fonts</source>
         <translation>Шрифти OpenType</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4832"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4848"/>
         <source>SVG Fonts</source>
         <translation>Шрифти SVG</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4833"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4849"/>
         <source>All Files</source>
         <translation>Усі файли</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4838"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4854"/>
         <source>Select Font Files to Install</source>
         <translation>Виберіть файли шрифтів для встановлення</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4872"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4888"/>
         <source>Failed to install font file: %1
 
 Reason: %2</source>
@@ -13695,7 +15127,7 @@ Reason: %2</source>
 Причина: %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4878"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4894"/>
         <source>Font Installation Summary:
 
 Successful Installations: %1
@@ -13706,55 +15138,57 @@ Failed Installations: %2</source>
 Невдалі встановлення: %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4884"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4900"/>
         <source>Installation Complete with Errors</source>
         <translation>Встановлення завершено з помилками</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4888"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4904"/>
         <source>Installation Successful</source>
         <translation>Встановлення успішно завершено</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5515"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5555"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5538"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5578"/>
         <source>Unable to save image. Error: %1</source>
         <translation>Не вдається зберегти зображення. Помилка: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5521"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5544"/>
         <source>Unable to save image. No data.</source>
         <translation>Не вдається зберегти зображення. Немає даних.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5527"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5550"/>
         <source>untitled</source>
         <translation>без назви</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8520"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8543"/>
         <source>Auto-Arrange Labels</source>
         <translation>Автоматичне розміщення міток</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2341"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2347"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5540"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2344"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2350"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5563"/>
         <source>All files</source>
         <translation>Усі файли</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5544"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5567"/>
         <source>Save Image</source>
         <translation>Зберегти зображення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2385"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1640"/>
         <source>Visibility group</source>
         <translation>Група видимості</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1665"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1591"/>
         <source>Show accuracy radius</source>
         <translation>Показати радіус точності</translation>
     </message>
@@ -14235,61 +15669,73 @@ Would you like to select another file?</source>
     <name>PreferencesConfigurationPage</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="45"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="632"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="51"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="633"/>
         <source>Auto-save modified pattern</source>
         <translation>Автозбереження модифікованого лекала</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="61"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="634"/>
         <source>Interval:</source>
         <translation>Інтервал:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="90"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="636"/>
         <source>Language</source>
         <translation>Мова</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="99"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="637"/>
         <source>GUI language:</source>
         <translation>Мова інтерфейсу:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="123"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="639"/>
         <source>Decimal separator parts:</source>
         <translation>Розділювач десяткової частини:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="140"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="640"/>
         <source>Default unit:</source>
         <translation>Одиниця виміру по замовчуванню:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="150"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="641"/>
         <source>Label language:</source>
         <translation>Мова назви точки:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="166"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="642"/>
         <source>Pattern editing</source>
         <translation>Редагування лекала</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="178"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="643"/>
         <source>Reset warnings</source>
         <translation>Скинути попередження</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="661"/>
         <source>Toolbar</source>
         <translation>Панель інструментів</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="662"/>
         <source>The text appears under the icon (recommended for beginners).</source>
         <translation>Текст під піктограмою (рекомендовано для новачків).</translation>
     </message>
@@ -14353,11 +15799,13 @@ Would you like to select another file?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="645"/>
         <source>Update a pattern only after a curve release</source>
         <translation>Оновлювати деталь лише після звільнення кривої</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="188"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="647"/>
         <source>Free curve mode</source>
         <translation>Режим вільної кривої</translation>
     </message>
@@ -14368,233 +15816,281 @@ Would you like to select another file?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="24"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="676"/>
         <source>General</source>
         <translation>Загальні</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="74"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="635"/>
         <source>min</source>
         <comment>minutes</comment>
         <translation>хв</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="116"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="638"/>
         <source>Piece label language:</source>
         <translation>Мова мітки деталі:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="198"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="648"/>
         <source>Double click calls Zoom fit best for current pattern piece</source>
         <translation>Подвійне клацання викликає функцію масштабування для найкращої відповідності поточної деталі викрійки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="221"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="654"/>
         <source>Enable to translate formula according to locale</source>
         <translation>Увімкнути переклад формули відповідно до локалі</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="224"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="656"/>
         <source>Translate formula</source>
         <translation>Формула перетворення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="660"/>
         <source>Enable Garbage Collector</source>
         <translation>Увімкнути збір сміття</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="265"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="663"/>
         <source>Toolbox icon size:</source>
         <translation>Розмір піктограм панелі інструментів:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="272"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="664"/>
         <source>Small</source>
         <translation>Малі</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="665"/>
         <source>Normal</source>
         <translation>Стандартний</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="321"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="667"/>
         <source>Theme:</source>
         <translation>Тема:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="345"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="668"/>
         <source>Pointer mode:</source>
         <translation>Режим вказівника:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="364"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="669"/>
         <source>Use tool groups</source>
         <translation>Використовувати групи інструментів</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="408"/>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="456"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="680"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="682"/>
         <source>Shortcuts</source>
         <translation>Комбінації клавіш</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="451"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="678"/>
         <source>Action</source>
         <translation>Дія</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="479"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="681"/>
         <source>Restore defaults</source>
         <translation>Відновити типові</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="489"/>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="623"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="703"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="705"/>
         <source>Scrolling</source>
         <translation>Прокрутка</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="495"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="683"/>
         <source>Animation</source>
         <translation>Анімація</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="504"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="684"/>
         <source>Duration:</source>
         <translation>Тривалість:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="511"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="686"/>
         <source>Scrolling animation duration</source>
         <translation>Тривалість анімації прокрутки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="514"/>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="540"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="688"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="693"/>
         <source>ms</source>
         <comment>milliseconds</comment>
         <translation>мс</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="530"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="689"/>
         <source>Update interval:</source>
         <translation>Інтервал оновлення:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="537"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="691"/>
         <source>Time in milliseconds between each animation update</source>
         <translation>Час у мілісекундах між кожним оновленням анімації</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="559"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="694"/>
         <source>Mouse scale</source>
         <translation>Масштаб миші</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="568"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="695"/>
         <source>Sensor:</source>
         <comment>sensor mouse</comment>
         <translation>Сенсор:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="575"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="697"/>
         <source>Scale scrolling sensitivity for mouse with sensor</source>
         <translation>Шкала чутливості прокручування для миші з сенсором</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="594"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="699"/>
         <source>Wheel:</source>
         <comment>mouse wheel</comment>
         <translation>Коліщатко:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="601"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="701"/>
         <source>Scale scrolling sensitivity for mouse with wheel</source>
         <translation>Шкала чутливості прокручування для миші з коліщатком</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="632"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="704"/>
         <source>Acceleration:</source>
         <translation>Прискорення:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="672"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="713"/>
         <source>Privacy</source>
         <translation>Приватність</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="678"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="706"/>
         <source>Usage statistic</source>
         <translation>Статистика про користування</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="684"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="707"/>
         <source>Send usage statistics</source>
         <translation>Надсилати статистику про користування</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="691"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="708"/>
         <source>Please help to improve Valentina&apos;s quality by automatically sending usage statistics. Sent data contains &lt;span style=&quot; font-weight:700;&quot;&gt;no potentially sensitive information&lt;/span&gt; like user names, email addresses, file contents or file paths.</source>
         <translation>Будь ласка, допоможіть поліпшити якість роботи Valentina, автоматично надсилаючи статистику користування. Надіслані дані не містять &lt;span style=&quot; font-weight:700;&quot;&gt;жодної потенційно конфіденційної інформації&lt;/span&gt;, такої як імена користувачів, адреси електронної пошти, вміст файлів або шляхи до них.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="704"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="709"/>
         <source>Crash reports</source>
         <translation>Звіти про збої</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="710"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="710"/>
         <source>Send automatic crash reports</source>
         <translation>Надсилати автозвіти про збої</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="719"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="711"/>
         <source>Email:</source>
         <translation>Email:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="735"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="712"/>
         <source>Reporting crash reports will help us make Valentina more reliable. All information is treated as confidential and is only used to improve future versions of this program. Please activate sending automatic crash reports and fill your email address (optional). If provided, we may contact you with additional information about the crash.</source>
         <translation>Повідомлення про збої допоможуть нам зробити Валентину більш надійною. Вся інформація обробляється як конфіденційна і використовується тільки для поліпшення майбутніх версій цієї програми. Будь ласка, активуйте автоматичну відправку звітів про аварії і введіть свою адресу електронної пошти (необов&apos;язково). Якщо вона буде вказана, ми можемо зв&apos;язатися з вами для отримання додаткової інформації про збій.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="313"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="666"/>
         <source>User Interface</source>
         <translation>Інтерфейс користувача</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="658"/>
         <source>Enable collecting unused objects when open pattern file.</source>
         <translation>Увімкнути збір незадіяних об&apos;єктів під час відкриття файлу викрійки.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="670"/>
         <source>Don&apos;t use the native file dialog</source>
         <translation>Не використовуйте рідний діалог файлів</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="381"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="671"/>
         <source>Update</source>
         <translation>Оновити</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="387"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="673"/>
         <source>Automatically check for updates each time the application starts</source>
         <translation>Автоматично перевіряти наявність оновлень при кожному запуску програми</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="390"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="675"/>
         <source>Automatically check for updates</source>
         <translation>Автоматично перевіряти наявність оновлень</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="208"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="650"/>
         <source>Disable if you want to skip interactive part of creating tools. And go straight to editing formulas instead.</source>
         <translation>Вимкніть, якщо хочете пропустити інтерактивну частину створення інструментів. І перейти відразу до редагування формул.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="211"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="652"/>
         <source>Interactive tools</source>
         <translation>Інтерактивні інструменти</translation>
     </message>
@@ -14603,26 +16099,31 @@ Would you like to select another file?</source>
     <name>PreferencesPathPage</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="20"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespathpage.h" line="105"/>
         <source>Paths that Valentina uses</source>
         <translation>Шляхи, що використовує Валентина</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="45"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespathpage.h" line="107"/>
         <source>Type</source>
         <translation>Тип</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="50"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespathpage.h" line="109"/>
         <source>Path</source>
         <translation>Контур</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="72"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespathpage.h" line="110"/>
         <source>Default</source>
         <translation>По замовчуванню</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.ui" line="101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespathpage.h" line="111"/>
         <source>Edit</source>
         <translation>Редагувати</translation>
     </message>
@@ -14651,177 +16152,213 @@ Would you like to select another file?</source>
     <name>PreferencesPatternPage</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="47"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="477"/>
         <source>Graphical output</source>
         <translation>Графічний вивід</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="53"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="478"/>
         <source>Use antialiasing</source>
         <translation>Використовувати згладжування</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="178"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="496"/>
         <source>Undo</source>
         <translation>Анулювати дію</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="187"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="497"/>
         <source>Count steps (0 - no limit):</source>
         <translation>Кількість кроків (0 - без обмежень):</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="200"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="498"/>
         <source>Workpiece</source>
         <translation>Деталь</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="209"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="502"/>
         <source>Forbid flipping</source>
         <translation>Заборонити віддзеркалення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="229"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="510"/>
         <source>Show second passmark on seam line</source>
         <translation>Показати другу надсічку на лінії шва</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="206"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="500"/>
         <source>By default forbid flipping for all new created workpieces</source>
         <translation>За замовчуванням заборонити віддзеркалення для всіх нових створених деталей</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="236"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="512"/>
         <source>By default hide the main path if the seam allowance was enabled</source>
         <translation>За замовчуванням ховати головний контур якщо прибавка на шви була включена</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="239"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="514"/>
         <source>Hide main path</source>
         <translation>Ховати головний контур</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="312"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="518"/>
         <source>Size:</source>
         <translation>Розмір:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="515"/>
         <source>Seam allowance</source>
         <translation>Прибавка на шви</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="485"/>
         <source>This setting has no effect since the value is overridden by the command-line option</source>
         <translation>Це налаштування не має ефекту, оскільки значення перевизначено опцією командного рядка</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="226"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="508"/>
         <source>Show a notch both in the seam allowance and on the seam line. If you want to see a notch on a piece without seam allowance, enable built-in seam allowance and set the length of a notch manually.</source>
         <translation>Показати надсічку як на припуску на шов, так і на лінії шва. Якщо ви хочете побачити надсічку на деталі без припусків на шви, увімкніть вбудовані припуски на шви і задайте довжину надсічки вручну.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="272"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="516"/>
         <source>Default value:</source>
         <translation>Значення за замовчуванням:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="298"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="517"/>
         <source>Font</source>
         <translation>Шрифт</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="332"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="519"/>
         <source>Outline font:</source>
         <translation>Контурний шрифт:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="352"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="520"/>
         <source>Single-line font:</source>
         <translation>Монолінійний шрифт:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="368"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="521"/>
         <source>Allow single stroke outline fonts</source>
         <translation>Дозволити монолінійні контурні шрифти</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="375"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="523"/>
         <source>When this option is activated, the application will utilize SVG Fonts present in your system to render piece label text, instead of using outline fonts.</source>
         <translation>Якщо цей параметр активовано, програма використовуватиме SVG-шрифти, наявні у вашій системі, для відображення тексту мітки деталі, замість того, щоб використовувати контурні шрифти.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="378"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="525"/>
         <source>Use single-line fonts</source>
         <translation>Використовувати однорядкові шрифти</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="388"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="526"/>
         <source>Label data/time format</source>
         <translation>Формат даних/часу мітки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="397"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="527"/>
         <source>Date:</source>
         <translation>Дата:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="409"/>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="430"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="528"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="530"/>
         <source>Edit formats</source>
         <translation>Редагувати формати</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="418"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="529"/>
         <source>Time:</source>
         <translation>Час:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="442"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="531"/>
         <source>Materials</source>
         <translation>Матеріали</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="450"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="532"/>
         <source>Known materials:</source>
         <translation>Відомі матеріали:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="463"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="534"/>
         <source>Manage list of known materials</source>
         <translation>Керувати списком відомих матеріалів</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="466"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="536"/>
         <source>Manage</source>
         <translation>Керувати</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="488"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="538"/>
         <source>When manage pattern materials save them to known materials list</source>
         <translation>Коли керуєте матеріалами викрійки, збережіть їх у списку відомих матеріалів</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="491"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="540"/>
         <source>Remeber pattern materials</source>
         <translation>Запам’ятати матеріали викрійки</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="98"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="487"/>
         <source>Curve approximation:</source>
         <translation>Апроксимація кривої:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="489"/>
         <source>Set default curve approximation scale</source>
         <translation>Встановити масштаб апроксимації кривої за замовчуванням</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="134"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="492"/>
         <source>Bold line width</source>
         <translation>Ширина жирної лінії</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="137"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="494"/>
         <source>Line width:</source>
         <translation>Ширина лінії:</translation>
     </message>
@@ -14837,6 +16374,7 @@ Would you like to select another file?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="60"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="480"/>
         <source>Use OpenGL to render a scene.
 This option will take an affect after restart.</source>
         <translation>Використовуйте OpenGL для візуалізації сцени.
@@ -14844,6 +16382,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="64"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="483"/>
         <source>Use OpenGL render</source>
         <translation>Використовувати рендеринг OpenGL</translation>
     </message>
@@ -14859,26 +16398,31 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="504"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="541"/>
         <source>Background image</source>
         <translation>Фонове зображення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="510"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="542"/>
         <source>Opacity:</source>
         <translation>Непрозорість:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="517"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="544"/>
         <source>Opacity value by default</source>
         <translation>Значення непрозорості за замовчуванням</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="216"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="504"/>
         <source>By default export to DXF-AAMA sew line on Draw layer for all new created workpieces</source>
         <translation>За замовчуванням експорт в DXF-AAMA лінії швів на шарі Draw для всіх новостворених деталей</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="219"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="506"/>
         <source>Sew line on drawing</source>
         <translation>Лінія шва на малювання</translation>
     </message>
@@ -15739,7 +17283,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="667"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2148"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2194"/>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation>Деталь &apos;%1&apos;. Припуск на шви недійсний.</translation>
     </message>
@@ -15927,7 +17471,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="558"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2466"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2512"/>
         <source>Piece &apos;%1&apos;. Unable to load default piece label template.
 %2
 %3</source>
@@ -15941,7 +17485,7 @@ This option will take an affect after restart.</source>
         <translation>Деталь &quot;%1&quot;. Нитка основи недійсна.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="3171"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="3217"/>
         <source>Piece &apos;%1&apos;. Fold line is not valid.</source>
         <translation>Деталь &apos;%1&apos;. Лінія згину не дійсна.</translation>
     </message>
@@ -16566,7 +18110,7 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="109"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1965"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1966"/>
         <source>0 results</source>
         <translation>0 результатів</translation>
     </message>
@@ -16617,21 +18161,21 @@ This option will take an affect after restart.</source>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="320"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2721"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2722"/>
         <source>Name</source>
         <comment>measurement column</comment>
         <translation>Назва</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="325"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2723"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2724"/>
         <source>Full name</source>
         <comment>measurement column</comment>
         <translation>Повне ім&apos;я</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="330"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2725"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2726"/>
         <source>Group</source>
         <comment>measurement column</comment>
         <translation>Група</translation>
@@ -16872,7 +18416,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1209"/>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1212"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="846"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="849"/>
         <source>Import from CSV</source>
         <translation>Імпорт із CSV</translation>
     </message>
@@ -16892,234 +18436,234 @@ This option will take an affect after restart.</source>
         <translation>Файл &apos;%1&apos; не існує!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="275"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="278"/>
         <source>File error.</source>
         <translation>Помилка файла.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="311"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="314"/>
         <source>untitled %1</source>
         <translation>безіменний %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="311"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1124"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="314"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1127"/>
         <source>untitled</source>
         <translation>без назви</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="319"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="322"/>
         <source>read only</source>
         <translation>тільки читання</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="670"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="723"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="673"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="726"/>
         <source>Known measurements</source>
         <translation>Відомі мірки</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="670"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="673"/>
         <source>All files</source>
         <translation>Усі файли</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="706"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="709"/>
         <source>Could not save the file</source>
         <translation>Не вдалося зберегти файл</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="725"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="728"/>
         <source>known measurements</source>
         <translation>відомі мірки</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="743"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="746"/>
         <source>Save as</source>
         <translation>Зберегти як</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="763"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="766"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Неможливо заблокувати. Цей файл вже був відкритий в іншому вікні.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="779"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="782"/>
         <source>Could not save file</source>
         <translation>Не вдалося зберегти файл</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="805"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="808"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Неможливо заблокувати. Цей файл вже був відкритий в іншому вікні. Можливі конфлікти, якщо одночасно запущено 2 екземпляри програми.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="843"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="846"/>
         <source>Comma-Separated Values</source>
         <translation>Розділені комою значення</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="626"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="629"/>
         <source>Invalid image. Error: %1</source>
         <translation>Недійсне зображення. Помилка: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1047"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1050"/>
         <source>Measurement images</source>
         <translation>Зображення мірок</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1113"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1150"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1116"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1153"/>
         <source>Unable to save image. Error: %1</source>
         <translation>Не вдається зберегти зображення. Помилка: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1134"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1137"/>
         <source>Save Image</source>
         <translation>Зберегти зображення</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1198"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1201"/>
         <source>Unable to show image. Error: %1</source>
         <translation>Неможливо показати зображення. Помилка: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1811"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="1812"/>
         <source>About Qt</source>
         <translation>Про Qt</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2057"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2058"/>
         <source>Empty</source>
         <translation>Порожньо</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2058"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2059"/>
         <source>File was not saved yet.</source>
         <translation>Файл ще не було збережено.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2109"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2110"/>
         <source>Unsaved changes</source>
         <translation>Незбереженні зміни</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2110"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2111"/>
         <source>Measurements have been modified. Do you want to save your changes?</source>
         <translation>Мірки змінені. Хочете зберегти зміни?</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2118"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2119"/>
         <source>Save…</source>
         <translation>Зберегти…</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2118"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2119"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2123"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2124"/>
         <source>Don&apos;t Save</source>
         <translation>Не зберігати</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2202"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2203"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Неможливо прочитати налаштування з файлу .INI неправильного формату.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2223"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2224"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Не вдається зберегти налаштування. Доступ заборонено.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2252"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2253"/>
         <source>Empty</source>
         <comment>list</comment>
         <translation>Порожньо</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2325"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2326"/>
         <source>Unknown measurement</source>
         <translation>Невідомі мірки</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2333"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2334"/>
         <source>&amp;New Window</source>
         <translation>&amp;Нове вікно</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2476"/>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2657"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2477"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2658"/>
         <source>Unnamed image %1</source>
         <translation>Зображення без назви %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2514"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2515"/>
         <source>Open file</source>
         <translation>Відкрити файл</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2633"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2634"/>
         <source>Length units</source>
         <translation>Одиниці довжини</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2634"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2635"/>
         <source>Degrees</source>
         <translation>Градуси</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2649"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2650"/>
         <source>None</source>
         <translation>Жодного</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2694"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2695"/>
         <source>Measurement name is empty.</source>
         <translation>Назва мірки порожня.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2699"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2700"/>
         <source>Imported file must not contain the same name twice.</source>
         <translation>Імпортований файл не повинен містити однакову назву двічі.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2704"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2705"/>
         <source>Measurement &apos;%1&apos; doesn&apos;t match regex pattern.</source>
         <translation>Мірка &quot;%1&quot; не відповідає шаблону регулярного виразу.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2709"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2710"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
         <translation>Мірка &quot;%1&quot; вже використовується у файлі.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2727"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2728"/>
         <source>Formula</source>
         <comment>measurement column</comment>
         <translation>Формула</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2729"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2730"/>
         <source>Description</source>
         <comment>measurement column</comment>
         <translation>Опис</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2753"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2754"/>
         <source>Error in row %1. The measurement name is empty.</source>
         <translation>Помилка в рядку %1. Назва мірки порожня.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2794"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2795"/>
         <source>Error in row %1. %2</source>
         <translation>Помилка в рядку %1. %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2807"/>
+        <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2808"/>
         <source>Individual measurements require at least 2 columns.</source>
         <translation>Для окремих вимірювань потрібно щонайменше 2 стовпці.</translation>
     </message>
@@ -18393,63 +19937,75 @@ Do you want to save your changes?</source>
     <name>TabFoldLine</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="544"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="24"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="562"/>
         <source>Fold line</source>
         <translation>Лінія згину</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="545"/>
         <source>Type:</source>
         <translation>Тип:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="67"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="547"/>
         <source>Bold</source>
         <comment>Font formating</comment>
         <translation>Жирний</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="86"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="550"/>
         <source>Italic</source>
         <comment>Font formating</comment>
         <translation>Курсив</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="105"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="553"/>
         <source>Aligns with the left edge</source>
         <translation>Вирівнювання за лівим краєм</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="127"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="556"/>
         <source>Centers horizontally in the available space</source>
         <translation>Центрує горизонтально у доступному просторі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="149"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="559"/>
         <source>Aligns with the right edge</source>
         <translation>Вирівнювання по правому краю</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="186"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="561"/>
         <source>Label:</source>
         <translation>Мітка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="605"/>
         <source>Manual shape</source>
         <translation>Ручне керування формою</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="232"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="563"/>
         <source>Height</source>
         <translation>Зріст</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="292"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="564"/>
         <source>Height:</source>
         <comment>notch depth</comment>
         <translation>Висота:</translation>
@@ -18458,6 +20014,9 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="315"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="543"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="771"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="566"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="580"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="594"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
@@ -18465,6 +20024,9 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="372"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="600"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="828"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="569"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="583"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="597"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
@@ -18472,6 +20034,9 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="404"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="632"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="860"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="572"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="586"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="600"/>
         <source>Calculation</source>
         <translation>Обчислення</translation>
     </message>
@@ -18479,27 +20044,34 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="429"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="657"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="885"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="575"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="589"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="603"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показати повне обчислення у вікні повідомлення&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="460"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="577"/>
         <source>Width</source>
         <translation>Ширина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="520"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="578"/>
         <source>Width:</source>
         <comment>notch width</comment>
         <translation>Ширина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="688"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="591"/>
         <source>Center</source>
         <translation>Центр</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabfoldline.ui" line="748"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabfoldline.h" line="592"/>
         <source>Center:</source>
         <comment>notch angle</comment>
         <translation>Центр:</translation>
@@ -18509,65 +20081,81 @@ Do you want to save your changes?</source>
     <name>TabGrainline</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="39"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="361"/>
         <source>Grainline enabled</source>
         <translation>Нитка основи ввімкнена</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="96"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="362"/>
         <source>Rotation:</source>
         <translation>Обертання:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="116"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="305"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="364"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="378"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="164"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="353"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="368"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="382"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="190"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="379"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="385"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="215"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="404"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="374"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="388"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="376"/>
         <source>Length:</source>
         <translation>Довжина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="434"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="390"/>
         <source>Center pin:</source>
         <translation>Центральна шпилька:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="458"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="391"/>
         <source>Top pin:</source>
         <translation>Верхня шпилька:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="468"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="392"/>
         <source>Bottom pin:</source>
         <translation>Нижня шпилька:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="498"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="393"/>
         <source>Arrows:</source>
         <translation>Стрілки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="513"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="394"/>
         <source>Visible</source>
         <translation>Видимий</translation>
     </message>
@@ -18576,32 +20164,39 @@ Do you want to save your changes?</source>
     <name>TabLabels</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1152"/>
         <source>Piece label data</source>
         <translation>Дані мітки деталі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="92"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1141"/>
         <source>Letter:</source>
         <translation>Буква:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1142"/>
         <source>Letter of pattern piece</source>
         <translation>Символ креслення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="129"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1144"/>
         <source>Placement:</source>
         <translation>Розташування:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="431"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1275"/>
         <source>Labels</source>
         <translation>Мітки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="528"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1206"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1180"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1230"/>
         <source>Width:</source>
         <translation>Ширина:</translation>
     </message>
@@ -18612,6 +20207,12 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1226"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1415"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1662"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1182"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1196"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1213"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1232"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1246"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1263"/>
         <source>Formula wizard</source>
         <translation>Мастер формул</translation>
     </message>
@@ -18622,6 +20223,12 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1274"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1463"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1710"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1186"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1200"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1217"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1236"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1250"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1267"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
@@ -18632,6 +20239,12 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1300"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1489"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1736"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1189"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1203"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1220"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1239"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1253"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1270"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
@@ -18642,200 +20255,252 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1325"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1514"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1761"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1192"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1206"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1242"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1256"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1273"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="717"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1395"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1194"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1244"/>
         <source>Height:</source>
         <translation>Висота:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="866"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1544"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1208"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1258"/>
         <source>Center pin:</source>
         <translation>Центральна шпилька:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="890"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1568"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1209"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1259"/>
         <source>Top left pin:</source>
         <translation>Верхня ліва шпилька:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="900"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1578"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1210"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1260"/>
         <source>Bottom right pin:</source>
         <translation>Нижня права шпилька:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="964"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1642"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1211"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1261"/>
         <source>Angle:</source>
         <translation>Кут:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1128"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1228"/>
         <source>Pattern label visible</source>
         <translation>Мітка лекала видима</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="51"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="238"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1135"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1153"/>
         <source>Label template:</source>
         <translation>Шаблон мітки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="61"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="248"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1139"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1157"/>
         <source>Edit template</source>
         <translation>Редагувати шаблон</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="83"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="276"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1140"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1158"/>
         <source>Label data</source>
         <translation>Дані мітки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="109"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1143"/>
         <source>Quantity:</source>
         <translation>Кількість:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="136"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1145"/>
         <source>on fold</source>
         <translation>на згині</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="157"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1147"/>
         <source>Annotation:</source>
         <translation>Анотація:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="164"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1148"/>
         <source>A text field to add comments in</source>
         <translation>Текстове поле для додавання коментарів</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="171"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1149"/>
         <source>Orientation:</source>
         <translation>Орієнтація:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1150"/>
         <source>Rotation:</source>
         <translation>Обертання:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="199"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1151"/>
         <source>Tilt:</source>
         <translation>Нахил:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="143"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1146"/>
         <source>Fold position:</source>
         <translation>Положення згинання:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="58"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1137"/>
         <source>Edit piece label template</source>
         <translation>Редагувати шаблон мітки деталі</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="444"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1176"/>
         <source>Options to control position a detail label. &lt;b&gt;Not available if a detail label template is empty&lt;/b&gt;.</source>
         <translation>Опції керування розташуванням мітки деталі. &lt;b&gt;Недоступні, якщо шаблон мітки деталі порожні&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="464"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1142"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1179"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1229"/>
         <source>Font size:</source>
         <translation>Розмір шрифту:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1125"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1226"/>
         <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
         <translation>Опції керування розташуванням мітки викрійки. &lt;b&gt;Недоступні, якщо шаблон мітки викрійки порожні&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="230"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1174"/>
         <source>Pattern label data</source>
         <translation>Дані мітки викрійки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="245"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1155"/>
         <source>Edit pattern label</source>
         <translation>Редагувати мітку викрійки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1159"/>
         <source>Pattern name:</source>
         <translation>Назва лекала:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="299"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1160"/>
         <source>Pattern number:</source>
         <translation>Номер лекала:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="313"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1161"/>
         <source>Company/Designer name:</source>
         <translation>Компанія/дизайнер:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1162"/>
         <source>Customer name:</source>
         <translation>Ім&apos;я клієнта:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="341"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1163"/>
         <source>Date format:</source>
         <translation>Формат дати:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="351"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1164"/>
         <source>Time format:</source>
         <translation>Формат часу:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="361"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1165"/>
         <source>Customer birth date:</source>
         <translation>Дата народження клієнта:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="368"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1166"/>
         <source>yyyy-MM-dd</source>
         <translation>dd-MM-yyyy</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="375"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1167"/>
         <source>Customer email:</source>
         <translation>Електронна адреса клієнта:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="388"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1168"/>
         <source>Materials</source>
         <translation>Матеріали</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="397"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1169"/>
         <source>Pattern materials:</source>
         <translation>Матеріали викрійки:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="404"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1171"/>
         <source>Manage list of pattern materials</source>
         <translation>Керувати списком матеріалів викрійки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="407"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1173"/>
         <source>Manage</source>
         <translation>Керувати</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="447"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1178"/>
         <source>Piece label visible</source>
         <translation>Мітка деталі видима</translation>
     </message>
@@ -18844,164 +20509,196 @@ Do you want to save your changes?</source>
     <name>TabPassmarks</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="40"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="731"/>
         <source>Passmark:</source>
         <translation>Надсічка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="197"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="813"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="751"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="809"/>
         <source>Angle</source>
         <translation>Кут</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="206"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="752"/>
         <source>Straightforward</source>
         <translation>Пряма</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="219"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="753"/>
         <source>Bisector</source>
         <translation>Бісектриса</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="71"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="735"/>
         <source>Marks</source>
         <translation>Позначки</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="232"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="280"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="755"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="767"/>
         <source>Select if need designate the corner point as a passmark</source>
         <translation>Виберіть якщо потрібно позначити кутову точку як надсічку</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="235"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="757"/>
         <source>Intersection</source>
         <translation>Перетин</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="333"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="778"/>
         <source>Clockwise opening</source>
         <translation>Відкриття за годинниковою стрілкою</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="343"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="779"/>
         <source>Not Mirrored</source>
         <translation>Не віддзеркалено</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="351"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="823"/>
         <source>Manual shape</source>
         <translation>Ручне керування формою</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="360"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="781"/>
         <source>Length</source>
         <translation>Довжина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="420"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="782"/>
         <source>Length:</source>
         <comment>notch depth</comment>
         <translation>Довжина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="585"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="795"/>
         <source>Width</source>
         <translation>Ширина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="645"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="796"/>
         <source>Width:</source>
         <comment>notch width</comment>
         <translation>Ширина:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="873"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="810"/>
         <source>Angle:</source>
         <comment>notch angle</comment>
         <translation>Кут:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1039"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="838"/>
         <source>Control</source>
         <translation>Контроль</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1093"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="824"/>
         <source>Visible</source>
         <translation>Видимий</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1193"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="832"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a notch visible</source>
         <translation>Створіть формулу, яка регулює видимість. Значення, які відрізняються від &quot;0&quot;, роблять надсічку видимою</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1268"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="842"/>
         <source>Show the second passmark on seam line</source>
         <translation>Показати другу надсічку на лінії шва</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1265"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="840"/>
         <source>This option has effect only if the second passmark on seam line enabled in global preferences. The option helps disable the second passmark for this passmark only.</source>
         <translation>Ця опція має ефект тільки коли друга надсічка на лінії шва включена в глобальних налаштуваннях. Ця опція допомагає відключати другу надсічку для цієї надсічки.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="60"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="780"/>
         <source>Type</source>
         <translation>Тип</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="80"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="736"/>
         <source>One line</source>
         <comment>notch type</comment>
         <translation>Одна лінія</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="93"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="737"/>
         <source>Two lines</source>
         <comment>notch type</comment>
         <translation>Дві лінії</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="106"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="738"/>
         <source>Three lines</source>
         <comment>notch type</comment>
         <translation>Три лінії</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="119"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="739"/>
         <source>T mark</source>
         <comment>notch type</comment>
         <translation>Т-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="135"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="743"/>
         <source>External V mark</source>
         <comment>notch type</comment>
         <translation>Зовнішня V-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="151"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="747"/>
         <source>Internal V mark</source>
         <comment>notch type</comment>
         <translation>Внутрішня V-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="161"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="748"/>
         <source>U mark</source>
         <comment>notch type</comment>
         <translation>U-позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="171"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="749"/>
         <source>Box mark</source>
         <comment>notch type</comment>
         <translation>Квадратна позначка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="181"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="750"/>
         <source>Check mark</source>
         <comment>notch type</comment>
         <translation>Позначка прапорець</translation>
@@ -19009,42 +20706,52 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="248"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="296"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="759"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="771"/>
         <source>Select if need designate the corner point as a passmark. Show only left passmark.</source>
         <translation>Виберіть, чи потрібно позначити кутову точку як надсічку. Показати лише ліву надсічку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="251"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="761"/>
         <source>Intersection (only left)</source>
         <translation>Перетин (тільки ліва)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="264"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="312"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="763"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="775"/>
         <source>Select if need designate the corner point as a passmark. Show only right passmark.</source>
         <translation>Виберіть, якщо потрібно позначити кутову точку як надсічку. Показати лише праву надсічку.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="267"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="765"/>
         <source>Intersection (only right)</source>
         <translation>Перетин (тільки права)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="283"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="769"/>
         <source>Intersection 2</source>
         <translation>Перетин 2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="299"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="773"/>
         <source>Intersection 2 (only left)</source>
         <translation>Перетин 2 (тільки ліва)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="315"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="777"/>
         <source>Intersection 2 (only right)</source>
         <translation>Перетин 2 (тільки права)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="148"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="745"/>
         <source>Acute angle that looks outside of piece</source>
         <translation>Гострий кут, що дивиться за межі деталі</translation>
     </message>
@@ -19053,6 +20760,10 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="668"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="896"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1116"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="784"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="798"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="812"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="826"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
@@ -19061,6 +20772,10 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="725"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="953"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1164"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="787"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="801"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="815"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="829"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
@@ -19068,6 +20783,9 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="529"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="757"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="985"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="790"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="804"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="818"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
@@ -19076,16 +20794,22 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="782"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1010"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1221"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="793"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="807"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="821"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="836"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="47"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="733"/>
         <source>List of all defined passmarks. To define a passmark return to the Main Path tab, call context menu for a point item and make it a passmark.</source>
         <translation>Список усіх визначених надсічок. Щоб визначити надсічку, поверніться на вкладку «Головний контур», викличте контекстне меню для вузла і зробіть його надсічкою.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="132"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="741"/>
         <source>Acute angle that looks inside of piece</source>
         <translation>Гострий кут, що дивиться всередину деталі</translation>
     </message>
@@ -19094,112 +20818,135 @@ Do you want to save your changes?</source>
     <name>TabPaths</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="43"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="991"/>
         <source>Main path</source>
         <translation>Головний контур</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="67"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="943"/>
         <source>All objects in path should follow in clockwise direction.</source>
         <translation>Усі об&apos;єкти в контурі повинні слідувати за годинниковою стрілкою.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="501"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1009"/>
         <source>Forbid piece be mirrored in a layout.</source>
         <translation>Заборонити віддзеркалення деталі в розкладці.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="504"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1011"/>
         <source>Forbid flipping</source>
         <translation>Заборонити відзеркалення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="381"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="990"/>
         <source>Ready!</source>
         <translation>Готовий!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="102"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="952"/>
         <source>Show full piece</source>
         <translation>Показати всю деталь</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="117"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="954"/>
         <source>Reverse node direction</source>
         <translation>Зворотний напрямок вузла</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="136"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="957"/>
         <source>Excluded node</source>
         <translation>Виключений вузол</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="155"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="960"/>
         <source>Turn point</source>
         <translation>Рубіжна точка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="174"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="963"/>
         <source>Check node uniqness</source>
         <translation>Перевіряти унікальність вузла</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="193"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="966"/>
         <source>Notch</source>
         <translation>Надсічка</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="212"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="969"/>
         <source>Duplicate</source>
         <translation>Копія</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="231"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="972"/>
         <source>Delete node</source>
         <translation>Видалити вузол</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="338"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="986"/>
         <source>Mirror line</source>
         <translation>Лінія дзеркального відображення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="368"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="989"/>
         <source>Show mirror line</source>
         <translation>Показати лінію дзеркального відображення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="521"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1017"/>
         <source>When the number of copies is greater than 1 and either &apos;Force Flipping&apos; or &apos;Forbid Flipping&apos; is selected, each even-numbered copy of the piece will be flipped vertically. The &apos;Force Flipping&apos; or &apos;Forbid Flipping&apos; setting will also toggle for each copy, applying the opposite of the initially selected option for each subsequent copy.</source>
         <translation>Якщо кількість копій більша за 1 і вибрано «Примусове перегортання» або «Заборонити перегортання», кожна парна копія деталі буде перегорнута по вертикалі. Параметр «Примусове перегортання» або «Заборонити перегортання» також буде перемикатися для кожної копії, застосовуючи протилежне значення до початково вибраної опції для кожної наступної копії.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="524"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1019"/>
         <source>Symmetrical copy</source>
         <translation>Симетрична копія</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="531"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1021"/>
         <source>Force piece to always follow grainline direction regardless of layout settings.</source>
         <translation>Наказує деталі завжди слідувати нитці основи незалежно від налаштувань розкладки.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="534"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1023"/>
         <source>Follow grainline</source>
         <translation>Дотримуватися нитки основи</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="555"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="561"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1025"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1092"/>
         <source>Seam allowance</source>
         <translation>Прибавка на шви</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="602"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1032"/>
         <source>Activates true zero seam allowance width. This also disables intersection checks between the seam line and seam allowance.</source>
         <translation>Активує дійсну нульову ширину припуску на шов. При цьому також вимикається перевірка перетину між лінією шва та припуском на шов.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="657"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1035"/>
         <source>Width:</source>
         <translation>Ширина:</translation>
     </message>
@@ -19207,6 +20954,9 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="677"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="916"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1106"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1037"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1057"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1075"/>
         <source>Formula wizard</source>
         <translation>Майстер формул</translation>
     </message>
@@ -19214,6 +20964,9 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="719"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="958"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1148"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1041"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1061"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1079"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
@@ -19221,6 +20974,9 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="745"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="984"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1174"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1044"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1064"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1082"/>
         <source>Calculation</source>
         <translation>Розрахунок</translation>
     </message>
@@ -19228,197 +20984,241 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="767"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1006"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1196"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1047"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1067"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1085"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Показати повний розрахунок у вікні повідомлення&lt;/p&gt;&lt;/body&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="792"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1049"/>
         <source>Nodes</source>
         <translation>Вузли</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="809"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1050"/>
         <source>Node:</source>
         <translation>Вузол:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="886"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1051"/>
         <source>Before:</source>
         <translation>Перед:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="906"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1096"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1053"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1071"/>
         <source>Return to default width</source>
         <translation>Повернутися до ширини по замовчуванню</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="909"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1099"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1055"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1073"/>
         <source>Default</source>
         <translation>По замовчуванню</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1076"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1069"/>
         <source>After:</source>
         <translation>Після:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1223"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1087"/>
         <source>Angle:</source>
         <translation>Кут:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="346"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1298"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="987"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1089"/>
         <source>Start point:</source>
         <translation>Стартова точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="356"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1308"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="988"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1090"/>
         <source>End point:</source>
         <translation>Кінцева точка:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1318"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1091"/>
         <source>Include as:</source>
         <translation>Вставити як:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1360"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1093"/>
         <source>Internal paths</source>
         <translation>Внутрішні шляхи</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="574"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1027"/>
         <source>The seam allowance is part of main path</source>
         <translation>Прибавка на шви є частиною основного контуру</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="577"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1029"/>
         <source>Built in</source>
         <translation>Вбудована</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="79"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="945"/>
         <source>Hide the main path if the seam allowance is enabled</source>
         <translation>Ховати головний контур якщо прибавка на шви була увімкнута</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="947"/>
         <source>Hide main path</source>
         <translation>Ховати головний контур</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="433"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="998"/>
         <source>Name of detail:</source>
         <translation>Назва деталі:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="416"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="995"/>
         <source>Detail</source>
         <translation>Деталь</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="419"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="996"/>
         <source>Name can&apos;t be empty</source>
         <translation>Назва обов&apos;язкова</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="511"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1013"/>
         <source>Force piece to be always flipped in a layout.</source>
         <translation>Примусове перевертання деталі у розкладці.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="514"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1015"/>
         <source>Force flipping</source>
         <translation>Примусове перевертання</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="258"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="975"/>
         <source>Move on top</source>
         <translation>Перемістити на вершину</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="275"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="978"/>
         <source>Move up</source>
         <translation>Перемістити вгору</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="292"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="981"/>
         <source>Move down</source>
         <translation>Перемістити вниз</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="309"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="984"/>
         <source>Move on bottom</source>
         <translation>Перемістити до низу</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="426"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="997"/>
         <source>Priority:</source>
         <translation>Пріоритет:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="454"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1001"/>
         <source>Controls priority in layout. 0 - no priority.</source>
         <translation>Керує пріоритетом у розкладці. 0 – без пріоритету.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="587"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1030"/>
         <source>Automatic</source>
         <comment>seam allowance</comment>
         <translation>Автоматична</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="605"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1034"/>
         <source>True zero width</source>
         <translation>Дійсна нульова ширина</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1264"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1088"/>
         <source>Custom</source>
         <comment>seam allowance</comment>
         <translation>Користувацька</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="395"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1024"/>
         <source>Piece</source>
         <translation>Деталь</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="403"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="993"/>
         <source>Universally Unique IDentifier of piece. Used to identifier piece while updating manual layout. Left empty to generate new value.</source>
         <translation>Універсальний унікальний ідентифікатор деталі. Використовується для ідентифікації фрагмента під час оновлення розкладки вручну. Залиште порожнім, щоб створити нове значення.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="440"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="999"/>
         <source>Gradation label:</source>
         <translation>Мітка градації:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="473"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1003"/>
         <source>Insert…</source>
         <translation>Вставити…</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="92"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="951"/>
         <source>On drawing</source>
         <translation>На малювання</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="482"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1004"/>
         <source>Short name:</source>
         <translation>Коротке ім&apos;я:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="489"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1006"/>
         <source>Name used to generate a variable</source>
         <translation>Ім&apos;я, що використовується для генерації змінної</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="89"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="949"/>
         <source>Export to DXF-AAMA sew line on Draw layer</source>
         <translation>Експорт в DXF-AAMA лінії шва на шарі Draw</translation>
     </message>
@@ -19427,6 +21227,7 @@ Do you want to save your changes?</source>
     <name>TabPlaceLabels</name>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabplacelabels.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabplacelabels.h" line="46"/>
         <source>Dialog</source>
         <translation>Діалог</translation>
     </message>
@@ -20261,24 +22062,24 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractPattern</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1482"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1490"/>
         <source>Can&apos;t find tool in table.</source>
         <translation>Не можу знайти інструмент в таблиці.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1992"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2000"/>
         <source>Error creating or updating group</source>
         <translation>Помилка створення чи оновлення групи</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2060"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2068"/>
         <source>measurement</source>
         <translation>мірка</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2304"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2487"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2545"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2312"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2495"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2553"/>
         <source>New group</source>
         <translation>Нова група</translation>
     </message>
@@ -20852,37 +22653,37 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="271"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="384"/>
         <source>black</source>
         <translation>чорний</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="222"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="335"/>
         <source>green</source>
         <translation>зелений</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="225"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="338"/>
         <source>blue</source>
         <translation>синій</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="228"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="341"/>
         <source>dark red</source>
         <translation>темно-червоний</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="231"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="344"/>
         <source>dark green</source>
         <translation>темно-зелений</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="234"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="347"/>
         <source>dark blue</source>
         <translation>темно-синій</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="237"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="350"/>
         <source>yellow</source>
         <translation>жовтий</translation>
     </message>
@@ -20895,7 +22696,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ви дійсно хочете видалити?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="240"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="353"/>
         <source>light salmon</source>
         <translation>світло-рожевий</translation>
     </message>
@@ -20904,52 +22705,52 @@ Do you want to save your changes?</source>
         <translation type="vanished">золотистий</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="243"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="356"/>
         <source>goldenrod</source>
         <translation>золотистий</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="246"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="359"/>
         <source>orange</source>
         <translation>оранжевий</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="249"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="362"/>
         <source>deep pink</source>
         <translation>темно-рожевий</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="252"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="365"/>
         <source>violet</source>
         <translation>фіолетовий</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="255"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="368"/>
         <source>dark violet</source>
         <translation>темно-фіолетовий</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="258"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="371"/>
         <source>medium sea green</source>
         <translation>середній морський зелений</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="261"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="374"/>
         <source>lime</source>
         <translation>лайм</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="264"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="377"/>
         <source>deep sky blue</source>
         <translation>темний небесно-синій</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="267"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="380"/>
         <source>corn flower blue</source>
         <translation>волошковий</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="162"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="275"/>
         <source>Edit wrong formula</source>
         <translation>Редагувати неправильну формулу</translation>
     </message>
@@ -20957,52 +22758,52 @@ Do you want to save your changes?</source>
 <context>
     <name>VApplication</name>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="442"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="436"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Помилка парсингу файла. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="448"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="442"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Помилка неправильний id. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="454"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="448"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Помилка конвертації значення. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="460"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="454"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Помилка порожній параметр. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="466"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="460"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Помилка неправильний id. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="485"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="479"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Щось не так!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="499"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="493"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Помилка парсингу: %1. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="504"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="498"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Програмне виключення: %1. Програма буде закрита.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="479"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="473"/>
         <source>Invalid notch.</source>
         <translation>Недійсна надсічка.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="491"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="485"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Попередження у формулі: %1. Програму буде завершено.</translation>
     </message>
@@ -24364,79 +26165,79 @@ Do you want to save your changes?</source>
         <translation type="vanished">Помилка не унікальний id.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="618"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="646"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="710"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="754"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="642"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="670"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="734"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="778"/>
         <source>Error parsing file.</source>
         <translation>Помилка парсингу файла.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="625"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="721"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="649"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="745"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Помилка, не можу конвертувати значення.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="632"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="732"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="656"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="756"/>
         <source>Error empty parameter.</source>
         <translation>Помилка, порожній параметр.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="639"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="743"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="663"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="767"/>
         <source>Error wrong id.</source>
         <translation>Помикла, неправильний id.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="653"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="765"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="677"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="789"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Помилка парсингу файлу (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="784"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="808"/>
         <source>Error updating scene after parsing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1181"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1198"/>
         <source>Error creating or updating detail</source>
         <translation>Помилка створення чи оновлення деталі</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1803"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1820"/>
         <source>Error creating or updating single point</source>
         <translation>Помилка створення чи оновлення простої точки</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1848"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1854"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1865"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1871"/>
         <source>Error creating or updating point of end line</source>
         <translation>Помилка створення чи оновлення точки кінця відрізку</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1898"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1904"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1915"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1921"/>
         <source>Error creating or updating point along line</source>
         <translation>Помилка створення чи оновлення точки вздовж лінії</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1943"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1949"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1960"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1966"/>
         <source>Error creating or updating point of shoulder</source>
         <translation>Помилка створення чи оновлення точки плеча</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1988"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1994"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2005"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2011"/>
         <source>Error creating or updating point of normal</source>
         <translation>Помилка створення чи оновлення точки нормалі</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2033"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2039"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2050"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2056"/>
         <source>Error creating or updating point of bisector</source>
         <translation>Помилка створення чи оновлення точки бісектриси</translation>
     </message>
@@ -24445,288 +26246,288 @@ Do you want to save your changes?</source>
         <translation type="vanished">Помилка створення чи оновлення точки перетину ліній</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2109"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2115"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2126"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2132"/>
         <source>Error creating or updating point of contact</source>
         <translation>Помилка створення чи оновлення точки дотику</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2145"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2162"/>
         <source>Error creating or updating modeling point</source>
         <translation>Помилка створення чи оновлення модельної точки</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2277"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2294"/>
         <source>Error creating or updating height</source>
         <translation>Помилка створення чи оновлення висоти</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2308"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2325"/>
         <source>Error creating or updating triangle</source>
         <translation>Помилка створення чи оновлення трикутника</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2338"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2355"/>
         <source>Error creating or updating point of intersection</source>
         <translation>Помилка створення чи оновлення точки перетину</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2394"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2400"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2411"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2417"/>
         <source>Error creating or updating cut spline point</source>
         <translation>Помилка створення чи оновлення точки розрізання кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2456"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2462"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2473"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2479"/>
         <source>Error creating or updating cut spline path point</source>
         <translation>Помилка створення чи оновлення точки розрізаня складної кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2518"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2524"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2535"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2541"/>
         <source>Error creating or updating cut arc point</source>
         <translation>Помилка створення чи оновлення точки розрізання дуги</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2565"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2571"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2582"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2588"/>
         <source>Error creating or updating point of intersection line and axis</source>
         <translation>Помилка створення чи оновлення точки перетину лінії і осі</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2632"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2638"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2649"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2655"/>
         <source>Error creating or updating point of intersection curve and axis</source>
         <translation>Помилка створення чи оновлення точки перетину кривої і осі</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1679"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1696"/>
         <source>Error creating or updating line</source>
         <translation>Помилка створення чи оновлення лінії</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2974"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3037"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2991"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3054"/>
         <source>Error creating or updating simple curve</source>
         <translation>Помилка створення чи оновлення кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3165"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3244"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3182"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3261"/>
         <source>Error creating or updating curve path</source>
         <translation>Помилка створення чи оновлення шляху кривих</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3303"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3309"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3320"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3326"/>
         <source>Error creating or updating a parallel curve</source>
         <translation>Помилка під час створення або оновлення паралельної кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3378"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3384"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3395"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3401"/>
         <source>Error creating or updating a graduated curve</source>
         <translation>Помилка під час створення або оновлення градієнтної кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3465"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3482"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation>Помилка створення чи оновлення модельної кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3490"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3507"/>
         <source>Error creating or updating modeling curve path</source>
         <translation>Помилка створення чи оновлення модельного шляху кривих</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3537"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3543"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3766"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3772"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3554"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3560"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3783"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3789"/>
         <source>Error creating or updating simple arc</source>
         <translation>Помилка створення чи оновлення дуги</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3686"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3692"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3703"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3709"/>
         <source>Error creating or updating elliptical arc with length</source>
         <translation>Помилка під час створення або оновлення еліптичної дуги за довжиною</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3719"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3736"/>
         <source>Error creating or updating modeling arc</source>
         <translation>Помилка створення чи оновлення модельної дуги</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4454"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4475"/>
         <source>Error creating or updating union details</source>
         <translation>Помилка створення чи оновлення об&apos;єднання деталей</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2695"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2712"/>
         <source>Error creating or updating point of intersection arcs</source>
         <translation>Помилка створення чи оновлення точки перетину дуг</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2738"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2755"/>
         <source>Error creating or updating point of intersection circles</source>
         <translation>Помилка створення чи оновлення точки перетину кіл</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2842"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2859"/>
         <source>Error creating or updating point from circle and tangent</source>
         <translation>Помилка створення чи оновлення точки кола та дотичної</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2873"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2890"/>
         <source>Error creating or updating point from arc and tangent</source>
         <translation>Помилка створення чи оновлення точки дуги та дотичної</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2924"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2941"/>
         <source>Error creating or updating true darts</source>
         <translation>Помилка створення чи оновлення виточок</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="942"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1039"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1108"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="959"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1056"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1125"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
         <translation>Неправильна назва тегу &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1646"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1663"/>
         <source>Unknown point type &apos;%1&apos;.</source>
         <translation>Невідомий тип точки &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4341"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4362"/>
         <source>Unknown spline type &apos;%1&apos;.</source>
         <translation>Невідомий тип сплайна &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4376"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4397"/>
         <source>Unknown arc type &apos;%1&apos;.</source>
         <translation>Невідомий тип дуги &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4460"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4481"/>
         <source>Unknown tools type &apos;%1&apos;.</source>
         <translation>Невідомий тип інструмента &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="556"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="580"/>
         <source>Error not unique id.</source>
         <translation>Помилка, не унікальний id.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2802"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2819"/>
         <source>Error creating or updating point of intersection curves</source>
         <translation>Помилка створення чи оновлення точки перетину кривих</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3043"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3060"/>
         <source>Error creating or updating simple interactive spline</source>
         <translation>Помилка створення чи оновлення кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3250"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3267"/>
         <source>Error creating or updating interactive spline path</source>
         <translation>Помилка створення чи оновлення складної кривої</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3097"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3114"/>
         <source>Error creating or updating cubic bezier curve</source>
         <translation>Помилка створення чи оновлення кубічної кривої Безьє</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3440"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3457"/>
         <source>Error creating or updating cubic bezier path curve</source>
         <translation>Помилка створення чи оновлення складної кубічної кривої Безьє</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3815"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3821"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3832"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3838"/>
         <source>Error creating or updating operation of rotation</source>
         <translation>Помилка створення чи оновлення повороту</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4492"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4513"/>
         <source>Unknown operation type &apos;%1&apos;.</source>
         <translation>Невідома операція &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3856"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3873"/>
         <source>Error creating or updating operation of flipping by line</source>
         <translation>Помилка створення чи оновлення операції відзеркалення по лінії</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3891"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3908"/>
         <source>Error creating or updating operation of flipping by axis</source>
         <translation>Помилка створення чи оновлення операції віддзеркалення за віссю</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3940"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3946"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3957"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3963"/>
         <source>Error creating or updating operation of moving</source>
         <translation>Помилка створення чи оновлення операції переміщення</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2070"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2087"/>
         <source>Error creating or updating point of line intersection</source>
         <translation>Помилка створення чи оновлення точки перетину ліній</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3597"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3603"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3614"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3620"/>
         <source>Error creating or updating simple elliptical arc</source>
         <translation>Помилка створення чи оновлення простої еліптичної дуги</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4413"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4434"/>
         <source>Unknown elliptical arc type &apos;%1&apos;.</source>
         <translation>Невідомий тип еліптичної дуги &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3630"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3647"/>
         <source>Error creating or updating modeling elliptical arc</source>
         <translation>Помилка створення чи оновлення модельної еліптичної дуги</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1125"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1142"/>
         <source>Detail</source>
         <translation>Деталь</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4526"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4547"/>
         <source>Unnamed path</source>
         <translation>Контур без назви</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4519"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4542"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4540"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4563"/>
         <source>Error creating or updating a piece path</source>
         <translation>Помилка створення чи оновлення контуру деталі</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2172"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2189"/>
         <source>Error creating or updating pin point</source>
         <translation>Помилка створення чи оновлення точки шпильки</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4520"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4541"/>
         <source>Piece path doesn&apos;t contain nodes</source>
         <translation>Контур деталі не містить вузлів</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2241"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2247"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2258"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2264"/>
         <source>Error creating or updating place label</source>
         <translation>Помилка створення або оновлення мітки місця</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4695"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4716"/>
         <source>Can&apos;t find increment &apos;%1&apos;</source>
         <translation>Не вдалося знайти прибавку &apos;%1&apos;</translation>
     </message>
@@ -24983,6 +26784,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VShortcutDialog</name>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/vshortcutdialog.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_vshortcutdialog.h" line="58"/>
         <source>Dialog</source>
         <translation>Діалог</translation>
     </message>
@@ -26929,7 +28731,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Цей id (%1) не унікальний.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2836"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2882"/>
         <source>Tool was used after deleting.</source>
         <translation>Інструмент був використаний після видалення.</translation>
     </message>
@@ -28582,72 +30384,86 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VWidgetBackgroundImages</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="367"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="41"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="368"/>
         <source>Transformation</source>
         <translation>Трансформація</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="51"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="372"/>
         <source>Translate</source>
         <comment>Translate piece</comment>
         <translation>Перемістити</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="59"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="369"/>
         <source>Horizontal:</source>
         <translation>По горизонталі:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="82"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="370"/>
         <source>Vertical:</source>
         <translation>По вертикалі:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="104"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="371"/>
         <source>Relative translation</source>
         <translation>Відносне переміщення</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="115"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="376"/>
         <source>Scale</source>
         <translation>Масштаб</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="123"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="373"/>
         <source>Width:</source>
         <translation>Ширина:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="146"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="374"/>
         <source>Height:</source>
         <translation>Висота:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="168"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="375"/>
         <source>Scale proportionally</source>
         <translation>Масштабувати пропорційно</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="179"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="379"/>
         <source>Rotate</source>
         <translation>Обертання</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="185"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="377"/>
         <source>Rotation</source>
         <translation>Поворот</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="266"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="378"/>
         <source>Angle:</source>
         <translation>Кут:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="303"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetbackgroundimages.h" line="380"/>
         <source>Z Value</source>
         <translation>Значення Z</translation>
     </message>
@@ -28726,31 +30542,37 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VWidgetDependencies</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="22"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="114"/>
         <source>Filter</source>
         <translation>Фільтр</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="32"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="116"/>
         <source>Go to object automatically on node selection</source>
         <translation>Автоматично перейти до об’єкта після вибору елемента</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="62"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="119"/>
         <source>Move to earliest possible position in history</source>
         <translation>Переміститися до найранішої можливої позиції в історії</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="75"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="122"/>
         <source>Move earlier in history</source>
         <translation>Перемістити раніше в історії</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="88"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="125"/>
         <source>Move later in history</source>
         <translation>Перемістити пізніше в історії</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="101"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="128"/>
         <source>Move to latest possible position in history</source>
         <translation>Перейти до найновішої можливої позиції в історії</translation>
     </message>
@@ -28784,6 +30606,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>VWidgetDetails</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdetails.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdetails.h" line="66"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
@@ -28824,6 +30647,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdetails.ui" line="26"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdetails.h" line="70"/>
         <source>Hide not in layout</source>
         <translation>Сховати не в розкладці</translation>
     </message>
@@ -28880,16 +30704,19 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetgroups.ui" line="26"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetgroups.h" line="85"/>
         <source>Tags:</source>
         <translation>Теги:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetgroups.ui" line="33"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetgroups.h" line="87"/>
         <source>Separate each tag with comma.</source>
         <translation>Розділіть кожен тег комою.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetgroups.ui" line="36"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetgroups.h" line="89"/>
         <source>Filter by tags</source>
         <translation>Фільтрувати за тегами</translation>
     </message>
@@ -29230,109 +31057,131 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <name>WatermarkWindow</name>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="14"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="321"/>
         <source>Watermark</source>
         <translation>Водяний знак</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="54"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="327"/>
         <source>Opacity:</source>
         <translation>Непрозорість:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="88"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="328"/>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="329"/>
         <source>Text:</source>
         <translation>Текст:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="116"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="331"/>
         <source>watermark text</source>
         <translation>текст водяного знака</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="126"/>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="256"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="332"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="343"/>
         <source>Rotation:</source>
         <translation>Обертання:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="152"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="333"/>
         <source>Font:</source>
         <translation>Шрифт:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="161"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="334"/>
         <source>The quick brown fox jumps over the lazy dog</source>
         <extracomment>Use native text to test a font options</extracomment>
         <translation>Бігла файно лисиця через ґанок і наштовхнулась на єхидного, поморщеного їжака-волоцюгу</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="171"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="336"/>
         <source>Edit font</source>
         <translation>Редагувати шрифт</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="216"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="339"/>
         <source>Image</source>
         <translation>Зображення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="228"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="340"/>
         <source>Path:</source>
         <translation>Шлях:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="237"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="341"/>
         <source>path to image</source>
         <translation>шлях до зображення</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="247"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="342"/>
         <source>Browse…</source>
         <translation>Огляд…</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="276"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="344"/>
         <source>Gray color</source>
         <translation>Відтінки сірого</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="313"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="345"/>
         <source>&amp;File</source>
         <translation>&amp;Файл</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="346"/>
         <source>Operations</source>
         <translation>Операції</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="347"/>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="507"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="322"/>
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="355"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="323"/>
         <source>Save &amp;As…</source>
         <translation>Зберегти &amp;як…</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="363"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="324"/>
         <source>E&amp;xit</source>
         <translation>Ви&amp;хід</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="371"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="325"/>
         <source>Open</source>
         <translation>Відкрити</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="379"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="326"/>
         <source>New</source>
         <translation>Новий</translation>
     </message>
@@ -29467,6 +31316,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.ui" line="200"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VLayoutLib.e3d8f1f9/qt.headers/ui_watermarkwindow.h" line="338"/>
         <source>Color:</source>
         <translation>Колір:</translation>
     </message>
