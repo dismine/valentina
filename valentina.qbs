@@ -112,6 +112,17 @@ Project {
         environment: {
             var env = base;
 
+	    // QT_QPA_PLATFORM
+            for (var i = 0; i < env.length; ++i) {
+                if (env[i].startsWith("QT_QPA_PLATFORM=")) {
+                    break;
+                }
+            }
+            if (i >= env.length) {
+                var qtPlatform = "QT_QPA_PLATFORM=" + "offscreen"
+                env.push(qtPlatform);
+            }
+ 
             if (qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos")) {
                 env.push("LD_LIBRARY_PATH=" + qbs.installRoot + qbs.installPrefix + "/" + buildconfig.libDirName + "/valentina");
             } else if (qbs.targetOS.contains("windows")) {
