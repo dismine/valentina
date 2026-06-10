@@ -366,6 +366,8 @@ jobs:
 
       - name: Tests
         if: env.RUN_TESTS == 'true'
+        env:
+          QT_QPA_PLATFORM: cocoa
         run: qbs -f valentina.qbs -p autotest-runner -d $GITHUB_WORKSPACE/build  profile:qt6 config:release
 
       - name: ccache stats
@@ -716,6 +718,8 @@ jobs:
 
       - name: Tests
         if: env.RUN_TESTS == 'true'
+        env:
+          QT_QPA_PLATFORM: cocoa
         run: qbs -f valentina.qbs -p autotest-runner -d $GITHUB_WORKSPACE/build  profile:qt6 config:release
 
       - name: ccache stats
