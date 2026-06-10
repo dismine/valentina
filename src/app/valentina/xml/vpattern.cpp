@@ -873,15 +873,15 @@ void VPattern::RefreshDirtyPieceGeometry(const QList<vidtype> &list)
     }
 
     // Resolve the piece tools and read the relevant settings on the GUI thread.
-    QVector<VToolSeamAllowance *> tools;
-    tools.reserve(list.size());
+    QVector<VToolSeamAllowance *> pieceTools;
+    pieceTools.reserve(list.size());
     for (auto pieceId : std::as_const(list))
     {
         try
         {
             if (auto *piece = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(pieceId)))
             {
-                tools.append(piece);
+                pieceTools.append(piece);
             }
         }
         catch (const VExceptionBadId &)
@@ -890,7 +890,7 @@ void VPattern::RefreshDirtyPieceGeometry(const QList<vidtype> &list)
         }
     }
 
-    if (tools.isEmpty())
+    if (pieceTools.isEmpty())
     {
         return;
     }
@@ -903,12 +903,12 @@ void VPattern::RefreshDirtyPieceGeometry(const QList<vidtype> &list)
     // alive (no piece can be deleted underneath them). This is what makes switching size in Detail
     // mode fast for patterns with many pieces.
     m_refreshPieceGeometryWatcher->setFuture(
-        QtConcurrent::map(tools, [combineTogether, pieceShowMainPath](VToolSeamAllowance *piece)
+        QtConcurrent::map(pieceTools, [combineTogether, pieceShowMainPath](VToolSeamAllowance *piece)
                           { piece->PrepareRefreshGeometry(combineTogether, pieceShowMainPath); }));
     m_refreshPieceGeometryWatcher->waitForFinished();
 
     // Apply the precomputed geometry to the scene on the GUI thread.
-    for (auto *piece : std::as_const(tools))
+    for (auto *piece : std::as_const(pieceTools))
     {
         piece->ApplyBatchGeometry();
     }

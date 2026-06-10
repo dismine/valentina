@@ -2126,34 +2126,34 @@ auto VToolSeamAllowance::ComputePieceGeometry(bool combineTogether, bool pieceSh
     // pieces. It must not access any QGraphicsItem - everything GUI-related lives in
     // ApplyPieceGeometry().
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
-    const VContainer *data = getData();
+    const VContainer *containerData = getData();
 
     VToolSeamAllowanceGeometry geom;
     geom.combineTogether = combineTogether;
     geom.pos = QPointF(detail.GetMx(), detail.GetMy());
     geom.pieceName = detail.GetName();
 
-    geom.seamPath = RenderSeamPath(detail, combineTogether, data);
+    geom.seamPath = RenderSeamPath(detail, combineTogether, containerData);
 
     if (!combineTogether)
     {
-        geom.passmarks = RenderPassmarks(detail, data);
+        geom.passmarks = RenderPassmarks(detail, containerData);
     }
 
-    geom.foldLine = RenderFoldLine(detail, data);
-    geom.mirrorLine = RenderMirrorLine(detail, data, combineTogether);
+    geom.foldLine = RenderFoldLine(detail, containerData);
+    geom.mirrorLine = RenderMirrorLine(detail, containerData, combineTogether);
 
     geom.hasSeamAllowance = detail.IsSeamAllowance() && not detail.IsSeamAllowanceBuiltIn();
     if (geom.hasSeamAllowance)
     {
-        geom.seamAllowance = RenderSeamAllowancePath(detail, combineTogether, data);
-        geom.seamAllowanceValid = detail.IsSeamAllowanceValid(data);
+        geom.seamAllowance = RenderSeamAllowancePath(detail, combineTogether, containerData);
+        geom.seamAllowanceValid = detail.IsSeamAllowanceValid(containerData);
     }
 
     geom.showMainPath = pieceShowMainPath || not detail.IsHideMainPath() || not detail.IsSeamAllowance() ||
                         detail.IsSeamAllowanceBuiltIn();
 
-    geom.placeLabels = detail.PlaceLabelPath(data);
+    geom.placeLabels = detail.PlaceLabelPath(containerData);
 
     geom.valid = true;
     return geom;
