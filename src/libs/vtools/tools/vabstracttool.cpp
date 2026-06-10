@@ -146,7 +146,8 @@ auto EvalCachedFormula(const QString &formula, const VContainer *data) -> qreal
     const QHash<QString, QSharedPointer<VInternalVariable>> *vars = data->DataVariables();
     FormulaCache *cache = ThreadFormulaCache();
 
-    if (CachedFormula *entry = cache->object(formula); entry != nullptr) // object() also marks it most-recently-used
+    if (const CachedFormula *entry = cache->object(formula);
+        entry != nullptr) // object() also marks it most-recently-used
     {
         bool refreshed = true;
         for (const auto &[name, ptr] : entry->usedVars)
