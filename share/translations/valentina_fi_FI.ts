@@ -20883,37 +20883,37 @@ This option will take an affect after restart.</source>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="384"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="385"/>
         <source>black</source>
         <translation>musta</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="335"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="336"/>
         <source>green</source>
         <translation>vihreä</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="338"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="339"/>
         <source>blue</source>
         <translation>sininen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="341"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="342"/>
         <source>dark red</source>
         <translation>tummanpunainen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="344"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="345"/>
         <source>dark green</source>
         <translation>tummanvihreä</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="347"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="348"/>
         <source>dark blue</source>
         <translation>tummansininen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="350"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="351"/>
         <source>yellow</source>
         <translation>keltainen</translation>
     </message>
@@ -20926,57 +20926,57 @@ This option will take an affect after restart.</source>
         <translation type="vanished">Haluatko todella poistaa?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="353"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="354"/>
         <source>light salmon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="356"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="357"/>
         <source>goldenrod</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="359"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="360"/>
         <source>orange</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="362"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="363"/>
         <source>deep pink</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="365"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="366"/>
         <source>violet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="368"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="369"/>
         <source>dark violet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="371"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="372"/>
         <source>medium sea green</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="374"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="375"/>
         <source>lime</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="377"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="378"/>
         <source>deep sky blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="380"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="381"/>
         <source>corn flower blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="275"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="276"/>
         <source>Edit wrong formula</source>
         <translation type="unfinished">Muutit väärää kaavaa</translation>
     </message>

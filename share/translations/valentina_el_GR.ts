@@ -22265,37 +22265,37 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="384"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="385"/>
         <source>black</source>
         <translation>μαύρο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="335"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="336"/>
         <source>green</source>
         <translation>πράσινο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="338"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="339"/>
         <source>blue</source>
         <translation>μπλε</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="341"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="342"/>
         <source>dark red</source>
         <translation>σκούρο κόκκινο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="344"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="345"/>
         <source>dark green</source>
         <translation>σκούρο πράσινο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="347"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="348"/>
         <source>dark blue</source>
         <translation>σκούρο μπλε</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="350"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="351"/>
         <source>yellow</source>
         <translation>κίτρινο</translation>
     </message>
@@ -22308,57 +22308,57 @@ Do you want to save your changes?</source>
         <translation type="vanished">Θέλετε σίγουρα να κάνετε διαγραφή;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="353"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="354"/>
         <source>light salmon</source>
         <translation>ανοιχτό σωμόν</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="356"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="357"/>
         <source>goldenrod</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="359"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="360"/>
         <source>orange</source>
         <translation>πορτοκαλί</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="362"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="363"/>
         <source>deep pink</source>
         <translation>βαθύ ροζ</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="365"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="366"/>
         <source>violet</source>
         <translation>μωβ</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="368"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="369"/>
         <source>dark violet</source>
         <translation>σκούρο μωβ</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="371"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="372"/>
         <source>medium sea green</source>
         <translation>πράσινο θαλλασί</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="374"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="375"/>
         <source>lime</source>
         <translation>πρασινοκίτρινο</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="377"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="378"/>
         <source>deep sky blue</source>
         <translation>βαθύ μπλε του ουρανού</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="380"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="381"/>
         <source>corn flower blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="275"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="276"/>
         <source>Edit wrong formula</source>
         <translation type="unfinished">Επεξεργασία εσφαλμένης φόρμουλας</translation>
     </message>

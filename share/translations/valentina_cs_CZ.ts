@@ -349,7 +349,7 @@
     <message>
         <location filename="../../src/libs/vdxf/libdxfrw/intern/drw_textcodec.cpp" line="121"/>
         <source>No available codec for code page &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro kódovou stránku &apos;%1&apos; není dostupný žádný kodek.</translation>
     </message>
 </context>
 <context>
@@ -392,7 +392,7 @@
     <message>
         <location filename="../../src/libs/vtools/undocommands/deletepatternpiece.cpp" line="45"/>
         <source>delete pattern block</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat díl střihu</translation>
     </message>
 </context>
 <context>
@@ -440,13 +440,13 @@
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="266"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="245"/>
         <source>Special thanks</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvláštní poděkování</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="308"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="247"/>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Zásluhy</translation>
     </message>
     <message>
         <source>Contributors</source>
@@ -509,12 +509,12 @@
     <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="273"/>
         <source>Special thanks</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvláštní poděkování</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="321"/>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Zásluhy</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="144"/>
@@ -683,7 +683,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="287"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="352"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohodit body</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="318"/>
@@ -1089,7 +1089,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="427"/>
         <source>Arc with length</source>
-        <translation type="unfinished"></translation>
+        <translation>Oblouk s délkou</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="651"/>
@@ -1325,60 +1325,60 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="141"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="142"/>
         <source>Rename…</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejmenovat…</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="43"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="144"/>
         <source>Base name</source>
-        <translation type="unfinished"></translation>
+        <translation>Základní název</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="48"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="146"/>
         <source>New name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový název</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="58"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="147"/>
         <source>Text:</source>
-        <translation type="unfinished">Text:</translation>
+        <translation>Text:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="65"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="149"/>
         <source>Use %n, %0n, %00n, %000n for counting</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro počítání použijte %n, %0n, %00n, %000n</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="75"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="151"/>
         <source>Position:</source>
-        <translation type="unfinished">Poloha:</translation>
+        <translation>Poloha:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="84"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="152"/>
         <source>Append</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojit</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="97"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="153"/>
         <source>Prepend</source>
-        <translation type="unfinished"></translation>
+        <translation>Předřadit</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="107"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="154"/>
         <source>Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahradit</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.cpp" line="182"/>
         <source>Enable renaming for this item</source>
-        <translation type="unfinished"></translation>
+        <translation>Povolit přejmenování této položky</translation>
     </message>
 </context>
 <context>
@@ -1387,19 +1387,19 @@
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogcredits.h" line="95"/>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Zásluhy</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="28"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogcredits.h" line="96"/>
         <source>Sponsors</source>
-        <translation type="unfinished"></translation>
+        <translation>Sponzoři</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogcredits.ui" line="42"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogcredits.h" line="98"/>
         <source>Authors</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoři</translation>
     </message>
 </context>
 <context>
@@ -1739,25 +1739,25 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="357"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="364"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="364"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="365"/>
         <source>Choose unique name for left sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolte jedinečný název pro levou podřízenou křivku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="371"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="366"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="378"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="367"/>
         <source>Choose unique name for right sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolte jedinečný název pro pravou podřízenou křivku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="28"/>
@@ -1901,25 +1901,25 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="288"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="310"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="295"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="311"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="302"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="312"/>
         <source>Choose unique name for left sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolte jedinečný název pro levou podřízenou křivku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="309"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="313"/>
         <source>Choose unique name for right sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolte jedinečný název pro pravou podřízenou křivku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="332"/>
@@ -2031,7 +2031,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="253"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="302"/>
         <source>Choose unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolte jedinečný popis</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="260"/>
@@ -2049,25 +2049,25 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="280"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="305"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="287"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="306"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="294"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="307"/>
         <source>Choose unique name for left sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolte jedinečný název pro levou podřízenou křivku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="301"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="308"/>
         <source>Choose unique name for right sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolte jedinečný název pro pravou podřízenou křivku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="324"/>
@@ -2181,19 +2181,19 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="260"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="305"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="267"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="306"/>
         <source>Choose unique name for left sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolte jedinečný název pro levou podřízenou křivku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="274"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="307"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="281"/>
@@ -2211,7 +2211,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="309"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="310"/>
         <source>Choose unique name for right sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolte jedinečný název pro pravou podřízenou křivku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="332"/>
@@ -3034,7 +3034,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="667"/>
         <source>Measurement %1 value alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Přezdívka hodnoty míry %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="747"/>
@@ -3464,19 +3464,19 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="586"/>
         <source>Elliptical arc with length</source>
-        <translation type="unfinished"></translation>
+        <translation>Elipsovitý oblouk s délkou</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="28"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="665"/>
         <source>Tool</source>
-        <translation type="unfinished">Nástroj</translation>
+        <translation>Nástroj</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="79"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="587"/>
         <source>Radius1:</source>
-        <translation type="unfinished">Poloměr1:</translation>
+        <translation>Poloměr1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="99"/>
@@ -3490,7 +3490,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="631"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="645"/>
         <source>Formula wizard</source>
-        <translation type="unfinished">Průvodce vzorcem</translation>
+        <translation>Průvodce vzorcem</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="141"/>
@@ -3504,7 +3504,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="635"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="649"/>
         <source>Value</source>
-        <translation type="unfinished">Hodnota</translation>
+        <translation>Hodnota</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="195"/>
@@ -3518,19 +3518,19 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="641"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="655"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="264"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="601"/>
         <source>Radius2:</source>
-        <translation type="unfinished">Poloměr2:</translation>
+        <translation>Poloměr2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="449"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="615"/>
         <source>First angle:</source>
-        <translation type="unfinished">První úhel:</translation>
+        <translation>První úhel:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="173"/>
@@ -3544,86 +3544,86 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="638"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="652"/>
         <source>Calculation</source>
-        <translation type="unfinished">Výpočet</translation>
+        <translation>Výpočet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="628"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="629"/>
         <source>Length:</source>
-        <translation type="unfinished">Délka:</translation>
+        <translation>Délka:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="807"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="643"/>
         <source>Rotation angle:</source>
-        <translation type="unfinished">Úhel otáčení:</translation>
+        <translation>Úhel otáčení:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="958"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="657"/>
         <source>Center point:</source>
-        <translation type="unfinished">Středový bod:</translation>
+        <translation>Středový bod:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="968"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="658"/>
         <source>Color:</source>
-        <translation type="unfinished">Barva:</translation>
+        <translation>Barva:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="975"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="659"/>
         <source>Pen style:</source>
-        <translation type="unfinished">Styl pera:</translation>
+        <translation>Styl pera:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1004"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="660"/>
         <source>Approximation scale:</source>
-        <translation type="unfinished">Měřítko přibližnosti:</translation>
+        <translation>Měřítko přibližnosti:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1011"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="662"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation type="unfinished">Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
+        <translation>Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1027"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="664"/>
         <source>Alias:</source>
-        <translation type="unfinished">Přezdívka:</translation>
+        <translation>Přezdívka:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1064"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="666"/>
         <source>Notes</source>
-        <translation type="unfinished">Poznámky</translation>
+        <translation>Poznámky</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="588"/>
         <source>Edit radius1</source>
-        <translation type="unfinished">Upravit poloměr 1</translation>
+        <translation>Upravit poloměr 1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="602"/>
         <source>Edit radius2</source>
-        <translation type="unfinished">Upravit poloměr 2</translation>
+        <translation>Upravit poloměr 2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="616"/>
         <source>Edit the first angle</source>
-        <translation type="unfinished">Upravit první úhel</translation>
+        <translation>Upravit první úhel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="630"/>
         <source>Edit the elliptical arc length</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit délku elipsovitého oblouku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.cpp" line="644"/>
         <source>Edit rotation angle</source>
-        <translation type="unfinished">Upravit úhel otočení</translation>
+        <translation>Upravit úhel otočení</translation>
     </message>
 </context>
 <context>
@@ -4161,7 +4161,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="42"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="326"/>
         <source>New:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="142"/>
@@ -4292,7 +4292,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="42"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="326"/>
         <source>New:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="142"/>
@@ -4347,37 +4347,37 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="20"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="435"/>
         <source>Graduated curve tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Odstupňovaná křivka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="34"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="476"/>
         <source>Tool</source>
-        <translation type="unfinished">Nástroj</translation>
+        <translation>Nástroj</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="40"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="436"/>
         <source>Offsets</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstupy</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="75"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="438"/>
         <source>Name</source>
-        <translation type="unfinished">Název</translation>
+        <translation>Název</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="80"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="440"/>
         <source>Calculated value</source>
-        <translation type="unfinished">Vypočítaná hodnota</translation>
+        <translation>Vypočítaná hodnota</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="85"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="442"/>
         <source>Formula</source>
-        <translation type="unfinished">Vzorec</translation>
+        <translation>Vzorec</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="100"/>
@@ -4385,19 +4385,19 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="444"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="446"/>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Podrobnosti</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="114"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="448"/>
         <source>Move offset up</source>
-        <translation type="unfinished"></translation>
+        <translation>Posunout odstup nahoru</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="131"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="451"/>
         <source>Move offset down</source>
-        <translation type="unfinished"></translation>
+        <translation>Posunout odstup dolů</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="206"/>
@@ -4405,118 +4405,118 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="453"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="474"/>
         <source>Name:</source>
-        <translation type="unfinished">Název:</translation>
+        <translation>Název:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="216"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="454"/>
         <source>Unique offset name</source>
-        <translation type="unfinished"></translation>
+        <translation>Jedinečný název odstupu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="226"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="455"/>
         <source>Calculated value:</source>
-        <translation type="unfinished">Vypočítaná hodnota:</translation>
+        <translation>Vypočítaná hodnota:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="233"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="456"/>
         <source>Formula:</source>
-        <translation type="unfinished">Vzorec:</translation>
+        <translation>Vzorec:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="257"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="458"/>
         <source>Calculation</source>
-        <translation type="unfinished">Výpočet</translation>
+        <translation>Výpočet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="285"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="461"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="314"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="464"/>
         <source>Formula wizard</source>
-        <translation type="unfinished">Průvodce vzorcem</translation>
+        <translation>Průvodce vzorcem</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="361"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="466"/>
         <source>Description:</source>
-        <translation type="unfinished">Popis:</translation>
+        <translation>Popis:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="396"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="467"/>
         <source>Curve:</source>
-        <translation type="unfinished">Křivka:</translation>
+        <translation>Křivka:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="406"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="468"/>
         <source>Pen style:</source>
-        <translation type="unfinished">Styl pera:</translation>
+        <translation>Styl pera:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="435"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="469"/>
         <source>Color:</source>
-        <translation type="unfinished">Barva:</translation>
+        <translation>Barva:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="449"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="470"/>
         <source>Approximation scale:</source>
-        <translation type="unfinished">Měřítko přibližnosti:</translation>
+        <translation>Měřítko přibližnosti:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="456"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="472"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation type="unfinished">Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
+        <translation>Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="482"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="475"/>
         <source>Alias:</source>
-        <translation type="unfinished">Přezdívka:</translation>
+        <translation>Přezdívka:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="512"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="477"/>
         <source>Notes</source>
-        <translation type="unfinished">Poznámky</translation>
+        <translation>Poznámky</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="220"/>
         <source>Offset %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstup %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="516"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="785"/>
         <source>Error</source>
-        <translation type="unfinished">Chyba</translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="522"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="791"/>
         <source>Value</source>
-        <translation type="unfinished">Hodnota</translation>
+        <translation>Hodnota</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="691"/>
         <source>Edit offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit odstup</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.cpp" line="786"/>
         <source>Parser error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba analyzátoru: %1</translation>
     </message>
 </context>
 <context>
@@ -5083,72 +5083,72 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1401"/>
         <source>Increment name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Název přídavku je prázdný.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1406"/>
         <source>Imported file must not contain the same name twice.</source>
-        <translation type="unfinished">Zavedený soubor nesmí obsahovat stejný název dvakrát.</translation>
+        <translation>Zavedený soubor nesmí obsahovat stejný název dvakrát.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1411"/>
         <source>Increment &apos;%1&apos; doesn&apos;t match regex pattern.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přídavek &apos;%1&apos; neodpovídá vzoru regulárního výrazu.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1416"/>
         <source>Increment &apos;%1&apos; already present in the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přídavek &apos;%1&apos; je již v souboru přítomen.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1439"/>
         <source>Name</source>
         <comment>increment column</comment>
-        <translation type="unfinished">Název</translation>
+        <translation>Název</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1441"/>
         <source>Calculated value</source>
         <comment>increment column</comment>
-        <translation type="unfinished">Vypočítaná hodnota</translation>
+        <translation>Vypočítaná hodnota</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1443"/>
         <source>Formula</source>
         <comment>increment column</comment>
-        <translation type="unfinished">Vzorec</translation>
+        <translation>Vzorec</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1445"/>
         <source>Description</source>
         <comment>increment column</comment>
-        <translation type="unfinished">Popis</translation>
+        <translation>Popis</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1462"/>
         <source>Increments require at least 2 columns.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přídavky vyžadují alespoň 2 sloupce.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1479"/>
         <source>Error in row %1. The increment name is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba v řádku %1. Název přídavku je prázdný.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1517"/>
         <source>Error in row %1. %2</source>
-        <translation type="unfinished">Chyba na řádku %1. %2</translation>
+        <translation>Chyba na řádku %1. %2</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1690"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1755"/>
         <source>Comma-Separated Values</source>
-        <translation type="unfinished">Čárkou oddělené hodnoty</translation>
+        <translation>Čárkou oddělené hodnoty</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="1757"/>
         <source>values</source>
-        <translation type="unfinished">hodnoty</translation>
+        <translation>hodnoty</translation>
     </message>
     <message>
         <source>Increment_%1</source>
@@ -5355,7 +5355,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1120"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1200"/>
         <source>Export to CSV</source>
-        <translation type="unfinished">Vyvést do CSV</translation>
+        <translation>Vyvést do CSV</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="475"/>
@@ -5364,7 +5364,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1123"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1203"/>
         <source>Import from CSV</source>
-        <translation type="unfinished">Zavést z CSV</translation>
+        <translation>Zavést z CSV</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="543"/>
@@ -5401,89 +5401,89 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="163"/>
         <source>Import increments</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavést přídavky</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="26"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="164"/>
         <source>Preview</source>
-        <translation type="unfinished">Náhled</translation>
+        <translation>Náhled</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="32"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="165"/>
         <source>Input</source>
-        <translation type="unfinished">Vstup</translation>
+        <translation>Vstup</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="48"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="166"/>
         <source>Import</source>
-        <translation type="unfinished">Zavedení</translation>
+        <translation>Zavedení</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="67"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="167"/>
         <source>Columns</source>
-        <translation type="unfinished">Sloupce</translation>
+        <translation>Sloupce</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="96"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="168"/>
         <source>Description:</source>
-        <translation type="unfinished">Popis:</translation>
+        <translation>Popis:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.ui" line="111"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="510"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrementscsvcolumns.h" line="169"/>
         <source>Ready</source>
-        <translation type="unfinished">Připraven</translation>
+        <translation>Připraven</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="167"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="442"/>
         <source>Name</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Název</translation>
+        <translation>Název</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="169"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="444"/>
         <source>Value</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Hodnota</translation>
+        <translation>Hodnota</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="171"/>
         <source>Description</source>
         <comment>measurement column</comment>
-        <translation type="unfinished">Popis</translation>
+        <translation>Popis</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="286"/>
         <source>Skip</source>
-        <translation type="unfinished">Přeskočit</translation>
+        <translation>Přeskočit</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="481"/>
         <source>File path is empty</source>
-        <translation type="unfinished">Cesta k souboru je prázdná</translation>
+        <translation>Cesta k souboru je prázdná</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="490"/>
         <source>Not enough columns</source>
-        <translation type="unfinished">Nedostatek sloupců</translation>
+        <translation>Nedostatek sloupců</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="497"/>
         <source>Not enough data to import</source>
-        <translation type="unfinished">Nedostatek údajů k zavedení</translation>
+        <translation>Nedostatek údajů k zavedení</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="505"/>
         <source>Please, select unique number for each column</source>
-        <translation type="unfinished">Vyberte, prosím, pro každý sloupec jedinečné číslo</translation>
+        <translation>Vyberte, prosím, pro každý sloupec jedinečné číslo</translation>
     </message>
 </context>
 <context>
@@ -6240,7 +6240,7 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="185"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="210"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohodit body</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="37"/>
@@ -6919,19 +6919,19 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="45"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="567"/>
         <source>New:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="103"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="569"/>
         <source>Bulk rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Hromadné přejmenování</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="119"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="572"/>
         <source>Remove object</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit předmět</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="152"/>
@@ -6986,19 +6986,19 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/app/valentina/dialogs/dialogmovesteps.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogmovesteps.h" line="87"/>
         <source>Move steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Kroky posunu</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogmovesteps.ui" line="29"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogmovesteps.h" line="88"/>
         <source>Move Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Posun</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogmovesteps.ui" line="41"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogmovesteps.h" line="89"/>
         <source>Steps:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kroky:</translation>
     </message>
 </context>
 <context>
@@ -7245,7 +7245,7 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="280"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="484"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohodit body</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="317"/>
@@ -7289,32 +7289,32 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="69"/>
         <source>Rotation</source>
-        <translation type="unfinished">Otáčení</translation>
+        <translation>Otáčení</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="174"/>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Neplatný název skupiny</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="233"/>
         <source>Default</source>
-        <translation type="unfinished">Výchozí</translation>
+        <translation>Výchozí</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="325"/>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Neplatný popis</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="325"/>
         <source>Invalid name</source>
-        <translation type="unfinished"></translation>
+        <translation>Neplatný název</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="573"/>
         <source>Adding or removing objects can&apos;t be applied while the dialog stays open. Use OK to confirm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidávání nebo odebírání předmětů nelze použít, dokud zůstává dialog otevřený. Pro potvrzení použijte OK.</translation>
     </message>
 </context>
 <context>
@@ -7323,96 +7323,96 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="283"/>
         <source>Parallel curve tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Rovnoběžná křivka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="28"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="307"/>
         <source>Tool</source>
-        <translation type="unfinished">Nástroj</translation>
+        <translation>Nástroj</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="79"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="284"/>
         <source>Width:</source>
-        <translation type="unfinished">Šířka:</translation>
+        <translation>Šířka:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="99"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="286"/>
         <source>Formula wizard</source>
-        <translation type="unfinished">Průvodce vzorcem</translation>
+        <translation>Průvodce vzorcem</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="141"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="290"/>
         <source>Value</source>
-        <translation type="unfinished">Hodnota</translation>
+        <translation>Hodnota</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="167"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="293"/>
         <source>Calculation</source>
-        <translation type="unfinished">Výpočet</translation>
+        <translation>Výpočet</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="189"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="296"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ukázat celý výpočet v okně se zprávami&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="224"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="298"/>
         <source>Curve:</source>
-        <translation type="unfinished">Křivka:</translation>
+        <translation>Křivka:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="234"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="299"/>
         <source>Color:</source>
-        <translation type="unfinished">Barva:</translation>
+        <translation>Barva:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="241"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="300"/>
         <source>Pen style:</source>
-        <translation type="unfinished">Styl pera:</translation>
+        <translation>Styl pera:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="270"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="301"/>
         <source>Approximation scale:</source>
-        <translation type="unfinished">Měřítko přibližnosti:</translation>
+        <translation>Měřítko přibližnosti:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="277"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="303"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation type="unfinished">Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
+        <translation>Nastavit měřítko přibližnosti pro tuto křivku, 0 - použít celkovou hodnotu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="293"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="305"/>
         <source>Alias:</source>
-        <translation type="unfinished">Přezdívka:</translation>
+        <translation>Přezdívka:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="314"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="306"/>
         <source>Name:</source>
-        <translation type="unfinished">Název:</translation>
+        <translation>Název:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="340"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="308"/>
         <source>Notes</source>
-        <translation type="unfinished">Poznámky</translation>
+        <translation>Poznámky</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.cpp" line="321"/>
         <source>Edit width to parallel curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit šířku k rovnoběžné křivce</translation>
     </message>
 </context>
 <context>
@@ -8107,13 +8107,13 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2182"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1608"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a notch visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořte vzorec, který řídí viditelnost. Hodnoty různé od &quot;0&quot; zviditelní zářez</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="2420"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1628"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a path visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořte vzorec, který řídí viditelnost. Hodnoty různé od &quot;0&quot; zviditelní cestu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1069"/>
@@ -8143,7 +8143,7 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1165"/>
         <source>Edit notch visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit viditelnost zářezu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1659"/>
@@ -9171,7 +9171,7 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="102"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="187"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohodit body</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="139"/>
@@ -9273,13 +9273,13 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="52"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="279"/>
         <source>Choose unique label</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolte jedinečný popis</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="103"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="283"/>
         <source>Arc 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Oblouk 1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="109"/>
@@ -9287,7 +9287,7 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="284"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="293"/>
         <source>Alias2:</source>
-        <translation type="unfinished">Přezdívka 2:</translation>
+        <translation>Přezdívka 2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="123"/>
@@ -9295,7 +9295,7 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="285"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="295"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="137"/>
@@ -9303,7 +9303,7 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="286"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="292"/>
         <source>Alias1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Přezdívka 1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="144"/>
@@ -9311,7 +9311,7 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="287"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="296"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="151"/>
@@ -9319,7 +9319,7 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="288"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="291"/>
         <source>Choose unique name for left sub arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolte jedinečný název pro levý podřízený oblouk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="158"/>
@@ -9327,13 +9327,13 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="289"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="294"/>
         <source>Choose unique name for right sub arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolte jedinečný název pro pravý podřízený oblouk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="168"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="290"/>
         <source>Arc 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Oblouk 2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="234"/>
@@ -9570,7 +9570,7 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="306"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="316"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="164"/>
@@ -9578,7 +9578,7 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="308"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="317"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="171"/>
@@ -9586,7 +9586,7 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="309"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="312"/>
         <source>Choose unique name for left sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolte jedinečný název pro levou podřízenou křivku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="178"/>
@@ -9594,7 +9594,7 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="310"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="315"/>
         <source>Choose unique name for right sub curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolte jedinečný název pro pravou podřízenou křivku</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="254"/>
@@ -9852,7 +9852,7 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="42"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="407"/>
         <source>New:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="142"/>
@@ -10740,7 +10740,7 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3075"/>
         <source>Edit notch visibility</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit viditelnost zářezu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3087"/>
@@ -10899,7 +10899,7 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5290"/>
         <source>Measurement %1 value alias</source>
-        <translation type="unfinished"></translation>
+        <translation>Přezdívka hodnoty míry %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5600"/>
@@ -11052,21 +11052,21 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="105"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="106"/>
         <source>Select measurements type</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte druh měr</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="52"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="107"/>
         <source>Individual</source>
         <comment>measurements type</comment>
-        <translation type="unfinished">Individuální</translation>
+        <translation>Individuální</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="72"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="108"/>
         <source>Multisize</source>
         <comment>measurements type</comment>
-        <translation type="unfinished">Více velikostí</translation>
+        <translation>Více velikostí</translation>
     </message>
 </context>
 <context>
@@ -12947,13 +12947,13 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/app/valentina/mainwindow.ui" line="696"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1728"/>
         <source>Pen options</source>
-        <translation type="unfinished"></translation>
+        <translation>Volby pera</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="707"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1729"/>
         <source>Dependency tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Strom závislostí</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="719"/>
@@ -13014,19 +13014,19 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1185"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1502"/>
         <source>Show Segment Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit popisy částí</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1188"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1504"/>
         <source>Allow segment labels to appear. Uncheck to hide them in all cases.</source>
-        <translation type="unfinished"></translation>
+        <translation>Umožní zobrazení popisů částí. Zrušením zaškrtnutí je ve všech případech skryjete.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1300"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1526"/>
         <source>Load Measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Načíst míry</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1679"/>
@@ -13074,44 +13074,44 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2634"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1655"/>
         <source>Reload labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Načíst popisy znovu</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2637"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1657"/>
         <source>Reload piece labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Načíst popisy dílů znovu</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2651"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="8593"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1659"/>
         <source>Auto-arrange labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaticky uspořádat popisy</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2654"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1661"/>
         <source>Auto-arrange point labels to reduce overlaps</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaticky uspořádat popisy bodů pro omezení překrývání</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2665"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1663"/>
         <source>Install single line font</source>
-        <translation type="unfinished"></translation>
+        <translation>Nainstalovat jednočárové písmo</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2683"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1664"/>
         <source>Elliptical arc with given length</source>
-        <translation type="unfinished"></translation>
+        <translation>Elipsovitý oblouk s danou délkou</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2701"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1665"/>
         <source>Parallel curve tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Rovnoběžná křivka</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2719"/>
@@ -13119,7 +13119,7 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1666"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1668"/>
         <source>Graduated curve tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Odstupňovaná křivka</translation>
     </message>
     <message>
         <source>Save &amp;As...</source>
@@ -13380,7 +13380,7 @@ Přesto použít nastavení?</translation>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1666"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1946"/>
         <source>Select one or more objects, &lt;b&gt;%1&lt;/b&gt; - confirm selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte jeden nebo více předmětů, &lt;b&gt;%1&lt;/b&gt; - potvrdit výběr</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1826"/>
@@ -14337,7 +14337,7 @@ Chcete uložit své změny?</translation>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1303"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1528"/>
         <source>Connect measurements file to pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojit soubor s mírami ke střihu</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1314"/>
@@ -15009,29 +15009,29 @@ Chcete uložit své změny?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1981"/>
         <source>Select point of the center of the elliptical arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte bod středu elipsovitého oblouku</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2098"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3273"/>
         <source>Pen style:</source>
-        <translation type="unfinished">Styl pera:</translation>
+        <translation>Styl pera:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2099"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3297"/>
         <source>Color:</source>
-        <translation type="unfinished">Barva:</translation>
+        <translation>Barva:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3278"/>
         <source>Sets the &lt;b&gt;default pen style&lt;/b&gt; for all newly created objects. This style is applied the first time an object is drawn.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaví &lt;b&gt;výchozí styl pera&lt;/b&gt; pro všechny nově vytvořené předměty. Tento styl se použije při prvním nakreslení předmětu.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3301"/>
         <source>Defines the &lt;b&gt;global object color property&lt;/b&gt;. This color is applied automatically the first time a new object is drawn.</source>
-        <translation type="unfinished"></translation>
+        <translation>Určuje &lt;b&gt;vlastnost globální barvy předmětu&lt;/b&gt;. Tato barva se použije automaticky při prvním nakreslení nového předmětu.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3437"/>
@@ -15091,39 +15091,41 @@ Chcete uložit své změny?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4845"/>
         <source>All Single-Line Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Všechna jednočárová písma</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4846"/>
         <source>TrueType Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Písma TrueType</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4847"/>
         <source>OpenType Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Písma OpenType</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4848"/>
         <source>SVG Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Písma SVG</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4849"/>
         <source>All Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Všechny soubory</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4854"/>
         <source>Select Font Files to Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte soubory písem k nainstalování</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4888"/>
         <source>Failed to install font file: %1
 
 Reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se nainstalovat soubor písma: %1
+
+Důvod: %2</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4894"/>
@@ -15131,17 +15133,20 @@ Reason: %2</source>
 
 Successful Installations: %1
 Failed Installations: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Souhrn instalace písem:
+
+Úspěšné instalace: %1
+Neúspěšné instalace: %2</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4900"/>
         <source>Installation Complete with Errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalace dokončena s chybami</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4904"/>
         <source>Installation Successful</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalace úspěšná</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5538"/>
@@ -15162,7 +15167,7 @@ Failed Installations: %2</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="8543"/>
         <source>Auto-Arrange Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaticky uspořádat popisy</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2344"/>
@@ -15448,7 +15453,7 @@ Chcete vybrat jiný soubor?</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/label/movesegmentlabel.cpp" line="101"/>
         <source>move segment label</source>
-        <translation type="unfinished"></translation>
+        <translation>Posunout popis části</translation>
     </message>
 </context>
 <context>
@@ -15472,7 +15477,7 @@ Chcete vybrat jiný soubor?</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/movetool.cpp" line="218"/>
         <source>move tool down in history</source>
-        <translation type="unfinished"></translation>
+        <translation>Posunout nástroj dolů v historii</translation>
     </message>
 </context>
 <context>
@@ -15480,7 +15485,7 @@ Chcete vybrat jiný soubor?</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/movetool.cpp" line="41"/>
         <source>move tool up in history</source>
-        <translation type="unfinished"></translation>
+        <translation>Posunout nástroj nahoru v historii</translation>
     </message>
 </context>
 <context>
@@ -15851,7 +15856,7 @@ Chcete vybrat jiný soubor?</translation>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="237"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="660"/>
         <source>Enable Garbage Collector</source>
-        <translation type="unfinished"></translation>
+        <translation>Povolit sběrač odpadu</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="265"/>
@@ -16052,7 +16057,7 @@ Chcete vybrat jiný soubor?</translation>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="234"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="658"/>
         <source>Enable collecting unused objects when open pattern file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Povolit sbírání nepoužívaných předmětů při otevření souboru se střihem.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="371"/>
@@ -16222,7 +16227,7 @@ Chcete vybrat jiný soubor?</translation>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="82"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="485"/>
         <source>This setting has no effect since the value is overridden by the command-line option</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto nastavení nemá žádný účinek, protože hodnota je přepsána volbou příkazového řádku</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="226"/>
@@ -17210,7 +17215,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="828"/>
         <source>Piece &apos;%1&apos;. Notch collapse for point &apos;%2&apos;. Provide a manual angle value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Díl &apos;%1&apos;. Zhroucení zářezu pro bod &apos;%2&apos;. Zadejte ruční hodnotu úhlu.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="228"/>
@@ -17250,27 +17255,27 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1232"/>
         <source>Point</source>
-        <translation type="unfinished">Bod</translation>
+        <translation>Bod</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1233"/>
         <source>Spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Křivka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1234"/>
         <source>Spline path</source>
-        <translation type="unfinished">Cesta hladké křivky (křivka spline)</translation>
+        <translation>Cesta hladké křivky (křivka spline)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1235"/>
         <source>Arc</source>
-        <translation type="unfinished">Oblouk</translation>
+        <translation>Oblouk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1236"/>
         <source>Elliptical arc</source>
-        <translation type="unfinished">Elipsovitý oblouk</translation>
+        <translation>Elipsovitý oblouk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vbank.cpp" line="422"/>
@@ -17313,7 +17318,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiecenode.cpp" line="486"/>
         <source>Cannot calculate passmark visibility for point &apos;%1&apos;. Reason: %2. Visibility trigger will be ignored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze vypočítat viditelnost značky sestavení pro bod &apos;%1&apos;. Důvod: %2. Spouštěč viditelnosti bude přehlížen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpiecenode.cpp" line="388"/>
@@ -17684,7 +17689,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolspline.cpp" line="192"/>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolsplinepath.cpp" line="172"/>
         <source>Curve &apos;%1&apos; with id %2 has not unique name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Křivka &apos;%1&apos; s ID %2 nemá jedinečný název.</translation>
     </message>
 </context>
 <context>
@@ -17971,7 +17976,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/renamepp.cpp" line="47"/>
         <source>rename pattern block</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejmenovat díl střihu</translation>
     </message>
 </context>
 <context>
@@ -18045,7 +18050,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/savetooloptions.cpp" line="43"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
 </context>
 <context>
@@ -19577,7 +19582,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="828"/>
         <source>Optional text alias for this value. Useful for referencing in pattern piece labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Volitelná textová přezdívka pro tuto hodnotu. Užitečná pro odkazování v popisech dílů střihu</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="923"/>
@@ -19607,7 +19612,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1390"/>
         <source>&amp;Open</source>
-        <translation type="unfinished">&amp;Otevřít</translation>
+        <translation>&amp;Otevřít</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1608"/>
@@ -19744,7 +19749,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4414"/>
         <source>Measurement &apos;%1&apos; already present in the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Míra &apos;%1&apos; je již v souboru přítomna.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4847"/>
@@ -20559,7 +20564,7 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="343"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="779"/>
         <source>Not Mirrored</source>
-        <translation type="unfinished">Nezrcadlit</translation>
+        <translation>Nezrcadlit</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="351"/>
@@ -20604,19 +20609,19 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1039"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="838"/>
         <source>Control</source>
-        <translation type="unfinished">Nastavení</translation>
+        <translation>Nastavení</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1093"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="824"/>
         <source>Visible</source>
-        <translation type="unfinished">Viditelný</translation>
+        <translation>Viditelný</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1193"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpassmarks.h" line="832"/>
         <source>Create a formula that regulates visibility. Values different from &quot;0&quot; make a notch visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořte vzorec, který řídí viditelnost. Hodnoty různé od &quot;0&quot; zviditelní zářez</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpassmarks.ui" line="1268"/>
@@ -20938,7 +20943,7 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="602"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1032"/>
         <source>Activates true zero seam allowance width. This also disables intersection checks between the seam line and seam allowance.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapne skutečnou nulovou šířku švové záložky. Toto také vypne kontroly průsečíků mezi švovou čarou a švovou záložkou.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="657"/>
@@ -21161,7 +21166,7 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="605"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1034"/>
         <source>True zero width</source>
-        <translation type="unfinished"></translation>
+        <translation>Skutečná nulová šířka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1264"/>
@@ -22053,7 +22058,7 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="765"/>
         <location filename="../../src/libs/vtools/tools/drawTools/operation/vabstractoperation.cpp" line="1248"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
 </context>
 <context>
@@ -22107,7 +22112,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/vabstractpoint.cpp" line="118"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
 </context>
 <context>
@@ -22272,7 +22277,7 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="361"/>
         <source>Show/hide segment labels</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit/skrýt popisy částí</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="363"/>
@@ -22284,7 +22289,7 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="365"/>
         <source>Reload piece labels</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Načíst popisy dílů znovu</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="367"/>
@@ -22626,61 +22631,61 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="479"/>
         <source>Tool &apos;Elliptical arc with given length&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Elipsovitý oblouk s danou délkou</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="481"/>
         <source>Tool &apos;Parallel curve&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Rovnoběžná křivka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="483"/>
         <source>Tool &apos;Graduated curve&apos;</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nástroj Odstupňovaná křivka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="485"/>
         <source>Auto-arrange labels</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Automaticky uspořádat popisy</translation>
     </message>
 </context>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="384"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="385"/>
         <source>black</source>
         <translation>Černá</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="335"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="336"/>
         <source>green</source>
         <translation>Zelená</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="338"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="339"/>
         <source>blue</source>
         <translation>Modrá</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="341"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="342"/>
         <source>dark red</source>
         <translation>Tmavě červená</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="344"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="345"/>
         <source>dark green</source>
         <translation>Tmavě zelená</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="347"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="348"/>
         <source>dark blue</source>
         <translation>Tmavě modrá</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="350"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="351"/>
         <source>yellow</source>
         <translation>Žlutá</translation>
     </message>
@@ -22693,7 +22698,7 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Opravdu chcete smazat?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="353"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="354"/>
         <source>light salmon</source>
         <translation>Světle lososová</translation>
     </message>
@@ -22702,52 +22707,52 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Zlatavá</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="356"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="357"/>
         <source>goldenrod</source>
         <translation>Zlatavá</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="359"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="360"/>
         <source>orange</source>
         <translation>Oranžová</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="362"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="363"/>
         <source>deep pink</source>
         <translation>Tmavě růžová</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="365"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="366"/>
         <source>violet</source>
         <translation>Fialová</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="368"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="369"/>
         <source>dark violet</source>
         <translation>Tmavě fialová</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="371"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="372"/>
         <source>medium sea green</source>
         <translation>Střední mořská zelená</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="374"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="375"/>
         <source>lime</source>
         <translation>Limetková</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="377"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="378"/>
         <source>deep sky blue</source>
         <translation>Tmavě nebeská modrá</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="380"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="381"/>
         <source>corn flower blue</source>
         <translation>kukuřice květina modrá</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="275"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="276"/>
         <source>Edit wrong formula</source>
         <translation>Upravit nesprávný vzorec</translation>
     </message>
@@ -23346,12 +23351,12 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="698"/>
         <source>Override the global curve approximation scale setting from the application preferences. The value must be between %1 and %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přepíše globální nastavení měřítka aproximace křivky z nastavení aplikace. Hodnota musí být mezi %1 a %2.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="703"/>
         <source>Curve approximation</source>
-        <translation type="unfinished"></translation>
+        <translation>Aproximace křivky</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="772"/>
@@ -23728,7 +23733,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="268"/>
         <source>Can&apos;t cast object to the requested type. Object id = %1, actual type = %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze přetypovat předmět na požadovaný typ. ID předmětu = %1, skutečný typ = %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="295"/>
@@ -23776,209 +23781,209 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="294"/>
         <source>Dependency tree</source>
-        <translation type="unfinished"></translation>
+        <translation>Strom závislostí</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="902"/>
         <source>Piece &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Díl &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="987"/>
         <source>True darts</source>
         <comment>operation</comment>
-        <translation type="unfinished">Vyrovnat délku záševku</translation>
+        <translation>Vyrovnat délku záševku</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="989"/>
         <source>Rotation</source>
         <comment>operation</comment>
-        <translation type="unfinished">Otáčení</translation>
+        <translation>Otáčení</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="991"/>
         <source>Flipping by line</source>
         <comment>operation</comment>
-        <translation type="unfinished">Převrácení podle čáry</translation>
+        <translation>Převrácení podle čáry</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="993"/>
         <source>Flipping by axis</source>
         <comment>operation</comment>
-        <translation type="unfinished">Převrácení podle osy</translation>
+        <translation>Převrácení podle osy</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="995"/>
         <source>Move</source>
         <comment>operation</comment>
-        <translation type="unfinished">Posunout</translation>
+        <translation>Posunout</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="997"/>
         <source>Union details</source>
         <comment>operation</comment>
-        <translation type="unfinished"></translation>
+        <translation>Spojení jednotlivostí (dílů střihu)</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1013"/>
         <source>Base point</source>
-        <translation type="unfinished">Základní bod</translation>
+        <translation>Základní bod</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1015"/>
         <source>Point at distance and angle</source>
-        <translation type="unfinished">Bod ve vzdálenosti a úhlu</translation>
+        <translation>Bod ve vzdálenosti a úhlu</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1017"/>
         <source>Point along line</source>
-        <translation type="unfinished"></translation>
+        <translation>Bod podél čáry</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1019"/>
         <source>Shoulder point</source>
-        <translation type="unfinished"></translation>
+        <translation>Bod ramene</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1021"/>
         <source>Point along perpendicular</source>
-        <translation type="unfinished">Bod podél kolmice</translation>
+        <translation>Bod podél kolmice</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1023"/>
         <source>Bisector</source>
-        <translation type="unfinished">Osa</translation>
+        <translation>Osa</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1025"/>
         <source>Point at line intersection</source>
-        <translation type="unfinished">Bod na průsečíku čar</translation>
+        <translation>Bod na průsečíku čar</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1028"/>
         <source>Spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Křivka</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1030"/>
         <source>Arc</source>
-        <translation type="unfinished">Oblouk</translation>
+        <translation>Oblouk</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1032"/>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1071"/>
         <source>Elliptical arc with given length</source>
-        <translation type="unfinished"></translation>
+        <translation>Elipsovitý oblouk s danou délkou</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1034"/>
         <source>Parallel curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Rovnoběžná křivka</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1036"/>
         <source>Graduated curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstupňovaná křivka</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1039"/>
         <source>Spline path</source>
-        <translation type="unfinished">Cesta hladké křivky (křivka spline)</translation>
+        <translation>Cesta hladké křivky (křivka spline)</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1041"/>
         <source>Point of intersection circle and segment</source>
-        <translation type="unfinished">Průsečík kruhu a části</translation>
+        <translation>Průsečík kruhu a části</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1043"/>
         <source>Perpendicular point along line</source>
-        <translation type="unfinished"></translation>
+        <translation>Bod podél kolmice</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1045"/>
         <source>Point located at the triangle&apos;s right-angled corner, lying along the axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Bod umístěný v pravoúhlém rohu trojúhelníku, ležící podél osy</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1047"/>
         <source>Point from X and Y of two other points</source>
-        <translation type="unfinished"></translation>
+        <translation>Bod z X a Y dvou jiných bodů</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1049"/>
         <source>Point segmenting an arc</source>
-        <translation type="unfinished"></translation>
+        <translation>Bod rozdělující oblouk</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1051"/>
         <source>Point segmenting a spline</source>
-        <translation type="unfinished"></translation>
+        <translation>Bod rozdělující křivku</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1053"/>
         <source>Point segmenting a spline path</source>
-        <translation type="unfinished"></translation>
+        <translation>Bod rozdělující cestu křivky</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1055"/>
         <source>Point of intersection line and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Bod průsečíku čáry a osy</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1057"/>
         <source>Point of intersection curve and axis</source>
-        <translation type="unfinished"></translation>
+        <translation>Bod průsečíku křivky a osy</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1059"/>
         <source>Point of intersection arcs</source>
-        <translation type="unfinished">Bod průsečíku oblouků</translation>
+        <translation>Bod průsečíku oblouků</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1061"/>
         <source>Point of intersection circles</source>
-        <translation type="unfinished">Bod průsečíku kruhů</translation>
+        <translation>Bod průsečíku kruhů</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1063"/>
         <source>Point of intersection curves</source>
-        <translation type="unfinished"></translation>
+        <translation>Bod průsečíku křivek</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1065"/>
         <source>Point from circle and tangent</source>
-        <translation type="unfinished">Bod průsečíku kruhu a tangenty</translation>
+        <translation>Bod průsečíku kruhu a tangenty</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1067"/>
         <source>Point from arc and tangent</source>
-        <translation type="unfinished">Bod průsečíku oblouku a tangenty</translation>
+        <translation>Bod průsečíku oblouku a tangenty</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1069"/>
         <source>Elliptical arc</source>
-        <translation type="unfinished">Elipsovitý oblouk</translation>
+        <translation>Elipsovitý oblouk</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1073"/>
         <source>Line connecting two points</source>
-        <translation type="unfinished"></translation>
+        <translation>Čára spojující dva body</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1097"/>
         <source>Union details operation creating piece &apos;%1&apos;. Source objects cannot be deleted while this operation exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Operace spojení jednotlivostí (dílů střihu) vytvářející díl &apos;%1&apos;. Zdrojové předměty nelze smazat, dokud tato operace existuje</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1107"/>
         <source>Union details operation. Source objects cannot be deleted while this operation exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Operace spojení jednotlivostí (dílů střihu). Zdrojové předměty nelze smazat, dokud tato operace existuje</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1121"/>
         <source>Line_%1_%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Čára_%1_%2</translation>
     </message>
 </context>
 <context>
@@ -24114,22 +24119,22 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="355"/>
         <source>Pending</source>
-        <translation type="unfinished"></translation>
+        <translation>Čeká se</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="380"/>
         <source>Cannot Delete Object</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze smazat předmět</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="381"/>
         <source>This object cannot be deleted because it is being used by other items.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento předmět nelze smazat, protože je používán jinými položkami.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="382"/>
         <source>Please resolve the dependencies before attempting to delete this object.</source>
-        <translation type="unfinished"></translation>
+        <translation>Před pokusem o smazání tohoto předmětu vyřešte závislosti.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="445"/>
@@ -24201,72 +24206,72 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="515"/>
         <source>Could not determine the system font installation path.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se určit cestu pro instalaci systémových písem.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="521"/>
         <source>Failed to create destination directory: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se vytvořit cílový adresář: %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="490"/>
         <source>Failed to copy file from %1 to %2. Possible reasons: permission denied, file locked, or general I/O error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se zkopírovat soubor z %1 do %2. Možné důvody: přístup odepřen, soubor uzamčen nebo obecná chyba I/O.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="280"/>
         <source>Font copy succeeded, but Linux font cache rebuild failed. Font may not be immediately visible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírování písma se zdařilo, ale obnovení mezipaměti písem v Linuxu selhalo. Písmo nemusí být ihned viditelné.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="288"/>
         <source>Font copy succeeded, but Windows Registry registration failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírování písma se zdařilo, ale registrace v registru Windows selhala.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="371"/>
         <source>Font loaded, but could not determine font family name to install font corrections.</source>
-        <translation type="unfinished"></translation>
+        <translation>Písmo načteno, ale nepodařilo se určit název rodiny písma pro instalaci oprav písma.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="397"/>
         <source>Font correction file already exists at destination: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor s opravou písma již v cíli existuje: %1.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="402"/>
         <source>Failed to copy font correction file from %1 to %2. Possible reasons: permission denied, file locked, or general I/O error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se zkopírovat soubor s opravou písma z %1 do %2. Možné důvody: přístup odepřen, soubor uzamčen nebo obecná chyba I/O.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="434"/>
         <source>Skipped existing font (User choice: No to All): %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Přeskočeno stávající písmo (volba uživatele: Ne všem): %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="443"/>
         <source>Font Already Exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Písmo již existuje</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="444"/>
         <source>The font &apos;%1&apos; is already installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Písmo &apos;%1&apos; je již nainstalováno.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="445"/>
         <source>Do you want to replace it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Chcete je nahradit?</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="474"/>
         <source>Installation cancelled by user. Font not replaced.</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalace zrušena uživatelem. Písmo nebylo nahrazeno.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vfontinstaller.cpp" line="481"/>
         <source>Failed to remove existing file: %1. Check permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se odstranit stávající soubor: %1. Zkontrolujte oprávnění.</translation>
     </message>
 </context>
 <context>
@@ -24626,7 +24631,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="432"/>
         <source>Pending</source>
-        <translation type="unfinished"></translation>
+        <translation>Čeká se</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="457"/>
@@ -24850,7 +24855,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="273"/>
         <source>Special thanks</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvláštní poděkování</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="317"/>
@@ -24860,7 +24865,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="324"/>
         <source>Credits</source>
-        <translation type="unfinished"></translation>
+        <translation>Zásluhy</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.cpp" line="66"/>
@@ -25726,7 +25731,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1655"/>
         <source>Print text as paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Tisknout text jako cesty</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1809"/>
@@ -26196,7 +26201,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="808"/>
         <source>Error updating scene after parsing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba při aktualizaci scény po analýze.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1198"/>
@@ -26319,13 +26324,13 @@ Chcete uložit změny?</translation>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3320"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3326"/>
         <source>Error creating or updating a parallel curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba při vytváření nebo aktualizaci rovnoběžné křivky</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3395"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3401"/>
         <source>Error creating or updating a graduated curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba při vytváření nebo aktualizaci odstupňované křivky</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3482"/>
@@ -26349,7 +26354,7 @@ Chcete uložit změny?</translation>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3703"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3709"/>
         <source>Error creating or updating elliptical arc with length</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba při vytváření nebo aktualizaci elipsovitého oblouku s délkou</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3736"/>
@@ -26925,7 +26930,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="549"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
 </context>
 <context>
@@ -26934,7 +26939,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="902"/>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="952"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
 </context>
 <context>
@@ -26942,12 +26947,12 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="203"/>
         <source>Length</source>
-        <translation type="unfinished">Délka</translation>
+        <translation>Délka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="205"/>
         <source>Label</source>
-        <translation type="unfinished">Popis</translation>
+        <translation>Popis</translation>
     </message>
 </context>
 <context>
@@ -26955,7 +26960,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="687"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
 </context>
 <context>
@@ -26978,7 +26983,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolalongline.cpp" line="196"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
 </context>
 <context>
@@ -27050,7 +27055,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="157"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolcurveintersectaxis.cpp" line="418"/>
@@ -27088,7 +27093,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcut.cpp" line="191"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
 </context>
 <context>
@@ -27101,7 +27106,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="376"/>
         <source>Elliptical arc</source>
-        <translation type="unfinished">Elipsovitý oblouk</translation>
+        <translation>Elipsovitý oblouk</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="377"/>
@@ -27131,12 +27136,12 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="382"/>
         <source>radius1</source>
-        <translation type="unfinished"></translation>
+        <translation>poloměr1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="383"/>
         <source>radius2</source>
-        <translation type="unfinished"></translation>
+        <translation>poloměr2</translation>
     </message>
 </context>
 <context>
@@ -27238,7 +27243,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/tooldoublepoint/vtooldoublepoint.cpp" line="534"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
 </context>
 <context>
@@ -27280,32 +27285,32 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.cpp" line="470"/>
         <source>Length</source>
-        <translation type="unfinished">Délka</translation>
+        <translation>Délka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.cpp" line="473"/>
         <source>Radius1</source>
-        <translation type="unfinished"></translation>
+        <translation>Poloměr1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.cpp" line="475"/>
         <source>Radius2</source>
-        <translation type="unfinished"></translation>
+        <translation>Poloměr2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.cpp" line="477"/>
         <source>Start angle</source>
-        <translation type="unfinished">Počáteční úhel</translation>
+        <translation>Počáteční úhel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.cpp" line="479"/>
         <source>End angle</source>
-        <translation type="unfinished">Koncový úhel</translation>
+        <translation>Koncový úhel</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolellipticalarcwithlength.cpp" line="481"/>
         <source>Label</source>
-        <translation type="unfinished">Popis</translation>
+        <translation>Popis</translation>
     </message>
 </context>
 <context>
@@ -27344,7 +27349,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolgraduatedcurve.cpp" line="111"/>
         <source>Offset %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstup %1</translation>
     </message>
 </context>
 <context>
@@ -27367,7 +27372,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolheight.cpp" line="334"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
 </context>
 <context>
@@ -27385,7 +27390,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vtoolline.cpp" line="461"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
 </context>
 <context>
@@ -27398,7 +27403,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoollineintersect.cpp" line="358"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoollineintersect.cpp" line="152"/>
@@ -27426,7 +27431,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.cpp" line="398"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollineintersectaxis.cpp" line="139"/>
@@ -27454,7 +27459,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoollinepoint.cpp" line="252"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
 </context>
 <context>
@@ -28016,7 +28021,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3225"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3605"/>
         <source>Name1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název1:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3192"/>
@@ -28024,7 +28029,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3226"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3606"/>
         <source>Name2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název2:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3207"/>
@@ -28120,42 +28125,42 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3352"/>
         <source>First arc. Left sub arc name:</source>
-        <translation type="unfinished"></translation>
+        <translation>První oblouk. Název levého podřízeného oblouku:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3353"/>
         <source>First arc. Right sub arc name:</source>
-        <translation type="unfinished"></translation>
+        <translation>První oblouk. Název pravého podřízeného oblouku:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3354"/>
         <source>First arc. Left sub arc alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>První oblouk. Přezdívka levého podřízeného oblouku:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3355"/>
         <source>First arc. Right sub arc alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>První oblouk. Přezdívka pravého podřízeného oblouku:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3356"/>
         <source>Second arc. Left sub arc name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Druhý oblouk. Název levého podřízeného oblouku:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3357"/>
         <source>Second arc. Right sub arc name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Druhý oblouk. Název pravého podřízeného oblouku:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3358"/>
         <source>Second arc. Left sub arc alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Druhý oblouk. Přezdívka levého podřízeného oblouku:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3359"/>
         <source>Second arc. Right sub arc alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Druhý oblouk. Přezdívka pravého podřízeného oblouku:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3371"/>
@@ -28200,42 +28205,42 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3391"/>
         <source>First curve. Left sub curve name:</source>
-        <translation type="unfinished"></translation>
+        <translation>První křivka. Název levé podřízené křivky:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3392"/>
         <source>First curve. Right sub curve name:</source>
-        <translation type="unfinished"></translation>
+        <translation>První křivka. Název pravé podřízené křivky:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3393"/>
         <source>First curve. Left sub curve alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>První křivka. Přezdívka levé podřízené křivky:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3394"/>
         <source>First curve. Right sub curve alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>První křivka. Přezdívka pravé podřízené křivky:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3395"/>
         <source>Second curve. Left sub curve name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Druhá křivka. Název levé podřízené křivky:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3396"/>
         <source>Second curve. Right sub curve name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Druhá křivka. Název pravé podřízené křivky:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3397"/>
         <source>Second curve. Left sub curve alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Druhá křivka. Přezdívka levé podřízené křivky:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3398"/>
         <source>Second curve. Right sub curve alias:</source>
-        <translation type="unfinished"></translation>
+        <translation>Druhá křivka. Přezdívka pravé podřízené křivky:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3410"/>
@@ -28256,38 +28261,38 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3721"/>
         <source>Elliptical arc with given length</source>
-        <translation type="unfinished"></translation>
+        <translation>Elipsovitý oblouk s danou délkou</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3727"/>
         <source>Radius1:</source>
-        <translation type="unfinished">Poloměr1:</translation>
+        <translation>Poloměr1:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3728"/>
         <source>Radius2:</source>
-        <translation type="unfinished">Poloměr2:</translation>
+        <translation>Poloměr2:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3747"/>
         <source>Parallel curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Rovnoběžná křivka</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3751"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3774"/>
         <source>Full name:</source>
-        <translation type="unfinished">Plný název:</translation>
+        <translation>Plný název:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3753"/>
         <source>Width:</source>
-        <translation type="unfinished">Šířka:</translation>
+        <translation>Šířka:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3770"/>
         <source>Graduated curve</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstupňovaná křivka</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3108"/>
@@ -28534,7 +28539,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.cpp" line="410"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofcontact.cpp" line="219"/>
@@ -28547,7 +28552,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectionarcs.cpp" line="167"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectionarcs.cpp" line="535"/>
@@ -28568,7 +28573,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="173"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="632"/>
@@ -28753,7 +28758,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toollinepoint/vtoolshoulderpoint.cpp" line="379"/>
         <source>save tool options</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit volby nástroje</translation>
     </message>
 </context>
 <context>
@@ -30106,7 +30111,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="66"/>
         <source>Offset_</source>
         <comment>Left symbol _ in the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Odstup_</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="116"/>
@@ -30541,62 +30546,62 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="22"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="114"/>
         <source>Filter</source>
-        <translation type="unfinished">Filtr</translation>
+        <translation>Filtr</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="32"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="116"/>
         <source>Go to object automatically on node selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Při výběru uzlu automaticky přejít na předmět</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="62"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="119"/>
         <source>Move to earliest possible position in history</source>
-        <translation type="unfinished"></translation>
+        <translation>Přesunout na nejdřívější možnou pozici v historii</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="75"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="122"/>
         <source>Move earlier in history</source>
-        <translation type="unfinished"></translation>
+        <translation>Přesunout dříve v historii</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="88"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="125"/>
         <source>Move later in history</source>
-        <translation type="unfinished"></translation>
+        <translation>Přesunout později v historii</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="101"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="128"/>
         <source>Move to latest possible position in history</source>
-        <translation type="unfinished"></translation>
+        <translation>Přesunout na nejpozdější možnou pozici v historii</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="667"/>
         <source>Expand All</source>
-        <translation type="unfinished">Rozbalit vše</translation>
+        <translation>Rozbalit vše</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="668"/>
         <source>Collapse All</source>
-        <translation type="unfinished">Sbalit vše</translation>
+        <translation>Sbalit vše</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="670"/>
         <source>Copy ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovat ID</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="672"/>
         <source>Go to Object</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejít na předmět</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="674"/>
         <source>Delete</source>
-        <translation type="unfinished">Smazat</translation>
+        <translation>Smazat</translation>
     </message>
 </context>
 <context>
@@ -30853,12 +30858,12 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="119"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elipsovitý oblouk&lt;/b&gt;: poloměr1 = %1%2, poloměr2 = %3%2, úhel1 = %4°; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte první poloměr, &lt;b&gt;%5&lt;/b&gt; - magnetický úhel, &lt;b&gt;%6&lt;/b&gt; - dokončeno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="164"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, angle2 = %5°, rotation = %6°; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%7&lt;/b&gt; - sticking angle, &lt;b&gt;%8&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elipsovitý oblouk&lt;/b&gt;: poloměr1 = %1%2, poloměr2 = %3%2, úhel1 = %4°, úhel2 = %5°, otočení = %6°; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte, &lt;b&gt;%7&lt;/b&gt; - magnetický úhel, &lt;b&gt;%8&lt;/b&gt; - dokončeno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarc.cpp" line="141"/>
@@ -30871,27 +30876,27 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarcwithlength.cpp" line="83"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%3&lt;/b&gt; - skip</source>
-        <translation type="unfinished">&lt;b&gt; Elipsovitý oblouk&lt;/b&gt;: poloměr1 = %1%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte první úhel, &lt;b&gt;%3&lt;/b&gt; - dokončeno</translation>
+        <translation>&lt;b&gt; Elipsovitý oblouk&lt;/b&gt;: poloměr1 = %1%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte první úhel, &lt;b&gt;%3&lt;/b&gt; - dokončeno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarcwithlength.cpp" line="100"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the second radius, &lt;b&gt;%4&lt;/b&gt; - skip</source>
-        <translation type="unfinished">&lt;b&gt;Elipsovitý oblouk&lt;/b&gt;: poloměr1 = %1%2, poloměr2 = %3%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte druhý poloměr, &lt;b&gt;%4&lt;/b&gt; - dokončeno</translation>
+        <translation>&lt;b&gt;Elipsovitý oblouk&lt;/b&gt;: poloměr1 = %1%2, poloměr2 = %3%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte druhý poloměr, &lt;b&gt;%4&lt;/b&gt; - dokončeno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarcwithlength.cpp" line="117"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the first radius, &lt;b&gt;%5&lt;/b&gt; - sticking angle, &lt;b&gt;%6&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elipsovitý oblouk&lt;/b&gt;: poloměr1 = %1%2, poloměr2 = %3%2, úhel1 = %4°; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte první poloměr, &lt;b&gt;%5&lt;/b&gt; - magnetický úhel, &lt;b&gt;%6&lt;/b&gt; - dokončeno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarcwithlength.cpp" line="140"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, arc length = %5%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the arc length, &lt;b&gt;%6&lt;/b&gt; - sticking angle, &lt;b&gt;%7&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elipsovitý oblouk&lt;/b&gt;: poloměr1 = %1%2, poloměr2 = %3%2, úhel1 = %4°, délka oblouku = %5%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte délku oblouku, &lt;b&gt;%6&lt;/b&gt; - magnetický úhel, &lt;b&gt;%7&lt;/b&gt; - dokončeno</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolellipticalarcwithlength.cpp" line="168"/>
         <source>&lt;b&gt;Elliptical arc&lt;/b&gt;: radius1 = %1%2, radius2 = %3%2, angle1 = %4°, arc length = %5%2, rotation = %6°; &lt;b&gt;Mouse click&lt;/b&gt; - finish creating, &lt;b&gt;%7&lt;/b&gt; - sticking angle, &lt;b&gt;%8&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elipsovitý oblouk&lt;/b&gt;: poloměr1 = %1%2, poloměr2 = %3%2, úhel1 = %4°, délka oblouku = %5%2, otočení = %6°; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte, &lt;b&gt;%7&lt;/b&gt; - magnetický úhel, &lt;b&gt;%8&lt;/b&gt; - dokončeno</translation>
     </message>
 </context>
 <context>
@@ -30915,7 +30920,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolgraduatedcurve.cpp" line="100"/>
         <source>&lt;b&gt;Graduated curve&lt;/b&gt;: offsets = %1; &lt;b&gt;Mouse click&lt;/b&gt; - selecting next width, &lt;b&gt;%2&lt;/b&gt; - negative width, &lt;b&gt;%3&lt;/b&gt; - finish</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Odstupňovaná křivka&lt;/b&gt;: odstupy = %1; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - výběr další šířky, &lt;b&gt;%2&lt;/b&gt; - záporná šířka, &lt;b&gt;%3&lt;/b&gt; - dokončeno</translation>
     </message>
 </context>
 <context>
@@ -30960,7 +30965,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolparallelcurve.cpp" line="75"/>
         <source>&lt;b&gt;Parallel curve&lt;/b&gt;: width = %1%2; &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting the width, &lt;b&gt;%3&lt;/b&gt; - negative width, &lt;b&gt;%4&lt;/b&gt; - skip</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Rovnoběžná křivka&lt;/b&gt;: šířka = %1%2; &lt;b&gt;Klepněte tlačítkem myši&lt;/b&gt; - potvrďte šířku, &lt;b&gt;%3&lt;/b&gt; - záporná šířka, &lt;b&gt;%4&lt;/b&gt; - dokončeno</translation>
     </message>
 </context>
 <context>

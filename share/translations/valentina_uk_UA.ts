@@ -7314,7 +7314,7 @@ Apply settings anyway?</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="573"/>
         <source>Adding or removing objects can&apos;t be applied while the dialog stays open. Use OK to confirm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Додавання або видалення об&apos;єктів неможливе, поки діалогове вікно відкрите. Натисніть «ОК», щоб підтвердити.</translation>
     </message>
 </context>
 <context>
@@ -22653,37 +22653,37 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="384"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="385"/>
         <source>black</source>
         <translation>чорний</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="335"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="336"/>
         <source>green</source>
         <translation>зелений</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="338"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="339"/>
         <source>blue</source>
         <translation>синій</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="341"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="342"/>
         <source>dark red</source>
         <translation>темно-червоний</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="344"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="345"/>
         <source>dark green</source>
         <translation>темно-зелений</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="347"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="348"/>
         <source>dark blue</source>
         <translation>темно-синій</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="350"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="351"/>
         <source>yellow</source>
         <translation>жовтий</translation>
     </message>
@@ -22696,7 +22696,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ви дійсно хочете видалити?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="353"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="354"/>
         <source>light salmon</source>
         <translation>світло-рожевий</translation>
     </message>
@@ -22705,52 +22705,52 @@ Do you want to save your changes?</source>
         <translation type="vanished">золотистий</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="356"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="357"/>
         <source>goldenrod</source>
         <translation>золотистий</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="359"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="360"/>
         <source>orange</source>
         <translation>оранжевий</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="362"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="363"/>
         <source>deep pink</source>
         <translation>темно-рожевий</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="365"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="366"/>
         <source>violet</source>
         <translation>фіолетовий</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="368"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="369"/>
         <source>dark violet</source>
         <translation>темно-фіолетовий</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="371"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="372"/>
         <source>medium sea green</source>
         <translation>середній морський зелений</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="374"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="375"/>
         <source>lime</source>
         <translation>лайм</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="377"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="378"/>
         <source>deep sky blue</source>
         <translation>темний небесно-синій</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="380"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="381"/>
         <source>corn flower blue</source>
         <translation>волошковий</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="275"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="276"/>
         <source>Edit wrong formula</source>
         <translation>Редагувати неправильну формулу</translation>
     </message>
@@ -26199,7 +26199,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="808"/>
         <source>Error updating scene after parsing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Помилка під час оновлення сцени після парсингу.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1198"/>

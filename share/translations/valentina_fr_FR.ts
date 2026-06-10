@@ -7314,7 +7314,7 @@ Appliquer quand même les réglages ?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="573"/>
         <source>Adding or removing objects can&apos;t be applied while the dialog stays open. Use OK to confirm.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;ajout ou la suppression d&apos;objets ne peut pas être appliqué tant que la boîte de dialogue reste ouverte. Utilisez OK pour confirmer.</translation>
     </message>
 </context>
 <context>
@@ -22649,37 +22649,37 @@ Voulez-vous enregistrer vos changements ?</translation>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="384"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="385"/>
         <source>black</source>
         <translation>noir</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="335"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="336"/>
         <source>green</source>
         <translation>vert</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="338"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="339"/>
         <source>blue</source>
         <translation>bleu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="341"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="342"/>
         <source>dark red</source>
         <translation>rouge foncé</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="344"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="345"/>
         <source>dark green</source>
         <translation>vert foncé</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="347"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="348"/>
         <source>dark blue</source>
         <translation>bleu foncé</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="350"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="351"/>
         <source>yellow</source>
         <translation>jaune</translation>
     </message>
@@ -22692,7 +22692,7 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation type="vanished">Voulez vous vraiment supprimer ?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="353"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="354"/>
         <source>light salmon</source>
         <translation>saumon clair</translation>
     </message>
@@ -22701,52 +22701,52 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation type="vanished">jaune d&apos;or</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="356"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="357"/>
         <source>goldenrod</source>
         <translation>jaune d&apos;or</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="359"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="360"/>
         <source>orange</source>
         <translation>orange</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="362"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="363"/>
         <source>deep pink</source>
         <translation>rose foncé</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="365"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="366"/>
         <source>violet</source>
         <translation>violet</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="368"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="369"/>
         <source>dark violet</source>
         <translation>violet foncé</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="371"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="372"/>
         <source>medium sea green</source>
         <translation>vert de mer moyen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="374"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="375"/>
         <source>lime</source>
         <translation>citron</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="377"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="378"/>
         <source>deep sky blue</source>
         <translation>bleu ciel</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="380"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="381"/>
         <source>corn flower blue</source>
         <translation>bleu centaurée</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="275"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="276"/>
         <source>Edit wrong formula</source>
         <translation>Modifier la formule erronée</translation>
     </message>
@@ -26195,7 +26195,7 @@ Voulez-vous enregistrer vos changements ?</translation>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="808"/>
         <source>Error updating scene after parsing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de la mise à jour de la scène après l&apos;analyse.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1198"/>

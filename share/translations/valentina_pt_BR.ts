@@ -683,7 +683,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="287"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="352"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Trocar pontos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="318"/>
@@ -6242,7 +6242,7 @@ Aplicar configurações assim mesmo?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="185"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="210"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Trocar pontos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="37"/>
@@ -7247,7 +7247,7 @@ Aplicar configurações assim mesmo?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="280"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="484"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Trocar pontos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="317"/>
@@ -7291,32 +7291,32 @@ Aplicar configurações assim mesmo?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="69"/>
         <source>Rotation</source>
-        <translation type="unfinished">Rotação</translation>
+        <translation>Rotação</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="174"/>
         <source>Invalid group name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome de grupo inválido</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="233"/>
         <source>Default</source>
-        <translation type="unfinished">Padrão</translation>
+        <translation>Padrão</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="325"/>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Rótulo inválido</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="325"/>
         <source>Invalid name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome inválido</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="573"/>
         <source>Adding or removing objects can&apos;t be applied while the dialog stays open. Use OK to confirm.</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar ou remover objetos não pode ser aplicado enquanto a caixa de diálogo permanece aberta. Use OK para confirmar.</translation>
     </message>
 </context>
 <context>
@@ -9173,7 +9173,7 @@ Aplicar configurações assim mesmo?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="102"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="187"/>
         <source>Swap points</source>
-        <translation type="unfinished"></translation>
+        <translation>Trocar pontos</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="139"/>
@@ -13086,13 +13086,13 @@ Aplicar configurações assim mesmo?</translation>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="8593"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1659"/>
         <source>Auto-arrange labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Organizar rótulos automaticamente</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2654"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1661"/>
         <source>Auto-arrange point labels to reduce overlaps</source>
-        <translation type="unfinished"></translation>
+        <translation>Organizar automaticamente os rótulos dos pontos para reduzir sobreposições</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2665"/>
@@ -15167,7 +15167,7 @@ Falha nas instalações: %2</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="8543"/>
         <source>Auto-Arrange Labels</source>
-        <translation type="unfinished"></translation>
+        <translation>Organizar Rótulos Automaticamente</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2344"/>
@@ -22652,43 +22652,43 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="485"/>
         <source>Auto-arrange labels</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Organizar rótulos automaticamente</translation>
     </message>
 </context>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="384"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="385"/>
         <source>black</source>
         <translation>preto</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="335"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="336"/>
         <source>green</source>
         <translation>verde</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="338"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="339"/>
         <source>blue</source>
         <translation>azul</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="341"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="342"/>
         <source>dark red</source>
         <translation>vermelho escuro</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="344"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="345"/>
         <source>dark green</source>
         <translation>Verde escuro</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="347"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="348"/>
         <source>dark blue</source>
         <translation>azul escuro</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="350"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="351"/>
         <source>yellow</source>
         <translation>amarelo</translation>
     </message>
@@ -22701,7 +22701,7 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
         <translation type="vanished">Realmente deseja excluir?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="353"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="354"/>
         <source>light salmon</source>
         <translation>salmão claro</translation>
     </message>
@@ -22710,52 +22710,52 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
         <translation type="vanished">dourado</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="356"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="357"/>
         <source>goldenrod</source>
         <translation>dourado</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="359"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="360"/>
         <source>orange</source>
         <translation>laranja</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="362"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="363"/>
         <source>deep pink</source>
         <translation>rosa escuro</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="365"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="366"/>
         <source>violet</source>
         <translation>violeta</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="368"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="369"/>
         <source>dark violet</source>
         <translation>violeta escuro</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="371"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="372"/>
         <source>medium sea green</source>
         <translation>médio verde mar</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="374"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="375"/>
         <source>lime</source>
         <translation>lima</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="377"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="378"/>
         <source>deep sky blue</source>
         <translation>azul céu escuro</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="380"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="381"/>
         <source>corn flower blue</source>
         <translation>azul flor de milho</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="275"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="276"/>
         <source>Edit wrong formula</source>
         <translation>Editar fórmula incorreta</translation>
     </message>
@@ -23736,7 +23736,7 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="268"/>
         <source>Can&apos;t cast object to the requested type. Object id = %1, actual type = %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não é possível converter o objeto para o tipo solicitado. ID do objeto = %1, tipo real = %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="295"/>
@@ -23825,7 +23825,7 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="997"/>
         <source>Union details</source>
         <comment>operation</comment>
-        <translation type="unfinished"></translation>
+        <translation>União de moldes</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1013"/>
@@ -23976,12 +23976,12 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1097"/>
         <source>Union details operation creating piece &apos;%1&apos;. Source objects cannot be deleted while this operation exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Operação de união de moldes criando a peça &apos;%1&apos;. Os objetos de origem não podem ser excluídos enquanto esta operação existir</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1107"/>
         <source>Union details operation. Source objects cannot be deleted while this operation exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Operação de união de moldes. Os objetos de origem não podem ser excluídos enquanto esta operação existir</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1121"/>
@@ -26204,7 +26204,7 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="808"/>
         <source>Error updating scene after parsing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ao atualizar a cena após a análise.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1198"/>
