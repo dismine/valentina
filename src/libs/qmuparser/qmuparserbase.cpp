@@ -882,6 +882,15 @@ void QmuParserBase::ApplyIfElse(QStack<token_type> &a_stOpt, QStack<token_type> 
     // Check if there is an if Else clause to be calculated
     while (a_stOpt.size() && a_stOpt.top().GetCode() == cmELSE)
     {
+        // Make sure both stacks hold enough elements to resolve the ternary operator. A
+        // malformed expression (e.g. "1?2+-:3") can leave the value stack under-filled,
+        // in which case popping below would read past the stack and crash. Guard at
+        // runtime instead of relying on the debug-only Q_ASSERTs further down.
+        if (a_stOpt.size() < 2 || a_stVal.size() < 3)
+        {
+            Error(ecUNASSIGNABLE_TOKEN, m_pTokenReader->GetPos());
+        }
+
         token_type const opElse = a_stOpt.pop();
         Q_ASSERT(a_stOpt.size() > 0);
 

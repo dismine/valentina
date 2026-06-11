@@ -33,6 +33,7 @@
 - [Valentina app] New action Auto-arrange labels (Ctrl+Shift+A). Automatically repositions point labels in Draw and Details mode to reduce overlaps.
 
 # Valentina 1.0.3 (unreleased)
+- [Misc] Fixed crash when evaluating a malformed if-then-else formula (e.g. a ternary branch with a missing operand).
 - [Valentina app] Fixed crash when pressing undo/redo while a tool options dialog is open, caused by the resulting full reparse destroying the tool and its geometry before the dialog was accepted.
 - [Tape app] Fixed sluggish image size scale control in the known measurements editor by no longer rebuilding the whole image list on every value change.
 - [Tape app] Fixed image list in the known measurements editor showing a single column until the Images tab was activated or the image size value was changed.
