@@ -26160,79 +26160,79 @@ Do you want to save your changes?</source>
         <translation type="vanished">Fehler: uneindeutige ID.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="642"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="670"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="734"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="778"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="625"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="653"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="717"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="761"/>
         <source>Error parsing file.</source>
         <translation>Fehler beim Auswerten der Datei.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="649"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="745"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="632"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="728"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Fehler: Wert kann nicht konvertiert werden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="656"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="756"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="639"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="739"/>
         <source>Error empty parameter.</source>
         <translation>Fehler: leerer Parameter.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="663"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="767"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="646"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="750"/>
         <source>Error wrong id.</source>
         <translation>Fehler: falsche ID.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="677"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="789"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="660"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="772"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Fehler beim Auswerten der Datei  (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="808"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="791"/>
         <source>Error updating scene after parsing.</source>
         <translation>Fehler beim Aktualisieren der Szene nach dem Parsen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1198"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1182"/>
         <source>Error creating or updating detail</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Detail&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1820"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1804"/>
         <source>Error creating or updating single point</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Punkt&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1865"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1871"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1849"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1855"/>
         <source>Error creating or updating point of end line</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Punkt mit Abstand und Winkel&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1915"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1921"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1899"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1905"/>
         <source>Error creating or updating point along line</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Punkt auf einer Linie&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1960"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1966"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1944"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1950"/>
         <source>Error creating or updating point of shoulder</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Spezieller Punkt an der Schulter&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2005"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2011"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1989"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1995"/>
         <source>Error creating or updating point of normal</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Punkt auf einer Senkrechten&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2050"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2056"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2034"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2040"/>
         <source>Error creating or updating point of bisector</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Winkelhalbierende&quot;</translation>
     </message>
@@ -26241,288 +26241,288 @@ Do you want to save your changes?</source>
         <translation type="vanished">Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Schnittpunkt zweier Linien&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2126"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2132"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2110"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2116"/>
         <source>Error creating or updating point of contact</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Schnittpunkt Kreis und Gerade&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2162"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2146"/>
         <source>Error creating or updating modeling point</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Punkt&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2294"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2278"/>
         <source>Error creating or updating height</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Lotfußpunkt&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2325"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2309"/>
         <source>Error creating or updating triangle</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Dreieck&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2355"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2339"/>
         <source>Error creating or updating point of intersection</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Laufender Schnittpunkt&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2411"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2417"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2395"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2401"/>
         <source>Error creating or updating cut spline point</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Kurvensegment&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2473"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2479"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2457"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2463"/>
         <source>Error creating or updating cut spline path point</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Pfadsegment&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2535"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2541"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2519"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2525"/>
         <source>Error creating or updating cut arc point</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Kreisbogen&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2582"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2588"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2566"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2572"/>
         <source>Error creating or updating point of intersection line and axis</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Laufender Schnittpunkt auf Linie&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2649"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2655"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2633"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2639"/>
         <source>Error creating or updating point of intersection curve and axis</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Laufender Schnittpunkt auf Kurve&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1696"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1680"/>
         <source>Error creating or updating line</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Linie&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2991"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3054"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2975"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3038"/>
         <source>Error creating or updating simple curve</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Kurve&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3182"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3261"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3166"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3245"/>
         <source>Error creating or updating curve path</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Gekrümmter Pfad&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3320"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3326"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3304"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3310"/>
         <source>Error creating or updating a parallel curve</source>
         <translation>Fehler beim Erstellen oder Aktualisieren einer parallelen Kurve</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3395"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3401"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3379"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3385"/>
         <source>Error creating or updating a graduated curve</source>
         <translation>Fehler beim Erstellen oder Aktualisieren einer abgestuften Kurve</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3482"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3466"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Kurve Detail&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3507"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3491"/>
         <source>Error creating or updating modeling curve path</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Pfad Detail&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3554"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3560"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3783"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3789"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3538"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3544"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3767"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3773"/>
         <source>Error creating or updating simple arc</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Bogen&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3703"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3709"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3687"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3693"/>
         <source>Error creating or updating elliptical arc with length</source>
         <translation>Fehler beim Erstellen oder Aktualisieren eines elliptischen Bogens mit Länge</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3736"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3720"/>
         <source>Error creating or updating modeling arc</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Bogen Detail&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4475"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4459"/>
         <source>Error creating or updating union details</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Details vereinigen&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2712"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2696"/>
         <source>Error creating or updating point of intersection arcs</source>
         <translation>Fehler beim Erstellen oder Aktualisieren des Bogen-Schnittpunktes</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2755"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2739"/>
         <source>Error creating or updating point of intersection circles</source>
         <translation>Fehler beim Erstellen oder Aktualisieren des Kreis-Schnittpunktes</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2859"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2843"/>
         <source>Error creating or updating point from circle and tangent</source>
         <translation>Fehler beim Erstellen oder Aktualisieren eines Berührungpunktes</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2890"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2874"/>
         <source>Error creating or updating point from arc and tangent</source>
         <translation>Fehler beim Erstellen oder Aktualisieren eines Punktes von Bogen und Tangente</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2941"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2925"/>
         <source>Error creating or updating true darts</source>
         <translation>Fehler beim Erstellen oder Aktualisieren des Abnäherausgleichs</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="959"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1056"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1125"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="943"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1040"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1109"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
         <translation>Falscher Symbolname &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1663"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1647"/>
         <source>Unknown point type &apos;%1&apos;.</source>
         <translation>Unbekannter Punkt Typ &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4362"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4346"/>
         <source>Unknown spline type &apos;%1&apos;.</source>
         <translation>Unbekannte Spline Type &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4397"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4381"/>
         <source>Unknown arc type &apos;%1&apos;.</source>
         <translation>Unbekannter Bogen Typ &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4481"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4465"/>
         <source>Unknown tools type &apos;%1&apos;.</source>
         <translation>Unbekannter Werkzeug Typ &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="580"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="563"/>
         <source>Error not unique id.</source>
         <translation>Fehler: uneindeutige ID.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2819"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2803"/>
         <source>Error creating or updating point of intersection curves</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des Eintrags vom Typ &quot;Kurvenschnittpunkt&quot;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3060"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3044"/>
         <source>Error creating or updating simple interactive spline</source>
         <translation>Fehler beim Anlegen oder Aktualisieren der einfachen interaktiven Spline</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3267"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3251"/>
         <source>Error creating or updating interactive spline path</source>
         <translation>Fehler beim Anlegen oder Aktualisieren des interaktiven Splinepfades</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3114"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3098"/>
         <source>Error creating or updating cubic bezier curve</source>
         <translation>Fehler beim Erstellen oder Aktualisieren der kubischen Bezierkurve</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3457"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3441"/>
         <source>Error creating or updating cubic bezier path curve</source>
         <translation>Fehler beim Erstellen oder Aktualisieren des Pfades der kubischen Bezierkurve</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3832"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3838"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3816"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3822"/>
         <source>Error creating or updating operation of rotation</source>
         <translation>Fehler bei der Erstellung oder Aktualisierung des Rotationsvorgangs</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4513"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4497"/>
         <source>Unknown operation type &apos;%1&apos;.</source>
         <translation>Unbekannter Vorgangstyp &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3873"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3857"/>
         <source>Error creating or updating operation of flipping by line</source>
         <translation>Fehler bei der Erstellung oder Aktualisierung beim Spiegel über eine Linie</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3908"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3892"/>
         <source>Error creating or updating operation of flipping by axis</source>
         <translation>Fehler bei der Erstellung oder Aktualisierung beim Spiegel über die Achse</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3957"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3963"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3941"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3947"/>
         <source>Error creating or updating operation of moving</source>
         <translation>Fehler beim Erstellen oder Aktualisieren der Verschiebung</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2087"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2071"/>
         <source>Error creating or updating point of line intersection</source>
         <translation>Fehler bei der Erstellung oder Aktualisierung des Linienschnittpunkts</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3614"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3620"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3598"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3604"/>
         <source>Error creating or updating simple elliptical arc</source>
         <translation>Fehler bei der Erstellung oder Aktualisierung eines elliptischen Bogens</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4434"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4418"/>
         <source>Unknown elliptical arc type &apos;%1&apos;.</source>
         <translation>Unbekannter elliptischer Bogentyp &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3647"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3631"/>
         <source>Error creating or updating modeling elliptical arc</source>
         <translation>Fehler beim Erstellen oder Aktualisieren des elliptischen Bogens</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1142"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1126"/>
         <source>Detail</source>
         <translation>Detail</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4547"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4531"/>
         <source>Unnamed path</source>
         <translation>Unbenannter Pfad</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4540"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4563"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4524"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4547"/>
         <source>Error creating or updating a piece path</source>
         <translation>Fehler beim Erstellen oder Aktualisieren eines Schnittteil-Pfad</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2189"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2173"/>
         <source>Error creating or updating pin point</source>
         <translation>Fehler beim Erstellen oder Aktualisieren des Pin-Punktes</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4541"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4525"/>
         <source>Piece path doesn&apos;t contain nodes</source>
         <translation>Der Teilepfad enthält keine Knoten</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2258"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2264"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2242"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2248"/>
         <source>Error creating or updating place label</source>
         <translation>Fehler beim Erstellen oder Aktualisieren der Bezeichnung</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4716"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4700"/>
         <source>Can&apos;t find increment &apos;%1&apos;</source>
         <translation>Inkrement „%1“ kann nicht gefunden werden</translation>
     </message>
