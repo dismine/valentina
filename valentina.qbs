@@ -1,4 +1,3 @@
-import qbs.File
 import qbs.FileInfo
 
 import "qbs/imports/conan/ConanfileProbe.qbs" as ConanfileProbe
@@ -102,8 +101,6 @@ Project {
 
     AutotestRunner {
         Depends { name: "buildconfig" }
-        Depends { name: "Qt.core" }
-        Depends { name: "cpp" }
 
         arguments: ["-silent", "-o", "-,txt"]
 
@@ -122,16 +119,7 @@ Project {
                 }
             }
             if (i >= env.length) {
-                // Prefer the headless "offscreen" plugin, but only when Qt actually
-                // ships it. macOS Qt bundles often include only "cocoa"; forcing a
-                // missing plugin aborts the GUI test binaries at startup. When it is
-                // absent, leave QT_QPA_PLATFORM unset so Qt picks the platform default.
-                var offscreenPlugin = FileInfo.joinPaths(
-                            Qt.core.pluginPath, "platforms",
-                            cpp.dynamicLibraryPrefix + "qoffscreen" + cpp.dynamicLibrarySuffix);
-                if (File.exists(offscreenPlugin)) {
-                    env.push("QT_QPA_PLATFORM=offscreen");
-                }
+                env.push("QT_QPA_PLATFORM=offscreen");
             }
  
             if (qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos")) {
@@ -158,20 +146,25 @@ Project {
                     env[i] = arrayElem;
                 else
                     env.push(arrayElem);
+            }
 
-                // QT_QPA_PLATFORM_PLUGIN_PATH
-                for (var i = 0; i < env.length; ++i) {
-                    if (env[i].startsWith("QT_QPA_PLATFORM_PLUGIN_PATH=")) {
+            // QT_QPA_PLATFORM_PLUGIN_PATH
+            // On macOS and Windows the test binaries do not search the Qt SDK plugins
+            // directory at run time, so the forced "offscreen" platform plugin is not
+            // found beside the executable (only the default platform plugin is deployed
+            // there). Point Qt at the SDK's "platforms" directory, which ships
+            // libqoffscreen, so the headless plugin can be loaded.
+            if (qbs.targetOS.contains("macos") || qbs.targetOS.contains("windows")) {
+                for (var k = 0; k < env.length; ++k) {
+                    if (env[k].startsWith("QT_QPA_PLATFORM_PLUGIN_PATH=")) {
                         break;
                     }
                 }
 
-                if (i >= env.length) {
-                    var pluginsPath = "QT_QPA_PLATFORM_PLUGIN_PATH=" + FileInfo.joinPaths(Qt.core.pluginPath, "platforms")
-                    env.push(pluginsPath);
+                if (k >= env.length) {
+                    env.push("QT_QPA_PLATFORM_PLUGIN_PATH="
+                             + FileInfo.joinPaths(Qt.core.pluginPath, "platforms"));
                 }
-
-                console.info("env_after: " + env);
             }
             return env;
         }
