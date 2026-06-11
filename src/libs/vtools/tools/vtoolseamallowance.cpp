@@ -2121,6 +2121,7 @@ void VToolSeamAllowance::SaveDialogChange(const QString &undoText)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::ShowOptions()
 {
+    qCDebug(vTool, "Show options for tool id=%u (%s).", m_id, qUtf8Printable(getTagName()));
     QPointer<DialogSeamAllowance> const dialog =
         new DialogSeamAllowance(getData(), doc, m_id, VAbstractValApplication::VApp()->getMainWindow());
     dialog->EnableApply(true);
@@ -2128,6 +2129,7 @@ void VToolSeamAllowance::ShowOptions()
     m_dialog->setModal(true);
     connect(m_dialog.data(), &DialogTool::DialogClosed, this, &VToolSeamAllowance::FullUpdateFromGuiOk);
     connect(m_dialog.data(), &DialogTool::DialogApplied, this, &VToolSeamAllowance::FullUpdateFromGuiApply);
+    BlockUndoRedoWhileDialogOpen();
     SetDialog();
     m_dialog->show();
 }

@@ -28,10 +28,45 @@
 
 #include "vinteractivetool.h"
 
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vwidgets/vabstractmainwindow.h"
+
+#include <QLoggingCategory>
+
 //---------------------------------------------------------------------------------------------------------------------
 VInteractiveTool::VInteractiveTool(VAbstractPattern *doc, VContainer *data, quint32 id, QObject *parent)
   : VAbstractTool(doc, data, id, parent)
 {
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief BlockUndoRedoWhileDialogOpen block undo/redo while the tool options dialog (m_dialog) is open.
+ *
+ * Running undo/redo emits VPattern::UndoCommand, which triggers a full reparse that destroys this tool and
+ * the pattern container while the dialog is still alive. Accepting the now-stale dialog afterwards
+ * dereferences freed geometry (use-after-free). Call this right after creating and connecting m_dialog,
+ * before showing it. The dialog is parented to the main window and outlives the tool, so the state is
+ * restored on the dialog's destruction rather than via the tool, which may already be gone.
+ */
+void VInteractiveTool::BlockUndoRedoWhileDialogOpen()
+{
+    SCASSERT(not m_dialog.isNull())
+
+    auto *window = qobject_cast<VAbstractMainWindow *>(VAbstractValApplication::VApp()->getMainWindow());
+    if (window == nullptr)
+    {
+        return;
+    }
+
+    const quint32 toolId = getId();
+    window->SetToolOptionsDialogVisible(true);
+    connect(m_dialog.data(), &QObject::destroyed, window,
+            [window, toolId]()
+            {
+                qCDebug(vTool, "Options dialog for tool id=%u closed.", toolId);
+                window->SetToolOptionsDialogVisible(false);
+            });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

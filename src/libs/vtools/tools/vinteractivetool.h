@@ -51,6 +51,8 @@ protected:
     /** @brief m_dialog tool's dialog options.*/
     QPointer<DialogTool> m_dialog{}; // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes)
 
+    void BlockUndoRedoWhileDialogOpen();
+
     /** @brief setDialog set dialog when user want change tool option. */
     virtual void SetDialog()
     { /*do nothing by default*/

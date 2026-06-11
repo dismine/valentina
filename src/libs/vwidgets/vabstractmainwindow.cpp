@@ -434,3 +434,10 @@ void VAbstractMainWindow::ZoomFitBestCurrent()
 {
     // do nothing
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractMainWindow::SetToolOptionsDialogVisible(bool visible)
+{
+    Q_UNUSED(visible)
+    // do nothing
+}

@@ -80,6 +80,7 @@ public slots:
     void UpdateVisibilityGroups() override;
     void UpdateDetailsList() override;
     void ZoomFitBestCurrent() override;
+    void SetToolOptionsDialogVisible(bool visible) override;
     void PlaceBackgroundImage(const QPointF &pos, const QString &fileName);
     void RemoveBackgroundImage(const QUuid &id);
 
@@ -347,6 +348,11 @@ private:
     bool m_toolOptionsActive{false};
     bool m_patternMessagesActive{false};
     bool m_backgroundImagesActive{false};
+
+    // True while a tool options (edit) dialog is open. Undo/redo are blocked during this time because
+    // running them triggers a full reparse that destroys the tool and pattern container the open dialog
+    // still references, leading to a use-after-free when the dialog is accepted.
+    bool m_toolOptionsDialogVisible{false};
 
     QMultiHash<VShortcutAction, QAction *> m_shortcutActions{};
 
