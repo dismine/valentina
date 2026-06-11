@@ -1,3 +1,4 @@
+import qbs.File
 import qbs.FileInfo
 
 import "qbs/imports/conan/ConanfileProbe.qbs" as ConanfileProbe
@@ -101,6 +102,8 @@ Project {
 
     AutotestRunner {
         Depends { name: "buildconfig" }
+        Depends { name: "Qt.core" }
+        Depends { name: "cpp" }
 
         arguments: ["-silent", "-o", "-,txt"]
 
@@ -119,8 +122,16 @@ Project {
                 }
             }
             if (i >= env.length) {
-                var qtPlatform = "QT_QPA_PLATFORM=" + "offscreen"
-                env.push(qtPlatform);
+                // Prefer the headless "offscreen" plugin, but only when Qt actually
+                // ships it. macOS Qt bundles often include only "cocoa"; forcing a
+                // missing plugin aborts the GUI test binaries at startup. When it is
+                // absent, leave QT_QPA_PLATFORM unset so Qt picks the platform default.
+                var offscreenPlugin = FileInfo.joinPaths(
+                            Qt.core.pluginPath, "platforms",
+                            cpp.dynamicLibraryPrefix + "qoffscreen" + cpp.dynamicLibrarySuffix);
+                if (File.exists(offscreenPlugin)) {
+                    env.push("QT_QPA_PLATFORM=offscreen");
+                }
             }
  
             if (qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos")) {
