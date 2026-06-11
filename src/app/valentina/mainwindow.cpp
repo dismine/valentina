@@ -2035,6 +2035,27 @@ void MainWindow::UpdateDetailsList()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::SetToolOptionsDialogVisible(bool visible)
+{
+    m_toolOptionsDialogVisible = visible;
+
+    // While a tool options dialog is open we must not let the user run undo/redo. An undo/redo emits
+    // VPattern::UndoCommand which triggers MainWindow::FullParseFile(), tearing down all tools and the
+    // VContainer the open dialog still references. Accepting the now-stale dialog afterwards dereferences
+    // freed geometry (use-after-free, e.g. crash in DialogSplinePath::SaveData).
+    if (visible)
+    {
+        undoAction->setEnabled(false);
+        redoAction->setEnabled(false);
+    }
+    else
+    {
+        undoAction->setEnabled(VAbstractApplication::VApp()->getUndoStack()->canUndo());
+        redoAction->setEnabled(VAbstractApplication::VApp()->getUndoStack()->canRedo());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief showEvent handle after show window.
  * @param event show event.
@@ -4042,8 +4063,10 @@ void MainWindow::CancelTool()
     // Crash: using CRTL+Z while using line tool.
     // related bug report:
     // https://bitbucket.org/dismine/valentina/issues/454/crash-using-crtl-z-while-using-line-tool
-    undoAction->setEnabled(VAbstractApplication::VApp()->getUndoStack()->canUndo());
-    redoAction->setEnabled(VAbstractApplication::VApp()->getUndoStack()->canRedo());
+    undoAction->setEnabled(not m_toolOptionsDialogVisible &&
+                           VAbstractApplication::VApp()->getUndoStack()->canUndo());
+    redoAction->setEnabled(not m_toolOptionsDialogVisible &&
+                           VAbstractApplication::VApp()->getUndoStack()->canRedo());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5019,6 +5042,16 @@ void MainWindow::FileClosedCorrect()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::FullParseFile()
 {
+    qCDebug(vMainWindow, "Full parsing file");
+
+    if (m_toolOptionsDialogVisible)
+    {
+        // Diagnostic breadcrumb: a full reparse tears down all tools and the VContainer. If a tool
+        // options dialog is still open it now references freed data and accepting it will crash.
+        qCWarning(vMainWindow, "Full parsing requested while a tool options dialog is open. "
+                               "This indicates a re-entrancy bug and can lead to a use-after-free crash.");
+    }
+
     m_toolOptions->ClearPropertyBrowser();
 
     if (not FullParsePattern())
@@ -5240,8 +5273,10 @@ void MainWindow::SetEnableWidgets(bool enable)
     actionDockWidgetGroups->setEnabled(enableOnDesignStage);
     actionDockWidgetBackgroundImages->setEnabled(enableOnDrawStage);
 
-    undoAction->setEnabled(enableOnDesignStage && VAbstractApplication::VApp()->getUndoStack()->canUndo());
-    redoAction->setEnabled(enableOnDesignStage && VAbstractApplication::VApp()->getUndoStack()->canRedo());
+    undoAction->setEnabled(enableOnDesignStage && not m_toolOptionsDialogVisible &&
+                           VAbstractApplication::VApp()->getUndoStack()->canUndo());
+    redoAction->setEnabled(enableOnDesignStage && not m_toolOptionsDialogVisible &&
+                           VAbstractApplication::VApp()->getUndoStack()->canRedo());
 
     // Now we don't want allow user call context menu
     m_sceneDraw->EnableTools();

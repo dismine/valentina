@@ -260,16 +260,18 @@ template<class Dialog>
  */
 void VDrawTool::ShowOptionsDialog()
 {
-    qCDebug(vTool, "Show options.");
+    qCDebug(vTool, "Show options for tool id=%u (%s).", m_id, qUtf8Printable(getTagName()));
     emit VAbstractValApplication::VApp()->getSceneView()->itemClicked(nullptr);
-
     m_dialog = QPointer<Dialog>(new Dialog(getData(), doc, m_id, VAbstractValApplication::VApp()->getMainWindow()));
     m_dialog->setModal(true);
 
     connect(m_dialog.data(), &DialogTool::DialogClosed, this, &VDrawTool::FullUpdateFromGuiOk);
     connect(m_dialog.data(), &DialogTool::DialogApplied, this, &VDrawTool::FullUpdateFromGuiApply);
 
+    BlockUndoRedoWhileDialogOpen();
+
     this->SetDialog();
+
     m_dialog->show();
 }
 

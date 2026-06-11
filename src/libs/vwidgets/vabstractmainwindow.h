@@ -53,6 +53,7 @@ public slots:
     virtual void UpdateVisibilityGroups();
     virtual void UpdateDetailsList();
     virtual void ZoomFitBestCurrent();
+    virtual void SetToolOptionsDialogVisible(bool visible);
     void WindowsLocale();
 
 protected slots:
