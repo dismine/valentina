@@ -914,6 +914,8 @@ auto QmuParserTester::TestIfThenElse() -> int
     iStat += ThrowTest("1 : 2", ecMISPLACED_COLON);
     iStat += ThrowTest("(1) ? 1 : 2 : 3", ecMISPLACED_COLON);
     iStat += ThrowTest("(true) ? 1 : 2 : 3", ecUNASSIGNABLE_TOKEN);
+    iStat += ThrowTest("1?2+-:3", ecUNASSIGNABLE_TOKEN);      // crashed before: ApplyIfElse stack underflow
+    iStat += ThrowTest("1>0 ? 1+- : 2", ecUNASSIGNABLE_TOKEN);
 
     iStat += EqnTest("1 ? 128 : 255", 128, true);
     iStat += EqnTest("1<2 ? 128 : 255", 128, true);
