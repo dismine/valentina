@@ -201,6 +201,35 @@ auto PassmarkWidth(const VPiecePassmarkData &passmarkData, qreal width) -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// Among several intersections, pick the closest one that lies in the forward direction of the axis (the closest point
+// is not always the one we need). On success stores it in notch and returns true.
+auto ForwardNotch(const QVector<QPointF> &points, const QLineF &axis, const QPointF &saPoint, QPointF *notch) -> bool
+{
+    QMap<qreal, int> forward;
+
+    for (qint32 i = 0; i < points.size(); ++i)
+    {
+        if (points.at(i) == saPoint)
+        { // Always seek unique intersection
+            continue;
+        }
+
+        if (const QLineF length(saPoint, points.at(i)); qAbs(length.angle() - axis.angle()) < 0.1)
+        {
+            forward.insert(length.length(), i);
+        }
+    }
+
+    if (not forward.isEmpty())
+    {
+        *notch = points.at(forward.first());
+        return true;
+    }
+
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto FixNotchPoint(const QVector<QPointF> &seamAllowance, const VPiecePassmarkData &data, QPointF *notch) -> bool
 {
     auto axis = QLineF(data.passmarkSAPoint, *notch);
@@ -213,11 +242,20 @@ auto FixNotchPoint(const QVector<QPointF> &seamAllowance, const VPiecePassmarkDa
     // Point is on seam allowance
     if (VAbstractCurve::IsPointOnCurve(seamAllowance, axis.p2()))
     { // Fixing distortion
+        // Fall back to the axis end point so the notch follows the (possibly manual) angle even when the refinement
+        // below cannot pick a unique intersection. Valid because entering this branch guarantees axis.p2() is on the
+        // curve.
+        *notch = axis.p2();
+
         axis.setLength(axis.length() + accuracyPointOnLine * 10);
         const QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(seamAllowance, axis);
         if (points.size() == 1)
         {
             *notch = points.constFirst();
+        }
+        else if (points.size() > 1)
+        {
+            ForwardNotch(points, axis, data.passmarkSAPoint, notch);
         }
         return true;
     }
@@ -237,30 +275,8 @@ auto FixNotchPoint(const QVector<QPointF> &seamAllowance, const VPiecePassmarkDa
         return true;
     }
 
-    QMap<qreal, int> forward;
-
-    for (qint32 i = 0; i < points.size(); ++i)
-    {
-        if (points.at(i) == data.passmarkSAPoint)
-        { // Always seek unique intersection
-            continue;
-        }
-
-        const QLineF length(data.passmarkSAPoint, points.at(i));
-        if (qAbs(length.angle() - axis.angle()) < 0.1)
-        {
-            forward.insert(length.length(), i);
-        }
-    }
-
     // Closest point is not always want we need. First return point in forward direction if exists.
-    if (not forward.isEmpty())
-    {
-        *notch = points.at(forward.first());
-        return true;
-    }
-
-    return false;
+    return ForwardNotch(points, axis, data.passmarkSAPoint, notch);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
