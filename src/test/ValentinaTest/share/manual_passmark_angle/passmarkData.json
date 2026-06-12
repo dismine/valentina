@@ -1,0 +1,40 @@
+{
+    "data": {
+        "globalPassmarkLength": 15.118110236220472,
+        "globalPassmarkWidth": 15.118110236220472,
+        "id": 3060,
+        "isMainPathNode": true,
+        "isShowSecondPassmark": false,
+        "nextSAPoint": {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "type": "VSAPoint",
+            "x": -536.7757263936628,
+            "y": -1177.9235264851413
+        },
+        "nodeName": "А57",
+        "passmarkAngleType": 0,
+        "passmarkIndex": 11,
+        "passmarkLineType": 0,
+        "passmarkSAPoint": {
+            "manualPassmarkAngle": true,
+            "passmarkAngle": 151.82319,
+            "passmarkClockwiseOpening": false,
+            "turnPoint": true,
+            "type": "VSAPoint",
+            "x": -537.5938589328995,
+            "y": -1171.1148415559965
+        },
+        "pieceName": "pered-praviy-verx-2-det",
+        "previousSAPoint": {
+            "angle": 6,
+            "curvePoint": true,
+            "passmarkClockwiseOpening": false,
+            "type": "VSAPoint",
+            "x": -538.9272155588787,
+            "y": -1160.0183446816009
+        },
+        "saWidth": 0
+    }
+}

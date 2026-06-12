@@ -122,6 +122,15 @@ void TST_VPiece::TestSAPassmark_data()
                      QStringLiteral("://true_zero_width_notches/seamAllowance.json"),
                      QStringLiteral("://true_zero_width_notches/rotatedSeamAllowance.json"),
                      QStringLiteral("://true_zero_width_notches/passmarkShape.json"));
+
+    // Straightforward passmark with a manual angle whose axis grazes the seam allowance near a corner (the axis end
+    // point is already on the curve and produces several nearby intersections). The notch must follow the manual angle.
+    // See file valentina_private_collection/bugs/notch_manual_angle/Jilet_rozwantajuwalniy.val
+    // (private collection)
+    ASSERT_TEST_CASE("Manual passmark angle.", QStringLiteral("://manual_passmark_angle/passmarkData.json"),
+                     QStringLiteral("://manual_passmark_angle/seamAllowance.json"),
+                     QStringLiteral("://manual_passmark_angle/rotatedSeamAllowance.json"),
+                     QStringLiteral("://manual_passmark_angle/passmarkShape.json"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

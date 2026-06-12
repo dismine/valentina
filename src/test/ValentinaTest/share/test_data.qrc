@@ -172,6 +172,10 @@
         <file>incorrect_notch/passmarkShape.json</file>
         <file>incorrect_notch/rotatedSeamAllowance.json</file>
         <file>incorrect_notch/seamAllowance.json</file>
+        <file>manual_passmark_angle/passmarkData.json</file>
+        <file>manual_passmark_angle/passmarkShape.json</file>
+        <file>manual_passmark_angle/rotatedSeamAllowance.json</file>
+        <file>manual_passmark_angle/seamAllowance.json</file>
         <file>full_seam_path_case_1/output.json</file>
         <file>full_seam_path_case_1/input.json</file>
         <file>full_seam_path_case_2/output.json</file>
