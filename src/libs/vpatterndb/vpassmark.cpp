@@ -1104,8 +1104,18 @@ auto VPassmark::BuiltInSAPassmarkBaseLine(const VPiece &piece, const QLineF &mir
 
     const auto [firstEdge, secondEdge] = DetermineEdges(piece, mirrorLine);
 
-    QLineF adjustedEdge = firstEdge;
-    adjustedEdge.setAngle(adjustedEdge.angle() + adjustedEdge.angleTo(secondEdge) / 2.);
+    QLineF adjustedEdge = firstEdge; // starts at m_data.passmarkSAPoint
+    if (m_data.passmarkSAPoint.IsManualPasskmarkAngle())
+    {
+        // The manual angle is stored as the outward direction (passmarkSAPoint -> seam allowance notch, see
+        // PassmarkAngle()/FixNotchPoint). The seam-line notch points into the piece, so use the opposite direction to
+        // stay collinear with the primary seam allowance notch.
+        adjustedEdge.setAngle(m_data.passmarkSAPoint.GetPasskmarkAngle() + 180);
+    }
+    else
+    {
+        adjustedEdge.setAngle(adjustedEdge.angle() + adjustedEdge.angleTo(secondEdge) / 2.);
+    }
     adjustedEdge.setLength(length);
 
     return {adjustedEdge};
