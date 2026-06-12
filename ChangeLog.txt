@@ -1,5 +1,6 @@
 # Valentina 1.0.3 (unreleased)
 - [Valentina app] Fixed a notch ignoring its manual angle when the notch axis met the seam allowance near a corner.
+- [Valentina app] Fixed the second notch on the seam line ignoring the manual passmark angle.
 - [Misc] Fixed crash when evaluating a malformed if-then-else formula (e.g. a ternary branch with a missing operand).
 - [Valentina app] Fixed crash when pressing undo/redo while a tool options dialog is open, caused by the resulting full reparse destroying the tool and its geometry before the dialog was accepted.
 - [Tape app] Fixed sluggish image size scale control in the known measurements editor by no longer rebuilding the whole image list on every value change.
