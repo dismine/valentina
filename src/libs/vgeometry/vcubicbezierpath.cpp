@@ -334,7 +334,7 @@ auto VCubicBezierPath::CountSubSpl(vsizetype size) -> vsizetype
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     return qFloor(qAbs((static_cast<long double>(size) - 4) / 3.0L + 1));
 #else
-    return qFloor(qAbs((size - 4) / 3.0 + 1));
+    return qFloor(qAbs((static_cast<double>(size) - 4) / 3.0 + 1));
 #endif
 }
 
