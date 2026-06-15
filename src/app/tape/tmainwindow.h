@@ -167,6 +167,7 @@ private:
     Ui::TMainWindow *ui;
     VMeasurements *m_m{nullptr};
     VContainer *m_data{nullptr};
+    bool m_refreshInProgress{false};
     Unit m_mUnit{Unit::Cm};
     Unit m_pUnit{Unit::Cm};
     MeasurementsType m_mType{MeasurementsType::Individual};

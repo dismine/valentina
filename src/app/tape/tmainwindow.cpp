@@ -344,9 +344,18 @@ TMainWindow::TMainWindow(QWidget *parent)
 TMainWindow::~TMainWindow()
 {
     ui->lineEditFind->blockSignals(true); // prevents crash
-    delete m_m;
-    m_m = nullptr; // Prevent SyncKnownMeasurements from accessing freed object if events fire during delete ui
-    delete m_data;
+
+    // Null both pointers BEFORE deleting so that if any event is processed during the deletions below
+    // (e.g. SyncKnownMeasurements via the Windows message pump in delete ui, or a modal dialog opened by
+    // the logging handler), the m_m/m_data guards in RefreshData() and SyncKnownMeasurements() reliably
+    // trip instead of touching a dangling object.
+    VMeasurements *m = m_m;
+    VContainer *d = m_data;
+    m_m = nullptr;
+    m_data = nullptr;
+    delete m;
+    delete d;
+
     qDeleteAll(m_hackedWidgets);
     delete ui;
 }
@@ -3594,10 +3603,27 @@ auto TMainWindow::AddSeparatorCell(const QString &text, int row, int column, int
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::RefreshData(bool freshCall)
 {
-    if (m_m == nullptr)
+    if (m_m == nullptr || m_data == nullptr)
     {
         return;
     }
+
+    // Guard against re-entrancy. RefreshData() rebuilds m_data's variables non-atomically
+    // (ClearVariables() frees them, then ReadMeasurements() re-adds them). If a nested event loop runs
+    // while we are inside this method (e.g. a modal dialog opened by the logging handler), the queued
+    // QFutureWatcher::finished signal can dispatch MApplication::SyncKnownMeasurements -> RefreshData()
+    // again on the same window. The nested call would free the very variables the outer ReadMeasurements()
+    // is still iterating, causing a use-after-free. Skip it; the outer call already does a full rebuild.
+    if (m_refreshInProgress)
+    {
+        qCDebug(tMainWindow,
+                "RefreshData() re-entered (likely via a nested event loop from a modal dialog) "
+                "while a refresh was already running; skipping the nested call to avoid "
+                "corrupting measurement data.");
+        return;
+    }
+    m_refreshInProgress = true;
+    auto resetGuard = qScopeGuard([this]() { m_refreshInProgress = false; });
 
     QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
@@ -3914,8 +3940,9 @@ void TMainWindow::UpdateWindowTitle()
 //---------------------------------------------------------------------------------------------------------------------
 void TMainWindow::SyncKnownMeasurements()
 {
-    if (m_m == nullptr)
+    if (m_m == nullptr || m_data == nullptr)
     {
+        qCDebug(tMainWindow, "SyncKnownMeasurements() called with no active measurement document; skipping.");
         return;
     }
 

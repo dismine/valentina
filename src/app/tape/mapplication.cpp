@@ -990,6 +990,10 @@ void MApplication::KnownMeasurementsPathChanged(const QString &oldPath, const QS
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::SyncKnownMeasurements()
 {
+    qCDebug(mApp,
+            "Syncing known measurements across %lld Tape window(s).",
+            static_cast<long long>(m_mainWindows.size()));
+
     for (const auto &w : qAsConst(m_mainWindows))
     {
         if (!w.isNull())
