@@ -1,4 +1,5 @@
 # Valentina 1.0.3 (unreleased)
+- [Valentina app] Fixed crash when closing the History dialog after the pattern history changed while the dialog was open.
 - [Valentina app] Fixed a notch ignoring its manual angle when the notch axis met the seam allowance near a corner.
 - [Valentina app] Fixed the second notch on the seam line ignoring the manual passmark angle.
 - [Misc] Fixed crash when evaluating a malformed if-then-else formula (e.g. a ternary branch with a missing operand).

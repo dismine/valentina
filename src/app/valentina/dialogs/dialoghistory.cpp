@@ -236,6 +236,14 @@ void DialogHistory::FillTable()
         }
     }
     ui->tableWidget->setRowCount(count); // Real row count
+
+    // Keep the stored description-row index valid: the table was just rebuilt and may now have fewer rows
+    // (or none), so a stale m_cursorToolRecordRow would point past the end and yield a null item later.
+    if (m_cursorToolRecordRow >= count)
+    {
+        m_cursorToolRecordRow = count > 0 ? count - 1 : 0;
+    }
+
     if (count > 0)
     {
         ui->tableWidget->selectRow(0);
@@ -278,7 +286,14 @@ auto DialogHistory::Record(const VToolRecord &tool) const -> HistoryRecord
         qDebug() << e.ErrorMessage() << Q_FUNC_INFO;
         return record;
     }
-    qDebug() << "Can't create history record for the tool" << record.id;
+
+    if (record.description.isEmpty())
+    {
+        // A tool that produces no description is silently dropped from the table; log only this real case
+        // instead of spamming a misleading message for every successfully described tool.
+        qDebug() << "Empty history description for tool" << record.id << "type"
+                 << static_cast<int>(tool.getTypeTool());
+    }
     return record;
 }
 
@@ -554,9 +569,14 @@ auto DialogHistory::PointName(quint32 pointId) const -> QString
  */
 void DialogHistory::closeEvent(QCloseEvent *event)
 {
-    QTableWidgetItem *item = ui->tableWidget->item(m_cursorToolRecordRow, 0);
-    auto id = qvariant_cast<quint32>(item->data(Qt::UserRole));
-    emit ShowHistoryTool(id, false);
+    // m_cursorToolRecordRow may outlive the rows it indexed: the table is rebuilt by FillTable() on every
+    // patternChanged while this dialog is open, and the history can shrink (or become empty). Always null-check
+    // ui->tableWidget->item(m_cursorToolRecordRow, ...) before dereferencing it (see also DialogAccepted()).
+    if (QTableWidgetItem *item = ui->tableWidget->item(m_cursorToolRecordRow, 0); item != nullptr)
+    {
+        auto id = qvariant_cast<quint32>(item->data(Qt::UserRole));
+        emit ShowHistoryTool(id, false);
+    }
 
     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     settings->SetHistorySearchOptionMatchCase(m_search->IsMatchCase());
