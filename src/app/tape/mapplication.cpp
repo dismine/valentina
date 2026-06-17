@@ -954,6 +954,8 @@ void MApplication::RepopulateMeasurementsDatabase(const QString &path)
             }
         }
 
+        qCDebug(mApp, "Repopulating known measurements database (triggered by '%s').", qUtf8Printable(path));
+
         connect(qApp,
                 &QCoreApplication::aboutToQuit,
                 m_knownMeasurementsRepopulateWatcher,
@@ -969,6 +971,7 @@ void MApplication::RepopulateMeasurementsDatabase(const QString &path)
             {
                 if (m_knownMeasurementsRepopulateWatcher->isCanceled())
                 {
+                    qCDebug(mApp, "Known measurements repopulation canceled before it started.");
                     return;
                 }
 
