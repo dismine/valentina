@@ -36,7 +36,9 @@
 #include <QDir>
 #include <QDirIterator>
 #include <QFileInfo>
+#include <QLoggingCategory>
 #include <QMutex>
+#include <QThread>
 
 namespace
 {
@@ -48,10 +50,21 @@ Q_GLOBAL_STATIC(QMutex, knownMeasurementsDatabaseMutex) // NOLINT
 QT_WARNING_POP
 } // namespace
 
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(kmDB, "knownmeasurements.database") // NOLINT
+
+QT_WARNING_POP
+
 //---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDatabase::PopulateMeasurementsDatabase()
 {
     QMutexLocker const locker(knownMeasurementsDatabaseMutex());
+
+    qCDebug(kmDB, "PopulateMeasurementsDatabase: start (thread %p).",
+            static_cast<void *>(QThread::currentThreadId()));
 
     m_measurementsCache.clear();
 
@@ -64,6 +77,9 @@ void VKnownMeasurementsDatabase::PopulateMeasurementsDatabase()
 
     UpdateIndexes();
     m_populated = true;
+
+    qCDebug(kmDB, "PopulateMeasurementsDatabase: done, %lld entries.",
+            static_cast<long long>(m_measurementsDB.size()));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -76,6 +92,7 @@ auto VKnownMeasurementsDatabase::IsPopulated() const -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto VKnownMeasurementsDatabase::AllKnownMeasurements() const -> QHash<QUuid, VKnownMeasurementsHeader>
 {
+    QMutexLocker const locker(knownMeasurementsDatabaseMutex());
     return m_measurementsDB;
 }
 
@@ -86,6 +103,8 @@ auto VKnownMeasurementsDatabase::KnownMeasurements(const QUuid &id) const -> VKn
     {
         return {};
     }
+
+    QMutexLocker const locker(knownMeasurementsDatabaseMutex());
 
     if (m_measurementsCache.contains(id))
     {
@@ -110,8 +129,10 @@ auto VKnownMeasurementsDatabase::KnownMeasurements(const QUuid &id) const -> VKn
     }
     catch (VException &e)
     {
-        qDebug("%s\n\n%s\n\n%s", qUtf8Printable("File error."), qUtf8Printable(e.ErrorMessage()),
-               qUtf8Printable(e.DetailedInformation()));
+        // Keep at debug level: this runs on the GUI thread, and a higher level would trigger Tape's modal
+        // QMessageBox log handler (a nested event loop).
+        qCDebug(kmDB, "%s\n\n%s\n\n%s", qUtf8Printable("File error."), qUtf8Printable(e.ErrorMessage()),
+                qUtf8Printable(e.DetailedInformation()));
     }
 
     return {};
@@ -154,8 +175,8 @@ void VKnownMeasurementsDatabase::ParseDirectory(const QString &path)
         }
         catch (VException &e)
         {
-            qDebug("%s\n\n%s\n\n%s", qUtf8Printable("File error."), qUtf8Printable(e.ErrorMessage()),
-                   qUtf8Printable(e.DetailedInformation()));
+            qCWarning(kmDB, "%s\n\n%s\n\n%s", qUtf8Printable("File error."), qUtf8Printable(e.ErrorMessage()),
+                      qUtf8Printable(e.DetailedInformation()));
         }
     }
 }

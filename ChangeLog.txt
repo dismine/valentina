@@ -33,6 +33,7 @@
 - [Valentina app] New action Auto-arrange labels (Ctrl+Shift+A). Automatically repositions point labels in Draw and Details mode to reduce overlaps.
 
 # Valentina 1.0.3 (unreleased)
+- [Tape app] Fixed crash from concurrent access to the known measurements database while it was being refreshed in the background.
 - [Tape app] Fixed a crash when the known-measurements database synced while a measurement refresh was already running, caused by re-entrant rebuilding of the measurement data.
 - [Valentina app] Fixed crash when closing the History dialog after the pattern history changed while the dialog was open.
 - [Valentina app] Fixed a notch ignoring its manual angle when the notch axis met the seam allowance near a corner.
