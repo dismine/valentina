@@ -3873,6 +3873,9 @@ void DialogSeamAllowance::InitMainPathTab()
                 rowNode.SetReverse(not rowNode.GetReverse());
                 rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
                 rowItem->setText(GetNodeName(data, rowNode, true));
+
+                ValidObjects(MainPathIsValid());
+                ListChanged();
             });
 
     connect(uiTabPaths->toolButtonExcluded, &QToolButton::toggled, this,
@@ -3893,6 +3896,9 @@ void DialogSeamAllowance::InitMainPathTab()
                 rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
                 rowItem->setText(GetNodeName(data, rowNode, true));
                 rowItem->setFont(NodeFont(rowItem->font(), rowNode.IsExcluded()));
+
+                ValidObjects(MainPathIsValid());
+                ListChanged();
             });
 
     connect(uiTabPaths->toolButtonTurnPoint, &QToolButton::toggled, this,
@@ -3912,6 +3918,9 @@ void DialogSeamAllowance::InitMainPathTab()
                 rowNode.SetTurnPoint(not rowNode.IsTurnPoint());
                 rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
                 rowItem->setText(GetNodeName(data, rowNode, true));
+
+                ValidObjects(MainPathIsValid());
+                ListChanged();
             });
 
     connect(uiTabPaths->toolButtonCheckUniqness, &QToolButton::toggled, this,
@@ -3931,6 +3940,9 @@ void DialogSeamAllowance::InitMainPathTab()
                 rowNode.SetCheckUniqueness(not rowNode.IsCheckUniqueness());
                 rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
                 rowItem->setText(GetNodeName(data, rowNode, true));
+
+                ValidObjects(MainPathIsValid());
+                ListChanged();
             });
 
     connect(uiTabPaths->toolButtonPassmark, &QToolButton::toggled, this,
@@ -3950,6 +3962,9 @@ void DialogSeamAllowance::InitMainPathTab()
                 rowNode.SetPassmark(checked);
                 rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
                 rowItem->setText(GetNodeName(data, rowNode, true));
+
+                ValidObjects(MainPathIsValid());
+                ListChanged();
             });
 
     connect(uiTabPaths->toolButtonDuplicateNode, &QToolButton::toggled, this,
@@ -3973,6 +3988,9 @@ void DialogSeamAllowance::InitMainPathTab()
                 item->setFont(NodeFont(item->font(), true));
                 item->setData(Qt::UserRole, QVariant::fromValue(duplicate));
                 uiTabPaths->listWidgetMainPath->addItem(item);
+
+                ValidObjects(MainPathIsValid());
+                ListChanged();
             });
 
     connect(uiTabPaths->toolButtonDelete, &QToolButton::clicked, this,
@@ -3986,6 +4004,9 @@ void DialogSeamAllowance::InitMainPathTab()
                 }
 
                 delete uiTabPaths->listWidgetMainPath->item(row);
+
+                ValidObjects(MainPathIsValid());
+                ListChanged();
             });
 
     uiTabPaths->listWidgetMainPath->installEventFilter(this);

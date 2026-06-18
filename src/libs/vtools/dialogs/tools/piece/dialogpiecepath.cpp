@@ -1322,6 +1322,9 @@ void DialogPiecePath::InitPathTab()
                 rowNode.SetReverse(not rowNode.GetReverse());
                 rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
                 rowItem->setText(GetNodeName(data, rowNode, true));
+
+                ValidObjects(PathIsValid());
+                ListChanged();
             });
 
     connect(ui->toolButtonExcluded,
@@ -1344,6 +1347,9 @@ void DialogPiecePath::InitPathTab()
                 rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
                 rowItem->setText(GetNodeName(data, rowNode, true));
                 rowItem->setFont(NodeFont(rowItem->font(), rowNode.IsExcluded()));
+
+                ValidObjects(PathIsValid());
+                ListChanged();
             });
 
     connect(ui->toolButtonTurnPoint,
@@ -1365,6 +1371,9 @@ void DialogPiecePath::InitPathTab()
                 rowNode.SetTurnPoint(not rowNode.IsTurnPoint());
                 rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
                 rowItem->setText(GetNodeName(data, rowNode, true));
+
+                ValidObjects(PathIsValid());
+                ListChanged();
             });
 
     connect(ui->toolButtonCheckUniqness,
@@ -1386,6 +1395,9 @@ void DialogPiecePath::InitPathTab()
                 rowNode.SetCheckUniqueness(not rowNode.IsCheckUniqueness());
                 rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
                 rowItem->setText(GetNodeName(data, rowNode, true));
+
+                ValidObjects(PathIsValid());
+                ListChanged();
             });
 
     connect(ui->toolButtonPassmark,
@@ -1407,6 +1419,9 @@ void DialogPiecePath::InitPathTab()
                 rowNode.SetPassmark(checked);
                 rowItem->setData(Qt::UserRole, QVariant::fromValue(rowNode));
                 rowItem->setText(GetNodeName(data, rowNode, true));
+
+                ValidObjects(PathIsValid());
+                ListChanged();
             });
 
     connect(ui->toolButtonDelete,
@@ -1422,6 +1437,9 @@ void DialogPiecePath::InitPathTab()
                 }
 
                 delete ui->listWidget->item(row);
+
+                ValidObjects(PathIsValid());
+                ListChanged();
             });
 
     ui->listWidget->installEventFilter(this);

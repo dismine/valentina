@@ -1,4 +1,5 @@
 # Valentina 1.0.3 (unreleased)
+- [Valentina app] Fixed the node option tool buttons (passmark, reverse, excluded, etc.) in the Seam Allowance and Piece Path dialogs not refreshing the notch list and visualization until the dialog was reopened.
 - [Tape app] Fixed crash from concurrent access to the known measurements database while it was being refreshed in the background.
 - [Tape app] Fixed a crash when the known-measurements database synced while a measurement refresh was already running, caused by re-entrant rebuilding of the measurement data.
 - [Valentina app] Fixed crash when closing the History dialog after the pattern history changed while the dialog was open.
