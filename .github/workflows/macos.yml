@@ -128,7 +128,7 @@ jobs:
         uses: actions/cache/restore@v5
         with:
           path: ${{ runner.temp }}/Qt
-          key: install-qt-intel-${{ matrix.qt.install }}-qtimageformats-v1
+          key: install-qt-intel-${{ matrix.qt.install }}-qtimageformats-v2
 
       - name: Install Qt
         if: steps.cache-qt.outputs.cache-hit != 'true'
@@ -144,11 +144,11 @@ jobs:
           setup-python: false
 
       - name: Save Qt cache
-        if: always() && steps.cache-qt.outputs.cache-hit != 'true'
+        if: steps.cache-qt.outputs.cache-hit != 'true'
         uses: actions/cache/save@v5
         with:
           path: ${{ runner.temp }}/Qt
-          key: install-qt-intel-${{ matrix.qt.install }}-qtimageformats-v1
+          key: install-qt-intel-${{ matrix.qt.install }}-qtimageformats-v2
 
       - name: Set path to Qt
         run: |
@@ -442,7 +442,7 @@ jobs:
         uses: actions/cache/restore@v5
         with:
           path: ${{ runner.temp }}/Qt
-          key: install-qt-arm-${{ matrix.qt.install }}-qtimageformats-v1
+          key: install-qt-arm-${{ matrix.qt.install }}-qtimageformats-v2
 
       - name: Install Qt
         if: steps.cache-qt.outputs.cache-hit != 'true'
@@ -458,11 +458,11 @@ jobs:
           setup-python: false
 
       - name: Save Qt cache
-        if: always() && steps.cache-qt.outputs.cache-hit != 'true'
+        if: steps.cache-qt.outputs.cache-hit != 'true'
         uses: actions/cache/save@v5
         with:
           path: ${{ runner.temp }}/Qt
-          key: install-qt-arm-${{ matrix.qt.install }}-qtimageformats-v1
+          key: install-qt-arm-${{ matrix.qt.install }}-qtimageformats-v2
 
       - name: Set path to Qt
         run: |
