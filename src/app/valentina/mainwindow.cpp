@@ -4501,7 +4501,7 @@ void MainWindow::ActionAddBackgroundImage()
 void MainWindow::ActionExportFontCorrections()
 {
     // Use standard path to manual layouts
-    VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
+    const VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     const QString dirPath = settings->GetPathFontCorrections();
 
     bool usedNotExistedDir = false;
@@ -4511,7 +4511,7 @@ void MainWindow::ActionExportFontCorrections()
     }
 
     auto RemoveUnsuded = qScopeGuard(
-        [usedNotExistedDir, dirPath]()
+        [usedNotExistedDir, dirPath]() -> void
         {
             if (usedNotExistedDir)
             {
@@ -4520,12 +4520,23 @@ void MainWindow::ActionExportFontCorrections()
             }
         });
 
-    const QString dir = QFileDialog::getExistingDirectory(
-        this, tr("Select folder"), dirPath,
-        VAbstractApplication::VApp()->NativeFileDialog(QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks));
-    if (not dir.isEmpty())
+
+    if (const QString dir = QFileDialog::getExistingDirectory(
+                this, tr("Select folder"), dirPath,
+                VAbstractApplication::VApp()->NativeFileDialog(QFileDialog::ShowDirsOnly |
+                                                               QFileDialog::DontResolveSymlinks));not dir.isEmpty())
     {
-        VSingleLineOutlineChar const corrector(settings->GetLabelFont());
+        const QFont labelFont = settings->GetLabelFont();
+        if (const QString filePath = QStringLiteral("%1/%2.json").arg(dir, labelFont.family());
+                QFileInfo::exists(filePath) &&
+                QMessageBox::question(this, tr("Export corrections"),
+                                      tr("File '%1' already exists. Overwrite it?").arg(filePath),
+                                      QMessageBox::Yes | QMessageBox::No, QMessageBox::No) != QMessageBox::Yes)
+        {
+            return;
+        }
+
+        VSingleLineOutlineChar const corrector(labelFont);
         corrector.ExportCorrections(dir);
     }
 }
