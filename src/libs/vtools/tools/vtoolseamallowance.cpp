@@ -1088,9 +1088,17 @@ void VToolSeamAllowance::AllowSelecting(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::ResetChildren(QGraphicsItem *pItem)
 {
-    const bool selected = isSelected();
     const VPiece detail = VAbstractTool::data.GetPiece(m_id);
     auto *pVGI = qgraphicsitem_cast<VTextGraphicsItem *>(pItem);
+    const auto *pGLI = qgraphicsitem_cast<VGrainlineItem *>(pItem);
+
+    // If the pressed item is one of this piece's labels or grainline, keep the piece selected
+    // so the child stays interactive. This used to be polled via IsIdle() inside paint(), which
+    // mutates selection state during paint and crashes on Windows under Qt 6.
+    const bool myChildPressed =
+        (pVGI != nullptr && (pVGI == m_dataLabel || pVGI == m_patternInfo)) || (pGLI != nullptr && pGLI == m_grainLine);
+    const bool selected = isSelected() || myChildPressed;
+
     if (pVGI != m_dataLabel && detail.GetPieceLabelData().IsEnabled())
     {
         m_dataLabel->Reset();
@@ -1100,8 +1108,7 @@ void VToolSeamAllowance::ResetChildren(QGraphicsItem *pItem)
         m_patternInfo->Reset();
     }
 
-    if (const auto *pGLI = qgraphicsitem_cast<VGrainlineItem *>(pItem);
-        pGLI != m_grainLine && detail.GetGrainlineGeometry().IsEnabled())
+    if (pGLI != m_grainLine && detail.GetGrainlineGeometry().IsEnabled())
     {
         m_grainLine->Reset();
     }
@@ -1417,6 +1424,16 @@ void VToolSeamAllowance::SaveRotateGrainline(qreal dRot, const QPointF &ptPos)
  */
 void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    // Do not mutate item state here (pens, brushes, selection). Since Qt 6 changing such state
+    // inside paint() crashes the paint pipeline on Windows. Scale/settings-dependent pens and
+    // brushes live in RefreshScale(); keeping the piece selected while one of its child labels
+    // is manipulated is handled in ResetChildren().
+    PaintWithFixItemHighlightSelected<QGraphicsPathItem>(this, painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::RefreshScale()
+{
     QPen toolPen = pen();
     toolPen.setWidthF(ScaleWidth(VAbstractApplication::VApp()->Settings()->WidthHairLine(), SceneScale(scene())));
     toolPen.setColor(VSceneStylesheet::PatternPieceStyle().PieceColor());
@@ -1441,12 +1458,6 @@ void VToolSeamAllowance::paint(QPainter *painter, const QStyleOptionGraphicsItem
     {
         m_foldLineLabel->setBrush(Qt::SolidPattern);
     }
-
-    if ((not m_dataLabel->IsIdle() || not m_patternInfo->IsIdle() || not m_grainLine->IsIdle()) && not isSelected())
-    {
-        setSelected(true);
-    }
-    PaintWithFixItemHighlightSelected<QGraphicsPathItem>(this, painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2071,6 +2082,8 @@ void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
     }
 
     m_passmarks->setPath(!combineTogether ? futurePassmarks.result() : QPainterPath());
+
+    RefreshScale();
 
     this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
 

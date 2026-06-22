@@ -67,14 +67,11 @@ VScenePoint::VScenePoint(VColorRole role, QGraphicsItem *parent)
 //---------------------------------------------------------------------------------------------------------------------
 void VScenePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    const qreal scale = SceneScale(scene());
-
-    ScaleMainPenWidth(scale);
-    ScaleCircleSize(this, scale);
-
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-
-    if (settings->GetShowAccuracyRadius())
+    // Do not mutate item/scene state here. Since Qt 6 changing geometry, visibility or
+    // selection inside paint() crashes the paint pipeline on Windows. All scale-dependent
+    // state lives in RefreshScale(), driven by VMainGraphicsView::ScaleChanged and the tool
+    // refresh path.
+    if (VAbstractApplication::VApp()->Settings()->GetShowAccuracyRadius())
     {
         QPainterStateGuard const guard(painter);
 
@@ -86,6 +83,19 @@ void VScenePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
         painter->setPen(pen);
         painter->drawEllipse(PointRect(accuracyPointOnLine));
     }
+
+    PaintWithFixItemHighlightSelected<QGraphicsEllipseItem>(this, painter, option, widget);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VScenePoint::RefreshScale()
+{
+    const qreal scale = SceneScale(scene());
+
+    ScaleMainPenWidth(scale);
+    ScaleCircleSize(this, scale);
+
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
 
     if (settings->GetPatternLabelFontSize() * scale < minVisibleFontSize || settings->GetHideLabels())
     {
@@ -100,8 +110,6 @@ void VScenePoint::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
             RefreshLine();
         }
     }
-
-    PaintWithFixItemHighlightSelected<QGraphicsEllipseItem>(this, painter, option, widget);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -122,7 +130,7 @@ void VScenePoint::RefreshPointGeometry(const VPointF &point)
     m_namePoint->setText(point.name());
     m_namePoint->setVisible(m_showLabel);
 
-    RefreshLine();
+    RefreshScale();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

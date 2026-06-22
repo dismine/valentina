@@ -109,6 +109,7 @@ public:
     void ConnectOutsideSignals();
     void ReinitInternals(const VPiece &detail, VMainGraphicsScene *scene);
     void RefreshGeometry(bool updateChildren = true);
+    void RefreshScale();
 
     auto type() const -> int override { return Type; }
     enum

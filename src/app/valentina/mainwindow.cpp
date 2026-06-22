@@ -178,6 +178,7 @@
 #include "../vtools/undocommands/undogroup.h"
 #include "../vwidgets/vgraphicssimpletextitem.h"
 #include "../vwidgets/vmaingraphicsscene.h"
+#include "../vwidgets/vscenepoint.h"
 #include "../vwidgets/vtoolbuttonpopup.h"
 #include "../vwidgets/vwidgetpopup.h"
 #include "core/vapplication.h"
@@ -2133,12 +2134,27 @@ void MainWindow::ScaleChanged(qreal scale)
         return;
     }
 
+    // Scale-dependent item state must be refreshed here, not inside paint(). Since Qt 6
+    // mutating geometry/visibility/selection during paint() crashes the paint pipeline on
+    // Windows.
     for (QGraphicsItem *item : scene->items())
     {
+        // VGraphicsSimpleTextItem and VToolSeamAllowance have a single fixed type(), so a cheap
+        // int compare + static_cast is enough. VScenePoint is a base class whose subclasses
+        // override type(), so it can only be matched with dynamic_cast.
         if (item->type() == VGraphicsSimpleTextItem::Type)
         {
-            auto *text = dynamic_cast<VGraphicsSimpleTextItem *>(item);
-            text->RefreshScale();
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+            static_cast<VGraphicsSimpleTextItem *>(item)->RefreshScale();
+        }
+        else if (item->type() == VToolSeamAllowance::Type)
+        {
+            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+            static_cast<VToolSeamAllowance *>(item)->RefreshScale();
+        }
+        else if (auto *point = dynamic_cast<VScenePoint *>(item))
+        {
+            point->RefreshScale();
         }
     }
 }
