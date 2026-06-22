@@ -118,7 +118,7 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.x'
+          python-version: '3.13'
           architecture: "x64"
           cache: 'pip'
           cache-dependency-path: 'share/ci/requirements-ci.txt'
@@ -432,7 +432,7 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.x'
+          python-version: '3.13'
           architecture: "x64"
           cache: 'pip'
           cache-dependency-path: 'share/ci/requirements-ci.txt'
