@@ -133,6 +133,7 @@ public:
     void ConnectOutsideSignals();
     void ReinitInternals(const VPiece &detail, VMainGraphicsScene *scene);
     void RefreshGeometry(bool updateChildren = true);
+    void RefreshScale();
 
     // Two-phase refresh for batch updates. PrepareRefreshGeometry() computes the geometry off the
     // GUI thread (safe to call concurrently for different pieces); ApplyBatchGeometry() applies the
