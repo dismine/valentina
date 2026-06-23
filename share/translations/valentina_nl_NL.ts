@@ -53,7 +53,7 @@
     <message>
         <location filename="../../src/libs/vtools/undocommands/addtocalc.cpp" line="45"/>
         <source>add object</source>
-        <translation type="unfinished"></translation>
+        <translation>object toevoegen</translation>
     </message>
 </context>
 <context>
@@ -3909,7 +3909,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="359"/>
         <source>%5 - intersection of lines %1_%2 and %3_%4</source>
-        <translation type="unfinished"></translation>
+        <translation>%5 - snijpunt van lijnen %1_%2 en %3_%4</translation>
     </message>
     <message>
         <source>Curve %1_%2</source>
@@ -3992,7 +3992,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="472"/>
         <source>Correction the dart %1_%2_%3</source>
-        <translation type="unfinished"></translation>
+        <translation>Correctie van de figuurnaad %1_%2_%3</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="462"/>
@@ -4086,12 +4086,12 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="38"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Search history &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zoekgeschiedenis &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zoekgeschiedenis &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="47"/>
         <source>Alt+Down</source>
-        <translation type="unfinished">Alt+Down</translation>
+        <translation>Alt+Down</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="57"/>
@@ -4102,52 +4102,52 @@
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="74"/>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.cpp" line="712"/>
         <source>0 results</source>
-        <translation type="unfinished">0 resultaten</translation>
+        <translation>0 resultaten</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="101"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hoofdlettergevoelig &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hoofdlettergevoelig &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="132"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match words &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hele woorden &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hele woorden &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="166"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match with regular expressions &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Reguliere expressies &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Met reguliere expressies &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="197"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use unicode properties &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;The meaning of the \w, \d, etc., character classes, as well as the meaning of their counterparts (\W, \D, etc.), is changed from matching ASCII characters only to matching any character with the corresponding Unicode property. For instance, \d is changed to match any character with the Unicode Nd (decimal digit) property; \w to match any character with either the Unicode L (letter) or N (digit) property, plus underscore, and so on. This option corresponds to the /u modifier in Perl regular expressions.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Unicode-eigenschappen gebruiken &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;De betekenis van de tekenklassen \w, \d, enzovoort, en hun tegenhangers (\W, \D, enzovoort) wordt gewijzigd van alleen ASCII-tekens naar elk teken met de bijbehorende Unicode-eigenschap. Zo wordt \d gewijzigd om elk teken te matchen met de Unicode-eigenschap Nd (decimaal cijfer); \w om elk teken te matchen met de Unicode-eigenschap L (letter) of N (cijfer), plus underscore, enzovoort. Deze optie komt overeen met de /u-modifier in Perl reguliere expressies.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Unicode-eigenschappen gebruiken &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;span style=&quot; color:#888a85;&quot;&gt;De betekenis van de tekenklassen \w, \d, enzovoort, evenals de betekenis van hun tegenhangers (\W, \D, enzovoort), wordt gewijzigd van het uitsluitend overeenkomen met ASCII-tekens naar het overeenkomen met elk teken met de bijbehorende Unicode-eigenschap. Zo wordt \d gewijzigd om overeen te komen met elk teken met de Unicode-eigenschap Nd (decimaal cijfer); \w om overeen te komen met elk teken met de Unicode-eigenschap L (letter) of N (cijfer), plus het liggende streepje, enzovoort. Deze optie komt overeen met de /u-modifier in reguliere expressies van Perl.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="203"/>
         <source>Alt+U</source>
-        <translation type="unfinished">Alt+U</translation>
+        <translation>Alt+U</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="223"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vorige zoeken &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vorige zoeken &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="232"/>
         <source>Shift+F3</source>
-        <translation type="unfinished">Shift+F3</translation>
+        <translation>Shift+F3</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="242"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Next %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Volgende zoeken %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Volgende zoeken %1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="251"/>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation>F3</translation>
     </message>
 </context>
 <context>
@@ -10981,7 +10981,7 @@ Toch de instellingen aanpassen?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="100"/>
         <source>&amp;Pattern piece</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Patroondeel</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="131"/>
@@ -12999,12 +12999,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4532"/>
         <source>Export corrections</source>
-        <translation type="unfinished"></translation>
+        <translation>Correcties exporteren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4533"/>
         <source>File &apos;%1&apos; already exists. Overwrite it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand &apos;%1&apos; bestaat al. Overschrijven?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5168"/>
@@ -14699,7 +14699,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/libs/vmisc/projectversion.cpp" line="115"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebaseerd op Qt %1 (%2, %3 bit)</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vgeometrydef.cpp" line="65"/>
@@ -15362,7 +15362,7 @@ Deze optie wordt actief na een herstart..</translation>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolspline.cpp" line="193"/>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolsplinepath.cpp" line="175"/>
         <source>Curve &apos;%1&apos; with id %2 has not unique name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Curve &apos;%1&apos; met id %2 heeft geen unieke naam.</translation>
     </message>
 </context>
 <context>
@@ -17587,7 +17587,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4420"/>
         <source>Measurement &apos;%1&apos; already used in the file.</source>
-        <translation type="unfinished">Maat &apos;%1&apos; wordt al gebruikt in het bestand.</translation>
+        <translation>Maat &apos;%1&apos; wordt al in het bestand gebruikt.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4473"/>
@@ -19632,7 +19632,7 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="345"/>
         <source>Open pattern history dialog</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Patroongeschiedenis openen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="347"/>
@@ -21079,7 +21079,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="264"/>
         <source>Can&apos;t cast object to the requested type. Object id = %1, actual type = %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan object niet converteren naar het gevraagde type. Object-id = %1, werkelijk type = %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="291"/>
@@ -21476,7 +21476,7 @@ Wil je deze veranderingen opslaan?</translation>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="212"/>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="249"/>
         <source>Can&apos;t create an image %1x%2 for &apos;%3&apos;. The image is too large or empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen afbeelding %1x%2 maken voor &apos;%3&apos;. De afbeelding is te groot of leeg.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="403"/>
@@ -23246,7 +23246,7 @@ Wil je deze veranderingen opslaan?</translation>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="728"/>
         <source>Error updating scene after parsing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij het bijwerken van de scène na het parseren.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1122"/>
@@ -24067,7 +24067,7 @@ Compatibiliteitsfout ruw indelingsformaat: actualFileVersion = %1 en fileVersion
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="138"/>
         <source>Fatal Error: Processing elliptical arcs is not supported in this version. Please update the application to a newer version to use this feature.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fatale fout: Het verwerken van elliptische bogen wordt in deze versie niet ondersteund. Werk de toepassing bij naar een nieuwere versie om deze functie te gebruiken.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="303"/>

@@ -3549,7 +3549,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="631"/>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta no válida</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="631"/>
@@ -3710,7 +3710,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="660"/>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta no válida</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="660"/>
@@ -4114,7 +4114,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="101"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Match Case &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Coincidir mayúsculas &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Coincidir mayúsculas &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoghistory.ui" line="132"/>
@@ -5900,7 +5900,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="879"/>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta no válida</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="879"/>
@@ -8248,7 +8248,7 @@ Aplicar características de todos modos?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="608"/>
         <source>Invalid label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta no válida</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="608"/>
@@ -13027,12 +13027,12 @@ el patrón.</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4532"/>
         <source>Export corrections</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar correcciones</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4533"/>
         <source>File &apos;%1&apos; already exists. Overwrite it?</source>
-        <translation type="unfinished"></translation>
+        <translation>El archivo &apos;%1&apos; ya existe. ¿Sobrescribirlo?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5168"/>
@@ -15390,7 +15390,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolspline.cpp" line="193"/>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolsplinepath.cpp" line="175"/>
         <source>Curve &apos;%1&apos; with id %2 has not unique name.</source>
-        <translation type="unfinished"></translation>
+        <translation>La curva &apos;%1&apos; con id %2 no tiene un nombre único.</translation>
     </message>
 </context>
 <context>
@@ -21107,7 +21107,7 @@ Quieres guardar los cambios?</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="264"/>
         <source>Can&apos;t cast object to the requested type. Object id = %1, actual type = %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede convertir el objeto al tipo solicitado. ID del objeto = %1, tipo real = %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="291"/>
@@ -21504,7 +21504,7 @@ Quieres guardar los cambios?</translation>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="212"/>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="249"/>
         <source>Can&apos;t create an image %1x%2 for &apos;%3&apos;. The image is too large or empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede crear una imagen %1x%2 para &apos;%3&apos;. La imagen es demasiado grande o está vacía.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="403"/>
@@ -23274,7 +23274,7 @@ Quieres guardar los cambios?</translation>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="728"/>
         <source>Error updating scene after parsing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al actualizar la escena después del análisis.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1122"/>
@@ -24099,7 +24099,7 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="138"/>
         <source>Fatal Error: Processing elliptical arcs is not supported in this version. Please update the application to a newer version to use this feature.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error grave: El procesamiento de arcos elípticos no es compatible con esta versión. Actualice la aplicación a una versión más reciente para usar esta función.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="303"/>

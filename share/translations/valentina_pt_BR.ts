@@ -13030,12 +13030,12 @@ Você quer salvar suas mudanças?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4532"/>
         <source>Export corrections</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar correções</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4533"/>
         <source>File &apos;%1&apos; already exists. Overwrite it?</source>
-        <translation type="unfinished"></translation>
+        <translation>O arquivo &apos;%1&apos; já existe. Substituí-lo?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5168"/>
@@ -15393,7 +15393,7 @@ Esta opção terá efeito após reinicialização.</translation>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolspline.cpp" line="193"/>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolsplinepath.cpp" line="175"/>
         <source>Curve &apos;%1&apos; with id %2 has not unique name.</source>
-        <translation type="unfinished"></translation>
+        <translation>A curva &apos;%1&apos; com id %2 não tem nome exclusivo.</translation>
     </message>
 </context>
 <context>
@@ -21113,7 +21113,7 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="264"/>
         <source>Can&apos;t cast object to the requested type. Object id = %1, actual type = %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não é possível converter o objeto para o tipo solicitado. ID do objeto = %1, tipo real = %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="291"/>
@@ -21510,7 +21510,7 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="212"/>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="249"/>
         <source>Can&apos;t create an image %1x%2 for &apos;%3&apos;. The image is too large or empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não é possível criar uma imagem %1x%2 para &apos;%3&apos;. A imagem é muito grande ou está vazia.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="403"/>
@@ -23280,7 +23280,7 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="728"/>
         <source>Error updating scene after parsing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ao atualizar a cena após a análise.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1122"/>

@@ -13029,12 +13029,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4532"/>
         <source>Export corrections</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvezi ispravke</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4533"/>
         <source>File &apos;%1&apos; already exists. Overwrite it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Datoteka &apos;%1&apos; već postoji. Prepisati je?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5168"/>
@@ -15392,7 +15392,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolspline.cpp" line="193"/>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolsplinepath.cpp" line="175"/>
         <source>Curve &apos;%1&apos; with id %2 has not unique name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Krivulja &apos;%1&apos; s id-om %2 nema jedinstven naziv.</translation>
     </message>
 </context>
 <context>
@@ -21109,7 +21109,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="264"/>
         <source>Can&apos;t cast object to the requested type. Object id = %1, actual type = %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nije moguće pretvoriti objekt u traženi tip. ID objekta = %1, stvarni tip = %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="291"/>
@@ -21506,7 +21506,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="212"/>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="249"/>
         <source>Can&apos;t create an image %1x%2 for &apos;%3&apos;. The image is too large or empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nije moguće stvoriti sliku %1x%2 za &apos;%3&apos;. Slika je prevelika ili prazna.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="403"/>
@@ -23276,7 +23276,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="728"/>
         <source>Error updating scene after parsing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pogreška pri ažuriranju scene nakon raščlanjivanja.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1122"/>
@@ -24101,7 +24101,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="138"/>
         <source>Fatal Error: Processing elliptical arcs is not supported in this version. Please update the application to a newer version to use this feature.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kobna pogreška: Obrada eliptičnih lukova nije podržana u ovoj verziji. Ažurirajte aplikaciju na noviju verziju kako biste koristili ovu značajku.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="303"/>

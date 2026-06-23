@@ -13027,12 +13027,12 @@ Sollen die Änderungen gespeichert werden?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4532"/>
         <source>Export corrections</source>
-        <translation type="unfinished"></translation>
+        <translation>Korrekturen exportieren</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4533"/>
         <source>File &apos;%1&apos; already exists. Overwrite it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei &apos;%1&apos; existiert bereits. Überschreiben?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5168"/>
@@ -15390,7 +15390,7 @@ Diese Option wird nach einem Neustart aktiv.</translation>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolspline.cpp" line="193"/>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolsplinepath.cpp" line="175"/>
         <source>Curve &apos;%1&apos; with id %2 has not unique name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurve &apos;%1&apos; mit ID %2 hat keinen eindeutigen Namen.</translation>
     </message>
 </context>
 <context>
@@ -19658,7 +19658,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="345"/>
         <source>Open pattern history dialog</source>
         <comment>shortcut for action</comment>
-        <translation type="unfinished"></translation>
+        <translation>Schnittmuster-Chronik öffnen</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="347"/>
@@ -21105,7 +21105,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="264"/>
         <source>Can&apos;t cast object to the requested type. Object id = %1, actual type = %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Objekt kann nicht in den angeforderten Typ umgewandelt werden. Objekt-ID = %1, tatsächlicher Typ = %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="291"/>
@@ -21501,7 +21501,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="212"/>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="249"/>
         <source>Can&apos;t create an image %1x%2 for &apos;%3&apos;. The image is too large or empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild %1x%2 für &apos;%3&apos; kann nicht erstellt werden. Das Bild ist zu groß oder leer.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="403"/>
@@ -23271,7 +23271,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="728"/>
         <source>Error updating scene after parsing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Aktualisieren der Szene nach dem Parsen.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1122"/>
@@ -24096,7 +24096,7 @@ Kompatibilitätsfehler beim Roh-Anordnungsformat: actualFileVersion = %1 und fil
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="138"/>
         <source>Fatal Error: Processing elliptical arcs is not supported in this version. Please update the application to a newer version to use this feature.</source>
-        <translation type="unfinished"></translation>
+        <translation>Schwerwiegender Fehler: Die Verarbeitung elliptischer Bögen wird in dieser Version nicht unterstützt. Bitte aktualisieren Sie die Anwendung auf eine neuere Version, um diese Funktion zu nutzen.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="303"/>

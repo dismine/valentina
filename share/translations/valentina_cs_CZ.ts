@@ -11516,7 +11516,7 @@ Přesto použít nastavení?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7634"/>
         <source>untitled.val</source>
-        <translation type="unfinished"></translation>
+        <translation>bez názvu.val</translation>
     </message>
     <message>
         <source>The pattern has been modified.
@@ -13026,12 +13026,12 @@ Chcete uložit své změny?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4532"/>
         <source>Export corrections</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportovat opravy</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4533"/>
         <source>File &apos;%1&apos; already exists. Overwrite it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor &apos;%1&apos; již existuje. Přepsat jej?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5168"/>
@@ -15389,7 +15389,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolspline.cpp" line="193"/>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolsplinepath.cpp" line="175"/>
         <source>Curve &apos;%1&apos; with id %2 has not unique name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Křivka &apos;%1&apos; s ID %2 nemá jedinečný název.</translation>
     </message>
 </context>
 <context>
@@ -21106,7 +21106,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="264"/>
         <source>Can&apos;t cast object to the requested type. Object id = %1, actual type = %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze přetypovat předmět na požadovaný typ. ID předmětu = %1, skutečný typ = %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="291"/>
@@ -21503,7 +21503,7 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="212"/>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="249"/>
         <source>Can&apos;t create an image %1x%2 for &apos;%3&apos;. The image is too large or empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze vytvořit obrázek %1x%2 pro &apos;%3&apos;. Obrázek je příliš velký nebo prázdný.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="403"/>
@@ -23273,7 +23273,7 @@ Chcete uložit změny?</translation>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="728"/>
         <source>Error updating scene after parsing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba při aktualizaci scény po analýze.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1122"/>
@@ -24098,7 +24098,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="138"/>
         <source>Fatal Error: Processing elliptical arcs is not supported in this version. Please update the application to a newer version to use this feature.</source>
-        <translation type="unfinished"></translation>
+        <translation>Závažná chyba: Zpracování eliptických oblouků není v této verzi podporováno. Aktualizujte aplikaci na novější verzi, abyste mohli tuto funkci používat.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="303"/>
@@ -26627,13 +26627,13 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="82"/>
         <source>Angle1SplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Úhel1CestaKřivky</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="84"/>
         <source>Angle2SplPath</source>
         <comment>Do not add symbol _ to the end of the name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Úhel2CestaKřivky</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="85"/>
