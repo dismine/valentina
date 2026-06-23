@@ -28,44 +28,44 @@
 #include "dialogcredits.h"
 #include "ui_dialogcredits.h"
 
-const QString DialogCredits::sponsors = QStringLiteral(R"(АннаДенесюк
+const QString DialogCredits::sponsors = QStringLiteral(R"(Анастасія Бровкіна
+АннаДенесюк
 Людмила_Данилюк
-Марина Ярёменко
 Наталя Думінська
-Олена Жемчужина
+Оксана Чорна
 Олена__Карась
 Оля Калун
-Тетяна Надточій
-anastasiianf
+Amirati
 Anita Guiso
-Anna Rashevska
-Anna Yefimenko
+Bellamaesdesigns
 Bortnovska
 cecile LALLEMAND
 chaulieu
+chiarabassetti.studio
 Constance Cellier
+Crema
 Diana Holub
 DurielLightbane
 Edwardo
 Eliane SIMON
 Gabrielle Squelin
+Gorebuy
 Himnish Sujan
 Irina Konetzka
 Jennifet
-Kateryna_Myasoyedova
 Kozakova_Natalie1996
 Kyowashi
-mdrivero
+Marina Orlova
+martos
+Merli
+milamila
 Monica Marques Carvalho
+nian
+Oksana Oksana
 Oleksandra
 Personalizzandia
-Piotr Jasiek
 Ryan Hawker
-shlomomintz
-SuzanA
 Svit1104
-tammapatterns
-Tanya_Pom08
 Tara Neplenbroek
 thebadjarvis
 tim-jacobs

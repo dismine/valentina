@@ -29,6 +29,29 @@
  <update_contact>contact@smart-pattern.com.ua</update_contact>
  <content_rating type="oars-1.1" />
  <releases>
+  <release version="1.0.3" type="stable" date="2026-06-23">
+    <description>
+      <p>
+        This is a stable maintenance release in the 1.0 series.
+      </p>
+      <ul>
+        <li>Valentina app. Ask for confirmation before overwriting an existing file when exporting font corrections.</li>
+        <li>Valentina app. Fixed the node option tool buttons (passmark, reverse, excluded, etc.) in the Seam Allowance and Piece Path dialogs not refreshing the notch list and visualization until the dialog was reopened.</li>
+        <li>Tape app. Fixed crash from concurrent access to the known measurements database while it was being refreshed in the background.</li>
+        <li>Tape app. Fixed a crash when the known-measurements database synced while a measurement refresh was already running, caused by re-entrant rebuilding of the measurement data.</li>
+        <li>Valentina app. Fixed crash when closing the History dialog after the pattern history changed while the dialog was open.</li>
+        <li>Valentina app. Fixed a notch ignoring its manual angle when the notch axis met the seam allowance near a corner.</li>
+        <li>Valentina app. Fixed the second notch on the seam line ignoring the manual passmark angle.</li>
+        <li>Misc. Fixed crash when evaluating a malformed if-then-else formula (e.g. a ternary branch with a missing operand).</li>
+        <li>Valentina app. Fixed crash when pressing undo/redo while a tool options dialog is open, caused by the resulting full reparse destroying the tool and its geometry before the dialog was accepted.</li>
+        <li>Tape app. Fixed sluggish image size scale control in the known measurements editor by no longer rebuilding the whole image list on every value change.</li>
+        <li>Tape app. Fixed image list in the known measurements editor showing a single column until the Images tab was activated or the image size value was changed.</li>
+        <li>Tape app. Fixed wrong diagram image shown for the selected measurement after opening the known measurements editor.</li>
+        <li>Valentina app. Fixed crash on shutdown while sending the application close statistic, caused by a nested event loop running during application teardown.</li>
+        <li>Valentina app. Fixed crash when syncing a multisize measurement file fails (e.g. user cancels the missing-measurements dialog): measurement pointer was nulled out but dimension comboboxes remained connected, causing a null dereference on the next dimension change event.</li>
+      </ul>
+    </description>
+  </release>
   <release version="1.0.2" type="stable" date="2026-06-03">
     <description>
       <p>
@@ -231,8 +254,7 @@
       <issue url="https://gitlab.com/smart-pattern/valentina/-/issues/163">valentina#163</issue>
       <issue url="https://gitlab.com/smart-pattern/valentina/-/issues/188">valentina#188</issue>
     </issues>
-    </release>
-  </releases>
+  </release>
   <release version="0.7.52" type="development" date="2020-09-12">
       <url type="details">https://smart-pattern.com.ua/blog/2022/09/17/release-valentina-0752/</url>
       <description>

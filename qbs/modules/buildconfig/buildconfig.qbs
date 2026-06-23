@@ -69,7 +69,7 @@ Module {
     property string libDirName: "lib"
 
     property string appTarget
-    property string projectVersion: "1.0.2"
+    property string projectVersion: "1.0.3"
 
     readonly property bool isEdgeBuild: {
         var parts = projectVersion.split(".")

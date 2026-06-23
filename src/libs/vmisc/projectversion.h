@@ -33,7 +33,7 @@ class QString;
 
 constexpr unsigned MAJOR_VERSION = 1;
 constexpr unsigned MINOR_VERSION = 0;
-constexpr unsigned DEBUG_VERSION = 2;
+constexpr unsigned DEBUG_VERSION = 3;
 
 auto AppVersionStr() -> const QString &;
 
@@ -54,8 +54,8 @@ constexpr int kToolbarStateVersion = 0;
 
 // Change version number in projectversion.cpp too.
 
-#define VER_FILEVERSION 1, 0, 2
-#define VER_FILEVERSION_STR "1.0.2\0"
+#define VER_FILEVERSION 1, 0, 3
+#define VER_FILEVERSION_STR "1.0.3\0"
 
 // #define V_PRERELEASE // Mark prerelease builds
 
