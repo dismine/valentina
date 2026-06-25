@@ -91,6 +91,8 @@ protected:
     void SetOnlyPoint(bool value);
     auto IsOnlyPoint() const -> bool;
 
+    void RefreshHoverPen();
+
 private:
     Q_DISABLE_COPY_MOVE(VScenePoint) // NOLINT
 

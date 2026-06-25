@@ -123,6 +123,12 @@ VNodePoint::VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent,
     connect(m_namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VNodePoint::NameChangePosition);
     connect(m_namePoint, &VGraphicsSimpleTextItem::ShowContextMenu, this,
             [this](QGraphicsSceneContextMenuEvent *event) { contextMenuEvent(event); });
+    connect(m_namePoint, &VGraphicsSimpleTextItem::LabelHovered, this,
+            [this](bool hovered)
+            {
+                m_isHovered = hovered;
+                RefreshHoverPen();
+            });
     m_lineName->SetColorRole(VColorRole::PieceNodeLabelLineColor);
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(initData.id));
     ToolCreation(initData.typeCreation);

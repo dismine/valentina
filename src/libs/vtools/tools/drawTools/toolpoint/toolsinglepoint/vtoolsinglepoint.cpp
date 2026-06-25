@@ -91,6 +91,12 @@ VToolSinglePoint::VToolSinglePoint(VAbstractPattern *doc, VContainer *data, quin
     connect(m_namePoint, &VGraphicsSimpleTextItem::PointChoosed, this, &VToolSinglePoint::PointChoosed);
     connect(m_namePoint, &VGraphicsSimpleTextItem::PointSelected, this, &VToolSinglePoint::PointSelected);
     connect(m_namePoint, &VGraphicsSimpleTextItem::NameChangePosition, this, &VToolSinglePoint::NameChangePosition);
+    connect(m_namePoint, &VGraphicsSimpleTextItem::LabelHovered, this,
+            [this](bool hovered)
+            {
+                m_isHovered = hovered;
+                RefreshHoverPen();
+            });
     RefreshPointGeometry(*VAbstractTool::data.GeometricObject<VPointF>(id));
 }
 
