@@ -178,6 +178,7 @@ auto VScenePoint::itemChange(GraphicsItemChange change, const QVariant &value) -
 void VScenePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = true;
+    RefreshHoverPen();
     QGraphicsEllipseItem::hoverEnterEvent(event);
 }
 
@@ -185,7 +186,17 @@ void VScenePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 void VScenePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = false;
+    RefreshHoverPen();
     QGraphicsEllipseItem::hoverLeaveEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VScenePoint::RefreshHoverPen()
+{
+    // paint() no longer recomputes the pen, so re-apply the hovered/un-hovered main pen width for
+    // the current scale here. Otherwise the hover highlight would not appear until the next zoom.
+    ScaleMainPenWidth(SceneScale(scene()));
+    update();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

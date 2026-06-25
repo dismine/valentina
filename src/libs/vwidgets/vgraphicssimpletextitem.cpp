@@ -214,6 +214,7 @@ void VGraphicsSimpleTextItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 
     m_hoverFlag = true;
     RefreshColor();
+    emit LabelHovered(true);
 
     if (QGraphicsItem const *parent = parentItem(); (parent != nullptr) && m_showParentTooltip)
     {
@@ -234,6 +235,7 @@ void VGraphicsSimpleTextItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     m_hoverFlag = false;
     RefreshColor();
+    emit LabelHovered(false);
     QGraphicsSimpleTextItem::hoverLeaveEvent(event);
 
     emit HoverCurve(false);

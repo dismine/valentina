@@ -141,6 +141,12 @@ VNodePoint::VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent,
         this,
         [this]() -> void { RefreshLine(); },
         Qt::QueuedConnection);
+    connect(m_namePoint, &VGraphicsSimpleTextItem::LabelHovered, this,
+            [this](bool hovered)
+            {
+                m_isHovered = hovered;
+                RefreshHoverPen();
+            });
     m_lineName->SetColorRole(VColorRole::PieceNodeLabelLineColor);
     QGraphicsItem::setData(LabelKindRole, static_cast<int>(LabelMoveRequest::Kind::Point));
     QGraphicsItem::setData(LabelToolIdRole, static_cast<quint32>(m_id));

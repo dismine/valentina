@@ -62,6 +62,19 @@ VSimplePoint::VSimplePoint(quint32 id, VColorRole role, QObject *parent)
         this,
         [this]() -> void { RefreshLine(); },
         Qt::QueuedConnection);
+    connect(m_namePoint, &VGraphicsSimpleTextItem::LabelHovered, this,
+            [this](bool hovered)
+            {
+                if (hovered)
+                {
+                    m_isHovered = true;
+                }
+                else if (not m_alwaysHovered)
+                {
+                    m_isHovered = false;
+                }
+                RefreshHoverPen();
+            });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -196,6 +209,7 @@ void VSimplePoint::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void VSimplePoint::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = true;
+    RefreshHoverPen();
     QGraphicsEllipseItem::hoverEnterEvent(event);
 }
 
@@ -206,6 +220,7 @@ void VSimplePoint::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     {
         m_isHovered = false;
     }
+    RefreshHoverPen();
     QGraphicsEllipseItem::hoverLeaveEvent(event);
 }
 

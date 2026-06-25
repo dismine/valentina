@@ -99,6 +99,7 @@ signals:
     void PointSelected(bool selected);
     void UpdateLine();
     void HoverCurve(bool hover);
+    void LabelHovered(bool hovered);
 
 protected:
     auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
