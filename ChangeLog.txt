@@ -32,7 +32,10 @@
 - [Puzzle app] New option Print text as paths.
 - [Valentina app] New action Auto-arrange labels (Ctrl+Shift+A). Automatically repositions point labels in Draw and Details mode to reduce overlaps.
 
-# Valentina 1.0.3 (unreleased)
+# Valentina 1.0.4 (unreleased)
+- [Valentina app] Fixed scene points (including spline control points) showing at the wrong size until the next zoom, e.g. after undo.
+
+# Valentina 1.0.3 June 23, 2026
 - [Valentina app] Ask for confirmation before overwriting an existing file when exporting font corrections.
 - [Valentina app] Fixed the node option tool buttons (passmark, reverse, excluded, etc.) in the Seam Allowance and Piece Path dialogs not refreshing the notch list and visualization until the dialog was reopened.
 - [Tape app] Fixed crash from concurrent access to the known measurements database while it was being refreshed in the background.
