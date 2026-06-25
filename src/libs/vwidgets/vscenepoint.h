@@ -86,6 +86,7 @@ protected:
 
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+    auto itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant override;
 
     void SetOnlyPoint(bool value);
     auto IsOnlyPoint() const -> bool;

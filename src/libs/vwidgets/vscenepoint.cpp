@@ -37,6 +37,7 @@
 
 #include <QBrush>
 #include <QFont>
+#include <QGraphicsScene>
 #include <QPainter>
 #include <QPen>
 #include <QStyle>
@@ -159,6 +160,19 @@ void VScenePoint::SetOnlyPoint(bool value)
 auto VScenePoint::IsOnlyPoint() const -> bool
 {
     return m_onlyPoint;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VScenePoint::itemChange(GraphicsItemChange change, const QVariant &value) -> QVariant
+{
+    // Size the point for the current view scale as soon as it enters a scene, so it is correct on
+    // its first paint (e.g. when interactively creating a tool) instead of flashing at the default
+    // size until the next RefreshScale/zoom.
+    if (change == ItemSceneHasChanged && value.value<QGraphicsScene *>() != nullptr)
+    {
+        RefreshScale();
+    }
+    return QGraphicsEllipseItem::itemChange(change, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -1,4 +1,5 @@
 # Valentina 1.0.4 (unreleased)
+- [Valentina app] Fixed scene points (including spline control points) showing at the wrong size until the next zoom, e.g. after undo.
 
 # Valentina 1.0.3 June 23, 2026
 - [Valentina app] Ask for confirmation before overwriting an existing file when exporting font corrections.
