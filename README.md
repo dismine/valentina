@@ -4,7 +4,7 @@
 [![Maintainer](https://img.shields.io/badge/Maintainer-Roman_Telezhynskyi-blue)]()
 [![GitLab Last Commit](https://img.shields.io/gitlab/last-commit/smart-pattern%2Fvalentina?style=flat)]()
 [![Discord](https://img.shields.io/discord/1209739539816517692?logo=discord&logoColor=white)](https://discord.gg/XUxKFQuQ)
-[![Stable version](https://img.shields.io/badge/Stable-v1.0.3-blue)](https://smart-pattern.com.ua/valentina/version/1.0.3/)
+[![Stable version](https://img.shields.io/badge/Stable-v1.0.4-blue)](https://smart-pattern.com.ua/valentina/version/1.0.4/)
 [![Edge version](https://img.shields.io/badge/Dev-v1.1.0-yellow)](https://smart-pattern.com.ua/valentina/version/1.1.0/)
 [![Build Status](https://api.cirrus-ci.com/github/dismine/valentina.svg)](https://cirrus-ci.com/github/dismine/valentina)
 [![Build status](https://ci.appveyor.com/api/projects/status/m505f1pfs19j81nt/branch/develop?svg=true)](https://ci.appveyor.com/project/dismi_/valentina)

@@ -29,6 +29,17 @@
  <update_contact>contact@smart-pattern.com.ua</update_contact>
  <content_rating type="oars-1.1" />
  <releases>
+  <release version="1.0.4" type="stable" date="2026-06-26">
+    <description>
+      <p>
+        This is a stable maintenance release in the 1.0 series.
+      </p>
+      <ul>
+        <li>Valentina app. Fixed scene points (including spline control points) showing at the wrong size until the next zoom, e.g. after undo.</li>
+        <li>Valentina app. Fixed point hover highlight no longer appearing; hovering a point's name label now highlights the point as well.</li>
+      </ul>
+    </description>
+  </release>
   <release version="1.0.3" type="stable" date="2026-06-23">
     <description>
       <p>
