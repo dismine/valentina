@@ -3388,15 +3388,9 @@ void MainWindow::ToolBarTools()
             {
                 VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
                 settings->SetPatternLabelFontSize(settings->GetPatternLabelFontSize() + 1);
-                if (m_sceneDraw)
-                {
-                    m_sceneDraw->update();
-                }
-
-                if (m_sceneDetails)
-                {
-                    m_sceneDetails->update();
-                }
+                // Label visibility depends on the font size and is recomputed in RefreshScale(),
+                // not in paint(), so drive the existing refresh dispatch instead of a bare update().
+                ScaleChanged(ui->view->transform().m11());
             });
 
     m_shortcutActions.insert(VShortcutAction::DecreaseLabelFont, ui->actionDecreaseLabelFont);
@@ -3405,15 +3399,7 @@ void MainWindow::ToolBarTools()
             {
                 VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
                 settings->SetPatternLabelFontSize(settings->GetPatternLabelFontSize() - 1);
-                if (m_sceneDraw)
-                {
-                    m_sceneDraw->update();
-                }
-
-                if (m_sceneDetails)
-                {
-                    m_sceneDetails->update();
-                }
+                ScaleChanged(ui->view->transform().m11());
             });
 
     m_shortcutActions.insert(VShortcutAction::OriginalLabelFont, ui->actionOriginalLabelFont);
@@ -3422,15 +3408,7 @@ void MainWindow::ToolBarTools()
             {
                 VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
                 settings->SetPatternLabelFontSize(VCommonSettings::GetDefPatternLabelFontSize());
-                if (m_sceneDraw)
-                {
-                    m_sceneDraw->update();
-                }
-
-                if (m_sceneDetails)
-                {
-                    m_sceneDetails->update();
-                }
+                ScaleChanged(ui->view->transform().m11());
             });
 
     m_shortcutActions.insert(VShortcutAction::HideLabels, ui->actionHideLabels);
@@ -3439,15 +3417,7 @@ void MainWindow::ToolBarTools()
             [this](bool checked)
             {
                 VAbstractValApplication::VApp()->ValentinaSettings()->SetHideLabels(checked);
-                if (m_sceneDraw)
-                {
-                    m_sceneDraw->update();
-                }
-
-                if (m_sceneDetails)
-                {
-                    m_sceneDetails->update();
-                }
+                ScaleChanged(ui->view->transform().m11());
             });
 }
 
@@ -4306,6 +4276,11 @@ void MainWindow::ActionDraw(bool checked)
         ui->view->setScene(currentScene);
         RestoreCurrentScene();
 
+        // Scale-dependent item state (e.g. label visibility) lives in RefreshScale(), not paint().
+        // It is not refreshed while a scene is inactive, so re-run the dispatch now that the scene is
+        // shown and the view transform is valid; otherwise stale state lingers until the next zoom.
+        ScaleChanged(ui->view->transform().m11());
+
         VAbstractValApplication::VApp()->SetDrawMode(Draw::Calculation);
         m_comboBoxDraws->setCurrentIndex(m_currentDrawIndex); // restore current pattern peace
         m_drawMode = true;
@@ -4386,6 +4361,11 @@ void MainWindow::ActionDetails(bool checked)
         emit ui->view->itemClicked(nullptr);
         ui->view->setScene(currentScene);
         RestoreCurrentScene();
+
+        // Scale-dependent item state (e.g. label visibility) lives in RefreshScale(), not paint().
+        // It is not refreshed while a scene is inactive, so re-run the dispatch now that the scene is
+        // shown and the view transform is valid; otherwise stale state lingers until the next zoom.
+        ScaleChanged(ui->view->transform().m11());
 
         VAbstractValApplication::VApp()->SetDrawMode(Draw::Modeling);
         SetEnableTool(true);

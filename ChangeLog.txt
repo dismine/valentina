@@ -32,7 +32,10 @@
 - [Puzzle app] New option Print text as paths.
 - [Valentina app] New action Auto-arrange labels (Ctrl+Shift+A). Automatically repositions point labels in Draw and Details mode to reduce overlaps.
 
-# Valentina 1.0.4 (unreleased)
+# Valentina 1.0.5 (unreleased)
+- [Valentina app] Fixed the Hide labels option and label font size changes not taking effect until the next zoom, including stale label state on the other scene after switching to it.
+
+# Valentina 1.0.4 June 26, 2026
 - [Valentina app] Fixed scene points (including spline control points) showing at the wrong size until the next zoom, e.g. after undo.
 - [Valentina app] Fixed point hover highlight no longer appearing; hovering a point's name label now highlights the point as well.
 
