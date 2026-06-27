@@ -28,181 +28,198 @@
 #include "dialogcredits.h"
 #include "ui_dialogcredits.h"
 
-const QString DialogCredits::sponsors = QStringLiteral(R"(Альона
+const QString DialogCredits::sponsors = QStringLiteral(R"(Jarosław Grzesik
+Irina Konetzka
+Gabrielle Squelin
+Svitlana Cherhava
+Aurelija Vindigienė
+Зоряна Касьян
+Наталія Субботська
+Любов Корнійчук
+Nicolas
+Тамара Крупка
+Castera Line
+Тетяна Надточій
+manu iena
+kasatkina.o
+кира
 Аліна Стельмах-Гордієнко
 Анастасія Микитюк
-Анна Капошко
-АннаДенесюк
-Валентина2025
-Віка Чебера
-Вікторія Гуцало
-Горгуля_85
-Елена Солнышкина
-Зоряна Касьян
-кира
-Лозова.Таня
-Любов Корнійчук
-Людмила Абрамова
-Людмила_Данилюк
 Лія Самосієнко
+Edith Burgos
+Hanna Panasiuk
+Ludmila
+Олена Дунаєвська
+Поліна Якубовська
+osteppy
+Валентина2025
+Альона
+dyvosvit
+Наталя Думінська
+Поліна Михайлюта
+Oleksandra
 марго
 Марина Прокопенко
-Марина Ярёменко
-Марія Харишин
-Наталя Думінська
-Наталія Субботська
-Олена
-Олена Дунаєвська
-Олена Жемчужина
-Олена Сівер
-Оля Калун
 Оля Коваль
-Поліна Михайлюта
-Поліна Якубовська
-Софія
-Тамара Крупка
-Татьяна Донец
-Тетяна Надточій
-Юлия Горобец
-Ірина
-a.dor
-abulxoyr Ибн АбдулХаким
-Alena German
-Alena Minak
-Alina Damineva
-Alyssa SANTINI
-Anastasiia1303
-Anastasiia_Mostsepan
-anastasiianf
-Andre
-andrii yarovitsyn
-angelinaa22
-Anita Guiso
-Anna Rashevska
-Anna Yefimenko
-arven
-Aurelija Vindigienė
-AЗозуля
-BaudinoMarieNoelle@8469
-Bodnarchuk
+tetiana17
 Boris Korotach
-Bortnovska
-Busybee1977
-Cansuakaydin
-Carlos Flores
-CarlosRomero
-Castera Line
-cecile LALLEMAND
-chaulieu
-Constance Cellier
-craftsbycatmarg
-Daniel Stefan Popescu
-DaphneLS
+Ruben Bakker
+zubeikomaria
+Alyssa SANTINI
 Dariia28
-David Hagar
-Denarmin
-Dinara
-Dmytrashko.tanya
-DurielLightbane
-dyvosvit
-Edith Burgos
-Eliane SIMON
-Elina Kondratenko
-ElinLundh
-ElodieNguyen
-emilialange
-Evvgenia
-fainakobita
-Fartukoff2020
-Fiono4ka
 Flavie Giraudeau
-Florine Vangeneberg
-fv
-G.VOVK
-Gabrielle Squelin
-Galina84
-GiovannyM
-Halyna Zinechko
-Hanna Panasiuk
-hello
-Himnish Sujan
-Innusha Tu
-Irina Konetzka
-ivanna sweet
-Ivette11
-Jarosław Grzesik
-Jennifer Jean Joseph
-Jennifet
-JessicaGoodyearDesign
-jonatan
-jules delarue
-Juls0912
-kasatkina.o
-Kateryna_Myasoyedova
-Klaudiusz Piotr Kusz
-Kristina_Kuvshyn
-Kseniya Pashkova
-Kyowashi
-LailaS
-LEONARDOVITH
-Liubov
-Ludmila@Yevchik
-Mafalda
-Maika
-manu iena
-mdrivero
+Fiono4ka
 meryrose
-Monica Marques Carvalho
+Alena Minak
+BaudinoMarieNoelle
+Constance Cellier
+zosia81
+tammapatterns
+DaphneLS
+Tetiana Olkhovska
+arven
+Вікторія Гуцало
+Jennifer Jean Joseph
+Bodnarchuk
+DurielLightbane
+Марія Харишин
+Kseniya Pashkova
+Ірина
 msandovaldesigns
-Muriel Rogger
-Nadiia Puchko
-Nicolas
+Tetiana Shevchuk
+svetlana valvi
 Nina Staufert
+Софія
+angelinaa22
+LailaS
+ivanna sweet
+Daniel Stefan Popescu
+Alina Damineva
+Carlos Flores
+Ryan Hawker
+Eliane SIMON
+Bortnovska
+Liubov
+Tetiana Dubyna
 Olena Schramka
-OlenaErakova
-Olesia
-Olga Guzyuk
-olga39
-osteppy
+Dmytrashko.tanya
+Denarmin
+CarlosRomero
+ukranastasio
+vio31
+Jennifet
+ElinLundh
+Yuliya
+Tanya_Pom08
+Victoria
+Марія Сцібель
 Patternporter
-Piotr Jasiek
+GentleOne
+Anna Yefimenko
+Edwardo
+Inesa
+YaroslavaDolinska
+Женя Канівець
+yesalesya
+Anita Guiso
+Олена__Карась
+Олеся Бурчак
+Kozakova_Natalie1996
+Vitaliia
+MashaKid
+iamksena92
+Vanessa Focardi
+Fartukoff2020
+Juls0912
+Dinara
+AЗозуля
+Nadiia Puchko
+G.VOVK
+Elina Kondratenko
+Лозова.Таня
+Galina84
+David Hagar
+jules delarue
+Klaudiusz Piotr Kusz
+hello
+Busybee1977
+scratchthedog
+Kristina_Kuvshyn
+saifudinka
+Sacha-Hugo Lagaude
+andrii yarovitsyn
+Muriel Rogger
+Maika
+Andre
+Volodymyr Chernega
+Елена Солнышкина
+Anna Rashevska
+Cansuakaydin
+Mafalda
+Slavovna
+cecile LALLEMAND
+Anastasiia1303
+wlkORety
+Tetyana Mazur
+Evvgenia
+Anastasiia_Mostsepan
+LEONARDOVITH
+ElodieNguyen
+ulabaka
+The Sewing Site AI
+emilialange
+Veronika M
+craftsbycatmarg
+chaulieu
+Valeriya89
+Олена
+Людмила_Данилюк
+fv
+a.dor
+Ivette11
+Горгуля_85
+jonatan
+Slazeret
+GiovannyM
+OlenaErakova
+abulxoyr Ибн АбдулХаким
+JessicaGoodyearDesign
+thebadjarvis
+Alena German
 ProgneSports
 qsrosales
-Ruben Bakker
-Ryan Hawker
-Sacha-Hugo Lagaude
-saifudinka
-scratchthedog
-shlomomintz
-Slavovna
-Slazeret
+Людмила Абрамова
+Kyowashi
+mdrivero
+anastasiianf
+Piotr Jasiek
 SuzanA
-svetlana valvi
-Svitlana Cherhava
-tammapatterns
-tanjashka
-Tara Neplenbroek
-Tatiana Onyshchak
-Tetiana Dubyna
-Tetiana Olkhovska
-Tetiana Shevchuk
-tetiana17
-Tetyana Mazur
-The Sewing Site AI
-thebadjarvis
+Kateryna_Myasoyedova
+Марина Ярёменко
+shlomomintz
 tim-jacobs
-ukranastasio
-ulabaka
-Valeriya89
-Vanessa Focardi
-Veronika M
-vikakarr
-vio31
-Vivrafashion
-Volodymyr Chernega
-wlkORety
-Yuliya
-zubeikomaria
+Tara Neplenbroek
+АннаДенесюк
+Monica Marques Carvalho
+Himnish Sujan
+Оля Калун
+Svit1104
+Diana Holub
+Personalizzandia
+Crema
+milamila
+Marina Orlova
+Oksana Oksana
+nian
+Gorebuy
+chiarabassetti.studio
+Amirati
+Оксана Чорна
+martos
+Анастасія Бровкіна
+Bellamaesdesigns
+Merli
+Aasokolov13
 )");
 
 //---------------------------------------------------------------------------------------------------------------------
