@@ -1402,7 +1402,7 @@ auto MainWindowsNoGUI::ApplyConverter(const QSharedPointer<VMeasurements> &m, co
 void MainWindowsNoGUI::CollectStatistics(MeasurementsType measurementsType, const QString &formatVersion) const
 {
     const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-    if (!settings->IsCollectStatistic())
+    if (!VApplication::IsGUIMode() || !settings->IsCollectStatistic())
     {
         return;
     }

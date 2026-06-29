@@ -503,7 +503,7 @@ auto TMainWindow::LoadFile(const QString &path) -> bool
             m_m->setXMLContent(converter.Convert()); // Read again after conversion
 
             VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
-            if (settings->IsCollectStatistic())
+            if (MApplication::VApp()->IsAppInGUIMode() && settings->IsCollectStatistic())
             {
                 auto *statistic = VGAnalytics::Instance();
 
@@ -528,7 +528,7 @@ auto TMainWindow::LoadFile(const QString &path) -> bool
             m_m->setXMLContent(converter.Convert()); // Read again after conversion
 
             VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
-            if (settings->IsCollectStatistic())
+            if (MApplication::VApp()->IsAppInGUIMode() && settings->IsCollectStatistic())
             {
                 auto *statistic = VGAnalytics::Instance();
 
@@ -1881,7 +1881,7 @@ void TMainWindow::ImportFromPattern()
         measurements = doc->ListMeasurements();
 
         VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
-        if (settings->IsCollectStatistic())
+        if (MApplication::VApp()->IsAppInGUIMode() && settings->IsCollectStatistic())
         {
             auto *statistic = VGAnalytics::Instance();
 

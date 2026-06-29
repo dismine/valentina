@@ -1722,7 +1722,7 @@ void VCommonSettings::SetAskCollectStatistic(bool value) const
 auto VCommonSettings::IsCollectStatistic() const -> bool
 {
     QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    return settings.value(*settingsStatistictCollect, 1).toBool();
+    return settings.value(*settingsStatistictCollect, 0).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

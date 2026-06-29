@@ -225,7 +225,8 @@ auto TKMMainWindow::LoadFile(const QString &path) -> bool
         m_m = new VKnownMeasurementsDocument();
         m_m->setXMLContent(converter.Convert());
 
-        if (const VCommonSettings *settings = VAbstractApplication::VApp()->Settings(); settings->IsCollectStatistic())
+        if (const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+            MApplication::VApp()->IsAppInGUIMode() && settings->IsCollectStatistic())
         {
             auto *statistic = VGAnalytics::Instance();
 
