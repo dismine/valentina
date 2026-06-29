@@ -1,4 +1,5 @@
 # Valentina 1.0.5 (unreleased)
+- [Valentina app / Tape app / Puzzle app] Usage statistics collection is now opt-in (disabled by default) and never runs in command-line mode.
 - [Valentina app] Fixed the Hide labels option and label font size changes not taking effect until the next zoom, including stale label state on the other scene after switching to it.
 
 # Valentina 1.0.4 June 26, 2026

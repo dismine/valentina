@@ -550,7 +550,7 @@ auto VPMainWindow::LoadFile(const QString &path) -> bool
         }
 
         VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-        if (settings->IsCollectStatistic())
+        if (VPApplication::VApp()->IsAppInGUIMode() && settings->IsCollectStatistic())
         {
             auto *statistic = VGAnalytics::Instance();
 

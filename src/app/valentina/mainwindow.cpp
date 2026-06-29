@@ -249,7 +249,7 @@ void LogPatternToolUsed(bool checked, const QString &toolName)
     if (checked)
     {
         VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
-        if (settings->IsCollectStatistic())
+        if (VApplication::IsGUIMode() && settings->IsCollectStatistic())
         {
             auto *statistic = VGAnalytics::Instance();
 
@@ -6581,7 +6581,7 @@ auto MainWindow::LoadPattern(QString fileName, const QString &customMeasureFile)
             doc->setXMLContent(converter->Convert());
 
             VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-            if (settings->IsCollectStatistic())
+            if (VApplication::IsGUIMode() && settings->IsCollectStatistic())
             {
                 auto *statistic = VGAnalytics::Instance();
 
