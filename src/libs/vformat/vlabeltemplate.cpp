@@ -39,6 +39,12 @@ VLabelTemplate::VLabelTemplate()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VLabelTemplate::SaveSchema() const -> QString
+{
+    return VLabelTemplateConverter::CurrentSchema;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VLabelTemplate::CreateEmptyTemplate()
 {
     clear();

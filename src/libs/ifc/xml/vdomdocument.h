@@ -126,6 +126,8 @@ public:
     auto CreateElementWithText(const QString &tagName, const QString &text) -> QDomElement;
 
     virtual auto SaveDocument(const QString &fileName, QString &error) -> bool;
+    static auto ValidateXMLData(const QString &schema, const QByteArray &data, const QString &fileName, QString &error)
+        -> bool;
     auto Major() const -> QString;
     auto Minor() const -> QString;
     auto Patch() const -> QString;
@@ -155,6 +157,10 @@ protected:
     void CollectId(const QDomElement &node, QVector<quint32> &vector) const;
 
     static void ValidateVersion(const QString &version);
+
+    /** @brief Schema to validate the serialized document against before committing a save. Empty means "do not
+     * validate". Subclasses backed by a known XSD should return their current schema. */
+    virtual auto SaveSchema() const -> QString;
 
 private slots:
     void CacheRefreshed();

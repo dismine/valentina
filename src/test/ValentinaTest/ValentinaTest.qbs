@@ -93,6 +93,8 @@ VTestApp {
         "tst_varc.cpp",
         "tst_qmutokenparser.cpp",
         "tst_vmeasurements.cpp",
+        "tst_vdomdocument.cpp",
+        "tst_vdomdocument.h",
         "tst_vlockguard.cpp",
         "tst_misc.cpp",
         "tst_vcommandline.cpp",

@@ -67,6 +67,7 @@ public:
 
     void setXMLContent(const QString &fileName) override;
     auto SaveDocument(const QString &fileName, QString &error) -> bool override;
+    auto SaveSchema() const -> QString override;
 
     void AddEmpty(const QString &name, const QString &formula = QString(), bool specialUnits = false);
     void AddEmptyAfter(const QString &after,

@@ -45,6 +45,8 @@ public:
     void AddLines(const QVector<VLabelTemplateLine> &lines);
     auto ReadLines() const -> QVector<VLabelTemplateLine>;
 
+    auto SaveSchema() const -> QString override;
+
 private:
     Q_DISABLE_COPY_MOVE(VLabelTemplate) // NOLINT
 };

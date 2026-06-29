@@ -290,6 +290,20 @@ auto VMeasurements::SaveDocument(const QString &fileName, QString &error) -> boo
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VMeasurements::SaveSchema() const -> QString
+{
+    switch (Type())
+    {
+        case MeasurementsType::Multisize:
+            return VVSTConverter::CurrentSchema;
+        case MeasurementsType::Individual:
+            return VVITConverter::CurrentSchema;
+        default:
+            return {}; // Unknown type: fall back to the empty-document guard only.
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VMeasurements::AddEmpty(const QString &name, const QString &formula, bool specialUnits)
 {
     QDomElement element = MakeEmpty(name, formula, MeasurementType::Measurement);

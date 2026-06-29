@@ -497,6 +497,8 @@ protected:
 
     auto GroupHasItem(const QDomElement &groupDomElement, quint32 toolId, quint32 objectId) -> bool;
 
+    auto SaveSchema() const -> QString override;
+
     auto ReadUnits() const -> Unit;
     auto ReadPatternNumber() const -> QString;
     auto ReadLabelDateFormat() const -> QString;

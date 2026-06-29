@@ -49,6 +49,7 @@
 #include "tst_vboundary.h"
 #include "tst_vcommandline.h"
 #include "tst_vcubicbezierpath.h"
+#include "tst_vdomdocument.h"
 #include "tst_vellipticalarc.h"
 #include "tst_vgobject.h"
 #include "tst_vlayoutdetail.h"
@@ -133,6 +134,7 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_VEllipticalArc());
     ASSERT_TEST(new TST_QmuTokenParser());
     ASSERT_TEST(new TST_VMeasurements());
+    ASSERT_TEST(new TST_VDomDocument());
     ASSERT_TEST(new TST_VLockGuard());
     ASSERT_TEST(new TST_Misc());
     ASSERT_TEST(new TST_VCommandLine());

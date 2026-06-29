@@ -38,12 +38,19 @@
 #include "../ifcdef.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/exception/vexception.h"
+#include "vparsererrorhandler.h"
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <xercesc/framework/MemBufInputSource.hpp>
+#include <xercesc/parsers/XercesDOMParser.hpp>
+#else
 #include <QAbstractMessageHandler>
 #include <QSourceLocation>
+#include <QXmlSchema>
+#include <QXmlSchemaValidator>
 #endif
 
+#include <QBuffer>
 #include <QByteArray>
 #include <QDir>
 #include <QDomNodeList>
@@ -790,37 +797,67 @@ auto VDomDocument::SaveDocument(const QString &fileName, QString &error) -> bool
         qDebug() << "Got empty file name.";
         return false;
     }
+
+    // QSaveFile guarantees an atomic write, but not that the content is meaningful. If the in-memory document is
+    // empty or damaged we must refuse to commit, otherwise we silently replace the user's good file with an empty
+    // or corrupt one. Cheap fast-path: an empty document has no root element.
+    if (documentElement().isNull())
+    {
+        error = tr("Refusing to save: the document has no content.");
+        return false;
+    }
+
+    // Serialize into memory first so we can validate the result before touching the target file. See issue #666:
+    // SaveCanonicalXML produces a deterministic attribute order.
+    QByteArray data;
+    {
+        QBuffer buffer(&data);
+        buffer.open(QIODevice::WriteOnly);
+        if (const int indent = 4; not SaveCanonicalXML(&buffer, indent, error))
+        {
+            return false;
+        }
+    }
+
+    if (data.isEmpty())
+    {
+        error = tr("Refusing to save: serialization produced no data.");
+        return false;
+    }
+
+    // Validate the serialized bytes against the document's XSD schema before committing. This catches both empty
+    // and structurally corrupt output, so a damaged document can never overwrite a good file on disk.
+    if (const QString schema = SaveSchema(); not schema.isEmpty() && not ValidateXMLData(schema, data, fileName, error))
+    {
+        return false;
+    }
+
     bool success = false;
     QSaveFile file(fileName);
     if (file.open(QIODevice::WriteOnly))
     {
-        // See issue #666. QDomDocument produces random attribute order.
-        if (const int indent = 4; not SaveCanonicalXML(&file, indent, error))
+        if (file.write(data) == data.size())
         {
-            return false;
-        }
-        // Left these strings in case we will need them for testing purposes
-        // QTextStream out(&file);
-        // #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        //  out.setCodec("UTF-8");
-        // #endif
-        //  save(out, indent);
-
-        success = file.commit();
+            success = file.commit();
 
 #if defined(_POSIX_SYNCHRONIZED_IO) && _POSIX_SYNCHRONIZED_IO > 0
-        if (success)
-        {
-            // https://stackoverflow.com/questions/74051505/does-qsavefilecommit-fsync-the-file-to-the-filesystem
-            QString const directoryPath = QFileInfo(file.fileName()).absoluteDir().path();
-            int const dirFd = ::open(directoryPath.toLocal8Bit().data(), O_RDONLY | O_DIRECTORY);
-            if (dirFd != -1)
+            if (success)
             {
-                ::fsync(dirFd);
-                ::close(dirFd);
+                // https://stackoverflow.com/questions/74051505/does-qsavefilecommit-fsync-the-file-to-the-filesystem
+                QString const directoryPath = QFileInfo(file.fileName()).absoluteDir().path();
+                int const dirFd = ::open(directoryPath.toLocal8Bit().data(), O_RDONLY | O_DIRECTORY);
+                if (dirFd != -1)
+                {
+                    ::fsync(dirFd);
+                    ::close(dirFd);
+                }
             }
-        }
 #endif
+        }
+        else
+        {
+            file.cancelWriting();
+        }
     }
 
     if (not success)
@@ -829,6 +866,127 @@ auto VDomDocument::SaveDocument(const QString &fileName, QString &error) -> bool
     }
 
     return success;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VDomDocument::SaveSchema() const -> QString
+{
+    return {}; // No schema by default; subclasses backed by an XSD override this.
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// ponytail: Xerces recompiles the grammar on every call. Load already validates per file open, so paying the same
+// cost on save (incl. autosave) is acceptable; cache the compiled grammar if large-pattern autosave latency bites.
+auto VDomDocument::ValidateXMLData(const QString &schema,
+                                   const QByteArray &data,
+                                   const QString &fileName,
+                                   QString &error) -> bool
+{
+    QFile fileSchema(schema);
+    if (not fileSchema.open(QIODevice::ReadOnly))
+    {
+        error = tr("Can't open schema file %1:\n%2.").arg(schema, fileSchema.errorString());
+        return false;
+    }
+
+    VParserErrorHandler parserErrorHandler;
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    XERCES_CPP_NAMESPACE::XercesDOMParser domParser;
+    domParser.setCreateEntityReferenceNodes(true);
+    domParser.setDisableDefaultEntityResolution(true);
+    domParser.setErrorHandler(&parserErrorHandler);
+
+    QByteArray const schemaFileData = fileSchema.readAll();
+    const char *schemaData = schemaFileData.constData();
+    const auto schemaSize = static_cast<size_t>(schemaFileData.size());
+
+    if (QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> const grammarSource(
+            new XERCES_CPP_NAMESPACE::MemBufInputSource(reinterpret_cast<const XMLByte *>(schemaData),
+                                                        schemaSize,
+                                                        "schema"));
+        domParser.loadGrammar(*grammarSource, XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
+    {
+        error = parserErrorHandler.StatusMessage() + '\n'_L1
+                + tr("Could not load schema file '%1'.").arg(fileSchema.fileName());
+        return false;
+    }
+
+    if (parserErrorHandler.HasError())
+    {
+        error = parserErrorHandler.StatusMessage() + '\n'_L1
+                + tr("Schema file %3 invalid in line %1 column %2")
+                      .arg(parserErrorHandler.Line())
+                      .arg(parserErrorHandler.Column())
+                      .arg(fileSchema.fileName());
+        return false;
+    }
+
+    domParser.setValidationScheme(XERCES_CPP_NAMESPACE::XercesDOMParser::Val_Always);
+    domParser.setDoNamespaces(true);
+    domParser.setDoSchema(true);
+    domParser.setValidationConstraintFatal(true);
+    domParser.setValidationSchemaFullChecking(true);
+    domParser.useCachedGrammarInParse(true);
+
+    const char *patternData = data.constData();
+    const auto patternSize = static_cast<size_t>(data.size());
+
+    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> const patternSource(
+        new XERCES_CPP_NAMESPACE::MemBufInputSource(reinterpret_cast<const XMLByte *>(patternData),
+                                                    patternSize,
+                                                    "pattern"));
+
+    domParser.parse(*patternSource);
+
+    if (domParser.getErrorCount() > 0)
+    {
+        error = parserErrorHandler.StatusMessage() + '\n'_L1
+                + tr("Validation error file %3 in line %1 column %2")
+                      .arg(parserErrorHandler.Line())
+                      .arg(parserErrorHandler.Column())
+                      .arg(fileName);
+        return false;
+    }
+#else
+    QXmlSchema sch;
+    sch.setMessageHandler(&parserErrorHandler);
+    if (sch.load(&fileSchema, QUrl::fromLocalFile(fileSchema.fileName())) == false)
+    {
+        error = parserErrorHandler.StatusMessage() + '\n'_L1
+                + tr("Could not load schema file '%1'.").arg(fileSchema.fileName());
+        return false;
+    }
+
+    bool errorOccurred = false;
+    if (sch.isValid() == false)
+    {
+        errorOccurred = true;
+    }
+    else
+    {
+        QByteArray patternData = data;
+        QBuffer pattern(&patternData);
+        pattern.open(QIODevice::ReadOnly);
+        QXmlSchemaValidator validator(sch);
+        if (validator.validate(&pattern) == false)
+        {
+            errorOccurred = true;
+        }
+    }
+
+    if (errorOccurred)
+    {
+        error = parserErrorHandler.StatusMessage() + '\n'_L1
+                + tr("Validation error file %3 in line %1 column %2")
+                      .arg(parserErrorHandler.Line())
+                      .arg(parserErrorHandler.Column())
+                      .arg(fileName);
+        return false;
+    }
+#endif // QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

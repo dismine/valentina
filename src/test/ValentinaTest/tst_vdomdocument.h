@@ -1,14 +1,14 @@
 /************************************************************************
  **
- **  @file   vwatermark.h
+ **  @file   tst_vdomdocument.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
- **  @date   25 12, 2019
+ **  @date   29 6, 2026
  **
  **  @brief
  **  @copyright
  **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2019 Valentina project
+ **  Copyright (C) 2026 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -25,40 +25,26 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef VWATERMARK_H
-#define VWATERMARK_H
 
-#include "../ifc/xml/vdomdocument.h"
+#ifndef TST_VDOMDOCUMENT_H
+#define TST_VDOMDOCUMENT_H
 
-class VWatermark : public VDomDocument
+#include <QObject>
+
+class TST_VDomDocument : public QObject
 {
-    Q_DECLARE_TR_FUNCTIONS(VWatermark) // NOLINT
+    Q_OBJECT // NOLINT
 
 public:
-    VWatermark();
-    virtual ~VWatermark() = default;
+    explicit TST_VDomDocument(QObject *parent = nullptr);
+    ~TST_VDomDocument() override = default;
 
-    void CreateEmptyWatermark();
-
-    virtual auto SaveDocument(const QString &fileName, QString &error) -> bool override;
-    auto SaveSchema() const -> QString override;
-
-    auto GetWatermark() const -> VWatermarkData;
-    void SetWatermark(const VWatermarkData &data);
-
-    static const QString TagWatermark;
-    static const QString TagText;
-    static const QString TagImage;
-
-    static const QString AttrOpacity;
-    static const QString AttrRotation;
-    static const QString AttrFont;
-    static const QString AttrPath;
-    static const QString AttrGrayscale;
-    static const QString AttrShow;
+private slots:
+    void RefuseEmptyDocumentSave() const;
+    void RejectInvalidDataAgainstSchema() const;
 
 private:
-    Q_DISABLE_COPY_MOVE(VWatermark) // NOLINT
+    Q_DISABLE_COPY_MOVE(TST_VDomDocument) // NOLINT
 };
 
-#endif // VWATERMARK_H
+#endif // TST_VDOMDOCUMENT_H

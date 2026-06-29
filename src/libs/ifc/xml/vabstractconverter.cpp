@@ -27,15 +27,6 @@
  *************************************************************************/
 
 #include "vabstractconverter.h"
-#include "vparsererrorhandler.h"
-
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#include <xercesc/framework/MemBufInputSource.hpp>
-#include <xercesc/parsers/XercesDOMParser.hpp>
-#else
-#include <QXmlSchema>
-#include <QXmlSchemaValidator>
-#endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
 #include <QDir>
 #include <QDomElement>
@@ -183,55 +174,6 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
 {
     qCDebug(vXML, "Validation xml file %s.", qUtf8Printable(m_convertedFileName));
 
-    QFile fileSchema(schema);
-    if (not fileSchema.open(QIODevice::ReadOnly))
-    {
-        const QString errorMsg(tr("Can't open schema file %1:\n%2.").arg(schema, fileSchema.errorString()));
-        throw VException(errorMsg);
-    }
-
-    VParserErrorHandler parserErrorHandler;
-
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    XERCES_CPP_NAMESPACE::XercesDOMParser domParser;
-    domParser.setCreateEntityReferenceNodes(true);
-    domParser.setDisableDefaultEntityResolution(true);
-    domParser.setErrorHandler(&parserErrorHandler);
-
-    QByteArray const data = fileSchema.readAll();
-    const char *schemaData = data.constData();
-    const auto schemaSize = static_cast<size_t>(data.size());
-
-    if (QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> const grammarSource(
-            new XERCES_CPP_NAMESPACE::MemBufInputSource(reinterpret_cast<const XMLByte *>(schemaData),
-                                                        schemaSize,
-                                                        "schema"));
-        domParser.loadGrammar(*grammarSource, XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
-    {
-        VException e(parserErrorHandler.StatusMessage());
-        e.AddMoreInformation(tr("Could not load schema file '%1'.").arg(fileSchema.fileName()));
-        throw e;
-    }
-
-    qCDebug(vXML, "Schema loaded.");
-
-    if (parserErrorHandler.HasError())
-    {
-        VException e(parserErrorHandler.StatusMessage());
-        e.AddMoreInformation(tr("Schema file %3 invalid in line %1 column %2")
-                                 .arg(parserErrorHandler.Line())
-                                 .arg(parserErrorHandler.Column())
-                                 .arg(fileSchema.fileName()));
-        throw e;
-    }
-
-    domParser.setValidationScheme(XERCES_CPP_NAMESPACE::XercesDOMParser::Val_Always);
-    domParser.setDoNamespaces(true);
-    domParser.setDoSchema(true);
-    domParser.setValidationConstraintFatal(true);
-    domParser.setValidationSchemaFullChecking(true);
-    domParser.useCachedGrammarInParse(true);
-
     QFile pattern(m_convertedFileName);
     if (not pattern.open(QIODevice::ReadOnly))
     {
@@ -239,68 +181,10 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
         throw VException(errorMsg);
     }
 
-    QByteArray const patternFileData = pattern.readAll();
-    const char *patternData = patternFileData.constData();
-    const auto patternSize = static_cast<size_t>(patternFileData.size());
-
-    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> const patternSource(
-        new XERCES_CPP_NAMESPACE::MemBufInputSource(reinterpret_cast<const XMLByte *>(patternData),
-                                                    patternSize,
-                                                    "pattern"));
-
-    domParser.parse(*patternSource);
-
-    if (domParser.getErrorCount() > 0)
+    if (QString error; not VDomDocument::ValidateXMLData(schema, pattern.readAll(), m_originalFileName, error))
     {
-        VException e(parserErrorHandler.StatusMessage());
-        e.AddMoreInformation(tr("Validation error file %3 in line %1 column %2")
-                                 .arg(parserErrorHandler.Line())
-                                 .arg(parserErrorHandler.Column())
-                                 .arg(m_originalFileName));
-        throw e;
+        throw VException(error);
     }
-#else
-    QFile pattern(m_convertedFileName);
-    if (not pattern.open(QIODevice::ReadOnly))
-    {
-        const QString errorMsg(tr("Can't open file %1:\n%2.").arg(m_convertedFileName, pattern.errorString()));
-        throw VException(errorMsg);
-    }
-
-    QXmlSchema sch;
-    sch.setMessageHandler(&parserErrorHandler);
-    if (sch.load(&fileSchema, QUrl::fromLocalFile(fileSchema.fileName())) == false)
-    {
-        VException e(parserErrorHandler.StatusMessage());
-        e.AddMoreInformation(tr("Could not load schema file '%1'.").arg(fileSchema.fileName()));
-        throw e;
-    }
-    qCDebug(vXML, "Schema loaded.");
-
-    bool errorOccurred = false;
-    if (sch.isValid() == false)
-    {
-        errorOccurred = true;
-    }
-    else
-    {
-        QXmlSchemaValidator validator(sch);
-        if (validator.validate(&pattern, QUrl::fromLocalFile(pattern.fileName())) == false)
-        {
-            errorOccurred = true;
-        }
-    }
-
-    if (errorOccurred)
-    {
-        VException e(parserErrorHandler.StatusMessage());
-        e.AddMoreInformation(tr("Validation error file %3 in line %1 column %2")
-                                 .arg(parserErrorHandler.Line())
-                                 .arg(parserErrorHandler.Column())
-                                 .arg(m_originalFileName));
-        throw e;
-    }
-#endif // QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 }
 
 //---------------------------------------------------------------------------------------------------------------------

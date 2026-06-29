@@ -2633,6 +2633,12 @@ auto VAbstractPattern::GroupHasItem(const QDomElement &groupDomElement, quint32 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::SaveSchema() const -> QString
+{
+    return VPatternConverter::CurrentSchema;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::ReadUnits() const -> Unit
 {
     Unit units = StrToUnits(UniqueTagText(TagUnit, unitCM));

@@ -43,6 +43,7 @@ public:
     ~VKnownMeasurementsDocument() override = default;
 
     auto SaveDocument(const QString &fileName, QString &error) -> bool override;
+    auto SaveSchema() const -> QString override;
 
     void CreateEmptyFile();
 

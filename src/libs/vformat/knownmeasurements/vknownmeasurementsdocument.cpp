@@ -100,6 +100,12 @@ auto VKnownMeasurementsDocument::SaveDocument(const QString &fileName, QString &
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VKnownMeasurementsDocument::SaveSchema() const -> QString
+{
+    return VKnownMeasurementsConverter::CurrentSchema;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VKnownMeasurementsDocument::CreateEmptyFile()
 {
     clear();

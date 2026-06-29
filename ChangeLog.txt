@@ -1,4 +1,5 @@
 # Valentina 1.1.1 (unreleased)
+- [Misc] Fixed files occasionally being saved empty/corrupt. Documents (patterns, measurements, watermarks, label templates and known measurements) are now validated against their schema before the file is committed, so a damaged document can no longer overwrite a good file on disk.
 
 # Valentina 1.1.0 June 27, 2026
 - [Tape app] The measurement database dialog now refreshes the diagram immediately when an image's size scale changes.

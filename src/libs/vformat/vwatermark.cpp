@@ -89,6 +89,12 @@ auto VWatermark::SaveDocument(const QString &fileName, QString &error) -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VWatermark::SaveSchema() const -> QString
+{
+    return VWatermarkConverter::CurrentSchema;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VWatermark::GetWatermark() const -> VWatermarkData
 {
     VWatermarkData data;
