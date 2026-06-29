@@ -32,6 +32,7 @@
 #include "mainwindow.h"
 #include "vabstractapplication.h"
 
+#include <QDebug>
 #include <QMessageBox> // For QT_REQUIRE_VERSION
 #include <QScopeGuard>
 #include <QScreen>
@@ -141,41 +142,85 @@ auto main(int argc, char *argv[]) -> int
     app.InitOptions();
 
     // === Diagnostic logging for DPI/multi-monitor crash investigation ===
-    // This logs screen configuration to help diagnose crashes that only occur
-    // on specific user systems, particularly related to:
-    // - Multi-monitor setups with different DPI scaling (e.g., 100% + 150%)
-    // - High-DPI displays (4K, 5K) with scaling > 100%
-    // - QPainter "engine == 0" errors caused by invalid paint device dimensions
-    // The crash stack trace shows UxTheme.dll + GetSystemMetricsForDpi, indicating
-    // Windows is calculating UI metrics based on DPI, which may fail if Qt and
-    // Windows disagree about DPI handling.
-    qDebug() << "=== Screen Information ===";
-    qDebug() << "Screens:";
-    for (auto *screen : QGuiApplication::screens())
+    // Crashes have been observed during screen/display reconfiguration (e.g. macOS
+    // wake-from-sleep, plugging/unplugging a monitor, or changing display scaling). The
+    // crash stack trace lands inside the platform style painting with no application frames,
+    // so the log is the only signal. During the failing transition a transient QScreen with
+    // an empty name() briefly appears, so logging only name() is useless. Dump the full
+    // screen identity and follow every add/remove/primary-change plus per-screen DPI and
+    // geometry change, to capture the exact sequence leading to the crash.
+    auto DumpScreen = [](const QScreen *screen) -> QString
     {
-        qDebug() << "  -" << screen->name() << "DPI:" << screen->logicalDotsPerInch()
-                 << "Ratio:" << screen->devicePixelRatio() << "Geometry:" << screen->geometry();
+        if (screen == nullptr)
+        {
+            return QStringLiteral("<null screen>");
+        }
+
+        QString info;
+        QDebug dbg(&info);
+        dbg.nospace() << "name=" << screen->name() << " manufacturer=" << screen->manufacturer()
+                      << " model=" << screen->model() << " serial=" << screen->serialNumber()
+                      << " geometry=" << screen->geometry() << " available=" << screen->availableGeometry()
+                      << " DPR=" << screen->devicePixelRatio() << " logicalDPI=" << screen->logicalDotsPerInch()
+                      << " physicalDPI=" << screen->physicalDotsPerInch() << " depth=" << screen->depth()
+                      << " refreshRate=" << screen->refreshRate();
+        return info;
+    };
+
+    auto ConnectScreenSignals = [DumpScreen](QScreen *screen) -> void
+    {
+        if (screen == nullptr)
+        {
+            return;
+        }
+
+        QObject::connect(screen,
+                         &QScreen::geometryChanged,
+                         screen,
+                         [DumpScreen, screen](const QRect &geometry)
+                         { qDebug() << "Screen geometry changed:" << geometry << "for" << DumpScreen(screen); });
+        QObject::connect(screen,
+                         &QScreen::logicalDotsPerInchChanged,
+                         screen,
+                         [DumpScreen, screen](qreal dpi)
+                         { qDebug() << "Screen logical DPI changed:" << dpi << "for" << DumpScreen(screen); });
+        QObject::connect(screen,
+                         &QScreen::physicalDotsPerInchChanged,
+                         screen,
+                         [DumpScreen, screen](qreal dpi)
+                         { qDebug() << "Screen physical DPI changed:" << dpi << "for" << DumpScreen(screen); });
+    };
+
+    qDebug() << "=== Screen Information ===";
+    const QList<QScreen *> screens = QGuiApplication::screens();
+    qDebug() << "Screens:" << screens.size();
+    for (auto *screen : screens)
+    {
+        qDebug() << "  -" << DumpScreen(screen);
+        ConnectScreenSignals(screen);
     }
 
-    // Monitor for screen configuration changes during runtime
-    // These events can trigger repainting with new DPI values, which may expose
-    // the crash if Qt/Windows DPI coordination fails during the transition
     QObject::connect(qApp,
                      &QGuiApplication::screenAdded,
-                     [](QScreen *screen) -> void
+                     [DumpScreen, ConnectScreenSignals](QScreen *screen) -> void
                      {
-                         qDebug() << "Screen added:" << screen->name();
-                         // User plugged in external monitor - may trigger DPI recalculation
+                         qDebug() << "Screen added:" << DumpScreen(screen)
+                                  << "(total:" << QGuiApplication::screens().size() << ")";
+                         ConnectScreenSignals(screen);
+                     });
+
+    QObject::connect(qApp,
+                     &QGuiApplication::screenRemoved,
+                     [DumpScreen](QScreen *screen) -> void
+                     {
+                         qDebug() << "Screen removed:" << DumpScreen(screen)
+                                  << "(remaining:" << QGuiApplication::screens().size() << ")";
                      });
 
     QObject::connect(qApp,
                      &QGuiApplication::primaryScreenChanged,
-                     [](QScreen *screen) -> void
-                     {
-                         qDebug() << "Primary screen changed to:" << screen->name();
-                         // User moved window to different monitor or changed primary display
-                         // This can cause widgets to repaint with different DPI values
-                     });
+                     [DumpScreen](QScreen *screen) -> void
+                     { qDebug() << "Primary screen changed to:" << DumpScreen(screen); });
 
     QT_REQUIRE_VERSION(argc, argv, "5.15.0") // clazy:exclude=qstring-arg,qstring-allocations NOLINT
 
