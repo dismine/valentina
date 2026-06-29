@@ -38,16 +38,16 @@
 #include <QDirIterator>
 #include <QFileSystemWatcher>
 #include <QFuture>
+#include <QGuiApplication>
 #include <QLibraryInfo>
 #include <QLoggingCategory>
 #include <QMessageLogger>
 #include <QScopeGuard>
+#include <QScreen>
 #include <QStandardPaths>
 #include <QTimeZone>
 #include <QTranslator>
 #include <QUndoStack>
-#include <QGuiApplication>
-#include <QScreen>
 #include <QWidget>
 #include <QtDebug>
 
@@ -486,8 +486,8 @@ void VAbstractApplication::RestartSVGFontDatabaseWatcher()
     if (m_svgFontDatabase != nullptr)
     {
         delete m_svgFontDatabaseWatcher;
-        m_svgFontDatabaseWatcher =
-            new QFileSystemWatcher({settings->GetPathSVGFonts(), VSvgFontDatabase::SystemSVGFontPath()});
+        m_svgFontDatabaseWatcher = new QFileSystemWatcher(
+            {settings->GetPathSVGFonts(), VSvgFontDatabase::SystemSVGFontPath()});
 
         if (m_svgFontDatabaseWatcher->thread() != this->thread())
         {
@@ -495,7 +495,9 @@ void VAbstractApplication::RestartSVGFontDatabaseWatcher()
         }
 
         m_svgFontDatabaseWatcher->setParent(this);
-        connect(m_svgFontDatabaseWatcher, &QFileSystemWatcher::directoryChanged, this,
+        connect(m_svgFontDatabaseWatcher,
+                &QFileSystemWatcher::directoryChanged,
+                this,
                 &VAbstractApplication::RepopulateFontDatabase);
     }
 }
@@ -515,7 +517,7 @@ auto VAbstractApplication::GetShortcutManager() const -> VAbstractShortcutManage
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractApplication::GetPlaceholderTranslator() -> QSharedPointer<VTranslator>
 {
-    VCommonSettings  const*settings = Settings();
+    VCommonSettings const *settings = Settings();
 
     QString pieceLabelLocale = settings->GetPieceLabelLocale();
     if (pieceLabelLocale == VCommonSettings::defaultPieceLabelLocale)
@@ -697,7 +699,9 @@ auto VAbstractApplication::LogDirPath() -> QString
         return QStringList{QCoreApplication::applicationDirPath(), logs, QCoreApplication::applicationName()}.join(
             QDir::separator());
 #else
-        return QStringList{QDir::homePath(), QCoreApplication::organizationName(), logs,
+        return QStringList{QDir::homePath(),
+                           QCoreApplication::organizationName(),
+                           logs,
                            QCoreApplication::applicationName()}
             .join(QDir::separator());
 #endif
@@ -705,9 +709,8 @@ auto VAbstractApplication::LogDirPath() -> QString
 #if defined(Q_OS_WINDOWS)
     auto path = QStringList{logDirPath, logs}.join(QDir::separator());
 #else
-    auto path =
-        QStringList{logDirPath, QCoreApplication::organizationName(), logs, QCoreApplication::applicationName()}.join(
-            QDir::separator());
+    auto path = QStringList{logDirPath, QCoreApplication::organizationName(), logs, QCoreApplication::applicationName()}
+                    .join(QDir::separator());
 #endif
     return path;
 }
@@ -726,22 +729,86 @@ auto VAbstractApplication::CreateLogDir() -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractApplication::LogScreenInfo()
 {
-    qDebug() << "=== Screen Information ===";
-    qDebug() << "Screens:";
-    for (const auto *screen : QGuiApplication::screens())
+    // Diagnostic logging for DPI/multi-monitor crash investigation. Crashes have been observed during
+    // screen/display reconfiguration (e.g. macOS wake-from-sleep, plugging/unplugging a monitor, or changing
+    // display scaling). The crash stack trace lands inside the platform style painting with no application
+    // frames, so the log is the only signal. During the failing transition a transient QScreen with an empty
+    // name() briefly appears, so logging only name() is useless. Dump the full screen identity and follow every
+    // add/remove/primary-change plus per-screen DPI and geometry change, to capture the exact sequence leading
+    // to the crash.
+    auto DumpScreen = [](const QScreen *screen) -> QString
     {
-        qDebug() << "  -" << screen->name() << "DPI:" << screen->logicalDotsPerInch()
-                 << "Ratio:" << screen->devicePixelRatio() << "Geometry:" << screen->geometry();
+        if (screen == nullptr)
+        {
+            return QStringLiteral("<null screen>");
+        }
+
+        QString info;
+        QDebug dbg(&info);
+        dbg.nospace() << "name=" << screen->name() << " manufacturer=" << screen->manufacturer()
+                      << " model=" << screen->model() << " serial=" << screen->serialNumber()
+                      << " geometry=" << screen->geometry() << " available=" << screen->availableGeometry()
+                      << " DPR=" << screen->devicePixelRatio() << " logicalDPI=" << screen->logicalDotsPerInch()
+                      << " physicalDPI=" << screen->physicalDotsPerInch() << " depth=" << screen->depth()
+                      << " refreshRate=" << screen->refreshRate();
+        return info;
+    };
+
+    auto ConnectScreenSignals = [DumpScreen](QScreen *screen) -> void
+    {
+        if (screen == nullptr)
+        {
+            return;
+        }
+
+        QObject::connect(screen,
+                         &QScreen::geometryChanged,
+                         screen,
+                         [DumpScreen, screen](const QRect &geometry)
+                         { qDebug() << "Screen geometry changed:" << geometry << "for" << DumpScreen(screen); });
+        QObject::connect(screen,
+                         &QScreen::logicalDotsPerInchChanged,
+                         screen,
+                         [DumpScreen, screen](qreal dpi)
+                         { qDebug() << "Screen logical DPI changed:" << dpi << "for" << DumpScreen(screen); });
+        QObject::connect(screen,
+                         &QScreen::physicalDotsPerInchChanged,
+                         screen,
+                         [DumpScreen, screen](qreal dpi)
+                         { qDebug() << "Screen physical DPI changed:" << dpi << "for" << DumpScreen(screen); });
+    };
+
+    qDebug() << "=== Screen Information ===";
+    const QList<QScreen *> screens = QGuiApplication::screens();
+    qDebug() << "Screens:" << screens.size();
+    for (auto *screen : screens)
+    {
+        qDebug() << "  -" << DumpScreen(screen);
+        ConnectScreenSignals(screen);
     }
 
     // Monitor for screen configuration changes during runtime
     QObject::connect(qApp,
                      &QGuiApplication::screenAdded,
-                     [](const QScreen *screen) -> void { qDebug() << "Screen added:" << screen->name(); });
+                     [DumpScreen, ConnectScreenSignals](QScreen *screen) -> void
+                     {
+                         qDebug() << "Screen added:" << DumpScreen(screen)
+                                  << "(total:" << QGuiApplication::screens().size() << ")";
+                         ConnectScreenSignals(screen);
+                     });
+
+    QObject::connect(qApp,
+                     &QGuiApplication::screenRemoved,
+                     [DumpScreen](QScreen *screen) -> void
+                     {
+                         qDebug() << "Screen removed:" << DumpScreen(screen)
+                                  << "(remaining:" << QGuiApplication::screens().size() << ")";
+                     });
 
     QObject::connect(qApp,
                      &QGuiApplication::primaryScreenChanged,
-                     [](const QScreen *screen) -> void { qDebug() << "Primary screen changed to:" << screen->name(); });
+                     [DumpScreen](QScreen *screen) -> void
+                     { qDebug() << "Primary screen changed to:" << DumpScreen(screen); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
