@@ -241,7 +241,10 @@ public:
 
     void ParseGroups(const QDomElement &domElement);
     auto CreateGroups(const QString &patternPieceName = QString()) -> QDomElement;
-    auto CreateGroup(quint32 id, const QString &name, const QStringList &tags, const QMap<quint32, quint32> &groupData,
+    auto CreateGroup(quint32 id,
+                     const QString &name,
+                     const QStringList &tags,
+                     const QMap<quint32, quint32> &groupData,
                      vidtype tool = null_id) -> QDomElement;
     auto GroupLinkedToTool(vidtype toolId) const -> vidtype;
 

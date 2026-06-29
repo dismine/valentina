@@ -70,9 +70,9 @@ void VWatermark::CreateEmptyWatermark()
     wElement.appendChild(createElement(TagImage));
 
     appendChild(wElement);
-    insertBefore(
-        createProcessingInstruction(QStringLiteral("xml"), QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")),
-        this->firstChild());
+    insertBefore(createProcessingInstruction(QStringLiteral("xml"),
+                                             QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")),
+                 this->firstChild());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -135,11 +135,17 @@ void VWatermark::SetWatermark(const VWatermarkData &data)
         if (QDomElement text = rootElement.firstChildElement(TagText); not text.isNull())
         {
             SetAttribute(text, AttrShow, data.showText);
-            SetAttributeOrRemoveIf<QString>(text, AttrText, data.text,
+            SetAttributeOrRemoveIf<QString>(text,
+                                            AttrText,
+                                            data.text,
                                             [](const QString &text) noexcept { return text.isEmpty(); });
-            SetAttributeOrRemoveIf<int>(text, AttrRotation, data.textRotation,
+            SetAttributeOrRemoveIf<int>(text,
+                                        AttrRotation,
+                                        data.textRotation,
                                         [](int textRotation) noexcept { return textRotation == 0; });
-            SetAttributeOrRemoveIf<QString>(text, AttrFont, data.font.toString(),
+            SetAttributeOrRemoveIf<QString>(text,
+                                            AttrFont,
+                                            data.font.toString(),
                                             [](const QString &fontString) noexcept { return fontString.isEmpty(); });
             SetAttribute(text, AttrColor, data.textColor.name());
         }
@@ -147,11 +153,17 @@ void VWatermark::SetWatermark(const VWatermarkData &data)
         if (QDomElement image = rootElement.firstChildElement(TagImage); not image.isNull())
         {
             SetAttribute(image, AttrShow, data.showImage);
-            SetAttributeOrRemoveIf<QString>(image, AttrPath, data.path,
+            SetAttributeOrRemoveIf<QString>(image,
+                                            AttrPath,
+                                            data.path,
                                             [](const QString &path) noexcept { return path.isEmpty(); });
-            SetAttributeOrRemoveIf<int>(image, AttrRotation, data.imageRotation,
+            SetAttributeOrRemoveIf<int>(image,
+                                        AttrRotation,
+                                        data.imageRotation,
                                         [](int imageRotation) noexcept { return imageRotation == 0; });
-            SetAttributeOrRemoveIf<bool>(image, AttrGrayscale, data.grayscale,
+            SetAttributeOrRemoveIf<bool>(image,
+                                         AttrGrayscale,
+                                         data.grayscale,
                                          [](bool grayscale) noexcept { return not grayscale; });
         }
     }

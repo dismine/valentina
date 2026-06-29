@@ -29,6 +29,7 @@
 #ifndef VDOMDOCUMENT_H
 #define VDOMDOCUMENT_H
 
+#include <functional>
 #include <QCoreApplication>
 #include <QDomDocument>
 #include <QDomElement>
@@ -41,7 +42,6 @@
 #include <QUuid>
 #include <QtCore/qcontainerfwd.h>
 #include <QtGlobal>
-#include <functional>
 
 #include "../ifcdef.h"
 #include "../qmuparser/qmudef.h"
@@ -50,7 +50,8 @@
 
 class QDomElement;
 class QDomNode;
-template <typename T> class QFutureWatcher;
+template<typename T>
+class QFutureWatcher;
 
 Q_DECLARE_LOGGING_CATEGORY(vXML)
 
@@ -99,17 +100,21 @@ public:
     virtual ~VDomDocument();
     auto FindElementById(quint32 id, const QString &tagName = QString(), bool updateCache = true) -> QDomElement;
 
-    template <typename T> void SetAttribute(QDomElement &domElement, const QString &name, const T &value) const;
+    template<typename T>
+    void SetAttribute(QDomElement &domElement, const QString &name, const T &value) const;
 
-    template <typename T>
-    void SetAttributeOrRemoveIf(QDomElement &domElement, const QString &name, const T &value,
+    template<typename T>
+    void SetAttributeOrRemoveIf(QDomElement &domElement,
+                                const QString &name,
+                                const T &value,
                                 const std::function<bool(const T &)> &removeCondition) const;
 
     static auto GetParametrUInt(const QDomElement &domElement, const QString &name, const QString &defValue) -> quint32;
     static auto GetParametrInt(const QDomElement &domElement, const QString &name, const QString &defValue) -> int;
     static auto GetParametrBool(const QDomElement &domElement, const QString &name, const QString &defValue) -> bool;
 
-    static auto GetParametrString(const QDomElement &domElement, const QString &name,
+    static auto GetParametrString(const QDomElement &domElement,
+                                  const QString &name,
                                   const QString &defValue = QString()) -> QString;
     static auto GetParametrEmptyString(const QDomElement &domElement, const QString &name) -> QString;
     static auto GetParametrDouble(const QDomElement &domElement, const QString &name, const QString &defValue) -> qreal;
@@ -168,7 +173,7 @@ private:
 };
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
+template<typename T>
 /**
  * @brief SetAttribute set attribute in pattern file. Replace "," by ".".
  * @param domElement element in xml tree.
@@ -183,54 +188,58 @@ inline void VDomDocument::SetAttribute(QDomElement &domElement, const QString &n
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <>
-inline void VDomDocument::SetAttribute<QString>(QDomElement &domElement, const QString &name,
-                                                const QString &value) const
+template<>
+inline void VDomDocument::SetAttribute<QString>(QDomElement &domElement, const QString &name, const QString &value) const
 {
     domElement.setAttribute(name, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <>
-inline void VDomDocument::SetAttribute<QLatin1String>(QDomElement &domElement, const QString &name,
+template<>
+inline void VDomDocument::SetAttribute<QLatin1String>(QDomElement &domElement,
+                                                      const QString &name,
                                                       const QLatin1String &value) const
 {
     domElement.setAttribute(name, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <>
+template<>
 inline void VDomDocument::SetAttribute<QUuid>(QDomElement &domElement, const QString &name, const QUuid &value) const
 {
     domElement.setAttribute(name, value.toString());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <>
+template<>
 inline void VDomDocument::SetAttribute<QChar>(QDomElement &domElement, const QString &name, const QChar &value) const
 {
     domElement.setAttribute(name, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <>
+template<>
 inline void VDomDocument::SetAttribute<bool>(QDomElement &domElement, const QString &name, const bool &value) const
 {
     domElement.setAttribute(name, value ? trueStr : falseStr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <>
-inline void VDomDocument::SetAttribute<MeasurementsType>(QDomElement &domElement, const QString &name,
+template<>
+inline void VDomDocument::SetAttribute<MeasurementsType>(QDomElement &domElement,
+                                                         const QString &name,
                                                          const MeasurementsType &value) const
 {
-    domElement.setAttribute(name, value == MeasurementsType::Multisize ? QStringLiteral("multisize")
-                                                                       : QStringLiteral("individual"));
+    domElement.setAttribute(name,
+                            value == MeasurementsType::Multisize ? QStringLiteral("multisize")
+                                                                 : QStringLiteral("individual"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
-inline void VDomDocument::SetAttributeOrRemoveIf(QDomElement &domElement, const QString &name, const T &value,
+template<typename T>
+inline void VDomDocument::SetAttributeOrRemoveIf(QDomElement &domElement,
+                                                 const QString &name,
+                                                 const T &value,
                                                  const std::function<bool(const T &)> &removeCondition) const
 {
     not removeCondition(value) ? SetAttribute(domElement, name, value) : domElement.removeAttribute(name);

@@ -118,9 +118,9 @@ void VKnownMeasurementsDocument::CreateEmptyFile()
     kmElement.appendChild(createElement(*tagMeasurements));
 
     appendChild(kmElement);
-    insertBefore(
-        createProcessingInstruction(QStringLiteral("xml"), QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")),
-        firstChild());
+    insertBefore(createProcessingInstruction(QStringLiteral("xml"),
+                                             QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")),
+                 firstChild());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -397,7 +397,9 @@ void VKnownMeasurementsDocument::SetMSpecialUnits(const QString &name, bool spec
 {
     if (QDomElement node = FindM(name); not node.isNull())
     {
-        SetAttributeOrRemoveIf<bool>(node, *attrSpecialUnits, special,
+        SetAttributeOrRemoveIf<bool>(node,
+                                     *attrSpecialUnits,
+                                     special,
                                      [](bool special) noexcept { return not special; });
     }
     else
@@ -411,7 +413,9 @@ void VKnownMeasurementsDocument::SetMDescription(const QString &name, const QStr
 {
     if (QDomElement node = FindM(name); not node.isNull())
     {
-        SetAttributeOrRemoveIf<QString>(node, *attrDescription, text,
+        SetAttributeOrRemoveIf<QString>(node,
+                                        *attrDescription,
+                                        text,
                                         [](const QString &text) noexcept { return text.isEmpty(); });
     }
     else
@@ -438,7 +442,9 @@ void VKnownMeasurementsDocument::SetMImage(const QString &name, const QUuid &ima
 {
     if (QDomElement node = FindM(name); not node.isNull())
     {
-        SetAttributeOrRemoveIf<QUuid>(node, *attrDiagram, imageId,
+        SetAttributeOrRemoveIf<QUuid>(node,
+                                      *attrDiagram,
+                                      imageId,
                                       [](const QUuid &imageId) noexcept { return imageId.isNull(); });
     }
     else
@@ -466,7 +472,9 @@ void VKnownMeasurementsDocument::SetImageTitle(const QUuid &id, const QString &t
 {
     if (QDomElement node = FindImage(id); not node.isNull())
     {
-        SetAttributeOrRemoveIf<QString>(node, *attrTitle, text,
+        SetAttributeOrRemoveIf<QString>(node,
+                                        *attrTitle,
+                                        text,
                                         [](const QString &text) noexcept { return text.isEmpty(); });
     }
     else
@@ -480,7 +488,9 @@ void VKnownMeasurementsDocument::SetImageSizeScale(const QUuid &id, qreal scale)
 {
     if (QDomElement node = FindImage(id); not node.isNull())
     {
-        SetAttributeOrRemoveIf<qreal>(node, *attrSize, scale,
+        SetAttributeOrRemoveIf<qreal>(node,
+                                      *attrSize,
+                                      scale,
                                       [](qreal scale) noexcept { return VFuzzyComparePossibleNulls(scale, 100.0); });
     }
     else
@@ -548,7 +558,9 @@ auto VKnownMeasurementsDocument::MakeEmptyImage(const VPatternImage &image) -> Q
 
     SetAttribute(element, *attrContentType, image.ContentType());
     SetAttribute(element, *attrUId, QUuid::createUuid().toString());
-    SetAttributeOrRemoveIf<QString>(element, *attrTitle, image.Title(),
+    SetAttributeOrRemoveIf<QString>(element,
+                                    *attrTitle,
+                                    image.Title(),
                                     [](const QString &text) noexcept { return text.isEmpty(); });
     setTagText(element, image.ContentData());
 

@@ -28,8 +28,8 @@
 
 #include "vdomdocument.h"
 
-#include <QSaveFile>
 #include <qdom.h>
+#include <QSaveFile>
 
 #include "../exception/vexceptionbadid.h"
 #include "../exception/vexceptionconversionerror.h"
@@ -287,8 +287,7 @@ VDomDocument::~VDomDocument()
     // Must be deleted explicitly before the QDomDocument base destructs. VDomDocument declares QObject before
     // QDomDocument, so QDomDocument::~QDomDocument() runs before QObject::~QObject(). The QDomElement objects
     // stored inside the QFutureWatcher's QFuture result must be released while the DOM nodes are still alive.
-    qCDebug(vXML) << "Destroying VDomDocument: stopping cache watcher, cache size"
-                  << m_elementIdCache.size();
+    qCDebug(vXML) << "Destroying VDomDocument: stopping cache watcher, cache size" << m_elementIdCache.size();
     m_watcher->cancel();
     m_watcher->waitForFinished();
     m_elementIdCache.clear();
@@ -742,7 +741,8 @@ void VDomDocument::setXMLContent(const QString &fileName)
     if (const QDomDocument::ParseResult result = QDomDocument::setContent(&file); !result)
     {
         file.close();
-        HandleParsingError(result.errorMessage, static_cast<int>(result.errorLine),
+        HandleParsingError(result.errorMessage,
+                           static_cast<int>(result.errorLine),
                            static_cast<int>(result.errorColumn));
     }
 #else

@@ -114,8 +114,11 @@ void VAbstractConverter::ReserveFile() const
 #else
     const QString hidden;
 #endif
-    const QString reserveFileName = u"%1/%2%3(v%4).%5.bak"_s.arg(
-        info.absoluteDir().absolutePath(), hidden, info.baseName(), GetFormatVersionStr(), info.completeSuffix());
+    const QString reserveFileName = u"%1/%2%3(v%4).%5.bak"_s.arg(info.absoluteDir().absolutePath(),
+                                                                 hidden,
+                                                                 info.baseName(),
+                                                                 GetFormatVersionStr(),
+                                                                 info.completeSuffix());
     if (not SafeCopy(m_convertedFileName, reserveFileName, error))
     {
         // #ifdef Q_OS_WIN32
@@ -133,16 +136,15 @@ void VAbstractConverter::ReserveFile() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::Replace(QString &formula, const QString &newName, vsizetype position, const QString &token,
-                                 vsizetype &bias) const
+void VAbstractConverter::Replace(
+    QString &formula, const QString &newName, vsizetype position, const QString &token, vsizetype &bias) const
 {
     formula.replace(position, token.length(), newName);
     bias = token.length() - newName.length();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractConverter::CorrectionsPositions(vsizetype position, vsizetype bias,
-                                              QMap<vsizetype, QString> &tokens) const
+void VAbstractConverter::CorrectionsPositions(vsizetype position, vsizetype bias, QMap<vsizetype, QString> &tokens) const
 {
     if (bias == 0)
     {
@@ -201,7 +203,8 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
     const auto schemaSize = static_cast<size_t>(data.size());
 
     if (QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> const grammarSource(
-            new XERCES_CPP_NAMESPACE::MemBufInputSource(reinterpret_cast<const XMLByte *>(schemaData), schemaSize,
+            new XERCES_CPP_NAMESPACE::MemBufInputSource(reinterpret_cast<const XMLByte *>(schemaData),
+                                                        schemaSize,
                                                         "schema"));
         domParser.loadGrammar(*grammarSource, XERCES_CPP_NAMESPACE::Grammar::SchemaGrammarType, true) == nullptr)
     {
@@ -240,8 +243,10 @@ void VAbstractConverter::ValidateXML(const QString &schema) const
     const char *patternData = patternFileData.constData();
     const auto patternSize = static_cast<size_t>(patternFileData.size());
 
-    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> const patternSource(new XERCES_CPP_NAMESPACE::MemBufInputSource(
-        reinterpret_cast<const XMLByte *>(patternData), patternSize, "pattern"));
+    QScopedPointer<XERCES_CPP_NAMESPACE::InputSource> const patternSource(
+        new XERCES_CPP_NAMESPACE::MemBufInputSource(reinterpret_cast<const XMLByte *>(patternData),
+                                                    patternSize,
+                                                    "pattern"));
 
     domParser.parse(*patternSource);
 

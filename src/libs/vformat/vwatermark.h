@@ -30,10 +30,10 @@
 
 #include "../ifc/xml/vdomdocument.h"
 
-
 class VWatermark : public VDomDocument
 {
     Q_DECLARE_TR_FUNCTIONS(VWatermark) // NOLINT
+
 public:
     VWatermark();
     virtual ~VWatermark() = default;
@@ -43,7 +43,7 @@ public:
     virtual auto SaveDocument(const QString &fileName, QString &error) -> bool override;
 
     auto GetWatermark() const -> VWatermarkData;
-    void           SetWatermark(const VWatermarkData &data);
+    void SetWatermark(const VWatermarkData &data);
 
     static const QString TagWatermark;
     static const QString TagText;

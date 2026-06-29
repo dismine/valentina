@@ -30,12 +30,13 @@
 #include "../ifc/xml/vlabeltemplateconverter.h"
 
 const QString VLabelTemplate::TagTemplate = QStringLiteral("template");
-const QString VLabelTemplate::TagLines    = QStringLiteral("lines");
+const QString VLabelTemplate::TagLines = QStringLiteral("lines");
 
 //---------------------------------------------------------------------------------------------------------------------
 VLabelTemplate::VLabelTemplate()
-    : VDomDocument()
-{}
+  : VDomDocument()
+{
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VLabelTemplate::CreateEmptyTemplate()
@@ -47,7 +48,8 @@ void VLabelTemplate::CreateEmptyTemplate()
 
     this->appendChild(templateElement);
     insertBefore(createProcessingInstruction(QStringLiteral("xml"),
-                                             QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")), this->firstChild());
+                                             QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")),
+                 this->firstChild());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

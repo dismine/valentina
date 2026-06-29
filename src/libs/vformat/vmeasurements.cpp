@@ -28,6 +28,7 @@
 
 #include "vmeasurements.h"
 
+#include <qnumeric.h>
 #include <QDate>
 #include <QDomNode>
 #include <QDomNodeList>
@@ -39,7 +40,6 @@
 #include <QSet>
 #include <QUuid>
 #include <QtDebug>
-#include <qnumeric.h>
 
 #include "../ifc/exception/vexceptionobjecterror.h"
 #include "../ifc/ifcdef.h"
@@ -249,7 +249,9 @@ VMeasurements::VMeasurements(Unit unit, VContainer *data, QObject *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VMeasurements::VMeasurements(Unit unit, const QVector<MeasurementDimension_p> &dimensions, VContainer *data,
+VMeasurements::VMeasurements(Unit unit,
+                             const QVector<MeasurementDimension_p> &dimensions,
+                             VContainer *data,
                              QObject *parent)
   : VDomDocument(parent),
     data(data),
@@ -267,8 +269,8 @@ void VMeasurements::setXMLContent(const QString &fileName)
     type = ReadType();
     m_units = ReadUnits();
 
-    if (type == MeasurementsType::Multisize &&
-        VVSTConverter::MeasurementMaxVer == GetFormatVersion(GetFormatVersionStr()))
+    if (type == MeasurementsType::Multisize
+        && VVSTConverter::MeasurementMaxVer == GetFormatVersion(GetFormatVersionStr()))
     {
         m_dimensions = ReadDimensions();
     }
@@ -292,7 +294,9 @@ void VMeasurements::AddEmpty(const QString &name, const QString &formula, bool s
 {
     QDomElement element = MakeEmpty(name, formula, MeasurementType::Measurement);
 
-    SetAttributeOrRemoveIf<bool>(element, AttrSpecialUnits, specialUnits,
+    SetAttributeOrRemoveIf<bool>(element,
+                                 AttrSpecialUnits,
+                                 specialUnits,
                                  [](bool special) noexcept { return not special; });
 
     const QDomNodeList list = elementsByTagName(TagBodyMeasurements);
@@ -304,7 +308,9 @@ void VMeasurements::AddEmptyAfter(const QString &after, const QString &name, con
 {
     QDomElement element = MakeEmpty(name, formula, MeasurementType::Measurement);
 
-    SetAttributeOrRemoveIf<bool>(element, AttrSpecialUnits, specialUnits,
+    SetAttributeOrRemoveIf<bool>(element,
+                                 AttrSpecialUnits,
+                                 specialUnits,
                                  [](bool special) noexcept { return not special; });
 
     const QDomElement sibling = FindM(after);
@@ -454,7 +460,8 @@ void VMeasurements::ReadMeasurements(qreal baseA, qreal baseB, qreal baseC) cons
 
     if (type == MeasurementsType::Individual)
     {
-        tempData = QSharedPointer<VContainer>::create(data->GetTrVars(), data->GetPatternUnit(),
+        tempData = QSharedPointer<VContainer>::create(data->GetTrVars(),
+                                                      data->GetPatternUnit(),
                                                       VContainer::UniqueNamespace());
     }
 
@@ -739,8 +746,7 @@ void VMeasurements::SetFullCircumference(bool fc)
     QDomElement dimenstionsTag = documentElement().firstChildElement(TagDimensions);
     if (not dimenstionsTag.isNull())
     {
-        SetAttributeOrRemoveIf<bool>(dimenstionsTag, AttrFullCircumference, fc,
-                                     [](bool fc) noexcept { return not fc; });
+        SetAttributeOrRemoveIf<bool>(dimenstionsTag, AttrFullCircumference, fc, [](bool fc) noexcept { return not fc; });
     }
     else
     {
@@ -831,8 +837,7 @@ void VMeasurements::SetMSpecialUnits(const QString &name, bool special)
 {
     if (QDomElement node = FindM(name); not node.isNull())
     {
-        SetAttributeOrRemoveIf<bool>(node, AttrSpecialUnits, special,
-                                     [](bool special) noexcept { return not special; });
+        SetAttributeOrRemoveIf<bool>(node, AttrSpecialUnits, special, [](bool special) noexcept { return not special; });
     }
     else
     {
@@ -917,7 +922,9 @@ void VMeasurements::SetMDescription(const QString &name, const QString &text)
 {
     if (QDomElement node = FindM(name); not node.isNull())
     {
-        SetAttributeOrRemoveIf<QString>(node, AttrDescription, text,
+        SetAttributeOrRemoveIf<QString>(node,
+                                        AttrDescription,
+                                        text,
                                         [](const QString &text) noexcept { return text.isEmpty(); });
     }
     else
@@ -945,7 +952,9 @@ void VMeasurements::SetMDimension(const QString &name, IMD type)
     ClearDimension(type);
     if (QDomElement node = FindM(name); not node.isNull())
     {
-        SetAttributeOrRemoveIf<QString>(node, AttrDimension, VMeasurements::IMDToStr(type),
+        SetAttributeOrRemoveIf<QString>(node,
+                                        AttrDimension,
+                                        VMeasurements::IMDToStr(type),
                                         [](const QString &type) noexcept
                                         { return type == VMeasurements::IMDToStr(IMD::N); });
     }
@@ -1031,11 +1040,17 @@ void VMeasurements::SetRestrictions(const QMap<QString, VDimensionRestriction> &
         QDomElement restrictionTag = createElement(TagRestriction);
 
         SetAttribute(restrictionTag, AttrCoordinates, i.key());
-        SetAttributeOrRemoveIf<qreal>(restrictionTag, AttrMin, i.value().GetMin(),
+        SetAttributeOrRemoveIf<qreal>(restrictionTag,
+                                      AttrMin,
+                                      i.value().GetMin(),
                                       [](qreal min) noexcept { return qFuzzyIsNull(min); });
-        SetAttributeOrRemoveIf<qreal>(restrictionTag, AttrMax, i.value().GetMax(),
+        SetAttributeOrRemoveIf<qreal>(restrictionTag,
+                                      AttrMax,
+                                      i.value().GetMax(),
                                       [](qreal max) noexcept { return qFuzzyIsNull(max); });
-        SetAttributeOrRemoveIf<QString>(restrictionTag, AttrExclude, i.value().GetExcludeString(),
+        SetAttributeOrRemoveIf<QString>(restrictionTag,
+                                        AttrExclude,
+                                        i.value().GetExcludeString(),
                                         [](const QString &exlcuded) noexcept { return exlcuded.isEmpty(); });
 
         restrictionsTag.appendChild(restrictionTag);
@@ -1080,7 +1095,9 @@ void VMeasurements::SetDimensionCustomNames(const QMap<MeasurementDimension, QSt
 
         if (names.contains(type))
         {
-            SetAttributeOrRemoveIf<QString>(dom, AttrCustomName, names.value(type),
+            SetAttributeOrRemoveIf<QString>(dom,
+                                            AttrCustomName,
+                                            names.value(type),
                                             [](const QString &name) noexcept { return name.isEmpty(); });
         }
     }
@@ -1272,9 +1289,9 @@ void VMeasurements::CreateEmptyMultisizeFile(Unit unit, const QVector<Measuremen
     mElement.appendChild(createElement(TagBodyMeasurements));
 
     this->appendChild(mElement);
-    insertBefore(
-        createProcessingInstruction(QStringLiteral("xml"), QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")),
-        this->firstChild());
+    insertBefore(createProcessingInstruction(QStringLiteral("xml"),
+                                             QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")),
+                 this->firstChild());
 
     // Cache data
     m_units = unit;
@@ -1305,9 +1322,9 @@ void VMeasurements::CreateEmptyIndividualFile(Unit unit)
     mElement.appendChild(createElement(TagBodyMeasurements));
 
     this->appendChild(mElement);
-    insertBefore(
-        createProcessingInstruction(QStringLiteral("xml"), QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")),
-        this->firstChild());
+    insertBefore(createProcessingInstruction(QStringLiteral("xml"),
+                                             QStringLiteral("version=\"1.0\" encoding=\"UTF-8\"")),
+                 this->firstChild());
 
     // Cache data
     m_units = unit;
@@ -1328,9 +1345,13 @@ auto VMeasurements::CreateDimensions(const QVector<MeasurementDimension_p> &dime
         SetAttribute(dimensionTag, AttrMin, dimension->MinValue());
         SetAttribute(dimensionTag, AttrMax, dimension->MaxValue());
         SetAttribute(dimensionTag, AttrStep, dimension->Step());
-        SetAttributeOrRemoveIf<bool>(dimensionTag, AttrMeasurement, dimension->IsBodyMeasurement(),
+        SetAttributeOrRemoveIf<bool>(dimensionTag,
+                                     AttrMeasurement,
+                                     dimension->IsBodyMeasurement(),
                                      [](bool m) noexcept { return m; });
-        SetAttributeOrRemoveIf<QString>(dimensionTag, AttrCustomName, dimension->CustomName(),
+        SetAttributeOrRemoveIf<QString>(dimensionTag,
+                                        AttrCustomName,
+                                        dimension->CustomName(),
                                         [](const QString &name) noexcept { return name.isEmpty(); });
 
         dimensionsTag.appendChild(dimensionTag);
@@ -1662,9 +1683,14 @@ void VMeasurements::ClearDimension(IMD type)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::ReadMeasurement(const QDomElement &dom, QSharedPointer<VContainer> &tempData,
-                                    QSharedPointer<VMeasurement> &meash, QSharedPointer<VMeasurement> &tempMeash, int i,
-                                    qreal baseA, qreal baseB, qreal baseC) const
+void VMeasurements::ReadMeasurement(const QDomElement &dom,
+                                    QSharedPointer<VContainer> &tempData,
+                                    QSharedPointer<VMeasurement> &meash,
+                                    QSharedPointer<VMeasurement> &tempMeash,
+                                    int i,
+                                    qreal baseA,
+                                    qreal baseB,
+                                    qreal baseC) const
 {
     const QString fullName = GetParametrEmptyString(dom, AttrFullName);
     const bool specialUnits = GetParametrBool(dom, AttrSpecialUnits, falseStr);
@@ -1711,8 +1737,12 @@ void VMeasurements::ReadMeasurement(const QDomElement &dom, QSharedPointer<VCont
             convertedStepC = UnitConvertor(convertedStepC, Units(), *data->GetPatternUnit());
         }
 
-        meash = QSharedPointer<VMeasurement>::create(static_cast<quint32>(i), name, convertedBaseA, convertedBaseB,
-                                                     convertedBaseC, base);
+        meash = QSharedPointer<VMeasurement>::create(static_cast<quint32>(i),
+                                                     name,
+                                                     convertedBaseA,
+                                                     convertedBaseB,
+                                                     convertedBaseC,
+                                                     base);
         meash->SetBaseA(baseA);
         meash->SetBaseB(baseB);
         meash->SetBaseC(baseC);
@@ -1738,14 +1768,14 @@ void VMeasurements::ReadMeasurement(const QDomElement &dom, QSharedPointer<VCont
     }
     else
     {
-        const IMD dimension =
-            VMeasurements::StrToIMD(GetParametrString(dom, AttrDimension, VMeasurements::IMDToStr(IMD::N)));
+        const IMD dimension = VMeasurements::StrToIMD(
+            GetParametrString(dom, AttrDimension, VMeasurements::IMDToStr(IMD::N)));
         const QString formula = GetParametrString(dom, AttrValue, QChar('0'));
         bool ok = false;
         qreal value = EvalFormula(tempData.data(), formula, &ok);
 
-        tempMeash =
-            QSharedPointer<VMeasurement>::create(tempData.data(), static_cast<quint32>(i), name, value, formula, ok);
+        tempMeash
+            = QSharedPointer<VMeasurement>::create(tempData.data(), static_cast<quint32>(i), name, value, formula, ok);
 
         if (not specialUnits)
         {
