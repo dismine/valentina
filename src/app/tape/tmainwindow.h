@@ -274,7 +274,8 @@ private:
 
     void CreateWindowMenu(QMenu *menu);
 
-    template <class T> void HackWidget(T **widget);
+    template<class T>
+    void HackWidget(T **widget);
     void HackDimensionBaseValue();
     void HackDimensionShifts();
 
@@ -284,7 +285,10 @@ private:
 
     void ImportIndividualMeasurements(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader);
     void ImportMultisizeMeasurements(const QxtCsvModel &csv, const QVector<int> &map, bool withHeader);
-    auto ImportMultisizeMeasurement(const QxtCsvModel &csv, int i, const QVector<int> &map, vsizetype dimensionsCount,
+    auto ImportMultisizeMeasurement(const QxtCsvModel &csv,
+                                    int i,
+                                    const QVector<int> &map,
+                                    vsizetype dimensionsCount,
                                     QSet<QString> &importedNames) -> MultisizeMeasurement;
 
     void SetCurrentPatternUnit();
@@ -309,7 +313,9 @@ private:
     static auto KnownMeasurementsRegistred(const QUuid &id) -> bool;
 
     auto CSVColumnHeader(int column) const -> QString;
-    void ExportRowToCSV(QxtCsvModel &csv, int row, const QSharedPointer<VMeasurement> &meash,
+    void ExportRowToCSV(QxtCsvModel &csv,
+                        int row,
+                        const QSharedPointer<VMeasurement> &meash,
                         const VKnownMeasurements &knownDB) const;
 
     void closeEvent(QCloseEvent *event) override;
