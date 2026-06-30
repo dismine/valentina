@@ -272,6 +272,8 @@ private:
 
     auto LoadFromExistingFile(const QString &path) -> bool;
 
+    void CollectFormatVersionStatistic(MeasurementsType mType) const;
+
     void CreateWindowMenu(QMenu *menu);
 
     template<class T>
