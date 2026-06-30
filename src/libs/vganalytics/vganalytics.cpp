@@ -276,6 +276,9 @@ auto VGAnalytics::NetworkAccessManager() const -> QNetworkAccessManager *
 //---------------------------------------------------------------------------------------------------------------------
 void VGAnalytics::SendAppFreshInstallEvent(qint64 engagementTimeMsec)
 {
+    // first_visit is the reserved GA4 event that powers the "New users" metric. The Measurement
+    // Protocol does not generate it automatically, so send it here on fresh install.
+    SendEvent(QStringLiteral("first_visit"), InitAppStartEventParams(engagementTimeMsec));
     SendEvent(QStringLiteral("vapp_fresh_install"), InitAppStartEventParams(engagementTimeMsec));
 }
 
