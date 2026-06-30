@@ -754,7 +754,7 @@ void VAbstractApplication::LogScreenInfo()
         return info;
     };
 
-    auto ConnectScreenSignals = [DumpScreen](QScreen *screen) -> void
+    auto ConnectScreenSignals = [DumpScreen](const QScreen *screen) -> void
     {
         if (screen == nullptr)
         {
@@ -799,7 +799,7 @@ void VAbstractApplication::LogScreenInfo()
 
     QObject::connect(qApp,
                      &QGuiApplication::screenRemoved,
-                     [DumpScreen](QScreen *screen) -> void
+                     [DumpScreen](const QScreen *screen) -> void
                      {
                          qDebug() << "Screen removed:" << DumpScreen(screen)
                                   << "(remaining:" << QGuiApplication::screens().size() << ")";
@@ -807,7 +807,7 @@ void VAbstractApplication::LogScreenInfo()
 
     QObject::connect(qApp,
                      &QGuiApplication::primaryScreenChanged,
-                     [DumpScreen](QScreen *screen) -> void
+                     [DumpScreen](const QScreen *screen) -> void
                      { qDebug() << "Primary screen changed to:" << DumpScreen(screen); });
 }
 

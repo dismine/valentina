@@ -256,7 +256,7 @@ private:
     void ClearDimension(IMD type);
 
     void ReadMeasurement(const QDomElement &dom,
-                         QSharedPointer<VContainer> &tempData,
+                         const QSharedPointer<VContainer> &tempData,
                          QSharedPointer<VMeasurement> &meash,
                          QSharedPointer<VMeasurement> &tempMeash,
                          int i,
