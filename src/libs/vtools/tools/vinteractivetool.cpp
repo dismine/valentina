@@ -55,7 +55,7 @@ VInteractiveTool::VInteractiveTool(VAbstractPattern *doc, VContainer *data, quin
  * before showing it. The dialog is parented to the main window and outlives the tool, so the state is
  * restored on the dialog's destruction rather than via the tool, which may already be gone.
  */
-void VInteractiveTool::BlockUndoRedoWhileDialogOpen()
+void VInteractiveTool::BlockUndoRedoWhileDialogOpen() const
 {
     SCASSERT(not m_dialog.isNull())
 
