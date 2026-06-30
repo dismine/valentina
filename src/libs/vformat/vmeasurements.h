@@ -52,6 +52,13 @@ enum class GenderType : qint8
 
 using VDimensions = QMap<MeasurementDimension, MeasurementDimension_p>;
 
+struct DimensionBases
+{
+    qreal baseA{0};
+    qreal baseB{0};
+    qreal baseC{0};
+};
+
 class VMeasurements : public VDomDocument
 {
     Q_OBJECT // NOLINT
@@ -260,9 +267,7 @@ private:
                          QSharedPointer<VMeasurement> &meash,
                          QSharedPointer<VMeasurement> &tempMeash,
                          int i,
-                         qreal baseA,
-                         qreal baseB,
-                         qreal baseC) const;
+                         const DimensionBases &bases) const;
 };
 
 #endif // VMEASUREMENTS_H

@@ -493,7 +493,7 @@ void VMeasurements::ReadMeasurements(qreal baseA, qreal baseB, qreal baseC) cons
 
         if (varType != MeasurementType::Separator)
         {
-            ReadMeasurement(dom, tempData, meash, tempMeash, i, baseA, baseB, baseC);
+            ReadMeasurement(dom, tempData, meash, tempMeash, i, {baseA, baseB, baseC});
         }
         else
         {
@@ -1702,9 +1702,7 @@ void VMeasurements::ReadMeasurement(const QDomElement &dom,
                                     QSharedPointer<VMeasurement> &meash,
                                     QSharedPointer<VMeasurement> &tempMeash,
                                     int i,
-                                    qreal baseA,
-                                    qreal baseB,
-                                    qreal baseC) const
+                                    const DimensionBases &bases) const
 {
     const QString fullName = GetParametrEmptyString(dom, AttrFullName);
     const bool specialUnits = GetParametrBool(dom, AttrSpecialUnits, falseStr);
@@ -1757,9 +1755,9 @@ void VMeasurements::ReadMeasurement(const QDomElement &dom,
                                                      convertedBaseB,
                                                      convertedBaseC,
                                                      base);
-        meash->SetBaseA(baseA);
-        meash->SetBaseB(baseB);
-        meash->SetBaseC(baseC);
+        meash->SetBaseA(bases.baseA);
+        meash->SetBaseB(bases.baseB);
+        meash->SetBaseC(bases.baseC);
 
         meash->SetShiftA(shiftA);
         meash->SetShiftB(shiftB);
