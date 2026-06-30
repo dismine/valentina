@@ -291,7 +291,7 @@ private:
                                     int i,
                                     const QVector<int> &map,
                                     vsizetype dimensionsCount,
-                                    QSet<QString> &importedNames) -> MultisizeMeasurement;
+                                    QSet<QString> &importedNames) const -> MultisizeMeasurement;
 
     void SetCurrentPatternUnit();
 

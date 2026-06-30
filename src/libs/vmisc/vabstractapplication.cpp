@@ -783,7 +783,7 @@ void VAbstractApplication::LogScreenInfo()
     qDebug() << "=== Screen Information ===";
     const QList<QScreen *> screens = QGuiApplication::screens();
     qDebug() << "Screens:" << screens.size();
-    for (auto *screen : screens)
+    for (const auto *screen : screens)
     {
         qDebug() << "  -" << DumpScreen(screen);
         ConnectScreenSignals(screen);
@@ -792,7 +792,7 @@ void VAbstractApplication::LogScreenInfo()
     // Monitor for screen configuration changes during runtime
     QObject::connect(qApp,
                      &QGuiApplication::screenAdded,
-                     [](QScreen *screen) -> void
+                     [](const QScreen *screen) -> void
                      {
                          qDebug() << "Screen added:" << DumpScreen(screen)
                                   << "(total:" << QGuiApplication::screens().size() << ")";

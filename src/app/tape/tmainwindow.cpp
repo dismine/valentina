@@ -4735,7 +4735,7 @@ auto TMainWindow::ImportMultisizeMeasurement(const QxtCsvModel &csv,
                                              int i,
                                              const QVector<int> &map,
                                              vsizetype dimensionsCount,
-                                             QSet<QString> &importedNames) -> TMainWindow::MultisizeMeasurement
+                                             QSet<QString> &importedNames) const -> TMainWindow::MultisizeMeasurement
 {
     const auto nameColumn = map.at(static_cast<int>(MultisizeMeasurementsColumns::Name));
     const QString name = csv.text(i, nameColumn).simplified();
