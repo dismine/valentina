@@ -113,6 +113,50 @@ auto LoadQM(QTranslator *translator, const QString &filename, const QString &loc
 
     return false;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DumpScreen(const QScreen *screen) -> QString
+{
+    if (screen == nullptr)
+    {
+        return QStringLiteral("<null screen>");
+    }
+
+    QString info;
+    QDebug dbg(&info);
+    dbg.nospace() << "name=" << screen->name() << " manufacturer=" << screen->manufacturer()
+                  << " model=" << screen->model() << " serial=" << screen->serialNumber()
+                  << " geometry=" << screen->geometry() << " available=" << screen->availableGeometry()
+                  << " DPR=" << screen->devicePixelRatio() << " logicalDPI=" << screen->logicalDotsPerInch()
+                  << " physicalDPI=" << screen->physicalDotsPerInch() << " depth=" << screen->depth()
+                  << " refreshRate=" << screen->refreshRate();
+    return info;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void ConnectScreenSignals(const QScreen *screen)
+{
+    if (screen == nullptr)
+    {
+        return;
+    }
+
+    QObject::connect(screen,
+                     &QScreen::geometryChanged,
+                     screen,
+                     [screen](const QRect &geometry)
+                     { qDebug() << "Screen geometry changed:" << geometry << "for" << DumpScreen(screen); });
+    QObject::connect(screen,
+                     &QScreen::logicalDotsPerInchChanged,
+                     screen,
+                     [screen](qreal dpi)
+                     { qDebug() << "Screen logical DPI changed:" << dpi << "for" << DumpScreen(screen); });
+    QObject::connect(screen,
+                     &QScreen::physicalDotsPerInchChanged,
+                     screen,
+                     [screen](qreal dpi)
+                     { qDebug() << "Screen physical DPI changed:" << dpi << "for" << DumpScreen(screen); });
+}
 } // namespace
 
 const QString VAbstractApplication::warningMessageSignature = QStringLiteral("[PATTERN MESSAGE]");
@@ -736,48 +780,6 @@ void VAbstractApplication::LogScreenInfo()
     // name() briefly appears, so logging only name() is useless. Dump the full screen identity and follow every
     // add/remove/primary-change plus per-screen DPI and geometry change, to capture the exact sequence leading
     // to the crash.
-    auto DumpScreen = [](const QScreen *screen) -> QString
-    {
-        if (screen == nullptr)
-        {
-            return QStringLiteral("<null screen>");
-        }
-
-        QString info;
-        QDebug dbg(&info);
-        dbg.nospace() << "name=" << screen->name() << " manufacturer=" << screen->manufacturer()
-                      << " model=" << screen->model() << " serial=" << screen->serialNumber()
-                      << " geometry=" << screen->geometry() << " available=" << screen->availableGeometry()
-                      << " DPR=" << screen->devicePixelRatio() << " logicalDPI=" << screen->logicalDotsPerInch()
-                      << " physicalDPI=" << screen->physicalDotsPerInch() << " depth=" << screen->depth()
-                      << " refreshRate=" << screen->refreshRate();
-        return info;
-    };
-
-    auto ConnectScreenSignals = [DumpScreen](const QScreen *screen) -> void
-    {
-        if (screen == nullptr)
-        {
-            return;
-        }
-
-        QObject::connect(screen,
-                         &QScreen::geometryChanged,
-                         screen,
-                         [DumpScreen, screen](const QRect &geometry)
-                         { qDebug() << "Screen geometry changed:" << geometry << "for" << DumpScreen(screen); });
-        QObject::connect(screen,
-                         &QScreen::logicalDotsPerInchChanged,
-                         screen,
-                         [DumpScreen, screen](qreal dpi)
-                         { qDebug() << "Screen logical DPI changed:" << dpi << "for" << DumpScreen(screen); });
-        QObject::connect(screen,
-                         &QScreen::physicalDotsPerInchChanged,
-                         screen,
-                         [DumpScreen, screen](qreal dpi)
-                         { qDebug() << "Screen physical DPI changed:" << dpi << "for" << DumpScreen(screen); });
-    };
-
     qDebug() << "=== Screen Information ===";
     const QList<QScreen *> screens = QGuiApplication::screens();
     qDebug() << "Screens:" << screens.size();
@@ -790,7 +792,7 @@ void VAbstractApplication::LogScreenInfo()
     // Monitor for screen configuration changes during runtime
     QObject::connect(qApp,
                      &QGuiApplication::screenAdded,
-                     [DumpScreen, ConnectScreenSignals](QScreen *screen) -> void
+                     [](QScreen *screen) -> void
                      {
                          qDebug() << "Screen added:" << DumpScreen(screen)
                                   << "(total:" << QGuiApplication::screens().size() << ")";
@@ -799,7 +801,7 @@ void VAbstractApplication::LogScreenInfo()
 
     QObject::connect(qApp,
                      &QGuiApplication::screenRemoved,
-                     [DumpScreen](const QScreen *screen) -> void
+                     [](const QScreen *screen) -> void
                      {
                          qDebug() << "Screen removed:" << DumpScreen(screen)
                                   << "(remaining:" << QGuiApplication::screens().size() << ")";
@@ -807,7 +809,7 @@ void VAbstractApplication::LogScreenInfo()
 
     QObject::connect(qApp,
                      &QGuiApplication::primaryScreenChanged,
-                     [DumpScreen](const QScreen *screen) -> void
+                     [](const QScreen *screen) -> void
                      { qDebug() << "Primary screen changed to:" << DumpScreen(screen); });
 }
 
