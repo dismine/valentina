@@ -50,7 +50,7 @@ void TST_VDomDocument::RefuseEmptyDocumentSave() const
     QVERIFY2(dir.isValid(), "Failed to create temporary directory.");
 
     const QString path = dir.filePath(QStringLiteral("pattern.val"));
-    const QByteArray sentinel = QByteArrayLiteral("<pattern>good</pattern>");
+    const auto sentinel = QByteArrayLiteral("<pattern>good</pattern>");
 
     {
         QFile file(path);
@@ -73,7 +73,7 @@ void TST_VDomDocument::RefuseEmptyDocumentSave() const
 // committed over a good file.
 void TST_VDomDocument::RejectInvalidDataAgainstSchema() const
 {
-    const QByteArray invalid = QByteArrayLiteral("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<notapattern/>\n");
+    const auto invalid = QByteArrayLiteral("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<notapattern/>\n");
     QString error;
     QVERIFY2(not VDomDocument::ValidateXMLData(VPatternConverter::CurrentSchema, invalid, QStringLiteral("test"), error),
              "Invalid XML unexpectedly passed schema validation.");
