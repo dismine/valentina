@@ -96,9 +96,8 @@ void VScenePoint::RefreshScale()
     ScaleMainPenWidth(scale);
     ScaleCircleSize(this, scale);
 
-    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-
-    if (settings->GetPatternLabelFontSize() * scale < minVisibleFontSize || settings->GetHideLabels())
+    if (const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+        settings->GetPatternLabelFontSize() * scale < minVisibleFontSize || settings->GetHideLabels())
     {
         m_namePoint->setVisible(false);
         m_lineName->setVisible(false);
