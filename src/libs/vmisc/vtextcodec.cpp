@@ -143,7 +143,8 @@ auto VTextCodec::availableCodecs() -> QList<QByteArray>
 //---------------------------------------------------------------------------------------------------------------------
 auto VTextCodec::name() const -> QString
 {
-    return QtCodecs().value(m_encoding).constFirst();
+    QStringList const names = QtCodecs().value(m_encoding);
+    return names.isEmpty() ? QString() : names.constFirst();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
