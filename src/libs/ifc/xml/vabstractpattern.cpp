@@ -1426,8 +1426,9 @@ void VAbstractPattern::FindFormulaDependencies(const QString &formula,
     connect(watcher, &QFutureWatcher<void>::finished, this, &VAbstractPattern::CleanDependenciesWatcher);
 
     // Create the async task
+    const quint64 generation = m_dependencyCheckGeneration.load();
     QFuture<void> const future = QtConcurrent::run(
-        [this, formula, id, variables]() -> void
+        [this, formula, id, variables, generation]() -> void
         {
             QList<QString> tokens;
             try
@@ -1445,13 +1446,12 @@ void VAbstractPattern::FindFormulaDependencies(const QString &formula,
                 return;
             }
 
-            const QThread *currentThread = QThread::currentThread();
             int checkCounter = 0;
             const int checkInterval = 10; // Check every 10 iterations
 
             for (const auto &token : std::as_const(tokens))
             {
-                if (++checkCounter >= checkInterval && currentThread->isInterruptionRequested())
+                if (++checkCounter >= checkInterval && m_dependencyCheckGeneration.load() != generation)
                 {
                     return;
                 }
@@ -2713,6 +2713,8 @@ auto VAbstractPattern::ReadCompanyName() const -> QString
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::CancelFormulaDependencyChecks()
 {
+    ++m_dependencyCheckGeneration;
+
     QList<QFutureWatcher<void> *> watchersCopy;
 
     {
