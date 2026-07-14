@@ -337,6 +337,8 @@ VAbstractPattern::VAbstractPattern(QObject *parent)
 //---------------------------------------------------------------------------------------------------------------------
 VAbstractPattern::~VAbstractPattern()
 {
+    CancelFormulaDependencyChecks();
+
     // Must be deleted before the QDomDocument base destructs. VDomDocument declares QObject before QDomDocument, so
     // QDomDocument::~QDomDocument() runs before QObject::~QObject(). The QDomElement objects stored in
     // VPatternBlockMapper must be released while the DOM nodes are still alive to avoid a double-free.
@@ -481,6 +483,7 @@ void VAbstractPattern::setXMLContent(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::Clear()
 {
+    CancelFormulaDependencyChecks();
     VDomDocument::Clear();
     m_patternNumber.clear();
     m_labelDateFormat.clear();
