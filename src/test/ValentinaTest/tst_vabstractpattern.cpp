@@ -153,3 +153,23 @@ void TST_VAbstractPattern::CancelStopsRunningWorkers()
              qUtf8Printable(u"Worker was not cancelled: %1 of %2 edges were added"_s.arg(graph->EdgeCount())
                                 .arg(totalEdges)));
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+// Clearing a document while a dependency check is running must not leak edges into the graph once the
+// next document re-adds vertices with the same ids.
+void TST_VAbstractPattern::ClearCancelsPendingWorkers()
+{
+    TestDoc doc;
+    VPatternGraph *graph = doc.PatternGraph();
+    QVERIFY(graph != nullptr);
+
+    AddVertices(graph);
+    doc.FindFormulaDependencies(BuildFormula(), formulaOwnerId, BuildVariables());
+
+    QVERIFY(WaitForFirstEdge(graph));
+    doc.Clear();
+    AddVertices(graph);
+    QThreadPool::globalInstance()->waitForDone();
+
+    QCOMPARE(graph->EdgeCount(), static_cast<std::size_t>(0));
+}

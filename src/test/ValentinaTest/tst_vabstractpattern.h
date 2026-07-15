@@ -42,6 +42,8 @@ public:
 private slots:
     // CancelFormulaDependencyChecks must stop a running dependency-check worker early
     void CancelStopsRunningWorkers();
+    // Clear must not let pending workers leak edges into the next document's graph
+    void ClearCancelsPendingWorkers();
 
 private:
     Q_DISABLE_COPY_MOVE(TST_VAbstractPattern) // NOLINT
