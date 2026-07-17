@@ -154,7 +154,7 @@ protected:
     auto setTagText(QDomElement &domElement, const QString &text) -> bool;
     auto UniqueTag(const QString &tagName) const -> QDomElement;
     auto UniqueTagText(const QString &tagName, const QString &defVal = QString()) const -> QString;
-    void CollectId(const QDomElement &node, QVector<quint32> &vector) const;
+    void CollectId(const QDomElement &node, QSet<quint32> &ids) const;
 
     static void ValidateVersion(const QString &version);
 
