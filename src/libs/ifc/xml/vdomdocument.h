@@ -50,8 +50,6 @@
 
 class QDomElement;
 class QDomNode;
-template<typename T>
-class QFutureWatcher;
 
 Q_DECLARE_LOGGING_CATEGORY(vXML)
 
@@ -97,7 +95,7 @@ public:
     static const QString TagLine;
 
     explicit VDomDocument(QObject *parent = nullptr);
-    virtual ~VDomDocument();
+    ~VDomDocument() override = default;
     auto FindElementById(quint32 id, const QString &tagName = QString(), bool updateCache = true) -> QDomElement;
 
     template<typename T>
@@ -162,15 +160,11 @@ protected:
      * validate". Subclasses backed by a known XSD should return their current schema. */
     virtual auto SaveSchema() const -> QString;
 
-private slots:
-    void CacheRefreshed();
-
 private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VDomDocument) // NOLINT
     /** @brief Map used for finding element by id. */
     QHash<quint32, QDomElement> m_elementIdCache;
-    QFutureWatcher<QHash<quint32, QDomElement>> *m_watcher;
 
     static auto find(QHash<quint32, QDomElement> &cache, const QDomElement &node, quint32 id) -> bool;
     auto RefreshCache(const QDomElement &root) const -> QHash<quint32, QDomElement>;

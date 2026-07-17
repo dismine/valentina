@@ -57,7 +57,6 @@
 #include <QDomText>
 #include <QFile>
 #include <QFileInfo>
-#include <QFutureWatcher>
 #include <QIODevice>
 #include <QMessageLogger>
 #include <QObject>
@@ -71,7 +70,6 @@
 #include <QUrl>
 #include <QVector>
 #include <QXmlStreamWriter>
-#include <QtConcurrentRun>
 #include <QtDebug>
 
 #ifdef Q_OS_UNIX
@@ -274,33 +272,8 @@ const QString VDomDocument::TagLine = QStringLiteral("line");
 //---------------------------------------------------------------------------------------------------------------------
 VDomDocument::VDomDocument(QObject *parent)
   : QObject(parent),
-    QDomDocument(),
-    m_elementIdCache(),
-    m_watcher(new QFutureWatcher<QHash<quint32, QDomElement>>())
+    QDomDocument()
 {
-    connect(qApp,
-            &QCoreApplication::aboutToQuit,
-            m_watcher,
-            [this]() -> void
-            {
-                m_watcher->cancel();
-                m_watcher->waitForFinished();
-            });
-    connect(m_watcher, &QFutureWatcher<QHash<quint32, QDomElement>>::finished, this, &VDomDocument::CacheRefreshed);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-VDomDocument::~VDomDocument()
-{
-    // Must be deleted explicitly before the QDomDocument base destructs. VDomDocument declares QObject before
-    // QDomDocument, so QDomDocument::~QDomDocument() runs before QObject::~QObject(). The QDomElement objects
-    // stored inside the QFutureWatcher's QFuture result must be released while the DOM nodes are still alive.
-    qCDebug(vXML) << "Destroying VDomDocument: stopping cache watcher, cache size" << m_elementIdCache.size();
-    m_watcher->cancel();
-    m_watcher->waitForFinished();
-    m_elementIdCache.clear();
-    delete m_watcher;
-    m_watcher = nullptr;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -394,9 +367,9 @@ auto VDomDocument::find(QHash<quint32, QDomElement> &cache, const QDomElement &n
         }
     }
 
-    for (qint32 i = 0; i < node.childNodes().length(); ++i)
+    for (QDomNode n = node.firstChild(); not n.isNull(); n = n.nextSibling())
     {
-        if (const QDomNode n = node.childNodes().at(i); n.isElement() && VDomDocument::find(cache, n.toElement(), id))
+        if (n.isElement() && VDomDocument::find(cache, n.toElement(), id))
         {
             return true;
         }
@@ -694,36 +667,18 @@ void VDomDocument::CollectId(const QDomElement &node, QSet<quint32> &ids) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// Builds the cache on this thread. QDomDocument is not thread-safe, and the callers (Parse(), Clear(),
+// RemoveAllChildren()) go on to rewrite the very document a background walk would be reading.
 void VDomDocument::RefreshElementIdCache()
 {
-    if (m_watcher->isFinished())
-    {
-        m_watcher->setFuture(
-            QtConcurrent::run([this]() -> QHash<quint32, QDomElement> { return RefreshCache(documentElement()); }));
-    }
+    m_elementIdCache = RefreshCache(documentElement());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VDomDocument::Clear()
 {
     clear();
-    if (m_watcher->isRunning())
-    {
-        m_watcher->cancel();
-        m_watcher->waitForFinished();
-    }
     m_elementIdCache.clear();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VDomDocument::CacheRefreshed()
-{
-    if (m_watcher->isCanceled())
-    {
-        return;
-    }
-
-    m_elementIdCache = m_watcher->future().result();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1148,7 +1103,6 @@ auto VDomDocument::UniqueTag(const QString &tagName) const -> QDomElement
  */
 void VDomDocument::RemoveAllChildren(QDomElement &domElement)
 {
-    m_watcher->waitForFinished();
     while (domElement.hasChildNodes())
     {
         domElement.removeChild(domElement.firstChild());

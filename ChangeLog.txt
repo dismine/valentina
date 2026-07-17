@@ -1,5 +1,5 @@
 # Valentina 1.1.1 (unreleased)
-- [Valentina app] Fixed sporadic crash when opening a pattern file. The id uniqueness check ran on a worker thread while parsing rewrote the same QDomDocument on the main thread, and QDomDocument is not thread-safe. The check now runs before parsing, and no longer scans the document quadratically, so it is faster than the threaded version it replaces.
+- [Valentina app] Fixed sporadic crash when opening or closing a pattern file. Two document walks - the id uniqueness check and the element id cache - ran on worker threads while parsing rewrote the same QDomDocument on the main thread, and QDomDocument is not thread-safe; closing a document could also free it while a walk was still running. Both walks now run on the main thread, and neither scans the document quadratically any more, so they are faster than the threaded versions they replace.
 - [Misc] Fixed files occasionally being saved empty/corrupt. Documents (patterns, measurements, watermarks, label templates and known measurements) are now validated against their schema before the file is committed, so a damaged document can no longer overwrite a good file on disk.
 
 # Valentina 1.1.0 June 27, 2026

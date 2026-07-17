@@ -143,3 +143,20 @@ void TST_VDomDocument::TestUniqueId() const
         QVERIFY_THROWS_EXCEPTION(VExceptionWrongId, doc.TestUniqueId());
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+// Every saved pattern opens with a comment and indentation text before the first element, so the id walk has to step
+// over non-element siblings instead of stopping at them. Nothing else catches this: the id cache is only an
+// optimization, and FindElementById falls back to elementsByTagName() when it misses, so a walk that quietly collects
+// nothing still returns the right answer by the slow path. Look up without a tag name - that path uses the walk itself.
+void TST_VDomDocument::FindElementByIdStepsOverNonElementNodes()
+{
+    VDomDocument doc;
+    QVERIFY2(doc.setContent(QByteArrayLiteral("<pattern>\n    <!--Pattern created with Valentina-->\n    <draw>"
+                                              "<calculation><point id=\"7\"/></calculation></draw>\n</pattern>")),
+             "Failed to parse test document.");
+
+    const QDomElement e = doc.FindElementById(7);
+    QVERIFY2(not e.isNull(), "Element sitting after comment and text nodes was not found.");
+    QCOMPARE(e.tagName(), QStringLiteral("point"));
+}

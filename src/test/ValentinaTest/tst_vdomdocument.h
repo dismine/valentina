@@ -44,6 +44,7 @@ private slots:
     void RejectInvalidDataAgainstSchema() const;
     void TestUniqueId_data() const;
     void TestUniqueId() const;
+    void FindElementByIdStepsOverNonElementNodes();
 
 private:
     Q_DISABLE_COPY_MOVE(TST_VDomDocument) // NOLINT
