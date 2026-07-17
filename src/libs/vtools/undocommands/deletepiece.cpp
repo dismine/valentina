@@ -92,17 +92,22 @@ void DeletePiece::undo()
 
     UndoDeleteAfterSibling(m_parentNode, m_siblingId, VAbstractPattern::TagDetail);
 
-    VAbstractPattern::AddTool(nodeId, m_tool);
+    if (not m_tool.isNull())
+    {
+        VAbstractPattern::AddTool(nodeId, m_tool);
+    }
     m_data.UpdatePiece(nodeId, m_detail);
 
-    m_tool->ReinitInternals(m_detail, m_scene);
-
     VAbstractTool::AddRecord(m_record, doc);
-    m_scene->addItem(m_tool);
-    m_tool->ConnectOutsideSignals();
-    m_tool->show();
-    VMainGraphicsView::NewSceneRect(m_scene, VAbstractValApplication::VApp()->getSceneView(), m_tool);
-    m_tool.clear();
+    if (not m_tool.isNull())
+    {
+        m_tool->ReinitInternals(m_detail, m_scene);
+        m_scene->addItem(m_tool);
+        m_tool->ConnectOutsideSignals();
+        m_tool->show();
+        VMainGraphicsView::NewSceneRect(m_scene, VAbstractValApplication::VApp()->getSceneView(), m_tool);
+        m_tool.clear();
+    }
     emit doc->UpdateInLayoutList();
 }
 
@@ -118,12 +123,15 @@ void DeletePiece::redo()
 
         m_tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId));
         SCASSERT(not m_tool.isNull());
-        m_tool->DisconnectOutsideSignals();
-        m_tool->EnableToolMove(true);
-        m_tool->hide();
-        m_tool->CancelLabelRendering();
+        if (not m_tool.isNull())
+        {
+            m_tool->DisconnectOutsideSignals();
+            m_tool->EnableToolMove(true);
+            m_tool->hide();
+            m_tool->CancelLabelRendering();
 
-        m_scene->removeItem(m_tool);
+            m_scene->removeItem(m_tool);
+        }
 
         VAbstractPattern::RemoveTool(nodeId);
         m_data.RemovePiece(nodeId);
