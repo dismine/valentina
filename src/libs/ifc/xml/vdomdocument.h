@@ -164,7 +164,7 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VDomDocument) // NOLINT
     /** @brief Map used for finding element by id. */
-    QHash<quint32, QDomElement> m_elementIdCache;
+    QHash<quint32, QDomElement> m_elementIdCache{};
 
     static auto find(QHash<quint32, QDomElement> &cache, const QDomElement &node, quint32 id) -> bool;
     auto RefreshCache(const QDomElement &root) const -> QHash<quint32, QDomElement>;
