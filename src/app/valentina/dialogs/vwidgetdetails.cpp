@@ -242,7 +242,10 @@ void VWidgetDetails::ToggledPieceItem(QTableWidgetItem *item)
         try
         {
             tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(id));
-            tool->setVisible(ui->checkBoxHideNotInLayout->isChecked() ? inLayout : true);
+            if (tool != nullptr)
+            {
+                tool->setVisible(ui->checkBoxHideNotInLayout->isChecked() ? inLayout : true);
+            }
         }
         catch (VExceptionBadId &)
         {
