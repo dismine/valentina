@@ -140,7 +140,16 @@ void TST_VDomDocument::TestUniqueId() const
     }
     else
     {
-        QVERIFY_THROWS_EXCEPTION(VExceptionWrongId, doc.TestUniqueId());
+        bool thrown = false;
+        try
+        {
+            doc.TestUniqueId();
+        }
+        catch (const VExceptionWrongId &)
+        {
+            thrown = true;
+        }
+        QVERIFY2(thrown, "Expected VExceptionWrongId to be thrown for duplicate ids.");
     }
 }
 
