@@ -5053,10 +5053,13 @@ void MainWindow::FullParseFile()
 
     if (m_toolOptionsDialogVisible)
     {
-        // Diagnostic breadcrumb: a full reparse tears down all tools and the VContainer. If a tool
-        // options dialog is still open it now references freed data and accepting it will crash.
-        qCWarning(vMainWindow, "Full parsing requested while a tool options dialog is open. "
-                               "This indicates a re-entrancy bug and can lead to a use-after-free crash.");
+        // A full reparse tears down all tools and the VContainer. Any tool options dialog still open
+        // now references freed data, and accepting it would crash. Reject it before teardown.
+        const QList<DialogTool *> openDialogs = findChildren<DialogTool *>();
+        for (DialogTool *dialog : openDialogs)
+        {
+            dialog->reject();
+        }
     }
 
     m_toolOptions->ClearPropertyBrowser();
