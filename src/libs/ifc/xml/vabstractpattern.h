@@ -41,6 +41,8 @@
 #include <QVector>
 #include <QtGlobal>
 
+#include <atomic>
+
 #include "../vmisc/def.h"
 #include "vdomdocument.h"
 #include "vtoolrecord.h"
@@ -519,6 +521,7 @@ private:
 
     QList<QFutureWatcher<void> *> m_formulaDependenciesWatchers{};
     mutable QMutex m_watchersMutex{};
+    std::atomic<quint64> m_dependencyCheckGeneration{0};
 
     auto ListIncrements() const -> QStringList;
     auto ListPointExpressions() const -> QVector<VFormulaField>;
