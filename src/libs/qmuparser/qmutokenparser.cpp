@@ -70,7 +70,15 @@ QmuTokenParser::QmuTokenParser(const QString &formula, bool osSeparator,
             auto search = m_FunDef.find(i.value());
             if(search != m_FunDef.end())
             {
-                AddCallback(i.key(), search->second, m_FunDef, ValidNameChars());
+                try
+                {
+                    AddCallback(i.key(), search->second, m_FunDef, ValidNameChars());
+                }
+                catch (const QmuParserError &)
+                {
+                    // Translated name is not usable as an identifier: it is empty, starts with a digit, or uses a
+                    // script outside ValidNameChars(). Skip it and keep the original name working.
+                }
             }
         }
         ++i;

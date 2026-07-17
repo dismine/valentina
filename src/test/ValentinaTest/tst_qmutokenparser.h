@@ -43,6 +43,8 @@ private slots:
     void IsSingle();
     void TokenFromUser_data();
     void TokenFromUser();
+    void TranslatedFunctionNames_data();
+    void TranslatedFunctionNames();
     void cleanupTestCase();
 
 private:

@@ -41,6 +41,8 @@ public:
     explicit VTranslateVars();
     ~VTranslateVars() = default;
 
+    static auto SupportVariableTranslation() -> bool;
+
     auto InternalVarToUser(const QString &var) const -> QString;
 
     auto VarToUser(const QString &var) const -> QString;
