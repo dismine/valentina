@@ -2856,28 +2856,9 @@ auto MainWindow::SavePatternAs(const QString &fileName) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 auto MainWindow::FullParsePattern() -> bool
 {
-    QFuture<void> futureTestUniqueId;
-
-    auto WaitForFutureFinish = [](QFuture<void> &futureTestUniqueId)
-    {
-        try
-        {
-            futureTestUniqueId.waitForFinished();
-        }
-        catch (...)
-        {
-            // ignore
-        }
-    };
-
-    auto HandleError = [this, WaitForFutureFinish](QFuture<void> &futureTestUniqueId)
+    auto HandleError = [this]()
     {
         SetEnabledGUI(false);
-        if (VAbstractValApplication::VApp()->getOpeningPattern())
-        {
-            WaitForFutureFinish(futureTestUniqueId);
-        }
-
         if (not VApplication::IsGUIMode())
         {
             QCoreApplication::exit(V_EX_DATAERR);
@@ -2886,42 +2867,20 @@ auto MainWindow::FullParsePattern() -> bool
 
     try
     {
+        // QDomDocument is not thread-safe and Parse() rewrites the same document, so this must stay on this thread.
         if (VAbstractValApplication::VApp()->getOpeningPattern())
         {
-            futureTestUniqueId = QtConcurrent::run([this]() { doc->TestUniqueId(); });
+            doc->TestUniqueId();
         }
 
         SetEnabledGUI(true);
         doc->Parse(Document::FullParse);
         ParseBackgroundImages();
-
-        if (VAbstractValApplication::VApp()->getOpeningPattern())
-        {
-            futureTestUniqueId.waitForFinished();
-        }
     }
     catch (const VExceptionUndo &)
     {
         /* If user want undo last operation before undo we need finish broken redo operation. For those we post event
          * myself. Later in method customEvent call undo.*/
-        if (VAbstractValApplication::VApp()->getOpeningPattern())
-        {
-            try
-            {
-                futureTestUniqueId.waitForFinished();
-            }
-            catch (const VExceptionWrongId &e)
-            {
-                qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id.")),
-                           qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-                SetEnabledGUI(false);
-                if (not VApplication::IsGUIMode())
-                {
-                    QCoreApplication::exit(V_EX_DATAERR);
-                }
-                return false;
-            }
-        }
         QApplication::postEvent(this, new UndoEvent());
         return false;
     }
@@ -2929,41 +2888,41 @@ auto MainWindow::FullParsePattern() -> bool
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")), //-V807
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        HandleError(futureTestUniqueId);
+        HandleError();
         return false;
     }
     catch (const VExceptionConversionError &e)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error can't convert value.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        HandleError(futureTestUniqueId);
+        HandleError();
         return false;
     }
     catch (const VExceptionEmptyParameter &e)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        HandleError(futureTestUniqueId);
+        HandleError();
         return false;
     }
     catch (const VExceptionWrongId &e)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        HandleError(futureTestUniqueId);
+        HandleError();
         return false;
     }
     catch (VException &e)
     {
         qCCritical(vMainWindow, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error parsing file.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        HandleError(futureTestUniqueId);
+        HandleError();
         return false;
     }
     catch (const std::bad_alloc &)
     {
         qCCritical(vMainWindow, "%s", qUtf8Printable(tr("Error parsing file (std::bad_alloc).")));
-        HandleError(futureTestUniqueId);
+        HandleError();
         return false;
     }
 

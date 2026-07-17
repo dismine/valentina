@@ -54,6 +54,7 @@
 #include <QMessageLogger>
 #include <QObject>
 #include <QRegularExpression>
+#include <QSet>
 #include <QStringList>
 #include <QTemporaryFile>
 #include <QTextDocument>
@@ -675,29 +676,28 @@ auto VDomDocument::UniqueTagText(const QString &tagName, const QString &defVal) 
  */
 void VDomDocument::TestUniqueId() const
 {
-    QVector<quint32> vector;
-    CollectId(documentElement(), vector);
+    QSet<quint32> ids;
+    CollectId(documentElement(), ids);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDomDocument::CollectId(const QDomElement &node, QVector<quint32> &vector) const
+void VDomDocument::CollectId(const QDomElement &node, QSet<quint32> &ids) const
 {
     if (node.hasAttribute(VDomDocument::AttrId))
     {
         const quint32 id = GetParametrId(node);
-        if (vector.contains(id))
+        if (ids.contains(id))
         {
             throw VExceptionWrongId(tr("This id (%1) is not unique.").arg(id), node);
         }
-        vector.append(id);
+        ids.insert(id);
     }
 
-    for (qint32 i = 0; i < node.childNodes().length(); ++i)
+    for (QDomNode n = node.firstChild(); not n.isNull(); n = n.nextSibling())
     {
-        const QDomNode n = node.childNodes().at(i);
         if (n.isElement())
         {
-            CollectId(n.toElement(), vector);
+            CollectId(n.toElement(), ids);
         }
     }
 }
