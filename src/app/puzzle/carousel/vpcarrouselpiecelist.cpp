@@ -157,7 +157,7 @@ void VPCarrouselPieceList::startDrag(Qt::DropActions supportedActions)
     Q_UNUSED(supportedActions)
 
     QListWidgetItem *_item = currentItem();
-    if (_item->type() == VPCarrouselPiece::Type)
+    if (_item != nullptr && _item->type() == VPCarrouselPiece::Type)
     {
         auto *pieceItem = dynamic_cast<VPCarrouselPiece *>(_item);
         SCASSERT(pieceItem != nullptr)
