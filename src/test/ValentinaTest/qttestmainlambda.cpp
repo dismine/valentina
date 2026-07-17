@@ -73,6 +73,8 @@
 #include "tst_qstringiterator.h"
 #include "tst_qtextcodec.h"
 #include "tst_utf8.h"
+#else
+#include "tst_vtextcodec.h"
 #endif
 
 #include "tst_vtextstream.h"
@@ -158,6 +160,8 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_Utf8());
     ASSERT_TEST(new TST_QTextCodec());
     ASSERT_TEST(new TST_QStringIterator());
+#else
+    ASSERT_TEST(new TST_VTextCodec());
 #endif
     ASSERT_TEST(new TST_VTextStream());
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
