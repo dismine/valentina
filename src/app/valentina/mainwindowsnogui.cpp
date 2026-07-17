@@ -1086,6 +1086,7 @@ void MainWindowsNoGUI::ExportScene(const QList<QGraphicsScene *> &scenes, const 
     exporter.SetBinaryDxfFormat(m_dialogSaveLayout->IsBinaryDXFFormat());
     exporter.SetShowGrainline(m_dialogSaveLayout->IsShowGrainline());
     exporter.SetBoundaryTogetherWithNotches(m_dialogSaveLayout->IsBoundaryTogetherWithNotches());
+    exporter.SetPiecesAsLayers(m_dialogSaveLayout->IsPiecesAsLayers());
 
     for (int i = 0; i < scenes.size(); ++i)
     {

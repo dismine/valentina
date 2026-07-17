@@ -551,6 +551,7 @@ void DialogSaveLayout::ShowExample()
     ui->checkBoxTextAsPaths->setEnabled(true);
     ui->checkBoxShowGrainline->setVisible(false);
     ui->checkBoxTogetherWithNotches->setVisible(false);
+    ui->checkBoxPiecesAsLayers->setVisible(false);
     ui->labelDxfCompatibility->setVisible(false);
     ui->comboBoxDxfCompatibility->setVisible(false);
 
@@ -598,6 +599,8 @@ void DialogSaveLayout::ShowExample()
             }
             ui->checkBoxShowGrainline->setVisible(true);
             ui->checkBoxTogetherWithNotches->setVisible(m_mode != Draw::Layout);
+            ui->checkBoxPiecesAsLayers->setVisible(currentFormat == LayoutExportFormats::SVG &&
+                                                   m_mode != Draw::Layout);
             break;
         case LayoutExportFormats::DXF_AC1006_Flat:
         case LayoutExportFormats::DXF_AC1009_Flat:
@@ -665,6 +668,13 @@ auto DialogSaveLayout::IsTextAsPaths() const -> bool
 void DialogSaveLayout::SetTextAsPaths(bool textAsPaths)
 {
     ui->checkBoxTextAsPaths->setChecked(textAsPaths);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogSaveLayout::IsPiecesAsLayers() const -> bool
+{
+    return Format() == LayoutExportFormats::SVG && m_mode != Draw::Layout &&
+           ui->checkBoxPiecesAsLayers->isChecked();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

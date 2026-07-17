@@ -74,6 +74,7 @@
 #include "vcommonsettings.h"
 #include "vfoldline.h"
 #include "vgraphicsfillitem.h"
+#include "vlayoutdef.h"
 #include "vlayoutpiece_p.h"
 #include "vtextmanager.h"
 
@@ -1833,6 +1834,8 @@ auto VLayoutPiece::GetItem(bool textAsPaths, bool togetherWithNotches, bool show
             mirrorLineItem->setPath(mirrorLinePath);
         }
     }
+
+    item->setData(LayoutPieceNameDataRole, GetName());
 
     return item;
 }
