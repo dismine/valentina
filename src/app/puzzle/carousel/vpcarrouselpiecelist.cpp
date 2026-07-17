@@ -222,9 +222,13 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
     SCASSERT(pieceItem != nullptr)
 
     VPPiecePtr const piece = pieceItem->GetPiece();
-    VPLayoutPtr const layout = piece->Layout();
+    if (piece.isNull())
+    {
+        return;
+    }
 
-    if (piece.isNull() || layout.isNull())
+    VPLayoutPtr const layout = piece->Layout();
+    if (layout.isNull())
     {
         return;
     }
