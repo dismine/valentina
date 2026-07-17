@@ -45,6 +45,8 @@
 #include "vtoolrecord.h"
 
 class QDomElement;
+template<typename T>
+class QFutureWatcher;
 class VPiecePath;
 class VPieceNode;
 class VPatternImage;
