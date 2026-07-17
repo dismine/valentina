@@ -114,6 +114,48 @@ void TST_QmuTokenParser::TokenFromUser()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_QmuTokenParser::TranslatedFunctionNames_data()
+{
+    QTest::addColumn<QString>("translated");
+    QTest::addColumn<QString>("original");
+    QTest::addColumn<QString>("formula");
+
+    // Names must consist of QmuFormulaBase::InitCharSets() characters. Translations that cannot be identifiers must be
+    // skipped instead of terminating the program.
+    QTest::newRow("script outside the alphabet") << u"分"_s << u"min"_s << u"min(1;2)"_s;
+    QTest::newRow("leading digit") << u"2min"_s << u"min"_s << u"min(1;2)"_s;
+    QTest::newRow("empty name") << QString() << u"min"_s << u"min(1;2)"_s;
+
+    // The alphabet does cover Latin, Cyrillic and Greek, so those translations must keep working.
+    QTest::newRow("latin translation") << u"soma"_s << u"sum"_s << u"soma(1;2)"_s;
+    QTest::newRow("greek translation") << u"ελάχιστο"_s << u"min"_s << u"ελάχιστο(1;2)"_s;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_QmuTokenParser::TranslatedFunctionNames()
+{
+    QFETCH(QString, translated);
+    QFETCH(QString, original);
+    QFETCH(QString, formula);
+
+    QMap<QString, QString> translatedFunctions;
+    translatedFunctions.insert(translated, original);
+
+    try
+    {
+        qmu::QmuTokenParser const cal(formula, false, true, translatedFunctions);
+        QCOMPARE(cal.GetNumbers().size(), 2);
+    }
+    catch (const qmu::QmuParserError &e)
+    {
+        const QString message = u"Translated name '%1' for function '%2' broke the parser: %3"_s.arg(translated,
+                                                                                                     original,
+                                                                                                     e.GetMsg());
+        QFAIL(qUtf8Printable(message));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_QmuTokenParser::cleanupTestCase()
 {
     QLocale::setDefault(m_systemLocale);

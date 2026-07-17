@@ -1,4 +1,5 @@
 # Valentina 1.1.1 (unreleased)
+- [Valentina app] Fixed crash on startup in locales whose math function names translate to non-identifier characters (e.g. Japanese), which the formula parser could not register.
 - [Valentina app] Fixed sporadic crash when opening or closing a pattern file. Two document walks - the id uniqueness check and the element id cache - ran on worker threads while parsing rewrote the same QDomDocument on the main thread, and QDomDocument is not thread-safe; closing a document could also free it while a walk was still running. Both walks now run on the main thread, and neither scans the document quadratically any more, so they are faster than the threaded versions they replace.
 - [Misc] Fixed files occasionally being saved empty/corrupt. Documents (patterns, measurements, watermarks, label templates and known measurements) are now validated against their schema before the file is committed, so a damaged document can no longer overwrite a good file on disk.
 
