@@ -865,8 +865,15 @@ auto VFoldLine::TwoArrowsPoints(qreal width, qreal height) const -> QVector<QVec
     VPieceGrainline const arrow1(base1, GrainlineArrowDirection::oneWayDown);
     VPieceGrainline const arrow2(base2, GrainlineArrowDirection::oneWayDown);
 
-    QVector<QPointF> arrow1Shape = arrow1.Shape().constFirst();
-    QVector<QPointF> arrow2Shape = arrow2.Shape().constFirst();
+    GrainlineShape const shape1 = arrow1.Shape();
+    GrainlineShape const shape2 = arrow2.Shape();
+    if (shape1.isEmpty() || shape2.isEmpty())
+    {
+        return {};
+    }
+
+    QVector<QPointF> arrow1Shape = shape1.constFirst();
+    QVector<QPointF> arrow2Shape = shape2.constFirst();
     QLineF line(arrow1Shape.constLast(), arrow2Shape.constLast());
     std::reverse(arrow2Shape.begin(), arrow2Shape.end());
 
