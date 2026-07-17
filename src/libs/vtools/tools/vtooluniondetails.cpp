@@ -1636,6 +1636,10 @@ auto FixChildren(QVector<quint32> records, QVector<quint32> children, VContainer
                 }
             }
         }
+        else
+        {
+            break;
+        }
     }
 
     return fixedChildren;
