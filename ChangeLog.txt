@@ -1,4 +1,13 @@
 # Valentina 1.0.5 (unreleased)
+- [Valentina app] Fixed crash on startup in locales whose math function names translate to non-identifier characters (e.g. Japanese), which the formula parser could not register.
+- [Valentina app] Fixed sporadic crash when opening a pattern file. The id uniqueness check and element id cache walks ran on a worker thread while parsing rewrote the same QDomDocument on the main thread, and QDomDocument is not thread-safe. Both walks now run on the main thread, and neither scans the document quadratically any more, so they are faster than the threaded versions they replace.
+- [Valentina app] Fixed use-after-free crashes triggered by a full reparse after undo/redo: any open tool options dialog is now closed before tools are freed, and the reparse is deferred so it no longer runs while a tool is still being deleted.
+- [Valentina app] Fixed crash when toggling a piece's in-layout state for a tool of the wrong type in the pieces list.
+- [Valentina app] Fixed release-build crash when undoing or redoing deletion of a piece.
+- [Valentina app] Fixed hang when uniting details with malformed union data.
+- [Valentina app / Puzzle app] Fixed crash when a piece's fold line produced degenerate arrow shapes.
+- [Puzzle app] Fixed crashes in the piece carousel when starting a drag on an empty item and when opening the context menu on a non-piece item.
+- [Misc] Fixed potential crash when a text encoding could not be resolved to a codec name.
 - [Valentina app / Tape app / Puzzle app] Usage statistics collection is now opt-in (disabled by default) and never runs in command-line mode.
 - [Valentina app] Fixed the Hide labels option and label font size changes not taking effect until the next zoom, including stale label state on the other scene after switching to it.
 
