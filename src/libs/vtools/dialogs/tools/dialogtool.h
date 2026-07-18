@@ -92,6 +92,7 @@ public:
     void SetAssociatedTool(VAbstractTool *tool);
 
     virtual void ShowDialog(bool click);
+    auto VisualizationBroken() const -> bool;
     virtual void Build(const Tool &type);
     virtual void SetPiecesList(const QVector<quint32> &list);
     virtual void SetPatternDoc(VAbstractPattern *doc);
@@ -206,6 +207,13 @@ protected:
     template <typename T> auto GetListInternals(const QListWidget *list) const -> QVector<T>;
 
     virtual void ShowVisualization() {}
+
+    /**
+     * @brief UsesVisualization whether this dialog drives a scene visualization (vis) during creation.
+     * Almost all tool dialogs do; the few that never create a vis (e.g. DialogGroup) override this to
+     * return false so VisualizationBroken() never reports them as broken just because vis is null.
+     */
+    virtual auto UsesVisualization() const -> bool { return true; }
     /**
      * @brief SaveData Put dialog data in local variables
      */

@@ -67,6 +67,7 @@ public slots:
 
 protected:
     auto IsValid() const -> bool override;
+    auto UsesVisualization() const -> bool override { return false; }
 
 private slots:
     void NameChanged();
