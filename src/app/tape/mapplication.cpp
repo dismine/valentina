@@ -211,6 +211,17 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     {
         type = QtDebugMsg;
     }
+
+    // Benign Qt-internal noise emitted while a QComboBox popup is torn down (e.g. inside a modal dialog
+    // such as Preferences). Harmless, but as warnings they used to pop a modal error box from the
+    // message handler; reentering the event loop over the half-destroyed popup then crashed. Keep them
+    // out of the user's face.
+    if ((type == QtWarningMsg) && (msg.contains(QStringLiteral("parent must be in parent hierarchy")) ||
+                                   (msg.contains(QStringLiteral("QBackingStore::flush()")) &&
+                                    msg.contains(QStringLiteral("does not have a handle")))))
+    {
+        type = QtDebugMsg;
+    }
 #endif
 
     // this is another one that doesn't make sense as just a debug message.  pretty serious
