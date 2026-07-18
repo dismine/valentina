@@ -30,6 +30,7 @@
 #include "stylehelper.h"
 
 #include <QApplication>
+#include <QLoggingCategory>
 #include <QObject>
 #include <QPainter>
 #include <QPalette>
@@ -38,6 +39,14 @@
 #include <QStyleOption>
 #include <QWidget>
 #include <QtMath>
+
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
+QT_WARNING_DISABLE_INTEL(1418)
+
+Q_LOGGING_CATEGORY(styleHelper, "v.styleHelper") // NOLINT
+
+QT_WARNING_POP
 
 QColor StyleHelper::m_baseColor;          // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 QColor StyleHelper::m_requestedBaseColor; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
@@ -121,6 +130,11 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon,
                                      const QColor &color,
                                      const QPoint &dipOffset)
 {
+    if (icon.isNull() || rect.isEmpty())
+    {
+        return; // Nothing to draw; a degenerate rect leads to null intermediate images below.
+    }
+
     QPixmap cache;
 
     if (QString const pixmapName
@@ -137,6 +151,18 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon,
         int const radius = dipRadius * devicePixelRatio;
         QPoint const offset = dipOffset * devicePixelRatio;
         cache = QPixmap(px.size() + QSize(radius * 2, radius * 2));
+
+        // Any of the QImage/QPixmap allocations below can return a null buffer (degenerate size or
+        // out of memory). Painting on a null device triggers "engine == 0" warnings and, worse, a
+        // crash deep in Qt's paint/blur code. Fall back to a plain icon draw instead of that.
+        if (px.isNull() || cache.isNull())
+        {
+            qCWarning(styleHelper) << "Skipping icon shadow: null buffer. rect:" << rect << "px size:" << px.size()
+                                   << "radius:" << radius << "cache size:" << cache.size();
+            icon.paint(p, rect, Qt::AlignCenter, iconMode);
+            return;
+        }
+
         cache.fill(Qt::transparent);
 
         QPainter cachePainter(&cache);
@@ -165,6 +191,20 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon,
 
         // Draw shadow
         QImage tmp(px.size() + QSize(radius * 2, radius * 2 + 1), QImage::Format_ARGB32_Premultiplied);
+
+        // blur the alpha channel
+        QImage blurred(tmp.size(), QImage::Format_ARGB32_Premultiplied);
+
+        if (tmp.isNull() || blurred.isNull())
+        {
+            qCWarning(styleHelper) << "Skipping icon shadow: null blur buffer. rect:" << rect << "px size:" << px.size()
+                                   << "radius:" << radius << "tmp size:" << tmp.size()
+                                   << "blurred size:" << blurred.size();
+            cachePainter.end();
+            icon.paint(p, rect, Qt::AlignCenter, iconMode);
+            return;
+        }
+
         tmp.fill(Qt::transparent);
 
         QPainter tmpPainter(&tmp);
@@ -172,8 +212,6 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon,
         tmpPainter.drawPixmap(QRect(radius, radius, px.width(), px.height()), px);
         tmpPainter.end();
 
-        // blur the alpha channel
-        QImage blurred(tmp.size(), QImage::Format_ARGB32_Premultiplied);
         blurred.fill(Qt::transparent);
 
         QPainter blurPainter(&blurred);
