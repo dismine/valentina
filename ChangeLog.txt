@@ -1,4 +1,5 @@
 # Valentina 1.1.1 (unreleased)
+- [Valentina app / Puzzle app] Fixed a hang when generating a layout on a single-CPU machine, where the nested layout-nesting parallelism deadlocked the thread pool and export never finished.
 - [Valentina app / Tape app / Puzzle app] Fixed a crash when redrawing the mode sidebar icons: the drop-shadow helper painted on intermediate image buffers without checking that they were allocated, so a degenerate tab size or low memory produced a null buffer and an access violation deep in Qt's paint code.
 - [Valentina app] Fixed a crash when deleting a tool (or otherwise triggering a full reparse) while a point/curve creation dialog was still open: clearing the scene deleted the dialog's on-screen preview, and the next click dereferenced the freed preview.
 - [Valentina app] Fixed a crash when closing or fully undoing a pattern: the draw and detail scenes kept dangling pointers to their deleted origin (axis) items, so the next zoom-to-fit or export dereferenced freed memory.
