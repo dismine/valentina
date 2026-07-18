@@ -56,6 +56,10 @@ public:
 
     void Clear();
 
+    // While a tool is being created (a creation dialog is open) deleting a tool would trigger a full reparse
+    // that clears the scene out from under the open dialog. Block deletion until the tool is finished.
+    void SetToolCreationActive(bool active);
+
 public slots:
     void UpdateDependencies();
     void ShowDependency(vidtype id);
@@ -88,6 +92,7 @@ private:
     VTreeStateManager *m_stateManager{nullptr};
     int m_indexPatternBlock{-1};
     vidtype m_activeTool{NULL_ID};
+    bool m_toolCreationActive{false};
     VHistoryManager m_historyManager;
 
     void ShowToolProperties(VAbstractTool *tool, bool show) const;

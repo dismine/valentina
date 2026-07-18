@@ -686,6 +686,18 @@ void DialogTool::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief VisualizationBroken true when this dialog expects a scene visualization but it has already been
+ * destroyed. This happens when a full reparse (e.g. deleting another tool while a creation dialog is open)
+ * clears the scene, which deletes the vis item; the QPointer then nulls itself. Callers must not forward
+ * scene events to ShowDialog() in that state - the overrides dereference vis and would crash.
+ */
+auto DialogTool::VisualizationBroken() const -> bool
+{
+    return UsesVisualization() && vis.isNull();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::Build(const Tool &type)
 {
     Q_UNUSED(type)

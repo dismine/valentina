@@ -1114,6 +1114,10 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
 
     m_dialogTool = dialogTool;
 
+    // A full reparse (e.g. deleting a tool from the dependencies dock) would clear the scene and destroy this
+    // dialog's visualization. Block tool deletion until the creation is finished.
+    m_dependenciesWidget->SetToolCreationActive(true);
+
     connect(scene, &VMainGraphicsScene::ChoosedObject, m_dialogTool.data(), &DialogTool::ChosenObject);
     if (t == Tool::Group)
     {
@@ -3814,6 +3818,7 @@ void MainWindow::CancelTool()
         m_dialogTool->hide();
         m_dialogTool->deleteLater();
     }
+    m_dependenciesWidget->SetToolCreationActive(false); // Creation finished/cancelled: allow deletion again.
     qCDebug(vMainWindow, "Dialog closed.");
 
     currentScene->setFocus(Qt::OtherFocusReason);
@@ -7647,10 +7652,22 @@ void MainWindow::ChangePP(int index, bool zoomBestFit)
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::EndVisualization(bool click)
 {
-    if (not m_dialogTool.isNull())
+    if (m_dialogTool.isNull())
     {
-        m_dialogTool->ShowDialog(click);
+        return;
     }
+
+    if (m_dialogTool->VisualizationBroken())
+    {
+        // The scene was fully reparsed (e.g. another tool was deleted) while this creation dialog was open,
+        // which deleted its visualization item. Its ShowDialog() override would dereference the now-freed vis
+        // and crash. Ignore the event; the user can still cancel the half-finished tool.
+        qCDebug(vMainWindow, "Ignoring scene event: the open tool dialog's visualization was destroyed by a "
+                             "reparse (scene cleared). Nothing to finish.");
+        return;
+    }
+
+    m_dialogTool->ShowDialog(click);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

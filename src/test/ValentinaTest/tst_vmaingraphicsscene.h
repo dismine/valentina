@@ -40,6 +40,7 @@ public:
 
 private slots:
     void SetOriginsVisibleIsSceneDerived();
+    void ClearDestroysVisualizationItem();
 
 private:
     Q_DISABLE_COPY_MOVE(TST_VMainGraphicsScene) // NOLINT

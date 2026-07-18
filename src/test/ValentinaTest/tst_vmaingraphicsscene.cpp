@@ -30,7 +30,21 @@
 #include "../vwidgets/vmaingraphicsscene.h"
 
 #include <QGraphicsLineItem>
+#include <QGraphicsObject>
+#include <QPointer>
 #include <QtTest>
+
+namespace
+{
+// Same shape as a tool Visualization: a scene item that is also a QObject, tracked through a QPointer -
+// exactly what DialogTool keeps in its `vis` member.
+class FakeVisualization : public QGraphicsObject
+{
+public:
+    auto boundingRect() const -> QRectF override { return {}; }
+    void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override {}
+};
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_VMainGraphicsScene::TST_VMainGraphicsScene(QObject *parent)
@@ -65,4 +79,27 @@ void TST_VMainGraphicsScene::SetOriginsVisibleIsSceneDerived()
     scene.clear();
     scene.SetOriginsVisible(true);
     QVERIFY(scene.items().isEmpty());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Regression test for the "dangling vis" crash (EXCEPTION_ACCESS_VIOLATION in VisToolEndLine::Angle via
+// DialogEndLine::ShowDialog). A tool-creation dialog keeps its visualization in a QPointer<Visualization>
+// added to the scene. A full reparse - e.g. deleting another tool while the dialog is open - calls
+// scene->clear(), which deletes that item. This test locks in the premise the fix relies on: clear() really
+// does destroy the item and null the QPointer, so DialogTool::VisualizationBroken() (vis.isNull()) can detect
+// it and MainWindow::EndVisualization() can skip ShowDialog() instead of dereferencing freed memory.
+void TST_VMainGraphicsScene::ClearDestroysVisualizationItem()
+{
+    VMainGraphicsScene scene;
+
+    QPointer<QGraphicsObject> vis = new FakeVisualization();
+    scene.addItem(vis);
+    QVERIFY2(not vis.isNull(), "The visualization item must be alive after being added to the scene.");
+    QVERIFY(scene.items().contains(vis));
+
+    scene.clear();
+
+    QVERIFY2(vis.isNull(),
+             "scene.clear() must destroy the visualization item and null the QPointer - "
+             "this is why ShowDialog() must never be called once vis is null.");
 }

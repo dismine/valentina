@@ -438,9 +438,15 @@ void VWidgetDependencies::GoToObject(vidtype id) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VWidgetDependencies::SetToolCreationActive(bool active)
+{
+    m_toolCreationActive = active;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VWidgetDependencies::DeleteTool(vidtype id) const
 {
-    if (id == NULL_ID)
+    if (id == NULL_ID || m_toolCreationActive)
     {
         return;
     }
@@ -472,7 +478,7 @@ void VWidgetDependencies::DeleteTool(vidtype id) const
 //---------------------------------------------------------------------------------------------------------------------
 auto VWidgetDependencies::CanDeleteObject(vidtype id) const -> bool
 {
-    if (id == NULL_ID)
+    if (id == NULL_ID || m_toolCreationActive)
     {
         return false;
     }
