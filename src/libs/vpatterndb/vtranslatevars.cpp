@@ -167,9 +167,9 @@ void VTranslateVars::InitFunctions()
                                  translate("VTranslateVars", "hyperbolic arcus cosine function", "function acosh"));
     functionsArguments.insert(acosh_F, oneArgument);
 
-    functions.insert(atanh_F, translate("VTranslateVars", "atanh", "hyperbolic arcur tangens function"));
+    functions.insert(atanh_F, translate("VTranslateVars", "atanh", "hyperbolic arcus tangent function"));
     functionsDescriptions.insert(atanh_F,
-                                 translate("VTranslateVars", "hyperbolic arcur tangens function", "function atanh"));
+                                 translate("VTranslateVars", "hyperbolic arcus tangent function", "function atanh"));
     functionsArguments.insert(atanh_F, oneArgument);
 
     functions.insert(sinD_F, translate("VTranslateVars", "sinD", "sine function working with degrees"));
