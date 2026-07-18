@@ -38,7 +38,7 @@
     <message>
         <location filename="../../src/libs/vtools/undocommands/addpiece.cpp" line="49"/>
         <source>add detail</source>
-        <translation>darab hozzáadása</translation>
+        <translation>alkatrész hozzáadása</translation>
     </message>
 </context>
 <context>
@@ -183,7 +183,7 @@
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation type="vanished">Tizedeselválasztó</translation>
+        <translation type="vanished">Tizedeselválasztó részei</translation>
     </message>
     <message>
         <source>Default unit</source>
@@ -203,7 +203,7 @@
     </message>
     <message>
         <source>Send crash reports</source>
-        <translation type="vanished">Hibajelentések küldése</translation>
+        <translation type="vanished">Összeomlási jelentések küldése</translation>
     </message>
     <message>
         <source>Pattern Editing</source>
@@ -318,7 +318,7 @@
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="29"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="242"/>
         <source>About Valentina</source>
-        <translation>A Valentina névjegye</translation>
+        <translation>Valentina névjegy</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.ui" line="109"/>
@@ -371,7 +371,7 @@
     <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="26"/>
         <source>About Tape</source>
-        <translation>A Tape névjegye</translation>
+        <translation>Tape névjegy</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.ui" line="100"/>
@@ -492,7 +492,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="327"/>
         <source>Point at distance along line</source>
-        <translation>Pont a vonal mentén adott távolságban</translation>
+        <translation>Pont adott távolságra a vonalon</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -597,7 +597,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="412"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="364"/>
         <source>Notes</source>
-        <translation>Jegyzetek</translation>
+        <translation>Megjegyzések</translation>
     </message>
 </context>
 <context>
@@ -765,7 +765,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="695"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="490"/>
         <source>Notes</source>
-        <translation>Jegyzetek</translation>
+        <translation>Megjegyzések</translation>
     </message>
 </context>
 <context>
@@ -931,7 +931,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="688"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="479"/>
         <source>Notes</source>
-        <translation>Jegyzetek</translation>
+        <translation>Megjegyzések</translation>
     </message>
 </context>
 <context>
@@ -1173,7 +1173,7 @@
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="97"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbulkrename.h" line="153"/>
         <source>Prepend</source>
-        <translation>Elé fűzés</translation>
+        <translation>Eléfűzés</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.ui" line="107"/>
@@ -1184,7 +1184,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogbulkrename.cpp" line="182"/>
         <source>Enable renaming for this item</source>
-        <translation>Átnevezés engedélyezése ehhez az elemhez</translation>
+        <translation>Átnevezés engedélyezése ennél az elemnél</translation>
     </message>
 </context>
 <context>
@@ -1281,7 +1281,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="127"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="207"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation>Állítsa be a görbe közelítési méretarányát, 0 – globális érték használata</translation>
+        <translation>Állítsa be a görbe közelítési skáláját, 0 – globális érték használata</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="28"/>
@@ -1293,7 +1293,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="143"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="209"/>
         <source>Alias:</source>
-        <translation>Álnév:</translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="158"/>
@@ -1314,7 +1314,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="122"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="334"/>
         <source>List of points</source>
-        <translation>Pontok listája</translation>
+        <translation>A pontok listája</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="252"/>
@@ -1378,7 +1378,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="273"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="352"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation>Állítsa be a görbe közelítési méretarányát, 0 – globális érték használata</translation>
+        <translation>Állítsa be a görbe közelítési skáláját, 0 – globális érték használata</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="28"/>
@@ -1390,7 +1390,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="289"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="354"/>
         <source>Alias:</source>
-        <translation>Álnév:</translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="319"/>
@@ -1409,7 +1409,7 @@
     </message>
     <message>
         <source>Axis point</source>
-        <translation type="vanished">Tengely pont</translation>
+        <translation type="vanished">Tengelypont</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -1428,7 +1428,7 @@
     </message>
     <message>
         <source>Axis Point</source>
-        <translation type="vanished">Tengely pont</translation>
+        <translation type="vanished">Tengelypont</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -1467,7 +1467,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="227"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="350"/>
         <source>Axis point:</source>
-        <translation>Tengely pont:</translation>
+        <translation>Tengelypont:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="247"/>
@@ -1545,13 +1545,13 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="322"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="362"/>
         <source>Alias1:</source>
-        <translation>Álnév1:</translation>
+        <translation>Alias1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="336"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="363"/>
         <source>Alias2:</source>
-        <translation>Álnév2:</translation>
+        <translation>Alias2:</translation>
     </message>
 </context>
 <context>
@@ -1568,7 +1568,7 @@
     </message>
     <message>
         <source>Arc</source>
-        <translation type="vanished">Körív</translation>
+        <translation type="vanished">Ív</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -1617,7 +1617,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="227"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="302"/>
         <source>Arc:</source>
-        <translation>Körív:</translation>
+        <translation>Ív:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="243"/>
@@ -1651,13 +1651,13 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="260"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="308"/>
         <source>Alias1:</source>
-        <translation>Álnév1:</translation>
+        <translation>Alias1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="274"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="309"/>
         <source>Alias2:</source>
-        <translation>Álnév2:</translation>
+        <translation>Alias2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="288"/>
@@ -1783,13 +1783,13 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="260"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="303"/>
         <source>Alias1:</source>
-        <translation>Álnév1:</translation>
+        <translation>Alias1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="270"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="304"/>
         <source>Alias2:</source>
-        <translation>Álnév2:</translation>
+        <translation>Alias2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="280"/>
@@ -1842,7 +1842,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="284"/>
         <source>Segment a curved path</source>
-        <translation>Görbe útvonal felosztása</translation>
+        <translation>Görbeútvonal felosztása</translation>
     </message>
     <message>
         <source>Color</source>
@@ -1933,13 +1933,13 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="281"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="308"/>
         <source>Alias1:</source>
-        <translation>Álnév1:</translation>
+        <translation>Alias1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="295"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="309"/>
         <source>Alias2:</source>
-        <translation>Álnév2:</translation>
+        <translation>Alias2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="309"/>
@@ -2234,7 +2234,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="367"/>
         <source>Could not save file</source>
-        <translation>A fájlt nem lehetett menteni</translation>
+        <translation>A fájl nem menthető</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="381"/>
@@ -2564,7 +2564,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="667"/>
         <source>Measurement %1 value alias</source>
-        <translation>%1 mérés értékének álneve</translation>
+        <translation>%1 mérés értékének aliasa</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="747"/>
@@ -2634,7 +2634,7 @@
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="204"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="345"/>
         <source>Measurements</source>
-        <translation>Mérés</translation>
+        <translation>Mértékek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="220"/>
@@ -2751,7 +2751,7 @@
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="308"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="353"/>
         <source>Lengths to control points</source>
-        <translation>Hosszak a kontrollpontokhoz</translation>
+        <translation>A kontrollpontokhoz tartozó hosszértékek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="341"/>
@@ -2763,7 +2763,7 @@
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="227"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="347"/>
         <source>Preview calculations</source>
-        <translation>Számítások előnézete</translation>
+        <translation>Előzetes számítások</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="315"/>
@@ -2774,7 +2774,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="241"/>
         <source>Length to control point</source>
-        <translation>Hossz a kontrollpontig</translation>
+        <translation>A kontrollponthoz tartozó hosszértékek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="836"/>
@@ -2939,7 +2939,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1020"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="662"/>
         <source>Alias:</source>
-        <translation>Álnév:</translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1076"/>
@@ -2957,7 +2957,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarc.ui" line="1037"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarc.h" line="665"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation>Állítsa be a görbe közelítési méretarányát, 0 – globális érték használata</translation>
+        <translation>Állítsa be a görbe közelítési skáláját, 0 – globális érték használata</translation>
     </message>
 </context>
 <context>
@@ -2966,7 +2966,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="586"/>
         <source>Elliptical arc with length</source>
-        <translation>Elliptikus ív megadott hosszal</translation>
+        <translation>Elliptikus ív adott hosszal</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="28"/>
@@ -3088,13 +3088,13 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1011"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="662"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation>Állítsa be a görbe közelítési méretarányát, 0 – globális érték használata</translation>
+        <translation>Állítsa be a görbe közelítési skáláját, 0 – globális érték használata</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1027"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogellipticalarcwithlength.h" line="664"/>
         <source>Alias:</source>
-        <translation>Álnév:</translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogellipticalarcwithlength.ui" line="1064"/>
@@ -3148,7 +3148,7 @@
     </message>
     <message>
         <source>First point of line</source>
-        <translation type="vanished">Első pont a vonalon</translation>
+        <translation type="vanished">A vonal első pontja</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -3158,7 +3158,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="20"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="362"/>
         <source>Point at distance and angle</source>
-        <translation>Pont távolságra és szögben</translation>
+        <translation>Pont adott távolsággal és szöggel</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -3369,7 +3369,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="484"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="486"/>
         <source>Details</source>
-        <translation>Leírás</translation>
+        <translation>Részletek</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="402"/>
@@ -3530,7 +3530,7 @@
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="217"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogfinalmeasurements.h" line="466"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Előző keresése &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Előző &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogfinalmeasurements.ui" line="226"/>
@@ -3557,7 +3557,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="197"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="330"/>
         <source>Origin point:</source>
-        <translation>Eredeti pont:</translation>
+        <translation>Kiindulópont:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="207"/>
@@ -3568,12 +3568,12 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="234"/>
         <source>Select origin point</source>
-        <translation>Eredeti pont kiválasztása</translation>
+        <translation>Válassza ki a kiindulópontot</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="281"/>
         <source>Select origin point that is not part of the list of objects</source>
-        <translation>Válasszon kiindulópontot, amely nem része az objektumok listájának</translation>
+        <translation>Válasszon ki olyan kiindulópontot, amely nem része az objektumok listájának</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.cpp" line="374"/>
@@ -3696,7 +3696,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="283"/>
         <source>Select first line point that is not part of the list of objects</source>
-        <translation>Válassza ki az első vonalpontot, amely nem része az objektumok listájának</translation>
+        <translation>Válasszon ki olyan első vonalpontot, amely nem része az objektumok listájának</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="287"/>
@@ -3706,7 +3706,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.cpp" line="300"/>
         <source>Select second line point that is not part of the list of objects</source>
-        <translation>Válassza ki a második vonalpontot, amely nem része az objektumok listájának</translation>
+        <translation>Válasszon ki olyan második vonalpontot, amely nem része az objektumok listájának</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="14"/>
@@ -3943,13 +3943,13 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="456"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="472"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation>Állítsa be a görbe közelítési méretarányát, 0 – globális érték használata</translation>
+        <translation>Állítsa be a görbe közelítési skáláját, 0 – globális érték használata</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="482"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggraduatedcurve.h" line="475"/>
         <source>Alias:</source>
-        <translation>Álnév:</translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggraduatedcurve.ui" line="512"/>
@@ -4041,27 +4041,27 @@
     </message>
     <message>
         <source>First point of line</source>
-        <translation type="vanished">Első pont a vonalon</translation>
+        <translation type="vanished">A vonal első pontja</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation type="vanished">Második pont a vonalon</translation>
+        <translation type="vanished">A vonal második pontja</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.cpp" line="210"/>
         <source>Select first point of line</source>
-        <translation>Második pont kiválasztása</translation>
+        <translation>Válassza ki a vonal első pontját</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.cpp" line="218"/>
         <source>Select second point of line</source>
-        <translation>Második pont kiválasztása a vonalon</translation>
+        <translation>Válassza ki a vonal második pontját</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="182"/>
         <source>Perpendicular point along line</source>
-        <translation>Merőleges pont a vonal mentén</translation>
+        <translation>Merőleges pont a vonalon</translation>
     </message>
     <message>
         <source>Base Point</source>
@@ -4099,13 +4099,13 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="85"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="189"/>
         <source>First point of line:</source>
-        <translation>Első pont a vonalon:</translation>
+        <translation>A vonal első pontja:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="101"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="190"/>
         <source>Second point of line:</source>
-        <translation>Második pont a vonalon:</translation>
+        <translation>A vonal második pontja:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="111"/>
@@ -4136,11 +4136,11 @@
     <name>DialogHistory</name>
     <message>
         <source>%1 - Base point</source>
-        <translation type="vanished">%1 - Alap pont</translation>
+        <translation type="vanished">%1 - Alappont</translation>
     </message>
     <message>
         <source>Arc</source>
-        <translation type="vanished">Körív</translation>
+        <translation type="vanished">Ív</translation>
     </message>
 </context>
 <context>
@@ -4209,7 +4209,7 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1672"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1269"/>
         <source>Arc</source>
-        <translation>Körív</translation>
+        <translation>Ív</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="20"/>
@@ -4281,7 +4281,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1190"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1192"/>
         <source>Details</source>
-        <translation>Leírás</translation>
+        <translation>Részletek</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="389"/>
@@ -4493,7 +4493,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1256"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1258"/>
         <source>Curves control point lengths</source>
-        <translation>Görbék kontrollpont-hosszai</translation>
+        <translation>A görbék kontrollpontjainak hosszértékei</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="487"/>
@@ -4522,7 +4522,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1224"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1226"/>
         <source>Preview calculations</source>
-        <translation>Számítások előnézete</translation>
+        <translation>Előzetes számítások</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1238"/>
@@ -4612,7 +4612,7 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1092"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1172"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Előző keresése &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Előző &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="257"/>
@@ -4758,7 +4758,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="481"/>
         <source>File path is empty</source>
-        <translation>A fájl elérési útja üres</translation>
+        <translation>A fájlútvonal üres</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="490"/>
@@ -4773,7 +4773,7 @@
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrementscsvcolumns.cpp" line="505"/>
         <source>Please, select unique number for each column</source>
-        <translation>Kérjük, válasszon egyedi számot minden oszlophoz</translation>
+        <translation>Kérem, adjon meg egyedi számot minden oszlophoz</translation>
     </message>
 </context>
 <context>
@@ -4919,7 +4919,7 @@
     <message>
         <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="489"/>
         <source>File path is empty</source>
-        <translation>A fájl elérési útja üres</translation>
+        <translation>A fájlútvonal üres</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="499"/>
@@ -4934,7 +4934,7 @@
     <message>
         <location filename="../../src/app/tape/dialogs/dialogknownmeasurementscsvcolumns.cpp" line="514"/>
         <source>Please, select unique number for each column</source>
-        <translation>Kérjük, válasszon egyedi számot minden oszlophoz</translation>
+        <translation>Kérem, adjon meg egyedi számot minden oszlophoz</translation>
     </message>
 </context>
 <context>
@@ -5376,7 +5376,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="17"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="204"/>
         <source>Line between points</source>
-        <translation>Vonal pontok között</translation>
+        <translation>Vonal két pont között</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -5454,12 +5454,12 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.cpp" line="124"/>
         <source>Select second point of first line</source>
-        <translation>Második pont kiválasztása az első vonalon</translation>
+        <translation>Válassza ki az első vonal második pontját</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.cpp" line="132"/>
         <source>Select first point of second line</source>
-        <translation>Első pont kiválasztása a második vonalon</translation>
+        <translation>Válassza ki a második vonal első pontját</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.cpp" line="140"/>
@@ -5470,7 +5470,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="210"/>
         <source>Point at line intersection</source>
-        <translation>Pont a vonalak metszéspontjában</translation>
+        <translation>Vonalak metszéspontja</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="45"/>
@@ -5529,13 +5529,13 @@ Mégis alkalmazza a beállításokat?</translation>
     </message>
     <message>
         <source>Axis point</source>
-        <translation type="vanished">Tengely pont</translation>
+        <translation type="vanished">Tengelypont</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="254"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="321"/>
         <source>First point of line</source>
-        <translation>Első pont a vonalon</translation>
+        <translation>A vonal első pontja</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -5550,7 +5550,7 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="309"/>
         <source>Select second point of line</source>
-        <translation>Második pont kiválasztása a vonalon</translation>
+        <translation>Válassza ki a vonal második pontját</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="321"/>
@@ -5567,13 +5567,13 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="234"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="317"/>
         <source>Axis Point</source>
-        <translation>Tengely pont</translation>
+        <translation>Tengelypont</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="274"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="325"/>
         <source>Second point of line</source>
-        <translation>Második pont a vonalon</translation>
+        <translation>A vonal második pontja</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -5612,7 +5612,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="227"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="315"/>
         <source>Axis point:</source>
-        <translation>Tengely pont:</translation>
+        <translation>Tengelypont:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="247"/>
@@ -5679,7 +5679,17 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmdatabase.ui" line="83"/>
         <source>Measurements</source>
-        <translation>Mérés</translation>
+        <translation>Mérések</translation>
+    </message>
+    <message>
+        <source>Bust</source>
+        <comment>Measurement section</comment>
+        <translation type="vanished">Mellbőség</translation>
+    </message>
+    <message>
+        <source>Crotch and Rise</source>
+        <comment>Measurement section</comment>
+        <translation type="vanished">Ülep és Ülepemelkedés</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="155"/>
@@ -5822,7 +5832,7 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="832"/>
         <source>File path is empty</source>
-        <translation>A fájl elérési útja üres</translation>
+        <translation>A fájlútvonal üres</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="841"/>
@@ -5837,7 +5847,7 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmeasurementscsvcolumns.cpp" line="856"/>
         <source>Please, select unique number for each column</source>
-        <translation>Kérjük, válasszon egyedi számot minden oszlophoz</translation>
+        <translation>Kérem, adjon meg egyedi számot minden oszlophoz</translation>
     </message>
 </context>
 <context>
@@ -6063,7 +6073,7 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/dialognewmeasurements.ui" line="17"/>
         <source>New measurement file</source>
-        <translation>Új mérési fájl</translation>
+        <translation>Új mérésfájl</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialognewmeasurements.ui" line="32"/>
@@ -6201,7 +6211,7 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.cpp" line="223"/>
         <source>Select second point of line</source>
-        <translation>Második pont kiválasztása a vonalon</translation>
+        <translation>Válassza ki a vonal második pontját</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="14"/>
@@ -6211,11 +6221,11 @@ Mégis alkalmazza a beállításokat?</translation>
     </message>
     <message>
         <source>First point of line</source>
-        <translation type="vanished">Első pont a vonalon</translation>
+        <translation type="vanished">A vonal első pontja</translation>
     </message>
     <message>
         <source>Second point of line</source>
-        <translation type="vanished">Második pont a vonalon</translation>
+        <translation type="vanished">A vonal második pontja</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -6422,13 +6432,13 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="277"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="303"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation>Állítsa be a görbe közelítési méretarányát, 0 – globális érték használata</translation>
+        <translation>Állítsa be a görbe közelítési skáláját, 0 – globális érték használata</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="293"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogparallelcurve.h" line="305"/>
         <source>Alias:</source>
-        <translation>Álnév:</translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogparallelcurve.ui" line="314"/>
@@ -6608,7 +6618,7 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="81"/>
         <source>File was not saved yet.</source>
-        <translation>A fájl még nem lett mentve.</translation>
+        <translation>A fájl még nincs elmentve.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="95"/>
@@ -6621,7 +6631,7 @@ Mégis alkalmazza a beállításokat?</translation>
     </message>
     <message>
         <source>Show measurements file</source>
-        <translation type="vanished">Mérési fájl mutatása</translation>
+        <translation type="vanished">Mérésfájl megjelenítése</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="28"/>
@@ -6633,7 +6643,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="284"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="324"/>
         <source>For technical notes</source>
-        <translation>Műszaki megjegyzésekhez</translation>
+        <translation>Technikai megjegyzések</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="97"/>
@@ -7064,7 +7074,7 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2216"/>
         <source>List of details is empty!</source>
-        <translation>A darabok listája üres!</translation>
+        <translation>Az alkatrészek listája üres!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1227"/>
@@ -7362,7 +7372,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="21"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpin.h" line="91"/>
         <source>Pin tool</source>
-        <translation>Tűzőpont eszköz</translation>
+        <translation>Tűpont eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="29"/>
@@ -7380,7 +7390,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpin.h" line="89"/>
         <source>Pin</source>
-        <translation>Tűzőpont</translation>
+        <translation>Tűpont</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpin.cpp" line="117"/>
@@ -7540,7 +7550,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="479"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogplacelabel.h" line="527"/>
         <source>Place label</source>
-        <translation>Elhelyezési címke</translation>
+        <translation>Címke elhelyezése</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogplacelabel.ui" line="620"/>
@@ -7594,7 +7604,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="161"/>
         <source>Point from arc and tangent</source>
-        <translation>Pont ívből és érintőből</translation>
+        <translation>Ív és érintő metszéspontja</translation>
     </message>
     <message>
         <source>Point label</source>
@@ -7602,7 +7612,7 @@ Mégis alkalmazza a beállításokat?</translation>
     </message>
     <message>
         <source>Arc</source>
-        <translation type="vanished">Körív</translation>
+        <translation type="vanished">Ív</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.cpp" line="160"/>
@@ -7631,13 +7641,13 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="66"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="167"/>
         <source>Tangent point:</source>
-        <translation>Érintési pont:</translation>
+        <translation>Érintőpont:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="95"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromarcandtangent.h" line="168"/>
         <source>Arc:</source>
-        <translation>Körív:</translation>
+        <translation>Ív:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.ui" line="118"/>
@@ -7664,7 +7674,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="274"/>
         <source>Point from circle and tangent</source>
-        <translation>Pont körből és érintőből</translation>
+        <translation>Kör és érintő metszéspontja</translation>
     </message>
     <message>
         <source>Radius</source>
@@ -7752,7 +7762,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="277"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="295"/>
         <source>Tangent point:</source>
-        <translation>Érintési pont:</translation>
+        <translation>Érintőpont:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="300"/>
@@ -7801,13 +7811,13 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.cpp" line="252"/>
         <source>Select second point of line</source>
-        <translation>Második pont kiválasztása a vonalon</translation>
+        <translation>Válassza ki a vonal második pontját</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="283"/>
         <source>Point at intersection of arc and line</source>
-        <translation>Pont az ív és a vonal metszéspontjában</translation>
+        <translation>Ív és vonal metszéspontja</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.cpp" line="154"/>
@@ -8032,7 +8042,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="284"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="293"/>
         <source>Alias2:</source>
-        <translation>Álnév2:</translation>
+        <translation>Alias2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="123"/>
@@ -8048,7 +8058,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="286"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="292"/>
         <source>Alias1:</source>
-        <translation>Álnév1:</translation>
+        <translation>Alias1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="144"/>
@@ -8064,7 +8074,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="288"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="291"/>
         <source>Choose unique name for left sub arc</source>
-        <translation>Válasszon egyedi nevet a bal oldali részívhez</translation>
+        <translation>Adjon egyedi nevet a bal részívnek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="158"/>
@@ -8072,7 +8082,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="289"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="294"/>
         <source>Choose unique name for right sub arc</source>
-        <translation>Válasszon egyedi nevet a jobb oldali részívhez</translation>
+        <translation>Adjon egyedi nevet a jobb részívnek</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="168"/>
@@ -8331,7 +8341,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="307"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="313"/>
         <source>Alias1:</source>
-        <translation>Álnév1:</translation>
+        <translation>Alias1:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="129"/>
@@ -8339,7 +8349,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="305"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncurves.h" line="314"/>
         <source>Alias2:</source>
-        <translation>Álnév2:</translation>
+        <translation>Alias2:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncurves.ui" line="188"/>
@@ -8613,7 +8623,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="581"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="558"/>
         <source>File name:</source>
-        <translation>Fájl neve:</translation>
+        <translation>Fájlnév:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="26"/>
@@ -8625,7 +8635,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="75"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="534"/>
         <source>File format:</source>
-        <translation>Fájl formátum:</translation>
+        <translation>Fájlformátum:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="39"/>
@@ -8645,11 +8655,11 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="560"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="562"/>
         <source>File base name</source>
-        <translation>Fájl alap név</translation>
+        <translation>Fájl alapnév</translation>
     </message>
     <message>
         <source>File base name. </source>
-        <translation type="vanished">Fájl alap név.</translation>
+        <translation type="vanished">Fájl alapnév.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="42"/>
@@ -8790,17 +8800,17 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="174"/>
         <source>Tried to use out of range file format type number.</source>
-        <translation>Tartományon kívüli fájlformátumtípus-szám használata történt.</translation>
+        <translation>Érvénytelen fájlformátumtípus.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="182"/>
         <source>Selected not present file format.</source>
-        <translation>Nem létező fájlformátum lett kiválasztva.</translation>
+        <translation>Nem létező fájlformátum.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="199"/>
         <source>Selected not present file format type.</source>
-        <translation>Nem létező fájlformátumtípus lett kiválasztva.</translation>
+        <translation>Nem létező fájlformátumtípus.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="380"/>
@@ -8816,7 +8826,7 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="469"/>
         <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
-        <translation>A mappa már tartalmaz %1 nevű fájlt. Felülírja az összes ütköző fájlnevet?</translation>
+        <translation>A mappában már van %1 nevű fájl. Felülírja a konfliktusos fájlokat?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="537"/>
@@ -8837,7 +8847,7 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="100"/>
         <source>The base filename does not match a regular expression.</source>
-        <translation>Az alap fájlnév nem felel meg a reguláris kifejezésnek.</translation>
+        <translation>Az alapfájlnév nem felel meg a mintának.</translation>
     </message>
 </context>
 <context>
@@ -8870,7 +8880,7 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="78"/>
         <source>File format:</source>
-        <translation>Fájl formátum:</translation>
+        <translation>Fájlformátum:</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="119"/>
@@ -8920,18 +8930,18 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="230"/>
         <source>File name:</source>
-        <translation>Fájl neve:</translation>
+        <translation>Fájlnév:</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="243"/>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.ui" line="246"/>
         <source>File base name</source>
-        <translation>Fájl alap név</translation>
+        <translation>Fájl alapnév</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="101"/>
         <source>The base filename does not match a regular expression.</source>
-        <translation>Az alap fájlnév nem felel meg a reguláris kifejezésnek.</translation>
+        <translation>Az alapfájlnév nem felel meg a mintának.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="145"/>
@@ -8941,17 +8951,17 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="190"/>
         <source>Tried to use out of range file format type number.</source>
-        <translation>Tartományon kívüli fájlformátumtípus-szám használata történt.</translation>
+        <translation>Érvénytelen fájlformátumtípus.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="198"/>
         <source>Selected not present file format.</source>
-        <translation>Nem létező fájlformátum lett kiválasztva.</translation>
+        <translation>Nem létező fájlformátum.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="215"/>
         <source>Selected not present file format type.</source>
-        <translation>Nem létező fájlformátumtípus lett kiválasztva.</translation>
+        <translation>Nem létező fájlformátumtípus.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="388"/>
@@ -8966,7 +8976,7 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="528"/>
         <source>Folder already contain file with name %1. Rewrite all conflict file names?</source>
-        <translation>A mappa már tartalmaz %1 nevű fájlt. Felülírja az összes ütköző fájlnevet?</translation>
+        <translation>A mappában már van %1 nevű fájl. Felülírja a konfliktusos fájlokat?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/dialogsavemanuallayout.cpp" line="587"/>
@@ -9222,12 +9232,12 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3819"/>
         <source>Pins</source>
-        <translation>Tűzőpontok</translation>
+        <translation>Tűpontok</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4242"/>
         <source>no pin</source>
-        <translation>nincs tűzőpont</translation>
+        <translation>nincs tűpont</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2258"/>
@@ -9343,7 +9353,7 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3823"/>
         <source>Place label</source>
-        <translation>Elhelyezési címke</translation>
+        <translation>Címke elhelyezése</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="642"/>
@@ -9548,7 +9558,7 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5311"/>
         <source>Measurement %1 value alias</source>
-        <translation>%1 mérés értékének álneve</translation>
+        <translation>%1 mérés értékének aliasa</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5621"/>
@@ -9701,7 +9711,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="105"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="106"/>
         <source>Select measurements type</source>
-        <translation>Válassza ki a mérések típusát</translation>
+        <translation>Válassza ki a méréstípust</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="52"/>
@@ -9887,18 +9897,18 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.cpp" line="213"/>
         <source>Select first point of line</source>
-        <translation>Második pont kiválasztása</translation>
+        <translation>Válassza ki a vonal első pontját</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.cpp" line="221"/>
         <source>Select second point of line</source>
-        <translation>Második pont kiválasztása a vonalon</translation>
+        <translation>Válassza ki a vonal második pontját</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="315"/>
         <source>Special point on shoulder</source>
-        <translation>Speciális pont a vállon</translation>
+        <translation>Speciális vállpont</translation>
     </message>
     <message>
         <source>Line color</source>
@@ -10220,7 +10230,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="894"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="653"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation>Állítsa be a görbe közelítési méretarányát, 0 – globális érték használata</translation>
+        <translation>Állítsa be a görbe közelítési skáláját, 0 – globális érték használata</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="31"/>
@@ -10232,7 +10242,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="910"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="655"/>
         <source>Alias:</source>
-        <translation>Álnév:</translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="940"/>
@@ -10247,7 +10257,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="700"/>
         <source>Curved path</source>
-        <translation>Görbe útvonal</translation>
+        <translation>Görbeútvonal</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="869"/>
@@ -10439,7 +10449,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1020"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="780"/>
         <source>Set approximation scale for this curve, 0 - use global value</source>
-        <translation>Állítsa be a görbe közelítési méretarányát, 0 – globális érték használata</translation>
+        <translation>Állítsa be a görbe közelítési skáláját, 0 – globális érték használata</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="46"/>
@@ -10451,7 +10461,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1036"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="782"/>
         <source>Alias:</source>
-        <translation>Álnév:</translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="1062"/>
@@ -10660,7 +10670,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="194"/>
         <source>True darts</source>
-        <translation>Valódi varrásbevarrások</translation>
+        <translation>Szűkítők kiegyenlítése</translation>
     </message>
     <message>
         <source>First base point</source>
@@ -10678,17 +10688,17 @@ Mégis alkalmazza a beállításokat?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.cpp" line="241"/>
         <source>Select the first dart point</source>
-        <translation>Válassza ki az első varrásbevarrás-pontot</translation>
+        <translation>Válassza ki az első szűkítőpontot</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.cpp" line="255"/>
         <source>Select the second dart point</source>
-        <translation>Válassza ki a második varrásbevarrás-pontot</translation>
+        <translation>Válassza ki a második szűkítőpontot</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.cpp" line="271"/>
         <source>Select the third dart point</source>
-        <translation>Válassza ki a harmadik varrásbevarrás-pontot</translation>
+        <translation>Válassza ki a harmadik szűkítőpontot</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="43"/>
@@ -10706,25 +10716,25 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="75"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="197"/>
         <source>First dart point:</source>
-        <translation>Első bevarráspont:</translation>
+        <translation>Első szűkítőpont:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="85"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="198"/>
         <source>Second dart point:</source>
-        <translation>Második bevarráspont:</translation>
+        <translation>Második szűkítőpont:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="114"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="199"/>
         <source>Third dart point:</source>
-        <translation>Harmadik bevarráspont:</translation>
+        <translation>Harmadik szűkítőpont:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="130"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="200"/>
         <source>First new dart point:</source>
-        <translation>Első új bevarráspont:</translation>
+        <translation>Első új szűkítőpont:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="137"/>
@@ -10746,7 +10756,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="147"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="205"/>
         <source>Second new dart point:</source>
-        <translation>Második új bevarráspont:</translation>
+        <translation>Második új szűkítőpont:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.ui" line="28"/>
@@ -10800,7 +10810,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.ui" line="17"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoguniondetails.h" line="71"/>
         <source>Union tool</source>
-        <translation>Egyesítés eszköz</translation>
+        <translation>Darabok egyesítése eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.cpp" line="105"/>
@@ -11012,52 +11022,52 @@ Mégis alkalmazza a beállításokat?</translation>
 <context>
     <name>MApplication</name>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="370"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="403"/>
         <source>Error parsing file. Program will be terminated.</source>
-        <translation>Hiba a fájl elemzése közben. A program leáll.</translation>
+        <translation>Fájl‑feldolgozási hiba. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="376"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="409"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Hiba: hibás azonosító. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="382"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="415"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Hiba: az érték nem alakítható át. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="388"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="421"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Hiba: üres paraméter. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="394"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="427"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Hiba: hibás azonosító. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="407"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="440"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Valami nincs rendben!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="420"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="453"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Elemzési hiba: %1. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="425"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="458"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Kivétel történt: %1. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="642"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="675"/>
         <source>Valentina&apos;s measurements editor.</source>
         <translation>A Valentina mérésszerkesztője.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1040"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1073"/>
         <source>The measurement file.</source>
         <translation>A mérésfájl.</translation>
     </message>
@@ -11074,99 +11084,99 @@ Mégis alkalmazza a beállításokat?</translation>
         <translation type="vanished">Szabásminta egység</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1290"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1323"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation>Érvénytelen alapméret-argumentum. cm, mm vagy hüvelyk lehet.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1086"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1119"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Nem lehet megkezdeni a bejövő kapcsolatok figyelését a(z) &apos;%1&apos; néven</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1206"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1239"/>
         <source>Please, provide one input file.</source>
-        <translation>Kérjük, adjon meg egy bemeneti fájlt.</translation>
+        <translation>Kérem, adjon meg egy bemeneti fájlt.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1062"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1095"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
-        <translation>Egységteszteléshez használható. Elindítja a programot, és megnyit egy fájlt a főablak megjelenítése nélkül.</translation>
+        <translation>Teszteléshez, fájl megnyitása főablak nélkül.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1065"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1098"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Nagy DPI-skálázás letiltása. Használja ezt a beállítást, ha probléma van a skálázással (alapértelmezés szerint a skálázás engedélyezve van). Másik lehetőségként használhatja a(z) %1 környezeti változót.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1044"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1077"/>
         <source>Set base for dimension A in the table units.</source>
         <translation>Az A dimenzió alapértékének beállítása a táblázat mértékegységében.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1045"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1078"/>
         <source>The dimension A base</source>
         <translation>Az A dimenzió alapértéke</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1048"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1081"/>
         <source>Set base for dimension B in the table units.</source>
         <translation>A B dimenzió alapértékének beállítása a táblázat mértékegységében.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1049"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1082"/>
         <source>The dimension B base</source>
         <translation>A B dimenzió alapértéke</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1052"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1085"/>
         <source>Set base for dimension C in the table units.</source>
         <translation>A C dimenzió alapértékének beállítása a táblázat mértékegységében.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1053"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1086"/>
         <source>The dimension C base</source>
         <translation>A C dimenzió alapértéke</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1056"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1089"/>
         <source>Set pattern file units: cm, mm, inch.</source>
-        <translation>A mintafájl mértékegységének beállítása: cm, mm, hüvelyk.</translation>
+        <translation>Mintaegységek beállítása: cm, mm, inch.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1057"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1090"/>
         <source>The pattern units</source>
         <translation>A minta mértékegysége</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1059"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1092"/>
         <source>Activate known measurements mode.</source>
         <translation>Ismert mérések mód aktiválása.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1229"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1262"/>
         <source>Invalid dimension A base value.</source>
         <translation>Érvénytelen A dimenzió alapérték.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1250"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1283"/>
         <source>Invalid dimension B base value.</source>
         <translation>Érvénytelen B dimenzió alapérték.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1271"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1304"/>
         <source>Invalid dimension C base value.</source>
         <translation>Érvénytelen C dimenzió alapérték.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="413"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="446"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Képlet-figyelmeztetés: %1. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1104"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1137"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
-        <translation>A tesztmód nem támogatja több fájl megnyitását.</translation>
+        <translation>Tesztmódban nem nyitható több fájl.</translation>
     </message>
 </context>
 <context>
@@ -11191,7 +11201,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2043"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1621"/>
         <source>Perpendicular point along line</source>
-        <translation>Merőleges pont a vonal mentén</translation>
+        <translation>Merőleges pont a vonalon</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1971"/>
@@ -11203,13 +11213,13 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1773"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1606"/>
         <source>Point at distance and angle</source>
-        <translation>Pont távolságra és szögben</translation>
+        <translation>Pont adott távolsággal és szöggel</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1935"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1615"/>
         <source>Point at distance along line</source>
-        <translation>Pont a vonal mentén távolságra</translation>
+        <translation>Pont adott távolságra a vonalon</translation>
     </message>
     <message>
         <source>Line</source>
@@ -11219,19 +11229,19 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2115"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1625"/>
         <source>Line between points</source>
-        <translation>Vonal pontok között</translation>
+        <translation>Vonal két pont között</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2097"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1624"/>
         <source>Point at line intersection</source>
-        <translation>Pont a vonalak metszéspontjában</translation>
+        <translation>Vonalak metszéspontja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1845"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1610"/>
         <source>Arc</source>
-        <translation>Körív</translation>
+        <translation>Ív</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="60"/>
@@ -11253,7 +11263,7 @@ Mégis alkalmazza a beállításokat?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="136"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2625"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2629"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1674"/>
         <source>Measurements</source>
         <translation>Mérés</translation>
@@ -11268,7 +11278,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/app/valentina/mainwindow.ui" line="205"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1680"/>
         <source>Toolbar files</source>
-        <translation>Fájlok eszköztár</translation>
+        <translation>Fájleszköztár</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="232"/>
@@ -11412,11 +11422,11 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/app/valentina/mainwindow.ui" line="745"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1422"/>
         <source>Open file with pattern</source>
-        <translation>Fájl megnyitása szabásmintával</translation>
+        <translation>Minta megnyitása fájlból</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="762"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6288"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6257"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1427"/>
         <source>Save</source>
         <translation>Mentés</translation>
@@ -11507,7 +11517,7 @@ Mégis alkalmazza a beállításokat?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2651"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8635"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8616"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1659"/>
         <source>Auto-arrange labels</source>
         <translation>Címkék automatikus elrendezése</translation>
@@ -11528,7 +11538,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2683"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1664"/>
         <source>Elliptical arc with given length</source>
-        <translation>Elliptikus ív adott hosszal</translation>
+        <translation>Elliptikus ív adott ívhosszal</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2701"/>
@@ -11562,11 +11572,11 @@ Mégis alkalmazza a beállításokat?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="836"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2106"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4382"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2110"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4346"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1440"/>
         <source>Details</source>
-        <translation>Leírás</translation>
+        <translation>Alkatrészek</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="863"/>
@@ -11584,7 +11594,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/app/valentina/mainwindow.ui" line="884"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1450"/>
         <source>Add new pattern piece</source>
-        <translation>Új szabásminta rész hozzáadása</translation>
+        <translation>Új szabásmintadarab hozzáadása</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="905"/>
@@ -11608,7 +11618,7 @@ Mégis alkalmazza a beállításokat?</translation>
         <location filename="../../src/app/valentina/mainwindow.ui" line="978"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1465"/>
         <source>&amp;About Valentina</source>
-        <translation>A Valentina &amp;névjegye</translation>
+        <translation>Valentina &amp;névjegy</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="992"/>
@@ -11684,108 +11694,108 @@ Mégis alkalmazza a beállításokat?</translation>
         <translation type="vanished">Online súgó</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5303"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5671"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5272"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5640"/>
         <source>Pattern piece %1</source>
         <translation>Mintadarab %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1260"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1288"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1299"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1313"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1264"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1292"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1303"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1317"/>
         <source>Select point</source>
         <translation>Pont kiválasztása</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1273"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1277"/>
         <source>Select first point</source>
         <translation>Első pont kiválasztása</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1327"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1475"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1839"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1331"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1479"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1843"/>
         <source>Select first point of line</source>
-        <translation>Második pont kiválasztása</translation>
+        <translation>Válassza ki a vonal első pontját</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1341"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1345"/>
         <source>Select first point of angle</source>
         <translation>Válassza ki a szög első pontját</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1355"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1359"/>
         <source>Select first point of first line</source>
         <translation>Válassza ki az első vonal első pontját</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1369"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1373"/>
         <source>Select first point curve</source>
         <translation>Válassza ki a görbe első pontját</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1393"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1397"/>
         <source>Select simple curve</source>
         <translation>Válasszon egyszerű görbét</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1407"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1411"/>
         <source>Select point of center of arc</source>
         <translation>Válassza ki az ív középpontját</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1436"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1440"/>
         <source>Select point of curve path</source>
         <translation>Válassza ki a görbe útvonal pontját</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1461"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1465"/>
         <source>Select curve path</source>
         <translation>Válasszon görbe útvonalat</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1533"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1537"/>
         <source>Select base point</source>
         <translation>Alappont kiválasztása</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1547"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1551"/>
         <source>Select first point of axis</source>
         <translation>Válassza ki a tengely első pontját</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1576"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1595"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1580"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1599"/>
         <source>Select detail</source>
         <translation>Válasszon darabot</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1631"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1643"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1655"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1667"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1947"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1635"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1647"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1659"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1671"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1951"/>
         <source>Select one or more objects, &lt;b&gt;%1&lt;/b&gt; - confirm selection</source>
         <translation>Válasszon ki egy vagy több objektumot, &lt;b&gt;%1&lt;/b&gt; – kiválasztás megerősítése</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1827"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1861"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1960"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1970"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1831"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1865"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1964"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1974"/>
         <source>Select arc</source>
         <translation>Válasszon ívet</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1849"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1994"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2005"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1853"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1998"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2009"/>
         <source>Select curve</source>
         <translation>Válasszon görbét</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6715"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6684"/>
         <source>About Qt</source>
         <translation>A Qt névjegye</translation>
     </message>
@@ -11794,68 +11804,67 @@ Mégis alkalmazza a beállításokat?</translation>
         <translation type="vanished">Szabásminta rész:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4533"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4497"/>
         <source>pattern</source>
         <translation>minta</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4540"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4504"/>
         <source>Save as</source>
         <translation>Mentés másként</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3032"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3036"/>
         <source>Could not save file</source>
-        <translation>A fájlt nem lehetett menteni</translation>
+        <translation>A fájl nem menthető</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2397"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2664"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4640"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7548"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2401"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2668"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4604"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7517"/>
         <source>Open file</source>
         <translation>Fájl megnyitása</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3155"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3183"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3118"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3146"/>
         <source>Error parsing file.</source>
-        <translation>Hiba a fájl elemzése közben.</translation>
+        <translation>Fájl‑feldolgozási hiba.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3162"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3125"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Hiba: az érték nem alakítható át.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3169"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5142"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3132"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5111"/>
         <source>Error empty parameter.</source>
         <translation>Hiba: üres paraméter.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3140"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3176"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3139"/>
         <source>Error wrong id.</source>
         <translation>Hiba: hibás azonosító.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3190"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3153"/>
         <source>Error parsing file (std::bad_alloc).</source>
-        <translation>Hiba a fájl elemzése közben (std::bad_alloc).</translation>
+        <translation>Fájl‑feldolgozási hiba (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5131"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5100"/>
         <source>Bad id.</source>
         <translation>Hibás azonosító.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6119"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6088"/>
         <source>File saved</source>
         <translation>Fájl mentve</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8090"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8071"/>
         <source>untitled.val</source>
         <translation>névtelen.val</translation>
     </message>
@@ -11865,30 +11874,30 @@ Do you want to save your changes?</source>
         <translation type="vanished">A szabásminta módosult. El akarod menteni a módosításokat?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2094"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6335"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2098"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6304"/>
         <source>&amp;Undo</source>
         <translation>&amp;Visszavonás</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2095"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6350"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2099"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6319"/>
         <source>&amp;Redo</source>
         <translation>Mé&amp;gis</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6889"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6858"/>
         <source>Pattern piece:</source>
         <translation>Szabásminta rész:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6891"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6860"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Adjon meg egy új címkét a mintadarabhoz.</translation>
     </message>
     <message>
         <source>This file already opened in another window.</source>
-        <translation type="vanished">A fájl újra megnyitása egy másik ablakban.</translation>
+        <translation type="vanished">A fájl már meg van nyitva egy másik ablakban.</translation>
     </message>
     <message>
         <source>Wrong units.</source>
@@ -11897,30 +11906,30 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="888"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="936"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6990"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7181"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6959"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7150"/>
         <source>File error.</source>
-        <translation>Fájl hiba.</translation>
+        <translation>Fájlhiba.</translation>
     </message>
     <message>
         <source>File loaded</source>
         <translation type="vanished">Fájl betöltve</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7510"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7479"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
-        <translation>A Valentina nem állt le megfelelően. Szeretné újra megnyitni a korábban nyitva lévő fájlokat (%1)?</translation>
+        <translation>A Valentina nem zárult le megfelelően. Újranyitja a korábbi fájlokat (%1)?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7512"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7481"/>
         <source>Reopen files.</source>
-        <translation>Fájl újranyitása.</translation>
+        <translation>Fájlok újranyitása.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1989"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1618"/>
         <source>Special point on shoulder</source>
-        <translation>Speciális pont a vállon</translation>
+        <translation>Speciális vállpont</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2007"/>
@@ -11950,7 +11959,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2187"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1629"/>
         <source>Curved path</source>
-        <translation>Görbe útvonal</translation>
+        <translation>Görbeútvonal</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2151"/>
@@ -11962,7 +11971,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1917"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1614"/>
         <source>Segment a curved path</source>
-        <translation>Görbe útvonal felosztása</translation>
+        <translation>Görbeútvonal felosztása</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1863"/>
@@ -11980,7 +11989,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2457"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1644"/>
         <source>Union tool</source>
-        <translation>Egyesítés eszköz</translation>
+        <translation>Darabok egyesítése eszköz</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1142"/>
@@ -11995,7 +12004,7 @@ Do you want to save your changes?</source>
         <translation>Az utoljára használt eszköz ismételt aktiválása</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1562"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1566"/>
         <source>Select point for X value (vertical)</source>
         <translation>Válasszon pontot az X értékhez (függőleges)</translation>
     </message>
@@ -12053,19 +12062,19 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2277"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1634"/>
         <source>Point from circle and tangent</source>
-        <translation>Pont körből és érintőből</translation>
+        <translation>Kör és érintő metszéspontja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2259"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1633"/>
         <source>Point from arc and tangent</source>
-        <translation>Pont ívből és érintőből</translation>
+        <translation>Ív és érintő metszéspontja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2223"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1631"/>
         <source>Arc with given length</source>
-        <translation>Ív adott hosszal</translation>
+        <translation>Ív adott ívhosszal</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="337"/>
@@ -12120,47 +12129,47 @@ Do you want to save your changes?</source>
         <translation>Eredeti elrendezés exportálása</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1873"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1877"/>
         <source>Select first an arc</source>
         <translation>Válassza ki az első ívet</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1928"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1932"/>
         <source>Select point of the center of the arc</source>
         <translation>Válassza ki az ív középpontját</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1938"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1942"/>
         <source>Select the first base line point</source>
         <translation>Válassza ki az alapvonal első pontját</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4347"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4311"/>
         <source>Detail mode</source>
         <translation>Darab mód</translation>
     </message>
     <message>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4404"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4417"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4440"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4453"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4476"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4673"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4752"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7438"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4637"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4716"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7407"/>
         <source>Layout mode</source>
         <translation>Elrendezés mód</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6277"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6246"/>
         <source>Unsaved changes</source>
         <translation>Módosítások nem lettek elmentve</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2423"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2427"/>
         <source>Measurements loaded</source>
         <translation>Mérések betöltve</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7738"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7719"/>
         <source>You can&apos;t export empty scene.</source>
         <translation>Üres jelenet nem exportálható.</translation>
     </message>
@@ -12168,20 +12177,20 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1731"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1600"/>
         <source>Create new Layout</source>
-        <translation>Új elrendezés létrehozása</translation>
+        <translation>Új Elrendezés létrehozása</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4567"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4531"/>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation>A zárolás nem lehetséges, a fájl meg van nyitva egy másik ablakban.</translation>
+        <translation>Zárolás sikertelen. A fájl már meg van nyitva egy másik ablakban.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3074"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3078"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation>A zárolás sikertelen. Ez a fájl már meg van nyitva egy másik ablakban. Két programpéldány futtatásakor ütközések várhatók.</translation>
+        <translation>Zárolás sikertelen. A fájl már meg van nyitva egy másik ablakban. 2 programpéldány ütközést okozhat.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7658"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7627"/>
         <source>Measurement file has unknown format.</source>
         <translation>A mérésfájl formátuma ismeretlen.</translation>
     </message>
@@ -12191,45 +12200,45 @@ Do you want to save your changes?</source>
         <translation>A mérésfájlok típusai nem egyeznek.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2602"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2606"/>
         <source>Couldn&apos;t sync measurements.</source>
         <translation>A mérések szinkronizálása nem sikerült.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5452"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5421"/>
         <source>Couldn&apos;t update measurements.</source>
         <translation>A mérések frissítése nem sikerült.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7108"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7125"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7077"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7094"/>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
         <translation>A(z) &apos;%1&apos; mérésfájl nem található.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7579"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7548"/>
         <source>Loading measurements file</source>
         <translation>Mérésfájl betöltése</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7921"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7964"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8007"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7902"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7945"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7988"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation>A(z) %1 metódus semmit sem tesz grafikus felület módban</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7421"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7477"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7786"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7826"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7390"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7446"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7767"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7807"/>
         <source>Export error.</source>
         <translation>Exportálási hiba.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8034"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8015"/>
         <source>Please, provide one input file.</source>
-        <translation>Kérjük, adjon meg egy bemeneti fájlt.</translation>
+        <translation>Kérem, adjon meg egy bemeneti fájlt.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1205"/>
@@ -12268,12 +12277,12 @@ Do you want to save your changes?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2484"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2488"/>
         <source>Measurements unloaded</source>
         <translation>Mérések eltávolítva</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2491"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2495"/>
         <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
         <translation>A mérések nem távolíthatók el. Néhányukat használja a minta.</translation>
     </message>
@@ -12281,7 +12290,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2403"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1641"/>
         <source>True darts</source>
-        <translation>Valódi varrásbevarrások</translation>
+        <translation>Szűkítők kiegyenlítése</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="605"/>
@@ -12303,7 +12312,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Mentés...</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6293"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6262"/>
         <source>Don&apos;t Save</source>
         <translation>Ne mentse</translation>
     </message>
@@ -12314,7 +12323,7 @@ Do you want to save your changes?</source>
         <translation>Görbék metszéspontja</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1895"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1899"/>
         <source>Select first curve</source>
         <translation>Válassza ki az első görbét</translation>
     </message>
@@ -12322,15 +12331,15 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2169"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1628"/>
         <source>Curve tool which uses point as control handle</source>
-        <translation>Görbe eszköz, amely pontot használ vezérlőfogantyúként</translation>
+        <translation>Görbe pontvezérléssel</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1379"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1383"/>
         <source>Select first curve point</source>
         <translation>Válassza ki az első görbepontot</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1447"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1451"/>
         <source>Select point of cubic bezier path</source>
         <translation>Válassza ki a köbös Bézier útvonal pontját</translation>
     </message>
@@ -12346,7 +12355,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2349"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1638"/>
         <source>Rotate objects</source>
-        <translation>Objektumok forgatása</translation>
+        <translation>Objektumok elforgatása</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1122"/>
@@ -12362,7 +12371,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2079"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1623"/>
         <source>Midpoint between two points</source>
-        <translation>Felezőpont két pont között</translation>
+        <translation>Két pont középpontja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="401"/>
@@ -12371,16 +12380,16 @@ Do you want to save your changes?</source>
         <translation>Csoport</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2102"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4302"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2106"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4266"/>
         <source>Contains all visibility groups</source>
-        <translation>Tartalmazza az összes láthatósági csoportot</translation>
+        <translation>Minden láthatósági csoportot tartalmaz</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2107"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4384"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2111"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4348"/>
         <source>Show which details will go in layout</source>
-        <translation>Megmutatja, mely darabok kerülnek az elrendezésbe</translation>
+        <translation>Az elrendezésbe kerülő alkatrészek megjelenítése</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1077"/>
@@ -12391,24 +12400,24 @@ Do you want to save your changes?</source>
         <translation>Eredeti méret</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1884"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1888"/>
         <source>Select first circle center</source>
         <translation>Válassza ki az első kör középpontját</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1906"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1917"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1910"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1921"/>
         <source>Select point on tangent</source>
         <translation>Válasszon pontot az érintőn</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2097"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3283"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2101"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3246"/>
         <source>Pattern Piece:</source>
         <translation>Szabásminta rész:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7574"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7543"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation>A mérésfájl &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; nem található. Szeretné frissíteni a fájl helyét?</translation>
     </message>
@@ -12431,12 +12440,12 @@ Do you want to save your changes?</source>
         <translation>Objektumok mozgatása</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2626"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2630"/>
         <source>Measurements were changed. Do you want to sync measurements now?</source>
         <translation>A mérések megváltoztak. Szeretné most szinkronizálni a méréseket?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2588"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2592"/>
         <source>Measurements have been synced</source>
         <translation>A mérések szinkronizálva lettek</translation>
     </message>
@@ -12447,22 +12456,22 @@ Do you want to save your changes?</source>
         <translation>Elliptikus ív</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1421"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1425"/>
         <source>Select point of center of elliptical arc</source>
         <translation>Válassza ki az elliptikus ív középpontját</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1489"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1493"/>
         <source>Select main path objects clockwise.</source>
         <translation>Válassza ki a fő útvonal objektumait az óramutató járásával megegyezően.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4610"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4574"/>
         <source>Could not save the file</source>
-        <translation>Nem sikerült menteni a fájlt</translation>
+        <translation>A fájl nem menthető</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8140"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8121"/>
         <source>read only</source>
         <translation>csak olvasható</translation>
     </message>
@@ -12527,22 +12536,22 @@ Do you want to save your changes?</source>
         <translation>Mérések eltávolítása, ha nem használták őket a mintafájlban</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2381"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7620"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7634"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2385"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7589"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7603"/>
         <source>Individual measurements</source>
         <translation>Egyéni mérések</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2387"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7620"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7634"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2391"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7589"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7603"/>
         <source>Multisize measurements</source>
         <translation>Méretsorozat-mérések</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4539"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4626"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4503"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4590"/>
         <source>Pattern files</source>
         <translation>Mintafájlok</translation>
     </message>
@@ -12550,18 +12559,18 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2511"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1647"/>
         <source>Pin tool</source>
-        <translation>Tűzőpont eszköz</translation>
+        <translation>Tűpont eszköz</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1510"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1514"/>
         <source>Select pin point</source>
-        <translation>Válassza ki a tűzőpontot</translation>
+        <translation>Válassza ki a tűpontot</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2529"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1648"/>
         <source>Insert node tool</source>
-        <translation>Csomópont-beszúró eszköz</translation>
+        <translation>Csomópont beszúrása eszköz</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1317"/>
@@ -12570,37 +12579,37 @@ Do you want to save your changes?</source>
         <translation>A Tape alkalmazás megnyitása mérésfájl létrehozásához vagy szerkesztéséhez</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3471"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3434"/>
         <source>Point at the intersections of lines/axis tools</source>
         <translation>Vonalak/tengelyek metszéspontja eszközök</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3514"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3477"/>
         <source>Point segmenting curves/arcs tools</source>
-        <translation>Görbéket/íveket felosztó pont eszközök</translation>
+        <translation>Görbét/ívet felosztó eszközök</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3528"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3491"/>
         <source>Points intersecting with 2 curves/arcs/circles tools</source>
-        <translation>2 görbével/ívvel/körrel metsző pont eszközök</translation>
+        <translation>Metszéspont eszközök 2 görbe/ív/kör esetén</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4348"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4312"/>
         <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
         <translation>A Darab mód még nem használható. Kérjük, hozzon létre legalább egy munkadarabot.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4441"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4405"/>
         <source>You can&apos;t use Layout mode yet. Please, create at least one workpiece.</source>
         <translation>Az Elrendezés mód még nem használható. Kérjük, hozzon létre legalább egy munkadarabot.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4454"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4418"/>
         <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
         <translation>Az Elrendezés mód még nem használható. Kérjük, vegyen fel legalább egy darabot az elrendezésbe.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4477"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4441"/>
         <source>You can&apos;t use Layout mode yet.</source>
         <translation>Az Elrendezés mód még nem használható.</translation>
     </message>
@@ -12620,28 +12629,28 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2565"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1650"/>
         <source>Export details skiping the Layout stage</source>
-        <translation>Darabok exportálása az Elrendezés szakasz kihagyásával</translation>
+        <translation>Alkatrészek exportálása az Elrendezés kihagyásával</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4674"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4753"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7439"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4638"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4717"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7408"/>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
-        <translation>Nincs elég darab az exportáláshoz. Kérjük, vegyen fel legalább egy darabot az elrendezésbe.</translation>
+        <translation>Nincs elég alkatrész az exportáláshoz. Kérjük, vegyen fel legalább egy alkatrészt az elrendezésbe.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4687"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4766"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7452"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4651"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4730"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7421"/>
         <source>Export details</source>
-        <translation>Leírás exportálása</translation>
+        <translation>Alkatrészek exportálása</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4687"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4766"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7452"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4651"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4730"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7421"/>
         <source>Can&apos;t export details.</source>
-        <translation>Nem lehetett exportálni a leírást.</translation>
+        <translation>Nem lehetett exportálni az alkatrészeket.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1400"/>
@@ -12680,7 +12689,7 @@ Do you want to save your changes?</source>
         <translation>Exportálás másként…</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6287"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6256"/>
         <source>Save…</source>
         <translation>Mentés…</translation>
     </message>
@@ -12697,17 +12706,17 @@ Do you want to save your changes?</source>
         <translation>Végső mérések exportálása CSV-be</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7748"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7729"/>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
         <translation>Üres jelenet nem exportálható. Kérjük, vegyen fel legalább egy darabot az elrendezésbe.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7854"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7835"/>
         <source>Export final measurements error.</source>
         <translation>Hiba a végső mérések exportálásakor.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7855"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7836"/>
         <source>Destination path is empty.</source>
         <translation>A célútvonal üres.</translation>
     </message>
@@ -12739,7 +12748,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1711"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1597"/>
         <source>Tool &quot;Select&quot;</source>
-        <translation>„Kiválasztás” eszköz</translation>
+        <translation>„Kijelölés” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1728"/>
@@ -12757,26 +12766,26 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2547"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1649"/>
         <source>Place label tool</source>
-        <translation>Elhelyezési címke eszköz</translation>
+        <translation>Címke elhelyezése eszköz</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2475"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1645"/>
         <source>Duplicate detail tool</source>
-        <translation>Darab duplikálása eszköz</translation>
+        <translation>Alkatrész másolata eszköz</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1520"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1524"/>
         <source>Select placelabel center point</source>
-        <translation>Válassza ki a címke középpontját</translation>
+        <translation>Válassza ki a darabcímke középpontját</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7139"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7108"/>
         <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
         <translation>A(z) &apos;%1&apos; mérésfájl nem található, vagy nem nyújt elegendő információt.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3241"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3204"/>
         <source>Scale:</source>
         <translation>Méretarány:</translation>
     </message>
@@ -12786,12 +12795,12 @@ Do you want to save your changes?</source>
         <translation>Hozzon létre új mintadarabot a munka megkezdéséhez.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2096"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2100"/>
         <source>Changes applied.</source>
         <translation>Módosítások alkalmazva.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6263"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6232"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Beállítást nem sikerült elmenteni. Hozzáférés megtagadva.</translation>
     </message>
@@ -12802,17 +12811,17 @@ Do you want to save your changes?</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6238"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6207"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>A beállítások nem olvashatók hibás .INI fájlból.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1501"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1505"/>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
         <translation>Válassza ki az útvonal objektumait, &lt;b&gt;%1&lt;/b&gt; – görbe irányának megfordítása</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1619"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1623"/>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation>Válasszon ki egy vagy több objektumot, tartsa lenyomva a(z) &lt;b&gt;%1&lt;/b&gt; gombot a többszörös kiválasztáshoz, &lt;b&gt;%2&lt;/b&gt; – létrehozás befejezése</translation>
     </message>
@@ -12847,30 +12856,30 @@ Do you want to save your changes?</source>
         <translation>Címkék elrejtése</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2101"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4300"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2105"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4264"/>
         <source>Groups of visibility</source>
         <translation>Láthatósági csoportok</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1523"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5645"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5614"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1565"/>
         <source>Export recipe</source>
         <translation>Recept exportálása</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5643"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5612"/>
         <source>Recipe files</source>
         <translation>Receptfájlok</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5645"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5614"/>
         <source>recipe</source>
         <translation>recept</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5658"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5627"/>
         <source>Could not save recipe. %1</source>
         <translation>A recept nem menthető. %1</translation>
     </message>
@@ -12878,7 +12887,7 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1899"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1613"/>
         <source>Curved path tool which uses point as control handle</source>
-        <translation>Görbe útvonal eszköz, amely pontot használ vezérlőfogantyúként</translation>
+        <translation>Görbeútvonal pontvezérléssel</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1809"/>
@@ -12900,7 +12909,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="413"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8550"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8531"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1691"/>
         <source>Pattern messages</source>
         <translation>Mintaüzenetek</translation>
@@ -12918,27 +12927,27 @@ Do you want to save your changes?</source>
         <translation>Szűrő</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8525"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8506"/>
         <source>DEBUG</source>
         <translation>DEBUG</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8528"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8509"/>
         <source>WARNING</source>
         <translation>FIGYELMEZTETÉS</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8531"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8512"/>
         <source>CRITICAL</source>
         <translation>KRITIKUS</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8534"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8515"/>
         <source>FATAL</source>
         <translation>VÉGZETES</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8537"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8518"/>
         <source>INFO</source>
         <translation>INFÓ</translation>
     </message>
@@ -12985,7 +12994,7 @@ Do you want to save your changes?</source>
         <translation>Vízjel létrehozása vagy szerkesztése</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2661"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2665"/>
         <source>Watermark files</source>
         <translation>Vízjelfájlok</translation>
     </message>
@@ -13032,78 +13041,78 @@ Do you want to save your changes?</source>
         <translation>Kézi elrendezés frissítése</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4721"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4796"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4685"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4760"/>
         <source>Unable to prepare raw layout data.</source>
         <translation>A nyers elrendezési adatok nem készíthetők elő.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4728"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4692"/>
         <source>Manual layout files</source>
-        <translation>Kézi elrendezés fájljai</translation>
+        <translation>Kézi elrendezésű fájlok</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4735"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4699"/>
         <source>Select manual layout</source>
         <translation>Válasszon kézi elrendezést</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4838"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4802"/>
         <source>Select folder</source>
         <translation>Válasszon mappát</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6278"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6247"/>
         <source>The pattern has been modified. Do you want to save your changes?</source>
         <translation>A minta módosult. Szeretné menteni a módosításokat?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7902"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7883"/>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
         <translation>A(z) &apos;%1&apos; A dimenzió érték nem támogatott ehhez a mintafájlhoz.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7909"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7890"/>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
         <translation>Az A dimenzió nem állítható be. Méretsorozat-méréseket tartalmazó fájl szükséges.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7915"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7896"/>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
         <translation>Az A dimenzió nem állítható be. A fájl nem volt megnyitva.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7945"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7926"/>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
         <translation>A(z) &apos;%1&apos; B dimenzió érték nem támogatott ehhez a mintafájlhoz.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7952"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7933"/>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
         <translation>A B dimenzió nem állítható be. Méretsorozat-méréseket tartalmazó fájl szükséges.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7958"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7939"/>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
         <translation>A B dimenzió nem állítható be. A fájl nem volt megnyitva.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7988"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7969"/>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
         <translation>A(z) &apos;%1&apos; C dimenzió érték nem támogatott ehhez a mintafájlhoz.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7995"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7976"/>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
         <translation>A C dimenzió nem állítható be. Méretsorozat-méréseket tartalmazó fájl szükséges.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8001"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7982"/>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation>A C dimenzió nem állítható be. A fájl nem volt megnyitva.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5663"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5632"/>
         <source>Could not create recipe file. %1</source>
         <translation>A receptfájl nem hozható létre. %1</translation>
     </message>
@@ -13114,12 +13123,12 @@ Do you want to save your changes?</source>
         <translation>Bolt</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7373"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7342"/>
         <source>Scalable Vector Graphics files</source>
         <translation>Méretezhető vektorgrafikus fájlok</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7375"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7344"/>
         <source>Save draw</source>
         <translation>Rajz mentése</translation>
     </message>
@@ -13142,139 +13151,139 @@ Do you want to save your changes?</source>
         <translation>Háttérkép hozzáadása</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1778"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1782"/>
         <source>Unable to add background image</source>
         <translation>A háttérkép nem adható hozzá</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1798"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1802"/>
         <source>Invalid image. Error: %1</source>
         <translation>Érvénytelen kép. Hiba: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1982"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1986"/>
         <source>Select point of the center of the elliptical arc</source>
         <translation>Válassza ki az elliptikus ív középpontját</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2120"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3310"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2124"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3273"/>
         <source>Pen style:</source>
         <translation>Tollstílus:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2121"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3334"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2125"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3297"/>
         <source>Color:</source>
         <translation>Szín:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3315"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3278"/>
         <source>Sets the &lt;b&gt;default pen style&lt;/b&gt; for all newly created objects. This style is applied the first time an object is drawn.</source>
         <translation>Beállítja az &lt;b&gt;alapértelmezett tollstílust&lt;/b&gt; az összes újonnan létrehozott objektumhoz. Ez a stílus az objektum első megrajzolásakor kerül alkalmazásra.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3338"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3301"/>
         <source>Defines the &lt;b&gt;global object color property&lt;/b&gt;. This color is applied automatically the first time a new object is drawn.</source>
         <translation>Meghatározza a &lt;b&gt;globális objektumszín-tulajdonságot&lt;/b&gt;. Ez a szín automatikusan alkalmazódik egy új objektum első megrajzolásakor.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3444"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3407"/>
         <source>Point at a given distance tools</source>
-        <translation>Adott távolságra lévő pont eszközök</translation>
+        <translation>Pont adott távolságra eszközök</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3458"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3421"/>
         <source>Perpendicular/Bisector tools</source>
         <translation>Merőleges/szögfelező eszközök</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3484"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3447"/>
         <source>Triangular tools</source>
         <translation>Háromszög eszközök</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3498"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3461"/>
         <source>Point intersecting with axis tools</source>
-        <translation>Tengellyel metsző pont eszközök</translation>
+        <translation>Metszéspont tengellyel eszközök</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3543"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3506"/>
         <source>Points intersecting with arcs/curves and tangents/segments tools</source>
-        <translation>Ívekkel/görbékkel és érintőkkel/szakaszokkal metsző pont eszközök</translation>
+        <translation>Ívek/görbék és érintők/szakaszok metszéspontjai eszközök</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3603"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3566"/>
         <source>Curves and arcs tools</source>
-        <translation>Görbe és ív eszközök</translation>
+        <translation>Görbe- és íveszközök</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3636"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3599"/>
         <source>Flipping objects tools</source>
-        <translation>Objektumtükröző eszközök</translation>
+        <translation>Objektumok tükrözése eszközök</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3649"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3612"/>
         <source>Rotating/moving objects tools</source>
-        <translation>Objektumforgató/-mozgató eszközök</translation>
+        <translation>Objektumok elforgatása/mozgatása eszközök</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3684"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3647"/>
         <source>Merge/duplicate pieces tools</source>
-        <translation>Darabegyesítő/-duplikáló eszközök</translation>
+        <translation>Darabok egyesítése/másolata eszközök</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3699"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3662"/>
         <source>Adding objects for Details mode tools</source>
-        <translation>Objektumokat hozzáadó eszközök a Darab módhoz</translation>
+        <translation>Objektumok hozzáadása az Alkatrészek módhoz eszközök</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4804"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4768"/>
         <source>Select background image</source>
         <translation>Válasszon háttérképet</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4845"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4809"/>
         <source>Export corrections</source>
         <translation>Korrekciók exportálása</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4846"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4810"/>
         <source>File &apos;%1&apos; already exists. Overwrite it?</source>
         <translation>A(z) &apos;%1&apos; fájl már létezik. Felülírja?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4875"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4839"/>
         <source>All Single-Line Fonts</source>
         <translation>Összes egyvonalas betűtípus</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4876"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4840"/>
         <source>TrueType Fonts</source>
         <translation>TrueType betűtípusok</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4877"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4841"/>
         <source>OpenType Fonts</source>
         <translation>OpenType betűtípusok</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4878"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4842"/>
         <source>SVG Fonts</source>
         <translation>SVG betűtípusok</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4879"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4843"/>
         <source>All Files</source>
-        <translation>Összes fájl</translation>
+        <translation>Minden fájl</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4884"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4848"/>
         <source>Select Font Files to Install</source>
-        <translation>Válassza ki a telepítendő betűtípusfájlokat</translation>
+        <translation>Telepítendő betűfájlok kiválasztása</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4918"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4882"/>
         <source>Failed to install font file: %1
 
 Reason: %2</source>
@@ -13283,7 +13292,7 @@ Reason: %2</source>
 Ok: %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4924"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4888"/>
         <source>Font Installation Summary:
 
 Successful Installations: %1
@@ -13294,45 +13303,45 @@ Sikeres telepítések: %1
 Sikertelen telepítések: %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4930"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4894"/>
         <source>Installation Complete with Errors</source>
         <translation>A telepítés hibákkal fejeződött be</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4934"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4898"/>
         <source>Installation Successful</source>
         <translation>A telepítés sikeres</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5580"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5620"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5549"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5589"/>
         <source>Unable to save image. Error: %1</source>
         <translation>A kép nem menthető. Hiba: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5586"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5555"/>
         <source>Unable to save image. No data.</source>
         <translation>A kép nem menthető. Nincs adat.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5592"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5561"/>
         <source>untitled</source>
         <translation>névtelen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8585"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8566"/>
         <source>Auto-Arrange Labels</source>
         <translation>Címkék automatikus elrendezése</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2381"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2387"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5605"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2385"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2391"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5574"/>
         <source>All files</source>
-        <translation>Összes fájl</translation>
+        <translation>Minden fájl</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5609"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5578"/>
         <source>Save Image</source>
         <translation>Kép mentése</translation>
     </message>
@@ -13382,7 +13391,7 @@ Sikertelen telepítések: %2</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="894"/>
         <source>Preparing details for layout</source>
-        <translation>Darabok előkészítése az elrendezéshez</translation>
+        <translation>Alkatrészek előkészítése az elrendezéshez</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1083"/>
@@ -13419,7 +13428,7 @@ Sikertelen telepítések: %2</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1294"/>
         <source>File error %1.</source>
-        <translation>Fájlhiba: %1.</translation>
+        <translation>Fájlhiba %1.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="471"/>
@@ -13440,7 +13449,7 @@ Sikertelen telepítések: %2</translation>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1371"/>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1440"/>
         <source>File error.</source>
-        <translation>Fájl hiba.</translation>
+        <translation>Fájlhiba.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1441"/>
@@ -13511,12 +13520,12 @@ Szeretne másik fájlt választani?</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/label/movedoublelabel.cpp" line="106"/>
         <source>move the first dart label</source>
-        <translation>első varrásbevarrás-címke mozgatása</translation>
+        <translation>első szűkítőcímke mozgatása</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/undocommands/label/movedoublelabel.cpp" line="110"/>
         <source>move the second dart label</source>
-        <translation>második varrásbevarrás-címke mozgatása</translation>
+        <translation>második szűkítőcímke mozgatása</translation>
     </message>
 </context>
 <context>
@@ -13685,7 +13694,7 @@ Szeretne másik fájlt választani?</translation>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="51"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="633"/>
         <source>Auto-save modified pattern</source>
-        <translation>Szabásminta módosítás automatikusan mentve</translation>
+        <translation>Módosított szabásminta automatikus mentése</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="61"/>
@@ -13709,13 +13718,13 @@ Szeretne másik fájlt választani?</translation>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="123"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="639"/>
         <source>Decimal separator parts:</source>
-        <translation>Tizedeselválasztó:</translation>
+        <translation>Tizedeselválasztó részei:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="140"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="640"/>
         <source>Default unit:</source>
-        <translation>Alapértelmezett egység:</translation>
+        <translation>Alapértelmezett mértékegység:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="150"/>
@@ -13820,7 +13829,7 @@ Szeretne másik fájlt választani?</translation>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.cpp" line="292"/>
         <source>default unit</source>
-        <translation>Alapértelmezett egység</translation>
+        <translation>Alapértelmezett mértékegység</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="24"/>
@@ -14240,7 +14249,7 @@ Szeretne másik fájlt választani?</translation>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="226"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="508"/>
         <source>Show a notch both in the seam allowance and on the seam line. If you want to see a notch on a piece without seam allowance, enable built-in seam allowance and set the length of a notch manually.</source>
-        <translation>Bevágás megjelenítése mind a varrásráhagyásban, mind a varrásvonalon. Ha bevágást szeretne látni egy varrásráhagyás nélküli darabon, engedélyezze a beépített varrásráhagyást, és állítsa be a bevágás hosszát kézzel.</translation>
+        <translation>Jelölés megjelenítése a varrásszélességen és a varrásvonalon is. Ha varrásszélesség nélküli alkatrészen szeretne jelölést látni, engedélyezze a beépített varrásszélességet, és állítsa be a jelölés hosszát.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="272"/>
@@ -14426,7 +14435,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="216"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencespatternpage.h" line="504"/>
         <source>By default export to DXF-AAMA sew line on Draw layer for all new created workpieces</source>
-        <translation>Alapértelmezés szerint a varrásvonal exportálása DXF-AAMA formátumba a Rajz rétegre az összes újonnan létrehozott munkadarabnál</translation>
+        <translation>Alapértelmezés szerint az új alkatrészek varrásvonalát DXF‑AAMA formátumban a Rajz rétegre exportálja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencespatternpage.ui" line="219"/>
@@ -14478,7 +14487,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="112"/>
         <source>Don&apos;t use the native file dialog</source>
-        <translation>Ne használja a natív fájlpárbeszédablakot</translation>
+        <translation>Ne használja a natív fájlablakot</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencesconfigurationpage.ui" line="24"/>
@@ -15106,36 +15115,36 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1140"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="468"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="473"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="442"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="447"/>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation>A toUInt paraméter nem konvertálható</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1077"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="519"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="493"/>
         <source>Can&apos;t convert toBool parameter</source>
         <translation>A toBool paraméter nem konvertálható</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="567"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="541"/>
         <source>Got empty parameter</source>
         <translation>Üres paraméter érkezett</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1114"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="604"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="609"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="578"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="583"/>
         <source>Can&apos;t convert toDouble parameter</source>
         <translation>A toDouble paraméter nem konvertálható</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="628"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="602"/>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
         <translation>Hibás paraméter-azonosító érkezett. Csak id &gt; 0 lehet.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1808"/>
+        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1812"/>
         <source>United detail</source>
         <translation>Egyesített darab</translation>
     </message>
@@ -15214,7 +15223,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1235"/>
         <source>Arc</source>
-        <translation>Körív</translation>
+        <translation>Ív</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1236"/>
@@ -15228,7 +15237,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="667"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2205"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2210"/>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation>A(z) &apos;%1&apos; darab. A varrásráhagyás nem érvényes.</translation>
     </message>
@@ -15294,8 +15303,8 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1166"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="497"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="502"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="471"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="476"/>
         <source>Can&apos;t convert toInt parameter</source>
         <translation>A toInt paraméter nem konvertálható</translation>
     </message>
@@ -15332,12 +15341,12 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="337"/>
         <source>Cannot prepare builtin passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark is empty.</source>
-        <translation>Nem készíthető elő a(z) &apos;%1&apos; beépített bevágásjel a(z) &apos;%2&apos; darabhoz. A bevágásjel üres.</translation>
+        <translation>Nem lehet előkészíteni a beépített jelölést (‘%1’) a(z) ‘%2’ alkatrészhez. A jelölés üres.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="351"/>
         <source>Cannot prepare builtin  passmark &apos;%1&apos; for piece &apos;%2&apos;. Passmark base line is empty.</source>
-        <translation>Nem készíthető elő a(z) &apos;%1&apos; beépített bevágásjel a(z) &apos;%2&apos; darabhoz. A bevágásjel alapvonala üres.</translation>
+        <translation>Nem lehet előkészíteni a beépített jelölést (‘%1’) a(z) ‘%2’ alkatrészhez. A jelölés alapvonala üres.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="276"/>
@@ -15416,7 +15425,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="558"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2527"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2532"/>
         <source>Piece &apos;%1&apos;. Unable to load default piece label template.
 %2
 %3</source>
@@ -15425,12 +15434,12 @@ Ez a beállítás újraindítás után lép életbe.</translation>
 %3</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1389"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1392"/>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
         <translation>A(z) &apos;%1&apos; darab. A szálirány nem érvényes.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="3232"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="3237"/>
         <source>Piece &apos;%1&apos;. Fold line is not valid.</source>
         <translation>A(z) &apos;%1&apos; darab. A hajtásvonal nem érvényes.</translation>
     </message>
@@ -15504,7 +15513,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/libs/ifc/xml/utils.cpp" line="122"/>
         <source>All files</source>
-        <translation>Összes fájl</translation>
+        <translation>Minden fájl</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/toolsdef.cpp" line="101"/>
@@ -15949,7 +15958,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/saveplacelabeloptions.cpp" line="46"/>
         <source>save place label options</source>
-        <translation>elhelyezési címke beállításainak mentése</translation>
+        <translation>címke beállításainak mentése</translation>
     </message>
 </context>
 <context>
@@ -15973,12 +15982,16 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/label/showdoublelabel.cpp" line="51"/>
         <source>toggle the first dart label</source>
-        <translation>első varrásbevarrás-címke ki-/bekapcsolása</translation>
+        <translation>első szűkítőcímke ki‑/bekapcsolása</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/undocommands/label/showdoublelabel.cpp" line="55"/>
+        <source>toggle the second dart label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>togggle the second dart label</source>
-        <translation>második varrásbevarrás-címke ki-/bekapcsolása</translation>
+        <translation type="vanished">második szűkítőcímke ki‑/bekapcsolása</translation>
     </message>
 </context>
 <context>
@@ -16050,7 +16063,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="258"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Előző keresése &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Előző &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="268"/>
@@ -16094,7 +16107,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="722"/>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="725"/>
         <source>Details</source>
-        <translation>Leírás</translation>
+        <translation>Részletek</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="362"/>
@@ -16289,7 +16302,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1114"/>
         <source>&amp;About Tape</source>
-        <translation>A Tape &amp;névjegye</translation>
+        <translation>Tape &amp;névjegy</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.ui" line="1125"/>
@@ -16346,7 +16359,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="279"/>
         <source>File error.</source>
-        <translation>Fájl hiba.</translation>
+        <translation>Fájlhiba.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="315"/>
@@ -16373,12 +16386,12 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="674"/>
         <source>All files</source>
-        <translation>Összes fájl</translation>
+        <translation>Minden fájl</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="710"/>
         <source>Could not save the file</source>
-        <translation>Nem sikerült menteni a fájlt</translation>
+        <translation>A fájl nem menthető</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="729"/>
@@ -16393,17 +16406,17 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="767"/>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation>A zárolás nem lehetséges, a fájl meg van nyitva egy másik ablakban.</translation>
+        <translation>Failed to lock. This file already opened in another window.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="783"/>
         <source>Could not save file</source>
-        <translation>A fájl mentése nem sikerült</translation>
+        <translation>A fájl nem menthető</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="809"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation>A zárolás sikertelen. Ez a fájl már meg van nyitva egy másik ablakban. Két programpéldány futtatásakor ütközések várhatók.</translation>
+        <translation>Zárolás sikertelen. A fájl már meg van nyitva egy másik ablakban. 2 programpéldány ütközést okozhat.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="847"/>
@@ -16449,7 +16462,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2060"/>
         <source>File was not saved yet.</source>
-        <translation>A fájl még nem lett mentve.</translation>
+        <translation>A fájl még nincs elmentve.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2111"/>
@@ -16536,7 +16549,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2701"/>
         <source>Imported file must not contain the same name twice.</source>
-        <translation>Az importált fájl nem tartalmazhatja ugyanazt a nevet kétszer.</translation>
+        <translation>Az importált fájl nem tartalmazhat duplikált neveket.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tkmmainwindow.cpp" line="2706"/>
@@ -16599,7 +16612,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/app/tape/tmainwindow.ui" line="381"/>
         <location filename="../../src/app/tape/tmainwindow.ui" line="384"/>
         <source>Details</source>
-        <translation>Leírás</translation>
+        <translation>Részletek</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="515"/>
@@ -16668,7 +16681,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     </message>
     <message>
         <source>Path to file</source>
-        <translation type="vanished">Fájl útvonala</translation>
+        <translation type="vanished">Fájlútvonal</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="914"/>
@@ -16704,7 +16717,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1136"/>
         <source>Notes:</source>
-        <translation>Jegyzet:</translation>
+        <translation>Megjegyzések:</translation>
     </message>
     <message>
         <source>File</source>
@@ -16757,7 +16770,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1489"/>
         <source>Add custom</source>
-        <translation>Egyéni hozzáadása</translation>
+        <translation>Egyedi hozzáadása</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1507"/>
@@ -16783,7 +16796,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1905"/>
         <source>This file already opened in another window.</source>
-        <translation>A fájl újra megnyitása egy másik ablakban.</translation>
+        <translation>A fájl már meg van nyitva egy másik ablakban.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="555"/>
@@ -16795,7 +16808,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1086"/>
         <source>Could not save file</source>
-        <translation>A fájlt nem lehetett menteni</translation>
+        <translation>A fájl nem menthető</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1015"/>
@@ -17070,13 +17083,13 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="710"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="731"/>
         <source>All files</source>
-        <translation>Összes fájl</translation>
+        <translation>Minden fájl</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="989"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="2784"/>
         <source>Could not save the file</source>
-        <translation>Nem sikerült menteni a fájlt</translation>
+        <translation>A fájl nem menthető</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4027"/>
@@ -17136,7 +17149,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4538"/>
         <source>Imported file must not contain the same name twice.</source>
-        <translation>Az importált fájl nem tartalmazhatja ugyanazt a nevet kétszer.</translation>
+        <translation>Az importált fájl nem tartalmazhat duplikált neveket.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4307"/>
@@ -17181,7 +17194,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1448"/>
         <source>&amp;About Tape</source>
-        <translation>A Tape &amp;névjegye</translation>
+        <translation>Tape &amp;névjegy</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1459"/>
@@ -17270,12 +17283,12 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="821"/>
         <source>Alias:</source>
-        <translation>Álnév:</translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="828"/>
         <source>Optional text alias for this value. Useful for referencing in pattern piece labels</source>
-        <translation>Választható szöveges álnév ehhez az értékhez. Hasznos a mintadarabcímkékben való hivatkozáshoz</translation>
+        <translation>Opcionális szöveges alias ehhez az értékhez. Hasznos a szabásminta‑címkékben való hivatkozáshoz</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="923"/>
@@ -17573,7 +17586,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="264"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find Previous &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Előző keresése &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Előző &lt;span style=&quot; color:#888a85;&quot;&gt;%1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="274"/>
@@ -17827,19 +17840,19 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="434"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="390"/>
         <source>Center pin:</source>
-        <translation>Középső tűzőpont:</translation>
+        <translation>Középső tűpont:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="458"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="391"/>
         <source>Top pin:</source>
-        <translation>Felső tűzőpont:</translation>
+        <translation>Felső tűpont:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="468"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabgrainline.h" line="392"/>
         <source>Bottom pin:</source>
-        <translation>Alsó tűzőpont:</translation>
+        <translation>Alsó tűpont:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabgrainline.ui" line="498"/>
@@ -17972,7 +17985,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1208"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1258"/>
         <source>Center pin:</source>
-        <translation>Középső tűzőpont:</translation>
+        <translation>Középső tűpont:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="890"/>
@@ -17980,7 +17993,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1209"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1259"/>
         <source>Top left pin:</source>
-        <translation>Bal felső tűzőpont:</translation>
+        <translation>Bal felső tűpont:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="900"/>
@@ -17988,7 +18001,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1210"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1260"/>
         <source>Bottom right pin:</source>
-        <translation>Jobb alsó tűzőpont:</translation>
+        <translation>Jobb alsó tűpont:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="964"/>
@@ -18736,7 +18749,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="987"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1089"/>
         <source>Start point:</source>
-        <translation>Kezdő pont:</translation>
+        <translation>Kezdőpont:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="356"/>
@@ -18744,7 +18757,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="988"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1090"/>
         <source>End point:</source>
-        <translation>Vég pont:</translation>
+        <translation>Végpont:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1318"/>
@@ -18768,7 +18781,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="577"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1029"/>
         <source>Built in</source>
-        <translation>Beágyazott</translation>
+        <translation>Beépített</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="79"/>
@@ -18969,7 +18982,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     </message>
     <message>
         <source>Decimal separator parts</source>
-        <translation type="vanished">Decimális elválasztó jel</translation>
+        <translation type="vanished">Tizedeselválasztó részei</translation>
     </message>
     <message>
         <source>GUI language:</source>
@@ -19015,7 +19028,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="64"/>
         <source>Decimal separator parts:</source>
-        <translation>Tizedeselválasztó:</translation>
+        <translation>Tizedeselválasztó részei:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="84"/>
@@ -19169,7 +19182,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="193"/>
         <source>Don&apos;t use the native file dialog</source>
-        <translation>Ne használja a natív fájlpárbeszédablakot</translation>
+        <translation>Ne használja a natív fájlablakot</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="203"/>
@@ -19398,24 +19411,6 @@ Ez a beállítás újraindítás után lép életbe.</translation>
 %2.</translation>
     </message>
     <message>
-        <source>Can&apos;t open schema file %1:
-%2.</source>
-        <translation type="vanished">A(z) %1 sémafájl nem nyitható meg:
-%2.</translation>
-    </message>
-    <message>
-        <source>Could not load schema file &apos;%1&apos;.</source>
-        <translation type="vanished">A(z) &apos;%1&apos; sémafájl nem tölthető be.</translation>
-    </message>
-    <message>
-        <source>Schema file %3 invalid in line %1 column %2</source>
-        <translation type="vanished">A(z) %3 sémafájl érvénytelen a(z) %1. sor %2. oszlopában</translation>
-    </message>
-    <message>
-        <source>Validation error file %3 in line %1 column %2</source>
-        <translation type="vanished">Ellenőrzési hiba a(z) %3 fájlban a(z) %1. sor %2. oszlopában</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="82"/>
         <source>Error opening a temp file: %1.</source>
         <translation>Hiba az ideiglenes fájl megnyitásakor: %1.</translation>
@@ -19559,7 +19554,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/libs/vwidgets/vabstractmainwindow.cpp" line="297"/>
         <source>Could not save the file.</source>
-        <translation>Nem sikerült menteni a fájlt.</translation>
+        <translation>A fájl nem menthető.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vwidgets/vabstractmainwindow.cpp" line="321"/>
@@ -19586,7 +19581,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/libs/vwidgets/vabstractmainwindow.cpp" line="356"/>
         <source>This file already opened in another window.</source>
-        <translation>A fájl újra megnyitása egy másik ablakban.</translation>
+        <translation>A fájl már meg van nyitva egy másik ablakban.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vwidgets/vabstractmainwindow.cpp" line="360"/>
@@ -19655,29 +19650,29 @@ Ez a beállítás újraindítás után lép életbe.</translation>
 <context>
     <name>VAbstractPattern</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1505"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1514"/>
         <source>Can&apos;t find tool in table.</source>
         <translation>Az eszköz nem található a táblázatban.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2014"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2023"/>
         <source>Error creating or updating group</source>
         <translation>Hiba a csoport létrehozásakor vagy frissítésekor</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2082"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2091"/>
         <source>measurement</source>
         <translation>mérés</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2341"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2525"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2584"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2350"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2534"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2593"/>
         <source>New group</source>
         <translation>Új csoport</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="684"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="687"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
         <translation>Hibás címkenév: &apos;%1&apos;.</translation>
     </message>
@@ -19808,7 +19803,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="341"/>
         <source>Details mode</source>
         <comment>shortcut for action</comment>
-        <translation>Darab mód</translation>
+        <translation>Alkatrészek mód</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="343"/>
@@ -19928,25 +19923,25 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="381"/>
         <source>Tool &apos;Point at distance and angle&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Pont távolságra és szögben” eszköz</translation>
+        <translation>„Pont adott távolsággal és szöggel&quot; eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="383"/>
         <source>Tool &apos;Line between points&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Vonal pontok között” eszköz</translation>
+        <translation>„Vonal két pont között” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="385"/>
         <source>Tool &apos;Point at distance along line&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Pont a vonal mentén távolságra” eszköz</translation>
+        <translation>„Pont adott távolságra a vonalon” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="387"/>
         <source>Tool &apos;Special point on shoulder&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Speciális pont a vállon” eszköz</translation>
+        <translation>„Speciális vállpont” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="389"/>
@@ -19964,7 +19959,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="393"/>
         <source>Tool &apos;Point at line intersection&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Pont a vonalak metszéspontjában” eszköz</translation>
+        <translation>„Vonalak metszéspontja” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="395"/>
@@ -19976,7 +19971,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="397"/>
         <source>Tool &apos;Curve which uses point as control handle&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Pontot vezérlőfogantyúként használó görbe” eszköz</translation>
+        <translation>„Görbe pontvezérléssel” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="399"/>
@@ -19988,13 +19983,13 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="401"/>
         <source>Tool &apos;Curved path&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Görbe útvonal” eszköz</translation>
+        <translation>„Görbeútvonal” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="403"/>
         <source>Tool &apos;Curved path which uses point as control handle&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Pontot vezérlőfogantyúként használó görbe útvonal” eszköz</translation>
+        <translation>„Görbeútvonal pontvezérléssel” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="405"/>
@@ -20018,7 +20013,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="411"/>
         <source>Tool &apos;Perpendicular point along line&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Merőleges pont a vonal mentén” eszköz</translation>
+        <translation>„Merőleges pont a vonalon” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="413"/>
@@ -20042,13 +20037,13 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="419"/>
         <source>Tool &apos;Segment a curved path&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Görbe útvonal felosztása” eszköz</translation>
+        <translation>„Görbeútvonal felosztása” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="421"/>
         <source>Tool &apos;Piece union&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Darabegyesítés” eszköz</translation>
+        <translation>„Darabok egyesítése” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="423"/>
@@ -20108,25 +20103,25 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="441"/>
         <source>Tool &apos;Point from circle and tangent&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Pont körből és érintőből” eszköz</translation>
+        <translation>„Kör és érintő metszéspontja” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="443"/>
         <source>Tool &apos;Point from arc and tangent&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Pont ívből és érintőből” eszköz</translation>
+        <translation>„Ív és érintő metszéspontja” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="445"/>
         <source>Tool &apos;Arc with given length&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Ív adott hosszal” eszköz</translation>
+        <translation>„Ív adott ívhosszal” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="447"/>
         <source>Tool &apos;True darts&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Valódi varrásbevarrások” eszköz</translation>
+        <translation>„Szűkítők kiegyenlítése&quot; eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="449"/>
@@ -20138,7 +20133,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="451"/>
         <source>Tool &apos;Rotate objects&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Objektumok forgatása” eszköz</translation>
+        <translation>„Objektumok elforgatása” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="453"/>
@@ -20162,7 +20157,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="459"/>
         <source>Tool &apos;Midpoint between two points&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Felezőpont két pont között” eszköz</translation>
+        <translation>„Két pont középpontja” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="461"/>
@@ -20180,7 +20175,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="465"/>
         <source>Export details as</source>
         <comment>shortcut for action</comment>
-        <translation>Darabok exportálása másként</translation>
+        <translation>Alkatrészek exportálása másként</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="467"/>
@@ -20192,7 +20187,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="469"/>
         <source>Tool &apos;Pin&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Tűzőpont” eszköz</translation>
+        <translation>„Tűpont” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="471"/>
@@ -20204,7 +20199,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="473"/>
         <source>Tool &apos;Place label&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Elhelyezési címke” eszköz</translation>
+        <translation>„Címke elhelyezése” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="475"/>
@@ -20222,7 +20217,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="479"/>
         <source>Tool &apos;Elliptical arc with given length&apos;</source>
         <comment>shortcut for action</comment>
-        <translation>„Elliptikus ív adott hosszal” eszköz</translation>
+        <translation>„Elliptikus ív adott ívhosszal” eszköz</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/vabstractshortcutmanager.cpp" line="481"/>
@@ -20339,52 +20334,52 @@ Ez a beállítás újraindítás után lép életbe.</translation>
 <context>
     <name>VApplication</name>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="436"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="467"/>
         <source>Error parsing file. Program will be terminated.</source>
-        <translation>Hiba a fájl elemzése közben. A program leáll.</translation>
+        <translation>Fájl‑feldolgozási hiba. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="442"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="473"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Hiba: hibás azonosító. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="448"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="479"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Hiba: az érték nem konvertálható. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="454"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="485"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Hiba: üres paraméter. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="460"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="491"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Hiba: hibás azonosító. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="479"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="510"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Valami nincs rendben!</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="493"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="524"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Elemzési hiba: %1. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="498"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="529"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Kivétel történt: %1. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="473"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="504"/>
         <source>Invalid notch.</source>
         <translation>Érvénytelen bevágás.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="485"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="516"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Képlet-figyelmeztetés: %1. A program leáll.</translation>
     </message>
@@ -20508,7 +20503,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/libs/vlayout/vbank.cpp" line="403"/>
         <source>Error of preparing data for layout: List of details is empty</source>
-        <translation>Hiba az elrendezési adatok előkészítésekor: a darabok listája üres</translation>
+        <translation>Hiba az elrendezés adatainak előkészítésekor: Az alkatrészek listája üres</translation>
     </message>
 </context>
 <context>
@@ -20660,22 +20655,22 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="731"/>
         <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation>Bal oldali oldalmargó a jelenlegi mértékegységben, pl. 3.0 (exportálás mód). Ha nincs beállítva, az alapértelmezett nyomtató értéke lesz használva. Vagy 0, ha nem található nyomtató.</translation>
+        <translation>Bal oldali margó a jelenlegi mértékegységben, pl. 3.0 (export mód). Ha nincs megadva, a program az alapértelmezett nyomtató értékét használja. Ha nem található nyomtató, az érték 0.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="736"/>
         <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation>Jobb oldali oldalmargó a jelenlegi mértékegységben, pl. 3.0 (exportálás mód). Ha nincs beállítva, az alapértelmezett nyomtató értéke lesz használva. Vagy 0, ha nem található nyomtató.</translation>
+        <translation>Jobb oldali margó a jelenlegi mértékegységben, pl. 3.0 (export mód). Ha nincs megadva, a program az alapértelmezett nyomtató értékét használja. Ha nem található nyomtató, az érték 0.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="741"/>
         <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation>Felső oldalmargó a jelenlegi mértékegységben, pl. 3.0 (exportálás mód). Ha nincs beállítva, az alapértelmezett nyomtató értéke lesz használva. Vagy 0, ha nem található nyomtató.</translation>
+        <translation>Felső margó a jelenlegi mértékegységben, pl. 3.0 (export mód). Ha nincs megadva, a program az alapértelmezett nyomtató értékét használja. Ha nem található nyomtató, az érték 0.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="746"/>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
-        <translation>Alsó oldalmargó a jelenlegi mértékegységben, pl. 3.0 (exportálás mód). Ha nincs beállítva, az alapértelmezett nyomtató értéke lesz használva. Vagy 0, ha nem található nyomtató.</translation>
+        <translation>Alsó margó a jelenlegi mértékegységben, pl. 3.0 (export mód). Ha nincs megadva, a program az alapértelmezett nyomtató értékét használja. Ha nem található nyomtató, az érték 0.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="958"/>
@@ -20720,7 +20715,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="783"/>
         <source>The layout gap width x2, measured in layout units (export mode). Set distance between details and a detail and a sheet.</source>
-        <translation>Az elrendezési hézag szélessége x2, az elrendezés mértékegységében mérve (exportálás mód). Beállítja a darabok közötti, valamint a darab és a lap közötti távolságot.</translation>
+        <translation>Az elrendezési hézagszélesség ×2, elrendezési egységekben mérve (export mód). Beállítja az alkatrészek közötti, valamint az alkatrész és a lap közötti távolságot.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="788"/>
@@ -20846,7 +20841,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="846"/>
         <source>Tiled page left margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.</source>
-        <translation>Csempézett oldal bal margója a jelenlegi mértékegységben, pl. 3.0 (exportálás mód). Ha nincs beállítva, az alapértelmezett 1 cm érték lesz használva.</translation>
+        <translation>Csempézett oldal bal margója a jelenlegi mértékegységben, pl. 3.0 (export mód). Ha nincs megadva, a program az alapértelmezett 1 cm‑es értéket használja.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="734"/>
@@ -20857,7 +20852,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="851"/>
         <source>Tiled page right margin in current units like 3.0 (export mode). If not set will be used default value 1 cm.</source>
-        <translation>Csempézett oldal jobb margója a jelenlegi mértékegységben, pl. 3.0 (exportálás mód). Ha nincs beállítva, az alapértelmezett 1 cm érték lesz használva.</translation>
+        <translation>Csempézett oldal jobb margója a jelenlegi mértékegységben, pl. 3.0 (export mód). Ha nincs megadva, a program az alapértelmezett 1 cm‑es értéket használja.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="739"/>
@@ -20868,7 +20863,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="856"/>
         <source>Tiled page top margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.</source>
-        <translation>Csempézett oldal felső margója a jelenlegi mértékegységben, pl. 3.0 (exportálás mód). Ha nincs beállítva, az alapértelmezett 1 cm érték lesz használva.</translation>
+        <translation>Csempézett oldal felső margója a jelenlegi mértékegységben, pl. 3.0 (export mód). Ha nincs megadva, a program az alapértelmezett 1 cm‑es értéket használja.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="744"/>
@@ -20879,7 +20874,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="861"/>
         <source>Tiled page bottom margin in current units like 3.0 (export mode). If not set will be used value default value 1 cm.</source>
-        <translation>Csempézett oldal alsó margója a jelenlegi mértékegységben, pl. 3.0 (exportálás mód). Ha nincs beállítva, az alapértelmezett 1 cm érték lesz használva.</translation>
+        <translation>Csempézett oldal alsó margója a jelenlegi mértékegységben, pl. 3.0 (export mód). Ha nincs megadva, a program az alapértelmezett 1 cm‑es értéket használja.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="749"/>
@@ -21161,7 +21156,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="218"/>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="248"/>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="262"/>
-        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="300"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="311"/>
         <source>Can&apos;t find object</source>
         <translation>Az objektum nem található</translation>
     </message>
@@ -21171,16 +21166,30 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <translation>Az objektum nem alakítható át a kért típusra. Objektumazonosító = %1, tényleges típus = %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="295"/>
-        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="424"/>
-        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="433"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="296"/>
+        <source>Can&apos;t cast object to the requested type. Name = &apos;%1&apos;, type = %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="306"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="437"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="446"/>
         <source>Can&apos;t cast object</source>
         <translation>Az objektum nem alakítható át</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="368"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="366"/>
+        <source>Can&apos;t cast object. Name = &apos;%1&apos;, type = %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="376"/>
+        <source>Can&apos;t find object. Type mismatch. Name = &apos;%1&apos;, existing type = %2, incoming type = %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Can&apos;t find object. Type mismatch.</source>
-        <translation>Az objektum nem található. Típuseltérés.</translation>
+        <translation type="vanished">Az objektum nem található. Típuseltérés.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="340"/>
@@ -21193,9 +21202,8 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <translation>Nem hozható létre &apos;%1&apos; típusú görbe</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="358"/>
         <source>Can&apos;t cast object.</source>
-        <translation>Az objektum nem alakítható át.</translation>
+        <translation type="vanished">Az objektum nem alakítható át.</translation>
     </message>
 </context>
 <context>
@@ -21227,7 +21235,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="987"/>
         <source>True darts</source>
         <comment>operation</comment>
-        <translation>Valódi varrásbevarrások</translation>
+        <translation>Szűkítők kiegyenlítése</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="989"/>
@@ -21257,7 +21265,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="997"/>
         <source>Union details</source>
         <comment>operation</comment>
-        <translation>Darabok egyesítése</translation>
+        <translation>Alkatrészek egyesítése</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1013"/>
@@ -21267,7 +21275,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1015"/>
         <source>Point at distance and angle</source>
-        <translation>Pont távolságra és szögben</translation>
+        <translation>Pont adott távolsággal és szöggel</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1017"/>
@@ -21292,7 +21300,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1025"/>
         <source>Point at line intersection</source>
-        <translation>Pont a vonalak metszéspontjában</translation>
+        <translation>Vonalak metszéspontja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1028"/>
@@ -21302,13 +21310,13 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1030"/>
         <source>Arc</source>
-        <translation>Körív</translation>
+        <translation>Ív</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1032"/>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1071"/>
         <source>Elliptical arc with given length</source>
-        <translation>Elliptikus ív adott hosszal</translation>
+        <translation>Elliptikus ív adott ívhosszal</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1034"/>
@@ -21333,7 +21341,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1043"/>
         <source>Perpendicular point along line</source>
-        <translation>Merőleges pont a vonal mentén</translation>
+        <translation>Merőleges pont a vonalon</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1045"/>
@@ -21348,7 +21356,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1049"/>
         <source>Point segmenting an arc</source>
-        <translation>Ívet felosztó pont</translation>
+        <translation>Ív felosztó pont</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1051"/>
@@ -21388,12 +21396,12 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1065"/>
         <source>Point from circle and tangent</source>
-        <translation>Pont körből és érintőből</translation>
+        <translation>Kör és érintő metszéspontja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1067"/>
         <source>Point from arc and tangent</source>
-        <translation>Pont ívből és érintőből</translation>
+        <translation>Ív és érintő metszéspontja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vdependencytreemodel.cpp" line="1069"/>
@@ -21424,93 +21432,92 @@ Ez a beállítás újraindítás után lép életbe.</translation>
 <context>
     <name>VDomDocument</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="735"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="690"/>
         <source>Can&apos;t open file %1:
 %2.</source>
         <translation>A(z) %1 fájl nem nyitható meg:
 %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="888"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="843"/>
         <source>Can&apos;t open schema file %1:
 %2.</source>
-        <translation type="unfinished">A(z) %1 sémafájl nem nyitható meg:
-%2.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="945"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="981"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="900"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="936"/>
         <source>Validation error file %3 in line %1 column %2</source>
-        <translation type="unfinished">Ellenőrzési hiba a(z) %3 fájlban a(z) %1. sor %2. oszlopában</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1178"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1132"/>
         <source>Couldn&apos;t get node</source>
         <translation>A csomópont nem szerezhető meg</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="911"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="957"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="866"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="912"/>
         <source>Could not load schema file &apos;%1&apos;.</source>
-        <translation type="unfinished">A(z) &apos;%1&apos; sémafájl nem tölthető be.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="439"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="413"/>
         <source>Fail to write Canonical XML.</source>
         <translation>A kanonikus XML írása sikertelen.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="381"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="355"/>
         <source>Not unique id (%1)</source>
         <translation>Nem egyedi azonosító (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="681"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="655"/>
         <source>This id (%1) is not unique.</source>
         <translation>Ez az azonosító (%1) nem egyedi.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="743"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="698"/>
         <source>Parsing error in file %3 at line %1, column %2</source>
         <translation>Elemzési hiba a(z) %3 fájlban a(z) %1. sor %2. oszlopában</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="806"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="761"/>
         <source>Refusing to save: the document has no content.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="824"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="779"/>
         <source>Refusing to save: serialization produced no data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="918"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="873"/>
         <source>Schema file %3 invalid in line %1 column %2</source>
-        <translation type="unfinished">A(z) %3 sémafájl érvénytelen a(z) %1. sor %2. oszlopában</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1025"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="980"/>
         <source>Couldn&apos;t get version information.</source>
         <translation>A verzióinformáció nem szerezhető meg.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1031"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="986"/>
         <source>Too many tags &lt;%1&gt; in file.</source>
         <translation>Túl sok &lt;%1&gt; címke a fájlban.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1267"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1221"/>
         <source>&lt;empty&gt;</source>
         <translation>&lt;üres&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1308"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1262"/>
         <source>Version &quot;%1&quot; invalid.</source>
         <translation>A(z) „%1” verzió érvénytelen.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1314"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1268"/>
         <source>Version &quot;0.0.0&quot; invalid.</source>
         <translation>A „0.0.0” verzió érvénytelen.</translation>
     </message>
@@ -21555,7 +21562,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="244"/>
         <source>Add to group</source>
-        <translation>Csoporthoz adás</translation>
+        <translation>Csoporthoz ad</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.cpp" line="275"/>
@@ -22159,52 +22166,52 @@ Ez a beállítás újraindítás után lép életbe.</translation>
 <context>
     <name>VPApplication</name>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="328"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="361"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Hiba a fájl elemzése közben. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="334"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="367"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Hiba: hibás azonosító. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="340"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="373"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Hiba: az érték nem konvertálható. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="346"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="379"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Hiba: üres paraméter. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="352"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="385"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Hiba: hibás azonosító. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="365"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="398"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Valami nincs rendben!</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="371"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="404"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Kivétel történt: %1. A program leáll.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="716"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="749"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Nem lehet megkezdeni a bejövő kapcsolatok figyelését a(z) &apos;%1&apos; néven</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="735"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="768"/>
         <source>Export mode doesn&apos;t support opening several files.</source>
         <translation>Az exportálás mód nem támogatja több fájl megnyitását.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="742"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="775"/>
         <source>Import raw layout data does not support opening several layout files.</source>
         <translation>A nyers elrendezési adatok importálása nem támogatja több elrendezésfájl megnyitását.</translation>
     </message>
@@ -22227,22 +22234,22 @@ Ez a beállítás újraindítás után lép életbe.</translation>
 <context>
     <name>VPCarrouselPieceList</name>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="257"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="261"/>
         <source>Move to Sheet</source>
         <translation>Áthelyezés a lapra</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="260"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="264"/>
         <source>Delete</source>
         <translation>Törlés</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="263"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="267"/>
         <source>Remove from Sheet</source>
         <translation>Eltávolítás a lapról</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="243"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="247"/>
         <source>Move to</source>
         <translation>Áthelyezés ide</translation>
     </message>
@@ -22252,7 +22259,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="26"/>
         <source>About Puzzle</source>
-        <translation>A Puzzle névjegye</translation>
+        <translation>Puzzle névjegy</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/dialogs/vpdialogabout.ui" line="100"/>
@@ -22790,7 +22797,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2226"/>
         <source>About &amp;Puzzle</source>
-        <translation>A &amp;Puzzle névjegye</translation>
+        <translation>&amp;Puzzle névjegy</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2257"/>
@@ -22833,7 +22840,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="543"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="569"/>
         <source>File error.</source>
-        <translation>Fájl hiba.</translation>
+        <translation>Fájlhiba.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="655"/>
@@ -22926,7 +22933,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3847"/>
         <source>Could not save the file</source>
-        <translation>Nem sikerült menteni a fájlt</translation>
+        <translation>A fájl nem menthető</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3866"/>
@@ -22941,17 +22948,17 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3908"/>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation>A zárolás nem lehetséges, a fájl meg van nyitva egy másik ablakban.</translation>
+        <translation>Zárolás sikertelen. A fájl már meg van nyitva egy másik ablakban.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3918"/>
         <source>Could not save file</source>
-        <translation>A fájl mentése nem sikerült</translation>
+        <translation>A fájl nem menthető</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3939"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation>A zárolás sikertelen. Ez a fájl már meg van nyitva egy másik ablakban. Két programpéldány futtatásakor ütközések várhatók.</translation>
+        <translation>Zárolás sikertelen. A fájl már meg van nyitva egy másik ablakban. 2 programpéldány ütközést okozhat.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3949"/>
@@ -23548,7 +23555,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1033"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos; with built-in seam allowance. User must manually provide length.</source>
-        <translation>Nem számítható ki bevágás a(z) &apos;%1&apos; pontnál a(z) &apos;%2&apos; darabban beépített varrásráhagyással. A felhasználónak kézzel kell megadnia a hosszt.</translation>
+        <translation>Nem lehet kiszámítani a jelölést a(z) ‘%1’ ponthoz a(z) ‘%2’ alkatrészen, beépített varrásszélesség használata esetén. A felhasználónak kézzel kell megadnia a jelölés hosszát.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vpassmark.cpp" line="1160"/>
@@ -23574,7 +23581,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="717"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="761"/>
         <source>Error parsing file.</source>
-        <translation>Hiba a fájl elemzése közben.</translation>
+        <translation>Fájl‑feldolgozási hiba.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="632"/>
@@ -23598,7 +23605,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="660"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="772"/>
         <source>Error parsing file (std::bad_alloc).</source>
-        <translation>Hiba a fájl elemzése közben (std::bad_alloc).</translation>
+        <translation>Fájl‑feldolgozási hiba (std::bad_alloc).</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="791"/>
@@ -23687,7 +23694,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2519"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2525"/>
         <source>Error creating or updating cut arc point</source>
-        <translation>Hiba az ívvágó pont létrehozásakor vagy frissítésekor</translation>
+        <translation>Hiba a vágott ív pontjának létrehozásakor vagy frissítésekor</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2566"/>
@@ -23733,7 +23740,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3466"/>
         <source>Error creating or updating modeling simple curve</source>
-        <translation>Hiba a modellezési egyszerű görbe létrehozásakor vagy frissítésekor</translation>
+        <translation>Hiba az egyszerű görbe modellezésének létrehozásakor vagy frissítésekor</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3491"/>
@@ -23752,12 +23759,12 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3687"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3693"/>
         <source>Error creating or updating elliptical arc with length</source>
-        <translation>Hiba az adott hosszú elliptikus ív létrehozásakor vagy frissítésekor</translation>
+        <translation>Hiba az elliptikus ív adott hosszal létrehozásakor vagy frissítésekor</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3720"/>
         <source>Error creating or updating modeling arc</source>
-        <translation>Hiba a modellezési ív létrehozásakor vagy frissítésekor</translation>
+        <translation>Hiba az ív modellezésének létrehozásakor vagy frissítésekor</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4459"/>
@@ -23777,17 +23784,17 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2843"/>
         <source>Error creating or updating point from circle and tangent</source>
-        <translation>Hiba a körből és érintőből származó pont létrehozásakor vagy frissítésekor</translation>
+        <translation>Hiba a kör és érintő metszéspontjának létrehozásakor vagy frissítésekor</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2874"/>
         <source>Error creating or updating point from arc and tangent</source>
-        <translation>Hiba az ívből és érintőből származó pont létrehozásakor vagy frissítésekor</translation>
+        <translation>Hiba az ív és érintő metszéspontjának létrehozásakor vagy frissítésekor</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2925"/>
         <source>Error creating or updating true darts</source>
-        <translation>Hiba a valódi varrásbevarrások létrehozásakor vagy frissítésekor</translation>
+        <translation>Hiba a szűkítők kiegyenlítésének létrehozásában/frissítésében</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="943"/>
@@ -23892,7 +23899,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3631"/>
         <source>Error creating or updating modeling elliptical arc</source>
-        <translation>Hiba a modellezési elliptikus ív létrehozásakor vagy frissítésekor</translation>
+        <translation>Hiba az elliptikus ív modellezésének létrehozásakor vagy frissítésekor</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1126"/>
@@ -23913,7 +23920,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2173"/>
         <source>Error creating or updating pin point</source>
-        <translation>Hiba a tűzőpont létrehozásakor vagy frissítésekor</translation>
+        <translation>Hiba a tűpont létrehozásakor vagy frissítésekor</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4525"/>
@@ -23924,7 +23931,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2242"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2248"/>
         <source>Error creating or updating place label</source>
-        <translation>Hiba az elhelyezési címke létrehozásakor vagy frissítésekor</translation>
+        <translation>Hiba a címke létrehozásakor vagy frissítésekor</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4700"/>
@@ -24467,7 +24474,7 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="375"/>
         <source>Arc</source>
-        <translation>Körív</translation>
+        <translation>Ív</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutarc.cpp" line="376"/>
@@ -24839,7 +24846,7 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3066"/>
         <source>Point at distance and angle</source>
-        <translation>Pont távolságra és szögben</translation>
+        <translation>Pont adott távolsággal és szöggel</translation>
     </message>
     <message>
         <source>Length</source>
@@ -24848,12 +24855,12 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3085"/>
         <source>Point at distance along line</source>
-        <translation>Pont a vonal mentén távolságra</translation>
+        <translation>Pont adott távolságra a vonalon</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3104"/>
         <source>Arc</source>
-        <translation>Körív</translation>
+        <translation>Ív</translation>
     </message>
     <message>
         <source>Radius</source>
@@ -24871,7 +24878,7 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3187"/>
         <source>Cut arc tool</source>
-        <translation>Ívvágó eszköz</translation>
+        <translation>Vágott ív eszköz</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3204"/>
@@ -24886,17 +24893,17 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3238"/>
         <source>Perpendicular point along line</source>
-        <translation>Merőleges pont a vonal mentén</translation>
+        <translation>Merőleges pont a vonalon</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3257"/>
         <source>Line between points</source>
-        <translation>Vonal pontok között</translation>
+        <translation>Vonal két pont között</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3276"/>
         <source>Point at line intersection</source>
-        <translation>Pont a vonalak metszéspontjában</translation>
+        <translation>Vonalak metszéspontja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3291"/>
@@ -24911,7 +24918,7 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3436"/>
         <source>Special point on shoulder</source>
-        <translation>Speciális pont a vállon</translation>
+        <translation>Speciális vállpont</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3456"/>
@@ -24959,17 +24966,17 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3127"/>
         <source>Arc with given length</source>
-        <translation>Ív adott hosszal</translation>
+        <translation>Ív adott ívhosszal</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3170"/>
         <source>True darts</source>
-        <translation>Valódi varrásbevarrások</translation>
+        <translation>Szűkítők kiegyenlítése</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3346"/>
         <source>Tool to make point from intersection two arcs</source>
-        <translation>Eszköz pont létrehozásához két ív metszéspontjából</translation>
+        <translation>Pont létrehozása két ív metszéspontjából</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3368"/>
@@ -24979,12 +24986,12 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3407"/>
         <source>Tool to make point from circle and tangent</source>
-        <translation>Eszköz pont létrehozásához körből és érintőből</translation>
+        <translation>Eszköz kör és érintő metszéspontjának létrehozásához</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3422"/>
         <source>Tool to make point from arc and tangent</source>
-        <translation>Eszköz pont létrehozásához ívből és érintőből</translation>
+        <translation>Eszköz ív és érintő metszéspontjának létrehozásához</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="859"/>
@@ -25009,7 +25016,7 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3384"/>
         <source>Tool to make point from intersection two curves</source>
-        <translation>Eszköz pont létrehozásához két görbe metszéspontjából</translation>
+        <translation>Pont létrehozása két görbe metszéspontjából</translation>
     </message>
     <message>
         <source>Name</source>
@@ -25243,23 +25250,23 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3176"/>
         <source>First dart point:</source>
-        <translation>Első bevarráspont:</translation>
+        <translation>Első szűkítőpont:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3177"/>
         <source>Second dart point:</source>
-        <translation>Második bevarráspont:</translation>
+        <translation>Második szűkítőpont:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3178"/>
         <source>Third dart point:</source>
-        <translation>Harmadik bevarráspont:</translation>
+        <translation>Harmadik szűkítőpont:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3190"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3426"/>
         <source>Arc:</source>
-        <translation>Körív:</translation>
+        <translation>Ív:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3191"/>
@@ -25381,12 +25388,12 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3354"/>
         <source>First arc. Left sub arc alias:</source>
-        <translation>Első ív. Bal részív álneve:</translation>
+        <translation>Első ív. Bal részív aliasa:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3355"/>
         <source>First arc. Right sub arc alias:</source>
-        <translation>Első ív. Jobb részív álneve:</translation>
+        <translation>Első ív. Jobb részív aliasa:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3356"/>
@@ -25401,12 +25408,12 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3358"/>
         <source>Second arc. Left sub arc alias:</source>
-        <translation>Második ív. Bal részív álneve:</translation>
+        <translation>Második ív. Bal részív aliasa:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3359"/>
         <source>Second arc. Right sub arc alias:</source>
-        <translation>Második ív. Jobb részív álneve:</translation>
+        <translation>Második ív. Jobb részív aliasa:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3371"/>
@@ -25461,12 +25468,12 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3393"/>
         <source>First curve. Left sub curve alias:</source>
-        <translation>Első görbe. Bal részgörbe álneve:</translation>
+        <translation>Első görbe. Bal részgörbe aliasa:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3394"/>
         <source>First curve. Right sub curve alias:</source>
-        <translation>Első görbe. Jobb részgörbe álneve:</translation>
+        <translation>Első görbe. Jobb részgörbe aliasa:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3395"/>
@@ -25481,12 +25488,12 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3397"/>
         <source>Second curve. Left sub curve alias:</source>
-        <translation>Második görbe. Bal részgörbe álneve:</translation>
+        <translation>Második görbe. Bal részgörbe aliasa:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3398"/>
         <source>Second curve. Right sub curve alias:</source>
-        <translation>Második görbe. Jobb részgörbe álneve:</translation>
+        <translation>Második görbe. Jobb részgörbe aliasa:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3410"/>
@@ -25497,7 +25504,7 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3411"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3425"/>
         <source>Tangent point:</source>
-        <translation>Érintési pont:</translation>
+        <translation>Érintőpont:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3412"/>
@@ -25507,7 +25514,7 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3721"/>
         <source>Elliptical arc with given length</source>
-        <translation>Elliptikus ív adott hosszal</translation>
+        <translation>Elliptikus ív adott ívhosszal</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3727"/>
@@ -25590,13 +25597,13 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3583"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3603"/>
         <source>Axis point:</source>
-        <translation>Tengely pont:</translation>
+        <translation>Tengelypont:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3623"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3662"/>
         <source>Origin point:</source>
-        <translation>Eredeti pont:</translation>
+        <translation>Kiindulópont:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3661"/>
@@ -25687,7 +25694,7 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3762"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3784"/>
         <source>Notes:</source>
-        <translation>Jegyzet:</translation>
+        <translation>Megjegyzések:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3113"/>
@@ -25701,7 +25708,7 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3755"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3777"/>
         <source>Alias:</source>
-        <translation>Álnév:</translation>
+        <translation>Alias:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3193"/>
@@ -25709,7 +25716,7 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3227"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3607"/>
         <source>Alias1:</source>
-        <translation>Álnév1:</translation>
+        <translation>Alias1:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3194"/>
@@ -25717,7 +25724,7 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3228"/>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3608"/>
         <source>Alias2:</source>
-        <translation>Álnév2:</translation>
+        <translation>Alias2:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3318"/>
@@ -25754,7 +25761,7 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointfromarcandtangent.cpp" line="132"/>
         <source>Error calculating point &apos;%1&apos;. Tangent to arc &apos;%2&apos; from point &apos;%3&apos; cannot be found</source>
-        <translation>Hiba a(z) &apos;%1&apos; pont kiszámításakor. A(z) &apos;%3&apos; pontból a(z) &apos;%2&apos; ívhez húzott érintő nem található</translation>
+        <translation>Hiba a(z) &apos;%1&apos; pont számításakor. A(z) &apos;%2&apos; ívhez a(z) &apos;%3&apos; pontból nem található érintő</translation>
     </message>
 </context>
 <context>
@@ -25803,7 +25810,7 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectionarcs.cpp" line="535"/>
         <source>Error calculating point &apos;%1&apos;. Arcs &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
-        <translation>Hiba a(z) &apos;%1&apos; pont kiszámításakor. A(z) &apos;%2&apos; és &apos;%3&apos; íveknek nincs metszéspontjuk</translation>
+        <translation>Hiba a(z) &apos;%1&apos; pont kiszámításakor. A(z) &apos;%2&apos; és &apos;%3&apos; íveknek nincs metszéspontja</translation>
     </message>
 </context>
 <context>
@@ -25811,7 +25818,7 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncircles.cpp" line="148"/>
         <source>Error calculating point &apos;%1&apos;. Circles with centers in points &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
-        <translation>Hiba a(z) &apos;%1&apos; pont kiszámításakor. A(z) &apos;%2&apos; és &apos;%3&apos; pontokban középponttal rendelkező köröknek nincs metszéspontjuk</translation>
+        <translation>Hiba a(z) &apos;%1&apos; pont kiszámításakor. A(z) &apos;%2&apos; és &apos;%3&apos; pontokban középponttal rendelkező köröknek nincs metszéspontja</translation>
     </message>
 </context>
 <context>
@@ -25824,7 +25831,7 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="632"/>
         <source>Error calculating point &apos;%1&apos;. Curves &apos;%2&apos; and &apos;%3&apos; have no point of intersection</source>
-        <translation>Hiba a(z) &apos;%1&apos; pont kiszámításakor. A(z) &apos;%2&apos; és &apos;%3&apos; görbéknek nincs metszéspontjuk</translation>
+        <translation>Hiba a(z) &apos;%1&apos; pont kiszámításakor. A(z) &apos;%2&apos; és &apos;%3&apos; görbéknek nincs metszéspontja</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/vtoolpointofintersectioncurves.cpp" line="1423"/>
@@ -25879,107 +25886,107 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
         <translation>Jelenlegi varrásráhagyás</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1412"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1415"/>
         <source>move pattern piece label</source>
         <translation>mintadarabcímke mozgatása</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1431"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1434"/>
         <source>resize pattern piece label</source>
         <translation>mintadarabcímke átméretezése</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1451"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1454"/>
         <source>rotate pattern piece label</source>
         <translation>mintadarabcímke forgatása</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1466"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1469"/>
         <source>move pattern info label</source>
         <translation>mintainformációs címke mozgatása</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1485"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1488"/>
         <source>resize pattern info label</source>
         <translation>mintainformációs címke átméretezése</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1503"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1506"/>
         <source>rotate pattern info label</source>
         <translation>mintainformációs címke forgatása</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1516"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1519"/>
         <source>move grainline</source>
         <translation>szálirány mozgatása</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1531"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1534"/>
         <source>resize grainline</source>
         <translation>szálirány átméretezése</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1545"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1548"/>
         <source>rotate grainline</source>
         <translation>szálirány forgatása</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1830"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1833"/>
         <source>Options</source>
         <translation>Beállítások</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1834"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1837"/>
         <source>In layout</source>
         <translation>Az elrendezésben</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1838"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1841"/>
         <source>Hide main path</source>
         <translation>Fő útvonal elrejtése</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1850"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1853"/>
         <source>Show full piece</source>
         <translation>Teljes darab megjelenítése</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1862"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1865"/>
         <source>Reset piece label template</source>
         <translation>Darabcímke-sablon visszaállítása</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1865"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1868"/>
         <source>Delete</source>
         <translation>Törlés</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1626"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1629"/>
         <source>apply save detail options</source>
         <translation>darab beállításai mentésének alkalmazása</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1926"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1929"/>
         <source>multi deletion</source>
         <translation>többszörös törlés</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1842"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1845"/>
         <source>Forbid flipping</source>
         <translation>Tükrözés tiltása</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1846"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1849"/>
         <source>Force flipping</source>
         <translation>Tükrözés kényszerítése</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1635"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1638"/>
         <source>This id (%1) is not unique.</source>
         <translation>Ez az azonosító (%1) nem egyedi.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2897"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2902"/>
         <source>Tool was used after deleting.</source>
         <translation>Az eszközt törlés után használták.</translation>
     </message>
@@ -26018,12 +26025,12 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
 <context>
     <name>VToolUnionDetails</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1979"/>
+        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1983"/>
         <source>union details</source>
-        <translation>Leírás összevonása</translation>
+        <translation>Alkatrészek egyesítése</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="2075"/>
+        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="2079"/>
         <source>This id (%1) is not unique.</source>
         <translation>Ez az azonosító (%1) nem egyedi.</translation>
     </message>
@@ -26055,10 +26062,9 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
         <translation>asinh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="171"/>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
-        <translation>atanh</translation>
+        <translation type="vanished">atanh</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="206"/>
@@ -26396,6 +26402,18 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
         <translation>Angle2ElArc_</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="171"/>
+        <source>atanh</source>
+        <comment>hyperbolic arcus tangent function</comment>
+        <translation type="unfinished">atanh</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="173"/>
+        <source>hyperbolic arcus tangent function</source>
+        <comment>function atanh</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="239"/>
         <source>r2cm</source>
         <comment>round to up to 1 decimal</comment>
@@ -26453,19 +26471,19 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="136"/>
         <source>arcus sine function working with radians</source>
         <comment>function asin</comment>
-        <translation>arkuszszinusz-függvény radiánban</translation>
+        <translation>az arkuszszinusz függvény radiánokkal dolgozik</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="141"/>
         <source>arcus cosine function working with radians</source>
         <comment>function acos</comment>
-        <translation>arkuszkoszinusz-függvény radiánban</translation>
+        <translation>az arkuszkoszinusz függvény radiánokkal dolgozik</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="146"/>
         <source>arcus tangens function working with radians</source>
         <comment>function atan</comment>
-        <translation>arkusztangens-függvény radiánban</translation>
+        <translation>az arkusztangens függvény radiánokkal dolgozik</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="150"/>
@@ -26489,19 +26507,18 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="163"/>
         <source>hyperbolic arcus sine function</source>
         <comment>function asinh</comment>
-        <translation>area szinusz hiperbolikusz-függvény</translation>
+        <translation>hiperbolikus arkuszszinusz függvény</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="168"/>
         <source>hyperbolic arcus cosine function</source>
         <comment>function acosh</comment>
-        <translation>area koszinusz hiperbolikusz-függvény</translation>
+        <translation>hiperbolikus arkuszkoszinusz függvény</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="173"/>
         <source>hyperbolic arcur tangens function</source>
         <comment>function atanh</comment>
-        <translation>area tangens hiperbolikusz-függvény</translation>
+        <translation type="vanished">hiperbolikus arkusztangens függvény</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="178"/>
@@ -26525,19 +26542,19 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="193"/>
         <source>arcus sine function working with degrees</source>
         <comment>function asinD</comment>
-        <translation>arkuszszinusz-függvény fokban</translation>
+        <translation>az arkuszszinusz függvény fokokkal dolgozik</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="198"/>
         <source>arcus cosine function working with degrees</source>
         <comment>function acosD</comment>
-        <translation>arkuszkoszinusz-függvény fokban</translation>
+        <translation>az arkuszkoszinusz függvény fokokkal dolgozik</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="203"/>
         <source>arcus tangens function working with degrees</source>
         <comment>function atanD</comment>
-        <translation>arkusztangens-függvény fokban</translation>
+        <translation>az arkusztangens függvény fokokkal dolgozik</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="207"/>
@@ -26869,27 +26886,27 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
         <translation>Áthelyezés a lehető legkésőbbi pozícióba az előzményekben</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="667"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="673"/>
         <source>Expand All</source>
         <translation>Összes kibontása</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="668"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="674"/>
         <source>Collapse All</source>
         <translation>Összes összecsukása</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="670"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="676"/>
         <source>Copy ID</source>
         <translation>Azonosító másolása</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="672"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="678"/>
         <source>Go to Object</source>
         <translation>Ugrás az objektumra</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="674"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="680"/>
         <source>Delete</source>
         <translation>Törlés</translation>
     </message>
@@ -26903,37 +26920,37 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
         <translation>Űrlap</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="275"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="278"/>
         <source>Unnamed</source>
         <translation>Névtelen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="288"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="291"/>
         <source>Select all</source>
         <translation>Összes kijelölése</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="289"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="292"/>
         <source>Select none</source>
-        <translation>Kijelölés megszüntetése</translation>
+        <translation>Kijelölés törlése</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="359"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="362"/>
         <source>select all details</source>
-        <translation>Összes leírás kiválasztása</translation>
+        <translation>összes alkatész kijelölése</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="366"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="369"/>
         <source>select none details</source>
-        <translation>darabok kijelölésének megszüntetése</translation>
+        <translation>alkatrészek kijelölésének törlése</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="293"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="296"/>
         <source>Invert selection</source>
         <translation>Kijelölés megfordítása</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="372"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="375"/>
         <source>invert selection</source>
         <translation>kijelölés megfordítása</translation>
     </message>
@@ -26944,17 +26961,17 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
         <translation>Az elrendezésben nem szereplők elrejtése</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="313"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="316"/>
         <source>Piece options</source>
         <translation>Darab beállításai</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="315"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="318"/>
         <source>Delete piece</source>
         <translation>Darab törlése</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="321"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="324"/>
         <source>Cannot find piece by id &apos;%1&apos;</source>
         <translation>A(z) &apos;%1&apos; azonosítójú darab nem található</translation>
     </message>
@@ -27072,17 +27089,17 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolcubicbezierpath.cpp" line="280"/>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points</source>
-        <translation>&lt;b&gt;Görbe útvonal&lt;/b&gt;: válasszon hét vagy több pontot</translation>
+        <translation>&lt;b&gt;Görbeútvonal&lt;/b&gt;: válasszon hét vagy több pontot</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolcubicbezierpath.cpp" line="290"/>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select more points for complete segment</source>
-        <translation>&lt;b&gt;Görbe útvonal&lt;/b&gt;: válasszon több pontot a szakasz befejezéséhez</translation>
+        <translation>&lt;b&gt;Görbeútvonal&lt;/b&gt;: válasszon még pontokat a szakasz befejezéséhez</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolcubicbezierpath.cpp" line="284"/>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;%1&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Görbe útvonal&lt;/b&gt;: válasszon hét vagy több pontot, &lt;b&gt;%1&lt;/b&gt; – létrehozás befejezése</translation>
+        <translation>&lt;b&gt;Görbeútvonal&lt;/b&gt;: válasszon hét vagy több pontot, &lt;b&gt;%1&lt;/b&gt; – létrehozás befejezése</translation>
     </message>
 </context>
 <context>
@@ -27178,7 +27195,7 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolendline.cpp" line="84"/>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Pont távolságra és szögben&lt;/b&gt;: szög = %1°, hossz = %2%3; &lt;b&gt;%4&lt;/b&gt; – szög rögzítése, &lt;b&gt;%5&lt;/b&gt; – létrehozás befejezése</translation>
+        <translation>&lt;b&gt;Pont adott távolsággal és szöggel&lt;/b&gt;: szög = %1°, hossz = %2%3; &lt;b&gt;%4&lt;/b&gt; – szög rögzítése, &lt;b&gt;%5&lt;/b&gt; – létrehozás befejezése</translation>
     </message>
 </context>
 <context>
@@ -27284,12 +27301,12 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolsplinepath.cpp" line="124"/>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points</source>
-        <translation>&lt;b&gt;Görbe útvonal&lt;/b&gt;: válasszon három vagy több pontot</translation>
+        <translation>&lt;b&gt;Görbeútvonal&lt;/b&gt;: válasszon három vagy több pontot</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolsplinepath.cpp" line="128"/>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;%1&lt;/b&gt; - finish creation</source>
-        <translation>&lt;b&gt;Görbe útvonal&lt;/b&gt;: válasszon három vagy több pontot, &lt;b&gt;%1&lt;/b&gt; – létrehozás befejezése</translation>
+        <translation>&lt;b&gt;Görbeútvonal&lt;/b&gt;: válasszon három vagy több pontot, &lt;b&gt;%1&lt;/b&gt; – létrehozás befejezése</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolsplinepath.cpp" line="134"/>
@@ -27442,7 +27459,7 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="225"/>
         <source>File error.</source>
-        <translation>Fájl hiba.</translation>
+        <translation>Fájlhiba.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="312"/>
@@ -27464,17 +27481,17 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="343"/>
         <source>Failed to lock. This file already opened in another window.</source>
-        <translation>A zárolás nem lehetséges, a fájl meg van nyitva egy másik ablakban.</translation>
+        <translation>Zárolás sikertelen. A fájl már meg van nyitva egy másik ablakban.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="354"/>
         <source>Could not save file</source>
-        <translation>A fájl mentése nem sikerült</translation>
+        <translation>A fájl nem menthető</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="377"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
-        <translation>A zárolás sikertelen. Ez a fájl már meg van nyitva egy másik ablakban. Két programpéldány futtatásakor ütközések várhatók.</translation>
+        <translation>Zárolás sikertelen. A fájl már meg van nyitva egy másik ablakban. 2 programpéldány ütközést okozhat.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="405"/>
@@ -27489,12 +27506,12 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="426"/>
         <source>Could not save the file.</source>
-        <translation>Nem sikerült menteni a fájlt.</translation>
+        <translation>A fájl nem menthető.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="454"/>
         <source>Could not save the file</source>
-        <translation>Nem sikerült menteni a fájlt</translation>
+        <translation>A fájl nem menthető</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/dialogs/watermarkwindow.cpp" line="470"/>
@@ -27716,26 +27733,26 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
         <translation type="vanished">információ.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="228"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="265"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="246"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="283"/>
         <source>Warning</source>
         <translation>Figyelmeztetés</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="232"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="269"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="250"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="287"/>
         <source>Critical error</source>
         <translation>Kritikus hiba</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="236"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="273"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="254"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="291"/>
         <source>Fatal error</source>
         <translation>Végzetes hiba</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="240"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="277"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="258"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="295"/>
         <source>Information</source>
         <translation>Információ</translation>
     </message>
@@ -27772,22 +27789,22 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
         <translation type="vanished">információ.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="300"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="313"/>
         <source>Warning</source>
         <translation>Figyelmeztetés</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="304"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="317"/>
         <source>Critical error</source>
         <translation>Kritikus hiba</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="308"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="321"/>
         <source>Fatal error</source>
         <translation>Végzetes hiba</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="312"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="325"/>
         <source>Information</source>
         <translation>Információ</translation>
     </message>

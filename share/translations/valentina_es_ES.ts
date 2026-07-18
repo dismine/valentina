@@ -12529,52 +12529,52 @@ Aplicar características de todos modos?</translation>
 <context>
     <name>MApplication</name>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="370"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="403"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Error al procesar el archivo. El programa se terminará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="376"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="409"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Error de identificación. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="382"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="415"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Error al convertir valor. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="388"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="421"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Error de parámetro vacío. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="394"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="427"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Error de identidad equivocada. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="407"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="440"/>
         <source>Something&apos;s wrong!!</source>
         <translation>¡¡Algo ha fallado!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="420"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="453"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Error al procesar: %1. El programa se terminará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="425"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="458"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Se ha lanzado una excepción: %1. El programa se terminará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="642"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="675"/>
         <source>Valentina&apos;s measurements editor.</source>
         <translation>Editor de medidas de Valentina.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1040"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1073"/>
         <source>The measurement file.</source>
         <translation>Archivo de medidas.</translation>
     </message>
@@ -12599,12 +12599,12 @@ Aplicar características de todos modos?</translation>
         <translation type="vanished">Utilizado para pruebas unitarias. Ejecuta el programa y abre un archivo sin mostrar una ventana.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1290"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1323"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation>Argumento de talla base inválida. Deben ser cm, mm o pulg.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1086"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1119"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>No se puede comenzar a escuchar por conexiones entrantes en el nombre &apos;%1&apos;</translation>
     </message>
@@ -12613,7 +12613,7 @@ Aplicar características de todos modos?</translation>
         <translation type="vanished">El modo de prueba no soporta abrir varios archivos.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1206"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1239"/>
         <source>Please, provide one input file.</source>
         <translation>Por favor, proporcione un archivo de entrada.</translation>
     </message>
@@ -12634,82 +12634,82 @@ Aplicar características de todos modos?</translation>
         <translation type="vanished">Abrir con la altura base. Valores válidos: %1cm.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1062"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1095"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Utilizado para pruebas unitarias. Ejecuta el programa y abre un archivo sin mostrar la ventana principal.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1065"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1098"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Deshabilitar escala de alto dpi. Llamar esta opción si tiene problemas con la escala ( predeterminado la escala esta habilitada). Alternativamente usted pude usar el %1 medio variable.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1044"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1077"/>
         <source>Set base for dimension A in the table units.</source>
         <translation>Establecer base para la dimensión A en las unidades de la tabla.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1045"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1078"/>
         <source>The dimension A base</source>
         <translation>La base de dimensión A</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1048"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1081"/>
         <source>Set base for dimension B in the table units.</source>
         <translation>Establecer base para la dimensión B en las unidades de la tabla.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1049"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1082"/>
         <source>The dimension B base</source>
         <translation>La base de dimensión B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1052"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1085"/>
         <source>Set base for dimension C in the table units.</source>
         <translation>Establecer base para la dimensión C en las unidades de la tabla.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1053"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1086"/>
         <source>The dimension C base</source>
         <translation>La base de la dimensión C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1056"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1089"/>
         <source>Set pattern file units: cm, mm, inch.</source>
         <translation>Establecer las unidades del archivo de patrón: cm, mm, pulgadas.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1057"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1090"/>
         <source>The pattern units</source>
         <translation>Las unidades del patrón</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1059"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1092"/>
         <source>Activate known measurements mode.</source>
         <translation>Activar el modo de medidas conocidas.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1229"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1262"/>
         <source>Invalid dimension A base value.</source>
         <translation>Valor base no válido para la dimensión A.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1250"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1283"/>
         <source>Invalid dimension B base value.</source>
         <translation>Valor base de dimensión B no válido.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1271"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1304"/>
         <source>Invalid dimension C base value.</source>
         <translation>Valor base no válido para la dimensión C.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="413"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="446"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Advertencia de fórmula: %1. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1104"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1137"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
         <translation>El modo de prueba no permite abrir varios archivos.</translation>
     </message>
@@ -12826,7 +12826,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="136"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2625"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2629"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1674"/>
         <source>Measurements</source>
         <translation>Medidas</translation>
@@ -12989,7 +12989,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="762"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6288"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6257"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1427"/>
         <source>Save</source>
         <translation>Guardar</translation>
@@ -13080,7 +13080,7 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2651"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8635"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8616"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1659"/>
         <source>Auto-arrange labels</source>
         <translation>Organizar etiquetas automáticamente</translation>
@@ -13135,8 +13135,8 @@ Aplicar características de todos modos?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="836"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2106"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4382"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2110"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4346"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1440"/>
         <source>Details</source>
         <translation>Detalles</translation>
@@ -13289,63 +13289,63 @@ Aplicar características de todos modos?</translation>
         <translation type="vanished">Mostrar ayuda en línea</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5303"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5671"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5272"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5640"/>
         <source>Pattern piece %1</source>
         <translation>Pieza de patrón %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1260"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1288"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1299"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1313"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1264"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1292"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1303"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1317"/>
         <source>Select point</source>
         <translation>Seleccionar punto</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1273"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1277"/>
         <source>Select first point</source>
         <translation>Selección primer punto</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1327"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1475"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1839"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1331"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1479"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1843"/>
         <source>Select first point of line</source>
         <translation>Selección primer punto de línea</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1341"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1345"/>
         <source>Select first point of angle</source>
         <translation>Selección primer punto del ángulo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1355"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1359"/>
         <source>Select first point of first line</source>
         <translation>Seleccionar primer punto de la primera línea</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1369"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1373"/>
         <source>Select first point curve</source>
         <translation>Seleccionar primer punto de la curva</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1393"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1397"/>
         <source>Select simple curve</source>
         <translation>Seleccionar curva simple</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1407"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1411"/>
         <source>Select point of center of arc</source>
         <translation>Seleccionar punto del centro del arco</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1436"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1440"/>
         <source>Select point of curve path</source>
         <translation>Seleccionar punto del trazado curvo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1461"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1465"/>
         <source>Select curve path</source>
         <translation>Seleccionar trazado curvo</translation>
     </message>
@@ -13354,47 +13354,47 @@ Aplicar características de todos modos?</translation>
         <translation type="vanished">Seleccionar puntos, arcos, curvas en sentido del reloj.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1533"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1537"/>
         <source>Select base point</source>
         <translation>Seleccionar punto base</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1547"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1551"/>
         <source>Select first point of axis</source>
         <translation>Seleccionar primer punto del eje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1576"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1595"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1580"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1599"/>
         <source>Select detail</source>
         <translation>Seleccionar detalle</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1631"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1643"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1655"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1667"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1947"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1635"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1647"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1659"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1671"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1951"/>
         <source>Select one or more objects, &lt;b&gt;%1&lt;/b&gt; - confirm selection</source>
         <translation>Seleccione uno o más objetos, &lt;b&gt;%1&lt;/b&gt; - confirmar selección</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1827"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1861"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1960"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1970"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1831"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1865"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1964"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1974"/>
         <source>Select arc</source>
         <translation>Seleccionar arco</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1849"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1994"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2005"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1853"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1998"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2009"/>
         <source>Select curve</source>
         <translation>Seleccionar curva</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6715"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6684"/>
         <source>About Qt</source>
         <translation>Sobre Qt</translation>
     </message>
@@ -13415,68 +13415,67 @@ Aplicar características de todos modos?</translation>
         <translation type="vanished">Archivos de patrón (*.val)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4533"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4497"/>
         <source>pattern</source>
         <translation>patrón</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4540"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4504"/>
         <source>Save as</source>
         <translation>Guardar como</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3032"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3036"/>
         <source>Could not save file</source>
         <translation>No se ha guardado archivo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2397"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2664"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4640"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7548"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2401"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2668"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4604"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7517"/>
         <source>Open file</source>
         <translation>Abrir archivo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3155"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3183"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3118"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3146"/>
         <source>Error parsing file.</source>
         <translation>Error analizando archivo.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3162"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3125"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Error no se puede convertir valor.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3169"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5142"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3132"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5111"/>
         <source>Error empty parameter.</source>
         <translation>Error parámetro vacío.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3140"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3176"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3139"/>
         <source>Error wrong id.</source>
         <translation>Error identificación equivocada.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3190"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3153"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Error analizando archivo (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5131"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5100"/>
         <source>Bad id.</source>
         <translation>Identificación incorrecta.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6119"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6088"/>
         <source>File saved</source>
         <translation>Archivo guardado</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8090"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8071"/>
         <source>untitled.val</source>
         <translation>Sin título.val</translation>
     </message>
@@ -13487,24 +13486,24 @@ Do you want to save your changes?</source>
 Quiere guardar los cambios?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2094"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6335"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2098"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6304"/>
         <source>&amp;Undo</source>
         <translation>&amp;Deshacer</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2095"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6350"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2099"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6319"/>
         <source>&amp;Redo</source>
         <translation>&amp;Rehacer</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6889"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6858"/>
         <source>Pattern piece:</source>
         <translation>Pieza de patrón:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6891"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6860"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Introduzca nueva etiqueta para la pieza de patrón.</translation>
     </message>
@@ -13523,8 +13522,8 @@ Quiere guardar los cambios?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="888"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="936"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6990"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7181"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6959"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7150"/>
         <source>File error.</source>
         <translation>Error en archivo.</translation>
     </message>
@@ -13533,12 +13532,12 @@ Quiere guardar los cambios?</translation>
         <translation type="vanished">Archivo cargado</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7510"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7479"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation>Valentina no se cerró correctamente. ¿Quieres volver a abrir archivos (%1) que había abierto?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7512"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7481"/>
         <source>Reopen files.</source>
         <translation>Reabrir archivos.</translation>
     </message>
@@ -13645,7 +13644,7 @@ Quiere guardar los cambios?</translation>
         <translation>Activar última herramienta usada de nuevo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1562"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1566"/>
         <source>Select point for X value (vertical)</source>
         <translation>Seleccionar punto para valor X (vertical)</translation>
     </message>
@@ -13790,7 +13789,7 @@ Quiere guardar los cambios?</translation>
         <translation>Exporta el diseño original</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1873"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1877"/>
         <source>Select first an arc</source>
         <translation>Selecciona el primer arco</translation>
     </message>
@@ -13803,17 +13802,17 @@ Quiere guardar los cambios?</translation>
         <translation type="vanished">Selecciona punto en tangente</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1928"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1932"/>
         <source>Select point of the center of the arc</source>
         <translation>Seleccionar punto del centro del arco</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1938"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1942"/>
         <source>Select the first base line point</source>
         <translation>Selección primer punto de línea base</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4347"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4311"/>
         <source>Detail mode</source>
         <translation>Modo detalle</translation>
     </message>
@@ -13822,12 +13821,12 @@ Quiere guardar los cambios?</translation>
         <translation type="vanished">No puede usar el modo de Detalle en este momento, cree al menos una pieza de trabajo.</translation>
     </message>
     <message>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4404"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4417"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4440"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4453"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4476"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4673"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4752"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7438"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4637"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4716"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7407"/>
         <source>Layout mode</source>
         <translation>Modo diseño</translation>
     </message>
@@ -13836,7 +13835,7 @@ Quiere guardar los cambios?</translation>
         <translation type="vanished">No puede usar el modo de Diseño en este momento. Por favor crear al menos una pieza de trabajo.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6277"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6246"/>
         <source>Unsaved changes</source>
         <translation>Cambios sin guardar</translation>
     </message>
@@ -13865,7 +13864,7 @@ Quiere guardar los cambios?</translation>
         <translation type="vanished">Medidas individuales (*.vit);;Medidas estándar (*.vst)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2423"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2427"/>
         <source>Measurements loaded</source>
         <translation>Medidas cargadas</translation>
     </message>
@@ -13874,7 +13873,7 @@ Quiere guardar los cambios?</translation>
         <translation type="vanished">Medidas estándar (*.vst);;Medidas individuales (*.vit)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7738"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7719"/>
         <source>You can&apos;t export empty scene.</source>
         <translation>No puedes exportar una escena vacía.</translation>
     </message>
@@ -13898,12 +13897,12 @@ Quiere guardar los cambios?</translation>
         <translation type="vanished">%1, %2 (%3)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4567"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4531"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Error al cerrar. Este archivo ya está abierto en otra ventana.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3074"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3078"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Error al cerrar. Este archivo ya está abierto en otra ventana. Posibles colisiones al abrir 2 copias del programa.</translation>
     </message>
@@ -13912,7 +13911,7 @@ Quiere guardar los cambios?</translation>
         <translation type="vanished">El archivo de medidas contiene medida(s) conocidas no válidas.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7658"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7627"/>
         <source>Measurement file has unknown format.</source>
         <translation>El archivo de medidas tiene un formato desconocido.</translation>
     </message>
@@ -13934,18 +13933,18 @@ Quiere guardar los cambios?</translation>
         <translation type="vanished">Las medidas fueron sincronizadas</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2602"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2606"/>
         <source>Couldn&apos;t sync measurements.</source>
         <translation>No se pudo sincronizar las medidas.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5452"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5421"/>
         <source>Couldn&apos;t update measurements.</source>
         <translation>No se pudieron actualizar las medidas.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7108"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7125"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7077"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7094"/>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
         <translation>No se ha podido encontrar el archivo de medidas &apos;%1&apos;.</translation>
     </message>
@@ -13954,7 +13953,7 @@ Quiere guardar los cambios?</translation>
         <translation type="vanished">El archivo de medidas &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; no se ha podido encontrar. Quieres actualizar la ubicación del archivo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7579"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7548"/>
         <source>Loading measurements file</source>
         <translation>Cargando archivo de medidas</translation>
     </message>
@@ -13971,9 +13970,9 @@ Quiere guardar los cambios?</translation>
         <translation type="vanished">No se pudo establecer la talla. No se abrió el archivo.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7921"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7964"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8007"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7902"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7945"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7988"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation>El método %1 no hace nada en el modo de interfaz gráfica</translation>
     </message>
@@ -13990,15 +13989,15 @@ Quiere guardar los cambios?</translation>
         <translation type="vanished">No se pudo establecer la altura. No se abrió el archivo.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7421"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7477"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7786"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7826"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7390"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7446"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7767"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7807"/>
         <source>Export error.</source>
         <translation>Error en exportación.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8034"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8015"/>
         <source>Please, provide one input file.</source>
         <translation>Por favor, proporcione un archivo de entrada.</translation>
     </message>
@@ -14047,12 +14046,12 @@ Quiere guardar los cambios?</translation>
         <translation type="vanished">Descargar medidas si no fueron usadas en un archivo de patrón.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2484"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2488"/>
         <source>Measurements unloaded</source>
         <translation>Medidas descargadas</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2491"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2495"/>
         <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
         <translation>No se pudieron descargar las medidas. Algunas de ellas se están usando en 
 el patrón.</translation>
@@ -14083,7 +14082,7 @@ el patrón.</translation>
         <translation type="vanished">Guardar...</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6293"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6262"/>
         <source>Don&apos;t Save</source>
         <translation>No guardar</translation>
     </message>
@@ -14122,7 +14121,7 @@ el patrón.</translation>
         <translation>Punto de intersección de curvas</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1895"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1899"/>
         <source>Select first curve</source>
         <translation>Seleccionar la primera curva</translation>
     </message>
@@ -14141,12 +14140,12 @@ el patrón.</translation>
         <translation>Herramienta curva que utiliza el punto como control de manejo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1379"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1383"/>
         <source>Select first curve point</source>
         <translation>Seleccionar el primer punto de la curva</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1447"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1451"/>
         <source>Select point of cubic bezier path</source>
         <translation>Seleccionar punto de camino de bezier cúbico</translation>
     </message>
@@ -14207,14 +14206,14 @@ el patrón.</translation>
         <translation>Grupo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2102"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4302"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2106"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4266"/>
         <source>Contains all visibility groups</source>
         <translation>Contiene todos los grupos visibles</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2107"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4384"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2111"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4348"/>
         <source>Show which details will go in layout</source>
         <translation>Mostrar que detalles irán en el Diseño</translation>
     </message>
@@ -14231,19 +14230,19 @@ el patrón.</translation>
         <translation>Zoom original</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1884"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1888"/>
         <source>Select first circle center</source>
         <translation>Seleccionar el primer centro de círculo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1906"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1917"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1910"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1921"/>
         <source>Select point on tangent</source>
         <translation>Seleccionar punto en tangente</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2097"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3283"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2101"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3246"/>
         <source>Pattern Piece:</source>
         <translation>Patrón:</translation>
     </message>
@@ -14256,7 +14255,7 @@ el patrón.</translation>
         <translation type="vanished">Tamaño:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7574"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7543"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation>El archivo de medidas &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; no pudo ser encontrado. ¿Quiere actualizar la ubicación del archivo?</translation>
     </message>
@@ -14279,7 +14278,7 @@ el patrón.</translation>
         <translation>Mover objetos</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2626"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2630"/>
         <source>Measurements were changed. Do you want to sync measurements now?</source>
         <translation>Las medidas fueron modificadas. ¿Quiere sincronizar las medidas ahora?</translation>
     </message>
@@ -14288,7 +14287,7 @@ el patrón.</translation>
         <translation type="vanished">La graduación no soporta pulgadas</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2588"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2592"/>
         <source>Measurements have been synced</source>
         <translation>Las medidas han sido sincronizadas</translation>
     </message>
@@ -14299,22 +14298,22 @@ el patrón.</translation>
         <translation>Arco Elíptico</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1421"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1425"/>
         <source>Select point of center of elliptical arc</source>
         <translation>Seleccionar el punto del centro del arco elíptico</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1489"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1493"/>
         <source>Select main path objects clockwise.</source>
         <translation>Seleccionar los objetos de la ruta principal en el sentido horario.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4610"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4574"/>
         <source>Could not save the file</source>
         <translation>No pudo guardarse el archivo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8140"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8121"/>
         <source>read only</source>
         <translation>sólo lectura</translation>
     </message>
@@ -14379,22 +14378,22 @@ el patrón.</translation>
         <translation>Descargar medidas si ellas no fueron usadas en un archivo de patrón</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2381"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7620"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7634"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2385"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7589"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7603"/>
         <source>Individual measurements</source>
         <translation>Medidas individuales</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2387"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7620"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7634"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2391"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7589"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7603"/>
         <source>Multisize measurements</source>
         <translation>Medidas Multitalla</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4539"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4626"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4503"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4590"/>
         <source>Pattern files</source>
         <translation>Archivos Patrones</translation>
     </message>
@@ -14405,7 +14404,7 @@ el patrón.</translation>
         <translation>Herramienta de Anclaje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1510"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1514"/>
         <source>Select pin point</source>
         <translation>Seleccionar punto anclaje</translation>
     </message>
@@ -14422,37 +14421,37 @@ el patrón.</translation>
         <translation>Abrir aplicación Tape para crear o editar archivo de medidas</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3471"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3434"/>
         <source>Point at the intersections of lines/axis tools</source>
         <translation>Punto en la intersección de líneas/herramientas de eje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3514"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3477"/>
         <source>Point segmenting curves/arcs tools</source>
         <translation>Herramientas de segmentación de curvas/arcos</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3528"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3491"/>
         <source>Points intersecting with 2 curves/arcs/circles tools</source>
         <translation>Puntos de intersección con 2 curvas/arcos/círculos</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4348"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4312"/>
         <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
         <translation>Usted no puede usar el modo Detalle aun. Por favor, crear al menos una pieza de trabajo.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4441"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4405"/>
         <source>You can&apos;t use Layout mode yet. Please, create at least one workpiece.</source>
         <translation>Usted no puede usar el modo Diseño aun. Por favor, crear al menos una pieza de trabajo.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4454"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4418"/>
         <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
         <translation>Usted no puede usar el modo Diseño aun. Por favor, incluya al menos un detalle en el diseño.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4477"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4441"/>
         <source>You can&apos;t use Layout mode yet.</source>
         <translation>Usted no puede usar el modo Diseño aun.</translation>
     </message>
@@ -14475,23 +14474,23 @@ el patrón.</translation>
         <translation>Exportar detalles omitiendo la etapa Diseño</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4674"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4753"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7439"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4638"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4717"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7408"/>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation>Usted no tiene suficientes detalles para exportar. Por favor, incluya al menos un detalle en el diseño.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4687"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4766"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7452"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4651"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4730"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7421"/>
         <source>Export details</source>
         <translation>Exportar detalles</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4687"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4766"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7452"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4651"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4730"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7421"/>
         <source>Can&apos;t export details.</source>
         <translation>No se puede exportar detalles.</translation>
     </message>
@@ -14532,7 +14531,7 @@ el patrón.</translation>
         <translation>Exportar Como…</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6287"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6256"/>
         <source>Save…</source>
         <translation>Guardar…</translation>
     </message>
@@ -14549,17 +14548,17 @@ el patrón.</translation>
         <translation>Exportar Medidas Finales a CSV</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7748"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7729"/>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
         <translation>Usted no puede exportar una escena vacía. Por favor, incluya al menos un detalle en el diseño.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7854"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7835"/>
         <source>Export final measurements error.</source>
         <translation>Error al exportar medidas finales.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7855"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7836"/>
         <source>Destination path is empty.</source>
         <translation>La ruta de destino esta vacía.</translation>
     </message>
@@ -14618,17 +14617,17 @@ el patrón.</translation>
         <translation>Herramienta detalle duplicado</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1520"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1524"/>
         <source>Select placelabel center point</source>
         <translation>Seleccionar punto de centro marcas del patrón</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7139"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7108"/>
         <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
         <translation>El archivo de medidas &apos;%1&apos; no pudo ser encontrado o no dio suficiente información.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3241"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3204"/>
         <source>Scale:</source>
         <translation>Escala:</translation>
     </message>
@@ -14638,12 +14637,12 @@ el patrón.</translation>
         <translation>Crear nueva pieza de patrón para comenzar a trabajar.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2096"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2100"/>
         <source>Changes applied.</source>
         <translation>Cambios aplicados.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6263"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6232"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>No se puede guardar configuración. Acceso denegado.</translation>
     </message>
@@ -14654,17 +14653,17 @@ el patrón.</translation>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6238"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6207"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>No se puede leer la configuración desde un archivo .INI deforme.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1501"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1505"/>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
         <translation>Seleccionar los objetos de la ruta, &lt;b&gt;%1&lt;/b&gt; - curva de sentido inverso</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1619"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1623"/>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation>Seleccione uno o mas objetos, presionar &lt;b&gt;%1&lt;/b&gt; - para selección múltiple, &lt;b&gt;%2&lt;/b&gt; - terminar creación</translation>
     </message>
@@ -14699,30 +14698,30 @@ el patrón.</translation>
         <translation>Ocultar etiquetas</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2101"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4300"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2105"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4264"/>
         <source>Groups of visibility</source>
         <translation>Grupos de visibilidad</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1523"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5645"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5614"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1565"/>
         <source>Export recipe</source>
         <translation>Exportar receta</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5643"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5612"/>
         <source>Recipe files</source>
         <translation>Archivos receta</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5645"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5614"/>
         <source>recipe</source>
         <translation>receta</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5658"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5627"/>
         <source>Could not save recipe. %1</source>
         <translation>No se pudo guardar receta. %1</translation>
     </message>
@@ -14752,7 +14751,7 @@ el patrón.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="413"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8550"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8531"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1691"/>
         <source>Pattern messages</source>
         <translation>Mensajes de patrón</translation>
@@ -14770,27 +14769,27 @@ el patrón.</translation>
         <translation>Filtro</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8525"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8506"/>
         <source>DEBUG</source>
         <translation>DEPURACION</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8528"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8509"/>
         <source>WARNING</source>
         <translation>ADVERTENCIA</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8531"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8512"/>
         <source>CRITICAL</source>
         <translation>CRITICO</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8534"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8515"/>
         <source>FATAL</source>
         <translation>FATAL</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8537"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8518"/>
         <source>INFO</source>
         <translation>INFORMACION</translation>
     </message>
@@ -14837,7 +14836,7 @@ el patrón.</translation>
         <translation>Crear o editar una marca de agua</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2661"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2665"/>
         <source>Watermark files</source>
         <translation>Archivos de marca de agua</translation>
     </message>
@@ -14884,78 +14883,78 @@ el patrón.</translation>
         <translation>Actualizar el diseño manual</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4721"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4796"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4685"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4760"/>
         <source>Unable to prepare raw layout data.</source>
         <translation>No se pueden preparar los datos brutos del diseño.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4728"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4692"/>
         <source>Manual layout files</source>
         <translation>Archivos de diseño manual</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4735"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4699"/>
         <source>Select manual layout</source>
         <translation>Seleccione diseño manual</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4838"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4802"/>
         <source>Select folder</source>
         <translation>Selecciona carpeta</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6278"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6247"/>
         <source>The pattern has been modified. Do you want to save your changes?</source>
         <translation>El patrón ha sido modificado. ¿Quiere guardar los cambios?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7902"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7883"/>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
         <translation>Dimensión A valor “%1” no admitida para este archivo de patrón.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7909"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7890"/>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
         <translation>No se pudo establecer la dimensión A. Necesita un archivo con medidas multitalla.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7915"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7896"/>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
         <translation>No se pudo establecer la dimensión A. No se abrió el archivo.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7945"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7926"/>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
         <translation>Valor de dimensión B no admitido &apos;%1&apos; para este archivo de patrón.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7952"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7933"/>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
         <translation>No se ha podido establecer la dimensión B. Se necesita un archivo con medidas multitamaño.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7958"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7939"/>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
         <translation>No se pudo establecer la dimensión B. No se abrió el archivo.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7988"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7969"/>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
         <translation>Dimensión C valor “%1” no admitida para este archivo de patrón.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7995"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7976"/>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
         <translation>No se pudo establecer la dimensión C. Necesita un archivo con medidas multitallas.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8001"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7982"/>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation>No se pudo establecer la dimensión C. No se abrió el archivo.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5663"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5632"/>
         <source>Could not create recipe file. %1</source>
         <translation>No se ha podido crear el archivo destino. %1</translation>
     </message>
@@ -14966,12 +14965,12 @@ el patrón.</translation>
         <translation>Tienda</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7373"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7342"/>
         <source>Scalable Vector Graphics files</source>
         <translation>Archivos de gráficos vectoriales escalables (sgv)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7375"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7344"/>
         <source>Save draw</source>
         <translation>Guardar dibujo</translation>
     </message>
@@ -14994,139 +14993,139 @@ el patrón.</translation>
         <translation>Agregar imagen de fondo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1778"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1782"/>
         <source>Unable to add background image</source>
         <translation>No se puede agregar la imagen de fondo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1798"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1802"/>
         <source>Invalid image. Error: %1</source>
         <translation>Imagen no válida. Error: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1982"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1986"/>
         <source>Select point of the center of the elliptical arc</source>
         <translation>Seleccionar el punto central del arco elíptico</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2120"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3310"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2124"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3273"/>
         <source>Pen style:</source>
         <translation>Estilo lápiz:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2121"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3334"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2125"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3297"/>
         <source>Color:</source>
         <translation>Color:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3315"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3278"/>
         <source>Sets the &lt;b&gt;default pen style&lt;/b&gt; for all newly created objects. This style is applied the first time an object is drawn.</source>
         <translation>Establece el &lt;b&gt;estilo de lápiz predeterminado&lt;/b&gt; para todos los objetos recién creados. Este estilo se aplica la primera vez que se dibuja un objeto.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3338"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3301"/>
         <source>Defines the &lt;b&gt;global object color property&lt;/b&gt;. This color is applied automatically the first time a new object is drawn.</source>
         <translation>Define la &lt;b&gt;propiedad de color global del objeto&lt;/b&gt;. Este color se aplica automáticamente la primera vez que se dibuja un nuevo objeto.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3444"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3407"/>
         <source>Point at a given distance tools</source>
         <translation>Herramientas de punto a una distancia dada</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3458"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3421"/>
         <source>Perpendicular/Bisector tools</source>
         <translation>Herramientas de perpendicular/bisectriz</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3484"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3447"/>
         <source>Triangular tools</source>
         <translation>Herramientas triangulares</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3498"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3461"/>
         <source>Point intersecting with axis tools</source>
         <translation>Herramientas de punto de intersección con eje</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3543"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3506"/>
         <source>Points intersecting with arcs/curves and tangents/segments tools</source>
         <translation>Herramientas de puntos de intersección con arcos/curvas y tangentes/segmentos</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3603"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3566"/>
         <source>Curves and arcs tools</source>
         <translation>Herramientas de curvas y arcos</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3636"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3599"/>
         <source>Flipping objects tools</source>
         <translation>Herramientas de volteo de objetos</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3649"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3612"/>
         <source>Rotating/moving objects tools</source>
         <translation>Herramientas de rotación/movimiento de objetos</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3684"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3647"/>
         <source>Merge/duplicate pieces tools</source>
         <translation>Herramientas de fusión/duplicación de piezas</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3699"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3662"/>
         <source>Adding objects for Details mode tools</source>
         <translation>Añadir objetos para las herramientas del modo Detalles</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4804"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4768"/>
         <source>Select background image</source>
         <translation>Seleccionar imagen de fondo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4845"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4809"/>
         <source>Export corrections</source>
         <translation>Exportar correcciones</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4846"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4810"/>
         <source>File &apos;%1&apos; already exists. Overwrite it?</source>
         <translation>El archivo &apos;%1&apos; ya existe. ¿Sobrescribirlo?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4875"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4839"/>
         <source>All Single-Line Fonts</source>
         <translation>Todas las fuentes de línea única</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4876"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4840"/>
         <source>TrueType Fonts</source>
         <translation>Fuentes TrueType</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4877"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4841"/>
         <source>OpenType Fonts</source>
         <translation>Fuentes OpenType</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4878"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4842"/>
         <source>SVG Fonts</source>
         <translation>Fuentes SVG</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4879"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4843"/>
         <source>All Files</source>
         <translation>Todos los archivos</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4884"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4848"/>
         <source>Select Font Files to Install</source>
         <translation>Seleccionar archivos de fuente para instalar</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4918"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4882"/>
         <source>Failed to install font file: %1
 
 Reason: %2</source>
@@ -15135,7 +15134,7 @@ Reason: %2</source>
 Motivo: %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4924"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4888"/>
         <source>Font Installation Summary:
 
 Successful Installations: %1
@@ -15146,45 +15145,45 @@ Instalaciones correctas: %1
 Instalaciones fallidas: %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4930"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4894"/>
         <source>Installation Complete with Errors</source>
         <translation>Instalación completada con errores</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4934"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4898"/>
         <source>Installation Successful</source>
         <translation>Instalación correcta</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5580"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5620"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5549"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5589"/>
         <source>Unable to save image. Error: %1</source>
         <translation>No se puede guardar la imagen. Error: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5586"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5555"/>
         <source>Unable to save image. No data.</source>
         <translation>No se puede guardar la imagen. No hay datos.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5592"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5561"/>
         <source>untitled</source>
         <translation>sin título</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8585"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8566"/>
         <source>Auto-Arrange Labels</source>
         <translation>Organizar etiquetas automáticamente</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2381"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2387"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5605"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2385"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2391"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5574"/>
         <source>All files</source>
         <translation>Todos los archivos</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5609"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5578"/>
         <source>Save Image</source>
         <translation>Guardar Imagen</translation>
     </message>
@@ -17169,36 +17168,36 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1140"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="468"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="473"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="442"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="447"/>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation>No se puede convertir a parámetro UInt</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1077"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="519"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="493"/>
         <source>Can&apos;t convert toBool parameter</source>
         <translation>No se puede convertir a parámetro Bool</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="567"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="541"/>
         <source>Got empty parameter</source>
         <translation>Parámetro vacío obtenido</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1114"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="604"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="609"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="578"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="583"/>
         <source>Can&apos;t convert toDouble parameter</source>
         <translation>No se puede convertir a parámetro Double</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="628"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="602"/>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
         <translation>Id de parámetro obtenido equivocado. Necesita solo id &gt; 0.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1808"/>
+        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1812"/>
         <source>United detail</source>
         <translation>Detalle unido</translation>
     </message>
@@ -17291,7 +17290,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="667"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2205"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2210"/>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation>Pieza &apos;%1&apos;. El margen de costura no es válido.</translation>
     </message>
@@ -17357,8 +17356,8 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1166"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="497"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="502"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="471"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="476"/>
         <source>Can&apos;t convert toInt parameter</source>
         <translation>No se puede convertir el parámetro toInt</translation>
     </message>
@@ -17479,7 +17478,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="558"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2527"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2532"/>
         <source>Piece &apos;%1&apos;. Unable to load default piece label template.
 %2
 %3</source>
@@ -17488,12 +17487,12 @@ Esta opción surtirá efecto después de reiniciar.</translation>
 %3</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1389"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1392"/>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
         <translation>Pieza &apos;%1&apos;. Hilo de la tela no es valido.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="3232"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="3237"/>
         <source>Piece &apos;%1&apos;. Fold line is not valid.</source>
         <translation>Pieza &apos;%1&apos;. La línea de doblez no es válida.</translation>
     </message>
@@ -18077,8 +18076,12 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/undocommands/label/showdoublelabel.cpp" line="55"/>
+        <source>toggle the second dart label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>togggle the second dart label</source>
-        <translation>alternar la segunda etiqueta de pinza</translation>
+        <translation type="vanished">alternar la segunda etiqueta de pinza</translation>
     </message>
 </context>
 <context>
@@ -21807,24 +21810,6 @@ Quieres guardar los cambios?</translation>
 %2.</translation>
     </message>
     <message>
-        <source>Can&apos;t open schema file %1:
-%2.</source>
-        <translation type="vanished">No se pudo abrir el archivo de esquema %1:
-%2.</translation>
-    </message>
-    <message>
-        <source>Could not load schema file &apos;%1&apos;.</source>
-        <translation type="vanished">No se puede cargar el archivo de esquema &apos;%1&apos;.</translation>
-    </message>
-    <message>
-        <source>Schema file %3 invalid in line %1 column %2</source>
-        <translation type="vanished">Archivo de esquema %3 inválido en línea %1 columna %2</translation>
-    </message>
-    <message>
-        <source>Validation error file %3 in line %1 column %2</source>
-        <translation type="vanished">Error de validación en el archivo %3 en la línea %1 columna %2</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="82"/>
         <source>Error opening a temp file: %1.</source>
         <translation>Error al abrir un fichero temporal: %1.</translation>
@@ -22064,29 +22049,29 @@ Quieres guardar los cambios?</translation>
 <context>
     <name>VAbstractPattern</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1505"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1514"/>
         <source>Can&apos;t find tool in table.</source>
         <translation>No se encuentra herramienta en la tabla.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2014"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2023"/>
         <source>Error creating or updating group</source>
         <translation>Error al crear o actualizar el grupo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2082"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2091"/>
         <source>measurement</source>
         <translation>medida</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2341"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2525"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2584"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2350"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2534"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2593"/>
         <source>New group</source>
         <translation>Nuevo grupo</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="684"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="687"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
         <translation>Nombre de etiqueta equivocado &apos;%1&apos;.</translation>
     </message>
@@ -22760,52 +22745,52 @@ Quieres guardar los cambios?</translation>
 <context>
     <name>VApplication</name>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="436"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="467"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Error al procesar el archivo. El programa se terminará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="442"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="473"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Error de identificación. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="448"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="479"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Error al convertir valor. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="454"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="485"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Error de parámetro vacío. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="460"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="491"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Error de identidad equivocada. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="479"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="510"/>
         <source>Something&apos;s wrong!!</source>
         <translation>¡¡Algo ha fallado!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="493"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="524"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Error al procesar: %1. El programa se terminará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="498"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="529"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Se ha lanzado una excepción: %1. El programa se terminará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="473"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="504"/>
         <source>Invalid notch.</source>
         <translation>Pique invalido.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="485"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="516"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Advertencia de fórmula: %1. El programa se cerrará.</translation>
     </message>
@@ -23726,7 +23711,7 @@ Quieres guardar los cambios?</translation>
         <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="218"/>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="248"/>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="262"/>
-        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="300"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="311"/>
         <source>Can&apos;t find object</source>
         <translation>No se encuentra objeto</translation>
     </message>
@@ -23736,16 +23721,30 @@ Quieres guardar los cambios?</translation>
         <translation>No se puede convertir el objeto al tipo solicitado. ID del objeto = %1, tipo real = %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="295"/>
-        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="424"/>
-        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="433"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="296"/>
+        <source>Can&apos;t cast object to the requested type. Name = &apos;%1&apos;, type = %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="306"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="437"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="446"/>
         <source>Can&apos;t cast object</source>
         <translation>No se puede convertir el objeto</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="368"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="366"/>
+        <source>Can&apos;t cast object. Name = &apos;%1&apos;, type = %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="376"/>
+        <source>Can&apos;t find object. Type mismatch. Name = &apos;%1&apos;, existing type = %2, incoming type = %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Can&apos;t find object. Type mismatch.</source>
-        <translation>No se encuentra objeto. Diferente tipo.</translation>
+        <translation type="vanished">No se encuentra objeto. Diferente tipo.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="340"/>
@@ -23758,9 +23757,8 @@ Quieres guardar los cambios?</translation>
         <translation>No puede crear una curva con el tipo &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="358"/>
         <source>Can&apos;t cast object.</source>
-        <translation>No puede asignar objeto.</translation>
+        <translation type="vanished">No puede asignar objeto.</translation>
     </message>
 </context>
 <context>
@@ -24005,14 +24003,14 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">No se puede convertir el parámetro toDouble</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="735"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="690"/>
         <source>Can&apos;t open file %1:
 %2.</source>
         <translation>No se pudo abrir el archivo %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="888"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="843"/>
         <source>Can&apos;t open schema file %1:
 %2.</source>
         <translation>No se pudo abrir el archivo de esquema %1:
@@ -24023,8 +24021,8 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">No se pudo cargar el archivo de esquema.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="945"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="981"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="900"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="936"/>
         <source>Validation error file %3 in line %1 column %2</source>
         <translation>Error de validación en el archivo %3 en la línea %1 columna %2</translation>
     </message>
@@ -24033,7 +24031,7 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">Error analizando el archivo %3 en la línea %1 columna %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1178"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1132"/>
         <source>Couldn&apos;t get node</source>
         <translation>No se pudo obtener nodo</translation>
     </message>
@@ -24054,68 +24052,68 @@ Quieres guardar los cambios?</translation>
         <translation type="vanished">No se puede eliminar el archivo del documento</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="911"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="957"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="866"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="912"/>
         <source>Could not load schema file &apos;%1&apos;.</source>
         <translation>No se puede cargar el archivo de esquema &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="439"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="413"/>
         <source>Fail to write Canonical XML.</source>
         <translation>Fallo al escribir XML Canónico.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="381"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="355"/>
         <source>Not unique id (%1)</source>
         <translation>Id no es único (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="681"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="655"/>
         <source>This id (%1) is not unique.</source>
         <translation>Este id (%1) no es único.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="743"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="698"/>
         <source>Parsing error in file %3 at line %1, column %2</source>
         <translation>Error de proceso en el fichero %3 en la línea %1, columna %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="806"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="761"/>
         <source>Refusing to save: the document has no content.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="824"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="779"/>
         <source>Refusing to save: serialization produced no data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="918"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="873"/>
         <source>Schema file %3 invalid in line %1 column %2</source>
-        <translation type="unfinished">Archivo de esquema %3 inválido en línea %1 columna %2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1025"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="980"/>
         <source>Couldn&apos;t get version information.</source>
         <translation>No se encuentra información de la versión.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1031"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="986"/>
         <source>Too many tags &lt;%1&gt; in file.</source>
         <translation>Demasiadas etiquetas &lt;%1&gt; en el archivo.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1267"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1221"/>
         <source>&lt;empty&gt;</source>
         <translation>&lt;empty&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1308"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1262"/>
         <source>Version &quot;%1&quot; invalid.</source>
         <translation>Versión &quot;%1&quot; no válida.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1314"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1268"/>
         <source>Version &quot;0.0.0&quot; invalid.</source>
         <translation>Versión &quot;0.0.0&quot; no válida.</translation>
     </message>
@@ -24768,52 +24766,52 @@ Quieres guardar los cambios?</translation>
 <context>
     <name>VPApplication</name>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="328"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="361"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Error al procesar el archivo. El programa se terminará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="334"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="367"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Error de identificación. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="340"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="373"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Error al convertir valor. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="346"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="379"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Error de parámetro vacío. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="352"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="385"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Error de identidad equivocada. El programa se cerrará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="365"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="398"/>
         <source>Something&apos;s wrong!!</source>
         <translation>¡¡Algo ha fallado!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="371"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="404"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Se ha lanzado una excepción: %1. El programa se terminará.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="716"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="749"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>No se puede comenzar a escuchar por conexiones entrantes en el nombre &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="735"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="768"/>
         <source>Export mode doesn&apos;t support opening several files.</source>
         <translation>El modo de exportación no permite abrir varios archivos.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="742"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="775"/>
         <source>Import raw layout data does not support opening several layout files.</source>
         <translation>La importación de datos de disposición de piezas sin procesar no permite abrir varios archivos de disposición de piezas.</translation>
     </message>
@@ -24836,22 +24834,22 @@ Quieres guardar los cambios?</translation>
 <context>
     <name>VPCarrouselPieceList</name>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="257"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="261"/>
         <source>Move to Sheet</source>
         <translation>Mover a la Hoja</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="260"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="264"/>
         <source>Delete</source>
         <translation>Borrar</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="263"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="267"/>
         <source>Remove from Sheet</source>
         <translation>Remover de la Hoja</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="243"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="247"/>
         <source>Move to</source>
         <translation>Mover a</translation>
     </message>
@@ -28659,107 +28657,107 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
         <translation>Margen de costura actual</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1412"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1415"/>
         <source>move pattern piece label</source>
         <translation>mover etiqueta de pieza de patrón</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1431"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1434"/>
         <source>resize pattern piece label</source>
         <translation>redimensionar etiqueta de pieza del patrón</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1451"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1454"/>
         <source>rotate pattern piece label</source>
         <translation>rotar etiqueta de pieza del patrón</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1466"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1469"/>
         <source>move pattern info label</source>
         <translation>mover etiqueta de información del patrón</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1485"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1488"/>
         <source>resize pattern info label</source>
         <translation>redimensionar etiqueta de información del patrón</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1503"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1506"/>
         <source>rotate pattern info label</source>
         <translation>rotar etiqueta de información del patrón</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1516"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1519"/>
         <source>move grainline</source>
         <translation>mover línea hilo de tela</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1531"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1534"/>
         <source>resize grainline</source>
         <translation>redimensionar línea hilo de tela</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1545"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1548"/>
         <source>rotate grainline</source>
         <translation>rotar línea hilo de tela</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1830"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1833"/>
         <source>Options</source>
         <translation>Opciones</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1834"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1837"/>
         <source>In layout</source>
         <translation>En diseño</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1838"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1841"/>
         <source>Hide main path</source>
         <translation>Ocultar ruta principal</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1850"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1853"/>
         <source>Show full piece</source>
         <translation>Mostrar la pieza completa</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1862"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1865"/>
         <source>Reset piece label template</source>
         <translation>Restablecer la plantilla de etiquetas de la pieza</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1865"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1868"/>
         <source>Delete</source>
         <translation>Borrar</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1626"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1629"/>
         <source>apply save detail options</source>
         <translation>aplicar guardar opciones de detalle</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1926"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1929"/>
         <source>multi deletion</source>
         <translation>borrado multiple</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1842"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1845"/>
         <source>Forbid flipping</source>
         <translation>Prohibir girar</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1846"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1849"/>
         <source>Force flipping</source>
         <translation>Forzar voltear</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1635"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1638"/>
         <source>This id (%1) is not unique.</source>
         <translation>Este id (%1) no es único.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2897"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2902"/>
         <source>Tool was used after deleting.</source>
         <translation>La herramienta se utilizo después de eliminar.</translation>
     </message>
@@ -28798,7 +28796,7 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
 <context>
     <name>VToolUnionDetails</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1979"/>
+        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1983"/>
         <source>union details</source>
         <translation>Detalles de unión</translation>
     </message>
@@ -28807,7 +28805,7 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
         <translation type="vanished">Detalle unido</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="2075"/>
+        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="2079"/>
         <source>This id (%1) is not unique.</source>
         <translation>Este id (%1) no es único.</translation>
     </message>
@@ -29749,10 +29747,9 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
         <translation type="vanished">acosh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="171"/>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
-        <translation>atanh</translation>
+        <translation type="vanished">atanh</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="206"/>
@@ -30110,6 +30107,18 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
         <translation>Angulo2ElArco_</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="171"/>
+        <source>atanh</source>
+        <comment>hyperbolic arcus tangent function</comment>
+        <translation type="unfinished">atanh</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="173"/>
+        <source>hyperbolic arcus tangent function</source>
+        <comment>function atanh</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="239"/>
         <source>r2cm</source>
         <comment>round to up to 1 decimal</comment>
@@ -30212,10 +30221,9 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
         <translation>función arco coseno hiperbolico</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="173"/>
         <source>hyperbolic arcur tangens function</source>
         <comment>function atanh</comment>
-        <translation>función arco tangente hiperbolica</translation>
+        <translation type="vanished">función arco tangente hiperbolica</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="178"/>
@@ -30605,27 +30613,27 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
         <translation>Mover a la posición más reciente posible en el historial</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="667"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="673"/>
         <source>Expand All</source>
         <translation>Expandir Todo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="668"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="674"/>
         <source>Collapse All</source>
         <translation>Colapsar Todo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="670"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="676"/>
         <source>Copy ID</source>
         <translation>Copiar ID</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="672"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="678"/>
         <source>Go to Object</source>
         <translation>Ir al objeto</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="674"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="680"/>
         <source>Delete</source>
         <translation>Eliminar</translation>
     </message>
@@ -30639,37 +30647,37 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
         <translation>Formulario</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="275"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="278"/>
         <source>Unnamed</source>
         <translation>Sin Nombre</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="288"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="291"/>
         <source>Select all</source>
         <translation>Seleccionar todo</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="289"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="292"/>
         <source>Select none</source>
         <translation>No seleccionar ninguno</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="359"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="362"/>
         <source>select all details</source>
         <translation>seleccionar todos los detalles</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="366"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="369"/>
         <source>select none details</source>
         <translation>no seleccionar ningún detalle</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="293"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="296"/>
         <source>Invert selection</source>
         <translation>Invertir selección</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="372"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="375"/>
         <source>invert selection</source>
         <translation>invertir selección</translation>
     </message>
@@ -30680,17 +30688,17 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
         <translation>No ocultar en el diseño</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="313"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="316"/>
         <source>Piece options</source>
         <translation>Opciones de pieza</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="315"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="318"/>
         <source>Delete piece</source>
         <translation>Eliminar pieza</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="321"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="324"/>
         <source>Cannot find piece by id &apos;%1&apos;</source>
         <translation>No se puede encontrar pieza con id &apos;%1&apos;</translation>
     </message>
@@ -31512,26 +31520,26 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
         <translation type="vanished">Información.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="228"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="265"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="246"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="283"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="232"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="269"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="250"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="287"/>
         <source>Critical error</source>
         <translation>Error crítico</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="236"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="273"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="254"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="291"/>
         <source>Fatal error</source>
         <translation>Error fatal</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="240"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="277"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="258"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="295"/>
         <source>Information</source>
         <translation>Información</translation>
     </message>
@@ -31580,22 +31588,22 @@ Error de compatibilidad de formato de diseño de piezas RAW: actualFileVersion =
         <translation type="vanished">Información.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="300"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="313"/>
         <source>Warning</source>
         <translation>Advertencia</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="304"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="317"/>
         <source>Critical error</source>
         <translation>Error crítico</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="308"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="321"/>
         <source>Fatal error</source>
         <translation>Error fatal</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="312"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="325"/>
         <source>Information</source>
         <translation>Información</translation>
     </message>

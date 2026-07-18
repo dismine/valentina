@@ -12533,52 +12533,52 @@ Přesto použít nastavení?</translation>
 <context>
     <name>MApplication</name>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="370"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="403"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Chyba při zpracování souboru. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="376"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="409"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Chyba. Špatný identifikátor. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="382"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="415"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Chyba. Nelze převést hodnotu. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="388"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="421"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Chyba. Prázdný parametr. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="394"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="427"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Chyba. Špatný identifikátor. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="407"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="440"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Něco je špatně!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="420"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="453"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Chyba při zpracování: %1. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="425"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="458"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Způsobena chyba: %1. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="642"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="675"/>
         <source>Valentina&apos;s measurements editor.</source>
         <translation>Editor velikostí ve Valentině.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1040"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1073"/>
         <source>The measurement file.</source>
         <translation>Soubor s mírami.</translation>
     </message>
@@ -12603,12 +12603,12 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Použít ke zkoušení jednotek. Spusťte program a otevřete soubor bez zobrazení okna.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1290"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1323"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation>Neplatná základní velikost. Musí být cm, mm nebo palec.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1086"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1119"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Nelze začít naslouchat příchozímu spojení &apos;%1&apos;</translation>
     </message>
@@ -12617,7 +12617,7 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Zkušební režim nepodporuje otevření více souborů.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1206"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1239"/>
         <source>Please, provide one input file.</source>
         <translation>Poskytněte, prosím, jeden vstupní soubor.</translation>
     </message>
@@ -12638,82 +12638,82 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Otevřeno se základní výškou. Platné hodnoty: %1 cm.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1062"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1095"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Použít ke zkoušení jednotek. Spusťte program a otevřete soubor bez zobrazení okna.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1065"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1098"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Zakázat škálování pro obrazovky s velkým rozlišením. Tuto volbu zvolte, pokud máte potíže se škálováním (ve výchozím nastavení je škálování povoleno). Jinou možností je použít proměnnou prostředí %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1044"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1077"/>
         <source>Set base for dimension A in the table units.</source>
         <translation>Nastavte základ pro rozměr A v jednotkách tabulky.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1045"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1078"/>
         <source>The dimension A base</source>
         <translation>Základní hodnota rozměru A</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1048"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1081"/>
         <source>Set base for dimension B in the table units.</source>
         <translation>Nastavte základ pro rozměr B v jednotkách tabulky.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1049"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1082"/>
         <source>The dimension B base</source>
         <translation>Základní hodnota rozměru B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1052"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1085"/>
         <source>Set base for dimension C in the table units.</source>
         <translation>Nastavte základ pro rozměr C v jednotkách tabulky.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1053"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1086"/>
         <source>The dimension C base</source>
         <translation>Základní hodnota rozměru C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1056"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1089"/>
         <source>Set pattern file units: cm, mm, inch.</source>
         <translation>Nastavit jednotky střihu: cm, mm, palec.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1057"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1090"/>
         <source>The pattern units</source>
         <translation>Jednotky střihu</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1059"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1092"/>
         <source>Activate known measurements mode.</source>
         <translation>Zapnout režim známých měr.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1229"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1262"/>
         <source>Invalid dimension A base value.</source>
         <translation>Neplatná základní hodnota rozměru A.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1250"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1283"/>
         <source>Invalid dimension B base value.</source>
         <translation>Neplatná základní hodnota rozměru B.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1271"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1304"/>
         <source>Invalid dimension C base value.</source>
         <translation>Neplatná základní hodnota rozměru C.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="413"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="446"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Upozornění na vzorec: %1. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1104"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1137"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
         <translation>Zkušební režim nepodporuje otevření více souborů.</translation>
     </message>
@@ -12830,7 +12830,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="136"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2625"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2629"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1674"/>
         <source>Measurements</source>
         <translation>Míry</translation>
@@ -12993,7 +12993,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="762"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6288"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6257"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1427"/>
         <source>Save</source>
         <translation>Uložit</translation>
@@ -13084,7 +13084,7 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2651"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8635"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8616"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1659"/>
         <source>Auto-arrange labels</source>
         <translation>Automaticky uspořádat popisy</translation>
@@ -13139,8 +13139,8 @@ Přesto použít nastavení?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="836"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2106"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4382"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2110"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4346"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1440"/>
         <source>Details</source>
         <translation>Jednotlivosti</translation>
@@ -13293,63 +13293,63 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Zobrazit nápovědu na internetu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5303"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5671"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5272"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5640"/>
         <source>Pattern piece %1</source>
         <translation>Díl střihu %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1260"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1288"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1299"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1313"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1264"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1292"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1303"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1317"/>
         <source>Select point</source>
         <translation>Vybrat bod</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1273"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1277"/>
         <source>Select first point</source>
         <translation>Vybrat první bod</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1327"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1475"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1839"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1331"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1479"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1843"/>
         <source>Select first point of line</source>
         <translation>Vybrat první bod čáry</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1341"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1345"/>
         <source>Select first point of angle</source>
         <translation>Vybrat první bod úhlu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1355"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1359"/>
         <source>Select first point of first line</source>
         <translation>Vybrat první bod první čáry</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1369"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1373"/>
         <source>Select first point curve</source>
         <translation>Vybrat první bod křivky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1393"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1397"/>
         <source>Select simple curve</source>
         <translation>Vybrat jednoduchou křivku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1407"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1411"/>
         <source>Select point of center of arc</source>
         <translation>Vybrat bod středu oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1436"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1440"/>
         <source>Select point of curve path</source>
         <translation>Vybrat bod na složené křivce</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1461"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1465"/>
         <source>Select curve path</source>
         <translation>Vybrat složenou křivku</translation>
     </message>
@@ -13358,47 +13358,47 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Vybrat body, oblouky, křivky po směru hodinových ručiček.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1533"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1537"/>
         <source>Select base point</source>
         <translation>Vybrat základní bod</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1547"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1551"/>
         <source>Select first point of axis</source>
         <translation>Vybrat první bod osy</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1576"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1595"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1580"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1599"/>
         <source>Select detail</source>
         <translation>Vybrat jednotlivost (díl střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1631"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1643"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1655"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1667"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1947"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1635"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1647"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1659"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1671"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1951"/>
         <source>Select one or more objects, &lt;b&gt;%1&lt;/b&gt; - confirm selection</source>
         <translation>Vyberte jeden nebo více předmětů, &lt;b&gt;%1&lt;/b&gt; - potvrdit výběr</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1827"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1861"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1960"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1970"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1831"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1865"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1964"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1974"/>
         <source>Select arc</source>
         <translation>Vybrat oblouk</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1849"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1994"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2005"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1853"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1998"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2009"/>
         <source>Select curve</source>
         <translation>Vybrat křivku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6715"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6684"/>
         <source>About Qt</source>
         <translation>O Qt</translation>
     </message>
@@ -13419,68 +13419,67 @@ Přesto použít nastavení?</translation>
         <translation type="vanished">Soubory se střihy (*.val)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4533"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4497"/>
         <source>pattern</source>
         <translation>střih</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4540"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4504"/>
         <source>Save as</source>
         <translation>Uložit jako</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3032"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3036"/>
         <source>Could not save file</source>
         <translation>Nepodařilo se uložit soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2397"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2664"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4640"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7548"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2401"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2668"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4604"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7517"/>
         <source>Open file</source>
         <translation>Otevřít soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3155"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3183"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3118"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3146"/>
         <source>Error parsing file.</source>
         <translation>Chyba při zpracování souboru.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3162"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3125"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Chyba. Nelze převést hodnotu.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3169"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5142"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3132"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5111"/>
         <source>Error empty parameter.</source>
         <translation>Chyba. Prázdný parametr.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3140"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3176"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3139"/>
         <source>Error wrong id.</source>
         <translation>Chyba. Špatný identifikátor.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3190"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3153"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Chyba při zpracování souboru (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5131"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5100"/>
         <source>Bad id.</source>
         <translation>Chybný identifikátor.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6119"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6088"/>
         <source>File saved</source>
         <translation>Soubor uložen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8090"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8071"/>
         <source>untitled.val</source>
         <translation>Bez názvu.val</translation>
     </message>
@@ -13491,24 +13490,24 @@ Do you want to save your changes?</source>
 Chcete uložit své změny?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2094"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6335"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2098"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6304"/>
         <source>&amp;Undo</source>
         <translation>&amp;Zpět</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2095"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6350"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2099"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6319"/>
         <source>&amp;Redo</source>
         <translation>&amp;Znovu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6889"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6858"/>
         <source>Pattern piece:</source>
         <translation>Díl střihu:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6891"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6860"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Zadejte nový popis dílu střihu.</translation>
     </message>
@@ -13527,8 +13526,8 @@ Chcete uložit své změny?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="888"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="936"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6990"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7181"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6959"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7150"/>
         <source>File error.</source>
         <translation>Chyba souboru.</translation>
     </message>
@@ -13537,12 +13536,12 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Soubor nahrán</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7510"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7479"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation>Valentina nebyla vypnuta správně. Chcete znovu otevřít soubory (%1), které jste měli otevřeny?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7512"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7481"/>
         <source>Reopen files.</source>
         <translation>Znovu otevřít soubory.</translation>
     </message>
@@ -13649,7 +13648,7 @@ Chcete uložit své změny?</translation>
         <translation>Zapnout znovu naposledy použitý nástroj</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1562"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1566"/>
         <source>Select point for X value (vertical)</source>
         <translation>Vybrat bod pro hodnotu X (svislý)</translation>
     </message>
@@ -13794,7 +13793,7 @@ Chcete uložit své změny?</translation>
         <translation>Vyvést původní rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1873"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1877"/>
         <source>Select first an arc</source>
         <translation>Vybrat první oblouk</translation>
     </message>
@@ -13807,17 +13806,17 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Vybrat bod na tangentě </translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1928"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1932"/>
         <source>Select point of the center of the arc</source>
         <translation>Vybrat středový bod oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1938"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1942"/>
         <source>Select the first base line point</source>
         <translation>Vybrat první bod základní čáry</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4347"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4311"/>
         <source>Detail mode</source>
         <translation>Režim jednotlivosti</translation>
     </message>
@@ -13826,12 +13825,12 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Nyní nemůžete použít Režim jednotlivosti. Vytvořte, prosím, alespoň jeden střihový díl.</translation>
     </message>
     <message>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4404"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4417"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4440"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4453"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4476"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4673"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4752"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7438"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4637"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4716"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7407"/>
         <source>Layout mode</source>
         <translation>Režim rozvržení</translation>
     </message>
@@ -13840,7 +13839,7 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Nyní nemůžete použít Režim rozvržení. Vytvořte, prosím, alespoň jeden střihový díl.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6277"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6246"/>
         <source>Unsaved changes</source>
         <translation>Neuložené změny</translation>
     </message>
@@ -13869,7 +13868,7 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Individuální míry (*.vit);;Obvyklé míry (*.vst)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2423"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2427"/>
         <source>Measurements loaded</source>
         <translation>Rozměry nahrány</translation>
     </message>
@@ -13878,7 +13877,7 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Obvyklé míry (*.vst);;Individuální míry (*.vit)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7738"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7719"/>
         <source>You can&apos;t export empty scene.</source>
         <translation>Nelze vyvést prázdný soubor (prázdné rozvržení).</translation>
     </message>
@@ -13902,12 +13901,12 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">%1, %2 (%3)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4567"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4531"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Nepodařilo se uzamknout. Tento soubor je již otevřen v jiném okně.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3074"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3078"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Nepodařilo se uzamknout. Tento soubor je již otevřen v jiném okně. Při zdvojeném vykonávání (dvě kopie programu) může dojít ke střetům.</translation>
     </message>
@@ -13916,7 +13915,7 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Soubor s mírami obsahuje neplatný(é) rozměr(y).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7658"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7627"/>
         <source>Measurement file has unknown format.</source>
         <translation>Soubor s mírami má neznámý formát.</translation>
     </message>
@@ -13938,18 +13937,18 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Míry byly seřízeny</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2602"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2606"/>
         <source>Couldn&apos;t sync measurements.</source>
         <translation>Nepodařilo se seřídit míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5452"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5421"/>
         <source>Couldn&apos;t update measurements.</source>
         <translation>Nepodařilo se aktualizovat míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7108"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7125"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7077"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7094"/>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
         <translation>Nepodařilo se najít soubor s mírami &apos;%1&apos;.</translation>
     </message>
@@ -13958,7 +13957,7 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Nepodařilo se najít soubor s mírami &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt;. Chcete aktualizovat umístění souboru?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7579"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7548"/>
         <source>Loading measurements file</source>
         <translation>Nahrává se soubor s mírami</translation>
     </message>
@@ -13975,9 +13974,9 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Nepodařilo se stanovit velikost. Soubor nebyl otevřen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7921"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7964"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8007"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7902"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7945"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7988"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation>Metoda %1 nepůsobí v režimu rozhraní</translation>
     </message>
@@ -13994,15 +13993,15 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Nepodařilo se stanovit výšku. Soubor nebyl otevřen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7421"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7477"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7786"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7826"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7390"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7446"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7767"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7807"/>
         <source>Export error.</source>
         <translation>Chyba při vyvádění.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8034"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8015"/>
         <source>Please, provide one input file.</source>
         <translation>Poskytněte, prosím, jeden vstupní soubor.</translation>
     </message>
@@ -14051,12 +14050,12 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Smazat nahrané míry, které nebyly použity v nynějším souboru se střihem.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2484"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2488"/>
         <source>Measurements unloaded</source>
         <translation>Nahrané míry smazány</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2491"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2495"/>
         <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
         <translation>Nepodařilo se smazat míry. Některé z nich se používají v nynějším střihu.</translation>
     </message>
@@ -14086,7 +14085,7 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Uložit...</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6293"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6262"/>
         <source>Don&apos;t Save</source>
         <translation>Neukládat</translation>
     </message>
@@ -14125,7 +14124,7 @@ Chcete uložit své změny?</translation>
         <translation>Bod průsečíku křivek</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1895"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1899"/>
         <source>Select first curve</source>
         <translation>Vybrat první křivku</translation>
     </message>
@@ -14144,12 +14143,12 @@ Chcete uložit své změny?</translation>
         <translation>Nástroj pro jednoduchou křivku s použitím bodů jako řídicích úchytů</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1379"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1383"/>
         <source>Select first curve point</source>
         <translation>Vybrat první bod křivky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1447"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1451"/>
         <source>Select point of cubic bezier path</source>
         <translation>Vybrat bod cesty kubické bézierovy křivky</translation>
     </message>
@@ -14210,14 +14209,14 @@ Chcete uložit své změny?</translation>
         <translation>Skupina</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2102"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4302"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2106"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4266"/>
         <source>Contains all visibility groups</source>
         <translation>Obsahuje všechny skupiny s viditelností</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2107"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4384"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2111"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4348"/>
         <source>Show which details will go in layout</source>
         <translation>Ukázat, které jednotlivosti (díly střihu) půjdou do rozvržení</translation>
     </message>
@@ -14234,19 +14233,19 @@ Chcete uložit své změny?</translation>
         <translation>Původní zvětšení</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1884"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1888"/>
         <source>Select first circle center</source>
         <translation>Vybrat střed prvního kruhu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1906"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1917"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1910"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1921"/>
         <source>Select point on tangent</source>
         <translation>Vybrat bod na tangentě</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2097"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3283"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2101"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3246"/>
         <source>Pattern Piece:</source>
         <translation>Díl střihu:</translation>
     </message>
@@ -14259,7 +14258,7 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Velikost:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7574"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7543"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation>Nepodařilo se najít soubor s mírami &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt;. Chcete aktualizovat umístění souboru?</translation>
     </message>
@@ -14282,7 +14281,7 @@ Chcete uložit své změny?</translation>
         <translation>Posunout předměty</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2626"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2630"/>
         <source>Measurements were changed. Do you want to sync measurements now?</source>
         <translation>Míry byly změněny. Chcete nyní rozměry seřídit?</translation>
     </message>
@@ -14291,7 +14290,7 @@ Chcete uložit své změny?</translation>
         <translation type="vanished">Odstupňování nepodporuje palce</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2588"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2592"/>
         <source>Measurements have been synced</source>
         <translation>Míry byly seřízeny</translation>
     </message>
@@ -14302,22 +14301,22 @@ Chcete uložit své změny?</translation>
         <translation>Elipsovitý oblouk</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1421"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1425"/>
         <source>Select point of center of elliptical arc</source>
         <translation>Vybrat bod středu elipsovitého oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1489"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1493"/>
         <source>Select main path objects clockwise.</source>
         <translation>Vybrat hlavní předměty cesty po směru hodinových ručiček.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4610"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4574"/>
         <source>Could not save the file</source>
         <translation>Nepodařilo se uložit soubor</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8140"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8121"/>
         <source>read only</source>
         <translation>Pouze pro čtení</translation>
     </message>
@@ -14382,22 +14381,22 @@ Chcete uložit své změny?</translation>
         <translation>Smazat nahrané míry, které nebyly použity v nynějším souboru se střihem</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2381"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7620"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7634"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2385"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7589"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7603"/>
         <source>Individual measurements</source>
         <translation>Individuální míry</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2387"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7620"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7634"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2391"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7589"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7603"/>
         <source>Multisize measurements</source>
         <translation>Měření více velikostí</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4539"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4626"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4503"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4590"/>
         <source>Pattern files</source>
         <translation>Soubory se střihem</translation>
     </message>
@@ -14408,7 +14407,7 @@ Chcete uložit své změny?</translation>
         <translation>Nástroj Špendlík</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1510"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1514"/>
         <source>Select pin point</source>
         <translation>Vybrat bod špendlíku</translation>
     </message>
@@ -14425,37 +14424,37 @@ Chcete uložit své změny?</translation>
         <translation>Otevřít program Tape pro vytvoření nebo upravení souboru s mírami</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3471"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3434"/>
         <source>Point at the intersections of lines/axis tools</source>
         <translation>Nástroje pro bod v průsečíku čar/os</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3514"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3477"/>
         <source>Point segmenting curves/arcs tools</source>
         <translation>Nástroje pro bodové rozdělení křivek/oblouků</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3528"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3491"/>
         <source>Points intersecting with 2 curves/arcs/circles tools</source>
         <translation>Body v průsečíku 2 křivek/oblouků/kružnic</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4348"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4312"/>
         <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
         <translation>Nyní nemůžete použít Režim jednotlivosti. Vytvořte, prosím, alespoň jeden střihový díl.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4441"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4405"/>
         <source>You can&apos;t use Layout mode yet. Please, create at least one workpiece.</source>
         <translation>Nyní ještě nemůžete použít Režim rozvržení. Vytvořte, prosím, alespoň jeden střihový díl.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4454"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4418"/>
         <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
         <translation>Nyní ještě nemůžete použít Režim rozvržení. Zahrňte, prosím, do rozvržení alespoň jednu jednotlivost (díl střihu).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4477"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4441"/>
         <source>You can&apos;t use Layout mode yet.</source>
         <translation>Ještě nemůžete použít Režim rozvržení.</translation>
     </message>
@@ -14478,23 +14477,23 @@ Chcete uložit své změny?</translation>
         <translation>Vyvést jednotlivosti (díly střihu) a přeskočit krok rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4674"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4753"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7439"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4638"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4717"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7408"/>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation>Nemáte dost jednotlivostí (dílů střihu) k vyvedení. Zahrňte, prosím, alespoň jednu jednotlivost (díl střihu) do rozvržení.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4687"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4766"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7452"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4651"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4730"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7421"/>
         <source>Export details</source>
         <translation>Vyvést jednotlivosti (díly střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4687"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4766"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7452"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4651"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4730"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7421"/>
         <source>Can&apos;t export details.</source>
         <translation>Nelze vyvést jednotlivosti (díly střihu).</translation>
     </message>
@@ -14535,7 +14534,7 @@ Chcete uložit své změny?</translation>
         <translation>Vyvést jako…</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6287"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6256"/>
         <source>Save…</source>
         <translation>Uložit…</translation>
     </message>
@@ -14552,17 +14551,17 @@ Chcete uložit své změny?</translation>
         <translation>Vyvést konečné míry do CSV</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7748"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7729"/>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
         <translation>Nemůžete vyvést prázdný výstup. Zahrňte, prosím, do rozvržení alespoň jednu jednotlivost (díl střihu).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7854"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7835"/>
         <source>Export final measurements error.</source>
         <translation>Chyba při vyvádění konečných měr do CSV.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7855"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7836"/>
         <source>Destination path is empty.</source>
         <translation>Cílová cesta je prázdná.</translation>
     </message>
@@ -14621,17 +14620,17 @@ Chcete uložit své změny?</translation>
         <translation>Nástroj Zdvojit jednotlivost (díl střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1520"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1524"/>
         <source>Select placelabel center point</source>
         <translation>Vybrat středový bod umístění popisu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7139"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7108"/>
         <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
         <translation>Soubor s mírami &apos;%1&apos; se nepodařilo najít nebo neposkytuje dostatek údajů.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3241"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3204"/>
         <source>Scale:</source>
         <translation>Měřítko:</translation>
     </message>
@@ -14641,12 +14640,12 @@ Chcete uložit své změny?</translation>
         <translation>Začněte vytvořením nového dílu střihu.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2096"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2100"/>
         <source>Changes applied.</source>
         <translation>Změny použity.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6263"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6232"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Nelze uložit nastavení. Přístup odepřen.</translation>
     </message>
@@ -14657,17 +14656,17 @@ Chcete uložit své změny?</translation>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6238"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6207"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Nelze číst nastavení z poškozeného souboru .INI.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1501"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1505"/>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
         <translation>Vyberte předměty cesty, &lt;b&gt;%1&lt;/b&gt; - obrátitkřivku směru</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1619"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1623"/>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation>Vyberte jeden nebo více předmětů, podržet &lt;b&gt;%1&lt;/b&gt; - pro vícenásobný výběr, &lt;b&gt;%2&lt;/b&gt; - dokončit vytvoření</translation>
     </message>
@@ -14702,30 +14701,30 @@ Chcete uložit své změny?</translation>
         <translation>Skrýt popisy</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2101"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4300"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2105"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4264"/>
         <source>Groups of visibility</source>
         <translation>Skupiny viditelnosti</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1523"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5645"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5614"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1565"/>
         <source>Export recipe</source>
         <translation>Vyvést Recipe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5643"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5612"/>
         <source>Recipe files</source>
         <translation>Soubory Recipe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5645"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5614"/>
         <source>recipe</source>
         <translation>Recipe</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5658"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5627"/>
         <source>Could not save recipe. %1</source>
         <translation>Nepodařilo se uložit Recipe. %1</translation>
     </message>
@@ -14755,7 +14754,7 @@ Chcete uložit své změny?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="413"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8550"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8531"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1691"/>
         <source>Pattern messages</source>
         <translation>Zprávy střihu</translation>
@@ -14773,27 +14772,27 @@ Chcete uložit své změny?</translation>
         <translation>Filtr</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8525"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8506"/>
         <source>DEBUG</source>
         <translation>LADĚNÍ</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8528"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8509"/>
         <source>WARNING</source>
         <translation>VAROVÁNÍ</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8531"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8512"/>
         <source>CRITICAL</source>
         <translation>ZÁSADNÍ</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8534"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8515"/>
         <source>FATAL</source>
         <translation>VELMI ZÁVAŽNÉ</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8537"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8518"/>
         <source>INFO</source>
         <translation>INFORMACE</translation>
     </message>
@@ -14840,7 +14839,7 @@ Chcete uložit své změny?</translation>
         <translation>Vytvořit nebo upravit vodoznak</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2661"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2665"/>
         <source>Watermark files</source>
         <translation>Soubory vodoznaku</translation>
     </message>
@@ -14887,78 +14886,78 @@ Chcete uložit své změny?</translation>
         <translation>Aktualizovat ruční rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4721"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4796"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4685"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4760"/>
         <source>Unable to prepare raw layout data.</source>
         <translation>Nelze připravit nezpracovaná data rozvržení.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4728"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4692"/>
         <source>Manual layout files</source>
         <translation>Soubory s ručním rozvržením</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4735"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4699"/>
         <source>Select manual layout</source>
         <translation>Vybrat ruční rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4838"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4802"/>
         <source>Select folder</source>
         <translation>Vybrat složku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6278"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6247"/>
         <source>The pattern has been modified. Do you want to save your changes?</source>
         <translation>Střih byl změněn. Chcete uložit své změny?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7902"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7883"/>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
         <translation>Hodnota A výšky &apos;%1&apos; pro tento soubor se střihem není podporována.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7909"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7890"/>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
         <translation>Nepodařilo se stanovit rozměr A. Soubor musí mít vícevelikostní míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7915"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7896"/>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
         <translation>Nepodařilo se stanovit rozměr A. Soubor nebyl otevřen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7945"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7926"/>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
         <translation>Hodnota B výšky &apos;%1&apos; pro tento soubor se střihem není podporována.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7952"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7933"/>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
         <translation>Nepodařilo se stanovit rozměr B. Soubor musí mít vícevelikostní míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7958"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7939"/>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
         <translation>Nepodařilo se stanovit rozměr B. Soubor nebyl otevřen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7988"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7969"/>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
         <translation>Hodnota C výšky &apos;%1&apos; pro tento soubor se střihem není podporována.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7995"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7976"/>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
         <translation>Nepodařilo se stanovit rozměr C. Soubor musí mít vícevelikostní míry.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8001"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7982"/>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation>Nepodařilo se stanovit rozměr C. Soubor nebyl otevřen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5663"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5632"/>
         <source>Could not create recipe file. %1</source>
         <translation>Nepodařilo se vytvořit soubor Recipe. %1</translation>
     </message>
@@ -14969,12 +14968,12 @@ Chcete uložit své změny?</translation>
         <translation>Obchod</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7373"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7342"/>
         <source>Scalable Vector Graphics files</source>
         <translation>Škálovatelné soubory vektorové grafiky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7375"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7344"/>
         <source>Save draw</source>
         <translation>Uložit výkres</translation>
     </message>
@@ -14997,139 +14996,139 @@ Chcete uložit své změny?</translation>
         <translation>Přidat obrázek pozadí</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1778"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1782"/>
         <source>Unable to add background image</source>
         <translation>Nelze přidat obrázek pozadí</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1798"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1802"/>
         <source>Invalid image. Error: %1</source>
         <translation>Neplatný obrázek. Chyba: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1982"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1986"/>
         <source>Select point of the center of the elliptical arc</source>
         <translation>Vyberte bod středu elipsovitého oblouku</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2120"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3310"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2124"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3273"/>
         <source>Pen style:</source>
         <translation>Styl pera:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2121"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3334"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2125"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3297"/>
         <source>Color:</source>
         <translation>Barva:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3315"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3278"/>
         <source>Sets the &lt;b&gt;default pen style&lt;/b&gt; for all newly created objects. This style is applied the first time an object is drawn.</source>
         <translation>Nastaví &lt;b&gt;výchozí styl pera&lt;/b&gt; pro všechny nově vytvořené předměty. Tento styl se použije při prvním nakreslení předmětu.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3338"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3301"/>
         <source>Defines the &lt;b&gt;global object color property&lt;/b&gt;. This color is applied automatically the first time a new object is drawn.</source>
         <translation>Určuje &lt;b&gt;vlastnost globální barvy předmětu&lt;/b&gt;. Tato barva se použije automaticky při prvním nakreslení nového předmětu.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3444"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3407"/>
         <source>Point at a given distance tools</source>
         <translation>Nástroje pro bod v dané vzdálenosti</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3458"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3421"/>
         <source>Perpendicular/Bisector tools</source>
         <translation>Nástroje pro kolmice/osy úhlů</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3484"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3447"/>
         <source>Triangular tools</source>
         <translation>Nástroje pro trojúhelníky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3498"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3461"/>
         <source>Point intersecting with axis tools</source>
         <translation>Nástroje pro body v průsečíku osy a jiného objektu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3543"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3506"/>
         <source>Points intersecting with arcs/curves and tangents/segments tools</source>
         <translation>Nástroje pro body v průsečíku křivek/oblouků a tečen/úseků</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3603"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3566"/>
         <source>Curves and arcs tools</source>
         <translation>Nástroje pro křivky a oblouky</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3636"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3599"/>
         <source>Flipping objects tools</source>
         <translation>Nástroje na převracení předmětů</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3649"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3612"/>
         <source>Rotating/moving objects tools</source>
         <translation>Nástroje pro otáčení/posunování předmětů</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3684"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3647"/>
         <source>Merge/duplicate pieces tools</source>
         <translation>Nástroje pro slučování/zdvojování dílů střihu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3699"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3662"/>
         <source>Adding objects for Details mode tools</source>
         <translation>Nástroje pro přidávání předmětů pro režim jednotlivostí (dílů střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4804"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4768"/>
         <source>Select background image</source>
         <translation>Vybrat obrázek pozadí</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4845"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4809"/>
         <source>Export corrections</source>
         <translation>Exportovat opravy</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4846"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4810"/>
         <source>File &apos;%1&apos; already exists. Overwrite it?</source>
         <translation>Soubor &apos;%1&apos; již existuje. Přepsat jej?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4875"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4839"/>
         <source>All Single-Line Fonts</source>
         <translation>Všechna jednočárová písma</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4876"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4840"/>
         <source>TrueType Fonts</source>
         <translation>Písma TrueType</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4877"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4841"/>
         <source>OpenType Fonts</source>
         <translation>Písma OpenType</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4878"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4842"/>
         <source>SVG Fonts</source>
         <translation>Písma SVG</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4879"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4843"/>
         <source>All Files</source>
         <translation>Všechny soubory</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4884"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4848"/>
         <source>Select Font Files to Install</source>
         <translation>Vyberte soubory písem k nainstalování</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4918"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4882"/>
         <source>Failed to install font file: %1
 
 Reason: %2</source>
@@ -15138,7 +15137,7 @@ Reason: %2</source>
 Důvod: %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4924"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4888"/>
         <source>Font Installation Summary:
 
 Successful Installations: %1
@@ -15149,45 +15148,45 @@ Failed Installations: %2</source>
 Neúspěšné instalace: %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4930"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4894"/>
         <source>Installation Complete with Errors</source>
         <translation>Instalace dokončena s chybami</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4934"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4898"/>
         <source>Installation Successful</source>
         <translation>Instalace úspěšná</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5580"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5620"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5549"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5589"/>
         <source>Unable to save image. Error: %1</source>
         <translation>Nepodařilo se uložit obrázek. Chyba: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5586"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5555"/>
         <source>Unable to save image. No data.</source>
         <translation>Nelze uložit obrázek. Žádná data.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5592"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5561"/>
         <source>untitled</source>
         <translation>bez názvu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8585"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8566"/>
         <source>Auto-Arrange Labels</source>
         <translation>Automaticky uspořádat popisy</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2381"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2387"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5605"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2385"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2391"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5574"/>
         <source>All files</source>
         <translation>Všechny soubory</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5609"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5578"/>
         <source>Save Image</source>
         <translation>Uložit obrázek</translation>
     </message>
@@ -17172,36 +17171,36 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1140"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="468"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="473"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="442"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="447"/>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation>Nelze převést parametr toUInt</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1077"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="519"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="493"/>
         <source>Can&apos;t convert toBool parameter</source>
         <translation>Nelze převést parametr toBool</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="567"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="541"/>
         <source>Got empty parameter</source>
         <translation>Obdržen prázdný parametr</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1114"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="604"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="609"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="578"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="583"/>
         <source>Can&apos;t convert toDouble parameter</source>
         <translation>Nelze převést parametr toDouble</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="628"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="602"/>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
         <translation>Obdržen chybný identifikátor parametru. Vyžaduje pouze identifikátor &gt; 0.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1808"/>
+        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1812"/>
         <source>United detail</source>
         <translation>Spojená jednotlivost (díl střihu)</translation>
     </message>
@@ -17294,7 +17293,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="667"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2205"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2210"/>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation>Díl &apos;%1&apos;. Švová záložka není platná.</translation>
     </message>
@@ -17360,8 +17359,8 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1166"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="497"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="502"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="471"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="476"/>
         <source>Can&apos;t convert toInt parameter</source>
         <translation>Nelze převést parametr toInt</translation>
     </message>
@@ -17482,7 +17481,7 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="558"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2527"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2532"/>
         <source>Piece &apos;%1&apos;. Unable to load default piece label template.
 %2
 %3</source>
@@ -17491,12 +17490,12 @@ Tato volba se projeví po opětovném spuštění.</translation>
 %3</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1389"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1392"/>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
         <translation>Díl &apos;%1&apos;. Dráha nitě není platná.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="3232"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="3237"/>
         <source>Piece &apos;%1&apos;. Fold line is not valid.</source>
         <translation>Díl &apos;%1&apos;. Čára záhybu není platná.</translation>
     </message>
@@ -18080,8 +18079,12 @@ Tato volba se projeví po opětovném spuštění.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/undocommands/label/showdoublelabel.cpp" line="55"/>
+        <source>toggle the second dart label</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>togggle the second dart label</source>
-        <translation>Přepnout druhý bod záševku</translation>
+        <translation type="vanished">Přepnout druhý bod záševku</translation>
     </message>
 </context>
 <context>
@@ -21810,24 +21813,6 @@ Chcete uložit změny?</translation>
 %2.</translation>
     </message>
     <message>
-        <source>Can&apos;t open schema file %1:
-%2.</source>
-        <translation type="vanished">Nelze otevřít soubor se schématem %1:
-%2.</translation>
-    </message>
-    <message>
-        <source>Could not load schema file &apos;%1&apos;.</source>
-        <translation type="vanished">Nepodařilo se nahrát soubor se schématem &apos;%1&apos;.</translation>
-    </message>
-    <message>
-        <source>Schema file %3 invalid in line %1 column %2</source>
-        <translation type="vanished">Soubor schématu %3 neplatný v řádku %1 sloupce %2</translation>
-    </message>
-    <message>
-        <source>Validation error file %3 in line %1 column %2</source>
-        <translation type="vanished">Chyba při ověřování souboru %3 na řádku %1, ve sloupci %2</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="82"/>
         <source>Error opening a temp file: %1.</source>
         <translation>Chyba při otevírání dočasného souboru: %1.</translation>
@@ -22067,29 +22052,29 @@ Chcete uložit změny?</translation>
 <context>
     <name>VAbstractPattern</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1505"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1514"/>
         <source>Can&apos;t find tool in table.</source>
         <translation>Nelze najít nástroj v tabulce.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2014"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2023"/>
         <source>Error creating or updating group</source>
         <translation>Chyba při vytváření nebo aktualizaci skupiny</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2082"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2091"/>
         <source>measurement</source>
         <translation>míra</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2341"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2525"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2584"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2350"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2534"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2593"/>
         <source>New group</source>
         <translation>Nová skupina</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="684"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="687"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
         <translation>Špatný název značky &apos;%1&apos;.</translation>
     </message>
@@ -22763,52 +22748,52 @@ Chcete uložit změny?</translation>
 <context>
     <name>VApplication</name>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="436"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="467"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Chyba při zpracování souboru. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="442"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="473"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Chyba. Špatný identifikátor. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="448"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="479"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Chyba. Nelze převést hodnotu. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="454"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="485"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Chyba. Prázdný parametr. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="460"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="491"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Chyba. Špatný identifikátor. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="479"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="510"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Něco je špatně!</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="493"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="524"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Chyba při zpracování: %1. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="498"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="529"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Způsobena chyba: %1. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="473"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="504"/>
         <source>Invalid notch.</source>
         <translation>Neplatný zářez.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="485"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="516"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Upozornění na vzorec: %1. Program bude ukončen.</translation>
     </message>
@@ -23729,7 +23714,7 @@ Chcete uložit změny?</translation>
         <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="218"/>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="248"/>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="262"/>
-        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="300"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="311"/>
         <source>Can&apos;t find object</source>
         <translation>Nelze najít předmět</translation>
     </message>
@@ -23739,16 +23724,30 @@ Chcete uložit změny?</translation>
         <translation>Nelze přetypovat předmět na požadovaný typ. ID předmětu = %1, skutečný typ = %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="295"/>
-        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="424"/>
-        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="433"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="296"/>
+        <source>Can&apos;t cast object to the requested type. Name = &apos;%1&apos;, type = %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="306"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="437"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="446"/>
         <source>Can&apos;t cast object</source>
         <translation>Nelze přečíst předmět</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="368"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="366"/>
+        <source>Can&apos;t cast object. Name = &apos;%1&apos;, type = %2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="376"/>
+        <source>Can&apos;t find object. Type mismatch. Name = &apos;%1&apos;, existing type = %2, incoming type = %3.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Can&apos;t find object. Type mismatch.</source>
-        <translation>Nelze najít předmět. Neodpovídající typ.</translation>
+        <translation type="vanished">Nelze najít předmět. Neodpovídající typ.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="340"/>
@@ -23761,9 +23760,8 @@ Chcete uložit změny?</translation>
         <translation>Nelze vytvořit křivku typu &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vcontainer.h" line="358"/>
         <source>Can&apos;t cast object.</source>
-        <translation>Nelze přečíst předmět.</translation>
+        <translation type="vanished">Nelze přečíst předmět.</translation>
     </message>
 </context>
 <context>
@@ -24008,14 +24006,14 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Nelze převést parametr toDouble</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="735"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="690"/>
         <source>Can&apos;t open file %1:
 %2.</source>
         <translation>Nelze otevřít soubor %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="888"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="843"/>
         <source>Can&apos;t open schema file %1:
 %2.</source>
         <translation>Nelze otevřít soubor se schématem %1:
@@ -24026,8 +24024,8 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Nelze načíst soubor se schématem.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="945"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="981"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="900"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="936"/>
         <source>Validation error file %3 in line %1 column %2</source>
         <translation>Chyba při ověřování souboru %3 na řádku %1, ve sloupci %2</translation>
     </message>
@@ -24036,7 +24034,7 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Chyba při zpracování souboru %3 na řádku %1, ve sloupci %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1178"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1132"/>
         <source>Couldn&apos;t get node</source>
         <translation>Nepodařilo se získat uzel</translation>
     </message>
@@ -24057,68 +24055,68 @@ Chcete uložit změny?</translation>
         <translation type="vanished">Nelze odstranit soubor dokumentu.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="911"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="957"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="866"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="912"/>
         <source>Could not load schema file &apos;%1&apos;.</source>
         <translation>Nepodařilo se nahrát soubor se schématem &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="439"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="413"/>
         <source>Fail to write Canonical XML.</source>
         <translation>Nepodařilo se zapsat Canonical XML.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="381"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="355"/>
         <source>Not unique id (%1)</source>
         <translation>Není jedinečné ID (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="681"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="655"/>
         <source>This id (%1) is not unique.</source>
         <translation>Tento identifikátor (%1) není jedinečný.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="743"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="698"/>
         <source>Parsing error in file %3 at line %1, column %2</source>
         <translation>Chyba při zpracování: soubor %3, řádek %1, sloupec %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="806"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="761"/>
         <source>Refusing to save: the document has no content.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="824"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="779"/>
         <source>Refusing to save: serialization produced no data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="918"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="873"/>
         <source>Schema file %3 invalid in line %1 column %2</source>
-        <translation type="unfinished">Soubor schématu %3 neplatný v řádku %1 sloupce %2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1025"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="980"/>
         <source>Couldn&apos;t get version information.</source>
         <translation>Nebylo možné získat informace o verzi.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1031"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="986"/>
         <source>Too many tags &lt;%1&gt; in file.</source>
         <translation>Příliš mnoho značek &lt;%1&gt; v souboru.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1267"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1221"/>
         <source>&lt;empty&gt;</source>
         <translation>&lt;prázdné&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1308"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1262"/>
         <source>Version &quot;%1&quot; invalid.</source>
         <translation>Verze &quot;%1&quot; neplatná.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1314"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1268"/>
         <source>Version &quot;0.0.0&quot; invalid.</source>
         <translation>Verze &quot;0.0.0&quot; neplatná.</translation>
     </message>
@@ -24771,52 +24769,52 @@ Chcete uložit změny?</translation>
 <context>
     <name>VPApplication</name>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="328"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="361"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Chyba při zpracování souboru. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="334"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="367"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Chyba. Špatný identifikátor. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="340"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="373"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Chyba. Nelze převést hodnotu. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="346"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="379"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Chyba. Prázdný parametr. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="352"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="385"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Chyba. Špatný identifikátor. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="365"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="398"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Něco je špatně!</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="371"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="404"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Způsobena chyba: %1. Program bude ukončen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="716"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="749"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Nelze začít naslouchat příchozímu spojení &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="735"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="768"/>
         <source>Export mode doesn&apos;t support opening several files.</source>
         <translation>Režim vyvedení nepodporuje otevření více souborů.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="742"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="775"/>
         <source>Import raw layout data does not support opening several layout files.</source>
         <translation>Zavedení nezpracovaných dat rozvržení nepodporuje otevření více souborů rozvržení.</translation>
     </message>
@@ -24839,22 +24837,22 @@ Chcete uložit změny?</translation>
 <context>
     <name>VPCarrouselPieceList</name>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="257"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="261"/>
         <source>Move to Sheet</source>
         <translation>Přesunout do listu</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="260"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="264"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="263"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="267"/>
         <source>Remove from Sheet</source>
         <translation>Odstranit z listu</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="243"/>
+        <location filename="../../src/app/puzzle/carousel/vpcarrouselpiecelist.cpp" line="247"/>
         <source>Move to</source>
         <translation>Přesunout do</translation>
     </message>
@@ -28662,107 +28660,107 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation>Nynější švová záložka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1412"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1415"/>
         <source>move pattern piece label</source>
         <translation>Posunout popis dílu střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1431"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1434"/>
         <source>resize pattern piece label</source>
         <translation>Změnit velikost popisu dílu střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1451"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1454"/>
         <source>rotate pattern piece label</source>
         <translation>Otočit velikost popisu dílu střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1466"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1469"/>
         <source>move pattern info label</source>
         <translation>Posunout popis s údaji ke střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1485"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1488"/>
         <source>resize pattern info label</source>
         <translation>Změnit velikost popisu s údaji ke střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1503"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1506"/>
         <source>rotate pattern info label</source>
         <translation>Otočit popis s údaji ke střihu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1516"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1519"/>
         <source>move grainline</source>
         <translation>Posunout dráhu nitě</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1531"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1534"/>
         <source>resize grainline</source>
         <translation>Změnit velikost dráhy nitě</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1545"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1548"/>
         <source>rotate grainline</source>
         <translation>Otočit dráhu nitě</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1830"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1833"/>
         <source>Options</source>
         <translation>Volby</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1834"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1837"/>
         <source>In layout</source>
         <translation>V rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1838"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1841"/>
         <source>Hide main path</source>
         <translation>Skrýt hlavní cestu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1850"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1853"/>
         <source>Show full piece</source>
         <translation>Ukázat celý díl</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1862"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1865"/>
         <source>Reset piece label template</source>
         <translation>Obnovit výchozí předlohu popisu dílu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1865"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1868"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1626"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1629"/>
         <source>apply save detail options</source>
         <translation>Použít uložit volby pro jednotlivosti (díly střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1926"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1929"/>
         <source>multi deletion</source>
         <translation>Vícenásobné smazání</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1842"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1845"/>
         <source>Forbid flipping</source>
         <translation>Zakázat převrácení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1846"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1849"/>
         <source>Force flipping</source>
         <translation>Vynutit převrácení</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1635"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1638"/>
         <source>This id (%1) is not unique.</source>
         <translation>Tento identifikátor (%1) není jedinečný.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2897"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2902"/>
         <source>Tool was used after deleting.</source>
         <translation>Nástroj byl použit po smazání.</translation>
     </message>
@@ -28801,7 +28799,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
 <context>
     <name>VToolUnionDetails</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1979"/>
+        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="1983"/>
         <source>union details</source>
         <translation>Spojení jednotlivostí (dílů střihu)</translation>
     </message>
@@ -28810,7 +28808,7 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation type="vanished">Spojená jednotlivost (díl střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="2075"/>
+        <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="2079"/>
         <source>This id (%1) is not unique.</source>
         <translation>Tento identifikátor (%1) není jedinečný.</translation>
     </message>
@@ -29752,10 +29750,9 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation type="vanished">acosh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="171"/>
         <source>atanh</source>
         <comment>hyperbolic arcur tangens function</comment>
-        <translation>atanh</translation>
+        <translation type="vanished">atanh</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="206"/>
@@ -30113,6 +30110,18 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation>Úhel2ElOblouk_</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="171"/>
+        <source>atanh</source>
+        <comment>hyperbolic arcus tangent function</comment>
+        <translation type="unfinished">atanh</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="173"/>
+        <source>hyperbolic arcus tangent function</source>
+        <comment>function atanh</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="239"/>
         <source>r2cm</source>
         <comment>round to up to 1 decimal</comment>
@@ -30215,10 +30224,9 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation>Hyperbolická funkce arkus kosinus</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="173"/>
         <source>hyperbolic arcur tangens function</source>
         <comment>function atanh</comment>
-        <translation>Hyperbolická funkce arkus tangens</translation>
+        <translation type="vanished">Hyperbolická funkce arkus tangens</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="178"/>
@@ -30608,27 +30616,27 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation>Přesunout na nejpozdější možnou pozici v historii</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="667"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="673"/>
         <source>Expand All</source>
         <translation>Rozbalit vše</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="668"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="674"/>
         <source>Collapse All</source>
         <translation>Sbalit vše</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="670"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="676"/>
         <source>Copy ID</source>
         <translation>Kopírovat ID</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="672"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="678"/>
         <source>Go to Object</source>
         <translation>Přejít na předmět</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="674"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.cpp" line="680"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
@@ -30642,37 +30650,37 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation>Formulář</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="275"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="278"/>
         <source>Unnamed</source>
         <translation>Bez názvu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="288"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="291"/>
         <source>Select all</source>
         <translation>Vybrat vše</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="289"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="292"/>
         <source>Select none</source>
         <translation>Žádný výběr</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="359"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="362"/>
         <source>select all details</source>
         <translation>Vybrat všechny jednotlivosti (díly střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="366"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="369"/>
         <source>select none details</source>
         <translation>Nevybrat žádné jednotlivosti (díly střihu)</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="293"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="296"/>
         <source>Invert selection</source>
         <translation>Obrátit výběr</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="372"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="375"/>
         <source>invert selection</source>
         <translation>Obrátit výběr</translation>
     </message>
@@ -30683,17 +30691,17 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation>Skrýt ne v rozvržení</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="313"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="316"/>
         <source>Piece options</source>
         <translation>Volby pro díl</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="315"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="318"/>
         <source>Delete piece</source>
         <translation>Smazat díl</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="321"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="324"/>
         <source>Cannot find piece by id &apos;%1&apos;</source>
         <translation>Nelze najít díl podle ID &apos;%1&apos;</translation>
     </message>
@@ -31515,26 +31523,26 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation type="vanished">Informace.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="228"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="265"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="246"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="283"/>
         <source>Warning</source>
         <translation>Upozornění</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="232"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="269"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="250"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="287"/>
         <source>Critical error</source>
         <translation>Vážná chyba</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="236"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="273"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="254"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="291"/>
         <source>Fatal error</source>
         <translation>Zásadní chyba</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="240"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="277"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="258"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="295"/>
         <source>Information</source>
         <translation>Informace</translation>
     </message>
@@ -31583,22 +31591,22 @@ Chyba kompatibility formátu nezpracovaného rozvržení: ActualFileVersion = %1
         <translation type="vanished">Informace.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="300"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="313"/>
         <source>Warning</source>
         <translation>Upozornění</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="304"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="317"/>
         <source>Critical error</source>
         <translation>Vážná chyba</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="308"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="321"/>
         <source>Fatal error</source>
         <translation>Zásadní chyba</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="312"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="325"/>
         <source>Information</source>
         <translation>Informace</translation>
     </message>
