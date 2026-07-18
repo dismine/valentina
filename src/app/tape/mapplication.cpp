@@ -254,48 +254,70 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
 
     if (isGuiThread)
     {
-        // fixme: trying to make sure there are no save/load dialogs are opened, because error message during them will
-        // lead to crash
-        const bool topWinAllowsPop = (QApplication::activeModalWidget() == nullptr) ||
-                                     !QApplication::activeModalWidget()->inherits("QFileDialog");
-        QMessageBox messageBox;
-        switch (type)
+        if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg)
         {
-            case QtWarningMsg:
-                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Warning"));
-                messageBox.setIcon(QMessageBox::Warning);
-                break;
-            case QtCriticalMsg:
-                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Critical error"));
-                messageBox.setIcon(QMessageBox::Critical);
-                break;
-            case QtFatalMsg:
-                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Fatal error"));
-                messageBox.setIcon(QMessageBox::Critical);
-                break;
-            case QtInfoMsg:
-                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Information"));
-                messageBox.setIcon(QMessageBox::Information);
-                break;
-            case QtDebugMsg:
-            default:
-                break;
-        }
+            auto ShowMessageBox = [type, logMsg]()
+            {
+                // fixme: trying to make sure there are no save/load dialogs are opened, because error message
+                //  during them will lead to crash
+                const bool topWinAllowsPop = (QApplication::activeModalWidget() == nullptr) ||
+                                             !QApplication::activeModalWidget()->inherits("QFileDialog");
 
-        if ((type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg) &&
-            not MApplication::VApp()->IsTestMode() && topWinAllowsPop)
-        {
-            messageBox.setText(VAbstractApplication::ClearMessage(logMsg));
-            messageBox.setStandardButtons(QMessageBox::Ok);
-            messageBox.setWindowModality(Qt::ApplicationModal);
-            messageBox.setModal(true);
+                if (not MApplication::VApp()->IsTestMode() && topWinAllowsPop)
+                {
+                    QMessageBox messageBox;
+                    switch (type)
+                    {
+                        case QtWarningMsg:
+                            messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Warning"));
+                            messageBox.setIcon(QMessageBox::Warning);
+                            break;
+                        case QtCriticalMsg:
+                            messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Critical error"));
+                            messageBox.setIcon(QMessageBox::Critical);
+                            break;
+                        case QtFatalMsg:
+                            messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Fatal error"));
+                            messageBox.setIcon(QMessageBox::Critical);
+                            break;
+                        case QtInfoMsg:
+                            messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Information"));
+                            messageBox.setIcon(QMessageBox::Information);
+                            break;
+                        case QtDebugMsg:
+                        default:
+                            break;
+                    }
+
+                    messageBox.setText(VAbstractApplication::ClearMessage(logMsg));
+                    messageBox.setStandardButtons(QMessageBox::Ok);
+                    messageBox.setWindowModality(Qt::ApplicationModal);
+                    messageBox.setModal(true);
 #ifndef QT_NO_CURSOR
-            QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
+                    QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
 #endif
-            messageBox.exec();
+                    messageBox.exec();
 #ifndef QT_NO_CURSOR
-            QGuiApplication::restoreOverrideCursor();
+                    QGuiApplication::restoreOverrideCursor();
 #endif
+                }
+            };
+
+            if (type == QtFatalMsg)
+            {
+                // A fatal message aborts right below. The dialog must be shown synchronously here or it
+                // will never appear.
+                ShowMessageBox();
+            }
+            else
+            {
+                // Never pop a modal dialog synchronously from whatever call stack logged the message: the
+                // nested event loop from QMessageBox::exec() then pumps events over not-yet-consistent
+                // state, which has repeatedly caused crashes in this codebase (see e.g. commits 714cd5d89,
+                // 06f755ed6). Defer to the next event loop iteration, where the stack that logged the
+                // message has fully unwound.
+                QTimer::singleShot(0, qApp, ShowMessageBox);
+            }
         }
 
         if (QtFatalMsg == type)

@@ -286,48 +286,68 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     {
         if ((type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg) && VApplication::IsGUIMode())
         {
-            // fixme: trying to make sure there are no save/load dialogs are opened, because error message during
-            //  them will lead to crash
-            const bool topWinAllowsPop = (QApplication::activeModalWidget() == nullptr) ||
-                                         !QApplication::activeModalWidget()->inherits("QFileDialog");
-
-            if (topWinAllowsPop && (not isPatternMessage || (type == QtCriticalMsg || type == QtFatalMsg)))
+            auto ShowMessageBox = [type, logMsg, isPatternMessage]()
             {
-                QMessageBox messageBox;
-                switch (type)
-                {
-                    case QtWarningMsg:
-                        messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Warning"));
-                        messageBox.setIcon(QMessageBox::Warning);
-                        break;
-                    case QtCriticalMsg:
-                        messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Critical error"));
-                        messageBox.setIcon(QMessageBox::Critical);
-                        break;
-                    case QtFatalMsg:
-                        messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Fatal error"));
-                        messageBox.setIcon(QMessageBox::Critical);
-                        break;
-                    case QtInfoMsg:
-                        messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Information"));
-                        messageBox.setIcon(QMessageBox::Information);
-                        break;
-                    case QtDebugMsg:
-                    default:
-                        break;
-                }
+                // fixme: trying to make sure there are no save/load dialogs are opened, because error message
+                //  during them will lead to crash
+                const bool topWinAllowsPop = (QApplication::activeModalWidget() == nullptr) ||
+                                             !QApplication::activeModalWidget()->inherits("QFileDialog");
 
-                messageBox.setText(VAbstractValApplication::ClearMessage(logMsg));
-                messageBox.setStandardButtons(QMessageBox::Ok);
-                messageBox.setWindowModality(Qt::ApplicationModal);
-                messageBox.setModal(true);
+                if (topWinAllowsPop && (not isPatternMessage || (type == QtCriticalMsg || type == QtFatalMsg)))
+                {
+                    QMessageBox messageBox;
+                    switch (type)
+                    {
+                        case QtWarningMsg:
+                            messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Warning"));
+                            messageBox.setIcon(QMessageBox::Warning);
+                            break;
+                        case QtCriticalMsg:
+                            messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Critical error"));
+                            messageBox.setIcon(QMessageBox::Critical);
+                            break;
+                        case QtFatalMsg:
+                            messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Fatal error"));
+                            messageBox.setIcon(QMessageBox::Critical);
+                            break;
+                        case QtInfoMsg:
+                            messageBox.setWindowTitle(QApplication::translate("vNoisyHandler", "Information"));
+                            messageBox.setIcon(QMessageBox::Information);
+                            break;
+                        case QtDebugMsg:
+                        default:
+                            break;
+                    }
+
+                    messageBox.setText(VAbstractValApplication::ClearMessage(logMsg));
+                    messageBox.setStandardButtons(QMessageBox::Ok);
+                    messageBox.setWindowModality(Qt::ApplicationModal);
+                    messageBox.setModal(true);
 #ifndef QT_NO_CURSOR
-                QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
+                    QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
 #endif
-                messageBox.exec();
+                    messageBox.exec();
 #ifndef QT_NO_CURSOR
-                QGuiApplication::restoreOverrideCursor();
+                    QGuiApplication::restoreOverrideCursor();
 #endif
+                }
+            };
+
+            if (type == QtFatalMsg)
+            {
+                // A fatal message aborts right below. The dialog must be shown synchronously here or it
+                // will never appear.
+                ShowMessageBox();
+            }
+            else
+            {
+                // Never pop a modal dialog synchronously from whatever call stack logged the message (e.g. in
+                // the middle of a QGraphicsItem geometry rebuild or a tool dialog's Apply handler): the nested
+                // event loop from QMessageBox::exec() then pumps events over not-yet-consistent state, which
+                // has repeatedly caused crashes in this codebase (see e.g. commits 714cd5d89, 06f755ed6).
+                // Defer to the next event loop iteration, where the stack that logged the message has fully
+                // unwound.
+                QTimer::singleShot(0, qApp, ShowMessageBox);
             }
         }
 

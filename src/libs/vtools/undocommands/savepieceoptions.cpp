@@ -70,6 +70,7 @@ void SavePieceOptions::undo()
         VToolSeamAllowance::AddPins(doc, domElement, m_oldDet.GetPins());
         VToolSeamAllowance::AddPlaceLabels(doc, domElement, m_oldDet.GetPlaceLabels());
         VToolSeamAllowance::AddMirrorLine(doc, domElement, m_oldDet);
+        qCDebug(vUndo, "Undo: dom element for id = %u rewritten.", nodeId);
 
         DecrementReferences(m_newDet.MissingNodes(m_oldDet));
         IncrementReferences(m_oldDet.MissingNodes(m_newDet));
@@ -85,13 +86,17 @@ void SavePieceOptions::undo()
 
         DecrementReferences(m_newDet.MissingPlaceLabels(m_oldDet));
         IncrementReferences(m_oldDet.MissingPlaceLabels(m_newDet));
+        qCDebug(vUndo, "Undo: references updated for id = %u.", nodeId);
 
         if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
         {
+            qCDebug(vUndo, "Undo: updating tool geometry for id = %u.", nodeId);
             tool->Update(m_oldDet);
+            qCDebug(vUndo, "Undo: tool geometry updated for id = %u.", nodeId);
         }
 
         emit UpdateGroups();
+        qCDebug(vUndo, "Undo: done for id = %u.", nodeId);
     }
     else
     {
@@ -118,6 +123,7 @@ void SavePieceOptions::redo()
         VToolSeamAllowance::AddPins(doc, domElement, m_newDet.GetPins());
         VToolSeamAllowance::AddPlaceLabels(doc, domElement, m_newDet.GetPlaceLabels());
         VToolSeamAllowance::AddMirrorLine(doc, domElement, m_newDet);
+        qCDebug(vUndo, "Redo: dom element for id = %u rewritten.", nodeId);
 
         DecrementReferences(m_oldDet.MissingNodes(m_newDet));
         IncrementReferences(m_newDet.MissingNodes(m_oldDet));
@@ -133,13 +139,17 @@ void SavePieceOptions::redo()
 
         DecrementReferences(m_oldDet.MissingPlaceLabels(m_newDet));
         IncrementReferences(m_newDet.MissingPlaceLabels(m_oldDet));
+        qCDebug(vUndo, "Redo: references updated for id = %u.", nodeId);
 
         if (auto *tool = qobject_cast<VToolSeamAllowance *>(VAbstractPattern::getTool(nodeId)))
         {
+            qCDebug(vUndo, "Redo: updating tool geometry for id = %u.", nodeId);
             tool->Update(m_newDet);
+            qCDebug(vUndo, "Redo: tool geometry updated for id = %u.", nodeId);
         }
 
         emit UpdateGroups();
+        qCDebug(vUndo, "Redo: done for id = %u.", nodeId);
     }
     else
     {
