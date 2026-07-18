@@ -62,6 +62,7 @@
 #include <QUrl>
 #include <QVector>
 #include <QXmlStreamWriter>
+#include <QtConcurrent>
 #include <QtDebug>
 
 #ifdef Q_OS_UNIX
