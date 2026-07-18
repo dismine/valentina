@@ -29,7 +29,7 @@
 #include "vposition.h"
 
 #include <QDir>
-#include <QFutureWatcher>
+#include <QFuture>
 #include <QImage>
 #include <QLineF>
 #include <QPainter>
@@ -50,6 +50,21 @@
 #include "../vlayout/vlayoutpoint.h"
 #include "../vmisc/def.h"
 #include "vpiecegrainline.h"
+
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+// Dedicated thread pool for the nested position search. VPosition::ArrangeDetail runs inside a global thread-pool
+// worker (MainWindowsNoGUI::GenerateLayout wraps Generate() in QtConcurrent::run), and then it launches its own
+// QtConcurrent::mapped and blocks waiting for it. Reusing the global pool deadlocks on a single-CPU host
+// (QThread::idealThreadCount() == 1): the only global-pool thread is parked here with no thread left to run the mapped
+// jobs. A separate pool keeps the inner search independent of the outer worker, so nesting can't starve the pool.
+auto NestingThreadPool() -> QThreadPool *
+{
+    static QThreadPool pool;
+    return &pool;
+}
+} // namespace
 
 #ifdef LAYOUT_DEBUG
 namespace
@@ -215,7 +230,6 @@ auto VPosition::ArrangeDetail(const VPositionData &data, std::atomic_bool *stop,
         return bestResult; // Not enough edges
     }
 
-    QFutureWatcher<VBestSquare> watcher;
     QVector<VPosition> jobs;
     jobs.reserve(data.gContour.GlobalEdgesCount());
 
@@ -235,18 +249,17 @@ auto VPosition::ArrangeDetail(const VPositionData &data, std::atomic_bool *stop,
         return position.getBestResult();
     };
 
-    QEventLoop wait;
-    QObject::connect(&watcher, &QFutureWatcher<VBestSquare>::finished, &wait, &QEventLoop::quit);
-
-    watcher.setFuture(QtConcurrent::mapped(jobs, Nest));
-    wait.exec();
+    // Run the position search on a dedicated pool (see NestingThreadPool) so it never competes with the outer
+    // nesting worker for global-pool threads. Without this it deadlocks on a single-CPU host.
+    QFuture<VBestSquare> future = QtConcurrent::mapped(NestingThreadPool(), jobs, Nest);
+    future.waitForFinished();
 
     if (stop->load())
     {
         return bestResult;
     }
 
-    QList<VBestSquare> const results = watcher.future().results();
+    QList<VBestSquare> const results = future.results();
     for (const auto &result : results)
     {
         bestResult.NewResult(result);
