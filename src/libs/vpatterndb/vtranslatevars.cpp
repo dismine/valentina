@@ -761,8 +761,8 @@ auto VTranslateVars::FormulaFromUser(const QString &formula, bool osSeparator) c
 
     QString newFormula = formula; // Local copy for making changes
 
-    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
-    if (settings->IsTranslateFormula() && SupportVariableTranslation())
+    if (VCommonSettings const *settings = VAbstractApplication::VApp()->Settings();
+        settings->IsTranslateFormula() && SupportVariableTranslation())
     {
         TranslateVarsFromUser(newFormula, tokens, numbers);
     }
