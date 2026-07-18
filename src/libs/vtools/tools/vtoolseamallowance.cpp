@@ -1099,11 +1099,14 @@ void VToolSeamAllowance::Move(qreal x, qreal y)
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::Update(const VPiece &piece)
 {
+    qCDebug(vTool, "VToolSeamAllowance::Update: id=%u start.", m_id);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
     VAbstractTool::data.UpdatePiece(m_id, piece);
     RefreshGeometry();
+    qCDebug(vTool, "VToolSeamAllowance::Update: id=%u geometry refreshed, updating scene rect.", m_id);
     VMainGraphicsView::NewSceneRect(m_sceneDetails, VAbstractValApplication::VApp()->getSceneView(), this);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+    qCDebug(vTool, "VToolSeamAllowance::Update: id=%u done.", m_id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2096,6 +2099,7 @@ void VToolSeamAllowance::UpdateInternalPaths()
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::RefreshGeometry(bool updateChildren)
 {
+    qCDebug(vTool, "VToolSeamAllowance::RefreshGeometry: id=%u start.", m_id);
     const VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     const bool combineTogether = settings->IsBoundaryTogetherWithNotches();
     const bool pieceShowMainPath = VAbstractApplication::VApp()->Settings()->IsPieceShowMainPath();
@@ -2202,6 +2206,7 @@ void VToolSeamAllowance::ApplyPieceGeometry(const VToolSeamAllowanceGeometry &ge
     {
         if (not geom.seamAllowanceValid)
         {
+            qCDebug(vTool, "VToolSeamAllowance::RefreshGeometry: id=%u seam allowance is not valid.", m_id);
             const QString errorMsg = QObject::tr("Piece '%1'. Seam allowance is not valid.").arg(geom.pieceName);
             VAbstractApplication::VApp()->IsPedantic()
                 ? throw VException(errorMsg)

@@ -72,6 +72,7 @@ void SavePieceOptions::undo()
     VToolSeamAllowance::AddPins(Doc(), domElement, m_oldDet.GetPins());
     VToolSeamAllowance::AddPlaceLabels(Doc(), domElement, m_oldDet.GetPlaceLabels());
     VToolSeamAllowance::AddMirrorLine(Doc(), domElement, m_oldDet);
+    qCDebug(vUndo, "Undo: dom element for id = %u rewritten.", ElementId());
 
     VPatternGraph *patternGraph = Doc()->PatternGraph();
     SCASSERT(patternGraph != nullptr)
@@ -90,9 +91,12 @@ void SavePieceOptions::undo()
     // Just disable is enough here. Piece will reactivate active paths
     DisableInternalPaths(m_newDet.GetInternalPaths());
 
+    qCDebug(vUndo, "Undo: updating tool geometry for id = %u.", ElementId());
     tool->Update(m_oldDet);
+    qCDebug(vUndo, "Undo: tool geometry updated for id = %u.", ElementId());
 
     emit UpdateGroups();
+    qCDebug(vUndo, "Undo: done for id = %u.", ElementId());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -118,6 +122,7 @@ void SavePieceOptions::redo()
     VToolSeamAllowance::AddPins(Doc(), domElement, m_newDet.GetPins());
     VToolSeamAllowance::AddPlaceLabels(Doc(), domElement, m_newDet.GetPlaceLabels());
     VToolSeamAllowance::AddMirrorLine(Doc(), domElement, m_newDet);
+    qCDebug(vUndo, "Redo: dom element for id = %u rewritten.", ElementId());
 
     VPatternGraph *patternGraph = Doc()->PatternGraph();
     SCASSERT(patternGraph != nullptr)
@@ -136,9 +141,12 @@ void SavePieceOptions::redo()
     // Just disable is enough here. Piece will reactivate active paths
     DisableInternalPaths(m_oldDet.GetInternalPaths());
 
+    qCDebug(vUndo, "Redo: updating tool geometry for id = %u.", ElementId());
     tool->Update(m_newDet);
+    qCDebug(vUndo, "Redo: tool geometry updated for id = %u.", ElementId());
 
     emit UpdateGroups();
+    qCDebug(vUndo, "Redo: done for id = %u.", ElementId());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
