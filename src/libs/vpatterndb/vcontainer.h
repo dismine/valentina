@@ -282,8 +282,19 @@ template <typename T> auto VContainer::GetVariable(const QString &name) const ->
     {
         try
         {
-            QSharedPointer<T> value = qSharedPointerDynamicCast<T>(d->variables.value(name));
-            SCASSERT(value.isNull() == false)
+            QSharedPointer<VInternalVariable> const gVar = d->variables.value(name);
+            QSharedPointer<T> value = qSharedPointerDynamicCast<T>(gVar);
+            if (value.isNull())
+            {
+                // SCASSERT is compiled away in release builds (V_NO_ASSERT), so a failed cast would
+                // silently return a null pointer that callers dereference and crash on. Throw instead
+                // so the existing VExceptionBadId handling deals with the wrong-type case.
+                const QString msg = QCoreApplication::translate(
+                                        "VContainer", "Can't cast object to the requested type. Name = '%1', type = %2.")
+                                        .arg(name)
+                                        .arg(static_cast<int>(gVar->GetType()));
+                throw VExceptionBadId(msg, name);
+            }
             return value;
         }
         catch (const std::bad_alloc &)
@@ -347,13 +358,21 @@ template <typename T> void VContainer::AddVariable(const QSharedPointer<T> &var,
             QSharedPointer<T> v = qSharedPointerDynamicCast<T>(d->variables.value(name));
             if (v.isNull())
             {
-                throw VExceptionBadId(tr("Can't cast object."), name);
+                throw VExceptionBadId(tr("Can't cast object. Name = '%1', type = %2.")
+                                          .arg(name)
+                                          .arg(static_cast<int>(d->variables.value(name)->GetType())),
+                                      name);
             }
             *v = *var;
         }
         else
         {
-            throw VExceptionBadId(tr("Can't find object. Type mismatch."), name);
+            throw VExceptionBadId(tr("Can't find object. Type mismatch. Name = '%1', existing type = %2, "
+                                     "incoming type = %3.")
+                                      .arg(name)
+                                      .arg(static_cast<int>(d->variables.value(name)->GetType()))
+                                      .arg(static_cast<int>(var->GetType())),
+                                  name);
         }
     }
     else
