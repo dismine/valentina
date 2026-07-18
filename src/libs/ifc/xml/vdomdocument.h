@@ -143,7 +143,7 @@ public:
     void TestUniqueId() const;
 
     void RefreshElementIdCache();
-    void RemoveAllChildren(QDomElement &domElement);
+    static void RemoveAllChildren(QDomElement &domElement);
 
     virtual void Clear();
 
