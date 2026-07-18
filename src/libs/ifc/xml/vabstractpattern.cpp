@@ -1405,6 +1405,53 @@ auto VAbstractPattern::PatternGraph() const -> VPatternGraph *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VAbstractPattern::ProcessFormulaDependencies(const QString &formula, quint32 id,
+                                                   const QHash<QString, QList<quint32>> &variables,
+                                                   quint64 generation)
+{
+    QList<QString> tokens;
+    try
+    {
+        QScopedPointer<qmu::QmuTokenParser> const cal(new qmu::QmuTokenParser(formula, false, false));
+        tokens = cal->GetTokens().values();
+    }
+    catch (qmu::QmuParserError &e)
+    {
+        qDebug() << "\nMath parser error:\n"
+                 << "--------------------------------------\n"
+                 << "Message:     " << e.GetMsg() << "\n"
+                 << "Expression:  " << e.GetExpr() << "\n"
+                 << "--------------------------------------";
+        return;
+    }
+
+    int checkCounter = 0;
+    const int checkInterval = 10; // Check every 10 iterations
+
+    for (const auto &token : std::as_const(tokens))
+    {
+        if (++checkCounter >= checkInterval && m_dependencyCheckGeneration.load() != generation)
+        {
+            return;
+        }
+
+        if (!variables.contains(token))
+        {
+            continue;
+        }
+
+        QList<quint32> const references = variables.value(token);
+        for (const auto &ref : references)
+        {
+            if (ref > NULL_ID && ref != id)
+            {
+                m_patternGraph->AddEdge(ref, id);
+            }
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VAbstractPattern::FindFormulaDependencies(const QString &formula,
                                                quint32 id,
                                                const QHash<QString, QList<quint32>> &variables)
@@ -1432,48 +1479,7 @@ void VAbstractPattern::FindFormulaDependencies(const QString &formula,
     const quint64 generation = m_dependencyCheckGeneration.load();
     QFuture<void> const future = QtConcurrent::run(
         [this, formula, id, variables, generation]() -> void
-        {
-            QList<QString> tokens;
-            try
-            {
-                QScopedPointer<qmu::QmuTokenParser> const cal(new qmu::QmuTokenParser(formula, false, false));
-                tokens = cal->GetTokens().values();
-            }
-            catch (qmu::QmuParserError &e)
-            {
-                qDebug() << "\nMath parser error:\n"
-                         << "--------------------------------------\n"
-                         << "Message:     " << e.GetMsg() << "\n"
-                         << "Expression:  " << e.GetExpr() << "\n"
-                         << "--------------------------------------";
-                return;
-            }
-
-            int checkCounter = 0;
-            const int checkInterval = 10; // Check every 10 iterations
-
-            for (const auto &token : std::as_const(tokens))
-            {
-                if (++checkCounter >= checkInterval && m_dependencyCheckGeneration.load() != generation)
-                {
-                    return;
-                }
-
-                if (!variables.contains(token))
-                {
-                    continue;
-                }
-
-                QList<quint32> const references = variables.value(token);
-                for (const auto &ref : references)
-                {
-                    if (ref > NULL_ID && ref != id)
-                    {
-                        m_patternGraph->AddEdge(ref, id);
-                    }
-                }
-            }
-        });
+        { ProcessFormulaDependencies(formula, id, variables, generation); });
 
     watcher->setFuture(future);
 
