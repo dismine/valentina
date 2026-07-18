@@ -28,8 +28,10 @@
 
 #include "tst_formulacache.h"
 
+#include "../ifc/exception/vexceptionbadid.h"
 #include "../vpatterndb/calculator.h"
 #include "../vpatterndb/variables/vincrement.h"
+#include "../vpatterndb/variables/vlinelength.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vtools/tools/vabstracttool.h"
 
@@ -70,4 +72,31 @@ void TST_FormulaCache::RefreshesValueOnReevaluation()
         QCOMPARE(cached, v + 1);
         QCOMPARE(cached, fresh);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_FormulaCache::GetVariableWrongTypeThrows()
+{
+    // Regression: a name present in the container but requested as the wrong type used to fail an
+    // SCASSERT that is compiled away in release builds, so GetVariable returned a null QSharedPointer
+    // that callers (e.g. DialogEditWrongFormula::ValChanged) dereferenced -> EXCEPTION_ACCESS_VIOLATION.
+    // It must throw VExceptionBadId instead so the existing handling deals with the wrong-type case.
+    VContainer data(nullptr, nullptr, VContainer::UniqueNamespace());
+
+    auto *increment = new VIncrement(&data, QStringLiteral("myvar"));
+    increment->SetFormula(5, QStringLiteral("5"), true);
+    data.AddUniqueVariable(increment); // container takes ownership
+
+    bool thrown = false;
+    try
+    {
+        QSharedPointer<VLengthLine> const wrong = data.GetVariable<VLengthLine>(QStringLiteral("myvar"));
+        Q_UNUSED(wrong)
+    }
+    catch (const VExceptionBadId &)
+    {
+        thrown = true;
+    }
+
+    QVERIFY2(thrown, "GetVariable with a wrong type must throw VExceptionBadId, not return a null pointer.");
 }
