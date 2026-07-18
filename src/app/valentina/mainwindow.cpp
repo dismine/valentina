@@ -4920,8 +4920,10 @@ void MainWindow::Clear()
     m_dependenciesWidget->Clear();
     qCDebug(vMainWindow, "Clearing scenes.");
     m_sceneDraw->clear();
+    qCDebug(vMainWindow, "Draw scene cleared.");
     m_sceneDraw->SetAcceptDrop(false);
     m_sceneDetails->clear();
+    qCDebug(vMainWindow, "Details scene cleared.");
     ArrowTool(true);
     {
         const QSignalBlocker blocker(m_comboBoxDraws);

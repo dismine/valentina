@@ -61,6 +61,7 @@
 #include "tst_vspline.h"
 #include "tst_vsplinepath.h"
 #include "tst_vsvgpathtokenizer.h"
+#include "tst_vmaingraphicsscene.h"
 #include "tst_vtheme.h"
 #include "tst_vlabelarrangeengine.h"
 #include "tst_vabstractpattern.h"
@@ -168,6 +169,7 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_VTextStream());
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     ASSERT_TEST(new TST_VTheme());
+    ASSERT_TEST(new TST_VMainGraphicsScene());
 
     return status;
 }

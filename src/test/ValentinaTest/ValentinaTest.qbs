@@ -113,6 +113,8 @@ VTestApp {
         "tst_vsvgpathtokenizer.h",
         "tst_vtheme.cpp",
         "tst_vtheme.h",
+        "tst_vmaingraphicsscene.cpp",
+        "tst_vmaingraphicsscene.h",
         "tst_vtranslatevars.cpp",
         "tst_vabstractpiece.cpp",
         "tst_vpatterngraph.cpp",

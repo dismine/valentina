@@ -37,7 +37,6 @@
 #include <QRectF>
 #include <QString>
 #include <QTransform>
-#include <QVector>
 #include <QtGlobal>
 
 #include "../vmisc/def.h"
@@ -178,7 +177,6 @@ private:
     /** @brief _transform view transform value. */
     QTransform    _transform;
     QPointF       scenePos;
-    QVector<QGraphicsItem *> origins;
 
     /** @brief m_nonInteractive all item on scene in non interactive. */
     bool          m_nonInteractive{false};

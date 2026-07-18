@@ -40,6 +40,13 @@
 
 #include "global.h"
 
+namespace
+{
+// Marks scene items that make up the origin (axis) decoration, so SetOriginsVisible() can find them by
+// querying the live scene instead of caching raw pointers that dangle once the items are deleted.
+constexpr int originItemData = 0;
+} // namespace
+
 //---------------------------------------------------------------------------------------------------------------------
 /**
  * @brief VMainGraphicsScene default constructor.
@@ -49,8 +56,7 @@ VMainGraphicsScene::VMainGraphicsScene(QObject *parent)
     horScrollBar(0),
     verScrollBar(0),
     _transform(QTransform()),
-    scenePos(QPointF()),
-    origins()
+    scenePos(QPointF())
 {
 }
 
@@ -65,8 +71,7 @@ VMainGraphicsScene::VMainGraphicsScene(const QRectF &sceneRect, QObject *parent)
     horScrollBar(0),
     verScrollBar(0),
     _transform(QTransform()),
-    scenePos(),
-    origins()
+    scenePos()
 {
 }
 
@@ -150,8 +155,6 @@ void VMainGraphicsScene::SetNonInteractive(bool nonInteractive)
 //---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::InitOrigins()
 {
-    origins.clear();
-
     QPen const originsPen(Qt::green, MmToPixel(1.2 / 3.0), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
     QBrush const axisTextBrush(Qt::green);
     const qreal arrowAngle = 35.0;
@@ -165,7 +168,7 @@ void VMainGraphicsScene::InitOrigins()
         xLine1->setFlag(QGraphicsItem::ItemIgnoresTransformations);
         xLine1->setZValue(-0.5);
         addItem(xLine1);
-        origins.append(xLine1);
+        xLine1->setData(originItemData, true);
 
         // Arrow left side
         QLineF arrowLeftLine = lineX;
@@ -176,7 +179,7 @@ void VMainGraphicsScene::InitOrigins()
         xLine2->setFlag(QGraphicsItem::ItemIgnoresTransformations);
         xLine2->setZValue(-0.5);
         addItem(xLine2);
-        origins.append(xLine2);
+        xLine2->setData(originItemData, true);
 
         // Arrow right side
         QLineF arrowRightLine = lineX;
@@ -187,7 +190,7 @@ void VMainGraphicsScene::InitOrigins()
         xLine3->setFlag(QGraphicsItem::ItemIgnoresTransformations);
         xLine3->setZValue(-0.5);
         addItem(xLine3);
-        origins.append(xLine3);
+        xLine3->setData(originItemData, true);
 
         // X axis text
         auto *xOrigin = new QGraphicsSimpleTextItem(QStringLiteral("X"), xLine1);
@@ -195,7 +198,7 @@ void VMainGraphicsScene::InitOrigins()
         xOrigin->setFlag(QGraphicsItem::ItemIgnoresTransformations);
         xOrigin->setZValue(-0.5);
         xOrigin->setPos(30, -(xOrigin->boundingRect().height() / 2));
-        origins.append(xOrigin);
+        xOrigin->setData(originItemData, true);
     }
 
     {
@@ -206,7 +209,7 @@ void VMainGraphicsScene::InitOrigins()
         yLine1->setFlag(QGraphicsItem::ItemIgnoresTransformations);
         yLine1->setZValue(-0.5);
         addItem(yLine1);
-        origins.append(yLine1);
+        yLine1->setData(originItemData, true);
 
         // Arrow left side
         QLineF arrowLeftLine = lineY;
@@ -217,7 +220,7 @@ void VMainGraphicsScene::InitOrigins()
         yLine2->setFlag(QGraphicsItem::ItemIgnoresTransformations);
         yLine2->setZValue(-0.5);
         addItem(yLine2);
-        origins.append(yLine2);
+        yLine2->setData(originItemData, true);
 
         // Arrow right side
         QLineF arrowRightLine = lineY;
@@ -228,7 +231,7 @@ void VMainGraphicsScene::InitOrigins()
         yLine3->setFlag(QGraphicsItem::ItemIgnoresTransformations);
         yLine3->setZValue(-0.5);
         addItem(yLine3);
-        origins.append(yLine3);
+        yLine3->setData(originItemData, true);
 
         // Y axis text
         auto *yOrigin = new QGraphicsSimpleTextItem(QStringLiteral("Y"), yLine1);
@@ -236,16 +239,19 @@ void VMainGraphicsScene::InitOrigins()
         yOrigin->setFlag(QGraphicsItem::ItemIgnoresTransformations);
         yOrigin->setZValue(-0.5);
         yOrigin->setPos(-(yOrigin->boundingRect().width() / 2), 30);
-        origins.append(yOrigin);
+        yOrigin->setData(originItemData, true);
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VMainGraphicsScene::SetOriginsVisible(bool visible)
 {
-    for (auto *item : std::as_const(origins))
+    // Derive the origin items from the live scene instead of a cache, so items deleted by clear() can never
+    // be dereferenced here.
+    const QList<QGraphicsItem *> sceneItems = items();
+    for (auto *item : sceneItems)
     {
-        if (item != nullptr)
+        if (item != nullptr && item->data(originItemData).toBool())
         {
             item->setVisible(visible);
         }
