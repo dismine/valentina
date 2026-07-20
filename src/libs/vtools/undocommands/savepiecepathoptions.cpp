@@ -67,7 +67,7 @@ void SavePiecePathOptions::undo()
     }
 
     VToolPiecePath::AddAttributes(Doc(), domElement, ElementId(), m_oldPath);
-    Doc()->RemoveAllChildren(domElement); //Very important to clear before rewrite
+    VAbstractPattern::RemoveAllChildren(domElement); //Very important to clear before rewrite
     VToolPiecePath::AddNodes(Doc(), domElement, m_oldPath);
 
     VPatternGraph *patternGraph = Doc()->PatternGraph();
@@ -119,7 +119,7 @@ void SavePiecePathOptions::redo()
     }
 
     VToolPiecePath::AddAttributes(Doc(), domElement, ElementId(), m_newPath);
-    Doc()->RemoveAllChildren(domElement); //Very important to clear before rewrite
+    VAbstractPattern::RemoveAllChildren(domElement); //Very important to clear before rewrite
     VToolPiecePath::AddNodes(Doc(), domElement, m_newPath);
 
     VPatternGraph *patternGraph = Doc()->PatternGraph();

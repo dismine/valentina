@@ -514,7 +514,7 @@ auto VToolSplinePath::GatherToolChanges() const -> VToolAbstractBezier::ToolChan
  */
 void VToolSplinePath::UpdatePathPoints(VAbstractPattern *doc, QDomElement &element, const VSplinePath &path)
 {
-    doc->RemoveAllChildren(element);
+    VAbstractPattern::RemoveAllChildren(element);
     for (qint32 i = 0; i < path.CountPoints(); ++i)
     {
         AddPathPoint(doc, element, path.at(i));

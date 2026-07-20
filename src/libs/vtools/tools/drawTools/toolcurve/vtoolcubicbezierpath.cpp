@@ -156,7 +156,7 @@ auto VToolCubicBezierPath::Create(VToolCubicBezierPathInitData initData) -> VToo
 //---------------------------------------------------------------------------------------------------------------------
 void VToolCubicBezierPath::UpdatePathPoints(VAbstractPattern *doc, QDomElement &element, const VCubicBezierPath &path)
 {
-    doc->RemoveAllChildren(element);
+    VAbstractPattern::RemoveAllChildren(element);
     for (qint32 i = 0; i < path.CountPoints(); ++i)
     {
         AddPathPoint(doc, element, path.at(i));

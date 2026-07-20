@@ -362,7 +362,7 @@ VToolGraduatedCurve::VToolGraduatedCurve(const VToolGraduatedCurveInitData &init
 //---------------------------------------------------------------------------------------------------------------------
 void VToolGraduatedCurve::UpdateOffsets(QDomElement &tag, const QVector<VRawGraduatedCurveOffset> &offsets)
 {
-    doc->RemoveAllChildren(tag);
+    VAbstractPattern::RemoveAllChildren(tag);
     for (const auto &offset : offsets)
     {
         QDomElement offsetTag = doc->createElement(AttrOffset);
