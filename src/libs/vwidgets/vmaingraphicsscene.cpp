@@ -241,7 +241,7 @@ void VMainGraphicsScene::InitOrigins()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMainGraphicsScene::SetOriginsVisible(bool visible)
+void VMainGraphicsScene::SetOriginsVisible(bool visible) const
 {
     for (auto *item : qAsConst(origins))
     {

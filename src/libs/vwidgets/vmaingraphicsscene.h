@@ -61,8 +61,8 @@ public:
     auto getScenePos() const -> QPointF;
 
     auto VisibleItemsBoundingRect() const -> QRectF;
-    void          InitOrigins();
-    void          SetOriginsVisible(bool visible);
+    void InitOrigins();
+    void SetOriginsVisible(bool visible) const;
 
     auto IsNonInteractive() const -> bool;
     void          SetNonInteractive(bool nonInteractive);
