@@ -344,11 +344,29 @@ void PreferencesPatternPage::InitLabelFontSizes()
 void PreferencesPatternPage::InitSingleLineFonts()
 {
     QScreen *primaryScreen = QGuiApplication::primaryScreen();
+    if (primaryScreen == nullptr)
+    {
+        qWarning() << "InitSingleLineFonts: no primary screen, skipping single line font previews.";
+        return;
+    }
 
-    // Retrieve the screen's physical DPI values and scale factor
-    const qreal dpiX = primaryScreen->physicalDotsPerInchX();
-    const qreal dpiY = primaryScreen->physicalDotsPerInchY();
-    const qreal scale = primaryScreen->devicePixelRatio();
+    // Retrieve the screen's physical DPI values and scale factor. On Windows these can be
+    // transiently bogus (e.g. during display reconfiguration) if the monitor reports an invalid
+    // physical size, so fall back to sane defaults and log the anomaly instead of feeding garbage
+    // into setMinimumSize()/QPixmap below (see issue with negative comboBoxSingleLineFont size).
+    qreal dpiX = primaryScreen->physicalDotsPerInchX();
+    qreal dpiY = primaryScreen->physicalDotsPerInchY();
+    qreal scale = primaryScreen->devicePixelRatio();
+
+    if (!(dpiX > 0) || !(dpiY > 0) || !(scale > 0))
+    {
+        qWarning() << "InitSingleLineFonts: screen" << primaryScreen->name()
+                   << "reported invalid DPI/scale (dpiX=" << dpiX << ", dpiY=" << dpiY << ", scale=" << scale
+                   << "), using fallback values.";
+        dpiX = dpiX > 0 ? dpiX : 96.0;
+        dpiY = dpiY > 0 ? dpiY : 96.0;
+        scale = scale > 0 ? scale : 1.0;
+    }
 
     int const previewWidth = qRound(250. / scale);
     int const previewHeight = qRound(QFontMetrics(QGuiApplication::font()).height() / scale);
@@ -358,8 +376,8 @@ void PreferencesPatternPage::InitSingleLineFonts()
     const int desiredHeightInPixels = qRound(previewHeight * dpiY / 96.0);
 
     // Adjust the image size based on the screen's scale factor
-    const int previewScaledWidthPixels = qRound(desiredWidthInPixels * scale);
-    const int previewScaledHeightPixels = qRound(desiredHeightInPixels * scale);
+    const int previewScaledWidthPixels = qMax(1, qRound(desiredWidthInPixels * scale));
+    const int previewScaledHeightPixels = qMax(1, qRound(desiredHeightInPixels * scale));
 
     ui->comboBoxSingleLineFont->clear();
     ui->comboBoxSingleLineFont->setMinimumSize(QSize(previewScaledWidthPixels, 0));
