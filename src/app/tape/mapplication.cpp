@@ -163,6 +163,54 @@ inline void LogMessageDetails(QtMsgType type, const QMessageLogContext &context,
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+inline void ShowNoisyMessageBox(QtMsgType type, const QString &logMsg)
+{
+    // fixme: trying to make sure there are no save/load dialogs are opened, because error message
+    //  during them will lead to crash
+    const bool topWinAllowsPop = (QApplication::activeModalWidget() == nullptr) ||
+                                 !QApplication::activeModalWidget()->inherits("QFileDialog");
+
+    if (not MApplication::VApp()->IsTestMode() && topWinAllowsPop)
+    {
+        QMessageBox messageBox;
+        switch (type)
+        {
+            case QtWarningMsg:
+                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Warning"));
+                messageBox.setIcon(QMessageBox::Warning);
+                break;
+            case QtCriticalMsg:
+                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Critical error"));
+                messageBox.setIcon(QMessageBox::Critical);
+                break;
+            case QtFatalMsg:
+                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Fatal error"));
+                messageBox.setIcon(QMessageBox::Critical);
+                break;
+            case QtInfoMsg:
+                messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Information"));
+                messageBox.setIcon(QMessageBox::Information);
+                break;
+            case QtDebugMsg:
+            default:
+                break;
+        }
+
+        messageBox.setText(VAbstractApplication::ClearMessage(logMsg));
+        messageBox.setStandardButtons(QMessageBox::Ok);
+        messageBox.setWindowModality(Qt::ApplicationModal);
+        messageBox.setModal(true);
+#ifndef QT_NO_CURSOR
+        QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
+#endif
+        messageBox.exec();
+#ifndef QT_NO_CURSOR
+        QGuiApplication::restoreOverrideCursor();
+#endif
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     // only the GUI thread should display message boxes.  If you are
@@ -267,52 +315,7 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     {
         if (type == QtWarningMsg || type == QtCriticalMsg || type == QtFatalMsg)
         {
-            auto ShowMessageBox = [type, logMsg]()
-            {
-                // fixme: trying to make sure there are no save/load dialogs are opened, because error message
-                //  during them will lead to crash
-                const bool topWinAllowsPop = (QApplication::activeModalWidget() == nullptr) ||
-                                             !QApplication::activeModalWidget()->inherits("QFileDialog");
-
-                if (not MApplication::VApp()->IsTestMode() && topWinAllowsPop)
-                {
-                    QMessageBox messageBox;
-                    switch (type)
-                    {
-                        case QtWarningMsg:
-                            messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Warning"));
-                            messageBox.setIcon(QMessageBox::Warning);
-                            break;
-                        case QtCriticalMsg:
-                            messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Critical error"));
-                            messageBox.setIcon(QMessageBox::Critical);
-                            break;
-                        case QtFatalMsg:
-                            messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Fatal error"));
-                            messageBox.setIcon(QMessageBox::Critical);
-                            break;
-                        case QtInfoMsg:
-                            messageBox.setWindowTitle(QApplication::translate("mNoisyHandler", "Information"));
-                            messageBox.setIcon(QMessageBox::Information);
-                            break;
-                        case QtDebugMsg:
-                        default:
-                            break;
-                    }
-
-                    messageBox.setText(VAbstractApplication::ClearMessage(logMsg));
-                    messageBox.setStandardButtons(QMessageBox::Ok);
-                    messageBox.setWindowModality(Qt::ApplicationModal);
-                    messageBox.setModal(true);
-#ifndef QT_NO_CURSOR
-                    QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
-#endif
-                    messageBox.exec();
-#ifndef QT_NO_CURSOR
-                    QGuiApplication::restoreOverrideCursor();
-#endif
-                }
-            };
+            auto ShowMessageBox = [type, logMsg]() { ShowNoisyMessageBox(type, logMsg); };
 
             if (type == QtFatalMsg)
             {
