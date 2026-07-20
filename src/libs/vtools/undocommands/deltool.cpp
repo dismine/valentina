@@ -137,24 +137,26 @@ void DelTool::redo()
 void DelTool::UpdateGroups(const QMap<quint32, VGroupData> &groups) const
 {
     QDomElement groupsTag = doc->CreateGroups(nameActivDraw);
-    if (not groupsTag.isNull())
+    if (groupsTag.isNull())
     {
-        doc->RemoveAllChildren(groupsTag);
+        return;
+    }
 
-        auto i = groups.constBegin();
-        while (i != groups.constEnd())
+    doc->RemoveAllChildren(groupsTag);
+
+    auto i = groups.constBegin();
+    while (i != groups.constEnd())
+    {
+        QMap<vidtype, vidtype> groupMap;
+        for (auto [first, second] : i.value().items)
         {
-            QMap<vidtype, vidtype> groupMap;
-            for (auto [first, second] : i.value().items)
-            {
-                groupMap.insert(first, second);
-            }
-
-            QDomElement group = doc->CreateGroup(i.key(), i.value().name, i.value().tags, groupMap, i.value().tool);
-            doc->SetAttribute(group, VAbstractPattern::AttrVisible, i.value().visible);
-            groupsTag.appendChild(group);
-
-            ++i;
+            groupMap.insert(first, second);
         }
+
+        QDomElement group = doc->CreateGroup(i.key(), i.value().name, i.value().tags, groupMap, i.value().tool);
+        doc->SetAttribute(group, VAbstractPattern::AttrVisible, i.value().visible);
+        groupsTag.appendChild(group);
+
+        ++i;
     }
 }
