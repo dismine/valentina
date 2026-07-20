@@ -42,7 +42,7 @@ public:
 
 private slots:
     void RefreshesValueOnReevaluation();
-    void GetVariableWrongTypeThrows();
+    void GetVariableWrongTypeThrows() const;
 };
 
 #endif // TST_FORMULACACHE_H

@@ -521,7 +521,7 @@ void VMeasurements::ReadMeasurements(qreal baseA, qreal baseB, qreal baseC) cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMeasurements::ClearForExport()
+void VMeasurements::ClearForExport() const
 {
     const QDomNodeList list = elementsByTagName(TagMeasurement);
 

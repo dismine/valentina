@@ -153,7 +153,7 @@ private:
 
     void ConvertImageToV0_9_0();
 
-    void ConvertMeasurementsPathToV0_9_1();
+    void ConvertMeasurementsPathToV0_9_1() const;
 
     void ConvertPathAttributesToV0_9_2();
 

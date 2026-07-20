@@ -56,7 +56,7 @@ TST_VMainGraphicsScene::TST_VMainGraphicsScene(QObject *parent)
 // Regression test for a use-after-free crash (EXC_BAD_ACCESS during undo -> MainWindow::Clear()).
 // SetOriginsVisible() must toggle only the origin (axis) items and must stay safe after the scene has been
 // cleared - it derives them from the live scene, so a stale pointer to a deleted item can never be touched.
-void TST_VMainGraphicsScene::SetOriginsVisibleIsSceneDerived()
+void TST_VMainGraphicsScene::SetOriginsVisibleIsSceneDerived() const
 {
     VMainGraphicsScene scene;
 
@@ -88,7 +88,7 @@ void TST_VMainGraphicsScene::SetOriginsVisibleIsSceneDerived()
 // scene->clear(), which deletes that item. This test locks in the premise the fix relies on: clear() really
 // does destroy the item and null the QPointer, so DialogTool::VisualizationBroken() (vis.isNull()) can detect
 // it and MainWindow::EndVisualization() can skip ShowDialog() instead of dereferencing freed memory.
-void TST_VMainGraphicsScene::ClearDestroysVisualizationItem()
+void TST_VMainGraphicsScene::ClearDestroysVisualizationItem() const
 {
     VMainGraphicsScene scene;
 

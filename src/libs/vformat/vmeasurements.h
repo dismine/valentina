@@ -94,7 +94,7 @@ public:
     void StoreNames(bool store);
 
     void ReadMeasurements(qreal baseA, qreal baseB = 0, qreal baseC = 0) const;
-    void ClearForExport();
+    void ClearForExport() const;
 
     auto Type() const -> MeasurementsType;
     auto DimensionABase() const -> qreal;

@@ -2460,7 +2460,7 @@ void VPatternConverter::ConvertImageToV0_9_0()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPatternConverter::ConvertMeasurementsPathToV0_9_1()
+void VPatternConverter::ConvertMeasurementsPathToV0_9_1() const
 {
     // TODO. Delete if minimal supported version is 0.9.1
     Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 9, 1), "Time to refactor the code.");

@@ -75,7 +75,7 @@ void TST_FormulaCache::RefreshesValueOnReevaluation()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_FormulaCache::GetVariableWrongTypeThrows()
+void TST_FormulaCache::GetVariableWrongTypeThrows() const
 {
     // Regression: a name present in the container but requested as the wrong type used to fail an
     // SCASSERT that is compiled away in release builds, so GetVariable returned a null QSharedPointer

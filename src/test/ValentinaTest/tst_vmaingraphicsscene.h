@@ -39,8 +39,8 @@ public:
     ~TST_VMainGraphicsScene() override = default;
 
 private slots:
-    void SetOriginsVisibleIsSceneDerived();
-    void ClearDestroysVisualizationItem();
+    void SetOriginsVisibleIsSceneDerived() const;
+    void ClearDestroysVisualizationItem() const;
 
 private:
     Q_DISABLE_COPY_MOVE(TST_VMainGraphicsScene) // NOLINT

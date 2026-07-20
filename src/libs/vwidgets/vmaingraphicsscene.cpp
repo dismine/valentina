@@ -244,7 +244,7 @@ void VMainGraphicsScene::InitOrigins()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VMainGraphicsScene::SetOriginsVisible(bool visible)
+void VMainGraphicsScene::SetOriginsVisible(bool visible) const
 {
     // Derive the origin items from the live scene instead of a cache, so items deleted by clear() can never
     // be dereferenced here.
