@@ -37,6 +37,15 @@
 #include <QVector>
 #include <QtGlobal>
 
+// QT_CONCURRENT_LIB is defined by the build system only for products that depend on the Qt "concurrent"
+// submodule. Most consumers of this header don't, so keep the QtConcurrent-specific helper opt-in to avoid
+// forcing that dependency (and its headers) onto every translation unit that includes compatibility.h.
+#ifdef QT_CONCURRENT_LIB
+#include <QFuture>
+#include <QThreadPool>
+#include <QtConcurrent>
+#endif
+
 #include "defglobal.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -243,6 +252,41 @@ template <typename T, typename N> inline auto Sliced(const T &list, N pos, N n) 
     return result;
 #endif
 }
+
+#ifdef QT_CONCURRENT_LIB
+//---------------------------------------------------------------------------------------------------------------------
+// QtConcurrent::mapped() only gained a QThreadPool overload in Qt 6. On Qt 5 run each item individually with
+// QtConcurrent::run(pool, ...), which has taken a pool since Qt 5.4, and collect the results by hand.
+// TODO: drop this wrapper (inline the Qt 6 branch) once Qt 5.15 support is removed.
+template <typename Sequence, typename MapFunctor>
+inline auto MappedOnPool(QThreadPool *pool, const Sequence &sequence, MapFunctor map)
+    -> QList<std::invoke_result_t<MapFunctor, typename Sequence::value_type>>
+{
+    using ResultType = std::invoke_result_t<MapFunctor, typename Sequence::value_type>;
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QFuture<ResultType> future = QtConcurrent::mapped(pool, sequence, map);
+    future.waitForFinished();
+    return future.results();
+#else
+    QVector<QFuture<ResultType>> futures;
+    futures.reserve(static_cast<vsizetype>(sequence.size()));
+    for (const auto &item : sequence)
+    {
+        futures.append(QtConcurrent::run(pool, map, item));
+    }
+
+    QList<ResultType> results;
+    results.reserve(futures.size());
+    for (auto &future : futures)
+    {
+        future.waitForFinished();
+        results.append(future.result());
+    }
+    return results;
+#endif
+}
+#endif // QT_CONCURRENT_LIB
 
 //---------------------------------------------------------------------------------------------------------------------
 inline auto FontFromString(const QString &descrip) -> QFont
