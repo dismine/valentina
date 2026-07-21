@@ -52,6 +52,7 @@
 #include "tst_vdomdocument.h"
 #include "tst_vellipticalarc.h"
 #include "tst_vgobject.h"
+#include "tst_vfoldline.h"
 #include "tst_vlayoutdetail.h"
 #include "tst_vlockguard.h"
 #include "tst_vmeasurements.h"
@@ -134,6 +135,7 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_VSplinePath());
     ASSERT_TEST(new TST_NameRegExp());
     ASSERT_TEST(new TST_VLayoutDetail());
+    ASSERT_TEST(new TST_VFoldLine());
     ASSERT_TEST(new TST_VArc());
     ASSERT_TEST(new TST_VEllipticalArc());
     ASSERT_TEST(new TST_QmuTokenParser());

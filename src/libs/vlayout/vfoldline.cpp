@@ -212,7 +212,6 @@ auto VFoldLine::FoldLineMarkPoints() const -> QVector<QVector<QPointF>>
             return ThreeXPoints();
         case FoldLineType::LAST_ONE_DO_NOT_USE:
             Q_UNREACHABLE();
-            break;
         case FoldLineType::Text:
         case FoldLineType::None:
         default:
@@ -320,35 +319,50 @@ void VFoldLine::UpdateFoldLineLabel(QGraphicsSimpleTextItem *item) const
     QRectF const rect = item->boundingRect();
 
     QTransform matrix;
-    if (m_verticallyFlipped && !m_horizontallyFlipped)
+    if (m_verticallyFlipped != m_horizontallyFlipped)
     {
-        QFontMetrics const fm(labelPos.font);
+        // Vertical-only and horizontal-only flips need DIFFERENT rotation offsets here, not a
+        // shared one -- confirmed empirically (real side-by-side renders), not assumed: a
+        // vertically flipped label must land 180 degrees from the non-flipped case (matching
+        // "both flipped", which already naturally lands there, since two reflections compose to
+        // a pure 180-degree rotation the label just follows), but a horizontally flipped label
+        // must match the non-flipped case exactly, 0 degrees extra. This asymmetry traces back to
+        // TwoArrowsTextAbove's label offset being an inherently Y-directional ("above" the fold
+        // line) concept: a Y-mirror (horizontal flip) interacts with that offset differently than
+        // an X-mirror (vertical flip) does. An earlier version of this assumed the two axes were
+        // symmetric and unified them onto a single shared offset, which was wrong -- see git
+        // history for the two-piece renders that exposed it in each direction independently.
+        //
+        // The correction's scale still has to be applied AFTER the rotation (outermost), not
+        // before it: scale-before-rotate cancels m_matrix's mirror but composes to an
+        // uncontrolled, angle-dependent extra rotation instead of a fixed offset.
+        //
+        // With the scale outermost, the only freedom left is translation, so the anchor is the
+        // item's own bounding-rect center rotated (not mirrored) into place: refRectCenter is
+        // where the *non-flipped* transform would put that same center point (using the
+        // non-flipped rotation, not whatever offset is added below -- the position match holds
+        // for any rotation angle used inside the correction, since it only pins down where the
+        // rotation's own center lands, verified against an asymmetric test shape, not just a
+        // symmetric rect whose 180-degree symmetry can hide an extra-rotation bug that real
+        // glyphs would reveal).
+        qreal const extraRotationDeg = m_verticallyFlipped ? 180. : 0.;
 
-        matrix.scale(-1, 1);
-        matrix.translate(-rect.width(), -rect.height() - fm.ascent());
+        QPointF const rectCenter = rect.center();
 
-        matrix.translate(-labelPos.pos.x(), labelPos.pos.y());
-        matrix.rotate(labelPos.angle);
-        matrix.translate(labelPos.pos.x(), -labelPos.pos.y());
-        matrix.translate(-labelPos.pos.x(), labelPos.pos.y());
-    }
-    else if (!m_verticallyFlipped && m_horizontallyFlipped)
-    {
-        matrix.scale(1, -1);
-        matrix.translate(0, -rect.height());
+        QTransform refTransform;
+        refTransform.translate(labelPos.pos.x(), labelPos.pos.y());
+        refTransform.rotate(-labelPos.angle);
+        QPointF const refRectCenter = refTransform.map(rectCenter);
 
-        matrix.translate(labelPos.pos.x(), -labelPos.pos.y());
-        matrix.rotate(labelPos.angle + 180);
-        matrix.translate(-labelPos.pos.x(), labelPos.pos.y());
-        matrix.translate(-rect.width(), -rect.height());
-        matrix.translate(labelPos.pos.x(), -labelPos.pos.y());
+        matrix.translate(refRectCenter.x(), refRectCenter.y());
+        matrix.scale(m_verticallyFlipped ? -1 : 1, m_horizontallyFlipped ? -1 : 1);
+        matrix.rotate(-labelPos.angle + extraRotationDeg);
+        matrix.translate(-rectCenter.x(), -rectCenter.y());
     }
     else
     {
         matrix.translate(labelPos.pos.x(), labelPos.pos.y());
         matrix.rotate(-labelPos.angle);
-        matrix.translate(-labelPos.pos.x(), -labelPos.pos.y());
-        matrix.translate(labelPos.pos.x(), labelPos.pos.y());
     }
 
     matrix *= m_matrix;
@@ -610,26 +624,26 @@ auto VFoldLine::OutlineFontLabel(const QLineF &base, qreal width, qreal textHeig
 
         QTransform matrix;
 
-        if (m_verticallyFlipped && !m_horizontallyFlipped)
+        if (m_verticallyFlipped != m_horizontallyFlipped)
         {
-            matrix.scale(-1, 1);
-            matrix.translate(-labelPath.boundingRect().width(), -labelPath.boundingRect().height() - fm.ascent());
+            // Vertical-only and horizontal-only flips need DIFFERENT rotation offsets here, not
+            // a shared one -- see UpdateFoldLineLabel() for the full reasoning (confirmed via
+            // real side-by-side renders, not assumed) and why the scale must be outermost.
+            qreal const extraRotationDeg = m_verticallyFlipped ? 180. : 0.;
 
-            matrix.translate(-rotationCenter.x(), rotationCenter.y());
-            matrix.rotate(QLineF(center, base.p1()).angle());
-            matrix.translate(rotationCenter.x(), -rotationCenter.y());
-            matrix.translate(-baseLine.p2().x(), baseLine.p2().y() - textHeight);
-        }
-        else if (!m_verticallyFlipped && m_horizontallyFlipped)
-        {
-            matrix.scale(1, -1);
-            matrix.translate(0, -fm.height());
+            QPointF const rectCenter = labelPath.boundingRect().center();
 
-            matrix.translate(rotationCenter.x(), -rotationCenter.y());
-            matrix.rotate(QLineF(center, base.p1()).angle() + 180);
-            matrix.translate(-rotationCenter.x(), rotationCenter.y());
-            matrix.translate(0, -labelPath.boundingRect().height() - textHeight * 2);
-            matrix.translate(baseLine.p2().x(), -baseLine.p2().y() + textHeight);
+            QTransform refTransform;
+            refTransform.translate(rotationCenter.x(), rotationCenter.y());
+            refTransform.rotate(-QLineF(center, base.p1()).angle());
+            refTransform.translate(-rotationCenter.x(), -rotationCenter.y());
+            refTransform.translate(baseLine.p2().x(), baseLine.p2().y() - textHeight);
+            QPointF const refRectCenter = refTransform.map(rectCenter);
+
+            matrix.translate(refRectCenter.x(), refRectCenter.y());
+            matrix.scale(m_verticallyFlipped ? -1 : 1, m_horizontallyFlipped ? -1 : 1);
+            matrix.rotate(-QLineF(center, base.p1()).angle() + extraRotationDeg);
+            matrix.translate(-rectCenter.x(), -rectCenter.y());
         }
         else
         {
@@ -651,26 +665,26 @@ auto VFoldLine::OutlineFontLabel(const QLineF &base, qreal width, qreal textHeig
 
         QTransform matrix;
 
-        if (m_verticallyFlipped && !m_horizontallyFlipped)
+        if (m_verticallyFlipped != m_horizontallyFlipped)
         {
-            matrix.scale(-1, 1);
-            matrix.translate(-labelPath.boundingRect().width(), -labelPath.boundingRect().height() - fm.ascent());
+            // See the single-stroke branch above for why the scale must be outermost, the
+            // rotation offset differs by flip axis, and the anchor must be the glyph's own
+            // bounding-rect center mapped through the non-flipped transform.
+            qreal const extraRotationDeg = m_verticallyFlipped ? 180. : 0.;
 
-            matrix.translate(-rotationCenter.x(), rotationCenter.y());
-            matrix.rotate(QLineF(center, base.p1()).angle());
-            matrix.translate(rotationCenter.x(), -rotationCenter.y());
-            matrix.translate(-baseLine.p2().x(), baseLine.p2().y());
-        }
-        else if (!m_verticallyFlipped && m_horizontallyFlipped)
-        {
-            matrix.scale(1, -1);
-            matrix.translate(0, -fm.height());
+            QPointF const rectCenter = labelPath.boundingRect().center();
 
-            matrix.translate(rotationCenter.x(), -rotationCenter.y());
-            matrix.rotate(QLineF(center, base.p1()).angle() + 180);
-            matrix.translate(-rotationCenter.x(), rotationCenter.y());
-            matrix.translate(0, -labelPath.boundingRect().height() - fm.height() - CmToPixel(0.1));
-            matrix.translate(baseLine.p2().x(), -baseLine.p2().y());
+            QTransform refTransform;
+            refTransform.translate(rotationCenter.x(), rotationCenter.y());
+            refTransform.rotate(-QLineF(center, base.p1()).angle());
+            refTransform.translate(-rotationCenter.x(), -rotationCenter.y());
+            refTransform.translate(baseLine.p2().x(), baseLine.p2().y());
+            QPointF const refRectCenter = refTransform.map(rectCenter);
+
+            matrix.translate(refRectCenter.x(), refRectCenter.y());
+            matrix.scale(m_verticallyFlipped ? -1 : 1, m_horizontallyFlipped ? -1 : 1);
+            matrix.rotate(-QLineF(center, base.p1()).angle() + extraRotationDeg);
+            matrix.translate(-rectCenter.x(), -rectCenter.y());
         }
         else
         {
@@ -734,26 +748,31 @@ auto VFoldLine::SVGFontLabel(const QLineF &base, qreal width, qreal textHeight) 
 
     QTransform matrix;
 
-    if (m_verticallyFlipped && !m_horizontallyFlipped)
+    if (m_verticallyFlipped != m_horizontallyFlipped)
     {
-        matrix.scale(-1, 1);
-        matrix.translate(-labelPath.boundingRect().width(), -labelPath.boundingRect().height());
+        // See OutlineFontLabel's single-stroke branch for the full reasoning: vertical-only and
+        // horizontal-only flips need DIFFERENT rotation offsets (confirmed via real side-by-side
+        // renders, not assumed), and the correction's scale has to be applied AFTER the rotation
+        // (outermost) -- scale-before-rotate cancels m_matrix's mirror but composes to an
+        // uncontrolled, angle-dependent extra rotation instead of a fixed offset. With scale
+        // outermost, the anchor is the glyph's own bounding-rect center mapped through the
+        // non-flipped transform, which keeps the footprint exactly where the non-flipped
+        // footprint mirrors to.
+        qreal const extraRotationDeg = m_verticallyFlipped ? 180. : 0.;
 
-        matrix.translate(-rotationCenter.x(), rotationCenter.y());
-        matrix.rotate(QLineF(center, base.p1()).angle());
-        matrix.translate(rotationCenter.x(), -rotationCenter.y());
-        matrix.translate(-baseLine.p2().x(), baseLine.p2().y() - textHeight);
-    }
-    else if (!m_verticallyFlipped && m_horizontallyFlipped)
-    {
-        matrix.scale(1, -1);
-        matrix.translate(0, -labelPath.boundingRect().height());
+        QPointF const rectCenter = labelPath.boundingRect().center();
 
-        matrix.translate(rotationCenter.x(), -rotationCenter.y());
-        matrix.rotate(QLineF(center, base.p1()).angle() + 180);
-        matrix.translate(-rotationCenter.x(), rotationCenter.y());
-        matrix.translate(0, -labelPath.boundingRect().height() - textHeight * 2);
-        matrix.translate(baseLine.p2().x(), -baseLine.p2().y() + textHeight);
+        QTransform refTransform;
+        refTransform.translate(rotationCenter.x(), rotationCenter.y());
+        refTransform.rotate(-QLineF(center, base.p1()).angle());
+        refTransform.translate(-rotationCenter.x(), -rotationCenter.y());
+        refTransform.translate(baseLine.p2().x(), baseLine.p2().y() - textHeight);
+        QPointF const refRectCenter = refTransform.map(rectCenter);
+
+        matrix.translate(refRectCenter.x(), refRectCenter.y());
+        matrix.scale(m_verticallyFlipped ? -1 : 1, m_horizontallyFlipped ? -1 : 1);
+        matrix.rotate(-QLineF(center, base.p1()).angle() + extraRotationDeg);
+        matrix.translate(-rectCenter.x(), -rectCenter.y());
     }
     else
     {
