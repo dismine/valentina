@@ -1,5 +1,6 @@
 # Valentina 1.0.5 (unreleased)
 - [Valentina app] Fixed fold-line label font (single stroke outline / single line font) not updating live when changed in preferences; a reload was needed to see the new style.
+- [Valentina app / Puzzle app] Fixed fold-line ("Cut on Fold") labels rendering upside down, mirrored, or offset from the fold line on vertically or horizontally flipped pieces.
 - [Valentina app / Puzzle app] Fixed a hang when generating a layout on a single-CPU machine, where the nested layout-nesting parallelism deadlocked the thread pool and export never finished.
 - [Valentina app / Tape app / Puzzle app] Fixed a crash when redrawing the mode sidebar icons: the drop-shadow helper painted on intermediate image buffers without checking that they were allocated, so a degenerate tab size or low memory produced a null buffer and an access violation deep in Qt's paint code.
 - [Valentina app] Fixed a crash when a full reparse (e.g. from an undo/redo) cleared the scene while a point/curve creation dialog was still open: it deleted the dialog's on-screen preview, and the next click dereferenced the freed preview.

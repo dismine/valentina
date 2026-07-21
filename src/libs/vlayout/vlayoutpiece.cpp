@@ -2287,7 +2287,7 @@ void VLayoutPiece::CreateFoldLineItem(QGraphicsItem *parent, bool textAsPaths) c
     }
     else if (GetFoldLineType() == FoldLineType::Text)
     {
-        if (settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts())
+        if (textAsPaths || settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts())
         {
             FoldLineLabel(shape.constFirst());
         }
@@ -2296,7 +2296,8 @@ void VLayoutPiece::CreateFoldLineItem(QGraphicsItem *parent, bool textAsPaths) c
     {
         FoldLineMark(shape.constFirst());
 
-        if (shape.size() > 1 && (settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts()))
+        if (shape.size() > 1 &&
+            (textAsPaths || settings->GetSingleStrokeOutlineFont() || settings->GetSingleLineFonts()))
         {
             FoldLineLabel(shape.constLast());
         }
