@@ -173,6 +173,7 @@ public slots:
 
 private slots:
     void UpdateGrainline();
+    void RefreshFoldLine();
     void SaveMoveDetail(const QPointF &ptPos);
     void SaveResizeDetail(qreal dLabelW);
     void SaveRotationDetail(qreal dRot);

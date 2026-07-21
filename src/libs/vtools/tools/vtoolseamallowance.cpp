@@ -1147,6 +1147,7 @@ void VToolSeamAllowance::ConnectOutsideSignals()
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdateDetailLabel);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdatePatternInfo);
     connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::UpdateGrainline);
+    connect(doc, &VAbstractPattern::CheckLayout, this, &VToolSeamAllowance::RefreshFoldLine);
 
     connect(m_sceneDetails, &VMainGraphicsScene::EnableToolMove, this, &VToolSeamAllowance::EnableToolMove);
     connect(m_sceneDetails, &VMainGraphicsScene::ItemByMousePress, this, &VToolSeamAllowance::ResetChildren);
@@ -3172,6 +3173,18 @@ auto VToolSeamAllowance::DuplicatePlaceLabels(const QVector<quint32> &placeLabel
         newPlaceLabels.append(initNodeData.id);
     }
     return newPlaceLabels;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::RefreshFoldLine()
+{
+    const VPiece detail = VAbstractTool::data.GetPiece(m_id);
+    UpdateFoldLine(RenderFoldLine(detail, getData()));
+
+    // m_foldLineLabel's brush (filled glyph vs. stroke-only path) depends on the same
+    // single-stroke/single-line font settings and is otherwise only refreshed by the full
+    // geometry pipeline.
+    RefreshScale();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
