@@ -222,6 +222,14 @@ protected:
     virtual void ShowVisualization() {}
 
     /**
+     * @brief RestoreTransientVariables re-inject dialog-local formula variables (e.g. "CurrentLength")
+     * that live only in this dialog's own container copy. SetAssociatedTool() replaces that copy
+     * wholesale from the associated tool's data, which never permanently holds such variables, so
+     * dialogs relying on them must restore them here to keep the "Edit length" variable list valid.
+     */
+    virtual void RestoreTransientVariables() {}
+
+    /**
      * @brief UsesVisualization whether this dialog drives a scene visualization (vis) during creation.
      * Almost all tool dialogs do; the few that never create a vis (e.g. DialogGroup) override this to
      * return false so VisualizationBroken() never reports them as broken just because vis is null.

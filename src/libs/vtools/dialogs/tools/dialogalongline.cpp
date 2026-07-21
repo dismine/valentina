@@ -150,6 +150,12 @@ void DialogAlongLine::PointChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::RestoreTransientVariables()
+{
+    SetCurrentLength();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogAlongLine::FXLength()
 {
     auto *dialog = new DialogEditWrongFormula(&data, toolId, this);

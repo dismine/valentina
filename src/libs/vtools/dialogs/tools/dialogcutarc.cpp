@@ -256,6 +256,12 @@ void DialogCutArc::ArcChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::RestoreTransientVariables()
+{
+    ArcChanged();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutArc::ValidateAlias()
 {
     QRegularExpression const rx(NameRegExp());
