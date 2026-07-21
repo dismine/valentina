@@ -84,6 +84,7 @@ public slots:
 
 protected:
     void ShowVisualization() override;
+    void RestoreTransientVariables() override;
     /**
      * @brief SaveData Put dialog data in local variables
      */

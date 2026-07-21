@@ -240,6 +240,12 @@ void DialogCutSplinePath::SplinePathChanged()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogCutSplinePath::RestoreTransientVariables()
+{
+    SplinePathChanged();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogCutSplinePath::ValidateAlias()
 {
     QRegularExpression const rx(NameRegExp());

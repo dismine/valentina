@@ -745,6 +745,7 @@ void DialogTool::SetAssociatedTool(VAbstractTool *tool)
         {
             vis->SetData(data);
         }
+        RestoreTransientVariables();
     }
     else
     {
