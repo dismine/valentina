@@ -26,9 +26,6 @@
  **
  *************************************************************************/
 
-#include <cstdio>
-#include <cstdlib>
-
 #include <QScopeGuard>
 #include <QtTest>
 
@@ -94,11 +91,6 @@
 //---------------------------------------------------------------------------------------------------------------------
 auto main(int argc, char **argv) -> int
 {
-    // ponytail: unbuffered stdout + per-class/teardown-phase markers to localize a Windows-CI-only
-    // crash that otherwise loses all QTest output; revert once found
-    std::setvbuf(stdout, nullptr, _IONBF, 0);
-    std::atexit([]() { std::fprintf(stdout, "[main] atexit reached\n"); std::fflush(stdout); });
-
     Q_INIT_RESOURCE(schema); // NOLINT
 
 #if defined(Q_OS_MACX)
@@ -112,15 +104,7 @@ auto main(int argc, char **argv) -> int
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     XERCES_CPP_NAMESPACE::XMLPlatformUtils::Initialize();
 
-    auto Terminate = qScopeGuard(
-        []()
-        {
-            std::fprintf(stdout, "[main] Xerces terminate begin\n");
-            std::fflush(stdout);
-            XERCES_CPP_NAMESPACE::XMLPlatformUtils::Terminate();
-            std::fprintf(stdout, "[main] Xerces terminate done\n");
-            std::fflush(stdout);
-        });
+    auto Terminate = qScopeGuard([]() { XERCES_CPP_NAMESPACE::XMLPlatformUtils::Terminate(); });
 #endif
 
     TestVApplication const app(argc, argv); // For QPrinter
@@ -138,13 +122,7 @@ auto main(int argc, char **argv) -> int
     int status = 0;
     auto ASSERT_TEST = [&status, argc, argv](QObject *obj)
     {
-        char const *className = obj->metaObject()->className();
-        std::fprintf(stdout, "[main] running %s\n", className);
-        std::fflush(stdout);
-        int const result = QTest::qExec(obj, argc, argv);
-        std::fprintf(stdout, "[main] %s result=%d\n", className, result);
-        std::fflush(stdout);
-        status |= result; // NOLINT(hicpp-signed-bitwise)
+        status |= QTest::qExec(obj, argc, argv); // NOLINT(hicpp-signed-bitwise)
         delete obj;
     };
 
@@ -194,9 +172,6 @@ auto main(int argc, char **argv) -> int
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     ASSERT_TEST(new TST_VTheme());
     ASSERT_TEST(new TST_VMainGraphicsScene());
-
-    std::fprintf(stdout, "[main] loop complete, status=%d\n", status);
-    std::fflush(stdout);
 
     return status;
 }

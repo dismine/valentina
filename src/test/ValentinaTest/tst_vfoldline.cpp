@@ -27,33 +27,61 @@
  *************************************************************************/
 
 #include "tst_vfoldline.h"
+#include "../vformat/vsinglelineoutlinechar.h"
 #include "../vlayout/vfoldline.h"
 #include "../vmisc/svgfont/vsvgfontdatabase.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 
-#include <cstdio>
-
+#include <QDir>
 #include <QGraphicsSimpleTextItem>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QLineF>
 #include <QScopeGuard>
+#include <QTemporaryDir>
 #include <QtTest>
 
-// ponytail: marker to localize a Windows-CI-only crash inside this test class; revert once found
 namespace
 {
-void TraceRow(const char *function)
+// VSingleLineOutlineChar::DrawChar() converts each glyph's normally-closed TrueType outline into
+// a single-stroke approximation by trimming the last point of every subpath with more than 2
+// points, UNLESS a font-specific correction file (authored by exporting, then hand-verifying, a
+// real font's actual glyph topology) says otherwise. No such file exists for the font QFont()
+// resolves to on a bare CI runner, on any platform, so that trimming heuristic runs uncalibrated
+// -- and its result depends on the specific font backend's exact glyph outline topology, which
+// differs enough between Windows' and Linux's default fonts to move a text-orientation
+// measurement outside tolerance on one platform but not the other (a real, narrow test-fragility
+// bug: this test's landmark-vector technique implicitly assumes a specific glyph shape). Writing
+// a real correction file that marks every subpath "already correct" (matching how the addText
+// mode -- which never runs this heuristic at all -- already passes identically on both platforms)
+// removes that platform-dependent variable for exactly the characters this test renders.
+void DisableSingleStrokeTrimForText(const QString &text, const QString &fontFamily, const QDir &correctionsDir)
 {
-    const char *tag = QTest::currentDataTag();
-    std::fprintf(stdout, "[tst_vfoldline] running %s [%s]\n", function, tag ? tag : "");
-    std::fflush(stdout);
-}
+    QJsonObject correctionsObject;
+    for (QChar const c : std::as_const(text))
+    {
+        if (c.isSpace())
+        {
+            continue;
+        }
 
-void TraceRowDone(const char *function)
-{
-    const char *tag = QTest::currentDataTag();
-    std::fprintf(stdout, "[tst_vfoldline] done %s [%s]\n", function, tag ? tag : "");
-    std::fflush(stdout);
+        QJsonObject segments;
+        // A handful of subpaths is more than any Latin letter glyph needs (simple letters have
+        // one contour, letters with a counter like 'e'/'a'/'b' have two); extra unused indices
+        // are simply never looked up.
+        for (int segment = 0; segment < 4; ++segment)
+        {
+            segments[QString::number(segment)] = false;
+        }
+        correctionsObject[QString(c)] = segments;
+    }
+
+    QFile file(correctionsDir.filePath(fontFamily + QStringLiteral(".json")));
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        file.write(QJsonDocument(correctionsObject).toJson());
+    }
 }
 } // namespace
 
@@ -82,7 +110,6 @@ void TST_VFoldLine::LabelStaysAnchoredAcrossAngles_data() const
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VFoldLine::LabelStaysAnchoredAcrossAngles() const
 {
-    TraceRow("LabelStaysAnchoredAcrossAngles");
     QFETCH(bool, verticallyFlipped);
     QFETCH(bool, horizontallyFlipped);
 
@@ -144,8 +171,6 @@ void TST_VFoldLine::LabelStaysAnchoredAcrossAngles() const
                                     .arg(distances.at(i))
                                     .arg(distances.constFirst())));
     }
-
-    TraceRowDone("LabelStaysAnchoredAcrossAngles");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -204,7 +229,6 @@ void TST_VFoldLine::LabelOrientationMatchesNonFlipped_data() const
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VFoldLine::LabelOrientationMatchesNonFlipped() const
 {
-    TraceRow("LabelOrientationMatchesNonFlipped");
     QFETCH(bool, verticallyFlipped);
     QFETCH(bool, horizontallyFlipped);
     QFETCH(qreal, mirrorScaleX);
@@ -288,8 +312,6 @@ void TST_VFoldLine::LabelOrientationMatchesNonFlipped() const
                                                 "%1 -- the local mirror correction must cancel m_matrix's mirror.")
                                     .arg(angleDeg)));
     }
-
-    TraceRowDone("LabelOrientationMatchesNonFlipped");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -317,7 +339,6 @@ void TST_VFoldLine::LabelStaysCloseToFoldLine_data() const
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VFoldLine::LabelStaysCloseToFoldLine() const
 {
-    TraceRow("LabelStaysCloseToFoldLine");
     QFETCH(bool, verticallyFlipped);
     QFETCH(bool, horizontallyFlipped);
     QFETCH(qreal, mirrorScaleX);
@@ -379,8 +400,6 @@ void TST_VFoldLine::LabelStaysCloseToFoldLine() const
                                     .arg(centerB.x())
                                     .arg(centerB.y())));
     }
-
-    TraceRowDone("LabelStaysCloseToFoldLine");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -412,7 +431,6 @@ void TST_VFoldLine::LabelPathStaysCloseToFoldLine_data() const
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VFoldLine::LabelPathStaysCloseToFoldLine() const
 {
-    TraceRow("LabelPathStaysCloseToFoldLine");
     QFETCH(bool, verticallyFlipped);
     QFETCH(bool, horizontallyFlipped);
     QFETCH(qreal, mirrorScaleX);
@@ -493,8 +511,6 @@ void TST_VFoldLine::LabelPathStaysCloseToFoldLine() const
                                     .arg(centerB.x())
                                     .arg(centerB.y())));
     }
-
-    TraceRowDone("LabelPathStaysCloseToFoldLine");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -524,7 +540,6 @@ void TST_VFoldLine::SVGLabelPathStaysCloseToFoldLine_data() const
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VFoldLine::SVGLabelPathStaysCloseToFoldLine() const
 {
-    TraceRow("SVGLabelPathStaysCloseToFoldLine");
     QFETCH(bool, verticallyFlipped);
     QFETCH(bool, horizontallyFlipped);
     QFETCH(qreal, mirrorScaleX);
@@ -612,8 +627,6 @@ void TST_VFoldLine::SVGLabelPathStaysCloseToFoldLine() const
                                     .arg(centerB.x())
                                     .arg(centerB.y())));
     }
-
-    TraceRowDone("SVGLabelPathStaysCloseToFoldLine");
 }
 
 
@@ -663,7 +676,6 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped_data() const
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
 {
-    TraceRow("LabelPathOrientationMatchesNonFlipped");
     QFETCH(QString, fontMode);
     QFETCH(bool, verticallyFlipped);
     QFETCH(bool, horizontallyFlipped);
@@ -688,13 +700,29 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
     VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
     bool const wasSingleStroke = settings->GetSingleStrokeOutlineFont();
     bool const wasSingleLine = settings->GetSingleLineFonts();
+    QString const wasPathFontCorrections = settings->GetPathFontCorrections();
     settings->SetSingleStrokeOutlineFont(fontMode == QStringLiteral("singleStroke"));
     settings->SetSingleLineFonts(fontMode == QStringLiteral("svg"));
+
+    // See DisableSingleStrokeTrimForText()'s comment: the singleStroke mode's glyph-trimming
+    // heuristic is uncalibrated for whatever font QFont() resolves to here, and that heuristic's
+    // result is sensitive to the exact font backend -- giving it real (if maximally permissive)
+    // correction data removes that platform-dependent variable. Must outlive the loop below.
+    QTemporaryDir correctionsDir;
+    if (fontMode == QStringLiteral("singleStroke"))
+    {
+        QVERIFY(correctionsDir.isValid());
+        DisableSingleStrokeTrimForText(QStringLiteral("Test label"), QFont().family(), QDir(correctionsDir.path()));
+        settings->SetPathFontCorrections(correctionsDir.path());
+    }
+
     auto restoreSettings = qScopeGuard(
-        [settings, wasSingleStroke, wasSingleLine]()
+        [settings, wasSingleStroke, wasSingleLine, wasPathFontCorrections]()
         {
             settings->SetSingleStrokeOutlineFont(wasSingleStroke);
             settings->SetSingleLineFonts(wasSingleLine);
+            settings->SetPathFontCorrections(wasPathFontCorrections);
+            VSingleLineOutlineChar(QFont()).ClearCorrectionsCache();
         });
 
     const QPointF center(500, 500);
@@ -712,9 +740,6 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
     const QVector<qreal> angles{0., 45., 90., 135., 180., 225., 270., 315.};
     for (qreal angleDeg : angles)
     {
-        std::fprintf(stdout, "[tst_vfoldline]   angle=%g begin\n", angleDeg);
-        std::fflush(stdout);
-
         QLineF half(center, center + QPointF(foldLineLength / 2., 0));
         half.setAngle(angleDeg);
         QLineF const foldLine(2 * center - half.p2(), half.p2());
@@ -726,10 +751,6 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
         QVector<QPainterPath> const shapeA = nonFlipped.FoldLinePath();
         QVERIFY(shapeA.size() > 1);
 
-        std::fprintf(stdout, "[tst_vfoldline]   angle=%g nonFlipped done, calling flipped.FoldLinePath()\n",
-                     angleDeg);
-        std::fflush(stdout);
-
         VFoldLine flipped(foldLine, FoldLineType::TwoArrowsTextAbove);
         flipped.SetLabel(QStringLiteral("Test label"));
         flipped.SetOutlineFont(QFont());
@@ -740,15 +761,8 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
         QVector<QPainterPath> const shapeB = flipped.FoldLinePath();
         QVERIFY(shapeB.size() > 1);
 
-        std::fprintf(stdout, "[tst_vfoldline]   angle=%g flipped.FoldLinePath() returned\n", angleDeg);
-        std::fflush(stdout);
-
         QPointF const vecA = LandmarkVector(shapeA.constLast());
-        std::fprintf(stdout, "[tst_vfoldline]   angle=%g vecA computed\n", angleDeg);
-        std::fflush(stdout);
         QPointF const vecB = LandmarkVector(shapeB.constLast());
-        std::fprintf(stdout, "[tst_vfoldline]   angle=%g vecB computed\n", angleDeg);
-        std::fflush(stdout);
 
         QTransform extraRot;
         extraRot.rotate(expectedExtraRotationDeg);
@@ -761,10 +775,6 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
             qRadiansToDegrees(qAtan2(vecB.x() * expectedVecB.y() - vecB.y() * expectedVecB.x(),
                                       vecB.x() * expectedVecB.x() + vecB.y() * expectedVecB.y()));
 
-        std::fprintf(stdout, "[tst_vfoldline]   angle=%g angleErrDeg=%g computed, calling QVERIFY2\n", angleDeg,
-                     angleErrDeg);
-        std::fflush(stdout);
-
         QVERIFY2(qAbs(angleErrDeg) < 1.,
                  qUtf8Printable(QStringLiteral("Flipped label path must be rotated by %1 degrees relative to the "
                                                 "non-flipped label path at fold-line angle %2 (got a %3 degree "
@@ -773,10 +783,5 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
                                     .arg(expectedExtraRotationDeg)
                                     .arg(angleDeg)
                                     .arg(angleErrDeg)));
-
-        std::fprintf(stdout, "[tst_vfoldline]   angle=%g end\n", angleDeg);
-        std::fflush(stdout);
     }
-
-    TraceRowDone("LabelPathOrientationMatchesNonFlipped");
 }
