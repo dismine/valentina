@@ -712,6 +712,9 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
     const QVector<qreal> angles{0., 45., 90., 135., 180., 225., 270., 315.};
     for (qreal angleDeg : angles)
     {
+        std::fprintf(stdout, "[tst_vfoldline]   angle=%g begin\n", angleDeg);
+        std::fflush(stdout);
+
         QLineF half(center, center + QPointF(foldLineLength / 2., 0));
         half.setAngle(angleDeg);
         QLineF const foldLine(2 * center - half.p2(), half.p2());
@@ -723,6 +726,10 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
         QVector<QPainterPath> const shapeA = nonFlipped.FoldLinePath();
         QVERIFY(shapeA.size() > 1);
 
+        std::fprintf(stdout, "[tst_vfoldline]   angle=%g nonFlipped done, calling flipped.FoldLinePath()\n",
+                     angleDeg);
+        std::fflush(stdout);
+
         VFoldLine flipped(foldLine, FoldLineType::TwoArrowsTextAbove);
         flipped.SetLabel(QStringLiteral("Test label"));
         flipped.SetOutlineFont(QFont());
@@ -732,6 +739,9 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
         flipped.SetMatrix(mirror);
         QVector<QPainterPath> const shapeB = flipped.FoldLinePath();
         QVERIFY(shapeB.size() > 1);
+
+        std::fprintf(stdout, "[tst_vfoldline]   angle=%g flipped.FoldLinePath() returned\n", angleDeg);
+        std::fflush(stdout);
 
         QPointF const vecA = LandmarkVector(shapeA.constLast());
         QPointF const vecB = LandmarkVector(shapeB.constLast());
