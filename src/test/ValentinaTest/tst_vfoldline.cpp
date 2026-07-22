@@ -48,6 +48,13 @@ void TraceRow(const char *function)
     std::fprintf(stdout, "[tst_vfoldline] running %s [%s]\n", function, tag ? tag : "");
     std::fflush(stdout);
 }
+
+void TraceRowDone(const char *function)
+{
+    const char *tag = QTest::currentDataTag();
+    std::fprintf(stdout, "[tst_vfoldline] done %s [%s]\n", function, tag ? tag : "");
+    std::fflush(stdout);
+}
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -137,6 +144,8 @@ void TST_VFoldLine::LabelStaysAnchoredAcrossAngles() const
                                     .arg(distances.at(i))
                                     .arg(distances.constFirst())));
     }
+
+    TraceRowDone("LabelStaysAnchoredAcrossAngles");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -279,6 +288,8 @@ void TST_VFoldLine::LabelOrientationMatchesNonFlipped() const
                                                 "%1 -- the local mirror correction must cancel m_matrix's mirror.")
                                     .arg(angleDeg)));
     }
+
+    TraceRowDone("LabelOrientationMatchesNonFlipped");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -368,6 +379,8 @@ void TST_VFoldLine::LabelStaysCloseToFoldLine() const
                                     .arg(centerB.x())
                                     .arg(centerB.y())));
     }
+
+    TraceRowDone("LabelStaysCloseToFoldLine");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -480,6 +493,8 @@ void TST_VFoldLine::LabelPathStaysCloseToFoldLine() const
                                     .arg(centerB.x())
                                     .arg(centerB.y())));
     }
+
+    TraceRowDone("LabelPathStaysCloseToFoldLine");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -597,6 +612,8 @@ void TST_VFoldLine::SVGLabelPathStaysCloseToFoldLine() const
                                     .arg(centerB.x())
                                     .arg(centerB.y())));
     }
+
+    TraceRowDone("SVGLabelPathStaysCloseToFoldLine");
 }
 
 
@@ -739,4 +756,6 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
                                     .arg(angleDeg)
                                     .arg(angleErrDeg)));
     }
+
+    TraceRowDone("LabelPathOrientationMatchesNonFlipped");
 }
