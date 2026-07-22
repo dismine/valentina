@@ -744,7 +744,11 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
         std::fflush(stdout);
 
         QPointF const vecA = LandmarkVector(shapeA.constLast());
+        std::fprintf(stdout, "[tst_vfoldline]   angle=%g vecA computed\n", angleDeg);
+        std::fflush(stdout);
         QPointF const vecB = LandmarkVector(shapeB.constLast());
+        std::fprintf(stdout, "[tst_vfoldline]   angle=%g vecB computed\n", angleDeg);
+        std::fflush(stdout);
 
         QTransform extraRot;
         extraRot.rotate(expectedExtraRotationDeg);
@@ -757,6 +761,10 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
             qRadiansToDegrees(qAtan2(vecB.x() * expectedVecB.y() - vecB.y() * expectedVecB.x(),
                                       vecB.x() * expectedVecB.x() + vecB.y() * expectedVecB.y()));
 
+        std::fprintf(stdout, "[tst_vfoldline]   angle=%g angleErrDeg=%g computed, calling QVERIFY2\n", angleDeg,
+                     angleErrDeg);
+        std::fflush(stdout);
+
         QVERIFY2(qAbs(angleErrDeg) < 1.,
                  qUtf8Printable(QStringLiteral("Flipped label path must be rotated by %1 degrees relative to the "
                                                 "non-flipped label path at fold-line angle %2 (got a %3 degree "
@@ -765,6 +773,9 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
                                     .arg(expectedExtraRotationDeg)
                                     .arg(angleDeg)
                                     .arg(angleErrDeg)));
+
+        std::fprintf(stdout, "[tst_vfoldline]   angle=%g end\n", angleDeg);
+        std::fflush(stdout);
     }
 
     TraceRowDone("LabelPathOrientationMatchesNonFlipped");
