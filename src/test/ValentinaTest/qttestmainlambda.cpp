@@ -26,6 +26,8 @@
  **
  *************************************************************************/
 
+#include <cstdio>
+
 #include <QScopeGuard>
 #include <QtTest>
 
@@ -91,6 +93,10 @@
 //---------------------------------------------------------------------------------------------------------------------
 auto main(int argc, char **argv) -> int
 {
+    // ponytail: unbuffered stdout + per-class markers to localize a Windows-CI-only crash that
+    // otherwise loses all QTest output when the process dies mid-run; revert once found
+    std::setvbuf(stdout, nullptr, _IONBF, 0);
+
     Q_INIT_RESOURCE(schema); // NOLINT
 
 #if defined(Q_OS_MACX)
@@ -122,6 +128,8 @@ auto main(int argc, char **argv) -> int
     int status = 0;
     auto ASSERT_TEST = [&status, argc, argv](QObject *obj)
     {
+        std::fprintf(stdout, "[main] running %s\n", obj->metaObject()->className());
+        std::fflush(stdout);
         status |= QTest::qExec(obj, argc, argv); // NOLINT(hicpp-signed-bitwise)
         delete obj;
     };
