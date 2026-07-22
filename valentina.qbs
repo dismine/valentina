@@ -102,7 +102,8 @@ Project {
     AutotestRunner {
         Depends { name: "buildconfig" }
 
-        arguments: ["-silent", "-o", "-,txt"]
+        // ponytail: temporarily verbose (was "-silent") to localize a Windows-CI-only test crash; revert once found
+        arguments: ["-v2", "-o", "-,txt"]
 
         Properties {
             condition: qbs.targetOS.contains("macos")
