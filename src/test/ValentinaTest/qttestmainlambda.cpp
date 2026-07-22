@@ -138,9 +138,13 @@ auto main(int argc, char **argv) -> int
     int status = 0;
     auto ASSERT_TEST = [&status, argc, argv](QObject *obj)
     {
-        std::fprintf(stdout, "[main] running %s\n", obj->metaObject()->className());
+        char const *className = obj->metaObject()->className();
+        std::fprintf(stdout, "[main] running %s\n", className);
         std::fflush(stdout);
-        status |= QTest::qExec(obj, argc, argv); // NOLINT(hicpp-signed-bitwise)
+        int const result = QTest::qExec(obj, argc, argv);
+        std::fprintf(stdout, "[main] %s result=%d\n", className, result);
+        std::fflush(stdout);
+        status |= result; // NOLINT(hicpp-signed-bitwise)
         delete obj;
     };
 
