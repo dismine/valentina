@@ -32,10 +32,23 @@
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 
+#include <cstdio>
+
 #include <QGraphicsSimpleTextItem>
 #include <QLineF>
 #include <QScopeGuard>
 #include <QtTest>
+
+// ponytail: marker to localize a Windows-CI-only crash inside this test class; revert once found
+namespace
+{
+void TraceRow(const char *function)
+{
+    const char *tag = QTest::currentDataTag();
+    std::fprintf(stdout, "[tst_vfoldline] running %s [%s]\n", function, tag ? tag : "");
+    std::fflush(stdout);
+}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_VFoldLine::TST_VFoldLine(QObject *parent)
@@ -62,6 +75,7 @@ void TST_VFoldLine::LabelStaysAnchoredAcrossAngles_data() const
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VFoldLine::LabelStaysAnchoredAcrossAngles() const
 {
+    TraceRow("LabelStaysAnchoredAcrossAngles");
     QFETCH(bool, verticallyFlipped);
     QFETCH(bool, horizontallyFlipped);
 
@@ -181,6 +195,7 @@ void TST_VFoldLine::LabelOrientationMatchesNonFlipped_data() const
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VFoldLine::LabelOrientationMatchesNonFlipped() const
 {
+    TraceRow("LabelOrientationMatchesNonFlipped");
     QFETCH(bool, verticallyFlipped);
     QFETCH(bool, horizontallyFlipped);
     QFETCH(qreal, mirrorScaleX);
@@ -291,6 +306,7 @@ void TST_VFoldLine::LabelStaysCloseToFoldLine_data() const
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VFoldLine::LabelStaysCloseToFoldLine() const
 {
+    TraceRow("LabelStaysCloseToFoldLine");
     QFETCH(bool, verticallyFlipped);
     QFETCH(bool, horizontallyFlipped);
     QFETCH(qreal, mirrorScaleX);
@@ -383,6 +399,7 @@ void TST_VFoldLine::LabelPathStaysCloseToFoldLine_data() const
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VFoldLine::LabelPathStaysCloseToFoldLine() const
 {
+    TraceRow("LabelPathStaysCloseToFoldLine");
     QFETCH(bool, verticallyFlipped);
     QFETCH(bool, horizontallyFlipped);
     QFETCH(qreal, mirrorScaleX);
@@ -492,6 +509,7 @@ void TST_VFoldLine::SVGLabelPathStaysCloseToFoldLine_data() const
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VFoldLine::SVGLabelPathStaysCloseToFoldLine() const
 {
+    TraceRow("SVGLabelPathStaysCloseToFoldLine");
     QFETCH(bool, verticallyFlipped);
     QFETCH(bool, horizontallyFlipped);
     QFETCH(qreal, mirrorScaleX);
@@ -628,6 +646,7 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped_data() const
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
 {
+    TraceRow("LabelPathOrientationMatchesNonFlipped");
     QFETCH(QString, fontMode);
     QFETCH(bool, verticallyFlipped);
     QFETCH(bool, horizontallyFlipped);
