@@ -167,6 +167,16 @@ void MonitorMainThread()
         QThread::msleep(static_cast<unsigned long>(heartbeatIntervalMs));
 
         const qint64 beat = heartbeat.load(std::memory_order_relaxed);
+
+        // Nothing to compare against until the GUI thread has published its first beat. The heartbeat is a QTimer, so
+        // it cannot fire before the event loop starts, while the watchdog is armed earlier - back in main(), before the
+        // main window is even constructed. Measuring that window reports the whole of startup as a stall and burns a
+        // dump slot on it every launch.
+        if (beat == 0)
+        {
+            continue;
+        }
+
         const qint64 elapsed = QDateTime::currentMSecsSinceEpoch() - beat;
 
         if (elapsed >= stallThresholdMs)
@@ -214,7 +224,8 @@ void StartMainThreadWatchdog(const QString &logFilePath)
 
     logPath = logFilePath;
 
-    heartbeat.store(QDateTime::currentMSecsSinceEpoch(), std::memory_order_relaxed);
+    // Left at 0 deliberately: the monitor treats that as "not armed yet" and waits for the timer below to publish the
+    // first real beat, which cannot happen until the event loop is running. See MonitorMainThread().
 
 #if defined(Q_OS_WIN) && defined(CRASH_REPORTING)
     CaptureMainThreadHandle();
