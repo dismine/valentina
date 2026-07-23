@@ -27,15 +27,63 @@
  *************************************************************************/
 
 #include "tst_vfoldline.h"
+#include "../vformat/vsinglelineoutlinechar.h"
 #include "../vlayout/vfoldline.h"
 #include "../vmisc/svgfont/vsvgfontdatabase.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 
+#include <QDir>
 #include <QGraphicsSimpleTextItem>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QLineF>
 #include <QScopeGuard>
+#include <QTemporaryDir>
 #include <QtTest>
+
+namespace
+{
+// VSingleLineOutlineChar::DrawChar() converts each glyph's normally-closed TrueType outline into
+// a single-stroke approximation by trimming the last point of every subpath with more than 2
+// points, UNLESS a font-specific correction file (authored by exporting, then hand-verifying, a
+// real font's actual glyph topology) says otherwise. No such file exists for the font QFont()
+// resolves to on a bare CI runner, on any platform, so that trimming heuristic runs uncalibrated
+// -- and its result depends on the specific font backend's exact glyph outline topology, which
+// differs enough between Windows' and Linux's default fonts to move a text-orientation
+// measurement outside tolerance on one platform but not the other (a real, narrow test-fragility
+// bug: this test's landmark-vector technique implicitly assumes a specific glyph shape). Writing
+// a real correction file that marks every subpath "already correct" (matching how the addText
+// mode -- which never runs this heuristic at all -- already passes identically on both platforms)
+// removes that platform-dependent variable for exactly the characters this test renders.
+void DisableSingleStrokeTrimForText(const QString &text, const QString &fontFamily, const QDir &correctionsDir)
+{
+    QJsonObject correctionsObject;
+    for (QChar const c : std::as_const(text))
+    {
+        if (c.isSpace())
+        {
+            continue;
+        }
+
+        QJsonObject segments;
+        // A handful of subpaths is more than any Latin letter glyph needs (simple letters have
+        // one contour, letters with a counter like 'e'/'a'/'b' have two); extra unused indices
+        // are simply never looked up.
+        for (int segment = 0; segment < 4; ++segment)
+        {
+            segments[QString::number(segment)] = false;
+        }
+        correctionsObject[QString(c)] = segments;
+    }
+
+    QFile file(correctionsDir.filePath(fontFamily + QStringLiteral(".json")));
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        file.write(QJsonDocument(correctionsObject).toJson());
+    }
+}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_VFoldLine::TST_VFoldLine(QObject *parent)
@@ -118,7 +166,7 @@ void TST_VFoldLine::LabelStaysAnchoredAcrossAngles() const
     {
         QVERIFY2(qAbs(distances.at(i) - distances.constFirst()) < 1.,
                  qUtf8Printable(QStringLiteral("Label anchor distance from labelPos.pos must stay constant as the "
-                                                "fold line's angle changes (angle %1: got %2, expected %3)")
+                                               "fold line's angle changes (angle %1: got %2, expected %3)")
                                     .arg(angles.at(i))
                                     .arg(distances.at(i))
                                     .arg(distances.constFirst())));
@@ -237,12 +285,12 @@ void TST_VFoldLine::LabelOrientationMatchesNonFlipped() const
         QTransform const expected = itemA.transform() * extraRotation;
 
         const QTransform &actual = itemB.transform();
-        QVERIFY2(qAbs(actual.m11() - expected.m11()) < 1e-6 && qAbs(actual.m12() - expected.m12()) < 1e-6 &&
-                     qAbs(actual.m21() - expected.m21()) < 1e-6 && qAbs(actual.m22() - expected.m22()) < 1e-6,
+        QVERIFY2(qAbs(actual.m11() - expected.m11()) < 1e-6 && qAbs(actual.m12() - expected.m12()) < 1e-6
+                     && qAbs(actual.m21() - expected.m21()) < 1e-6 && qAbs(actual.m22() - expected.m22()) < 1e-6,
                  qUtf8Printable(QStringLiteral("Flipped label's linear transform must equal the non-flipped "
-                                                "label's rotated by %1 degrees at fold-line angle %2 (got [%3 %4 / "
-                                                "%5 %6], expected [%7 %8 / %9 %10]) -- otherwise the label renders "
-                                                "upside down or off-angle.")
+                                               "label's rotated by %1 degrees at fold-line angle %2 (got [%3 %4 / "
+                                               "%5 %6], expected [%7 %8 / %9 %10]) -- otherwise the label renders "
+                                               "upside down or off-angle.")
                                     .arg(expectedExtraRotationDeg)
                                     .arg(angleDeg)
                                     .arg(actual.m11())
@@ -261,7 +309,7 @@ void TST_VFoldLine::LabelOrientationMatchesNonFlipped() const
         auto Determinant = [](const QTransform &t) { return t.m11() * t.m22() - t.m12() * t.m21(); };
         QVERIFY2(Determinant(itemB.transform()) > 0,
                  qUtf8Printable(QStringLiteral("Flipped label's glyphs must not be mirror-imaged at fold-line angle "
-                                                "%1 -- the local mirror correction must cancel m_matrix's mirror.")
+                                               "%1 -- the local mirror correction must cancel m_matrix's mirror.")
                                     .arg(angleDeg)));
     }
 }
@@ -341,11 +389,11 @@ void TST_VFoldLine::LabelStaysCloseToFoldLine() const
 
         QVERIFY2(QLineF(centerB, expectedCenterB).length() < 1.,
                  qUtf8Printable(QStringLiteral("Flipped label's footprint center must land where the non-flipped "
-                                                "label's footprint center does once mapped through the same "
-                                                "mirror, at fold-line angle %1 (expected (%2, %3), got (%4, %5)) "
-                                                "-- a mismatch means the label sits an extra label-width/height "
-                                                "away from the fold line, or drifted sideways along it, instead "
-                                                "of hugging it like the non-flipped case.")
+                                               "label's footprint center does once mapped through the same "
+                                               "mirror, at fold-line angle %1 (expected (%2, %3), got (%4, %5)) "
+                                               "-- a mismatch means the label sits an extra label-width/height "
+                                               "away from the fold line, or drifted sideways along it, instead "
+                                               "of hugging it like the non-flipped case.")
                                     .arg(angleDeg)
                                     .arg(expectedCenterB.x())
                                     .arg(expectedCenterB.y())
@@ -392,7 +440,7 @@ void TST_VFoldLine::LabelPathStaysCloseToFoldLine() const
     bool const wasSingleStroke = settings->GetSingleStrokeOutlineFont();
     settings->SetSingleStrokeOutlineFont(true);
     auto restoreSettings = qScopeGuard([settings, wasSingleStroke]()
-                                        { settings->SetSingleStrokeOutlineFont(wasSingleStroke); });
+                                       { settings->SetSingleStrokeOutlineFont(wasSingleStroke); });
 
     const QPointF center(500, 500);
     const qreal foldLineLength = 800;
@@ -452,11 +500,11 @@ void TST_VFoldLine::LabelPathStaysCloseToFoldLine() const
 
         QVERIFY2(QLineF(centerB, expectedCenterB).length() < 5.,
                  qUtf8Printable(QStringLiteral("Flipped label path's footprint center must land where the non-"
-                                                "flipped label path's footprint center does once mapped through "
-                                                "the same mirror, at fold-line angle %1 (expected (%2, %3), got "
-                                                "(%4, %5)) -- a mismatch along the fold line's own direction means "
-                                                "the label drifted sideways (e.g. by a whole label width) even "
-                                                "though its distance to the line looks fine.")
+                                               "flipped label path's footprint center does once mapped through "
+                                               "the same mirror, at fold-line angle %1 (expected (%2, %3), got "
+                                               "(%4, %5)) -- a mismatch along the fold line's own direction means "
+                                               "the label drifted sideways (e.g. by a whole label width) even "
+                                               "though its distance to the line looks fine.")
                                     .arg(angleDeg)
                                     .arg(expectedCenterB.x())
                                     .arg(expectedCenterB.y())
@@ -518,8 +566,7 @@ void TST_VFoldLine::SVGLabelPathStaysCloseToFoldLine() const
     VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
     bool const wasSingleLine = settings->GetSingleLineFonts();
     settings->SetSingleLineFonts(true);
-    auto restoreSettings = qScopeGuard([settings, wasSingleLine]()
-                                        { settings->SetSingleLineFonts(wasSingleLine); });
+    auto restoreSettings = qScopeGuard([settings, wasSingleLine]() { settings->SetSingleLineFonts(wasSingleLine); });
 
     const QPointF center(500, 500);
     const qreal foldLineLength = 800;
@@ -568,11 +615,11 @@ void TST_VFoldLine::SVGLabelPathStaysCloseToFoldLine() const
 
         QVERIFY2(QLineF(centerB, expectedCenterB).length() < 5.,
                  qUtf8Printable(QStringLiteral("Flipped SVG label path's footprint center must land where the "
-                                                "non-flipped label path's footprint center does once mapped "
-                                                "through the same mirror, at fold-line angle %1 (expected (%2, "
-                                                "%3), got (%4, %5)) -- a mismatch along the fold line's own "
-                                                "direction means the label drifted sideways (e.g. by a whole "
-                                                "label width) even though its distance to the line looks fine.")
+                                               "non-flipped label path's footprint center does once mapped "
+                                               "through the same mirror, at fold-line angle %1 (expected (%2, "
+                                               "%3), got (%4, %5)) -- a mismatch along the fold line's own "
+                                               "direction means the label drifted sideways (e.g. by a whole "
+                                               "label width) even though its distance to the line looks fine.")
                                     .arg(angleDeg)
                                     .arg(expectedCenterB.x())
                                     .arg(expectedCenterB.y())
@@ -580,8 +627,6 @@ void TST_VFoldLine::SVGLabelPathStaysCloseToFoldLine() const
                                     .arg(centerB.y())));
     }
 }
-
-
 
 //---------------------------------------------------------------------------------------------------------------------
 // Regression test closing a gap the earlier LabelPathStaysCloseToFoldLine/SVGLabelPathStaysCloseToFoldLine
@@ -619,8 +664,7 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped_data() const
     for (const QString &mode : {QStringLiteral("singleStroke"), QStringLiteral("svg"), QStringLiteral("addText")})
     {
         QTest::addRow("%s, vertically flipped", qUtf8Printable(mode)) << mode << true << false << -1. << 1. << 180.;
-        QTest::addRow("%s, horizontally flipped", qUtf8Printable(mode))
-            << mode << false << true << 1. << -1. << 0.;
+        QTest::addRow("%s, horizontally flipped", qUtf8Printable(mode)) << mode << false << true << 1. << -1. << 0.;
         QTest::addRow("%s, both flipped", qUtf8Printable(mode)) << mode << true << true << -1. << -1. << 180.;
     }
 }
@@ -652,13 +696,29 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
     VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
     bool const wasSingleStroke = settings->GetSingleStrokeOutlineFont();
     bool const wasSingleLine = settings->GetSingleLineFonts();
+    QString const wasPathFontCorrections = settings->GetPathFontCorrections();
     settings->SetSingleStrokeOutlineFont(fontMode == QStringLiteral("singleStroke"));
     settings->SetSingleLineFonts(fontMode == QStringLiteral("svg"));
+
+    // See DisableSingleStrokeTrimForText()'s comment: the singleStroke mode's glyph-trimming
+    // heuristic is uncalibrated for whatever font QFont() resolves to here, and that heuristic's
+    // result is sensitive to the exact font backend -- giving it real (if maximally permissive)
+    // correction data removes that platform-dependent variable. Must outlive the loop below.
+    QTemporaryDir correctionsDir;
+    if (fontMode == QStringLiteral("singleStroke"))
+    {
+        QVERIFY(correctionsDir.isValid());
+        DisableSingleStrokeTrimForText(QStringLiteral("Test label"), QFont().family(), QDir(correctionsDir.path()));
+        settings->SetPathFontCorrections(correctionsDir.path());
+    }
+
     auto restoreSettings = qScopeGuard(
-        [settings, wasSingleStroke, wasSingleLine]()
+        [settings, wasSingleStroke, wasSingleLine, wasPathFontCorrections]()
         {
             settings->SetSingleStrokeOutlineFont(wasSingleStroke);
             settings->SetSingleLineFonts(wasSingleLine);
+            settings->SetPathFontCorrections(wasPathFontCorrections);
+            VSingleLineOutlineChar(QFont()).ClearCorrectionsCache();
         });
 
     const QPointF center(500, 500);
@@ -707,15 +767,14 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
         // Signed angle between vecB and expectedVecB via atan2 of the cross/dot products -- robust
         // to the vectors' differing lengths (elided text width can differ slightly by construction
         // details) since only their relative angle is being checked.
-        qreal const angleErrDeg =
-            qRadiansToDegrees(qAtan2(vecB.x() * expectedVecB.y() - vecB.y() * expectedVecB.x(),
-                                      vecB.x() * expectedVecB.x() + vecB.y() * expectedVecB.y()));
+        qreal const angleErrDeg = qRadiansToDegrees(qAtan2(vecB.x() * expectedVecB.y() - vecB.y() * expectedVecB.x(),
+                                                           vecB.x() * expectedVecB.x() + vecB.y() * expectedVecB.y()));
 
         QVERIFY2(qAbs(angleErrDeg) < 1.,
                  qUtf8Printable(QStringLiteral("Flipped label path must be rotated by %1 degrees relative to the "
-                                                "non-flipped label path at fold-line angle %2 (got a %3 degree "
-                                                "mismatch instead) -- otherwise the label renders upside down or "
-                                                "at the wrong angle.")
+                                               "non-flipped label path at fold-line angle %2 (got a %3 degree "
+                                               "mismatch instead) -- otherwise the label renders upside down or "
+                                               "at the wrong angle.")
                                     .arg(expectedExtraRotationDeg)
                                     .arg(angleDeg)
                                     .arg(angleErrDeg)));
