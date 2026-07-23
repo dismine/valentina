@@ -1,4 +1,5 @@
 # Valentina 1.0.5 (unreleased)
+- [Valentina app / Tape app / Puzzle app] Fixed the interface freezing while the usage statistics and country lookup made network requests on the main thread, which on Windows could block for as long as the system took to resolve its proxy configuration.
 - [Valentina app] Fixed fold-line label font (single stroke outline / single line font) not updating live when changed in preferences; a reload was needed to see the new style.
 - [Valentina app / Puzzle app] Fixed fold-line ("Cut on Fold") labels rendering upside down, mirrored, or offset from the fold line on vertically or horizontally flipped pieces.
 - [Valentina app / Puzzle app] Fixed a hang when generating a layout on a single-CPU machine, where the nested layout-nesting parallelism deadlocked the thread pool and export never finished.

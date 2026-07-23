@@ -28,8 +28,8 @@
 #ifndef VGANALYTICS_H
 #define VGANALYTICS_H
 
-#include <QObject>
 #include <functional>
+#include <QObject>
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 1, 0)
 #include <QLocale>
@@ -81,7 +81,6 @@ public:
     void SetNetworkAccessManager(QNetworkAccessManager *networkAccessManager);
     auto NetworkAccessManager() const -> QNetworkAccessManager *;
 
-    static auto CountryCode() -> QString;
     static void CheckCountryCodeAsync(std::function<void(const QString &)> callback);
 
 public slots:

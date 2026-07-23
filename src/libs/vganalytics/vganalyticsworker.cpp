@@ -31,6 +31,7 @@
 #include <QCoreApplication>
 #include <QLoggingCategory>
 #include <QNetworkAccessManager>
+#include <QNetworkProxy>
 #include <QNetworkReply>
 
 #include <QGuiApplication>
@@ -269,6 +270,10 @@ auto VGAnalyticsWorker::SendAnalytics() -> QNetworkReply *
     if (networkManager == nullptr)
     {
         networkManager = new QNetworkAccessManager(this);
+        // This worker lives on the GUI thread, and on Windows the first request through a manager resolves the system
+        // proxy synchronously on the calling thread. With WPAD enabled and the PAC host unreachable that freezes the
+        // UI for as long as WinHTTP takes to give up. Telemetry is not worth blocking on, so skip the lookup.
+        networkManager->setProxy(QNetworkProxy::NoProxy);
     }
 
     QNetworkReply *reply = networkManager->post(m_request, requestJson);
@@ -304,8 +309,7 @@ void VGAnalyticsWorker::SendAnalyticsFinished()
 
     // Unconditional breadcrumb (bypasses m_logLevel) so a crash/hang while flushing analytics leaves a
     // trace in the log instead of cutting off silently.
-    qCDebug(vAnalytics) << "Reply finished. HTTP status =" << httpStatusCode
-                        << "queue size =" << m_messageQueue.size();
+    qCDebug(vAnalytics) << "Reply finished. HTTP status =" << httpStatusCode << "queue size =" << m_messageQueue.size();
 
     if (httpStatusCode < 200 || httpStatusCode > 299)
     {
