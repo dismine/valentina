@@ -68,6 +68,8 @@ VLib {
             "vabstractshortcutmanager.cpp",
             "vtranslator.h",
             "vtranslator.cpp",
+            "vmainthreadwatchdog.h",
+            "vmainthreadwatchdog.cpp",
         ]
 
         if (Utilities.versionCompare(Qt.core.version, "6") >= 0) {

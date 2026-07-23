@@ -72,6 +72,7 @@ public:
     auto TrVars() -> const VTranslateVars * override;
 
     auto static IsGUIMode() -> bool;
+    static auto LogPath() -> QString;
     auto IsAppInGUIMode() const -> bool override;
     auto IsPedantic() const -> bool override;
 
@@ -103,7 +104,6 @@ private:
 
     bool m_appCloseEventSent{false};
 
-    static auto LogPath() -> QString;
     void BeginLogging();
     void SendAppCloseStatistic();
 };

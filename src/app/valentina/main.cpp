@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "../fervor/fvupdater.h"
+#include "../vmisc/vmainthreadwatchdog.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "core/vapplication.h"
 #include "mainwindow.h"
@@ -140,6 +141,11 @@ auto main(int argc, char *argv[]) -> int
 
     VApplication app(argc, argv);
     app.InitOptions();
+
+    if (VApplication::IsGUIMode())
+    {
+        StartMainThreadWatchdog(VApplication::LogPath());
+    }
 
     // === Diagnostic logging for DPI/multi-monitor crash investigation ===
     // Crashes have been observed during screen/display reconfiguration (e.g. macOS
