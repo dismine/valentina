@@ -27,8 +27,12 @@
  *************************************************************************/
 #include "vmainthreadwatchdog.h"
 
-#if defined(Q_OS_WIN)
+// Only needed to capture the stalled thread's context for a crash report. MinGW already defines NOMINMAX in
+// os_defines.h, so guard the define instead of repeating it unconditionally.
+#if defined(Q_OS_WIN) && defined(CRASH_REPORTING)
+#ifndef NOMINMAX
 #define NOMINMAX
+#endif
 #include <windows.h>
 #endif
 
@@ -84,7 +88,7 @@ void AppendStallToLog(const QString &line)
     }
 }
 
-#if defined(Q_OS_WIN)
+#if defined(Q_OS_WIN) && defined(CRASH_REPORTING)
 HANDLE mainThreadHandle = nullptr; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -160,7 +164,7 @@ void MonitorMainThread()
 
     while (monitoring.load(std::memory_order_relaxed))
     {
-        QThread::msleep(heartbeatIntervalMs);
+        QThread::msleep(static_cast<unsigned long>(heartbeatIntervalMs));
 
         const qint64 beat = heartbeat.load(std::memory_order_relaxed);
         const qint64 elapsed = QDateTime::currentMSecsSinceEpoch() - beat;
@@ -192,7 +196,9 @@ void MonitorMainThread()
         {
             stalled = false;
             // Safe to go through the normal logging path now - the GUI thread is pumping events again.
-            qCInfo(vWatchdog, "Main thread recovered after %lld ms.", beat - stallStart);
+            qCInfo(vWatchdog,
+                   "%s",
+                   qUtf8Printable(QStringLiteral("Main thread recovered after %1 ms.").arg(beat - stallStart)));
         }
     }
 }
@@ -210,7 +216,7 @@ void StartMainThreadWatchdog(const QString &logFilePath)
 
     heartbeat.store(QDateTime::currentMSecsSinceEpoch(), std::memory_order_relaxed);
 
-#if defined(Q_OS_WIN)
+#if defined(Q_OS_WIN) && defined(CRASH_REPORTING)
     CaptureMainThreadHandle();
 #endif
 
