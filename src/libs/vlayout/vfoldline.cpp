@@ -212,6 +212,7 @@ auto VFoldLine::FoldLineMarkPoints() const -> QVector<QVector<QPointF>>
             return ThreeXPoints();
         case FoldLineType::LAST_ONE_DO_NOT_USE:
             Q_UNREACHABLE();
+            break;
         case FoldLineType::Text:
         case FoldLineType::None:
         default:
