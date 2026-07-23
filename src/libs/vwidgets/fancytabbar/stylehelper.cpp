@@ -30,6 +30,7 @@
 #include "stylehelper.h"
 
 #include <QApplication>
+#include <QElapsedTimer>
 #include <QLoggingCategory>
 #include <QObject>
 #include <QPainter>
@@ -138,7 +139,47 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon,
     QPixmap cache;
     QString const pixmapName = QString::fromLatin1("icon %0 %1 %2").arg(icon.cacheKey()).arg(iconMode).arg(rect.height());
 
-    if (!QPixmapCache::find(pixmapName, &cache))
+    // Diagnostics for an unreproducible freeze. This cache is keyed on QIcon::cacheKey(), which is unique per QIcon
+    // instance - so a caller that hands us a freshly constructed icon every time can never hit it, and pays for the
+    // allocations and qt_blurImage() below on every single draw. Count what actually happens on the machine that
+    // freezes rather than guessing. Costs one branch on the hit path.
+    static qint64 hits = 0;     // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+    static qint64 misses = 0;   // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+    static qint64 missMs = 0;   // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+    static qint64 reported = 0; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+
+    const bool cached = QPixmapCache::find(pixmapName, &cache);
+    cached ? ++hits : ++misses;
+
+    QElapsedTimer missTimer;
+    if (not cached)
+    {
+        missTimer.start();
+    }
+
+    auto ReportIconShadowStats = [&]()
+    {
+        if (cached)
+        {
+            return;
+        }
+
+        missMs += missTimer.elapsed();
+
+        // Every 200 misses, so a healthy build stays silent and a pathological one is obvious.
+        if (misses - reported >= 200)
+        {
+            reported = misses;
+            qCInfo(styleHelper,
+                   "%s",
+                   qUtf8Printable(QStringLiteral("Icon shadow cache: %1 misses, %2 hits, %3 ms spent rebuilding.")
+                                      .arg(misses)
+                                      .arg(hits)
+                                      .arg(missMs)));
+        }
+    };
+
+    if (not cached)
     {
         // High-dpi support: The in parameters (rect, radius, offset) are in
         // device-independent pixels. The call to QIcon::pixmap() below might
@@ -232,6 +273,7 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon,
         cachePainter.drawPixmap(QRect(QPoint(radius, radius) + offset, QSize(px.width(), px.height())), px);
         cache.setDevicePixelRatio(devicePixelRatio);
         QPixmapCache::insert(pixmapName, cache);
+        ReportIconShadowStats();
     }
 
     QRect targetRect = cache.rect();

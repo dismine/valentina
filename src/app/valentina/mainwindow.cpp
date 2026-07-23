@@ -78,13 +78,14 @@
 #include "../vmisc/def.h"
 #include "../vmisc/dialogs/dialogaskcollectstatistic.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
+#include "../vmisc/projectversion.h"
 #include "../vmisc/qxtcsvmodel.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vmisc/vmodifierkey.h"
+#include "../vmisc/vslowop.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/vvalentinasettings.h"
-#include "../vmisc/projectversion.h"
 #include "../vpatterndb/variables/vincrement.h"
 #include "../vpatterndb/variables/vmeasurement.h"
 #include "../vtools/dialogs/support/dialogeditlabel.h"
@@ -3100,6 +3101,14 @@ void MainWindow::ToolBarTools()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolBarDrawTools()
 {
+    VSlowOp const opAll(QStringLiteral("ToolBarDrawTools (total)"));
+    // This function clear()s the tool bars and then news a QMenu and a VToolButtonPopup per group, parented to the
+    // window, without deleting the previous set. If that is a leak the child count climbs on every call, and style
+    // resolution walks the whole tree - so log it rather than assume either way.
+    qCInfo(vTiming,
+           "%s",
+           qUtf8Printable(
+               QStringLiteral("ToolBarDrawTools: window has %1 children before rebuild.").arg(children().size())));
     SetupDrawToolsIcons();
 
     VValentinaSettings *settings = VApplication::VApp()->ValentinaSettings();
@@ -3713,6 +3722,7 @@ void MainWindow::CancelTool()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::SetupDrawToolsIcons()
 {
+    VSlowOp const op(QStringLiteral("SetupDrawToolsIcons"));
     const auto resource = QStringLiteral("toolicon");
 
     // This check helps to find missed tools
@@ -3903,6 +3913,7 @@ void MainWindow::ActionDraw(bool checked)
     if (checked)
     {
         qCDebug(vMainWindow, "Show draw scene");
+        VSlowOp const opAll(QStringLiteral("ActionDraw (total)"));
         ArrowTool(true);
 
         const auto resource = QStringLiteral("icon");
@@ -3913,23 +3924,41 @@ void MainWindow::ActionDraw(bool checked)
         ui->actionDraw->setChecked(true);
         ui->actionDetails->setChecked(false);
         ui->actionLayout->setChecked(false);
-        SaveCurrentScene();
+        {
+            VSlowOp const op(QStringLiteral("ActionDraw/SaveCurrentScene"));
+            SaveCurrentScene();
+        }
 
         currentScene = m_sceneDraw;
-        ui->view->setScene(currentScene);
-        RestoreCurrentScene();
+        {
+            VSlowOp const op(QStringLiteral("ActionDraw/setScene"));
+            ui->view->setScene(currentScene);
+        }
+        {
+            VSlowOp const op(QStringLiteral("ActionDraw/RestoreCurrentScene"));
+            RestoreCurrentScene();
+        }
 
         // Scale-dependent item state (e.g. label visibility) lives in RefreshScale(), not paint().
         // It is not refreshed while a scene is inactive, so re-run the dispatch now that the scene is
         // shown and the view transform is valid; otherwise stale state lingers until the next zoom.
-        ScaleChanged(ui->view->transform().m11());
+        {
+            VSlowOp const op(QStringLiteral("ActionDraw/ScaleChanged"));
+            ScaleChanged(ui->view->transform().m11());
+        }
 
         VAbstractValApplication::VApp()->SetDrawMode(Draw::Calculation);
-        m_comboBoxDraws->setCurrentIndex(m_currentDrawIndex); // restore current pattern peace
+        {
+            VSlowOp const op(QStringLiteral("ActionDraw/comboBoxDraws setCurrentIndex"));
+            m_comboBoxDraws->setCurrentIndex(m_currentDrawIndex); // restore current pattern peace
+        }
         m_drawMode = true;
 
-        SetEnableTool(true);
-        SetEnableWidgets(true);
+        {
+            VSlowOp const op(QStringLiteral("ActionDraw/SetEnableTool+Widgets"));
+            SetEnableTool(true);
+            SetEnableWidgets(true);
+        }
 
         if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize)
         {
