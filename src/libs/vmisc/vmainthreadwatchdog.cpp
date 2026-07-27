@@ -119,11 +119,21 @@ void CaptureMainThreadHandle()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-// How much CPU the main thread has actually burned, in ms. A stack says where the thread is; it cannot say whether it
-// is working or waiting, and those call for opposite fixes. Sampled across a stall this separates them outright: CPU
-// climbing roughly in step with wall time means the thread is computing, CPU flat while wall time runs means it is
-// blocked - on I/O, on a lock, or on page faults being serviced.
-auto MainThreadCpuMs() -> qint64
+// How much CPU the main thread has actually burned, split kernel/user, in ms. A stack says where the thread is; it
+// cannot say why it is slow, and the three candidates want opposite fixes:
+//
+//   user time climbing    - the thread is computing. Our allocation volume is the problem.
+//   kernel time climbing  - it is in the kernel: page faults, memory decompression, syscalls. The machine is.
+//   neither climbing      - it is blocked, waiting on I/O or a lock.
+//
+// Summing the two hides the distinction that matters most here, so keep them apart.
+struct MainThreadCpu
+{
+    qint64 kernelMs{-1};
+    qint64 userMs{-1};
+};
+
+auto SampleMainThreadCpu() -> MainThreadCpu
 {
     FILETIME creation = {};
     FILETIME exit = {};
@@ -132,7 +142,7 @@ auto MainThreadCpuMs() -> qint64
 
     if (mainThreadHandle == nullptr || not GetThreadTimes(mainThreadHandle, &creation, &exit, &kernel, &user))
     {
-        return -1;
+        return {};
     }
 
     auto ToMs = [](const FILETIME &ft)
@@ -142,7 +152,7 @@ auto MainThreadCpuMs() -> qint64
         return static_cast<qint64>(ticks / 10000);
     };
 
-    return ToMs(kernel) + ToMs(user);
+    return {ToMs(kernel), ToMs(user)};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -279,7 +289,7 @@ void MonitorMainThread()
     int dumpsSent = 0;
 #if defined(Q_OS_WIN)
     int samplesTaken = 0;
-    qint64 lastCpuMs = -1;
+    MainThreadCpu lastCpu{};
 #endif
 
     while (monitoring.load(std::memory_order_relaxed))
@@ -309,7 +319,7 @@ void MonitorMainThread()
                 stallStart = beat;
 #if defined(Q_OS_WIN)
                 samplesTaken = 0;
-                lastCpuMs = MainThreadCpuMs(); // Baseline, so the first sample's delta is a real measurement.
+                lastCpu = SampleMainThreadCpu(); // Baseline, so the first sample's delta is a real measurement.
 #endif
 
                 const QString since = QDateTime::fromMSecsSinceEpoch(beat).toString(
@@ -330,16 +340,19 @@ void MonitorMainThread()
             {
                 ++samplesTaken;
 
-                const qint64 cpu = MainThreadCpuMs();
-                const qint64 cpuDelta = (cpu < 0 || lastCpuMs < 0) ? -1 : cpu - lastCpuMs;
-                lastCpuMs = cpu;
+                const MainThreadCpu cpu = SampleMainThreadCpu();
+                const bool haveCpu = cpu.kernelMs >= 0 && lastCpu.kernelMs >= 0;
+                const qint64 kernelDelta = haveCpu ? cpu.kernelMs - lastCpu.kernelMs : -1;
+                const qint64 userDelta = haveCpu ? cpu.userMs - lastCpu.userMs : -1;
+                lastCpu = cpu;
 
                 if (const QString stack = WalkMainThreadStack(); not stack.isEmpty())
                 {
                     AppendStallToLog(
-                        QStringLiteral("[%1:WATCHDOG] Stalled, cpu +%2 ms per %3 ms wall, at %4")
+                        QStringLiteral("[%1:WATCHDOG] Stalled, kernel +%2 ms user +%3 ms per %4 ms wall, at %5")
                             .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss")))
-                            .arg(cpuDelta)
+                            .arg(kernelDelta)
+                            .arg(userDelta)
                             .arg(heartbeatIntervalMs)
                             .arg(stack));
                 }
