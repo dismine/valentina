@@ -5763,9 +5763,62 @@ void MainWindow::setCurrentFile(const QString &fileName)
         restoreFiles.removeAll(fileName);
         restoreFiles.prepend(fileName);
         settings->SetRestoreFileList(restoreFiles);
+
+        // After the values are set, before they are flushed. Measuring first would report the previous contents of the
+        // two lists written just above, and those lists are candidates for the value that has grown out of hand -
+        // exactly the state worth seeing. The setters here only mark the value dirty; Qt flushes on the next event
+        // loop turn, so this still runs before the write it describes. Anything added above that calls sync() would
+        // break that, and this call has to move ahead of it.
+        ReportOversizedSettings(settings);
     }
 
     UpdateWindowTitle();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ReportOversizedSettings name a setting that has grown out of hand.
+ *
+ * Writing a value here makes Qt rewrite the whole ini file on the next event loop turn. A reporter freezes for ninety
+ * seconds at a hundred percent CPU inside that rewrite, yet her settings file on disk is 6 KB and rewriting that same
+ * file takes 0.5 ms here - so the value being written is not the one that reached disk, and the write never finishes.
+ * Something is growing a setting during the session. Name it rather than keep guessing.
+ *
+ * Silent unless a value is genuinely absurd, so it costs one pass over ~80 keys per file open and nothing else.
+ */
+void MainWindow::ReportOversizedSettings(const VValentinaSettings *settings)
+{
+    constexpr qsizetype threshold = 64 * 1024;
+
+    qsizetype largest = 0;
+    QString largestKey;
+    qsizetype total = 0;
+
+    const QStringList keys = settings->allKeys();
+    for (const auto &key : keys)
+    {
+        // Measuring the serialised form is the point: that is what iniEscapedString() has to escape.
+        const qsizetype size = settings->value(key).toString().size();
+        total += size;
+        if (size > largest)
+        {
+            largest = size;
+            largestKey = key;
+        }
+    }
+
+    if (largest >= threshold || total >= threshold)
+    {
+        // Info, not warning: the message handler turns warnings into a modal dialog in GUI mode, and popping one up
+        // while the window is already frozen would be worse than the freeze.
+        qCInfo(vMainWindow,
+               "%s",
+               qUtf8Printable(QStringLiteral("Oversized settings: %1 keys, %2 chars total, largest \"%3\" at %4 chars.")
+                                  .arg(keys.size())
+                                  .arg(total)
+                                  .arg(largestKey)
+                                  .arg(largest)));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5834,6 +5887,11 @@ void MainWindow::WriteSettings()
     settings->SetDockWidgetToolOptionsActive(ui->dockWidgetToolOptions->isVisible());
     settings->SetDockWidgetPatternMessagesActive(ui->dockWidgetMessages->isVisible());
     settings->SetDockWidgetBackgroundImagesActive(actionDockWidgetBackgroundImages->isChecked());
+
+    // This path syncs explicitly, so the freeze happens right below rather than on the next event loop turn - the
+    // report has to go before it or a closing window never produces one. It is also the only place saveState() and
+    // saveGeometry() are stored, which makes it the likeliest place to catch a value that has grown out of hand.
+    ReportOversizedSettings(settings);
 
     settings->sync();
     if (settings->status() == QSettings::AccessError)
