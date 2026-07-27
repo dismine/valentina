@@ -27,9 +27,9 @@
  *************************************************************************/
 #include "vmainthreadwatchdog.h"
 
-// Only needed to capture the stalled thread's context for a crash report. MinGW already defines NOMINMAX in
-// os_defines.h, so guard the define instead of repeating it unconditionally.
-#if defined(Q_OS_WIN) && defined(CRASH_REPORTING)
+// Needed to read the stalled thread's context, both for the crash report and for the stack sampling below. MinGW
+// already defines NOMINMAX in os_defines.h, so guard the define instead of repeating it unconditionally.
+#if defined(Q_OS_WIN)
 #ifndef NOMINMAX
 #define NOMINMAX
 #endif
@@ -39,6 +39,7 @@
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QFile>
+#include <QStringList>
 #include <QTextStream>
 #include <QThread>
 #include <QTimer>
@@ -88,7 +89,11 @@ void AppendStallToLog(const QString &line)
     }
 }
 
-#if defined(Q_OS_WIN) && defined(CRASH_REPORTING)
+#if defined(Q_OS_WIN)
+// Enough samples to show which frames stay put and which move; a longer stall is already described by the first few.
+constexpr int maxSamplesPerStall = 20;
+constexpr int maxStackFrames = 24;
+
 HANDLE mainThreadHandle = nullptr; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -106,6 +111,97 @@ void CaptureMainThreadHandle()
     {
         mainThreadHandle = nullptr;
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto CaptureMainThreadContext(CONTEXT *context) -> bool
+{
+    if (mainThreadHandle == nullptr)
+    {
+        return false;
+    }
+
+    *context = {};
+    context->ContextFlags = CONTEXT_FULL;
+
+    if (SuspendThread(mainThreadHandle) == static_cast<DWORD>(-1))
+    {
+        return false;
+    }
+
+    // Nothing but the single call inside the suspend window. Anything that can take a lock - the loader lock in
+    // particular - risks deadlocking against a main thread that already holds it, and unlike an ordinary deadlock this
+    // one would leave the GUI suspended for good.
+    const bool captured = GetThreadContext(mainThreadHandle, context);
+    ResumeThread(mainThreadHandle);
+    return captured;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ModuleOffset(quintptr address) -> QString
+{
+    HMODULE module = nullptr;
+    if (not GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+                               reinterpret_cast<LPCWSTR>(address), // NOLINT(performance-no-int-to-ptr)
+                               &module))
+    {
+        return QStringLiteral("0x%1").arg(address, 0, 16);
+    }
+
+    wchar_t path[MAX_PATH] = {};
+    const DWORD length = GetModuleFileNameW(module, path, MAX_PATH);
+    const QString name = QString::fromWCharArray(path, static_cast<int>(length)).section(QLatin1Char('\\'), -1);
+
+    return QStringLiteral("%1+0x%2").arg(name).arg(address - reinterpret_cast<quintptr>(module), 0, 16);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Where does the main thread actually sit during a stall? The uploaded minidumps cannot answer that: below the top few
+// ntdll frames their stacks are recovered by scanning, which is why one shows ucrtbase!realloc_base at two
+// non-adjacent levels and repeats three Qt6Core addresses. Unwinding here, in-process, uses the real unwind tables, so
+// the frames are ordered and true. Sampling it once a second turns a stall into a profile: the frames that stay put
+// across samples are the loop.
+auto WalkMainThreadStack() -> QString
+{
+    CONTEXT context;
+    if (not CaptureMainThreadContext(&context))
+    {
+        return {};
+    }
+
+#if defined(_WIN64)
+    QStringList frames;
+
+    // Unwind after resuming, never during the suspend: RtlLookupFunctionEntry can take the loader lock. A thread stuck
+    // in one long operation has a stable stack, so an occasional torn sample costs nothing - the frames that matter are
+    // the ones that repeat.
+    for (int i = 0; i < maxStackFrames && context.Rip != 0; ++i)
+    {
+        frames.append(ModuleOffset(static_cast<quintptr>(context.Rip)));
+
+        DWORD64 imageBase = 0;
+        PRUNTIME_FUNCTION const function = RtlLookupFunctionEntry(context.Rip, &imageBase, nullptr);
+        if (function == nullptr)
+        {
+            break; // Leaf function: no unwind data, and guessing the return address is how scanned stacks go wrong.
+        }
+
+        PVOID handlerData = nullptr;
+        DWORD64 establisherFrame = 0;
+        RtlVirtualUnwind(UNW_FLAG_NHANDLER,
+                         imageBase,
+                         context.Rip,
+                         function,
+                         &context,
+                         &handlerData,
+                         &establisherFrame,
+                         nullptr);
+    }
+
+    return frames.join(QStringLiteral(" < "));
+#else
+    return ModuleOffset(static_cast<quintptr>(context.Eip)); // No RtlVirtualUnwind on 32-bit.
+#endif
 }
 #endif
 
@@ -127,24 +223,12 @@ void DumpStalledMainThread(qint64 elapsed)
     stallDuration.Set(std::to_string(elapsed).c_str());
 
 #if defined(Q_OS_WIN)
-    if (mainThreadHandle != nullptr)
+    // Report the *main* thread rather than this one. CRASHPAD_SIMULATE_CRASH() captures its caller, so every hang would
+    // group under this function and bury the stack we are after.
+    if (CONTEXT context; CaptureMainThreadContext(&context))
     {
-        CONTEXT context = {};
-        context.ContextFlags = CONTEXT_FULL;
-
-        // Report the *main* thread rather than this one. CRASHPAD_SIMULATE_CRASH() captures its caller, so every hang
-        // would group under this function and bury the stack we are after.
-        if (SuspendThread(mainThreadHandle) != static_cast<DWORD>(-1))
-        {
-            const bool captured = GetThreadContext(mainThreadHandle, &context);
-            ResumeThread(mainThreadHandle);
-
-            if (captured)
-            {
-                crashpad::CrashpadClient::DumpWithoutCrash(context);
-                return;
-            }
-        }
+        crashpad::CrashpadClient::DumpWithoutCrash(context);
+        return;
     }
 #endif
 
@@ -161,6 +245,9 @@ void MonitorMainThread()
     bool stalled = false;
     qint64 stallStart = 0;
     int dumpsSent = 0;
+#if defined(Q_OS_WIN)
+    int samplesTaken = 0;
+#endif
 
     while (monitoring.load(std::memory_order_relaxed))
     {
@@ -185,6 +272,9 @@ void MonitorMainThread()
             {
                 stalled = true;
                 stallStart = beat;
+#if defined(Q_OS_WIN)
+                samplesTaken = 0;
+#endif
 
                 const QString since = QDateTime::fromMSecsSinceEpoch(beat).toString(
                     QStringLiteral("yyyy.MM.dd hh:mm:ss"));
@@ -201,6 +291,19 @@ void MonitorMainThread()
                     DumpStalledMainThread(elapsed);
                 }
             }
+
+#if defined(Q_OS_WIN)
+            if (samplesTaken < maxSamplesPerStall)
+            {
+                ++samplesTaken;
+                if (const QString stack = WalkMainThreadStack(); not stack.isEmpty())
+                {
+                    AppendStallToLog(
+                        QStringLiteral("[%1:WATCHDOG] Stalled at %2")
+                            .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss")), stack));
+                }
+            }
+#endif
         }
         else if (stalled)
         {
@@ -227,7 +330,7 @@ void StartMainThreadWatchdog(const QString &logFilePath)
     // Left at 0 deliberately: the monitor treats that as "not armed yet" and waits for the timer below to publish the
     // first real beat, which cannot happen until the event loop is running. See MonitorMainThread().
 
-#if defined(Q_OS_WIN) && defined(CRASH_REPORTING)
+#if defined(Q_OS_WIN)
     CaptureMainThreadHandle();
 #endif
 
