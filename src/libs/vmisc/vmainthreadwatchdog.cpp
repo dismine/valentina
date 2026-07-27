@@ -268,7 +268,9 @@ void MonitorMainThread()
 
         if (elapsed >= stallThresholdMs)
         {
-            if (not stalled)
+            const bool stallJustStarted = not stalled;
+
+            if (stallJustStarted)
             {
                 stalled = true;
                 stallStart = beat;
@@ -284,15 +286,12 @@ void MonitorMainThread()
                                      .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss")))
                                      .arg(elapsed)
                                      .arg(since));
-
-                if (dumpsSent < maxDumpsPerSession)
-                {
-                    ++dumpsSent;
-                    DumpStalledMainThread(elapsed);
-                }
             }
 
 #if defined(Q_OS_WIN)
+            // Before the dump, not after: crashpad attaches its copy of the log at the moment the dump is taken, so a
+            // sample written afterwards only reaches the backend with the *next* stall's report - one freeze late, and
+            // never at all for a session that stalls once.
             if (samplesTaken < maxSamplesPerStall)
             {
                 ++samplesTaken;
@@ -304,6 +303,12 @@ void MonitorMainThread()
                 }
             }
 #endif
+
+            if (stallJustStarted && dumpsSent < maxDumpsPerSession)
+            {
+                ++dumpsSent;
+                DumpStalledMainThread(elapsed);
+            }
         }
         else if (stalled)
         {
