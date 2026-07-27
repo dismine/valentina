@@ -55,6 +55,7 @@
 
 #include "../projectversion.h"
 #include "../vcommonsettings.h"
+#include "../vmainthreadwatchdog.h"
 
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
 #include "../appimage.h"
@@ -213,8 +214,16 @@ auto InitializeCrashpad(const QString &appName) -> bool
 
     // Attachments to be uploaded alongside the crash - default bundle size limit is 20MB
     std::vector<base::FilePath> attachments;
-    base::FilePath const attachment(VCrashPaths::GetPlatformString(VCrashPaths::GetAttachmentPath(appName)));
-    attachments.push_back(attachment);
+    const QString appLog = VCrashPaths::GetAttachmentPath(appName);
+    attachments.emplace_back(VCrashPaths::GetPlatformString(appLog));
+
+    // The watchdog keeps its own file. A hang report is worth little without it: it holds the stall durations and the
+    // sampled stacks of the wedged thread, none of which can be written to the application log without the GUI thread
+    // overwriting them when it wakes up.
+    if (const QString watchdogLog = MainThreadWatchdogLogPath(appLog); not watchdogLog.isEmpty())
+    {
+        attachments.emplace_back(VCrashPaths::GetPlatformString(watchdogLog));
+    }
 
     // Ensure that crashpad_handler is shipped with your application
     base::FilePath const handler(VCrashPaths::GetPlatformString(crashpadPaths.GetHandlerPath()));

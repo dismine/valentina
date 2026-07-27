@@ -38,7 +38,9 @@
 
 #include <QCoreApplication>
 #include <QDateTime>
+#include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QStringList>
 #include <QTextStream>
 #include <QThread>
@@ -71,10 +73,13 @@ std::atomic<bool> monitoring{false};
 QString logPath; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables) - set once before the monitor starts.
 
 //---------------------------------------------------------------------------------------------------------------------
-// Append the stall directly to the log file rather than going through qCInfo(). The message handler marshals logging
-// from a worker thread onto the GUI thread, which is the very thread that is stuck, so a logged line does not reach the
-// file until the stall ends - long after the crash report was captured and its copy of the log attached. Writing here
-// is safe precisely because the GUI thread is blocked: it cannot be touching its own QTextStream while we append.
+// Write straight to the file rather than going through qCInfo(). The message handler marshals logging from a worker
+// thread onto the GUI thread, which is the very thread that is stuck, so a logged line does not reach the file until
+// the stall ends - long after the crash report was captured and its copy of the log attached.
+//
+// This goes to the watchdog's own file, never the application log. Sharing that file loses the data: the GUI thread's
+// logger keeps its own handle and file position, so everything appended during a stall is overwritten as soon as the
+// GUI thread resumes and writes at the offset it remembers.
 void AppendStallToLog(const QString &line)
 {
     if (logPath.isEmpty())
@@ -360,6 +365,22 @@ void MonitorMainThread()
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
+auto MainThreadWatchdogLogPath(const QString &logFilePath) -> QString
+{
+    if (logFilePath.isEmpty())
+    {
+        return {};
+    }
+
+    QFileInfo const info(logFilePath);
+    const QString suffix = info.suffix();
+    const QString name = info.completeBaseName() + QStringLiteral("-watchdog")
+                         + (suffix.isEmpty() ? QString() : QLatin1Char('.') + suffix);
+
+    return QDir::toNativeSeparators(info.absoluteDir().filePath(name));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void StartMainThreadWatchdog(const QString &logFilePath)
 {
     if (monitoring.exchange(true))
@@ -367,7 +388,13 @@ void StartMainThreadWatchdog(const QString &logFilePath)
         return;
     }
 
-    logPath = logFilePath;
+    logPath = MainThreadWatchdogLogPath(logFilePath);
+
+    // Create it now, empty sessions included. Crashpad lists this file as an attachment when the handler starts, and a
+    // path that does not exist is not worth finding out about at crash time. It also makes "the watchdog was running"
+    // an observable fact rather than an assumption.
+    AppendStallToLog(QStringLiteral("[%1:WATCHDOG] Watchdog armed.")
+                         .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss"))));
 
     // Left at 0 deliberately: the monitor treats that as "not armed yet" and waits for the timer below to publish the
     // first real beat, which cannot happen until the event loop is running. See MonitorMainThread().

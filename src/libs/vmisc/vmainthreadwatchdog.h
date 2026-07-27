@@ -45,4 +45,16 @@ Q_DECLARE_LOGGING_CATEGORY(vWatchdog) // NOLINT
  */
 void StartMainThreadWatchdog(const QString &logFilePath);
 
+/**
+ * @brief MainThreadWatchdogLogPath the file the watchdog writes stalls and stack samples to.
+ *
+ * Derived from the application log path by inserting "-watchdog" before the extension. The watchdog needs a file of its
+ * own: it writes from the monitor thread while the GUI thread is wedged, and the GUI thread's logger holds its own open
+ * handle with its own file position. Appending to that same file means the GUI thread overwrites the appended lines the
+ * moment it resumes - which it did, destroying the samples from two ninety-second stalls before this was noticed.
+ *
+ * Returns an empty string for an empty input.
+ */
+auto MainThreadWatchdogLogPath(const QString &logFilePath) -> QString;
+
 #endif // VMAINTHREADWATCHDOG_H
