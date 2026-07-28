@@ -183,7 +183,7 @@ auto GetExecutableDir() -> QString
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
-auto InitializeCrashpad(const QString &appName) -> bool
+auto InitializeCrashpad(const QString &productName, const QString &appName) -> bool
 {
     QScopedPointer<VCommonSettings> const appSettings(AppSettings(appName));
 
@@ -257,10 +257,12 @@ auto InitializeCrashpad(const QString &appName) -> bool
 
     // Metadata that will be posted to BugSplat
     QMap<std::string, std::string> annotations;
-    annotations["format"] = "minidump";                       // Required: Crashpad setting to save crash as a
-    annotations["database"] = dbName.toStdString();           // Required: BugSplat database
-    annotations["product"] = appName.toLower().toStdString(); // Required: BugSplat appName
-    annotations["version"] = AppCrashVersion().toStdString(); // Required: BugSplat appVersion
+    annotations["format"] = "minidump";             // Required: Crashpad setting to save crash as a
+    annotations["database"] = dbName.toStdString(); // Required: BugSplat database
+    // Deliberately the product, not this application: all three file their reports under one BugSplat product, and
+    // splitting them would strand the existing history.
+    annotations["product"] = productName.toLower().toStdString(); // Required: BugSplat appName
+    annotations["version"] = AppCrashVersion().toStdString();     // Required: BugSplat appVersion
 
     QString clientID = appSettings->GetClientID();
     if (clientID.isEmpty())
