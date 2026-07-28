@@ -267,7 +267,12 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
         type = QtDebugMsg;
     }
 
-    if (msg.contains("GOAWAY invalid stream"_L1, Qt::CaseInsensitive))
+    // Qt's network stack reports transport hiccups (HTTP/2 GOAWAY, aborted streams, TLS chatter) as
+    // warnings, and the message handler turns a warning into a modal error box. The only network traffic
+    // here is the update check and usage statistics, which the user never asked for and cannot act on, so
+    // the box is pure noise - and popping it from a network callback has crashed before. Valentina's own
+    // network code reports its failures itself.
+    if (context.category != nullptr && QLatin1String(context.category).startsWith("qt.network"_L1))
     {
         type = QtDebugMsg;
     }
