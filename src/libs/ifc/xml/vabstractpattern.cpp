@@ -596,6 +596,17 @@ auto VAbstractPattern::ChangeNamePP(const QString &oldName, const QString &newNa
             nameActivPP = newName;
         }
         ppElement.setAttribute(AttrName, newName);
+
+        // History records store the pattern piece name they belong to. Without this the records keep pointing at the
+        // old name and getLocalHistory() returns nothing for the renamed piece.
+        for (auto &tool : history)
+        {
+            if (tool.getNameDraw() == oldName)
+            {
+                tool.setNameDraw(newName);
+            }
+        }
+
         emit patternChanged(false); // For situation when we change name directly, without undocommands.
         emit ChangedNameDraw(oldName, newName);
         return true;

@@ -537,16 +537,19 @@ void DialogHistory::InitialTable()
  */
 void DialogHistory::ShowPoint()
 {
-    const QVector<VToolRecord> *history = m_doc->getHistory();
-    if (not history->empty())
+    // The global history being non-empty says nothing about the table: FillTable() lists only the records of the
+    // active pattern piece that have a description. Ask the table itself.
+    QTableWidgetItem *item = ui->tableWidget->item(0, 1);
+    if (item == nullptr)
     {
-        QTableWidgetItem *item = ui->tableWidget->item(0, 1);
-        item->setSelected(true);
-        m_cursorToolRecordRow = 0;
-        item = ui->tableWidget->item(0, 0);
-        auto id = qvariant_cast<quint32>(item->data(Qt::UserRole));
-        emit ShowHistoryTool(id, true);
+        return;
     }
+
+    item->setSelected(true);
+    m_cursorToolRecordRow = 0;
+    item = ui->tableWidget->item(0, 0);
+    auto id = qvariant_cast<quint32>(item->data(Qt::UserRole));
+    emit ShowHistoryTool(id, true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
