@@ -5792,7 +5792,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
  */
 void MainWindow::ReportOversizedSettings(const VValentinaSettings *settings, const QString &context)
 {
-    constexpr qsizetype threshold = 64 * 1024;
+    constexpr qsizetype threshold = VCommonSettings::oversizedValueThreshold;
 
     qsizetype largest = 0;
     QString largestKey;
@@ -5801,8 +5801,10 @@ void MainWindow::ReportOversizedSettings(const VValentinaSettings *settings, con
     const QStringList keys = settings->allKeys();
     for (const auto &key : keys)
     {
-        // Measuring the serialised form is the point: that is what iniEscapedString() has to escape.
-        const qsizetype size = settings->value(key).toString().size();
+        // Measuring the serialised form is the point: that is what iniEscapedString() has to escape. Not toString():
+        // a value holding a comma comes back as a QStringList, and toString() reports one of those as empty - which is
+        // how a 29 million character knownMaterials was passed over here in favour of a smaller path.
+        const qsizetype size = VCommonSettings::ValueSize(settings->value(key));
         total += size;
         if (size > largest)
         {

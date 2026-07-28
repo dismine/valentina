@@ -50,6 +50,8 @@ VTestApp {
         "tst_qmutokenparser.cpp",
         "tst_vmeasurements.cpp",
         "tst_vlockguard.cpp",
+        "tst_vcommonsettings.cpp",
+        "tst_vcommonsettings.h",
         "tst_misc.cpp",
         "tst_vcommandline.cpp",
         "tst_vpiece.cpp",

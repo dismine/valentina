@@ -660,6 +660,7 @@ void MApplication::OpenSettings()
 #endif
     settings = new VTapeSettings(QSettings::IniFormat, QSettings::UserScope, QCoreApplication::organizationName(),
                                  QCoreApplication::applicationName(), this);
+    settings->RemoveOversizedValues();
     connect(settings, &VTapeSettings::SVGFontsPathChanged, this, &MApplication::SVGFontsPathChanged);
     connect(settings, &VTapeSettings::KnownMeasurementsPathChanged, this, &MApplication::KnownMeasurementsPathChanged);
 }
