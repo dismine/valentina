@@ -5819,19 +5819,29 @@ void MainWindow::ReportOversizedSettings(const VValentinaSettings *settings, con
         // break the line apart, and truncated so a runaway value cannot bloat the log it is reported in.
         const QByteArray head = settings->value(largestKey).toString().left(100).toUtf8().toPercentEncoding(" /\\:.-_()");
 
+        // The reporter's own copy of her ini is 6 KB and holds a healthy 36 character path, yet this reports 24 MB and
+        // thirteen keys more than that file contains. A UserScope QSettings reads a fallback chain - the organisation
+        // wide file beside the application one, then the two system scope files - and allKeys() unions all of them, so
+        // the oversized value need not live in the file she looked at. Name the file this object writes to and its size
+        // on disk: if that file is the big one she sent the wrong copy, and if it is small the value comes from a
+        // fallback and there is another file to hunt down.
+        const QString settingsFile = settings->fileName();
+        const qint64 settingsBytes = QFileInfo(settingsFile).size();
+
         // Info, not warning: the message handler turns warnings into a modal dialog in GUI mode, and popping one up
         // while the window is already frozen would be worse than the freeze.
         qCInfo(vMainWindow,
                "%s",
                qUtf8Printable(
                    QStringLiteral("Oversized settings at %1: %2 keys, %3 chars total, largest \"%4\" at %5 chars, "
-                                  "starts with \"%6\".")
+                                  "starts with \"%6\". Primary file \"%7\" is %8 bytes.")
                        .arg(context)
                        .arg(keys.size())
                        .arg(total)
                        .arg(largestKey)
                        .arg(largest)
-                       .arg(QString::fromLatin1(head))));
+                       .arg(QString::fromLatin1(head), settingsFile)
+                       .arg(settingsBytes)));
     }
 }
 
