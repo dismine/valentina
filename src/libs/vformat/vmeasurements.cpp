@@ -472,7 +472,10 @@ void VMeasurements::ReadMeasurements(qreal baseA, qreal baseB, qreal baseC) cons
     // Container for values in measurement file's unit
     QSharedPointer<VContainer> tempData;
 
-    if (type == MeasurementsType::Individual)
+    // Must match the branch condition in ReadMeasurement(): everything that is not multisize goes through the
+    // formula path there and dereferences tempData. Creating it only for MeasurementsType::Individual left it null
+    // for MeasurementsType::Unknown.
+    if (type != MeasurementsType::Multisize)
     {
         tempData = QSharedPointer<VContainer>::create(data->GetTrVars(),
                                                       data->GetPatternUnit(),
