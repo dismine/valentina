@@ -155,10 +155,12 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon,
         // Any of the QImage/QPixmap allocations below can return a null buffer (degenerate size or
         // out of memory). Painting on a null device triggers "engine == 0" warnings and, worse, a
         // crash deep in Qt's paint/blur code. Fall back to a plain icon draw instead of that.
+        // Log at info level, not warning: this runs from a paint event, and in GUI mode a warning
+        // becomes a message box, one per icon draw.
         if (px.isNull() || cache.isNull())
         {
-            qCWarning(styleHelper) << "Skipping icon shadow: null buffer. rect:" << rect << "px size:" << px.size()
-                                   << "radius:" << radius << "cache size:" << cache.size();
+            qCInfo(styleHelper) << "Skipping icon shadow: null buffer. rect:" << rect << "px size:" << px.size()
+                                << "radius:" << radius << "cache size:" << cache.size();
             icon.paint(p, rect, Qt::AlignCenter, iconMode);
             return;
         }
@@ -197,9 +199,9 @@ void StyleHelper::drawIconWithShadow(const QIcon &icon,
 
         if (tmp.isNull() || blurred.isNull())
         {
-            qCWarning(styleHelper) << "Skipping icon shadow: null blur buffer. rect:" << rect << "px size:" << px.size()
-                                   << "radius:" << radius << "tmp size:" << tmp.size()
-                                   << "blurred size:" << blurred.size();
+            qCInfo(styleHelper) << "Skipping icon shadow: null blur buffer. rect:" << rect << "px size:" << px.size()
+                                << "radius:" << radius << "tmp size:" << tmp.size()
+                                << "blurred size:" << blurred.size();
             cachePainter.end();
             icon.paint(p, rect, Qt::AlignCenter, iconMode);
             return;
