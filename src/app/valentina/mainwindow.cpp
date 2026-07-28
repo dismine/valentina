@@ -5769,7 +5769,7 @@ void MainWindow::setCurrentFile(const QString &fileName)
         // exactly the state worth seeing. The setters here only mark the value dirty; Qt flushes on the next event
         // loop turn, so this still runs before the write it describes. Anything added above that calls sync() would
         // break that, and this call has to move ahead of it.
-        ReportOversizedSettings(settings);
+        ReportOversizedSettings(settings, QStringLiteral("setCurrentFile"));
     }
 
     UpdateWindowTitle();
@@ -5784,9 +5784,13 @@ void MainWindow::setCurrentFile(const QString &fileName)
  * file takes 0.5 ms here - so the value being written is not the one that reached disk, and the write never finishes.
  * Something is growing a setting during the session. Name it rather than keep guessing.
  *
+ * Her settings file on disk stays 6 KB and stale - the writes never finish, so nothing reaches it - which means the
+ * value is grown in memory during the session. @a context says which point in the session took the measurement, so a
+ * quiet startup followed by a loud file open pins the growth to loading a pattern rather than to reading settings.
+ *
  * Silent unless a value is genuinely absurd, so it costs one pass over ~80 keys per file open and nothing else.
  */
-void MainWindow::ReportOversizedSettings(const VValentinaSettings *settings)
+void MainWindow::ReportOversizedSettings(const VValentinaSettings *settings, const QString &context)
 {
     constexpr qsizetype threshold = 64 * 1024;
 
@@ -5809,15 +5813,25 @@ void MainWindow::ReportOversizedSettings(const VValentinaSettings *settings)
 
     if (largest >= threshold || total >= threshold)
     {
+        // The size alone named the key but not the defect. A 24 MB "paths/labels" is either a path appended to itself,
+        // some unrelated payload written to the wrong key, or a QString that is not really that long - and the first
+        // hundred characters tell those three apart at a glance. Percent-encoded so a stray newline or NUL cannot
+        // break the line apart, and truncated so a runaway value cannot bloat the log it is reported in.
+        const QByteArray head = settings->value(largestKey).toString().left(100).toUtf8().toPercentEncoding(" /\\:.-_()");
+
         // Info, not warning: the message handler turns warnings into a modal dialog in GUI mode, and popping one up
         // while the window is already frozen would be worse than the freeze.
         qCInfo(vMainWindow,
                "%s",
-               qUtf8Printable(QStringLiteral("Oversized settings: %1 keys, %2 chars total, largest \"%3\" at %4 chars.")
-                                  .arg(keys.size())
-                                  .arg(total)
-                                  .arg(largestKey)
-                                  .arg(largest)));
+               qUtf8Printable(
+                   QStringLiteral("Oversized settings at %1: %2 keys, %3 chars total, largest \"%4\" at %5 chars, "
+                                  "starts with \"%6\".")
+                       .arg(context)
+                       .arg(keys.size())
+                       .arg(total)
+                       .arg(largestKey)
+                       .arg(largest)
+                       .arg(QString::fromLatin1(head))));
     }
 }
 
@@ -5869,6 +5883,11 @@ void MainWindow::ReadSettings()
     {
         qWarning() << tr("Cannot read settings from a malformed .INI file.");
     }
+
+    // Nothing has been loaded yet at this point, so this measurement is the settings file as it came off disk. Silence
+    // here followed by a report from setCurrentFile means opening a pattern grows the value; a report here means it was
+    // already oversized before the window existed.
+    ReportOversizedSettings(settings, QStringLiteral("ReadSettings"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5891,7 +5910,7 @@ void MainWindow::WriteSettings()
     // This path syncs explicitly, so the freeze happens right below rather than on the next event loop turn - the
     // report has to go before it or a closing window never produces one. It is also the only place saveState() and
     // saveGeometry() are stored, which makes it the likeliest place to catch a value that has grown out of hand.
-    ReportOversizedSettings(settings);
+    ReportOversizedSettings(settings, QStringLiteral("WriteSettings"));
 
     settings->sync();
     if (settings->status() == QSettings::AccessError)
