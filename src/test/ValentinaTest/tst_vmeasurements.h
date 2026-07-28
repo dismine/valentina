@@ -41,6 +41,7 @@ public:
 private slots:
     void CreateEmptyMultisizeFile();
     void CreateEmptyIndividualFile();
+    void ReadMeasurementsUnknownType();
 };
 
 #endif // TST_VMEASUREMENTS_H

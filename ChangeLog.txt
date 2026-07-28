@@ -1,4 +1,5 @@
 # Valentina 1.0.5 (unreleased)
+- [Tape app] Fixed a crash while reading a measurement file whose format was not recognized as either individual or multisize.
 - [Valentina app] Fixed a crash when opening Preferences after a monitor was disconnected or reconfigured. The screen reported an invalid physical size, and the single line font preview was sized from it.
 - [Tape app] Fixed a crash while the known measurements database was being rebuilt in the background after its folder changed.
 - [Valentina app / Tape app / Puzzle app] Fixed a crash when closing the application while usage statistics were still being sent.

@@ -134,3 +134,46 @@ void TST_VMeasurements::CreateEmptyIndividualFile()
         QFAIL(e.ErrorMessage().toUtf8().constData());
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ReadMeasurementsUnknownType a document whose root tag is neither vit nor vst reports
+ * MeasurementsType::Unknown. ReadMeasurement() then takes the formula path, which used to dereference a container
+ * ReadMeasurements() created only for MeasurementsType::Individual.
+ */
+void TST_VMeasurements::ReadMeasurementsUnknownType()
+{
+    QTemporaryFile file(QDir::tempPath() + QStringLiteral("/XXXXXX.xml"));
+    if (not file.open())
+    {
+        QFAIL("Can't open temporary file.");
+    }
+
+    file.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+               "<measurements>\n"
+               "    <unit>cm</unit>\n"
+               "    <body-measurements>\n"
+               "        <m name=\"height\" value=\"176\"/>\n"
+               "    </body-measurements>\n"
+               "</measurements>\n");
+    file.close();
+
+    Unit const mUnit = Unit::Cm;
+    auto const data = QSharedPointer<VContainer>(new VContainer(nullptr, &mUnit, VContainer::UniqueNamespace()));
+
+    VMeasurements m(data.data());
+    try
+    {
+        m.setXMLContent(file.fileName());
+    }
+    catch (VException &e)
+    {
+        QFAIL(e.ErrorMessage().toUtf8().constData());
+    }
+
+    QCOMPARE(m.Type(), MeasurementsType::Unknown);
+
+    m.ReadMeasurements(0); // Used to crash here dereferencing a null container.
+
+    QVERIFY(data->DataVariables()->contains(QStringLiteral("height")));
+}
