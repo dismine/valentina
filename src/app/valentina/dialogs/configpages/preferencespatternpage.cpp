@@ -359,26 +359,30 @@ void PreferencesPatternPage::InitSingleLineFonts()
     QScreen const*primaryScreen = QGuiApplication::primaryScreen();
     if (primaryScreen == nullptr)
     {
-        qWarning() << "InitSingleLineFonts: no primary screen, skipping single line font previews.";
+        qDebug() << "InitSingleLineFonts: no primary screen, skipping single line font previews.";
         return;
     }
 
     // Retrieve the screen's physical DPI values and scale factor. On Windows these can be
     // transiently bogus (e.g. during display reconfiguration) if the monitor reports an invalid
     // physical size, so fall back to sane defaults and log the anomaly instead of feeding garbage
-    // into setMinimumSize()/QPixmap below (see issue with negative comboBoxSingleLineFont size).
+    // into setMinimumSize()/QPixmap below. A -1 mm physical width on a 3440 px screen gives
+    // dpiX = -87376 and a minimum width of -227542; a 0 mm width gives infinity, which passes any
+    // plain `> 0` test, hence the upper bounds.
     qreal dpiX = primaryScreen->physicalDotsPerInchX();
     qreal dpiY = primaryScreen->physicalDotsPerInchY();
     qreal scale = primaryScreen->devicePixelRatio();
 
-    if (!(dpiX > 0) || !(dpiY > 0) || !(scale > 0))
+    if (!(dpiX > 0 && dpiX <= 10000.) || !(dpiY > 0 && dpiY <= 10000.) || !(scale > 0 && scale <= 100.))
     {
-        qWarning() << "InitSingleLineFonts: screen" << primaryScreen->name()
-                   << "reported invalid DPI/scale (dpiX=" << dpiX << ", dpiY=" << dpiY << ", scale=" << scale
-                   << "), using fallback values.";
-        dpiX = dpiX > 0 ? dpiX : 96.0;
-        dpiY = dpiY > 0 ? dpiY : 96.0;
-        scale = scale > 0 ? scale : 1.0;
+        // qDebug, not qWarning: in GUI mode the noisy message handler turns warnings into a message
+        // box, and this is a condition we recover from silently.
+        qDebug() << "InitSingleLineFonts: screen" << primaryScreen->name()
+                 << "reported invalid DPI/scale (dpiX=" << dpiX << ", dpiY=" << dpiY << ", scale=" << scale
+                 << "), using fallback values.";
+        dpiX = dpiX > 0 && dpiX <= 10000. ? dpiX : 96.0;
+        dpiY = dpiY > 0 && dpiY <= 10000. ? dpiY : 96.0;
+        scale = scale > 0 && scale <= 100. ? scale : 1.0;
     }
 
     int const previewWidth = qRound(250. / scale);
