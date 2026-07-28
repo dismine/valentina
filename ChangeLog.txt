@@ -1,4 +1,6 @@
 # Valentina 1.1.1 (unreleased)
+- [Tape app] Fixed a crash while the known measurements database was being rebuilt in the background after its folder changed.
+- [Valentina app / Tape app / Puzzle app] Fixed a crash when closing the application while usage statistics were still being sent.
 - [Valentina app / Tape app / Puzzle app] Stopped Qt network warnings from the background update check and usage statistics popping an error dialog. Messages such as "stream 1 finished with error" said nothing the user could act on, and showing them could crash the application.
 - [Valentina app / Tape app / Puzzle app] Fixed the interface freezing for minutes at a time when the settings file had grown corrupt. Values damaged by repeated character encoding could reach hundreds of megabytes, and Qt rewrites the whole file on every settings change; such values are now discarded on startup.
 - [Valentina app / Tape app / Puzzle app] Fixed the crash reporter reading its settings from a different file than the one the application saves to, so the "send crash reports" preference could be ignored. In Tape and Puzzle it also read Valentina's settings and attached a log file that did not exist.
