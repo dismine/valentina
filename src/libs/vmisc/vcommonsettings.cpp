@@ -266,7 +266,7 @@ VCommonSettings::VCommonSettings(const QString &fileName, QSettings::Format form
  */
 auto VCommonSettings::ValueSize(const QVariant &value) -> qsizetype
 {
-    if (value.typeId() == QMetaType::QStringList)
+    if (value.userType() == QMetaType::QStringList)
     {
         qsizetype size = 0;
         const QStringList list = value.toStringList();
