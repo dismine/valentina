@@ -43,6 +43,7 @@
 
 #include <QDir>
 #include <QMap>
+#include <QStandardPaths>
 
 #include <string>
 #include <vector>
@@ -68,8 +69,25 @@ using namespace crashpad;
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief AppSettings the same settings file the application itself uses.
+ *
+ * This runs from main() before the application object exists, so neither the Windows relocation into Documents nor the
+ * application name is in place yet. Without repeating the relocation here this reads a stale file at the default
+ * location - one reporter's crash settings sat in %APPDATA% while every preference she actually changed was written to
+ * Documents, so her opt-in was read from a file no version of the application had updated in years. Lower casing the
+ * name made it worse: on a case sensitive filesystem valentina.ini and Valentina.ini are simply different files.
+ */
 Q_REQUIRED_RESULT auto AppSettings(const QString &appName) -> VCommonSettings *
 {
+#if defined(Q_OS_WIN)
+    QString const docPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+    if (!docPath.isEmpty())
+    {
+        QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, docPath);
+    }
+#endif
+
     return new VCommonSettings(QSettings::IniFormat, QSettings::UserScope, QStringLiteral(VER_COMPANYNAME_STR),
                                appName);
 }
@@ -167,7 +185,7 @@ auto GetExecutableDir() -> QString
 //---------------------------------------------------------------------------------------------------------------------
 auto InitializeCrashpad(const QString &appName) -> bool
 {
-    QScopedPointer<VCommonSettings> const appSettings(AppSettings(appName.toLower()));
+    QScopedPointer<VCommonSettings> const appSettings(AppSettings(appName));
 
     if (!appSettings->IsSendCrashReport())
     {
