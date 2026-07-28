@@ -368,6 +368,18 @@ MApplication::MApplication(int &argc, char **argv)
     // The first inside own bundle where info.plist is works fine, but the second,
     // when we run inside Valentina's bundle, require direct setting the icon.
     setWindowIcon(QIcon(":/tapeicon/64x64/logo.png"));
+
+    // Connect once. RepopulateMeasurementsDatabase() runs on every known measurements directory change, and
+    // connecting there stacked up another copy of both connections each time.
+    connect(this, &QCoreApplication::aboutToQuit, m_knownMeasurementsRepopulateWatcher,
+            [this]()
+            {
+                m_knownMeasurementsRepopulateCanceled.storeRelease(1);
+                m_knownMeasurementsRepopulateWatcher->cancel();
+                m_knownMeasurementsRepopulateWatcher->waitForFinished();
+            });
+    connect(m_knownMeasurementsRepopulateWatcher, &QFutureWatcher<void>::finished, this,
+            &MApplication::SyncKnownMeasurements);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -997,20 +1009,10 @@ void MApplication::RepopulateMeasurementsDatabase(const QString &path)
 
         qCDebug(mApp, "Repopulating known measurements database (triggered by '%s').", qUtf8Printable(path));
 
-        connect(qApp,
-                &QCoreApplication::aboutToQuit,
-                m_knownMeasurementsRepopulateWatcher,
-                [this]()
-                {
-                    m_knownMeasurementsRepopulateWatcher->cancel();
-                    m_knownMeasurementsRepopulateWatcher->waitForFinished();
-                });
-        QObject::connect(m_knownMeasurementsRepopulateWatcher, &QFutureWatcher<void>::finished, this,
-                         &MApplication::SyncKnownMeasurements);
         m_knownMeasurementsRepopulateWatcher->setFuture(QtConcurrent::run(
             [this]()
             {
-                if (m_knownMeasurementsRepopulateWatcher->isCanceled())
+                if (m_knownMeasurementsRepopulateCanceled.loadAcquire() != 0)
                 {
                     qCDebug(mApp, "Known measurements repopulation canceled before it started.");
                     return;

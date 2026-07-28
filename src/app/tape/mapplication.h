@@ -35,6 +35,7 @@
 #include "dialogs/dialogmdatabase.h"
 #include "vtapesettings.h"
 
+#include <QAtomicInt>
 #include <QFutureWatcher>
 
 class TMainWindow;
@@ -117,6 +118,9 @@ private:
     VKnownMeasurementsDatabase *m_knownMeasurementsDatabase{nullptr};
     QFileSystemWatcher *m_knownMeasurementsDatabaseWatcher{nullptr};
     QFutureWatcher<void> *m_knownMeasurementsRepopulateWatcher;
+    // Read by the repopulation task on a pool thread, written on the GUI thread at aboutToQuit. The task must not
+    // ask the watcher itself: setFuture() can still be running on the GUI thread when the task starts.
+    QAtomicInt m_knownMeasurementsRepopulateCanceled{0};
     QSharedPointer<VLockGuard<QFile>> m_lockLog{};
     std::shared_ptr<QTextStream> m_out{nullptr};
 
