@@ -83,7 +83,6 @@
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vcommonsettings.h"
 #include "../vmisc/vmodifierkey.h"
-#include "../vmisc/vslowop.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/vvalentinasettings.h"
 #include "../vpatterndb/variables/vincrement.h"
@@ -3101,14 +3100,6 @@ void MainWindow::ToolBarTools()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::ToolBarDrawTools()
 {
-    VSlowOp const opAll(QStringLiteral("ToolBarDrawTools (total)"));
-    // This function clear()s the tool bars and then news a QMenu and a VToolButtonPopup per group, parented to the
-    // window, without deleting the previous set. If that is a leak the child count climbs on every call, and style
-    // resolution walks the whole tree - so log it rather than assume either way.
-    qCInfo(vTiming,
-           "%s",
-           qUtf8Printable(
-               QStringLiteral("ToolBarDrawTools: window has %1 children before rebuild.").arg(children().size())));
     SetupDrawToolsIcons();
 
     VValentinaSettings *settings = VApplication::VApp()->ValentinaSettings();
@@ -3722,7 +3713,6 @@ void MainWindow::CancelTool()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::SetupDrawToolsIcons()
 {
-    VSlowOp const op(QStringLiteral("SetupDrawToolsIcons"));
     const auto resource = QStringLiteral("toolicon");
 
     // This check helps to find missed tools
@@ -3913,7 +3903,6 @@ void MainWindow::ActionDraw(bool checked)
     if (checked)
     {
         qCDebug(vMainWindow, "Show draw scene");
-        VSlowOp const opAll(QStringLiteral("ActionDraw (total)"));
         ArrowTool(true);
 
         const auto resource = QStringLiteral("icon");
@@ -3924,41 +3913,23 @@ void MainWindow::ActionDraw(bool checked)
         ui->actionDraw->setChecked(true);
         ui->actionDetails->setChecked(false);
         ui->actionLayout->setChecked(false);
-        {
-            VSlowOp const op(QStringLiteral("ActionDraw/SaveCurrentScene"));
-            SaveCurrentScene();
-        }
+        SaveCurrentScene();
 
         currentScene = m_sceneDraw;
-        {
-            VSlowOp const op(QStringLiteral("ActionDraw/setScene"));
-            ui->view->setScene(currentScene);
-        }
-        {
-            VSlowOp const op(QStringLiteral("ActionDraw/RestoreCurrentScene"));
-            RestoreCurrentScene();
-        }
+        ui->view->setScene(currentScene);
+        RestoreCurrentScene();
 
         // Scale-dependent item state (e.g. label visibility) lives in RefreshScale(), not paint().
         // It is not refreshed while a scene is inactive, so re-run the dispatch now that the scene is
         // shown and the view transform is valid; otherwise stale state lingers until the next zoom.
-        {
-            VSlowOp const op(QStringLiteral("ActionDraw/ScaleChanged"));
-            ScaleChanged(ui->view->transform().m11());
-        }
+        ScaleChanged(ui->view->transform().m11());
 
         VAbstractValApplication::VApp()->SetDrawMode(Draw::Calculation);
-        {
-            VSlowOp const op(QStringLiteral("ActionDraw/comboBoxDraws setCurrentIndex"));
-            m_comboBoxDraws->setCurrentIndex(m_currentDrawIndex); // restore current pattern peace
-        }
+        m_comboBoxDraws->setCurrentIndex(m_currentDrawIndex); // restore current pattern peace
         m_drawMode = true;
 
-        {
-            VSlowOp const op(QStringLiteral("ActionDraw/SetEnableTool+Widgets"));
-            SetEnableTool(true);
-            SetEnableWidgets(true);
-        }
+        SetEnableTool(true);
+        SetEnableWidgets(true);
 
         if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize)
         {
@@ -5763,88 +5734,9 @@ void MainWindow::setCurrentFile(const QString &fileName)
         restoreFiles.removeAll(fileName);
         restoreFiles.prepend(fileName);
         settings->SetRestoreFileList(restoreFiles);
-
-        // After the values are set, before they are flushed. Measuring first would report the previous contents of the
-        // two lists written just above, and those lists are candidates for the value that has grown out of hand -
-        // exactly the state worth seeing. The setters here only mark the value dirty; Qt flushes on the next event
-        // loop turn, so this still runs before the write it describes. Anything added above that calls sync() would
-        // break that, and this call has to move ahead of it.
-        ReportOversizedSettings(settings, QStringLiteral("setCurrentFile"));
     }
 
     UpdateWindowTitle();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-/**
- * @brief ReportOversizedSettings name a setting that has grown out of hand.
- *
- * Writing a value here makes Qt rewrite the whole ini file on the next event loop turn. A reporter freezes for ninety
- * seconds at a hundred percent CPU inside that rewrite, yet her settings file on disk is 6 KB and rewriting that same
- * file takes 0.5 ms here - so the value being written is not the one that reached disk, and the write never finishes.
- * Something is growing a setting during the session. Name it rather than keep guessing.
- *
- * Her settings file on disk stays 6 KB and stale - the writes never finish, so nothing reaches it - which means the
- * value is grown in memory during the session. @a context says which point in the session took the measurement, so a
- * quiet startup followed by a loud file open pins the growth to loading a pattern rather than to reading settings.
- *
- * Silent unless a value is genuinely absurd, so it costs one pass over ~80 keys per file open and nothing else.
- */
-void MainWindow::ReportOversizedSettings(const VValentinaSettings *settings, const QString &context)
-{
-    constexpr qsizetype threshold = VCommonSettings::oversizedValueThreshold;
-
-    qsizetype largest = 0;
-    QString largestKey;
-    qsizetype total = 0;
-
-    const QStringList keys = settings->allKeys();
-    for (const auto &key : keys)
-    {
-        // Measuring the serialised form is the point: that is what iniEscapedString() has to escape. Not toString():
-        // a value holding a comma comes back as a QStringList, and toString() reports one of those as empty - which is
-        // how a 29 million character knownMaterials was passed over here in favour of a smaller path.
-        const qsizetype size = VCommonSettings::ValueSize(settings->value(key));
-        total += size;
-        if (size > largest)
-        {
-            largest = size;
-            largestKey = key;
-        }
-    }
-
-    if (largest >= threshold || total >= threshold)
-    {
-        // The size alone named the key but not the defect. A 24 MB "paths/labels" is either a path appended to itself,
-        // some unrelated payload written to the wrong key, or a QString that is not really that long - and the first
-        // hundred characters tell those three apart at a glance. Percent-encoded so a stray newline or NUL cannot
-        // break the line apart, and truncated so a runaway value cannot bloat the log it is reported in.
-        const QByteArray head = settings->value(largestKey).toString().left(100).toUtf8().toPercentEncoding(" /\\:.-_()");
-
-        // The reporter's own copy of her ini is 6 KB and holds a healthy 36 character path, yet this reports 24 MB and
-        // thirteen keys more than that file contains. A UserScope QSettings reads a fallback chain - the organisation
-        // wide file beside the application one, then the two system scope files - and allKeys() unions all of them, so
-        // the oversized value need not live in the file she looked at. Name the file this object writes to and its size
-        // on disk: if that file is the big one she sent the wrong copy, and if it is small the value comes from a
-        // fallback and there is another file to hunt down.
-        const QString settingsFile = settings->fileName();
-        const qint64 settingsBytes = QFileInfo(settingsFile).size();
-
-        // Info, not warning: the message handler turns warnings into a modal dialog in GUI mode, and popping one up
-        // while the window is already frozen would be worse than the freeze.
-        qCInfo(vMainWindow,
-               "%s",
-               qUtf8Printable(
-                   QStringLiteral("Oversized settings at %1: %2 keys, %3 chars total, largest \"%4\" at %5 chars, "
-                                  "starts with \"%6\". Primary file \"%7\" is %8 bytes.")
-                       .arg(context)
-                       .arg(keys.size())
-                       .arg(total)
-                       .arg(largestKey)
-                       .arg(largest)
-                       .arg(QString::fromLatin1(head), settingsFile)
-                       .arg(settingsBytes)));
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5895,11 +5787,6 @@ void MainWindow::ReadSettings()
     {
         qWarning() << tr("Cannot read settings from a malformed .INI file.");
     }
-
-    // Nothing has been loaded yet at this point, so this measurement is the settings file as it came off disk. Silence
-    // here followed by a report from setCurrentFile means opening a pattern grows the value; a report here means it was
-    // already oversized before the window existed.
-    ReportOversizedSettings(settings, QStringLiteral("ReadSettings"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5918,11 +5805,6 @@ void MainWindow::WriteSettings()
     settings->SetDockWidgetToolOptionsActive(ui->dockWidgetToolOptions->isVisible());
     settings->SetDockWidgetPatternMessagesActive(ui->dockWidgetMessages->isVisible());
     settings->SetDockWidgetBackgroundImagesActive(actionDockWidgetBackgroundImages->isChecked());
-
-    // This path syncs explicitly, so the freeze happens right below rather than on the next event loop turn - the
-    // report has to go before it or a closing window never produces one. It is also the only place saveState() and
-    // saveGeometry() are stored, which makes it the likeliest place to catch a value that has grown out of hand.
-    ReportOversizedSettings(settings, QStringLiteral("WriteSettings"));
 
     settings->sync();
     if (settings->status() == QSettings::AccessError)

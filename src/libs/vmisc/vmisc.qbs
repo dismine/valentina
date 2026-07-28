@@ -70,8 +70,6 @@ VLib {
             "vtranslator.cpp",
             "vmainthreadwatchdog.h",
             "vmainthreadwatchdog.cpp",
-            "vslowop.h",
-            "vslowop.cpp",
         ]
 
         if (Utilities.versionCompare(Qt.core.version, "6") >= 0) {

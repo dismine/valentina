@@ -400,7 +400,6 @@ private:
     auto SavePattern(const QString &fileName, QString &error) -> bool;
     void AutoSavePattern();
     void setCurrentFile(const QString &fileName);
-    static void ReportOversizedSettings(const VValentinaSettings *settings, const QString &context);
 
     void ReadSettings();
     void WriteSettings();
