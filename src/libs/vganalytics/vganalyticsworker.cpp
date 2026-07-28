@@ -221,6 +221,15 @@ void VGAnalyticsWorker::EnqueQueryWithCurrentTime(const QJsonObject &query)
  */
 auto VGAnalyticsWorker::SendAnalytics() -> QNetworkReply *
 {
+    if (!m_pendingReply.isNull())
+    {
+        // A POST for the head of the queue is already in flight. Callers arrive from several places at once (the
+        // retry timer, the finished handler, the close-event flush at shutdown), and posting the head a second time
+        // would make SendAnalyticsFinished() dequeue twice for a single message - eventually dequeuing an empty
+        // queue. Let everyone wait on the reply that is already running.
+        return m_pendingReply;
+    }
+
     if (m_messageQueue.isEmpty())
     {
         // queue empty -> try sending later
@@ -278,6 +287,7 @@ auto VGAnalyticsWorker::SendAnalytics() -> QNetworkReply *
 
     QNetworkReply *reply = networkManager->post(m_request, requestJson);
     connect(reply, &QNetworkReply::finished, this, &VGAnalyticsWorker::SendAnalyticsFinished);
+    m_pendingReply = reply;
     return reply;
 }
 
@@ -305,6 +315,11 @@ void VGAnalyticsWorker::SendAnalyticsFinished()
     // Make sure the reply is destroyed once we leave this slot, regardless of which branch we take.
     reply->deleteLater();
 
+    if (m_pendingReply == reply)
+    {
+        m_pendingReply.clear();
+    }
+
     int const httpStatusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
 
     // Unconditional breadcrumb (bypasses m_logLevel) so a crash/hang while flushing analytics leaves a
@@ -321,6 +336,14 @@ void VGAnalyticsWorker::SendAnalyticsFinished()
     }
 
     LogMessage(VGAnalytics::Debug, QStringLiteral("Message sent"));
+
+    if (m_messageQueue.isEmpty())
+    {
+        // Dequeuing an empty queue is undefined behaviour, and it crashed the application at shutdown. Nothing left
+        // to confirm, so just idle.
+        m_timer.start();
+        return;
+    }
 
     m_messageQueue.dequeue();
     SendAnalytics();

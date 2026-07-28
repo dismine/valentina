@@ -35,6 +35,7 @@
 #include <QLoggingCategory>
 #include <QNetworkRequest>
 #include <QObject>
+#include <QPointer>
 #include <QQueue>
 #include <QString>
 #include <QTimer>
@@ -62,6 +63,7 @@ public:
     QNetworkAccessManager *networkManager{nullptr}; // NOLINT(misc-non-private-member-variables-in-classes)
 
     QQueue<QueryBuffer> m_messageQueue{};                      // NOLINT(misc-non-private-member-variables-in-classes)
+    QPointer<QNetworkReply> m_pendingReply{};                  // NOLINT(misc-non-private-member-variables-in-classes)
     QTimer m_timer{};                                          // NOLINT(misc-non-private-member-variables-in-classes)
     QNetworkRequest m_request{};                               // NOLINT(misc-non-private-member-variables-in-classes)
     enum VGAnalytics::LogLevel m_logLevel{VGAnalytics::Debug}; // NOLINT(misc-non-private-member-variables-in-classes)
