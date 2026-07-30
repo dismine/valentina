@@ -64,8 +64,8 @@ private:
     Q_DISABLE_COPY_MOVE(DialogTapePreferences) // NOLINT
     Ui::DialogTapePreferences *ui;
     bool m_isInitialized{false};
-    TapePreferencesConfigurationPage *m_configurationPage;
-    TapePreferencesPathPage *m_pathPage;
+    TapePreferencesConfigurationPage *m_configurationPage{nullptr};
+    TapePreferencesPathPage *m_pathPage{nullptr};
 };
 
 #endif // DIALOGTAPEPREFERENCES_H

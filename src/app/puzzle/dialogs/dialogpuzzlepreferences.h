@@ -28,8 +28,8 @@
 #ifndef DIALOGPUZZLEPREFERENCES_H
 #define DIALOGPUZZLEPREFERENCES_H
 
-#include <QDialog>
 #include <memory>
+#include <QDialog>
 
 namespace Ui
 {
@@ -67,9 +67,9 @@ private:
     Q_DISABLE_COPY_MOVE(DialogPuzzlePreferences) // NOLINT
     std::unique_ptr<Ui::DialogPuzzlePreferences> ui;
     bool m_isInitialized{false};
-    PuzzlePreferencesConfigurationPage *m_configurationPage;
-    PuzzlePreferencesLayoutPage *m_layoutPage;
-    PuzzlePreferencesPathPage *m_pathPage;
+    PuzzlePreferencesConfigurationPage *m_configurationPage{nullptr};
+    PuzzlePreferencesLayoutPage *m_layoutPage{nullptr};
+    PuzzlePreferencesPathPage *m_pathPage{nullptr};
 };
 
 #endif // DIALOGPUZZLEPREFERENCES_H

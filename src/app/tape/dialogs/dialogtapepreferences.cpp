@@ -46,11 +46,15 @@ using namespace Qt::Literals::StringLiterals;
 //---------------------------------------------------------------------------------------------------------------------
 DialogTapePreferences::DialogTapePreferences(QWidget *parent)
   : QDialog(parent),
-    ui(new Ui::DialogTapePreferences),
-    m_configurationPage(new TapePreferencesConfigurationPage),
-    m_pathPage(new TapePreferencesPathPage)
+    ui(new Ui::DialogTapePreferences)
 {
+    // setupUi() must run before the pages are built: their constructors can reenter the event loop,
+    // and changeEvent() then dereferences ui->buttonBox, which is indeterminate until setupUi()
+    // assigns it. See the comment in valentina's DialogPreferences for the crash this caused.
     ui->setupUi(this);
+
+    m_configurationPage = new TapePreferencesConfigurationPage;
+    m_pathPage = new TapePreferencesPathPage;
 
 #if defined(Q_OS_MAC)
     setWindowFlags(Qt::Window);
