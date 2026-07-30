@@ -142,7 +142,7 @@ void DelTool::UpdateGroups(const QMap<quint32, VGroupData> &groups) const
         return;
     }
 
-    doc->RemoveAllChildren(groupsTag);
+    VAbstractPattern::RemoveAllChildren(groupsTag);
 
     auto i = groups.constBegin();
     while (i != groups.constEnd())

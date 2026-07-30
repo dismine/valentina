@@ -1554,7 +1554,7 @@ void VToolSeamAllowance::RefreshDataInFile()
 
         doc->SetAttribute(domElement, AttrVersion, QString().setNum(pieceVersion));
 
-        doc->RemoveAllChildren(domElement); // Very important to clear before rewrite
+        VAbstractPattern::RemoveAllChildren(domElement); // Very important to clear before rewrite
         AddPatternPieceData(doc, domElement, piece);
         AddPatternInfo(doc, domElement, piece);
         AddGrainline(doc, domElement, piece);
