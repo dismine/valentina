@@ -189,3 +189,4 @@ bw-output
 /graph_info.json
 /deactivate_conanrun.sh
 /deactivate_conanbuild.sh
+/graphify-out
