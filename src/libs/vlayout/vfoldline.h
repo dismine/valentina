@@ -141,6 +141,10 @@ private:
 
     auto OutlineFontLabel(const QLineF &base, qreal width, qreal textHeight) const -> QPainterPath;
     auto SVGFontLabel(const QLineF &base, qreal width, qreal textHeight) const -> QPainterPath;
+    auto LabelTransform(const QPainterPath &labelPath,
+                        const QPointF &rotationCenter,
+                        const QPointF &labelPos,
+                        qreal angle) const -> QTransform;
 
     auto LabelTextHeight() const -> qreal;
     auto LabelSVGFontEngine(VSvgFontEngine &engine) const -> bool;
