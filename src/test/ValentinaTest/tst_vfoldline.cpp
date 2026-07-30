@@ -44,6 +44,20 @@
 
 namespace
 {
+// Shared _data() rows for the flip tests: each flip combination and the mirror QTransform scale
+// factors that correspond to it.
+void AddFlipMirrorRows()
+{
+    QTest::addColumn<bool>("verticallyFlipped");
+    QTest::addColumn<bool>("horizontallyFlipped");
+    QTest::addColumn<qreal>("mirrorScaleX");
+    QTest::addColumn<qreal>("mirrorScaleY");
+
+    QTest::newRow("vertically flipped") << true << false << -1. << 1.;
+    QTest::newRow("horizontally flipped") << false << true << 1. << -1.;
+    QTest::newRow("both flipped") << true << true << -1. << -1.;
+}
+
 // VSingleLineOutlineChar::DrawChar() converts each glyph's normally-closed TrueType outline into
 // a single-stroke approximation by trimming the last point of every subpath with more than 2
 // points, UNLESS a font-specific correction file (authored by exporting, then hand-verifying, a
@@ -326,14 +340,7 @@ void TST_VFoldLine::LabelOrientationMatchesNonFlipped() const
 // match the non-flipped label's closest distance to its own fold line.
 void TST_VFoldLine::LabelStaysCloseToFoldLine_data() const
 {
-    QTest::addColumn<bool>("verticallyFlipped");
-    QTest::addColumn<bool>("horizontallyFlipped");
-    QTest::addColumn<qreal>("mirrorScaleX");
-    QTest::addColumn<qreal>("mirrorScaleY");
-
-    QTest::newRow("vertically flipped") << true << false << -1. << 1.;
-    QTest::newRow("horizontally flipped") << false << true << 1. << -1.;
-    QTest::newRow("both flipped") << true << true << -1. << -1.;
+    AddFlipMirrorRows();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -418,14 +425,7 @@ void TST_VFoldLine::LabelStaysCloseToFoldLine() const
 // the affected code path.
 void TST_VFoldLine::LabelPathStaysCloseToFoldLine_data() const
 {
-    QTest::addColumn<bool>("verticallyFlipped");
-    QTest::addColumn<bool>("horizontallyFlipped");
-    QTest::addColumn<qreal>("mirrorScaleX");
-    QTest::addColumn<qreal>("mirrorScaleY");
-
-    QTest::newRow("vertically flipped") << true << false << -1. << 1.;
-    QTest::newRow("horizontally flipped") << false << true << 1. << -1.;
-    QTest::newRow("both flipped") << true << true << -1. << -1.;
+    AddFlipMirrorRows();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -527,14 +527,7 @@ void TST_VFoldLine::LabelPathStaysCloseToFoldLine() const
 // (it only toggles SetSingleStrokeOutlineFont(), never SetSingleLineFonts()).
 void TST_VFoldLine::SVGLabelPathStaysCloseToFoldLine_data() const
 {
-    QTest::addColumn<bool>("verticallyFlipped");
-    QTest::addColumn<bool>("horizontallyFlipped");
-    QTest::addColumn<qreal>("mirrorScaleX");
-    QTest::addColumn<qreal>("mirrorScaleY");
-
-    QTest::newRow("vertically flipped") << true << false << -1. << 1.;
-    QTest::newRow("horizontally flipped") << false << true << 1. << -1.;
-    QTest::newRow("both flipped") << true << true << -1. << -1.;
+    AddFlipMirrorRows();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
