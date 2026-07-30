@@ -193,3 +193,4 @@ bw-output
 /compile_commands.json
 
 .cache
+/graphify-out
