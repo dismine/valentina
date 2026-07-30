@@ -272,13 +272,15 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     }
 #endif
 
-    // this is another one that doesn't make sense as just a debug message.  pretty serious
-    // sign of a problem
-    // http://www.developer.nokia.com/Community/Wiki/QPainter::begin:Paint_device_returned_engine_%3D%3D_0_(Known_Issue)
-    if ((type == QtDebugMsg) && msg.contains(QStringLiteral("QPainter::begin")) &&
-        msg.contains(QStringLiteral("Paint device returned engine")))
+    // Qt reports a broken paint device ("QPainter::begin: Paint device returned engine == 0") and then every
+    // call on the dead painter ("QPainter::setPen: Painter not active", ...) as warnings, and the message
+    // handler turns a warning into a modal error box. One failed begin() therefore produces a dialog per
+    // painter call, per repaint, raised from inside the paint stack itself. Crash report a9979fa1 (1.1.0,
+    // b75c9bff3) ends exactly that way: twelve painter warnings, twelve modal boxes, then an access
+    // violation in Qt's paint code. The user can act on none of it, so keep it in the log only.
+    if ((type == QtWarningMsg) && msg.startsWith("QPainter::"_L1))
     {
-        type = QtWarningMsg;
+        type = QtDebugMsg;
     }
 
     // This qWarning about "Cowardly refusing to send clipboard message to hung application..."
