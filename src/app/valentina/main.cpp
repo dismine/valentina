@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "../fervor/fvupdater.h"
+#include "../vmisc/vmainthreadwatchdog.h"
 #include "../vpatterndb/vpiecenode.h"
 #include "core/vapplication.h"
 #include "mainwindow.h"
@@ -123,6 +124,11 @@ auto main(int argc, char *argv[]) -> int
 
     VApplication app(argc, argv);
     app.InitOptions();
+
+    if (VApplication::IsGUIMode())
+    {
+        StartMainThreadWatchdog(VApplication::LogPath());
+    }
 
     VAbstractApplication::LogScreenInfo();
 

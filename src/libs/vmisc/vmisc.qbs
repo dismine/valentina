@@ -108,6 +108,8 @@ VLib {
         "vtranslator.h",
         "vtranslator.cpp",
         "vmainbase.h",
+        "vmainthreadwatchdog.h",
+        "vmainthreadwatchdog.cpp",
     ]
 
     Group {
