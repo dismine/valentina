@@ -39,12 +39,12 @@
 #include "../vmisc/vtranslator.h"
 #include "../vwidgets/vpiecegrainline.h"
 
+#include <algorithm>
 #include <QGraphicsSimpleTextItem>
 #include <QLineF>
 #include <QPainterPath>
 #include <QtDebug>
 #include <QtMath>
-#include <algorithm>
 
 namespace
 {
@@ -590,6 +590,8 @@ auto VFoldLine::OutlineFontLabel(const QLineF &base, qreal width, qreal textHeig
     baseLine.setLength(width);
     Swap(baseLine);
 
+    qreal const labelAngle = -QLineF(center, base.p1()).angle();
+
     QFont const font = LabelOutlineFont();
     QFontMetrics const fm(font);
     QString const label = fm.elidedText(FoldLineLabel(), Qt::ElideRight, qFloor(width));
@@ -623,39 +625,11 @@ auto VFoldLine::OutlineFontLabel(const QLineF &base, qreal width, qreal textHeig
             w += fm.horizontalAdvance(c);
         }
 
-        QTransform matrix;
-
-        if (m_verticallyFlipped != m_horizontallyFlipped)
-        {
-            // Vertical-only and horizontal-only flips need DIFFERENT rotation offsets here, not
-            // a shared one -- see UpdateFoldLineLabel() for the full reasoning (confirmed via
-            // real side-by-side renders, not assumed) and why the scale must be outermost.
-            qreal const extraRotationDeg = m_verticallyFlipped ? 180. : 0.;
-
-            QPointF const rectCenter = labelPath.boundingRect().center();
-
-            QTransform refTransform;
-            refTransform.translate(rotationCenter.x(), rotationCenter.y());
-            refTransform.rotate(-QLineF(center, base.p1()).angle());
-            refTransform.translate(-rotationCenter.x(), -rotationCenter.y());
-            refTransform.translate(baseLine.p2().x(), baseLine.p2().y() - textHeight);
-            QPointF const refRectCenter = refTransform.map(rectCenter);
-
-            matrix.translate(refRectCenter.x(), refRectCenter.y());
-            matrix.scale(m_verticallyFlipped ? -1 : 1, m_horizontallyFlipped ? -1 : 1);
-            matrix.rotate(-QLineF(center, base.p1()).angle() + extraRotationDeg);
-            matrix.translate(-rectCenter.x(), -rectCenter.y());
-        }
-        else
-        {
-            matrix.translate(rotationCenter.x(), rotationCenter.y());
-            matrix.rotate(-QLineF(center, base.p1()).angle());
-            matrix.translate(-rotationCenter.x(), -rotationCenter.y());
-            matrix.translate(baseLine.p2().x(), baseLine.p2().y() - textHeight);
-        }
-
-        matrix *= m_matrix;
-        labelPath = matrix.map(labelPath);
+        labelPath = LabelTransform(labelPath,
+                                   rotationCenter,
+                                   QPointF(baseLine.p2().x(), baseLine.p2().y() - textHeight),
+                                   labelAngle)
+                        .map(labelPath);
     }
     else
     {
@@ -664,39 +638,7 @@ auto VFoldLine::OutlineFontLabel(const QLineF &base, qreal width, qreal textHeig
         baseLine.setLength(fm.descent() + CmToPixel(0.2));
         labelPath.addText(QPointF(), font, label);
 
-        QTransform matrix;
-
-        if (m_verticallyFlipped != m_horizontallyFlipped)
-        {
-            // See the single-stroke branch above for why the scale must be outermost, the
-            // rotation offset differs by flip axis, and the anchor must be the glyph's own
-            // bounding-rect center mapped through the non-flipped transform.
-            qreal const extraRotationDeg = m_verticallyFlipped ? 180. : 0.;
-
-            QPointF const rectCenter = labelPath.boundingRect().center();
-
-            QTransform refTransform;
-            refTransform.translate(rotationCenter.x(), rotationCenter.y());
-            refTransform.rotate(-QLineF(center, base.p1()).angle());
-            refTransform.translate(-rotationCenter.x(), -rotationCenter.y());
-            refTransform.translate(baseLine.p2().x(), baseLine.p2().y());
-            QPointF const refRectCenter = refTransform.map(rectCenter);
-
-            matrix.translate(refRectCenter.x(), refRectCenter.y());
-            matrix.scale(m_verticallyFlipped ? -1 : 1, m_horizontallyFlipped ? -1 : 1);
-            matrix.rotate(-QLineF(center, base.p1()).angle() + extraRotationDeg);
-            matrix.translate(-rectCenter.x(), -rectCenter.y());
-        }
-        else
-        {
-            matrix.translate(rotationCenter.x(), rotationCenter.y());
-            matrix.rotate(-QLineF(center, base.p1()).angle());
-            matrix.translate(-rotationCenter.x(), -rotationCenter.y());
-            matrix.translate(baseLine.p2().x(), baseLine.p2().y());
-        }
-
-        matrix *= m_matrix;
-        labelPath = matrix.map(labelPath);
+        labelPath = LabelTransform(labelPath, rotationCenter, baseLine.p2(), labelAngle).map(labelPath);
     }
 
     return labelPath;
@@ -747,46 +689,54 @@ auto VFoldLine::SVGFontLabel(const QLineF &base, qreal width, qreal textHeight) 
 
     QPainterPath labelPath = engine.DrawPath(QPointF(), label);
 
+    return LabelTransform(labelPath,
+                          rotationCenter,
+                          QPointF(baseLine.p2().x(), baseLine.p2().y() - textHeight),
+                          -QLineF(center, base.p1()).angle())
+        .map(labelPath);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VFoldLine::LabelTransform(const QPainterPath &labelPath,
+                               const QPointF &rotationCenter,
+                               const QPointF &labelPos,
+                               qreal angle) const -> QTransform
+{
     QTransform matrix;
 
     if (m_verticallyFlipped != m_horizontallyFlipped)
     {
-        // See OutlineFontLabel's single-stroke branch for the full reasoning: vertical-only and
-        // horizontal-only flips need DIFFERENT rotation offsets (confirmed via real side-by-side
-        // renders, not assumed), and the correction's scale has to be applied AFTER the rotation
-        // (outermost) -- scale-before-rotate cancels m_matrix's mirror but composes to an
-        // uncontrolled, angle-dependent extra rotation instead of a fixed offset. With scale
-        // outermost, the anchor is the glyph's own bounding-rect center mapped through the
-        // non-flipped transform, which keeps the footprint exactly where the non-flipped
-        // footprint mirrors to.
+        // Vertical-only and horizontal-only flips need DIFFERENT rotation offsets here, not a shared one
+        // (confirmed via real side-by-side renders, not assumed), and the correction's scale has to be applied
+        // AFTER the rotation (outermost) -- scale-before-rotate cancels m_matrix's mirror but composes to an
+        // uncontrolled, angle-dependent extra rotation instead of a fixed offset. With scale outermost, the
+        // anchor is the glyph's own bounding-rect center mapped through the non-flipped transform, which keeps
+        // the footprint exactly where the non-flipped footprint mirrors to.
         qreal const extraRotationDeg = m_verticallyFlipped ? 180. : 0.;
 
         QPointF const rectCenter = labelPath.boundingRect().center();
 
         QTransform refTransform;
         refTransform.translate(rotationCenter.x(), rotationCenter.y());
-        refTransform.rotate(-QLineF(center, base.p1()).angle());
+        refTransform.rotate(angle);
         refTransform.translate(-rotationCenter.x(), -rotationCenter.y());
-        refTransform.translate(baseLine.p2().x(), baseLine.p2().y() - textHeight);
+        refTransform.translate(labelPos.x(), labelPos.y());
         QPointF const refRectCenter = refTransform.map(rectCenter);
 
         matrix.translate(refRectCenter.x(), refRectCenter.y());
         matrix.scale(m_verticallyFlipped ? -1 : 1, m_horizontallyFlipped ? -1 : 1);
-        matrix.rotate(-QLineF(center, base.p1()).angle() + extraRotationDeg);
+        matrix.rotate(angle + extraRotationDeg);
         matrix.translate(-rectCenter.x(), -rectCenter.y());
     }
     else
     {
         matrix.translate(rotationCenter.x(), rotationCenter.y());
-        matrix.rotate(-QLineF(center, base.p1()).angle());
+        matrix.rotate(angle);
         matrix.translate(-rotationCenter.x(), -rotationCenter.y());
-        matrix.translate(baseLine.p2().x(), baseLine.p2().y() - textHeight);
+        matrix.translate(labelPos.x(), labelPos.y());
     }
 
-    matrix *= m_matrix;
-    labelPath = matrix.map(labelPath);
-
-    return labelPath;
+    return matrix * m_matrix;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -897,10 +847,14 @@ auto VFoldLine::TwoArrowsPoints(qreal width, qreal height) const -> QVector<QVec
     QLineF line(arrow1Shape.constLast(), arrow2Shape.constLast());
     std::reverse(arrow2Shape.begin(), arrow2Shape.end());
 
-    std::transform(arrow1Shape.begin(), arrow1Shape.end(), arrow1Shape.begin(),
+    std::transform(arrow1Shape.begin(),
+                   arrow1Shape.end(),
+                   arrow1Shape.begin(),
                    [this](const QPointF &point) { return m_matrix.map(point); });
     line = m_matrix.map(line);
-    std::transform(arrow2Shape.begin(), arrow2Shape.end(), arrow2Shape.begin(),
+    std::transform(arrow2Shape.begin(),
+                   arrow2Shape.end(),
+                   arrow2Shape.begin(),
                    [this](const QPointF &point) { return m_matrix.map(point); });
 
     return {arrow1Shape, {line.p1(), line.p2()}, arrow2Shape};
