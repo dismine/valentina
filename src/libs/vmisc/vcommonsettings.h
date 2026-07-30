@@ -63,6 +63,17 @@ public:
 
     static auto CastToLayoutExportFormat(qint8 f) -> qint8;
 
+    /**
+     * @brief oversizedValueThreshold the size past which a settings value can only be corrupt.
+     *
+     * The largest value written here in normal use is a saveState() blob, a couple of kilobytes. Nothing legitimate
+     * comes close to this.
+     */
+    static constexpr qsizetype oversizedValueThreshold = 64 * 1024;
+
+    static auto ValueSize(const QVariant &value) -> qsizetype;
+    auto RemoveOversizedValues() -> QStringList;
+
     auto GetPathIndividualMeasurements() const -> QString;
     void SetPathIndividualMeasurements(const QString &value) const;
 

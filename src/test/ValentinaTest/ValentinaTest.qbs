@@ -97,6 +97,8 @@ VTestApp {
         "tst_vdomdocument.cpp",
         "tst_vdomdocument.h",
         "tst_vlockguard.cpp",
+        "tst_vcommonsettings.cpp",
+        "tst_vcommonsettings.h",
         "tst_misc.cpp",
         "tst_vcommandline.cpp",
         "tst_vpiece.cpp",

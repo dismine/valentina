@@ -228,6 +228,7 @@ qreal scrollingSensorMouseScaleCached = -1; // NOLINT(cppcoreguidelines-avoid-no
 qreal scrollingWheelMouseScaleCached = -1;  // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 qreal scrollingAccelerationCached = -1;     // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 int patternTranslateFormulaCached = -1;     // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+int themeModeCached = -1;                   // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
 //---------------------------------------------------------------------------------------------------------------------
 auto ClearFormats(const QStringList &predefinedFormats, QStringList formats) -> QStringList
@@ -259,6 +260,71 @@ VCommonSettings::VCommonSettings(Format format, Scope scope, const QString &orga
 VCommonSettings::VCommonSettings(const QString &fileName, QSettings::Format format, QObject *parent)
   : QSettings(fileName, format, parent)
 {
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ValueSize length of a settings value in characters, whichever form it was stored in.
+ *
+ * A value holding a comma comes back from QSettings as a QStringList, and calling toString() on one of those returns an
+ * empty string. Measuring only the string form therefore reports the largest value in a corrupt file as zero - which is
+ * exactly what happened when a 29 million character knownMaterials was passed over in favour of a smaller path.
+ */
+auto VCommonSettings::ValueSize(const QVariant &value) -> qsizetype
+{
+    if (value.userType() == QMetaType::QStringList)
+    {
+        qsizetype size = 0;
+        const QStringList list = value.toStringList();
+        for (const auto &item : list)
+        {
+            size += item.size() + 2; // the ", " each item costs once written back out
+        }
+        return size;
+    }
+
+    return value.toString().size();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief RemoveOversizedValues drop any value too large to have come from this application.
+ *
+ * A reporter's settings file reached 138 MB after every non-ASCII value in it was read as Latin-1 and written back as
+ * UTF-8 a score of times, doubling on each pass. Qt rewrites the whole ini on every setValue(), so once the file is that
+ * size the main thread spends over ninety seconds at full CPU inside iniEscapedString() on each save, and the
+ * application is unusable for as long as the file stays broken. It never repairs itself.
+ *
+ * Whatever produced the corruption - and a Qt 5 era reader is the only thing that can - a path or a materials list of
+ * this size is meaningless. Dropping it costs one preference and restores a working application; keeping it costs the
+ * application. Returns the keys removed so the caller can say what it discarded.
+ *
+ * @return keys that were dropped, empty in the normal case.
+ */
+auto VCommonSettings::RemoveOversizedValues() -> QStringList
+{
+    QStringList oversized;
+
+    const QStringList keys = allKeys();
+    for (const auto &key : keys)
+    {
+        if (ValueSize(value(key)) > oversizedValueThreshold)
+        {
+            oversized.append(key);
+        }
+    }
+
+    for (const auto &key : oversized)
+    {
+        // Info, not warning: in GUI mode the message handler turns a warning into a modal dialog, and this runs before
+        // there is a main window to parent one to.
+        qInfo("Dropping corrupt settings value \"%s\" of %lld characters.",
+              qUtf8Printable(key),
+              static_cast<long long>(ValueSize(value(key))));
+        remove(key);
+    }
+
+    return oversized;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -652,22 +718,30 @@ void VCommonSettings::SetToolboxIconSizeSmall(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetThemeMode() const -> VThemeMode
 {
-    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    int val = settings.value(*settingConfigurationThemeMode, static_cast<int>(VThemeMode::System)).toInt();
-
-    if (val < 0 || val > 2)
+    // Cached because VTheme asks for it on every icon lookup, and constructing a QSettings is not free: it runs
+    // initAccess() -> sync(), which stats the ini file. That turned a pattern load into thousands of stat() calls.
+    if (themeModeCached < 0)
     {
-        val = 0;
+        QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+        int val = settings.value(*settingConfigurationThemeMode, static_cast<int>(VThemeMode::System)).toInt();
+
+        if (val < 0 || val > 2)
+        {
+            val = 0;
+        }
+
+        themeModeCached = val;
     }
 
-    return static_cast<VThemeMode>(val);
+    return static_cast<VThemeMode>(themeModeCached);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VCommonSettings::SetThemeMode(VThemeMode mode) const
 {
+    themeModeCached = static_cast<int>(mode);
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    settings.setValue(*settingConfigurationThemeMode, static_cast<int>(mode));
+    settings.setValue(*settingConfigurationThemeMode, themeModeCached);
     settings.sync();
 }
 
@@ -1490,9 +1564,18 @@ auto VCommonSettings::WidthHairLine() const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetScrollingDuration() const -> int
 {
-    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    return GetCachedValue(settings, scrollingDurationCached, *settingScrollingDuration, defaultScrollingDuration,
-                          scrollingDurationMin, scrollingDurationMax);
+    if (scrollingDurationCached < 0)
+    {
+        QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+        GetCachedValue(settings,
+                       scrollingDurationCached,
+                       *settingScrollingDuration,
+                       defaultScrollingDuration,
+                       scrollingDurationMin,
+                       scrollingDurationMax);
+    }
+
+    return scrollingDurationCached;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1507,9 +1590,18 @@ void VCommonSettings::SetScrollingDuration(int duration) const
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetScrollingUpdateInterval() const -> int
 {
-    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    return GetCachedValue(settings, scrollingUpdateIntervalCached, *settingScrollingUpdateInterval,
-                          defaultScrollingUpdateInterval, scrollingUpdateIntervalMin, scrollingUpdateIntervalMax);
+    if (scrollingUpdateIntervalCached < 0)
+    {
+        QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+        GetCachedValue(settings,
+                       scrollingUpdateIntervalCached,
+                       *settingScrollingUpdateInterval,
+                       defaultScrollingUpdateInterval,
+                       scrollingUpdateIntervalMin,
+                       scrollingUpdateIntervalMax);
+    }
+
+    return scrollingUpdateIntervalCached;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1524,9 +1616,18 @@ void VCommonSettings::SetScrollingUpdateInterval(int updateInterval) const
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetSensorMouseScale() const -> qreal
 {
-    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    return GetCachedValue(settings, scrollingSensorMouseScaleCached, *settingScrollingSensorMouseScale,
-                          defaultSensorMouseScale, sensorMouseScaleMin, sensorMouseScaleMax);
+    if (scrollingSensorMouseScaleCached < 0)
+    {
+        QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+        GetCachedValue(settings,
+                       scrollingSensorMouseScaleCached,
+                       *settingScrollingSensorMouseScale,
+                       defaultSensorMouseScale,
+                       sensorMouseScaleMin,
+                       sensorMouseScaleMax);
+    }
+
+    return scrollingSensorMouseScaleCached;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1541,9 +1642,18 @@ void VCommonSettings::SetSensorMouseScale(qreal scale) const
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetWheelMouseScale() const -> qreal
 {
-    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    return GetCachedValue(settings, scrollingWheelMouseScaleCached, *settingScrollingWheelMouseScale,
-                          defaultWheelMouseScale, wheelMouseScaleMin, wheelMouseScaleMax);
+    if (scrollingWheelMouseScaleCached < 0)
+    {
+        QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+        GetCachedValue(settings,
+                       scrollingWheelMouseScaleCached,
+                       *settingScrollingWheelMouseScale,
+                       defaultWheelMouseScale,
+                       wheelMouseScaleMin,
+                       wheelMouseScaleMax);
+    }
+
+    return scrollingWheelMouseScaleCached;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1558,9 +1668,18 @@ void VCommonSettings::SetWheelMouseScale(qreal scale) const
 //---------------------------------------------------------------------------------------------------------------------
 auto VCommonSettings::GetScrollingAcceleration() const -> qreal
 {
-    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    return GetCachedValue(settings, scrollingAccelerationCached, *settingScrollingAcceleration,
-                          defaultScrollingAcceleration, scrollingAccelerationMin, scrollingAccelerationMax);
+    if (scrollingAccelerationCached < 0)
+    {
+        QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+        GetCachedValue(settings,
+                       scrollingAccelerationCached,
+                       *settingScrollingAcceleration,
+                       defaultScrollingAcceleration,
+                       scrollingAccelerationMin,
+                       scrollingAccelerationMax);
+    }
+
+    return scrollingAccelerationCached;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

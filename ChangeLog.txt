@@ -1,4 +1,5 @@
 # Valentina 1.1.1 (unreleased)
+- [Valentina app / Tape app / Puzzle app] Fixed the interface freezing for minutes at a time when the settings file had grown corrupt. Values damaged by repeated character encoding could reach hundreds of megabytes, and Qt rewrites the whole file on every settings change; such values are now discarded on startup.
 - [Valentina app / Tape app / Puzzle app] Fixed a crash when closing the application while usage statistics were still being sent.
 - [Valentina app / Tape app / Puzzle app] Fixed the interface freezing while the usage statistics and country lookup made network requests on the main thread, which on Windows could block for as long as the system took to resolve its proxy configuration.
 - [Valentina app] Fixed fold-line label font (single stroke outline / single line font) not updating live when changed in preferences; a reload was needed to see the new style.
