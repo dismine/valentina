@@ -30,6 +30,15 @@
 
 #include <QString>
 
-auto InitializeCrashpad(const QString &appName) -> bool;
+/**
+ * @brief InitializeCrashpad start the crash reporter.
+ *
+ * @param productName the product reports are filed under in BugSplat. This is "Valentina" for all three applications
+ * and changing it would send their reports somewhere else.
+ * @param appName this application - "Valentina", "Tape" or "Puzzle". Picks the settings file to read the opt-in from
+ * and the log file to attach, both of which are per application. Must match QCoreApplication::applicationName(), which
+ * is not set yet when this runs.
+ */
+auto InitializeCrashpad(const QString &productName, const QString &appName) -> bool;
 
 #endif // CRASHHANDLER_H

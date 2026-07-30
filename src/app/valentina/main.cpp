@@ -85,7 +85,7 @@ auto main(int argc, char *argv[]) -> int
 #endif
 
 #ifdef CRASH_REPORTING
-    InitializeCrashpad(QStringLiteral(VER_PRODUCTNAME_STR));
+    InitializeCrashpad(QStringLiteral(VER_PRODUCTNAME_STR), QStringLiteral(VER_INTERNALNAME_STR));
 #endif
 
 #if defined(Q_OS_WIN)

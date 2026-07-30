@@ -72,8 +72,7 @@ void VAbstractValApplication::PostWarningMessage(const QString &message, QtMsgTy
 void VAbstractValApplication::OpenSettings()
 {
 #if defined(Q_OS_WIN)
-    QString const docPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
-    if (!docPath.isEmpty())
+    if (QString const docPath = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation); !docPath.isEmpty())
     {
         QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, docPath);
     }
