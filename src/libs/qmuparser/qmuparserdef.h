@@ -26,6 +26,7 @@
 #include <QString>
 #include <QtGlobal>
 #include <locale>
+#include <sstream>
 
 // Header <ciso646> is removed in C++20.
 #if defined(Q_CC_MSVC) && __cplusplus <= 201703L
