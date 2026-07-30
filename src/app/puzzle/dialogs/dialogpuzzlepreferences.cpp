@@ -46,12 +46,16 @@ using namespace Qt::Literals::StringLiterals;
 //---------------------------------------------------------------------------------------------------------------------
 DialogPuzzlePreferences::DialogPuzzlePreferences(QWidget *parent)
   : QDialog(parent),
-    ui(std::make_unique<Ui::DialogPuzzlePreferences>()),
-    m_configurationPage(new PuzzlePreferencesConfigurationPage),
-    m_layoutPage(new PuzzlePreferencesLayoutPage),
-    m_pathPage(new PuzzlePreferencesPathPage)
+    ui(std::make_unique<Ui::DialogPuzzlePreferences>())
 {
+    // setupUi() must run before the pages are built: their constructors can reenter the event loop,
+    // and changeEvent() then dereferences ui->buttonBox, which is indeterminate until setupUi()
+    // assigns it. See the comment in valentina's DialogPreferences for the crash this caused.
     ui->setupUi(this);
+
+    m_configurationPage = new PuzzlePreferencesConfigurationPage;
+    m_layoutPage = new PuzzlePreferencesLayoutPage;
+    m_pathPage = new PuzzlePreferencesPathPage;
 
 #if defined(Q_OS_MAC)
     setWindowFlags(Qt::Window);
