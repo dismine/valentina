@@ -28,10 +28,10 @@
 #include "vganalytics.h"
 #include "vganalyticsworker.h"
 
-#include <vcsRepoState.h>
 #include <atomic>
 #include <functional>
 #include <memory>
+#include <vcsRepoState.h>
 #include <QDataStream>
 #include <QDebug>
 #include <QGuiApplication>
@@ -42,6 +42,7 @@
 #include <QLocale>
 #include <QLoggingCategory>
 #include <QNetworkAccessManager>
+#include <QNetworkProxy>
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QQueue>
@@ -73,6 +74,22 @@ using namespace Qt::Literals::StringLiterals;
 
 namespace
 {
+// Resolved once by CheckCountryCodeAsync() at startup and reused for every event afterwards. Filling this field used
+// to mean a blocking HTTPS GET on the GUI thread each time an app-start event was built. Only ever touched from the
+// GUI thread.
+QString countryCodeCache = QStringLiteral("Unknown"); // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+
+//---------------------------------------------------------------------------------------------------------------------
+void CacheCountryCode(const QString &country)
+{
+    countryCodeCache = country;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto CachedCountryCode() -> QString
+{
+    return countryCodeCache;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 auto GetSystemMemorySize() -> qint64
@@ -98,10 +115,10 @@ auto GetSystemMemorySize() -> qint64
     host_statistics64(machPort, HOST_VM_INFO, reinterpret_cast<host_info64_t>(&vmStats), &count);
 
     auto freeMemory = static_cast<qulonglong>(vmStats.free_count) * static_cast<qulonglong>(pageSize);
-    qulonglong totalMemoryUsed =
-        (static_cast<qulonglong>(vmStats.active_count) + static_cast<qulonglong>(vmStats.inactive_count) +
-         static_cast<qulonglong>(vmStats.wire_count)) *
-        static_cast<qulonglong>(pageSize);
+    qulonglong totalMemoryUsed = (static_cast<qulonglong>(vmStats.active_count)
+                                  + static_cast<qulonglong>(vmStats.inactive_count)
+                                  + static_cast<qulonglong>(vmStats.wire_count))
+                                 * static_cast<qulonglong>(pageSize);
     return static_cast<qint64>(freeMemory + totalMemoryUsed);
 #elif defined(Q_OS_LINUX)
     struct sysinfo info; // NOLINT(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
@@ -184,7 +201,10 @@ void VGAnalytics::SetLogLevel(enum VGAnalytics::LogLevel logLevel)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VGAnalytics::LogLevel() const -> enum VGAnalytics::LogLevel { return d->m_logLevel; }
+auto VGAnalytics::LogLevel() const -> enum VGAnalytics::LogLevel
+{
+    return d->m_logLevel;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void VGAnalytics::SetRepoRevision(QString rev)
@@ -314,7 +334,8 @@ void VGAnalytics::SendAppCloseEvent(qint64 engagementTimeMsec)
         QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
         loop.exec(); // wait for finished
 
-        qCDebug(vAnalytics) << "Close event flush finished" << (timer.isActive() ? "(reply received)." : "(timed out).");
+        qCDebug(vAnalytics) << "Close event flush finished"
+                            << (timer.isActive() ? "(reply received)." : "(timed out).");
     }
     else
     {
@@ -464,67 +485,11 @@ auto VGAnalytics::InitAppStartEventParams(qint64 engagementTimeMsec) const -> QH
         // https://developers.google.com/analytics/devguides/collection/protocol/ga4/sending-events?client_type=gtag#optional_parameters_for_reports
         {QStringLiteral("engagement_time_msec"), engagementTimeMsec},
         {QStringLiteral("gui_language"), d->m_guiLanguage},
-        {QStringLiteral("country_code"), CountryCode()},
+        {QStringLiteral("country_code"), CachedCountryCode()},
         {QStringLiteral("kernel_type"), QSysInfo::kernelType()},
         {QStringLiteral("total_memory"), TotalMemory()},
     };
     return params;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VGAnalytics::CountryCode() -> QString
-{
-    QNetworkAccessManager manager;
-    QNetworkRequest const request(QUrl(QStringLiteral("https://api.country.is")));
-    QNetworkReply *reply = manager.get(request);
-
-    QTimer timer;
-    timer.setSingleShot(true);
-    timer.start(5s); // Set the timeout to 5 seconds
-
-    QEventLoop eventLoop;
-
-    QObject::connect(&timer, &QTimer::timeout, &eventLoop, &QEventLoop::quit);
-    QObject::connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
-
-    eventLoop.exec();
-
-    auto country = QStringLiteral("Unknown");
-
-    if (timer.isActive())
-    {
-        // The API response was received before the timeout
-        if (reply->error() == QNetworkReply::NoError)
-        {
-            QByteArray const responseData = reply->readAll();
-            QJsonParseError error;
-            QJsonDocument const jsonDoc = QJsonDocument::fromJson(responseData, &error);
-
-            if (error.error == QJsonParseError::NoError && jsonDoc.isObject())
-            {
-                QJsonObject jsonObj = jsonDoc.object();
-                if (jsonObj.contains(QStringLiteral("country")))
-                {
-                    country = jsonObj[QStringLiteral("country")].toString().toLower();
-                }
-            }
-        }
-        else
-        {
-            qDebug() << "Error:" << reply->errorString();
-        }
-    }
-    else
-    {
-        // Timeout occurred
-        qDebug() << "Request timed out";
-        reply->abort();
-    }
-
-    // Clean up the reply
-    reply->deleteLater();
-
-    return country;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -543,6 +508,12 @@ void VGAnalytics::CheckCountryCodeAsync(std::function<void(const QString &)> cal
     state->manager = new QNetworkAccessManager;
     state->callback = std::move(callback);
 
+    // On Windows the first request through a manager resolves the system proxy synchronously on the calling thread,
+    // and this one runs on the GUI thread. With WPAD enabled and the PAC host unreachable that blocks the whole UI for
+    // as long as WinHTTP takes to give up, which no timer below can bound. Valentina has no proxy settings of its own
+    // and nothing here needs one, so skip the lookup entirely.
+    state->manager->setProxy(QNetworkProxy::NoProxy);
+
     QNetworkRequest const request(QUrl(QStringLiteral("https://api.country.is")));
     state->reply = state->manager->get(request);
 
@@ -560,6 +531,7 @@ void VGAnalytics::CheckCountryCodeAsync(std::function<void(const QString &)> cal
         state->timer->deleteLater();
         state->reply->deleteLater();
         state->manager->deleteLater();
+        CacheCountryCode(country);
         state->callback(country);
     };
 
@@ -596,8 +568,7 @@ void VGAnalytics::CheckCountryCodeAsync(std::function<void(const QString &)> cal
     // Abort the pending request on app shutdown so the SSL thread can clean up before
     // QApplication destructs. Without this, the SSL backend thread may fire events into
     // freed Qt objects, causing EXC_BAD_ACCESS.
-    QObject::connect(qApp, &QCoreApplication::aboutToQuit, state->reply,
-                     [state]() { state->reply->abort(); });
+    QObject::connect(qApp, &QCoreApplication::aboutToQuit, state->reply, [state]() { state->reply->abort(); });
 
     state->timer->start(5s);
 }
