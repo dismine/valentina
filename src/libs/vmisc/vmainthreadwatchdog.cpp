@@ -100,10 +100,13 @@ constexpr int maxSamplesPerStall = 20;
 constexpr int maxStackFrames = 24;
 
 HANDLE mainThreadHandle = nullptr; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
+DWORD mainThreadId = 0;            // NOLINT(cppcoreguidelines-avoid-non-const-global-variables)
 
 //---------------------------------------------------------------------------------------------------------------------
 void CaptureMainThreadHandle()
 {
+    mainThreadId = GetCurrentThreadId();
+
     // GetCurrentThread() hands back a pseudo-handle that always refers to whichever thread uses it, so the monitor
     // thread cannot be given it directly. Duplicate it into a real handle while we are still on the main thread.
     if (not DuplicateHandle(GetCurrentProcess(),
@@ -245,6 +248,43 @@ auto WalkMainThreadStack() -> QString
     return ModuleOffset(static_cast<quintptr>(context.Eip)); // No RtlVirtualUnwind on 32-bit.
 #endif
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+// Is the main thread really failing to pump messages, or is it merely parked in one of Windows' own modal loops?
+//
+// The heartbeat rides Qt's event loop, and a native file dialog, an open menu or a window being dragged all run a
+// message loop of their own that never gets back to Qt's. A user reading an Open dialog for ten seconds therefore
+// looks exactly like a freeze - which is how a session that was never stuck spends its whole dump budget before the
+// real freeze arrives. One report already came in this way: the log ends at getOpenFileName(), the stack sits in
+// comctl32's text drawing, and the thread burned no CPU at all.
+//
+// Windows draws the distinction already. IsHungAppWindow() is what makes Explorer stamp a window "Not Responding",
+// and it is true only once the owning thread has stopped answering messages - which a healthy dialog loop still does.
+// Ask it rather than trying to recognise a dialog from the stack.
+auto MainThreadHung() -> bool
+{
+    GUITHREADINFO info = {};
+    info.cbSize = sizeof(info);
+
+    if (mainThreadId == 0 || not GetGUIThreadInfo(mainThreadId, &info))
+    {
+        return true;
+    }
+
+    // Any window owned by the thread answers the question. There may be none to ask about - the app sits in the
+    // background with nothing active or focused - and then we report, because a missed freeze costs more than a
+    // spurious dump the cap already limits to three.
+    const HWND window = info.hwndActive != nullptr ? info.hwndActive : info.hwndFocus;
+    return window == nullptr || IsHungAppWindow(window);
+}
+#else
+//---------------------------------------------------------------------------------------------------------------------
+// Only Windows runs modal loops that starve Qt's event loop while the thread itself stays responsive, and only Windows
+// can be asked about it. Everywhere else a stopped heartbeat is a stall.
+constexpr auto MainThreadHung() -> bool
+{
+    return true;
+}
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -309,7 +349,9 @@ void MonitorMainThread()
 
         const qint64 elapsed = QDateTime::currentMSecsSinceEpoch() - beat;
 
-        if (elapsed >= stallThresholdMs)
+        // Checked every pass rather than once when the stall starts: a dialog opened during a genuine stall must not
+        // silence the rest of it, and a dialog closed during one must not keep it silenced.
+        if (elapsed >= stallThresholdMs && MainThreadHung())
         {
             const bool stallJustStarted = not stalled;
 
@@ -365,8 +407,10 @@ void MonitorMainThread()
                 DumpStalledMainThread(elapsed);
             }
         }
-        else if (stalled)
+        else if (stalled && elapsed < stallThresholdMs)
         {
+            // Only a beat that actually moved is a recovery. Falling out of the branch above because the thread stopped
+            // looking hung is not one, and would report a recovery after 0 ms.
             stalled = false;
             // Safe to go through the normal logging path now - the GUI thread is pumping events again.
             qCInfo(vWatchdog,
