@@ -26,6 +26,7 @@
 #include <QString>
 #include <QtGlobal>
 #include <locale>
+#include <sstream>
 
 #ifdef __INTEL_COMPILER
 #include "qmuparserfixes.h"
