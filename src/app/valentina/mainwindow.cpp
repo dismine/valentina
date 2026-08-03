@@ -895,7 +895,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
         auto *scene = qobject_cast<VMainGraphicsScene *>(currentScene);
         SCASSERT(scene != nullptr)
 
-        connect(scene, &VMainGraphicsScene::ChoosedObject, m_dialogTool.data(), &DialogTool::ChosenObject);
+        connect(scene, &VMainGraphicsScene::ChoosedObject, m_dialogTool.data(), &DialogTool::SceneObjectChosen);
         connect(scene, &VMainGraphicsScene::SelectedObject, m_dialogTool.data(), &DialogTool::SelectedObject);
         connect(m_dialogTool.data(), &DialogTool::DialogClosed, this, closeDialogSlot);
         connect(m_dialogTool.data(), &DialogTool::ToolTip, this, &MainWindow::ShowToolTip);
