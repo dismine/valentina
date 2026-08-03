@@ -78,13 +78,20 @@ auto FilterLocales(const QStringList &locales) -> QStringList
     QStringList filtered;
     for (const auto &locale : locales)
     {
-        if (not locale.startsWith("ru"_L1) && not locale.startsWith("ir"_L1))
+        if (not locale.startsWith("ru"_L1, Qt::CaseInsensitive) && not locale.startsWith("ir"_L1, Qt::CaseInsensitive))
         {
             filtered.append(locale);
         }
     }
 
     return filtered;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Extra check on top of FilterLocales(): reject a candidate by file name regardless of how it was built.
+auto IsExcludedQmFile(const QString &qmFileName) -> bool
+{
+    return qmFileName.contains("_ru"_L1, Qt::CaseInsensitive);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -104,7 +111,13 @@ auto LoadQM(QTranslator *translator, const QString &filename, const QString &loc
 
     for (auto &locale : languages)
     {
-        const bool loaded = translator->load(filename + locale, qmDir);
+        const QString qmFileName = filename + locale;
+        if (IsExcludedQmFile(qmFileName))
+        {
+            continue;
+        }
+
+        const bool loaded = translator->load(qmFileName, qmDir);
         if (loaded)
         {
             return loaded;
@@ -386,7 +399,7 @@ void VAbstractApplication::WinAttachConsole()
 //---------------------------------------------------------------------------------------------------------------------
 void VAbstractApplication::LoadTranslation(QString locale)
 {
-    if (locale.startsWith("ru"_L1) || locale.startsWith("ir"_L1))
+    if (locale.startsWith("ru"_L1, Qt::CaseInsensitive) || locale.startsWith("ir"_L1, Qt::CaseInsensitive))
     {
         locale = QString();
     }
@@ -569,14 +582,15 @@ auto VAbstractApplication::GetPlaceholderTranslator() -> QSharedPointer<VTransla
         pieceLabelLocale = settings->GetLocale();
     }
 
-    if (pieceLabelLocale.startsWith("ru"_L1) || pieceLabelLocale.startsWith("ir"_L1))
+    if (pieceLabelLocale.startsWith("ru"_L1, Qt::CaseInsensitive) || pieceLabelLocale.startsWith("ir"_L1, Qt::CaseInsensitive))
     {
         return QSharedPointer<VTranslator>(new VTranslator);
     }
 
     auto translator = QSharedPointer<VTranslator>(new VTranslator);
     const QString appQmDir = VAbstractApplication::translationsPath(settings->GetLocale());
-    if (translator->load(QStringLiteral("valentina_") + pieceLabelLocale, appQmDir))
+    const QString qmFileName = QStringLiteral("valentina_") + pieceLabelLocale;
+    if (not IsExcludedQmFile(qmFileName) && translator->load(qmFileName, appQmDir))
     {
         return translator;
     }
@@ -610,7 +624,7 @@ void VAbstractApplication::CacheTextCodec(QStringConverter::Encoding encoding, V
 void VAbstractApplication::CheckSystemLocale()
 {
     if (const QString defLocale = QLocale::system().name();
-        defLocale.startsWith("ru"_L1) || defLocale.startsWith("ir"_L1))
+        defLocale.startsWith("ru"_L1, Qt::CaseInsensitive) || defLocale.startsWith("ir"_L1, Qt::CaseInsensitive))
     {
         QCoreApplication::exit();
         return;

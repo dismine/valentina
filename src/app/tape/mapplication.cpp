@@ -550,7 +550,8 @@ void MApplication::InitOptions()
                            VGAnalytics::CheckCountryCodeAsync(
                                [](const QString &country)
                                {
-                                   if (country == "ru"_L1 || country == "by"_L1 || country == "ir"_L1)
+                                   const QString c = country.toLower();
+                                   if (c == "ru"_L1 || c == "by"_L1 || c == "ir"_L1)
                                    {
                                        QCoreApplication::exit();
                                    }
