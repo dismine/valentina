@@ -32,7 +32,14 @@ VLib {
         condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled && qbs.targetOS.contains("macos")
         cpp.libraryPaths: ["/usr/lib"]
         cpp.dynamicLibraries: ["bsm"]
-        cpp.frameworks: ["AppKit", "Security"]
+        cpp.frameworks: ["AppKit", "Security", "CoreFoundation"]
+    }
+
+    Properties {
+        // CFRunLoopIsWaiting() in the main-thread watchdog. Only reached when the block above did not match - qbs
+        // takes the first matching Properties item, so the more specific condition has to come first.
+        condition: qbs.targetOS.contains("macos")
+        cpp.frameworks: ["CoreFoundation"]
     }
 
     Properties {
