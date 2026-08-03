@@ -577,7 +577,10 @@ auto VToolSeamAllowance::Create(const QPointer<DialogTool> &dialog, VMainGraphic
     if (piece != nullptr)
     {
         piece->m_dialog = dialog;
+        qCDebug(vTool, "VToolSeamAllowance::Create: id=%u refreshing geometry after creation from dialog.",
+                piece->m_id);
         piece->RefreshGeometry(true); // Refresh internal paths
+        qCDebug(vTool, "VToolSeamAllowance::Create: id=%u geometry refresh call returned.", piece->m_id);
     }
     return piece;
 }
@@ -2266,6 +2269,10 @@ void VToolSeamAllowance::ApplyPieceGeometry(const VToolSeamAllowanceGeometry &ge
                            this,
                            [this, updateChildren]() -> void
                            {
+                               qCDebug(vTool,
+                                       "VToolSeamAllowance::RefreshGeometry: id=%u deferred label/grainline "
+                                       "update starting.",
+                                       m_id);
                                this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
                                UpdateDetailLabel();
                                UpdatePatternInfo();
@@ -2276,6 +2283,10 @@ void VToolSeamAllowance::ApplyPieceGeometry(const VToolSeamAllowanceGeometry &ge
                                    UpdateInternalPaths();
                                }
                                this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+                               qCDebug(vTool,
+                                       "VToolSeamAllowance::RefreshGeometry: id=%u deferred label/grainline "
+                                       "update done.",
+                                       m_id);
                            });
     }
     else
@@ -2298,6 +2309,7 @@ void VToolSeamAllowance::ApplyPieceGeometry(const VToolSeamAllowanceGeometry &ge
 
     // Now we can start checking validity of the grainline
     m_geometryIsReady = true;
+    qCDebug(vTool, "VToolSeamAllowance::RefreshGeometry: id=%u synchronous part done.", m_id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
