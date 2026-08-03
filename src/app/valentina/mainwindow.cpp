@@ -1118,7 +1118,7 @@ void MainWindow::SetToolButton(bool checked, Tool t, const QString &cursor, cons
     // dialog's visualization. Block tool deletion until the creation is finished.
     m_dependenciesWidget->SetToolCreationActive(true);
 
-    connect(scene, &VMainGraphicsScene::ChoosedObject, m_dialogTool.data(), &DialogTool::ChosenObject);
+    connect(scene, &VMainGraphicsScene::ChoosedObject, m_dialogTool.data(), &DialogTool::SceneObjectChosen);
     if (t == Tool::Group)
     {
         connect(scene, &VMainGraphicsScene::SelectedObject, m_dialogTool.data(), &DialogTool::SelectedObject);

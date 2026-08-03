@@ -615,6 +615,27 @@ void DialogTool::CheckState()
 
 //---------------------------------------------------------------------------------------------------------------------
 /**
+ * @brief SceneObjectChosen guarded entry point for the scene's ChoosedObject signal. ChosenObject() overrides
+ * dereference vis without a null check (SCASSERT is a no-op in release builds), so ignore the event when a full
+ * reparse has already destroyed the visualization. See VisualizationBroken().
+ * @param id id of point or detail
+ * @param type type of object
+ */
+void DialogTool::SceneObjectChosen(quint32 id, const SceneObject &type)
+{
+    if (VisualizationBroken())
+    {
+        qCDebug(vDialog,
+                "Ignoring chosen object: the open tool dialog's visualization was destroyed by a reparse "
+                "(scene cleared). Nothing to select.");
+        return;
+    }
+
+    ChosenObject(id, type);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
  * @brief ChosenObject gets id and type of selected object. Save right data and ignore wrong.
  * @param id id of point or detail
  * @param type type of object

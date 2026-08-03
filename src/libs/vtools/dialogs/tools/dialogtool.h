@@ -125,6 +125,7 @@ signals:
      */
     void ToolTip(const QString &toolTip);
 public slots:
+    void SceneObjectChosen(quint32 id, const SceneObject &type);
     virtual void ChosenObject(quint32 id, const SceneObject &type);
     virtual void SelectedObject(bool selected, quint32 object, quint32 tool);
     virtual void ClearSourceObjects() {}
