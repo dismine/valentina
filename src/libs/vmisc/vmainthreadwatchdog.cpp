@@ -36,6 +36,10 @@
 #include <windows.h>
 #endif
 
+#if defined(Q_OS_MACOS)
+#include <CoreFoundation/CFRunLoop.h>
+#endif
+
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QDir>
@@ -277,9 +281,26 @@ auto MainThreadHung() -> bool
     const HWND window = info.hwndActive != nullptr ? info.hwndActive : info.hwndFocus;
     return window == nullptr || IsHungAppWindow(window);
 }
+#elif defined(Q_OS_MACOS)
+//---------------------------------------------------------------------------------------------------------------------
+// Same question as the Windows version above, for the other platform that stops the heartbeat without stopping the
+// thread. macOS App Nap defers a backgrounded app's run-loop timers until it is brought forward again, so switching
+// away from Valentina for half a minute freezes the heartbeat while the main thread sits perfectly healthy in
+// -[NSApplication nextEventMatchingMask:]. One report came in exactly this way: three "stalls" of 11-30 s, no log
+// activity in any of them, every thread in the dump parked in a kernel wait, and each one ending the moment the user
+// touched the window again.
+//
+// CFRunLoopIsWaiting() draws the distinction. It is true only while the run loop is asleep on its mach port with
+// nothing to dispatch - which is idle, not stuck. A main thread grinding inside an event handler, blocked on a lock or
+// on I/O, is not waiting, and still reports.
+auto MainThreadHung() -> bool
+{
+    CFRunLoopRef const loop = CFRunLoopGetMain();
+    return loop == nullptr || not CFRunLoopIsWaiting(loop);
+}
 #else
 //---------------------------------------------------------------------------------------------------------------------
-// Only Windows runs modal loops that starve Qt's event loop while the thread itself stays responsive, and only Windows
+// Only Windows and macOS run loops that starve Qt's event loop while the thread itself stays responsive, and only they
 // can be asked about it. Everywhere else a stopped heartbeat is a stall.
 constexpr auto MainThreadHung() -> bool
 {
