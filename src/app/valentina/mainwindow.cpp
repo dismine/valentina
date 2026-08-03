@@ -4974,8 +4974,11 @@ void MainWindow::GradationChanged()
     if (UpdateMeasurements(m_m, m_currentDimensionA, m_currentDimensionB, m_currentDimensionC))
     {
         doc->LiteParseTree(Document::FullLiteParse);
+        qCDebug(vMainWindow, "GradationChanged: lite parse tree done.");
         StoreDimensions();
+        qCDebug(vMainWindow, "GradationChanged: dimensions stored.");
         emit m_sceneDetails->DimensionsChanged();
+        qCDebug(vMainWindow, "GradationChanged: DimensionsChanged emitted.");
     }
     else
     {
