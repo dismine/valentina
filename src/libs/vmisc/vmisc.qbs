@@ -15,6 +15,11 @@ VLib {
     }
 
     Properties {
+        condition: qbs.targetOS.contains("windows")
+        cpp.dynamicLibraries: ["User32"]
+    }
+
+    Properties {
         condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled && qbs.targetOS.contains("macos")
         cpp.libraryPaths: ["/usr/lib"]
         cpp.dynamicLibraries: ["bsm"]
