@@ -2198,9 +2198,9 @@ void VPattern::ParsePlaceLabel(QDomElement &domElement, const Document &parse)
         }
         catch (const VExceptionBadId &)
         { // Possible case. Parent was deleted, but the node object is still here.
-            qDebug() << "Broken relation. Parent was deleted, but the place label object is still here. Place label "
-                        "id ="
-                     << initData.id << ".";
+            qCDebug(vXML) << "Broken relation. Parent was deleted, but the place label object is still here. "
+                             "Place label id ="
+                          << initData.id << ".";
             return; // Just ignore
         }
 
@@ -4905,6 +4905,12 @@ void VPattern::PrepareForParse(const Document &parse)
         sceneDetail->clear();
         sceneDetail->InitOrigins();
         data->ClearForFullParse();
+        // An orphaned node (its source object already deleted) still holds its id on this element, but nothing
+        // recreates it as a live object during this parse, so nothing else advances the id generator past it.
+        // Resync against every id physically present, not just the ones this parse manages to rebuild, or a
+        // freshly minted id can collide with one that only survives on such an element.
+        data->UpdateId(MaxRecordedId());
+        qCDebug(vXML, "Id counter resynced to %u after full parse reset.", data->getId());
         PatternBlockMapper()->Clear();
 
         qDeleteAll(toolsOnRemove); // Remove all invisible on a scene objects.

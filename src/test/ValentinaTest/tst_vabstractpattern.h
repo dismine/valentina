@@ -44,6 +44,8 @@ private slots:
     void CancelStopsRunningWorkers();
     // Clear must not let pending workers leak edges into the next document's graph
     void ClearCancelsPendingWorkers();
+    void MaxRecordedIdCountsOrphanedNodes();
+    void MaxRecordedIdOnEmptyDocumentIsZero();
 
 private:
     Q_DISABLE_COPY_MOVE(TST_VAbstractPattern) // NOLINT

@@ -29,6 +29,7 @@
 #include "vabstractnode.h"
 
 #include <QSharedPointer>
+#include <QTextStream>
 #include <QUndoStack>
 
 #include "../ifc/exception/vexceptionwrongid.h"
@@ -150,7 +151,17 @@ void VAbstractNode::AddToModeling(const QDomElement &domElement)
     const QDomElement duplicate = doc->FindElementById(m_id);
     if (not duplicate.isNull())
     {
-        throw VExceptionWrongId(tr("This id (%1) is not unique.").arg(m_id), duplicate);
+        VExceptionWrongId excep(tr("This id (%1) is not unique.").arg(m_id), duplicate);
+
+        // The exception only carries the pre-existing element found above. Without the element that was about
+        // to be added, a report cannot tell which of the two is the stale one, or what kind of node the new
+        // attempt even was — that ambiguity is exactly what made the last occurrence hard to read.
+        QString newTag;
+        QTextStream stream(&newTag);
+        domElement.save(stream, 4);
+        excep.AddMoreInformation(tr("Attempted to add a new node with the same id:\n%1").arg(newTag));
+
+        throw excep;
     }
 
     QDomElement modeling;

@@ -450,6 +450,10 @@ void VAbstractTool::ToolCreation(const Source &typeCreation)
 {
     if (typeCreation == Source::FromGui)
     {
+        // Every tool/node funnels through here to mint its XML element. Logging the id here, once, lets a
+        // duplicate-id report (which names an id but not its history) be traced back to the moment and class
+        // that created it, instead of requiring a per-tool breadcrumb.
+        qCDebug(vTool, "Adding new %s to file, id %u.", metaObject()->className(), m_id);
         AddToFile();
     }
     else

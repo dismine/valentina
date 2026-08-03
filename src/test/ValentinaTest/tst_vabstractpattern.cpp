@@ -177,3 +177,45 @@ void TST_VAbstractPattern::ClearCancelsPendingWorkers()
 
     QCOMPARE(graph->EdgeCount(), static_cast<std::size_t>(0));
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief MaxRecordedIdCountsOrphanedNodes a full parse must not reissue an id that only survives on an
+ * orphaned node.
+ *
+ * When a node's source object is deleted, the node element itself is left behind in the document (its
+ * idObject no longer resolves), and parsing it just skips recreating a live tool for it. MaxRecordedId() feeds
+ * the id generator after a full-parse reset, so it must count that element's id too, or a freshly minted id
+ * can collide with it -- exactly the crash this test is standing in for.
+ */
+void TST_VAbstractPattern::MaxRecordedIdCountsOrphanedNodes()
+{
+    TestDoc doc;
+    QVERIFY(doc.setContent(QByteArray(R"(
+        <pattern>
+            <draw name="Block A">
+                <calculation>
+                    <point id="5" type="single"/>
+                    <line id="10" firstPoint="5" secondPoint="5"/>
+                </calculation>
+                <modeling>
+                    <spline id="161" idObject="78" inUse="false" type="modelingSpline"/>
+                </modeling>
+            </draw>
+        </pattern>)")));
+
+    doc.RefreshElementIdCache();
+
+    QCOMPARE(doc.MaxRecordedId(), static_cast<quint32>(161));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPattern::MaxRecordedIdOnEmptyDocumentIsZero()
+{
+    TestDoc doc;
+    QVERIFY(doc.setContent(QByteArray(R"(<pattern><draw name="Block A"/></pattern>)")));
+
+    doc.RefreshElementIdCache();
+
+    QCOMPARE(doc.MaxRecordedId(), static_cast<quint32>(NULL_ID));
+}
