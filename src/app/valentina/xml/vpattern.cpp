@@ -262,6 +262,14 @@ void VPattern::Parse(const Document &parse)
     {
         case Document::FullParse:
             qCDebug(vXML, "Full parse.");
+            // Not the trigger itself, but the last undo command executed before this parse is often it (undo/
+            // redo, or an Apply that posts a reparse). Free context for whatever the next investigation is.
+            if (QUndoStack *undoStack = VAbstractApplication::VApp()->getUndoStack();
+                undoStack != nullptr && undoStack->index() > 0)
+            {
+                qCDebug(vXML, "Last undo command before this parse: %s",
+                        qUtf8Printable(undoStack->text(undoStack->index() - 1)));
+            }
             break;
         case Document::LiteParse:
             qCDebug(vXML, "Lite parse.");
@@ -2082,7 +2090,7 @@ void VPattern::ParseNodePoint(const QDomElement &domElement, const Document &par
         }
         catch (const VExceptionBadId &)
         { // Possible case. Parent was deleted, but the node object is still here.
-            qDebug() << "Broken relation. Parent was deleted, but the node object is still here. Node point id ="
+            qCDebug(vXML) << "Broken relation. Parent was deleted, but the node object is still here. Node point id ="
                      << initData.id << ".";
             return; // Just ignore
         }
@@ -2127,9 +2135,9 @@ void VPattern::ParsePinPoint(const QDomElement &domElement, const Document &pars
         }
         catch (const VExceptionBadId &)
         { // Possible case. Parent was deleted, but the node object is still here.
-            qDebug() << "Broken relation. Parent was deleted, but the place label object is still here. Place label "
-                        "id ="
-                     << initData.id << ".";
+            qCDebug(vXML) << "Broken relation. Parent was deleted, but the place label object is still here. "
+                             "Place label id ="
+                          << initData.id << ".";
             return; // Just ignore
         }
 
@@ -2166,9 +2174,9 @@ void VPattern::ParsePlaceLabel(QDomElement &domElement, const Document &parse)
         }
         catch (const VExceptionBadId &)
         { // Possible case. Parent was deleted, but the node object is still here.
-            qDebug() << "Broken relation. Parent was deleted, but the place label object is still here. Place label "
-                        "id ="
-                     << initData.id << ".";
+            qCDebug(vXML) << "Broken relation. Parent was deleted, but the place label object is still here. "
+                             "Place label id ="
+                          << initData.id << ".";
             return; // Just ignore
         }
 
@@ -3210,7 +3218,7 @@ void VPattern::ParseNodeSpline(const QDomElement &domElement, const Document &pa
         }
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
-            qDebug() << "Broken relation. Parent was deleted, but the node object is still here. Node spline id ="
+            qCDebug(vXML) << "Broken relation. Parent was deleted, but the node object is still here. Node spline id ="
                      << initData.id << "." << e.ErrorMessage();
             return; // Just ignore
         }
@@ -3259,8 +3267,9 @@ void VPattern::ParseNodeSplinePath(const QDomElement &domElement, const Document
         }
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
-            qDebug() << "Broken relation. Parent was deleted, but the node object is still here. Node spline path id ="
-                     << initData.id << "." << e.ErrorMessage();
+            qCDebug(vXML) << "Broken relation. Parent was deleted, but the node object is still here. Node spline "
+                             "path id ="
+                          << initData.id << "." << e.ErrorMessage();
             return; // Just ignore
         }
         VNodeSplinePath::Create(initData);
@@ -3409,8 +3418,9 @@ void VPattern::ParseNodeEllipticalArc(const QDomElement &domElement, const Docum
         }
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
-            qDebug() << "Broken relation. Parent was deleted, but the node object is still here. Node elliptical arc id ="
-                     << initData.id << "." << e.ErrorMessage();
+            qCDebug(vXML) << "Broken relation. Parent was deleted, but the node object is still here. Node "
+                             "elliptical arc id ="
+                          << initData.id << "." << e.ErrorMessage();
             return; // Just ignore
         }
         arc->setIdObject(initData.idObject);
@@ -3449,7 +3459,7 @@ void VPattern::ParseNodeArc(const QDomElement &domElement, const Document &parse
         }
         catch (const VExceptionBadId &e)
         { // Possible case. Parent was deleted, but the node object is still here.
-            qDebug() << "Broken relation. Parent was deleted, but the node object is still here. Node arc id ="
+            qCDebug(vXML) << "Broken relation. Parent was deleted, but the node object is still here. Node arc id ="
                      << initData.id << "." << e.ErrorMessage();
             return; // Just ignore
         }
@@ -4180,7 +4190,7 @@ void VPattern::ParsePathElement(VMainGraphicsScene *scene, QDomElement &domEleme
             }
             catch (const VExceptionBadId &)
             { // Possible case. Parent was deleted, but the node object is still here.
-                qDebug() << "Broken relation. Parent was deleted, but the piece path object is still here. Piece "
+                qCDebug(vXML) << "Broken relation. Parent was deleted, but the piece path object is still here. Piece "
                             "path id ="
                          << initData.id << ".";
                 return; // Just ignore
@@ -4576,6 +4586,12 @@ void VPattern::PrepareForParse(const Document &parse)
         sceneDetail->clear();
         sceneDetail->InitOrigins();
         data->ClearForFullParse();
+        // An orphaned node (its source object already deleted) still holds its id on this element, but nothing
+        // recreates it as a live object during this parse, so nothing else advances the id generator past it.
+        // Resync against every id physically present, not just the ones this parse manages to rebuild, or a
+        // freshly minted id can collide with one that only survives on such an element.
+        data->UpdateId(MaxRecordedId());
+        qCDebug(vXML, "Id counter resynced to %u after full parse reset.", data->getId());
         nameActivPP.clear();
         patternPieces.clear();
 

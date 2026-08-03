@@ -49,11 +49,11 @@
 #include <QDomText>
 #include <QFile>
 #include <QFileInfo>
+#include <QHash>
 #include <QIODevice>
 #include <QMessageLogger>
 #include <QObject>
 #include <QRegularExpression>
-#include <QSet>
 #include <QStringList>
 #include <QTemporaryFile>
 #include <QTextDocument>
@@ -660,21 +660,30 @@ auto VDomDocument::UniqueTagText(const QString &tagName, const QString &defVal) 
  */
 void VDomDocument::TestUniqueId() const
 {
-    QSet<quint32> ids;
+    QHash<quint32, QDomElement> ids;
     CollectId(documentElement(), ids);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VDomDocument::CollectId(const QDomElement &node, QSet<quint32> &ids) const
+void VDomDocument::CollectId(const QDomElement &node, QHash<quint32, QDomElement> &ids) const
 {
     if (node.hasAttribute(VDomDocument::AttrId))
     {
         const quint32 id = GetParametrId(node);
-        if (ids.contains(id))
+        if (auto it = ids.constFind(id); it != ids.constEnd())
         {
-            throw VExceptionWrongId(tr("This id (%1) is not unique.").arg(id), node);
+            VExceptionWrongId excep(tr("This id (%1) is not unique.").arg(id), node);
+
+            // Report both occurrences: seeing only the later one leaves no way to tell which is the stale
+            // element and which is the new one, and that ambiguity is a dead end for the next report.
+            QString firstTag;
+            QTextStream stream(&firstTag);
+            it.value().save(stream, 4);
+            excep.AddMoreInformation(tr("First occurrence of this id:\n%1").arg(firstTag));
+
+            throw excep;
         }
-        ids.insert(id);
+        ids.insert(id, node);
     }
 
     for (QDomNode n = node.firstChild(); not n.isNull(); n = n.nextSibling())
@@ -692,6 +701,28 @@ void VDomDocument::CollectId(const QDomElement &node, QSet<quint32> &ids) const
 void VDomDocument::RefreshElementIdCache()
 {
     m_elementIdCache = RefreshCache(documentElement());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief MaxRecordedId return the highest id attribute present anywhere in the document.
+ *
+ * Unlike TestUniqueId(), this never throws and counts ids on elements whose referenced object no longer
+ * exists (e.g. an orphaned modeling node left behind after its source curve was deleted). A full parse must
+ * resync the id generator against this value, not just against the ids of objects it manages to rebuild: an id
+ * that only survives on such an orphaned element is still spent and must not be handed out again.
+ *
+ * @return highest id found, or NULL_ID if the document has none.
+ */
+auto VDomDocument::MaxRecordedId() const -> quint32
+{
+    quint32 maxId = NULL_ID;
+    const QList<quint32> ids = m_elementIdCache.keys();
+    for (quint32 id : ids)
+    {
+        maxId = qMax(maxId, id);
+    }
+    return maxId;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

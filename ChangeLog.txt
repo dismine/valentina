@@ -1,4 +1,5 @@
 # Valentina 1.0.5 (unreleased)
+- [Valentina app] Fixed a crash caused by a full reparse reissuing an id already used by an orphaned node left behind after its source curve or point was deleted; the id generator now accounts for every id present in the file, not just the ones it manages to rebuild as live objects.
 - [Valentina app / Tape app / Puzzle app] Stopped Qt painting warnings from popping an error dialog. A single broken paint device raised one modal box per painting call and per repaint, from inside the painting code itself, which could end in a crash.
 - [Valentina app] Fixed the tool history being lost after renaming a pattern piece, which left the History dialog empty and crashed the application when it was opened.
 - [Tape app] Fixed a crash while reading a measurement file whose format was not recognized as either individual or multisize.

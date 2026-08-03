@@ -140,6 +140,7 @@ public:
     void TestUniqueId() const;
 
     void RefreshElementIdCache();
+    auto MaxRecordedId() const -> quint32;
     static void RemoveAllChildren(QDomElement &domElement);
 
     static auto Compare(const QDomElement &element1, const QDomElement &element2) -> bool;
@@ -149,7 +150,7 @@ protected:
     auto setTagText(QDomElement &domElement, const QString &text) -> bool;
     auto UniqueTag(const QString &tagName) const -> QDomElement;
     auto UniqueTagText(const QString &tagName, const QString &defVal = QString()) const -> QString;
-    void CollectId(const QDomElement &node, QSet<quint32> &ids) const;
+    void CollectId(const QDomElement &node, QHash<quint32, QDomElement> &ids) const;
 
     static void ValidateVersion(const QString &version);
 

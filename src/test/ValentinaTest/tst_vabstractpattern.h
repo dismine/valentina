@@ -42,6 +42,8 @@ public:
 
 private slots:
     void ChangeNamePPKeepsLocalHistory();
+    void MaxRecordedIdCountsOrphanedNodes();
+    void MaxRecordedIdOnEmptyDocumentIsZero();
 
 private:
     Q_DISABLE_COPY_MOVE(TST_VAbstractPattern) // NOLINT
