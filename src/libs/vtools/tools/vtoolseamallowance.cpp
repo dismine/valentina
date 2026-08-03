@@ -87,6 +87,7 @@
 #include <QMenu>
 #include <QMessageBox>
 #include <QPainterPath>
+#include <QThread>
 #include <QTimer>
 #include <QUuid>
 #include <QtConcurrent/QtConcurrentRun>
@@ -523,7 +524,9 @@ void UpdatePathExcludeState(const VPiecePath &path)
 //---------------------------------------------------------------------------------------------------------------------
 VToolSeamAllowance::~VToolSeamAllowance()
 {
+    qCDebug(vTool, "VToolSeamAllowance::~VToolSeamAllowance: id=%u destroying.", m_id);
     CancelLabelRendering();
+    qCDebug(vTool, "VToolSeamAllowance::~VToolSeamAllowance: id=%u destroyed.", m_id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1294,11 +1297,19 @@ void VToolSeamAllowance::UpdateDetailLabel()
                 info.labelData = detail.GetPieceLabelData();
 
                 m_pieceLabelInfoStale = false;
+                qCDebug(vTool, "VToolSeamAllowance::UpdateDetailLabel: id=%u dispatching background label update.",
+                        m_id);
                 m_pieceUpdateInfoWatcher->setFuture(QtConcurrent::run(
                     [this, info, detail]()
                     {
+                        qCDebug(vTool,
+                                "VToolSeamAllowance::UpdateDetailLabel: id=%u background label update start on "
+                                "thread %p.",
+                                m_id, static_cast<void *>(QThread::currentThreadId()));
                         m_dataLabel->SetPieceName(detail.GetName());
                         m_dataLabel->UpdatePieceLabelData(info);
+                        qCDebug(vTool, "VToolSeamAllowance::UpdateDetailLabel: id=%u background label update done.",
+                                m_id);
                     }));
             }
         }
@@ -1334,11 +1345,19 @@ void VToolSeamAllowance::UpdatePatternInfo()
                 VPieceLabelInfo const info = VTextManager::PrepareLabelInfo(doc, getData(), false);
 
                 m_patternLabelInfoStale = false;
+                qCDebug(vTool, "VToolSeamAllowance::UpdatePatternInfo: id=%u dispatching background label update.",
+                        m_id);
                 m_patternUpdateInfoWatcher->setFuture(QtConcurrent::run(
                     [this, info, detail]()
                     {
+                        qCDebug(vTool,
+                                "VToolSeamAllowance::UpdatePatternInfo: id=%u background label update start on "
+                                "thread %p.",
+                                m_id, static_cast<void *>(QThread::currentThreadId()));
                         m_patternInfo->SetPieceName(detail.GetName());
                         m_patternInfo->UpdatePatternLabelData(info);
+                        qCDebug(vTool, "VToolSeamAllowance::UpdatePatternInfo: id=%u background label update done.",
+                                m_id);
                     }));
             }
         }
@@ -1617,6 +1636,16 @@ auto VToolSeamAllowance::shape() const -> QPainterPath
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::CancelLabelRendering()
 {
+    const bool patternFutureRunning = not m_patternUpdateInfoWatcher->isFinished();
+    const bool pieceFutureRunning = not m_pieceUpdateInfoWatcher->isFinished();
+    if (patternFutureRunning || pieceFutureRunning)
+    {
+        qCDebug(vTool,
+                "VToolSeamAllowance::CancelLabelRendering: id=%u waiting for in-flight background label update "
+                "(pattern=%d, piece=%d).",
+                m_id, patternFutureRunning, pieceFutureRunning);
+    }
+
     m_patternUpdateInfoWatcher->cancel();
     m_pieceUpdateInfoWatcher->cancel();
 

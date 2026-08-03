@@ -5410,11 +5410,14 @@ void MainWindow::GradationChanged()
     if (UpdateMeasurements(m_m, m_currentDimensionA, m_currentDimensionB, m_currentDimensionC, reopened))
     {
         doc->LiteParseTree(Document::FullLiteParse);
+        qCDebug(vMainWindow, "GradationChanged: lite parse tree done.");
         StoreDimensions();
+        qCDebug(vMainWindow, "GradationChanged: dimensions stored.");
         // A size switch is a discrete user action: refresh piece geometry immediately instead of
         // waiting for the debounce timer started by the parse. RefreshPieceGeometry() also refreshes
         // the piece labels, so the previous eager DimensionsChanged() emit is no longer needed.
         doc->RefreshPieceGeometry();
+        qCDebug(vMainWindow, "GradationChanged: piece geometry refreshed.");
     }
     else
     {
