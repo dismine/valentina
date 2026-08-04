@@ -68,10 +68,14 @@ constexpr int heartbeatIntervalMs = 1000;
 // Windows stamps a window "Not Responding" after 5 s of an unresponsive message pump. Matching it means the log says
 // what the user saw.
 constexpr qint64 stallThresholdMs = 5000;
+// A monitor pass longer than this means the whole process was off the CPU, not that the GUI thread is slow. Well above
+// any scheduling delay a loaded machine can add to a 1 s sleep, and well below the shortest nap worth noticing.
+constexpr qint64 processFrozenGapMs = 5000;
 // One pathological machine must not flood the crash backend. Stalls keep being logged after the cap.
 constexpr int maxDumpsPerSession = 3;
 
-std::atomic<qint64> heartbeat{0}; // Written by the GUI thread, read by the monitor.
+// Written by the GUI thread, read by the monitor - which also writes it once, to discard a suspend gap.
+std::atomic<qint64> heartbeat{0};
 std::atomic<bool> monitoring{false};
 
 QString logPath; // NOLINT(cppcoreguidelines-avoid-non-const-global-variables) - set once before the monitor starts.
@@ -353,9 +357,15 @@ void MonitorMainThread()
     MainThreadCpu lastCpu{};
 #endif
 
+    qint64 lastPass = QDateTime::currentMSecsSinceEpoch();
+
     while (monitoring.load(std::memory_order_relaxed))
     {
         QThread::msleep(static_cast<unsigned long>(heartbeatIntervalMs));
+
+        const qint64 now = QDateTime::currentMSecsSinceEpoch();
+        const qint64 sincePass = now - lastPass;
+        lastPass = now;
 
         const qint64 beat = heartbeat.load(std::memory_order_relaxed);
 
@@ -368,7 +378,23 @@ void MonitorMainThread()
             continue;
         }
 
-        const qint64 elapsed = QDateTime::currentMSecsSinceEpoch() - beat;
+        // Sleep, hibernate and modern standby freeze every thread, this one included, and the wall clock keeps running
+        // through it. On resume the heartbeat is hours old while the GUI thread is perfectly healthy - a report arrived
+        // exactly this way, an 11 792 119 ms "stall" whose only sample sits in Qt's idle PeekMessage loop burning no
+        // CPU at all. What gives it away is this loop: our own 1 s sleep took 3 hours, which no amount of main-thread
+        // stalling can do. Restart the measurement instead of reporting the nap; a thread that really is stuck simply
+        // never beats again and is caught 5 s later.
+        if (sincePass > processFrozenGapMs)
+        {
+            heartbeat.store(now, std::memory_order_relaxed);
+            stalled = false;
+            AppendStallToLog(QStringLiteral("[%1:WATCHDOG] Process frozen for %2 ms (system sleep), heartbeat reset.")
+                                 .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyy.MM.dd hh:mm:ss")))
+                                 .arg(sincePass));
+            continue;
+        }
+
+        const qint64 elapsed = now - beat;
 
         // Checked every pass rather than once when the stall starts: a dialog opened during a genuine stall must not
         // silence the rest of it, and a dialog closed during one must not keep it silenced.
