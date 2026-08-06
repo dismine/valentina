@@ -492,11 +492,19 @@ auto VAbstractCubicBezier::GetParmT(qreal length) const -> qreal
     constexpr qreal eps = ToPixel(0.00001, Unit::Mm);
     qreal parT = 0.5;
     qreal step = parT;
-    qreal splLength = 0;
 
-    do
+    forever
     {
-        splLength = RealLengthByT(parT);
+        const qreal splLength = RealLengthByT(parT);
+
+        // Check convergence for the *current* parT before nudging it any further. Stepping past
+        // this point and only then testing the old splLength would return a parT that was never
+        // actually verified against the target length.
+        if (qAbs(splLength - length) <= eps)
+        {
+            break;
+        }
+
         step /= 2.0;
 
         if (qFuzzyIsNull(step))
@@ -505,7 +513,7 @@ auto VAbstractCubicBezier::GetParmT(qreal length) const -> qreal
         }
 
         splLength > length ? parT -= step : parT += step;
-    } while (qAbs(splLength - length) > eps);
+    }
 
     return parT;
 }
