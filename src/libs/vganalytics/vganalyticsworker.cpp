@@ -256,13 +256,16 @@ auto VGAnalyticsWorker::SendAnalytics() -> QNetworkReply *
     m_request.setRawHeader("Connection", connection.toUtf8());
     m_request.setHeader(QNetworkRequest::ContentLengthHeader, requestJson.length());
 
-    if (m_measurementId.isEmpty())
+    if (m_measurementId.isEmpty() || m_apiSecret.isEmpty())
     {
-        LogMessage(VGAnalytics::Error, QStringLiteral("google analytics measurement id was not set!"));
-    }
-    if (m_apiSecret.isEmpty())
-    {
-        LogMessage(VGAnalytics::Error, QStringLiteral("google analytics api seceret was not set!"));
+        // The id/secret are compile-time constants (see def.h) and are always set once VGAnalytics::Init()
+        // has run, so getting here means SendAnalytics() was reached before Init() - e.g. the app quit
+        // (AboutToQuit() -> SendAppCloseStatistic()) before InitOptions() reached its VGAnalytics::Init()
+        // call. Not a real misconfiguration, so just drop the message instead of popping a warning dialog
+        // and POSTing a request with blank credentials.
+        LogMessage(VGAnalytics::Debug, QStringLiteral("google analytics not initialized yet, dropping message"));
+        m_messageQueue.dequeue();
+        return nullptr;
     }
 
     auto requestUrl = QStringLiteral("https://www.google-analytics.com/mp/collect?measurement_id=%1&api_secret=%2");
