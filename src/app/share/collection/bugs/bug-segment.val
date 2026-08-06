@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern labelPrefix="en">
+    <!--Pattern created with Valentina v1.1.0.711 (https://smart-pattern.com.ua/).-->
+    <version>1.2.0</version>
+    <unit>cm</unit>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <previewCalculations/>
+    <draw name="bug">
+        <calculation>
+            <point id="1" mx="0.4" my="0.65" name="A" showLabel="true" type="single" x="0.79375" y="1.05833"/>
+            <point angle="90" basePoint="1" id="2" length="20" lineColor="#464646" mx="0.4" my="0.65" name="A1" showLabel="true" type="endLine" typeLine="dotLine"/>
+            <point angle="180" basePoint="1" id="3" length="22" lineColor="#464646" mx="0.4" my="0.65" name="A2" showLabel="true" type="endLine" typeLine="dotLine"/>
+            <point firstPoint="3" id="4" mx="0.4" my="0.65" name="A3" secondPoint="2" showLabel="true" type="pointOfIntersection"/>
+            <point angle="180" basePoint="3" id="5" length="5" lineColor="#464646" mx="0.4" my="0.65" name="A4" showLabel="true" type="endLine" typeLine="dotLine"/>
+            <point firstPoint="1" id="6" length="8" lineColor="#464646" mx="0.4" my="0.65" name="A5" secondPoint="2" showLabel="true" type="alongLine" typeLine="dotLine"/>
+            <point firstPoint="3" id="7" mx="0.4" my="0.65" name="A6" secondPoint="6" showLabel="true" type="pointOfIntersection"/>
+            <line firstPoint="5" id="8" lineColor="#464646" secondPoint="7" typeLine="dotLine"/>
+            <line firstPoint="3" id="9" lineColor="#464646" secondPoint="7" typeLine="dotLine"/>
+            <line firstPoint="7" id="10" lineColor="#464646" secondPoint="4" typeLine="dotLine"/>
+            <line firstPoint="4" id="11" lineColor="#464646" secondPoint="2" typeLine="dotLine"/>
+            <spline aScale="0" color="#00ff00" id="12" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="185" angle2="5" length1="0" length2="Line_A4_A6/3.001" pSpline="5"/>
+                <pathPoint angle1="262.5" angle2="82.5" length1="Line_A4_A6/3.001" length2="Line_A6_A3/3.001" pSpline="7"/>
+                <pathPoint angle1="277.5" angle2="97.5" length1="Line_A6_A3/3.001" length2="5.63998" pSpline="4"/>
+            </spline>
+            <point curveName1="A4_A3__ls" curveName2="A4_A3__rs" id="13" length="SplPath_A4_A3_Seg_1+(SplPath_A4_A3_Seg_2/2)" mx="0.4" my="0.65" name="A7" segment1Id="14" segment1Mx="0.4" segment1My="0.65" segment2Id="15" segment2Mx="0.4" segment2My="0.4" showLabel="true" splinePath="12" type="cutSplinePath"/>
+        </calculation>
+        <modeling/>
+        <details/>
+        <groups/>
+    </draw>
+</pattern>

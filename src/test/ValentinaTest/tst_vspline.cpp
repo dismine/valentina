@@ -755,6 +755,19 @@ void TST_VSpline::TestParametrT_data()
     } while (step <= 1);
 
     QTest::newRow(qUtf8Printable(QStringLiteral("Curve 2. Bug.").arg(step))) << spl << 4.7813492845686536;
+
+    // See file <root>/src/app/share/collection/bugs/bug-segment.val. The target length below lands so close to
+    // RealLengthByT(0.5) that the bisection loop used to converge on the very first probe. The old
+    // code checked convergence against the *pre-step* splLength but returned the *post-step* parT,
+    // so it answered 0.25 instead of the already-converged 0.5, putting the cut point far from
+    // where the formula asked for.
+    p1 = VPointF(-801.4960629921261, -262.36233070866143, QStringLiteral("p1"), 5, 10);
+    p4 = VPointF(-801.4960629921261, -715.90563779527565, QStringLiteral("p4"), 5, 10);
+    spl = VSpline(p1, QPointF(-781.76954487119792, -412.20011185544843),
+                  QPointF(-781.76954487119804, -566.0678566484886), p4);
+
+    QTest::newRow("Curve 3. Target length lands on the first bisection probe (regression).")
+        << spl << 227.41579727162303;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
