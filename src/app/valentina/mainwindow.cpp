@@ -7305,6 +7305,11 @@ void MainWindow::Preferences()
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, &MainWindow::ToolBarDrawTools);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, [this]() { emit doc->FullUpdateFromFile(); });
         connect(dlg.data(), &DialogPreferences::UpdateProperties, this, [this]() { emit doc->CheckLayout(); });
+        // Queued: a full reparse tears down the tool tree and scene. Running it synchronously would
+        // happen in the middle of DialogPreferences::Apply(), before it finishes applying the rest of
+        // the settings and before UpdateProperties() fires. Defer it until Apply() has returned.
+        connect(dlg.data(), &DialogPreferences::RequestFullParse, this, &MainWindow::FullParseFile,
+                Qt::QueuedConnection);
         connect(dlg.data(), &DialogPreferences::UpdateProperties, ui->view,
                 &VMainGraphicsView::ResetScrollingAnimation);
         QGuiApplication::restoreOverrideCursor();
