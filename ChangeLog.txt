@@ -1,5 +1,6 @@
 # Valentina 1.0.5 (unreleased)
 - [Valentina app] Fixed a point cut by length along a multi-segment curve sometimes landing far from the requested distance, depending on the curve's approximation scale.
+- [Valentina app] Fixed the pattern not recalculating after changing the default curve approximation scale in Preferences; curves and everything computed from their length kept using the old value until the file was reopened.
 - [Valentina app] Fixed a crash when fitting the view to the current pattern piece while one of its tools had no scene, which made its bounding rectangle undefined.
 - [Valentina app] Fixed a crash caused by a full reparse reissuing an id already used by an orphaned node left behind after its source curve or point was deleted; the id generator now accounts for every id present in the file, not just the ones it manages to rebuild as live objects.
 - [Valentina app / Tape app / Puzzle app] Stopped Qt painting warnings from popping an error dialog. A single broken paint device raised one modal box per painting call and per repaint, from inside the painting code itself, which could end in a crash.

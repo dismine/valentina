@@ -191,6 +191,8 @@ auto PreferencesPatternPage::Apply() -> QStringList
         settings->SetOpenGLRender(ui->checkBoxOpenGLRender->isChecked());
     }
 
+    m_curveApproximationScaleChanged =
+        not qFuzzyCompare(settings->GetCurveApproximationScale(), ui->doubleSpinBoxCurveApproximation->value());
     settings->SetCurveApproximationScale(ui->doubleSpinBoxCurveApproximation->value());
     settings->SetLineWidth(UnitConvertor(ui->doubleSpinBoxLineWidth->value(), m_oldLineUnit, Unit::Mm));
     VAbstractValApplication::VApp()->getSceneView()->SetAntialiasing(ui->graphOutputCheck->isChecked());

@@ -159,6 +159,13 @@ void DialogPreferences::Apply()
     preferences += m_patternPage->Apply();
     preferences += m_pathPage->Apply();
 
+    if (m_patternPage->IsCurveApproximationScaleChanged())
+    {
+        // Curve length/geometry depends on this value. Existing curves and everything computed from
+        // them (cached length variables, points cut by length, etc.) need a full reparse to pick it up.
+        emit RequestFullParse();
+    }
+
     if (not preferences.isEmpty())
     {
         const QString text =
