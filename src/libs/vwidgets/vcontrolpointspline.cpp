@@ -235,6 +235,13 @@ void VControlPointSpline::Init()
     controlLine->SetBoldLine(false);
     // controlLine->setFlag(QGraphicsItem::ItemStacksBehindParent, true);
     controlLine->setVisible(false);
+
+    // Do not rely on itemChange(ItemSceneHasChanged) here: when parent already belongs to a
+    // scene, Qt delivers that notification from inside QGraphicsItem's own base constructor,
+    // where virtual dispatch still resolves to the base no-op, not VScenePoint::itemChange. That
+    // leaves the point undersized until an unrelated view rescale happens to refresh it. Size it
+    // explicitly instead, same as InitPointItem() does for plain support points.
+    RefreshScale();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
