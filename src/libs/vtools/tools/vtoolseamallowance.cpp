@@ -2264,30 +2264,8 @@ void VToolSeamAllowance::ApplyPieceGeometry(const VToolSeamAllowanceGeometry &ge
 
     if (VAbstractApplication::VApp()->IsAppInGUIMode())
     {
-        QTimer::singleShot(100ms,
-                           Qt::CoarseTimer,
-                           this,
-                           [this, updateChildren]() -> void
-                           {
-                               qCDebug(vTool,
-                                       "VToolSeamAllowance::RefreshGeometry: id=%u deferred label/grainline "
-                                       "update starting.",
-                                       m_id);
-                               this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
-                               UpdateDetailLabel();
-                               UpdatePatternInfo();
-                               UpdateGrainline();
-                               UpdateExcludeState();
-                               if (updateChildren)
-                               {
-                                   UpdateInternalPaths();
-                               }
-                               this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-                               qCDebug(vTool,
-                                       "VToolSeamAllowance::RefreshGeometry: id=%u deferred label/grainline "
-                                       "update done.",
-                                       m_id);
-                           });
+        QTimer::singleShot(100ms, Qt::CoarseTimer, this,
+                           [this, updateChildren]() -> void { DeferredLabelGrainlineUpdate(updateChildren); });
     }
     else
     {
@@ -2310,6 +2288,23 @@ void VToolSeamAllowance::ApplyPieceGeometry(const VToolSeamAllowanceGeometry &ge
     // Now we can start checking validity of the grainline
     m_geometryIsReady = true;
     qCDebug(vTool, "VToolSeamAllowance::RefreshGeometry: id=%u synchronous part done.", m_id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::DeferredLabelGrainlineUpdate(bool updateChildren)
+{
+    qCDebug(vTool, "VToolSeamAllowance::RefreshGeometry: id=%u deferred label/grainline update starting.", m_id);
+    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, false);
+    UpdateDetailLabel();
+    UpdatePatternInfo();
+    UpdateGrainline();
+    UpdateExcludeState();
+    if (updateChildren)
+    {
+        UpdateInternalPaths();
+    }
+    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+    qCDebug(vTool, "VToolSeamAllowance::RefreshGeometry: id=%u deferred label/grainline update done.", m_id);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

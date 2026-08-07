@@ -257,6 +257,7 @@ private:
 
     void UpdateExcludeState();
     void UpdateInternalPaths();
+    void DeferredLabelGrainlineUpdate(bool updateChildren);
 
     auto FindLabelGeometry(const VPatternLabelData &labelData, const QVector<quint32> &pins, qreal &rotationAngle,
                            qreal &labelWidth, qreal &labelHeight, QPointF &pos) -> VPieceItem::MoveTypes;
