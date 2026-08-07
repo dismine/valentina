@@ -587,12 +587,14 @@ auto VAbstractApplication::GetPlaceholderTranslator() -> QSharedPointer<VTransla
         return QSharedPointer<VTranslator>(new VTranslator);
     }
 
-    auto translator = QSharedPointer<VTranslator>(new VTranslator);
-    const QString appQmDir = VAbstractApplication::translationsPath(settings->GetLocale());
-    const QString qmFileName = QStringLiteral("valentina_") + pieceLabelLocale;
-    if (not IsExcludedQmFile(qmFileName) && translator->load(qmFileName, appQmDir))
     {
-        return translator;
+        auto translator = QSharedPointer<VTranslator>(new VTranslator);
+        const QString appQmDir = VAbstractApplication::translationsPath(settings->GetLocale());
+        const QString qmFileName = QStringLiteral("valentina_") + pieceLabelLocale;
+        if (not IsExcludedQmFile(qmFileName) && translator->load(qmFileName, appQmDir))
+        {
+            return translator;
+        }
     }
 
     return QSharedPointer<VTranslator>(new VTranslator);

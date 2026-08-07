@@ -1639,14 +1639,18 @@ auto VToolSeamAllowance::shape() const -> QPainterPath
 //---------------------------------------------------------------------------------------------------------------------
 void VToolSeamAllowance::CancelLabelRendering()
 {
-    const bool patternFutureRunning = not m_patternUpdateInfoWatcher->isFinished();
-    const bool pieceFutureRunning = not m_pieceUpdateInfoWatcher->isFinished();
-    if (patternFutureRunning || pieceFutureRunning)
     {
-        qCDebug(vTool,
-                "VToolSeamAllowance::CancelLabelRendering: id=%u waiting for in-flight background label update "
-                "(pattern=%d, piece=%d).",
-                m_id, patternFutureRunning, pieceFutureRunning);
+        const bool patternFutureRunning = not m_patternUpdateInfoWatcher->isFinished();
+        const bool pieceFutureRunning = not m_pieceUpdateInfoWatcher->isFinished();
+        if (patternFutureRunning || pieceFutureRunning)
+        {
+            qCDebug(vTool,
+                    "VToolSeamAllowance::CancelLabelRendering: id=%u waiting for in-flight background label update "
+                    "(pattern=%d, piece=%d).",
+                    m_id,
+                    patternFutureRunning,
+                    pieceFutureRunning);
+        }
     }
 
     m_patternUpdateInfoWatcher->cancel();
