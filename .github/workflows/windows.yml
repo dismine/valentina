@@ -19,7 +19,6 @@ env:
   QBS_VERSION: 3.1.1
   INNOSETUP_VERSION: 6.7.1
   VALENTINA_VERSION: 1_1_0
-  ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
   # Set the URL as an environment variable for the cache key
   SIMPLYSIGN_URL: 'https://files.certum.eu/software/SimplySignDesktop/Windows/9.4.3.90/SimplySignDesktop-9.4.3.90-64-bit-en.msi'
 
@@ -320,21 +319,39 @@ jobs:
         shell: bash
         run: qbs build -p ValentinaSetup ${{ env.COMMON_QBS_ARGS }}
 
-      - name: Commit hash
-        id: commit
-        if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
-        uses: prompt/actions-commit-hash@v4
-
       - name: Deploy
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
         shell: pwsh
         env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_DEV_BUCKET: ${{ secrets.R2_DEV_BUCKET }}
           VALENTINA_BUILD_FOLDER: ${{ runner.temp }}\build
-          APPVEYOR_BUILD_FOLDER: ${{ env.SOURCE_DIR }}
-          APPVEYOR_REPO_BRANCH: ${{ github.base_ref || github.ref_name }}
-          APPVEYOR_REPO_COMMIT: ${{ steps.commit.outputs.hash }}
           PYTHON: ${{ env.Python3_ROOT_DIR }}
           TARGET_PLATFORM: "Windows10+"
           ARCH: x64
           COMPILER: msvc
-        run: ./scripts/appveyor-deploy.ps1
+        run: |
+          $ErrorActionPreference = "Stop"
+          $InstallRoot = "$env:VALENTINA_BUILD_FOLDER\release\install-root\valentina"
+          $Installer = "$InstallRoot\ValentinaInstaller.exe"
+          if (-not (Test-Path $Installer)) {
+              Write-Error "Installer not found at $Installer"
+              exit 1
+          }
+          $Type = "$env:TARGET_PLATFORM-$env:COMPILER-$env:ARCH-$env:QT_VERSION-${{ github.ref_name }}-${{ github.sha }}"
+          $Portable = "$env:VALENTINA_BUILD_FOLDER\release\install-root\valentina-portable-$Type.7z"
+
+          & "$env:PYTHON\python.exe" scripts/deploy.py upload `
+            --branch "${{ github.ref_name }}" --platform windows `
+            --name "valentina-$Type.exe" "$Installer"
+          if ($LastExitCode -ne 0) { exit $LastExitCode }
+
+          Remove-Item -Path $Installer
+          & "$env:PYTHON\python.exe" scripts/deploy.py pack "$InstallRoot" "$Portable"
+          if ($LastExitCode -ne 0) { exit $LastExitCode }
+
+          & "$env:PYTHON\python.exe" scripts/deploy.py upload `
+            --branch "${{ github.ref_name }}" --platform windows "$Portable"
+          if ($LastExitCode -ne 0) { exit $LastExitCode }
