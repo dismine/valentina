@@ -504,4 +504,4 @@ jobs:
             --branch "${{ github.ref_name }}" \
             --platform linux \
             --name "valentina-${TARGET_PLATFORM}-${ARCH}-${{ github.ref_name }}-${{ github.sha }}.AppImage" \
-            "${{ github.workspace }}/Valentina-continuous-x86_64.AppImage"
+            "$GITHUB_WORKSPACE/Valentina-continuous-x86_64.AppImage"
