@@ -410,6 +410,10 @@ jobs:
           python3 --version
           pip3 install --upgrade -r share/ci/requirements-ci.txt
 
+      - name: Test deploy.py
+        shell: bash
+        run: python3 scripts/test_deploy.py
+
       - name: Restore ccache
         uses: actions/cache@v5
         with:
