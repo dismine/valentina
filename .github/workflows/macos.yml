@@ -13,7 +13,6 @@ on:
 env:
   SOURCE_DIR: ${{ github.workspace }}
   VALENTINA_VERSION: 1_1_0
-  ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
   # Should contain the base64 of the certificate
   MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
   # Should contain the full certificate name, such as Developer ID Application: Your Name (K1234567)
@@ -399,21 +398,27 @@ jobs:
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
         run: xcrun stapler staple $GITHUB_WORKSPACE/build/release/install-root/share/valentina.dmg || true  
 
-      - name: Commit hash
-        id: commit
-        if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
-        uses: prompt/actions-commit-hash@v4
-
       - name: Deploy
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
         env:
-          VALENTINA_WORKING_DIR: ${{ github.workspace }}
-          CIRRUS_BRANCH: ${{ github.base_ref || github.ref_name }}
-          CIRRUS_CHANGE_IN_REPO: ${{ steps.commit.outputs.hash }}
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_DEV_BUCKET: ${{ secrets.R2_DEV_BUCKET }}
           TARGET_PLATFORM: ${{ matrix.qt.target }}
           ARCH: x64
           QT_VERSION: ${{ matrix.qt.label }}
-        run: ./scripts/cirrus-deploy.sh
+        shell: bash
+        run: |
+          BUNDLE_SUFFIX=""
+          if [ "$MULTI_BUNDLE" = "true" ]; then
+            BUNDLE_SUFFIX="-multibundle"
+          fi
+          python3 scripts/deploy.py upload \
+            --branch "${{ github.ref_name }}" \
+            --platform macos \
+            --name "valentina-${TARGET_PLATFORM}-${QT_VERSION}-${ARCH}-${{ github.ref_name }}${BUNDLE_SUFFIX}-${{ github.sha }}.dmg" \
+            "${{ github.workspace }}/build/release/install-root/share/valentina.dmg"
   arm_build:
     name: MacOS ${{ matrix.qt.build_target }} arm Qt ${{ matrix.qt.install }} (${{ matrix.bundle.label }})
     needs: changes
@@ -749,19 +754,25 @@ jobs:
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
         run: xcrun stapler staple $GITHUB_WORKSPACE/build/release/install-root/share/valentina.dmg || true  
 
-      - name: Commit hash
-        id: commit
-        if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
-        uses: prompt/actions-commit-hash@v4
-
       - name: Deploy
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
         env:
-          VALENTINA_WORKING_DIR: ${{ github.workspace }}
-          CIRRUS_BRANCH: ${{ github.base_ref || github.ref_name }}
-          CIRRUS_CHANGE_IN_REPO: ${{ steps.commit.outputs.hash }}
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_DEV_BUCKET: ${{ secrets.R2_DEV_BUCKET }}
           TARGET_PLATFORM: ${{ matrix.qt.target }}
           ARCH: armv8
           QT_VERSION: ${{ matrix.qt.label }}
-        run: ./scripts/cirrus-deploy.sh
+        shell: bash
+        run: |
+          BUNDLE_SUFFIX=""
+          if [ "$MULTI_BUNDLE" = "true" ]; then
+            BUNDLE_SUFFIX="-multibundle"
+          fi
+          python3 scripts/deploy.py upload \
+            --branch "${{ github.ref_name }}" \
+            --platform macos \
+            --name "valentina-${TARGET_PLATFORM}-${QT_VERSION}-${ARCH}-${{ github.ref_name }}${BUNDLE_SUFFIX}-${{ github.sha }}.dmg" \
+            "${{ github.workspace }}/build/release/install-root/share/valentina.dmg"
 
