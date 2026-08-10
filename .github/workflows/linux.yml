@@ -490,10 +490,14 @@ jobs:
       - name: Deploy AppImage
         if: github.event_name != 'pull_request'
         env:
-          ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
-          # Mapping to what appimage-deploy.sh expects
-          CIRRUS_WORKING_DIR: ${{ github.workspace }}
-          CIRRUS_BRANCH: ${{ github.ref_name }}
-          CIRRUS_CHANGE_IN_REPO: ${{ github.sha }}
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_DEV_BUCKET: ${{ secrets.R2_DEV_BUCKET }}
         shell: bash
-        run: ./scripts/appimage-deploy.sh
+        run: |
+          python3 scripts/deploy.py upload \
+            --branch "${{ github.ref_name }}" \
+            --platform linux \
+            --name "valentina-${TARGET_PLATFORM}-${ARCH}-${{ github.ref_name }}-${{ github.sha }}.AppImage" \
+            "${{ github.workspace }}/Valentina-continuous-x86_64.AppImage"
