@@ -1,39 +1,68 @@
+#!/usr/bin/env python3
+"""Pack and upload Valentina development builds to Cloudflare R2."""
+
 import argparse
-import datetime
 import os
 import pathlib
-import re
 import shutil
+import subprocess
 import sys
-import py7zr
+from datetime import datetime, timezone
 
-import dropbox
-from dropbox import DropboxOAuth2FlowNoRedirect
-from dropbox.exceptions import ApiError, AuthError
-from dropbox.files import WriteMode
-
-APP_KEY = "v33m5tjz020h7uy"
+BRANCH_ROOTS = {"master": "stable", "develop": "edge"}
+PLATFORMS = ("windows", "macos", "linux")
+SHA_WIDTH = 12
+R2_ENV_VARS = ("R2_ACCOUNT_ID", "R2_ACCESS_KEY_ID", "R2_SECRET_ACCESS_KEY", "R2_DEV_BUCKET")
 
 
-def run_auth():
+def branch_root(branch):
+    """Map a git ref name onto its bucket root. Unknown branches are fatal."""
+    if branch not in BRANCH_ROOTS:
+        raise SystemExit(
+            f"Refusing to deploy from branch {branch!r}; expected one of {sorted(BRANCH_ROOTS)}."
+        )
+    return BRANCH_ROOTS[branch]
+
+
+def format_build_folder(commit_timestamp, commit_sha):
+    """Build the per-commit folder name: UTC minute plus a fixed-width sha.
+
+    The sha is sliced here rather than taken from `git --format=%h` because
+    core.abbrev=auto varies with object count -- 9 in a full local clone of this
+    repo, fewer under actions/checkout's default fetch-depth of 1. A disagreement
+    would split one commit's artifacts across two folders with no error anywhere.
     """
-    Use to generate a refresh token
-    """
-    auth_flow = DropboxOAuth2FlowNoRedirect(APP_KEY, use_pkce=True, token_access_type='offline')
+    stamp = datetime.fromtimestamp(int(commit_timestamp), timezone.utc)  # not datetime.UTC: 3.10
+    return f"{stamp:%Y%m%dT%H%M}-{commit_sha[:SHA_WIDTH]}"
 
-    authorize_url = auth_flow.start()
-    print(f"1. Go to: {authorize_url}")
-    print("2. Click \"Allow\" (you might have to log in first).")
-    print("3. Copy the authorization code.")
-    auth_code = input("Enter the authorization code here: ").strip()
 
-    try:
-        oauth_result = auth_flow.finish(auth_code)
-    except Exception as e:
-        print(f'Error: {e}')
-        exit(1)
+def read_commit(cwd=None):
+    """Return (committer_timestamp, full_sha) for HEAD."""
+    result = subprocess.run(
+        ["git", "show", "-s", "--format=%ct%n%H", "HEAD"],
+        capture_output=True,
+        text=True,
+        check=True,
+        cwd=cwd,
+    )
+    timestamp, sha = result.stdout.split()
+    return timestamp, sha
 
-    print(f"Refresh token: {oauth_result.refresh_token}")
+
+def object_key(branch, platform, name, commit_timestamp, commit_sha):
+    if platform not in PLATFORMS:
+        raise SystemExit(f"Unknown platform {platform!r}; expected one of {list(PLATFORMS)}.")
+    folder = format_build_folder(commit_timestamp, commit_sha)
+    return f"{branch_root(branch)}/{folder}/{platform}/{name}"
+
+
+def r2_config(env=None):
+    """Read R2 credentials from the environment. Never echoes values."""
+    env = os.environ if env is None else env
+    missing = [name for name in R2_ENV_VARS if not env.get(name)]
+    if missing:
+        raise SystemExit(f"Missing required environment variable(s): {', '.join(missing)}")
+    return {name: env[name] for name in R2_ENV_VARS}
 
 
 def run_pack(source, destination):
@@ -43,6 +72,8 @@ def run_pack(source, destination):
     :param destination: path to resulting zip archive. The path must include a format suffix.
     Example: '/path/to/folder.zip'
     """
+    import py7zr  # deferred: only CI installs it, developer checkouts do not have it
+
     base = os.path.basename(destination)
     name = base.split('.')[0]
 
@@ -67,181 +98,57 @@ def run_pack(source, destination):
         print("Unsupported archive format.")
 
 
-def run_upload(refresh_token, file, path):
-    with dropbox.Dropbox(oauth2_refresh_token=refresh_token, app_key=APP_KEY) as dbx:
-        # Check that the access token is valid
-        try:
-            dbx.users_get_current_account()
-        except AuthError:
-            sys.exit("ERROR: Invalid access token; try re-generating an "
-                     "access token from the app console on the web.")
+def run_upload(files, branch, platform, name=None):
+    branch_root(branch)  # fail on an unusable branch before anything else is read
+    if name is not None and len(files) > 1:
+        raise SystemExit("--name cannot be combined with multiple files.")
 
-        print(f"Uploading {file} to Dropbox as {path}...")
-        try:
-            with open(file, "rb") as f:
-                dbx.files_upload(f.read(), path, mode=WriteMode('overwrite'))
-        except ApiError as err:
-            # This checks for the specific error where a user doesn't have
-            # enough Dropbox space quota to upload this file
-            if (err.error.is_path() and
-                    err.error.get_path().reason.is_insufficient_space()):
-                sys.exit("ERROR: Cannot deploy; insufficient space.")
-            elif err.user_message_text:
-                print(err.user_message_text)
-                sys.exit()
-            else:
-                print(err)
-                sys.exit()
-        print("Successfully uploaded")
+    config = r2_config()
 
-def folder_mod_time(dbx, folder):
-    folder_mod_times = []
-    entries = dbx.files_list_folder(folder.path_display)
-    # Loop through each item in the folder list
-    for result in entries.entries:
-        # Check if the item is a file
-        if isinstance(result, dropbox.files.FileMetadata):
-            # Get the parent folder path of the file
-            parent_folder_path = result.path_display.rsplit('/', 1)[0]
-            # Get the modification time of the file
-            file_mod_time = result.client_modified
-            # Add the file modification time to the dictionary for the parent folder
-            folder_mod_times.append(file_mod_time)
+    import boto3  # deferred: only CI installs it, developer checkouts do not have it
 
-    folder_mod_times.append(datetime.datetime(1900, 1, 1, 0, 0, 0))
-    # Compute the maximum modification time across all files in each folder
-    max_mod_time = max(folder_mod_times)
-    return max_mod_time
+    client = boto3.client(
+        "s3",
+        endpoint_url=f"https://{config['R2_ACCOUNT_ID']}.r2.cloudflarestorage.com",
+        aws_access_key_id=config["R2_ACCESS_KEY_ID"],
+        aws_secret_access_key=config["R2_SECRET_ACCESS_KEY"],
+        region_name="auto",
+    )
+    bucket = config["R2_DEV_BUCKET"]
+    timestamp, sha = read_commit()
 
-# Define a function to delete a file or folder recursively
-def delete_file_or_folder(dbx, item):
-    try:
-        # Check if the path is a file
-        if isinstance(item, dropbox.files.FileMetadata):
-            dbx.files_delete_v2(item.path_display)
-            print(f"Deleted file: {item.path_display}")
-        # Check if the path is a folder
-        elif isinstance(item, dropbox.files.FolderMetadata):
-            # Recursively delete all files and subfolders inside the folder
-            for entry in dbx.files_list_folder(item.path_display).entries:
-                delete_file_or_folder(dbx, entry)
-            # Delete the folder itself
-            dbx.files_delete_v2(item.path_display)
-            print(f"Deleted folder: {item.path_display}")
-    except dropbox.exceptions.ApiError as e:
-        print(f"Error deleting {item.path_display}: {e}")
+    for path in files:
+        if not os.path.isfile(path):
+            raise SystemExit(f"Not a file: {path}")
+        leaf = name or os.path.basename(path)
+        key = object_key(branch, platform, leaf, timestamp, sha)
+        print(f"Uploading {path} -> s3://{bucket}/{key}")
+        client.upload_file(path, bucket, key)  # handles multipart for 150 MB+ artifacts
 
-def run_clean(refresh_token):
-    with dropbox.Dropbox(oauth2_refresh_token=refresh_token, app_key=APP_KEY) as dbx:
-        # Check that the access token is valid
-        try:
-            dbx.users_get_current_account()
-        except AuthError:
-            sys.exit("ERROR: Invalid access token; try re-generating an "
-                     "access token from the app console on the web.")
-
-        clean_folders = ["/1.0.x/MacOS", "/1.0.x/Windows", "/1.0.x/Linux", "/1.1.x/MacOS", "/1.1.x/Windows", "/1.1.x/Linux"]
-        arhive_types = [r'^valentina-Windows10\+-mingw-x64-Qt.*-(?:develop|master)-[a-f0-9]{40}\.exe$',
-                        r'^valentina-Windows7\+-mingw-x86-Qt.*-(?:develop|master)-[a-f0-9]{40}\.exe$',
-                        r'^valentina-Windows10\+-msvc-x64-Qt.*-(?:develop|master)-[a-f0-9]{40}\.exe$',
-                        r'^valentina-Windows7\+-msvc-x86-Qt.*-(?:develop|master)-[a-f0-9]{40}\.exe$',
-                        r'^valentina-portable-Windows10\+-mingw-x64-Qt.*-(?:develop|master)-[a-f0-9]{40}\.7z$',
-                        r'^valentina-portable-Windows7\+-mingw-x86-Qt.*-(?:develop|master)-[a-f0-9]{40}\.7z$',
-                        r'^valentina-portable-Windows10\+-msvc-x64-Qt.*-(?:develop|master)-[a-f0-9]{40}\.7z$',
-                        r'^valentina-portable-Windows7\+-msvc-x86-Qt.*-(?:develop|master)-[a-f0-9]{40}\.7z$',
-                        r'^valentina-MacOS_10_15\+-Qt.*-x64-(?:develop|master)-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-MacOS_10_15\+-Qt.*-x64-(?:develop|master)-multibundle-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-MacOS_12\+-Qt.*-x64-master-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-MacOS_12\+-Qt.*-x64-master-multibundle-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-MacOS_12\+-Qt.*-arm.*-master-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-MacOS_12\+-Qt.*-arm.*-master-multibundle-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-MacOS_13\+-Qt.*-x64-develop-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-MacOS_13\+-Qt.*-x64-develop-multibundle-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-MacOS_13\+-Qt.*-arm.*-develop-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-MacOS_13\+-Qt.*-arm.*-develop-multibundle-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-MacOS_11\+-Qt.*-arm.*-(?:develop|master)-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-MacOS_11\+-Qt.*-arm.*-(?:develop|master)-multibundle-[a-f0-9]{40}\.dmg$',
-                        r'^valentina-Linux-x86_64-(?:develop|master)-[a-f0-9]{40}\.AppImage$']
-
-        item_types = {}
-
-        for path in clean_folders:
-            result = dbx.files_list_folder(path)
-            for entry in result.entries:
-                for archive_type in arhive_types:
-                    if re.search(archive_type, entry.name):
-                        if archive_type not in item_types:
-                            item_types[archive_type] = []
-                        item_types[archive_type].append(entry)
-                        break
-
-        to_delete = []
-        for items in item_types.values():
-            # Separate files and folders
-            files = [item for item in items if isinstance(item, dropbox.files.FileMetadata)]
-            folders = [item for item in items if isinstance(item, dropbox.files.FolderMetadata)]
-
-            # Sort files by modification time
-            files = sorted(files, key=lambda f: f.client_modified)
-
-            # Sort folders by last modified time on server
-            folders = sorted(folders, key=lambda f: folder_mod_time(dbx, f))
-
-            # Keep only the latest item of each type
-            to_delete += files[:-1] + folders[:-1]
-
-        # Delete the remaining items
-        for item in to_delete:
-            delete_file_or_folder(dbx, item)
+    print("Successfully uploaded")
 
 
-def parse_args(args=None):
-    parser = argparse.ArgumentParser(prog='app')
-    cmds = parser.add_subparsers(help='commands')
+def parse_args(argv=None):
+    parser = argparse.ArgumentParser(prog="deploy")
+    commands = parser.add_subparsers(dest="command", required=True)
 
-    def cmd(name, **kw):
-        p = cmds.add_parser(name, **kw)
-        p.set_defaults(cmd=name)
-        p.arg = lambda *a, **kw: p.add_argument(*a, **kw) and p
-        p.exe = lambda f: p.set_defaults(exe=f) and p
+    pack = commands.add_parser("pack", help="Compress a folder")
+    pack.add_argument("source", help="Path to folder or file")
+    pack.add_argument("destination", help="Path to the resulting archive")
 
-        # global options
-        # p.arg('-s', '--settings', help='application settings')
-        return p
+    upload = commands.add_parser("upload", help="Upload build artifacts to R2")
+    upload.add_argument("--branch", required=True, help="Git ref name, e.g. master")
+    upload.add_argument("--platform", required=True, choices=PLATFORMS)
+    upload.add_argument("--name", default=None, help="Override the object's leaf filename")
+    upload.add_argument("files", nargs="+", help="Files to upload")
 
-    cmd('auth', help='Authorize application') \
-        .exe(lambda _: (
-             run_auth()
-        ))
+    args = parser.parse_args(argv)
 
-    cmd('pack', help='Compress folder') \
-        .arg('source', type=str, help='Path to folder or file') \
-        .arg('destination', type=str, help='Path to resulting zip archive') \
-        .exe(lambda a: (
-             run_pack(a.source, a.destination)
-        ))
-
-    cmd('upload', help='Upload file with override') \
-        .arg('refresh_token', type=str, help='Refresh token') \
-        .arg('file', type=str, help='Path to file') \
-        .arg('path', type=str, help='Path on disk') \
-        .exe(lambda a: (
-             run_upload(a.refresh_token, a.file, a.path)
-        ))
-
-    cmd('clean', help='Clean stale artifacts') \
-        .arg('refresh_token', type=str, help='Refresh token') \
-        .exe(lambda a: (
-             run_clean(a.refresh_token)
-    ))
-
-    args = parser.parse_args(args)
-    if not hasattr(args, 'exe'):
-        parser.print_usage()
+    if args.command == "pack":
+        run_pack(args.source, args.destination)
     else:
-        args.exe(args)
+        run_upload(args.files, args.branch, args.platform, args.name)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parse_args()
-
