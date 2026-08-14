@@ -565,10 +565,20 @@ void VGAnalytics::CheckCountryCodeAsync(std::function<void(const QString &)> cal
                          finish(country);
                      });
 
-    // Abort the pending request on app shutdown so the SSL thread can clean up before
-    // QApplication destructs. Without this, the SSL backend thread may fire events into
-    // freed Qt objects, causing EXC_BAD_ACCESS.
-    QObject::connect(qApp, &QCoreApplication::aboutToQuit, state->reply, [state]() { state->reply->abort(); });
+    // Abort the pending request on app shutdown. abort() re-emits finished(), which would run
+    // finish() and deleteLater() these objects while Windows' Schannel backend thread may still be
+    // mid-handshake on them, racing a use-after-free on that thread. Disconnect first so abort()'s
+    // finished() is a no-op and the objects are simply leaked for the remainder of the (already
+    // exiting) process instead of freed out from under the backend thread.
+    QObject::connect(qApp,
+                     &QCoreApplication::aboutToQuit,
+                     state->reply,
+                     [state]()
+                     {
+                         state->reply->disconnect();
+                         state->timer->disconnect();
+                         state->reply->abort();
+                     });
 
     state->timer->start(5s);
 }
