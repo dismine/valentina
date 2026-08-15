@@ -36,10 +36,6 @@
 #include <QMessageBox> // For QT_REQUIRE_VERSION
 #include <QTimer>
 
-#ifdef Q_OS_WIN
-#include <clocale>
-#endif
-
 #ifdef CRASH_REPORTING
 #include "../vmisc/crashhandler/crashhandler.h"
 #include "version.h"
@@ -63,10 +59,6 @@ using namespace Qt::Literals::StringLiterals;
 //---------------------------------------------------------------------------------------------------------------------
 auto main(int argc, char *argv[]) -> int
 {
-#ifdef Q_OS_WIN
-    std::setlocale(LC_ALL, ".UTF8");
-#endif
-
     Q_INIT_RESOURCE(cursor);     // NOLINT
     Q_INIT_RESOURCE(toolcursor); // NOLINT
     Q_INIT_RESOURCE(icon);       // NOLINT

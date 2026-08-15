@@ -23,6 +23,7 @@
 #include <memory>
 #include <sstream>
 #include <QScopedPointer>
+#include <QString>
 
 #if ((defined(__clang__) && (__clang_major__ >= 9)) || (!defined(__clang__) && defined(__GNUC__) && __GNUC__ >= 9) \
      || (defined(_MSC_VER) && (_MSC_VER >= 1920)))
@@ -84,7 +85,13 @@ auto dxfRW::read(DRW_Interface *interface_, bool ext) -> bool
      || (defined(_MSC_VER) && (_MSC_VER < 1920)))
     filestr.open(fileName.c_str(), std::ios_base::in | std::ios::binary);
 #else
+#if defined(_MSC_VER)
+    // On Windows, std::filesystem::path built from a narrow char string decodes it using the
+    // system ANSI codepage, not UTF-8, mangling non-Latin paths. Go through UTF-16 explicitly.
+    auto filePath = std::filesystem::path(QString::fromUtf8(fileName.c_str()).toStdWString());
+#else
     auto filePath = std::filesystem::path(fileName);
+#endif
     filestr.open(filePath, std::ios_base::in | std::ios::binary);
 #endif
     if (!filestr.is_open() || !filestr.good())
@@ -149,7 +156,11 @@ auto dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool
      || (defined(_MSC_VER) && (_MSC_VER < 1920)))
         filestr.open(fileName.c_str(), std::ios_base::out | std::ios::binary | std::ios::trunc);
 #else
+#if defined(_MSC_VER)
+        auto filePath = std::filesystem::path(QString::fromUtf8(fileName.c_str()).toStdWString());
+#else
         auto filePath = std::filesystem::path(fileName);
+#endif
         filestr.open(filePath, std::ios_base::out | std::ios::binary | std::ios::trunc);
 #endif
 
@@ -172,7 +183,11 @@ auto dxfRW::write(DRW_Interface *interface_, DRW::Version ver, bool bin) -> bool
      || (defined(_MSC_VER) && (_MSC_VER < 1920)))
         filestr.open(fileName.c_str(), std::ios_base::out | std::ios::trunc);
 #else
+#if defined(_MSC_VER)
+        auto filePath = std::filesystem::path(QString::fromUtf8(fileName.c_str()).toStdWString());
+#else
         auto filePath = std::filesystem::path(fileName);
+#endif
         filestr.open(filePath, std::ios_base::out | std::ios::trunc);
 #endif
 
