@@ -18,6 +18,11 @@
 # KDE directory preferences
 .directory
 
+# Local AI assistant tool config
+.claude/
+.serena/
+.superpowers/
+
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
 
