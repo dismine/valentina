@@ -39,7 +39,7 @@ class DialogEditLabel;
 
 struct VLabelTemplateLine;
 
-class QMenu;
+class VScrollableMenu;
 class VAbstractPattern;
 class VPiece;
 class VContainer;
@@ -75,7 +75,7 @@ private:
     // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(DialogEditLabel) // NOLINT
     Ui::DialogEditLabel *ui;
-    QMenu *m_placeholdersMenu;
+    VScrollableMenu *m_placeholdersMenu;
     const VAbstractPattern *m_doc;
     const VContainer *m_data;
 

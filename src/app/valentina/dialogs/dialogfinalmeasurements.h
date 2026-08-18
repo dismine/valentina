@@ -42,6 +42,7 @@ class DialogFinalMeasurements;
 }
 
 class QAbstractButton;
+class VScrollableMenu;
 
 class DialogFinalMeasurements : public QDialog
 {
@@ -84,7 +85,7 @@ private:
     int formulaBaseHeight{0};
     bool m_isInitialized{false};
 
-    QMenu *m_searchHistory;
+    VScrollableMenu *m_searchHistory;
 
     QMultiHash<VShortcutAction, QAbstractButton *> m_shortcuts{};
     QHash<QAbstractButton *, QString> m_serachButtonTooltips{};

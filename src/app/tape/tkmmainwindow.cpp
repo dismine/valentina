@@ -40,6 +40,7 @@
 #include "../vmisc/theme/themeDef.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vsysexits.h"
+#include "../vwidgets/vscrollablemenu.h"
 #include "dialogs/dialogabouttape.h"
 #include "dialogs/dialogknownmeasurementscsvcolumns.h"
 #include "knownmeasurements/vknownmeasurements.h"
@@ -111,7 +112,7 @@ enum class MUnits : qint8
 TKMMainWindow::TKMMainWindow(QWidget *parent)
   : VAbstractMainWindow(parent),
     ui(new Ui::TKMMainWindow),
-    m_searchHistory(new QMenu(this))
+    m_searchHistory(new VScrollableMenu(this))
 {
     ui->setupUi(this);
 
@@ -2035,7 +2036,6 @@ void TKMMainWindow::InitSearch()
                 m_search->Find(ui->lineEditFind->text());
             });
 
-    m_searchHistory->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
     InitSearchHistory();
     ui->pushButtonSearch->setMenu(m_searchHistory);
     ui->pushButtonSearch->setProperty("hasMenu", true);

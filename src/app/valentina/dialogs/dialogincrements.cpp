@@ -43,6 +43,7 @@
 #include "../vpatterndb/variables/vlinelength.h"
 #include "../vpatterndb/vtranslatevars.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
+#include "../vwidgets/vscrollablemenu.h"
 #include "dialogincrementscsvcolumns.h"
 #include "ui_dialogincrements.h"
 
@@ -118,8 +119,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     m_data(data),
     m_patternDoc(doc),
     m_completeData(doc->GetCompleteData()),
-    m_searchHistory(new QMenu(this)),
-    m_searchHistoryPC(new QMenu(this))
+    m_searchHistory(new VScrollableMenu(this)),
+    m_searchHistoryPC(new VScrollableMenu(this))
 {
     ui->setupUi(this);
 
@@ -1186,9 +1187,6 @@ void DialogIncrements::InitSearch()
                 m_searchPC->SetUseUnicodePreperties(checked);
                 m_searchPC->Find(ui->lineEditFindPC->text());
             });
-
-    m_searchHistory->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
-    m_searchHistoryPC->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
 
     InitIncrementsSearchHistory();
     InitPreviewCalculationsSearchHistory();

@@ -51,6 +51,7 @@ class VMeasurement;
 class QAbstractButton;
 class QUuid;
 class VKnownMeasurements;
+class VScrollableMenu;
 
 class TMainWindow final : public VAbstractMainWindow
 {
@@ -188,7 +189,7 @@ private:
     bool m_isInitialized{false};
     bool m_mIsReadOnly{false};
     QTimer *m_gradation;
-    QMenu *m_searchHistory;
+    VScrollableMenu *m_searchHistory;
 
     QVector<QObject *> m_hackedWidgets{};
 

@@ -1,4 +1,5 @@
 # Valentina 1.1.1 (unreleased)
+- [Valentina app / Tape app] Fixed placeholder and search-history menus (label template editor, increments/final measurements search, known measurements search) splitting into multiple columns instead of scrolling on some Linux styles, cutting off long lists.
 - [Valentina app / Tape app / Puzzle app] Fixed exporting DXF files to a path containing non-Latin characters failing with "No such file or directory" on Windows; the codepage used to decode the path no longer depends on the system locale.
 - [Valentina app / Tape app / Puzzle app] Fixed a rare crash on shutdown when a second instance connected to an already-running one and quit while the background country lookup was still in flight: aborting the request could delete it out from under Windows' TLS backend thread.
 - [Valentina app] Fixed a point cut by length along a multi-segment curve sometimes landing far from the requested distance, depending on the curve's approximation scale.

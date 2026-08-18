@@ -38,6 +38,7 @@
 
 class VIndividualMeasurements;
 class QxtCsvModel;
+class VScrollableMenu;
 
 namespace Ui
 {
@@ -116,8 +117,8 @@ private:
 
     QVector<QPair<QString, QString>> m_renameList{};
 
-    QMenu *m_searchHistory;
-    QMenu *m_searchHistoryPC;
+    VScrollableMenu *m_searchHistory;
+    VScrollableMenu *m_searchHistoryPC;
 
     QMultiHash<VShortcutAction, QAbstractButton *> m_shortcuts{};
     QHash<QAbstractButton *, QString> m_serachButtonTooltips{};
