@@ -367,6 +367,7 @@ jobs:
             --git-hash    "g$CRASH_SHORT_SHA" \
             --commit-sha  "$CRASH_COMMIT_SHA" \
             --qt-version  "$CRASH_QT_VERSION" \
+            --arch        x64 \
             $MULTIBUNDLE_FLAG
 
       - name: Strip debug symbols
@@ -733,6 +734,7 @@ jobs:
             --git-hash    "g$CRASH_SHORT_SHA" \
             --commit-sha  "$CRASH_COMMIT_SHA" \
             --qt-version  "$CRASH_QT_VERSION" \
+            --arch        armv8 \
             $MULTIBUNDLE_FLAG
 
       - name: Strip debug symbols

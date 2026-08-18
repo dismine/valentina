@@ -494,7 +494,8 @@ jobs:
             --app-version $VALENTINA_VERSION \
             --git-hash g$CRASH_SHORT_SHA \
             --commit-sha $CRASH_COMMIT_SHA \
-            --qt-version $CRASH_QT_VERSION
+            --qt-version $CRASH_QT_VERSION \
+            --arch $ARCH
           $GITHUB_WORKSPACE/build/AppDir/usr/local/bin/crashpad_handler --version
           du -h $GITHUB_WORKSPACE/build/AppDir/usr/local/bin/crashpad_handler
           find $GITHUB_WORKSPACE/build/AppDir -name '*.debug' -delete
