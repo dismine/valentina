@@ -44,18 +44,20 @@ Usage:
         --git-hash    <hash>    \\
         --commit-sha  <sha>     \\
         --qt-version  <qtver>   \\
+        --arch        <arch>    \\
         [--platform   <plat>]   \\
         [--multibundle]
 
 Examples:
     python upload_symbols.py \\
         --build-dir ./build --app-version 1_1_0 --git-hash gf4373acf9 \\
-        --commit-sha f4373acf9c1234567890abcdef1234567890abcd --qt-version Qt_6_2
+        --commit-sha f4373acf9c1234567890abcdef1234567890abcd --qt-version Qt_6_2 \\
+        --arch x86_64
 
     python upload_symbols.py \\
         --build-dir ./build --app-version 1_1_0 --git-hash gf4373acf9 \\
         --commit-sha f4373acf9c1234567890abcdef1234567890abcd --qt-version Qt_6_10 \\
-        --platform macos --multibundle
+        --arch armv8 --platform macos --multibundle
 """
 
 import argparse
@@ -145,9 +147,16 @@ TARGETS_BY_PLATFORM: dict[str, list[Target]] = {
 R2_EXTENSION: dict[str, str] = {"linux": "debug", "windows": "pdb", "macos": "dsym.zip"}
 
 
-def r2_symbol_key(platform: str, commit_sha: str, application: str) -> str:
+def r2_symbol_key(platform: str, commit_sha: str, arch: str, application: str) -> str:
     """
     Build the R2 object key for a durably-stored debug artifact.
+
+    The arch segment is always present, even for platforms that only ever
+    build one architecture today (Linux, Windows) -- macOS already ships two
+    (x64, armv8) from independent CI jobs that would otherwise upload to the
+    identical key and silently clobber each other's symbols. Keeping every
+    platform's key shape uniform means a future second architecture on any
+    platform needs no key-format change, just a new --arch value.
 
     Filenames are normalized to '<application>.<ext>' rather than the raw
     on-disk name (which varies for versioned Linux shared libraries), per
@@ -155,7 +164,7 @@ def r2_symbol_key(platform: str, commit_sha: str, application: str) -> str:
     """
     if platform not in R2_EXTENSION:
         raise SystemExit(f"[ERROR] Unknown platform {platform!r} for R2 key construction.")
-    return f"builds/{commit_sha}/{platform}/{application}.{R2_EXTENSION[platform]}"
+    return f"builds/{commit_sha}/{platform}/{arch}/{application}.{R2_EXTENSION[platform]}"
 
 
 R2_SYMBOL_STORE_ENV_VARS = (
@@ -198,6 +207,7 @@ def upload_to_symbol_store(
     artifact_path: Path,
     platform: str,
     commit_sha: str,
+    arch: str,
 ) -> None:
     """
     Upload one already-located artifact to the R2 debug-symbol store.
@@ -205,7 +215,7 @@ def upload_to_symbol_store(
     Runs after upload_target() (BugSplat) has already succeeded for this target,
     so a failed R2 upload here doesn't take down the BugSplat copy already made.
     """
-    key = r2_symbol_key(platform, commit_sha, target.application)
+    key = r2_symbol_key(platform, commit_sha, arch, target.application)
 
     scratch_dir: Path | None = None
 
@@ -445,6 +455,14 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Qt version with underscores, e.g. Qt_6_10.",
     )
     parser.add_argument(
+        "--arch",
+        required=True, metavar="ARCH",
+        help="Build architecture, e.g. x86_64, x64, armv8. Always part of the R2 "
+             "debug-symbol-store key, even on platforms that build only one "
+             "architecture today, so a platform gaining a second one later needs "
+             "no key-format change.",
+    )
+    parser.add_argument(
         "--platform",
         choices=["linux", "windows", "macos"],
         default=None, metavar="PLATFORM",
@@ -526,6 +544,7 @@ def main() -> None:
             artifact_path = artifact_path,
             platform      = platform,
             commit_sha    = args.commit_sha,
+            arch          = args.arch,
         )
 
     print(f"[INFO] Uploaded : {uploaded} / {len(targets)} target(s).")

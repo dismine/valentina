@@ -285,7 +285,8 @@ jobs:
             --app-version $env:VALENTINA_VERSION `
             --git-hash    "g$shortSha" `
             --commit-sha  $commitSha `
-            --qt-version  $qtVersion
+            --qt-version  $qtVersion `
+            --arch        x64
 
       - name: Strip debug symbols
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'

@@ -25,13 +25,23 @@ def test_r2_extension_covers_all_platforms():
 
 
 def test_r2_symbol_key_uses_normalized_application_name():
-    key = us.r2_symbol_key("windows", SHA40, "valentina")
-    assert key == f"builds/{SHA40}/windows/valentina.pdb"
+    key = us.r2_symbol_key("windows", SHA40, "x64", "valentina")
+    assert key == f"builds/{SHA40}/windows/x64/valentina.pdb"
 
 
 def test_r2_symbol_key_macos_uses_dsym_zip_extension():
-    key = us.r2_symbol_key("macos", SHA40, "qmuparserlib")
-    assert key == f"builds/{SHA40}/macos/qmuparserlib.dsym.zip"
+    key = us.r2_symbol_key("macos", SHA40, "armv8", "qmuparserlib")
+    assert key == f"builds/{SHA40}/macos/armv8/qmuparserlib.dsym.zip"
+
+
+def test_r2_symbol_key_keeps_intel_and_arm_macos_builds_separate():
+    # The bug this guards against: two independent CI jobs (intel_build,
+    # arm_build) upload the same application for the same commit under the
+    # same platform. Without an arch segment they'd collide on one key and
+    # silently overwrite each other's symbols.
+    intel_key = us.r2_symbol_key("macos", SHA40, "x64", "valentina")
+    arm_key = us.r2_symbol_key("macos", SHA40, "armv8", "valentina")
+    assert intel_key != arm_key
 
 
 def test_r2_symbol_store_config_returns_all_four_values():
@@ -64,18 +74,29 @@ def test_parse_args_requires_commit_sha():
         us.parse_args,
         [
             "--build-dir", ".", "--app-version", "1_0_0",
-            "--git-hash", "gabc123", "--qt-version", "Qt_6_8",
+            "--git-hash", "gabc123", "--qt-version", "Qt_6_8", "--arch", "x86_64",
         ],
     )
 
 
-def test_parse_args_accepts_commit_sha():
+def test_parse_args_requires_arch():
+    expect_systemexit(
+        us.parse_args,
+        [
+            "--build-dir", ".", "--app-version", "1_0_0",
+            "--git-hash", "gabc123", "--qt-version", "Qt_6_8", "--commit-sha", SHA40,
+        ],
+    )
+
+
+def test_parse_args_accepts_commit_sha_and_arch():
     args = us.parse_args([
         "--build-dir", ".", "--app-version", "1_0_0",
         "--git-hash", "gabc123", "--qt-version", "Qt_6_8",
-        "--commit-sha", SHA40,
+        "--commit-sha", SHA40, "--arch", "x86_64",
     ])
     assert args.commit_sha == SHA40
+    assert args.arch == "x86_64"
 
 
 def test_heavy_dependencies_are_not_imported_at_module_scope():
@@ -94,11 +115,11 @@ def test_upload_to_symbol_store_uploads_plain_file_by_key():
     us.upload_to_symbol_store(
         client=StubClient(), bucket="val-debug-symbols", target=target,
         artifact_path=us.Path("/tmp/does-not-matter/valentina.debug"),
-        platform="linux", commit_sha=SHA40,
+        platform="linux", commit_sha=SHA40, arch="x86_64",
     )
     assert calls == [
         ("/tmp/does-not-matter/valentina.debug", "val-debug-symbols",
-         f"builds/{SHA40}/linux/valentina.debug")
+         f"builds/{SHA40}/linux/x86_64/valentina.debug")
     ]
 
 
@@ -124,13 +145,13 @@ def test_upload_to_symbol_store_zips_directory_bundles():
     us.upload_to_symbol_store(
         client=StubClient(), bucket="val-debug-symbols", target=target,
         artifact_path=bundle_dir,
-        platform="macos", commit_sha=SHA40,
+        platform="macos", commit_sha=SHA40, arch="armv8",
     )
     assert len(calls) == 1
     path, bucket, key = calls[0]
     assert path.endswith("valentina.dsym.zip")
     assert bucket == "val-debug-symbols"
-    assert key == f"builds/{SHA40}/macos/valentina.dsym.zip"
+    assert key == f"builds/{SHA40}/macos/armv8/valentina.dsym.zip"
 
     # The zip must preserve the bundle's own directory name as its top-level
     # entry (e.g. "Valentina.app.dSYM/Info.plist"), not just the bundle's
@@ -157,6 +178,7 @@ def test_upload_to_symbol_store_wraps_client_errors_as_systemexit():
         us.upload_to_symbol_store,
         client=FailingClient(), bucket="b", target=target,
         artifact_path=us.Path("/tmp/x/valentina.debug"), platform="linux", commit_sha=SHA40,
+        arch="x86_64",
     )
 
 
@@ -179,14 +201,14 @@ def test_upload_to_symbol_store_cleans_up_scratch_dir_on_upload_failure():
     expect_systemexit(
         us.upload_to_symbol_store,
         client=FailingClient(), bucket="b", target=target,
-        artifact_path=bundle_dir, platform="macos", commit_sha=SHA40,
+        artifact_path=bundle_dir, platform="macos", commit_sha=SHA40, arch="armv8",
     )
     assert len(seen_paths) == 1
     assert not us.Path(seen_paths[0]).parent.exists()
 
 
 def test_r2_symbol_key_rejects_unknown_platform():
-    expect_systemexit(us.r2_symbol_key, "solaris", SHA40, "valentina")
+    expect_systemexit(us.r2_symbol_key, "solaris", SHA40, "x86_64", "valentina")
 
 
 def test_validate_commit_sha_accepts_full_40_char_hex_sha():
