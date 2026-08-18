@@ -49,6 +49,7 @@ class TabFoldLine;
 class VisPieceSpecialPoints;
 class FancyTabBar;
 class VUndoCommand;
+class VScrollableMenu;
 
 class DialogSeamAllowance final : public DialogTool
 {
@@ -273,7 +274,7 @@ private:
 
     QString m_defLabelValue{};
 
-    QMenu *m_placeholdersMenu;
+    VScrollableMenu *m_placeholdersMenu;
 
     QMap<QString, QPair<QString, QString>> m_gradationPlaceholders{};
 

@@ -51,6 +51,7 @@
 #include "../vpatterndb/vpiecepath.h"
 #include "../vwidgets/fancytabbar/fancytabbar.h"
 #include "../vwidgets/vmousewheelwidgetadjustmentguard.h"
+#include "../vwidgets/vscrollablemenu.h"
 #include "dialogpatternmaterials.h"
 #include "dialogpiecepath.h"
 #include "dialogplacelabel.h"
@@ -181,7 +182,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, VAbstractPatter
     m_timerFoldHeight(new QTimer(this)),
     m_timerFoldWidth(new QTimer(this)),
     m_timerFoldCenter(new QTimer(this)),
-    m_placeholdersMenu(new QMenu(this))
+    m_placeholdersMenu(new VScrollableMenu(this))
 {
     ui->setupUi(this);
 
@@ -4059,7 +4060,6 @@ void DialogSeamAllowance::InitPieceTab()
     InitGradationPlaceholders();
     InitGradationPlaceholdersMenu();
 
-    m_placeholdersMenu->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
     uiTabPaths->pushButtonGradationPlaceholder->setMenu(m_placeholdersMenu);
     uiTabPaths->pushButtonGradationPlaceholder->setProperty("hasMenu", true);
     uiTabPaths->pushButtonGradationPlaceholder->style()->unpolish(uiTabPaths->pushButtonGradationPlaceholder);

@@ -22,6 +22,8 @@ VLib {
         "vmaingraphicsview.cpp",
         "vmousewheelwidgetadjustmentguard.cpp",
         "vmousewheelwidgetadjustmentguard.h",
+        "vscrollablemenu.cpp",
+        "vscrollablemenu.h",
         "vsponsorcredits.cpp",
         "vsponsorcredits.h",
         "vtoolbuttonpopup.cpp",

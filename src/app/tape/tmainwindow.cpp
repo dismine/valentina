@@ -54,6 +54,7 @@
 #include "../vpatterndb/vcontainer.h"
 #include "../vtools/dialogs/support/dialogeditwrongformula.h"
 #include "../vwidgets/vaspectratiopixmaplabel.h"
+#include "../vwidgets/vscrollablemenu.h"
 #include "dialogs/dialogabouttape.h"
 #include "dialogs/dialogdimensioncustomnames.h"
 #include "dialogs/dialogdimensionlabels.h"
@@ -256,7 +257,7 @@ TMainWindow::TMainWindow(QWidget *parent)
   : VAbstractMainWindow(parent),
     ui(new Ui::TMainWindow),
     m_gradation(new QTimer(this)),
-    m_searchHistory(new QMenu(this))
+    m_searchHistory(new VScrollableMenu(this))
 {
     ui->setupUi(this);
 
@@ -5389,7 +5390,6 @@ void TMainWindow::InitSearch()
                 m_search->Find(ui->lineEditFind->text());
             });
 
-    m_searchHistory->setStyleSheet(QStringLiteral("QMenu { menu-scrollable: 1; }"));
     InitSearchHistory();
     ui->pushButtonSearch->setMenu(m_searchHistory);
     ui->pushButtonSearch->setProperty("hasMenu", true);

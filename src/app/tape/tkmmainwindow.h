@@ -47,6 +47,7 @@ class VPatternImage;
 class QCompleter;
 class QxtCsvModel;
 class QListWidget;
+class VScrollableMenu;
 
 class TKMMainWindow final : public VAbstractMainWindow
 {
@@ -129,7 +130,7 @@ private:
     QString m_curFile{};
     bool m_isInitialized{false};
     bool m_mIsReadOnly{false};
-    QMenu *m_searchHistory;
+    VScrollableMenu *m_searchHistory;
     QSharedPointer<VLockGuard<char>> m_lock{nullptr};
     QSharedPointer<VTableSearch> m_search{};
     VKnownMeasurementsDocument *m_m{nullptr};
