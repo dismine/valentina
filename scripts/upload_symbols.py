@@ -61,11 +61,13 @@ Examples:
 """
 
 import argparse
+import lzma
 import os
 import shutil
 import string
 import subprocess
 import sys
+import tarfile
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
@@ -144,7 +146,11 @@ TARGETS_BY_PLATFORM: dict[str, list[Target]] = {
 
 # ── R2 debug-symbol store ──────────────────────────────────────────────────────
 
-R2_EXTENSION: dict[str, str] = {"linux": "debug", "windows": "pdb", "macos": "dsym.zip"}
+R2_EXTENSION: dict[str, str] = {"linux": "debug.xz", "windows": "pdb.xz", "macos": "dsym.tar.xz"}
+
+# Max xz compression -- this runs once per CI build, not per user, so the slower
+# EXTREME pass is worth it for the smaller durable copy.
+XZ_PRESET = 9 | lzma.PRESET_EXTREME
 
 
 def r2_symbol_key(platform: str, commit_sha: str, arch: str, application: str) -> str:
@@ -217,25 +223,23 @@ def upload_to_symbol_store(
     """
     key = r2_symbol_key(platform, commit_sha, arch, target.application)
 
-    scratch_dir: Path | None = None
+    # Scratch path outside the tree being packaged -- it must not itself become
+    # something the workflow's blanket debug-file-strip step has to know to skip.
+    scratch_dir = Path(tempfile.mkdtemp())
 
     if target.is_dir:
-        # macOS .dSYM is a bundle (directory); R2 objects are flat files. Zip to a
-        # scratch path outside the tree being packaged -- it must not itself become
-        # something the workflow's blanket debug-file-strip step has to know to skip.
-        scratch_dir = Path(tempfile.mkdtemp())
-        zip_path = scratch_dir / f"{target.application}.{R2_EXTENSION['macos']}"
-        # root_dir/base_dir (rather than just root_dir=artifact_path) so the bundle's
-        # own directory name is preserved as the zip's top-level entry -- otherwise
-        # the zip would contain only the bundle's *contents*, losing the name that
+        # macOS .dSYM is a bundle (directory); R2 objects are flat files. arcname
+        # (rather than adding artifact_path itself) preserves the bundle's own
+        # directory name as the tar's top-level entry -- otherwise the archive
+        # would contain only the bundle's *contents*, losing the name that
         # identifies which binary the DWARF data belongs to.
-        shutil.make_archive(
-            str(zip_path.with_suffix("")), "zip",
-            root_dir=artifact_path.parent, base_dir=artifact_path.name,
-        )
-        upload_path = zip_path
+        upload_path = scratch_dir / f"{target.application}.{R2_EXTENSION['macos']}"
+        with tarfile.open(upload_path, "w:xz", preset=XZ_PRESET) as tar:
+            tar.add(artifact_path, arcname=artifact_path.name)
     else:
-        upload_path = artifact_path
+        upload_path = scratch_dir / f"{target.application}.{R2_EXTENSION[platform]}"
+        with open(artifact_path, "rb") as src, lzma.open(upload_path, "wb", preset=XZ_PRESET) as dst:
+            shutil.copyfileobj(src, dst)
 
     print(f"[INFO] Uploading '{target.application}' to R2 key '{key}'")
 
@@ -245,8 +249,7 @@ def upload_to_symbol_store(
         except Exception as exc:
             raise SystemExit(f"[ERROR] R2 upload failed for '{target.application}' ({exc}).")
     finally:
-        if scratch_dir is not None:
-            shutil.rmtree(scratch_dir, ignore_errors=True)
+        shutil.rmtree(scratch_dir, ignore_errors=True)
 
     print(f"[OK]   '{target.application}' stored in R2.\n")
 
