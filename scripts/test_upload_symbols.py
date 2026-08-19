@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Plain-assert checks for upload_symbols.py pure pieces. No network, no pytest, no boto3."""
 
+import lzma
 import os
 import sys
-import zipfile
+import tarfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -21,17 +22,17 @@ def expect_systemexit(fn, *args, **kwargs):
 
 
 def test_r2_extension_covers_all_platforms():
-    assert us.R2_EXTENSION == {"linux": "debug", "windows": "pdb", "macos": "dsym.zip"}
+    assert us.R2_EXTENSION == {"linux": "debug.xz", "windows": "pdb.xz", "macos": "dsym.tar.xz"}
 
 
 def test_r2_symbol_key_uses_normalized_application_name():
     key = us.r2_symbol_key("windows", SHA40, "x64", "valentina")
-    assert key == f"builds/{SHA40}/windows/x64/valentina.pdb"
+    assert key == f"builds/{SHA40}/windows/x64/valentina.pdb.xz"
 
 
-def test_r2_symbol_key_macos_uses_dsym_zip_extension():
+def test_r2_symbol_key_macos_uses_dsym_tar_xz_extension():
     key = us.r2_symbol_key("macos", SHA40, "armv8", "qmuparserlib")
-    assert key == f"builds/{SHA40}/macos/armv8/qmuparserlib.dsym.zip"
+    assert key == f"builds/{SHA40}/macos/armv8/qmuparserlib.dsym.tar.xz"
 
 
 def test_r2_symbol_key_keeps_intel_and_arm_macos_builds_separate():
@@ -104,34 +105,49 @@ def test_heavy_dependencies_are_not_imported_at_module_scope():
     assert "boto3" not in sys.modules
 
 
-def test_upload_to_symbol_store_uploads_plain_file_by_key():
+def test_upload_to_symbol_store_xz_compresses_plain_file():
     calls = []
+    captured_bytes = {}
 
     class StubClient:
         def upload_file(self, path, bucket, key):
+            # Snapshot the bytes now -- upload_to_symbol_store cleans up its
+            # scratch directory (including this file) right after this call.
+            captured_bytes["data"] = us.Path(path).read_bytes()
             calls.append((path, bucket, key))
+
+    import tempfile as _tempfile
+    parent_dir = _tempfile.mkdtemp()
+    original_content = b"fake debug info, repeated " * 100
+    artifact_path = us.Path(parent_dir) / "valentina.debug"
+    artifact_path.write_bytes(original_content)
 
     target = us.Target("valentina", "valentina.debug", False, "valentina.debug")
     us.upload_to_symbol_store(
         client=StubClient(), bucket="val-debug-symbols", target=target,
-        artifact_path=us.Path("/tmp/does-not-matter/valentina.debug"),
+        artifact_path=artifact_path,
         platform="linux", commit_sha=SHA40, arch="x86_64",
     )
-    assert calls == [
-        ("/tmp/does-not-matter/valentina.debug", "val-debug-symbols",
-         f"builds/{SHA40}/linux/x86_64/valentina.debug")
-    ]
+    assert len(calls) == 1
+    path, bucket, key = calls[0]
+    assert path.endswith("valentina.debug.xz")
+    assert bucket == "val-debug-symbols"
+    assert key == f"builds/{SHA40}/linux/x86_64/valentina.debug.xz"
+    assert lzma.decompress(captured_bytes["data"]) == original_content
+
+    # The scratch directory used to build the archive must be cleaned up afterward.
+    assert not us.Path(path).parent.exists()
 
 
-def test_upload_to_symbol_store_zips_directory_bundles():
+def test_upload_to_symbol_store_tar_xzs_directory_bundles():
     calls = []
-    captured_zip_bytes = {}
+    captured_bytes = {}
 
     class StubClient:
         def upload_file(self, path, bucket, key):
-            # Snapshot the zip's bytes now -- upload_to_symbol_store cleans up
-            # its scratch directory (including this file) right after this call.
-            captured_zip_bytes["data"] = us.Path(path).read_bytes()
+            # Snapshot the bytes now -- upload_to_symbol_store cleans up its
+            # scratch directory (including this file) right after this call.
+            captured_bytes["data"] = us.Path(path).read_bytes()
             calls.append((path, bucket, key))
 
     import tempfile as _tempfile
@@ -149,22 +165,22 @@ def test_upload_to_symbol_store_zips_directory_bundles():
     )
     assert len(calls) == 1
     path, bucket, key = calls[0]
-    assert path.endswith("valentina.dsym.zip")
+    assert path.endswith("valentina.dsym.tar.xz")
     assert bucket == "val-debug-symbols"
-    assert key == f"builds/{SHA40}/macos/armv8/valentina.dsym.zip"
+    assert key == f"builds/{SHA40}/macos/armv8/valentina.dsym.tar.xz"
 
-    # The zip must preserve the bundle's own directory name as its top-level
+    # The tarball must preserve the bundle's own directory name as its top-level
     # entry (e.g. "Valentina.app.dSYM/Info.plist"), not just the bundle's
-    # contents flattened to the zip root -- otherwise the DWARF data loses the
-    # name that identifies which binary it belongs to.
+    # contents flattened to the archive root -- otherwise the DWARF data loses
+    # the name that identifies which binary it belongs to.
     import io
-    with zipfile.ZipFile(io.BytesIO(captured_zip_bytes["data"])) as zf:
-        namelist = zf.namelist()
-        assert namelist, "zip should not be empty"
-        top_level_dirs = {name.split("/")[0] for name in namelist}
+    with tarfile.open(fileobj=io.BytesIO(captured_bytes["data"]), mode="r:xz") as tar:
+        names = tar.getnames()
+        assert names, "tarball should not be empty"
+        top_level_dirs = {name.split("/")[0] for name in names}
         assert top_level_dirs == {bundle_name}
 
-    # The scratch directory used to build the zip must be cleaned up afterward.
+    # The scratch directory used to build the archive must be cleaned up afterward.
     assert not us.Path(path).parent.exists()
 
 
@@ -173,11 +189,15 @@ def test_upload_to_symbol_store_wraps_client_errors_as_systemexit():
         def upload_file(self, path, bucket, key):
             raise RuntimeError("network down")
 
+    import tempfile as _tempfile
+    artifact_path = us.Path(_tempfile.mkdtemp()) / "valentina.debug"
+    artifact_path.write_bytes(b"fake debug info")
+
     target = us.Target("valentina", "valentina.debug", False, "valentina.debug")
     expect_systemexit(
         us.upload_to_symbol_store,
         client=FailingClient(), bucket="b", target=target,
-        artifact_path=us.Path("/tmp/x/valentina.debug"), platform="linux", commit_sha=SHA40,
+        artifact_path=artifact_path, platform="linux", commit_sha=SHA40,
         arch="x86_64",
     )
 
