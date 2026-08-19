@@ -288,16 +288,16 @@ jobs:
             --qt-version  $qtVersion `
             --arch        x64
 
+      - name: Tests
+        if: env.RUN_TESTS == 'true'
+        shell: bash
+        run: qbs -p autotest-runner ${{ env.COMMON_QBS_ARGS }}
+
       - name: Strip debug symbols
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
         shell: pwsh
         run: |
           Get-ChildItem -Path "${{ runner.temp }}\build\release\install-root\valentina" -Filter *.pdb -Recurse | Remove-Item
-
-      - name: Tests
-        if: env.RUN_TESTS == 'true'
-        shell: bash
-        run: qbs -p autotest-runner ${{ env.COMMON_QBS_ARGS }}
 
       - name: Sign binaries
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true' && env.SIGN == 'true'
@@ -307,7 +307,7 @@ jobs:
         run: |
           & "./scripts/sign-binaries.ps1" `
             -InstallRoot "$env:RUNNER_TEMP\build\release\install-root\valentina" `
-            -CertumKeyId $env:CERTUM_KEY_ID  
+            -CertumKeyId $env:CERTUM_KEY_ID
 
       - name: Create installer
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
