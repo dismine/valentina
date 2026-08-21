@@ -484,16 +484,18 @@ jobs:
             project.enableConan:true \
             project.conanProfiles:share/ci/conan/profiles/appimage
           qbs -p autotest-runner -d build profile:qt6 config:release
-          CRASH_QT_VERSION=$(/usr/bin/qmake6 -query QT_VERSION | awk -F. '{print "Qt_" $1 "_" $2}')
-          CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
-          CRASH_COMMIT_SHA=$(git rev-parse HEAD)
-          python3 scripts/upload_symbols.py \
-            --build-dir $GITHUB_WORKSPACE/build/AppDir \
-            --app-version $VALENTINA_VERSION \
-            --git-hash g$CRASH_SHORT_SHA \
-            --commit-sha $CRASH_COMMIT_SHA \
-            --qt-version $CRASH_QT_VERSION \
-            --arch $ARCH
+          if [ "$GITHUB_EVENT_NAME" != "pull_request" ]; then
+            CRASH_QT_VERSION=$(/usr/bin/qmake6 -query QT_VERSION | awk -F. '{print "Qt_" $1 "_" $2}')
+            CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
+            CRASH_COMMIT_SHA=$(git rev-parse HEAD)
+            python3 scripts/upload_symbols.py \
+              --build-dir $GITHUB_WORKSPACE/build/AppDir \
+              --app-version $VALENTINA_VERSION \
+              --git-hash g$CRASH_SHORT_SHA \
+              --commit-sha $CRASH_COMMIT_SHA \
+              --qt-version $CRASH_QT_VERSION \
+              --arch $ARCH
+          fi
           $GITHUB_WORKSPACE/build/AppDir/usr/local/bin/crashpad_handler --version
           du -h $GITHUB_WORKSPACE/build/AppDir/usr/local/bin/crashpad_handler
           find $GITHUB_WORKSPACE/build/AppDir -name '*.debug' -delete
