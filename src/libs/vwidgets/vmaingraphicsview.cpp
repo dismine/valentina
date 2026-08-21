@@ -93,7 +93,7 @@ auto ScrollingSteps(QWheelEvent *wheel_event) -> qreal
     else if (not numDegrees.isNull())
     {
         const qreal mouseScale = settings->GetWheelMouseScale();
-        numSteps = (numPixels.x() == 0 ? numDegrees.y() : numDegrees.x()) / 15. * mouseScale;
+        numSteps = (numDegrees.x() == 0 ? numDegrees.y() : numDegrees.x()) / 15. * mouseScale;
     }
 
     return numSteps;
@@ -244,8 +244,17 @@ void GraphicsViewZoom::HorizontalScrollingTime(qreal x)
 //---------------------------------------------------------------------------------------------------------------------
 void GraphicsViewZoom::animFinished()
 {
-    _numScheduledVerticalScrollings = 0;
-    _numScheduledHorizontalScrollings = 0;
+    QObject const *animation = sender();
+
+    if (animation == nullptr || animation == verticalScrollAnim.data())
+    {
+        _numScheduledVerticalScrollings = 0;
+    }
+
+    if (animation == nullptr || animation == horizontalScrollAnim.data())
+    {
+        _numScheduledHorizontalScrollings = 0;
+    }
 
     /*
      * In moust cases cursor position on view doesn't change, but for scene after scrolling position will be different.
