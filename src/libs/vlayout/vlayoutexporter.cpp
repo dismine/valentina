@@ -27,7 +27,10 @@
  *************************************************************************/
 #include "vlayoutexporter.h"
 
+#include <QBuffer>
 #include <QCursor>
+#include <QDomDocument>
+#include <QFile>
 #include <QFileInfo>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
@@ -163,9 +166,23 @@ void VLayoutExporter::ExportToSVG(QGraphicsScene *scene, const QList<QGraphicsIt
 
     PrepareGrainlineForExport(details, m_showGrainline);
 
-    QSvgGenerator generator;
-    generator.setFileName(m_fileName);
+    if (m_piecesAsLayers && !details.isEmpty())
+    {
+        ExportPiecesAsSvgLayers(scene, details);
+    }
+    else
+    {
+        QSvgGenerator generator;
+        generator.setFileName(m_fileName);
+        RenderSVG(generator, scene);
+    }
 
+    RestoreGrainlineAfterExport(details);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutExporter::RenderSVG(QSvgGenerator &generator, QGraphicsScene *scene) const
+{
     QSize drawingSize;
     drawingSize.setWidth(qFloor(m_imageRect.width() * m_xScale + m_margins.left() + m_margins.right()));
     drawingSize.setHeight(qFloor(m_imageRect.height() * m_yScale + m_margins.top() + m_margins.bottom()));
@@ -190,8 +207,86 @@ void VLayoutExporter::ExportToSVG(QGraphicsScene *scene, const QList<QGraphicsIt
     painter.scale(m_xScale, m_yScale);
     scene->render(&painter, m_imageRect, m_imageRect, Qt::IgnoreAspectRatio);
     painter.end();
+}
 
-    RestoreGrainlineAfterExport(details);
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutExporter::ExportPiecesAsSvgLayers(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const
+{
+    QDomDocument svg;
+    svg.appendChild(svg.createProcessingInstruction(
+        QStringLiteral("xml"), QStringLiteral(R"(version="1.0" encoding="UTF-8" standalone="no")")));
+    QDomElement root;
+
+    for (int i = 0; i < details.size(); ++i)
+    {
+        for (auto *item : details)
+        {
+            item->setVisible(item == details.at(i));
+        }
+
+        QBuffer buffer;
+        buffer.open(QIODevice::WriteOnly);
+
+        QSvgGenerator generator;
+        generator.setOutputDevice(&buffer);
+        RenderSVG(generator, scene);
+        buffer.close();
+
+        QDomDocument pieceDoc;
+        pieceDoc.setContent(buffer.data());
+        QDomElement const pieceRoot = pieceDoc.documentElement();
+
+        if (root.isNull())
+        {
+            root = svg.importNode(pieceRoot, false).toElement();
+            root.setAttribute(QStringLiteral("xmlns:inkscape"),
+                              QStringLiteral("http://www.inkscape.org/namespaces/inkscape"));
+            svg.appendChild(root);
+        }
+
+        QString name = details.at(i)->data(LayoutPieceNameDataRole).toString();
+        if (name.isEmpty())
+        {
+            name = tr("Piece %1").arg(i + 1);
+        }
+
+        QDomElement layer = svg.createElement(QStringLiteral("g"));
+        layer.setAttribute(QStringLiteral("id"), QStringLiteral("layer%1").arg(i + 1));
+        layer.setAttribute(QStringLiteral("inkscape:groupmode"), QStringLiteral("layer"));
+        layer.setAttribute(QStringLiteral("inkscape:label"), name);
+
+        for (QDomNode node = pieceRoot.firstChild(); !node.isNull(); node = node.nextSibling())
+        {
+            const QString tag = node.toElement().tagName();
+            if (tag == "title"_L1 || tag == "desc"_L1)
+            {
+                if (i == 0)
+                {
+                    root.appendChild(svg.importNode(node, true));
+                }
+            }
+            else
+            {
+                layer.appendChild(svg.importNode(node, true));
+            }
+        }
+
+        root.appendChild(layer);
+    }
+
+    for (auto *item : details)
+    {
+        item->setVisible(true);
+    }
+
+    QFile file(m_fileName);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate))
+    {
+        qCritical() << qUtf8Printable(tr("Can't create file '%1'. %2").arg(m_fileName, file.errorString()));
+        return;
+    }
+    file.write(svg.toByteArray());
+    file.close();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -34,6 +34,8 @@
 #include <QTransform>
 #include <climits>
 
+constexpr int LayoutPieceNameDataRole = Qt::UserRole + 1;
+
 enum class LayoutExportFileFormat : qint8
 {
     SVG,
