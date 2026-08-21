@@ -38,3 +38,5 @@ Patch contributors:
 		* Testing
 	Serhii Olendarenko <sergey.olendarenko@gmail.com>
 		* Icons
+	Paco Arjonilla <pacoarjonilla@yahoo.es>
+		* Developing.
