@@ -334,7 +334,7 @@ jobs:
           ${{ env.COMMON_QBS_ARGS }}
 
       - name: Deploy symbols
-        if: env.WITH_CRASH_REPORTING == 'True'
+        if: github.event_name != 'pull_request' && env.WITH_CRASH_REPORTING == 'True'
         env:
           BUGSPLAT_DATABASE: "valentina"
           SYMBOL_UPLOAD_CLIENT_ID: ${{ secrets.SYMBOL_UPLOAD_CLIENT_ID }}
@@ -701,7 +701,7 @@ jobs:
           ${{ env.COMMON_QBS_ARGS }}
 
       - name: Deploy symbols
-        if: env.WITH_CRASH_REPORTING == 'True'
+        if: github.event_name != 'pull_request' && env.WITH_CRASH_REPORTING == 'True'
         env:
           BUGSPLAT_DATABASE: "valentina"
           SYMBOL_UPLOAD_CLIENT_ID: ${{ secrets.SYMBOL_UPLOAD_CLIENT_ID }}
