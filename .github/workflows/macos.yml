@@ -72,6 +72,7 @@ jobs:
     runs-on: macos-15-intel
 
     strategy:
+      fail-fast: false
       matrix:
         qt:
           # LTS release
@@ -414,6 +415,7 @@ jobs:
     runs-on: macos-14
 
     strategy:
+      fail-fast: false
       matrix:
         qt:
           # LTS release
@@ -762,6 +764,7 @@ jobs:
     runs-on: macos-14
 
     strategy:
+      fail-fast: false
       matrix:
         bundle:
           - label: multibundle
