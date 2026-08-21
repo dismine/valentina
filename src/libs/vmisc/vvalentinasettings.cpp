@@ -113,6 +113,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingNestingTime, ("layout/time"_L1))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingEfficiencyCoefficient, ("layout/efficiencyCoefficient"_L1))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutExportFormat, ("layout/exportFormat"_L1))   // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDetailExportFormat, ("detail/exportFormat"_L1))   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDetailPiecesAsLayers, ("detail/piecesAsLayers"_L1)) // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingDxfCompatibility, ("layout/dxfCompatibility"_L1)) // NOLINT
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingTiledPDFPaperHeight, ("tiledPDF/paperHeight"_L1)) // NOLINT
@@ -782,6 +783,18 @@ auto VValentinaSettings::GetDetailExportFormat() const -> qint8
 void VValentinaSettings::SetDetailExportFormat(qint8 format)
 {
     setValue(*settingDetailExportFormat, format);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetDetailPiecesAsLayers() const -> bool
+{
+    return value(*settingDetailPiecesAsLayers, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetDetailPiecesAsLayers(bool value)
+{
+    setValue(*settingDetailPiecesAsLayers, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

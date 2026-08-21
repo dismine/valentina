@@ -354,6 +354,12 @@ auto VCommandLine::IsTextAsPaths() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VCommandLine::IsPiecesAsLayers() const -> bool
+{
+    return IsOptionSet(LONG_OPTION_PIECES_AS_LAYERS);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VCommandLine::IsExportOnlyDetails() const -> bool
 {
     return IsOptionSet(LONG_OPTION_EXPORTONLYDETAILS);
@@ -665,6 +671,9 @@ void VCommandLine::InitCommandLineOptions()
          QChar('0')},
         {LONG_OPTION_NOGRAINLINE, translate("VCommandLine", "Show/hide grainline when export layout.")},
         {LONG_OPTION_TEXT2PATHS, translate("VCommandLine", "Export text as paths.")},
+        {LONG_OPTION_PIECES_AS_LAYERS,
+         translate("VCommandLine",
+                   "Export each piece as a separate SVG layer (export mode, details only, SVG format only).")},
         {LONG_OPTION_EXPORTONLYDETAILS,
          translate("VCommandLine",
                    "Export only details. Export details as they positioned in the details mode. Any "

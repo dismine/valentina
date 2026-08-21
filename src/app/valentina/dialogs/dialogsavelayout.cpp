@@ -678,6 +678,12 @@ auto DialogSaveLayout::IsPiecesAsLayers() const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSaveLayout::SetPiecesAsLayers(bool value)
+{
+    ui->checkBoxPiecesAsLayers->setChecked(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSaveLayout::SetTiledExportMode(bool tiledExportMode)
 {
     m_tiledExportMode = tiledExportMode;
@@ -864,6 +870,7 @@ void DialogSaveLayout::ReadSettings()
         {
             qDebug() << qUtf8Printable(e.ErrorMessage());
         }
+        ui->checkBoxPiecesAsLayers->setChecked(settings->GetDetailPiecesAsLayers());
     }
     else
     {
@@ -921,6 +928,7 @@ void DialogSaveLayout::WriteSettings() const
     if (m_mode != Draw::Layout)
     {
         settings->SetDetailExportFormat(static_cast<qint8>(Format()));
+        settings->SetDetailPiecesAsLayers(ui->checkBoxPiecesAsLayers->isChecked());
     }
     else
     {

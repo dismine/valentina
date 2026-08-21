@@ -74,6 +74,7 @@ public:
     void SetTextAsPaths(bool textAsPaths);
 
     auto IsPiecesAsLayers() const -> bool;
+    void SetPiecesAsLayers(bool value);
 
     void SetTiledExportMode(bool tiledExportMode);
 
