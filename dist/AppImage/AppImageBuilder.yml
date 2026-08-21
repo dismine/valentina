@@ -72,7 +72,8 @@ AppDir:
     - libxcb-glx0
     - libxcb-present0
     - libxcb-dri3-0
-    # graphic libraries interface (safe graphics bundle including drivers, acceleration may not work in some systems)
+    # graphic libraries interface (client libs only; GPU drivers come from the host system,
+    # not bundled here, since QOpenGLWidget rendering is opt-in and off by default)
     - libglvnd0
     - libglx0
     - libglapi-mesa
@@ -81,12 +82,6 @@ AppDir:
     - libgbm1
     - libdrm2
     - libglx-mesa0
-    - libgl1-amber-dri
-    - libgl1-mesa-dri
-    - mesa-utils
-    - libgl1-mesa-glx
-    - libdrm-amdgpu1
-    - libdrm-nouveau2
     exclude:
     - humanity-icon-theme
     - hicolor-icon-theme
@@ -134,6 +129,21 @@ AppDir:
     - usr/share/themes/Emacs/**
     - usr/share/icons/**
     - usr/share/icons/hicolor/icon-theme.cache
+    # embedded/framebuffer Qt platform plugins; this AppImage only ever runs the xcb (X11) backend
+    - usr/lib/*/qt6/plugins/platforms/libqeglfs*
+    - usr/lib/*/qt6/plugins/platforms/libqlinuxfb*
+    - usr/lib/*/qt6/plugins/platforms/libqminimal*
+    - usr/lib/*/qt6/plugins/platforms/libqoffscreen*
+    - usr/lib/*/qt6/plugins/platforms/libqvkkhrdisplay*
+    - usr/lib/*/qt6/plugins/platforms/libqvnc*
+    - usr/lib/*/qt6/plugins/egldeviceintegrations/**
+    - usr/lib/*/qt6/plugins/generic/**
+    - usr/lib/*/libQt6EglF[sS]*
+    - usr/lib/*/libinput.so*
+    - usr/lib/*/libwacom.so*
+    - usr/lib/*/libmtdev.so*
+    - usr/lib/*/libevdev.so*
+    - usr/share/libwacom/**
   after_bundle:
     # Provide a fallback /bin/sh
     - ln -s bash $TARGET_APPDIR/bin/sh
