@@ -760,7 +760,12 @@ jobs:
   universal_build:
     name: MacOS 12+ universal Qt 6.8.3 (${{ matrix.bundle.label }})
     needs: [changes, intel_build, arm_build]
-    if: needs.changes.outputs.qbs == 'true'
+    # intel_build/arm_build's aggregate result is "failure" if any unrelated
+    # matrix row fails (e.g. the legacy 10.15+/11+ builds), even when the
+    # MacOS_12+ combinations we actually depend on succeeded. Don't let that
+    # block this job; the artifact download step below fails on its own if
+    # the 12+ artifacts genuinely aren't there.
+    if: always() && needs.changes.outputs.qbs == 'true' && needs.changes.result == 'success'
     runs-on: macos-14
 
     strategy:
