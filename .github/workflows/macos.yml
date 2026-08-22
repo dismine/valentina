@@ -53,6 +53,7 @@ jobs:
               - '.github/workflows/macos.yml'
               - 'scripts/upload_symbols.py'
               - 'scripts/macos_universal_merge.sh'
+              - 'scripts/macos_universal_codesign.sh'
               - '**/*.h'
               - '**/*.hpp'
               - '**/*.cpp'
@@ -887,11 +888,7 @@ jobs:
         run: scripts/macos_universal_merge.sh intel-root arm-root universal-root
 
       - name: Codesign universal app bundles
-        run: |
-          find universal-root -maxdepth 6 -name "*.app" -type d | while read -r app; do
-            echo "Codesigning $app"
-            codesign --force --deep --options runtime --timestamp -s "$MACOS_CERTIFICATE_NAME" "$app"
-          done
+        run: scripts/macos_universal_codesign.sh "$MACOS_CERTIFICATE_NAME" universal-root/usr/local/Applications/*.app
 
       - name: Create DMG
         run: >
