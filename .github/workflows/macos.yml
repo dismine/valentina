@@ -352,12 +352,20 @@ jobs:
       # The MacOS_12+ row is merged with its arm counterpart into a universal
       # binary by the universal_build job, so upload the raw app tree for that
       # instead of packaging/signing/deploying it here.
+      - name: Archive app bundle for universal merge
+        if: matrix.qt.target == 'MacOS_12+' && env.DEPLOY == 'true'
+        # actions/upload-artifact dereferences symlinks when uploading a
+        # directory tree (no way to opt out on v4), which flattens macOS
+        # frameworks' Versions/Current symlinks into real duplicate files.
+        # tar preserves them; upload the tar as a single opaque file instead.
+        run: tar -cf install-root.tar -C build/release install-root
+
       - name: Upload app bundle for universal merge
         if: matrix.qt.target == 'MacOS_12+' && env.DEPLOY == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: macos-app-12plus-intel-${{ matrix.bundle.label }}
-          path: build/release/install-root
+          path: install-root.tar
           retention-days: 1
 
       - name: Create DMG
@@ -695,12 +703,16 @@ jobs:
       # The MacOS_12+ row is merged with its intel counterpart into a universal
       # binary by the universal_build job, so upload the raw app tree for that
       # instead of packaging/signing/deploying it here.
+      - name: Archive app bundle for universal merge
+        if: matrix.qt.target == 'MacOS_12+' && env.DEPLOY == 'true'
+        run: tar -cf install-root.tar -C build/release install-root
+
       - name: Upload app bundle for universal merge
         if: matrix.qt.target == 'MacOS_12+' && env.DEPLOY == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: macos-app-12plus-arm-${{ matrix.bundle.label }}
-          path: build/release/install-root
+          path: install-root.tar
           retention-days: 1
 
       - name: Create DMG
@@ -874,13 +886,19 @@ jobs:
         uses: actions/download-artifact@v6
         with:
           name: macos-app-12plus-intel-${{ matrix.bundle.label }}
-          path: intel-root
+          path: intel-artifact
 
       - name: Download arm app bundle
         uses: actions/download-artifact@v6
         with:
           name: macos-app-12plus-arm-${{ matrix.bundle.label }}
-          path: arm-root
+          path: arm-artifact
+
+      - name: Extract app bundles
+        run: |
+          mkdir -p intel-root arm-root
+          tar -xf intel-artifact/install-root.tar -C intel-root --strip-components=1
+          tar -xf arm-artifact/install-root.tar -C arm-root --strip-components=1
 
       - name: Merge into universal binaries
         run: scripts/macos_universal_merge.sh intel-root arm-root universal-root
