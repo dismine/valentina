@@ -14,6 +14,7 @@ rm -rf "$out_root"
 cp -R "$intel_root" "$out_root"
 
 merged=0
+already_universal=0
 while IFS= read -r -d '' intel_file; do
     rel="${intel_file#"$intel_root"/}"
     arm_file="$arm_root/$rel"
@@ -26,6 +27,16 @@ while IFS= read -r -d '' intel_file; do
 
     file "$intel_file" | grep -q "Mach-O" || continue
 
+    # Files bundled straight from Qt's own SDK (plugins, frameworks) are
+    # already universal on both sides, byte-differences and all (signatures,
+    # timestamps) — lipo refuses to "merge" two inputs that already share an
+    # architecture, so just keep the copy already placed by the base cp -R.
+    archs=$(lipo -archs "$intel_file")
+    if grep -q "x86_64" <<<"$archs" && grep -q "arm64" <<<"$archs"; then
+        already_universal=$((already_universal + 1))
+        continue
+    fi
+
     lipo -create "$intel_file" "$arm_file" -output "$out_file"
 
     info=$(lipo -info "$out_file")
@@ -37,5 +48,5 @@ while IFS= read -r -d '' intel_file; do
     merged=$((merged + 1))
 done < <(find "$intel_root" -type f -print0)
 
-echo "Merged $merged Mach-O files into universal binaries under $out_root"
+echo "Merged $merged Mach-O files into universal binaries ($already_universal were already universal) under $out_root"
 [ "$merged" -gt 0 ] || { echo "error: no Mach-O files were merged" >&2; exit 1; }
