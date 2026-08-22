@@ -882,6 +882,23 @@ jobs:
           qbs config defaultProfile qt6
           qbs config profiles.qt6.baseProfile clang
 
+      - name: Setup path to Conan home folder
+        run: echo "CONAN_HOME=${{ runner.temp }}/.conan2" >> $GITHUB_ENV
+
+      - name: Cache Conan packages (Conan 2.x)
+        uses: actions/cache@v5
+        with:
+          path: ${{ env.CONAN_HOME }}/p
+          key: conan2-packages-${{ runner.os }}-v1-${{ hashFiles('**/conanfile.py') }}
+          restore-keys: conan2-packages-${{ runner.os }}-
+
+      # qbs resolves the whole project graph (every product's Depends,
+      # including Conan-provided ones like xerces-c) before building
+      # anything, even when -p narrows the actual build to one product —
+      # so this is needed even though nothing here gets compiled.
+      - name: Build Conan dependencies
+        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -pr:a=share/ci/conan/profiles/macos_arm
+
       - name: Download intel app bundle
         uses: actions/download-artifact@v6
         with:
@@ -906,6 +923,9 @@ jobs:
       - name: Codesign universal app bundles
         run: scripts/macos_universal_codesign.sh "$MACOS_CERTIFICATE_NAME" universal-root/usr/local/Applications/*.app
 
+      # ponytail: --dry-run diagnostic, confirms -p 'Valentina DMG' doesn't
+      # pull in a full C++ rebuild now that Conan resolves; remove before
+      # merging to master once verified.
       - name: Create DMG
         run: >
           qbs build
@@ -913,12 +933,18 @@ jobs:
           -d "$GITHUB_WORKSPACE/build"
           -p 'Valentina DMG'
           --force-probe-execution
+          --dry-run
+          --command-echo-mode command-line
           config:release
           qbs.installRoot:"$GITHUB_WORKSPACE/universal-root"
           profile:qt6
           project.minimumMacosVersion:12.0
           "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME"
           modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE}
+          project.enableConan:true
+          project.conanWithXerces:true
+          project.conanWithCrashReporting:true
+          project.conanProfiles:share/ci/conan/profiles/macos_arm
 
       - name: Store the notarization credentials
         run: xcrun notarytool store-credentials "notarytool-profile" --apple-id "$MACOS_NOTARIZATION_APPLE_ID" --team-id "$MACOS_NOTARIZATION_TEAM_ID" --password "$MACOS_NOTARIZATION_PWD"
