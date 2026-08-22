@@ -22,6 +22,23 @@ for app in "$@"; do
 
     find "$app" -type f -print0 | while IFS= read -r -d '' f; do
         file "$f" | grep -q "Mach-O" || continue
+
+        # Frameworks here are laid out with real duplicate files where a
+        # proper framework would use symlinks (top-level copy, Versions/1,
+        # Versions/Current all contain the same binary as independent
+        # files). Only Versions/<N>/<binary> is what anything actually
+        # links against (confirmed via each binary's own LC_ID_DYLIB and
+        # its dependents' load commands) — explicitly codesigning the
+        # unreferenced flat top-level or Versions/Current copies as
+        # separate code makes codesign report "bundle format is ambiguous
+        # (could be app or framework)" on the framework directory.
+        case "$f" in
+            */Versions/Current/*) continue ;;
+        esac
+        case "$(dirname "$f")" in
+            *.framework) continue ;;
+        esac
+
         sign "$f"
     done
 
