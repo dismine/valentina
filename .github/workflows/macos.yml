@@ -358,6 +358,7 @@ jobs:
           name: macos-app-12plus-intel-${{ matrix.bundle.label }}
           path: build/release/install-root
           retention-days: 1
+          follow-symlinks: false
 
       - name: Create DMG
         if: matrix.qt.target != 'MacOS_12+' && github.event_name != 'pull_request' && env.DEPLOY == 'true'
@@ -701,6 +702,7 @@ jobs:
           name: macos-app-12plus-arm-${{ matrix.bundle.label }}
           path: build/release/install-root
           retention-days: 1
+          follow-symlinks: false
 
       - name: Create DMG
         if: matrix.qt.target != 'MacOS_12+' && github.event_name != 'pull_request' && env.DEPLOY == 'true'
