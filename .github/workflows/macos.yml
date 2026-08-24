@@ -938,9 +938,6 @@ jobs:
       - name: Codesign universal app bundles
         run: scripts/macos_universal_codesign.sh "$MACOS_CERTIFICATE_NAME" universal-root/usr/local/Applications/*.app
 
-      # ponytail: --dry-run diagnostic, confirms -p 'Valentina DMG' doesn't
-      # pull in a full C++ rebuild now that Conan resolves; remove before
-      # merging to master once verified.
       - name: Create DMG
         run: >
           qbs build
@@ -948,8 +945,6 @@ jobs:
           -d "$GITHUB_WORKSPACE/build"
           -p 'Valentina DMG'
           --force-probe-execution
-          --dry-run
-          --command-echo-mode command-line
           config:release
           qbs.installRoot:"$GITHUB_WORKSPACE/universal-root"
           profile:qt6
