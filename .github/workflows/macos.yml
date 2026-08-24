@@ -820,10 +820,24 @@ jobs:
           python -m pip install -r share/ci/requirements-ci.txt
 
       - name: Restore Qt cache
+        id: cache-qt
         uses: actions/cache/restore@v5
         with:
           path: ${{ runner.temp }}/Qt
           key: install-qt-arm-6.8.3-qtimageformats-v2
+
+      - name: Install Qt
+        if: steps.cache-qt.outputs.cache-hit != 'true'
+        uses: jurplel/install-qt-action@v4
+        with:
+          version:      6.8.3
+          host:         'mac'
+          target:       'desktop'
+          arch:         'clang_64'
+          dir:          ${{ runner.temp }}
+          modules:      'qtimageformats'
+          cache:        false
+          setup-python: false
 
       - name: Set path to Qt
         run: |
