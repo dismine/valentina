@@ -54,7 +54,7 @@ VLib {
     }
 
     Properties {
-        condition: !qbs.targetOS.contains("macos") || (qbs.targetOS.contains("macos") && !buildconfig.enableMultiBundle)
+        condition: !qbs.targetOS.contains("macos")
         install: true
         installDir: buildconfig.installLibraryPath
     }

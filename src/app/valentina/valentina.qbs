@@ -15,8 +15,8 @@ VToolApp {
     Depends { name: "VFormatLib"; }
     Depends { name: "VMiscLib"; }
     Depends { name: "VGAnalyticsLib" }
-    Depends { name: "Tape"; condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle }
-    Depends { name: "Puzzle"; condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle }
+    Depends { name: "Tape"; condition: qbs.targetOS.contains("macos") }
+    Depends { name: "Puzzle"; condition: qbs.targetOS.contains("macos") }
 
     Depends {
         name: "Qt.xmlpatterns"
@@ -204,7 +204,7 @@ VToolApp {
         cpp.defines: {
             var defines = [];
             if (qbs.targetOS.contains("macos")) {
-                var appTarget = product.buildconfig.enableMultiBundle ? exportingProduct.targetName : "Valentina";
+                var appTarget = exportingProduct.targetName;
                 var installBinaryPath = FileInfo.joinPaths(product.buildconfig.installAppPath,
                                                            appTarget + ".app/Contents/MacOS")
                 var path = FileInfo.joinPaths(product.qbs.installRoot + product.qbs.installPrefix,
@@ -236,9 +236,6 @@ VToolApp {
         condition: qbs.targetOS.contains("macos")
         macdeployqt.targetApps: {
             var apps = [];
-            if (!buildconfig.enableMultiBundle)
-                apps.push("Tape", "Puzzle");
-
             if (buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled)
                 apps.push("crashpad_handler");
 

@@ -48,7 +48,7 @@ VToolApp {
 
     Group {
         name: "xerces-c library (MacOS)"
-        condition: buildconfig.useConanPackages && buildconfig.conanXercesEnabled && qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
+        condition: buildconfig.useConanPackages && buildconfig.conanXercesEnabled && qbs.targetOS.contains("macos")
         prefix: XercesC.libraryPaths[0] + "/"
         files: ["**/*" + cpp.dynamicLibrarySuffix]
         qbs.install: true
@@ -58,7 +58,7 @@ VToolApp {
 
     Group {
         name: "Crashpad handler"
-        condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled && qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
+        condition: buildconfig.useConanPackages && buildconfig.conanCrashReportingEnabled && qbs.targetOS.contains("macos")
         prefix: crashpad.binDirs[0] + "/"
         files: "crashpad_handler" + FileInfo.executableSuffix()
         qbs.install: true
@@ -67,7 +67,7 @@ VToolApp {
     }
 
     Properties {
-        condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
+        condition: qbs.targetOS.contains("macos")
         macdeployqt.targetApps: {
             var apps = [];
 
@@ -156,7 +156,7 @@ VToolApp {
             var defines = [];
 
             if (qbs.targetOS.contains("macos")) {
-                var appTarget = product.buildconfig.enableMultiBundle ? exportingProduct.targetName : "Valentina";
+                var appTarget = exportingProduct.targetName;
                 var installBinaryPath = FileInfo.joinPaths(product.buildconfig.installAppPath,
                                                            appTarget + ".app/Contents/MacOS")
                 var path = FileInfo.joinPaths(product.qbs.installRoot + product.qbs.installPrefix,
@@ -227,7 +227,7 @@ VToolApp {
 
     Group {
         name: "MacOS assets"
-        condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
+        condition: qbs.targetOS.contains("macos")
         prefix: project.sourceDirectory + "/dist/macos/tape/"
         files: [
             "Info.plist",
@@ -237,7 +237,7 @@ VToolApp {
 
     Group {
         name: "ICNS"
-        condition: qbs.targetOS.contains("macos") && buildconfig.enableMultiBundle
+        condition: qbs.targetOS.contains("macos")
         prefix: project.sourceDirectory + "/dist/macos/valentina-project.xcassets/"
         files: [
             "i-measurements.iconset",
