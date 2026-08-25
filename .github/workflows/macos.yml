@@ -718,11 +718,6 @@ jobs:
     if: always() && needs.changes.outputs.qbs == 'true' && needs.changes.result == 'success'
     runs-on: macos-14
 
-    strategy:
-      fail-fast: false
-      matrix:
-
-
     env:
       MACOS_DEPLOYMENT_TARGET: '12.0'
 
