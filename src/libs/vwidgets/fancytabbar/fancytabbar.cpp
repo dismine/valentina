@@ -75,6 +75,15 @@ FancyTabBar::FancyTabBar(TabBarPosition position, QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+// Each FancyTab is a plain QObject holding a raw, non-parented pointer back to this tab bar (used by its hover-fade
+// QPropertyAnimation to call update()). Without this, a tab left mid-animation outlives the tab bar and the next
+// animation tick dereferences freed memory.
+FancyTabBar::~FancyTabBar()
+{
+    qDeleteAll(m_attachedTabs);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto FancyTabBar::TabSizeHint(bool minimum) const -> QSize
 {
     QFont boldFont(font());

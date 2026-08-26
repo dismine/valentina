@@ -54,7 +54,7 @@ public:
     };
 
     explicit FancyTabBar(TabBarPosition position, QWidget *parent = nullptr);
-    ~FancyTabBar() override = default;
+    ~FancyTabBar() override;
 
     auto sizeHint() const -> QSize override;
     auto minimumSizeHint() const -> QSize override;
