@@ -100,9 +100,7 @@ auto AppCrashVersion() -> QString
 
 #if defined(Q_OS_MACOS)
     auto const platform = QStringLiteral("macos");
-#if defined(MULTI_BUNDLE)
     multibundle = QStringLiteral("-multibundle");
-#endif
 #elif defined(Q_OS_WIN)
     auto const platform = QStringLiteral("windows");
 #elif defined(Q_OS_LINUX)

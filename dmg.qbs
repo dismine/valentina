@@ -16,15 +16,11 @@ VAppleApplicationDiskImage {
     Probe {
         id: bundleProbe
         property string root: absoluteSourceBase
-        property bool enableMultiBundle: buildconfig.enableMultiBundle
         property bool ready
         configure: {
-            if (!enableMultiBundle)
-                ready = File.exists(FileInfo.joinPaths(root, "Valentina.app"));
-            else
-                ready = File.exists(FileInfo.joinPaths(root, "Valentina.app"))
-                        && File.exists(FileInfo.joinPaths(root, "Tape.app"))
-                        && File.exists(FileInfo.joinPaths(root, "Puzzle.app"));
+            ready = File.exists(FileInfo.joinPaths(root, "Valentina.app"))
+                    && File.exists(FileInfo.joinPaths(root, "Tape.app"))
+                    && File.exists(FileInfo.joinPaths(root, "Puzzle.app"));
             found = true;
         }
     }
@@ -54,17 +50,7 @@ VAppleApplicationDiskImage {
     Group {
         name: "Bundles"
         prefix: absoluteSourceBase + "/"
-        files: {
-            var files = ["Valentina.app"];
-
-            if (buildconfig.enableMultiBundle)
-            {
-                files.push("Tape.app");
-                files.push("Puzzle.app");
-            }
-
-            return files;
-        }
+        files: ["Valentina.app", "Tape.app", "Puzzle.app"]
         fileTags: "dmg.input.app"
     }
 
@@ -73,43 +59,20 @@ VAppleApplicationDiskImage {
     Group {
         name: "Background image"
         condition: useImageBackground
-        files: {
-            if (buildconfig.enableMultiBundle)
-                return ["dist/macos/dmg/background_multibundle.tiff"]
-
-            return ["dist/macos/dmg/background.tiff"]
-        }
+        files: ["dist/macos/dmg/background.tiff"]
     }
 
     dmg.backgroundColor: "#41cd52"
     dmg.badgeVolumeIcon: false
-    dmg.iconPositions: {
-        if (buildconfig.enableMultiBundle) {
-            return [{"x": 140, "y": 199, "path": "Valentina.app"},
-                    {"x": 140, "y": 331, "path": "Tape.app"},
-                    {"x": 140, "y": 450, "path": "Puzzle.app"},
-                    {"x": 455, "y": 321, "path": "Applications"},];
-        } else {
-            return [{"x": 162, "y": 190, "path": "Valentina.app"},
-                    {"x": 162, "y": 450, "path": "Applications"},];
-        }
-    }
+    dmg.iconPositions: [{"x": 140, "y": 199, "path": "Valentina.app"},
+                         {"x": 140, "y": 331, "path": "Tape.app"},
+                         {"x": 140, "y": 450, "path": "Puzzle.app"},
+                         {"x": 455, "y": 321, "path": "Applications"},]
     dmg.windowX: 420
     dmg.windowY: 250
-    dmg.windowWidth: {
-        if (buildconfig.enableMultiBundle)
-            return 742;
-
-        return 576;
-    }
-
+    dmg.windowWidth: 742
     dmg.windowHeight: 606
-    dmg.iconSize: {
-        if (buildconfig.enableMultiBundle)
-            return 64;
-
-        return 128;
-    }
+    dmg.iconSize: 64
     dmg.format: {
         if (Qt.core.versionMajor >= 6)
             return "ULMO"; // macOS 10.15+ only

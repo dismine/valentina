@@ -13,13 +13,15 @@ Per-platform targets and debug artifact types:
 Excluded targets (never uploaded): parserTest, collectionTest, translationsTest
 
 Version string format:
-    <app_version>-<git_hash>-<qt_version>-<platform>[‑multibundle]
+    <app_version>-<git_hash>-<qt_version>-<platform>[-multibundle]
+
+    macOS always ships as a multibundle (Valentina.app + Tape.app + Puzzle.app),
+    so the suffix is appended automatically for that platform, not a flag.
 
     Examples:
         1_1_0-gf4373acf9-Qt_6_2-linux
         1_1_0-gf4373acf9-Qt_6_10-macos-multibundle
         1_1_0-g12e950caa-Qt_6_10-windows
-        1_1_0-g12e950caa-Qt_6_10-macos
 
 Authentication — set ONE of the two pairs as environment variables:
     SYMBOL_UPLOAD_USER          BugSplat account email
@@ -45,8 +47,7 @@ Usage:
         --commit-sha  <sha>     \\
         --qt-version  <qtver>   \\
         --arch        <arch>    \\
-        [--platform   <plat>]   \\
-        [--multibundle]
+        [--platform   <plat>]
 
 Examples:
     python upload_symbols.py \\
@@ -57,7 +58,7 @@ Examples:
     python upload_symbols.py \\
         --build-dir ./build --app-version 1_1_0 --git-hash gf4373acf9 \\
         --commit-sha f4373acf9c1234567890abcdef1234567890abcd --qt-version Qt_6_10 \\
-        --arch armv8 --platform macos --multibundle
+        --arch armv8 --platform macos
 """
 
 import argparse
@@ -256,14 +257,15 @@ def upload_to_symbol_store(
 
 # ── Version builder ────────────────────────────────────────────────────────────
 
-def build_version(app_version: str, git_hash: str, qt_version: str,
-                  platform: str, multibundle: bool) -> str:
+def build_version(app_version: str, git_hash: str, qt_version: str, platform: str) -> str:
     """
     Assemble the BugSplat version string, e.g.:
         1_1_0-gf4373acf9-Qt_6_10-macos-multibundle
+
+    macOS always ships as a multibundle, so the suffix is unconditional there.
     """
     parts = [app_version, git_hash, qt_version, platform]
-    if multibundle:
+    if platform == "macos":
         parts.append("multibundle")
     return "-".join(parts)
 
@@ -471,11 +473,6 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default=None, metavar="PLATFORM",
         help="Target platform. Auto-detected from the host OS when omitted.",
     )
-    parser.add_argument(
-        "--multibundle",
-        action="store_true", default=False,
-        help="Append '-multibundle' suffix to the version string (macOS only).",
-    )
     return parser.parse_args(argv)
 
 
@@ -493,16 +490,11 @@ def main() -> None:
 
     platform = args.platform or detect_platform()
 
-    if args.multibundle and platform != "macos":
-        print(f"[WARN] --multibundle is set but platform is '{platform}'. "
-              "The suffix will still be appended as requested.")
-
     version = build_version(
         app_version = args.app_version,
         git_hash    = args.git_hash,
         qt_version  = args.qt_version,
         platform    = platform,
-        multibundle = args.multibundle,
     )
 
     build_dir: Path = args.build_dir.resolve()

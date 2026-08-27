@@ -66,7 +66,7 @@ jobs:
               - '**/*.svg'
 
   intel_build:
-    name: MacOS ${{ matrix.qt.build_target }} intel Qt ${{ matrix.qt.install }} (${{ matrix.bundle.label }})
+    name: MacOS ${{ matrix.qt.build_target }} intel Qt ${{ matrix.qt.install }}
     needs: changes
     if: needs.changes.outputs.qbs == 'true'
     runs-on: macos-15-intel
@@ -119,16 +119,10 @@ jobs:
             with_iconv: 'True'
             with_big_codecs: 'True'
             deploy: 'false'
-        bundle:
-          - label: multibundle
-            multibundle: true
-          - label: singlebundle
-            multibundle: false
 
     env:
       DEPLOY: ${{ matrix.qt.deploy }}
       RUN_TESTS: ${{ matrix.qt.run_tests }}
-      MULTI_BUNDLE: ${{ matrix.bundle.multibundle }}
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
       WITH_ICU: ${{ matrix.qt.with_icu }}
       WITH_ICONV: ${{ matrix.qt.with_iconv }}
@@ -294,24 +288,23 @@ jobs:
       - name: Set up common Qbs args
         run: >
           echo "COMMON_QBS_ARGS=
-          -f valentina.qbs 
-          -d $GITHUB_WORKSPACE/build 
-          --jobs $(nproc) 
-          config:release 
-          modules.buildconfig.enableUnitTests:${{ env.RUN_TESTS }} 
-          modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
-          qbs.installRoot:$GITHUB_WORKSPACE/build/release/install-root 
-          profile:qt6 
-          project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET 
-          \"modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME\" 
-          modules.macdeployqt.libpath:${{ env.QTDIR }}/lib 
-          modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir 
+          -f valentina.qbs
+          -d $GITHUB_WORKSPACE/build
+          --jobs $(nproc)
+          config:release
+          modules.buildconfig.enableUnitTests:${{ env.RUN_TESTS }}
+          qbs.installRoot:$GITHUB_WORKSPACE/build/release/install-root
+          profile:qt6
+          project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET
+          \"modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME\"
+          modules.macdeployqt.libpath:${{ env.QTDIR }}/lib
+          modules.macdeployqt.macdeployqtProgramBinPath:${HOME}/macdeployqt-install-dir
           project.withICUCodecs:${{ env.WITH_ICU }}
           project.withICONVCodecs:${{ env.WITH_ICONV }}
           project.withBigCodecs:${{ env.WITH_BIG_CODECS }}
-          project.enableConan:true 
-          project.conanWithXerces:true 
-          project.conanWithCrashReporting:true 
+          project.enableConan:true
+          project.conanWithXerces:true
+          project.conanWithCrashReporting:true
           project.conanWithICU:${{ env.WITH_ICU }}
           project.conanWithICONV:${{ env.WITH_ICONV }}
           modules.buildconfig.enableCcache:${ENABLE_CCACHE}
@@ -344,20 +337,13 @@ jobs:
           CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
           CRASH_COMMIT_SHA=$(git rev-parse HEAD)
 
-          # Determine multibundle flag
-          MULTIBUNDLE_FLAG=""
-          if [ "$MULTI_BUNDLE" = "true" ]; then
-            MULTIBUNDLE_FLAG="--multibundle"
-          fi
-
           python3 scripts/upload_symbols.py \
             --build-dir   "$GITHUB_WORKSPACE/build/release/install-root" \
             --app-version "$VALENTINA_VERSION" \
             --git-hash    "g$CRASH_SHORT_SHA" \
             --commit-sha  "$CRASH_COMMIT_SHA" \
             --qt-version  "$CRASH_QT_VERSION" \
-            --arch        x64 \
-            $MULTIBUNDLE_FLAG
+            --arch        x64
 
       - name: Strip debug symbols
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
@@ -385,7 +371,7 @@ jobs:
         if: matrix.qt.target == 'MacOS_13+' && env.DEPLOY == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: macos-app-13plus-intel-${{ matrix.bundle.label }}
+          name: macos-app-13plus-intel
           path: install-root.tar
           retention-days: 1
 
@@ -429,17 +415,13 @@ jobs:
           QT_VERSION: ${{ matrix.qt.label }}
         shell: bash
         run: |
-          BUNDLE_SUFFIX=""
-          if [ "$MULTI_BUNDLE" = "true" ]; then
-            BUNDLE_SUFFIX="-multibundle"
-          fi
           python3 scripts/deploy.py upload \
             --branch "${{ github.ref_name }}" \
             --platform macos \
-            --name "valentina-${TARGET_PLATFORM}-${QT_VERSION}-${ARCH}-${{ github.ref_name }}${BUNDLE_SUFFIX}-${{ github.sha }}.dmg" \
+            --name "valentina-${TARGET_PLATFORM}-${QT_VERSION}-${ARCH}-${{ github.ref_name }}-multibundle-${{ github.sha }}.dmg" \
             "${{ github.workspace }}/build/release/install-root/share/valentina.dmg"
   arm_build:
-    name: MacOS ${{ matrix.qt.build_target }} arm Qt ${{ matrix.qt.install }} (${{ matrix.bundle.label }})
+    name: MacOS ${{ matrix.qt.build_target }} arm Qt ${{ matrix.qt.install }}
     needs: changes
     if: needs.changes.outputs.qbs == 'true'
     runs-on: macos-14
@@ -492,16 +474,10 @@ jobs:
             with_iconv: 'True'
             with_big_codecs: 'True'
             deploy: 'false'
-        bundle:
-          - label: multibundle
-            multibundle: true
-          - label: singlebundle
-            multibundle: false
 
     env:
       DEPLOY: ${{ matrix.qt.deploy }}
       RUN_TESTS: ${{ matrix.qt.run_tests }}
-      MULTI_BUNDLE: ${{ matrix.bundle.multibundle }}
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
       WITH_ICU: ${{ matrix.qt.with_icu }}
       WITH_ICONV: ${{ matrix.qt.with_iconv }}
@@ -672,7 +648,6 @@ jobs:
           --jobs $(nproc) 
           config:release 
           modules.buildconfig.enableUnitTests:${{ env.RUN_TESTS }}
-          modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE} 
           qbs.installRoot:$GITHUB_WORKSPACE/build/release/install-root 
           profile:qt6 
           project.minimumMacosVersion:$MACOS_DEPLOYMENT_TARGET 
@@ -717,20 +692,13 @@ jobs:
           CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
           CRASH_COMMIT_SHA=$(git rev-parse HEAD)
 
-          # Determine multibundle flag
-          MULTIBUNDLE_FLAG=""
-          if [ "$MULTI_BUNDLE" = "true" ]; then
-            MULTIBUNDLE_FLAG="--multibundle"
-          fi
-
           python3 scripts/upload_symbols.py \
             --build-dir   "$GITHUB_WORKSPACE/build/release/install-root" \
             --app-version "$VALENTINA_VERSION" \
             --git-hash    "g$CRASH_SHORT_SHA" \
             --commit-sha  "$CRASH_COMMIT_SHA" \
             --qt-version  "$CRASH_QT_VERSION" \
-            --arch        armv8 \
-            $MULTIBUNDLE_FLAG
+            --arch        armv8
 
       - name: Strip debug symbols
         if: github.event_name != 'pull_request' && env.DEPLOY == 'true'
@@ -754,7 +722,7 @@ jobs:
         if: matrix.qt.target == 'MacOS_13+' && env.DEPLOY == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: macos-app-13plus-arm-${{ matrix.bundle.label }}
+          name: macos-app-13plus-arm
           path: install-root.tar
           retention-days: 1
 
@@ -798,14 +766,10 @@ jobs:
           QT_VERSION: ${{ matrix.qt.label }}
         shell: bash
         run: |
-          BUNDLE_SUFFIX=""
-          if [ "$MULTI_BUNDLE" = "true" ]; then
-            BUNDLE_SUFFIX="-multibundle"
-          fi
           python3 scripts/deploy.py upload \
             --branch "${{ github.ref_name }}" \
             --platform macos \
-            --name "valentina-${TARGET_PLATFORM}-${QT_VERSION}-${ARCH}-${{ github.ref_name }}${BUNDLE_SUFFIX}-${{ github.sha }}.dmg" \
+            --name "valentina-${TARGET_PLATFORM}-${QT_VERSION}-${ARCH}-${{ github.ref_name }}-multibundle-${{ github.sha }}.dmg" \
             "${{ github.workspace }}/build/release/install-root/share/valentina.dmg"
 
   # Merges the MacOS_13+ intel and arm app trees (the only row present in both
@@ -814,7 +778,7 @@ jobs:
   # MacOS_10_15+ (intel-only) and MacOS_11+ (arm-only) have no counterpart to
   # merge against and keep shipping as single-arch DMGs from the jobs above.
   universal_build:
-    name: MacOS 13+ universal Qt 6.8.3 (${{ matrix.bundle.label }})
+    name: MacOS 13+ universal Qt 6.8.3
     needs: [changes, intel_build, arm_build]
     # intel_build/arm_build's aggregate result is "failure" if any unrelated
     # matrix row fails (e.g. the legacy 10.15+/11+ builds), even when the
@@ -824,17 +788,7 @@ jobs:
     if: always() && needs.changes.outputs.qbs == 'true' && needs.changes.result == 'success'
     runs-on: macos-14
 
-    strategy:
-      fail-fast: false
-      matrix:
-        bundle:
-          - label: multibundle
-            multibundle: true
-          - label: singlebundle
-            multibundle: false
-
     env:
-      MULTI_BUNDLE: ${{ matrix.bundle.multibundle }}
       MACOS_DEPLOYMENT_TARGET: '13.0'
 
     steps:
@@ -950,13 +904,13 @@ jobs:
       - name: Download intel app bundle
         uses: actions/download-artifact@v6
         with:
-          name: macos-app-13plus-intel-${{ matrix.bundle.label }}
+          name: macos-app-13plus-intel
           path: intel-artifact
 
       - name: Download arm app bundle
         uses: actions/download-artifact@v6
         with:
-          name: macos-app-13plus-arm-${{ matrix.bundle.label }}
+          name: macos-app-13plus-arm
           path: arm-artifact
 
       - name: Extract app bundles
@@ -983,7 +937,6 @@ jobs:
           profile:qt6
           project.minimumMacosVersion:13.0
           "modules.buildconfig.signingIdentity:$MACOS_CERTIFICATE_NAME"
-          modules.buildconfig.enableMultiBundle:${MULTI_BUNDLE}
           project.enableConan:true
           project.conanWithXerces:true
           project.conanWithCrashReporting:true
@@ -1010,12 +963,8 @@ jobs:
           QT_VERSION: Qt6_8
         shell: bash
         run: |
-          BUNDLE_SUFFIX=""
-          if [ "$MULTI_BUNDLE" = "true" ]; then
-            BUNDLE_SUFFIX="-multibundle"
-          fi
           python3 scripts/deploy.py upload \
             --branch "${{ github.ref_name }}" \
             --platform macos \
-            --name "valentina-${TARGET_PLATFORM}-${QT_VERSION}-${ARCH}-${{ github.ref_name }}${BUNDLE_SUFFIX}-${{ github.sha }}.dmg" \
+            --name "valentina-${TARGET_PLATFORM}-${QT_VERSION}-${ARCH}-${{ github.ref_name }}-multibundle-${{ github.sha }}.dmg" \
             "${{ github.workspace }}/universal-root/share/valentina.dmg"

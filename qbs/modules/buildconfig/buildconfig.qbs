@@ -23,8 +23,6 @@ Module {
 
     property bool enableAppImage: false
 
-    property bool enableMultiBundle: false
-
     // Use this property to disable running macdeployqt tool. Produced app bundle will not be standalone.
     property bool runMacDeployQt: true
 
@@ -174,9 +172,6 @@ Module {
 
         if (enableAppImage && qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos"))
             defines.push('APPIMAGE');
-
-        if (enableMultiBundle)
-            defines.push('MULTI_BUNDLE');
 
         if (useConanPackages && conanCrashReportingEnabled)
             defines.push('CRASH_REPORTING');

@@ -109,7 +109,7 @@ auto AppFilePath(const QString &appName) -> QString
     }
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
 
-#if defined(Q_OS_MACOS) && defined(MULTI_BUNDLE)
+#if defined(Q_OS_MACOS)
     QFileInfo multiBundleFile(
         QStringLiteral("%1/../../../%2.app/Contents/MacOS/%2").arg(QCoreApplication::applicationDirPath(), appName));
     if (multiBundleFile.exists())

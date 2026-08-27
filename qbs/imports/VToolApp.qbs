@@ -42,7 +42,7 @@ VApp {
 
     Group {
         name: "Translations"
-        condition: product.primaryApp || (qbs.targetOS.contains("macos") && (!bundle.isBundle || (bundle.isBundle && buildconfig.enableMultiBundle)))
+        condition: product.primaryApp || qbs.targetOS.contains("macos")
         prefix: project.sourceDirectory + "/share/translations/"
         files: {
             var files = [];
@@ -58,7 +58,7 @@ VApp {
     }
 
     Group {
-        condition: product.primaryApp || (qbs.targetOS.contains("macos") && (!bundle.isBundle || (bundle.isBundle && buildconfig.enableMultiBundle)))
+        condition: product.primaryApp || qbs.targetOS.contains("macos")
         fileTagsFilter: "qm"
         qbs.install: true
         qbs.installDir: buildconfig.installDataPath + "/translations"
@@ -66,7 +66,7 @@ VApp {
 
     Rule {
         multiplex: true
-        condition: qbs.targetOS.contains("macos") && bundle.isBundle && (buildconfig.enableMultiBundle || primaryApp)
+        condition: qbs.targetOS.contains("macos") && bundle.isBundle
         inputs: ["qm"]
         outputFileTags: ["bundle.qm", "bundle.content"]
         outputArtifacts: {
