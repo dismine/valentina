@@ -157,16 +157,6 @@
          </widget>
         </item>
         <item>
-         <widget class="QCheckBox" name="checkBoxPiecesAsLayers">
-          <property name="toolTip">
-           <string>Export each piece as a separate layer. Intended for cutters and plotters that distinguish shapes by layer.</string>
-          </property>
-          <property name="text">
-           <string>Pieces as layers</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <layout class="QHBoxLayout" name="horizontalLayout_8">
           <item>
            <widget class="QLabel" name="labelDxfCompatibility">

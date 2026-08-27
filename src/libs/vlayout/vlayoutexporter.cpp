@@ -166,7 +166,7 @@ void VLayoutExporter::ExportToSVG(QGraphicsScene *scene, const QList<QGraphicsIt
 
     PrepareGrainlineForExport(details, m_showGrainline);
 
-    if (m_piecesAsLayers && !details.isEmpty())
+    if (!details.isEmpty())
     {
         ExportPiecesAsSvgLayers(scene, details);
     }

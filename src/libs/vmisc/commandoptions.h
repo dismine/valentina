@@ -133,7 +133,6 @@ extern const QString LONG_OPTION_LANDSCAPE_ORIENTATION;
 extern const QString LONG_OPTION_NEST_QUANTITY;
 extern const QString LONG_OPTION_PREFER_ONE_SHEET_SOLUTION;
 extern const QString LONG_OPTION_BOUNDARY_TOGETHER_WITH_NOTCHES;
-extern const QString LONG_OPTION_PIECES_AS_LAYERS;
 
 auto AllKeys() -> QStringList;
 

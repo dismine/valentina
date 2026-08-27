@@ -183,9 +183,6 @@ public:
     auto GetDetailExportFormat() const -> qint8;
     void SetDetailExportFormat(qint8 format);
 
-    auto GetDetailPiecesAsLayers() const -> bool;
-    void SetDetailPiecesAsLayers(bool value);
-
     auto GetDxfCompatibility() const -> qint8;
     void SetDxfCompatibility(qint8 type);
 

@@ -73,9 +73,6 @@ public:
     auto IsTextAsPaths() const -> bool;
     void SetTextAsPaths(bool textAsPaths);
 
-    auto IsPiecesAsLayers() const -> bool;
-    void SetPiecesAsLayers(bool value);
-
     void SetTiledExportMode(bool tiledExportMode);
 
     void SetTiledMargins(QMarginsF margins);

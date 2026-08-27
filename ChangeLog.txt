@@ -1,6 +1,6 @@
 # Valentina 1.1.1 (unreleased)
 - [Valentina app] Fixed the horizontal scroll wheel (thumb wheel on mice that have one) doing nothing on the pattern and layout views; horizontal wheel events were computed as zero scrolling steps and discarded. Scrolling both axes at once no longer cuts one of them short.
-- [Valentina app] New option "Pieces as layers" when exporting details to SVG. Each piece becomes a separate layer, for cutters and plotters that distinguish shapes by layer.
+- [Valentina app / Puzzle app] Exporting details to SVG now wraps each piece in its own named Inkscape layer, for cutters and plotters that distinguish shapes by layer.
 - [Valentina app / Tape app] Fixed placeholder and search-history menus (label template editor, increments/final measurements search, known measurements search) splitting into multiple columns instead of scrolling on some Linux styles, cutting off long lists.
 - [Valentina app / Tape app / Puzzle app] Fixed exporting DXF files to a path containing non-Latin characters failing with "No such file or directory" on Windows; the codepage used to decode the path no longer depends on the system locale.
 - [Valentina app / Tape app / Puzzle app] Fixed a rare crash on shutdown when a second instance connected to an already-running one and quit while the background country lookup was still in flight: aborting the request could delete it out from under Windows' TLS backend thread.

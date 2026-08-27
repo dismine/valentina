@@ -7755,7 +7755,6 @@ auto MainWindow::DoExport(const VCommandLinePtr &expParams) -> bool
                 static_cast<DXFApparelCompatibility>(expParams->DXFApparelCompatibilityType()));
             m_dialogSaveLayout->SetShowGrainline(!expParams->IsNoGrainline());
             m_dialogSaveLayout->SetTextAsPaths(expParams->IsTextAsPaths());
-            m_dialogSaveLayout->SetPiecesAsLayers(expParams->IsPiecesAsLayers());
             m_dialogSaveLayout->SetXScale(expParams->ExportXScale());
             m_dialogSaveLayout->SetYScale(expParams->ExportYScale());
 

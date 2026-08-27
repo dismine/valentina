@@ -87,7 +87,6 @@ public:
     auto IsBinaryDXF() const -> bool;
     auto IsNoGrainline() const -> bool;
     auto IsTextAsPaths() const -> bool;
-    auto IsPiecesAsLayers() const -> bool;
     auto IsExportOnlyDetails() const -> bool;
     auto IsCSVWithHeader() const -> bool;
 

@@ -91,9 +91,6 @@ public:
     void SetBoundaryTogetherWithNotches(bool value);
     auto IsBoundaryTogetherWithNotches() const -> bool;
 
-    void SetPiecesAsLayers(bool value);
-    auto IsPiecesAsLayers() const -> bool;
-
     void ExportToSVG(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const;
     void ExportToPNG(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const;
     void ExportToTIF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details) const;
@@ -151,7 +148,6 @@ private:
     int m_penWidth{1};
     bool m_togetherWithNotches{false};
     DXFApparelCompatibility m_dxfCompatibility{DXFApparelCompatibility::STANDARD};
-    bool m_piecesAsLayers{false};
 
     void ExportToPDF(QGraphicsScene *scene, const QList<QGraphicsItem *> &details, const QString &filename) const;
     void RenderSVG(QSvgGenerator &generator, QGraphicsScene *scene) const;
@@ -300,18 +296,6 @@ inline void VLayoutExporter::SetBoundaryTogetherWithNotches(bool value)
 inline auto VLayoutExporter::IsBoundaryTogetherWithNotches() const -> bool
 {
     return m_togetherWithNotches;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline void VLayoutExporter::SetPiecesAsLayers(bool value)
-{
-    m_piecesAsLayers = value;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto VLayoutExporter::IsPiecesAsLayers() const -> bool
-{
-    return m_piecesAsLayers;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
