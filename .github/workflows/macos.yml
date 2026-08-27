@@ -238,28 +238,14 @@ jobs:
       - name: Check if System.keychain is not cluttered
         run: du -h /Library/Keychains/System.keychain
 
-      # Add certificates to keychain and allow codesign to access them
-      # 1) Apple Worldwide Developer Relations Certification Authority
-      - name: Add Apple Worldwide Developer Relations Certification Authority
-        run: |
-          curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer --output $HOME/AppleWWDRCAG3.cer --silent
-          sudo security import $HOME/AppleWWDRCAG3.cer -k /Library/Keychains/System.keychain -T /usr/bin/codesign || true
-
-      # 2) Developer Authentication Certification Authority
-      - name: Add Developer Authentication Certification Authority
-        run: |
-          curl https://www.apple.com/certificateauthority/DeveloperIDG2CA.cer --output $HOME/DeveloperIDG2CA.cer --silent
-          sudo security import $HOME/DeveloperIDG2CA.cer -k /Library/Keychains/System.keychain -T /usr/bin/codesign || true
-
-      # 3) Developer ID
+      # Add certificate to keychain and allow codesign to access it. Modern
+      # runner images already trust Apple's WWDR/Developer Authentication CAs,
+      # so importing them here is no longer necessary.
       - name: Add Developer ID
         run: security import certificate.p12 -k $HOME/Library/Keychains/build.keychain -P "$MACOS_CERTIFICATE_PWD" -T /usr/bin/codesign
 
       - name: Delete the files, we no longer need them
-        run: |
-          rm $HOME/AppleWWDRCAG3.cer
-          rm $HOME/DeveloperIDG2CA.cer
-          rm certificate.p12
+        run: rm certificate.p12
 
       # Set the partition list (sort of like an access control list)
       - name: Set the partition list
@@ -625,28 +611,14 @@ jobs:
       - name: Check if System.keychain is not cluttered
         run: du -h /Library/Keychains/System.keychain
 
-      # Add certificates to keychain and allow codesign to access them
-      # 1) Apple Worldwide Developer Relations Certification Authority
-      - name: Add Apple Worldwide Developer Relations Certification Authority
-        run: |
-          curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer --output $HOME/AppleWWDRCAG3.cer --silent
-          sudo security import $HOME/AppleWWDRCAG3.cer -k /Library/Keychains/System.keychain -T /usr/bin/codesign || true
-
-      # 2) Developer Authentication Certification Authority
-      - name: Add Developer Authentication Certification Authority
-        run: |
-          curl https://www.apple.com/certificateauthority/DeveloperIDG2CA.cer --output $HOME/DeveloperIDG2CA.cer --silent
-          sudo security import $HOME/DeveloperIDG2CA.cer -k /Library/Keychains/System.keychain -T /usr/bin/codesign || true
-
-      # 3) Developer ID
+      # Add certificate to keychain and allow codesign to access it. Modern
+      # runner images already trust Apple's WWDR/Developer Authentication CAs,
+      # so importing them here is no longer necessary.
       - name: Add Developer ID
         run: security import certificate.p12 -k $HOME/Library/Keychains/build.keychain -P "$MACOS_CERTIFICATE_PWD" -T /usr/bin/codesign
 
       - name: Delete the files, we no longer need them
-        run: |
-          rm $HOME/AppleWWDRCAG3.cer
-          rm $HOME/DeveloperIDG2CA.cer
-          rm certificate.p12
+        run: rm certificate.p12
 
       # Set the partition list (sort of like an access control list)
       - name: Set the partition list
@@ -931,24 +903,14 @@ jobs:
           security unlock-keychain -p "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
           security set-keychain-settings $HOME/Library/Keychains/build.keychain
 
-      - name: Add Apple Worldwide Developer Relations Certification Authority
-        run: |
-          curl https://www.apple.com/certificateauthority/AppleWWDRCAG3.cer --output $HOME/AppleWWDRCAG3.cer --silent
-          sudo security import $HOME/AppleWWDRCAG3.cer -k /Library/Keychains/System.keychain -T /usr/bin/codesign || true
-
-      - name: Add Developer Authentication Certification Authority
-        run: |
-          curl https://www.apple.com/certificateauthority/DeveloperIDG2CA.cer --output $HOME/DeveloperIDG2CA.cer --silent
-          sudo security import $HOME/DeveloperIDG2CA.cer -k /Library/Keychains/System.keychain -T /usr/bin/codesign || true
-
+      # Add certificate to keychain and allow codesign to access it. Modern
+      # runner images already trust Apple's WWDR/Developer Authentication CAs,
+      # so importing them here is no longer necessary.
       - name: Add Developer ID
         run: security import certificate.p12 -k $HOME/Library/Keychains/build.keychain -P "$MACOS_CERTIFICATE_PWD" -T /usr/bin/codesign
 
       - name: Delete the files, we no longer need them
-        run: |
-          rm $HOME/AppleWWDRCAG3.cer
-          rm $HOME/DeveloperIDG2CA.cer
-          rm certificate.p12
+        run: rm certificate.p12
 
       - name: Set the partition list
         run: security set-key-partition-list -S "apple-tool:,apple:,codesign:" -s -k "$MACOS_CI_KEYCHAIN_PWD" $HOME/Library/Keychains/build.keychain
