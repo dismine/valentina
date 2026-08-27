@@ -451,9 +451,9 @@ auto AngleBySecondSymmetry(const QVector<VRawSAPoint> &points,
     }
 
     QPointF px2;
-    type = sEdge.intersects(bigLine2, &px2);
+    QLineF::IntersectType const type2 = sEdge.intersects(bigLine2, &px2);
 
-    if (type == QLineF::NoIntersection)
+    if (type2 == QLineF::NoIntersection)
     {
         return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, trueZeroWidth, needRollback);
     }
@@ -483,7 +483,9 @@ auto AngleBySecondSymmetry(const QVector<VRawSAPoint> &points,
         }
     }
 
-    if (IsOutsidePoint(bigLine2.p2(), bigLine2.p1(), px2))
+    // A bounded intersection means the mirrored edge really crosses the outgoing seam allowance inside both
+    // segments, so it is a valid corner point. Only an unbounded one needs the artificial loop below.
+    if (type2 == QLineF::BoundedIntersection || IsOutsidePoint(bigLine2.p2(), bigLine2.p1(), px2))
     {
         pointsIntr.append(VRawSAPoint(px2, p.CurvePoint(), p.TurnPoint()));
     }
