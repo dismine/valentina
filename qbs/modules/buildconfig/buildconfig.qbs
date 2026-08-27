@@ -203,6 +203,9 @@ Module {
     readonly property string minimumMacosVersion: {
         var qtRequiredMinVersion;
         if (Qt.core.versionMajor >= 6) {
+            // For Qt 6.12 https://doc-snapshots.qt.io/qt6-6.12/supported-platforms.html
+            if (Qt.core.versionMinor >= 12)
+                qtRequiredMinVersion = "14.4";
             // For Qt 6.10 https://doc-snapshots.qt.io/qt6-6.10/supported-platforms.html
             if (Qt.core.versionMinor >= 10)
                 qtRequiredMinVersion = "13.0";
