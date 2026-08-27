@@ -1,4 +1,5 @@
 # Valentina 1.0.5 (unreleased)
+- [Misc] Fixed nearly invisible placeholder text in disabled/read-only fields on custom dark theme, and on Linux when the system palette already looked dark enough that the app skipped loading its own theme.
 - [Valentina app] Fixed a seam allowance corner set to "by second edge symmetry" growing a stray spike instead of mirroring the matching corner at the other end of the edge, so pieces that should look identical no longer differ.
 - [Valentina app] Fixed a crash from a sidebar tab's hover-fade animation still running after the tab bar that owned it was destroyed (e.g. closing a piece-creation dialog), which left the animation calling into freed memory.
 - [Valentina app / Tape app / Puzzle app] Removed the single-bundle macOS package. Only the multi-app bundle (separate Valentina.app, Tape.app and Puzzle.app in one DMG) is offered now.
