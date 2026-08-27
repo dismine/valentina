@@ -99,6 +99,24 @@ inline auto NativeLinuxDarkThemeAvailable() -> bool
 #endif
 
 //---------------------------------------------------------------------------------------------------------------------
+// Qt Style Sheets have no property for QPalette::PlaceholderText, so QLineEdit/QPlainTextEdit fall back to
+// auto-dimming whatever QSS "color" is set for the widget's current state. That default dimming was tuned for
+// the native palette, not our QSS colors: on the dark theme it turns the already muted disabled text color
+// (#454545) into an almost invisible placeholder. Set the role explicitly so it stays legible.
+void SetPlaceholderTextPalette(bool dark)
+{
+    QPalette palette = qApp->palette(); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+    const QColor placeholder = dark ? QColor(0x9a, 0x9a, 0x9a) : QColor(0x8a, 0x8a, 0x8a);
+    const QColor placeholderDisabled = dark ? QColor(0x6e, 0x6e, 0x6e) : QColor(0xb4, 0xb4, 0xb4);
+
+    palette.setColor(QPalette::Active, QPalette::PlaceholderText, placeholder);
+    palette.setColor(QPalette::Inactive, QPalette::PlaceholderText, placeholder);
+    palette.setColor(QPalette::Disabled, QPalette::PlaceholderText, placeholderDisabled);
+
+    qApp->setPalette(palette); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void ActivateCustomLightTheme()
 {
     if (QFile f(QStringLiteral(":/light/stylesheet.qss")); !f.exists())
@@ -111,6 +129,7 @@ void ActivateCustomLightTheme()
         {
             QTextStream ts(&f);
             qApp->setStyleSheet(ts.readAll()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+            SetPlaceholderTextPalette(false);
         }
         else
         {
@@ -132,6 +151,7 @@ void ActivateCustomDarkTheme()
         {
             QTextStream ts(&f);
             qApp->setStyleSheet(ts.readAll()); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+            SetPlaceholderTextPalette(true);
         }
         else
         {
@@ -419,6 +439,15 @@ void VTheme::InitThemeMode()
             }
         }
     }
+
+#if defined(Q_OS_LINUX)
+    // Unlike macOS/Windows, "native dark theme" on Linux is not a real desktop integration (see
+    // NativeLinuxDarkThemeAvailable()), just Qt's own Fusion-style heuristic. When that heuristic already reports
+    // dark, the branches above skip loading our custom stylesheet, so QPalette::PlaceholderText is left unset on
+    // read-only/disabled QLineEdit fields, and Qt's fallback rendering for it is nearly invisible. Make sure it is
+    // always set explicitly.
+    SetPlaceholderTextPalette(ColorSheme() == VColorSheme::Dark);
+#endif
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -516,7 +545,7 @@ void VTheme::ResetThemeSettings() const
     InitThemeMode();
     VSceneStylesheet::ResetStyles();
 
-    emit Instance()->ThemeSettingsChanged();
+    emit Instance() -> ThemeSettingsChanged();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -578,7 +607,7 @@ VTheme::VTheme(QObject *parent)
         m_isProcessingColorSchemeChange = true;
         QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
 
-        VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
+        VCommonSettings const *settings = VAbstractApplication::VApp()->Settings();
 
         if (VThemeMode const themeMode = settings->GetThemeMode();
             themeMode == VThemeMode::System && VTheme::NativeDarkThemeAvailable())
@@ -596,7 +625,7 @@ VTheme::VTheme(QObject *parent)
         m_isProcessingColorSchemeChange = false;
     };
 
-    QStyleHints  const*hints = QGuiApplication::styleHints();
+    QStyleHints const *hints = QGuiApplication::styleHints();
     connect(hints, &QStyleHints::colorSchemeChanged, this, colorSchemeChangedSlot);
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 5, 0)
 }
