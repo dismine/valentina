@@ -1040,6 +1040,16 @@ void TST_VAbstractPiece::EquidistantAngleType_data()
     ASSERT_TEST_CASE("Issue 937. Case5", QStringLiteral("://Issue_937_case_5/input.json"),
                      QStringLiteral("://Issue_937_case_5/output.json"), 37.795275590551185 /*seam allowance width*/);
 
+    // See file src/app/share/collection/bugs/Kitchen_mitt_SA_symmetry.val
+    // Isoceles triangle whose wide edge carries a bigger allowance and is bounded by a ByFirstEdgeSymmetry
+    // corner at one end and a BySecondEdgeSymmetry corner at the other, so the result must be mirror
+    // symmetric. BySecondEdgeSymmetry used to build an artificial loop even though the mirrored edge crossed
+    // the outgoing allowance inside both segments, leaving a stray point that broke the symmetry.
+    ASSERT_TEST_CASE("SA second edge symmetry. Bounded intersection.",
+                     QStringLiteral("://SA_SecondEdgeSymmetry_case1/input.json"),
+                     QStringLiteral("://SA_SecondEdgeSymmetry_case1/output.json"),
+                     37.795275590551185 /*seam allowance width*/);
+
     // See file valentina_private_collection/bugs/busty/busty.val
     ASSERT_TEST_CASE("Busty", QStringLiteral("://busty/input.json"), QStringLiteral("://busty/output.json"),
                      0 /*seam allowance width*/);

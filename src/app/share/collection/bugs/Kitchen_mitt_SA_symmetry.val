@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern labelPrefix="en">
+    <!--Pattern created with Valentina v1.1.0.98 (https://smart-pattern.com.ua/).-->
+    <version>1.2.0</version>
+    <unit>cm</unit>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <previewCalculations/>
+    <draw name="Élément de patron 1">
+        <calculation>
+            <point id="1" mx="0.4" my="0.65" name="A" showLabel="true" type="single" x="0.79375" y="1.05833"/>
+            <point angle="0" basePoint="1" id="2" length="20" lineColor="#000000" mx="0.4" my="0.65" name="A1" showLabel="true" type="endLine" typeLine="hair"/>
+            <point angle="90&#10;" basePoint="1" id="3" length="Line_A_A1" lineColor="#000000" mx="0.4" my="0.65" name="A2" showLabel="true" type="endLine" typeLine="hair"/>
+            <point firstPoint="2" id="4" mx="0.4" my="0.65" name="A3" secondPoint="3" showLabel="true" type="pointOfIntersection"/>
+            <point id="5" mx="0.4" my="0.65" name="A4" p1Line1="4" p1Line2="3" p2Line1="1" p2Line2="2" showLabel="true" type="lineIntersect"/>
+        </calculation>
+        <modeling>
+            <point id="6" idObject="2" mx="0.927468" my="-0.767292" type="modeling"/>
+            <point id="7" idObject="1" mx="1.0636" my="-0.767292" type="modeling"/>
+            <point id="8" idObject="3" mx="0.927468" my="-0.767292" type="modeling"/>
+            <point id="9" idObject="4" mx="0.927468" my="-0.767292" type="modeling"/>
+            <point id="11" idObject="4" mx="1.67868" my="0.814215" type="modeling"/>
+            <point id="12" idObject="5" mx="0.927468" my="0.616527" type="modeling"/>
+            <point id="13" idObject="3" mx="-2.99814" my="0.434519" type="modeling"/>
+            <point id="15" idObject="5" type="pin"/>
+            <point id="16" idObject="2" mx="0" my="0" type="modeling"/>
+            <point id="17" idObject="1" mx="0" my="0" type="modeling"/>
+            <point id="18" idObject="5" mx="0" my="0" type="modeling"/>
+            <point id="20" idObject="2" mx="0" my="0" type="modeling"/>
+            <point id="21" idObject="5" mx="0" my="0" type="modeling"/>
+            <point id="22" idObject="4" mx="0" my="0" type="modeling"/>
+            <point id="24" idObject="1" mx="0.0879542" my="0.967496" type="modeling"/>
+            <point id="25" idObject="3" mx="0" my="0" type="modeling"/>
+            <point id="26" idObject="5" mx="0" my="0" type="modeling"/>
+        </modeling>
+        <details>
+            <detail followGrainline="false" forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="10" mx="-14.7929" my="1.72012" name="ENVERS" sewLineOnDrawing="false" uuid="{69b0ce7d-1dd3-4108-b8a8-437bfe2e6b0c}" version="2" width="1">
+                <data annotation="" centerPin="15" foldPosition="" fontSize="20" height="4.5" letter="" mx="187.776" my="-414.425" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="10">
+                    <line alignment="4" bold="false" italic="false" sfIncrement="0" text="YAZLINA SEWING PATTERNS"/>
+                    <line alignment="4" bold="false" italic="false" sfIncrement="0" text="MANIQUE DE CUISINE"/>
+                    <line alignment="4" bold="false" italic="false" sfIncrement="0" text="TISSU ENVERS (x%pQuantity%)"/>
+                    <line alignment="4" bold="false" italic="false" sfIncrement="0" text="REMBOURRAGE (x%pQuantity%)"/>
+                    <line alignment="0" bold="false" italic="false" sfIncrement="0" text="&lt;empty&gt;"/>
+                </data>
+                <patternInfo height="10" mx="0" my="0" rotation="0" visible="false" width="10"/>
+                <grainline arrows="0" enabled="true" length="10" mx="158.845" my="-144.652" rotation="90" visible="true"/>
+                <nodes>
+                    <node idObject="6" type="NodePoint"/>
+                    <node idObject="7" type="NodePoint"/>
+                    <node idObject="8" type="NodePoint"/>
+                    <node idObject="9" type="NodePoint"/>
+                </nodes>
+                <pins>
+                    <record>15</record>
+                </pins>
+                <mirrorLine type="2ArrowsTextAbove"/>
+            </detail>
+            <detail followGrainline="false" forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="14" mx="24.4741" my="0.675866" name="ENDROIT" seamAllowance="true" sewLineOnDrawing="false" uuid="{65785d8c-3889-43c3-ad4e-a12ccd00a055}" version="2" width="1">
+                <data annotation="" foldPosition="" height="10" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="10"/>
+                <patternInfo height="10" mx="0" my="0" rotation="0" visible="false" width="10"/>
+                <grainline arrows="0" enabled="false" length="10" mx="0" my="0" rotation="90" visible="true"/>
+                <nodes>
+                    <node angle="2" before="3" idObject="11" type="NodePoint"/>
+                    <node idObject="12" type="NodePoint"/>
+                    <node after="3" angle="3" idObject="13" type="NodePoint"/>
+                </nodes>
+                <mirrorLine type="2ArrowsTextAbove"/>
+            </detail>
+            <detail followGrainline="false" forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="19" mx="24.5977" my="5.98467" name="Pièce" seamAllowance="true" sewLineOnDrawing="false" uuid="{411f32b7-d578-4536-b4d9-5b25b2a3faea}" version="2" width="1">
+                <data annotation="" foldPosition="" height="10" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="10"/>
+                <patternInfo height="10" mx="0" my="0" rotation="0" visible="false" width="10"/>
+                <grainline arrows="0" enabled="false" length="10" mx="0" my="0" rotation="90" visible="true"/>
+                <nodes>
+                    <node after="3" angle="3" idObject="16" type="NodePoint"/>
+                    <node angle="2" before="3" idObject="17" type="NodePoint"/>
+                    <node idObject="18" type="NodePoint"/>
+                </nodes>
+                <mirrorLine type="2ArrowsTextAbove"/>
+            </detail>
+            <detail followGrainline="false" forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="23" mx="28.7911" my="2.67983" name="Pièce_1" seamAllowance="true" sewLineOnDrawing="false" uuid="{71e24504-74db-4dc2-8619-ebc27d9702c2}" version="2" width="1">
+                <data annotation="" foldPosition="" height="10" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="10"/>
+                <patternInfo height="10" mx="0" my="0" rotation="0" visible="false" width="10"/>
+                <grainline arrows="0" enabled="false" length="10" mx="0" my="0" rotation="90" visible="true"/>
+                <nodes>
+                    <node angle="2" before="3" idObject="20" type="NodePoint"/>
+                    <node idObject="21" type="NodePoint"/>
+                    <node after="3" angle="3" idObject="22" type="NodePoint"/>
+                </nodes>
+                <mirrorLine type="2ArrowsTextAbove"/>
+            </detail>
+            <detail followGrainline="false" forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="27" mx="18.0292" my="2.76686" name="Detail" seamAllowance="true" sewLineOnDrawing="false" uuid="{d4c83ec0-fcee-48af-aef3-493e5b5e7f8b}" version="2" width="1">
+                <data annotation="" foldPosition="" height="10" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="10"/>
+                <patternInfo height="10" mx="0" my="0" rotation="0" visible="false" width="10"/>
+                <grainline arrows="0" enabled="false" length="10" mx="0" my="0" rotation="90" visible="true"/>
+                <nodes>
+                    <node after="3" angle="3" idObject="24" type="NodePoint"/>
+                    <node angle="2" before="3" idObject="25" type="NodePoint"/>
+                    <node idObject="26" type="NodePoint"/>
+                </nodes>
+                <mirrorLine type="2ArrowsTextAbove"/>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+</pattern>
