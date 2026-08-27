@@ -1474,7 +1474,7 @@
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/viewmag1.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/viewmagfit.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/visibility.svg</file> -->
-        <!-- <file>icons/La-Sierra-Dark/actions/22x22/window-close.svg</file> -->
+        <file>icons/La-Sierra-Dark/actions/22x22/window-close.svg</file>
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/window-fullscreen.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/window.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/window_fullscreen.svg</file> -->
@@ -2981,7 +2981,7 @@
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/viewmag1.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/viewmagfit.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/visibility.svg</file> -->
-        <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/window-close.svg</file> -->
+        <file>icons/La-Sierra-Dark/actions/22x22@2x/window-close.svg</file>
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/window-fullscreen.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/window.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/window_fullscreen.svg</file> -->

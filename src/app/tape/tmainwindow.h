@@ -188,6 +188,7 @@ private:
     QLabel *m_labelPatternUnit{nullptr};
     bool m_isInitialized{false};
     bool m_mIsReadOnly{false};
+    bool m_knownMeasurementsWarningDismissed{false};
     QTimer *m_gradation;
     VScrollableMenu *m_searchHistory;
 
@@ -312,6 +313,8 @@ private:
 
     void InitKnownMeasurements(QComboBox *combo);
     void InitKnownMeasurementsDescription();
+    void InstallKnownMeasurements(const QUuid &neededId);
+    void UpdateKnownMeasurementsBanner();
 
     static auto KnownMeasurementsRegistred(const QUuid &id) -> bool;
 

@@ -155,7 +155,7 @@ enum class VThemeIcon : quint8
     // ViewFullscreen,
     ViewRefresh,
     // ViewRestore,
-    // WindowClose,
+    WindowClose,
     // WindowNew,
     ZoomFitBest,
     ZoomIn,

@@ -29,6 +29,7 @@
 #include "tmainwindow.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/utils.h"
+#include "../ifc/xml/vknownmeasurementsconverter.h"
 #include "../ifc/xml/vpatternconverter.h"
 #include "../ifc/xml/vpatternimage.h"
 #include "../ifc/xml/vvitconverter.h"
@@ -36,6 +37,7 @@
 #include "../qmuparser/qmudef.h"
 #include "../vformat/knownmeasurements/vknownmeasurement.h"
 #include "../vformat/knownmeasurements/vknownmeasurementsdatabase.h"
+#include "../vformat/knownmeasurements/vknownmeasurementsdocument.h"
 #include "../vganalytics/vganalytics.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/def.h"
@@ -86,6 +88,8 @@ using QTextCodec = VTextCodec;
 #include <QComboBox>
 #include <QCursor>
 #include <QDesktopServices>
+#include <QDir>
+#include <QFile>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QMessageBox>
@@ -3229,6 +3233,25 @@ void TMainWindow::InitWindow()
             this,
             &TMainWindow::SaveKnownMeasurements);
 
+    connect(ui->pushButtonInstallKnownMeasurements,
+            &QPushButton::clicked,
+            this,
+            [this]() { InstallKnownMeasurements(m_m->KnownMeasurements()); });
+    connect(ui->pushButtonInstallKnownMeasurementsWarning,
+            &QPushButton::clicked,
+            this,
+            [this]() { InstallKnownMeasurements(m_m->KnownMeasurements()); });
+    connect(ui->toolButtonDismissKnownMeasurementsWarning,
+            &QToolButton::clicked,
+            this,
+            [this]()
+            {
+                m_knownMeasurementsWarningDismissed = true;
+                ui->frameKnownMeasurementsWarning->setVisible(false);
+            });
+    m_knownMeasurementsWarningDismissed = false;
+    UpdateKnownMeasurementsBanner();
+
     InitSearch();
 
     ui->plainTextEditNotes->setPlainText(m_m->Notes());
@@ -4063,6 +4086,8 @@ void TMainWindow::SyncKnownMeasurements()
         qCDebug(tMainWindow, "SyncKnownMeasurements() called with no active measurement document; skipping.");
         return;
     }
+
+    UpdateKnownMeasurementsBanner();
 
     {
         const QSignalBlocker blocker(ui->comboBoxKnownMeasurements);
@@ -4982,6 +5007,9 @@ void TMainWindow::InitIcons()
     auto const tapeIconResource = QStringLiteral("tapeicon");
     ui->actionMeasurementDiagram->setIcon(
         VTheme::GetIconResource(tapeIconResource, QStringLiteral("24x24/mannequin.png")));
+
+    ui->toolButtonDismissKnownMeasurementsWarning->setIcon(FromTheme(VThemeIcon::WindowClose));
+    ui->labelKnownMeasurementsWarningIcon->setPixmap(FromTheme(VThemeIcon::DialogWarning).pixmap(16, 16));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -5067,6 +5095,132 @@ void TMainWindow::InitKnownMeasurementsDescription()
     if (!id.isNull() && known.contains(id))
     {
         ui->plainTextEditKnownMeasurementsDescription->setPlainText(known.value(id).description);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::InstallKnownMeasurements(const QUuid &neededId)
+{
+    const QString filter = tr("Known measurements") + " (*.vkm);;"_L1 + tr("All files") + " (*.*)"_L1;
+    const QString filePath = QFileDialog::getOpenFileName(this,
+                                                          tr("Install known measurements"),
+                                                          QDir::homePath(),
+                                                          filter,
+                                                          nullptr,
+                                                          VAbstractApplication::VApp()->NativeFileDialog());
+
+    if (filePath.isEmpty())
+    {
+        return;
+    }
+
+    QUuid uid;
+    QString name;
+    QString description;
+
+    try
+    {
+        VKnownMeasurementsConverter converter(filePath);
+        VKnownMeasurementsDocument doc;
+        doc.setXMLContent(converter.Convert());
+
+        uid = doc.GetUId();
+        name = doc.Name();
+        description = doc.Description();
+    }
+    catch (VException &e)
+    {
+        QMessageBox::warning(this,
+                             tr("Install known measurements"),
+                             tr("File is not a valid known measurements file.\n\n%1").arg(e.ErrorMessage()));
+        return;
+    }
+
+    const bool relinkOffer = uid != neededId;
+
+    QMessageBox msgBox(this);
+    msgBox.setWindowTitle(tr("Install known measurements"));
+    msgBox.setText(tr("Install \"%1\"?").arg(name.isEmpty() ? QFileInfo(filePath).fileName() : name));
+    msgBox.setInformativeText(description);
+    msgBox.setIcon(QMessageBox::Question);
+
+    QAbstractButton *installButton = msgBox.addButton(tr("Install"), QMessageBox::AcceptRole);
+    QAbstractButton *relinkButton = relinkOffer ? msgBox.addButton(tr("Install and Relink"), QMessageBox::AcceptRole)
+                                                : nullptr;
+    msgBox.addButton(QMessageBox::Cancel);
+    msgBox.setDefaultButton(qobject_cast<QPushButton *>(installButton));
+    msgBox.exec();
+
+    QAbstractButton *clicked = msgBox.clickedButton();
+    if (clicked != installButton && clicked != relinkButton)
+    {
+        return;
+    }
+
+    const QString rootPath = MApplication::VApp()->TapeSettings()->GetPathKnownMeasurements();
+    QDir const rootDir(rootPath);
+    if (!rootDir.exists() && !rootDir.mkpath("."_L1))
+    {
+        QMessageBox::warning(this,
+                             tr("Install known measurements"),
+                             tr("Unable to create known measurements folder \"%1\".").arg(rootPath));
+        return;
+    }
+
+    const QString destPath = rootDir.filePath(QFileInfo(filePath).fileName());
+    const bool samePlace = QFileInfo(filePath).canonicalFilePath() == QFileInfo(destPath).canonicalFilePath();
+
+    if (!samePlace && QFileInfo::exists(destPath))
+    {
+        if (QMessageBox::question(this,
+                                  tr("Install known measurements"),
+                                  tr("File \"%1\" already exists in the known measurements folder. Replace it?")
+                                      .arg(QFileInfo(destPath).fileName()))
+            == QMessageBox::No)
+        {
+            return;
+        }
+        QFile::remove(destPath);
+    }
+
+    if (!samePlace && !QFile::copy(filePath, destPath))
+    {
+        QMessageBox::warning(this, tr("Install known measurements"), tr("Unable to copy file to \"%1\".").arg(destPath));
+        return;
+    }
+
+    MApplication::VApp()->KnownMeasurementsDatabase()->PopulateMeasurementsDatabase();
+
+    if (clicked == relinkButton && m_m != nullptr)
+    {
+        m_m->SetKnownMeasurements(uid);
+        MeasurementsWereSaved(false);
+    }
+
+    SyncKnownMeasurements();
+    UpdateKnownMeasurementsBanner();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TMainWindow::UpdateKnownMeasurementsBanner()
+{
+    if (m_m == nullptr)
+    {
+        ui->frameKnownMeasurementsWarning->setVisible(false);
+        return;
+    }
+
+    const QUuid docId = m_m->KnownMeasurements();
+    if (!docId.isNull() && !KnownMeasurementsRegistred(docId) && !m_knownMeasurementsWarningDismissed)
+    {
+        ui->labelKnownMeasurementsWarning->setText(
+            tr("Descriptions and diagrams aren't available: the known measurements file this table was "
+               "created with isn't installed."));
+        ui->frameKnownMeasurementsWarning->setVisible(true);
+    }
+    else
+    {
+        ui->frameKnownMeasurementsWarning->setVisible(false);
     }
 }
 

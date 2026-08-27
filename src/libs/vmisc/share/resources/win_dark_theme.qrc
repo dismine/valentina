@@ -1091,7 +1091,7 @@
         <!-- <file>icons/Eleven-Dark/16/actions/virtual-desktops.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/vonkoch.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/widget-alternatives.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16/actions/window-close.svg</file> -->
+        <file>icons/Eleven-Dark/16/actions/window-close.svg</file>
         <!-- <file>icons/Eleven-Dark/16/actions/window-duplicate.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/window-new.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/window-next.svg</file> -->
@@ -3499,7 +3499,7 @@
         <!-- <file>icons/Eleven-Dark/22/actions/warnprev.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/whitebalance.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/widget-alternatives.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22/actions/window-close.svg</file> -->
+        <file>icons/Eleven-Dark/22/actions/window-close.svg</file>
         <!-- <file>icons/Eleven-Dark/22/actions/window-duplicate.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/window-maximize.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/window-minimize.svg</file> -->
@@ -5771,7 +5771,7 @@
         <!-- <file>icons/Eleven-Dark/24/actions/warnprev.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/whitebalance.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/widget-alternatives.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24/actions/window-close.svg</file> -->
+        <file>icons/Eleven-Dark/24/actions/window-close.svg</file>
         <!-- <file>icons/Eleven-Dark/24/actions/window-duplicate.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/window-maximize.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/window-new.svg</file> -->
@@ -7189,7 +7189,7 @@
         <!-- <file>icons/Eleven-Dark/32/actions/view-sort-descending-name.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32/actions/view-sort-descending.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32/actions/view-sort.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/32/actions/window-close.svg</file> -->
+        <file>icons/Eleven-Dark/32/actions/window-close.svg</file>
         <!-- <file>icons/Eleven-Dark/32/actions/zoom-1-to-2.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32/actions/zoom-2-to-1.svg</file> -->
         <file>icons/Eleven-Dark/32/actions/zoom-fit-best.svg</file>
@@ -9023,7 +9023,7 @@
         <!-- <file>icons/Eleven-Dark/16@2x/actions/virtual-desktops.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/vonkoch.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/widget-alternatives.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16@2x/actions/window-close.svg</file> -->
+        <file>icons/Eleven-Dark/16@2x/actions/window-close.svg</file>
         <!-- <file>icons/Eleven-Dark/16@2x/actions/window-duplicate.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/window-new.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/window-next.svg</file> -->
@@ -11431,7 +11431,7 @@
         <!-- <file>icons/Eleven-Dark/22@2x/actions/warnprev.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/whitebalance.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/widget-alternatives.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22@2x/actions/window-close.svg</file> -->
+        <file>icons/Eleven-Dark/22@2x/actions/window-close.svg</file>
         <!-- <file>icons/Eleven-Dark/22@2x/actions/window-duplicate.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/window-maximize.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/window-minimize.svg</file> -->
@@ -13703,7 +13703,7 @@
         <!-- <file>icons/Eleven-Dark/24@2x/actions/warnprev.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/whitebalance.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/widget-alternatives.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24@2x/actions/window-close.svg</file> -->
+        <file>icons/Eleven-Dark/24@2x/actions/window-close.svg</file>
         <!-- <file>icons/Eleven-Dark/24@2x/actions/window-duplicate.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/window-maximize.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/window-new.svg</file> -->
@@ -15121,7 +15121,7 @@
         <!-- <file>icons/Eleven-Dark/32@2x/actions/view-sort-descending-name.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32@2x/actions/view-sort-descending.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32@2x/actions/view-sort.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/32@2x/actions/window-close.svg</file> -->
+        <file>icons/Eleven-Dark/32@2x/actions/window-close.svg</file>
         <!-- <file>icons/Eleven-Dark/32@2x/actions/zoom-1-to-2.svg</file> -->
         <!-- <file>icons/Eleven-Dark/32@2x/actions/zoom-2-to-1.svg</file> -->
         <file>icons/Eleven-Dark/32@2x/actions/zoom-fit-best.svg</file>
