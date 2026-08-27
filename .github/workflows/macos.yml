@@ -75,7 +75,7 @@ jobs:
       fail-fast: false
       matrix:
         qt:
-          - install: 6.11.0
+          - install: 6.11.2
             label: Qt6_11
             build_target: '13+'
             xcode: '16.4'
@@ -86,7 +86,7 @@ jobs:
             with_iconv: 'False'
             withBigCodecs: 'False'
             deploy: 'true'
-          - install: 6.11.0
+          - install: 6.11.2
             label: Qt6_11
             build_target: '13+'
             xcode: '16.4'
@@ -430,7 +430,7 @@ jobs:
       fail-fast: false
       matrix:
         qt:
-          - install: 6.11.0
+          - install: 6.11.2
             label: Qt6_11
             build_target: '13+'
             xcode: '16.2'
@@ -441,7 +441,7 @@ jobs:
             with_iconv: 'False'
             withBigCodecs: 'False'
             deploy: 'true'
-          - install: 6.11.0
+          - install: 6.11.2
             label: Qt6_11
             build_target: '13+'
             xcode: '16.2'
