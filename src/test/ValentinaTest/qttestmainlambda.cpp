@@ -35,6 +35,7 @@
 
 #include "../vmisc/testvapplication.h"
 #include "tst_dxf.h"
+#include "tst_fancytabbar.h"
 #include "tst_findpoint.h"
 #include "tst_formulacache.h"
 #include "tst_misc.h"
@@ -129,6 +130,7 @@ auto main(int argc, char **argv) -> int
 
     ASSERT_TEST(new TST_FindPoint());
     ASSERT_TEST(new TST_FormulaCache());
+    ASSERT_TEST(new TST_FancyTabBar());
     ASSERT_TEST(new TST_VPiece());
     ASSERT_TEST(new TST_VPoster());
     ASSERT_TEST(new TST_VAbstractPiece());

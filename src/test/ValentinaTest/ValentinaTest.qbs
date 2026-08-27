@@ -79,6 +79,8 @@ VTestApp {
     files: [
         "qttestmainlambda.cpp",
         "tst_dxf.cpp",
+        "tst_fancytabbar.cpp",
+        "tst_fancytabbar.h",
         "tst_dxf.h",
         "tst_formulacache.cpp",
         "tst_formulacache.h",

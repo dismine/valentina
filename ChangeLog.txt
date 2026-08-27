@@ -1,4 +1,5 @@
 # Valentina 1.1.1 (unreleased)
+- [Valentina app] Fixed a crash from a sidebar tab's hover-fade animation still running after the tab bar that owned it was destroyed (e.g. closing a piece-creation dialog), which left the animation calling into freed memory.
 - [Valentina app / Tape app / Puzzle app] Removed the single-bundle macOS package. Only the multi-app bundle (separate Valentina.app, Tape.app and Puzzle.app in one DMG) is offered now.
 - [Valentina app] Fixed the horizontal scroll wheel (thumb wheel on mice that have one) doing nothing on the pattern and layout views; horizontal wheel events were computed as zero scrolling steps and discarded. Scrolling both axes at once no longer cuts one of them short.
 - [Valentina app / Puzzle app] Exporting details to SVG now wraps each piece in its own named Inkscape layer, for cutters and plotters that distinguish shapes by layer.
