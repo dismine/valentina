@@ -126,6 +126,8 @@ VTestApp {
         "tst_vpatterngraph.h",
         "tst_vabstractpattern.cpp",
         "tst_vabstractpattern.h",
+        "tst_toolsdef.cpp",
+        "tst_toolsdef.h",
         "tst_vtooluniondetails.cpp",
         "tst_vposter.h",
         "tst_vspline.h",

@@ -142,22 +142,25 @@ void FillDefSourceNames(QVector<SourceItem> &source, const VContainer *data, con
             {
                 const QString baseName = GetBaseName(sourceItem.id, data);
                 const QString candidateName = u"%1__%2%3"_s.arg(baseName, suffix).arg(suffixIndex);
+                // Curves are registered with a type head prefix (e.g. "Spl_"), so uniqueness must be
+                // checked against the full name, not the headless candidate.
+                const QString fullName = GetSourceItemName(candidateName, sourceItem.id, data);
 
                 // Check if name matches the regex
-                if (!rx.match(candidateName).hasMatch())
+                if (!rx.match(fullName).hasMatch())
                 {
                     allValid = false;
                     break;
                 }
 
                 // Check if name is unique in data and not already in candidate set
-                if (!data->IsUnique(candidateName) || candidateNames.contains(candidateName))
+                if (!data->IsUnique(fullName) || candidateNames.contains(fullName))
                 {
                     allValid = false;
                     break;
                 }
 
-                candidateNames.insert(candidateName);
+                candidateNames.insert(fullName);
             }
             catch (const VExceptionBadId &)
             {
@@ -299,8 +302,10 @@ auto GetDefSourceName(quint32 id, const VContainer *data, const QString &suffix,
         for (int suffixIndex = 1; suffixIndex <= maxTries; ++suffixIndex)
         {
             const QString candidateName = u"%1__%2%3"_s.arg(baseName, suffix).arg(suffixIndex);
-            if (rx.match(candidateName).hasMatch() && data->IsUnique(candidateName)
-                && !occupiedNames.contains(candidateName))
+            // Curves are registered with a type head prefix (e.g. "Spl_"), so uniqueness must be
+            // checked against the full name, not the headless candidate.
+            const QString fullName = GetSourceItemName(candidateName, id, data);
+            if (rx.match(fullName).hasMatch() && data->IsUnique(fullName) && !occupiedNames.contains(candidateName))
             {
                 return candidateName;
             }

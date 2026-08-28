@@ -44,6 +44,7 @@
 #include "tst_readval.h"
 #include "tst_renametoken.h"
 #include "tst_svgfontwritingsystem.h"
+#include "tst_toolsdef.h"
 #include "tst_vabstractcurve.h"
 #include "tst_vabstractpiece.h"
 #include "tst_varc.h"
@@ -158,6 +159,7 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_VLabelArrangeEngine());
     ASSERT_TEST(new TST_VPatternGraph());
     ASSERT_TEST(new TST_VAbstractPattern());
+    ASSERT_TEST(new TST_ToolsDef());
     ASSERT_TEST(new TST_VToolUnionDetails());
     ASSERT_TEST(new TST_XSDShema());
     ASSERT_TEST(new TST_VSVGPathTokenizer());

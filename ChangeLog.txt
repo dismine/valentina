@@ -1,4 +1,5 @@
 # Valentina 1.1.1 (unreleased)
+- [Valentina app] Fixed Move/Rotate/Flip operations letting the auto-generated name of a resulting curve collide with an existing one, since the uniqueness check compared the name without its curve-type prefix. Two curves could silently end up with the same name.
 - [Misc] Fixed nearly invisible placeholder text in disabled/read-only fields on custom dark theme, and on Linux when the system palette already looked dark enough that the app skipped loading its own theme.
 - [Tape app] Added an "Install…" button next to the known measurements database selector to install a .vkm file directly, plus a dismissible warning banner shown when a measurement file references a known measurements database that isn't installed.
 - [Valentina app] Fixed a seam allowance corner set to "by second edge symmetry" growing a stray spike instead of mirroring the matching corner at the other end of the edge, so pieces that should look identical no longer differ.
