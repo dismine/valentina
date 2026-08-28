@@ -1,6 +1,16 @@
 #!/bin/bash
 # Run this script if you want to find and update all strings in the code.
-# Please, run this script from folder <root_folder>/scripts.
+# Can be run from any directory -- it always operates relative to its own location, not the
+# caller's cwd. Do not remove the "cd" below: running this from the wrong directory used to make
+# the "rm -r ./share" step below delete the repo's real share/ directory (issue found 2026-08-28).
+set -euo pipefail
+cd "$(dirname "$0")"
+
+# Sanity check the repo layout before doing anything destructive.
+if [[ ! -f "../valentina.qbs" ]]; then
+    echo "ERROR: expected ../valentina.qbs relative to $(pwd) -- refusing to run." >&2
+    exit 1
+fi
 
 start=$(date +%s)
 
@@ -12,10 +22,13 @@ VALENTINA_BRANCH=''    # for example 10x
 LANGUAGES="uk,de_DE,cs,he_IL,fr_FR,it_IT,nl,id,es,fi,ro_RO,zh_CN,pt_BR,el_GR,pl_PL,hr_HR,hu_HU,pt_PT,ja"
 
 # Certant languages like he_IL and zh_CN are not supported by math parser
-tx pull -r valentina-project.valentina_${VALENTINA_BRANCH}ts -w 30 --mode=default -f --skip -l "${LANGUAGES}" &
-wait
+tx pull -r valentina-project.valentina_${VALENTINA_BRANCH}ts -w 30 --mode=default -f --skip -l "${LANGUAGES}"
 
 # cannot fix incorrect placing for pattern making systems
+if [[ ! -d ./share/translations ]]; then
+    echo "ERROR: tx pull didn't produce ./share/translations -- aborting before touching anything." >&2
+    exit 1
+fi
 cp -r ./share/translations/* ../share/translations
 rm -r ./share
 
