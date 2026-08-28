@@ -51,6 +51,7 @@
 #include "tst_vboundary.h"
 #include "tst_vcommandline.h"
 #include "tst_vcommonsettings.h"
+#include "tst_vcontainer.h"
 #include "tst_vcubicbezierpath.h"
 #include "tst_vdomdocument.h"
 #include "tst_vellipticalarc.h"
@@ -159,6 +160,7 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_VLabelArrangeEngine());
     ASSERT_TEST(new TST_VPatternGraph());
     ASSERT_TEST(new TST_VAbstractPattern());
+    ASSERT_TEST(new TST_VContainer());
     ASSERT_TEST(new TST_ToolsDef());
     ASSERT_TEST(new TST_VToolUnionDetails());
     ASSERT_TEST(new TST_XSDShema());

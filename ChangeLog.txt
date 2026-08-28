@@ -1,4 +1,5 @@
 # Valentina 1.1.1 (unreleased)
+- [Valentina app] The pattern loader now warns when a pattern file has two objects sharing the same name, which can make formulas silently resolve to the wrong object; pass --pedantic on the command line to make this a hard error instead.
 - [Valentina app] Fixed Move/Rotate/Flip operations letting the auto-generated name of a resulting curve collide with an existing one, since the uniqueness check compared the name without its curve-type prefix. Two curves could silently end up with the same name.
 - [Misc] Fixed nearly invisible placeholder text in disabled/read-only fields on custom dark theme, and on Linux when the system palette already looked dark enough that the app skipped loading its own theme.
 - [Tape app] Added an "Install…" button next to the known measurements database selector to install a .vkm file directly, plus a dismissible warning banner shown when a measurement file references a known measurements database that isn't installed.

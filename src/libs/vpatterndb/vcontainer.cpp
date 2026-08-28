@@ -45,6 +45,7 @@
 #include "../vgeometry/vspline.h"
 #include "../vmisc/exception/vexception.h"
 #include "../vmisc/literals.h"
+#include "../vmisc/vabstractapplication.h"
 #include "variables/varcradius.h"
 #include "variables/vcurveangle.h"
 #include "variables/vcurveclength.h"
@@ -249,17 +250,98 @@ void VContainer::RegisterUniqueName(VGObject *obj) const
     RegisterUniqueName(pointer);
 }
 
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+// Diagnostic helper for RegisterUniqueName(). Only walked when a collision was already detected, so a
+// linear scan is fine.
+//
+// excludeId must be the id of the object currently being registered: UpdateObject() inserts it into
+// `objects` before RegisterUniqueName() runs, so without excluding it a hash scan can non-deterministically
+// return the object itself instead of the other, genuinely colliding one -- QHash iteration order for
+// integer keys is randomized per process by Qt's hash-flooding protection, so which match comes first is
+// not stable across runs.
+auto FindObjectByName(const QHash<quint32, QSharedPointer<VGObject>> &objects, const QString &name,
+                      quint32 excludeId) -> QSharedPointer<VGObject>
+{
+    for (auto i = objects.constBegin(); i != objects.constEnd(); ++i)
+    {
+        if (i.key() != excludeId && (i.value()->name() == name || i.value()->GetAlias() == name))
+        {
+            return i.value();
+        }
+    }
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// A Draw::Modeling object (piece node) is an intentional copy of its source Draw::Calculation object --
+// VNodePoint/VNodeSpline/VNodeArc/etc. Create() always duplicate the source and keep its name, linking back
+// via idObject. Sharing a name with that source is by design, not a duplicate-name bug.
+auto IsModelingMirror(const QSharedPointer<VGObject> &a, const QSharedPointer<VGObject> &b) -> bool
+{
+    return (a->getIdObject() != NULL_ID && a->getIdObject() == b->id())
+        || (b->getIdObject() != NULL_ID && b->getIdObject() == a->id());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// A Draw::Calculation object created by an operation (Move/Rotate/Flip/...) does not carry its own name in
+// the pattern file -- the name lives on the <item> for the source object inside that operation's tool
+// element, whose id is stashed in idObject (see VToolMove's CreateItem()). Report that tool id instead of
+// the object's own id, which points at a nameless destination placeholder no one can act on.
+auto OwningToolId(const QSharedPointer<VGObject> &object) -> quint32
+{
+    if (object->getMode() == Draw::Calculation && object->getIdObject() != NULL_ID)
+    {
+        return object->getIdObject();
+    }
+    return object->id();
+}
+} // namespace
+
 //---------------------------------------------------------------------------------------------------------------------
 void VContainer::RegisterUniqueName(const QSharedPointer<VGObject> &obj) const
 {
     SCASSERT(not obj.isNull())
 
-    uniqueNames[d->nspace].insert(obj->name());
-
-    if (not obj->GetAlias().isEmpty())
+    auto Register = [this, &obj](const QString &name)
     {
-        uniqueNames[d->nspace].insert(obj->GetAlias());
-    }
+        if (name.isEmpty())
+        {
+            return;
+        }
+
+        if (uniqueNames[d->nspace].contains(name))
+        {
+            QSharedPointer<VGObject> existing = FindObjectByName(d->calculationObjects, name, obj->id());
+            if (existing.isNull() && d->modelingObjects)
+            {
+                existing = FindObjectByName(*d->modelingObjects, name, obj->id());
+            }
+
+            // A Draw::Modeling object sharing a name with the Draw::Calculation object it mirrors is not
+            // a collision.
+            if (not existing.isNull() && not IsModelingMirror(existing, obj))
+            {
+                const QString errorMsg =
+                    tr("The pattern has two objects sharing the name '%1': one from the tool with id %2, "
+                       "another from the tool with id %3. Formulas or tools referencing this name may "
+                       "resolve to the wrong one.")
+                        .arg(name)
+                        .arg(OwningToolId(obj))
+                        .arg(OwningToolId(existing));
+
+                VAbstractApplication::VApp()->IsPedantic()
+                    ? throw VException(errorMsg)
+                    : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
+            }
+        }
+
+        uniqueNames[d->nspace].insert(name);
+    };
+
+    Register(obj->name());
+    Register(obj->GetAlias());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -286,10 +368,11 @@ auto VContainer::AddGObject(const QSharedPointer<VGObject> &obj) -> quint32
         return NULL_ID;
     }
 
-    RegisterUniqueName(obj);
-
     const quint32 id = getNextId();
     obj->setId(id);
+
+    // Assign the id first so a collision warning can report the real, final id of the new object.
+    RegisterUniqueName(obj);
 
     if (obj->getMode() == Draw::Calculation)
     {
