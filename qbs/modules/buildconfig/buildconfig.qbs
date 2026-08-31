@@ -761,7 +761,8 @@ Module {
                 if (Utilities.versionCompare(cpp.compilerVersion, "8") >= 0) {
                     debugFlags.push(
                         "-Wmultistatement-macros",
-                        "-Warray-bounds"
+                        "-Warray-bounds",
+                        "-Wno-error=array-bounds" // false positive in immer's HAMT node code
                     )
                 }
 
