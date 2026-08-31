@@ -74,7 +74,7 @@ jobs:
           qtbase5-dev libqt5svg5-dev qttools5-dev-tools
           libqt5xmlpatterns5-dev libqt5core5a libqt5gui5
           libqt5printsupport5 libqt5svg5 libqt5widgets5
-          libqt5xml5 libqt5xmlpatterns5 poppler-utils git"
+          libqt5xml5 libqt5xmlpatterns5 libimmer-dev poppler-utils git"
 
       - name: Restore ccache
         uses: actions/cache@v5
@@ -130,7 +130,7 @@ jobs:
         run: >
           bash -c "$PACKAGE_MANAGER_INSTALL
           qt6-base-dev qt6-l10n-tools libqt6svg6-dev
-          qt6-base-dev-tools qmake6 libxerces-c-dev
+          qt6-base-dev-tools qmake6 libxerces-c-dev libimmer-dev
           poppler-utils libgl1-mesa-dev git"
 
       - name: Restore ccache
@@ -190,7 +190,7 @@ jobs:
           qtbase5-dev libqt5svg5-dev qttools5-dev-tools
           libqt5xmlpatterns5-dev libqt5core5a libqt5gui5
           libqt5printsupport5 libqt5svg5 libqt5widgets5
-          libqt5xml5 libqt5xmlpatterns5 poppler-utils git"
+          libqt5xml5 libqt5xmlpatterns5 libimmer-dev poppler-utils git"
 
       - name: Restore ccache
         uses: actions/cache@v5
@@ -247,7 +247,7 @@ jobs:
         run: >
           bash -c "$PACKAGE_MANAGER_INSTALL
           qt6-base-dev qt6-l10n-tools libqt6svg6-dev
-          qt6-base-dev-tools qmake6 libxerces-c-dev
+          qt6-base-dev-tools qmake6 libxerces-c-dev libimmer-dev
           poppler-utils libgl1-mesa-dev git"
 
       - name: Restore ccache
@@ -303,7 +303,7 @@ jobs:
         run: >
           bash -c "$PACKAGE_MANAGER_INSTALL
           qt6-base-dev qt6-l10n-tools libqt6svg6-dev
-          qt6-base-dev-tools libxerces-c-dev poppler-utils libgl1-mesa-dev git"
+          qt6-base-dev-tools libxerces-c-dev libimmer-dev poppler-utils libgl1-mesa-dev git"
 
       - name: Restore ccache
         uses: actions/cache@v5

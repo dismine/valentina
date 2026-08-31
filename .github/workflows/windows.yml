@@ -207,7 +207,7 @@ jobs:
 
       - name: Build Conan dependencies
         shell: bash
-        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -o '&:with_icu=${{ env.WITH_ICU }}' -o '&:with_iconv=${{ env.WITH_ICONV }}' -pr:a=share/ci/conan/profiles/windows
+        run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -o '&:with_icu=${{ env.WITH_ICU }}' -o '&:with_iconv=${{ env.WITH_ICONV }}' -o '&:with_immer=True' -pr:a=share/ci/conan/profiles/windows
 
       - name: Cache SimplySign Installer
         if: ${{ matrix.qt.sign == true }}
@@ -258,6 +258,7 @@ jobs:
           project.conanWithXerces:true
           project.conanWithICU:${{ env.WITH_ICU }}
           project.conanWithICONV:${{ env.WITH_ICONV }}
+          project.conanWithImmer:true
           project.conanProfiles:share/ci/conan/profiles/windows
           project.withICUCodecs:${{ env.WITH_ICU }}
           project.withICONVCodecs:${{ env.WITH_ICONV }}
