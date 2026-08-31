@@ -6402,6 +6402,15 @@ MainWindow::~MainWindow()
     CancelTool();
 
     delete doc;
+
+    // Delete the scenes explicitly, while this window's own widgets (e.g. m_statusLabel) are still guaranteed
+    // alive. A tool item destroyed here can still emit ToolTip() while tearing down its visualization preview
+    // (e.g. VisToolSplinePath), which reaches MainWindow::ShowToolTip(). Left to Qt's implicit child cleanup
+    // instead, the scenes would be destroyed later, after m_statusLabel may already be gone, crashing on freed
+    // memory.
+    delete m_sceneDraw;
+    delete m_sceneDetails;
+
     delete ui;
 }
 
