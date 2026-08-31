@@ -143,7 +143,7 @@ auto EvalCachedFormula(const QString &formula, const VContainer *data) -> qreal
         }
     }
 
-    const QHash<QString, QSharedPointer<VInternalVariable>> *vars = data->DataVariables();
+    const auto *vars = data->DataVariables();
     FormulaCache *cache = ThreadFormulaCache();
 
     if (const CachedFormula *entry = cache->object(formula);
@@ -152,9 +152,9 @@ auto EvalCachedFormula(const QString &formula, const VContainer *data) -> qreal
         bool refreshed = true;
         for (const auto &[name, ptr] : entry->usedVars)
         {
-            if (auto var = vars->constFind(name); var != vars->constEnd())
+            if (const auto *var = vars->find(name); var != nullptr)
             {
-                *ptr = *var.value()->GetValue();
+                *ptr = *(*var)->GetValue();
             }
             else if (name.startsWith('#'_L1))
             {
@@ -389,27 +389,6 @@ auto VAbstractTool::ColorsList() -> QMap<QString, QString>
         map.insert(colorNames.at(i), name);
     }
     return map;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// cppcheck-suppress unusedFunction
-auto VAbstractTool::PointsList() const -> QMap<QString, quint32>
-{
-    const QHash<quint32, QSharedPointer<VGObject>> *objs = data.CalculationGObjects();
-    QMap<QString, quint32> list;
-    for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
-    {
-        if (i.key() != m_id)
-        {
-            QSharedPointer<VGObject> const obj = i.value();
-            if (obj->getType() == GOType::Point)
-            {
-                const QSharedPointer<VPointF> point = data.GeometricObject<VPointF>(i.key());
-                list[point->name()] = i.key();
-            }
-        }
-    }
-    return list;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

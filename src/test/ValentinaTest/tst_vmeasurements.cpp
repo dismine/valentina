@@ -175,5 +175,5 @@ void TST_VMeasurements::ReadMeasurementsUnknownType()
 
     m.ReadMeasurements(0); // Used to crash here dereferencing a null container.
 
-    QVERIFY(data->DataVariables()->contains(QStringLiteral("height")));
+    QVERIFY(data->DataVariables()->count(QStringLiteral("height")) != 0);
 }

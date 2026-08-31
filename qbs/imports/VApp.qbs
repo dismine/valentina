@@ -5,6 +5,16 @@ CppApplication {
     Depends { name: "buildconfig" }
     Depends { name: "bundle"; condition: qbs.targetOS.contains("macos") }
     Depends { name: "macdeployqt"; condition: qbs.targetOS.contains("macos") }
+    // See VLib.qbs -- header-only immer backs VContainer's persistent storage and its headers
+    // reach every application through vcontainer.h.
+    Depends {
+        name: "immersystem"
+        condition: !(buildconfig.useConanPackages && buildconfig.conanImmerEnabled)
+    }
+    Depends {
+        name: "immer"
+        condition: buildconfig.useConanPackages && buildconfig.conanImmerEnabled
+    }
 
     qbsModuleProviders: {
         var providers = ["Qt"];

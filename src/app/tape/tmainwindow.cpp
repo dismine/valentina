@@ -2158,13 +2158,13 @@ void TMainWindow::ShowNewMData(bool fresh)
 
         if (meash->IsSpecialUnits())
         {
-            const qreal value = *m_data->DataVariables()->value(meash->GetName())->GetValue();
+            const qreal value = *(*m_data->DataVariables())[meash->GetName()]->GetValue();
             calculatedValue = VAbstractApplication::VApp()->LocaleToString(value) + QChar(QChar::Space) + degreeSymbol;
         }
         else
         {
             const QString postfix = UnitsToStr(m_pUnit); // Show unit in dialog lable (cm, mm or inch)
-            const qreal value = UnitConvertor(*m_data->DataVariables()->value(meash->GetName())->GetValue(),
+            const qreal value = UnitConvertor(*(*m_data->DataVariables())[meash->GetName()]->GetValue(),
                                               m_mUnit,
                                               m_pUnit);
             calculatedValue = VAbstractApplication::VApp()->LocaleToString(value) + QChar(QChar::Space) + postfix;
@@ -3879,12 +3879,12 @@ void TMainWindow::RefreshMeasurementData(const QSharedPointer<VMeasurement> &mea
         QString calculatedValue;
         if (meash->IsSpecialUnits())
         {
-            const qreal value = *m_data->DataVariables()->value(meash->GetName())->GetValue();
+            const qreal value = *(*m_data->DataVariables())[meash->GetName()]->GetValue();
             calculatedValue = locale().toString(value) + degreeSymbol;
         }
         else
         {
-            const qreal value = UnitConvertor(*m_data->DataVariables()->value(meash->GetName())->GetValue(),
+            const qreal value = UnitConvertor(*(*m_data->DataVariables())[meash->GetName()]->GetValue(),
                                               m_mUnit,
                                               m_pUnit);
             calculatedValue = locale().toString(value);

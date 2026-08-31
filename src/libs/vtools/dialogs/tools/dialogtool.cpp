@@ -205,30 +205,30 @@ void DialogTool::FillComboBoxArcCurves(QComboBox *box, FillComboBox rule, quint3
     SCASSERT(box != nullptr)
     const QSignalBlocker blocker(box);
 
-    const QHash<quint32, QSharedPointer<VGObject>> *objs = data.CalculationGObjects();
+    const auto *objs = data.CalculationGObjects();
     QMap<QString, quint32> list;
-    for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
+    for (const auto &i : *objs)
     {
         if (rule == FillComboBox::NoChildren)
         {
-            if (i.key() != toolId && i.value()->getIdTool() != toolId && i.key() != ch1 && i.key() != ch2)
+            if (i.first != toolId && i.second->getIdTool() != toolId && i.first != ch1 && i.first != ch2)
             {
-                const QSharedPointer<VGObject> &obj = i.value();
+                const QSharedPointer<VGObject> &obj = i.second;
                 if (obj->getType() == GOType::Arc || obj->getType() == GOType::EllipticalArc)
                 {
-                    PrepareList<VAbstractCurve>(list, i.key());
+                    PrepareList<VAbstractCurve>(list, i.first);
                 }
             }
         }
         else
         {
-            if (i.key() != toolId && i.value()->getIdTool() != toolId)
+            if (i.first != toolId && i.second->getIdTool() != toolId)
             {
-                const QSharedPointer<VGObject> &obj = i.value();
+                const QSharedPointer<VGObject> &obj = i.second;
                 if ((obj->getType() == GOType::Arc || obj->getType() == GOType::EllipticalArc)
                     && obj->getMode() == Draw::Calculation)
                 {
-                    PrepareList<VAbstractCurve>(list, i.key());
+                    PrepareList<VAbstractCurve>(list, i.first);
                 }
             }
         }
@@ -246,11 +246,11 @@ void DialogTool::FillComboBoxSplines(QComboBox *box) const
 
     const auto *const objs = data.CalculationGObjects();
     QMap<QString, quint32> list;
-    for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
+    for (const auto &i : *objs)
     {
-        if (i.key() != toolId && i.value()->getIdTool() != toolId && IsSpline(i.value()))
+        if (i.first != toolId && i.second->getIdTool() != toolId && IsSpline(i.second))
         {
-            PrepareList<VAbstractCurve>(list, i.key());
+            PrepareList<VAbstractCurve>(list, i.first);
         }
     }
     FillList(box, list);
@@ -265,11 +265,11 @@ void DialogTool::FillComboBoxSplinesPath(QComboBox *box) const
 
     const auto *const objs = data.CalculationGObjects();
     QMap<QString, quint32> list;
-    for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
+    for (const auto &i : *objs)
     {
-        if (i.key() != toolId && i.value()->getIdTool() != toolId && IsSplinePath(i.value()))
+        if (i.first != toolId && i.second->getIdTool() != toolId && IsSplinePath(i.second))
         {
-            PrepareList<VAbstractCurve>(list, i.key());
+            PrepareList<VAbstractCurve>(list, i.first);
         }
     }
     FillList(box, list);
@@ -282,19 +282,19 @@ void DialogTool::FillComboBoxCurves(QComboBox *box) const
     SCASSERT(box != nullptr)
     const auto *const objs = data.CalculationGObjects();
     QMap<QString, quint32> list;
-    for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
+    for (const auto &i : *objs)
     {
-        if (i.key() == toolId)
+        if (i.first == toolId)
         {
             continue;
         }
 
-        if (QSharedPointer<VGObject> const &obj = i.value();
+        if (QSharedPointer<VGObject> const &obj = i.second;
             obj->getType() == GOType::Arc || obj->getType() == GOType::EllipticalArc || obj->getType() == GOType::Spline
             || obj->getType() == GOType::SplinePath || obj->getType() == GOType::CubicBezier
             || obj->getType() == GOType::CubicBezierPath)
         {
-            PrepareList<VAbstractCurve>(list, i.key());
+            PrepareList<VAbstractCurve>(list, i.first);
         }
     }
     FillList(box, list);
@@ -765,29 +765,29 @@ void DialogTool::FillCombo(QComboBox *box, GOType gType, FillComboBox rule, cons
     SCASSERT(box != nullptr)
     const QSignalBlocker blocker(box);
 
-    const QHash<quint32, QSharedPointer<VGObject>> *objs = data.CalculationGObjects();
+    const auto *objs = data.CalculationGObjects();
     QMap<QString, quint32> list;
-    for (auto i = objs->constBegin(); i != objs->constEnd(); ++i)
+    for (const auto &i : *objs)
     {
         if (rule == FillComboBox::NoChildren)
         {
-            if (i.key() != toolId && i.value()->getIdTool() != toolId && i.key() != ch1 && i.key() != ch2)
+            if (i.first != toolId && i.second->getIdTool() != toolId && i.first != ch1 && i.first != ch2)
             {
-                const QSharedPointer<VGObject> &obj = i.value();
+                const QSharedPointer<VGObject> &obj = i.second;
                 if (obj->getType() == gType)
                 {
-                    PrepareList<GObject>(list, i.key());
+                    PrepareList<GObject>(list, i.first);
                 }
             }
         }
         else
         {
-            if (i.key() != toolId && i.value()->getIdTool() != toolId)
+            if (i.first != toolId && i.second->getIdTool() != toolId)
             {
-                const QSharedPointer<VGObject> &obj = i.value();
+                const QSharedPointer<VGObject> &obj = i.second;
                 if (obj->getType() == gType && obj->getMode() == Draw::Calculation)
                 {
-                    PrepareList<GObject>(list, i.key());
+                    PrepareList<GObject>(list, i.first);
                 }
             }
         }

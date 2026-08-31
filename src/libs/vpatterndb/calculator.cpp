@@ -73,7 +73,7 @@ Calculator::Calculator()
  * @param formula string of formula.
  * @return value of formula.
  */
-auto Calculator::EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable>> *vars, const QString &formula)
+auto Calculator::EvalFormula(const immer::map<QString, QSharedPointer<VInternalVariable>> *vars, const QString &formula)
     -> qreal
 {
     // Converting with locale is much faster in case of single numerical value.
@@ -99,11 +99,14 @@ auto Calculator::VarFactory(const QString &a_szName, void *a_pUserData) -> qreal
     Q_UNUSED(a_szName)
     auto *calc = static_cast<Calculator *>(a_pUserData);
 
-    if (calc->m_vars != nullptr && calc->m_vars->contains(a_szName))
+    if (calc->m_vars != nullptr)
     {
-        QSharedPointer<qreal> const val(new qreal(*calc->m_vars->value(a_szName)->GetValue()));
-        calc->m_varsValues.append(val);
-        return val.data();
+        if (const auto *found = calc->m_vars->find(a_szName))
+        {
+            QSharedPointer<qreal> const val(new qreal(*(*found)->GetValue()));
+            calc->m_varsValues.append(val);
+            return val.data();
+        }
     }
 
     if (a_szName.startsWith('#'))

@@ -27,8 +27,10 @@
  *************************************************************************/
 
 #include "tst_vcontainer.h"
+#include "../ifc/exception/vexceptionbadid.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/typedef.h"
+#include "../vpatterndb/variables/vincrement.h"
 #include "../vpatterndb/vcontainer.h"
 
 #include <QtTest>
@@ -40,6 +42,51 @@ TST_VContainer::TST_VContainer(QObject *parent)
   : QObject(parent)
 {
 }
+
+namespace
+{
+auto MakeIncrement(VContainer *data, const QString &name, qreal value) -> VIncrement *
+{
+    auto *incr = new VIncrement(data, name);
+    incr->SetFormula(value, QString::number(value), true);
+    return incr;
+}
+
+// Benchmark-only variant. VIncrement(VContainer *, ...) deep-copies the whole container and then
+// runs ClearVariables() over every variable in it, so building one is O(variables) all by itself --
+// a cost that has nothing to do with the container's copy-on-write behaviour, and that real draw
+// tools never pay (they add VLengthLine / VLineAngle / VArcRadius, not VIncrement). Using it inside
+// a timed loop hides the very thing these benchmarks exist to measure.
+auto MakeBenchVariable(const QString &name, qreal value) -> VIncrement *
+{
+    auto *incr = new VIncrement();
+    incr->SetName(name);
+    incr->SetFormula(value, QString::number(value), true);
+    return incr;
+}
+
+void BenchmarkSizes()
+{
+    QTest::addColumn<int>("preload");
+    QTest::newRow("n=0") << 0;
+    QTest::newRow("n=500") << 500;
+    QTest::newRow("n=2000") << 2000;
+    QTest::newRow("n=8000") << 8000;
+}
+
+// Fills the container with `preload` variables and `preload` points.
+auto Preload(VContainer *data, int preload) -> QVector<quint32>
+{
+    QVector<quint32> ids;
+    ids.reserve(preload);
+    for (int i = 0; i < preload; ++i)
+    {
+        data->AddVariable(MakeBenchVariable(u"preload_%1"_s.arg(i), i + 1));
+        ids.append(data->AddGObject(new VPointF(i, i, u"P_preload_%1"_s.arg(i))));
+    }
+    return ids;
+}
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VContainer::DuplicateNameIsNotRejected()
@@ -126,4 +173,151 @@ void TST_VContainer::ModelingMirrorSharingCalculationNameDoesNotWarn()
 
     QVERIFY2(!sawDuplicateNameWarning,
              "A Draw::Modeling object sharing its source Draw::Calculation object's name must not warn");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VContainer::OldToolSnapshotUnaffectedByLaterStructuralChange()
+{
+    const Unit unit = Unit::Cm;
+    VContainer data(nullptr, &unit, VContainer::UniqueNamespace());
+    data.AddVariable(MakeIncrement(&data, u"first"_s, 1));
+
+    const VContainer snapshot = data; // mirrors VDataTool::VDataTool's data(*data)
+
+    // A later tool adds a structurally new variable to the *live* container.
+    data.AddVariable(MakeIncrement(&data, u"second"_s, 2));
+
+    // The old snapshot must not see it.
+    bool exceptionThrown = false;
+    try
+    {
+        snapshot.GetVariable<VIncrement>(u"second"_s);
+    }
+    catch (const VExceptionBadId &)
+    {
+        exceptionThrown = true;
+    }
+    QVERIFY(exceptionThrown);
+
+    // The live container must.
+    QCOMPARE(*data.GetVariable<VIncrement>(u"second"_s)->GetValue(), 2.0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VContainer::OldToolSnapshotSeesValueUpdateToExistingVariable()
+{
+    // Pins the aliasing subtlety: FullLiteParse relies on old snapshots observing value
+    // updates to already-existing variables, even though they must NOT see new ones.
+    const Unit unit = Unit::Cm;
+    VContainer data(nullptr, &unit, VContainer::UniqueNamespace());
+    data.AddVariable(MakeIncrement(&data, u"first"_s, 1));
+
+    const VContainer snapshot = data;
+
+    data.AddVariable(MakeIncrement(&data, u"first"_s, 42)); // existing-name branch: mutates in place
+
+    QCOMPARE(*snapshot.GetVariable<VIncrement>(u"first"_s)->GetValue(), 42.0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VContainer::BenchmarkToolParseShape_data()
+{
+    BenchmarkSizes();
+}
+
+// The cost this plan exists to remove: parsing one more tool into an already-large container.
+void TST_VContainer::BenchmarkToolParseShape()
+{
+    QFETCH(int, preload);
+
+    const Unit unit = Unit::Cm;
+    VContainer data(nullptr, &unit, VContainer::UniqueNamespace());
+    Preload(&data, preload);
+
+    // A fixed iteration count instead of QBENCHMARK's adaptive repeat: the adaptive
+    // version would grow the container by a different amount for each row and for each
+    // implementation, blurring the `preload` axis this benchmark is measuring along.
+    constexpr int iterations = 200;
+
+    QBENCHMARK_ONCE
+    {
+        for (int i = 0; i < iterations; ++i)
+        {
+            // Exactly what parsing one draw tool does: VDataTool takes a by-value snapshot
+            // of the container, then the tool writes its own object and variable into the
+            // live one -- which is what forces the copy-on-write detach.
+            const VContainer snapshot = data;
+            data.AddGObject(new VPointF(i, i, u"P_bench_%1"_s.arg(i)));
+            data.AddVariable(MakeBenchVariable(u"bench_%1"_s.arg(i), i + 1));
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VContainer::BenchmarkVariableLookup_data()
+{
+    BenchmarkSizes();
+}
+
+// The cost this plan risks adding: HAMT lookup is slower per call than QHash lookup, and
+// formula evaluation is lookup-count-dominated. This is the regression guard.
+void TST_VContainer::BenchmarkVariableLookup()
+{
+    QFETCH(int, preload);
+
+    if (preload == 0)
+    {
+        QSKIP("Nothing to look up.");
+    }
+
+    const Unit unit = Unit::Cm;
+    VContainer data(nullptr, &unit, VContainer::UniqueNamespace());
+    Preload(&data, preload);
+
+    QStringList names;
+    names.reserve(preload);
+    for (int i = 0; i < preload; ++i)
+    {
+        names.append(u"preload_%1"_s.arg(i));
+    }
+
+    qreal sum = 0;
+    QBENCHMARK
+    {
+        for (const auto &name : names)
+        {
+            sum += *data.GetVariable<VIncrement>(name)->GetValue();
+        }
+    }
+    QVERIFY(sum > 0); // keeps the loop observable so it cannot be optimised away
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VContainer::BenchmarkObjectLookup_data()
+{
+    BenchmarkSizes();
+}
+
+void TST_VContainer::BenchmarkObjectLookup()
+{
+    QFETCH(int, preload);
+
+    if (preload == 0)
+    {
+        QSKIP("Nothing to look up.");
+    }
+
+    const Unit unit = Unit::Cm;
+    VContainer data(nullptr, &unit, VContainer::UniqueNamespace());
+    const QVector<quint32> ids = Preload(&data, preload);
+
+    qreal sum = 0;
+    QBENCHMARK
+    {
+        for (auto id : ids)
+        {
+            sum += data.GeometricObject<VPointF>(id)->x();
+        }
+    }
+    QVERIFY(sum >= 0);
 }

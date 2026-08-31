@@ -99,7 +99,6 @@ public:
     auto getData() const -> const VContainer *;
     auto getData() -> VContainer *;
 
-    auto PointsList() const -> QMap<QString, quint32>;
     virtual auto getTagName() const -> QString = 0;
     virtual void ShowVisualization(bool show) = 0;
     virtual void TriggerChoosed() {}

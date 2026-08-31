@@ -28,6 +28,7 @@
 
 #include "vpatternconverter.h"
 
+#include <optional>
 #include <QDir>
 #include <QDomNode>
 #include <QDomNodeList>

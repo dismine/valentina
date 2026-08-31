@@ -34,6 +34,8 @@
 #include <QString>
 #include <QtGlobal>
 
+#include <immer/map.hpp>
+
 #include "../qmuparser/qmuformulabase.h"
 
 class VInternalVariable;
@@ -62,12 +64,13 @@ public:
     Calculator();
     ~Calculator() override = default;
 
-    auto EvalFormula(const QHash<QString, QSharedPointer<VInternalVariable>> *vars, const QString &formula) -> qreal;
+    auto EvalFormula(const immer::map<QString, QSharedPointer<VInternalVariable>> *vars, const QString &formula)
+        -> qreal;
 
 private:
     Q_DISABLE_COPY_MOVE(Calculator) // NOLINT
     QVector<QSharedPointer<qreal>> m_varsValues{};
-    const QHash<QString, QSharedPointer<VInternalVariable>> *m_vars{nullptr};
+    const immer::map<QString, QSharedPointer<VInternalVariable>> *m_vars{nullptr};
 
     static auto VarFactory(const QString &a_szName, void *a_pUserData) -> qreal *;
     static auto Warning(const QString &warningMsg, qreal value) -> qreal;

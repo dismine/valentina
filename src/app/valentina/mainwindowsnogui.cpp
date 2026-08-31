@@ -902,6 +902,10 @@ auto MainWindowsNoGUI::PrepareDetailsForLayout(const QVector<DetailForLayout> &d
     QObject::connect(&futureWatcher, &QFutureWatcher<VLayoutPiece>::progressValueChanged, &progress,
                      &QProgressDialog::setValue);
 
+    // Every worker below reads a tool's container snapshot; the main thread must not write
+    // to any container until they are all done. See VContainer::FrozenScope.
+    const VContainer::FrozenScope frozen;
+
     futureWatcher.setFuture(QtConcurrent::mapped(details, PrepareDetail));
 
     if (VApplication::IsGUIMode())

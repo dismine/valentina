@@ -53,6 +53,18 @@ private slots:
     // and always shares its name by design (see VNodePoint::Create() and friends) -- not a bug.
     void ModelingMirrorSharingCalculationNameDoesNotWarn();
 
+    // Regression tests: pin snapshot semantics preserved by the rewrite.
+    void OldToolSnapshotUnaffectedByLaterStructuralChange();
+    void OldToolSnapshotSeesValueUpdateToExistingVariable();
+
+    // Benchmarks: measure QHash baseline before persistent-map swap.
+    void BenchmarkToolParseShape_data();
+    void BenchmarkToolParseShape();
+    void BenchmarkVariableLookup_data();
+    void BenchmarkVariableLookup();
+    void BenchmarkObjectLookup_data();
+    void BenchmarkObjectLookup();
+
 private:
     Q_DISABLE_COPY_MOVE(TST_VContainer) // NOLINT
 };

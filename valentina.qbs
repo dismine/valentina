@@ -11,6 +11,7 @@ Project {
     property bool conanWithCrashReporting: false
     property bool conanWithICU: false
     property bool conanWithICONV: false
+    property bool conanWithImmer: false
     property string minimumMacosVersion: undefined
     property string minimumQtVersion: "5.15"
     property stringList conanProfiles: []
@@ -42,7 +43,8 @@ Project {
     property string conanInstallPath: conanProbe.generatedFilesPath
     ConanfileProbe {
         id: conanProbe
-        condition: enableConan && (conanWithXerces || conanWithCrashReporting || conanWithICU || conanWithICONV)
+        condition: enableConan && (conanWithXerces || conanWithCrashReporting || conanWithICU || conanWithICONV ||
+                                   conanWithImmer)
         conanfilePath: project.sourceDirectory + "/conanfile.py"
         verbose: true
         generators: []
@@ -52,6 +54,7 @@ Project {
             console.info("* crash reporting: " + conanWithCrashReporting);
             console.info("* ICU: " + conanWithICU);
             console.info("* ICONV: " + conanWithICONV);
+            console.info("* immer: " + conanWithImmer);
 
             var o = {};
             if (conanWithXerces)
@@ -64,6 +67,9 @@ Project {
                 o['&:with_icu'] = "True";
             else if (conanWithICONV)
                 o['&:with_iconv'] = "True";
+
+            if (conanWithImmer)
+                o['&:with_immer'] = "True";
 
             return o;
         }

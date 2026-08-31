@@ -32,6 +32,8 @@
 #include <QSharedDataPointer>
 #include <QtGlobal>
 
+#include <immer/map.hpp>
+
 #include "../vgeometry/vabstractcurve.h"
 #include "../vmisc/def.h"
 
@@ -121,7 +123,7 @@ public:
     auto NodePreviousPoint(const VContainer *data, int i) const -> QPointF;
     auto NodeNextPoint(const VContainer *data, int i) const -> QPointF;
 
-    auto IsVisible(const QHash<QString, QSharedPointer<VInternalVariable>> *vars) const -> bool;
+    auto IsVisible(const immer::map<QString, QSharedPointer<VInternalVariable>> *vars) const -> bool;
 
     static auto indexOfNode(const QVector<VPieceNode> &nodes, quint32 id) -> int;
 

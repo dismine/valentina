@@ -39,9 +39,13 @@
 #include <QSharedPointer>
 #include <QString>
 #include <QStringList>
+#include <QThread>
 #include <QTypeInfo>
 #include <QtGlobal>
+#include <atomic>
 #include <new>
+
+#include <immer/map.hpp>
 
 #include "../ifc/exception/vexceptionbadid.h"
 #include "../vgeometry/vabstractcubicbezierpath.h"
@@ -76,8 +80,12 @@ public:
     VContainerData(const VContainerData &data) = default;
     ~VContainerData();
 
+    // Persistent (structurally shared) storage: a VContainerData copy is O(1) and later structural
+    // mutations only rebuild the HAMT nodes on the path to the changed key, so an old tool snapshot
+    // no longer forces a full deep copy of the whole map. See docs/superpowers/plans/
+    // 2026-08-28-persistent-container.md.
     // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
-    QHash<quint32, QSharedPointer<VGObject>> calculationObjects{};
+    immer::map<quint32, QSharedPointer<VGObject>> calculationObjects{};
     // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
     QSharedPointer<QHash<quint32, QSharedPointer<VGObject>>> modelingObjects{
         QSharedPointer<QHash<quint32, QSharedPointer<VGObject>>>::create()};
@@ -86,7 +94,7 @@ public:
      * @brief variables container for measurements, increments, lines lengths, lines angles, arcs lengths, curve lengths
      */
     // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
-    QHash<QString, QSharedPointer<VInternalVariable>> variables{};
+    immer::map<QString, QSharedPointer<VInternalVariable>> variables{};
 
     // NOLINTNEXTLINE(misc-non-private-member-variables-in-classes)
     QSharedPointer<QHash<quint32, VPiece>> pieces{QSharedPointer<QHash<quint32, VPiece>>::create()};
@@ -125,6 +133,29 @@ public:
     auto operator=(VContainer &&data) noexcept -> VContainer &;
 
     static auto UniqueNamespace() -> QString;
+
+    // ponytail: a tripwire, NOT a lock. Layout piece preparation reads this container from many
+    // worker threads at once (MainWindowsNoGUI::PrepareDetailsForLayout -> VLayoutPiece::Create),
+    // while the main thread sits in a nested event loop and could still dispatch a mutation.
+    // Nothing enforces "no writes during that window", so assert it instead of assuming it.
+    // Upgrade to real synchronisation only if this actually fires.
+    //
+    // The hazard is specifically a main-thread write racing worker-thread reads, so
+    // CheckNotFrozen() below only trips for mutations happening on the main/GUI thread. A worker
+    // thread mutating its own private, thread-local VContainer copy is safe by construction --
+    // nothing else can see that instance yet -- and must never trip this, regardless of `frozen`.
+    // (Discovered false positive: VPattern::GetCompleteData() mutates a worker-local `lastData`
+    // copy via RemoveVariable() during this window and used to abort before this check existed.)
+    //
+    // The flag itself is private: FrozenScope is a nested class and therefore already has access
+    // to VContainer's private members, which makes it the only way to raise or clear the tripwire.
+    class FrozenScope
+    {
+    public:
+        FrozenScope() { VContainer::frozen.store(true, std::memory_order_relaxed); }
+        ~FrozenScope() { VContainer::frozen.store(false, std::memory_order_relaxed); }
+        Q_DISABLE_COPY_MOVE(FrozenScope) // NOLINT
+    };
 
     template <typename T> auto GeometricObject(const quint32 &id) const -> QSharedPointer<T>;
     auto GetGObject(quint32 id) const -> QSharedPointer<VGObject>;
@@ -180,9 +211,9 @@ public:
 
     void FillPiecesAreas(Unit unit);
 
-    auto CalculationGObjects() const -> const QHash<quint32, QSharedPointer<VGObject>> *;
+    auto CalculationGObjects() const -> const immer::map<quint32, QSharedPointer<VGObject>> *;
     auto DataPieces() const -> QHash<quint32, VPiece> *;
-    auto DataVariables() const -> const QHash<QString, QSharedPointer<VInternalVariable>> *;
+    auto DataVariables() const -> const immer::map<QString, QSharedPointer<VInternalVariable>> *;
 
     auto DataMeasurements() const -> QMap<QString, QSharedPointer<VMeasurement>>;
     auto DataMeasurementsWithSeparators() const -> QMap<QString, QSharedPointer<VMeasurement>>;
@@ -215,6 +246,18 @@ private:
     static QMap<QString, QSet<QString>> uniqueNames;
     static QMap<QString, quint32> copyCounter;
 
+    // Tripwire state raised by FrozenScope -- see the comment on FrozenScope above for what it
+    // guards and why it is an assert rather than a lock.
+    static std::atomic_bool frozen;
+
+    // Tripwire check for `frozen`, called from every mutator. A static member function rather than
+    // a free function in an anonymous namespace: it is called from the templated mutators below,
+    // which have external linkage and are instantiated in arbitrary translation units, so an
+    // internal-linkage helper would make each instantiation call a different entity (an ODR
+    // violation). Keep this compiled in for release builds too -- the interesting evidence comes
+    // from real users on real patterns, not from debug runs.
+    static void CheckNotFrozen(const char *where);
+
     QSharedDataPointer<VContainerData> d;
 
     void AddCurve(const QSharedPointer<VAbstractCurve> &curve, const quint32 &id, quint32 parentId = NULL_ID);
@@ -236,6 +279,21 @@ private:
 
 Q_DECLARE_TYPEINFO(VContainer, Q_MOVABLE_TYPE); // NOLINT
 
+//---------------------------------------------------------------------------------------------------------------------
+// Defined out of line so that it is visible both to the templated mutators below (instantiated in
+// arbitrary translation units) and to the plain mutators in vcontainer.cpp, which includes this
+// header. See the declaration for why this is a member function and not a free one.
+inline void VContainer::CheckNotFrozen(const char *where)
+{
+    QCoreApplication *app = QCoreApplication::instance();
+    if (VContainer::frozen.load(std::memory_order_relaxed) && app != nullptr &&
+        QThread::currentThread() == app->thread())
+    {
+        qCritical() << "VContainer mutated while layout workers were reading it:" << where;
+        Q_ASSERT(false);
+    }
+}
+
 /*
  *  Defintion of templated member functions of VContainer
  */
@@ -249,9 +307,9 @@ template <typename T> auto VContainer::GeometricObject(const quint32 &id) const 
     }
 
     QSharedPointer<VGObject> gObj;
-    if (d->calculationObjects.contains(id))
+    if (const auto *found = d->calculationObjects.find(id))
     {
-        gObj = d->calculationObjects.value(id);
+        gObj = *found;
     }
     else if (d->modelingObjects->contains(id))
     {
@@ -282,11 +340,11 @@ template <typename T> auto VContainer::GeometricObject(const quint32 &id) const 
 template <typename T> auto VContainer::GetVariable(const QString &name) const -> QSharedPointer<T>
 {
     SCASSERT(name.isEmpty() == false)
-    if (d->variables.contains(name))
+    if (const auto *found = d->variables.find(name))
     {
         try
         {
-            QSharedPointer<VInternalVariable> const gVar = d->variables.value(name);
+            QSharedPointer<VInternalVariable> const gVar = *found;
             QSharedPointer<T> value = qSharedPointerDynamicCast<T>(gVar);
             if (value.isNull())
             {
@@ -323,7 +381,7 @@ template <typename T> void VContainer::AddUniqueVariable(const QSharedPointer<T>
 {
     AddVariable(var);
 
-    if (d->variables.contains(var->GetName()))
+    if (d->variables.count(var->GetName()) != 0)
     {
         uniqueNames[d->nspace].insert(var->GetName());
     }
@@ -351,21 +409,27 @@ template <typename T> void VContainer::AddVariable(const QSharedPointer<T> &var)
 template<typename T>
 void VContainer::AddVariable(const QSharedPointer<T> &var, const QString &name)
 {
+    CheckNotFrozen("AddVariable");
+
     if (name.isEmpty())
     {
         return;
     }
 
-    if (d->variables.contains(name))
+    // Existing-name branch below deliberately mutates the already-stored variable *in place*
+    // (`*v = *var;`) instead of replacing the map entry. Old tool snapshots share that pointee and
+    // must keep observing new values -- Document::FullLiteParse depends on it. Only the structural
+    // (first-time insert) branch touches the persistent map. Do not "fix" this into immutability.
+    if (const auto *found = d->variables.find(name))
     {
-        if (d->variables.value(name)->GetType() == var->GetType())
+        if ((*found)->GetType() == var->GetType())
         {
-            QSharedPointer<T> v = qSharedPointerDynamicCast<T>(d->variables.value(name));
+            QSharedPointer<T> v = qSharedPointerDynamicCast<T>(*found);
             if (v.isNull())
             {
                 throw VExceptionBadId(tr("Can't cast object. Name = '%1', type = %2.")
                                           .arg(name)
-                                          .arg(static_cast<int>(d->variables.value(name)->GetType())),
+                                          .arg(static_cast<int>((*found)->GetType())),
                                       name);
             }
 
@@ -376,14 +440,14 @@ void VContainer::AddVariable(const QSharedPointer<T> &var, const QString &name)
             throw VExceptionBadId(tr("Can't find object. Type mismatch. Name = '%1', existing type = %2, "
                                      "incoming type = %3.")
                                       .arg(name)
-                                      .arg(static_cast<int>(d->variables.value(name)->GetType()))
+                                      .arg(static_cast<int>((*found)->GetType()))
                                       .arg(static_cast<int>(var->GetType())),
                                   name);
         }
     }
     else
     {
-        d->variables.insert(name, var);
+        d->variables = d->variables.set(name, var);
     }
 }
 
@@ -425,13 +489,19 @@ template <class T> void VContainer::UpdateGObject(quint32 id, const QSharedPoint
  */
 template <typename T> void VContainer::UpdateObject(const quint32 &id, const QSharedPointer<T> &point)
 {
+    CheckNotFrozen("UpdateObject");
+
     Q_ASSERT_X(id != NULL_ID, Q_FUNC_INFO, "id == 0"); //-V654 //-V712
     SCASSERT(point.isNull() == false)
     point->setId(id);
 
-    if (d->calculationObjects.contains(id) && point->getMode() == Draw::Calculation)
+    // As in AddVariable(), the existing-id branches mutate the already-stored object in place
+    // (`*obj = *point;`) so old tool snapshots keep seeing value updates. Only the two "not there
+    // yet" branches below change the map structure.
+    const auto *found = d->calculationObjects.find(id);
+    if (found != nullptr && point->getMode() == Draw::Calculation)
     {
-        QSharedPointer<T> obj = qSharedPointerDynamicCast<T>(d->calculationObjects.value(id));
+        QSharedPointer<T> obj = qSharedPointerDynamicCast<T>(*found);
         if (obj.isNull())
         {
             throw VExceptionBadId(tr("Can't cast object"), id);
@@ -449,7 +519,7 @@ template <typename T> void VContainer::UpdateObject(const quint32 &id, const QSh
     }
     else if (point->getMode() == Draw::Calculation)
     {
-        d->calculationObjects.insert(id, point);
+        d->calculationObjects = d->calculationObjects.set(id, point);
     }
     else if (point->getMode() == Draw::Modeling)
     {

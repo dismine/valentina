@@ -34,6 +34,8 @@
 #include <QString>
 #include <QtGlobal>
 
+#include <immer/map.hpp>
+
 #include "../ifc/ifcdef.h"
 #include "../vgeometry/vgeometrydef.h"
 #include "../vmisc/typedef.h"
@@ -68,7 +70,7 @@ QT_WARNING_DISABLE_GCC("-Weffc++")
 struct FormulaData
 {
     QString formula;
-    const QHash<QString, QSharedPointer<VInternalVariable>> *variables{nullptr};
+    const immer::map<QString, QSharedPointer<VInternalVariable>> *variables{nullptr};
     QLabel *labelEditFormula{nullptr};
     QLabel *labelResult{nullptr};
     QString postfix{};

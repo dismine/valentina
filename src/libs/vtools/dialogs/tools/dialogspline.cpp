@@ -464,7 +464,7 @@ void DialogSpline::SaveSpline()
     QString length1F = ui->plainTextEditLength1F->toPlainText();
     QString length2F = ui->plainTextEditLength2F->toPlainText();
 
-    const QHash<QString, QSharedPointer<VInternalVariable>> *vars = data.DataVariables();
+    const auto *vars = data.DataVariables();
 
     const qreal angle1 = Visualization::FindValFromUser(angle1F, vars);
     const qreal angle2 = Visualization::FindValFromUser(angle2F, vars);

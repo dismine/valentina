@@ -1825,7 +1825,7 @@ void DialogSeamAllowance::PlaceLabelDialogClosed(int result)
         {
             VPlaceLabelItem const currentLabel = CurrentPlaceLabel(dialogTool->GetToolId());
 
-            const QHash<QString, QSharedPointer<VInternalVariable>> *vars = data.DataVariables();
+            const auto *vars = data.DataVariables();
 
             const qreal w = qAbs(Visualization::FindLengthFromUser(dialogTool->GetWidth(), vars, false));
             const qreal h = qAbs(Visualization::FindLengthFromUser(dialogTool->GetHeight(), vars, false));
@@ -2752,8 +2752,8 @@ void DialogSeamAllowance::EvalWidth()
 {
     // Avoid circular dependency. CurrentSeamAllowance value based on the width field value. On this stage, we must
     // hide from user the existence of CurrentSeamAllowance variable.
-    QHash<QString, QSharedPointer<VInternalVariable>> variables = *data.DataVariables();
-    variables.remove(currentSeamAllowance);
+    auto variables = *data.DataVariables();
+    variables = variables.erase(currentSeamAllowance);
 
     m_saWidth = Eval({.formula = uiTabPaths->plainTextEditFormulaWidth->toPlainText(),
                       .variables = &variables,

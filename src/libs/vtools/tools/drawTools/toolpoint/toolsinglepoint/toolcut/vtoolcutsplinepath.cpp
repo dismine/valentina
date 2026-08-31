@@ -174,6 +174,11 @@ auto VToolCutSplinePath::Create(VToolCutInitData &initData) -> VToolCutSplinePat
     initData.data->AddVariable(length);
 
     const qreal result = CheckFormula(initData.id, initData.formula, initData.data);
+    // Only this tool needs this special variable, and only for the formula evaluation
+    // above — remove it immediately rather than at the end of the function, so this
+    // tool's own about-to-be-taken container snapshot doesn't force the *next*
+    // detach to also carry it.
+    initData.data->RemoveVariable(currentLength);
 
     VSplinePath *splPath1 = nullptr;
     VSplinePath *splPath2 = nullptr;
@@ -257,8 +262,6 @@ auto VToolCutSplinePath::Create(VToolCutInitData &initData) -> VToolCutSplinePat
         InitSegmentConnections(initData.scene, tool, splPath->getType());
         VAbstractPattern::AddTool(initData.id, tool);
     }
-    // Very important to delete it. Only this tool need this special variable.
-    initData.data->RemoveVariable(currentLength);
     return tool;
 }
 

@@ -975,7 +975,7 @@ auto VPiecePath::NodeNextPoint(const VContainer *data, int i) const -> QPointF
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPiecePath::IsVisible(const QHash<QString, QSharedPointer<VInternalVariable>> *vars) const -> bool
+auto VPiecePath::IsVisible(const immer::map<QString, QSharedPointer<VInternalVariable>> *vars) const -> bool
 {
     SCASSERT(vars != nullptr)
     bool visible = true;

@@ -5,6 +5,18 @@ Library {
     Depends { name: "bundle"; condition: qbs.targetOS.contains("macos") }
     Depends { name: "cpp" }
     Depends { name: "coverage"; required: false }
+    // Header-only immer backs VContainer's persistent storage. vcontainer.h and calculator.h are
+    // included across effectively every library, so the include path is wired centrally here
+    // instead of per product. Default: found as a system package (immersystem probes for it).
+    // project.conanWithImmer:true switches to a pinned version fetched through Conan instead.
+    Depends {
+        name: "immersystem"
+        condition: !(buildconfig.useConanPackages && buildconfig.conanImmerEnabled)
+    }
+    Depends {
+        name: "immer"
+        condition: buildconfig.useConanPackages && buildconfig.conanImmerEnabled
+    }
 
     qbsModuleProviders: {
         var providers = ["Qt"];
