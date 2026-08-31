@@ -44,6 +44,7 @@ Module {
 
     readonly property bool useConanPackages : project.enableConan
     readonly property bool conanXercesEnabled : project.conanWithXerces
+    readonly property bool conanImmerEnabled : project.conanWithImmer
     readonly property bool conanCrashReportingEnabled : {
         if (qbs.targetOS.contains("windows")) {
             if (qbs.toolchain.contains("msvc")) {
