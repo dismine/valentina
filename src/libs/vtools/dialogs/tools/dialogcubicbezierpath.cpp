@@ -311,6 +311,12 @@ void DialogCubicBezierPath::NewPointChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogCubicBezierPath::AddPoint()
 {
+    if (ui->comboBoxNewPoint->currentIndex() == -1)
+    {
+        return; // Nothing selected. Can happen if a pattern change re-enabled the button (see
+                // CheckDependencyTreeComplete()) while the combo box was empty.
+    }
+
     const auto id = qvariant_cast<quint32>(ui->comboBoxNewPoint->currentData());
     const auto point = data.GeometricObject<VPointF>(id);
     NewItem(*point);
@@ -525,7 +531,7 @@ void DialogCubicBezierPath::SetDefColor(const QString &value)
 void DialogCubicBezierPath::CheckDependencyTreeComplete()
 {
     m_dependencyReady = m_doc->IsPatternGraphComplete();
-    ui->toolButtonAddPoint->setEnabled(m_dependencyReady);
+    ui->toolButtonAddPoint->setEnabled(m_dependencyReady && ui->comboBoxNewPoint->currentIndex() != -1);
     ui->toolButtonRemovePoint->setEnabled(m_dependencyReady);
     ui->toolButtonTop->setEnabled(m_dependencyReady);
     ui->toolButtonUp->setEnabled(m_dependencyReady);
