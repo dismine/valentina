@@ -415,6 +415,11 @@ MApplication::~MApplication()
 // reimplemented from QApplication so we can throw exceptions in slots
 auto MApplication::notify(QObject *receiver, QEvent *event) -> bool
 {
+    // Every catch below must call the qualified ::exit() (the C library one), not exit() unqualified. Inside
+    // a QCoreApplication-derived member function, unqualified exit() resolves to the inherited static slot
+    // QCoreApplication::exit(int), which does not terminate the process: it just flags the nearest event
+    // loop(s) to quit and returns control here. Control then keeps running on data that is known bad (the
+    // exception that got us into this catch), which crashed once teardown eventually caught up with it.
     try
     {
         return QApplication::notify(receiver, event);
@@ -424,38 +429,38 @@ auto MApplication::notify(QObject *receiver, QEvent *event) -> bool
         qCCritical(mApp, "%s\n\n%s\n\n%s",
                    qUtf8Printable(tr("Error parsing file. Program will be terminated.")), //-V807
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        exit(V_EX_DATAERR);
+        ::exit(V_EX_DATAERR);
     }
     catch (const VExceptionBadId &e)
     {
         qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error bad id. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        exit(V_EX_DATAERR);
+        ::exit(V_EX_DATAERR);
     }
     catch (const VExceptionConversionError &e)
     {
         qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error can't convert value. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        exit(V_EX_DATAERR);
+        ::exit(V_EX_DATAERR);
     }
     catch (const VExceptionEmptyParameter &e)
     {
         qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        exit(V_EX_DATAERR);
+        ::exit(V_EX_DATAERR);
     }
     catch (const VExceptionWrongId &e)
     {
         qCCritical(mApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        exit(V_EX_DATAERR);
+        ::exit(V_EX_DATAERR);
     }
     catch (const VExceptionToolWasDeleted &e)
     {
         qCCritical(mApp, "%s\n\n%s\n\n%s",
                    qUtf8Printable(QStringLiteral("Unhadled deleting tool. Continue use object after deleting!")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        exit(V_EX_DATAERR);
+        ::exit(V_EX_DATAERR);
     }
     catch (const VException &e)
     {
@@ -466,19 +471,19 @@ auto MApplication::notify(QObject *receiver, QEvent *event) -> bool
     catch (const qmu::QmuParserWarning &e)
     {
         qCCritical(mApp, "%s", qUtf8Printable(tr("Formula warning: %1. Program will be terminated.").arg(e.GetMsg())));
-        exit(V_EX_DATAERR);
+        ::exit(V_EX_DATAERR);
     }
     // These last two cases special. I found that we can't show here modal dialog with error message.
     // Somehow program doesn't waite untile an error dialog will be closed. But if ignore this program will hang.
     catch (const qmu::QmuParserError &e)
     {
         qCCritical(mApp, "%s", qUtf8Printable(tr("Parser error: %1. Program will be terminated.").arg(e.GetMsg())));
-        exit(V_EX_DATAERR);
+        ::exit(V_EX_DATAERR);
     }
     catch (std::exception &e)
     {
         qCCritical(mApp, "%s", qUtf8Printable(tr("Exception thrown: %1. Program will be terminated.").arg(e.what())));
-        exit(V_EX_SOFTWARE);
+        ::exit(V_EX_SOFTWARE);
     }
     return false;
 }
