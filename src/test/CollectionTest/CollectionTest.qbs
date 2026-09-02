@@ -100,7 +100,8 @@ VTestApp {
             "issue_256_wrong.vit",
             "issue_256_correct.vst",
             "wrong_formula.val",
-            "test_pedantic.val"
+            "test_pedantic.val",
+            "legacy_cutarc_name.val"
         ]
         fileTags: ["tst_valentina_files"]
     }

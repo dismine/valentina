@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern labelPrefix="en">
+    <!--Pattern created with Valentina v1.0.4.0 (https://smart-pattern.com.ua/).-->
+    <version>0.9.8</version>
+    <unit>inch</unit>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <previewCalculations/>
+    <draw name="Piece2_Bag-base">
+        <calculation>
+            <point id="1" mx="0.104167" my="0.15625" name="A" showLabel="true" type="single" x="0.450403" y="0.580838"/>
+            <arc aScale="0" angle1="0" angle2="360" center="1" color="#6495ed" id="2" penStyle="dashLine" radius="6" type="simple"/>
+            <point arc="2" id="3" length="0" mx="0.736701" my="-0.434115" name="A1" showLabel="true" type="cutArc"/>
+            <point arc="2" id="6" length="(Arc_A_5/4)*1" mx="0.104167" my="0.15625" name="A2" showLabel="true" type="cutArc"/>
+            <point arc="2" id="9" length="(Arc_A_5/4)*2" mx="0.104167" my="0.15625" name="A3" showLabel="true" type="cutArc"/>
+            <point arc="2" id="12" length="(Arc_A_5/4)*3" mx="0.104167" my="0.15625" name="A4" showLabel="true" type="cutArc"/>
+        </calculation>
+        <modeling/>
+        <details/>
+        <groups/>
+    </draw>
+</pattern>

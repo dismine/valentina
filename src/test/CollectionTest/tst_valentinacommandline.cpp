@@ -188,6 +188,9 @@ void TST_ValentinaCommandLine::TestMode_data() const
         << V_EX_NOINPUT;
 
     QTest::newRow("Wrong formula.") << "wrong_formula.val" << u"--test"_s << V_EX_DATAERR;
+
+    QTest::newRow("Legacy cutArc point without name1/name2 attributes.")
+        << "legacy_cutarc_name.val" << u"--test"_s << V_EX_OK;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -207,6 +207,11 @@ auto VToolCutArc::Create(VToolCutInitData &initData) -> VToolCutArc *
 
     // This fix can be removed since name1 and name2 no longer should be empty
     Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
+    // a1/a2 may already carry a name stamped by their constructor (or copied from the base curve) while their id
+    // was still unset. Clear it so FixSubCurveNames regenerates a name from the id assigned above instead of
+    // reusing that stale/colliding one.
+    a1->setName(QString());
+    a2->setName(QString());
     FixSubCurveNames(initData, arc, a1, a2);
 
     a1->SetNameSuffix(initData.name1);
