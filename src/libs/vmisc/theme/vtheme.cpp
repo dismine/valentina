@@ -105,7 +105,7 @@ inline auto NativeLinuxDarkThemeAvailable() -> bool
 // (#454545) into an almost invisible placeholder. Set the role explicitly so it stays legible.
 void SetPlaceholderTextPalette(bool dark)
 {
-    QPalette palette = qApp->palette(); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+    QPalette palette = QApplication::palette();
     const QColor placeholder = dark ? QColor(0x9a, 0x9a, 0x9a) : QColor(0x8a, 0x8a, 0x8a);
     const QColor placeholderDisabled = dark ? QColor(0x6e, 0x6e, 0x6e) : QColor(0xb4, 0xb4, 0xb4);
 
@@ -113,7 +113,7 @@ void SetPlaceholderTextPalette(bool dark)
     palette.setColor(QPalette::Inactive, QPalette::PlaceholderText, placeholder);
     palette.setColor(QPalette::Disabled, QPalette::PlaceholderText, placeholderDisabled);
 
-    qApp->setPalette(palette); // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+    QApplication::setPalette(palette);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
