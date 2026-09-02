@@ -51,9 +51,6 @@ public:
     auto addAction(const QString &text) -> QAction *;
     void clear();
 
-protected:
-    auto eventFilter(QObject *watched, QEvent *event) -> bool override;
-
 private:
     Q_DISABLE_COPY_MOVE(VScrollableMenu) // NOLINT
 
@@ -61,6 +58,7 @@ private:
     QHash<QAction *, QListWidgetItem *> m_itemForAction{};
     QHash<QListWidgetItem *, QAction *> m_actionForItem{};
 
+    auto eventFilter(QObject *watched, QEvent *event) -> bool override;
     void UpdateItem(QAction *action);
     void ItemActivated(QListWidgetItem *item);
 };
