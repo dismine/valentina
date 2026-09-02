@@ -115,19 +115,28 @@ void TST_VContainer::DuplicateNameIsNotRejected()
 
 namespace
 {
-QtMessageHandler previousMessageHandler = nullptr;
-bool sawDuplicateNameWarning = false;
+QtMessageHandler &PreviousMessageHandler()
+{
+    static QtMessageHandler previousMessageHandler = nullptr;
+    return previousMessageHandler;
+}
+
+bool &SawDuplicateNameWarning()
+{
+    static bool sawDuplicateNameWarning = false;
+    return sawDuplicateNameWarning;
+}
 
 void CaptureDuplicateNameWarning(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     if (type == QtWarningMsg && msg.contains(u"sharing the name"_s))
     {
-        sawDuplicateNameWarning = true;
+        SawDuplicateNameWarning() = true;
     }
 
-    if (previousMessageHandler != nullptr)
+    if (PreviousMessageHandler() != nullptr)
     {
-        previousMessageHandler(type, context, msg);
+        PreviousMessageHandler()(type, context, msg);
     }
 }
 } // namespace
@@ -142,12 +151,12 @@ void TST_VContainer::UpdatingObjectWithUnchangedNameDoesNotWarn()
     const quint32 id = data.AddGObject(new VPointF(0, 0, name));
     QVERIFY(id != NULL_ID);
 
-    sawDuplicateNameWarning = false;
-    previousMessageHandler = qInstallMessageHandler(CaptureDuplicateNameWarning);
+    SawDuplicateNameWarning() = false;
+    PreviousMessageHandler() = qInstallMessageHandler(CaptureDuplicateNameWarning);
     data.UpdateGObject(id, new VPointF(1, 1, name));
-    qInstallMessageHandler(previousMessageHandler);
+    qInstallMessageHandler(PreviousMessageHandler());
 
-    QVERIFY2(!sawDuplicateNameWarning, "Recomputing an object with its own existing name must not warn");
+    QVERIFY2(!SawDuplicateNameWarning(), "Recomputing an object with its own existing name must not warn");
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -166,12 +175,12 @@ void TST_VContainer::ModelingMirrorSharingCalculationNameDoesNotWarn()
     modelingPoint->setIdObject(calcId);
     modelingPoint->setMode(Draw::Modeling);
 
-    sawDuplicateNameWarning = false;
-    previousMessageHandler = qInstallMessageHandler(CaptureDuplicateNameWarning);
+    SawDuplicateNameWarning() = false;
+    PreviousMessageHandler() = qInstallMessageHandler(CaptureDuplicateNameWarning);
     data.UpdateGObject(data.getNextId(), modelingPoint);
-    qInstallMessageHandler(previousMessageHandler);
+    qInstallMessageHandler(PreviousMessageHandler());
 
-    QVERIFY2(!sawDuplicateNameWarning,
+    QVERIFY2(!SawDuplicateNameWarning(),
              "A Draw::Modeling object sharing its source Draw::Calculation object's name must not warn");
 }
 
