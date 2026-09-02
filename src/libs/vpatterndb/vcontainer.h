@@ -500,8 +500,7 @@ template <typename T> void VContainer::UpdateObject(const quint32 &id, const QSh
     // As in AddVariable(), the existing-id branches mutate the already-stored object in place
     // (`*obj = *point;`) so old tool snapshots keep seeing value updates. Only the two "not there
     // yet" branches below change the map structure.
-    const auto *found = d->calculationObjects.find(id);
-    if (found != nullptr && point->getMode() == Draw::Calculation)
+    if (const auto *found = d->calculationObjects.find(id); found != nullptr && point->getMode() == Draw::Calculation)
     {
         QSharedPointer<T> obj = qSharedPointerDynamicCast<T>(*found);
         if (obj.isNull())

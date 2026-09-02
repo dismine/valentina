@@ -387,9 +387,8 @@ void VTheme::SetToAutoTheme() const
 //---------------------------------------------------------------------------------------------------------------------
 void VTheme::InitThemeMode()
 {
-    VThemeMode const themeMode = VAbstractApplication::VApp()->Settings()->GetThemeMode();
-
-    if (themeMode == VThemeMode::Light)
+    if (VThemeMode const themeMode = VAbstractApplication::VApp()->Settings()->GetThemeMode();
+        themeMode == VThemeMode::Light)
     {
         if (NativeDarkThemeAvailable())
         {
