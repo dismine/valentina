@@ -704,7 +704,7 @@ void VPMainWindow::SetupMenu()
     m_actionShortcuts.insert(VShortcutAction::SaveAs, ui->actionSaveAs);
 
     m_recentFileActs.fill(nullptr);
-    for (auto &recentFileAct : m_recentFileActs)
+    for (QAction *&recentFileAct : m_recentFileActs)
     {
         auto *action = new QAction(this);
         recentFileAct = action;

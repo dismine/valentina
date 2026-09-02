@@ -901,11 +901,10 @@ auto SimplifiedChineseWritingSystem(QChar c) -> bool
 {
     char16_t const codePoint = c.unicode();
 
-    // NOLINTNEXTLINE(readability-qualified-auto)
-    const auto it = std::lower_bound(simplifiedChineseWritingSystemRanges.begin(),
-                                     simplifiedChineseWritingSystemRanges.end(),
-                                     codePoint,
-                                     [](const Range &range, char16_t value) -> bool { return range.end < value; });
+    const Range *it = std::lower_bound(simplifiedChineseWritingSystemRanges.begin(),
+                                        simplifiedChineseWritingSystemRanges.end(),
+                                        codePoint,
+                                        [](const Range &range, char16_t value) -> bool { return range.end < value; });
     return it != simplifiedChineseWritingSystemRanges.end() && it->start <= codePoint && codePoint <= it->end;
 }
 
@@ -914,11 +913,10 @@ auto TraditionalChineseWritingSystem(QChar c) -> bool
 {
     char16_t const codePoint = c.unicode();
 
-    // NOLINTNEXTLINE(readability-qualified-auto)
-    const auto it = std::lower_bound(traditionalChineseWritingSystemRanges.begin(),
-                                     traditionalChineseWritingSystemRanges.end(),
-                                     codePoint,
-                                     [](const Range &range, char16_t value) -> bool { return range.end < value; });
+    const Range *it = std::lower_bound(traditionalChineseWritingSystemRanges.begin(),
+                                        traditionalChineseWritingSystemRanges.end(),
+                                        codePoint,
+                                        [](const Range &range, char16_t value) -> bool { return range.end < value; });
     return it != traditionalChineseWritingSystemRanges.end() && it->start <= codePoint && codePoint <= it->end;
 }
 
