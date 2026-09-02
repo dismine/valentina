@@ -287,7 +287,7 @@ Q_DECLARE_TYPEINFO(VContainer, Q_MOVABLE_TYPE); // NOLINT
 // header. See the declaration for why this is a member function and not a free one.
 inline void VContainer::CheckNotFrozen(const char *where)
 {
-    QCoreApplication *app = QCoreApplication::instance();
+    QCoreApplication *const app = QCoreApplication::instance();
     if (VContainer::frozen.load(std::memory_order_relaxed) && app != nullptr &&
         QThread::currentThread() == app->thread())
     {
