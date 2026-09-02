@@ -409,9 +409,8 @@ auto AngleBySecondSymmetry(const QVector<VRawSAPoint> &points, QPointF p1, QPoin
     QLineF const sEdge(VPointF::FlipPF(axis, bigLine1.p1()), VPointF::FlipPF(axis, bigLine1.p2()));
 
     QPointF px1;
-    QLineF::IntersectType type = sEdge.intersects(bigLine1, &px1);
 
-    if (type == QLineF::NoIntersection)
+    if (QLineF::IntersectType const type = sEdge.intersects(bigLine1, &px1); type == QLineF::NoIntersection)
     {
         return AngleByLength(points, p1, p2, p3, bigLine1, sp2, bigLine2, p, width, needRollback);
     }
