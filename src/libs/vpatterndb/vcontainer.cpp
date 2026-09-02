@@ -551,7 +551,7 @@ void VContainer::ClearVariables(const QVector<VarType> &types)
 {
     CheckNotFrozen("ClearVariables");
 
-    if (d->variables.size() != 0) //-V807
+    if (!d->variables.empty()) //-V807
     {
         if (types.isEmpty() || types.contains(VarType::Unknown))
         {
