@@ -780,7 +780,7 @@ jobs:
   # MacOS_10_15+ (intel-only) and MacOS_11+ (arm-only) have no counterpart to
   # merge against and keep shipping as single-arch DMGs from the jobs above.
   universal_build:
-    name: MacOS 13+ universal Qt 6.8.3
+    name: MacOS 13+ universal Qt 6.11.2
     needs: [changes, intel_build, arm_build]
     # intel_build/arm_build's aggregate result is "failure" if any unrelated
     # matrix row fails (e.g. the legacy 10.15+/11+ builds), even when the
