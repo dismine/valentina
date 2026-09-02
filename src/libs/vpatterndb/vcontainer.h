@@ -262,6 +262,8 @@ private:
 
     void AddCurve(const QSharedPointer<VAbstractCurve> &curve, const quint32 &id, quint32 parentId = NULL_ID);
 
+    void RegisterUniqueName(const QSharedPointer<VGObject> &obj, const QString &name) const;
+
     template <typename T> void AddVariable(const QSharedPointer<T> &var, const QString &name);
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

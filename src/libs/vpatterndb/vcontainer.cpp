@@ -332,44 +332,45 @@ void VContainer::RegisterUniqueName(const QSharedPointer<VGObject> &obj) const
 
     SCASSERT(not obj.isNull())
 
-    auto Register = [this, &obj](const QString &name)
+    RegisterUniqueName(obj, obj->name());
+    RegisterUniqueName(obj, obj->GetAlias());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VContainer::RegisterUniqueName(const QSharedPointer<VGObject> &obj, const QString &name) const
+{
+    if (name.isEmpty())
     {
-        if (name.isEmpty())
+        return;
+    }
+
+    if (uniqueNames[d->nspace].contains(name))
+    {
+        QSharedPointer<VGObject> existing = FindObjectByName(d->calculationObjects, name, obj->id());
+        if (existing.isNull() && d->modelingObjects)
         {
-            return;
+            existing = FindObjectByName(*d->modelingObjects, name, obj->id());
         }
 
-        if (uniqueNames[d->nspace].contains(name))
+        // A Draw::Modeling object sharing a name with the Draw::Calculation object it mirrors is not
+        // a collision.
+        if (not existing.isNull() && not IsModelingMirror(existing, obj))
         {
-            QSharedPointer<VGObject> existing = FindObjectByName(d->calculationObjects, name, obj->id());
-            if (existing.isNull() && d->modelingObjects)
-            {
-                existing = FindObjectByName(*d->modelingObjects, name, obj->id());
-            }
+            const QString errorMsg =
+                tr("The pattern has two objects sharing the name '%1': one from the tool with id %2, "
+                   "another from the tool with id %3. Formulas or tools referencing this name may "
+                   "resolve to the wrong one.")
+                    .arg(name)
+                    .arg(OwningToolId(obj))
+                    .arg(OwningToolId(existing));
 
-            // A Draw::Modeling object sharing a name with the Draw::Calculation object it mirrors is not
-            // a collision.
-            if (not existing.isNull() && not IsModelingMirror(existing, obj))
-            {
-                const QString errorMsg =
-                    tr("The pattern has two objects sharing the name '%1': one from the tool with id %2, "
-                       "another from the tool with id %3. Formulas or tools referencing this name may "
-                       "resolve to the wrong one.")
-                        .arg(name)
-                        .arg(OwningToolId(obj))
-                        .arg(OwningToolId(existing));
-
-                VAbstractApplication::VApp()->IsPedantic()
-                    ? throw VException(errorMsg)
-                    : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
-            }
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(errorMsg)
+                : qWarning() << VAbstractApplication::warningMessageSignature + errorMsg;
         }
+    }
 
-        uniqueNames[d->nspace].insert(name);
-    };
-
-    Register(obj->name());
-    Register(obj->GetAlias());
+    uniqueNames[d->nspace].insert(name);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
