@@ -48,7 +48,10 @@ public:
     explicit VScrollableMenu(QWidget *parent = nullptr);
     ~VScrollableMenu() override = default;
 
+    using QMenu::addAction;
     auto addAction(const QString &text) -> QAction *;
+
+    using QMenu::clear;
     void clear();
 
 private:
