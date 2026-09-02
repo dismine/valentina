@@ -67,7 +67,7 @@ void VAbstractShortcutManager::UpdateActionShortcuts(const QMultiHash<VShortcutA
     {
         const auto actionList = actions.values(shortcut.type);
 
-        for (const auto &action : actionList)
+        for (QAction *action : actionList)
         {
             if (action)
             {
@@ -84,7 +84,7 @@ void VAbstractShortcutManager::UpdateButtonShortcut(const QMultiHash<VShortcutAc
     {
         const auto buttonList = buttons.values(shortcut.type);
 
-        for (const auto &button : buttonList)
+        for (QAbstractButton *button : buttonList)
         {
             if (button)
             {

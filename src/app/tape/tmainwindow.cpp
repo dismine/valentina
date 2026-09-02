@@ -2925,7 +2925,7 @@ void TMainWindow::SetupMenu()
             });
     connect(ui->actionPreferences, &QAction::triggered, this, [this]() { MApplication::VApp()->Preferences(this); });
 
-    for (auto &recentFileAct : m_recentFileActs)
+    for (QAction *&recentFileAct : m_recentFileActs)
     {
         auto *action = new QAction(this);
         recentFileAct = action;

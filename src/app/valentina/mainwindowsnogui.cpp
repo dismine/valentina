@@ -1019,7 +1019,7 @@ auto MainWindowsNoGUI::CreateScenes(const QList<QGraphicsItem *> &papers, const 
         scene->addItem(papers.at(i));
 
         const QList<QGraphicsItem *> &paperDetails = details.at(i);
-        for (const auto &detail : paperDetails)
+        for (QGraphicsItem *detail : paperDetails)
         {
             scene->addItem(detail);
         }
