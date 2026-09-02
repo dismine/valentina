@@ -115,7 +115,7 @@ auto VScrollableMenu::eventFilter(QObject *watched, QEvent *event) -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VScrollableMenu::UpdateItem(QAction *action)
+void VScrollableMenu::UpdateItem(QAction *action) const
 {
     QListWidgetItem *item = m_itemForAction.value(action);
     if (item == nullptr)

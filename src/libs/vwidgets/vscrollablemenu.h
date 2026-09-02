@@ -62,7 +62,7 @@ private:
     QHash<QListWidgetItem *, QAction *> m_actionForItem{};
 
     auto eventFilter(QObject *watched, QEvent *event) -> bool override;
-    void UpdateItem(QAction *action);
+    void UpdateItem(QAction *action) const;
     void ItemActivated(QListWidgetItem *item);
 };
 
