@@ -277,11 +277,11 @@ auto ObjectNameMatches(quint32 id, const QSharedPointer<VGObject> &object, const
 auto FindObjectByName(const immer::map<quint32, QSharedPointer<VGObject>> &objects, const QString &name,
                       quint32 excludeId) -> QSharedPointer<VGObject>
 {
-    for (const auto &kv : objects)
+    for (const auto &[objId, object] : objects)
     {
-        if (ObjectNameMatches(kv.first, kv.second, name, excludeId))
+        if (ObjectNameMatches(objId, object, name, excludeId))
         {
-            return kv.second;
+            return object;
         }
     }
     return {};
@@ -562,11 +562,11 @@ void VContainer::ClearVariables(const QVector<VarType> &types)
             // Collect first, then erase: immer::map has no mutable iterators, and each erase() returns a
             // new map that has to be rebound, which would invalidate any iterator held across the loop.
             QVector<QString> doomed;
-            for (const auto &kv : d->variables)
+            for (const auto &[name, var] : d->variables)
             {
-                if (types.contains(kv.second->GetType()))
+                if (types.contains(var->GetType()))
                 {
-                    doomed.append(kv.first);
+                    doomed.append(name);
                 }
             }
 
@@ -809,9 +809,9 @@ auto VContainer::DataDependencyVariables() const -> QHash<QString, QList<quint32
 
     QHash<QString, QList<quint32>> varData;
 
-    for (const auto &kv : d->variables)
+    for (const auto &[name, var] : d->variables)
     {
-        const auto &var = kv.second;
+        Q_UNUSED(name)
         if (types.contains(var->GetType()))
         {
             auto const references = var->GetReferences();
@@ -880,12 +880,12 @@ template <typename T> auto VContainer::DataVar(const VarType &type) const -> QMa
 {
     QMap<QString, QSharedPointer<T>> map;
     // The returned QMap sorts by translated name; the source map's own iteration order is irrelevant.
-    for (const auto &kv : d->variables)
+    for (const auto &[name, value] : d->variables)
     {
-        if (kv.second->GetType() == type)
+        if (value->GetType() == type)
         {
-            QSharedPointer<T> const var = GetVariable<T>(kv.first);
-            map.insert(d->trVars->VarToUser(kv.first), var);
+            QSharedPointer<T> const var = GetVariable<T>(name);
+            map.insert(d->trVars->VarToUser(name), var);
         }
     }
     return map;
