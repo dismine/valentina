@@ -30,6 +30,7 @@
 #include <chrono>
 #include <thread>
 #include <utility>
+#include <QBuffer>
 #include <QCloseEvent>
 #include <QFileDialog>
 #include <QFileInfo>
@@ -60,6 +61,7 @@
 #include "../vmisc/projectversion.h"
 #include "../vmisc/theme/themeDef.h"
 #include "../vmisc/theme/vtheme.h"
+#include "../vmisc/vasyncfileio.h"
 #include "../vmisc/vsysexits.h"
 #include "../vwidgets/vmaingraphicsscene.h"
 #include "../vwidgets/vmousewheelwidgetadjustmentguard.h"
@@ -643,31 +645,56 @@ void VPMainWindow::SetCurrentFile(const QString &fileName)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPMainWindow::SaveLayout(const QString &path, QString &error) -> bool
 {
-    bool success = false;
-    QSaveFile file(path);
-    if (file.open(QIODevice::WriteOnly))
+    // Serialize into memory first: the writer walks the live layout, so it has to run on the GUI thread. Only the
+    // write itself goes to a worker - QSaveFile::commit() calls FlushFileBuffers, which a cloud-sync or antivirus
+    // filter driver can stall for seconds and freeze the whole window.
+    QByteArray data;
     {
+        QBuffer buffer(&data);
+        buffer.open(QIODevice::WriteOnly);
+
         VPLayoutFileWriter fileWriter;
-        fileWriter.WriteFile(m_layout, &file);
+        fileWriter.WriteFile(m_layout, &buffer);
 
         if (fileWriter.hasError())
         {
             error = tr("Fail to create layout.");
             return false;
         }
-
-        success = file.commit();
     }
+
+    const bool success = VAsyncFileIO::RunFileOperation(tr("Saving %1…").arg(QFileInfo(path).fileName()),
+                                                        [path, data, &error]() -> bool
+                                                        {
+                                                            QSaveFile file(path);
+                                                            if (not file.open(QIODevice::WriteOnly))
+                                                            {
+                                                                error = file.errorString();
+                                                                return false;
+                                                            }
+
+                                                            if (file.write(data) != data.size())
+                                                            {
+                                                                file.cancelWriting();
+                                                                error = file.errorString();
+                                                                return false;
+                                                            }
+
+                                                            if (not file.commit())
+                                                            {
+                                                                error = file.errorString();
+                                                                return false;
+                                                            }
+
+                                                            return true;
+                                                        });
 
     if (success)
     {
         SetCurrentFile(path);
         LayoutWasSaved(true);
     }
-    else
-    {
-        error = file.errorString();
-    }
+
     return success;
 }
 

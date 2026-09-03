@@ -38,6 +38,7 @@
 #include "../ifcdef.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/exception/vexception.h"
+#include "../vmisc/vasyncfileio.h"
 #include "vparsererrorhandler.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -818,40 +819,53 @@ auto VDomDocument::SaveDocument(const QString &fileName, QString &error) -> bool
         return false;
     }
 
-    bool success = false;
-    QSaveFile file(fileName);
-    if (file.open(QIODevice::WriteOnly))
-    {
-        if (file.write(data) == data.size())
-        {
-            success = file.commit();
+    // From here on the document is a plain byte array, so this can safely leave the GUI thread. It has to:
+    // QSaveFile::commit() calls FlushFileBuffers, which a cloud-sync or antivirus filter driver can stall for
+    // seconds, freezing the whole window. Autosave stays silent - the user did not ask for it, so it must not
+    // raise a dialog.
+    const QFileInfo info(fileName);
+    const QString description = info.suffix() == "autosave"_L1 ? QString() : tr("Saving %1…").arg(info.fileName());
+
+    return VAsyncFileIO::RunFileOperation(description,
+                                          [fileName, data, &error]() -> bool
+                                          {
+                                              bool success = false;
+                                              QSaveFile file(fileName);
+                                              if (file.open(QIODevice::WriteOnly))
+                                              {
+                                                  if (file.write(data) == data.size())
+                                                  {
+                                                      success = file.commit();
 
 #if defined(_POSIX_SYNCHRONIZED_IO) && _POSIX_SYNCHRONIZED_IO > 0
-            if (success)
-            {
-                // https://stackoverflow.com/questions/74051505/does-qsavefilecommit-fsync-the-file-to-the-filesystem
-                QString const directoryPath = QFileInfo(file.fileName()).absoluteDir().path();
-                int const dirFd = ::open(directoryPath.toLocal8Bit().data(), O_RDONLY | O_DIRECTORY);
-                if (dirFd != -1)
-                {
-                    ::fsync(dirFd);
-                    ::close(dirFd);
-                }
-            }
+                                                      if (success)
+                                                      {
+                                                          // https://stackoverflow.com/questions/74051505/does-qsavefilecommit-fsync-the-file-to-the-filesystem
+                                                          QString const directoryPath
+                                                              = QFileInfo(file.fileName()).absoluteDir().path();
+                                                          int const dirFd = ::open(directoryPath.toLocal8Bit().data(),
+                                                                                   O_RDONLY | O_DIRECTORY);
+                                                          if (dirFd != -1)
+                                                          {
+                                                              ::fsync(dirFd);
+                                                              ::close(dirFd);
+                                                          }
+                                                      }
 #endif
-        }
-        else
-        {
-            file.cancelWriting();
-        }
-    }
+                                                  }
+                                                  else
+                                                  {
+                                                      file.cancelWriting();
+                                                  }
+                                              }
 
-    if (not success)
-    {
-        error = file.errorString();
-    }
+                                              if (not success)
+                                              {
+                                                  error = file.errorString();
+                                              }
 
-    return success;
+                                              return success;
+                                          });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1168,67 +1182,74 @@ auto VDomDocument::NodeById(const quint32 &nodeId, const QString &tagName) -> QD
 //---------------------------------------------------------------------------------------------------------------------
 auto VDomDocument::SafeCopy(const QString &source, const QString &destination, QString &error) -> bool
 {
-    bool result = false;
+    // No DOM is involved here, so the whole copy can leave the GUI thread - and it has to: removing and renaming
+    // the destination goes through DeleteFileW on Windows, which a cloud-sync or antivirus filter driver can stall
+    // for seconds. This is the stall seen when opening an older-format file, which makes a reserve copy first.
+    return VAsyncFileIO::RunFileOperation(tr("Copying %1…").arg(QFileInfo(destination).fileName()),
+                                          [source, destination, &error]() -> bool
+                                          {
+                                              bool result = false;
 
-    // #ifdef Q_OS_WIN32
-    //     qt_ntfs_permission_lookup++; // turn checking on
-    // #endif /*Q_OS_WIN32*/
+                                              // #ifdef Q_OS_WIN32
+                                              //     qt_ntfs_permission_lookup++; // turn checking on
+                                              // #endif /*Q_OS_WIN32*/
 
-    QTemporaryFile destFile(destination + ".XXXXXX"_L1);
-    destFile.setAutoRemove(false); // Will be renamed to be destination file
-    if (not destFile.open())
-    {
-        error = destFile.errorString();
-    }
-    else
-    {
-        QFile sourceFile(source);
-        if (sourceFile.open(QIODevice::ReadOnly))
-        {
-            result = true;
-            char block[4096];
-            qint64 bytes;
-            while ((bytes = sourceFile.read(block, sizeof(block))) > 0)
-            {
-                if (bytes != destFile.write(block, bytes))
-                {
-                    error = destFile.errorString();
-                    result = false;
-                    break;
-                }
-            }
+                                              QTemporaryFile destFile(destination + ".XXXXXX"_L1);
+                                              destFile.setAutoRemove(false); // Will be renamed to be destination file
+                                              if (not destFile.open())
+                                              {
+                                                  error = destFile.errorString();
+                                              }
+                                              else
+                                              {
+                                                  QFile sourceFile(source);
+                                                  if (sourceFile.open(QIODevice::ReadOnly))
+                                                  {
+                                                      result = true;
+                                                      char block[4096];
+                                                      qint64 bytes;
+                                                      while ((bytes = sourceFile.read(block, sizeof(block))) > 0)
+                                                      {
+                                                          if (bytes != destFile.write(block, bytes))
+                                                          {
+                                                              error = destFile.errorString();
+                                                              result = false;
+                                                              break;
+                                                          }
+                                                      }
 
-            if (bytes == -1)
-            {
-                error = sourceFile.errorString();
-                result = false;
-            }
+                                                      if (bytes == -1)
+                                                      {
+                                                          error = sourceFile.errorString();
+                                                          result = false;
+                                                      }
 
-            if (result)
-            {
-                QFile::remove(destination);
-                if (not destFile.rename(destination))
-                {
-                    error = destFile.errorString();
-                    result = false;
-                }
-                else
-                {
-                    result = true;
-                }
-            }
-        }
-        else
-        {
-            error = sourceFile.errorString();
-        }
-    }
+                                                      if (result)
+                                                      {
+                                                          QFile::remove(destination);
+                                                          if (not destFile.rename(destination))
+                                                          {
+                                                              error = destFile.errorString();
+                                                              result = false;
+                                                          }
+                                                          else
+                                                          {
+                                                              result = true;
+                                                          }
+                                                      }
+                                                  }
+                                                  else
+                                                  {
+                                                      error = sourceFile.errorString();
+                                                  }
+                                              }
 
-    // #ifdef Q_OS_WIN32
-    //     qt_ntfs_permission_lookup--; // turn off check permission again
-    // #endif /*Q_OS_WIN32*/
+                                              // #ifdef Q_OS_WIN32
+                                              //     qt_ntfs_permission_lookup--; // turn off check permission again
+                                              // #endif /*Q_OS_WIN32*/
 
-    return result;
+                                              return result;
+                                          });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

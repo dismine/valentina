@@ -39,6 +39,7 @@
 #include "../vmisc/projectversion.h"
 #include "../vmisc/qt_dispatch/qt_dispatch.h"
 #include "../vmisc/theme/vtheme.h"
+#include "../vmisc/vasyncfileio.h"
 #include "../vmisc/vsysexits.h"
 #include "dialogs/dialogtapepreferences.h"
 #include "qfuturewatcher.h"
@@ -681,6 +682,8 @@ auto MApplication::event(QEvent *e) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void MApplication::AboutToQuit()
 {
+    VAsyncFileIO::WaitForFileOperations(); // never tear down mid-write
+
     // If try to use the method QApplication::exit program can't sync settings and show warning about QApplication
     // instance. Solution is to call sync() before quit.
     // Connect this slot with VApplication::aboutToQuit.

@@ -47,6 +47,7 @@
 #include "tst_toolsdef.h"
 #include "tst_vabstractcurve.h"
 #include "tst_vabstractpiece.h"
+#include "tst_vasyncfileio.h"
 #include "tst_varc.h"
 #include "tst_vboundary.h"
 #include "tst_vcommandline.h"
@@ -136,6 +137,7 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_VPiece());
     ASSERT_TEST(new TST_VPoster());
     ASSERT_TEST(new TST_VAbstractPiece());
+    ASSERT_TEST(new TST_VAsyncFileIO());
     ASSERT_TEST(new TST_VSpline());
     ASSERT_TEST(new TST_VSplinePath());
     ASSERT_TEST(new TST_NameRegExp());

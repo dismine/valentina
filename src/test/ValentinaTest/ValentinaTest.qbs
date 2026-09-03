@@ -98,6 +98,8 @@ VTestApp {
         "tst_vmeasurements.cpp",
         "tst_vdomdocument.cpp",
         "tst_vdomdocument.h",
+        "tst_vasyncfileio.cpp",
+        "tst_vasyncfileio.h",
         "tst_vlockguard.cpp",
         "tst_vcommonsettings.cpp",
         "tst_vcommonsettings.h",

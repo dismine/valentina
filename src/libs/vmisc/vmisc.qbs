@@ -1,7 +1,7 @@
 import qbs.Utilities
 
 VLib {
-    Depends { name: "Qt"; submodules: ["core", "printsupport", "gui", "widgets"] }
+    Depends { name: "Qt"; submodules: ["core", "printsupport", "gui", "widgets", "concurrent"] }
     Depends { name: "buildconfig" }
 
     Depends {
@@ -77,6 +77,7 @@ VLib {
         "testpath.cpp",
         "vabstractvalapplication.cpp",
         "vabstractapplication.cpp",
+        "vasyncfileio.cpp",
         "projectversion.cpp",
         "vcommonsettings.cpp",
         "vfontinstaller.cpp",
@@ -94,6 +95,7 @@ VLib {
         "vabstractvalapplication.h",
         "vmath.h",
         "vabstractapplication.h",
+        "vasyncfileio.h",
         "projectversion.h",
         "vcommonsettings.h",
         "vvalentinasettings.h",

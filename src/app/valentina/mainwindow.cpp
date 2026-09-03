@@ -90,6 +90,7 @@
 #include "../vmisc/vmodifierkey.h"
 #include "../vmisc/vsysexits.h"
 #include "../vmisc/vvalentinasettings.h"
+#include "../vmisc/vasyncfileio.h"
 #include "../vmisc/vfontinstaller.h"
 #include "../vmisc/projectversion.h"
 #include "../vmisc/dialogs/dialogselectmeasurementstype.h"
@@ -683,6 +684,29 @@ MainWindow::MainWindow(QWidget *parent)
         connect(manager, &VAbstractShortcutManager::ShortcutsUpdated, this, &MainWindow::UpdateShortcuts);
         UpdateShortcuts();
     }
+
+    // File save/copy operations already exclude user input while in flight (VAsyncFileIO::RunFileOperation);
+    // reuse the same status-bar progress bar and setEnabled(false) already used for pattern parsing and label
+    // arranging (see FullParseFile() and RunAutoArrangeLabels()), instead of popping a second, visually
+    // inconsistent modal dialog - VAsyncFileIO's own fallback for apps with no such widget (Tape, Puzzle).
+    VAsyncFileIO::SetBusyIndicatorHandler(
+        [this](bool busy, const QString & /*description*/)
+        {
+            if (busy)
+            {
+                m_progressBar->setRange(0, 0); // indeterminate spinner
+                m_progressBar->setValue(0);
+                m_statusLabel->setVisible(false);
+                m_progressBar->setVisible(true);
+                setEnabled(false);
+            }
+            else
+            {
+                setEnabled(true);
+                m_progressBar->setVisible(false);
+                m_statusLabel->setVisible(true);
+            }
+        });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2616,6 +2640,14 @@ void MainWindow::SyncMeasurements()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::MeasurementsSyncTimerTimeout()
 {
+    // The nested event loop that keeps the GUI alive during a slow save still delivers timer events, so this can
+    // fire while a save or copy is in flight. Skip this turn rather than pop a modal on top of the busy dialog:
+    // this timer repeats, so the next tick asks again.
+    if (VAsyncFileIO::IsFileOperationRunning())
+    {
+        return;
+    }
+
     if (isActiveWindow())
     {
         static bool asking = false;
@@ -5452,6 +5484,16 @@ void MainWindow::ClearPatternMessages()
 //---------------------------------------------------------------------------------------------------------------------
 void MainWindow::AskDefaultSettings()
 {
+    // Unlike the repeating autosave/sync timers, this is a one-shot startup call: a bare early return here would
+    // mean the user is simply never asked these onboarding questions if a file operation (e.g. a slow
+    // pre-conversion backup copy) happens to be in flight during that first second. Reschedule instead, so it
+    // retries a second later rather than dropping the ask on the floor.
+    if (VAsyncFileIO::IsFileOperationRunning())
+    {
+        QTimer::singleShot(1s, this, &MainWindow::AskDefaultSettings);
+        return;
+    }
+
     if (VApplication::IsGUIMode())
     {
         VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
@@ -6108,6 +6150,14 @@ auto MainWindow::SavePattern(const QString &fileName, QString &error) -> bool
  */
 void MainWindow::AutoSavePattern()
 {
+    // The nested event loop that keeps the GUI alive during a slow save still delivers timer events, so this can
+    // fire while a save or copy is in flight. Skip this turn rather than queue a second one: isNeedAutosave stays
+    // true, so the next tick retries.
+    if (VAsyncFileIO::IsFileOperationRunning())
+    {
+        return;
+    }
+
     if (VApplication::IsGUIMode() && not VAbstractValApplication::VApp()->GetPatternPath().isEmpty() &&
         isWindowModified() && isNeedAutosave)
     {
@@ -6890,6 +6940,8 @@ auto MainWindow::PatternPieceName(QString &name) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 MainWindow::~MainWindow()
 {
+    VAsyncFileIO::SetBusyIndicatorHandler(nullptr); // the handler above captures this - drop it first
+
     CancelTool();
 
     delete doc;
