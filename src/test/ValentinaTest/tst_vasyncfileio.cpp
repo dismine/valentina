@@ -94,7 +94,7 @@ void TST_VAsyncFileIO::WorkerPropagatesFailure() const
     QString error;
 
     const bool result = VAsyncFileIO::RunFileOperationOnWorker(QString(),
-                                                               [&error]() -> bool
+                                                               [&error]() noexcept -> bool
                                                                {
                                                                    error = QStringLiteral("disk on fire");
                                                                    return false;
