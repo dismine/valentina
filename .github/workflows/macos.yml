@@ -425,7 +425,7 @@ jobs:
     name: MacOS ${{ matrix.qt.build_target }} arm Qt ${{ matrix.qt.install }}
     needs: changes
     if: needs.changes.outputs.qbs == 'true'
-    runs-on: macos-14
+    runs-on: macos-15
 
     strategy:
       fail-fast: false
@@ -788,7 +788,7 @@ jobs:
     # block this job; the artifact download step below fails on its own if
     # the 13+ artifacts genuinely aren't there.
     if: always() && needs.changes.outputs.qbs == 'true' && needs.changes.result == 'success'
-    runs-on: macos-14
+    runs-on: macos-15
 
     env:
       MACOS_DEPLOYMENT_TARGET: '13.0'
