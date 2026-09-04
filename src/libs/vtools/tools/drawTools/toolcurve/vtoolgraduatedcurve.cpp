@@ -173,19 +173,23 @@ auto VToolGraduatedCurve::GetGraduatedOffsets() const -> QVector<VGraduatedCurve
     QVector<VGraduatedCurveOffset> widths;
     widths.reserve(m_offsets.size());
 
-    VContainer localData = VAbstractTool::data;
+    // Each VFormula below only stores a pointer to its container, and callers keep using
+    // that pointer after this call returns (e.g. the property browser's "fx" button), so the
+    // container must be this tool's own persistent one, not a local variable that goes out of
+    // scope here (see VToolCut::GetFormulaLength()).
+    auto *container = const_cast<VContainer *>(getData());
 
     for (const auto &offset : m_offsets)
     {
-        VFormula width(offset.formula, &localData);
+        VFormula width(offset.formula, container);
         width.setToolId(m_id);
         width.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
         width.Eval();
 
-        auto *offsetVal = new VIncrement(&localData, offset.name);
+        auto *offsetVal = new VIncrement(container, offset.name);
         offsetVal->SetFormula(width.getDoubleValue(), offset.formula, width.error());
 
-        localData.AddVariable(offsetVal);
+        container->AddVariable(offsetVal);
 
         widths.append({.name = offset.name, .offset = width, .description = offset.description});
     }

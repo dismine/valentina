@@ -69,6 +69,8 @@ public:
 
     auto SecondPointName() const -> QString;
 
+    auto GetFormulaLength() const -> VFormula override;
+
     void ShowVisualization(bool show) override;
 protected slots:
     void ShowContextMenu(QGraphicsSceneContextMenuEvent *event, quint32 id=NULL_ID) override;

@@ -69,7 +69,7 @@ public:
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr) override;
 
-    auto GetFormulaLength() const -> VFormula;
+    virtual auto GetFormulaLength() const -> VFormula;
     void SetFormulaLength(const VFormula &value);
 
     auto BasePointName() const -> QString;

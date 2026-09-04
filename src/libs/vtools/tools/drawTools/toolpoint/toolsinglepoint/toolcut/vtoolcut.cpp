@@ -43,6 +43,7 @@
 #include "../vgeometry/vgobject.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/vabstractapplication.h"
+#include "../vpatterndb/variables/vcurvelength.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vformula.h"
 #include "../vtoolsinglepoint.h"
@@ -273,7 +274,20 @@ auto VToolCut::itemChange(GraphicsItemChange change, const QVariant &value) -> Q
 //---------------------------------------------------------------------------------------------------------------------
 auto VToolCut::GetFormulaLength() const -> VFormula
 {
-    VFormula val(formula, getData());
+    // The property browser edits this formula outside a tool dialog, so the dialog's
+    // RestoreTransientVariables() never runs. Inject the same special "CurrentLength"
+    // variable into this tool's own container (see VToolCut::Create()), mirroring how
+    // dialogs keep re-adding it on selection change. The variable must live in the
+    // tool's persistent container, not a local copy: VFormula only stores a pointer to
+    // it, and callers (e.g. the property browser's "fx" button) keep using that pointer
+    // well after this call returns.
+    auto *container = const_cast<VContainer *>(getData());
+    const QSharedPointer<VAbstractCurve> curve = container->GeometricObject<VAbstractCurve>(baseCurveId);
+    auto *length = new VCurveLength(baseCurveId, baseCurveId, curve.data(), *container->GetPatternUnit());
+    length->SetName(currentLength);
+    container->AddVariable(length);
+
+    VFormula val(formula, container);
     val.setToolId(m_id);
     val.setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits()));
     val.Eval();
