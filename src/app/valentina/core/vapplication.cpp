@@ -335,7 +335,12 @@ inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &con
     // here is the update check and usage statistics, which the user never asked for and cannot act on, so
     // the box is pure noise - and popping it from a network callback has crashed before. Valentina's own
     // network code reports its failures itself.
-    if (context.category != nullptr && QLatin1String(context.category).startsWith("qt.network"_L1))
+    //
+    // The analytics worker (category "v.analytics") is the same story: it logs its own post failures
+    // (unreachable host, DNS lookup failure, etc.) as qCWarning, which is opt-in telemetry the user never
+    // asked for and cannot act on either, so it must not surface as a modal box.
+    if (context.category != nullptr && (QLatin1String(context.category).startsWith("qt.network"_L1) ||
+                                         QLatin1String(context.category) == "v.analytics"_L1))
     {
         type = QtDebugMsg;
     }
