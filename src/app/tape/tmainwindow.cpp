@@ -5712,18 +5712,18 @@ void TMainWindow::InitSearch()
 void TMainWindow::InitSearchHistory()
 {
     QStringList const searchHistory = MApplication::VApp()->TapeSettings()->GetTapeSearchHistory();
-    m_searchHistory->clear();
+    m_searchHistory->Clear();
 
     if (searchHistory.isEmpty())
     {
-        QAction *action = m_searchHistory->addAction('<'_L1 + tr("Empty", "list") + '>'_L1);
+        QAction *action = m_searchHistory->AddAction('<'_L1 + tr("Empty", "list") + '>'_L1);
         action->setDisabled(true);
         return;
     }
 
     for (const auto &term : searchHistory)
     {
-        QAction *action = m_searchHistory->addAction(term);
+        QAction *action = m_searchHistory->AddAction(term);
         action->setData(term);
         connect(action,
                 &QAction::triggered,

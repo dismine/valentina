@@ -5245,7 +5245,7 @@ void DialogSeamAllowance::InitGradationPlaceholdersMenu()
     while (i != m_gradationPlaceholders.constEnd())
     {
         auto [first, second] = i.value();
-        QAction *action = m_placeholdersMenu->addAction(first);
+        QAction *action = m_placeholdersMenu->AddAction(first);
         action->setData(per + i.key() + per);
         connect(action, &QAction::triggered, this, &DialogSeamAllowance::InsertGradationPlaceholder);
         ++i;

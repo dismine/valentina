@@ -48,11 +48,8 @@ public:
     explicit VScrollableMenu(QWidget *parent = nullptr);
     ~VScrollableMenu() override = default;
 
-    using QMenu::addAction;
-    auto addAction(const QString &text) -> QAction *;
-
-    using QMenu::clear;
-    void clear();
+    auto AddAction(const QString &text) -> QAction *;
+    void Clear();
 
 private:
     Q_DISABLE_COPY_MOVE(VScrollableMenu) // NOLINT

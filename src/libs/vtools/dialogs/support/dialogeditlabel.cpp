@@ -523,7 +523,7 @@ void DialogEditLabel::InitPlaceholdersMenu()
     auto i = sortedActions.constBegin();
     while (i != sortedActions.constEnd())
     {
-        QAction *action = m_placeholdersMenu->addAction(i.key());
+        QAction *action = m_placeholdersMenu->AddAction(i.key());
         action->setData(i.value());
         action->setToolTip(i.value());
         connect(action, &QAction::triggered, this, &DialogEditLabel::InsertPlaceholder);

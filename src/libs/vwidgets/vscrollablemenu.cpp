@@ -74,7 +74,7 @@ VScrollableMenu::VScrollableMenu(QWidget *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VScrollableMenu::addAction(const QString &text) -> QAction *
+auto VScrollableMenu::AddAction(const QString &text) -> QAction *
 {
     auto *action = new QAction(text, this);
 
@@ -90,7 +90,7 @@ auto VScrollableMenu::addAction(const QString &text) -> QAction *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VScrollableMenu::clear()
+void VScrollableMenu::Clear()
 {
     m_listWidget->clear(); // deletes the QListWidgetItem objects
     qDeleteAll(m_itemForAction.keys());
