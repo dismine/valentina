@@ -1,0 +1,31 @@
+name: Check Conan dependencies
+
+on:
+  schedule:
+    - cron: '0 6 * * 1' # every Monday at 06:00 UTC
+  workflow_dispatch:
+
+jobs:
+  check-outdated:
+    name: Check for outdated Conan dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+
+      - name: Install Conan
+        run: pip install conan==2.29.1
+
+      - name: Check ConanCenter for newer versions
+        run: |
+          outdated=0
+          while IFS='/' read -r name version; do
+            result=$(conan list "${name}/[>${version}]" -r conancenter -f json 2>/dev/null)
+            if [ "$(echo "$result" | jq -r '.conancenter | has("error")')" = "true" ]; then
+              continue
+            fi
+            newer=$(echo "$result" | jq -r '.conancenter | keys | join(", ")')
+            echo "::warning::${name}/${version} is outdated, newer available: ${newer}"
+            outdated=1
+          done < <(grep -oP 'self\.requires\("\K[^"]+' conanfile.py)
+          exit "$outdated"
