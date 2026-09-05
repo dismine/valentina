@@ -127,8 +127,7 @@ void TST_VAsyncFileIO::WorkerFailureLeavesOriginalFileUnchanged() const
         QString(),
         [filePath]() -> bool
         {
-            QSaveFile file(filePath);
-            if (file.open(QIODevice::WriteOnly))
+            if (QSaveFile file(filePath); file.open(QIODevice::WriteOnly))
             {
                 file.write(QByteArrayLiteral("corrupted"));
                 file.cancelWriting(); // never commit(): mirrors VDomDocument::SaveDocument's failure path

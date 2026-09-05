@@ -75,9 +75,8 @@ constexpr int busyDialogDelayMs = 500;
 //---------------------------------------------------------------------------------------------------------------------
 auto VAsyncFileIO::RunFileOperation(const QString &description, const std::function<bool()> &op) -> bool
 {
-    VAbstractApplication *app = VAbstractApplication::VApp();
-
-    if (app == nullptr || not app->IsAppInGUIMode() || QThread::currentThread() != app->thread())
+    if (VAbstractApplication *app = VAbstractApplication::VApp();
+        app == nullptr || not app->IsAppInGUIMode() || QThread::currentThread() != app->thread())
     {
         return op(); // console mode, tests, or already off the GUI thread: no GUI to keep responsive
     }
