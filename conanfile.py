@@ -36,9 +36,9 @@ class Recipe(ConanFile):
         self.requires("sentry-crashpad/0.6.5")
 
     if self.options.with_icu:
-        self.requires("icu/77.1")
+        self.requires("icu/78.2")
     elif self.options.with_iconv:
         self.requires("libiconv/1.18")
 
     if self.options.with_immer:
-        self.requires("immer/0.8.1")
+        self.requires("immer/0.9.1")
