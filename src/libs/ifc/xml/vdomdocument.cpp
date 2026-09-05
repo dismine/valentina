@@ -249,6 +249,51 @@ auto LessThen(const QDomNode &element1, const QDomNode &element2) -> bool
     }
     return false;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto CopyFileData(const QString &source, const QString &destination, QString &error) -> bool
+{
+    QTemporaryFile destFile(destination + ".XXXXXX"_L1);
+    destFile.setAutoRemove(false); // Will be renamed to be destination file
+    if (not destFile.open())
+    {
+        error = destFile.errorString();
+        return false;
+    }
+
+    QFile sourceFile(source);
+    if (not sourceFile.open(QIODevice::ReadOnly))
+    {
+        error = sourceFile.errorString();
+        return false;
+    }
+
+    char block[4096];
+    qint64 bytes;
+    while ((bytes = sourceFile.read(block, sizeof(block))) > 0)
+    {
+        if (bytes != destFile.write(block, bytes))
+        {
+            error = destFile.errorString();
+            return false;
+        }
+    }
+
+    if (bytes == -1)
+    {
+        error = sourceFile.errorString();
+        return false;
+    }
+
+    QFile::remove(destination);
+    if (not destFile.rename(destination))
+    {
+        error = destFile.errorString();
+        return false;
+    }
+
+    return true;
+}
 } // namespace
 
 QT_WARNING_PUSH
@@ -1187,69 +1232,7 @@ auto VDomDocument::SafeCopy(const QString &source, const QString &destination, Q
     // for seconds. This is the stall seen when opening an older-format file, which makes a reserve copy first.
     return VAsyncFileIO::RunFileOperation(tr("Copying %1…").arg(QFileInfo(destination).fileName()),
                                           [source, destination, &error]() -> bool
-                                          {
-                                              bool result = false;
-
-                                              // #ifdef Q_OS_WIN32
-                                              //     qt_ntfs_permission_lookup++; // turn checking on
-                                              // #endif /*Q_OS_WIN32*/
-
-                                              QTemporaryFile destFile(destination + ".XXXXXX"_L1);
-                                              destFile.setAutoRemove(false); // Will be renamed to be destination file
-                                              if (not destFile.open())
-                                              {
-                                                  error = destFile.errorString();
-                                              }
-                                              else
-                                              {
-                                                  QFile sourceFile(source);
-                                                  if (sourceFile.open(QIODevice::ReadOnly))
-                                                  {
-                                                      result = true;
-                                                      char block[4096];
-                                                      qint64 bytes;
-                                                      while ((bytes = sourceFile.read(block, sizeof(block))) > 0)
-                                                      {
-                                                          if (bytes != destFile.write(block, bytes))
-                                                          {
-                                                              error = destFile.errorString();
-                                                              result = false;
-                                                              break;
-                                                          }
-                                                      }
-
-                                                      if (bytes == -1)
-                                                      {
-                                                          error = sourceFile.errorString();
-                                                          result = false;
-                                                      }
-
-                                                      if (result)
-                                                      {
-                                                          QFile::remove(destination);
-                                                          if (not destFile.rename(destination))
-                                                          {
-                                                              error = destFile.errorString();
-                                                              result = false;
-                                                          }
-                                                          else
-                                                          {
-                                                              result = true;
-                                                          }
-                                                      }
-                                                  }
-                                                  else
-                                                  {
-                                                      error = sourceFile.errorString();
-                                                  }
-                                              }
-
-                                              // #ifdef Q_OS_WIN32
-                                              //     qt_ntfs_permission_lookup--; // turn off check permission again
-                                              // #endif /*Q_OS_WIN32*/
-
-                                              return result;
-                                          });
+                                          { return CopyFileData(source, destination, error); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
