@@ -211,23 +211,19 @@ void DialogTool::FillComboBoxArcCurves(QComboBox *box, FillComboBox rule, quint3
     {
         if (rule == FillComboBox::NoChildren)
         {
-            if (id != toolId && obj->getIdTool() != toolId && id != ch1 && id != ch2)
+            if (id != toolId && obj->getIdTool() != toolId && id != ch1 && id != ch2
+                && (obj->getType() == GOType::Arc || obj->getType() == GOType::EllipticalArc))
             {
-                if (obj->getType() == GOType::Arc || obj->getType() == GOType::EllipticalArc)
-                {
-                    PrepareList<VAbstractCurve>(list, id);
-                }
+                PrepareList<VAbstractCurve>(list, id);
             }
         }
         else
         {
-            if (id != toolId && obj->getIdTool() != toolId)
+            if (id != toolId && obj->getIdTool() != toolId
+                && (obj->getType() == GOType::Arc || obj->getType() == GOType::EllipticalArc)
+                && obj->getMode() == Draw::Calculation)
             {
-                if ((obj->getType() == GOType::Arc || obj->getType() == GOType::EllipticalArc)
-                    && obj->getMode() == Draw::Calculation)
-                {
-                    PrepareList<VAbstractCurve>(list, id);
-                }
+                PrepareList<VAbstractCurve>(list, id);
             }
         }
     }
@@ -768,22 +764,17 @@ void DialogTool::FillCombo(QComboBox *box, GOType gType, FillComboBox rule, cons
     {
         if (rule == FillComboBox::NoChildren)
         {
-            if (id != toolId && obj->getIdTool() != toolId && id != ch1 && id != ch2)
+            if (id != toolId && obj->getIdTool() != toolId && id != ch1 && id != ch2 && obj->getType() == gType)
             {
-                if (obj->getType() == gType)
-                {
-                    PrepareList<GObject>(list, id);
-                }
+                PrepareList<GObject>(list, id);
             }
         }
         else
         {
-            if (id != toolId && obj->getIdTool() != toolId)
+            if (id != toolId && obj->getIdTool() != toolId && obj->getType() == gType
+                && obj->getMode() == Draw::Calculation)
             {
-                if (obj->getType() == gType && obj->getMode() == Draw::Calculation)
-                {
-                    PrepareList<GObject>(list, id);
-                }
+                PrepareList<GObject>(list, id);
             }
         }
     }
