@@ -5145,13 +5145,13 @@ void TMainWindow::InstallKnownMeasurements(const QUuid &neededId)
     msgBox.setIcon(QMessageBox::Question);
 
     QAbstractButton *installButton = msgBox.addButton(tr("Install"), QMessageBox::AcceptRole);
-    QAbstractButton *const relinkButton =
+    const QAbstractButton *relinkButton =
         relinkOffer ? msgBox.addButton(tr("Install and Relink"), QMessageBox::AcceptRole) : nullptr;
     msgBox.addButton(QMessageBox::Cancel);
     msgBox.setDefaultButton(qobject_cast<QPushButton *>(installButton));
     msgBox.exec();
 
-    QAbstractButton *const clicked = msgBox.clickedButton();
+    const QAbstractButton *clicked = msgBox.clickedButton();
     if (clicked != installButton && clicked != relinkButton)
     {
         return;

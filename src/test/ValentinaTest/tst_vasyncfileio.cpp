@@ -70,7 +70,7 @@ void TST_VAsyncFileIO::InlineWhenNotInGUIMode() const
 // headless-safe. The point of the whole feature is that the operation does not run on the calling thread.
 void TST_VAsyncFileIO::WorkerRunsOffCallingThread() const
 {
-    QThread *callerThread = QThread::currentThread();
+    const QThread *callerThread = QThread::currentThread();
     QThread *opThread = nullptr;
 
     const bool result = VAsyncFileIO::RunFileOperationOnWorker(QString(),
