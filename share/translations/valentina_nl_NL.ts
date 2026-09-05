@@ -11946,32 +11946,32 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Fout bij opsplitsen: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="305"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="301"/>
         <source>First point</source>
         <translation>Eerste punt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="306"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="302"/>
         <source>Second point</source>
         <translation>Tweede punt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="314"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="310"/>
         <source>Highest point</source>
         <translation>Hoogste punt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="315"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="311"/>
         <source>Lowest point</source>
         <translation>Laagste punt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="323"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="319"/>
         <source>Leftmost point</source>
         <translation>Uiterst linkerpunt</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="324"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="320"/>
         <source>Rightmost point</source>
         <translation>Uiterst rechterpunt</translation>
     </message>
@@ -11980,32 +11980,32 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Ongeldige waarde</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="403"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="399"/>
         <source>by length</source>
         <translation>op lengte</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="404"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="400"/>
         <source>by points intersetions</source>
         <translation>op snijpunten</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="405"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="401"/>
         <source>by first edge symmetry</source>
         <translation>op eerste lijn symmetrie-as</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="406"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="402"/>
         <source>by second edge symmetry</source>
         <translation>op tweede lijn symmetrie-as</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="407"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="403"/>
         <source>by first edge right angle</source>
         <translation>op eerste lijn rechte hoek</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="408"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="404"/>
         <source>by second edge right angle</source>
         <translation>op tweede lijn rechte hoek</translation>
     </message>
@@ -12530,52 +12530,52 @@ Toch de instellingen aanpassen?</translation>
 <context>
     <name>MApplication</name>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="435"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="440"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Fout bij opsplitsen bestand. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="441"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="446"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Fout slechte ID. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="447"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="452"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Fout kan waarde niet omzetten. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="453"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="458"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Fout lege parameter. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="459"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="464"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Fout verkeerde ID. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="472"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="477"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Er gaat iets verkeerd!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="485"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="490"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Fout bij opsplitsen: %1. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="490"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="495"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Uitgeworpen uitzondering: %1. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="720"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="725"/>
         <source>Valentina&apos;s measurements editor.</source>
         <translation>Valentina&apos;s maten editor.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1108"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1113"/>
         <source>The measurement file.</source>
         <translation>Het maten bestand.</translation>
     </message>
@@ -12600,12 +12600,12 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Gebruik voor eenheid testing. Laat het programma lopen en open een bestand zonder het te vertonen in een venster.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1358"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1363"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation>Ongeldig basis maat argument. Moet bestaan uit: cm, mm, of inches.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1154"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1159"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Kan niet beginnen met verwerken van inkomende connecties op naam &apos;%1&apos;</translation>
     </message>
@@ -12614,7 +12614,7 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Test modus ondersteunt niet het openen van verschillende bestanden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1274"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1279"/>
         <source>Please, provide one input file.</source>
         <translation>Alsublieft, verstrek één invoer bestand.</translation>
     </message>
@@ -12635,82 +12635,82 @@ Toch de instellingen aanpassen?</translation>
         <translation type="vanished">Open met de basis hoogte. Geldige waardes: %1cm.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1130"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1135"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Gebruik voor eenheid testing. Laat het programma lopen en open een bestand zonder het hoofdvenster te vertonen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1133"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1138"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Schakel hoog-dpi-schaling uit. Gebruik deze optie als je problemen hebt met schaalverandering (als default is ingeschakeld). Als alternatief kun je %1 omgevingsvariabele gebruiken.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1112"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1117"/>
         <source>Set base for dimension A in the table units.</source>
         <translation>Zet de basis voor dimensie A in de tabel eenheden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1113"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1118"/>
         <source>The dimension A base</source>
         <translation>Dimensie A basis</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1116"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1121"/>
         <source>Set base for dimension B in the table units.</source>
         <translation>Zet de basis voor dimensie B in de tabel eenheden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1117"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1122"/>
         <source>The dimension B base</source>
         <translation>Dimensie B basis</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1120"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1125"/>
         <source>Set base for dimension C in the table units.</source>
         <translation>Zet de basis voor dimensie C in de tabel eenheden.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1121"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1126"/>
         <source>The dimension C base</source>
         <translation>Dimensie C basis</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1124"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1129"/>
         <source>Set pattern file units: cm, mm, inch.</source>
         <translation>Stel patroon bestand eenheid in: cm, mm, inches.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1125"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1130"/>
         <source>The pattern units</source>
         <translation>Patroon eenheden</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1127"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1132"/>
         <source>Activate known measurements mode.</source>
         <translation>Bekende matenmodus activeren.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1297"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1302"/>
         <source>Invalid dimension A base value.</source>
         <translation>Ongeldige waarde voor dimensie A basis.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1318"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1323"/>
         <source>Invalid dimension B base value.</source>
         <translation>Ongeldige waarde voor dimensie B basis.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1339"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1344"/>
         <source>Invalid dimension C base value.</source>
         <translation>Ongeldige waarde voor dimensie C basis.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="478"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="483"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Formule waarschuwing: %1. Programma wordt gestopt.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1172"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1177"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
         <translation>Testmodus ondersteunt het openen van meerdere bestanden niet.</translation>
     </message>
@@ -17167,31 +17167,31 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1140"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="443"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="448"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="526"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="531"/>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation>Kan parameter toUlnt niet converteren</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1077"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="494"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="577"/>
         <source>Can&apos;t convert toBool parameter</source>
         <translation>Kan de parameter toBool niet converteren</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="542"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="625"/>
         <source>Got empty parameter</source>
         <translation>Kreeg een lege parameter</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1114"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="579"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="584"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="662"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="667"/>
         <source>Can&apos;t convert toDouble parameter</source>
         <translation>Kan niet naar toDouble parameter converteren</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="603"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="686"/>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
         <translation>Kreeg de verkeerde parameter id. Alleen nodig id&gt;0.</translation>
     </message>
@@ -17355,8 +17355,8 @@ Deze optie wordt actief na een herstart..</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1166"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="472"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="477"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="555"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="560"/>
         <source>Can&apos;t convert toInt parameter</source>
         <translation>Kan toInt parameter niet omzetten</translation>
     </message>
@@ -17519,7 +17519,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="223"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="273"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3275"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3279"/>
         <source>Cannot set printer margins</source>
         <translation>Kan de printer marges niet bepalen</translation>
     </message>
@@ -22815,52 +22815,52 @@ Wil je deze veranderingen opslaan?</translation>
 <context>
     <name>VApplication</name>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="484"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="489"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Fout bij opsplitsen bestand. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="490"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="495"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Fout slechte ID. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="496"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="501"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Fout kan waarde niet omzetten. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="502"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="507"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Fout lege parameter. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="508"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="513"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Fout verkeerde ID. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="527"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="532"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Er gaat iets verkeerd!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="541"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="546"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Fout bij opsplitsen: %1. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="546"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="551"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Uitgeworpen uitzondering: %1. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="521"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="526"/>
         <source>Invalid notch.</source>
         <translation>Ongeldige inkeping.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="533"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="538"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Formule waarschuwing: %1. Programma wordt gestopt.</translation>
     </message>
@@ -24074,14 +24074,14 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Kan niet omzetten naar toDouble parameter</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="722"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="805"/>
         <source>Can&apos;t open file %1:
 %2.</source>
         <translation>kan bestand niet openen %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="888"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="934"/>
         <source>Can&apos;t open schema file %1:
 %2.</source>
         <translation>Kan schema bestand niet openen %1:
@@ -24092,8 +24092,8 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Kan schema bestand niet laden.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="945"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="981"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="991"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1027"/>
         <source>Validation error file %3 in line %1 column %2</source>
         <translation>Validatie fout bestand %3 op lijn %1 kolom %2</translation>
     </message>
@@ -24102,7 +24102,7 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Fout bij opsplitsen bestand %3 op lijn %1 kolom %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1177"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1223"/>
         <source>Couldn&apos;t get node</source>
         <translation>Krijg het knooppunt niet</translation>
     </message>
@@ -24123,84 +24123,84 @@ Wil je deze veranderingen opslaan?</translation>
         <translation type="vanished">Kon document bestand niet verwijderen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="911"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="957"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1003"/>
         <source>Could not load schema file &apos;%1&apos;.</source>
         <translation>Kan schema bestand niet laden &apos;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="414"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="497"/>
         <source>Fail to write Canonical XML.</source>
         <translation>Het is mislukt om Conanical XML te schrijven.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="356"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="439"/>
         <source>Not unique id (%1)</source>
         <translation>Geen uniek id (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="656"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="739"/>
         <source>This id (%1) is not unique.</source>
         <translation>De id (%1) is niet uniek.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="663"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="746"/>
         <source>First occurrence of this id:
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="730"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="813"/>
         <source>Parsing error in file %3 at line %1, column %2</source>
         <translation>Parserfout in bestand %3 op regel %1, kolom %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="793"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="876"/>
         <source>Refusing to save: the document has no content.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="811"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="894"/>
         <source>Refusing to save: serialization produced no data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="827"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="910"/>
         <source>Saving %1…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="918"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="964"/>
         <source>Schema file %3 invalid in line %1 column %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1025"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1071"/>
         <source>Couldn&apos;t get version information.</source>
         <translation>Kon geen versie informatie krijgen.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1031"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1077"/>
         <source>Too many tags &lt;%1&gt; in file.</source>
         <translation>Te veel etiketten &lt;%1&gt; in bestand.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1188"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1234"/>
         <source>Copying %1…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1273"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1257"/>
         <source>&lt;empty&gt;</source>
         <translation>&lt;empty&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1314"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1298"/>
         <source>Version &quot;%1&quot; invalid.</source>
         <translation>Versie &quot;%1&quot; ongeldig.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1320"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1304"/>
         <source>Version &quot;0.0.0&quot; invalid.</source>
         <translation>Versie &quot;0.0.0&quot; ongeldig.</translation>
     </message>
@@ -24863,52 +24863,52 @@ Wil je deze veranderingen opslaan?</translation>
 <context>
     <name>VPApplication</name>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="377"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="382"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Fout bij opsplitsen bestand. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="383"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="388"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Fout slechte ID. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="389"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="394"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Fout kan waarde niet omzetten. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="395"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="400"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Fout lege parameter. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="401"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="406"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Fout verkeerde ID. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="414"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="419"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Er gaat iets verkeerd!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="420"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="425"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Uitgeworpen uitzondering: %1. Programma wordt beëindigd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="768"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="773"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Kan niet beginnen met verwerken van inkomende connecties op naam &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="787"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="792"/>
         <source>Export mode doesn&apos;t support opening several files.</source>
         <translation>Exportmodus ondersteunt het openen van meerdere bestanden niet.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="794"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="799"/>
         <source>Import raw layout data does not support opening several layout files.</source>
         <translation>Importeren ruwe indelingsgegevens ondersteunt het openen van meerdere indelingsbestanden niet.</translation>
     </message>
@@ -25534,147 +25534,147 @@ Wil je deze veranderingen opslaan?</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2310"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="5194"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="5198"/>
         <source>Preferences</source>
         <translation>Voorkeuren</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="491"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="517"/>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
         <translation>Bestand &apos;%1&apos; bestaat niet!</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="535"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="545"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="561"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="571"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="597"/>
         <source>File error.</source>
         <translation>Bestandsfout.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="661"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="687"/>
         <source>Fail to create layout.</source>
         <translation>Aanmaken indeling mislukt.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3496"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3500"/>
         <source>Could not extract data from file &apos;%1&apos;. %2</source>
         <translation>Kan geen gegevens extraheren uit bestand &apos;%1&apos;. %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="975"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1063"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="979"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1067"/>
         <source>Centimeters</source>
         <translation>Centimeters</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="974"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1062"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="978"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1066"/>
         <source>Millimiters</source>
         <translation>Millimeters</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="976"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1064"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="980"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1068"/>
         <source>Inches</source>
         <translation>Inches</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1847"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1851"/>
         <source>Scale:</source>
         <translation>Schaal:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1877"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1881"/>
         <source>untitled %1.vlt</source>
         <translation>naamloos %1.vlt</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1877"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1881"/>
         <source>untitled.vlt</source>
         <translation>naamloos.vlt</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1884"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1888"/>
         <source>read only</source>
         <translation>alleen lezen</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1950"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1954"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Kan instellingen niet inlezen wegens een niet-conform .INI-bestand.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1967"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1971"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Kan instellingen niet opslaan. Toegang geweigerd.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2875"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3229"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3406"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2879"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3233"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3410"/>
         <source>Failed to open file, is it writable?</source>
         <translation>Kan bestand niet openen. Is het beschrijfbaar?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2022"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2026"/>
         <source>&amp;New Window</source>
         <translation>&amp;Nieuw Venster</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1979"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1983"/>
         <source>Layout has been modified. Do you want to save your changes?</source>
         <translation>Indeling is gewijzigd. Wilt u uw wijzigingen opslaan?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3829"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3891"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3833"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3895"/>
         <source>Layout files</source>
         <translation>Indelingsbestanden</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3833"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3981"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4923"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3837"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3985"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4927"/>
         <source>Open file</source>
         <translation>Open bestand</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3874"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3878"/>
         <source>Could not save the file</source>
         <translation>Het bestand is niet bewaard</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3893"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3897"/>
         <source>layout</source>
         <translation>indeling</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3905"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3909"/>
         <source>Save as</source>
         <translation>Opslaan als</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3935"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3939"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Afsluiten is mislukt. Dit bestand is al geopend in een ander venster.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3945"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3949"/>
         <source>Could not save file</source>
         <translation>Kon bestand niet opslaan</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3966"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3970"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Afsluiten is mislukt. Dit bestand is al geopend in een ander venster. Verwacht een conflict als 2 kopieën van het programma gaan lopen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3976"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3980"/>
         <source>Raw Layout files</source>
         <translation>Bestanden ruwe indeling</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3994"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3998"/>
         <source>About Qt</source>
         <translation>Over Qt</translation>
     </message>
@@ -25944,162 +25944,162 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Instellingenmap</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="536"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="562"/>
         <source>Unable to read a layout file. %1</source>
         <translation>Kan indelingsbestand niet lezen. %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="546"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="572"/>
         <source>Failed to read %1</source>
         <translation>Lezen van %1 mislukt</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="666"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="692"/>
         <source>Saving %1…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="787"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3797"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="791"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3801"/>
         <source>&amp;Undo</source>
         <translation>&amp;Ongedaan maken</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="793"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3798"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="797"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3802"/>
         <source>&amp;Redo</source>
         <translation>&amp;Opnieuw</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="977"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1065"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="981"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1069"/>
         <source>Pixels</source>
         <translation>Pixels</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1978"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1982"/>
         <source>Unsaved changes</source>
         <translation>Niet opgeslagen veranderingen</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1987"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1991"/>
         <source>Save…</source>
         <translation>Opslaan…</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1987"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1991"/>
         <source>Save</source>
         <translation>Opslaan</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1992"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1996"/>
         <source>Don&apos;t Save</source>
         <translation>Niet opslaan</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2467"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2532"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2471"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2536"/>
         <source>Can&apos;t create a path</source>
         <translation>Kan geen pad maken</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2754"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2758"/>
         <source>Can&apos;t open file &apos;%1&apos;</source>
         <translation>Kan bestand &apos;%1&apos; niet openen</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2768"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3282"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2772"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3286"/>
         <source>Failed in flushing page to disk, disk full?</source>
         <translation>Fout bij wegschrijven pagina naar schijf, schijf vol?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3117"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3144"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3173"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3121"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3148"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3177"/>
         <source>The layout is invalid.</source>
         <translation>De indeling is ongeldig.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3118"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3122"/>
         <source>The layout is invalid. Piece out of bound. Do you want to continue export?</source>
         <translation>De indeling is ongeldig. Stuk buiten grens. Wilt u doorgaan met exporteren?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3145"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3149"/>
         <source>The layout is invalid. Pieces superposition. Do you want to continue export?</source>
         <translation>De indeling is ongeldig. Stukken overlappen. Wilt u doorgaan met exporteren?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3174"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3178"/>
         <source>The layout is invalid. One or several pieces are closer than minimally allowed. Do you want to continue export?</source>
         <translation>De indeling is ongeldig. Een of meerdere stukken liggen dichter dan minimaal toegestaan. Wilt u doorgaan met exporteren?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4263"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4267"/>
         <source>Sheet %1</source>
         <translation>Blad %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3572"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3576"/>
         <source>translate pieces</source>
         <translation>stukken verschuiven</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3689"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3693"/>
         <source>rotate pieces</source>
         <translation>stukken draaien</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4467"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4471"/>
         <source>untitled %1</source>
         <translation>naamloos %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4467"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4471"/>
         <source>untitled</source>
         <translation>naamloos</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4552"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4603"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4556"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4607"/>
         <source>For printing multipages document all sheet should have the same size.</source>
         <translation>Voor het afdrukken van multipagina&apos;s document, moeten alle bladen dezelfde maat hebben.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4564"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4615"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4650"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4688"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4743"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4787"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4820"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4856"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4568"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4619"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4654"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4692"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4747"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4791"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4824"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4860"/>
         <source>Print error</source>
         <translation>Afdruk fout</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4565"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4616"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4651"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4689"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4744"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4788"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4821"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4857"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4569"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4620"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4655"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4693"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4748"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4792"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4825"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4861"/>
         <source>Cannot proceed because there are no available printers in your system.</source>
         <translation>Kan niet verder gaan omdat er geen beschikbare printers in het systeem zijn.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4920"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4924"/>
         <source>Watermark files</source>
         <translation>Watermerk bestanden</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4576"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4627"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4662"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4700"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4580"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4631"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4666"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4704"/>
         <source>Unable to get sheet page settings</source>
         <translation>Kan paginainstellingen blad niet ophalen</translation>
     </message>
@@ -26139,12 +26139,12 @@ Wil je deze veranderingen opslaan?</translation>
         <translation>Heeft alleen effect bij afdrukken in de toepassing. Gebruik een aparte instelling voor exporteren met tegelschema</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4517"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4521"/>
         <source>sheet</source>
         <translation>blad</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3518"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3522"/>
         <source>Piece %1 invalid. %2</source>
         <translation>Stuk %1 ongeldig. %2</translation>
     </message>
@@ -27217,7 +27217,7 @@ Compatibiliteitsfout ruw indelingsformaat: actualFileVersion = %1 en fileVersion
 <context>
     <name>VToolCut</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcut.cpp" line="191"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcut.cpp" line="192"/>
         <source>save tool options</source>
         <translation>gereedschapsopties opslaan</translation>
     </message>

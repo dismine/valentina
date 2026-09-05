@@ -11949,32 +11949,32 @@ Svejedno primijeniti postavke?</translation>
         <translation type="vanished">Pogreška analizatora: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="305"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="301"/>
         <source>First point</source>
         <translation>Prva točka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="306"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="302"/>
         <source>Second point</source>
         <translation>Druga točka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="314"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="310"/>
         <source>Highest point</source>
         <translation>Najviša točka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="315"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="311"/>
         <source>Lowest point</source>
         <translation>Najniža točka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="323"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="319"/>
         <source>Leftmost point</source>
         <translation>Krajnja lijeva točka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="324"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="320"/>
         <source>Rightmost point</source>
         <translation>Krajnja desna točka</translation>
     </message>
@@ -11983,32 +11983,32 @@ Svejedno primijeniti postavke?</translation>
         <translation type="vanished">Nevažeća vrijednost</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="403"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="399"/>
         <source>by length</source>
         <translation>po duljini</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="404"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="400"/>
         <source>by points intersetions</source>
         <translation>prema presjecima točaka</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="405"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="401"/>
         <source>by first edge symmetry</source>
         <translation>prema simetriji prvog ruba</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="406"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="402"/>
         <source>by second edge symmetry</source>
         <translation>prema simetriji drugog ruba</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="407"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="403"/>
         <source>by first edge right angle</source>
         <translation>pod pravim kutom prema prvom rubu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="408"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="404"/>
         <source>by second edge right angle</source>
         <translation>pod pravim kutom prema drugom rubu</translation>
     </message>
@@ -12533,52 +12533,52 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>MApplication</name>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="435"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="440"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Greška pri obradi datoteke. Program će se zatvoriti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="441"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="446"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Pogrešan ID. Program će se prekinuti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="447"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="452"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Ne mogu pretvoriti vrijednost. Program će se prekinuti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="453"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="458"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Prazan parametar. Program će se prekinuti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="459"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="464"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Pogrešan ID. Program će se prekinuti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="472"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="477"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Nešto nije u redu!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="485"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="490"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Pogreška u parseru: %1. Program će se zatvoriti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="490"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="495"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Iznimka bačena: %1. Program će se prekinuti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="720"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="725"/>
         <source>Valentina&apos;s measurements editor.</source>
         <translation>Uređivač mjerenja Valentina.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1108"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1113"/>
         <source>The measurement file.</source>
         <translation>Datoteka mjerenja.</translation>
     </message>
@@ -12603,12 +12603,12 @@ Svejedno primijeniti postavke?</translation>
         <translation type="vanished">Koristi za testiranje jedinica. Pokrenite program i otvorite datoteku bez prikazivanja prozora.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1358"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1363"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation>Neispravan argument osnovne veličine. Mora biti cm, mm ili inč.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1154"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1159"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Ne mogu započeti slušanje dolaznih veza na imenu &apos;%1&apos;</translation>
     </message>
@@ -12617,7 +12617,7 @@ Svejedno primijeniti postavke?</translation>
         <translation type="vanished">Testni način ne podržava otvaranje više datoteka.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1274"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1279"/>
         <source>Please, provide one input file.</source>
         <translation>Molimo, navedite jednu ulaznu datoteku.</translation>
     </message>
@@ -12638,82 +12638,82 @@ Svejedno primijeniti postavke?</translation>
         <translation type="vanished">Otvori s osnovnom visinom. Važeće vrijednosti: %1cm.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1130"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1135"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Koristi za testiranje jedinica. Pokrenite program i otvorite datoteku bez prikazivanja glavnog prozora.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1133"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1138"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Onemogućite skaliranje visoke DPI. Koristite ovu opciju ako imate problema s razmjeravanjem (po zadanim postavkama skaliranje je omogućeno). Alternativno, možete koristiti varijablu okruženja %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1112"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1117"/>
         <source>Set base for dimension A in the table units.</source>
         <translation>Postavi osnovu za dimenziju A u tablici jedinica.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1113"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1118"/>
         <source>The dimension A base</source>
         <translation>Osnova dimenzije A</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1116"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1121"/>
         <source>Set base for dimension B in the table units.</source>
         <translation>Postavi osnovu za dimenziju B u tablici jedinica.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1117"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1122"/>
         <source>The dimension B base</source>
         <translation>Osnova dimenzije B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1120"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1125"/>
         <source>Set base for dimension C in the table units.</source>
         <translation>Postavi osnovu za dimenziju C u tablici jedinica.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1121"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1126"/>
         <source>The dimension C base</source>
         <translation>Osnova dimenzije C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1124"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1129"/>
         <source>Set pattern file units: cm, mm, inch.</source>
         <translation>Postavi jedinice datoteke kroja: cm, mm, inč.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1125"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1130"/>
         <source>The pattern units</source>
         <translation>Jedinice kroja</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1127"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1132"/>
         <source>Activate known measurements mode.</source>
         <translation>Aktiviraj način poznatih mjerenja.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1297"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1302"/>
         <source>Invalid dimension A base value.</source>
         <translation>Neispravna vrijednost osnove dimenzije A.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1318"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1323"/>
         <source>Invalid dimension B base value.</source>
         <translation>Neispravna vrijednost osnove dimenzije B.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1339"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1344"/>
         <source>Invalid dimension C base value.</source>
         <translation>Neispravna vrijednost osnove dimenzije C.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="478"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="483"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Upozorenje o formuli: %1. Program će se zatvoriti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1172"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1177"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
         <translation>Testni način ne podržava otvaranje više datoteka.</translation>
     </message>
@@ -17170,31 +17170,31 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1140"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="443"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="448"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="526"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="531"/>
         <source>Can&apos;t convert toUInt parameter</source>
         <translation>Ne mogu pretvoriti uUInt parametar</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1077"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="494"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="577"/>
         <source>Can&apos;t convert toBool parameter</source>
         <translation>Ne mogu pretvoriti uBool parametar</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="542"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="625"/>
         <source>Got empty parameter</source>
         <translation>Dobiven prazan parametar</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1114"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="579"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="584"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="662"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="667"/>
         <source>Can&apos;t convert toDouble parameter</source>
         <translation>Ne mogu pretvoriti uDouble parametar</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="603"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="686"/>
         <source>Got wrong parameter id. Need only id &gt; 0.</source>
         <translation>Dobiven pogrešan ID parametra. Potrebni su samo ID-ovi &gt; 0.</translation>
     </message>
@@ -17358,8 +17358,8 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1166"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="472"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="477"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="555"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="560"/>
         <source>Can&apos;t convert toInt parameter</source>
         <translation>Nije moguće pretvoriti u Int parametar</translation>
     </message>
@@ -17522,7 +17522,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="223"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="273"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3275"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3279"/>
         <source>Cannot set printer margins</source>
         <translation>Nije moguće postaviti margine pisača</translation>
     </message>
@@ -22818,52 +22818,52 @@ Do you want to save your changes?</source>
 <context>
     <name>VApplication</name>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="484"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="489"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Greška pri obradi datoteke. Program će se zatvoriti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="490"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="495"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Pogrešan ID. Program će se prekinuti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="496"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="501"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Ne mogu pretvoriti vrijednost. Program će se prekinuti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="502"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="507"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Prazan parametar. Program će se prekinuti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="508"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="513"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Pogrešan ID. Program će se prekinuti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="527"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="532"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Nešto nije u redu!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="541"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="546"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Pogreška u parseru: %1. Program će se zatvoriti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="546"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="551"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Iznimka bačena: %1. Program će se prekinuti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="521"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="526"/>
         <source>Invalid notch.</source>
         <translation>Neispravna ureza.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="533"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="538"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Upozorenje o formuli: %1. Program će se zatvoriti.</translation>
     </message>
@@ -24077,14 +24077,14 @@ Do you want to save your changes?</source>
         <translation type="vanished">Ne mogu pretvoriti uDouble parametar</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="722"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="805"/>
         <source>Can&apos;t open file %1:
 %2.</source>
         <translation>Ne mogu otvoriti datoteku %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="888"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="934"/>
         <source>Can&apos;t open schema file %1:
 %2.</source>
         <translation>Nije moguće otvoriti datoteku sheme %1:
@@ -24095,8 +24095,8 @@ Do you want to save your changes?</source>
         <translation type="vanished">Nije moguće učitati shematsku datoteku.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="945"/>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="981"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="991"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1027"/>
         <source>Validation error file %3 in line %1 column %2</source>
         <translation>Pogreška validacije datoteke %3 u retku %1, stupcu %2</translation>
     </message>
@@ -24105,7 +24105,7 @@ Do you want to save your changes?</source>
         <translation type="vanished">Greška pri obradi datoteke %3 u retku %1 stupcu %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1177"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1223"/>
         <source>Couldn&apos;t get node</source>
         <translation>Nije moguće dohvatiti čvor</translation>
     </message>
@@ -24126,84 +24126,84 @@ Do you want to save your changes?</source>
         <translation type="vanished">Nije moguće ukloniti dokument.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="911"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="957"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1003"/>
         <source>Could not load schema file &apos;%1&apos;.</source>
         <translation>Nije moguće učitati shematsku datoteku &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="414"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="497"/>
         <source>Fail to write Canonical XML.</source>
         <translation>Neuspješno pisanje Canonical XML-a.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="356"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="439"/>
         <source>Not unique id (%1)</source>
         <translation>Nije jedinstven ID (%1)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="656"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="739"/>
         <source>This id (%1) is not unique.</source>
         <translation>Ovaj ID (%1) nije jedinstven.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="663"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="746"/>
         <source>First occurrence of this id:
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="730"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="813"/>
         <source>Parsing error in file %3 at line %1, column %2</source>
         <translation>Greška pri obradi datoteke %3 u retku %1 stupcu %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="793"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="876"/>
         <source>Refusing to save: the document has no content.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="811"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="894"/>
         <source>Refusing to save: serialization produced no data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="827"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="910"/>
         <source>Saving %1…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="918"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="964"/>
         <source>Schema file %3 invalid in line %1 column %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1025"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1071"/>
         <source>Couldn&apos;t get version information.</source>
         <translation>Nije moguće dobiti informacije o verziji.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1031"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1077"/>
         <source>Too many tags &lt;%1&gt; in file.</source>
         <translation>Previše oznaka &lt;%1&gt; u datoteci.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1188"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1234"/>
         <source>Copying %1…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1273"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1257"/>
         <source>&lt;empty&gt;</source>
         <translation>&lt;prazno&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1314"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1298"/>
         <source>Version &quot;%1&quot; invalid.</source>
         <translation>Verzija &quot;%1&quot; nije valjana.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1320"/>
+        <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1304"/>
         <source>Version &quot;0.0.0&quot; invalid.</source>
         <translation>Verzija &quot;0.0.0&quot; nije valjana.</translation>
     </message>
@@ -24866,52 +24866,52 @@ Do you want to save your changes?</source>
 <context>
     <name>VPApplication</name>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="377"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="382"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Greška pri obradi datoteke. Program će se zatvoriti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="383"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="388"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Pogrešan ID. Program će se prekinuti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="389"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="394"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Ne mogu pretvoriti vrijednost. Program će se prekinuti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="395"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="400"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Prazan parametar. Program će se prekinuti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="401"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="406"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Pogrešan ID. Program će se prekinuti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="414"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="419"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Nešto nije u redu!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="420"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="425"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Iznimka bačena: %1. Program će se prekinuti.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="768"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="773"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Ne mogu započeti slušanje dolaznih veza na imenu &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="787"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="792"/>
         <source>Export mode doesn&apos;t support opening several files.</source>
         <translation>Način izvoza ne podržava otvaranje više datoteka.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="794"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="799"/>
         <source>Import raw layout data does not support opening several layout files.</source>
         <translation>Uvoz sirovih podataka rasporeda ne podržava otvaranje više rasporeda.</translation>
     </message>
@@ -25537,147 +25537,147 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="2310"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="5194"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="5198"/>
         <source>Preferences</source>
         <translation>Postavke</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="491"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="517"/>
         <source>File &apos;%1&apos; doesn&apos;t exist!</source>
         <translation>Datoteka &apos;%1&apos; ne postoji!</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="535"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="545"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="561"/>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="571"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="597"/>
         <source>File error.</source>
         <translation>Pogreška u datoteci.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="661"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="687"/>
         <source>Fail to create layout.</source>
         <translation>Neuspješno stvaranje rasporeda.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3496"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3500"/>
         <source>Could not extract data from file &apos;%1&apos;. %2</source>
         <translation>Nije moguće izdvojiti podatke iz datoteke &apos;%1&apos;. %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="975"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1063"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="979"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1067"/>
         <source>Centimeters</source>
         <translation>Centimetri</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="974"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1062"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="978"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1066"/>
         <source>Millimiters</source>
         <translation>Milimetri</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="976"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1064"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="980"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1068"/>
         <source>Inches</source>
         <translation>Inči</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1847"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1851"/>
         <source>Scale:</source>
         <translation>Skala:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1877"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1881"/>
         <source>untitled %1.vlt</source>
         <translation>neimenovano %1.vlt</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1877"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1881"/>
         <source>untitled.vlt</source>
         <translation>neimenovano.vlt</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1884"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1888"/>
         <source>read only</source>
         <translation>samo za čitanje</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1950"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1954"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Ne mogu čitati postavke iz neispravno oblikovane .INI datoteke.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1967"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1971"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Ne mogu spremiti postavke. Pristup odbijen.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2875"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3229"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3406"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2879"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3233"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3410"/>
         <source>Failed to open file, is it writable?</source>
         <translation>Neuspješno otvaranje datoteke, je li zapisiva?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2022"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2026"/>
         <source>&amp;New Window</source>
         <translation>&amp;Novi prozor</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1979"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1983"/>
         <source>Layout has been modified. Do you want to save your changes?</source>
         <translation>Raspored je izmijenjen. Želite li spremiti promjene?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3829"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3891"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3833"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3895"/>
         <source>Layout files</source>
         <translation>Datoteke rasporeda</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3833"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3981"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4923"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3837"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3985"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4927"/>
         <source>Open file</source>
         <translation>Otvori datoteku</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3874"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3878"/>
         <source>Could not save the file</source>
         <translation>Nije moguće spremiti datoteku</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3893"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3897"/>
         <source>layout</source>
         <translation>raspored</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3905"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3909"/>
         <source>Save as</source>
         <translation>Spremi kao</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3935"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3939"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Neuspješno zaključavanje. Ova datoteka je već otvorena u drugom prozoru.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3945"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3949"/>
         <source>Could not save file</source>
         <translation>Nije moguće spremiti datoteku</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3966"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3970"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Neuspješno zaključavanje. Ova datoteka je već otvorena u drugom prozoru. Očekuju se sukobi ako se program pokrene dvaput.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3976"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3980"/>
         <source>Raw Layout files</source>
         <translation>Sirove datoteke rasporeda</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3994"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3998"/>
         <source>About Qt</source>
         <translation>O Qt</translation>
     </message>
@@ -25947,162 +25947,162 @@ Do you want to save your changes?</source>
         <translation>Direktorij postavki</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="536"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="562"/>
         <source>Unable to read a layout file. %1</source>
         <translation>Nije moguće učitati datoteku rasporeda. %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="546"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="572"/>
         <source>Failed to read %1</source>
         <translation>Nije uspjelo čitanje %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="666"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="692"/>
         <source>Saving %1…</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="787"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3797"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="791"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3801"/>
         <source>&amp;Undo</source>
         <translation>&amp;Poništi</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="793"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3798"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="797"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3802"/>
         <source>&amp;Redo</source>
         <translation>&amp;Ponovi</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="977"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1065"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="981"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1069"/>
         <source>Pixels</source>
         <translation>Pikseli</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1978"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1982"/>
         <source>Unsaved changes</source>
         <translation>Nespremljene promjene</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1987"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1991"/>
         <source>Save…</source>
         <translation>Spremi…</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1987"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1991"/>
         <source>Save</source>
         <translation>Spremi</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1992"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="1996"/>
         <source>Don&apos;t Save</source>
         <translation>Nemoj spremiti</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2467"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2532"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2471"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2536"/>
         <source>Can&apos;t create a path</source>
         <translation>Ne mogu stvoriti putanju</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2754"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2758"/>
         <source>Can&apos;t open file &apos;%1&apos;</source>
         <translation>Ne mogu otvoriti datoteku &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2768"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3282"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="2772"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3286"/>
         <source>Failed in flushing page to disk, disk full?</source>
         <translation>Neuspjelo ispisivanje stranice na disk, disk pun?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3117"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3144"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3173"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3121"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3148"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3177"/>
         <source>The layout is invalid.</source>
         <translation>Raspored nije valjan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3118"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3122"/>
         <source>The layout is invalid. Piece out of bound. Do you want to continue export?</source>
         <translation>Raspored nije valjan. Dio izvan granice. Želite li nastaviti s izvozom?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3145"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3149"/>
         <source>The layout is invalid. Pieces superposition. Do you want to continue export?</source>
         <translation>Raspored nije valjan. Preklapanje dijelova. Želite li nastaviti s izvozom?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3174"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3178"/>
         <source>The layout is invalid. One or several pieces are closer than minimally allowed. Do you want to continue export?</source>
         <translation>Raspored nije valjan. Jedan ili više dijelova su bliže od minimalno dopuštenog razmaka. Želite li nastaviti s izvozom?</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4263"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4267"/>
         <source>Sheet %1</source>
         <translation>List %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3572"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3576"/>
         <source>translate pieces</source>
         <translation>premjesti dijelove</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3689"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3693"/>
         <source>rotate pieces</source>
         <translation>rotiraj dijelove</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4467"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4471"/>
         <source>untitled %1</source>
         <translation>neimenovano %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4467"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4471"/>
         <source>untitled</source>
         <translation>neimenovano</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4552"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4603"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4556"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4607"/>
         <source>For printing multipages document all sheet should have the same size.</source>
         <translation>Za ispis višestranih dokumenata svi listovi moraju biti iste veličine.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4564"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4615"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4650"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4688"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4743"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4787"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4820"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4856"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4568"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4619"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4654"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4692"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4747"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4791"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4824"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4860"/>
         <source>Print error</source>
         <translation>Pogreška pri ispisu</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4565"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4616"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4651"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4689"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4744"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4788"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4821"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4857"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4569"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4620"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4655"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4693"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4748"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4792"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4825"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4861"/>
         <source>Cannot proceed because there are no available printers in your system.</source>
         <translation>Nije moguće nastaviti jer u sustavu nema dostupnih pisača.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4920"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4924"/>
         <source>Watermark files</source>
         <translation>Datoteke vodenih žigova</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4576"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4627"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4662"/>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4700"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4580"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4631"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4666"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4704"/>
         <source>Unable to get sheet page settings</source>
         <translation>Nije moguće dohvatiti postavke stranice lista</translation>
     </message>
@@ -26142,12 +26142,12 @@ Do you want to save your changes?</source>
         <translation>Ima učinak samo pri ispisu u aplikaciji. Za izvoz s shemom pločica koristite odvojenu postavku</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4517"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="4521"/>
         <source>sheet</source>
         <translation>list</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3518"/>
+        <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="3522"/>
         <source>Piece %1 invalid. %2</source>
         <translation>Dio %1 nije valjan. %2</translation>
     </message>
@@ -27220,7 +27220,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VToolCut</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcut.cpp" line="191"/>
+        <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcut.cpp" line="192"/>
         <source>save tool options</source>
         <translation>spremi opcije alata</translation>
     </message>
