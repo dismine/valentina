@@ -115,7 +115,7 @@ void TST_VAsyncFileIO::WorkerFailureLeavesOriginalFileUnchanged() const
     QVERIFY2(tempDir.isValid(), "Failed to create a temporary directory.");
 
     const QString filePath = tempDir.filePath(QStringLiteral("original.txt"));
-    const QByteArray goodContent = QByteArrayLiteral("good content");
+    const auto goodContent = QByteArrayLiteral("good content");
 
     {
         QFile file(filePath);
