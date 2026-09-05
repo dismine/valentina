@@ -294,6 +294,44 @@ auto CopyFileData(const QString &source, const QString &destination, QString &er
 
     return true;
 }
+
+auto WriteDocumentData(const QString &fileName, const QByteArray &data, QString &error) -> bool
+{
+    bool success = false;
+    QSaveFile file(fileName);
+    if (file.open(QIODevice::WriteOnly))
+    {
+        if (file.write(data) == data.size())
+        {
+            success = file.commit();
+
+#if defined(_POSIX_SYNCHRONIZED_IO) && _POSIX_SYNCHRONIZED_IO > 0
+            if (success)
+            {
+                // https://stackoverflow.com/questions/74051505/does-qsavefilecommit-fsync-the-file-to-the-filesystem
+                QString const directoryPath = QFileInfo(file.fileName()).absoluteDir().path();
+                int const dirFd = ::open(directoryPath.toLocal8Bit().data(), O_RDONLY | O_DIRECTORY);
+                if (dirFd != -1)
+                {
+                    ::fsync(dirFd);
+                    ::close(dirFd);
+                }
+            }
+#endif
+        }
+        else
+        {
+            file.cancelWriting();
+        }
+    }
+
+    if (not success)
+    {
+        error = file.errorString();
+    }
+
+    return success;
+}
 } // namespace
 
 QT_WARNING_PUSH
@@ -873,44 +911,7 @@ auto VDomDocument::SaveDocument(const QString &fileName, QString &error) -> bool
 
     return VAsyncFileIO::RunFileOperation(description,
                                           [fileName, data, &error]() -> bool
-                                          {
-                                              bool success = false;
-                                              QSaveFile file(fileName);
-                                              if (file.open(QIODevice::WriteOnly))
-                                              {
-                                                  if (file.write(data) == data.size())
-                                                  {
-                                                      success = file.commit();
-
-#if defined(_POSIX_SYNCHRONIZED_IO) && _POSIX_SYNCHRONIZED_IO > 0
-                                                      if (success)
-                                                      {
-                                                          // https://stackoverflow.com/questions/74051505/does-qsavefilecommit-fsync-the-file-to-the-filesystem
-                                                          QString const directoryPath
-                                                              = QFileInfo(file.fileName()).absoluteDir().path();
-                                                          int const dirFd = ::open(directoryPath.toLocal8Bit().data(),
-                                                                                   O_RDONLY | O_DIRECTORY);
-                                                          if (dirFd != -1)
-                                                          {
-                                                              ::fsync(dirFd);
-                                                              ::close(dirFd);
-                                                          }
-                                                      }
-#endif
-                                                  }
-                                                  else
-                                                  {
-                                                      file.cancelWriting();
-                                                  }
-                                              }
-
-                                              if (not success)
-                                              {
-                                                  error = file.errorString();
-                                              }
-
-                                              return success;
-                                          });
+                                          { return WriteDocumentData(fileName, data, error); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

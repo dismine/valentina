@@ -306,6 +306,32 @@ auto IsValidFileName(const QString &fileName) -> bool
 
     return true;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+auto WriteLayoutData(const QString &path, const QByteArray &data, QString &error) -> bool
+{
+    QSaveFile file(path);
+    if (not file.open(QIODevice::WriteOnly))
+    {
+        error = file.errorString();
+        return false;
+    }
+
+    if (file.write(data) != data.size())
+    {
+        file.cancelWriting();
+        error = file.errorString();
+        return false;
+    }
+
+    if (not file.commit())
+    {
+        error = file.errorString();
+        return false;
+    }
+
+    return true;
+}
 } // namespace
 
 struct VPExportData
@@ -665,29 +691,7 @@ auto VPMainWindow::SaveLayout(const QString &path, QString &error) -> bool
 
     const bool success = VAsyncFileIO::RunFileOperation(tr("Saving %1…").arg(QFileInfo(path).fileName()),
                                                         [path, data, &error]() -> bool
-                                                        {
-                                                            QSaveFile file(path);
-                                                            if (not file.open(QIODevice::WriteOnly))
-                                                            {
-                                                                error = file.errorString();
-                                                                return false;
-                                                            }
-
-                                                            if (file.write(data) != data.size())
-                                                            {
-                                                                file.cancelWriting();
-                                                                error = file.errorString();
-                                                                return false;
-                                                            }
-
-                                                            if (not file.commit())
-                                                            {
-                                                                error = file.errorString();
-                                                                return false;
-                                                            }
-
-                                                            return true;
-                                                        });
+                                                        { return WriteLayoutData(path, data, error); });
 
     if (success)
     {
