@@ -274,7 +274,8 @@ auto ObjectNameMatches(quint32 id, const QSharedPointer<VGObject> &object, const
     return id != excludeId && (object->name() == name || object->GetAlias() == name);
 }
 
-auto FindObjectByName(const immer::map<quint32, QSharedPointer<VGObject>> &objects, const QString &name,
+auto FindObjectByName(const immer::map<quint32, QSharedPointer<VGObject>> &objects,
+                      const QString &name,
                       quint32 excludeId) -> QSharedPointer<VGObject>
 {
     for (const auto &[objId, object] : objects)
@@ -287,8 +288,8 @@ auto FindObjectByName(const immer::map<quint32, QSharedPointer<VGObject>> &objec
     return {};
 }
 
-auto FindObjectByName(const QHash<quint32, QSharedPointer<VGObject>> &objects, const QString &name,
-                      quint32 excludeId) -> QSharedPointer<VGObject>
+auto FindObjectByName(const QHash<quint32, QSharedPointer<VGObject>> &objects, const QString &name, quint32 excludeId)
+    -> QSharedPointer<VGObject>
 {
     for (auto i = objects.constBegin(); i != objects.constEnd(); ++i)
     {
@@ -394,13 +395,13 @@ void VContainer::RegisterUniqueName(const QSharedPointer<VGObject> &obj, const Q
         // a collision.
         if (not existing.isNull() && not IsModelingMirror(existing, obj, d->calculationObjects, *d->modelingObjects))
         {
-            const QString errorMsg =
-                tr("The pattern has two objects sharing the name '%1': one from the tool with id %2, "
-                   "another from the tool with id %3. Formulas or tools referencing this name may "
-                   "resolve to the wrong one.")
-                    .arg(name)
-                    .arg(OwningToolId(obj))
-                    .arg(OwningToolId(existing));
+            const QString errorMsg
+                = tr("The pattern has two objects sharing the name '%1': one from the tool with id %2, "
+                     "another from the tool with id %3. Formulas or tools referencing this name may "
+                     "resolve to the wrong one.")
+                      .arg(name)
+                      .arg(OwningToolId(obj))
+                      .arg(OwningToolId(existing));
 
             VAbstractApplication::VApp()->IsPedantic()
                 ? throw VException(errorMsg)
@@ -548,9 +549,15 @@ void VContainer::ClearForFullParse()
     d->pieces->clear();
     d->piecePaths->clear();
     Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 12, "Check that you used all types");
-    ClearVariables(QVector<VarType>{VarType::Increment, VarType::IncrementSeparator, VarType::LineAngle,
-                                    VarType::LineLength, VarType::CurveLength, VarType::CurveCLength,
-                                    VarType::ArcRadius, VarType::CurveAngle, VarType::PieceExternalArea,
+    ClearVariables(QVector<VarType>{VarType::Increment,
+                                    VarType::IncrementSeparator,
+                                    VarType::LineAngle,
+                                    VarType::LineLength,
+                                    VarType::CurveLength,
+                                    VarType::CurveCLength,
+                                    VarType::ArcRadius,
+                                    VarType::CurveAngle,
+                                    VarType::PieceExternalArea,
                                     VarType::PieceSeamLineArea});
     ClearGObjects();
     ClearUniqueNames();
@@ -657,8 +664,8 @@ void VContainer::AddArc(const QSharedPointer<VAbstractCurve> &arc, const quint32
 void VContainer::AddCurve(const QSharedPointer<VAbstractCurve> &curve, const quint32 &id, quint32 parentId)
 {
     const GOType curveType = curve->getType();
-    if (curveType != GOType::Spline && curveType != GOType::SplinePath && curveType != GOType::CubicBezier &&
-        curveType != GOType::CubicBezierPath && curveType != GOType::Arc && curveType != GOType::EllipticalArc)
+    if (curveType != GOType::Spline && curveType != GOType::SplinePath && curveType != GOType::CubicBezier
+        && curveType != GOType::CubicBezierPath && curveType != GOType::Arc && curveType != GOType::EllipticalArc)
     {
         throw VException(tr("Can't create a curve with type '%1'").arg(static_cast<int>(curveType)));
     }
@@ -677,7 +684,8 @@ void VContainer::AddSpline(const QSharedPointer<VAbstractBezier> &curve, quint32
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VContainer::AddCurveWithSegments(const QSharedPointer<VAbstractCubicBezierPath> &curve, const quint32 &id,
+void VContainer::AddCurveWithSegments(const QSharedPointer<VAbstractCubicBezierPath> &curve,
+                                      const quint32 &id,
                                       quint32 parentId)
 {
     AddSpline(curve, id, parentId);
@@ -742,7 +750,7 @@ void VContainer::RemoveIncrement(const QString &name)
 //---------------------------------------------------------------------------------------------------------------------
 void VContainer::FillPiecesAreas(Unit unit)
 {
-    QHash<quint32, VPiece>  const*pieces = d->pieces.data();
+    QHash<quint32, VPiece> const *pieces = d->pieces.data();
 
     auto i = pieces->constBegin();
     while (i != pieces->constEnd())
@@ -839,11 +847,11 @@ auto VContainer::DataDependencyVariables() const -> QHash<QString, QList<quint32
 {
     Q_STATIC_ASSERT_X(static_cast<int>(VarType::Unknown) == 12, "Check that you used all types");
     QVector<VarType> const types{VarType::LineAngle,
-                           VarType::LineLength,
-                           VarType::CurveLength,
-                           VarType::CurveCLength,
-                           VarType::ArcRadius,
-                           VarType::CurveAngle};
+                                 VarType::LineLength,
+                                 VarType::CurveLength,
+                                 VarType::CurveCLength,
+                                 VarType::ArcRadius,
+                                 VarType::CurveAngle};
 
     QHash<QString, QList<quint32>> varData;
 
@@ -914,7 +922,8 @@ auto VContainer::GetTrVars() const -> const VTranslateVars *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T> auto VContainer::DataVar(const VarType &type) const -> QMap<QString, QSharedPointer<T>>
+template<typename T>
+auto VContainer::DataVar(const VarType &type) const -> QMap<QString, QSharedPointer<T>>
 {
     QMap<QString, QSharedPointer<T>> map;
     // The returned QMap sorts by translated name; the source map's own iteration order is irrelevant.
