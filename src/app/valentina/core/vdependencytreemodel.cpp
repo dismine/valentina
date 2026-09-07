@@ -1286,5 +1286,13 @@ auto VDependencyFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIn
     QModelIndex const index = sourceModel()->index(sourceRow, 0, sourceParent);
     QString const displayName = sourceModel()->data(index, Qt::DisplayRole).toString();
 
-    return displayName.contains(filterRegularExpression());
+    if (displayName.contains(filterRegularExpression()))
+    {
+        return true;
+    }
+
+    // Also allow searching by object id (e.g. the ids reported in duplicate-name warnings)
+    bool ok = false;
+    vidtype const filterId = filterRegularExpression().pattern().toUInt(&ok);
+    return ok && sourceModel()->data(index, Qt::UserRole).toUInt() == filterId;
 }

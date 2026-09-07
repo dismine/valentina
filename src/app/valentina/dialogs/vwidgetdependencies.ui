@@ -19,7 +19,7 @@
      <item>
       <widget class="QLineEdit" name="lineEditFilter">
        <property name="placeholderText">
-        <string>Filter</string>
+        <string>Filter (name or id)</string>
        </property>
        <property name="clearButtonEnabled">
         <bool>true</bool>
