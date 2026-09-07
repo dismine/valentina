@@ -56,6 +56,10 @@ Options
         macos-x86_64, macos-arm64, windows-x86_64. Auto-detected by default.
   --version <version>
         The desired Qbs version.
+  --no-default-mirror
+        Skip https://download.qt.io (its MirrorBrain redirector) and use the
+        explicit fallback mirrors directly. Useful where download.qt.io is
+        blocked or unreachable.
 EOF
 }
 
@@ -88,6 +92,8 @@ case "$OSTYPE" in
         ;;
 esac
 
+USE_DEFAULT_MIRROR=1
+
 while [ $# -gt 0 ]; do
     case "$1" in
         --directory|-d)
@@ -101,6 +107,9 @@ while [ $# -gt 0 ]; do
         --version)
             VERSION="$2"
             shift
+            ;;
+        --no-default-mirror)
+            USE_DEFAULT_MIRROR=
             ;;
         --help|-h)
             help
@@ -137,22 +146,31 @@ fi
 # download.qt.io itself is unreachable. Keep the list short — every dead/stale entry costs retry
 # time before failover, and hardcoded mirrors rot. Verify with:
 #   curl -sIL "$M/official_releases/qbs/<ver>/qbs-linux-x86_64-<ver>.tar.gz" -o /dev/null -w '%{http_code}\n'
-MIRRORS="\
-    https://download.qt.io \
+# Where download.qt.io is blocked/unreachable, --no-default-mirror
+# drops it and goes straight to the explicit fallbacks.
+FALLBACK_MIRRORS="\
     https://ftp.fau.de/qtproject \
     https://www.mirrorservice.org/sites/download.qt-project.org \
     https://mirrors.ocf.berkeley.edu/qt \
     https://mirrors.ustc.edu.cn/qtproject \
     https://mirror.aarnet.edu.au/pub/qtproject \
 "
+if [ -n "${USE_DEFAULT_MIRROR}" ]; then
+    MIRRORS="https://download.qt.io ${FALLBACK_MIRRORS}"
+else
+    MIRRORS="${FALLBACK_MIRRORS}"
+fi
 
 # Hardened curl invocation reused for every download attempt:
+#   --connect-timeout 5        : connections establish fast; keep it short so a blocked/unreachable
+#                                mirror fails over quickly instead of hanging
 #   --speed-limit/--speed-time : abort a stalled transfer (<1 KB/s for 30s) instead of hanging
-#   --retry/--retry-all-errors : auto-retry transient failures (timeouts, connection resets)
+#   --retry/--retry-all-errors : auto-retry transient failures (timeouts, connection resets);
+#                                with no --retry-delay, curl uses exponential backoff (1s,2s,4s,…)
 #   --fail                     : treat HTTP errors as failures so we fall through to next mirror
 #   --location                 : follow MirrorBrain's 302 redirect from download.qt.io
-CURL=(curl --fail --location --connect-timeout 30 \
-      --retry 3 --retry-delay 5 --retry-all-errors \
+CURL=(curl --fail --location --connect-timeout 5 \
+      --retry 2 --retry-all-errors \
       --speed-limit 1024 --speed-time 30 --show-error --silent)
 
 BASE_FILENAME="qbs-${HOST_OS}-${VERSION}"

@@ -38,6 +38,7 @@
 ##
 #############################################################################
 set -eu
+set -o pipefail
 
 function help() {
     cat <<EOF
@@ -103,6 +104,11 @@ Options
         The desired Qt version. Currently supported are all versions
         above 5.9.0.
 
+  --no-default-mirror
+        Skip https://download.qt.io (its MirrorBrain redirector) and use the
+        explicit fallback mirrors directly. Useful where download.qt.io is
+        blocked or unreachable.
+
 EOF
 }
 
@@ -110,6 +116,7 @@ TARGET_PLATFORM=desktop
 COMPONENTS=
 VERSION=
 FORCE_DOWNLOAD=false
+USE_DEFAULT_MIRROR=1
 MD5_TOOL=md5sum
 
 case "$OSTYPE" in
@@ -124,7 +131,7 @@ case "$OSTYPE" in
         TOOLCHAIN=clang_64
         MD5_TOOL="md5 -r"
         ;;
-    msys)
+    msys|cygwin)
         HOST_OS=windows_x86
         INSTALL_DIR=/c/Qt
         TOOLCHAIN=win64_msvc2015_64
@@ -159,6 +166,9 @@ while [ $# -gt 0 ]; do
         --version)
             VERSION="$2"
             shift
+            ;;
+        --no-default-mirror)
+            USE_DEFAULT_MIRROR=
             ;;
         --help|-h)
             help
@@ -224,48 +234,75 @@ if ${INSTALLATION_IS_VALID}; then
     exit 0
 fi
 
-MIRRORS="\
-    http://ftp.acc.umu.se/mirror/qt.io/qtproject \
-    http://ftp.fau.de/qtproject \
-    http://download.qt.io \
+# Lead with download.qt.io: its MirrorBrain frontend redirects (302) to a healthy,
+# geographically-close mirror automatically. The rest are explicit fallbacks taken from
+# https://download.qt.io/static/mirrorlist/ in case the redirect target is itself unhealthy.
+# A few geographically-spread fallbacks (EU, US, Asia, Oceania) are enough: they only fire if
+# download.qt.io itself is unreachable. Keep the list short — every dead/stale entry costs retry
+# time before failover, and hardcoded mirrors rot. Verify with:
+#   curl -sIL "$M/online/qtsdkrepository/linux_x64/desktop/qt6_680/" -o /dev/null -w '%{http_code}\n'
+# Where download.qt.io is blocked/unreachable, --no-default-mirror
+# drops it and goes straight to the explicit fallbacks.
+FALLBACK_MIRRORS="\
+    https://ftp.fau.de/qtproject \
+    https://www.mirrorservice.org/sites/download.qt-project.org \
+    https://mirrors.ocf.berkeley.edu/qt \
+    https://mirrors.ustc.edu.cn/qtproject \
+    https://mirror.aarnet.edu.au/pub/qtproject \
 "
+if [ -n "${USE_DEFAULT_MIRROR}" ]; then
+    MIRRORS="https://download.qt.io ${FALLBACK_MIRRORS}"
+else
+    MIRRORS="${FALLBACK_MIRRORS}"
+fi
 
-for MIRROR in ${MIRRORS}; do
-    if curl "${MIRROR}/online" -s -f -o /dev/null; then
-        break;
-    else
-        echo "Server ${MIRROR} not availabe. Trying next alternative..." >&2
-        MIRROR=""
-    fi
-done
+# Hardened curl invocation reused for every download attempt:
+#   --connect-timeout 5        : connections establish fast; keep it short so a blocked/unreachable
+#                                mirror fails over quickly instead of hanging
+#   --speed-limit/--speed-time : abort a stalled transfer (<1 KB/s for 30s) instead of hanging
+#   --retry/--retry-all-errors : auto-retry transient failures (timeouts, connection resets);
+#                                with no --retry-delay, curl uses exponential backoff (1s,2s,4s,…)
+#   --fail                     : treat HTTP errors as failures so we fall through to next mirror
+#   --location                 : follow MirrorBrain's 302 redirect from download.qt.io
+CURL=(curl --fail --location --connect-timeout 5 \
+      --retry 2 --retry-all-errors \
+      --speed-limit 1024 --speed-time 30 --show-error --silent)
+
+# Directory listings probe many path variants; keep these fast so a dead mirror
+# fails over quickly instead of retrying every REMOTE_BASE.
+CURL_LIST=(curl --fail --location --connect-timeout 5 --max-time 20 --silent)
 
 DOWNLOAD_DIR=`mktemp -d 2>/dev/null || mktemp -d -t 'install-qt'`
 
 #
-# The repository structure is a mess. Try different URL variants
+# The repository structure is a mess. Try different URL variants against MIRROR.
+# Returns 0 and prints the URL on success; returns 1 if nothing was found so the
+# caller can try the next mirror.
 #
 function compute_url(){
     local COMPONENT=$1
-    local CURL="curl -s -L"
     local BASE_URL="${MIRROR}/online/qtsdkrepository/${HOST_OS}/${TARGET_PLATFORM}"
     local ANDROID_ARCH=$(echo ${TOOLCHAIN##android_})
+    local REMOTE_PATH=
+    local REMOTE_BASE=
+    local HOST_OS_NAME=
 
     if [[ "${COMPONENT}" =~ "qtcreator" ]]; then
-
-        if [[ "${HOST_OS}" == "windows_x86" ]]; then
+        local host_os="${HOST_OS}"
+        if [[ "${host_os}" == "windows_x86" ]]; then
             # newer QtC versions do not supported x86 version anymore
-            HOST_OS="windows_x64"
+            host_os="windows_x64"
         fi
 
-        SHORT_VERSION=${VERSION%??}
+        local SHORT_VERSION=${VERSION%??}
         BASE_URL="${MIRROR}/official_releases/qtcreator"
-        REMOTE_PATH="${SHORT_VERSION}/${VERSION}/installer_source/${HOST_OS}/qtcreator.7z"
+        REMOTE_PATH="${SHORT_VERSION}/${VERSION}/installer_source/${host_os}/qtcreator.7z"
         echo "${BASE_URL}/${REMOTE_PATH}"
         return 0
     elif [[ "${COMPONENT}" =~ "mingw" ]]; then
         REMOTE_BASE="tools_mingw90/qt.tools.${TOOLCHAIN}${VERSION//./}"
 
-        REMOTE_PATH="$(${CURL} ${BASE_URL}/${REMOTE_BASE}/ | grep -o -E "[[:alnum:]_.\-]*7z" | grep -v "meta" | head -1)"
+        REMOTE_PATH="$("${CURL_LIST[@]}" "${BASE_URL}/${REMOTE_BASE}/" 2>/dev/null | grep -o -E "[[:alnum:]_.\-]*7z" | grep -v "meta" | head -1 || true)"
         if [ ! -z "${REMOTE_PATH}" ]; then
             echo "${BASE_URL}/${REMOTE_BASE}/${REMOTE_PATH}"
             return 0
@@ -273,7 +310,15 @@ function compute_url(){
     else
         HOST_OS_NAME=${HOST_OS//_x64/}
         HOST_OS_NAME=${HOST_OS_NAME//_arm64/}
-        REMOTE_BASES=(
+        # Windows >=6.11.0: packages are split per toolchain under
+        # qt6_6110/qt6_6110_msvc2022_64/ (win64_ prefix stripped from the dir name).
+        local WIN_TOOLCHAIN_DIR=${TOOLCHAIN#win64_}
+        local REMOTE_BASES=(
+            # Windows repository format (>=6.11.0)
+            # qt6_6110/qt6_6110_msvc2022_64/qt.qt6.6110.win64_msvc2022_64/
+            "qt6_${VERSION//./}/qt6_${VERSION//./}_${WIN_TOOLCHAIN_DIR}/qt.qt6.${VERSION//./}.${TOOLCHAIN}"
+            # qt6_6110/qt6_6110_msvc2022_64/qt.qt6.6110.addons.qt5compat.win64_msvc2022_64/
+            "qt6_${VERSION//./}/qt6_${VERSION//./}_${WIN_TOOLCHAIN_DIR}/qt.qt6.${VERSION//./}.addons.${COMPONENT}.${TOOLCHAIN}"
             # New repository format (>=6.8.0)
             # qt6_680/qt6_680/qt.qt6.680.clang_64/6.8.3-0-*qtbase-*.7z
             "qt6_${VERSION//./}/qt6_${VERSION//./}/qt.qt6.${VERSION//./}.${TOOLCHAIN}"
@@ -305,7 +350,7 @@ function compute_url(){
         )
 
         for REMOTE_BASE in ${REMOTE_BASES[*]}; do
-            REMOTE_PATH="$(${CURL} ${BASE_URL}/${REMOTE_BASE}/ | grep -o -E "[[:alnum:]_.\-]*7z" | grep "${COMPONENT}" | tail -1)"
+            REMOTE_PATH="$("${CURL_LIST[@]}" "${BASE_URL}/${REMOTE_BASE}/" 2>/dev/null | grep -o -E "[[:alnum:]_.\-]*7z" | grep "${COMPONENT}" | tail -1 || true)"
             if [ ! -z "${REMOTE_PATH}" ]; then
                 echo "${BASE_URL}/${REMOTE_BASE}/${REMOTE_PATH}"
                 return 0
@@ -313,35 +358,34 @@ function compute_url(){
         done
     fi
 
-    echo "Could not determine a remote URL for ${COMPONENT} with version ${VERSION}">&2
-    exit 1
+    return 1
 }
 
 function version {
   echo "$@" | awk -F. '{ printf("%03d%03d%03d\n", $1,$2,$3); }';
 }
 
-mkdir -p ${INSTALL_DIR}
-rm -f "${HASH_FILEPATH}"
-
-for COMPONENT in ${COMPONENTS}; do
-
+function resolve_toolchain_dir() {
     if [[ "${TOOLCHAIN}" =~ "win64_mingw" ]]; then
-        TOOLCHAIN_DIR="${TOOLCHAIN/win64_/}_64"
+        echo "${TOOLCHAIN/win64_/}_64"
     elif [[ "${TOOLCHAIN}" =~ "win32_mingw" ]]; then
-        TOOLCHAIN_DIR="${TOOLCHAIN/win32_/}_32"
+        echo "${TOOLCHAIN/win32_/}_32"
     elif [[ "${TOOLCHAIN}" =~ "win64_msvc" ]]; then
-        TOOLCHAIN_DIR="${TOOLCHAIN/win64_/}"
+        echo "${TOOLCHAIN/win64_/}"
     elif [[ "${TOOLCHAIN}" =~ "win32_msvc" ]]; then
-        TOOLCHAIN_DIR="${TOOLCHAIN/win32_/}"
+        echo "${TOOLCHAIN/win32_/}"
     elif [[ "${TOOLCHAIN}" =~ "any" ]] && [[ "${TARGET_PLATFORM}" == "android" ]]; then
-        TOOLCHAIN_DIR="android"
+        echo "android"
     elif [[ "${HOST_OS}" == "mac_x64" ]] && [[ ! "$(version "${VERSION}")" < "$(version "6.1.2")" ]] && [[ "${TARGET_PLATFORM}" == "desktop" ]]; then
-        TOOLCHAIN_DIR="macos"
+        echo "macos"
     else
-        TOOLCHAIN_DIR="${TOOLCHAIN}"
+        echo "${TOOLCHAIN}"
     fi
+}
 
+# Sets UNPACK_DIR / ARCHIVER_DIR for COMPONENT based on host, version, and toolchain.
+function setup_unpack_dirs() {
+    local COMPONENT=$1
     if [[ "${COMPONENT}" =~ "qtcreator" ]] && [[ "${HOST_OS}" != "mac_x64" ]]; then
         UNPACK_DIR="${INSTALL_DIR}/Tools/QtCreator"
         ARCHIVER_DIR="${UNPACK_DIR}"
@@ -357,102 +401,165 @@ for COMPONENT in ${COMPONENTS}; do
         UNPACK_DIR="${INSTALL_DIR}"
         ARCHIVER_DIR="${UNPACK_DIR}"
     fi
+}
 
+# Returns 0 if COMPONENT is unavailable for this Qt version/target and should be skipped.
+function skip_unsupported_component() {
+    local COMPONENT=$1
     if [ "$(version "${VERSION}")" -ge "$(version "6.0.0")" ]; then
         if [[ "${COMPONENT}" =~ "qtscript" ]] || [[ "${COMPONENT}" =~ "qtscxml" ]] || [[ "${COMPONENT}" =~ "qtx11extras" ]]; then
             echo "Component ${COMPONENT} was removed in Qt6, skipping" >&2
-            continue
+            return 0
         fi
         if [[ "${COMPONENT}" =~ "icu" ]] && [[ "${TARGET_PLATFORM}" =~ "wasm" ]]; then
             echo "Component ${COMPONENT} is not present in Qt6 (${TARGET_PLATFORM}), skipping" >&2
-            continue
+            return 0
         fi
     else
         if [[ "${COMPONENT}" =~ "qt5compat" ]] || [[ "${COMPONENT}" =~ "shadertools" ]]; then
             echo "Component ${COMPONENT} is not present in Qt ${VERSION}, skipping" >&2
+            return 0
+        fi
+    fi
+    return 1
+}
+
+# Download URL ($1), verify the archive, extract into ARCHIVER_DIR, and append paths to
+# HASH_FILEPATH. Returns non-zero on any failure so the caller can try the next mirror.
+download_one() {
+    local url=$1
+    local package="${DOWNLOAD_DIR}/package.7z"
+    echo "Trying ${url} ..." >&2
+    "${CURL[@]}" "${url}" -o "${package}" || return 1
+    7z t "${package}" >/dev/null 2>&1 || return 1
+    7z x -y -o"${ARCHIVER_DIR}" "${package}" >/dev/null 2>&1 || 7z x -y -snld20 -o"${ARCHIVER_DIR}" "${package}" >/dev/null 2>&1 || return 1
+    7z l -ba -slt -y "${package}" | tr '\\' '/' | sed -n -e "s|^Path\ =\ |${ARCHIVER_DIR}/|p" >> "${HASH_FILEPATH}" 2>/dev/null
+    rm -f "${package}"
+}
+
+# Patch qt.conf / qconfig.pri for qmake and print the bin directory for PATH.
+function process_qtbase() {
+    if [ "${TARGET_PLATFORM}" == "android" ] && [ "$(version "${VERSION}")" -ge "$(version "6.0.0")" ]; then
+        CONF_FILE="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/bin/target_qt.conf"
+        ANDROID_QMAKE_FILE="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/bin/qmake"
+        if [ "${TOOLCHAIN}" == "android_armv7" ] && [ "$(version "${VERSION}")" -ge "$(version "6.4.2")" ]; then
+            sed -i "s/\r//" "${CONF_FILE}"
+            sed -i "s|HostLibraryExecutables=.\/bin|HostLibraryExecutables=.\/libexec|g" "${CONF_FILE}"
+            chmod +x "${ANDROID_QMAKE_FILE}"
+            sed -i "s|\\\|\/|g" "${ANDROID_QMAKE_FILE}"
+        fi
+        sed -i "s|target|../$TOOLCHAIN|g" "${CONF_FILE}"
+        sed -i "/HostPrefix/ s|$|gcc_64|g" "${CONF_FILE}"
+        QMAKE_FILE="${UNPACK_DIR}/${VERSION}/gcc_64/bin/qmake"
+        sed -i "s|\/home\/qt\/work\/install\/bin\/qmake|$QMAKE_FILE|g" "${ANDROID_QMAKE_FILE}"
+        sed -i "s|\/Users\/qt\/work\/install\/bin\/qmake|$QMAKE_FILE|g" "${ANDROID_QMAKE_FILE}"
+    elif [ "${TARGET_PLATFORM}" == "ios" ] && [ ! "${VERSION}" \< "6.0.0" ]; then
+        CONF_FILE="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/bin/target_qt.conf"
+        sed -i.bak "s|HostData=target|HostData=../$TOOLCHAIN|g" "${CONF_FILE}"
+        sed -i.bak "s|HostPrefix=..\/..\/|HostPrefix=..\/..\/macos|g" "${CONF_FILE}"
+        IOS_QMAKE_FILE="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/bin/qmake"
+        QMAKE_FILE="${UNPACK_DIR}/${VERSION}/macos/bin/qmake"
+        sed -i.bak "s|\/Users\/qt\/work\/install\/bin\/qmake|${QMAKE_FILE}|g" "${IOS_QMAKE_FILE}"
+    elif [ "${TARGET_PLATFORM}" == "wasm" ] && [ ! "${VERSION}" \< "6.0.0" ]; then
+        CONF_FILE="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/bin/target_qt.conf"
+        sed -i.bak "s|HostData=target|HostData=../$TOOLCHAIN|g" "${CONF_FILE}"
+        sed -i.bak "s|HostPrefix=..\/..\/|HostPrefix=..\/..\/gcc_64|g" "${CONF_FILE}"
+        WASM_QMAKE_FILE="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/bin/qmake"
+        QMAKE_FILE="${UNPACK_DIR}/${VERSION}/gcc_64/bin/qmake"
+        sed -i.bak "s|\/home\/qt\/work\/install\/bin\/qmake|${QMAKE_FILE}|g" "${WASM_QMAKE_FILE}"
+    elif [ "${TARGET_PLATFORM}" == "desktop" ] && [ "${TOOLCHAIN}" == "win64_msvc2022_arm64_cross_compiled" ] && [ ! "${VERSION}" \< "6.0.0" ]; then
+        local BIN_DIR="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/bin"
+        CONF_FILE="${BIN_DIR}/target_qt.conf"
+        sed -i.bak "s|HostData=target|HostData=../msvc2022_arm64_cross_compiled|g" "${CONF_FILE}"
+        sed -i.bak "s|HostPrefix=..\/..\/|HostPrefix=..\/..\/msvc2022_64|g" "${CONF_FILE}"
+        # Qt <=6.8 shipped qmake.bat; >=6.10 renamed it to host-qmake.bat (same content).
+        local HOST_QMAKE6='"%~dp0\\\\..\\\\..\\\\msvc2022_64\\\\bin\\\\qmake6.exe"'
+        local HOST_QTPATHS6='"%~dp0\\\\..\\\\..\\\\msvc2022_64\\\\bin\\\\qtpaths6.exe"'
+        for bat in qmake.bat qmake6.bat host-qmake.bat host-qmake6.bat; do
+            if [ -f "${BIN_DIR}/${bat}" ]; then
+                sed -i.bak "s|\\\\Users\\\\qt\\\\work\\\\install\\\\bin\\\\qmake6.exe|${HOST_QMAKE6}|g" "${BIN_DIR}/${bat}"
+            fi
+        done
+        for bat in host-qtpaths.bat host-qtpaths6.bat; do
+            if [ -f "${BIN_DIR}/${bat}" ]; then
+                sed -i.bak "s|\\\\Users\\\\qt\\\\work\\\\install\\\\bin\\\\qtpaths6.exe|${HOST_QTPATHS6}|g" "${BIN_DIR}/${bat}"
+            fi
+        done
+    else
+        CONF_FILE="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/bin/qt.conf"
+        echo "[Paths]" > ${CONF_FILE}
+        echo "Prefix = .." >> ${CONF_FILE}
+    fi
+
+    # Adjust the license to be able to run qmake
+    # sed with -i requires intermediate file on Mac OS
+    PRI_FILE="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/mkspecs/qconfig.pri"
+    sed -i.bak 's/Enterprise/OpenSource/g' "${PRI_FILE}"
+    sed -i.bak 's/licheck.*//g' "${PRI_FILE}"
+    rm "${PRI_FILE}.bak"
+
+    # Print the directory so that the caller can adjust the PATH variable.
+    echo $(dirname "${CONF_FILE}")
+}
+
+function process_mingw() {
+    local VERSION_DIR="${VERSION//./}"
+    if [[ "${TOOLCHAIN}" =~ "win64_mingw" ]]; then
+        if [[ "${VERSION}" == "9.0.0" ]]; then
+            VERSION_DIR="1120"
+        fi
+        echo "${UNPACK_DIR}/Tools/mingw${VERSION_DIR}_64/bin"
+    elif [[ "${TOOLCHAIN}" =~ "win32_mingw" ]]; then
+        echo "${UNPACK_DIR}/Tools/mingw${VERSION_DIR}_32/bin"
+    fi
+}
+
+function process_qtcreator() {
+    if [ "${HOST_OS}" == "mac_x64" ]; then
+        echo "${UNPACK_DIR}/Qt Creator.app/Contents/MacOS"
+    else
+        echo "${UNPACK_DIR}/bin"
+    fi
+}
+
+mkdir -p ${INSTALL_DIR}
+rm -f "${HASH_FILEPATH}"
+
+TOOLCHAIN_DIR="$(resolve_toolchain_dir)"
+
+for COMPONENT in ${COMPONENTS}; do
+    setup_unpack_dirs "${COMPONENT}"
+
+    if skip_unsupported_component "${COMPONENT}"; then
+        continue
+    fi
+
+    echo "Downloading ${COMPONENT}..." >&2
+    DOWNLOADED=
+    for MIRROR in ${MIRRORS}; do
+        if ! URL="$(compute_url "${COMPONENT}")"; then
+            echo "  could not resolve URL on ${MIRROR}, trying next mirror..." >&2
             continue
         fi
+        if download_one "${URL}"; then
+            DOWNLOADED=1
+            break
+        fi
+        echo "  failed, trying next mirror..." >&2
+        rm -f "${DOWNLOAD_DIR}/package.7z"
+    done
+
+    if [ -z "${DOWNLOADED}" ]; then
+        echo "All mirrors failed for ${COMPONENT}." >&2
+        exit 1
     fi
 
-    URL="$(compute_url ${COMPONENT})"
-    echo "Downloading ${COMPONENT} ${URL}..." >&2
-    curl --progress-bar -L -o ${DOWNLOAD_DIR}/package.7z ${URL} >&2
-    7z x -y -o${ARCHIVER_DIR} ${DOWNLOAD_DIR}/package.7z >/dev/null 2>&1
-    7z l -ba -slt -y ${DOWNLOAD_DIR}/package.7z | tr '\\' '/' | sed -n -e "s|^Path\ =\ |${ARCHIVER_DIR}/|p" >> "${HASH_FILEPATH}" 2>/dev/null
-    rm -f ${DOWNLOAD_DIR}/package.7z
-
-    #
-    # conf file is needed for qmake
-    #
     if [[ "${COMPONENT}" == "qtbase" ]]; then
-        if [ "${TARGET_PLATFORM}" == "android" ] && [ ! "$(version "${VERSION}")" < "$(version "6.0.0")" ]; then
-            CONF_FILE="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/bin/target_qt.conf"
-            ANDROID_QMAKE_FILE="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/bin/qmake"
-            if [ "${TOOLCHAIN}" == "android_armv7" ] && [ ! "$(version "${VERSION}")" < "$(version "6.4.2")" ]; then
-                sed -i "s/\r//" "${CONF_FILE}"
-                sed -i "s|HostLibraryExecutables=.\/bin|HostLibraryExecutables=.\/libexec|g" "${CONF_FILE}"
-                chmod +x "${ANDROID_QMAKE_FILE}"
-                sed -i "s|\\\|\/|g" "${ANDROID_QMAKE_FILE}"
-            fi
-            sed -i "s|target|../$TOOLCHAIN|g" "${CONF_FILE}"
-            sed -i "/HostPrefix/ s|$|gcc_64|g" "${CONF_FILE}"
-            QMAKE_FILE="${UNPACK_DIR}/${VERSION}/gcc_64/bin/qmake"
-            sed -i "s|\/home\/qt\/work\/install\/bin\/qmake|$QMAKE_FILE|g" "${ANDROID_QMAKE_FILE}"
-            sed -i "s|\/Users\/qt\/work\/install\/bin\/qmake|$QMAKE_FILE|g" "${ANDROID_QMAKE_FILE}"
-        elif [ "${TARGET_PLATFORM}" == "ios" ] && [ ! "${VERSION}" \< "6.0.0" ]; then
-            CONF_FILE="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/bin/target_qt.conf"
-            sed -i.bak "s|HostData=target|HostData=../$TOOLCHAIN|g" "${CONF_FILE}"
-            sed -i.bak "s|HostPrefix=..\/..\/|HostPrefix=..\/..\/macos|g" "${CONF_FILE}"
-            IOS_QMAKE_FILE="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/bin/qmake"
-            QMAKE_FILE="${UNPACK_DIR}/${VERSION}/macos/bin/qmake"
-            sed -i.bak "s|\/Users\/qt\/work\/install\/bin\/qmake|${QMAKE_FILE}|g" "${IOS_QMAKE_FILE}"
-        elif [ "${TARGET_PLATFORM}" == "wasm" ] && [ ! "${VERSION}" \< "6.0.0" ]; then
-            CONF_FILE="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/bin/target_qt.conf"
-            sed -i.bak "s|HostData=target|HostData=../$TOOLCHAIN|g" "${CONF_FILE}"
-            sed -i.bak "s|HostPrefix=..\/..\/|HostPrefix=..\/..\/gcc_64|g" "${CONF_FILE}"
-            WASM_QMAKE_FILE="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/bin/qmake"
-            QMAKE_FILE="${UNPACK_DIR}/${VERSION}/gcc_64/bin/qmake"
-            sed -i.bak "s|\/home\/qt\/work\/install\/bin\/qmake|${QMAKE_FILE}|g" "${WASM_QMAKE_FILE}"
-        elif [ "${TARGET_PLATFORM}" == "desktop" ] && [ "${TOOLCHAIN}" == "win64_msvc2022_arm64_cross_compiled" ] && [ ! "${VERSION}" \< "6.0.0" ]; then
-            CONF_FILE="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/bin/target_qt.conf"
-            sed -i.bak "s|HostData=target|HostData=../msvc2022_arm64_cross_compiled|g" "${CONF_FILE}"
-            sed -i.bak "s|HostPrefix=..\/..\/|HostPrefix=..\/..\/msvc2022_64|g" "${CONF_FILE}"
-            ARM64_QMAKE_FILE="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/bin/qmake.bat"
-            QMAKE_FILE='"%~dp0\\\\..\\\\..\\\\msvc2022_64\\\\bin\\\\qmake6.exe"'
-            sed -i.bak "s|\\\\Users\\\\qt\\\\work\\\\install\\\\bin\\\\qmake6.exe|${QMAKE_FILE}|g" "${ARM64_QMAKE_FILE}"
-        else
-            CONF_FILE="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/bin/qt.conf"
-            echo "[Paths]" > ${CONF_FILE}
-            echo "Prefix = .." >> ${CONF_FILE}
-        fi
-
-        # Adjust the license to be able to run qmake
-        # sed with -i requires intermediate file on Mac OS
-        PRI_FILE="${UNPACK_DIR}/${VERSION}/${TOOLCHAIN_DIR}/mkspecs/qconfig.pri"
-        sed -i.bak 's/Enterprise/OpenSource/g' "${PRI_FILE}"
-        sed -i.bak 's/licheck.*//g' "${PRI_FILE}"
-        rm "${PRI_FILE}.bak"
-
-        # Print the directory so that the caller can
-        # adjust the PATH variable.
-        echo $(dirname "${CONF_FILE}")
+        process_qtbase
     elif [[ "${COMPONENT}" =~ "mingw" ]]; then
-        VERSION_DIR="${VERSION//./}"
-        if [[ "${TOOLCHAIN}" =~ "win64_mingw" ]]; then
-            if [[ "${VERSION}" == "9.0.0" ]]; then
-                VERSION_DIR="1120"
-            fi
-            echo "${UNPACK_DIR}/Tools/mingw${VERSION_DIR}_64/bin"
-        elif [[ "${TOOLCHAIN}" =~ "win32_mingw" ]]; then
-            echo "${UNPACK_DIR}/Tools/mingw${VERSION_DIR}_32/bin"
-        fi
+        process_mingw
     elif [[ "${COMPONENT}" =~ "qtcreator" ]]; then
-        if [ "${HOST_OS}" == "mac_x64" ]; then
-            echo "${UNPACK_DIR}/Qt Creator.app/Contents/MacOS"
-        else
-            echo "${UNPACK_DIR}/bin"
-        fi
+        process_qtcreator
     fi
-
 done
 
