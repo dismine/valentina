@@ -1594,7 +1594,7 @@ void TKMMainWindow::SaveImageTitle()
         ui->listWidget->setCurrentRow(row);
     }
 
-    ShowMData();
+    ShowImageData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
