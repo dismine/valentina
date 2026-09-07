@@ -21263,17 +21263,17 @@ Ez a beállítás újraindítás után lép életbe.</translation>
         <translation type="vanished">Az objektum nem található. Típuseltérés.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="360"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="399"/>
         <source>The pattern has two objects sharing the name &apos;%1&apos;: one from the tool with id %2, another from the tool with id %3. Formulas or tools referencing this name may resolve to the wrong one.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="454"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="493"/>
         <source>Number of free id exhausted.</source>
         <translation>A szabad azonosítók száma kimerült.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="625"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="670"/>
         <source>Can&apos;t create a curve with type &apos;%1&apos;</source>
         <translation>Nem hozható létre &apos;%1&apos; típusú görbe</translation>
     </message>
@@ -26948,10 +26948,14 @@ Nyers elrendezésformátum kompatibilitási hiba: actualFileVersion = %1 és fil
 <context>
     <name>VWidgetDependencies</name>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="22"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="114"/>
         <source>Filter</source>
         <translation>Szűrő</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="22"/>
+        <source>Filter (name or id)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="32"/>

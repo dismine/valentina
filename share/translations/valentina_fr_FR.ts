@@ -23818,17 +23818,17 @@ Voulez-vous enregistrer vos changements ?</translation>
         <translation type="vanished">Impossible de trouver l&apos;objet. Le type ne correspond pas.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="360"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="399"/>
         <source>The pattern has two objects sharing the name &apos;%1&apos;: one from the tool with id %2, another from the tool with id %3. Formulas or tools referencing this name may resolve to the wrong one.</source>
         <translation>Ce patron comprend deux objets qui partagent le même nom &apos;%1&apos;: le premier avec l&apos;outil d&apos;identifiant %2, le second avec l&apos;outil d&apos;identifiant %3. Les formules ou outils associés à ce nom, peuvent se retrouver associés au mauvais objet.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="454"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="493"/>
         <source>Number of free id exhausted.</source>
         <translation>Le nombre d&apos;ids libres est épuisé.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="625"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="670"/>
         <source>Can&apos;t create a curve with type &apos;%1&apos;</source>
         <translation>Impossible de créer une courbe de type &apos;%1&apos;</translation>
     </message>
@@ -30676,10 +30676,14 @@ Erreur de compatibilité du format .rld: actualFileVersion = %1 alors que fileVe
 <context>
     <name>VWidgetDependencies</name>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="22"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_vwidgetdependencies.h" line="114"/>
         <source>Filter</source>
         <translation>Filtrer</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="22"/>
+        <source>Filter (name or id)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="32"/>
