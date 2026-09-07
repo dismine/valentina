@@ -1585,7 +1585,7 @@ void TKMMainWindow::SaveImageTitle()
     ui->listWidget->setCurrentRow(row);
     ui->listWidget->blockSignals(false);
 
-    ShowMData();
+    ShowImageData();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
