@@ -53,6 +53,10 @@ private slots:
     // and always shares its name by design (see VNodePoint::Create() and friends) -- not a bug.
     void ModelingMirrorSharingCalculationNameDoesNotWarn();
 
+    // VToolUnionDetails::AddNodePoint() (and its arc/spline siblings) mirrors an exposed piece node
+    // off an internal helper object rather than the calc source directly, a two-hop idObject chain.
+    void ModelingMirrorOfModelingMirrorDoesNotWarn();
+
     // Regression tests: pin snapshot semantics preserved by the rewrite.
     void OldToolSnapshotUnaffectedByLaterStructuralChange();
     void OldToolSnapshotSeesValueUpdateToExistingVariable();

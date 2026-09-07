@@ -185,6 +185,45 @@ void TST_VContainer::ModelingMirrorSharingCalculationNameDoesNotWarn()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_VContainer::ModelingMirrorOfModelingMirrorDoesNotWarn()
+{
+    const Unit unit = Unit::Cm;
+    VContainer data(nullptr, &unit, VContainer::UniqueNamespace());
+
+    const QString name = u"B"_s;
+    const quint32 calcId = data.AddGObject(new VPointF(0, 0, name));
+    QVERIFY(calcId != NULL_ID);
+
+    auto *sourceNode = new VPointF(0, 0, name);
+    sourceNode->setIdObject(calcId);
+    sourceNode->setMode(Draw::Modeling);
+    const quint32 sourceNodeId = data.AddGObject(sourceNode);
+    QVERIFY(sourceNodeId != NULL_ID);
+
+    // Mirrors what VToolUnionDetails::AddNodePoint() does: the exposed piece node mirrors an
+    // internal helper object (itself a mirror of the calc source), not the calc source directly --
+    // a two-hop idObject chain.
+    auto *helper = new VPointF(0, 0, name);
+    helper->setIdObject(sourceNodeId);
+    helper->setMode(Draw::Modeling);
+    const quint32 helperId = data.AddGObject(helper);
+    QVERIFY(helperId != NULL_ID);
+
+    auto *unitedNode = new VPointF(0, 0, name);
+    unitedNode->setIdObject(helperId);
+    unitedNode->setMode(Draw::Modeling);
+
+    SawDuplicateNameWarning() = false;
+    PreviousMessageHandler() = qInstallMessageHandler(CaptureDuplicateNameWarning);
+    data.UpdateGObject(data.getNextId(), unitedNode);
+    qInstallMessageHandler(PreviousMessageHandler());
+
+    QVERIFY2(!SawDuplicateNameWarning(),
+             "A Draw::Modeling object mirroring another Draw::Modeling mirror of the same "
+             "Draw::Calculation source must not warn");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_VContainer::OldToolSnapshotUnaffectedByLaterStructuralChange()
 {
     const Unit unit = Unit::Cm;

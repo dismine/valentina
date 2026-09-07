@@ -301,13 +301,51 @@ auto FindObjectByName(const QHash<quint32, QSharedPointer<VGObject>> &objects, c
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto FindObjectById(const immer::map<quint32, QSharedPointer<VGObject>> &calculationObjects,
+                    const QHash<quint32, QSharedPointer<VGObject>> &modelingObjects,
+                    quint32 id) -> QSharedPointer<VGObject>
+{
+    if (const auto *found = calculationObjects.find(id))
+    {
+        return *found;
+    }
+    return modelingObjects.value(id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Follow obj's idObject chain to whatever it ultimately mirrors. Usually one hop (a Draw::Modeling node
+// points straight at its Draw::Calculation source), but a generated node can mirror another Draw::Modeling
+// node instead of the original source -- e.g. VToolUnionDetails::AddNodePoint() re-points the exposed piece
+// node at an internal helper object it just created for the biased/rotated position, not at the source
+// point directly. Only follow the chain through Draw::Modeling objects: a Draw::Calculation object's own
+// idObject means something unrelated (see OwningToolId()), so it always ends the walk.
+// Bounded to tolerate a malformed/cyclic idObject chain in a corrupted file.
+auto ResolveMirrorRoot(const QSharedPointer<VGObject> &obj,
+                       const immer::map<quint32, QSharedPointer<VGObject>> &calculationObjects,
+                       const QHash<quint32, QSharedPointer<VGObject>> &modelingObjects) -> quint32
+{
+    QSharedPointer<VGObject> current = obj;
+    for (int guard = 0; guard < 32 && not current.isNull() && current->getMode() == Draw::Modeling
+                        && current->getIdObject() != NULL_ID;
+         ++guard)
+    {
+        current = FindObjectById(calculationObjects, modelingObjects, current->getIdObject());
+    }
+    return current.isNull() ? obj->id() : current->id();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 // A Draw::Modeling object (piece node) is an intentional copy of its source Draw::Calculation object --
 // VNodePoint/VNodeSpline/VNodeArc/etc. Create() always duplicate the source and keep its name, linking back
-// via idObject. Sharing a name with that source is by design, not a duplicate-name bug.
-auto IsModelingMirror(const QSharedPointer<VGObject> &a, const QSharedPointer<VGObject> &b) -> bool
+// via idObject, possibly through another Draw::Modeling object rather than the source directly (see
+// ResolveMirrorRoot() above). Sharing a name with that source is by design, not a duplicate-name bug.
+auto IsModelingMirror(const QSharedPointer<VGObject> &a,
+                      const QSharedPointer<VGObject> &b,
+                      const immer::map<quint32, QSharedPointer<VGObject>> &calculationObjects,
+                      const QHash<quint32, QSharedPointer<VGObject>> &modelingObjects) -> bool
 {
-    return (a->getIdObject() != NULL_ID && a->getIdObject() == b->id())
-        || (b->getIdObject() != NULL_ID && b->getIdObject() == a->id());
+    return ResolveMirrorRoot(a, calculationObjects, modelingObjects) == b->id()
+           || ResolveMirrorRoot(b, calculationObjects, modelingObjects) == a->id();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -354,7 +392,7 @@ void VContainer::RegisterUniqueName(const QSharedPointer<VGObject> &obj, const Q
 
         // A Draw::Modeling object sharing a name with the Draw::Calculation object it mirrors is not
         // a collision.
-        if (not existing.isNull() && not IsModelingMirror(existing, obj))
+        if (not existing.isNull() && not IsModelingMirror(existing, obj, d->calculationObjects, *d->modelingObjects))
         {
             const QString errorMsg =
                 tr("The pattern has two objects sharing the name '%1': one from the tool with id %2, "
