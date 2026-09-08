@@ -1284,9 +1284,9 @@ auto VDependencyFilterProxyModel::filterAcceptsRow(int sourceRow, const QModelIn
 
     // Filter first-level items
     QModelIndex const index = sourceModel()->index(sourceRow, 0, sourceParent);
-    QString const displayName = sourceModel()->data(index, Qt::DisplayRole).toString();
 
-    if (displayName.contains(filterRegularExpression()))
+    if (QString const displayName = sourceModel()->data(index, Qt::DisplayRole).toString();
+        displayName.contains(filterRegularExpression()))
     {
         return true;
     }

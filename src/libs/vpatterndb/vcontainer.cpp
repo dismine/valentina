@@ -663,8 +663,8 @@ void VContainer::AddArc(const QSharedPointer<VAbstractCurve> &arc, const quint32
 //---------------------------------------------------------------------------------------------------------------------
 void VContainer::AddCurve(const QSharedPointer<VAbstractCurve> &curve, const quint32 &id, quint32 parentId)
 {
-    const GOType curveType = curve->getType();
-    if (curveType != GOType::Spline && curveType != GOType::SplinePath && curveType != GOType::CubicBezier
+    if (const GOType curveType = curve->getType();
+        curveType != GOType::Spline && curveType != GOType::SplinePath && curveType != GOType::CubicBezier
         && curveType != GOType::CubicBezierPath && curveType != GOType::Arc && curveType != GOType::EllipticalArc)
     {
         throw VException(tr("Can't create a curve with type '%1'").arg(static_cast<int>(curveType)));
