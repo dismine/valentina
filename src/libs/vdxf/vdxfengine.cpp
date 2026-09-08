@@ -1186,11 +1186,12 @@ void VDxfEngine::ExportStyleSystemText(const QSharedPointer<dx_iface> &input, co
         const QStringList strings = detail.GetPatternText();
         if (not strings.isEmpty())
         {
+            const QFontMetrics fm(detail.GetPatternLabelData().GetFont());
+            const qreal height = ToPixel(fm.ascent() * m_yscale, m_varInsunits);
             for (int j = 0; j < strings.size(); ++j)
             {
-                const qreal height = ToPixel(AAMATextHeight * m_yscale, m_varInsunits);
                 QPointF const pos(0, GetSize().height() - height * (static_cast<int>(strings.size()) - j - 1));
-                input->AddEntity(AAMAText(pos, strings.at(j), *layer1));
+                input->AddEntity(AAMAText(pos, strings.at(j), *layer1, height));
             }
             return;
         }
