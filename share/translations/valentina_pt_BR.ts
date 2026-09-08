@@ -6,7 +6,7 @@
     <message>
         <location filename="../../src/libs/vtools/undocommands/image/addbackgroundimage.cpp" line="35"/>
         <source>add background image</source>
-        <translation>fixar imagem de fundo</translation>
+        <translation>adicionar imagem de fundo</translation>
     </message>
 </context>
 <context>
@@ -60,7 +60,7 @@
     <name>AddUnionDetails</name>
     <message>
         <source>add union details</source>
-        <translation type="vanished">Adicionar detalhes de ligação</translation>
+        <translation type="vanished">Adicionar detalhes de união</translation>
     </message>
 </context>
 <context>
@@ -209,7 +209,7 @@
     <name>ConfigurationPage</name>
     <message>
         <source>Setup user interface language updated and will be used the next time start</source>
-        <translation type="vanished">Configuração de idioma de interface atualizada e que será utilizada após da próxima vez que o programa for iniciado.</translation>
+        <translation type="vanished">Configuração de idioma de interface atualizada e que será utilizada da próxima vez que o programa for iniciado.</translation>
     </message>
     <message>
         <source>Default unit updated and will be used the next pattern creation</source>
@@ -7294,27 +7294,27 @@ Aplicar configurações assim mesmo?</translation>
         <translation>Rotação</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="174"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="168"/>
         <source>Invalid group name</source>
         <translation>Nome de grupo inválido</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="233"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="227"/>
         <source>Default</source>
         <translation>Padrão</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="325"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="319"/>
         <source>Invalid label</source>
         <translation>Rótulo inválido</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="325"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="319"/>
         <source>Invalid name</source>
         <translation>Nome inválido</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="573"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/dialogoperationtool.cpp" line="591"/>
         <source>Adding or removing objects can&apos;t be applied while the dialog stays open. Use OK to confirm.</source>
         <translation>Adicionar ou remover objetos não pode ser aplicado enquanto a caixa de diálogo permanece aberta. Use OK para confirmar.</translation>
     </message>
@@ -19780,7 +19780,7 @@ Deseja salvar suas mudanças?</translation>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5104"/>
         <source>Known measurements</source>
-        <translation type="unfinished">Medidas conhecidas</translation>
+        <translation>Medidas conhecidas</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5106"/>
@@ -19790,7 +19790,7 @@ Deseja salvar suas mudanças?</translation>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5176"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5188"/>
         <source>Install known measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Criar Medidas Conhecidas</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5135"/>
