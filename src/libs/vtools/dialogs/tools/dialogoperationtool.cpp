@@ -116,13 +116,7 @@ void DialogOperationTool::SetSourceObjects(const QVector<SourceItem> &value)
         // First call populates the dialog from the tool; remember the committed object set (by recordId)
         // so later edits (add/remove) can be detected. Subsequent calls (add/remove/rename) must not move
         // the baseline.
-        m_baselineSourceRecords.clear();
-        m_baselineSourceRecords.reserve(value.size());
-        for (const auto &item : value)
-        {
-            m_baselineSourceRecords.insert(item.recordId);
-        }
-        m_sourceBaselineCaptured = true;
+        CaptureSourceBaseline();
     }
 
     FillSourceList();
@@ -534,6 +528,30 @@ auto DialogOperationTool::SaveSourceObjects() const -> QVector<SourceItem>
     }
 
     return objects;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogOperationTool::CaptureSourceBaseline()
+{
+    m_baselineSourceRecords.clear();
+    m_baselineSourceRecords.reserve(m_sourceObjects.size());
+    for (const auto &item : std::as_const(m_sourceObjects))
+    {
+        m_baselineSourceRecords.insert(item.recordId);
+    }
+    m_sourceBaselineCaptured = true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogOperationTool::ToolCommitted()
+{
+    // Apply just created the tool from the objects listed right now, so they are the committed set and become
+    // the new baseline. Without this the creation flow never captures a baseline at all - objects picked on the
+    // scene go straight into SourceObjects(), bypassing SetSourceObjects() - and the first add/remove after
+    // Apply would capture its own already-changed set. SourceObjectsChanged() would then report no change,
+    // leaving Apply enabled for a structural change that forces a full reparse and destroys the tool this
+    // dialog points at.
+    CaptureSourceBaseline();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

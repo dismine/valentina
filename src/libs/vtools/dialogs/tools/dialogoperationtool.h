@@ -113,6 +113,7 @@ protected:
     virtual void OnSourceObjectsSet() {}
 
     void CheckState() override;
+    void ToolCommitted() override;
 
     // True when the set of operated objects differs from the set the dialog was opened with. Compared by
     // recordId (the same key SyncDestination() uses), so adding/removing - or removing and re-adding -
@@ -140,6 +141,8 @@ private:
      * populated. Used to detect object-set changes (see SourceObjectsChanged). */
     QSet<QUuid> m_baselineSourceRecords{};
     bool m_sourceBaselineCaptured{false};
+
+    void CaptureSourceBaseline();
 
     bool stage1{true};
     bool flagName{true};

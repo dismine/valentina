@@ -231,6 +231,13 @@ protected:
     virtual void RestoreTransientVariables() {}
 
     /**
+     * @brief ToolCommitted called right after the dialog created its tool and got linked to it. Dialogs that
+     * compare their contents against what is committed in the pattern must re-snapshot that baseline here,
+     * because until Apply is pressed the dialog is filled without going through the usual setters.
+     */
+    virtual void ToolCommitted() {}
+
+    /**
      * @brief UsesVisualization whether this dialog drives a scene visualization (vis) during creation.
      * Almost all tool dialogs do; the few that never create a vis (e.g. DialogGroup) override this to
      * return false so VisualizationBroken() never reports them as broken just because vis is null.
