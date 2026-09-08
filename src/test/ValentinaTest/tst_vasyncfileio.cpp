@@ -71,7 +71,7 @@ void TST_VAsyncFileIO::InlineWhenNotInGUIMode() const
 void TST_VAsyncFileIO::WorkerRunsOffCallingThread() const
 {
     const QThread *callerThread = QThread::currentThread();
-    QThread *opThread = nullptr;
+    const QThread *opThread = nullptr;
 
     const bool result = VAsyncFileIO::RunFileOperationOnWorker(QString(),
                                                                [&opThread]() -> bool
