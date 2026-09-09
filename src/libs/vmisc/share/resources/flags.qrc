@@ -22,5 +22,6 @@
         <file>flags/Hungary.png</file>
         <file>flags/Portugal.png</file>
         <file>flags/Japan.png</file>
+        <file>flags/Denmark.png</file>
     </qresource>
 </RCC>
