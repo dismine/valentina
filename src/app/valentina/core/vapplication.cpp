@@ -662,27 +662,41 @@ void VApplication::InitOptions()
 //---------------------------------------------------------------------------------------------------------------------
 void VApplication::StartDetachedProcess(const QString &program, const QStringList &arguments)
 {
+    bool started = false;
 #if !defined(Q_OS_MACOS)
     const QString workingDirectory = QFileInfo(program).absoluteDir().absolutePath();
-    QProcess::startDetached(program, arguments, workingDirectory);
+    started = QProcess::startDetached(program, arguments, workingDirectory);
 #else
     if (not program.endsWith(".app"_L1))
     {
         const QString workingDirectory = QFileInfo(program).absoluteDir().absolutePath();
-        QProcess::startDetached(program, arguments, workingDirectory);
+        started = QProcess::startDetached(program, arguments, workingDirectory);
     }
     else
     {
-        QStringList openArguments{"-n", QStringLiteral("/Applications/%1").arg(program)};
-        if (not arguments.isEmpty())
+        if (const QString appBundlePath = QStringLiteral("/Applications/%1").arg(program);
+            QFileInfo::exists(appBundlePath))
         {
-            openArguments.append("--args"_L1);
-            openArguments += arguments;
-        }
+            QStringList openArguments{"-n", appBundlePath};
+            if (not arguments.isEmpty())
+            {
+                openArguments.append("--args"_L1);
+                openArguments += arguments;
+            }
 
-        QProcess::startDetached("open"_L1, openArguments);
+            // 'open' hands off to launchd and returns immediately, so its own exit status can't tell
+            // us whether the app actually launched. Existence of the bundle is the best check available.
+            started = QProcess::startDetached("open"_L1, openArguments);
+        }
     }
 #endif
+
+    if (not started)
+    {
+        qCWarning(vApp, "%s",
+                  qUtf8Printable(tr("Unable to start '%1'. Make sure the application is installed correctly.")
+                                     .arg(program)));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
