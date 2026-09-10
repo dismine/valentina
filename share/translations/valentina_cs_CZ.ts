@@ -16898,6 +16898,11 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Způsobena chyba: %1. Program bude ukončen.</translation>
     </message>
     <message>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="712"/>
+        <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="525"/>
         <source>Invalid notch.</source>
         <translation>Neplatný zářez.</translation>
@@ -17833,22 +17838,22 @@ Tato volba se projeví po opětovném spuštění.</translation>
 <context>
     <name>VDxfEngine</name>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1039"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1041"/>
         <source>Piece &apos;%1&apos;. Piece System Text is missing.</source>
         <translation>Díl &apos;%1&apos;. Chybí systémový text dílu, tj. specifikace dílů pro standardní DXF.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1195"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1198"/>
         <source>Style System Text is missing.</source>
         <translation>Text systému stylů, tj. údaje o specifikaci vzoru pro standardní DXF, chybí.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2068"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2072"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; or &apos;Size:&apos; identifier is missing.</source>
         <translation>Díl &apos;%1&apos;. Chybí identifikátor &apos;Piece Name:&apos; název dílu, nebo &apos;Size:&apos; velikost.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2103"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2107"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; identifier requires &apos;Size:&apos; identifier to be present.</source>
         <translation>Díl &apos;%1&apos;. Identifikátor &apos;Piece Name:&apos; název dílu vyžaduje stanovení identifikátoru &apos;Size:&apos; velikost.</translation>
     </message>

@@ -16901,6 +16901,11 @@ Ao guardar o ficheiro com a versão atual, não será mais possível abri-lo em 
         <translation>Exceção lançada: %1. O programa será encerrado.</translation>
     </message>
     <message>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="712"/>
+        <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="525"/>
         <source>Invalid notch.</source>
         <translation>Pique inválido.</translation>
@@ -17836,22 +17841,22 @@ Ao guardar o ficheiro com a versão atual, não será mais possível abri-lo em 
 <context>
     <name>VDxfEngine</name>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1039"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1041"/>
         <source>Piece &apos;%1&apos;. Piece System Text is missing.</source>
         <translation>Peça &apos;%1&apos;. O campo de texto obrigatório está vazio.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1195"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1198"/>
         <source>Style System Text is missing.</source>
         <translation>Texto de design do sistema ausente.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2068"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2072"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; or &apos;Size:&apos; identifier is missing.</source>
         <translation>Peça &apos;%1&apos;: É necessário definir o &apos;Nome da Peça&apos; ou o &apos;Tamanho&apos; para continuar.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2103"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2107"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; identifier requires &apos;Size:&apos; identifier to be present.</source>
         <translation>Peça &apos;%1&apos;: O identificador &apos;Nome da Peça&apos; exige que o identificador &apos;Tamanho&apos; também seja definido.</translation>
     </message>

@@ -16897,6 +16897,11 @@ This option will take an affect after restart.</source>
         <translation>Програмне виключення: %1. Програма буде закрита.</translation>
     </message>
     <message>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="712"/>
+        <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="525"/>
         <source>Invalid notch.</source>
         <translation>Недійсна надсічка.</translation>
@@ -17832,22 +17837,22 @@ This option will take an affect after restart.</source>
 <context>
     <name>VDxfEngine</name>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1039"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1041"/>
         <source>Piece &apos;%1&apos;. Piece System Text is missing.</source>
         <translation>Деталь &apos;%1&apos;. Відсутній системний текст деталі.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1195"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1198"/>
         <source>Style System Text is missing.</source>
         <translation>Відсутній системний текст дизайну.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2068"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2072"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; or &apos;Size:&apos; identifier is missing.</source>
         <translation>Деталь &apos;%1&apos;. Відсутній ідентифікатор &apos;Piece Name:&apos; або &apos;Size:&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2103"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2107"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; identifier requires &apos;Size:&apos; identifier to be present.</source>
         <translation>Деталь &apos;%1&apos;. Ідентифікатор &apos;Piece Name:&apos; вимагає присутності ідентифікатора &apos;Size:&apos;.</translation>
     </message>

@@ -16158,7 +16158,8 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vabstractnode.cpp" line="187"/>
         <source>Attempted to add a new node with the same id:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokušano je dodati novi čvor s istim ID-om:
+%1</translation>
     </message>
 </context>
 <context>
@@ -16895,6 +16896,11 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="550"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Iznimka bačena: %1. Program će se prekinuti.</translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="712"/>
+        <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="525"/>
@@ -17757,7 +17763,8 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="682"/>
         <source>First occurrence of this id:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Prvo pojavljivanje ovog ID-a:
+%1</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="749"/>
@@ -17831,22 +17838,22 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
 <context>
     <name>VDxfEngine</name>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1039"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1041"/>
         <source>Piece &apos;%1&apos;. Piece System Text is missing.</source>
         <translation>Krojni dio &apos;%1&apos;. Nedostaje tekst sustava dijelova.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1195"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1198"/>
         <source>Style System Text is missing.</source>
         <translation>Nedostaje tekst sustava stila.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2068"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2072"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; or &apos;Size:&apos; identifier is missing.</source>
         <translation>Krojni dio &apos;%1&apos;. Nedostaje identifikator &apos;Ime dijela:&apos; ili &apos;Veličina:&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2103"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2107"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; identifier requires &apos;Size:&apos; identifier to be present.</source>
         <translation>Krojni dio &apos;%1&apos;. Identifikator &apos;Ime dijela:&apos; zahtijeva prisutnost identifikatora &apos;Veličina:&apos;.</translation>
     </message>

@@ -1555,7 +1555,7 @@
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="726"/>
         <source>Word: on fold</source>
-        <translation>Palavra: na dobra</translation>
+        <translation>Palavra: Na dobra</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="639"/>
@@ -1647,25 +1647,25 @@
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="610"/>
         <source>Height label</source>
         <comment>dimension</comment>
-        <translation>rótulo Altura</translation>
+        <translation>Rótulo Altura</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="616"/>
         <source>Size label</source>
         <comment>dimension</comment>
-        <translation>rótulo Tamanho</translation>
+        <translation>Rótulo Tamanho</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="622"/>
         <source>Hip label</source>
         <comment>dimension</comment>
-        <translation>rótulo Quadril</translation>
+        <translation>Rótulo Quadril</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="628"/>
         <source>Waist label</source>
         <comment>dimension</comment>
-        <translation>rótulo Cintura</translation>
+        <translation>Rótulo Cintura</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="693"/>
@@ -9495,12 +9495,12 @@ Aplicar configurações assim mesmo?</translation>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7159"/>
         <source>Measurement file has unknown format.</source>
-        <translation>Arquivo de medidas tem formato desconhecido.</translation>
+        <translation>O arquivo de medidas possui formato desconhecido.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="732"/>
         <source>Measurement files types have not match.</source>
-        <translation>Os tipos de arquivos de medidas não têm correspondência.</translation>
+        <translation>Os tipos dos arquivos de medidas não correspondem.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2403"/>
@@ -16900,6 +16900,11 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
         <translation>Exceção lançada: %1. O programa será encerrado.</translation>
     </message>
     <message>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="712"/>
+        <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="525"/>
         <source>Invalid notch.</source>
         <translation>Pique inválido.</translation>
@@ -17834,22 +17839,22 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
 <context>
     <name>VDxfEngine</name>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1039"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1041"/>
         <source>Piece &apos;%1&apos;. Piece System Text is missing.</source>
         <translation>Peça &apos;%1&apos;. O campo de texto obrigatório está vazio.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1195"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1198"/>
         <source>Style System Text is missing.</source>
         <translation>Texto de design do sistema ausente.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2068"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2072"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; or &apos;Size:&apos; identifier is missing.</source>
         <translation>Peça &apos;%1&apos;: é necessário definir o &apos;Nome da Peça&apos; ou o &apos;Tamanho&apos; para continuar.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2103"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2107"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; identifier requires &apos;Size:&apos; identifier to be present.</source>
         <translation>Peça &apos;%1&apos;: O identificador &apos;Nome da Peça&apos; exige que o identificador &apos;Tamanho&apos; também seja definido.</translation>
     </message>
