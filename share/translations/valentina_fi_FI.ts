@@ -19369,6 +19369,11 @@ Tämä asetus tulee voimaan uudelleenkäynnistyksen jälkeen.</translation>
         <translation>Poikkeus: %1. Ohjelma suljetaan.</translation>
     </message>
     <message>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="713"/>
+        <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="526"/>
         <source>Invalid notch.</source>
         <translation>Virheellinen pykälä.</translation>

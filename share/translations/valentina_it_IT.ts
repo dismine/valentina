@@ -19369,6 +19369,11 @@ Questa opzione sarà effettiva dopo il riavvio del programma.</translation>
         <translation>Eccezione generata:%1. Il programma verrà terminato.</translation>
     </message>
     <message>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="713"/>
+        <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="526"/>
         <source>Invalid notch.</source>
         <translation>Tacca non valida.</translation>

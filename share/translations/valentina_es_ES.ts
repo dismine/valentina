@@ -19370,6 +19370,11 @@ Esta opción surtirá efecto después de reiniciar.</translation>
         <translation>Se ha lanzado una excepción: %1. El programa se terminará.</translation>
     </message>
     <message>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="713"/>
+        <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="526"/>
         <source>Invalid notch.</source>
         <translation>Pique invalido.</translation>

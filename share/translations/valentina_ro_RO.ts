@@ -19374,6 +19374,11 @@ Această opțiune va avea efect după repornire.</translation>
         <translation>Excepție generată: %1. Programul va fi închis.</translation>
     </message>
     <message>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="713"/>
+        <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="526"/>
         <source>Invalid notch.</source>
         <translation>Crestătură nevalidă.</translation>

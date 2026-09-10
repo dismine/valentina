@@ -19372,6 +19372,11 @@ Tato volba se projeví po opětovném spuštění.</translation>
         <translation>Způsobena chyba: %1. Program bude ukončen.</translation>
     </message>
     <message>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="713"/>
+        <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="526"/>
         <source>Invalid notch.</source>
         <translation>Neplatný zářez.</translation>

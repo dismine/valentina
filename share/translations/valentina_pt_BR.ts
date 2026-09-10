@@ -3562,7 +3562,7 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="56"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="187"/>
         <source>Choose unique label.</source>
-        <translation>Digite um nome não utilizado.</translation>
+        <translation>Escolher etiqueta única.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="69"/>
@@ -4663,7 +4663,7 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="640"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="644"/>
         <source>Set multiplier for length of the biggest workpiece in layout.</source>
-        <translation>Define o multiplicador em relação ao comprimento da maior peça no encaixe.</translation>
+        <translation>Definir o multiplicador para o comprimento da maior peça no encaixe.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="618"/>
@@ -5549,13 +5549,13 @@ Aplicar configurações assim mesmo?</translation>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="35"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="92"/>
         <source>Pattern piece name:</source>
-        <translation>Nome da peça de modelagem:</translation>
+        <translation>Nome da peça do molde:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="42"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="94"/>
         <source>Unique pattern piece name</source>
-        <translation>Nome único da peça de modelagem</translation>
+        <translation>Nome único da peça do molde</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="45"/>
@@ -8993,7 +8993,7 @@ Aplicar configurações assim mesmo?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="105"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogselectmeasurementstype.h" line="106"/>
         <source>Select measurements type</source>
-        <translation>Selecione o tipo de medida</translation>
+        <translation>Selecione o tipo de medidas</translation>
     </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogselectmeasurementstype.ui" line="52"/>
@@ -9015,7 +9015,7 @@ Aplicar configurações assim mesmo?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="14"/>
         <source>Setup multisize measurements</source>
-        <translation>Configurar tabela de Tamanhos Múltiplos</translation>
+        <translation>Configurar medidas de vários tamanhos</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="24"/>
@@ -11651,7 +11651,7 @@ Aplicar configurações assim mesmo?</translation>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4535"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4622"/>
         <source>Pattern files</source>
-        <translation>Arquivos de molde</translation>
+        <translation>Arquivos de moldes</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2511"/>
@@ -12731,7 +12731,7 @@ Deseja selecionar outro arquivo?</translation>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="680"/>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="829"/>
         <source>on fold</source>
-        <translation>na dobra</translation>
+        <translation>Cortar na dobra do tecido</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="977"/>
@@ -12799,7 +12799,7 @@ Deseja selecionar outro arquivo?</translation>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="178"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_preferencesconfigurationpage.h" line="643"/>
         <source>Reset warnings</source>
-        <translation>reinicializar avisos</translation>
+        <translation>Reinicializar avisos</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/configpages/preferencesconfigurationpage.ui" line="247"/>
@@ -19372,6 +19372,11 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
         <translation>Exceção lançada: %1. O programa será encerrado.</translation>
     </message>
     <message>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="713"/>
+        <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="526"/>
         <source>Invalid notch.</source>
         <translation>Pique inválido.</translation>
@@ -21068,7 +21073,7 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="429"/>
         <source>Reset piece label template</source>
-        <translation>Resetar modelo de etiqueta de peça</translation>
+        <translation>Restaurar modelo de etiqueta de peça</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="438"/>
@@ -22162,7 +22167,7 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1655"/>
         <source>Print text as paths</source>
-        <translation>Print text as paths</translation>
+        <translation>Imprimir texto como caminhos</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.ui" line="1809"/>
