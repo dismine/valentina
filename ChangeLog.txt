@@ -1,4 +1,5 @@
 # Valentina 1.0.5 (unreleased)
+- [Valentina app / Puzzle app] Fixed DXF point markers (notches, drill holes, turn points) showing as oversized circle-and-cross shapes that grow or shrink with the viewer's zoom level in some CAD applications, instead of a small fixed-size dot.
 - [Valentina app / Puzzle app] Fixed the piece name annotation text on ASTM DXF export being too small to read (2.5mm), below the 3.5-5mm the ASTM D6673 standard recommends for readability.
 - [Valentina app / Puzzle app] Fixed the Style System Text on AAMA/ASTM DXF export ignoring the configured pattern label font size and always using a fixed small text height.
 - [Misc] Added Danish (da_DK) language.
