@@ -16158,8 +16158,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vabstractnode.cpp" line="187"/>
         <source>Attempted to add a new node with the same id:
 %1</source>
-        <translation>Pokušaj dodavanja novog čvora s istim ID-om:
-%1</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -17758,8 +17757,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="682"/>
         <source>First occurrence of this id:
 %1</source>
-        <translation>Prva pojava ovog ID-a:
-%1</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="749"/>

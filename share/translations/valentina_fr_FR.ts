@@ -16153,7 +16153,8 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vabstractnode.cpp" line="187"/>
         <source>Attempted to add a new node with the same id:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tentative d&apos;ajouter un nouveau noeud avec le même identifiant:
+%1</translation>
     </message>
 </context>
 <context>
@@ -17752,7 +17753,8 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="682"/>
         <source>First occurrence of this id:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Première occurrence de cet identifiant :
+%1</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="749"/>

@@ -16161,7 +16161,7 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
         <location filename="../../src/libs/vtools/tools/nodeDetails/vabstractnode.cpp" line="187"/>
         <source>Attempted to add a new node with the same id:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation> Tentativa de adicionar um novo nó com o mesmo ID: %1</translation>
     </message>
 </context>
 <context>
@@ -17701,7 +17701,7 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="370"/>
         <source>Can&apos;t find object. Type mismatch. Name = &apos;%1&apos;, existing type = %2, incoming type = %3.</source>
-        <translation>Objeto não encontrado. Incompatibilidade de tipo. Nome = &apos;%1&apos;, tipo existente = %2, tipo de entrada = %3</translation>
+        <translation>Objeto não encontrado. Incompatibilidade de tipo. Nome = &apos;%1&apos;, tipo existente = %2, tipo de entrada = %3.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="339"/>
@@ -17760,7 +17760,7 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="682"/>
         <source>First occurrence of this id:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation> Primeira ocorrência deste ID: %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="749"/>
