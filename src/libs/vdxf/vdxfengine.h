@@ -183,7 +183,8 @@ private:
     Q_REQUIRED_RESULT auto AAMAPolygon(const QVector<VLayoutPoint> &polygon, const UTF8STRING &layer, bool forceClosed)
         -> DRW_Entity *;
     Q_REQUIRED_RESULT auto AAMALine(const QLineF &line, const UTF8STRING &layer) -> DRW_Entity *;
-    Q_REQUIRED_RESULT auto AAMAText(const QPointF &pos, const QString &text, const UTF8STRING &layer) -> DRW_Entity *;
+    Q_REQUIRED_RESULT auto AAMAText(const QPointF &pos, const QString &text, const UTF8STRING &layer,
+                                    qreal height = -1) -> DRW_Entity *;
     Q_REQUIRED_RESULT auto AAMAPoint(const QPointF &pos, const UTF8STRING &layer) const -> DRW_Point *;
     Q_REQUIRED_RESULT auto AAMACircle(const QPointF &pos, const UTF8STRING &layer, qreal radius) const -> DRW_Circle *;
 
