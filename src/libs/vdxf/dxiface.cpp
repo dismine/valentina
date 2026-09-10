@@ -204,6 +204,14 @@ void dx_iface::InitHeader(VarMeasurement varMeasurement, VarInsunits varInsunits
     cData.headerC.addInt("$MEASUREMENT", static_cast<int>(varMeasurement), 70);
     cData.headerC.addInt("$INSUNITS", static_cast<int>(varInsunits), 70);
 
+    // libdxfrw defaults to $PDMODE 34 (circle+cross) and $PDSIZE 0 (5% of drawing
+    // extents) when not set. PDSIZE 0 is relative to the view, so some readers
+    // (e.g. newer LibreCAD) draw huge markers that grow/shrink with zoom. PDMODE 0
+    // is a plain dot, whose size doesn't depend on PDSIZE, so it renders the same
+    // small size everywhere.
+    cData.headerC.addInt("$PDMODE", 0, 70);
+    cData.headerC.addDouble("$PDSIZE", 0, 40);
+
     QString dateTime = QDateTime::currentDateTime().toString("yyyyMMdd.HHmmsszzz");
     dateTime.chop(1); // we need hundredths of a second
     cData.headerC.addStr("$TDCREATE", dateTime.toStdString(), 40);
