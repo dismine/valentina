@@ -10,13 +10,6 @@
     </message>
 </context>
 <context>
-    <name>AddDet</name>
-    <message>
-        <source>add detail</source>
-        <translation type="vanished">詳細を追加</translation>
-    </message>
-</context>
-<context>
     <name>AddGroup</name>
     <message>
         <location filename="../../src/libs/vtools/undocommands/undogroup.cpp" line="48"/>
@@ -81,215 +74,6 @@
     </message>
 </context>
 <context>
-    <name>CommunityPage</name>
-    <message>
-        <source>Server</source>
-        <translation type="vanished">サーバー</translation>
-    </message>
-    <message>
-        <source>Server name/IP</source>
-        <translation type="vanished">サーバー名/IP</translation>
-    </message>
-    <message>
-        <source>Secure connection</source>
-        <translation type="vanished">安全な接続</translation>
-    </message>
-    <message>
-        <source>Proxy settings</source>
-        <translation type="vanished">プロキシー設定</translation>
-    </message>
-    <message>
-        <source>Use Proxy</source>
-        <translation type="vanished">プロキシーを使用</translation>
-    </message>
-    <message>
-        <source>Proxy address</source>
-        <translation type="vanished">プロキシーアドレス</translation>
-    </message>
-    <message>
-        <source>Proxy port</source>
-        <translation type="vanished">ポート</translation>
-    </message>
-    <message>
-        <source>Proxy user</source>
-        <translation type="vanished">ユーザー名</translation>
-    </message>
-    <message>
-        <source>Proxy pass</source>
-        <translation type="vanished">パスワード</translation>
-    </message>
-    <message>
-        <source>User settings</source>
-        <translation type="vanished">ユーザー設定</translation>
-    </message>
-    <message>
-        <source>User Name</source>
-        <translation type="vanished">ユーザー名</translation>
-    </message>
-    <message>
-        <source>Save password</source>
-        <translation type="vanished">パスワードを保存</translation>
-    </message>
-    <message>
-        <source>Password</source>
-        <translation type="vanished">パスワード</translation>
-    </message>
-    <message>
-        <source>Server name/IP:</source>
-        <translation type="vanished">サーバー名/IP:</translation>
-    </message>
-    <message>
-        <source>Proxy address:</source>
-        <translation type="vanished">プロキシーアドレス:</translation>
-    </message>
-    <message>
-        <source>Proxy port:</source>
-        <translation type="vanished">ポート</translation>
-    </message>
-    <message>
-        <source>Proxy user:</source>
-        <translation type="vanished">ユーザー名</translation>
-    </message>
-    <message>
-        <source>Proxy pass:</source>
-        <translation type="vanished">パスワード</translation>
-    </message>
-    <message>
-        <source>User Name:</source>
-        <translation type="vanished">ユーザー名：</translation>
-    </message>
-    <message>
-        <source>Password:</source>
-        <translation type="vanished">パスワード</translation>
-    </message>
-</context>
-<context>
-    <name>ConfigDialog</name>
-    <message>
-        <source>Apply</source>
-        <translation type="vanished">適用</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="vanished">キャンセル</translation>
-    </message>
-    <message>
-        <source>Config Dialog</source>
-        <translation type="vanished">設定ダイアログ</translation>
-    </message>
-    <message>
-        <source>Configuration</source>
-        <translation type="vanished">設定</translation>
-    </message>
-    <message>
-        <source>Pattern</source>
-        <translation type="vanished">パターン</translation>
-    </message>
-    <message>
-        <source>Community</source>
-        <translation type="vanished">コミュニティー</translation>
-    </message>
-    <message>
-        <source>Paths</source>
-        <translation type="vanished">パス</translation>
-    </message>
-</context>
-<context>
-    <name>ConfigurationPage</name>
-    <message>
-        <source>Setup user interface language updated and will be used the next time start</source>
-        <translation type="vanished">言語設定を更新して次回起動時に反映する。</translation>
-    </message>
-    <message>
-        <source>Default unit updated and will be used the next pattern creation</source>
-        <translation type="vanished">設定が更新されました。次回起動時に適用されます。</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="vanished">保存</translation>
-    </message>
-    <message>
-        <source>Auto-save modified pattern</source>
-        <translation type="vanished">パターン編集時に自動保存</translation>
-    </message>
-    <message>
-        <source>min</source>
-        <translation type="vanished">分</translation>
-    </message>
-    <message>
-        <source>Interval:</source>
-        <translation type="vanished">間隔：</translation>
-    </message>
-    <message>
-        <source>Language</source>
-        <translation type="vanished">言語</translation>
-    </message>
-    <message>
-        <source>GUI language</source>
-        <translation type="vanished">言語設定</translation>
-    </message>
-    <message>
-        <source>Default unit</source>
-        <translation type="vanished">単位</translation>
-    </message>
-    <message>
-        <source>Centimeters</source>
-        <translation type="vanished">センチ</translation>
-    </message>
-    <message>
-        <source>Millimiters</source>
-        <translation type="vanished">ミリ</translation>
-    </message>
-    <message>
-        <source>Inches</source>
-        <translation type="vanished">インチ</translation>
-    </message>
-    <message>
-        <source>Send crash reports</source>
-        <translation type="vanished">クラッシュリポートを送信する</translation>
-    </message>
-    <message>
-        <source>Send crash reports (recommended)</source>
-        <translation type="vanished">クラッシュリポートを送信する(推奨)</translation>
-    </message>
-    <message>
-        <source>Pattern Editing</source>
-        <translation type="vanished">パターン編集</translation>
-    </message>
-    <message>
-        <source>Toolbar</source>
-        <translation type="vanished">ツールバー</translation>
-    </message>
-    <message>
-        <source>The text appears under the icon. (recommended for beginners.)</source>
-        <translation type="vanished">アイコンの下に説明を表示(初心者に推奨)</translation>
-    </message>
-    <message>
-        <source>GUI language:</source>
-        <translation type="vanished">言語設定：</translation>
-    </message>
-    <message>
-        <source>Default unit:</source>
-        <translation type="vanished">単位：</translation>
-    </message>
-    <message>
-        <source>Pattern making system</source>
-        <translation type="vanished">パターン作成システム</translation>
-    </message>
-    <message>
-        <source>Pattern making system:</source>
-        <translation type="vanished">パターン作成システム</translation>
-    </message>
-    <message>
-        <source>Author:</source>
-        <translation type="vanished">著作者</translation>
-    </message>
-    <message>
-        <source>Book:</source>
-        <translation type="vanished">書籍名</translation>
-    </message>
-</context>
-<context>
     <name>DRW_TextCodec</name>
     <message>
         <location filename="../../src/libs/vdxf/libdxfrw/intern/drw_textcodec.cpp" line="121"/>
@@ -322,13 +106,6 @@
     </message>
 </context>
 <context>
-    <name>DeleteDetail</name>
-    <message>
-        <source>delete tool</source>
-        <translation type="vanished">ツールを削除</translation>
-    </message>
-</context>
-<context>
     <name>DeletePatternPiece</name>
     <message>
         <location filename="../../src/libs/vtools/undocommands/deletepatternpiece.cpp" line="45"/>
@@ -342,25 +119,6 @@
         <location filename="../../src/libs/vtools/undocommands/deletepiece.cpp" line="52"/>
         <source>delete tool</source>
         <translation>ツールを削除</translation>
-    </message>
-</context>
-<context>
-    <name>Detail</name>
-    <message>
-        <source>Fabric</source>
-        <translation type="vanished">表地</translation>
-    </message>
-    <message>
-        <source>Lining</source>
-        <translation type="vanished">裏地</translation>
-    </message>
-    <message>
-        <source>Interfacing</source>
-        <translation type="vanished">芯地</translation>
-    </message>
-    <message>
-        <source>Interlining</source>
-        <translation type="vanished">接着芯</translation>
     </message>
 </context>
 <context>
@@ -505,14 +263,6 @@
 <context>
     <name>DialogAlongLine</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">長さ</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">長さ</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="201"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="340"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -528,10 +278,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="327"/>
         <source>Point at distance along line</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">線の色</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.cpp" line="162"/>
@@ -654,14 +400,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="vanished">エラー</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">色</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="498"/>
         <source>Edit radius</source>
         <translation type="unfinished"></translation>
@@ -701,10 +439,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="470"/>
         <source>Value</source>
         <translation>数値</translation>
-    </message>
-    <message>
-        <source>Calulation</source>
-        <translation type="vanished">計算</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="261"/>
@@ -786,10 +520,6 @@
 <context>
     <name>DialogArcWithLength</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">ダイアログ</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="189"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="368"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="547"/>
@@ -798,14 +528,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="468"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation type="vanished">長さ</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">色</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="427"/>
@@ -821,10 +543,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="455"/>
         <source>Edit the arc length</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">エラー</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="79"/>
@@ -983,14 +701,6 @@
 <context>
     <name>DialogBisector</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">長さ</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">長さ</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="315"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1011,10 +721,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="302"/>
         <source>Point along bisector</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">線の色</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.cpp" line="147"/>
@@ -1200,10 +906,6 @@
         <translation>色：</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation type="vanished">名前：</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="37"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="199"/>
         <source>First point:</source>
@@ -1306,10 +1008,6 @@
         <translation>色：</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation type="vanished">名前：</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="330"/>
         <source>Tool cubic bezier path</source>
@@ -1400,10 +1098,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="335"/>
         <source>Point intersect curve and axis</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">線の色</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="351"/>
@@ -1528,14 +1222,6 @@
 <context>
     <name>DialogCutArc</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">長さ</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">長さ</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="300"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1546,10 +1232,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="287"/>
         <source>Segment an arc</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">イロ</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.cpp" line="119"/>
@@ -1605,10 +1287,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Color:</source>
-        <translation type="vanished">色：</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="28"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="314"/>
         <source>Tool</source>
@@ -1660,14 +1338,6 @@
 <context>
     <name>DialogCutSpline</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">長さ</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">長さ</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="295"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1678,10 +1348,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="282"/>
         <source>Segmenting a simple curve</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">イロ</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.cpp" line="417"/>
@@ -1729,10 +1395,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="300"/>
         <source>Unique label</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation type="vanished">色：</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="28"/>
@@ -1792,14 +1454,6 @@
 <context>
     <name>DialogCutSplinePath</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">長さ</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">長さ</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="297"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -1810,10 +1464,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="284"/>
         <source>Segment a curved path</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">イロ</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.cpp" line="415"/>
@@ -1867,10 +1517,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="304"/>
         <source>Choose unique label.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation type="vanished">色：</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="28"/>
@@ -1945,49 +1591,6 @@
         <location filename="../../src/app/valentina/dialogs/dialogdatetimeformats.cpp" line="90"/>
         <source>&lt;empty&gt;</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DialogDetail</name>
-    <message>
-        <source>Width</source>
-        <translation type="vanished">幅</translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation type="vanished">幅：</translation>
-    </message>
-    <message>
-        <source>Fabric</source>
-        <translation type="vanished">表地</translation>
-    </message>
-    <message>
-        <source>Lining</source>
-        <translation type="vanished">裏地</translation>
-    </message>
-    <message>
-        <source>Interfacing</source>
-        <translation type="vanished">接着芯</translation>
-    </message>
-    <message>
-        <source>Interlining</source>
-        <translation type="vanished">接着芯</translation>
-    </message>
-    <message>
-        <source>Formula wizard</source>
-        <translation type="vanished">幅</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="vanished">数値</translation>
-    </message>
-    <message>
-        <source>Calculation</source>
-        <translation type="vanished">計算</translation>
-    </message>
-    <message>
-        <source>Length:</source>
-        <translation type="vanished">長さ：</translation>
     </message>
 </context>
 <context>
@@ -3054,14 +2657,6 @@
 <context>
     <name>DialogEndLine</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">長さ</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">長さ</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="216"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="410"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="375"/>
@@ -3074,10 +2669,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="362"/>
         <source>Point at distance and angle</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">線の色</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.cpp" line="176"/>
@@ -3461,10 +3052,6 @@
 <context>
     <name>DialogFlippingByAxis</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">ダイアログ</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="197"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="330"/>
         <source>Origin point:</source>
@@ -3587,10 +3174,6 @@
 </context>
 <context>
     <name>DialogFlippingByLine</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="vanished">ダイアログ</translation>
-    </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="197"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="330"/>
@@ -3961,10 +3544,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="182"/>
         <source>Perpendicular point along line</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">線の色</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="46"/>
@@ -5242,10 +4821,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Line color</source>
-        <translation type="vanished">線の色</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="158"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="208"/>
         <source>First point:</source>
@@ -5417,10 +4992,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="325"/>
         <source>Second point of line</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">線の色</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="402"/>
@@ -5686,10 +5257,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogMove</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">ダイアログ</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="256"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="577"/>
         <source>Angle:</source>
@@ -5951,10 +5518,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogNewPattern</name>
     <message>
-        <source>Individual measurements</source>
-        <translation type="vanished">個人採寸表</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="52"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="97"/>
         <source>Units:</source>
@@ -6016,14 +5579,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogNormal</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">長さ</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">長さ</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="475"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -6039,10 +5594,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="462"/>
         <source>Point along perpendicular</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">線の色</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.cpp" line="156"/>
@@ -6478,13 +6029,6 @@ Apply settings anyway?</source>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="503"/>
         <source>Unable to show image. Error: %1</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DialogPatternXmlEdit</name>
-    <message>
-        <source>Name:</source>
-        <translation type="vanished">名前：</translation>
     </message>
 </context>
 <context>
@@ -7719,10 +7263,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogPointOfIntersectionArcs</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">ダイアログ</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.cpp" line="181"/>
         <source>Select second an arc</source>
         <translation type="unfinished"></translation>
@@ -7844,10 +7384,6 @@ Apply settings anyway?</source>
 </context>
 <context>
     <name>DialogPointOfIntersectionCircles</name>
-    <message>
-        <source>Dialog</source>
-        <translation type="vanished">ダイアログ</translation>
-    </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="189"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="369"/>
@@ -8232,10 +7768,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="417"/>
         <source>Value</source>
         <translation>数値</translation>
-    </message>
-    <message>
-        <source>Calulation</source>
-        <translation type="vanished">計算</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="350"/>
@@ -9610,14 +9142,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogShoulderPoint</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">長さ</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">長さ</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="328"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -9638,10 +9162,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="315"/>
         <source>Special point on shoulder</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">線の色</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.cpp" line="146"/>
@@ -9810,10 +9330,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="vanished">イロ</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="873"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="650"/>
         <source>Color:</source>
@@ -9848,10 +9364,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation type="vanished">名前：</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="121"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="517"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="591"/>
@@ -9884,10 +9396,6 @@ Apply settings anyway?</source>
         <translation>数値</translation>
     </message>
     <message>
-        <source>Calulation</source>
-        <translation type="vanished">計算</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="231"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="410"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="627"/>
@@ -9918,10 +9426,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="358"/>
         <source>Edit second control point length</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">エラー</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="209"/>
@@ -9992,10 +9496,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="vanished">色</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="999"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="777"/>
         <source>Color:</source>
@@ -10034,10 +9534,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation type="vanished">名前：</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="176"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="547"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="704"/>
@@ -10074,10 +9570,6 @@ Apply settings anyway?</source>
         <translation>数値</translation>
     </message>
     <message>
-        <source>Calulation</source>
-        <translation type="vanished">計算</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="286"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="465"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="657"/>
@@ -10108,10 +9600,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="535"/>
         <source>Edit second control point length</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">エラー</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="904"/>
@@ -10218,14 +9706,6 @@ Apply settings anyway?</source>
 </context>
 <context>
     <name>DialogTool</name>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">エラー</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="vanished">数値</translation>
-    </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="301"/>
         <source>First point</source>
@@ -10633,10 +10113,6 @@ Apply settings anyway?</source>
         <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">エラー</translation>
-    </message>
 </context>
 <context>
     <name>HideAllBackgroundImages</name>
@@ -10693,7 +10169,7 @@ Apply settings anyway?</source>
 <context>
     <name>InitPieceLabelLanguages</name>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="579"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="580"/>
         <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13200,56 +12676,6 @@ Would you like to select another file?</source>
     </message>
 </context>
 <context>
-    <name>PathPage</name>
-    <message>
-        <source>Type</source>
-        <translation type="vanished">タイプ</translation>
-    </message>
-    <message>
-        <source>Path</source>
-        <translation type="vanished">パス</translation>
-    </message>
-    <message>
-        <source>Individual measurements</source>
-        <translation type="vanished">個人採寸表</translation>
-    </message>
-    <message>
-        <source>Patterns</source>
-        <translation type="vanished">パターン</translation>
-    </message>
-    <message>
-        <source>Layout</source>
-        <translation type="vanished">レイアウト</translation>
-    </message>
-    <message>
-        <source>Templates</source>
-        <translation type="vanished">テンプレート</translation>
-    </message>
-</context>
-<context>
-    <name>PatternPage</name>
-    <message>
-        <source>User</source>
-        <translation type="vanished">ユーザー</translation>
-    </message>
-    <message>
-        <source>User name</source>
-        <translation type="vanished">ユーザー名</translation>
-    </message>
-    <message>
-        <source>Undo</source>
-        <translation type="vanished">取り消し</translation>
-    </message>
-    <message>
-        <source>User name:</source>
-        <translation type="vanished">ユーザー名：</translation>
-    </message>
-    <message>
-        <source>Delete all</source>
-        <translation type="vanished">全て削除</translation>
-    </message>
-</context>
-<context>
     <name>Placeholder</name>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="641"/>
@@ -14642,12 +14068,12 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="618"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="619"/>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="630"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="631"/>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14685,17 +14111,17 @@ This option will take an affect after restart.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="548"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="549"/>
         <source>mm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="557"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="558"/>
         <source>cm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="550"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="551"/>
         <source>inch</source>
         <translation type="unfinished"></translation>
     </message>
@@ -14713,7 +14139,7 @@ This option will take an affect after restart.</source>
         <translation>数値</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="552"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="553"/>
         <source>px</source>
         <translation type="unfinished"></translation>
     </message>
@@ -16194,10 +15620,6 @@ This option will take an affect after restart.</source>
 </context>
 <context>
     <name>TMainWindow</name>
-    <message>
-        <source>Name</source>
-        <translation type="vanished">名前</translation>
-    </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="600"/>
         <source>Calculated value</source>
@@ -18549,79 +17971,6 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabplacelabels.h" line="46"/>
         <source>Dialog</source>
         <translation>ダイアログ</translation>
-    </message>
-</context>
-<context>
-    <name>TapeConfigDialog</name>
-    <message>
-        <source>Apply</source>
-        <translation type="vanished">適用</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="vanished">キャンセル</translation>
-    </message>
-    <message>
-        <source>Config Dialog</source>
-        <translation type="vanished">設定ダイアログ</translation>
-    </message>
-    <message>
-        <source>Configuration</source>
-        <translation type="vanished">設定</translation>
-    </message>
-    <message>
-        <source>Paths</source>
-        <translation type="vanished">パス</translation>
-    </message>
-</context>
-<context>
-    <name>TapeConfigurationPage</name>
-    <message>
-        <source>Language</source>
-        <translation type="vanished">言語</translation>
-    </message>
-    <message>
-        <source>GUI language</source>
-        <translation type="vanished">言語設定</translation>
-    </message>
-    <message>
-        <source>Pattern making system</source>
-        <translation type="vanished">パターン作成システム</translation>
-    </message>
-    <message>
-        <source>Author:</source>
-        <translation type="vanished">著作者</translation>
-    </message>
-    <message>
-        <source>Book:</source>
-        <translation type="vanished">本名</translation>
-    </message>
-    <message>
-        <source>GUI language:</source>
-        <translation type="vanished">言語設定：</translation>
-    </message>
-    <message>
-        <source>Pattern making system:</source>
-        <translation type="vanished">パターン作成システム</translation>
-    </message>
-</context>
-<context>
-    <name>TapePathPage</name>
-    <message>
-        <source>Type</source>
-        <translation type="vanished">タイプ</translation>
-    </message>
-    <message>
-        <source>Path</source>
-        <translation type="vanished">パス</translation>
-    </message>
-    <message>
-        <source>Individual measurements</source>
-        <translation type="vanished">個人採寸表</translation>
-    </message>
-    <message>
-        <source>Templates</source>
-        <translation type="vanished">テンプレート</translation>
     </message>
 </context>
 <context>
@@ -21216,22 +20565,22 @@ This option will take an affect after restart.</source>
 <context>
     <name>VDxfEngine</name>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1045"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1047"/>
         <source>Piece &apos;%1&apos;. Piece System Text is missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1201"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1204"/>
         <source>Style System Text is missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2074"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2078"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; or &apos;Size:&apos; identifier is missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2109"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2113"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; identifier requires &apos;Size:&apos; identifier to be present.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -21394,10 +20743,6 @@ This option will take an affect after restart.</source>
 </context>
 <context>
     <name>VFormulaProperty</name>
-    <message>
-        <source>Value</source>
-        <translation type="vanished">数値</translation>
-    </message>
     <message>
         <location filename="../../src/app/valentina/core/vformulaproperty.cpp" line="49"/>
         <source>Formula</source>
@@ -24466,10 +23811,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Length</source>
-        <translation type="vanished">長さ</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3085"/>
         <source>Point at distance along line</source>
         <translation type="unfinished"></translation>
@@ -24550,14 +23891,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Line color</source>
-        <translation type="vanished">線の色</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">イロ</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3598"/>
         <source>Point intersection curve and axis</source>
         <translation type="unfinished"></translation>
@@ -24626,10 +23959,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3384"/>
         <source>Tool to make point from intersection two curves</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="vanished">名前</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3502"/>
@@ -25843,11 +25172,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>acosh</source>
         <comment>hyperbolic arcus cosine function</comment>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>height</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">身長</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="90"/>

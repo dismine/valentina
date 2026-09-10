@@ -228,6 +228,9 @@ Source: "{#buildDirectory}\translations\*_pt_PT.qm"; DestDir: "{app}\translation
 Source: "{#buildDirectory}\translations\*_ja_JP.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\japanese
 Source: "{#buildDirectory}\translations\*_ja.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\japanese
 
+Source: "{#buildDirectory}\translations\*_da_DK.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\danish
+Source: "{#buildDirectory}\translations\*_da.qm"; DestDir: "{app}\translations"; Flags: ignoreversion; Components: lang_files\danish
+
 ; Other files
 Source: "{#buildDirectory}\bearer\*"; DestDir: "{app}\bearer"; Flags: recursesubdirs createallsubdirs skipifsourcedoesntexist
 Source: "{#buildDirectory}\generic\*"; DestDir: "{app}\generic"; Flags: recursesubdirs createallsubdirs skipifsourcedoesntexist

@@ -10,13 +10,6 @@
     </message>
 </context>
 <context>
-    <name>AddDet</name>
-    <message>
-        <source>add detail</source>
-        <translation type="vanished">dodaj detalje</translation>
-    </message>
-</context>
-<context>
     <name>AddGroup</name>
     <message>
         <location filename="../../src/libs/vtools/undocommands/undogroup.cpp" line="48"/>
@@ -57,13 +50,6 @@
     </message>
 </context>
 <context>
-    <name>AddUnionDetails</name>
-    <message>
-        <source>add union details</source>
-        <translation type="vanished">dodaj detalje unije</translation>
-    </message>
-</context>
-<context>
     <name>ChangeGroupOptions</name>
     <message>
         <location filename="../../src/libs/vtools/undocommands/undogroup.cpp" line="159"/>
@@ -85,263 +71,6 @@
         <location filename="../../src/libs/vtools/undocommands/undogroup.cpp" line="432"/>
         <source>change multiple groups visibility</source>
         <translation>promijeni više grupa vidljivost</translation>
-    </message>
-</context>
-<context>
-    <name>CommunityPage</name>
-    <message>
-        <source>Server</source>
-        <translation type="vanished">Poslužitelj</translation>
-    </message>
-    <message>
-        <source>Server name/IP</source>
-        <translation type="vanished">Naziv poslužitelja/IP</translation>
-    </message>
-    <message>
-        <source>Secure connection</source>
-        <translation type="vanished">Sigurna veza</translation>
-    </message>
-    <message>
-        <source>Proxy settings</source>
-        <translation type="vanished">Postavke proxyja</translation>
-    </message>
-    <message>
-        <source>Use Proxy</source>
-        <translation type="vanished">Koristi proxy</translation>
-    </message>
-    <message>
-        <source>Proxy address</source>
-        <translation type="vanished">Proxy adresa</translation>
-    </message>
-    <message>
-        <source>Proxy port</source>
-        <translation type="vanished">Proxy port</translation>
-    </message>
-    <message>
-        <source>Proxy user</source>
-        <translation type="vanished">Proxy korisnik</translation>
-    </message>
-    <message>
-        <source>Proxy pass</source>
-        <translation type="vanished">Proxy lozinka</translation>
-    </message>
-    <message>
-        <source>User settings</source>
-        <translation type="vanished">Korisničke postavke</translation>
-    </message>
-    <message>
-        <source>User Name</source>
-        <translation type="vanished">Korisničko ime</translation>
-    </message>
-    <message>
-        <source>Save password</source>
-        <translation type="vanished">Spremi lozinku</translation>
-    </message>
-    <message>
-        <source>Password</source>
-        <translation type="vanished">Lozinka</translation>
-    </message>
-    <message>
-        <source>Server name/IP:</source>
-        <translation type="vanished">Naziv poslužitelja/IP:</translation>
-    </message>
-    <message>
-        <source>Proxy address:</source>
-        <translation type="vanished">Adresa proxyja:</translation>
-    </message>
-    <message>
-        <source>Proxy port:</source>
-        <translation type="vanished">Port proxyja:</translation>
-    </message>
-    <message>
-        <source>Proxy user:</source>
-        <translation type="vanished">Korisnik proxyja:</translation>
-    </message>
-    <message>
-        <source>Proxy pass:</source>
-        <translation type="vanished">Lozinka proxyja:</translation>
-    </message>
-    <message>
-        <source>User Name:</source>
-        <translation type="vanished">Korisničko ime:</translation>
-    </message>
-    <message>
-        <source>Password:</source>
-        <translation type="vanished">Lozinka:</translation>
-    </message>
-</context>
-<context>
-    <name>ConfigDialog</name>
-    <message>
-        <source>Apply</source>
-        <translation type="vanished">Primijeni</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Otkaži</translation>
-    </message>
-    <message>
-        <source>&amp;Ok</source>
-        <translation type="vanished">&amp;U redu</translation>
-    </message>
-    <message>
-        <source>Config Dialog</source>
-        <translation type="vanished">Dijalog konfiguracije</translation>
-    </message>
-    <message>
-        <source>Configuration</source>
-        <translation type="vanished">Konfiguracija</translation>
-    </message>
-    <message>
-        <source>Pattern</source>
-        <translation type="vanished">Kroj</translation>
-    </message>
-    <message>
-        <source>Community</source>
-        <translation type="vanished">Zajednica</translation>
-    </message>
-    <message>
-        <source>Paths</source>
-        <translation type="vanished">Putanje</translation>
-    </message>
-</context>
-<context>
-    <name>ConfigurationPage</name>
-    <message>
-        <source>Setup user interface language updated and will be used the next time start</source>
-        <translation type="vanished">Postavka korisničkog sučelja jezika je ažurirana i koristit će se pri sljedećem pokretanju</translation>
-    </message>
-    <message>
-        <source>Default unit updated and will be used the next pattern creation</source>
-        <translation type="vanished">Zadana jedinica je ažurirana i koristit će se pri sljedećoj izradi kroja</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="vanished">Spremi</translation>
-    </message>
-    <message>
-        <source>Auto-save modified pattern</source>
-        <translation type="vanished">Automatski spremi izmijenjeni kroj</translation>
-    </message>
-    <message>
-        <source>min</source>
-        <translation type="vanished">min</translation>
-    </message>
-    <message>
-        <source>Interval:</source>
-        <translation type="vanished">Interval:</translation>
-    </message>
-    <message>
-        <source>Language</source>
-        <translation type="vanished">Jezik</translation>
-    </message>
-    <message>
-        <source>GUI language</source>
-        <translation type="vanished">Jezik korisničkog sučelja</translation>
-    </message>
-    <message>
-        <source>Decimal separator parts</source>
-        <translation type="vanished">Decimalni separator:</translation>
-    </message>
-    <message>
-        <source>With OS options (%1)</source>
-        <translation type="vanished">S opcijama OS-a (%1)</translation>
-    </message>
-    <message>
-        <source>Default unit</source>
-        <translation type="vanished">Zadana jedinica</translation>
-    </message>
-    <message>
-        <source>Centimeters</source>
-        <translation type="vanished">Centimetri</translation>
-    </message>
-    <message>
-        <source>Millimiters</source>
-        <translation type="vanished">Milimetri</translation>
-    </message>
-    <message>
-        <source>Inches</source>
-        <translation type="vanished">Inči</translation>
-    </message>
-    <message>
-        <source>Label language</source>
-        <translation type="vanished">Jezik oznaka</translation>
-    </message>
-    <message>
-        <source>Send crash reports</source>
-        <translation type="vanished">Slanje izvješća o pogreškama</translation>
-    </message>
-    <message>
-        <source>Send crash reports (recommended)</source>
-        <translation type="vanished">Pošalji izvješća o pogreškama (preporučeno)</translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collect information that may help us fix a problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="vanished">Nakon svake pogreške Valentina prikuplja informacije koje nam mogu pomoći u otklanjanju problema. Ne prikupljamo osobne podatke. Više o tome možete saznati &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;ovdje&lt;/a&gt;.</translation>
-    </message>
-    <message>
-        <source>Pattern Editing</source>
-        <translation type="vanished">Uređivanje kroja</translation>
-    </message>
-    <message>
-        <source>Confirm item deletion</source>
-        <translation type="vanished">Potvrdi brisanje stavke</translation>
-    </message>
-    <message>
-        <source>Toolbar</source>
-        <translation type="vanished">Alatna traka</translation>
-    </message>
-    <message>
-        <source>The text appears under the icon. (recommended for beginners.)</source>
-        <translation type="vanished">Tekst se pojavljuje ispod ikone (preporučeno za početnike).</translation>
-    </message>
-    <message>
-        <source>GUI language:</source>
-        <translation type="vanished">Jezik korisničkog sučelja:</translation>
-    </message>
-    <message>
-        <source>Decimal separator parts:</source>
-        <translation type="vanished">Decimalni separator:</translation>
-    </message>
-    <message>
-        <source>Default unit:</source>
-        <translation type="vanished">Zadana jedinica:</translation>
-    </message>
-    <message>
-        <source>Label language:</source>
-        <translation type="vanished">Jezik oznaka:</translation>
-    </message>
-    <message>
-        <source>Pattern making system</source>
-        <translation type="vanished">Sustav za izradu krojeva</translation>
-    </message>
-    <message>
-        <source>Pattern making system:</source>
-        <translation type="vanished">Sustav za izradu krojeva:</translation>
-    </message>
-    <message>
-        <source>Author:</source>
-        <translation type="vanished">Autor:</translation>
-    </message>
-    <message>
-        <source>Book:</source>
-        <translation type="vanished">Knjiga:</translation>
-    </message>
-    <message>
-        <source>The Default unit has been updated and will be used as the default for the next pattern you create.</source>
-        <translation type="vanished">Zadana jedinica je ažurirana i koristit će se za sljedeći kroj koji izradite.</translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;kind of information&lt;/a&gt; we collect.</source>
-        <translation type="vanished">Nakon svake pogreške Valentina prikuplja informacije koje nam mogu pomoći u otklanjanju problema. Ne prikupljamo osobne podatke. Više o tome možete saznati &lt;a href=&quot;https://bitbucket.org/dismine/valentina/wiki/manual/Crash_reports&quot;&gt;ovdje&lt;/a&gt;.</translation>
-    </message>
-    <message>
-        <source>The text appears under the icon (recommended for beginners).</source>
-        <translation type="vanished">Tekst se pojavljuje ispod ikone (preporučeno za početnike).</translation>
-    </message>
-    <message>
-        <source>After each crash Valentina collects information that may help us fix the problem. We do not collect any personal information. Find more about what %1kind of information%2 we collect.</source>
-        <translation type="vanished">Nakon svake pogreške Valentina prikuplja informacije koje nam mogu pomoći u rješavanju problema. Ne prikupljamo osobne podatke. Više o tome koje %1informacije%2 prikupljamo saznajte ovdje.</translation>
     </message>
 </context>
 <context>
@@ -377,18 +106,7 @@
     </message>
 </context>
 <context>
-    <name>DeleteDetail</name>
-    <message>
-        <source>delete tool</source>
-        <translation type="vanished">obriši alat</translation>
-    </message>
-</context>
-<context>
     <name>DeletePatternPiece</name>
-    <message>
-        <source>delete pattern piece %1</source>
-        <translation type="vanished">obriši krojni dio %1</translation>
-    </message>
     <message>
         <location filename="../../src/libs/vtools/undocommands/deletepatternpiece.cpp" line="45"/>
         <source>delete pattern block</source>
@@ -401,25 +119,6 @@
         <location filename="../../src/libs/vtools/undocommands/deletepiece.cpp" line="52"/>
         <source>delete tool</source>
         <translation>obriši alat</translation>
-    </message>
-</context>
-<context>
-    <name>Detail</name>
-    <message>
-        <source>Fabric</source>
-        <translation type="vanished">Tkanina</translation>
-    </message>
-    <message>
-        <source>Lining</source>
-        <translation type="vanished">Podstava</translation>
-    </message>
-    <message>
-        <source>Interfacing</source>
-        <translation type="vanished">Pojačanje</translation>
-    </message>
-    <message>
-        <source>Interlining</source>
-        <translation type="vanished">Međupodstava</translation>
     </message>
 </context>
 <context>
@@ -447,14 +146,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="247"/>
         <source>Credits</source>
         <translation>Zahvale</translation>
-    </message>
-    <message>
-        <source>Contributors</source>
-        <translation type="vanished">Suradnici</translation>
-    </message>
-    <message>
-        <source>Built on %3 at %4</source>
-        <translation type="vanished">Sagrađeno na %3 u %4</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="66"/>
@@ -522,10 +213,6 @@
         <translation>Izgradnja revizije: %1</translation>
     </message>
     <message>
-        <source>Built on %3 at %4</source>
-        <translation type="vanished">Sagrađeno na %3 u %4</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/dialogs/dialogabouttape.cpp" line="155"/>
         <source>Web site : %1</source>
         <translation>Web stranica: %1</translation>
@@ -576,46 +263,10 @@
 <context>
     <name>DialogAlongLine</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">Duljina</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">Vrijednost duljine</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="201"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="340"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">Prva točka</translation>
-    </message>
-    <message>
-        <source>First point of line</source>
-        <translation type="vanished">Prva točka linije</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">Druga točka</translation>
-    </message>
-    <message>
-        <source>Second point of line</source>
-        <translation type="vanished">Druga točka linije</translation>
-    </message>
-    <message>
-        <source>Type of line</source>
-        <translation type="vanished">Tip linije</translation>
-    </message>
-    <message>
-        <source>Show line from first point to this point</source>
-        <translation type="vanished">Pokaži liniju od prve točke do ove točke</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.cpp" line="220"/>
@@ -627,10 +278,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="327"/>
         <source>Point at distance along line</source>
         <translation>Točka na udaljenosti duž linije</translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">Boja linije</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.cpp" line="162"/>
@@ -743,14 +390,6 @@
         <translation>Luk</translation>
     </message>
     <message>
-        <source>Radius</source>
-        <translation type="vanished">Polumjer</translation>
-    </message>
-    <message>
-        <source>Value of radius</source>
-        <translation type="vanished">Vrijednost polumjera</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="371"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="550"/>
@@ -759,46 +398,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="476"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>First angle</source>
-        <translation type="vanished">Prvi kut</translation>
-    </message>
-    <message>
-        <source>Value of first angle</source>
-        <translation type="vanished">Vrijednost prvog kuta</translation>
-    </message>
-    <message>
-        <source>Second angle</source>
-        <translation type="vanished">Drugi kut</translation>
-    </message>
-    <message>
-        <source>Value of second angle</source>
-        <translation type="vanished">Vrijednost drugog kuta</translation>
-    </message>
-    <message>
-        <source>Center point</source>
-        <translation type="vanished">Središnja točka</translation>
-    </message>
-    <message>
-        <source>Select point of center of arc</source>
-        <translation type="vanished">Odaberi točku središta luka</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">Pogreška</translation>
-    </message>
-    <message>
-        <source>Radius can&apos;t be negative</source>
-        <translation type="vanished">Polumjer ne može biti negativan</translation>
-    </message>
-    <message>
-        <source>Angles equal</source>
-        <translation type="vanished">Kutovi su jednaki</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">Boja</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="498"/>
@@ -840,10 +439,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="470"/>
         <source>Value</source>
         <translation>Vrijednost</translation>
-    </message>
-    <message>
-        <source>Calulation</source>
-        <translation type="vanished">Izračun</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="261"/>
@@ -925,18 +520,6 @@
 <context>
     <name>DialogArcWithLength</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">Dijalog</translation>
-    </message>
-    <message>
-        <source>Radius</source>
-        <translation type="vanished">Polumjer</translation>
-    </message>
-    <message>
-        <source>Value of radius</source>
-        <translation type="vanished">Vrijednost polumjera</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="189"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="368"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="547"/>
@@ -945,34 +528,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="468"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>First angle</source>
-        <translation type="vanished">Prvi kut</translation>
-    </message>
-    <message>
-        <source>Value of first angle</source>
-        <translation type="vanished">Vrijednost prvog kuta</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation type="vanished">Duljina</translation>
-    </message>
-    <message>
-        <source>Arc length</source>
-        <translation type="vanished">Duljina luka</translation>
-    </message>
-    <message>
-        <source>Center point</source>
-        <translation type="vanished">Središnja točka</translation>
-    </message>
-    <message>
-        <source>Select point of center of arc</source>
-        <translation type="vanished">Odaberi točku središta luka</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">Boja</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="427"/>
@@ -988,18 +543,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="455"/>
         <source>Edit the arc length</source>
         <translation>Uredi duljinu luka</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">Pogreška</translation>
-    </message>
-    <message>
-        <source>Radius can&apos;t be negative</source>
-        <translation type="vanished">Polumjer ne može biti negativan</translation>
-    </message>
-    <message>
-        <source>Length can&apos;t be equal 0</source>
-        <translation type="vanished">Duljina ne može biti jednaka 0</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="79"/>
@@ -1158,54 +701,10 @@
 <context>
     <name>DialogBisector</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">Duljina</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">Vrijednost duljine</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="315"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">Prva točka</translation>
-    </message>
-    <message>
-        <source>First point of angle</source>
-        <translation type="vanished">Prva točka kuta</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">Druga točka</translation>
-    </message>
-    <message>
-        <source>Second point of angle</source>
-        <translation type="vanished">Druga točka kuta</translation>
-    </message>
-    <message>
-        <source>Third point</source>
-        <translation type="vanished">Treća točka</translation>
-    </message>
-    <message>
-        <source>Third point of angle</source>
-        <translation type="vanished">Treća točka kuta</translation>
-    </message>
-    <message>
-        <source>Type of line</source>
-        <translation type="vanished">Tip linije</translation>
-    </message>
-    <message>
-        <source>Show line from second point to this point</source>
-        <translation type="vanished">Pokaži liniju od druge točke do ove točke</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.cpp" line="214"/>
@@ -1222,10 +721,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="302"/>
         <source>Point along bisector</source>
         <translation>Točka duž simetrale</translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">Boja linije</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.cpp" line="147"/>
@@ -1405,18 +900,10 @@
 <context>
     <name>DialogCubicBezier</name>
     <message>
-        <source>Cubic bezier</source>
-        <translation type="vanished">Kubična Bezierova krivulja</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="106"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="204"/>
         <source>Color:</source>
         <translation>Boja:</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation type="vanished">Naziv:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="37"/>
@@ -1456,10 +943,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.cpp" line="159"/>
         <source>Select the fourth point of curve</source>
         <translation>Odaberi četvrtu točku krivulje</translation>
-    </message>
-    <message>
-        <source>Invalid spline</source>
-        <translation type="vanished">Neispravan splajn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="14"/>
@@ -1507,10 +990,6 @@
 <context>
     <name>DialogCubicBezierPath</name>
     <message>
-        <source>Dialog cubic bezier path</source>
-        <translation type="vanished">Dijalog kubične Bezierove putanje</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="93"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="332"/>
         <source>Point:</source>
@@ -1527,14 +1006,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="349"/>
         <source>Color:</source>
         <translation>Boja:</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation type="vanished">Naziv:</translation>
-    </message>
-    <message>
-        <source>Invalid spline path</source>
-        <translation type="vanished">Neispravna putanja splajna</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="14"/>
@@ -1612,38 +1083,10 @@
 <context>
     <name>DialogCurveIntersectAxis</name>
     <message>
-        <source>Angle</source>
-        <translation type="vanished">Kut</translation>
-    </message>
-    <message>
-        <source>Value of angle</source>
-        <translation type="vanished">Vrijednost kuta</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="348"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Axis point</source>
-        <translation type="vanished">Točka osi</translation>
-    </message>
-    <message>
-        <source>Curve</source>
-        <translation type="vanished">Krivulja</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
-        <source>Type of line</source>
-        <translation type="vanished">Tip linije</translation>
-    </message>
-    <message>
-        <source>Show line from first point to this point</source>
-        <translation type="vanished">Pokaži liniju od prve točke do ove točke</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="295"/>
@@ -1655,14 +1098,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="335"/>
         <source>Point intersect curve and axis</source>
         <translation>Točka na presjeku krivulje i osi</translation>
-    </message>
-    <message>
-        <source>Axis Point</source>
-        <translation type="vanished">Točka osi</translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">Boja linije</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="351"/>
@@ -1787,40 +1222,16 @@
 <context>
     <name>DialogCutArc</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">Duljina</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">Vrijednost duljine</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="300"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Arc</source>
-        <translation type="vanished">Luk</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="287"/>
         <source>Segment an arc</source>
         <translation>Segmentiranje luka</translation>
-    </message>
-    <message>
-        <source>Selected arc</source>
-        <translation type="vanished">Odabrani luk</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">Boja</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.cpp" line="119"/>
@@ -1876,10 +1287,6 @@
         <translation>Odaberi jedinstvenu oznaku.</translation>
     </message>
     <message>
-        <source>Color:</source>
-        <translation type="vanished">Boja:</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="28"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="314"/>
         <source>Tool</source>
@@ -1931,40 +1338,16 @@
 <context>
     <name>DialogCutSpline</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">Duljina</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">Vrijednost duljine</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="295"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Curve</source>
-        <translation type="vanished">Krivulja</translation>
-    </message>
-    <message>
-        <source>Selected curve</source>
-        <translation type="vanished">Odabrana krivulja</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="282"/>
         <source>Segmenting a simple curve</source>
         <translation>Segmentiranje jednostavne krivulje</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">Boja</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.cpp" line="417"/>
@@ -2012,14 +1395,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="300"/>
         <source>Unique label</source>
         <translation>Jedinstvena oznaka</translation>
-    </message>
-    <message>
-        <source>Choose unique label.</source>
-        <translation type="vanished">Odaberi jedinstvenu oznaku.</translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation type="vanished">Boja:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="28"/>
@@ -2079,40 +1454,16 @@
 <context>
     <name>DialogCutSplinePath</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">Duljina</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">Vrijednost duljine</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="297"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Curve</source>
-        <translation type="vanished">Krivulja</translation>
-    </message>
-    <message>
-        <source>Selected curve path</source>
-        <translation type="vanished">Odabrana zakrivljena putanja</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="284"/>
         <source>Segment a curved path</source>
         <translation>Segment zakrivljene putanje</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">Boja</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.cpp" line="415"/>
@@ -2166,10 +1517,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="304"/>
         <source>Choose unique label.</source>
         <translation>Odaberi jedinstvenu oznaku.</translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation type="vanished">Boja:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="28"/>
@@ -2244,281 +1591,6 @@
         <location filename="../../src/app/valentina/dialogs/dialogdatetimeformats.cpp" line="90"/>
         <source>&lt;empty&gt;</source>
         <translation>&lt;prazno&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>DialogDetail</name>
-    <message>
-        <source>Detail</source>
-        <translation type="vanished">Detalj</translation>
-    </message>
-    <message>
-        <source>Bias X</source>
-        <translation type="vanished">Pomak X</translation>
-    </message>
-    <message>
-        <source>cm</source>
-        <translation type="vanished">cm</translation>
-    </message>
-    <message>
-        <source>Bias Y</source>
-        <translation type="vanished">Pomak Y</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="vanished">Opcije</translation>
-    </message>
-    <message>
-        <source>Name of detail</source>
-        <translation type="vanished">Naziv detalja</translation>
-    </message>
-    <message>
-        <source>Seam allowance</source>
-        <translation type="vanished">Šav</translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="vanished">Širina</translation>
-    </message>
-    <message>
-        <source>Closed</source>
-        <translation type="vanished">Zatvoreno</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="vanished">Obriši</translation>
-    </message>
-    <message>
-        <source>Got wrong scene object. Ignore.</source>
-        <translation type="vanished">Netočan objekt scene. Ignoriraj.</translation>
-    </message>
-    <message>
-        <source>Reverse</source>
-        <translation type="vanished">Obrni</translation>
-    </message>
-    <message>
-        <source>Seam allowance tool</source>
-        <translation type="vanished">Alat za širinu šava</translation>
-    </message>
-    <message>
-        <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="vanished">Svi objekti u putu trebaju slijediti smjer kazaljke na satu.</translation>
-    </message>
-    <message>
-        <source>Scroll down the list</source>
-        <translation type="vanished">Pomakni dolje na popisu</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>Scroll up the list</source>
-        <translation type="vanished">Pomakni gore na popisu</translation>
-    </message>
-    <message>
-        <source>Ready!</source>
-        <translation type="vanished">Spremno!</translation>
-    </message>
-    <message>
-        <source>You need more points!</source>
-        <translation type="vanished">Treba ti više točaka!</translation>
-    </message>
-    <message>
-        <source>First point can not equal the last point!</source>
-        <translation type="vanished">Prva točka ne može biti jednaka posljednjoj točki!</translation>
-    </message>
-    <message>
-        <source>You have double points!</source>
-        <translation type="vanished">Imaš duple točke!</translation>
-    </message>
-    <message>
-        <source>You have to choose points in a clockwise direction!</source>
-        <translation type="vanished">Moraš odabrati točke u smjeru kazaljke na satu!</translation>
-    </message>
-    <message>
-        <source>Bias X:</source>
-        <translation type="vanished">Pomak X:</translation>
-    </message>
-    <message>
-        <source>Bias Y:</source>
-        <translation type="vanished">Pomak Y:</translation>
-    </message>
-    <message>
-        <source>Name of detail:</source>
-        <translation type="vanished">Naziv detalja:</translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation type="vanished">Širina:</translation>
-    </message>
-    <message>
-        <source>First point cannot be equal to the last point!</source>
-        <translation type="vanished">Prva točka ne može biti jednaka posljednjoj točki!</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="vanished">Općenito</translation>
-    </message>
-    <message>
-        <source>Pattern piece data</source>
-        <translation type="vanished">Podaci o krojnom dijelu</translation>
-    </message>
-    <message>
-        <source>Material/Cut number/Placement</source>
-        <translation type="vanished">Vrsta materijala/Broj rezanja/Pozicija</translation>
-    </message>
-    <message>
-        <source>Material type:</source>
-        <translation type="vanished">Vrsta materijala:</translation>
-    </message>
-    <message>
-        <source>Cut number:</source>
-        <translation type="vanished">Broj rezanja:</translation>
-    </message>
-    <message>
-        <source>Placement:</source>
-        <translation type="vanished">Pozicija:</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="vanished">Dodaj</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="vanished">Odustani</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="vanished">Ukloni</translation>
-    </message>
-    <message>
-        <source>Letter:</source>
-        <translation type="vanished">Slovo:</translation>
-    </message>
-    <message>
-        <source>Detail label visible</source>
-        <translation type="vanished">Oznaka detalja vidljiva</translation>
-    </message>
-    <message>
-        <source>Pattern label visible</source>
-        <translation type="vanished">Oznaka kroja vidljiva</translation>
-    </message>
-    <message>
-        <source>Fabric</source>
-        <translation type="vanished">Tkanina</translation>
-    </message>
-    <message>
-        <source>Lining</source>
-        <translation type="vanished">Podstava</translation>
-    </message>
-    <message>
-        <source>Interfacing</source>
-        <translation type="vanished">Pojačanje</translation>
-    </message>
-    <message>
-        <source>Interlining</source>
-        <translation type="vanished">Međupodstava</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="vanished">Ništa</translation>
-    </message>
-    <message>
-        <source>Cut on fold</source>
-        <translation type="vanished">Izreži na preklopu</translation>
-    </message>
-    <message>
-        <source>Cut %1 of %2%3</source>
-        <translation type="vanished">Izreži %1 od %2%3</translation>
-    </message>
-    <message>
-        <source> on Fold</source>
-        <translation type="vanished">na Preklopu</translation>
-    </message>
-    <message>
-        <source>Update</source>
-        <translation type="vanished">Ažuriranje</translation>
-    </message>
-    <message>
-        <source>on Fold</source>
-        <translation type="vanished">na preklop</translation>
-    </message>
-    <message>
-        <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation type="vanished">Možete odabrati jednu od unaprijed definiranih vrsta materijala ili unijeti novu</translation>
-    </message>
-    <message>
-        <source>Forbid piece be mirrored in a layout.</source>
-        <translation type="vanished">Zabranite zrcaljenje komada u rasporedu.</translation>
-    </message>
-    <message>
-        <source>Forbid flipping</source>
-        <translation type="vanished">Zabranjeno okretanje</translation>
-    </message>
-    <message>
-        <source>Letter of pattern piece</source>
-        <translation type="vanished">Slovo krojnog dijela</translation>
-    </message>
-    <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="vanished">Naziv ne može biti prazan</translation>
-    </message>
-    <message>
-        <source>Grainline</source>
-        <translation type="vanished">Nit osnove</translation>
-    </message>
-    <message>
-        <source>Grainline visible</source>
-        <translation type="vanished">Linija tkanine vidljiva</translation>
-    </message>
-    <message>
-        <source>Rotation:</source>
-        <translation type="vanished">Rotacija:</translation>
-    </message>
-    <message>
-        <source>Formula wizard</source>
-        <translation type="vanished">Čarobnjak za formule</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="vanished">Vrijednost</translation>
-    </message>
-    <message>
-        <source>Calculation</source>
-        <translation type="vanished">Izračun</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Length:</source>
-        <translation type="vanished">Duljina:</translation>
-    </message>
-    <message>
-        <source>Infinite/undefined result</source>
-        <translation type="vanished">Beskonačan/neodređen rezultat</translation>
-    </message>
-    <message>
-        <source>Length should be positive</source>
-        <translation type="vanished">Duljina mora biti pozitivna</translation>
-    </message>
-    <message>
-        <source>Arrows:</source>
-        <translation type="vanished">Strelice:</translation>
-    </message>
-    <message>
-        <source>Both</source>
-        <translation type="vanished">Oboje</translation>
-    </message>
-    <message>
-        <source>Just front</source>
-        <translation type="vanished">Samo prednja</translation>
-    </message>
-    <message>
-        <source>Just rear</source>
-        <translation type="vanished">Samo stražnja</translation>
     </message>
 </context>
 <context>
@@ -3081,32 +2153,16 @@
         <translation>Uredi formulu</translation>
     </message>
     <message>
-        <source>Formula</source>
-        <translation type="vanished">Formula</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="95"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="335"/>
         <source>Insert variable into formula</source>
         <translation>Umetni varijablu u formulu</translation>
     </message>
     <message>
-        <source>Value of first angle</source>
-        <translation type="vanished">Vrijednost prvog kuta</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="191"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="344"/>
         <source>Input data</source>
         <translation>Ulazni podaci</translation>
-    </message>
-    <message>
-        <source>Size and height</source>
-        <translation type="vanished">Veličina i visina</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="204"/>
@@ -3127,10 +2183,6 @@
         <translation>Duljina linija</translation>
     </message>
     <message>
-        <source>Length of arcs</source>
-        <translation type="vanished">Duljina lukova</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="259"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="349"/>
         <source>Length of curves</source>
@@ -3149,25 +2201,9 @@
         <translation>Sakrij prazna mjerenja</translation>
     </message>
     <message>
-        <source>Double click for add to formula</source>
-        <translation type="vanished">Dvostruki klik za dodavanje u formulu</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation type="vanished">Visina</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="vanished">Veličina</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="211"/>
         <source>Line length</source>
         <translation>Duljina linije</translation>
-    </message>
-    <message>
-        <source>Arc length</source>
-        <translation type="vanished">Duljina luka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="217"/>
@@ -3186,10 +2222,6 @@
         <translation>Polumjer lukova</translation>
     </message>
     <message>
-        <source>Angles of arcs</source>
-        <translation type="vanished">Kutovi lukova</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="301"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="352"/>
         <source>Angles of curves</source>
@@ -3199,10 +2231,6 @@
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="229"/>
         <source>Arc radius</source>
         <translation>Polumjer luka</translation>
-    </message>
-    <message>
-        <source>Arc angle</source>
-        <translation type="vanished">Kut luka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.cpp" line="235"/>
@@ -3629,14 +2657,6 @@
 <context>
     <name>DialogEndLine</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">Duljina</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">Vrijednost duljine</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="216"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="410"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="375"/>
@@ -3645,42 +2665,10 @@
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Angle</source>
-        <translation type="vanished">Kut</translation>
-    </message>
-    <message>
-        <source>Value of angle</source>
-        <translation type="vanished">Vrijednost kuta</translation>
-    </message>
-    <message>
-        <source>Base point</source>
-        <translation type="vanished">Osnovna točka</translation>
-    </message>
-    <message>
-        <source>First point of line</source>
-        <translation type="vanished">Prva točka linije</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
-        <source>Type of line</source>
-        <translation type="vanished">Tip linije</translation>
-    </message>
-    <message>
-        <source>Show line from first point to this point</source>
-        <translation type="vanished">Pokaži liniju od prve točke do ove točke</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="20"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="362"/>
         <source>Point at distance and angle</source>
         <translation>Točka na udaljenosti i pod kutom</translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">Boja linije</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.cpp" line="176"/>
@@ -3779,14 +2767,6 @@
 </context>
 <context>
     <name>DialogExportToCSV</name>
-    <message>
-        <source>Export options</source>
-        <translation type="vanished">Opcije izvoza</translation>
-    </message>
-    <message>
-        <source>Export</source>
-        <translation type="vanished">Izvezi</translation>
-    </message>
     <message>
         <location filename="../../src/libs/vmisc/dialogs/dialogexporttocsv.ui" line="36"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VMiscLib.b56b4d5c/qt.headers/ui_dialogexporttocsv.h" line="198"/>
@@ -4072,18 +3052,10 @@
 <context>
     <name>DialogFlippingByAxis</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">Dijalog</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="197"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyaxis.h" line="330"/>
         <source>Origin point:</source>
         <translation>Početna točka:</translation>
-    </message>
-    <message>
-        <source>Suffix:</source>
-        <translation type="vanished">Sufiks:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyaxis.ui" line="207"/>
@@ -4203,18 +3175,10 @@
 <context>
     <name>DialogFlippingByLine</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">Dijalog</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="197"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogflippingbyline.h" line="330"/>
         <source>First line point:</source>
         <translation>Prva točka linije:</translation>
-    </message>
-    <message>
-        <source>Suffix:</source>
-        <translation type="vanished">Sufiks:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogflippingbyline.ui" line="207"/>
@@ -4534,10 +3498,6 @@
         <translation>Naziv grupe:</translation>
     </message>
     <message>
-        <source>Unique pattern piece name</source>
-        <translation type="vanished">Jedinstveni naziv krojnog dijela</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoggroup.ui" line="36"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoggroup.h" line="96"/>
         <source>Choose group name</source>
@@ -4570,30 +3530,6 @@
 <context>
     <name>DialogHeight</name>
     <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
-        <source>Base point</source>
-        <translation type="vanished">Osnovna točka</translation>
-    </message>
-    <message>
-        <source>First point of line</source>
-        <translation type="vanished">Prva točka linije</translation>
-    </message>
-    <message>
-        <source>Second point of line</source>
-        <translation type="vanished">Druga točka linije</translation>
-    </message>
-    <message>
-        <source>Type of line</source>
-        <translation type="vanished">Tip linije</translation>
-    </message>
-    <message>
-        <source>Show line from first point to our point</source>
-        <translation type="vanished">Pokaži liniju od prve točke do naše točke</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.cpp" line="210"/>
         <source>Select first point of line</source>
         <translation>Odaberi prvu točku linije</translation>
@@ -4608,14 +3544,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="182"/>
         <source>Perpendicular point along line</source>
         <translation>Okomita točka duž linije</translation>
-    </message>
-    <message>
-        <source>Base Point</source>
-        <translation type="vanished">Bazna točka</translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">Boja linije</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="46"/>
@@ -4676,165 +3604,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="194"/>
         <source>Notes</source>
         <translation>Bilješke</translation>
-    </message>
-</context>
-<context>
-    <name>DialogHistory</name>
-    <message>
-        <source>History</source>
-        <translation type="vanished">Povijest</translation>
-    </message>
-    <message>
-        <source>Tool</source>
-        <translation type="vanished">Alat</translation>
-    </message>
-    <message>
-        <source>Can&apos;t create record.</source>
-        <translation type="vanished">Nije moguće stvoriti zapis.</translation>
-    </message>
-    <message>
-        <source>%1 - Base point</source>
-        <translation type="vanished">%1 - Bazna točka</translation>
-    </message>
-    <message>
-        <source>%1_%2 - Line from point %1 to point %2</source>
-        <translation type="vanished">%1_%2 - Linija od točke %1 do točke %2</translation>
-    </message>
-    <message>
-        <source>%3 - Point along line %1_%2</source>
-        <translation type="vanished">%3 - Točka uzduž linije %1_%2</translation>
-    </message>
-    <message>
-        <source>%1 - Point of shoulder</source>
-        <translation type="vanished">%1 - Točka ramena</translation>
-    </message>
-    <message>
-        <source>%3 - normal to line %1_%2</source>
-        <translation type="vanished">%3 - Okomica na liniju %1_%2</translation>
-    </message>
-    <message>
-        <source>%4 - bisector of angle %1_%2_%3</source>
-        <translation type="vanished">%4 - Simetrala kuta %1_%2_%3</translation>
-    </message>
-    <message>
-        <source>%5 - intersection of lines %1_%2 and %3_%4</source>
-        <translation type="vanished">%5 - Presjek linija %1_%2 i %3_%4</translation>
-    </message>
-    <message>
-        <source>Curve %1_%2</source>
-        <translation type="vanished">Krivulja %1_%2</translation>
-    </message>
-    <message>
-        <source>Arc with center in point %1</source>
-        <translation type="vanished">Luk sa središtem u točki %1</translation>
-    </message>
-    <message>
-        <source>Curve point %1</source>
-        <translation type="vanished">Točka krivulje %1</translation>
-    </message>
-    <message>
-        <source>%4 - point of contact of arc with the center in point %1 and line %2_%3</source>
-        <translation type="vanished">%4 - Točka dodira luka sa središtem u točki %1 i linijom %2_%3</translation>
-    </message>
-    <message>
-        <source>Point of perpendicular from point %1 to line %2_%3</source>
-        <translation type="vanished">Točka okomice iz točke %1 na liniju %2_%3</translation>
-    </message>
-    <message>
-        <source>Triangle: axis %1_%2, points %3 and %4</source>
-        <translation type="vanished">Trokut: os %1_%2, točke %3 i %4</translation>
-    </message>
-    <message>
-        <source>%1 - point of intersection %2 and %3</source>
-        <translation type="vanished">%1 - Točka presjeka %2 i %3</translation>
-    </message>
-    <message>
-        <source>%1 - cut arc with center %2</source>
-        <translation type="vanished">%1 - Izrezani luk sa središtem %2</translation>
-    </message>
-    <message>
-        <source>%1 - cut curve %2_%3</source>
-        <translation type="vanished">%1 - Izrezana krivulja %2_%3</translation>
-    </message>
-    <message>
-        <source>%1 - cut curve path %2</source>
-        <translation type="vanished">%1 - Izrezana putanja krivulje %2</translation>
-    </message>
-    <message>
-        <source>%1 - point of intersection line %2_%3 and axis through point %4</source>
-        <translation type="vanished">%1 - Točka presjeka linije %2_%3 i osi kroz točku %4</translation>
-    </message>
-    <message>
-        <source>%1 - point of intersection curve and axis through point %2</source>
-        <translation type="vanished">%1 - Točka presjeka krivulje i osi kroz točku %2</translation>
-    </message>
-    <message>
-        <source>Arc with center in point %1 and length %2</source>
-        <translation type="vanished">Luk sa središtem u točki %1 i duljinom %2</translation>
-    </message>
-    <message>
-        <source>%1 - point of arcs intersection</source>
-        <translation type="vanished">%1 - Točka presjeka lukova</translation>
-    </message>
-    <message>
-        <source>%1 - point of circles intersection</source>
-        <translation type="vanished">%1 - Točka presjeka kružnica</translation>
-    </message>
-    <message>
-        <source>%1 - point from circle and tangent</source>
-        <translation type="vanished">%1 - Točka s kružnice i tangente</translation>
-    </message>
-    <message>
-        <source>%1 - point from arc and tangent</source>
-        <translation type="vanished">%1 - Točka s luka i tangente</translation>
-    </message>
-    <message>
-        <source>Correction the dart %1_%2_%3</source>
-        <translation type="vanished">Korekcija strelice %1_%2_%3</translation>
-    </message>
-    <message>
-        <source>%1 - point of curves intersection</source>
-        <translation type="vanished">%1 - Točka presjeka krivulja</translation>
-    </message>
-    <message>
-        <source>Curve</source>
-        <translation type="vanished">Krivulja</translation>
-    </message>
-    <message>
-        <source>Cubic bezier curve</source>
-        <translation type="vanished">Kubična Bézierova krivulja</translation>
-    </message>
-    <message>
-        <source>Arc</source>
-        <translation type="vanished">Luk</translation>
-    </message>
-    <message>
-        <source>%1 with length %2</source>
-        <translation type="vanished">%1 s duljinom %2</translation>
-    </message>
-    <message>
-        <source>Spline path</source>
-        <translation type="vanished">Splajn putanja</translation>
-    </message>
-    <message>
-        <source>Cubic bezier curve path</source>
-        <translation type="vanished">Putanja kubične Bezierove krivulje</translation>
-    </message>
-    <message>
-        <source>%1 - cut %2</source>
-        <translation type="vanished">%1 - Izreži %2</translation>
-    </message>
-    <message>
-        <source>arc</source>
-        <translation type="vanished">luk</translation>
-    </message>
-    <message>
-        <source>curve</source>
-        <translation type="vanished">krivulja</translation>
-    </message>
-    <message>
-        <source>curve path</source>
-        <translation type="vanished">putanja krivulje</translation>
     </message>
 </context>
 <context>
@@ -4944,10 +3713,6 @@
         <translation>Kutovi krivulja</translation>
     </message>
     <message>
-        <source>Lengths arcs</source>
-        <translation type="vanished">Duljine lukova</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1644"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="1647"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1272"/>
@@ -4960,10 +3725,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1271"/>
         <source>Radius</source>
         <translation>Polumjer</translation>
-    </message>
-    <message>
-        <source>Angles arcs</source>
-        <translation type="vanished">Kutovi lukova</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="360"/>
@@ -5151,10 +3912,6 @@
         <translation>Vrijednosti</translation>
     </message>
     <message>
-        <source>Increment_%1</source>
-        <translation type="vanished">Povećanje_%1</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="2355"/>
         <source>Edit increment</source>
         <translation>Uredi povećanje</translation>
@@ -5180,14 +3937,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogincrements.h" line="1216"/>
         <source>Formula wizard</source>
         <translation>Čarobnjak za formule</translation>
-    </message>
-    <message>
-        <source>Invalid value</source>
-        <translation type="vanished">Nevažeća vrijednost</translation>
-    </message>
-    <message>
-        <source>Find:</source>
-        <translation type="vanished">Pronađi:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.ui" line="82"/>
@@ -5650,26 +4399,10 @@
 <context>
     <name>DialogLayoutProgress</name>
     <message>
-        <source>Couldn&apos;t prepare data for creation layout</source>
-        <translation type="vanished">Nije moguće pripremiti podatke za izradu rasporeda</translation>
-    </message>
-    <message>
-        <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="vanished">Nekoliko radnih dijelova ostalo je nepostavljeno, ali nijedan ne odgovara za papir.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutprogress.ui" line="17"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutprogress.h" line="109"/>
         <source>Create a Layout</source>
         <translation>Izradi krojnu sliku</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Finding best position for worpieces. Please, wait.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pronalazak najbolje pozicije za krojne dijelove. Molimo, pričekajte.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Arranged workpieces: %1 from %2</source>
-        <translation type="vanished">Raspoređeni krojni dijelovi: %1 od %2</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutprogress.ui" line="36"/>
@@ -5766,10 +4499,6 @@
 <context>
     <name>DialogLayoutSettings</name>
     <message>
-        <source>Paper size</source>
-        <translation type="vanished">Veličina papira</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="70"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="591"/>
         <source>Templates:</source>
@@ -5786,30 +4515,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="593"/>
         <source>Height:</source>
         <translation>Visina:</translation>
-    </message>
-    <message>
-        <source>Rotate workpiece</source>
-        <translation type="vanished">Rotiraj krojni dio</translation>
-    </message>
-    <message>
-        <source>Rotate by</source>
-        <translation type="vanished">Rotiraj za</translation>
-    </message>
-    <message>
-        <source>degree</source>
-        <translation type="vanished">stupanj</translation>
-    </message>
-    <message>
-        <source>Creation options</source>
-        <translation type="vanished">Opcije kreiranja</translation>
-    </message>
-    <message>
-        <source>Shift length:</source>
-        <translation type="vanished">Duljina pomaka:</translation>
-    </message>
-    <message>
-        <source>Principle of choosing the next workpiece</source>
-        <translation type="vanished">Princip odabira sljedećeg krojnog dijela</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="532"/>
@@ -5883,54 +4588,10 @@
         <translation>Spremi duljinu lista</translation>
     </message>
     <message>
-        <source>Letter</source>
-        <translation type="vanished">Pismo</translation>
-    </message>
-    <message>
-        <source>Legal</source>
-        <translation type="vanished">Pravno</translation>
-    </message>
-    <message>
-        <source>Roll 24in</source>
-        <translation type="vanished">Rola 24 in</translation>
-    </message>
-    <message>
-        <source>Roll 30in</source>
-        <translation type="vanished">Rola 30 in</translation>
-    </message>
-    <message>
-        <source>Roll 36in</source>
-        <translation type="vanished">Rola 36 in</translation>
-    </message>
-    <message>
-        <source>Roll 42in</source>
-        <translation type="vanished">Rola 42 in</translation>
-    </message>
-    <message>
-        <source>Roll 44in</source>
-        <translation type="vanished">Rola 44 in</translation>
-    </message>
-    <message>
-        <source>
-	Three groups: big, middle, small = 0
-	Two groups: big, small = 1
-	Descending area = 2
-</source>
-        <translation type="vanished">
-	Tri grupe: veliki, srednji, mali = 0
-	Dvije grupe: velike, male = 1
-	Silazno područje = 2
-</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="44"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="590"/>
         <source>Paper format</source>
         <translation>Format papira</translation>
-    </message>
-    <message>
-        <source>Fields</source>
-        <translation type="vanished">Polja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="255"/>
@@ -5957,25 +4618,9 @@
         <translation>Dolje:</translation>
     </message>
     <message>
-        <source>Ignore fileds</source>
-        <translation type="vanished">Ignoriraj polja</translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="vanished">Prilagođeno</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.cpp" line="698"/>
         <source>Wrong fields.</source>
         <translation>Pogrešna polja.</translation>
-    </message>
-    <message>
-        <source>Fields go beyond printing. 
-
-Apply settings anyway?</source>
-        <translation type="vanished">Polja izlaze iz ispis. 
-
-Svejedno primijeniti postavke?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.cpp" line="553"/>
@@ -5995,18 +4640,10 @@ Svejedno primijeniti postavke?</translation>
         <translation>Opcije rasporeda</translation>
     </message>
     <message>
-        <source>Shift/Offset length:</source>
-        <translation type="vanished">Pomak/Odmak duljina:</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="524"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="627"/>
         <source>Rule for choosing the next workpiece</source>
         <translation>Pravilo za odabir sljedećeg krojnog dijela</translation>
-    </message>
-    <message>
-        <source>Enabling for sheets that have big height will speed up creating. </source>
-        <translation type="vanished">Omogućavanje za listove velike visine će ubrzati izradu.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="621"/>
@@ -6025,10 +4662,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialoglayoutsettings.h" line="644"/>
         <source>Set multiplier for length of the biggest workpiece in layout.</source>
         <translation>Postavi množitelj za duljinu najvećeg radnog dijela u rasporedu.</translation>
-    </message>
-    <message>
-        <source>x</source>
-        <translation type="vanished">x</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.ui" line="618"/>
@@ -6182,22 +4815,6 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>DialogLine</name>
     <message>
-        <source>First point</source>
-        <translation type="vanished">Prva točka</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">Druga točka</translation>
-    </message>
-    <message>
-        <source>Type of line</source>
-        <translation type="vanished">Tip linije</translation>
-    </message>
-    <message>
-        <source>Show line from first point to this point</source>
-        <translation type="vanished">Pokaži liniju od prve točke do ove točke</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.cpp" line="195"/>
         <source>Select second point</source>
         <translation>Odaberi drugu točku</translation>
@@ -6207,10 +4824,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="204"/>
         <source>Line between points</source>
         <translation>Linija između točaka</translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">Boja linije</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="158"/>
@@ -6258,22 +4871,10 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>DialogLineIntersect</name>
     <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="64"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="216"/>
         <source>First line</source>
         <translation>Prva linija</translation>
-    </message>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">Prva točka</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">Druga točka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="103"/>
@@ -6352,44 +4953,16 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>DialogLineIntersectAxis</name>
     <message>
-        <source>Angle</source>
-        <translation type="vanished">Kut</translation>
-    </message>
-    <message>
-        <source>Value of angle</source>
-        <translation type="vanished">Vrijednost kuta</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="313"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Axis point</source>
-        <translation type="vanished">Točka osi</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="254"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="321"/>
         <source>First point of line</source>
         <translation>Prva točka linije</translation>
-    </message>
-    <message>
-        <source>First line point</source>
-        <translation type="vanished">Prva točka linije</translation>
-    </message>
-    <message>
-        <source>Second line point</source>
-        <translation type="vanished">Druga točka linije</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
-        <source>Type of line</source>
-        <translation type="vanished">Tip linije</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="329"/>
@@ -6424,10 +4997,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="325"/>
         <source>Second point of line</source>
         <translation>Druga točka linije</translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">Boja linije</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="402"/>
@@ -6530,91 +5099,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/app/tape/dialogs/dialogmdatabase.ui" line="83"/>
         <source>Measurements</source>
         <translation>Mjerenja</translation>
-    </message>
-    <message>
-        <source>Direct Height</source>
-        <comment>Measurement section</comment>
-        <translation type="vanished">Direktna visina</translation>
-    </message>
-    <message>
-        <source>Direct Width</source>
-        <comment>Measurement section</comment>
-        <translation type="vanished">Direktna širina</translation>
-    </message>
-    <message>
-        <source>Indentation</source>
-        <comment>Measurement section</comment>
-        <translation type="vanished">Uvlaka</translation>
-    </message>
-    <message>
-        <source>Circumference and Arc</source>
-        <comment>Measurement section</comment>
-        <translation type="vanished">Opseg i luk</translation>
-    </message>
-    <message>
-        <source>Vertical</source>
-        <comment>Measurement section</comment>
-        <translation type="vanished">Vertikalno</translation>
-    </message>
-    <message>
-        <source>Horizontal</source>
-        <comment>Measurement section</comment>
-        <translation type="vanished">Horizontalno</translation>
-    </message>
-    <message>
-        <source>Bust</source>
-        <comment>Measurement section</comment>
-        <translation type="vanished">Prsa</translation>
-    </message>
-    <message>
-        <source>Balance</source>
-        <comment>Measurement section</comment>
-        <translation type="vanished">Balans</translation>
-    </message>
-    <message>
-        <source>Arm</source>
-        <comment>Measurement section</comment>
-        <translation type="vanished">Ruka</translation>
-    </message>
-    <message>
-        <source>Leg</source>
-        <comment>Measurement section</comment>
-        <translation type="vanished">Noga</translation>
-    </message>
-    <message>
-        <source>Crotch and Rise</source>
-        <comment>Measurement section</comment>
-        <translation type="vanished">Međunožje i visina struka</translation>
-    </message>
-    <message>
-        <source>Hand</source>
-        <comment>Measurement section</comment>
-        <translation type="vanished">Šaka</translation>
-    </message>
-    <message>
-        <source>Foot</source>
-        <comment>Measurement section</comment>
-        <translation type="vanished">Stopalo</translation>
-    </message>
-    <message>
-        <source>Head</source>
-        <comment>Measurement section</comment>
-        <translation type="vanished">Glava</translation>
-    </message>
-    <message>
-        <source>Men &amp; Tailoring</source>
-        <comment>Measurement section</comment>
-        <translation type="vanished">Muški kroj i odijela</translation>
-    </message>
-    <message>
-        <source>Historical &amp; Specialty</source>
-        <comment>Measurement section</comment>
-        <translation type="vanished">Povijesna i specijalna mjerenja</translation>
-    </message>
-    <message>
-        <source>Patternmaking measurements</source>
-        <comment>Measurement section</comment>
-        <translation type="vanished">Mjerenja za izradu krojeva</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogmdatabase.cpp" line="155"/>
@@ -6778,10 +5262,6 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>DialogMove</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">Dijalog</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.ui" line="256"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="577"/>
         <source>Angle:</source>
@@ -6822,10 +5302,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogmove.h" line="591"/>
         <source>Length:</source>
         <translation>Duljina:</translation>
-    </message>
-    <message>
-        <source>Suffix:</source>
-        <translation type="vanished">Sufiks:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogmove.cpp" line="471"/>
@@ -7019,21 +5495,9 @@ Svejedno primijeniti postavke?</translation>
         <translation>Jedinica:</translation>
     </message>
     <message>
-        <source>Base size:</source>
-        <translation type="vanished">Osnovna veličina:</translation>
-    </message>
-    <message>
-        <source>Base height:</source>
-        <translation type="vanished">Osnovna visina:</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/dialogs/dialognewmeasurements.cpp" line="112"/>
         <source>Individual</source>
         <translation>Individualno</translation>
-    </message>
-    <message>
-        <source>Standard</source>
-        <translation type="vanished">Standardno</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialognewmeasurements.cpp" line="136"/>
@@ -7058,14 +5522,6 @@ Svejedno primijeniti postavke?</translation>
 </context>
 <context>
     <name>DialogNewPattern</name>
-    <message>
-        <source>Individual measurements</source>
-        <translation type="vanished">Individualna mjerenja</translation>
-    </message>
-    <message>
-        <source>Pattern piece name</source>
-        <translation type="vanished">Naziv krojnog dijela</translation>
-    </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="52"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="97"/>
@@ -7128,42 +5584,10 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>DialogNormal</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">Duljina</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">Vrijednost duljine</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="475"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">Prva točka</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">Druga točka</translation>
-    </message>
-    <message>
-        <source>Additional angle degrees</source>
-        <translation type="vanished">Dodatni kut u stupnjevima</translation>
-    </message>
-    <message>
-        <source>Type of line</source>
-        <translation type="vanished">Tip linije</translation>
-    </message>
-    <message>
-        <source>Show line from first point to this point</source>
-        <translation type="vanished">Pokaži liniju od prve točke do ove točke</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.cpp" line="223"/>
@@ -7175,18 +5599,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="462"/>
         <source>Point along perpendicular</source>
         <translation>Točka duž okomice</translation>
-    </message>
-    <message>
-        <source>First point of line</source>
-        <translation type="vanished">Prva točka linije</translation>
-    </message>
-    <message>
-        <source>Second point of line</source>
-        <translation type="vanished">Druga točka linije</translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">Boja linije</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.cpp" line="156"/>
@@ -7445,54 +5857,10 @@ Svejedno primijeniti postavke?</translation>
         <translation>Svojstva kroja</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="vanished">Opis</translation>
-    </message>
-    <message>
-        <source>Author name</source>
-        <translation type="vanished">Ime autora</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="217"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="318"/>
         <source>Pattern description</source>
         <translation>Opis kroja</translation>
-    </message>
-    <message>
-        <source>For technical notes.</source>
-        <translation type="vanished">Za tehničke bilješke.</translation>
-    </message>
-    <message>
-        <source>Heights and Sizes</source>
-        <translation type="vanished">Visine i veličine</translation>
-    </message>
-    <message>
-        <source>All heights (cm)</source>
-        <translation type="vanished">Sve visine (cm)</translation>
-    </message>
-    <message>
-        <source>All sizes (cm)</source>
-        <translation type="vanished">Sve veličine (cm)</translation>
-    </message>
-    <message>
-        <source>Default height and size</source>
-        <translation type="vanished">Zadana visina i veličina</translation>
-    </message>
-    <message>
-        <source>From standard measurements</source>
-        <translation type="vanished">Iz standardnih mjerenja</translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="vanished">Prilagođeno</translation>
-    </message>
-    <message>
-        <source>Height:</source>
-        <translation type="vanished">Visina:</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation type="vanished">Veličina:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="297"/>
@@ -7589,18 +5957,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Predložak oznake</translation>
     </message>
     <message>
-        <source>Images (*.png *.jpg *.jpeg *.bmp)</source>
-        <translation type="vanished">Slike (*.png *.jpg *.jpeg *.bmp)</translation>
-    </message>
-    <message>
-        <source>Images</source>
-        <translation type="vanished">Slike</translation>
-    </message>
-    <message>
-        <source>Save File</source>
-        <translation type="vanished">Spremi datoteku</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="467"/>
         <source>untitled</source>
         <translation>neimenovano</translation>
@@ -7633,54 +5989,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="95"/>
         <source>Show in Finder</source>
         <translation>Prikaži u Finderu</translation>
-    </message>
-    <message>
-        <source>General info</source>
-        <translation type="vanished">Opće informacije</translation>
-    </message>
-    <message>
-        <source>Pattern name:</source>
-        <translation type="vanished">Naziv kroja:</translation>
-    </message>
-    <message>
-        <source>Pattern number:</source>
-        <translation type="vanished">Broj kroja:</translation>
-    </message>
-    <message>
-        <source>Company/Designer name:</source>
-        <translation type="vanished">Naziv tvrtke/dizajnera:</translation>
-    </message>
-    <message>
-        <source>Customer name:</source>
-        <translation type="vanished">Ime kupca:</translation>
-    </message>
-    <message>
-        <source>Created:</source>
-        <translation type="vanished">Stvoreno:</translation>
-    </message>
-    <message>
-        <source>Pattern size:</source>
-        <translation type="vanished">Veličina kroja:</translation>
-    </message>
-    <message>
-        <source>Show measurements</source>
-        <translation type="vanished">Prikaži mjerenja</translation>
-    </message>
-    <message>
-        <source>Show date of creation</source>
-        <translation type="vanished">Prikaži datum izrade</translation>
-    </message>
-    <message>
-        <source>Use %1 and %2 to insert pattern size and height</source>
-        <translation type="vanished">Koristite %1 i %2 za umetanje veličine kroja i visine</translation>
-    </message>
-    <message>
-        <source>Show date of layout creation (%1)</source>
-        <translation type="vanished">Prikaži datum izrade rasporeda (%1)</translation>
-    </message>
-    <message>
-        <source>Show measurements file</source>
-        <translation type="vanished">Prikaži datoteku mjerenja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="28"/>
@@ -7726,153 +6034,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="503"/>
         <source>Unable to show image. Error: %1</source>
         <translation>Nije moguće prikazati sliku. Pogreška: %1</translation>
-    </message>
-</context>
-<context>
-    <name>DialogPatternXmlEdit</name>
-    <message>
-        <source>XML Editor</source>
-        <translation type="vanished">XML Uređivač</translation>
-    </message>
-    <message>
-        <source>Value :</source>
-        <translation type="vanished">Vrijednost:</translation>
-    </message>
-    <message>
-        <source>Name :</source>
-        <translation type="vanished">Naziv:</translation>
-    </message>
-    <message>
-        <source>&lt;No selection&gt;</source>
-        <translation type="vanished">&lt;Nema odabira&gt;</translation>
-    </message>
-    <message>
-        <source>Type : </source>
-        <translation type="vanished">Tip:</translation>
-    </message>
-    <message>
-        <source>Add  attribute</source>
-        <translation type="vanished">Dodaj atribut</translation>
-    </message>
-    <message>
-        <source>Add  son</source>
-        <translation type="vanished">Dodaj dijete</translation>
-    </message>
-    <message>
-        <source>Remove attribute</source>
-        <translation type="vanished">Ukloni atribut</translation>
-    </message>
-    <message>
-        <source>Remove node</source>
-        <translation type="vanished">Ukloni čvor</translation>
-    </message>
-    <message>
-        <source>Set</source>
-        <translation type="vanished">Postavi</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="vanished">Odustani</translation>
-    </message>
-    <message>
-        <source>Apply changes</source>
-        <translation type="vanished">Primijeni promjene</translation>
-    </message>
-    <message>
-        <source>Undo last</source>
-        <translation type="vanished">Poništi zadnje</translation>
-    </message>
-    <message>
-        <source>Immediate apply</source>
-        <translation type="vanished">Odmah primijeni</translation>
-    </message>
-    <message>
-        <source>Base selection</source>
-        <translation type="vanished">Osnovni odabir</translation>
-    </message>
-    <message>
-        <source>All pattern pieces</source>
-        <translation type="vanished">Svi krojni dijelovi</translation>
-    </message>
-    <message>
-        <source>No changes</source>
-        <translation type="vanished">Nema promjena</translation>
-    </message>
-    <message>
-        <source>Cannot delete previously created node</source>
-        <translation type="vanished">Ne mogu izbrisati prethodno stvoren čvor</translation>
-    </message>
-    <message>
-        <source>No changes left</source>
-        <translation type="vanished">Nema preostalih promjena</translation>
-    </message>
-    <message>
-        <source>Cannot undo change</source>
-        <translation type="vanished">Ne mogu poništiti promjenu</translation>
-    </message>
-    <message>
-        <source>&lt;no value&gt;</source>
-        <translation type="vanished">&lt;bez vrijednosti&gt;</translation>
-    </message>
-    <message>
-        <source>Unchanged</source>
-        <translation type="vanished">Nepromijenjeno</translation>
-    </message>
-    <message>
-        <source>Cannot delete previously created attribute</source>
-        <translation type="vanished">Ne mogu izbrisati prethodno stvoren atribut</translation>
-    </message>
-    <message>
-        <source>Node Name</source>
-        <translation type="vanished">Naziv čvora</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation type="vanished">Naziv:</translation>
-    </message>
-    <message>
-        <source>Node Value (may be empty)</source>
-        <translation type="vanished">Vrijednost čvora (može biti prazno)</translation>
-    </message>
-    <message>
-        <source>Value:</source>
-        <translation type="vanished">Vrijednost:</translation>
-    </message>
-    <message>
-        <source>Attribute Name</source>
-        <translation type="vanished">Naziv atributa</translation>
-    </message>
-    <message>
-        <source>Attribute Value</source>
-        <translation type="vanished">Vrijednost atributa</translation>
-    </message>
-    <message>
-        <source>No selection</source>
-        <translation type="vanished">Nema odabira</translation>
-    </message>
-    <message>
-        <source>Root node</source>
-        <translation type="vanished">Korijenski čvor</translation>
-    </message>
-    <message>
-        <source>Node</source>
-        <translation type="vanished">Čvor</translation>
-    </message>
-    <message>
-        <source>Attribute</source>
-        <translation type="vanished">Atribut</translation>
-    </message>
-    <message>
-        <source>Immediately apply</source>
-        <translation type="vanished">Odmah primijeni</translation>
-    </message>
-    <message>
-        <source>Type: </source>
-        <translation type="vanished">Tip:</translation>
-    </message>
-    <message>
-        <source>Type:</source>
-        <translation type="vanished">Vrsta:</translation>
     </message>
 </context>
 <context>
@@ -8780,26 +6941,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Točka s luka i tangente</translation>
     </message>
     <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
-        <source>Tangent point</source>
-        <translation type="vanished">Tangenta točka</translation>
-    </message>
-    <message>
-        <source>Arc</source>
-        <translation type="vanished">Luk</translation>
-    </message>
-    <message>
-        <source>Select point of center of arc</source>
-        <translation type="vanished">Odaberi točku središta luka</translation>
-    </message>
-    <message>
-        <source>Take</source>
-        <translation type="vanished">Uzmi</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.cpp" line="160"/>
         <source>Select an arc</source>
         <translation>Odaberite luk</translation>
@@ -8862,34 +7003,10 @@ Svejedno primijeniti postavke?</translation>
         <translation>Točka s kružnice i tangente</translation>
     </message>
     <message>
-        <source>Radius</source>
-        <translation type="vanished">Polumjer</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="189"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="287"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
-        <source>Center of the circle</source>
-        <translation type="vanished">Središte kružnice</translation>
-    </message>
-    <message>
-        <source>Select point of center of arc</source>
-        <translation type="vanished">Odaberi točku središta luka</translation>
-    </message>
-    <message>
-        <source>Tangent point</source>
-        <translation type="vanished">Tangenta točka</translation>
-    </message>
-    <message>
-        <source>Take</source>
-        <translation type="vanished">Uzmi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="265"/>
@@ -8987,39 +7104,15 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>DialogPointOfContact</name>
     <message>
-        <source>Radius</source>
-        <translation type="vanished">Polumjer</translation>
-    </message>
-    <message>
-        <source>Value of radius</source>
-        <translation type="vanished">Vrijednost polumjera</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="296"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
-        <source>Center of arc</source>
-        <translation type="vanished">Središte luka</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.cpp" line="260"/>
         <source>Select point of center of arc</source>
         <translation>Odaberi točku središta luka</translation>
-    </message>
-    <message>
-        <source>Top of the line</source>
-        <translation type="vanished">Vrh linije</translation>
-    </message>
-    <message>
-        <source>End of the line</source>
-        <translation type="vanished">Kraj linije</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.cpp" line="252"/>
@@ -9113,30 +7206,10 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>DialogPointOfIntersection</name>
     <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
-        <source>First point of angle</source>
-        <translation type="vanished">Prva točka kuta</translation>
-    </message>
-    <message>
-        <source>Second point of angle</source>
-        <translation type="vanished">Druga točka kuta</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="179"/>
         <source>Point from X and Y of two other points</source>
         <translation>Točka iz X i Y dviju drugih točaka</translation>
-    </message>
-    <message>
-        <source>X: vertical point</source>
-        <translation type="vanished">X: vertikalna točka</translation>
-    </message>
-    <message>
-        <source>Y: horizontal point</source>
-        <translation type="vanished">Y: horizontalna točka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.cpp" line="136"/>
@@ -9195,30 +7268,6 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>DialogPointOfIntersectionArcs</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">Dijalog</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
-        <source>First arc</source>
-        <translation type="vanished">Prvi luk</translation>
-    </message>
-    <message>
-        <source>Selected arc</source>
-        <translation type="vanished">Odabrani luk</translation>
-    </message>
-    <message>
-        <source>Second arc</source>
-        <translation type="vanished">Drugi luk</translation>
-    </message>
-    <message>
-        <source>Take</source>
-        <translation type="vanished">Uzmi</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.cpp" line="181"/>
         <source>Select second an arc</source>
         <translation>Odaberite drugi luk</translation>
@@ -9234,10 +7283,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="277"/>
         <source>Unique label</source>
         <translation>Jedinstvena oznaka</translation>
-    </message>
-    <message>
-        <source>Choose unique label.</source>
-        <translation type="vanished">Odaberi jedinstvenu oznaku.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="65"/>
@@ -9345,44 +7390,12 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>DialogPointOfIntersectionCircles</name>
     <message>
-        <source>Dialog</source>
-        <translation type="vanished">Dijalog</translation>
-    </message>
-    <message>
-        <source>Radius of the first circle</source>
-        <translation type="vanished">Polumjer prvog kruga</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="189"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.ui" line="369"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="365"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="379"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Radius of the second circle</source>
-        <translation type="vanished">Polumjer drugog kruga</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
-        <source>Center of the first circle</source>
-        <translation type="vanished">Središte prvog kruga</translation>
-    </message>
-    <message>
-        <source>Select point of center of arc</source>
-        <translation type="vanished">Odaberi točku središta luka</translation>
-    </message>
-    <message>
-        <source>Center of the second circle</source>
-        <translation type="vanished">Središte drugog kruga</translation>
-    </message>
-    <message>
-        <source>Take</source>
-        <translation type="vanished">Uzmi</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="289"/>
@@ -9766,10 +7779,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Vrijednost</translation>
     </message>
     <message>
-        <source>Calulation</source>
-        <translation type="vanished">Izračun</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="350"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogrotation.h" line="423"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -9782,10 +7791,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Početna točka:</translation>
     </message>
     <message>
-        <source>Suffix:</source>
-        <translation type="vanished">Sufiks:</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="371"/>
         <source>Edit angle</source>
         <translation>Uredi kut</translation>
@@ -9794,10 +7799,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.cpp" line="252"/>
         <source>Select origin point</source>
         <translation>Odaberite početnu točku</translation>
-    </message>
-    <message>
-        <source>Select origin point that is not part of the list of objects</source>
-        <translation type="vanished">Odaberite početnu točku koja nije dio popisa objekata</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogrotation.ui" line="328"/>
@@ -9923,22 +7924,10 @@ Svejedno primijeniti postavke?</translation>
         <translation>Format datoteke:</translation>
     </message>
     <message>
-        <source>Browse...</source>
-        <translation type="vanished">Pregledaj...</translation>
-    </message>
-    <message>
-        <source>TextLabel</source>
-        <translation type="vanished">TekstOznaka</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="39"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="527"/>
         <source>Destination folder</source>
         <translation>Ciljana mapa</translation>
-    </message>
-    <message>
-        <source>Path to destination folder.</source>
-        <translation type="vanished">Putanja do ciljne mape.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="55"/>
@@ -9953,14 +7942,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogsavelayout.h" line="562"/>
         <source>File base name</source>
         <translation>Osnovni naziv datoteke</translation>
-    </message>
-    <message>
-        <source>File base name. </source>
-        <translation type="vanished">Osnovni naziv datoteke</translation>
-    </message>
-    <message>
-        <source>File base name.</source>
-        <translation type="vanished">Osnovni naziv datoteke.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.ui" line="42"/>
@@ -10139,46 +8120,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="140"/>
         <source>Select folder</source>
         <translation>Odaberite mapu</translation>
-    </message>
-    <message>
-        <source>Svg files (*.svg)</source>
-        <translation type="vanished">Svg datoteke (.svg)</translation>
-    </message>
-    <message>
-        <source>PDF files (*.pdf)</source>
-        <translation type="vanished">PDF datoteke (.pdf)</translation>
-    </message>
-    <message>
-        <source>Images (*.png)</source>
-        <translation type="vanished">Slike (.png)</translation>
-    </message>
-    <message>
-        <source>Wavefront OBJ (*.obj)</source>
-        <translation type="vanished">Wavefront OBJ (.obj)</translation>
-    </message>
-    <message>
-        <source>PS files (*.ps)</source>
-        <translation type="vanished">PS datoteke (.ps)</translation>
-    </message>
-    <message>
-        <source>EPS files (*.eps)</source>
-        <translation type="vanished">EPS datoteke (.eps)</translation>
-    </message>
-    <message>
-        <source>DXF files (*.dxf)</source>
-        <translation type="vanished">DXF datoteke (*.dxf)</translation>
-    </message>
-    <message>
-        <source>Tried to use out of range format number.</source>
-        <translation type="vanished">Pokušaj korištenja broja formata izvan raspona</translation>
-    </message>
-    <message>
-        <source>Selected not present format.</source>
-        <translation type="vanished">Odabrani format nije dostupan.</translation>
-    </message>
-    <message>
-        <source>The base filename has not match regular expression.</source>
-        <translation type="vanished">Osnovni naziv datoteke ne odgovara regularnom izrazu.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogsavelayout.cpp" line="407"/>
@@ -11210,42 +9151,10 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>DialogShoulderPoint</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">Duljina</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">Vrijednost duljine</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="328"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pokaži potpunu izračunatu vrijednost u poruci&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">Prva točka</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">Druga točka</translation>
-    </message>
-    <message>
-        <source>Third point</source>
-        <translation type="vanished">Treća točka</translation>
-    </message>
-    <message>
-        <source>Type of line</source>
-        <translation type="vanished">Tip linije</translation>
-    </message>
-    <message>
-        <source>Show line from first point to our point</source>
-        <translation type="vanished">Pokaži liniju od prve točke do naše točke</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.cpp" line="213"/>
@@ -11262,10 +9171,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="315"/>
         <source>Special point on shoulder</source>
         <translation>Posebna točka na ramenu</translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">Boja linije</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.cpp" line="146"/>
@@ -11423,34 +9328,6 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>DialogSpline</name>
     <message>
-        <source>First point</source>
-        <translation type="vanished">Prva točka</translation>
-    </message>
-    <message>
-        <source>Length ratio of the first control point</source>
-        <translation type="vanished">Omjer duljine prve kontrolne točke</translation>
-    </message>
-    <message>
-        <source>The angle of the first control point</source>
-        <translation type="vanished">Kut prve kontrolne točke</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">Druga točka</translation>
-    </message>
-    <message>
-        <source>Length ratio of the second control point</source>
-        <translation type="vanished">Omjer duljine druge kontrolne točke</translation>
-    </message>
-    <message>
-        <source>The angle of the second control point</source>
-        <translation type="vanished">Kut druge kontrolne točke</translation>
-    </message>
-    <message>
-        <source>Coefficient of curvature of the curve</source>
-        <translation type="vanished">Koeficijent zakrivljenosti krivulje</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="176"/>
         <source>Select last point of curve</source>
         <translation>Odaberite posljednju točku krivulje</translation>
@@ -11460,14 +9337,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="588"/>
         <source>Simple curve</source>
         <translation>Jednostavna krivulja</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">Boja</translation>
-    </message>
-    <message>
-        <source>Coefficient of curvature of the curve:</source>
-        <translation type="vanished">Koeficijent zakrivljenosti krivulje:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="873"/>
@@ -11498,22 +9367,10 @@ Svejedno primijeniti postavke?</translation>
         <translation>Kut:</translation>
     </message>
     <message>
-        <source>Length ratio:</source>
-        <translation type="vanished">Omjer duljine:</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="445"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="619"/>
         <source>Second point:</source>
         <translation>Druga točka:</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation type="vanished">Naziv:</translation>
-    </message>
-    <message>
-        <source>Invalid spline</source>
-        <translation type="vanished">Neispravan splajn</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="121"/>
@@ -11548,10 +9405,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Vrijednost</translation>
     </message>
     <message>
-        <source>Calulation</source>
-        <translation type="vanished">Izračun</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="231"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="410"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="627"/>
@@ -11582,14 +9435,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="358"/>
         <source>Edit second control point length</source>
         <translation>Uredi duljinu druge kontrolne točke</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">Pogreška</translation>
-    </message>
-    <message>
-        <source>Length can&apos;t be negative</source>
-        <translation type="vanished">Duljina ne može biti negativna</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="209"/>
@@ -11649,47 +9494,15 @@ Svejedno primijeniti postavke?</translation>
         <translation>Zakrivljena putanja</translation>
     </message>
     <message>
-        <source>Point of curve</source>
-        <translation type="vanished">Točka krivulje</translation>
-    </message>
-    <message>
-        <source>Length ratio of the first control point</source>
-        <translation type="vanished">Omjer duljine prve kontrolne točke</translation>
-    </message>
-    <message>
-        <source>The angle of the first control point</source>
-        <translation type="vanished">Kut prve kontrolne točke</translation>
-    </message>
-    <message>
-        <source>Length ratio of the second control point</source>
-        <translation type="vanished">Omjer duljine druge kontrolne točke</translation>
-    </message>
-    <message>
-        <source>The angle of the second control point</source>
-        <translation type="vanished">Kut druge kontrolne točke</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="869"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="762"/>
         <source>List of points</source>
         <translation>Popis točaka</translation>
     </message>
     <message>
-        <source>Coefficient of curvature of the curve</source>
-        <translation type="vanished">Koeficijent zakrivljenosti krivulje</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="232"/>
         <source>Select point of curve path</source>
         <translation>Odaberi točku putanje krivulje</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">Boja</translation>
-    </message>
-    <message>
-        <source>Coefficient of curvature of the curve:</source>
-        <translation type="vanished">Koeficijent zakrivljenosti krivulje:</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="999"/>
@@ -11724,22 +9537,10 @@ Svejedno primijeniti postavke?</translation>
         <translation>Kut:</translation>
     </message>
     <message>
-        <source>Length ratio:</source>
-        <translation type="vanished">Omjer duljine:</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="494"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="732"/>
         <source>Second control point</source>
         <translation>Druga kontrolna točka</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation type="vanished">Naziv:</translation>
-    </message>
-    <message>
-        <source>Invalid spline path</source>
-        <translation type="vanished">Neispravna putanja splajna</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="176"/>
@@ -11778,10 +9579,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Vrijednost</translation>
     </message>
     <message>
-        <source>Calulation</source>
-        <translation type="vanished">Izračun</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="286"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="465"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="657"/>
@@ -11812,14 +9609,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="535"/>
         <source>Edit second control point length</source>
         <translation>Uredi duljinu druge kontrolne točke</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">Pogreška</translation>
-    </message>
-    <message>
-        <source>Length can&apos;t be negative</source>
-        <translation type="vanished">Duljina ne može biti negativna</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="904"/>
@@ -11929,26 +9718,6 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>DialogTool</name>
     <message>
-        <source>Error</source>
-        <translation type="vanished">Pogreška</translation>
-    </message>
-    <message>
-        <source>Empty field</source>
-        <translation type="vanished">Prazno polje</translation>
-    </message>
-    <message>
-        <source>Value can&apos;t be 0</source>
-        <translation type="vanished">Vrijednost ne može biti 0</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="vanished">Vrijednost</translation>
-    </message>
-    <message>
-        <source>Parser error: %1</source>
-        <translation type="vanished">Pogreška analizatora: %1</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="301"/>
         <source>First point</source>
         <translation>Prva točka</translation>
@@ -11977,10 +9746,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="320"/>
         <source>Rightmost point</source>
         <translation>Krajnja desna točka</translation>
-    </message>
-    <message>
-        <source>Invalid value</source>
-        <translation type="vanished">Nevažeća vrijednost</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="399"/>
@@ -12016,30 +9781,6 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>DialogTriangle</name>
     <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
-        <source>First point of axis</source>
-        <translation type="vanished">Prva točka osi</translation>
-    </message>
-    <message>
-        <source>First point of line</source>
-        <translation type="vanished">Prva točka linije</translation>
-    </message>
-    <message>
-        <source>Second point of axis</source>
-        <translation type="vanished">Druga točka osi</translation>
-    </message>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">Prva točka</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">Druga točka</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.cpp" line="115"/>
         <source>Select second point of axis</source>
         <translation>Odaberi drugu točku osi</translation>
@@ -12059,18 +9800,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="170"/>
         <source>Triangle tool</source>
         <translation>Alat za trokut</translation>
-    </message>
-    <message>
-        <source>First point of the axis</source>
-        <translation type="vanished">Prva točka osi</translation>
-    </message>
-    <message>
-        <source>Second point of the axis</source>
-        <translation type="vanished">Druga točka osi</translation>
-    </message>
-    <message>
-        <source>Second point of line</source>
-        <translation type="vanished">Druga točka linije</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="46"/>
@@ -12134,50 +9863,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtruedarts.h" line="194"/>
         <source>True darts</source>
         <translation>Pravi ušitci</translation>
-    </message>
-    <message>
-        <source>First base point</source>
-        <translation type="vanished">Prva bazna točka</translation>
-    </message>
-    <message>
-        <source>First point of angle</source>
-        <translation type="vanished">Prva točka kuta</translation>
-    </message>
-    <message>
-        <source>Second base point</source>
-        <translation type="vanished">Druga bazna točka</translation>
-    </message>
-    <message>
-        <source>Second point of angle</source>
-        <translation type="vanished">Druga točka kuta</translation>
-    </message>
-    <message>
-        <source>First dart point</source>
-        <translation type="vanished">Prva točka ušitka</translation>
-    </message>
-    <message>
-        <source>Third point of angle</source>
-        <translation type="vanished">Treća točka kuta</translation>
-    </message>
-    <message>
-        <source>Second dart point</source>
-        <translation type="vanished">Druga točka ušitka:</translation>
-    </message>
-    <message>
-        <source>Show line from second point to this point</source>
-        <translation type="vanished">Pokaži liniju od druge točke do ove točke</translation>
-    </message>
-    <message>
-        <source>Third dart point</source>
-        <translation type="vanished">Treća točka ušitka:</translation>
-    </message>
-    <message>
-        <source>First new dart point</source>
-        <translation type="vanished">Prva nova točka ušitka:</translation>
-    </message>
-    <message>
-        <source>Second new dart point</source>
-        <translation type="vanished">Druga nova točka ušitka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtruedarts.cpp" line="233"/>
@@ -12279,10 +9964,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Pogrešna formula</translation>
     </message>
     <message>
-        <source>Error while calculation formula. You can try undo last operation or fix broken formula.</source>
-        <translation type="vanished">Pogreška pri izračunu formule. Možete pokušati poništiti zadnju operaciju ili popraviti pogrešnu formulu.</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogundo.ui" line="44"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogundo.h" line="87"/>
         <source>&amp;Undo</source>
@@ -12309,10 +9990,6 @@ Svejedno primijeniti postavke?</translation>
 </context>
 <context>
     <name>DialogUnionDetails</name>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do you really want union details?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Zaista želite spojiti detalje?&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoguniondetails.ui" line="17"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoguniondetails.h" line="71"/>
@@ -12384,10 +10061,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Ažuriranje softvera</translation>
     </message>
     <message>
-        <source>A new version of %1 is available!</source>
-        <translation type="vanished">Dostupna je nova verzija %1!</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/fervor/fvupdatewindow.ui" line="39"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/FervorLib.9f14f5b4/qt.headers/ui_fvupdatewindow.h" line="106"/>
         <source>%1 %2 is now available - you have %3. Would you like to download it now?</source>
@@ -12451,14 +10124,6 @@ Svejedno primijeniti postavke?</translation>
         <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
         <translation>Greška sadržaja: nevažeći &apos;privitci&apos; s poveznicom za preuzimanje</translation>
     </message>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">Pogreška</translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation type="vanished">Informacija</translation>
-    </message>
 </context>
 <context>
     <name>HideAllBackgroundImages</name>
@@ -12515,7 +10180,7 @@ Svejedno primijeniti postavke?</translation>
 <context>
     <name>InitPieceLabelLanguages</name>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="579"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="580"/>
         <source>Default</source>
         <translation>Zadano</translation>
     </message>
@@ -12583,26 +10248,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Datoteka mjerenja.</translation>
     </message>
     <message>
-        <source>The base height</source>
-        <translation type="vanished">Osnovna visina</translation>
-    </message>
-    <message>
-        <source>The base size</source>
-        <translation type="vanished">Osnovna veličina</translation>
-    </message>
-    <message>
-        <source>Set pattern file unit: cm, mm, inch.</source>
-        <translation type="vanished">Postavi jedinice datoteke kroja: cm, mm, inč.</translation>
-    </message>
-    <message>
-        <source>The pattern unit</source>
-        <translation type="vanished">Jedinice kroja</translation>
-    </message>
-    <message>
-        <source>Use for unit testing. Run the program and open a file without showing a window.</source>
-        <translation type="vanished">Koristi za testiranje jedinica. Pokrenite program i otvorite datoteku bez prikazivanja prozora.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="1363"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation>Neispravan argument osnovne veličine. Mora biti cm, mm ili inč.</translation>
@@ -12613,29 +10258,9 @@ Svejedno primijeniti postavke?</translation>
         <translation>Ne mogu započeti slušanje dolaznih veza na imenu &apos;%1&apos;</translation>
     </message>
     <message>
-        <source>Test mode doesn&apos;t support openning several files.</source>
-        <translation type="vanished">Testni način ne podržava otvaranje više datoteka.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="1279"/>
         <source>Please, provide one input file.</source>
         <translation>Molimo, navedite jednu ulaznu datoteku.</translation>
-    </message>
-    <message>
-        <source>Open with the base size. Valid values: %1cm.</source>
-        <translation type="vanished">Otvori s osnovnom veličinom. Važeće vrijednosti: %1cm.</translation>
-    </message>
-    <message>
-        <source>Invalid base height argument. Must be %1cm.</source>
-        <translation type="vanished">Neispravan argument osnovne visine. Mora biti %1cm.</translation>
-    </message>
-    <message>
-        <source>Invalid base size argument. Must be %1cm.</source>
-        <translation type="vanished">Neispravan argument osnovne veličine. Mora biti %1cm.</translation>
-    </message>
-    <message>
-        <source>Open with the base height. Valid values: %1cm.</source>
-        <translation type="vanished">Otvori s osnovnom visinom. Važeće vrijednosti: %1cm.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/mapplication.cpp" line="1135"/>
@@ -12727,14 +10352,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Valentina</translation>
     </message>
     <message>
-        <source>Tools for creating points.</source>
-        <translation type="vanished">Alati za stvaranje točaka.</translation>
-    </message>
-    <message>
-        <source>Point</source>
-        <translation type="vanished">Točka</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1953"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1616"/>
         <source>Point along perpendicular</source>
@@ -12765,14 +10382,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Točka na udaljenosti duž linije</translation>
     </message>
     <message>
-        <source>Tools for creating lines.</source>
-        <translation type="vanished">Alati za stvaranje linija</translation>
-    </message>
-    <message>
-        <source>Line</source>
-        <translation type="vanished">Linija</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2115"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1625"/>
         <source>Line between points</source>
@@ -12785,30 +10394,10 @@ Svejedno primijeniti postavke?</translation>
         <translation>Točka na presjeku linija</translation>
     </message>
     <message>
-        <source>Tools for creating curves.</source>
-        <translation type="vanished">Alati za stvaranje krivulja</translation>
-    </message>
-    <message>
-        <source>Curve</source>
-        <translation type="vanished">Krivulja</translation>
-    </message>
-    <message>
-        <source>Tools for creating arcs.</source>
-        <translation type="vanished">Alati za stvaranje lukova</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1845"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1610"/>
         <source>Arc</source>
         <translation>Luk</translation>
-    </message>
-    <message>
-        <source>Tools for creating details.</source>
-        <translation type="vanished">Alati za stvaranje detalja</translation>
-    </message>
-    <message>
-        <source>Detail</source>
-        <translation type="vanished">Detalj</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="60"/>
@@ -13122,10 +10711,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Alat graduirana krivulja</translation>
     </message>
     <message>
-        <source>Save &amp;As...</source>
-        <translation type="vanished">Spremi &amp;Kao...</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="788"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1434"/>
         <source>Save not yet saved pattern</source>
@@ -13168,14 +10753,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1454"/>
         <source>Change the label of pattern piece</source>
         <translation>Promijeni oznaku krojnog dijela</translation>
-    </message>
-    <message>
-        <source>Table of variables</source>
-        <translation type="vanished">Tablica varijabli</translation>
-    </message>
-    <message>
-        <source>Tables of variables</source>
-        <translation type="vanished">Tablice varijabli</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="158"/>
@@ -13245,52 +10822,16 @@ Svejedno primijeniti postavke?</translation>
         <translation>Smanji</translation>
     </message>
     <message>
-        <source>Edit pattern XML code</source>
-        <translation type="vanished">Uredi XML kod kroja</translation>
-    </message>
-    <message>
-        <source>Original zoom </source>
-        <translation type="vanished">Izvorno zumiranje</translation>
-    </message>
-    <message>
-        <source>Original Zoom </source>
-        <translation type="vanished">Izvorno zumiranje</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1097"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1484"/>
         <source>Zoom fit best</source>
         <translation>Prilagodi najboljem prikazu</translation>
     </message>
     <message>
-        <source>Stop</source>
-        <translation type="vanished">Zaustavi</translation>
-    </message>
-    <message>
-        <source>Stop using tool</source>
-        <translation type="vanished">Prestani koristiti alat</translation>
-    </message>
-    <message>
-        <source>Repot Bug...</source>
-        <translation type="vanished">Prijavi grešku...</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1111"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1487"/>
         <source>Report bug</source>
         <translation>Prijavi grešku</translation>
-    </message>
-    <message>
-        <source>Close window</source>
-        <translation type="vanished">Zatvori prozor</translation>
-    </message>
-    <message>
-        <source>Online help</source>
-        <translation type="vanished">Online pomoć</translation>
-    </message>
-    <message>
-        <source>Show online help</source>
-        <translation type="vanished">Prikaži online pomoć</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5304"/>
@@ -13354,10 +10895,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>Odaberi putanju krivulje</translation>
     </message>
     <message>
-        <source>Select points, arcs, curves clockwise.</source>
-        <translation type="vanished">Odaberi točke, lukove, krivulje u smjeru kazaljke na satu.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1561"/>
         <source>Select base point</source>
         <translation>Odaberi baznu točku</translation>
@@ -13401,22 +10938,6 @@ Svejedno primijeniti postavke?</translation>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6737"/>
         <source>About Qt</source>
         <translation>O Qt</translation>
-    </message>
-    <message>
-        <source>Height: </source>
-        <translation type="vanished">Visina:</translation>
-    </message>
-    <message>
-        <source>Size: </source>
-        <translation type="vanished">Veličina</translation>
-    </message>
-    <message>
-        <source>Pattern Piece: </source>
-        <translation type="vanished">Krojni dio:</translation>
-    </message>
-    <message>
-        <source>Pattern files (*.val)</source>
-        <translation type="vanished">Datoteke krojeva (*.val)</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4529"/>
@@ -13484,11 +11005,6 @@ Svejedno primijeniti postavke?</translation>
         <translation>neimenovano.val</translation>
     </message>
     <message>
-        <source>The pattern has been modified.
-Do you want to save your changes?</source>
-        <translation type="vanished">Krojni dio je izmijenjen. Želite li spremiti promjene?</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2122"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6357"/>
         <source>&amp;Undo</source>
@@ -13511,28 +11027,12 @@ Do you want to save your changes?</source>
         <translation>Unesite novu oznaku za krojni dio.</translation>
     </message>
     <message>
-        <source>This file already opened in another window.</source>
-        <translation type="vanished">Ova datoteka je već otvorena u drugom prozoru.</translation>
-    </message>
-    <message>
-        <source>Wrong units.</source>
-        <translation type="vanished">Neispravne jedinice.</translation>
-    </message>
-    <message>
-        <source>Application doesn&apos;t support standard table with inches.</source>
-        <translation type="vanished">Aplikacija ne podržava standardnu tablicu s inčima.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="912"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="960"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7023"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7214"/>
         <source>File error.</source>
         <translation>Pogreška u datoteci.</translation>
-    </message>
-    <message>
-        <source>File loaded</source>
-        <translation type="vanished">Datoteka učitana</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7548"/>
@@ -13545,14 +11045,6 @@ Do you want to save your changes?</source>
         <translation>Ponovno otvori datoteke.</translation>
     </message>
     <message>
-        <source>Standard measurements (*.vst)</source>
-        <translation type="vanished">Standardna mjerenja (.vst)</translation>
-    </message>
-    <message>
-        <source>Individual measurements (*.vit)</source>
-        <translation type="vanished">Pojedinačna mjerenja (.vit)</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1989"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1618"/>
         <source>Special point on shoulder</source>
@@ -13563,10 +11055,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1619"/>
         <source>Triangle tool</source>
         <translation>Alat za trokut</translation>
-    </message>
-    <message>
-        <source>Point at intersection of arc and line</source>
-        <translation type="vanished">Točka na presjeku luka i linije</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2025"/>
@@ -13617,22 +11105,10 @@ Do you want to save your changes?</source>
         <translation>Segmentiranje luka</translation>
     </message>
     <message>
-        <source>Point intersect arc and axis</source>
-        <translation type="vanished">Točka na presjeku luka i osi</translation>
-    </message>
-    <message>
-        <source>Seam allowance tool</source>
-        <translation type="vanished">Alat za širinu šava</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2457"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1644"/>
         <source>Union tool</source>
         <translation>Alat za spajanje</translation>
-    </message>
-    <message>
-        <source>toolBar</source>
-        <translation type="vanished">alatnaTraka</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1142"/>
@@ -13690,10 +11166,6 @@ Do you want to save your changes?</source>
         <translation>Prikaži/sakrij kontrolne točke i smjer krivulje</translation>
     </message>
     <message>
-        <source>Tools</source>
-        <translation type="vanished">Alati</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1791"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1607"/>
         <source>Point of intersection arcs</source>
@@ -13724,30 +11196,10 @@ Do you want to save your changes?</source>
         <translation>Luk s određenom duljinom</translation>
     </message>
     <message>
-        <source>Settings</source>
-        <translation type="vanished">Postavke</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="337"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1686"/>
         <source>Layout pages</source>
         <translation>Stranice rasporeda</translation>
-    </message>
-    <message>
-        <source>Save as PDF</source>
-        <translation type="vanished">Spremi kao PDF</translation>
-    </message>
-    <message>
-        <source>Save original layout</source>
-        <translation type="vanished">Spremi izvorni raspored</translation>
-    </message>
-    <message>
-        <source>Save as tiled PDF</source>
-        <translation type="vanished">Spremi kao pločasti PDF</translation>
-    </message>
-    <message>
-        <source>Split and save a layout into smaller pages</source>
-        <translation type="vanished">Podijeli i spremi raspored na manje stranice</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1202"/>
@@ -13780,10 +11232,6 @@ Do you want to save your changes?</source>
         <translation>Pregled ispisa izvornog rasporeda</translation>
     </message>
     <message>
-        <source>Export As...</source>
-        <translation type="vanished">Izvezi kao...</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1286"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1752"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1524"/>
@@ -13795,14 +11243,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1901"/>
         <source>Select first an arc</source>
         <translation>Odaberite prvi luk</translation>
-    </message>
-    <message>
-        <source>Select first circle center </source>
-        <translation type="vanished">Odaberite prvo središte kruga</translation>
-    </message>
-    <message>
-        <source>Select point on tangent </source>
-        <translation type="vanished">Odaberite točku na tangenti</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1956"/>
@@ -13820,10 +11260,6 @@ Do you want to save your changes?</source>
         <translation>Način detalja</translation>
     </message>
     <message>
-        <source>You can&apos;t use now the Detail mode. Please, create at least one workpiece.</source>
-        <translation type="vanished">Ne možete sada koristiti način detalja. Molimo, izradite barem jedan radni dio.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4436"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4449"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4472"/>
@@ -13834,46 +11270,14 @@ Do you want to save your changes?</source>
         <translation>Način rasporeda</translation>
     </message>
     <message>
-        <source>You can&apos;t use now the Layout mode. Please, create at least one workpiece.</source>
-        <translation type="vanished">Ne možete sada koristiti način rasporeda. Molimo, izradite barem jedan radni dio.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6299"/>
         <source>Unsaved changes</source>
         <translation>Nespremljene promjene</translation>
     </message>
     <message>
-        <source>Load Individual ...</source>
-        <translation type="vanished">Učitaj individualno...</translation>
-    </message>
-    <message>
-        <source>Load Standard ...</source>
-        <translation type="vanished">Učitaj standardno...</translation>
-    </message>
-    <message>
-        <source>Show ...</source>
-        <translation type="vanished">Prikaži...</translation>
-    </message>
-    <message>
-        <source>Show measurements</source>
-        <translation type="vanished">Prikaži mjerenja</translation>
-    </message>
-    <message>
-        <source>Sync measurements</source>
-        <translation type="vanished">Sinkroniziraj mjerenja</translation>
-    </message>
-    <message>
-        <source>Individual measurements (*.vit);;Standard measurements (*.vst)</source>
-        <translation type="vanished">Individualna mjerenja (.vit);;Standardna mjerenja (.vst)</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2451"/>
         <source>Measurements loaded</source>
         <translation>Mjerenja učitana</translation>
-    </message>
-    <message>
-        <source>Standard measurements (*.vst);;Individual measurements (*.vit)</source>
-        <translation type="vanished">Standardna mjerenja (.vst);;Individualna mjerenja (.vit)</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7788"/>
@@ -13887,19 +11291,6 @@ Do you want to save your changes?</source>
         <translation>Izradi novi raspored</translation>
     </message>
     <message>
-        <source>Create/Edit</source>
-        <translation type="vanished">Izradi/Uredi</translation>
-    </message>
-    <message>
-        <source>Create/edit measurements</source>
-        <translation type="vanished">Izradi/uredi mjerenja</translation>
-    </message>
-    <message>
-        <source>%1, %2 (%3)</source>
-        <extracomment>Coords in status line: &quot;X, Y (units)&quot;</extracomment>
-        <translation type="vanished">%1, %2 (%3)</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="4563"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Neuspješno zaključavanje. Ova datoteka je već otvorena u drugom prozoru.</translation>
@@ -13910,30 +11301,14 @@ Do you want to save your changes?</source>
         <translation>Neuspješno zaključavanje. Ova datoteka je već otvorena u drugom prozoru. Očekuju se sukobi ako se program pokrene dvaput.</translation>
     </message>
     <message>
-        <source>Measurement file contains invalid known measurement(s).</source>
-        <translation type="vanished">Datoteka mjerenja sadrži nevažeća poznata mjerenja.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7696"/>
         <source>Measurement file has unknown format.</source>
         <translation>Datoteka mjerenja ima nepoznat format.</translation>
     </message>
     <message>
-        <source>Measurement file doesn&apos;t include all required measurements.</source>
-        <translation type="vanished">Datoteka mjerenja ne uključuje sva potrebna mjerenja.</translation>
-    </message>
-    <message>
-        <source>Please, additionaly provide: %1</source>
-        <translation type="vanished">Molimo, dodatno unesite: %1</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="946"/>
         <source>Measurement files types have not match.</source>
         <translation>Tipovi datoteka mjerenja se ne podudaraju.</translation>
-    </message>
-    <message>
-        <source>Measurements was synced</source>
-        <translation type="vanished">Mjerenja su sinkronizirana</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2630"/>
@@ -13952,25 +11327,9 @@ Do you want to save your changes?</source>
         <translation>Datoteka mjerenja &apos;%1&apos; nije pronađena.</translation>
     </message>
     <message>
-        <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location</source>
-        <translation type="vanished">Datoteka mjerenja &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; nije pronađena. Želite li ažurirati lokaciju datoteke?</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7617"/>
         <source>Loading measurements file</source>
         <translation>Učitavanje datoteke mjerenja</translation>
-    </message>
-    <message>
-        <source>Not supported size value &apos;%1&apos; for this pattern file.</source>
-        <translation type="vanished">Nepodržana vrijednost veličine &apos;%1&apos; za ovu datoteku kroja.</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t set size. Need a file with standard measurements.</source>
-        <translation type="vanished">Nije moguće postaviti veličinu. Potrebna je datoteka sa standardnim mjerenjima.</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t set size. File wasn&apos;t opened.</source>
-        <translation type="vanished">Nije moguće postaviti veličinu. Datoteka nije otvorena.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7971"/>
@@ -13978,18 +11337,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="8057"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation>Metoda %1 ne radi u GUI načinu rada</translation>
-    </message>
-    <message>
-        <source>Not supported height value &apos;%1&apos; for this pattern file.</source>
-        <translation type="vanished">Nepodržana vrijednost visine &apos;%1&apos; za ovu datoteku kroja.</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t set height. Need a file with standard measurements.</source>
-        <translation type="vanished">Nije moguće postaviti visinu. Potrebna je datoteka sa standardnim mjerenjima.</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t set height. File wasn&apos;t opened.</source>
-        <translation type="vanished">Nije moguće postaviti visinu. Datoteka nije otvorena.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7459"/>
@@ -14041,14 +11388,6 @@ Do you want to save your changes?</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Način rada za izradu rasporeda detalja. Ovaj način rada je dostupan ako je kreiran barem jedan detalj u fazi &quot;Način rada s detaljima&quot;. Raspored se može izvesti u željeni format datoteke i spremiti na vaš tvrdi disk.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <source>Unload measurements</source>
-        <translation type="vanished">Isprazni mjerenja</translation>
-    </message>
-    <message>
-        <source>Unload measurements if they was not used in a pattern file.</source>
-        <translation type="vanished">Isprazni mjerenja ako nisu korištena u datoteci kroja.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2512"/>
         <source>Measurements unloaded</source>
         <translation>Mjerenja su ispražnjena</translation>
@@ -14080,41 +11419,9 @@ Do you want to save your changes?</source>
         <translation>Izradi/Uredi mjerenja</translation>
     </message>
     <message>
-        <source>Save...</source>
-        <translation type="vanished">Spremi...</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="6315"/>
         <source>Don&apos;t Save</source>
         <translation>Nemoj spremiti</translation>
-    </message>
-    <message>
-        <source>Locking file</source>
-        <translation type="vanished">Zaključavanje datoteke</translation>
-    </message>
-    <message>
-        <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="vanished">Ova datoteka je već otvorena u drugom prozoru. Ignorirajte ako želite nastaviti (ne preporučuje se, može uzrokovati korupciju podataka).</translation>
-    </message>
-    <message>
-        <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="vanished">Datoteka za zaključavanje nije mogla biti stvorena zbog nedostatka dozvola. Ignorirajte ako želite nastaviti (ne preporučuje se, može uzrokovati korupciju podataka).</translation>
-    </message>
-    <message>
-        <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="vanished">Dogodila se nepoznata pogreška, primjerice, puna particija spriječila je zapisivanje zaključne datoteke. Ignorirajte ako želite nastaviti (ne preporučuje se, može uzrokovati korupciju podataka).</translation>
-    </message>
-    <message>
-        <source>The lock file could not be created, for lack of permissions.</source>
-        <translation type="vanished">Datoteku za zaključavanje nije moguće kreirati zbog nedostatka dozvola.</translation>
-    </message>
-    <message>
-        <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation type="vanished">Dogodila se nepoznata pogreška, na primjer, puna particija spriječila je zapisivanje datoteke za zaključavanje.</translation>
-    </message>
-    <message>
-        <source>Report Bug...</source>
-        <translation type="vanished">Prijavi grešku...</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1881"/>
@@ -14126,14 +11433,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1923"/>
         <source>Select first curve</source>
         <translation>Odaberite prvu krivulju</translation>
-    </message>
-    <message>
-        <source>(read only)</source>
-        <translation type="vanished">(samo za čitanje)</translation>
-    </message>
-    <message>
-        <source>Measurements was changed. Do you want to sync measurements now?</source>
-        <translation type="vanished">Mjerenja su promijenjena. Želite li sada sinkronizirati mjerenja?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2169"/>
@@ -14152,26 +11451,6 @@ Do you want to save your changes?</source>
         <translation>Odaberite točku putanje kubične Bezierove krivulje</translation>
     </message>
     <message>
-        <source>Toolbar pointer</source>
-        <translation type="vanished">Alatna traka za pokazivač</translation>
-    </message>
-    <message>
-        <source>Operations</source>
-        <translation type="vanished">Operacije</translation>
-    </message>
-    <message>
-        <source>Create new group</source>
-        <translation type="vanished">Izradi novu grupu</translation>
-    </message>
-    <message>
-        <source>Groups</source>
-        <translation type="vanished">Grupe</translation>
-    </message>
-    <message>
-        <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">Odaberite jedan ili više objekata, &lt;b&gt;Enter&lt;/b&gt; - dovršite stvaranje</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2349"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1638"/>
         <source>Rotate objects</source>
@@ -14186,14 +11465,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1492"/>
         <source>Close pattern</source>
         <translation>Zatvori trenutni kroj</translation>
-    </message>
-    <message>
-        <source>Select one or more objects, &lt;b&gt;Enter&lt;/b&gt; - confirm selection</source>
-        <translation type="vanished">Odaberite jedan ili više objekata, &lt;b&gt;Enter&lt;/b&gt; - potvrdite odabir</translation>
-    </message>
-    <message>
-        <source>Tool pointer</source>
-        <translation type="vanished">Alat za pokazivač</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2079"/>
@@ -14220,10 +11491,6 @@ Do you want to save your changes?</source>
         <translation>Prikaži koji će detalji ići u raspored</translation>
     </message>
     <message>
-        <source>You can&apos;t use now the Layout mode. Please, include at least one detail in layout.</source>
-        <translation type="vanished">Ne možete sada koristiti način rasporeda. Molimo, uključite barem jedan detalj u raspored.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1077"/>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1080"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1480"/>
@@ -14247,14 +11514,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="3278"/>
         <source>Pattern Piece:</source>
         <translation>Krojni dio:</translation>
-    </message>
-    <message>
-        <source>Height:</source>
-        <translation type="vanished">Visina:</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation type="vanished">Veličina:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="7612"/>
@@ -14283,10 +11542,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2662"/>
         <source>Measurements were changed. Do you want to sync measurements now?</source>
         <translation>Mjerenja su promijenjena. Želite li sada sinkronizirati mjerenja?</translation>
-    </message>
-    <message>
-        <source>Gradation doesn&apos;t support inches</source>
-        <translation type="vanished">Gradacija ne podržava inče.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="2616"/>
@@ -15205,94 +12460,14 @@ Neuspješne instalacije: %2</translation>
 <context>
     <name>MainWindowsNoGUI</name>
     <message>
-        <source>For saving multypage document all sheet should have the same size. Use export function instead.</source>
-        <translation type="vanished">Za spremanje dokumenta s više stranica sve stranice moraju biti iste veličine. Umjesto toga koristite funkciju izvoza.</translation>
-    </message>
-    <message>
-        <source>For previewing multypage document all sheet should have the same size.</source>
-        <translation type="vanished">Za pregled dokumenta s više stranica sve stranice moraju biti iste veličine.</translation>
-    </message>
-    <message>
-        <source>For printing multypages document all sheet should have the same size.</source>
-        <translation type="vanished">Za ispis dokumenta s više stranica sve stranice moraju biti iste veličine.</translation>
-    </message>
-    <message>
-        <source>Creating file &apos;%1&apos; failed! %2</source>
-        <translation type="vanished">Stvaranje datoteke &apos;%1&apos; nije uspjelo! %2</translation>
-    </message>
-    <message>
-        <source>Critical error!</source>
-        <translation type="vanished">Kritična pogreška!</translation>
-    </message>
-    <message>
-        <source>Print to pdf</source>
-        <translation type="vanished">Ispiši u PDF</translation>
-    </message>
-    <message>
-        <source>PDF file (*.pdf)</source>
-        <translation type="vanished">PDF datoteka (*.pdf)</translation>
-    </message>
-    <message>
-        <source>Print error</source>
-        <translation type="vanished">Pogreška pri ispisu</translation>
-    </message>
-    <message>
-        <source>Cannot proceed because there are no available printers in your system.</source>
-        <translation type="vanished">Nije moguće nastaviti jer u sustavu nema dostupnih pisača.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="1222"/>
         <source>unnamed</source>
         <translation>bez naslova</translation>
     </message>
     <message>
-        <source>The layout is stale.</source>
-        <translation type="vanished">Raspored je zastario.</translation>
-    </message>
-    <message>
-        <source>The layout was not updated since last pattern modification. Do you want to continue?</source>
-        <translation type="vanished">Raspored nije ažuriran od posljednje izmjene kroja. Želite li nastaviti?</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="468"/>
         <source>Couldn&apos;t prepare data for creation layout</source>
         <translation>Nije moguće pripremiti podatke za izradu rasporeda</translation>
-    </message>
-    <message>
-        <source>Several workpieces left not arranged, but none of them match for paper</source>
-        <translation type="vanished">Nekoliko radnih dijelova ostalo je nepostavljeno, ali nijedan ne odgovara za papir.</translation>
-    </message>
-    <message>
-        <source>Can&apos;t open printer %1</source>
-        <translation type="vanished">Nije moguće otvoriti pisač %1.</translation>
-    </message>
-    <message>
-        <source>Export error.</source>
-        <translation type="vanished">Pogreška pri izvozu.</translation>
-    </message>
-    <message>
-        <source>For saving multipage document all sheet should have the same size. Use export function instead.</source>
-        <translation type="vanished">Za spremanje dokumenta s više stranica sve stranice moraju biti iste veličine. Umjesto toga koristite funkciju izvoza.</translation>
-    </message>
-    <message>
-        <source>For previewing multipage document all sheet should have the same size.</source>
-        <translation type="vanished">Za pregled višestranog dokumenta svi listovi moraju biti iste veličine.</translation>
-    </message>
-    <message>
-        <source>For printing multipages document all sheet should have the same size.</source>
-        <translation type="vanished">Za ispis višestranih dokumenata svi listovi moraju biti iste veličine.</translation>
-    </message>
-    <message>
-        <source>Pages will be cropped because they do not fit printer paper size.</source>
-        <translation type="vanished">Stranice će biti odrezane jer ne odgovaraju veličini papira pisača.</translation>
-    </message>
-    <message>
-        <source>Can&apos;t create path</source>
-        <translation type="vanished">Nije moguće stvoriti putanju.</translation>
-    </message>
-    <message>
-        <source>Cannot set printer margins</source>
-        <translation type="vanished">Nije moguće postaviti margine pisača</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindowsnogui.cpp" line="564"/>
@@ -15518,116 +12693,6 @@ Nedostaje: %1
         <location filename="../../src/libs/vtools/undocommands/label/operationshowlabel.cpp" line="48"/>
         <source>toggle label</source>
         <translation>uključi/isključi oznaku</translation>
-    </message>
-</context>
-<context>
-    <name>PathPage</name>
-    <message>
-        <source>Open Directory</source>
-        <translation type="vanished">Otvori direktorij</translation>
-    </message>
-    <message>
-        <source>Path that use Valentina</source>
-        <translation type="vanished">Put koji koristi Valentina</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">Zadano</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="vanished">Uredi</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="vanished">Vrsta</translation>
-    </message>
-    <message>
-        <source>Path</source>
-        <translation type="vanished">Put</translation>
-    </message>
-    <message>
-        <source>Individual measurements</source>
-        <translation type="vanished">Individualna mjerenja</translation>
-    </message>
-    <message>
-        <source>Patterns</source>
-        <translation type="vanished">Krojevi</translation>
-    </message>
-    <message>
-        <source>Standard measurements</source>
-        <translation type="vanished">Standardna mjerenja</translation>
-    </message>
-    <message>
-        <source>Layout</source>
-        <translation type="vanished">Raspored</translation>
-    </message>
-    <message>
-        <source>Templates</source>
-        <translation type="vanished">Predlošci</translation>
-    </message>
-</context>
-<context>
-    <name>PatternPage</name>
-    <message>
-        <source>User</source>
-        <translation type="vanished">Korisnik</translation>
-    </message>
-    <message>
-        <source>User name</source>
-        <translation type="vanished">Korisničko ime</translation>
-    </message>
-    <message>
-        <source>Graphical output</source>
-        <translation type="vanished">Grafički izlaz</translation>
-    </message>
-    <message>
-        <source>Use antialiasing</source>
-        <translation type="vanished">Koristi zaglađivanje</translation>
-    </message>
-    <message>
-        <source>Undo</source>
-        <translation type="vanished">Poništi</translation>
-    </message>
-    <message>
-        <source>Count steps (0 - no limit)</source>
-        <translation type="vanished">Broj koraka (0 - nema ograničenja)</translation>
-    </message>
-    <message>
-        <source>User name:</source>
-        <translation type="vanished">Korisničko ime:</translation>
-    </message>
-    <message>
-        <source>Count steps (0 - no limit):</source>
-        <translation type="vanished">Broj koraka (0 - nema ograničenja):</translation>
-    </message>
-    <message>
-        <source>All user defined materials have been deleted!</source>
-        <translation type="vanished">Svi korisnički definirani materijali su izbrisani!</translation>
-    </message>
-    <message>
-        <source>User defined materials</source>
-        <translation type="vanished">Korisnički definirani materijali</translation>
-    </message>
-    <message>
-        <source>Delete all</source>
-        <translation type="vanished">Izbriši sve</translation>
-    </message>
-    <message>
-        <source>Workpiece</source>
-        <translation type="vanished">Radni dijelovi</translation>
-    </message>
-    <message>
-        <source>Forbid flipping</source>
-        <translation type="vanished">Zabranjeno okretanje</translation>
-    </message>
-    <message>
-        <source>By default forbid flipping for all workpieces</source>
-        <translation type="vanished">Prema zadanim postavkama zabrani okretanje za sve radne dijelove</translation>
-    </message>
-    <message>
-        <source>By default forbid flipping for all new created workpieces</source>
-        <translation type="vanished">Prema zadanim postavkama zabrani okretanje za sve novokreirane radne dijelove</translation>
     </message>
 </context>
 <context>
@@ -16937,14 +14002,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
 <context>
     <name>QApplication</name>
     <message>
-        <source>The path to the measurments is already relative.</source>
-        <translation type="vanished">Putanja do mjerenja je već relativna.</translation>
-    </message>
-    <message>
-        <source>The path to the measurments is already absolute.</source>
-        <translation type="vanished">Putanja do mjerenja je već apsolutna.</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vmisc/vmainbase.h" line="54"/>
         <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
         <translation>Izvršna datoteka &apos;%1&apos; zahtijeva Qt %2, pronađen Qt %3.</translation>
@@ -16953,49 +14010,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <location filename="../../src/libs/vmisc/vmainbase.h" line="59"/>
         <source>Incompatible Qt Library Error</source>
         <translation>Pogreška nekompatibilne Qt biblioteke</translation>
-    </message>
-</context>
-<context>
-    <name>QCommandLineParser</name>
-    <message>
-        <source>Displays version information.</source>
-        <translation type="vanished">Prikazuje informacije o verziji.</translation>
-    </message>
-    <message>
-        <source>Displays this help.</source>
-        <translation type="vanished">Prikazuje ovu pomoć.</translation>
-    </message>
-    <message>
-        <source>Unknown option &apos;%1&apos;.</source>
-        <translation type="vanished">Nepoznata opcija &apos;%1&apos;.</translation>
-    </message>
-    <message>
-        <source>Unknown options: %1.</source>
-        <translation type="vanished">Nepoznate opcije: %1.</translation>
-    </message>
-    <message>
-        <source>Missing value after &apos;%1&apos;.</source>
-        <translation type="vanished">Nedostaje vrijednost nakon &apos;%1&apos;.</translation>
-    </message>
-    <message>
-        <source>Unexpected value after &apos;%1&apos;.</source>
-        <translation type="vanished">Neočekivana vrijednost nakon &apos;%1&apos;.</translation>
-    </message>
-    <message>
-        <source>[options]</source>
-        <translation type="vanished">[opcije]</translation>
-    </message>
-    <message>
-        <source>Usage: %1</source>
-        <translation type="vanished">Korištenje: %1</translation>
-    </message>
-    <message>
-        <source>Options:</source>
-        <translation type="vanished">Opcije:</translation>
-    </message>
-    <message>
-        <source>Arguments:</source>
-        <translation type="vanished">Argumenti:</translation>
     </message>
 </context>
 <context>
@@ -17076,12 +14090,12 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>Pogreška kompatibilnosti VTextManager: actualClassVersion = %1 i classVersion = %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="618"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="619"/>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation>Pogreška podudaranja prefiksa CustomSARecord: actualStreamHeader = 0x%1 i streamHeader = 0x%2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="630"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="631"/>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation>Pogreška kompatibilnosti CustomSARecord: actualClassVersion = %1 i classVersion = %2</translation>
     </message>
@@ -17119,21 +14133,17 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <source>Create new pattern piece to start working.</source>
-        <translation type="vanished">Izradi novi krojni dio za početak rada.</translation>
-    </message>
-    <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="548"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="549"/>
         <source>mm</source>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="557"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="558"/>
         <source>cm</source>
         <translation>cm</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="550"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="551"/>
         <source>inch</source>
         <translation>inč</translation>
     </message>
@@ -17151,22 +14161,14 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>Vrijednost</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="552"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="553"/>
         <source>px</source>
         <translation>px</translation>
-    </message>
-    <message>
-        <source>add node</source>
-        <translation type="vanished">dodaj čvor</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/undocommands/movepiece.cpp" line="55"/>
         <source>move detail</source>
         <translation>pomakni detalj</translation>
-    </message>
-    <message>
-        <source>Changes applied.</source>
-        <translation type="vanished">Promjene su primijenjene.</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/xml/vplayoutfilereader.cpp" line="1140"/>
@@ -17701,21 +14703,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
     </message>
 </context>
 <context>
-    <name>QSaveFile</name>
-    <message>
-        <source>Existing file %1 is not writable</source>
-        <translation type="vanished">Postojeća datoteka %1 nije zapisiva.</translation>
-    </message>
-    <message>
-        <source>Writing canceled by application</source>
-        <translation type="vanished">Pisanje je otkazano od strane aplikacije.</translation>
-    </message>
-    <message>
-        <source>Partial write. Partition full?</source>
-        <translation type="vanished">Djelomično pisanje. Particija puna?</translation>
-    </message>
-</context>
-<context>
     <name>QmuParser</name>
     <message>
         <location filename="../../src/libs/qmuparser/qmuparser.cpp" line="301"/>
@@ -17978,10 +14965,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
 <context>
     <name>RenamePP</name>
     <message>
-        <source>rename pattern piece</source>
-        <translation type="vanished">preimenuj krojni dio</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/undocommands/renamepp.cpp" line="47"/>
         <source>rename pattern block</source>
         <translation>preimenuj blok uzorka</translation>
@@ -18012,20 +14995,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
     </message>
 </context>
 <context>
-    <name>RotationMoveLabel</name>
-    <message>
-        <source>move point label</source>
-        <translation type="vanished">pomakni oznaku točke</translation>
-    </message>
-</context>
-<context>
-    <name>SaveDetailOptions</name>
-    <message>
-        <source>save detail option</source>
-        <translation type="vanished">spremi opciju detalja</translation>
-    </message>
-</context>
-<context>
     <name>SavePieceOptions</name>
     <message>
         <location filename="../../src/libs/vtools/undocommands/savepieceoptions.cpp" line="49"/>
@@ -18052,10 +15021,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
 <context>
     <name>SaveToolOptions</name>
     <message>
-        <source>save tool option</source>
-        <translation type="vanished">spremi opciju alata</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/undocommands/savetooloptions.cpp" line="43"/>
         <source>save tool options</source>
         <translation>spremi opcije alata</translation>
@@ -18079,7 +15044,7 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
     <message>
         <location filename="../../src/libs/vtools/undocommands/label/showdoublelabel.cpp" line="55"/>
         <source>toggle the second dart label</source>
-        <translation type="unfinished"></translation>
+        <translation>Promijeni prikaz oznake drugog ušitka</translation>
     </message>
 </context>
 <context>
@@ -18680,33 +15645,9 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
 <context>
     <name>TMainWindow</name>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Select New for creation measurement file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Odaberite Novi za stvaranje datoteke mjerenja.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="vanished">Naziv</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="600"/>
         <source>Calculated value</source>
         <translation>Izračunata vrijednost</translation>
-    </message>
-    <message>
-        <source>Formula</source>
-        <translation type="vanished">Formula</translation>
-    </message>
-    <message>
-        <source>Base value</source>
-        <translation type="vanished">Osnovna vrijednost</translation>
-    </message>
-    <message>
-        <source>In sizes</source>
-        <translation type="vanished">Po veličinama</translation>
-    </message>
-    <message>
-        <source>In heights</source>
-        <translation type="vanished">Po visinama</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="436"/>
@@ -18733,14 +15674,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <location filename="../../src/app/tape/tmainwindow.ui" line="704"/>
         <source>Base value:</source>
         <translation>Osnovna vrijednost:</translation>
-    </message>
-    <message>
-        <source>In sizes:</source>
-        <translation type="vanished">Po veličinama:</translation>
-    </message>
-    <message>
-        <source>In heights:</source>
-        <translation type="vanished">Po visinama:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="827"/>
@@ -18788,46 +15721,14 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>Putanja:</translation>
     </message>
     <message>
-        <source>Path to file</source>
-        <translation type="vanished">Putanja do datoteke</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="969"/>
         <source>Show in Explorer</source>
         <translation>Prikaži u Exploreru</translation>
     </message>
     <message>
-        <source>Base size:</source>
-        <translation type="vanished">Osnovna veličina:</translation>
-    </message>
-    <message>
-        <source>Base size value</source>
-        <translation type="vanished">Vrijednost osnovne veličine</translation>
-    </message>
-    <message>
-        <source>Base height:</source>
-        <translation type="vanished">Osnovna visina:</translation>
-    </message>
-    <message>
-        <source>Base height value</source>
-        <translation type="vanished">Vrijednost osnovne visine</translation>
-    </message>
-    <message>
-        <source>Given name:</source>
-        <translation type="vanished">Ime:</translation>
-    </message>
-    <message>
-        <source>Family name:</source>
-        <translation type="vanished">Prezime:</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1114"/>
         <source>Birth date:</source>
         <translation>Datum rođenja:</translation>
-    </message>
-    <message>
-        <source>yyyy-MM-dd</source>
-        <translation type="vanished">yyyy-MM-dd</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1176"/>
@@ -18838,18 +15739,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1202"/>
         <source>Notes:</source>
         <translation>Bilješke:</translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation type="vanished">Datoteka</translation>
-    </message>
-    <message>
-        <source>Window</source>
-        <translation type="vanished">Prozor</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation type="vanished">Pomoć</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="64"/>
@@ -18869,34 +15758,14 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>Gradacija</translation>
     </message>
     <message>
-        <source>Open individual ...</source>
-        <translation type="vanished">Otvori pojedinačna ...</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="3660"/>
         <source>Save</source>
         <translation>Spremi</translation>
     </message>
     <message>
-        <source>Save As ...</source>
-        <translation type="vanished">Spremi kao ...</translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="vanished">Izlaz</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1503"/>
         <source>About &amp;Qt</source>
         <translation>O &amp;Qt</translation>
-    </message>
-    <message>
-        <source>About Tape</source>
-        <translation type="vanished">O Tape</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="vanished">Novi</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1540"/>
@@ -18914,21 +15783,9 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>Samo za čitanje</translation>
     </message>
     <message>
-        <source>Open standard ...</source>
-        <translation type="vanished">Otvori standard ...</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1584"/>
         <source>Open template</source>
         <translation>Otvori predložak</translation>
-    </message>
-    <message>
-        <source>Database</source>
-        <translation type="vanished">Baza podataka</translation>
-    </message>
-    <message>
-        <source>Show information about all known measurement</source>
-        <translation type="vanished">Prikaži informacije o svim poznatim mjerenjima</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1592"/>
@@ -18964,14 +15821,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>mjere</translation>
     </message>
     <message>
-        <source>Individual measurements (*.vit)</source>
-        <translation type="vanished">Pojedinačna mjerenja (.vit)</translation>
-    </message>
-    <message>
-        <source>Standard measurements (*.vst)</source>
-        <translation type="vanished">Standardna mjerenja (.vst)</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1043"/>
         <source>Save as</source>
         <translation>Spremi kao</translation>
@@ -18985,10 +15834,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1528"/>
         <source>Edit measurement</source>
         <translation>Uredi mjerenje</translation>
-    </message>
-    <message>
-        <source>M_%1</source>
-        <translation type="vanished">M_%1</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="2403"/>
@@ -19011,18 +15856,6 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>Pogreška analizatora: %1</translation>
     </message>
     <message>
-        <source>Standard measurements</source>
-        <translation type="vanished">Standardna mjerenja</translation>
-    </message>
-    <message>
-        <source>Height: </source>
-        <translation type="vanished">Visina:</translation>
-    </message>
-    <message>
-        <source>Size: </source>
-        <translation type="vanished">Veličina</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="686"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="811"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1024"/>
@@ -19038,19 +15871,9 @@ Ova će se opcija primijeniti nakon ponovnog pokretanja.</translation>
         <translation>neimenovano</translation>
     </message>
     <message>
-        <source>&lt;Empty&gt;</source>
-        <translation type="vanished">&lt;Prazno&gt;</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="3649"/>
         <source>Unsaved changes</source>
         <translation>Nespremljene promjene</translation>
-    </message>
-    <message>
-        <source>Measurements have been modified.
-Do you want to save your changes?</source>
-        <translation type="vanished">Mjerenja su izmijenjena.
-Želite li spremiti promjene?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4189"/>
@@ -19085,38 +15908,6 @@ Do you want to save your changes?</source>
         <translation>Jedinica kroja:</translation>
     </message>
     <message>
-        <source>Find:</source>
-        <translation type="vanished">Pronađi:</translation>
-    </message>
-    <message>
-        <source>Find Previous</source>
-        <translation type="vanished">Pronađi prethodno</translation>
-    </message>
-    <message>
-        <source>Ctrl+Shift+G</source>
-        <translation type="vanished">Ctrl+Shift+G</translation>
-    </message>
-    <message>
-        <source>Find Next</source>
-        <translation type="vanished">Pronađi sljedeće</translation>
-    </message>
-    <message>
-        <source>Ctrl+G</source>
-        <translation type="vanished">Ctrl+G</translation>
-    </message>
-    <message>
-        <source>Individual measurements (*.vit);;Standard measurements (*.vst);;All files (*.*)</source>
-        <translation type="vanished">Pojedinačna mjerenja (.vit);;Standardna mjerenja (.vst);;Sve datoteke (.)</translation>
-    </message>
-    <message>
-        <source>Standard measurements (*.vst);;Individual measurements (*.vit);;All files (*.*)</source>
-        <translation type="vanished">Standardna mjerenja (.vst);;Pojedinačna mjerenja (.vit);;Sve datoteke (.)</translation>
-    </message>
-    <message>
-        <source>Measurements (*.vst *.vit);;All files (*.*)</source>
-        <translation type="vanished">Mjerenja (.vst .vit);;Sve datoteke (.)</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="1075"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Neuspješno zaključavanje. Ova datoteka je već otvorena u drugom prozoru.</translation>
@@ -19127,18 +15918,10 @@ Do you want to save your changes?</source>
         <translation>Neuspješno zaključavanje. Ova datoteka je već otvorena u drugom prozoru. Očekuju se sukobi ako se program pokrene dvaput.</translation>
     </message>
     <message>
-        <source>File contains invalid known measurement(s).</source>
-        <translation type="vanished">Datoteka sadrži nevažeća poznata mjerenja.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="507"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="4409"/>
         <source>File has unknown format.</source>
         <translation>Datoteka ima nepoznat format.</translation>
-    </message>
-    <message>
-        <source>Full name</source>
-        <translation type="vanished">Puno ime</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="468"/>
@@ -19160,25 +15943,9 @@ Do you want to save your changes?</source>
         <translation>Nije moguće pronaći mjerenje &apos;%1&apos;.</translation>
     </message>
     <message>
-        <source>The base value of known measurement forbidden to change.</source>
-        <translation type="vanished">Osnovnu vrijednost poznatog mjerenja nije dopušteno mijenjati.</translation>
-    </message>
-    <message>
-        <source>The size increase value of known measurement forbidden to change.</source>
-        <translation type="vanished">Vrijednost povećanja veličine poznatog mjerenja nije dopušteno mijenjati.</translation>
-    </message>
-    <message>
-        <source>The height increase value of known measurement forbidden to change.</source>
-        <translation type="vanished">Vrijednost povećanja visine poznatog mjerenja nije dopušteno mijenjati.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="2659"/>
         <source>The full name of known measurement forbidden to change.</source>
         <translation>Puno ime poznatog mjerenja nije dopušteno mijenjati.</translation>
-    </message>
-    <message>
-        <source>Name in formula</source>
-        <translation type="vanished">Naziv u formuli</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="682"/>
@@ -19224,14 +15991,6 @@ Do you want to save your changes?</source>
         <translation>Spol:</translation>
     </message>
     <message>
-        <source>PM system:</source>
-        <translation type="vanished">PM sustav:</translation>
-    </message>
-    <message>
-        <source>Create from existing ...</source>
-        <translation type="vanished">Stvori iz postojeće ...</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1614"/>
         <source>Create from existing file</source>
         <translation>Stvori iz postojeće datoteke</translation>
@@ -19242,22 +16001,10 @@ Do you want to save your changes?</source>
         <translation>Odaberi datoteku</translation>
     </message>
     <message>
-        <source>Export standard measurements not supported.</source>
-        <translation type="vanished">Izvoz standardnih mjerenja nije podržan.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1352"/>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1660"/>
         <source>Measurement diagram</source>
         <translation>Dijagram mjerenja</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=\&quot;center\&quot;&gt;Nepoznato mjerenje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Unknown measurement&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:340pt;&quot;&gt;?&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Nepoznato mjerenje&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="3078"/>
@@ -19290,62 +16037,14 @@ Do you want to save your changes?</source>
         <translation>Čitljiv naziv mjere.</translation>
     </message>
     <message>
-        <source>Customer&apos;s name.</source>
-        <translation type="vanished">Ime kupca.</translation>
-    </message>
-    <message>
-        <source>Customer&apos;s family name.</source>
-        <translation type="vanished">Prezime kupca.</translation>
-    </message>
-    <message>
-        <source>Customer&apos;s email address.</source>
-        <translation type="vanished">E-mail adresa kupca.</translation>
-    </message>
-    <message>
-        <source>Save...</source>
-        <translation type="vanished">Spremi...</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="3665"/>
         <source>Don&apos;t Save</source>
         <translation>Nemoj spremiti</translation>
     </message>
     <message>
-        <source>Locking file</source>
-        <translation type="vanished">Zaključavanje datoteke</translation>
-    </message>
-    <message>
-        <source>This file already opened in another window. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="vanished">Ova datoteka je već otvorena u drugom prozoru. Ignorirajte ako želite nastaviti (ne preporučuje se, može uzrokovati korupciju podataka).</translation>
-    </message>
-    <message>
-        <source>The lock file could not be created, for lack of permissions. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="vanished">Datoteka za zaključavanje nije mogla biti stvorena zbog nedostatka dozvola. Ignorirajte ako želite nastaviti (ne preporučuje se, može uzrokovati korupciju podataka).</translation>
-    </message>
-    <message>
-        <source>Unknown error happened, for instance a full partition prevented writing out the lock file. Ignore if you want to continue (not recommended, can cause a data corruption).</source>
-        <translation type="vanished">Dogodila se nepoznata pogreška, primjerice, puna particija spriječila je zapisivanje zaključne datoteke. Ignorirajte ako želite nastaviti (ne preporučuje se, može uzrokovati korupciju podataka).</translation>
-    </message>
-    <message>
-        <source>The lock file could not be created, for lack of permissions.</source>
-        <translation type="vanished">Datoteku za zaključavanje nije moguće kreirati zbog nedostatka dozvola.</translation>
-    </message>
-    <message>
-        <source>Unknown error happened, for instance a full partition prevented writing out the lock file.</source>
-        <translation type="vanished">Dogodila se nepoznata pogreška, na primjer, puna particija spriječila je zapisivanje datoteke za zaključavanje.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1628"/>
         <source>Export to CSV</source>
         <translation>Izvoz u CSV</translation>
-    </message>
-    <message>
-        <source>Comma-Separated Values (*.cvs)</source>
-        <translation type="vanished">Vrijednosti odvojene zarezima (*.cvs)</translation>
-    </message>
-    <message>
-        <source>Invalid value</source>
-        <translation type="vanished">Nevažeća vrijednost</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="332"/>
@@ -19363,21 +16062,9 @@ Do you want to save your changes?</source>
         <translation>Ime kupca</translation>
     </message>
     <message>
-        <source>Customer&apos;s family name</source>
-        <translation type="vanished">Prezime kupca</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1192"/>
         <source>Customer&apos;s email address</source>
         <translation>E-mail adresa kupca</translation>
-    </message>
-    <message>
-        <source>Height:</source>
-        <translation type="vanished">Visina:</translation>
-    </message>
-    <message>
-        <source>Size:</source>
-        <translation type="vanished">Veličina:</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="686"/>
@@ -19778,7 +16465,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5104"/>
         <source>Known measurements</source>
-        <translation type="unfinished">Poznata mjerenja</translation>
+        <translation>Poznata mjerenja</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5106"/>
@@ -19788,49 +16475,51 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5176"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5188"/>
         <source>Install known measurements</source>
-        <translation type="unfinished"></translation>
+        <translation>Instaliraj poznata mjerenja</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5135"/>
         <source>File is not a valid known measurements file.
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Datoteka nije valjana datoteka poznatih mjerenja.
+
+%1</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5143"/>
         <source>Install &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>Instaliraj &quot;%1&quot;?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5147"/>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Instaliraj</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5149"/>
         <source>Install and Relink</source>
-        <translation type="unfinished"></translation>
+        <translation>Instaliraj i ponovno poveži</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5166"/>
         <source>Unable to create known measurements folder &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nije moguće stvoriti mapu poznatih mjerenja &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5177"/>
         <source>File &quot;%1&quot; already exists in the known measurements folder. Replace it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Datoteka &quot;%1&quot; već postoji u mapi poznatih mjerenja. Želite li je zamijeniti?</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5188"/>
         <source>Unable to copy file to &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nije moguće kopirati datoteku u &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5217"/>
         <source>Descriptions and diagrams aren&apos;t available: the known measurements file this table was created with isn&apos;t installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Opisi i dijagrami nisu dostupni: datoteka poznatih mjerenja s kojom je ova tablica izrađena nije instalirana.</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="5256"/>
@@ -19967,12 +16656,12 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/tape/tmainwindow.ui" line="341"/>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1006"/>
         <source>Install…</source>
-        <translation type="unfinished"></translation>
+        <translation>Instaliraj…</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="348"/>
         <source>Dismiss</source>
-        <translation type="unfinished"></translation>
+        <translation>Odbaci</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1765"/>
@@ -21311,127 +18000,6 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>TapeConfigDialog</name>
-    <message>
-        <source>Apply</source>
-        <translation type="vanished">Primijeni</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="vanished">&amp;Otkaži</translation>
-    </message>
-    <message>
-        <source>&amp;Ok</source>
-        <translation type="vanished">&amp;U redu</translation>
-    </message>
-    <message>
-        <source>Config Dialog</source>
-        <translation type="vanished">Dijalog konfiguracije</translation>
-    </message>
-    <message>
-        <source>Configuration</source>
-        <translation type="vanished">Konfiguracija</translation>
-    </message>
-    <message>
-        <source>Paths</source>
-        <translation type="vanished">Putanje</translation>
-    </message>
-</context>
-<context>
-    <name>TapeConfigurationPage</name>
-    <message>
-        <source>Language</source>
-        <translation type="vanished">Jezik</translation>
-    </message>
-    <message>
-        <source>GUI language</source>
-        <translation type="vanished">Jezik korisničkog sučelja</translation>
-    </message>
-    <message>
-        <source>Pattern making system</source>
-        <translation type="vanished">Sustav za izradu krojeva</translation>
-    </message>
-    <message>
-        <source>Author:</source>
-        <translation type="vanished">Autor:</translation>
-    </message>
-    <message>
-        <source>Book:</source>
-        <translation type="vanished">Knjiga:</translation>
-    </message>
-    <message>
-        <source>Decimal separator parts</source>
-        <translation type="vanished">Decimalni separator:</translation>
-    </message>
-    <message>
-        <source>With OS options (%1)</source>
-        <translation type="vanished">S opcijama OS-a (%1)</translation>
-    </message>
-    <message>
-        <source>GUI language:</source>
-        <translation type="vanished">Jezik korisničkog sučelja:</translation>
-    </message>
-    <message>
-        <source>Decimal separator parts:</source>
-        <translation type="vanished">Decimalni separator:</translation>
-    </message>
-    <message>
-        <source>Pattern making system:</source>
-        <translation type="vanished">Sustav za izradu krojeva:</translation>
-    </message>
-    <message>
-        <source>Default height and size</source>
-        <translation type="vanished">Zadana visina i veličina</translation>
-    </message>
-    <message>
-        <source>Default height:</source>
-        <translation type="vanished">Zadana visina:</translation>
-    </message>
-    <message>
-        <source>Default size:</source>
-        <translation type="vanished">Zadana veličina:</translation>
-    </message>
-</context>
-<context>
-    <name>TapePathPage</name>
-    <message>
-        <source>Open Directory</source>
-        <translation type="vanished">Otvori direktorij</translation>
-    </message>
-    <message>
-        <source>Path that use Valentina</source>
-        <translation type="vanished">Put koji koristi Valentina</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="vanished">Zadano</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="vanished">Uredi</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="vanished">Vrsta</translation>
-    </message>
-    <message>
-        <source>Path</source>
-        <translation type="vanished">Put</translation>
-    </message>
-    <message>
-        <source>Individual measurements</source>
-        <translation type="vanished">Individualna mjerenja</translation>
-    </message>
-    <message>
-        <source>Standard measurements</source>
-        <translation type="vanished">Standardna mjerenja</translation>
-    </message>
-    <message>
-        <source>Templates</source>
-        <translation type="vanished">Predlošci</translation>
-    </message>
-</context>
-<context>
     <name>TapePreferencesConfigurationPage</name>
     <message>
         <location filename="../../src/app/tape/dialogs/configpages/tapepreferencesconfigurationpage.ui" line="24"/>
@@ -21667,13 +18235,6 @@ Do you want to save your changes?</source>
     </message>
 </context>
 <context>
-    <name>ToggleDetailInLayout</name>
-    <message>
-        <source>detail in layout list</source>
-        <translation type="vanished">detalj na popisu rasporeda</translation>
-    </message>
-</context>
-<context>
     <name>ToggleHideMainPath</name>
     <message>
         <location filename="../../src/libs/vtools/undocommands/togglepiecestate.cpp" line="181"/>
@@ -21809,41 +18370,9 @@ Do you want to save your changes?</source>
 <context>
     <name>VAbstractConverter</name>
     <message>
-        <source>Couldn&apos;t get version information.</source>
-        <translation type="vanished">Nije moguće dobiti informacije o verziji.</translation>
-    </message>
-    <message>
-        <source>Too many tags &lt;%1&gt; in file.</source>
-        <translation type="vanished">Previše oznaka &lt;%1&gt; u datoteci.</translation>
-    </message>
-    <message>
-        <source>Version &quot;%1&quot; invalid.</source>
-        <translation type="vanished">Verzija &quot;%1&quot; nije valjana.</translation>
-    </message>
-    <message>
-        <source>Version &quot;0.0.0&quot; invalid.</source>
-        <translation type="vanished">Verzija &quot;0.0.0&quot; nije valjana.</translation>
-    </message>
-    <message>
-        <source>Invalid version. Minimum supported version is %1</source>
-        <translation type="vanished">Neispravna verzija. Minimalno podržana verzija je %1.</translation>
-    </message>
-    <message>
-        <source>Invalid version. Maximum supported version is %1</source>
-        <translation type="vanished">Neispravna verzija. Maksimalno podržana verzija je %1.</translation>
-    </message>
-    <message>
-        <source>Error no unique id.</source>
-        <translation type="vanished">Greška: nije jedinstveni ID.</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="271"/>
         <source>Could not change version.</source>
         <translation>Nije moguće promijeniti verziju.</translation>
-    </message>
-    <message>
-        <source>Error creating a backup file: %1.</source>
-        <translation type="vanished">Greška prilikom stvaranja sigurnosne kopije: %1.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="124"/>
@@ -21864,10 +18393,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="206"/>
         <source>Unexpected version &quot;%1&quot;.</source>
         <translation>Neočekivana verzija &quot;%1&quot;.</translation>
-    </message>
-    <message>
-        <source>Error replacing a symlink by real file: %1.</source>
-        <translation type="vanished">Greška pri zamjeni simboličke veze stvarnom datotekom: %1.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vabstractconverter.cpp" line="180"/>
@@ -22081,7 +18606,8 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vtools/tools/nodeDetails/vabstractnode.cpp" line="162"/>
         <source>Attempted to add a new node with the same id:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokušano je dodati novi čvor s istim ID-om:
+%1</translation>
     </message>
 </context>
 <context>
@@ -22748,21 +19274,9 @@ Do you want to save your changes?</source>
         <translation>žuta</translation>
     </message>
     <message>
-        <source>Confirm deletion</source>
-        <translation type="vanished">Potvrda brisanja</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete?</source>
-        <translation type="vanished">Želite li stvarno izbrisati?</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="354"/>
         <source>light salmon</source>
         <translation>svijetlo lososova</translation>
-    </message>
-    <message>
-        <source>golden rod</source>
-        <translation type="vanished">zlatna šipka</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="357"/>
@@ -23029,17 +19543,9 @@ Do you want to save your changes?</source>
         <translation>Datoteka mjera</translation>
     </message>
     <message>
-        <source>Number corresponding to output format (default = 0, export mode): </source>
-        <translation type="vanished">Broj koji odgovara izlaznom formatu (zadano = 0, način izvoza):</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="657"/>
         <source>Format number</source>
         <translation>Broj formata</translation>
-    </message>
-    <message>
-        <source>Number corresponding to page template (default = 0, export mode): </source>
-        <translation type="vanished">Broj koji odgovara predlošku stranice (zadano = 0, način izvoza):</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="708"/>
@@ -23058,29 +19564,9 @@ Do you want to save your changes?</source>
         <translation>Jedinica mjere</translation>
     </message>
     <message>
-        <source>Rotation in degrees (one of predefined). Default (or 0) is no-rotate (export mode).</source>
-        <translation type="vanished">Rotacija u stupnjevima (jedna od unaprijed definiranih). Zadano (ili 0) je bez rotacije (način izvoza).</translation>
-    </message>
-    <message>
-        <source>Angle</source>
-        <translation type="vanished">Kut</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="763"/>
         <source>Auto crop unused length (export mode).</source>
         <translation>Automatsko obrezivanje neiskorištene duljine (način izvoza).</translation>
-    </message>
-    <message>
-        <source>Unite pages if possible (export mode).</source>
-        <translation type="vanished">Spajanje stranica ako je moguće (način izvoza).</translation>
-    </message>
-    <message>
-        <source>Save length of the sheet if set. (export mode).</source>
-        <translation type="vanished">Spremi duljinu papira ako je postavljeno (način izvoza).</translation>
-    </message>
-    <message>
-        <source>Layout units (as paper&apos;s one except px, export mode).</source>
-        <translation type="vanished">Jedinice rasporeda (iste kao i papir osim px, način izvoza).</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="781"/>
@@ -23088,25 +19574,9 @@ Do you want to save your changes?</source>
         <translation>Jedinica</translation>
     </message>
     <message>
-        <source>Shift layout length measured in layout units (export mode).</source>
-        <translation type="vanished">Pomak duljine rasporeda u jedinicama rasporeda (način izvoza).</translation>
-    </message>
-    <message>
-        <source>Shift length</source>
-        <translation type="vanished">Duljina pomaka</translation>
-    </message>
-    <message>
-        <source>Gap width x2, measured in layout units. (export mode).</source>
-        <translation type="vanished">Širina razmaka x2, mjerena u jedinicama rasporeda (način izvoza).</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="786"/>
         <source>The gap width</source>
         <translation>Širina razmaka</translation>
-    </message>
-    <message>
-        <source>Sets layout groupping (export mode): </source>
-        <translation type="vanished">Postavlja grupiranje izgleda (način izvoza):</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="790"/>
@@ -23114,17 +19584,9 @@ Do you want to save your changes?</source>
         <translation>Vrsta grupiranja</translation>
     </message>
     <message>
-        <source>Cannot use pageformat and page explicit size/units together.</source>
-        <translation type="vanished">Nije moguće koristiti format stranice i eksplicitnu veličinu/jedinice stranice zajedno.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="945"/>
         <source>Page height, width, units must be used all 3 at once.</source>
         <translation>Visina, širina i jedinice stranice moraju se koristiti zajedno.</translation>
-    </message>
-    <message>
-        <source>Invalid rotation value. That must be one of predefined values.</source>
-        <translation type="vanished">Nevažeća vrijednost rotacije. Mora biti jedna od unaprijed definiranih vrijednosti.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="108"/>
@@ -23149,10 +19611,6 @@ Do you want to save your changes?</source>
         <translation>Opcije izvoza mogu se koristiti samo s jednom ulaznom datotekom.</translation>
     </message>
     <message>
-        <source>Run the program in a test mode. The program this mode load a single pattern file and silently quit without showing the main window. The key have priority before key &apos;%1&apos;.</source>
-        <translation type="vanished">Pokrenite program u testnom načinu. U ovom načinu program učitava jednu datoteku kroja i tiho se zatvara bez prikaza glavnog prozora. Ova opcija ima prednost pred opcijom &apos;%1&apos;.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="218"/>
         <source>Test option can be used with single input file only.</source>
         <translation>Opcija testa može se koristiti samo s jednom ulaznom datotekom.</translation>
@@ -23168,29 +19626,9 @@ Do you want to save your changes?</source>
         <translation>Osnovno ime datoteka rasporeda</translation>
     </message>
     <message>
-        <source>The path to output destination folder.</source>
-        <translation type="vanished">Putanja do odredišne mape.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="635"/>
         <source>The destination folder</source>
         <translation>Odredišna mapa</translation>
-    </message>
-    <message>
-        <source>Set size value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="vanished">Postavite vrijednost veličine za datoteku kroja koja je otvorena sa standardnim mjerama (način izvoza). Vrijedne vrijednosti: %1cm.</translation>
-    </message>
-    <message>
-        <source>The size value</source>
-        <translation type="vanished">Vrijednost veličine</translation>
-    </message>
-    <message>
-        <source>Set height value a pattern file, that was opened with standard measurements (export mode). Valid values: %1cm.</source>
-        <translation type="vanished">Postavite vrijednost visine za datoteku kroja koja je otvorena sa standardnim mjerama (način izvoza). Vrijedne vrijednosti: %1cm.</translation>
-    </message>
-    <message>
-        <source>The height value</source>
-        <translation type="vanished">Vrijednost visine</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="715"/>
@@ -23203,18 +19641,6 @@ Do you want to save your changes?</source>
         <translation>Visina stranice u trenutnim jedinicama, npr. 12.0 (ne može se koristiti s &quot;%1&quot;, način izvoza).</translation>
     </message>
     <message>
-        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode): </source>
-        <translation type="vanished">Mjerne jedinice visine/širine stranice (ne može se koristiti s &quot;%1&quot;, način izvoza):</translation>
-    </message>
-    <message>
-        <source>Invalid gradation size value.</source>
-        <translation type="vanished">Nevažeća vrijednost gradacijske veličine.</translation>
-    </message>
-    <message>
-        <source>Invalid gradation height value.</source>
-        <translation type="vanished">Nevažeća vrijednost gradacijske visine.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="74"/>
         <source>Pattern making program.</source>
         <translation>Program za izradu krojeva.</translation>
@@ -23223,10 +19649,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="77"/>
         <source>Pattern file.</source>
         <translation>Datoteka kroja.</translation>
-    </message>
-    <message>
-        <source>Ignore margins printing (export mode). Set all margins to 0.</source>
-        <translation type="vanished">Ignoriraj margine pri ispisu (način izvoza). Postavi sve margine na 0.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="731"/>
@@ -23247,10 +19669,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="746"/>
         <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found.</source>
         <translation>Donja margina stranice u trenutnim jedinicama, npr. 3.0 (način izvoza). Ako nije postavljeno, koristit će se zadana vrijednost pisača ili 0 ako pisač nije pronađen.</translation>
-    </message>
-    <message>
-        <source>Shift length must be used together with shift units.</source>
-        <translation type="vanished">Pomak duljine mora se koristiti zajedno s jedinicama pomaka.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="958"/>
@@ -23283,34 +19701,6 @@ Do you want to save your changes?</source>
         <translation>Putanja do odredišne mape. Prema zadanim postavkama, direktorij s kojeg je aplikacija pokrenuta.</translation>
     </message>
     <message>
-        <source>Page height/width measure units (cannot be used with &quot;%1&quot;, export mode). Valid values: %2.</source>
-        <translation type="vanished">Jedinice mjerenja visine/širine stranice (ne može se koristiti s &quot;%1&quot;, način izvoza). Vrijedne vrijednosti: %2.</translation>
-    </message>
-    <message>
-        <source>Ignore margins printing (export mode). Disable value keys: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Set all margins to 0.</source>
-        <translation type="vanished">Ignoriraj margine pri ispisu (način izvoza). Onemogućene ključne vrijednosti: &quot;%1&quot;, &quot;%2&quot;, &quot;%3&quot;, &quot;%4&quot;. Postavi sve margine na 0.</translation>
-    </message>
-    <message>
-        <source>Page left margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="vanished">Lijeva margina stranice u trenutnim jedinicama, npr. 3.0 (način izvoza). Ako nije postavljena, koristit će se vrijednost iz zadanog pisača ili 0 ako pisači nisu pronađeni. Vrijednost će biti ignorirana ako je ključ &quot;%1&quot; korišten.</translation>
-    </message>
-    <message>
-        <source>Page right margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="vanished">Desna margina stranice u trenutnim jedinicama, npr. 3.0 (način izvoza). Ako nije postavljena, koristit će se vrijednost iz zadanog pisača ili 0 ako pisači nisu pronađeni. Vrijednost će biti ignorirana ako je ključ &quot;%1&quot; korišten.</translation>
-    </message>
-    <message>
-        <source>Page top margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="vanished">Gornja margina stranice u trenutnim jedinicama, npr. 3.0 (način izvoza). Ako nije postavljena, koristit će se vrijednost iz zadanog pisača ili 0 ako pisači nisu pronađeni. Vrijednost će biti ignorirana ako je ključ &quot;%1&quot; korišten.</translation>
-    </message>
-    <message>
-        <source>Page bottom margin in current units like 3.0 (export mode). If not set will be used value from default printer. Or 0 if none printers was found. Value will be ignored if key &quot;%1&quot; is used.</source>
-        <translation type="vanished">Donja margina stranice u trenutnim jedinicama, npr. 3.0 (način izvoza). Ako nije postavljena, koristit će se vrijednost iz zadanog pisača ili 0 ako pisači nisu pronađeni. Vrijednost će biti ignorirana ako je ključ &quot;%1&quot; korišten.</translation>
-    </message>
-    <message>
-        <source>Rotation in degrees (one of predefined, export mode). Default value is 180. 0 is no-rotate. Valid values: %1. Each value show how many times details will be rotated. For example 180 mean two times (360/180=2) by 180 degree.</source>
-        <translation type="vanished">Rotacija u stupnjevima (jedna od unaprijed definiranih, način izvoza). Zadana vrijednost je 180. Vrijednost 0 označava da nema rotacije. Važeće vrijednosti: %1. Svaka vrijednost pokazuje koliko puta će detalji biti rotirani. Na primjer, 180 znači dva puta (360/180=2) za 180 stupnjeva.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="766"/>
         <source>Unite pages if possible (export mode). Maximum value limited by QImage that supports only a maximum of 32768x32768 px images.</source>
         <translation>Spajanje stranica ako je moguće (način izvoza). Maksimalna vrijednost ograničena je na QImage koji podržava slike maksimalne veličine 32768x32768 piksela.</translation>
@@ -23319,10 +19709,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="775"/>
         <source>Save length of the sheet if set (export mode). The option tells the program to use as much as possible width of sheet. Quality of a layout can be worse when this option was used.</source>
         <translation>Spremi duljinu papira ako je postavljeno (način izvoza). Opcija govori programu da koristi što je moguće više širine papira. Kvaliteta rasporeda može biti lošija ako je ova opcija korištena.</translation>
-    </message>
-    <message>
-        <source>Shift layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="vanished">Pomak duljine rasporeda, mjeren u jedinicama rasporeda (način izvoza). Opcija pokazuje koliko će točaka duž ruba biti korišteno pri izradi rasporeda.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="783"/>
@@ -23340,25 +19726,9 @@ Do you want to save your changes?</source>
         <translation>Pokrenite program u testnom načinu. Program u ovom načinu učitava jednu datoteku kroja i tiho se zatvara bez prikaza glavnog prozora. Ključ ima prioritet prije ključa &apos;%1&apos;.</translation>
     </message>
     <message>
-        <source>Shift/Offset layout length measured in layout units (export mode). The option show how many points along edge will be used in creating a layout.</source>
-        <translation type="vanished">Pomak/Odmak duljine rasporeda, mjeren u jedinicama rasporeda (način izvoza). Opcija pokazuje koliko će točaka duž ruba biti korišteno pri izradi rasporeda.</translation>
-    </message>
-    <message>
-        <source>Shift/Offset length</source>
-        <translation type="vanished">Duljina pomaka/odmaka</translation>
-    </message>
-    <message>
-        <source>Shift/Offset length must be used together with shift units.</source>
-        <translation type="vanished">Duljina pomaka/odmaka mora se koristiti zajedno s jedinicama pomaka.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vcmdexport.cpp" line="655"/>
         <source>Number corresponding to output format (default = 0, export mode):</source>
         <translation>Broj koji odgovara izlaznom formatu (zadano = 0, način izvoza):</translation>
-    </message>
-    <message>
-        <source>Number corresponding to page template (default = 0, export mode):</source>
-        <translation type="vanished">Broj koji odgovara predlošku stranice (zadano = 0, način izvoza):</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpcommandline.cpp" line="108"/>
@@ -23796,7 +20166,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="356"/>
         <source>Can&apos;t cast object to the requested type. Name = &apos;%1&apos;, type = %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nije moguće pretvoriti objekt u traženi tip. Naziv = &apos;%1&apos;, tip = %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="366"/>
@@ -23808,21 +20178,17 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="432"/>
         <source>Can&apos;t cast object. Name = &apos;%1&apos;, type = %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nije moguće pretvoriti objekt. Naziv = &apos;%1&apos;, tip = %2.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.h" line="442"/>
         <source>Can&apos;t find object. Type mismatch. Name = &apos;%1&apos;, existing type = %2, incoming type = %3.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Can&apos;t find object. Type mismatch.</source>
-        <translation type="vanished">Ne mogu pronaći objekt. Nepodudaranje tipova.</translation>
+        <translation>Nije moguće pronaći objekt. Neusklađenost tipova. Naziv = &apos;%1&apos;, postojeći tip = %2, dolazni tip = %3.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="399"/>
         <source>The pattern has two objects sharing the name &apos;%1&apos;: one from the tool with id %2, another from the tool with id %3. Formulas or tools referencing this name may resolve to the wrong one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kroj sadrži dva objekta s istim nazivom &apos;%1&apos;: jedan iz alata s ID-om %2, a drugi iz alata s ID-om %3. Formule ili alati koji se pozivaju na taj naziv mogu se povezati s pogrešnim objektom.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="493"/>
@@ -24061,22 +20427,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VDomDocument</name>
     <message>
-        <source>Can&apos;t convert toUInt parameter</source>
-        <translation type="vanished">Ne mogu pretvoriti uUInt parametar</translation>
-    </message>
-    <message>
-        <source>Can&apos;t convert toBool parameter</source>
-        <translation type="vanished">Ne mogu pretvoriti uBool parametar</translation>
-    </message>
-    <message>
-        <source>Got empty parameter</source>
-        <translation type="vanished">Dobiven prazan parametar</translation>
-    </message>
-    <message>
-        <source>Can&apos;t convert toDouble parameter</source>
-        <translation type="vanished">Ne mogu pretvoriti uDouble parametar</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="805"/>
         <source>Can&apos;t open file %1:
 %2.</source>
@@ -24091,39 +20441,15 @@ Do you want to save your changes?</source>
 %2.</translation>
     </message>
     <message>
-        <source>Could not load schema file.</source>
-        <translation type="vanished">Nije moguće učitati shematsku datoteku.</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="991"/>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1027"/>
         <source>Validation error file %3 in line %1 column %2</source>
         <translation>Pogreška validacije datoteke %3 u retku %1, stupcu %2</translation>
     </message>
     <message>
-        <source>Parsing error file %3 in line %1 column %2</source>
-        <translation type="vanished">Greška pri obradi datoteke %3 u retku %1 stupcu %2</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1223"/>
         <source>Couldn&apos;t get node</source>
         <translation>Nije moguće dohvatiti čvor</translation>
-    </message>
-    <message>
-        <source>Got wrong parameter id. Need only id &gt; 0.</source>
-        <translation type="vanished">Dobiven pogrešan ID parametra. Potrebni su samo ID-ovi &gt; 0.</translation>
-    </message>
-    <message>
-        <source>This id is not unique.</source>
-        <translation type="vanished">Ovaj ID nije jedinstven.</translation>
-    </message>
-    <message>
-        <source>Could not copy temp file to document file</source>
-        <translation type="vanished">Nije moguće kopirati privremenu datoteku u dokument.</translation>
-    </message>
-    <message>
-        <source>Could not remove document file</source>
-        <translation type="vanished">Nije moguće ukloniti dokument.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="957"/>
@@ -24150,7 +20476,8 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="746"/>
         <source>First occurrence of this id:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Prvo pojavljivanje ovog ID-a:
+%1</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="813"/>
@@ -24160,22 +20487,22 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="876"/>
         <source>Refusing to save: the document has no content.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spremanje odbijeno: dokument nema sadržaja.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="894"/>
         <source>Refusing to save: serialization produced no data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spremanje odbijeno: serijalizacija nije proizvela podatke.</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="910"/>
         <source>Saving %1…</source>
-        <translation type="unfinished"></translation>
+        <translation>Spremanje %1…</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="964"/>
         <source>Schema file %3 invalid in line %1 column %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Datoteka sheme %3 nije valjana u retku %1, stupcu %2</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1071"/>
@@ -24190,7 +20517,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1234"/>
         <source>Copying %1…</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiranje %1…</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vdomdocument.cpp" line="1257"/>
@@ -24210,10 +20537,6 @@ Do you want to save your changes?</source>
 </context>
 <context>
     <name>VDrawTool</name>
-    <message>
-        <source>Edit wrong formula</source>
-        <translation type="vanished">Uredi pogrešnu formulu</translation>
-    </message>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/vdrawtool.h" line="185"/>
         <source>Options</source>
@@ -24273,22 +20596,22 @@ Do you want to save your changes?</source>
 <context>
     <name>VDxfEngine</name>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1045"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1047"/>
         <source>Piece &apos;%1&apos;. Piece System Text is missing.</source>
         <translation>Krojni dio &apos;%1&apos;. Nedostaje tekst sustava dijelova.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1201"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1204"/>
         <source>Style System Text is missing.</source>
         <translation>Nedostaje tekst sustava stila.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2074"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2078"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; or &apos;Size:&apos; identifier is missing.</source>
         <translation>Krojni dio &apos;%1&apos;. Nedostaje identifikator &apos;Ime dijela:&apos; ili &apos;Veličina:&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2109"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2113"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; identifier requires &apos;Size:&apos; identifier to be present.</source>
         <translation>Krojni dio &apos;%1&apos;. Identifikator &apos;Ime dijela:&apos; zahtijeva prisutnost identifikatora &apos;Veličina:&apos;.</translation>
     </message>
@@ -24452,10 +20775,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VFormulaProperty</name>
     <message>
-        <source>Value</source>
-        <translation type="vanished">Vrijednost</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vformulaproperty.cpp" line="49"/>
         <source>Formula</source>
         <translation>Formula</translation>
@@ -24541,12 +20860,12 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="250"/>
         <source>Piece %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Dio %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="285"/>
         <source>Can&apos;t create file &apos;%1&apos;. %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nije moguće stvoriti datoteku &apos;%1&apos;. %2</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutexporter.cpp" line="307"/>
@@ -25116,17 +21435,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/libs/vpropertyexplorer/qtcolorpicker.cpp" line="672"/>
         <source>Light gray</source>
         <translation>Svijetlo siva</translation>
-    </message>
-</context>
-<context>
-    <name>VPE::VBoolProperty</name>
-    <message>
-        <source>True</source>
-        <translation type="vanished">Istina</translation>
-    </message>
-    <message>
-        <source>False</source>
-        <translation type="vanished">Lažno</translation>
     </message>
 </context>
 <context>
@@ -25959,7 +22267,7 @@ Do you want to save your changes?</source>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="692"/>
         <source>Saving %1…</source>
-        <translation type="unfinished"></translation>
+        <translation>Spremanje %1…</translation>
     </message>
     <message>
         <location filename="../../src/app/puzzle/vpmainwindow.cpp" line="791"/>
@@ -26292,10 +22600,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VPattern</name>
     <message>
-        <source>Error no unique id.</source>
-        <translation type="vanished">Greška: nije jedinstveni ID.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="625"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="653"/>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="717"/>
@@ -26371,10 +22675,6 @@ Do you want to save your changes?</source>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2040"/>
         <source>Error creating or updating point of bisector</source>
         <translation>Greška pri stvaranju ili ažuriranju točke simetrale</translation>
-    </message>
-    <message>
-        <source>Error creating or updating point of lineintersection</source>
-        <translation type="vanished">Greška pri stvaranju ili ažuriranju točke presjeka linija</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2110"/>
@@ -26666,14 +22966,6 @@ Do you want to save your changes?</source>
 <context>
     <name>VPatternConverter</name>
     <message>
-        <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="vanished">Neočekivana verzija &quot;%1&quot;.</translation>
-    </message>
-    <message>
-        <source>Error restoring backup file: %1.</source>
-        <translation type="vanished">Greška pri vraćanju sigurnosne kopije: %1.</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/ifc/xml/vpatternconverter.cpp" line="562"/>
         <source>Error no unique id.</source>
         <translation>Greška: nije jedinstveni ID.</translation>
@@ -26952,10 +23244,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>This spline does not exist.</source>
         <translation>Ovaj splajn ne postoji.</translation>
     </message>
-    <message>
-        <source>Can&apos;t cut spline path with one point</source>
-        <translation type="vanished">Nije moguće rezati putanju splajna s jednom točkom.</translation>
-    </message>
 </context>
 <context>
     <name>VSvgFontReader</name>
@@ -27025,33 +23313,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="955"/>
         <source>Piece &apos;%1&apos;. Not enough space for label.</source>
         <translation>Dio &apos;%1&apos;. Nedovoljno prostora za oznaku.</translation>
-    </message>
-</context>
-<context>
-    <name>VTextManager</name>
-    <message>
-        <source>Cut %1 on %2%3</source>
-        <translation type="vanished">Izreži %1 na %2%3</translation>
-    </message>
-    <message>
-        <source> on Fold</source>
-        <translation type="vanished">na Preklopu</translation>
-    </message>
-    <message>
-        <source>on Fold</source>
-        <translation type="vanished">na preklop</translation>
-    </message>
-    <message>
-        <source>Cut</source>
-        <translation type="vanished">Izreži</translation>
-    </message>
-    <message>
-        <source>cut</source>
-        <translation type="vanished">izrezati</translation>
-    </message>
-    <message>
-        <source>on fold</source>
-        <translation type="vanished">na preklop</translation>
     </message>
 </context>
 <context>
@@ -27309,57 +23570,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.cpp" line="484"/>
         <source>label</source>
         <translation>oznaka</translation>
-    </message>
-</context>
-<context>
-    <name>VToolDetail</name>
-    <message>
-        <source>Options</source>
-        <translation type="vanished">Opcije</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="vanished">Obriši</translation>
-    </message>
-    <message>
-        <source>move pattern piece label</source>
-        <translation type="vanished">pomakni oznaku krojnog dijela</translation>
-    </message>
-    <message>
-        <source>resize pattern piece label</source>
-        <translation type="vanished">promijeni veličinu oznake krojnog dijela</translation>
-    </message>
-    <message>
-        <source>rotate pattern piece label</source>
-        <translation type="vanished">rotiraj oznaku krojnog dijela</translation>
-    </message>
-    <message>
-        <source>move pattern info label</source>
-        <translation type="vanished">pomakni informativnu oznaku krojnog dijela</translation>
-    </message>
-    <message>
-        <source>resize pattern info label</source>
-        <translation type="vanished">promijeni veličinu informativne oznake krojnog dijela</translation>
-    </message>
-    <message>
-        <source>rotate pattern info label</source>
-        <translation type="vanished">rotiraj informativnu oznaku krojnog dijela</translation>
-    </message>
-    <message>
-        <source>In layout</source>
-        <translation type="vanished">U rasporedu</translation>
-    </message>
-    <message>
-        <source>move grainline</source>
-        <translation type="vanished">pomakni nit tkanja</translation>
-    </message>
-    <message>
-        <source>resize grainline</source>
-        <translation type="vanished">promijeni veličinu niti tkanja</translation>
-    </message>
-    <message>
-        <source>rotate grainline</source>
-        <translation type="vanished">rotiraj nit tkanja</translation>
     </message>
 </context>
 <context>
@@ -27632,29 +23842,9 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Osnovna točka</translation>
     </message>
     <message>
-        <source>Point label</source>
-        <translation type="vanished">Oznaka točke</translation>
-    </message>
-    <message>
-        <source>Position</source>
-        <translation type="vanished">Pozicija</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3066"/>
         <source>Point at distance and angle</source>
         <translation>Točka na udaljenosti i pod kutom</translation>
-    </message>
-    <message>
-        <source>Line type</source>
-        <translation type="vanished">Vrsta linije</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation type="vanished">Duljina</translation>
-    </message>
-    <message>
-        <source>Angle</source>
-        <translation type="vanished">Kut</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3085"/>
@@ -27665,18 +23855,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3104"/>
         <source>Arc</source>
         <translation>Luk</translation>
-    </message>
-    <message>
-        <source>Radius</source>
-        <translation type="vanished">Polumjer</translation>
-    </message>
-    <message>
-        <source>First angle</source>
-        <translation type="vanished">Prvi kut</translation>
-    </message>
-    <message>
-        <source>Second angle</source>
-        <translation type="vanished">Drugi kut</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3150"/>
@@ -27719,14 +23897,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Točka duž okomice</translation>
     </message>
     <message>
-        <source>Additional angle degrees</source>
-        <translation type="vanished">Dodatni kut u stupnjevima</translation>
-    </message>
-    <message>
-        <source>Point at intersection of arc and line</source>
-        <translation type="vanished">Točka na presjeku luka i linije</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3333"/>
         <source>Tool to make point from x &amp; y of two other points</source>
         <translation>Alat za stvaranje točke iz x &amp; y dviju drugih točaka</translation>
@@ -27742,10 +23912,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Alat za krivulju</translation>
     </message>
     <message>
-        <source>Curve factor</source>
-        <translation type="vanished">Faktor krivulje</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3525"/>
         <source>Tool for path curve</source>
         <translation>Alat za putanju krivulje</translation>
@@ -27759,14 +23925,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3578"/>
         <source>Point intersection line and axis</source>
         <translation>Točka presjeka linije i osi</translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">Boja linije</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">Boja</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3598"/>
@@ -27794,21 +23952,9 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Pravi ušitci</translation>
     </message>
     <message>
-        <source>Point 1 label</source>
-        <translation type="vanished">Oznaka točke 1</translation>
-    </message>
-    <message>
-        <source>Point 2 label</source>
-        <translation type="vanished">Oznaka točke 2</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3346"/>
         <source>Tool to make point from intersection two arcs</source>
         <translation>Alat za stvaranje točke s presjeka dvaju lukova</translation>
-    </message>
-    <message>
-        <source>Take</source>
-        <translation type="vanished">Uzmi</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3368"/>
@@ -27816,21 +23962,9 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Alat za stvaranje točke s presjeka dvaju krugova</translation>
     </message>
     <message>
-        <source>First circle radius</source>
-        <translation type="vanished">Polumjer prvog kruga</translation>
-    </message>
-    <message>
-        <source>Second circle radius</source>
-        <translation type="vanished">Polumjer drugog kruga</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3407"/>
         <source>Tool to make point from circle and tangent</source>
         <translation>Alat za stvaranje točke s kruga i tangente</translation>
-    </message>
-    <message>
-        <source>Circle radius</source>
-        <translation type="vanished">Polumjer kruga</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3422"/>
@@ -27863,34 +23997,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>Alat za stvaranje točke s presjeka dviju krivulja</translation>
     </message>
     <message>
-        <source>Vertical correction</source>
-        <translation type="vanished">Okomita korekcija</translation>
-    </message>
-    <message>
-        <source>Horizontal correction</source>
-        <translation type="vanished">Vodoravna korekcija</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="vanished">Naziv</translation>
-    </message>
-    <message>
-        <source>C1: angle</source>
-        <translation type="vanished">C1: kut</translation>
-    </message>
-    <message>
-        <source>C1: length</source>
-        <translation type="vanished">C1: duljina</translation>
-    </message>
-    <message>
-        <source>C2: angle</source>
-        <translation type="vanished">C2: kut</translation>
-    </message>
-    <message>
-        <source>C2: length</source>
-        <translation type="vanished">C2: duljina</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3502"/>
         <source>Cubic bezier curve</source>
         <translation>Kubična Bézierova krivulja</translation>
@@ -27904,10 +24010,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3621"/>
         <source>Tool rotation</source>
         <translation>Alat za rotaciju</translation>
-    </message>
-    <message>
-        <source>Suffix</source>
-        <translation type="vanished">Sufiks</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="879"/>
@@ -27933,10 +24035,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3659"/>
         <source>Tool flipping by axis</source>
         <translation>Alat za zrcaljenje po osi</translation>
-    </message>
-    <message>
-        <source>Axis type</source>
-        <translation type="vanished">Vrsta osi</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3671"/>
@@ -28906,10 +25004,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>sjedini detalje</translation>
     </message>
     <message>
-        <source>United detail</source>
-        <translation type="vanished">Sjedinjeni detalj</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/tools/vtooluniondetails.cpp" line="2079"/>
         <source>This id (%1) is not unique.</source>
         <translation>Ovaj ID (%1) nije jedinstven.</translation>
@@ -28917,911 +25011,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 </context>
 <context>
     <name>VTranslateVars</name>
-    <message>
-        <source>Bunka</source>
-        <comment>System name</comment>
-        <translation type="vanished">Bunka</translation>
-    </message>
-    <message>
-        <source>Bunka Fashion College</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Bunka Fashion College</translation>
-    </message>
-    <message>
-        <source>Fundamentals of Garment Design</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Fundamentals of Garment Design</translation>
-    </message>
-    <message>
-        <source>Barnfield and Richard</source>
-        <comment>System name</comment>
-        <translation type="vanished">Barnfield and Richard</translation>
-    </message>
-    <message>
-        <source>Jo Barnfield and Andrew Richards</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Jo Barnfield and Andrew Richards</translation>
-    </message>
-    <message>
-        <source>Pattern Making Primer</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Pattern Making Primer</translation>
-    </message>
-    <message>
-        <source>Friendship/Women</source>
-        <comment>System name</comment>
-        <translation type="vanished">Friendship/Women</translation>
-    </message>
-    <message>
-        <source>Elizabeth Friendship</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Elizabeth Friendship</translation>
-    </message>
-    <message>
-        <source>Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Creating Historical Clothes - Pattern Cutting from the 16th to the 19th Centuries</translation>
-    </message>
-    <message>
-        <source>Morris, K.</source>
-        <comment>System name</comment>
-        <translation type="vanished">Morris, K.</translation>
-    </message>
-    <message>
-        <source>Karen Morris</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Karen Morris</translation>
-    </message>
-    <message>
-        <source>Sewing Lingerie that Fits</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Sewing Lingerie that Fits</translation>
-    </message>
-    <message>
-        <source>Castro</source>
-        <comment>System name</comment>
-        <translation type="vanished">Castro</translation>
-    </message>
-    <message>
-        <source>Lucia Mors de Castro</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Lucia Mors de Castro</translation>
-    </message>
-    <message>
-        <source>Patternmaking in Practic</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Patternmaking in Practic</translation>
-    </message>
-    <message>
-        <source>Kim &amp; Uh</source>
-        <comment>System name</comment>
-        <translation type="vanished">Kim &amp; Uh</translation>
-    </message>
-    <message>
-        <source>Injoo Kim and Mykyung Uh</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Injoo Kim and Mykyung Uh</translation>
-    </message>
-    <message>
-        <source>Apparel Making in Fashion Design</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Apparel Making in Fashion Design</translation>
-    </message>
-    <message>
-        <source>Waugh</source>
-        <comment>System name</comment>
-        <translation type="vanished">Waugh</translation>
-    </message>
-    <message>
-        <source>Norah Waugh</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Norah Waugh</translation>
-    </message>
-    <message>
-        <source>Corsets and Crinolines</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Corsets and Crinolines</translation>
-    </message>
-    <message>
-        <source>Grimble</source>
-        <comment>System name</comment>
-        <translation type="vanished">Grimble</translation>
-    </message>
-    <message>
-        <source>Frances Grimble</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Frances Grimble</translation>
-    </message>
-    <message>
-        <source>Fashions of the Gilded Age</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Fashions of the Gilded Age</translation>
-    </message>
-    <message>
-        <source>Thornton&apos;s International System</source>
-        <comment>System name</comment>
-        <translation type="vanished">Thornton&apos;s International System</translation>
-    </message>
-    <message>
-        <source>ed. R. L. Shep</source>
-        <comment>Author name</comment>
-        <translation type="vanished">ed. R. L. Shep</translation>
-    </message>
-    <message>
-        <source>The Great War: Styles and Patterns of the 1910s</source>
-        <comment>Book name</comment>
-        <translation type="vanished">The Great War: Styles and Patterns of the 1910s</translation>
-    </message>
-    <message>
-        <source>Hillhouse &amp; Mansfield</source>
-        <comment>System name</comment>
-        <translation type="vanished">Hillhouse &amp; Mansfield</translation>
-    </message>
-    <message>
-        <source>Marion S. Hillhouse and Evelyn A. Mansfield</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Marion S. Hillhouse and Evelyn A. Mansfield</translation>
-    </message>
-    <message>
-        <source>Dress Design: Draping and Flat Pattern Making</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Dress Design: Draping and Flat Pattern Making</translation>
-    </message>
-    <message>
-        <source>Pivnick</source>
-        <comment>System name</comment>
-        <translation type="vanished">Pivnick</translation>
-    </message>
-    <message>
-        <source>Esther Kaplan Pivnick</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Esther Kaplan Pivnick</translation>
-    </message>
-    <message>
-        <source>How to Design Beautiful Clothes: Designing and Pattern Making</source>
-        <comment>Book name</comment>
-        <translation type="vanished">How to Design Beautiful Clothes: Designing and Pattern Making</translation>
-    </message>
-    <message>
-        <source>Minister &amp; Son</source>
-        <comment>System name</comment>
-        <translation type="vanished">Minister &amp; Son</translation>
-    </message>
-    <message>
-        <source>Edward Minister &amp; Son, ed. R. L. Shep</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Edward Minister &amp; Son, ed. R. L. Shep</translation>
-    </message>
-    <message>
-        <source>The Complete Guide to Practical Cutting (1853)</source>
-        <comment>Book name</comment>
-        <translation type="vanished">The Complete Guide to Practical Cutting (1853)</translation>
-    </message>
-    <message>
-        <source>Strickland</source>
-        <comment>System name</comment>
-        <translation type="vanished">Strickland</translation>
-    </message>
-    <message>
-        <source>Gertrude Strickland</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Gertrude Strickland</translation>
-    </message>
-    <message>
-        <source>A Tailoring Manual</source>
-        <comment>Book name</comment>
-        <translation type="vanished">A Tailoring Manual</translation>
-    </message>
-    <message>
-        <source>Loh &amp; Lewis</source>
-        <comment>System name</comment>
-        <translation type="vanished">Loh &amp; Lewis</translation>
-    </message>
-    <message>
-        <source>May Loh and Diehl Lewis</source>
-        <comment>Author name</comment>
-        <translation type="vanished">May Loh and Diehl Lewis</translation>
-    </message>
-    <message>
-        <source>Patternless Fashion Design</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Patternless Fashion Design</translation>
-    </message>
-    <message>
-        <source>Morris, F. R.</source>
-        <comment>System name</comment>
-        <translation type="vanished">Morris, F. R.</translation>
-    </message>
-    <message>
-        <source>F. R. Morris</source>
-        <comment>Author name</comment>
-        <translation type="vanished">F. R. Morris</translation>
-    </message>
-    <message>
-        <source>Ladies Garment Cutting and Making</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Ladies Garment Cutting and Making</translation>
-    </message>
-    <message>
-        <source>Mason</source>
-        <comment>System name</comment>
-        <translation type="vanished">Mason</translation>
-    </message>
-    <message>
-        <source>Gertrude Mason</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Gertrude Mason</translation>
-    </message>
-    <message>
-        <source>Gertrude Mason&apos;s Patternmaking Book</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Gertrude Mason&apos;s Patternmaking Book</translation>
-    </message>
-    <message>
-        <source>Kimata</source>
-        <comment>System name</comment>
-        <translation type="vanished">Kimata</translation>
-    </message>
-    <message>
-        <source>K. Kimata</source>
-        <comment>Author name</comment>
-        <translation type="vanished">K. Kimata</translation>
-    </message>
-    <message>
-        <source>K.Kimata&apos;s Simplified Drafting Book for Dressmaking</source>
-        <comment>Book name</comment>
-        <translation type="vanished">K.Kimata&apos;s Simplified Drafting Book for Dressmaking</translation>
-    </message>
-    <message>
-        <source>Master Designer</source>
-        <comment>System name</comment>
-        <translation type="vanished">Master Designer</translation>
-    </message>
-    <message>
-        <source>The Master Designer (Chicago, IL)</source>
-        <comment>Author name</comment>
-        <translation type="vanished">The Master Designer (Chicago, IL)</translation>
-    </message>
-    <message>
-        <source>Master Designer&apos;s System of Designing, Cutting and Grading</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Master Designer&apos;s System of Designing, Cutting and Grading</translation>
-    </message>
-    <message>
-        <source>Kopp</source>
-        <comment>System name</comment>
-        <translation type="vanished">Kopp</translation>
-    </message>
-    <message>
-        <source>Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Ernestine Kopp, Vittorina Rolfo, Beatrice Zelin, Lee Gross</translation>
-    </message>
-    <message>
-        <source>How to Draft Basic Patterns</source>
-        <comment>Book name</comment>
-        <translation type="vanished">How to Draft Basic Patterns</translation>
-    </message>
-    <message>
-        <source>Ekern</source>
-        <comment>System name</comment>
-        <translation type="vanished">Ekern</translation>
-    </message>
-    <message>
-        <source>Doris Ekern</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Doris Ekern</translation>
-    </message>
-    <message>
-        <source>Slacks Cut-to-Fit for Your Figure</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Slacks Cut-to-Fit for Your Figure</translation>
-    </message>
-    <message>
-        <source>Doyle</source>
-        <comment>System name</comment>
-        <translation type="vanished">Doyle</translation>
-    </message>
-    <message>
-        <source>Sarah J. Doyle</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Sarah J. Doyle</translation>
-    </message>
-    <message>
-        <source>Sarah&apos;s Key to Pattern Drafting</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Sarah&apos;s Key to Pattern Drafting</translation>
-    </message>
-    <message>
-        <source>Shelton</source>
-        <comment>System name</comment>
-        <translation type="vanished">Shelton</translation>
-    </message>
-    <message>
-        <source>Karla J. Shelton</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Karla J. Shelton</translation>
-    </message>
-    <message>
-        <source>Design and Sew Jeans</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Design and Sew Jeans</translation>
-    </message>
-    <message>
-        <source>Lady Boutique</source>
-        <comment>System name</comment>
-        <translation type="vanished">Lady Boutique</translation>
-    </message>
-    <message>
-        <source>Lady Boutique</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Lady Boutique</translation>
-    </message>
-    <message>
-        <source>Lady Boutique magazine (Japan)</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Lady Boutique magazine (Japan)</translation>
-    </message>
-    <message>
-        <source>Rohr</source>
-        <comment>System name</comment>
-        <translation type="vanished">Rohr</translation>
-    </message>
-    <message>
-        <source>M. Rohr</source>
-        <comment>Author name</comment>
-        <translation type="vanished">M. Rohr</translation>
-    </message>
-    <message>
-        <source>Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Pattern Drafting and Grading: Women&apos;s nd Misses&apos; Garment Design</translation>
-    </message>
-    <message>
-        <source>Moore</source>
-        <comment>System name</comment>
-        <translation type="vanished">Moore</translation>
-    </message>
-    <message>
-        <source>Dorothy Moore</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Dorothy Moore</translation>
-    </message>
-    <message>
-        <source>Dorothy Moore&apos;s Pattern Drafting and Dressmaking</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Dorothy Moore&apos;s Pattern Drafting and Dressmaking</translation>
-    </message>
-    <message>
-        <source>Abling</source>
-        <comment>System name</comment>
-        <translation type="vanished">Abling</translation>
-    </message>
-    <message>
-        <source>Bina Abling</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Bina Abling</translation>
-    </message>
-    <message>
-        <source>Integrating Draping, Drafting and Drawing</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Integrating Draping, Drafting and Drawing</translation>
-    </message>
-    <message>
-        <source>Fukomoto</source>
-        <comment>System name</comment>
-        <translation type="vanished">Fukomoto</translation>
-    </message>
-    <message>
-        <source>Sue S. Fukomoto</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Sue S. Fukomoto</translation>
-    </message>
-    <message>
-        <source>Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Scientific Pattern Drafting as taught at Style Center School of Costume Design, Dressmaking and Millinery</translation>
-    </message>
-    <message>
-        <source>Dressmaking International</source>
-        <comment>System name</comment>
-        <translation type="vanished">Dressmaking International</translation>
-    </message>
-    <message>
-        <source>Dressmaking International</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Dressmaking International</translation>
-    </message>
-    <message>
-        <source>Dressmaking International magazine (Japan)</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Dressmaking International magazine (Japan)</translation>
-    </message>
-    <message>
-        <source>Erwin</source>
-        <comment>System name</comment>
-        <translation type="vanished">Erwin</translation>
-    </message>
-    <message>
-        <source>Mabel D. Erwin</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Mabel D. Erwin</translation>
-    </message>
-    <message>
-        <source>Practical Dress Design</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Practical Dress Design</translation>
-    </message>
-    <message>
-        <source>Gough</source>
-        <comment>System name</comment>
-        <translation type="vanished">Gough</translation>
-    </message>
-    <message>
-        <source>E. L. G. Gough</source>
-        <comment>Author name</comment>
-        <translation type="vanished">E. L. G. Gough</translation>
-    </message>
-    <message>
-        <source>Principles of Garment Cutting</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Principles of Garment Cutting</translation>
-    </message>
-    <message>
-        <source>Allemong</source>
-        <comment>System name</comment>
-        <translation type="vanished">Allemong</translation>
-    </message>
-    <message>
-        <source>Elizabeth M. Allemong</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Elizabeth M. Allemong</translation>
-    </message>
-    <message>
-        <source>European Cut</source>
-        <comment>Book name</comment>
-        <translation type="vanished">European Cut</translation>
-    </message>
-    <message>
-        <source>McCunn</source>
-        <comment>System name</comment>
-        <translation type="vanished">McCunn</translation>
-    </message>
-    <message>
-        <source>Donald H. McCunn</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Donald H. McCunn</translation>
-    </message>
-    <message>
-        <source>How to Make Your Own Sewing Patterns</source>
-        <comment>Book name</comment>
-        <translation type="vanished">How to Make Your Own Sewing Patterns</translation>
-    </message>
-    <message>
-        <source>Zarapkar</source>
-        <comment>System name</comment>
-        <translation type="vanished">Zarapkar</translation>
-    </message>
-    <message>
-        <source>Shri K. R. Zarapkar and Shri Arvind K. Zarapkar</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Shri K. R. Zarapkar and Shri Arvind K. Zarapkar</translation>
-    </message>
-    <message>
-        <source>Zarapkar System of Cutting</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Zarapkar System of Cutting</translation>
-    </message>
-    <message>
-        <source>Kunick</source>
-        <comment>System name</comment>
-        <translation type="vanished">Kunick</translation>
-    </message>
-    <message>
-        <source>Philip Kunick</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Philip Kunick</translation>
-    </message>
-    <message>
-        <source>Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Sizing, Pattern Construction and Grading for Women&apos;s and Children&apos;s Garments</translation>
-    </message>
-    <message>
-        <source>Handford</source>
-        <comment>System name</comment>
-        <translation type="vanished">Handford</translation>
-    </message>
-    <message>
-        <source>Jack Handford</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Jack Handford</translation>
-    </message>
-    <message>
-        <source>Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Professional Patternmaking for Designers: Women&apos;s Wear, Men&apos;s Casual Wear</translation>
-    </message>
-    <message>
-        <source>Davis</source>
-        <comment>System name</comment>
-        <translation type="vanished">Davis</translation>
-    </message>
-    <message>
-        <source>R. I. Davis</source>
-        <comment>Author name</comment>
-        <translation type="vanished">R. I. Davis</translation>
-    </message>
-    <message>
-        <source>Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Men&apos;s 17th &amp; 18th Century Costume, Cut &amp; Fashion</translation>
-    </message>
-    <message>
-        <source>MacLochlainn</source>
-        <comment>System name</comment>
-        <translation type="vanished">MacLochlainn</translation>
-    </message>
-    <message>
-        <source>Jason MacLochlainn</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Jason MacLochlainn</translation>
-    </message>
-    <message>
-        <source>The Victorian Tailor: An Introduction to Period Tailoring</source>
-        <comment>Book name</comment>
-        <translation type="vanished">The Victorian Tailor: An Introduction to Period Tailoring</translation>
-    </message>
-    <message>
-        <source>Joseph-Armstrong</source>
-        <comment>System name</comment>
-        <translation type="vanished">Joseph-Armstrong</translation>
-    </message>
-    <message>
-        <source>Helen Joseph-Armstrong</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Helen Joseph-Armstrong</translation>
-    </message>
-    <message>
-        <source>Patternmaking for Fashion Design</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Patternmaking for Fashion Design</translation>
-    </message>
-    <message>
-        <source>Supreme System</source>
-        <comment>System name</comment>
-        <translation type="vanished">Supreme System</translation>
-    </message>
-    <message>
-        <source>Frederick T. Croonberg</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Frederick T. Croonberg</translation>
-    </message>
-    <message>
-        <source>The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</source>
-        <comment>Book name</comment>
-        <translation type="vanished">The Blue Book of Men&apos;s Tailoring, Grand Edition of Supreme System for Producing Mens Garments (1907)</translation>
-    </message>
-    <message>
-        <source>Sugino</source>
-        <comment>System name</comment>
-        <translation type="vanished">Sugino</translation>
-    </message>
-    <message>
-        <source>Dressmaking</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Dressmaking</translation>
-    </message>
-    <message>
-        <source>Pattern Drafting Vols. I, II, III (Japan)</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Pattern Drafting Vols. I, II, III (Japan)</translation>
-    </message>
-    <message>
-        <source>Centre Point System</source>
-        <comment>System name</comment>
-        <translation type="vanished">Centre Point System</translation>
-    </message>
-    <message>
-        <source>Louis Devere</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Louis Devere</translation>
-    </message>
-    <message>
-        <source>The Handbook of Practical Cutting on the Centre Point System</source>
-        <comment>Book name</comment>
-        <translation type="vanished">The Handbook of Practical Cutting on the Centre Point System</translation>
-    </message>
-    <message>
-        <source>Aldrich/Men</source>
-        <comment>System name</comment>
-        <translation type="vanished">Aldrich/Men</translation>
-    </message>
-    <message>
-        <source>Winifred Aldrich</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Winifred Aldrich</translation>
-    </message>
-    <message>
-        <source>Metric Pattern Cutting for Menswear</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Metric Pattern Cutting for Menswear</translation>
-    </message>
-    <message>
-        <source>Aldrich/Women</source>
-        <comment>System name</comment>
-        <translation type="vanished">Aldrich/Women</translation>
-    </message>
-    <message>
-        <source>Metric Pattern Cutting for Women&apos;s Wear</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Metric Pattern Cutting for Women&apos;s Wear</translation>
-    </message>
-    <message>
-        <source>Kershaw</source>
-        <comment>System name</comment>
-        <translation type="vanished">Kershaw</translation>
-    </message>
-    <message>
-        <source>Gareth Kershaw</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Gareth Kershaw</translation>
-    </message>
-    <message>
-        <source>Patternmaking for Menswear</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Patternmaking for Menswear</translation>
-    </message>
-    <message>
-        <source>Gilewska</source>
-        <comment>System name</comment>
-        <translation type="vanished">Gilewska</translation>
-    </message>
-    <message>
-        <source>Teresa Gilewska</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Teresa Gilewska</translation>
-    </message>
-    <message>
-        <source>Pattern-Drafting for Fashion: The Basics</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Pattern-Drafting for Fashion: The Basics</translation>
-    </message>
-    <message>
-        <source>Lo</source>
-        <comment>System name</comment>
-        <translation type="vanished">Lo</translation>
-    </message>
-    <message>
-        <source>Dennic Chunman Lo</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Dennic Chunman Lo</translation>
-    </message>
-    <message>
-        <source>Pattern Cutting</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Pattern Cutting</translation>
-    </message>
-    <message>
-        <source>Bray</source>
-        <comment>System name</comment>
-        <translation type="vanished">Bray</translation>
-    </message>
-    <message>
-        <source>Natalie Bray</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Natalie Bray</translation>
-    </message>
-    <message>
-        <source>Dress Pattern Designing: The Basic Principles of Cut and Fit</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Dress Pattern Designing: The Basic Principles of Cut and Fit</translation>
-    </message>
-    <message>
-        <source>Knowles/Men</source>
-        <comment>System name</comment>
-        <translation type="vanished">Knowles/Men</translation>
-    </message>
-    <message>
-        <source>Lori A. Knowles</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Lori A. Knowles</translation>
-    </message>
-    <message>
-        <source>The Practical Guide to Patternmaking for Fashion Designers: Menswear</source>
-        <comment>Book name</comment>
-        <translation type="vanished">The Practical Guide to Patternmaking for Fashion Designers: Menswear</translation>
-    </message>
-    <message>
-        <source>Friendship/Men</source>
-        <comment>System name</comment>
-        <translation type="vanished">Friendship/Men</translation>
-    </message>
-    <message>
-        <source>Pattern Cutting for Men&apos;s Costume</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Pattern Cutting for Men&apos;s Costume</translation>
-    </message>
-    <message>
-        <source>Brown</source>
-        <comment>System name</comment>
-        <translation type="vanished">Brown</translation>
-    </message>
-    <message>
-        <source>P. Clement Brown</source>
-        <comment>Author name</comment>
-        <translation type="vanished">P. Clement Brown</translation>
-    </message>
-    <message>
-        <source>Art in Dress</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Art in Dress</translation>
-    </message>
-    <message>
-        <source>Mitchell</source>
-        <comment>System name</comment>
-        <translation type="vanished">Mitchell</translation>
-    </message>
-    <message>
-        <source>Jno. J. Mitchell</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Jno. J. Mitchell</translation>
-    </message>
-    <message>
-        <source>&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</source>
-        <comment>Book name</comment>
-        <translation type="vanished">&quot;Standard&quot; Work on Cutting (Men&apos;s Garments) 1886: The Art and Science of Garment Cutting</translation>
-    </message>
-    <message>
-        <source>GOST 17917-86</source>
-        <comment>System name</comment>
-        <translation type="vanished">GOST 17917-86</translation>
-    </message>
-    <message>
-        <source>Ministry of consumer industry of the USSR</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Ministry of consumer industry of the USSR</translation>
-    </message>
-    <message>
-        <source>Standard figure boys</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Standard figure boys</translation>
-    </message>
-    <message>
-        <source>Eddy</source>
-        <comment>System name</comment>
-        <translation type="vanished">Eddy</translation>
-    </message>
-    <message>
-        <source>Josephine F. Eddy and Elizabeth C. B. Wiley</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Josephine F. Eddy and Elizabeth C. B. Wiley</translation>
-    </message>
-    <message>
-        <source>Pattern and Dress Design</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Pattern and Dress Design</translation>
-    </message>
-    <message>
-        <source>Knowles/Women</source>
-        <comment>System name</comment>
-        <translation type="vanished">Knowles/Women</translation>
-    </message>
-    <message>
-        <source>Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Practical Guide to Patternmaking for Fashion Designers: Juniors, Misses, and Women</translation>
-    </message>
-    <message>
-        <source>American Garment Cutter</source>
-        <comment>System name</comment>
-        <translation type="vanished">American Garment Cutter</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <comment>System name</comment>
-        <translation type="vanished">Ništa</translation>
-    </message>
-    <message>
-        <source>Valentina team</source>
-        <comment>Author name</comment>
-        <translation type="vanished">Tim Valentina</translation>
-    </message>
-    <message>
-        <source>Valentina&apos;s internal standard</source>
-        <comment>Book name</comment>
-        <translation type="vanished">Valentinin interni standard</translation>
-    </message>
-    <message>
-        <source>Line_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="vanished">Linija_</translation>
-    </message>
-    <message>
-        <source>AngleLine_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="vanished">KutLinija_</translation>
-    </message>
-    <message>
-        <source>Arc_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="vanished">Luk_</translation>
-    </message>
-    <message>
-        <source>Spl_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="vanished">Krivulja_</translation>
-    </message>
-    <message>
-        <source>SplPath</source>
-        <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="vanished">PutanjaKrivulje</translation>
-    </message>
-    <message>
-        <source>RadiusArc_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="vanished">PolumjerLuka_</translation>
-    </message>
-    <message>
-        <source>Angle1Arc_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="vanished">Kut1Luka_</translation>
-    </message>
-    <message>
-        <source>Angle2Arc_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="vanished">Kut2Luka_</translation>
-    </message>
-    <message>
-        <source>Angle1Spl_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="vanished">Kut1Krivulje_</translation>
-    </message>
-    <message>
-        <source>Angle2Spl_</source>
-        <comment>Left symbol _ in name</comment>
-        <translation type="vanished">Kut2Krivulje_</translation>
-    </message>
-    <message>
-        <source>Angle1SplPath</source>
-        <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="vanished">Kut1PutanjeKrivulje</translation>
-    </message>
-    <message>
-        <source>Angle2SplPath</source>
-        <comment>Do not add symbol _ to the end of name</comment>
-        <translation type="vanished">Kut2PutanjeKrivulje</translation>
-    </message>
-    <message>
-        <source>sin</source>
-        <comment>sine function</comment>
-        <translation type="vanished">sin</translation>
-    </message>
-    <message>
-        <source>cos</source>
-        <comment>cosine function</comment>
-        <translation type="vanished">cos</translation>
-    </message>
-    <message>
-        <source>tan</source>
-        <comment>tangens function</comment>
-        <translation type="vanished">tan</translation>
-    </message>
-    <message>
-        <source>asin</source>
-        <comment>arcus sine function</comment>
-        <translation type="vanished">asin</translation>
-    </message>
-    <message>
-        <source>acos</source>
-        <comment>arcus cosine function</comment>
-        <translation type="vanished">acos</translation>
-    </message>
-    <message>
-        <source>atan</source>
-        <comment>arcus tangens function</comment>
-        <translation type="vanished">atan</translation>
-    </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="149"/>
         <source>sinh</source>
@@ -29845,16 +25034,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>asinh</source>
         <comment>hyperbolic arcus sine function</comment>
         <translation>asinh</translation>
-    </message>
-    <message>
-        <source>acosh</source>
-        <comment>hyperbolic arcus tangens function</comment>
-        <translation type="vanished">acosh</translation>
-    </message>
-    <message>
-        <source>atanh</source>
-        <comment>hyperbolic arcur tangens function</comment>
-        <translation type="vanished">atanh</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="206"/>
@@ -29939,21 +25118,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>fmod</source>
         <comment>Returns the floating-point remainder of numer/denom (rounded towards zero)</comment>
         <translation>fmod</translation>
-    </message>
-    <message>
-        <source>cm</source>
-        <comment>centimeter</comment>
-        <translation type="vanished">cm</translation>
-    </message>
-    <message>
-        <source>mm</source>
-        <comment>millimeter</comment>
-        <translation type="vanished">mm</translation>
-    </message>
-    <message>
-        <source>in</source>
-        <comment>inch</comment>
-        <translation type="vanished">in</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="67"/>
@@ -30044,16 +25208,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>acosh</source>
         <comment>hyperbolic arcus cosine function</comment>
         <translation>acosh</translation>
-    </message>
-    <message>
-        <source>size</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">veličina</translation>
-    </message>
-    <message>
-        <source>height</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">visina</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="90"/>
@@ -30215,13 +25369,13 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="171"/>
         <source>atanh</source>
         <comment>hyperbolic arcus tangent function</comment>
-        <translation type="unfinished">atanh</translation>
+        <translation>atanh</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="173"/>
         <source>hyperbolic arcus tangent function</source>
         <comment>function atanh</comment>
-        <translation type="unfinished"></translation>
+        <translation>hiperbolna arkus tangens funkcija</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="239"/>
@@ -30495,28 +25649,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
 </context>
 <context>
-    <name>VVITConverter</name>
-    <message>
-        <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="vanished">Neočekivana verzija &quot;%1&quot;.</translation>
-    </message>
-    <message>
-        <source>Error restoring backup file: %1.</source>
-        <translation type="vanished">Greška pri vraćanju sigurnosne kopije: %1.</translation>
-    </message>
-</context>
-<context>
-    <name>VVSTConverter</name>
-    <message>
-        <source>Unexpected version &quot;%1&quot;.</source>
-        <translation type="vanished">Neočekivana verzija &quot;%1&quot;.</translation>
-    </message>
-    <message>
-        <source>Error restoring backup file: %1.</source>
-        <translation type="vanished">Greška pri vraćanju sigurnosne kopije: %1.</translation>
-    </message>
-</context>
-<context>
     <name>VWidgetBackgroundImages</name>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetbackgroundimages.ui" line="14"/>
@@ -30684,7 +25816,7 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="22"/>
         <source>Filter (name or id)</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter (naziv ili ID)</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetdependencies.ui" line="32"/>
@@ -30810,14 +25942,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VWidgetGroups</name>
     <message>
-        <source>Form</source>
-        <translation type="vanished">Forma</translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation type="vanished">Preimenuj</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/vwidgetgroups.cpp" line="297"/>
         <source>Delete</source>
         <translation>Obriši</translation>
@@ -30931,10 +26055,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>&lt;b&gt;Zakrivljeni put&lt;/b&gt;: odaberite sedam ili više točaka</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Curved path&lt;/b&gt;: select seven or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">&lt;b&gt;Zakrivljeni put&lt;/b&gt;: odaberite sedam ili više točaka, &lt;b&gt;Enter&lt;/b&gt; - završetak stvaranja</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolcubicbezierpath.cpp" line="290"/>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select more points for complete segment</source>
         <translation>&lt;b&gt;Zakrivljeni put&lt;/b&gt;: odaberite više točaka za dovršenje segmenta</translation>
@@ -30947,10 +26067,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 </context>
 <context>
     <name>VisToolCurveIntersectAxis</name>
-    <message>
-        <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">&lt;b&gt;Presjek krivulje i osi&lt;/b&gt;: kut = %1°; &lt;b&gt;Shift&lt;/b&gt; - pridržavanje kuta, &lt;b&gt;Enter&lt;/b&gt; - završetak stvaranja</translation>
-    </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolcurveintersectaxis.cpp" line="89"/>
         <source>&lt;b&gt;Intersection curve and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;%3&lt;/b&gt; - finish creation</source>
@@ -31040,14 +26156,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VisToolEndLine</name>
     <message>
-        <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">&lt;b&gt;Točka na udaljenosti i pod kutom&lt;/b&gt;: kut = %1°; &lt;b&gt;Shift&lt;/b&gt; - pridržavanje kuta, &lt;b&gt;Enter&lt;/b&gt; - završetak stvaranja</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">&lt;b&gt;Točka na udaljenosti i pod kutom&lt;/b&gt;: kut = %1°, duljina = %2%3; &lt;b&gt;Shift&lt;/b&gt; - pridržavanje kuta, &lt;b&gt;Enter&lt;/b&gt; - završetak stvaranja</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoolendline.cpp" line="84"/>
         <source>&lt;b&gt;Point at distance and angle&lt;/b&gt;: angle = %1°, length = %2%3; &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;%5&lt;/b&gt; - finish creation</source>
         <translation>&lt;b&gt;Točka na udaljenosti i pod kutom&lt;/b&gt;: kut = %1°, duljina = %2%3; &lt;b&gt;%4&lt;/b&gt; - pridržavanje kuta, &lt;b&gt;%5&lt;/b&gt; - završetak stvaranja</translation>
@@ -31064,10 +26172,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VisToolLineIntersectAxis</name>
     <message>
-        <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">&lt;b&gt;Presjek linije i osi&lt;/b&gt;: kut = %1°; &lt;b&gt;Shift&lt;/b&gt; - pridržavanje kuta, &lt;b&gt;Enter&lt;/b&gt; - završetak stvaranja</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/visualization/line/vistoollineintersectaxis.cpp" line="114"/>
         <source>&lt;b&gt;Intersection line and axis&lt;/b&gt;: angle = %1°; &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;%3&lt;/b&gt; - finish creation</source>
         <translation>&lt;b&gt;Presjek linije i osi&lt;/b&gt;: kut = %1°; &lt;b&gt;%2&lt;/b&gt; - pridržavanje kuta, &lt;b&gt;%3&lt;/b&gt; - završetak stvaranja</translation>
@@ -31075,10 +26179,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 </context>
 <context>
     <name>VisToolMove</name>
-    <message>
-        <source>Length = %1%2, angle = %3°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">Duljina = %1%2, kut = %3°, &lt;b&gt;Shift&lt;/b&gt; - pridržavanje kuta, &lt;b&gt;Klik mišem&lt;/b&gt; - završetak stvaranja</translation>
-    </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/line/operation/vistoolmove.cpp" line="186"/>
         <source>Length = %1%2, angle = %3°, &lt;b&gt;%4&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish selecting a position</source>
@@ -31138,10 +26238,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VisToolRotation</name>
     <message>
-        <source>Rotating angle = %1°, &lt;b&gt;Shift&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">Kut rotacije = %1°, &lt;b&gt;Shift&lt;/b&gt; - pridržavanje kuta, &lt;b&gt;Klik mišem&lt;/b&gt; - završetak stvaranja</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/visualization/line/operation/vistoolrotation.cpp" line="116"/>
         <source>Rotating angle = %1°, &lt;b&gt;%2&lt;/b&gt; - sticking angle, &lt;b&gt;Mouse click&lt;/b&gt; - finish creation</source>
         <translation>Kut rotacije = %1°, &lt;b&gt;%2&lt;/b&gt; - pridržavanje kuta, &lt;b&gt;Klik mišem&lt;/b&gt; - završetak stvaranja</translation>
@@ -31158,10 +26254,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VisToolSpline</name>
     <message>
-        <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
-        <translation type="vanished">Koristite &lt;b&gt;Shift&lt;/b&gt; za pridržavanje kuta!</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolspline.cpp" line="122"/>
         <source>Use &lt;b&gt;%1&lt;/b&gt; for sticking angle!</source>
         <translation>Koristite &lt;b&gt;%1&lt;/b&gt; za pridržavanje kuta!</translation>
@@ -31173,14 +26265,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vtools/visualization/path/vistoolsplinepath.cpp" line="124"/>
         <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points</source>
         <translation>&lt;b&gt;Zakrivljeni put&lt;/b&gt;: odaberite tri ili više točaka</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Curved path&lt;/b&gt;: select three or more points, &lt;b&gt;Enter&lt;/b&gt; - finish creation</source>
-        <translation type="vanished">&lt;b&gt;Zakrivljeni put&lt;/b&gt;: odaberite tri ili više točaka, &lt;b&gt;Enter&lt;/b&gt; - završetak stvaranja</translation>
-    </message>
-    <message>
-        <source>Use &lt;b&gt;Shift&lt;/b&gt; for sticking angle!</source>
-        <translation type="vanished">Koristite &lt;b&gt;Shift&lt;/b&gt; za pridržavanje kuta!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/visualization/path/vistoolsplinepath.cpp" line="128"/>
@@ -31608,22 +26692,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation>INFO:</translation>
     </message>
     <message>
-        <source>Warning.</source>
-        <translation type="vanished">Upozorenje.</translation>
-    </message>
-    <message>
-        <source>Critical error.</source>
-        <translation type="vanished">Kritična pogreška.</translation>
-    </message>
-    <message>
-        <source>Fatal error.</source>
-        <translation type="vanished">Fatalna pogreška.</translation>
-    </message>
-    <message>
-        <source>Information.</source>
-        <translation type="vanished">Informacija.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/puzzle/vpapplication.cpp" line="143"/>
         <location filename="../../src/app/tape/mapplication.cpp" line="180"/>
         <source>Warning</source>
@@ -31674,22 +26742,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="184"/>
         <source>INFO:</source>
         <translation>INFO:</translation>
-    </message>
-    <message>
-        <source>Warning.</source>
-        <translation type="vanished">Upozorenje.</translation>
-    </message>
-    <message>
-        <source>Critical error.</source>
-        <translation type="vanished">Kritična pogreška.</translation>
-    </message>
-    <message>
-        <source>Fatal error.</source>
-        <translation type="vanished">Fatalna pogreška.</translation>
-    </message>
-    <message>
-        <source>Information.</source>
-        <translation type="vanished">Informacija.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="209"/>

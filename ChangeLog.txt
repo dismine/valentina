@@ -1,4 +1,5 @@
 # Valentina 1.1.1 (unreleased)
+- [Misc] Added Danish (da_DK) language.
 - [Valentina app / Puzzle app] Fixed the piece name annotation text on ASTM DXF export being too small to read (2.5mm), below the 3.5-5mm the ASTM D6673 standard recommends for readability.
 - [Valentina app / Puzzle app] Fixed the Style System Text on AAMA/ASTM DXF export ignoring the configured pattern label font size and always using a fixed small text height.
 - [Tape app] Fixed the known measurements editor showing the wrong measurement diagram, and sometimes the wrong image title/size, after renaming an image on the Images tab: saving the title refreshed the Measurements tab's data instead of the Images tab's.

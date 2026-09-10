@@ -10,13 +10,6 @@
     </message>
 </context>
 <context>
-    <name>AddDet</name>
-    <message>
-        <source>add detail</source>
-        <translation type="vanished">הוסף פרט</translation>
-    </message>
-</context>
-<context>
     <name>AddGroup</name>
     <message>
         <location filename="../../src/libs/vtools/undocommands/undogroup.cpp" line="48"/>
@@ -81,171 +74,6 @@
     </message>
 </context>
 <context>
-    <name>CommunityPage</name>
-    <message>
-        <source>Server</source>
-        <translation type="vanished">שרת</translation>
-    </message>
-    <message>
-        <source>Server name/IP</source>
-        <translation type="vanished">שם שרת/IP</translation>
-    </message>
-    <message>
-        <source>Secure connection</source>
-        <translation type="vanished">חיבור מקור</translation>
-    </message>
-    <message>
-        <source>Proxy settings</source>
-        <translation type="vanished">הגדרות פרוקסי</translation>
-    </message>
-    <message>
-        <source>Use Proxy</source>
-        <translation type="vanished">השתמש בפרוקסי</translation>
-    </message>
-    <message>
-        <source>Proxy address</source>
-        <translation type="vanished">כתובת פרוקסי</translation>
-    </message>
-    <message>
-        <source>Proxy user</source>
-        <translation type="vanished">משתמש פרוקסי</translation>
-    </message>
-    <message>
-        <source>User settings</source>
-        <translation type="vanished">הגדרות משתמש</translation>
-    </message>
-    <message>
-        <source>User Name</source>
-        <translation type="vanished">שם משתמש</translation>
-    </message>
-    <message>
-        <source>Save password</source>
-        <translation type="vanished">שמור סיסמה</translation>
-    </message>
-    <message>
-        <source>Password</source>
-        <translation type="vanished">סיסמה</translation>
-    </message>
-    <message>
-        <source>Proxy address:</source>
-        <translation type="vanished">כתובת פרוקסי:</translation>
-    </message>
-    <message>
-        <source>Proxy user:</source>
-        <translation type="vanished">משתמש פרוקסי:</translation>
-    </message>
-    <message>
-        <source>User Name:</source>
-        <translation type="vanished">שם משתמש:</translation>
-    </message>
-    <message>
-        <source>Password:</source>
-        <translation type="vanished">סיסמה</translation>
-    </message>
-</context>
-<context>
-    <name>ConfigDialog</name>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="vanished">וביטול</translation>
-    </message>
-    <message>
-        <source>&amp;Ok</source>
-        <translation type="vanished">ואישור</translation>
-    </message>
-    <message>
-        <source>Pattern</source>
-        <translation type="vanished">גזרה</translation>
-    </message>
-    <message>
-        <source>Community</source>
-        <translation type="vanished">קהילה</translation>
-    </message>
-</context>
-<context>
-    <name>ConfigurationPage</name>
-    <message>
-        <source>Default unit updated and will be used the next pattern creation</source>
-        <translation type="vanished">ברירת מחדל יחידת מידה עודכנה ותשומש ביצירת הגזרה הבאה</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="vanished">שמור</translation>
-    </message>
-    <message>
-        <source>Auto-save modified pattern</source>
-        <translation type="vanished">שמור אוטומטית שינויים בגזרה</translation>
-    </message>
-    <message>
-        <source>Language</source>
-        <translation type="vanished">שפה</translation>
-    </message>
-    <message>
-        <source>Default unit</source>
-        <translation type="vanished">ברירת מחדל יחידת מידה</translation>
-    </message>
-    <message>
-        <source>Centimeters</source>
-        <translation type="vanished">סנטימטרים</translation>
-    </message>
-    <message>
-        <source>Millimiters</source>
-        <translation type="vanished">מילימטר</translation>
-    </message>
-    <message>
-        <source>Inches</source>
-        <translation type="vanished">אינצ&apos;ים</translation>
-    </message>
-    <message>
-        <source>Label language</source>
-        <translation type="vanished">שפת תווית</translation>
-    </message>
-    <message>
-        <source>Send crash reports</source>
-        <translation type="vanished">שלח דוח קריסה</translation>
-    </message>
-    <message>
-        <source>Send crash reports (recommended)</source>
-        <translation type="vanished">שלח דוח קריסה (מומלץ)</translation>
-    </message>
-    <message>
-        <source>Pattern Editing</source>
-        <translation type="vanished">עריכת גזרה</translation>
-    </message>
-    <message>
-        <source>Confirm item deletion</source>
-        <translation type="vanished">אשר מחיקה</translation>
-    </message>
-    <message>
-        <source>Toolbar</source>
-        <translation type="vanished">סרגל כלים</translation>
-    </message>
-    <message>
-        <source>The text appears under the icon. (recommended for beginners.)</source>
-        <translation type="vanished">הטקסט מופיע מתחת לאייקון (מומלץ עבור מתחילים)</translation>
-    </message>
-    <message>
-        <source>Default unit:</source>
-        <translation type="vanished">ברירת מחדל יחידת מידה</translation>
-    </message>
-    <message>
-        <source>Label language:</source>
-        <translation type="vanished">שפת תווית</translation>
-    </message>
-    <message>
-        <source>Pattern making system</source>
-        <translation type="vanished">שיטת תדמיתנות</translation>
-    </message>
-    <message>
-        <source>Pattern making system:</source>
-        <translation type="vanished">עריכת גזרה</translation>
-    </message>
-    <message>
-        <source>Book:</source>
-        <translation type="vanished">ספר</translation>
-    </message>
-</context>
-<context>
     <name>DRW_TextCodec</name>
     <message>
         <location filename="../../src/libs/vdxf/libdxfrw/intern/drw_textcodec.cpp" line="121"/>
@@ -278,18 +106,7 @@
     </message>
 </context>
 <context>
-    <name>DeleteDetail</name>
-    <message>
-        <source>delete tool</source>
-        <translation type="vanished">מחק כלי</translation>
-    </message>
-</context>
-<context>
     <name>DeletePatternPiece</name>
-    <message>
-        <source>delete pattern piece %1</source>
-        <translation type="vanished">מחק חלק גזרה 1%</translation>
-    </message>
     <message>
         <location filename="../../src/libs/vtools/undocommands/deletepatternpiece.cpp" line="45"/>
         <source>delete pattern block</source>
@@ -302,17 +119,6 @@
         <location filename="../../src/libs/vtools/undocommands/deletepiece.cpp" line="52"/>
         <source>delete tool</source>
         <translation>מחק כלי</translation>
-    </message>
-</context>
-<context>
-    <name>Detail</name>
-    <message>
-        <source>Fabric</source>
-        <translation type="vanished">בד</translation>
-    </message>
-    <message>
-        <source>Lining</source>
-        <translation type="vanished">בטנה</translation>
     </message>
 </context>
 <context>
@@ -340,10 +146,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogaboutapp.h" line="247"/>
         <source>Credits</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Contributors</source>
-        <translation type="vanished">תורמים</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogaboutapp.cpp" line="66"/>
@@ -461,46 +263,10 @@
 <context>
     <name>DialogAlongLine</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">אורך</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">ערך האורך</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.ui" line="201"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="340"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">נקודה ראשונה</translation>
-    </message>
-    <message>
-        <source>First point of line</source>
-        <translation type="vanished">נקודה ראשונה בקו</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">נקודה שנייה</translation>
-    </message>
-    <message>
-        <source>Second point of line</source>
-        <translation type="vanished">נקודה שנייה בקו</translation>
-    </message>
-    <message>
-        <source>Type of line</source>
-        <translation type="vanished">סוג הקו</translation>
-    </message>
-    <message>
-        <source>Show line from first point to this point</source>
-        <translation type="vanished">הראה קו מהנקודה הראשונה לנקודה זו</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.cpp" line="220"/>
@@ -512,10 +278,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogalongline.h" line="327"/>
         <source>Point at distance along line</source>
         <translation>נקודה לאורך הקו</translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">צבע הקו</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogalongline.cpp" line="162"/>
@@ -628,14 +390,6 @@
         <translation>קשת</translation>
     </message>
     <message>
-        <source>Radius</source>
-        <translation type="vanished">רדיוס</translation>
-    </message>
-    <message>
-        <source>Value of radius</source>
-        <translation type="vanished">ערך הרדיוס</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="371"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.ui" line="550"/>
@@ -644,42 +398,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarc.h" line="476"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>First angle</source>
-        <translation type="vanished">זווית ראשונה</translation>
-    </message>
-    <message>
-        <source>Value of first angle</source>
-        <translation type="vanished">ערך הזווית הראשונה</translation>
-    </message>
-    <message>
-        <source>Second angle</source>
-        <translation type="vanished">זווית שניה</translation>
-    </message>
-    <message>
-        <source>Value of second angle</source>
-        <translation type="vanished">ערך הזווית השניה</translation>
-    </message>
-    <message>
-        <source>Center point</source>
-        <translation type="vanished">נקודת מרכז</translation>
-    </message>
-    <message>
-        <source>Select point of center of arc</source>
-        <translation type="vanished">בחר את נקודת מרכז הקשת</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">טעות</translation>
-    </message>
-    <message>
-        <source>Radius can&apos;t be negative</source>
-        <translation type="vanished">רדיוס אינו יכול להיות ערך שלילי</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">צבע</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarc.cpp" line="498"/>
@@ -802,14 +520,6 @@
 <context>
     <name>DialogArcWithLength</name>
     <message>
-        <source>Radius</source>
-        <translation type="vanished">רדיוס</translation>
-    </message>
-    <message>
-        <source>Value of radius</source>
-        <translation type="vanished">ערך הרדיוס</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="189"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="368"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="547"/>
@@ -818,30 +528,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogarcwithlength.h" line="468"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>First angle</source>
-        <translation type="vanished">זווית ראשונה</translation>
-    </message>
-    <message>
-        <source>Value of first angle</source>
-        <translation type="vanished">ערך הזווית הראשונה</translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation type="vanished">אורך</translation>
-    </message>
-    <message>
-        <source>Center point</source>
-        <translation type="vanished">נקודת מרכז</translation>
-    </message>
-    <message>
-        <source>Select point of center of arc</source>
-        <translation type="vanished">בחר נקודת מרכז הקשת</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">צבע</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="427"/>
@@ -857,14 +543,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.cpp" line="455"/>
         <source>Edit the arc length</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">טעות</translation>
-    </message>
-    <message>
-        <source>Radius can&apos;t be negative</source>
-        <translation type="vanished">רדיוס אינו יכול להיות ערך שלילי</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogarcwithlength.ui" line="79"/>
@@ -1023,34 +701,10 @@
 <context>
     <name>DialogBisector</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">אורך</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">ערך האורך</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="315"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">נקודה ראשונה</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">נקודה שנייה</translation>
-    </message>
-    <message>
-        <source>Type of line</source>
-        <translation type="vanished">סוג הקו</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.cpp" line="214"/>
@@ -1067,10 +721,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogbisector.h" line="302"/>
         <source>Point along bisector</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">צבע הקו</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogbisector.cpp" line="147"/>
@@ -1256,10 +906,6 @@
         <translation>צבע</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation type="vanished">שם</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezier.ui" line="37"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezier.h" line="199"/>
         <source>First point:</source>
@@ -1362,10 +1008,6 @@
         <translation>צבע</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation type="vanished">שם</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcubicbezierpath.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcubicbezierpath.h" line="330"/>
         <source>Tool cubic bezier path</source>
@@ -1447,22 +1089,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Curve</source>
-        <translation type="vanished">עקומה</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
-        <source>Type of line</source>
-        <translation type="vanished">סוג הקו</translation>
-    </message>
-    <message>
-        <source>Show line from first point to this point</source>
-        <translation type="vanished">הראה קו מהנקודה הראשונה לנקודה זו</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="295"/>
         <source>Select axis point</source>
         <translation type="unfinished"></translation>
@@ -1472,10 +1098,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcurveintersectaxis.h" line="335"/>
         <source>Point intersect curve and axis</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">צבע הקו</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcurveintersectaxis.cpp" line="351"/>
@@ -1600,36 +1222,16 @@
 <context>
     <name>DialogCutArc</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">אורך</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">ערך האורך</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="300"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Arc</source>
-        <translation type="vanished">קשת</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="287"/>
         <source>Segment an arc</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">צבע</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.cpp" line="119"/>
@@ -1685,10 +1287,6 @@
         <translation>בחר תווית ייחודית.</translation>
     </message>
     <message>
-        <source>Color:</source>
-        <translation type="vanished">צבע</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutarc.ui" line="28"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutarc.h" line="314"/>
         <source>Tool</source>
@@ -1740,36 +1338,16 @@
 <context>
     <name>DialogCutSpline</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">אורך</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">ערך האורך</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="295"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Curve</source>
-        <translation type="vanished">עקומה</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="282"/>
         <source>Segmenting a simple curve</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">צבע</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.cpp" line="417"/>
@@ -1817,14 +1395,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutspline.h" line="300"/>
         <source>Unique label</source>
         <translation>תווית ייחודית</translation>
-    </message>
-    <message>
-        <source>Choose unique label.</source>
-        <translation type="vanished">בחר תווית ייחודית.</translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation type="vanished">צבע</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutspline.ui" line="28"/>
@@ -1884,36 +1454,16 @@
 <context>
     <name>DialogCutSplinePath</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">אורך</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">ערך האורך</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="297"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Curve</source>
-        <translation type="vanished">עקומה</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="284"/>
         <source>Segment a curved path</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">צבע</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.cpp" line="415"/>
@@ -1967,10 +1517,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogcutsplinepath.h" line="304"/>
         <source>Choose unique label.</source>
         <translation>בחר תווית ייחודית.</translation>
-    </message>
-    <message>
-        <source>Color:</source>
-        <translation type="vanished">צבע</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogcutsplinepath.ui" line="28"/>
@@ -2045,229 +1591,6 @@
         <location filename="../../src/app/valentina/dialogs/dialogdatetimeformats.cpp" line="90"/>
         <source>&lt;empty&gt;</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DialogDetail</name>
-    <message>
-        <source>Detail</source>
-        <translation type="vanished">פרט</translation>
-    </message>
-    <message>
-        <source>cm</source>
-        <translation type="vanished">ס&quot;מ</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="vanished">אפשרויות</translation>
-    </message>
-    <message>
-        <source>Name of detail</source>
-        <translation type="vanished">שם הפרט</translation>
-    </message>
-    <message>
-        <source>Seam allowance</source>
-        <translation type="vanished">תוספת תפר</translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="vanished">רוחב</translation>
-    </message>
-    <message>
-        <source>Closed</source>
-        <translation type="vanished">סגור</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="vanished">למחוק</translation>
-    </message>
-    <message>
-        <source>Reverse</source>
-        <translation type="vanished">הפוך</translation>
-    </message>
-    <message>
-        <source>Seam allowance tool</source>
-        <translation type="vanished">כלי תוספת תפר</translation>
-    </message>
-    <message>
-        <source>All objects in path should follow in clockwise direction.</source>
-        <translation type="vanished">כל האובייקטים צריכים להיות בכיוון השעון.</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="vanished">...</translation>
-    </message>
-    <message>
-        <source>Ready!</source>
-        <translation type="vanished">מוכן!</translation>
-    </message>
-    <message>
-        <source>You need more points!</source>
-        <translation type="vanished">אתה צריך נקודות נוספות!</translation>
-    </message>
-    <message>
-        <source>First point can not equal the last point!</source>
-        <translation type="vanished">הנקודה הראשונה אינה יכולה להיות שווה לנקודה האחרונה!</translation>
-    </message>
-    <message>
-        <source>You have double points!</source>
-        <translation type="vanished">יש לך נקודות כפולות!</translation>
-    </message>
-    <message>
-        <source>You have to choose points in a clockwise direction!</source>
-        <translation type="vanished">עליך לבחור נקודות בכיוון השעון!</translation>
-    </message>
-    <message>
-        <source>Name of detail:</source>
-        <translation type="vanished">שם הפרט:</translation>
-    </message>
-    <message>
-        <source>Width:</source>
-        <translation type="vanished">רוחב:</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="vanished">כללי</translation>
-    </message>
-    <message>
-        <source>Pattern piece data</source>
-        <translation type="vanished">מידע על חלק הגזרה</translation>
-    </message>
-    <message>
-        <source>Material/Cut number/Placement</source>
-        <translation type="vanished">חומר/מספר גזרה/מיקום</translation>
-    </message>
-    <message>
-        <source>Material type:</source>
-        <translation type="vanished">סוג חומר:</translation>
-    </message>
-    <message>
-        <source>Cut number:</source>
-        <translation type="vanished">מספר חיתוך:</translation>
-    </message>
-    <message>
-        <source>Placement:</source>
-        <translation type="vanished">מיקום:</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="vanished">הוסף</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="vanished">בטל</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="vanished">הסר</translation>
-    </message>
-    <message>
-        <source>Letter:</source>
-        <translation type="vanished">אות:</translation>
-    </message>
-    <message>
-        <source>Detail label visible</source>
-        <translation type="vanished">תווית פרט נראית</translation>
-    </message>
-    <message>
-        <source>Pattern label visible</source>
-        <translation type="vanished">תווית גזרה נראית</translation>
-    </message>
-    <message>
-        <source>Fabric</source>
-        <translation type="vanished">בד</translation>
-    </message>
-    <message>
-        <source>Lining</source>
-        <translation type="vanished">בטנה</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="vanished">ללא</translation>
-    </message>
-    <message>
-        <source>Cut on fold</source>
-        <translation type="vanished">חתוך על קיפול בד</translation>
-    </message>
-    <message>
-        <source> on Fold</source>
-        <translation type="vanished">על קיפול בד</translation>
-    </message>
-    <message>
-        <source>Update</source>
-        <translation type="vanished">עדכון</translation>
-    </message>
-    <message>
-        <source>on Fold</source>
-        <translation type="vanished">על קיפול בד</translation>
-    </message>
-    <message>
-        <source>You can choose one of the predefined materials or enter a new one</source>
-        <translation type="vanished">עליך לבחור אחד מהחומרים המוגדרים או להגדיר חומר חדש</translation>
-    </message>
-    <message>
-        <source>Forbid flipping</source>
-        <translation type="vanished">אסור היפוך</translation>
-    </message>
-    <message>
-        <source>Letter of pattern piece</source>
-        <translation type="vanished">אות חלק הגזרה</translation>
-    </message>
-    <message>
-        <source>Name can&apos;t be empty</source>
-        <translation type="vanished">השם אינו יכול להישאר ריק</translation>
-    </message>
-    <message>
-        <source>Grainline</source>
-        <translation type="vanished">קו ישר</translation>
-    </message>
-    <message>
-        <source>Grainline visible</source>
-        <translation type="vanished">קו ישר נראה</translation>
-    </message>
-    <message>
-        <source>Rotation:</source>
-        <translation type="vanished">סיבוב:</translation>
-    </message>
-    <message>
-        <source>Formula wizard</source>
-        <translation type="vanished">אשף הפורמולות</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="vanished">ערך</translation>
-    </message>
-    <message>
-        <source>Calculation</source>
-        <translation type="vanished">חישובים</translation>
-    </message>
-    <message>
-        <source>Length:</source>
-        <translation type="vanished">אורך</translation>
-    </message>
-    <message>
-        <source>Infinite/undefined result</source>
-        <translation type="vanished">תוצאה אינסופית\ בלתי מוגדרת</translation>
-    </message>
-    <message>
-        <source>Length should be positive</source>
-        <translation type="vanished">על האורך להיות חיובי</translation>
-    </message>
-    <message>
-        <source>Arrows:</source>
-        <translation type="vanished">חצים:</translation>
-    </message>
-    <message>
-        <source>Both</source>
-        <translation type="vanished">גם וגם</translation>
-    </message>
-    <message>
-        <source>Just front</source>
-        <translation type="vanished">רק קדמי</translation>
-    </message>
-    <message>
-        <source>Just rear</source>
-        <translation type="vanished">רק אחורי</translation>
     </message>
 </context>
 <context>
@@ -2836,10 +2159,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Value of first angle</source>
-        <translation type="vanished">ערך הזווית הראשונה</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/support/dialogeditwrongformula.ui" line="191"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogeditwrongformula.h" line="344"/>
         <source>Input data</source>
@@ -3338,14 +2657,6 @@
 <context>
     <name>DialogEndLine</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">אורך</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">ערך האורך</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="216"/>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="410"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="375"/>
@@ -3354,30 +2665,10 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>First point of line</source>
-        <translation type="vanished">נקודה ראשונה בשורה</translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
-        <source>Type of line</source>
-        <translation type="vanished">סוג הקו</translation>
-    </message>
-    <message>
-        <source>Show line from first point to this point</source>
-        <translation type="vanished">הראה קו מהנקודה הראשונה לנקודה זו</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.ui" line="20"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogendline.h" line="362"/>
         <source>Point at distance and angle</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">צבע הקו</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogendline.cpp" line="176"/>
@@ -4239,22 +3530,6 @@
 <context>
     <name>DialogHeight</name>
     <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
-        <source>First point of line</source>
-        <translation type="vanished">נקודה ראשונה בשורה</translation>
-    </message>
-    <message>
-        <source>Second point of line</source>
-        <translation type="vanished">נקודה שנייה בשורה</translation>
-    </message>
-    <message>
-        <source>Type of line</source>
-        <translation type="vanished">סוג הקו</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.cpp" line="210"/>
         <source>Select first point of line</source>
         <translation>לבחור נקודה ראשונה</translation>
@@ -4269,10 +3544,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="182"/>
         <source>Perpendicular point along line</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">צבע הקו</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="46"/>
@@ -4333,25 +3604,6 @@
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="194"/>
         <source>Notes</source>
         <translation>הערות</translation>
-    </message>
-</context>
-<context>
-    <name>DialogHistory</name>
-    <message>
-        <source>History</source>
-        <translation type="vanished">היסטוריה</translation>
-    </message>
-    <message>
-        <source>Tool</source>
-        <translation type="vanished">כלי</translation>
-    </message>
-    <message>
-        <source>Curve</source>
-        <translation type="vanished">עיקול</translation>
-    </message>
-    <message>
-        <source>Arc</source>
-        <translation type="vanished">קשת</translation>
     </message>
 </context>
 <context>
@@ -5366,10 +4618,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Custom</source>
-        <translation type="vanished">מותאם אישית</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/dialoglayoutsettings.cpp" line="698"/>
         <source>Wrong fields.</source>
         <translation type="unfinished"></translation>
@@ -5562,22 +4810,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogLine</name>
     <message>
-        <source>First point</source>
-        <translation type="vanished">נקודה ראשונה</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">נקודה שנייה</translation>
-    </message>
-    <message>
-        <source>Type of line</source>
-        <translation type="vanished">סוג הקו</translation>
-    </message>
-    <message>
-        <source>Show line from first point to this point</source>
-        <translation type="vanished">הראה קו מהנקודה הראשונה לנקודה זו</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.cpp" line="195"/>
         <source>Select second point</source>
         <translation>לבחור נקודה שנייה</translation>
@@ -5587,10 +4819,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogline.h" line="204"/>
         <source>Line between points</source>
         <translation>קו בין נקודות</translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">צבע הקו</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogline.ui" line="158"/>
@@ -5638,22 +4866,10 @@ Apply settings anyway?</source>
 <context>
     <name>DialogLineIntersect</name>
     <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="64"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersect.h" line="216"/>
         <source>First line</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">נקודה ראשונה</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">נקודה שנייה</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersect.ui" line="103"/>
@@ -5744,14 +4960,6 @@ Apply settings anyway?</source>
         <translation>נקודה ראשונה בשורה</translation>
     </message>
     <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
-        <source>Type of line</source>
-        <translation type="vanished">סוג הקו</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.ui" line="329"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="334"/>
         <source>Show line from first point to this point</source>
@@ -5784,10 +4992,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialoglineintersectaxis.h" line="325"/>
         <source>Second point of line</source>
         <translation>נקודה שנייה בשורה</translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">צבע הקו</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialoglineintersectaxis.cpp" line="402"/>
@@ -6375,38 +5579,10 @@ Apply settings anyway?</source>
 <context>
     <name>DialogNormal</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">אורך</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">ערך האורך</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="475"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">נקודה ראשונה</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">נקודה שנייה</translation>
-    </message>
-    <message>
-        <source>Type of line</source>
-        <translation type="vanished">סוג הקו</translation>
-    </message>
-    <message>
-        <source>Show line from first point to this point</source>
-        <translation type="vanished">הראה קו מהנקודה הראשונה לנקודה זו</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.cpp" line="223"/>
@@ -6418,18 +5594,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialognormal.h" line="462"/>
         <source>Point along perpendicular</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>First point of line</source>
-        <translation type="vanished">נקודה ראשונה בשורה</translation>
-    </message>
-    <message>
-        <source>Second point of line</source>
-        <translation type="vanished">נקודה שנייה בשורה</translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">צבע הקו</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialognormal.cpp" line="156"/>
@@ -6694,10 +5858,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Custom</source>
-        <translation type="vanished">מותאם אישית</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.ui" line="297"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialogpatternproperties.h" line="327"/>
         <source>Security</source>
@@ -6869,17 +6029,6 @@ Apply settings anyway?</source>
         <location filename="../../src/app/valentina/dialogs/dialogpatternproperties.cpp" line="503"/>
         <source>Unable to show image. Error: %1</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DialogPatternXmlEdit</name>
-    <message>
-        <source>Cancel</source>
-        <translation type="vanished">בטל</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation type="vanished">שם</translation>
     </message>
 </context>
 <context>
@@ -7787,18 +6936,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
-        <source>Arc</source>
-        <translation type="vanished">קשת</translation>
-    </message>
-    <message>
-        <source>Select point of center of arc</source>
-        <translation type="vanished">בחר נקודת מרכז הקשת</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromarcandtangent.cpp" line="160"/>
         <source>Select an arc</source>
         <translation type="unfinished"></translation>
@@ -7861,22 +6998,10 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Radius</source>
-        <translation type="vanished">רדיוס</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.ui" line="189"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointfromcircleandtangent.h" line="287"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
-        <source>Select point of center of arc</source>
-        <translation type="vanished">בחר נקודת מרכז הקשת</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointfromcircleandtangent.cpp" line="265"/>
@@ -7974,22 +7099,10 @@ Apply settings anyway?</source>
 <context>
     <name>DialogPointOfContact</name>
     <message>
-        <source>Radius</source>
-        <translation type="vanished">רדיוס</translation>
-    </message>
-    <message>
-        <source>Value of radius</source>
-        <translation type="vanished">ערך הרדיוס</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofcontact.h" line="296"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofcontact.cpp" line="260"/>
@@ -8088,10 +7201,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogPointOfIntersection</name>
     <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersection.ui" line="14"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersection.h" line="179"/>
         <source>Point from X and Y of two other points</source>
@@ -8154,10 +7263,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogPointOfIntersectionArcs</name>
     <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.cpp" line="181"/>
         <source>Select second an arc</source>
         <translation type="unfinished"></translation>
@@ -8173,10 +7278,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectionarcs.h" line="277"/>
         <source>Unique label</source>
         <translation>תווית ייחודית</translation>
-    </message>
-    <message>
-        <source>Choose unique label.</source>
-        <translation type="vanished">בחר תווית ייחודית.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectionarcs.ui" line="65"/>
@@ -8290,14 +7391,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpointofintersectioncircles.h" line="379"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
-        <source>Select point of center of arc</source>
-        <translation type="vanished">בחר נקודת מרכז הקשת</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogpointofintersectioncircles.cpp" line="289"/>
@@ -10051,34 +9144,10 @@ Apply settings anyway?</source>
 <context>
     <name>DialogShoulderPoint</name>
     <message>
-        <source>Length</source>
-        <translation type="vanished">אורך</translation>
-    </message>
-    <message>
-        <source>Value of length</source>
-        <translation type="vanished">ערך האורך</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.ui" line="192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="328"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show full calculation in message box&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">נקודה ראשונה</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">נקודה שנייה</translation>
-    </message>
-    <message>
-        <source>Type of line</source>
-        <translation type="vanished">סוג הקו</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.cpp" line="213"/>
@@ -10095,10 +9164,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogshoulderpoint.h" line="315"/>
         <source>Special point on shoulder</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line color</source>
-        <translation type="vanished">צבע הקו</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogshoulderpoint.cpp" line="146"/>
@@ -10256,14 +9321,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogSpline</name>
     <message>
-        <source>First point</source>
-        <translation type="vanished">נקודה ראשונה</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">נקודה שנייה</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="176"/>
         <source>Select last point of curve</source>
         <translation type="unfinished"></translation>
@@ -10273,10 +9330,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="588"/>
         <source>Simple curve</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">צבע</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="873"/>
@@ -10311,10 +9364,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogspline.h" line="619"/>
         <source>Second point:</source>
         <translation>נקודה שניה</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation type="vanished">שם</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="121"/>
@@ -10379,10 +9428,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.cpp" line="358"/>
         <source>Edit second control point length</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">טעות</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogspline.ui" line="209"/>
@@ -10453,10 +9498,6 @@ Apply settings anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Color</source>
-        <translation type="vanished">צבע</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="999"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="777"/>
         <source>Color:</source>
@@ -10493,10 +9534,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogsplinepath.h" line="732"/>
         <source>Second control point</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation type="vanished">שם</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.ui" line="176"/>
@@ -10565,10 +9602,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="535"/>
         <source>Edit second control point length</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">טעות</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogsplinepath.cpp" line="904"/>
@@ -10677,14 +9710,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogTool</name>
     <message>
-        <source>Error</source>
-        <translation type="vanished">טעות</translation>
-    </message>
-    <message>
-        <source>Value</source>
-        <translation type="vanished">ערך</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtool.cpp" line="301"/>
         <source>First point</source>
         <translation>נקודה ראשונה</translation>
@@ -10748,22 +9773,6 @@ Apply settings anyway?</source>
 <context>
     <name>DialogTriangle</name>
     <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
-        <source>First point of line</source>
-        <translation type="vanished">נקודה ראשונה בשורה</translation>
-    </message>
-    <message>
-        <source>First point</source>
-        <translation type="vanished">נקודה ראשונה</translation>
-    </message>
-    <message>
-        <source>Second point</source>
-        <translation type="vanished">נקודה שנייה</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.cpp" line="115"/>
         <source>Select second point of axis</source>
         <translation type="unfinished"></translation>
@@ -10783,10 +9792,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogtriangle.h" line="170"/>
         <source>Triangle tool</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Second point of line</source>
-        <translation type="vanished">נקודה שנייה בשורה</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogtriangle.ui" line="46"/>
@@ -11111,10 +10116,6 @@ Apply settings anyway?</source>
         <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Error</source>
-        <translation type="vanished">טעות</translation>
-    </message>
 </context>
 <context>
     <name>HideAllBackgroundImages</name>
@@ -11171,7 +10172,7 @@ Apply settings anyway?</source>
 <context>
     <name>InitPieceLabelLanguages</name>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="579"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="580"/>
         <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11343,10 +10344,6 @@ Apply settings anyway?</source>
         <translation>ולנטינה</translation>
     </message>
     <message>
-        <source>Point</source>
-        <translation type="vanished">נקודה</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1953"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1616"/>
         <source>Point along perpendicular</source>
@@ -11377,14 +10374,6 @@ Apply settings anyway?</source>
         <translation>נקודה במרחק לאורך הקו</translation>
     </message>
     <message>
-        <source>Tools for creating lines.</source>
-        <translation type="vanished">כלים ליצירת קווים.</translation>
-    </message>
-    <message>
-        <source>Line</source>
-        <translation type="vanished">קו</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2115"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1625"/>
         <source>Line between points</source>
@@ -11397,30 +10386,10 @@ Apply settings anyway?</source>
         <translation>נקודה במפגש קוים</translation>
     </message>
     <message>
-        <source>Tools for creating curves.</source>
-        <translation type="vanished">כלים ליצירת עיקול</translation>
-    </message>
-    <message>
-        <source>Curve</source>
-        <translation type="vanished">עיקול</translation>
-    </message>
-    <message>
-        <source>Tools for creating arcs.</source>
-        <translation type="vanished">כלים ליצירת קשתות.</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1845"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1610"/>
         <source>Arc</source>
         <translation>קשת</translation>
-    </message>
-    <message>
-        <source>Tools for creating details.</source>
-        <translation type="vanished">כלים ליצירת פרטים.</translation>
-    </message>
-    <message>
-        <source>Detail</source>
-        <translation type="vanished">פרט</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="60"/>
@@ -11778,14 +10747,6 @@ Apply settings anyway?</source>
         <translation>שנה תווית חלק גזרה</translation>
     </message>
     <message>
-        <source>Table of variables</source>
-        <translation type="vanished">טבלת משתנים</translation>
-    </message>
-    <message>
-        <source>Tables of variables</source>
-        <translation type="vanished">טבלאות משתנים</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="158"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1676"/>
         <source>History</source>
@@ -11853,48 +10814,16 @@ Apply settings anyway?</source>
         <translation>התרחק</translation>
     </message>
     <message>
-        <source>Original zoom </source>
-        <translation type="vanished">זום מקןרי</translation>
-    </message>
-    <message>
-        <source>Original Zoom </source>
-        <translation type="vanished">זום מקורי</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1097"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1484"/>
         <source>Zoom fit best</source>
         <translation>זום מותאם</translation>
     </message>
     <message>
-        <source>Stop</source>
-        <translation type="vanished">הפסק</translation>
-    </message>
-    <message>
-        <source>Stop using tool</source>
-        <translation type="vanished">הפסק להשתמש בכלי</translation>
-    </message>
-    <message>
-        <source>Repot Bug...</source>
-        <translation type="vanished">דווח על תקלה...</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1111"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1487"/>
         <source>Report bug</source>
         <translation>דווח על תקלה</translation>
-    </message>
-    <message>
-        <source>Close window</source>
-        <translation type="vanished">סגור חלון</translation>
-    </message>
-    <message>
-        <source>Online help</source>
-        <translation type="vanished">עזרה אונליין</translation>
-    </message>
-    <message>
-        <source>Show online help</source>
-        <translation type="vanished">הראה עזרה אונליין</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="5304"/>
@@ -12166,10 +11095,6 @@ Apply settings anyway?</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1609"/>
         <source>Segment an arc</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Seam allowance tool</source>
-        <translation type="vanished">כלי תוספת תפר</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2457"/>
@@ -13754,20 +12679,6 @@ Would you like to select another file?</source>
     </message>
 </context>
 <context>
-    <name>PathPage</name>
-    <message>
-        <source>Edit</source>
-        <translation type="vanished">ערוך</translation>
-    </message>
-</context>
-<context>
-    <name>PatternPage</name>
-    <message>
-        <source>Forbid flipping</source>
-        <translation type="vanished">אסור היפוך</translation>
-    </message>
-</context>
-<context>
     <name>Placeholder</name>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="641"/>
@@ -15160,12 +14071,12 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="618"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="619"/>
         <source>CustomSARecord prefix mismatch error: actualStreamHeader = 0x%1 and streamHeader = 0x%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="630"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="631"/>
         <source>CustomSARecord compatibility error: actualClassVersion = %1 and classVersion = %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15203,17 +14114,17 @@ This option will take an affect after restart.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="548"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="549"/>
         <source>mm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="557"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="558"/>
         <source>cm</source>
         <translation>ס&quot;מ</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="550"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="551"/>
         <source>inch</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15231,7 +14142,7 @@ This option will take an affect after restart.</source>
         <translation>ערך</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vmisc/def.cpp" line="552"/>
+        <location filename="../../src/libs/vmisc/def.cpp" line="553"/>
         <source>px</source>
         <translation type="unfinished"></translation>
     </message>
@@ -15335,7 +14246,7 @@ This option will take an affect after restart.</source>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1232"/>
         <source>Point</source>
-        <translation type="unfinished">נקודה</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1233"/>
@@ -16713,10 +15624,6 @@ This option will take an affect after restart.</source>
 <context>
     <name>TMainWindow</name>
     <message>
-        <source>Name</source>
-        <translation type="vanished">שם</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="600"/>
         <source>Calculated value</source>
         <translation type="unfinished"></translation>
@@ -16813,14 +15720,6 @@ This option will take an affect after restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File</source>
-        <translation type="vanished">קובץ</translation>
-    </message>
-    <message>
-        <source>Window</source>
-        <translation type="vanished">חלון</translation>
-    </message>
-    <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="64"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="715"/>
         <location filename="../../src/app/tape/tmainwindow.cpp" line="736"/>
@@ -16846,14 +15745,6 @@ This option will take an affect after restart.</source>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1503"/>
         <source>About &amp;Qt</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>About Tape</source>
-        <translation type="vanished">אודות סרט-מידה</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="vanished">חדש</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/tmainwindow.ui" line="1540"/>
@@ -19083,43 +17974,6 @@ This option will take an affect after restart.</source>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabplacelabels.h" line="46"/>
         <source>Dialog</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TapeConfigDialog</name>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="vanished">וביטול</translation>
-    </message>
-    <message>
-        <source>&amp;Ok</source>
-        <translation type="vanished">ואישור</translation>
-    </message>
-</context>
-<context>
-    <name>TapeConfigurationPage</name>
-    <message>
-        <source>Language</source>
-        <translation type="vanished">שפה</translation>
-    </message>
-    <message>
-        <source>Pattern making system</source>
-        <translation type="vanished">שיטת תדמיתנות</translation>
-    </message>
-    <message>
-        <source>Book:</source>
-        <translation type="vanished">ספר</translation>
-    </message>
-    <message>
-        <source>Pattern making system:</source>
-        <translation type="vanished">עריכת גזרה</translation>
-    </message>
-</context>
-<context>
-    <name>TapePathPage</name>
-    <message>
-        <source>Edit</source>
-        <translation type="vanished">ערוך</translation>
     </message>
 </context>
 <context>
@@ -21714,22 +20568,22 @@ This option will take an affect after restart.</source>
 <context>
     <name>VDxfEngine</name>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1045"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1047"/>
         <source>Piece &apos;%1&apos;. Piece System Text is missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1201"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="1204"/>
         <source>Style System Text is missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2074"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2078"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; or &apos;Size:&apos; identifier is missing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2109"/>
+        <location filename="../../src/libs/vdxf/vdxfengine.cpp" line="2113"/>
         <source>Piece &apos;%1&apos;. &apos;Piece Name:&apos; identifier requires &apos;Size:&apos; identifier to be present.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -21892,10 +20746,6 @@ This option will take an affect after restart.</source>
 </context>
 <context>
     <name>VFormulaProperty</name>
-    <message>
-        <source>Value</source>
-        <translation type="vanished">ערך</translation>
-    </message>
     <message>
         <location filename="../../src/app/valentina/core/vformulaproperty.cpp" line="49"/>
         <source>Formula</source>
@@ -24433,17 +23283,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
     </message>
 </context>
 <context>
-    <name>VTextManager</name>
-    <message>
-        <source> on Fold</source>
-        <translation type="vanished">על קיפול בד</translation>
-    </message>
-    <message>
-        <source>on Fold</source>
-        <translation type="vanished">על קיפול בד</translation>
-    </message>
-</context>
-<context>
     <name>VToolAbstractArc</name>
     <message>
         <location filename="../../src/libs/vtools/tools/drawTools/toolcurve/vtoolabstractcurve.cpp" line="549"/>
@@ -24698,17 +23537,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/libs/vtools/tools/drawTools/toolpoint/toolsinglepoint/toolcut/vtoolcutsplinepath.cpp" line="484"/>
         <source>label</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>VToolDetail</name>
-    <message>
-        <source>Options</source>
-        <translation type="vanished">אפשרויות</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="vanished">למחוק</translation>
     </message>
 </context>
 <context>
@@ -24981,17 +23809,9 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Point label</source>
-        <translation type="vanished">תווית הנקודה</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3066"/>
         <source>Point at distance and angle</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Length</source>
-        <translation type="vanished">אורך</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3085"/>
@@ -25002,18 +23822,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3104"/>
         <source>Arc</source>
         <translation>קשת</translation>
-    </message>
-    <message>
-        <source>Radius</source>
-        <translation type="vanished">רדיוס</translation>
-    </message>
-    <message>
-        <source>First angle</source>
-        <translation type="vanished">זווית ראשונה</translation>
-    </message>
-    <message>
-        <source>Second angle</source>
-        <translation type="vanished">זווית שניה</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3150"/>
@@ -25086,14 +23894,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Line color</source>
-        <translation type="vanished">צבע הקו</translation>
-    </message>
-    <message>
-        <source>Color</source>
-        <translation type="vanished">צבע</translation>
-    </message>
-    <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3598"/>
         <source>Point intersection curve and axis</source>
         <translation type="unfinished"></translation>
@@ -25162,10 +23962,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3384"/>
         <source>Tool to make point from intersection two curves</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="vanished">שם</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vtooloptionspropertybrowser.cpp" line="3502"/>
@@ -26183,11 +24979,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
 <context>
     <name>VTranslateVars</name>
     <message>
-        <source>None</source>
-        <comment>System name</comment>
-        <translation type="vanished">ללא</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="149"/>
         <source>sinh</source>
         <comment>hyperbolic sine function</comment>
@@ -26296,11 +25087,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>cm</source>
-        <comment>centimeter</comment>
-        <translation type="vanished">ס&quot;מ</translation>
-    </message>
-    <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="67"/>
         <source>Line_</source>
         <comment>Left symbol _ in the name</comment>
@@ -26389,11 +25175,6 @@ Raw layout format compatibility error: actualFileVersion = %1 and fileVersion = 
         <source>acosh</source>
         <comment>hyperbolic arcus cosine function</comment>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>height</source>
-        <comment>placeholder</comment>
-        <translation type="vanished">גובע</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpatterndb/vtranslatevars.cpp" line="90"/>
