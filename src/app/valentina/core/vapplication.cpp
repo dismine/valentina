@@ -674,7 +674,22 @@ void VApplication::StartDetachedProcess(const QString &program, const QStringLis
     }
     else
     {
-        if (const QString appBundlePath = QStringLiteral("/Applications/%1").arg(program);
+        // AppFilePath()'s sibling-bundle lookup already handles bundles installed next to this one,
+        // including inside a subfolder (e.g. to keep several versions side by side). We only get here
+        // with a bare name like "Tape.app" when that lookup failed, so ask Spotlight to resolve it
+        // instead of assuming it sits directly in /Applications -- a user may have it in ~/Applications
+        // or any subfolder of either.
+        QProcess mdfind;
+        mdfind.start("mdfind"_L1, QStringList{"-onlyin"_L1, QDir::homePath(), "-onlyin"_L1, "/Applications"_L1,
+                                               QStringLiteral("kMDItemFSName == '%1'").arg(program)});
+        // Keep this well under the 30s default: it runs on the GUI thread, so a stuck mdworker
+        // must not freeze the window -- falling back to the /Applications guess is better than that.
+        mdfind.waitForFinished(3000);
+        const QStringList hits =
+            QString::fromUtf8(mdfind.readAllStandardOutput()).split('\n'_L1, Qt::SkipEmptyParts);
+
+        if (const QString appBundlePath = not hits.isEmpty() ? hits.constFirst()
+                                                             : QStringLiteral("/Applications/%1").arg(program);
             QFileInfo::exists(appBundlePath))
         {
             QStringList openArguments{"-n", appBundlePath};
