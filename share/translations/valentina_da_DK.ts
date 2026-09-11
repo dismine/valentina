@@ -16897,7 +16897,7 @@ Denne indstilling træder i kraft efter genstart.</translation>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="712"/>
         <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke starte &apos;%1&apos;. Kontroller, at programmet er installeret korrekt.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="525"/>

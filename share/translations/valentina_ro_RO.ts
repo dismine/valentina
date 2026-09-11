@@ -16903,7 +16903,7 @@ Această opțiune va avea efect după repornire.</translation>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="712"/>
         <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nu s-a putut porni &apos;%1&apos;. Asigurați-vă că aplicația este instalată corect.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="525"/>

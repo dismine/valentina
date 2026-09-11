@@ -16903,7 +16903,7 @@ Ao guardar o ficheiro com a versão atual, não será mais possível abri-lo em 
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="712"/>
         <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível iniciar &apos;%1&apos;. Certifique-se de que a aplicação está instalada corretamente.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="525"/>

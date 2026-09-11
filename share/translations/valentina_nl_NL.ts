@@ -16897,7 +16897,7 @@ Deze optie wordt actief na een herstart..</translation>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="712"/>
         <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan &apos;%1&apos; niet starten. Zorg ervoor dat de toepassing correct is geïnstalleerd.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="525"/>
