@@ -19368,7 +19368,7 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="713"/>
         <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidak dapat memulai &apos;%1&apos;. Pastikan aplikasi terinstal dengan benar.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="526"/>

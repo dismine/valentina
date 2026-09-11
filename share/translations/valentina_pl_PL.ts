@@ -19374,7 +19374,7 @@ Ta opcja zadziała po ponownym uruchomieniu.</translation>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="713"/>
         <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie można uruchomić &apos;%1&apos;. Upewnij się, że aplikacja jest poprawnie zainstalowana.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="526"/>

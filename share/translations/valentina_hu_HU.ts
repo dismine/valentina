@@ -19368,7 +19368,7 @@ Ez a beállítás újraindítás után lép életbe.</translation>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="713"/>
         <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>A(z) &apos;%1&apos; nem indítható el. Győződjön meg róla, hogy az alkalmazás megfelelően van telepítve.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="526"/>

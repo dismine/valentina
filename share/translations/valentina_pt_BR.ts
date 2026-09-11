@@ -3562,7 +3562,7 @@ O significado das classes de caracteres \w, \d, etc., bem como o significado de 
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="56"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogheight.h" line="187"/>
         <source>Choose unique label.</source>
-        <translation>Escolher etiqueta única.</translation>
+        <translation>Digite um nome não utilizado.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/dialogheight.ui" line="69"/>
@@ -5549,13 +5549,13 @@ Aplicar configurações assim mesmo?</translation>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="35"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="92"/>
         <source>Pattern piece name:</source>
-        <translation>Nome da peça do molde:</translation>
+        <translation>Nome da peça de modelagem:</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="42"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_dialognewpattern.h" line="94"/>
         <source>Unique pattern piece name</source>
-        <translation>Nome único da peça do molde</translation>
+        <translation>Nome único da peça de modelagem</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialognewpattern.ui" line="45"/>
@@ -9015,7 +9015,7 @@ Aplicar configurações assim mesmo?</translation>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="14"/>
         <source>Setup multisize measurements</source>
-        <translation>Configurar medidas de vários tamanhos</translation>
+        <translation>Configurar tabela de Tamanhos Múltiplos</translation>
     </message>
     <message>
         <location filename="../../src/app/tape/dialogs/dialogsetupmultisize.ui" line="24"/>
@@ -14749,13 +14749,13 @@ Esta opção terá efeito após reinicialização.</translation>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="46"/>
         <source>Invalid infix operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>Invalid infix operator identifier: &quot;$TOK$&quot;.</translation>
+        <translation>Identificador de operdor infixo inválido: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="49"/>
         <source>Invalid postfix operator identifier: &quot;$TOK$&quot;.</source>
         <comment>Math parser error messages. Left untouched &quot;$TOK$&quot;</comment>
-        <translation>Invalid postfix operator identifier: &quot;$TOK$&quot;.</translation>
+        <translation>Identificador de operador pós-fixo inválido: &quot;$TOK$&quot;.</translation>
     </message>
     <message>
         <location filename="../../src/libs/qmuparser/qmuparsererror.cpp" line="51"/>
@@ -19374,7 +19374,7 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="713"/>
         <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível iniciar %1. Verifique se o aplicativo está instalado corretamente.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="526"/>
@@ -22980,7 +22980,7 @@ Ao salvar o arquivo com a versão atual, não será mais possível abri-lo em um
     <message>
         <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="55"/>
         <source>Unexpected mime type: %1</source>
-        <translation>Unexpected mime type: %1</translation>
+        <translation>Tipo mime inesperado: %1</translation>
     </message>
     <message>
         <location filename="../../src/libs/ifc/xml/vpatternimage.cpp" line="62"/>

@@ -19372,7 +19372,7 @@ Esta opción surtirá efecto después de reiniciar.</translation>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="713"/>
         <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede iniciar &apos;%1&apos;. Asegúrese de que la aplicación esté instalada correctamente.</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/core/vapplication.cpp" line="526"/>
