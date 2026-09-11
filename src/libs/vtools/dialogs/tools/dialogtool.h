@@ -59,7 +59,8 @@
 #include "../vtools/visualization/visualization.h" // Issue on Windows
 #include "../vwidgets/vmaingraphicsscene.h"
 
-template <class T> class QSharedPointer;
+template<class T>
+class QSharedPointer;
 
 Q_DECLARE_LOGGING_CATEGORY(vDialog)
 
@@ -172,9 +173,13 @@ protected:
     virtual void CheckState();
 
     void FillComboBoxPiecesList(QComboBox *box, const QVector<quint32> &list);
-    void FillComboBoxPoints(QComboBox *box, FillComboBox rule = FillComboBox::Whole, quint32 ch1 = NULL_ID,
+    void FillComboBoxPoints(QComboBox *box,
+                            FillComboBox rule = FillComboBox::Whole,
+                            quint32 ch1 = NULL_ID,
                             quint32 ch2 = NULL_ID) const;
-    void FillComboBoxArcs(QComboBox *box, FillComboBox rule = FillComboBox::Whole, quint32 ch1 = NULL_ID,
+    void FillComboBoxArcs(QComboBox *box,
+                          FillComboBox rule = FillComboBox::Whole,
+                          quint32 ch1 = NULL_ID,
                           quint32 ch2 = NULL_ID) const;
     void FillComboBoxEllipticalArcs(QComboBox *box,
                                     FillComboBox rule = FillComboBox::Whole,
@@ -193,11 +198,17 @@ protected:
 
     auto Eval(const FormulaData &formulaData, bool &flag) -> qreal;
 
-    void setCurrentPointId(QComboBox *box, const quint32 &value, FillComboBox rule = FillComboBox::NoChildren,
-                           const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID) const;
+    void setCurrentPointId(QComboBox *box,
+                           const quint32 &value,
+                           FillComboBox rule = FillComboBox::NoChildren,
+                           const quint32 &ch1 = NULL_ID,
+                           const quint32 &ch2 = NULL_ID) const;
     void setCurrentSplineId(QComboBox *box, const quint32 &value) const;
-    void setCurrentArcId(QComboBox *box, const quint32 &value, FillComboBox rule = FillComboBox::NoChildren,
-                         const quint32 &ch1 = NULL_ID, const quint32 &ch2 = NULL_ID) const;
+    void setCurrentArcId(QComboBox *box,
+                         const quint32 &value,
+                         FillComboBox rule = FillComboBox::NoChildren,
+                         const quint32 &ch1 = NULL_ID,
+                         const quint32 &ch2 = NULL_ID) const;
     void setCurrentArcCurveId(QComboBox *box,
                               const quint32 &value,
                               FillComboBox rule = FillComboBox::NoChildren,
@@ -208,17 +219,22 @@ protected:
 
     static auto getCurrentObjectId(QComboBox *box) -> quint32;
 
-    template <typename T> auto getCurrentCrossPoint(QComboBox *box) const -> T;
+    template<typename T>
+    auto getCurrentCrossPoint(QComboBox *box) const -> T;
 
     auto SetObject(const quint32 &id, QComboBox *box, const QString &toolTip) -> bool;
 
-    template <typename T> void InitOkCancelApply(T *ui);
+    template<typename T>
+    void InitOkCancelApply(T *ui);
 
-    template <typename T> void InitOkCancel(T *ui);
+    template<typename T>
+    void InitOkCancel(T *ui);
 
-    template <typename T> void AddVisualization();
+    template<typename T>
+    void AddVisualization();
 
-    template <typename T> auto GetListInternals(const QListWidget *list) const -> QVector<T>;
+    template<typename T>
+    auto GetListInternals(const QListWidget *list) const -> QVector<T>;
 
     virtual void ShowVisualization() {}
 
@@ -248,7 +264,9 @@ protected:
      */
     virtual void SaveData() {}
     auto DNumber(const QString &baseName) const -> quint32;
-    void NewNodeItem(QListWidget *listWidget, const VPieceNode &node, bool showPassmark = true,
+    void NewNodeItem(QListWidget *listWidget,
+                     const VPieceNode &node,
+                     bool showPassmark = true,
                      bool showExclusion = true);
 
     void InitNodeAngles(QComboBox *box);
@@ -256,13 +274,17 @@ protected:
 private:
     Q_DISABLE_COPY_MOVE(DialogTool) // NOLINT
 
-    template <typename T> void PrepareList(QMap<QString, quint32> &list, quint32 id) const;
+    template<typename T>
+    void PrepareList(QMap<QString, quint32> &list, quint32 id) const;
 
     auto IsSpline(const QSharedPointer<VGObject> &obj) const -> bool;
     auto IsSplinePath(const QSharedPointer<VGObject> &obj) const -> bool;
 
-    template <typename GObject>
-    void FillCombo(QComboBox *box, GOType gType, FillComboBox rule = FillComboBox::Whole, const quint32 &ch1 = NULL_ID,
+    template<typename GObject>
+    void FillCombo(QComboBox *box,
+                   GOType gType,
+                   FillComboBox rule = FillComboBox::Whole,
+                   const quint32 &ch1 = NULL_ID,
                    const quint32 &ch2 = NULL_ID) const;
 };
 
@@ -270,13 +292,14 @@ private:
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T> auto DialogTool::GetListInternals(const QListWidget *list) const -> QVector<T>
+template<typename T>
+auto DialogTool::GetListInternals(const QListWidget *list) const -> QVector<T>
 {
     SCASSERT(list != nullptr)
     QVector<T> internals;
     for (qint32 i = 0; i < list->count(); ++i)
     {
-        QListWidgetItem  const*item = list->item(i);
+        QListWidgetItem const *item = list->item(i);
         internals.append(qvariant_cast<T>(item->data(Qt::UserRole)));
     }
     return internals;
@@ -289,7 +312,7 @@ inline auto DialogTool::GetAssociatedTool() -> VAbstractTool *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
+template<typename T>
 /**
  * @brief InitOkCancelApply initialise OK / Cancel and Apply buttons
  * @param ui Dialog container
@@ -303,7 +326,7 @@ inline void DialogTool::InitOkCancelApply(T *ui)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T>
+template<typename T>
 /**
  * @brief InitOkCancel initialise OK and Cancel buttons
  * @param ui Dialog container
@@ -322,7 +345,8 @@ inline void DialogTool::InitOkCancel(T *ui)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T> inline void DialogTool::AddVisualization()
+template<typename T>
+inline void DialogTool::AddVisualization()
 {
     if (prepare == false)
     {
@@ -343,7 +367,8 @@ template <typename T> inline void DialogTool::AddVisualization()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T> inline auto DialogTool::getCurrentCrossPoint(QComboBox *box) const -> T
+template<typename T>
+inline auto DialogTool::getCurrentCrossPoint(QComboBox *box) const -> T
 {
     int value;
     bool ok = false;

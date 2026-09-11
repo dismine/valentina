@@ -28,6 +28,8 @@
 
 #include "dialogtool.h"
 
+#include <qiterator.h>
+#include <qnumeric.h>
 #include <QBuffer>
 #include <QCloseEvent>
 #include <QComboBox>
@@ -54,8 +56,6 @@
 #include <QTimer>
 #include <QWidget>
 #include <QtDebug>
-#include <qiterator.h>
-#include <qnumeric.h>
 
 #include "../../tools/vabstracttool.h"
 #include "../ifc/xml/vabstractpattern.h"
@@ -71,7 +71,8 @@
 
 using namespace Qt::Literals::StringLiterals;
 
-template <class T> class QSharedPointer;
+template<class T>
+class QSharedPointer;
 
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wmissing-prototypes")
@@ -106,8 +107,7 @@ DialogTool::DialogTool(const VContainer *patternData, VAbstractPattern *doc, qui
 //---------------------------------------------------------------------------------------------------------------------
 DialogTool::~DialogTool()
 {
-    qCDebug(vDialog) << "~DialogTool: vis=" << static_cast<void *>(vis.data())
-                     << "isNull=" << vis.isNull();
+    qCDebug(vDialog) << "~DialogTool: vis=" << static_cast<void *>(vis.data()) << "isNull=" << vis.isNull();
     delete vis.data();
 }
 
@@ -479,8 +479,8 @@ auto DialogTool::Eval(const FormulaData &formulaData, bool &flag) -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogTool::setCurrentPointId(QComboBox *box, const quint32 &value, FillComboBox rule, const quint32 &ch1,
-                                   const quint32 &ch2) const
+void DialogTool::setCurrentPointId(
+    QComboBox *box, const quint32 &value, FillComboBox rule, const quint32 &ch1, const quint32 &ch2) const
 {
     SCASSERT(box != nullptr)
 
@@ -505,8 +505,8 @@ void DialogTool::setCurrentSplineId(QComboBox *box, const quint32 &value) const
 /**
  * @brief setCurrentArcId
  */
-void DialogTool::setCurrentArcId(QComboBox *box, const quint32 &value, FillComboBox rule, const quint32 &ch1,
-                                 const quint32 &ch2) const
+void DialogTool::setCurrentArcId(
+    QComboBox *box, const quint32 &value, FillComboBox rule, const quint32 &ch1, const quint32 &ch2) const
 {
     SCASSERT(box != nullptr)
     FillComboBoxArcs(box, rule, ch1, ch2);
@@ -578,7 +578,8 @@ auto DialogTool::SetObject(const quint32 &id, QComboBox *box, const QString &too
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T> void DialogTool::PrepareList(QMap<QString, quint32> &list, quint32 id) const
+template<typename T>
+void DialogTool::PrepareList(QMap<QString, quint32> &list, quint32 id) const
 {
     const auto obj = data.GeometricObject<T>(id);
     SCASSERT(obj != nullptr)
@@ -752,9 +753,8 @@ void DialogTool::SetAssociatedTool(VAbstractTool *tool)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename GObject>
-void DialogTool::FillCombo(QComboBox *box, GOType gType, FillComboBox rule, const quint32 &ch1,
-                           const quint32 &ch2) const
+template<typename GObject>
+void DialogTool::FillCombo(QComboBox *box, GOType gType, FillComboBox rule, const quint32 &ch1, const quint32 &ch2) const
 {
     SCASSERT(box != nullptr)
     const QSignalBlocker blocker(box);
