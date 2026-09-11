@@ -154,9 +154,11 @@ protected:
     QPushButton *bApply;
 
     /**
-     * @brief associatedTool vdrawtool associated with opened dialog.
+     * @brief associatedTool vdrawtool associated with opened dialog. QPointer so a full reparse that
+     * destroys and recreates the tool (see VAbstractOperation's queued NeedFullParsing) leaves this
+     * null instead of dangling - matches how vis already handles the same scene-clear scenario.
      */
-    VAbstractTool *associatedTool;
+    QPointer<VAbstractTool> associatedTool;
     quint32 toolId;
 
     /** @brief prepare show if we prepare. Show dialog after finish working with visual part of tool*/
@@ -303,12 +305,6 @@ auto DialogTool::GetListInternals(const QListWidget *list) const -> QVector<T>
         internals.append(qvariant_cast<T>(item->data(Qt::UserRole)));
     }
     return internals;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-inline auto DialogTool::GetAssociatedTool() -> VAbstractTool *
-{
-    return this->associatedTool;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

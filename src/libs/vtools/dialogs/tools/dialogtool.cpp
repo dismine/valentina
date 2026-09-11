@@ -731,6 +731,12 @@ void DialogTool::SetPatternDoc(VAbstractPattern *doc)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto DialogTool::GetAssociatedTool() -> VAbstractTool *
+{
+    return this->associatedTool;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogTool::SetAssociatedTool(VAbstractTool *tool)
 {
     if (tool != nullptr)
