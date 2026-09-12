@@ -258,95 +258,20 @@ namespace
 // linear scan is fine.
 //
 // excludeId must be the id of the object currently being registered: UpdateObject() inserts it into
-// `objects` before RegisterUniqueName() runs, so without excluding it a hash scan can non-deterministically
-// return the object itself instead of the other, genuinely colliding one -- QHash iteration order for
-// integer keys is randomized per process by Qt's hash-flooding protection, so which match comes first is
-// not stable across runs.
-//
-// Two overloads rather than one template: `calculationObjects` is an immer::map, whose iterators yield
-// std::pair<K, T>, while `modelingObjects` is still a QHash, whose iterators expose key()/value(). The two
-// iteration shapes are not source-compatible, and the only common form (QHash::keyValueBegin()) would need
-// a per-container adapter for no gain over the two three-line loops below. The match predicate itself is
-// shared so it cannot drift between them.
-auto ObjectNameMatches(quint32 id, const QSharedPointer<VGObject> &object, const QString &name, quint32 excludeId)
-    -> bool
-{
-    return id != excludeId && (object->name() == name || object->GetAlias() == name);
-}
-
+// `objects` before RegisterUniqueName() runs, so without excluding it a scan can return the object itself
+// instead of the other, genuinely colliding one.
 auto FindObjectByName(const immer::map<quint32, QSharedPointer<VGObject>> &objects,
                       const QString &name,
                       quint32 excludeId) -> QSharedPointer<VGObject>
 {
     for (const auto &[objId, object] : objects)
     {
-        if (ObjectNameMatches(objId, object, name, excludeId))
+        if (objId != excludeId && (object->name() == name || object->GetAlias() == name))
         {
             return object;
         }
     }
     return {};
-}
-
-auto FindObjectByName(const QHash<quint32, QSharedPointer<VGObject>> &objects, const QString &name, quint32 excludeId)
-    -> QSharedPointer<VGObject>
-{
-    for (auto i = objects.constBegin(); i != objects.constEnd(); ++i)
-    {
-        if (ObjectNameMatches(i.key(), i.value(), name, excludeId))
-        {
-            return i.value();
-        }
-    }
-    return {};
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto FindObjectById(const immer::map<quint32, QSharedPointer<VGObject>> &calculationObjects,
-                    const QHash<quint32, QSharedPointer<VGObject>> &modelingObjects,
-                    quint32 id) -> QSharedPointer<VGObject>
-{
-    if (const auto *found = calculationObjects.find(id))
-    {
-        return *found;
-    }
-    return modelingObjects.value(id);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// Follow obj's idObject chain to whatever it ultimately mirrors. Usually one hop (a Draw::Modeling node
-// points straight at its Draw::Calculation source), but a generated node can mirror another Draw::Modeling
-// node instead of the original source -- e.g. VToolUnionDetails::AddNodePoint() re-points the exposed piece
-// node at an internal helper object it just created for the biased/rotated position, not at the source
-// point directly. Only follow the chain through Draw::Modeling objects: a Draw::Calculation object's own
-// idObject means something unrelated (see OwningToolId()), so it always ends the walk.
-// Bounded to tolerate a malformed/cyclic idObject chain in a corrupted file.
-auto ResolveMirrorRoot(const QSharedPointer<VGObject> &obj,
-                       const immer::map<quint32, QSharedPointer<VGObject>> &calculationObjects,
-                       const QHash<quint32, QSharedPointer<VGObject>> &modelingObjects) -> quint32
-{
-    QSharedPointer<VGObject> current = obj;
-    for (int guard = 0; guard < 32 && not current.isNull() && current->getMode() == Draw::Modeling
-                        && current->getIdObject() != NULL_ID;
-         ++guard)
-    {
-        current = FindObjectById(calculationObjects, modelingObjects, current->getIdObject());
-    }
-    return current.isNull() ? obj->id() : current->id();
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-// A Draw::Modeling object (piece node) is an intentional copy of its source Draw::Calculation object --
-// VNodePoint/VNodeSpline/VNodeArc/etc. Create() always duplicate the source and keep its name, linking back
-// via idObject, possibly through another Draw::Modeling object rather than the source directly (see
-// ResolveMirrorRoot() above). Sharing a name with that source is by design, not a duplicate-name bug.
-auto IsModelingMirror(const QSharedPointer<VGObject> &a,
-                      const QSharedPointer<VGObject> &b,
-                      const immer::map<quint32, QSharedPointer<VGObject>> &calculationObjects,
-                      const QHash<quint32, QSharedPointer<VGObject>> &modelingObjects) -> bool
-{
-    return ResolveMirrorRoot(a, calculationObjects, modelingObjects) == b->id()
-           || ResolveMirrorRoot(b, calculationObjects, modelingObjects) == a->id();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -383,17 +308,17 @@ void VContainer::RegisterUniqueName(const QSharedPointer<VGObject> &obj, const Q
         return;
     }
 
-    if (uniqueNames[d->nspace].contains(name))
+    // Only a Draw::Calculation object can genuinely collide. A Draw::Modeling object is by definition a
+    // copy of the Draw::Calculation object it was made from and keeps its name on purpose: piece nodes
+    // (VNodePoint/VNodeArc/...), pins (VToolPin), place labels (VToolPlaceLabel, which takes its center
+    // point's name), and the scaffolding copies VToolUnionDetails builds before anything links back to
+    // them. Nor is a Draw::Modeling name ever resolved by name -- formulas resolve through variables, and
+    // only Draw::Calculation tools create those (VContainer::AddLine()/AddCurve...() callers are all draw
+    // tools). So a name shared with, or between, Draw::Modeling objects carries no signal.
+    if (obj->getMode() == Draw::Calculation && uniqueNames[d->nspace].contains(name))
     {
-        QSharedPointer<VGObject> existing = FindObjectByName(d->calculationObjects, name, obj->id());
-        if (existing.isNull() && d->modelingObjects)
-        {
-            existing = FindObjectByName(*d->modelingObjects, name, obj->id());
-        }
-
-        // A Draw::Modeling object sharing a name with the Draw::Calculation object it mirrors is not
-        // a collision.
-        if (not existing.isNull() && not IsModelingMirror(existing, obj, d->calculationObjects, *d->modelingObjects))
+        if (const QSharedPointer<VGObject> existing = FindObjectByName(d->calculationObjects, name, obj->id());
+            not existing.isNull())
         {
             const QString errorMsg
                 = tr("The pattern has two objects sharing the name '%1': one from the tool with id %2, "

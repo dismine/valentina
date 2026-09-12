@@ -28,6 +28,7 @@
 
 #include "tst_vcontainer.h"
 #include "../ifc/exception/vexceptionbadid.h"
+#include "../vgeometry/vplacelabelitem.h"
 #include "../vgeometry/vpointf.h"
 #include "../vmisc/typedef.h"
 #include "../vpatterndb/variables/vincrement.h"
@@ -88,31 +89,6 @@ auto Preload(VContainer *data, int preload) -> QVector<quint32>
 }
 } // namespace
 
-//---------------------------------------------------------------------------------------------------------------------
-void TST_VContainer::DuplicateNameIsNotRejected()
-{
-    const Unit unit = Unit::Cm;
-    VContainer data(nullptr, &unit, VContainer::UniqueNamespace());
-
-    const QString name = u"A78_A80__m1"_s;
-
-    QVERIFY(data.IsUnique(name));
-
-    const quint32 id1 = data.AddGObject(new VPointF(0, 0, name));
-    QVERIFY(id1 != NULL_ID);
-    QVERIFY(!data.IsUnique(name));
-
-    // A second, independently created object claiming the already-registered name must not be
-    // rejected today -- reproducing what happens when an undo/redo cycle restores a tool whose
-    // name was, in the meantime, generated again for an unrelated tool.
-    const quint32 id2 = data.AddGObject(new VPointF(10, 10, name));
-    QVERIFY(id2 != NULL_ID);
-    QVERIFY(id1 != id2);
-
-    QCOMPARE(data.GetGObject(id1)->name(), name);
-    QCOMPARE(data.GetGObject(id2)->name(), name);
-}
-
 namespace
 {
 QtMessageHandler &PreviousMessageHandler()
@@ -140,6 +116,36 @@ void CaptureDuplicateNameWarning(QtMsgType type, const QMessageLogContext &conte
     }
 }
 } // namespace
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VContainer::DuplicateNameIsNotRejected()
+{
+    const Unit unit = Unit::Cm;
+    VContainer data(nullptr, &unit, VContainer::UniqueNamespace());
+
+    const QString name = u"A78_A80__m1"_s;
+
+    QVERIFY(data.IsUnique(name));
+
+    const quint32 id1 = data.AddGObject(new VPointF(0, 0, name));
+    QVERIFY(id1 != NULL_ID);
+    QVERIFY(!data.IsUnique(name));
+
+    // A second, independently created object claiming the already-registered name must not be
+    // rejected today -- reproducing what happens when an undo/redo cycle restores a tool whose
+    // name was, in the meantime, generated again for an unrelated tool.
+    SawDuplicateNameWarning() = false;
+    PreviousMessageHandler() = qInstallMessageHandler(CaptureDuplicateNameWarning);
+    const quint32 id2 = data.AddGObject(new VPointF(10, 10, name));
+    qInstallMessageHandler(PreviousMessageHandler());
+
+    QVERIFY(id2 != NULL_ID);
+    QVERIFY(id1 != id2);
+    QVERIFY2(SawDuplicateNameWarning(), "Two unrelated Draw::Calculation objects sharing a name must warn");
+
+    QCOMPARE(data.GetGObject(id1)->name(), name);
+    QCOMPARE(data.GetGObject(id2)->name(), name);
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VContainer::UpdatingObjectWithUnchangedNameDoesNotWarn()
@@ -221,6 +227,69 @@ void TST_VContainer::ModelingMirrorOfModelingMirrorDoesNotWarn()
     QVERIFY2(!SawDuplicateNameWarning(),
              "A Draw::Modeling object mirroring another Draw::Modeling mirror of the same "
              "Draw::Calculation source must not warn");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VContainer::PlaceLabelSharingCenterPointNameDoesNotWarn()
+{
+    const Unit unit = Unit::Cm;
+    VContainer data(nullptr, &unit, VContainer::UniqueNamespace());
+
+    const QString name = u"A170"_s;
+    const quint32 calcId = data.AddGObject(new VPointF(0, 0, name));
+    QVERIFY(calcId != NULL_ID);
+
+    // Mirrors VToolPin::Create(): a piece pin is a Draw::Modeling copy of the calc point.
+    auto *pin = new VPointF(0, 0, name);
+    pin->setIdObject(calcId);
+    pin->setMode(Draw::Modeling);
+    const quint32 pinId = data.AddGObject(pin);
+    QVERIFY(pinId != NULL_ID);
+
+    // Mirrors VToolPlaceLabel::Create(): the label takes the center point's name but never calls
+    // setIdObject() -- the link is SetCenterPoint(). Two labels may share one center point.
+    auto MakeLabel = [&name](quint32 centerPoint)
+    {
+        auto *label = new VPlaceLabelItem();
+        label->setName(name);
+        label->SetCenterPoint(centerPoint);
+        return label;
+    };
+
+    SawDuplicateNameWarning() = false;
+    PreviousMessageHandler() = qInstallMessageHandler(CaptureDuplicateNameWarning);
+    data.UpdateGObject(data.getNextId(), MakeLabel(pinId));
+    data.UpdateGObject(data.getNextId(), MakeLabel(calcId));
+    qInstallMessageHandler(PreviousMessageHandler());
+
+    QVERIFY2(!SawDuplicateNameWarning(),
+             "A place label sharing its center point's name must not warn, however many labels "
+             "hang off that point");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VContainer::UnionDetailsScaffoldCopyDoesNotWarn()
+{
+    const Unit unit = Unit::Cm;
+    VContainer data(nullptr, &unit, VContainer::UniqueNamespace());
+
+    const QString name = u"A170"_s;
+    const quint32 calcId = data.AddGObject(new VPointF(0, 0, name));
+    QVERIFY(calcId != NULL_ID);
+    Q_UNUSED(calcId)
+
+    // Mirrors the first object every VToolUnionDetails::AddNode*()/AddPin() builds: a Draw::Modeling copy
+    // of the source carrying its name, registered before anything links back to it -- no idObject at all.
+    auto *scaffold = new VPointF(0, 0, name);
+    scaffold->setMode(Draw::Modeling);
+
+    SawDuplicateNameWarning() = false;
+    PreviousMessageHandler() = qInstallMessageHandler(CaptureDuplicateNameWarning);
+    data.AddGObject(scaffold);
+    qInstallMessageHandler(PreviousMessageHandler());
+
+    QVERIFY2(!SawDuplicateNameWarning(),
+             "An intermediate Draw::Modeling copy with no back-link to its source must not warn");
 }
 
 //---------------------------------------------------------------------------------------------------------------------

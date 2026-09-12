@@ -57,6 +57,14 @@ private slots:
     // off an internal helper object rather than the calc source directly, a two-hop idObject chain.
     void ModelingMirrorOfModelingMirrorDoesNotWarn();
 
+    // A VPlaceLabelItem copies its center point's name but links back through GetCenterPoint(),
+    // not idObject -- and two labels can share one center point (see VToolPlaceLabel::Create()).
+    void PlaceLabelSharingCenterPointNameDoesNotWarn();
+
+    // VToolUnionDetails::AddNodePoint()/AddPin()/AddNodeArc()/... register an intermediate Draw::Modeling
+    // copy of the source, carrying its name, before anything links back to it -- no idObject at all.
+    void UnionDetailsScaffoldCopyDoesNotWarn();
+
     // Regression tests: pin snapshot semantics preserved by the rewrite.
     void OldToolSnapshotUnaffectedByLaterStructuralChange();
     void OldToolSnapshotSeesValueUpdateToExistingVariable();
