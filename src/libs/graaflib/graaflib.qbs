@@ -51,6 +51,8 @@ VLib {
         "io/dot.tpp",
         "properties/vertex_properties.h",
         "properties/vertex_properties.tpp",
+        "tree.h",
+        "tree.tpp",
         "types.h",
     ]
 

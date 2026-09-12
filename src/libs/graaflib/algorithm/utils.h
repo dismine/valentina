@@ -2,7 +2,8 @@
 
 #include "../graph.h"
 
-namespace graaf {
+namespace graaf
+{
 
 /**
  * Get transposed version of a given directed graph
@@ -10,10 +11,9 @@ namespace graaf {
  * @param  graph The directed graph that is to be transposed
  * @return directed_graph<VERTEX_T, EDGE_T> The transposed graph
  */
-template <typename VERTEX_T, typename EDGE_T>
-directed_graph<VERTEX_T, EDGE_T> get_transposed_graph(
-    const directed_graph<VERTEX_T, EDGE_T>& graph);
+template<typename VERTEX_T, typename EDGE_T>
+directed_graph<VERTEX_T, EDGE_T> get_transposed_graph(const directed_graph<VERTEX_T, EDGE_T> &graph);
 
-}  // namespace graaf
+} // namespace graaf
 
 #include "utils.tpp"

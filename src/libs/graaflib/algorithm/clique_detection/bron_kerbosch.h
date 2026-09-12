@@ -2,7 +2,10 @@
 
 #include "../../graph.h"
 
-namespace graaf::algorithm {
+#include <vector>
+
+namespace graaf::algorithm
+{
 /**
  * @brief Finds all cliques in an undirected graph using the Bron-Kerbosch
  * algorithm.
@@ -18,10 +21,9 @@ namespace graaf::algorithm {
  * @return A vector of cliques, each represented as a vector of vertex
  * identifiers.
  */
-template <typename V, typename E>
-std::vector<std::vector<vertex_id_t>> bron_kerbosch(
-    const graph<V, E, graph_type::UNDIRECTED>& graph);
+template<typename V, typename E>
+std::vector<std::vector<vertex_id_t>> bron_kerbosch(const graph<V, E, graph_type::UNDIRECTED> &graph);
 
-}  // namespace graaf::algorithm
+} // namespace graaf::algorithm
 
 #include "bron_kerbosch.tpp"

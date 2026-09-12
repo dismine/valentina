@@ -1,11 +1,13 @@
 #pragma once
 
 #include "../../graph.h"
+#include "../../types.h"
 #include "common.h"
 
 #include <vector>
 
-namespace graaf::algorithm {
+namespace graaf::algorithm
+{
 
 /**
  * @brief Finds strongly connected components in a directed graph using
@@ -23,10 +25,9 @@ namespace graaf::algorithm {
  * each of which contains the vertex IDs forming a strongly connected
  * component.
  */
-template <typename V, typename E>
-sccs_t kosarajus_strongly_connected_components(
-    const directed_graph<V, E>& graph);
+template<typename V, typename E>
+sccs_t kosarajus_strongly_connected_components(const directed_graph<V, E> &graph);
 
-}  // namespace graaf::algorithm
+} // namespace graaf::algorithm
 
 #include "kosaraju.tpp"

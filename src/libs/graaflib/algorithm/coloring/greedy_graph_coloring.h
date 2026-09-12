@@ -1,8 +1,10 @@
 #pragma once
 
+#include "../../graph.h"
 #include "../../types.h"
 
-namespace graaf::algorithm {
+namespace graaf::algorithm
+{
 
 /**
  * @brief Greedy Graph Coloring Algorithm
@@ -17,9 +19,9 @@ namespace graaf::algorithm {
  * @return An unordered_map where keys are vertex identifiers and values are
  * their respective colors.
  */
-template <typename GRAPH>
-std::unordered_map<vertex_id_t, int> greedy_graph_coloring(const GRAPH& graph);
+template<typename GRAPH>
+std::unordered_map<vertex_id_t, int> greedy_graph_coloring(const GRAPH &graph);
 
-}  // namespace graaf::algorithm
+} // namespace graaf::algorithm
 
 #include "greedy_graph_coloring.tpp"
