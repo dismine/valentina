@@ -29,6 +29,63 @@
  <update_contact>contact@smart-pattern.com.ua</update_contact>
  <content_rating type="oars-1.1" />
  <releases>
+  <release version="1.0.5" type="stable" date="2026-09-15">
+    <description>
+      <p>
+        This is a stable maintenance release in the 1.0 series.
+      </p>
+      <ul>
+        <li>Valentina app. Fixed launching Tape or Puzzle from Valentina on macOS failing to find them when installed outside of /Applications directly.</li>
+        <li>Valentina app. Fixed Valentina silently doing nothing when it couldn't launch Tape or Puzzle; a warning is now shown explaining the launch failed.</li>
+        <li>Valentina app / Puzzle app. Fixed DXF point markers showing as oversized shapes that grow or shrink with the viewer's zoom level in some CAD applications.</li>
+        <li>Valentina app / Puzzle app. Fixed the piece name annotation text on ASTM DXF export being too small to read.</li>
+        <li>Valentina app / Puzzle app. Fixed the Style System Text on AAMA/ASTM DXF export ignoring the configured pattern label font size.</li>
+        <li>Misc. Added Danish (da_DK) language.</li>
+        <li>Tape app. Fixed the known measurements editor showing the wrong measurement diagram or image title/size after renaming an image on the Images tab.</li>
+        <li>Valentina app / Tape app / Puzzle app. Fixed a crash after a fatal data error where the program kept running on known-bad state instead of shutting down.</li>
+        <li>Valentina app. Fixed a crash on closing the pattern window while a curve tool's control-point preview was still on screen.</li>
+        <li>Misc. Fixed nearly invisible placeholder text in disabled/read-only fields on custom dark theme and some Linux dark palettes.</li>
+        <li>Valentina app. Fixed a seam allowance corner set to "by second edge symmetry" growing a stray spike instead of mirroring the matching corner.</li>
+        <li>Valentina app. Fixed a crash from a sidebar tab's hover-fade animation still running after the tab bar that owned it was destroyed.</li>
+        <li>Valentina app / Tape app / Puzzle app. Removed the single-bundle macOS package; only the multi-app bundle is offered now.</li>
+        <li>Valentina app. Fixed the horizontal scroll wheel doing nothing on the pattern and layout views.</li>
+        <li>Valentina app / Tape app. Fixed placeholder and search-history menus splitting into multiple columns instead of scrolling on some Linux styles.</li>
+        <li>Valentina app / Tape app / Puzzle app. Fixed exporting DXF files to a path containing non-Latin characters failing on Windows.</li>
+        <li>Valentina app / Tape app / Puzzle app. Fixed a rare crash on shutdown when a second instance connected to an already-running one and quit while a background lookup was in flight.</li>
+        <li>Valentina app. Fixed a point cut by length along a multi-segment curve sometimes landing far from the requested distance.</li>
+        <li>Valentina app. Fixed the pattern not recalculating after changing the default curve approximation scale in Preferences.</li>
+        <li>Valentina app. Fixed a crash when fitting the view to the current pattern piece while one of its tools had no scene.</li>
+        <li>Valentina app. Fixed a crash caused by a full reparse reissuing an id already used by an orphaned node.</li>
+        <li>Valentina app / Tape app / Puzzle app. Stopped Qt painting warnings from popping an error dialog that could itself crash the application.</li>
+        <li>Valentina app. Fixed the tool history being lost after renaming a pattern piece, which crashed the application when the History dialog was opened.</li>
+        <li>Tape app. Fixed a crash while reading a measurement file whose format was not recognized.</li>
+        <li>Valentina app. Fixed a crash when opening Preferences after a monitor was disconnected or reconfigured.</li>
+        <li>Tape app. Fixed a crash while the known measurements database was being rebuilt in the background after its folder changed.</li>
+        <li>Valentina app / Tape app / Puzzle app. Fixed a crash when closing the application while usage statistics were still being sent.</li>
+        <li>Valentina app / Tape app / Puzzle app. Stopped Qt network warnings from the background update check and usage statistics popping an error dialog.</li>
+        <li>Valentina app / Tape app / Puzzle app. Fixed the interface freezing for minutes at a time when the settings file had grown corrupt.</li>
+        <li>Valentina app / Tape app / Puzzle app. Fixed the crash reporter reading its settings from the wrong file, so the "send crash reports" preference could be ignored.</li>
+        <li>Valentina app / Tape app / Puzzle app. Fixed the interface freezing while usage statistics and country lookup made network requests on the main thread.</li>
+        <li>Valentina app. Fixed fold-line label font not updating live when changed in preferences.</li>
+        <li>Valentina app / Puzzle app. Fixed fold-line ("Cut on Fold") labels rendering upside down, mirrored, or offset on flipped pieces.</li>
+        <li>Valentina app / Puzzle app. Fixed a hang when generating a layout on a single-CPU machine.</li>
+        <li>Valentina app / Tape app / Puzzle app. Fixed a crash when redrawing the mode sidebar icons under low memory or degenerate tab sizes.</li>
+        <li>Valentina app. Fixed a crash when a full reparse cleared the scene while a point/curve creation dialog was still open.</li>
+        <li>Valentina app / Tape app / Puzzle app. Fixed a crash that could happen when a warning or critical message was logged in the middle of another operation.</li>
+        <li>Valentina app. Fixed crash on startup in locales whose math function names translate to non-identifier characters (e.g. Japanese).</li>
+        <li>Valentina app. Fixed sporadic crash when opening a pattern file due to unsafe concurrent access to the same document.</li>
+        <li>Valentina app. Fixed use-after-free crashes triggered by a full reparse after undo/redo.</li>
+        <li>Valentina app. Fixed crash when toggling a piece's in-layout state for a tool of the wrong type in the pieces list.</li>
+        <li>Valentina app. Fixed release-build crash when undoing or redoing deletion of a piece.</li>
+        <li>Valentina app. Fixed hang when uniting details with malformed union data.</li>
+        <li>Valentina app / Puzzle app. Fixed crash when a piece's fold line produced degenerate arrow shapes.</li>
+        <li>Puzzle app. Fixed crashes in the piece carousel when starting a drag on an empty item or opening the context menu on a non-piece item.</li>
+        <li>Misc. Fixed potential crash when a text encoding could not be resolved to a codec name.</li>
+        <li>Valentina app / Tape app / Puzzle app. Usage statistics collection is now opt-in (disabled by default) and never runs in command-line mode.</li>
+        <li>Valentina app. Fixed the Hide labels option and label font size changes not taking effect until the next zoom.</li>
+      </ul>
+    </description>
+  </release>
   <release version="1.0.4" type="stable" date="2026-06-26">
     <description>
       <p>

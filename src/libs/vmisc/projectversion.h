@@ -33,7 +33,7 @@ class QString;
 
 constexpr unsigned MAJOR_VERSION = 1;
 constexpr unsigned MINOR_VERSION = 0;
-constexpr unsigned DEBUG_VERSION = 4;
+constexpr unsigned DEBUG_VERSION = 5;
 
 auto AppVersionStr() -> const QString &;
 
@@ -54,15 +54,15 @@ constexpr int kToolbarStateVersion = 0;
 
 // Change version number in projectversion.cpp too.
 
-#define VER_FILEVERSION 1, 0, 4
-#define VER_FILEVERSION_STR "1.0.4\0"
+#define VER_FILEVERSION 1, 0, 5
+#define VER_FILEVERSION_STR "1.0.5\0"
 
 // #define V_PRERELEASE // Mark prerelease builds
 
 #define VER_PRODUCTVERSION VER_FILEVERSION
 #define VER_PRODUCTVERSION_STR VER_FILEVERSION_STR
 #define VER_COMPANYNAME_STR "Valentina"
-#define VER_LEGALCOPYRIGHT_STR "Copyright © 2013-2025 Valentina Team"
+#define VER_LEGALCOPYRIGHT_STR "Copyright © 2013-2026 Valentina Team"
 #define VER_LEGALTRADEMARKS1_STR "All Rights Reserved"
 #define VER_LEGALTRADEMARKS2_STR VER_LEGALTRADEMARKS1_STR
 #define VER_COMPANYDOMAIN_STR "smart-pattern.com.ua"
