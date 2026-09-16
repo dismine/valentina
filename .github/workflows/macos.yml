@@ -12,7 +12,7 @@ on:
 
 env:
   SOURCE_DIR: ${{ github.workspace }}
-  VALENTINA_VERSION: 1_0_2
+  VALENTINA_VERSION: 1_0_5
   # Should contain the base64 of the certificate
   MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
   # Should contain the full certificate name, such as Developer ID Application: Your Name (K1234567)
