@@ -87,7 +87,7 @@ jobs:
             withBigCodecs: 'False'
             deploy: 'true'
           - install: 6.11.2
-            label: Qt6_11
+            label: Qt6_11_bigcodecs
             build_target: '13+'
             xcode: '16.4'
             target: 'MacOS_13+'
@@ -109,7 +109,7 @@ jobs:
             withBigCodecs: 'False'
             deploy: 'true'
           - install: 6.4.3
-            label: Qt6_4
+            label: Qt6_4_bigcodecs
             build_target: '10.15+'
             xcode: '16.4'
             target: 'MacOS_10_15+'
@@ -124,6 +124,7 @@ jobs:
       DEPLOY: ${{ matrix.qt.deploy }}
       RUN_TESTS: ${{ matrix.qt.run_tests }}
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
+      CRASH_BUILD_LABEL: ${{ matrix.qt.label }}
       WITH_ICU: ${{ matrix.qt.with_icu }}
       WITH_ICONV: ${{ matrix.qt.with_iconv }}
       WITH_BIG_CODECS: ${{ matrix.qt.with_big_codecs }}
@@ -303,6 +304,7 @@ jobs:
           project.withICONVCodecs:${{ env.WITH_ICONV }}
           project.withBigCodecs:${{ env.WITH_BIG_CODECS }}
           project.enableConan:true
+          project.crashBuildLabel:$CRASH_BUILD_LABEL
           project.conanWithXerces:true
           project.conanWithCrashReporting:true
           project.conanWithICU:${{ env.WITH_ICU }}
@@ -317,7 +319,7 @@ jobs:
           ${{ env.COMMON_QBS_ARGS }}
 
       - name: Deploy symbols
-        if: github.event_name != 'pull_request' && env.WITH_CRASH_REPORTING == 'True'
+        if: github.event_name != 'pull_request' && env.WITH_CRASH_REPORTING == 'True' && env.DEPLOY == 'true'
         env:
           BUGSPLAT_DATABASE: "valentina"
           SYMBOL_UPLOAD_CLIENT_ID: ${{ secrets.SYMBOL_UPLOAD_CLIENT_ID }}
@@ -334,7 +336,6 @@ jobs:
           export PATH="$RUNNER_TEMP:$PATH"
 
           # Build version components
-          CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print "Qt_" $1 "_" $2}')
           CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
           CRASH_COMMIT_SHA=$(git rev-parse HEAD)
 
@@ -343,7 +344,7 @@ jobs:
             --app-version "$VALENTINA_VERSION" \
             --git-hash    "g$CRASH_SHORT_SHA" \
             --commit-sha  "$CRASH_COMMIT_SHA" \
-            --qt-version  "$CRASH_QT_VERSION" \
+            --label       "$CRASH_BUILD_LABEL" \
             --arch        x64
 
       - name: Strip debug symbols
@@ -443,7 +444,7 @@ jobs:
             withBigCodecs: 'False'
             deploy: 'true'
           - install: 6.11.2
-            label: Qt6_11
+            label: Qt6_11_bigcodecs
             build_target: '13+'
             xcode: '16.2'
             target: 'MacOS_13+'
@@ -465,7 +466,7 @@ jobs:
             withBigCodecs: 'False'
             deploy: 'true'
           - install: 6.7.3
-            label: Qt6_7
+            label: Qt6_7_bigcodecs
             build_target: '11+'
             xcode: '16.2'
             target: 'MacOS_11+'
@@ -480,6 +481,7 @@ jobs:
       DEPLOY: ${{ matrix.qt.deploy }}
       RUN_TESTS: ${{ matrix.qt.run_tests }}
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
+      CRASH_BUILD_LABEL: ${{ matrix.qt.label }}
       WITH_ICU: ${{ matrix.qt.with_icu }}
       WITH_ICONV: ${{ matrix.qt.with_iconv }}
       WITH_BIG_CODECS: ${{ matrix.qt.with_big_codecs }}
@@ -659,6 +661,7 @@ jobs:
           project.withICONVCodecs:${{ env.WITH_ICONV }}
           project.withBigCodecs:${{ env.WITH_BIG_CODECS }} 
           project.enableConan:true
+          project.crashBuildLabel:$CRASH_BUILD_LABEL
           project.conanWithXerces:true
           project.conanWithCrashReporting:true
           project.conanWithICU:${{ env.WITH_ICU }}
@@ -673,7 +676,7 @@ jobs:
           ${{ env.COMMON_QBS_ARGS }}
 
       - name: Deploy symbols
-        if: github.event_name != 'pull_request' && env.WITH_CRASH_REPORTING == 'True'
+        if: github.event_name != 'pull_request' && env.WITH_CRASH_REPORTING == 'True' && env.DEPLOY == 'true'
         env:
           BUGSPLAT_DATABASE: "valentina"
           SYMBOL_UPLOAD_CLIENT_ID: ${{ secrets.SYMBOL_UPLOAD_CLIENT_ID }}
@@ -690,7 +693,6 @@ jobs:
           export PATH="$RUNNER_TEMP:$PATH"
 
           # Build version components
-          CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print "Qt_" $1 "_" $2}')
           CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
           CRASH_COMMIT_SHA=$(git rev-parse HEAD)
 
@@ -699,7 +701,7 @@ jobs:
             --app-version "$VALENTINA_VERSION" \
             --git-hash    "g$CRASH_SHORT_SHA" \
             --commit-sha  "$CRASH_COMMIT_SHA" \
-            --qt-version  "$CRASH_QT_VERSION" \
+            --label       "$CRASH_BUILD_LABEL" \
             --arch        armv8
 
       - name: Strip debug symbols

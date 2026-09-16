@@ -69,7 +69,7 @@ jobs:
             deploy: 'true'
             sign: true 
           - install: 6.10.3
-            label: Qt6_10
+            label: Qt6_10_bigcodecs
             run_tests: 'true'
             with_icu: 'False'
             with_iconv: 'True'
@@ -87,6 +87,7 @@ jobs:
       WITH_BIG_CODECS: ${{ matrix.qt.with_big_codecs }}
       INSTALL_QT: ${{ matrix.qt.install }}
       QT_VERSION: ${{ matrix.qt.label }}
+      CRASH_BUILD_LABEL: ${{ matrix.qt.label }}
 
     steps:
       - name: Checkout repo
@@ -254,6 +255,7 @@ jobs:
           project.enableSigning:${{ env.SIGN }}
           modules.buildconfig.signingThumbprint:${{ secrets.CERTUM_KEY_ID }}
           project.enableConan:true
+          project.crashBuildLabel:$CRASH_BUILD_LABEL
           project.conanWithCrashReporting:${{ env.WITH_CRASH_REPORTING }}
           project.conanWithXerces:true
           project.conanWithICU:${{ env.WITH_ICU }}
@@ -272,7 +274,7 @@ jobs:
         run: qbs build ${{ env.COMMON_QBS_ARGS }}
 
       - name: Deploy symbols
-        if: github.event_name != 'pull_request' && env.WITH_CRASH_REPORTING == 'True'
+        if: github.event_name != 'pull_request' && env.WITH_CRASH_REPORTING == 'True' && env.DEPLOY == 'true'
         shell: pwsh
         env:
           BUGSPLAT_DATABASE: "valentina"
@@ -288,8 +290,6 @@ jobs:
             -OutFile "${{ runner.temp }}\symbol-upload-windows.exe"
 
           # Build version components
-          $qtVersion = (& "$env:QT_ROOT_DIR\bin\qmake.exe" -query QT_VERSION) `
-            -replace '(\d+)\.(\d+).*', 'Qt_$1_$2'
           $shortSha  = git log --pretty=format:%h -n 1
           $commitSha = git rev-parse HEAD
 
@@ -304,7 +304,7 @@ jobs:
             --app-version $env:VALENTINA_VERSION `
             --git-hash    "g$shortSha" `
             --commit-sha  $commitSha `
-            --qt-version  $qtVersion `
+            --label       $env:CRASH_BUILD_LABEL `
             --arch        x64
 
       - name: Tests

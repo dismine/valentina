@@ -16,6 +16,12 @@ Project {
     property string minimumQtVersion: "5.15"
     property stringList conanProfiles: []
 
+    // Build-variant label, set by CI (see .github/workflows/*). Baked into the binary as
+    // CRASH_BUILD_LABEL and reported by AppCrashVersion(); the same value must be passed to
+    // scripts/upload_symbols.py --label, or crash reports won't resolve to uploaded symbols.
+    // Empty (local builds): AppCrashVersion() falls back to computing Qt_<major>_<minor>.
+    property string crashBuildLabel: ""
+
     property bool enableSigning: {
         if (qbs.targetOS.contains("macos"))
             return true;

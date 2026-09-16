@@ -471,6 +471,7 @@ jobs:
           qbs config defaultProfile qt6
           qbs config profiles.qt6.baseProfile ${COMPILER}
           conan install . --build=missing -o '&:with_crash_reporting=True' -pr:a=share/ci/conan/profiles/appimage
+          CRASH_BUILD_LABEL=$(/usr/bin/qmake6 -query QT_VERSION | awk -F. '{print "Qt_" $1 "_" $2}')
           qbs build \
             -f valentina.qbs \
             -d $GITHUB_WORKSPACE/build \
@@ -484,10 +485,10 @@ jobs:
             project.conanWithCrashReporting:true \
             project.withICUCodecs:true \
             project.enableConan:true \
-            project.conanProfiles:share/ci/conan/profiles/appimage
+            project.conanProfiles:share/ci/conan/profiles/appimage \
+            project.crashBuildLabel:$CRASH_BUILD_LABEL
           qbs -p autotest-runner -d build profile:qt6 config:release
           if [ "$GITHUB_EVENT_NAME" != "pull_request" ]; then
-            CRASH_QT_VERSION=$(/usr/bin/qmake6 -query QT_VERSION | awk -F. '{print "Qt_" $1 "_" $2}')
             CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
             CRASH_COMMIT_SHA=$(git rev-parse HEAD)
             python3 scripts/upload_symbols.py \
@@ -495,7 +496,7 @@ jobs:
               --app-version $VALENTINA_VERSION \
               --git-hash g$CRASH_SHORT_SHA \
               --commit-sha $CRASH_COMMIT_SHA \
-              --qt-version $CRASH_QT_VERSION \
+              --label $CRASH_BUILD_LABEL \
               --arch $ARCH
           fi
           $GITHUB_WORKSPACE/build/AppDir/usr/local/bin/crashpad_handler --version
