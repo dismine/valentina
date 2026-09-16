@@ -98,6 +98,7 @@ jobs:
       DEPLOY: ${{ matrix.qt.deploy }}
       RUN_TESTS: ${{ matrix.qt.run_tests }}
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
+      CRASH_BUILD_LABEL: ${{ matrix.qt.label }}
       ENABLE_CCACHE: "true"
 
     steps:
@@ -273,7 +274,8 @@ jobs:
           project.conanWithXerces:true
           project.conanWithCrashReporting:true
           modules.buildconfig.enableCcache:${ENABLE_CCACHE}
-          project.conanProfiles:share/ci/conan/profiles/macos" >> $GITHUB_ENV
+          project.conanProfiles:share/ci/conan/profiles/macos
+          project.crashBuildLabel:$CRASH_BUILD_LABEL" >> $GITHUB_ENV
 
       - name: Build Valentina
         run: qbs build ${{ env.COMMON_QBS_ARGS }}
@@ -296,7 +298,6 @@ jobs:
           export PATH="$RUNNER_TEMP:$PATH"
 
           # Build version components
-          CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print "Qt_" $1 "_" $2}')
           CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
           CRASH_COMMIT_SHA=$(git rev-parse HEAD)
 
@@ -307,7 +308,7 @@ jobs:
             --app-version "$VALENTINA_VERSION" \
             --git-hash    "g$CRASH_SHORT_SHA" \
             --commit-sha  "$CRASH_COMMIT_SHA" \
-            --qt-version  "$CRASH_QT_VERSION" \
+            --label       "$CRASH_BUILD_LABEL" \
             --arch        x64
 
       - name: Strip debug symbols
@@ -418,6 +419,7 @@ jobs:
       DEPLOY: ${{ matrix.qt.deploy }}
       RUN_TESTS: ${{ matrix.qt.run_tests }}
       MACOS_DEPLOYMENT_TARGET: ${{ matrix.qt.minimumMacosVersion }}
+      CRASH_BUILD_LABEL: ${{ matrix.qt.label }}
       ENABLE_CCACHE: "true"
 
     steps:
@@ -593,7 +595,8 @@ jobs:
           project.conanWithXerces:true
           project.conanWithCrashReporting:true
           modules.buildconfig.enableCcache:${ENABLE_CCACHE}
-          project.conanProfiles:share/ci/conan/profiles/macos_arm" >> $GITHUB_ENV
+          project.conanProfiles:share/ci/conan/profiles/macos_arm
+          project.crashBuildLabel:$CRASH_BUILD_LABEL" >> $GITHUB_ENV
 
       - name: Build Valentina
         run: qbs build ${{ env.COMMON_QBS_ARGS }}
@@ -616,7 +619,6 @@ jobs:
           export PATH="$RUNNER_TEMP:$PATH"
 
           # Build version components
-          CRASH_QT_VERSION=$($QTDIR/bin/qmake -query QT_VERSION | awk -F. '{print "Qt_" $1 "_" $2}')
           CRASH_SHORT_SHA=$(git log --pretty=format:%h -n 1)
           CRASH_COMMIT_SHA=$(git rev-parse HEAD)
 
@@ -627,7 +629,7 @@ jobs:
             --app-version "$VALENTINA_VERSION" \
             --git-hash    "g$CRASH_SHORT_SHA" \
             --commit-sha  "$CRASH_COMMIT_SHA" \
-            --qt-version  "$CRASH_QT_VERSION" \
+            --label       "$CRASH_BUILD_LABEL" \
             --arch        armv8
 
       - name: Strip debug symbols

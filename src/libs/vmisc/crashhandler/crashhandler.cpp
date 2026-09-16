@@ -95,7 +95,16 @@ Q_REQUIRED_RESULT auto AppSettings(const QString &appName) -> VCommonSettings *
 auto AppCrashVersion() -> QString
 {
     auto const version = QStringLiteral("%1_%2_%3").arg(MAJOR_VERSION).arg(MINOR_VERSION).arg(DEBUG_VERSION);
-    auto const qtVersion = QStringLiteral("Qt_%1_%2").arg(QT_VERSION_MAJOR).arg(QT_VERSION_MINOR);
+    // The build-variant label CI compiled this binary with. Several CI jobs build one
+    // platform+arch and differ only in Qt version or build options; the label is what tells
+    // them apart, here and in the debug-symbol store key. Local and other non-CI builds have
+    // no label define and keep reporting the Qt version, which is also the default label CI
+    // passes for single-variant jobs -- so this position always holds a valid label.
+#ifdef CRASH_BUILD_LABEL
+    auto const label = QStringLiteral(CRASH_BUILD_LABEL);
+#else
+    auto const label = QStringLiteral("Qt_%1_%2").arg(QT_VERSION_MAJOR).arg(QT_VERSION_MINOR);
+#endif
     QString multibundle; // NOLINT(misc-const-correctness)
 
 #if defined(Q_OS_MACOS)
@@ -115,7 +124,7 @@ auto AppCrashVersion() -> QString
         revision.prepend('g');
     }
 
-    return QStringLiteral("%1-%2-%3-%4%5").arg(version, revision, qtVersion, platform, multibundle);
+    return QStringLiteral("%1-%2-%3-%4%5").arg(version, revision, label, platform, multibundle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -26,13 +26,13 @@ def test_r2_extension_covers_all_platforms():
 
 
 def test_r2_symbol_key_uses_normalized_application_name():
-    key = us.r2_symbol_key("windows", SHA40, "x64", "valentina")
-    assert key == f"builds/{SHA40}/windows/x64/valentina.pdb.xz"
+    key = us.r2_symbol_key("windows", SHA40, "x64", "Qt_6_10", "valentina")
+    assert key == f"builds/{SHA40}/windows/x64/Qt_6_10/valentina.pdb.xz"
 
 
 def test_r2_symbol_key_macos_uses_dsym_tar_xz_extension():
-    key = us.r2_symbol_key("macos", SHA40, "armv8", "qmuparserlib")
-    assert key == f"builds/{SHA40}/macos/armv8/qmuparserlib.dsym.tar.xz"
+    key = us.r2_symbol_key("macos", SHA40, "armv8", "Qt6_11", "qmuparserlib")
+    assert key == f"builds/{SHA40}/macos/armv8/Qt6_11/qmuparserlib.dsym.tar.xz"
 
 
 def test_r2_symbol_key_keeps_intel_and_arm_macos_builds_separate():
@@ -40,9 +40,34 @@ def test_r2_symbol_key_keeps_intel_and_arm_macos_builds_separate():
     # arm_build) upload the same application for the same commit under the
     # same platform. Without an arch segment they'd collide on one key and
     # silently overwrite each other's symbols.
-    intel_key = us.r2_symbol_key("macos", SHA40, "x64", "valentina")
-    arm_key = us.r2_symbol_key("macos", SHA40, "armv8", "valentina")
+    intel_key = us.r2_symbol_key("macos", SHA40, "x64", "Qt6_11", "valentina")
+    arm_key = us.r2_symbol_key("macos", SHA40, "armv8", "Qt6_11", "valentina")
     assert intel_key != arm_key
+
+
+def test_r2_symbol_key_keeps_two_variants_of_one_platform_arch_separate():
+    # The bug this guards against: two matrix legs build the same commit for the
+    # same platform+arch (e.g. Qt 6.11 with ICU codecs and Qt 6.11 with big
+    # codecs, or two macOS deployment targets). Without a label segment they
+    # collide on one key and the leg that finishes last silently wins.
+    icu_key = us.r2_symbol_key("macos", SHA40, "x64", "Qt6_11", "valentina")
+    codecs_key = us.r2_symbol_key("macos", SHA40, "x64", "Qt6_11_bigcodecs", "valentina")
+    assert icu_key != codecs_key
+
+
+def test_build_version_puts_the_label_where_the_qt_version_used_to_be():
+    version = us.build_version("1_1_0", "gb75c9bff3", "Qt6_11_bigcodecs", "macos")
+    assert version == "1_1_0-gb75c9bff3-Qt6_11_bigcodecs-macos-multibundle"
+
+
+def test_validate_label_accepts_default_and_variant_forms():
+    us.validate_label("Qt_6_8")           # the default, computed from the Qt version
+    us.validate_label("Qt6_11_bigcodecs")  # an explicit variant
+
+
+def test_validate_label_rejects_malformed_labels():
+    for bad in ("Qt6.10", "Qt6-10", "Qt 610", "", "Q" * 33):
+        expect_systemexit(us.validate_label, bad)
 
 
 def test_r2_symbol_store_config_returns_all_four_values():
@@ -75,7 +100,7 @@ def test_parse_args_requires_commit_sha():
         us.parse_args,
         [
             "--build-dir", ".", "--app-version", "1_0_0",
-            "--git-hash", "gabc123", "--qt-version", "Qt_6_8", "--arch", "x86_64",
+            "--git-hash", "gabc123", "--label", "Qt_6_8", "--arch", "x86_64",
         ],
     )
 
@@ -85,7 +110,7 @@ def test_parse_args_requires_arch():
         us.parse_args,
         [
             "--build-dir", ".", "--app-version", "1_0_0",
-            "--git-hash", "gabc123", "--qt-version", "Qt_6_8", "--commit-sha", SHA40,
+            "--git-hash", "gabc123", "--label", "Qt_6_8", "--commit-sha", SHA40,
         ],
     )
 
@@ -93,11 +118,21 @@ def test_parse_args_requires_arch():
 def test_parse_args_accepts_commit_sha_and_arch():
     args = us.parse_args([
         "--build-dir", ".", "--app-version", "1_0_0",
-        "--git-hash", "gabc123", "--qt-version", "Qt_6_8",
+        "--git-hash", "gabc123", "--label", "Qt_6_8",
         "--commit-sha", SHA40, "--arch", "x86_64",
     ])
     assert args.commit_sha == SHA40
     assert args.arch == "x86_64"
+
+
+def test_parse_args_requires_label():
+    expect_systemexit(
+        us.parse_args,
+        [
+            "--build-dir", ".", "--app-version", "1_0_0",
+            "--git-hash", "gabc123", "--commit-sha", SHA40, "--arch", "x86_64",
+        ],
+    )
 
 
 def test_heavy_dependencies_are_not_imported_at_module_scope():
@@ -126,13 +161,13 @@ def test_upload_to_symbol_store_xz_compresses_plain_file():
     us.upload_to_symbol_store(
         client=StubClient(), bucket="val-debug-symbols", target=target,
         artifact_path=artifact_path,
-        platform="linux", commit_sha=SHA40, arch="x86_64",
+        platform="linux", commit_sha=SHA40, arch="x86_64", label="Qt_6_8",
     )
     assert len(calls) == 1
     path, bucket, key = calls[0]
     assert path.endswith("valentina.debug.xz")
     assert bucket == "val-debug-symbols"
-    assert key == f"builds/{SHA40}/linux/x86_64/valentina.debug.xz"
+    assert key == f"builds/{SHA40}/linux/x86_64/Qt_6_8/valentina.debug.xz"
     assert lzma.decompress(captured_bytes["data"]) == original_content
 
     # The scratch directory used to build the archive must be cleaned up afterward.
@@ -161,13 +196,13 @@ def test_upload_to_symbol_store_tar_xzs_directory_bundles():
     us.upload_to_symbol_store(
         client=StubClient(), bucket="val-debug-symbols", target=target,
         artifact_path=bundle_dir,
-        platform="macos", commit_sha=SHA40, arch="armv8",
+        platform="macos", commit_sha=SHA40, arch="armv8", label="Qt6_11",
     )
     assert len(calls) == 1
     path, bucket, key = calls[0]
     assert path.endswith("valentina.dsym.tar.xz")
     assert bucket == "val-debug-symbols"
-    assert key == f"builds/{SHA40}/macos/armv8/valentina.dsym.tar.xz"
+    assert key == f"builds/{SHA40}/macos/armv8/Qt6_11/valentina.dsym.tar.xz"
 
     # The tarball must preserve the bundle's own directory name as its top-level
     # entry (e.g. "Valentina.app.dSYM/Info.plist"), not just the bundle's
@@ -198,7 +233,7 @@ def test_upload_to_symbol_store_wraps_client_errors_as_systemexit():
         us.upload_to_symbol_store,
         client=FailingClient(), bucket="b", target=target,
         artifact_path=artifact_path, platform="linux", commit_sha=SHA40,
-        arch="x86_64",
+        arch="x86_64", label="Qt_6_8",
     )
 
 
@@ -221,14 +256,14 @@ def test_upload_to_symbol_store_cleans_up_scratch_dir_on_upload_failure():
     expect_systemexit(
         us.upload_to_symbol_store,
         client=FailingClient(), bucket="b", target=target,
-        artifact_path=bundle_dir, platform="macos", commit_sha=SHA40, arch="armv8",
+        artifact_path=bundle_dir, platform="macos", commit_sha=SHA40, arch="armv8", label="Qt6_11",
     )
     assert len(seen_paths) == 1
     assert not us.Path(seen_paths[0]).parent.exists()
 
 
 def test_r2_symbol_key_rejects_unknown_platform():
-    expect_systemexit(us.r2_symbol_key, "solaris", SHA40, "x86_64", "valentina")
+    expect_systemexit(us.r2_symbol_key, "solaris", SHA40, "x86_64", "Qt_6_8", "valentina")
 
 
 def test_validate_commit_sha_accepts_full_40_char_hex_sha():

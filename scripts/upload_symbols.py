@@ -13,7 +13,7 @@ Per-platform targets and debug artifact types:
 Excluded targets (never uploaded): parserTest, collectionTest, translationsTest
 
 Version string format:
-    <app_version>-<git_hash>-<qt_version>-<platform>[-multibundle]
+    <app_version>-<git_hash>-<label>-<platform>[-multibundle]
 
     macOS always ships as a multibundle (Valentina.app + Tape.app + Puzzle.app),
     so the suffix is appended automatically for that platform, not a flag.
@@ -45,25 +45,26 @@ Usage:
         --app-version <ver>     \\
         --git-hash    <hash>    \\
         --commit-sha  <sha>     \\
-        --qt-version  <qtver>   \\
+        --label       <label>   \\
         --arch        <arch>    \\
         [--platform   <plat>]
 
 Examples:
     python upload_symbols.py \\
         --build-dir ./build --app-version 1_1_0 --git-hash gf4373acf9 \\
-        --commit-sha f4373acf9c1234567890abcdef1234567890abcd --qt-version Qt_6_2 \\
+        --commit-sha f4373acf9c1234567890abcdef1234567890abcd --label Qt_6_2 \\
         --arch x86_64
 
     python upload_symbols.py \\
         --build-dir ./build --app-version 1_1_0 --git-hash gf4373acf9 \\
-        --commit-sha f4373acf9c1234567890abcdef1234567890abcd --qt-version Qt_6_10 \\
+        --commit-sha f4373acf9c1234567890abcdef1234567890abcd --label Qt_6_10 \\
         --arch armv8 --platform macos
 """
 
 import argparse
 import lzma
 import os
+import re
 import shutil
 import string
 import subprocess
@@ -154,7 +155,7 @@ R2_EXTENSION: dict[str, str] = {"linux": "debug.xz", "windows": "pdb.xz", "macos
 XZ_PRESET = 9 | lzma.PRESET_EXTREME
 
 
-def r2_symbol_key(platform: str, commit_sha: str, arch: str, application: str) -> str:
+def r2_symbol_key(platform: str, commit_sha: str, arch: str, label: str, application: str) -> str:
     """
     Build the R2 object key for a durably-stored debug artifact.
 
@@ -165,13 +166,25 @@ def r2_symbol_key(platform: str, commit_sha: str, arch: str, application: str) -
     platform's key shape uniform means a future second architecture on any
     platform needs no key-format change, just a new --arch value.
 
+    The label segment is the same idea one axis over: several CI jobs build the
+    same commit for the same platform+arch and differ only in build options the
+    key would otherwise not see (macOS deployment target, ICU vs ICONV codecs).
+    The label is also what AppCrashVersion() reports, so a crash report names
+    its own key with no lookup table.
+
+    Ceiling: two jobs that pass the *same* label still clobber each other, and
+    nothing here detects it -- labels must be unique per platform+arch, which is
+    a property of the workflow matrices, not of this function. A job whose build
+    and upload steps receive different labels breaks BugSplat symbol matching
+    instead; both workflows avoid it by deriving the two from one variable.
+
     Filenames are normalized to '<application>.<ext>' rather than the raw
     on-disk name (which varies for versioned Linux shared libraries), per
     the debug-symbols service spec's bucket layout.
     """
     if platform not in R2_EXTENSION:
         raise SystemExit(f"[ERROR] Unknown platform {platform!r} for R2 key construction.")
-    return f"builds/{commit_sha}/{platform}/{arch}/{application}.{R2_EXTENSION[platform]}"
+    return f"builds/{commit_sha}/{platform}/{arch}/{label}/{application}.{R2_EXTENSION[platform]}"
 
 
 R2_SYMBOL_STORE_ENV_VARS = (
@@ -215,6 +228,7 @@ def upload_to_symbol_store(
     platform: str,
     commit_sha: str,
     arch: str,
+    label: str,
 ) -> None:
     """
     Upload one already-located artifact to the R2 debug-symbol store.
@@ -222,7 +236,7 @@ def upload_to_symbol_store(
     Runs after upload_target() (BugSplat) has already succeeded for this target,
     so a failed R2 upload here doesn't take down the BugSplat copy already made.
     """
-    key = r2_symbol_key(platform, commit_sha, arch, target.application)
+    key = r2_symbol_key(platform, commit_sha, arch, label, target.application)
 
     # Scratch path outside the tree being packaged -- it must not itself become
     # something the workflow's blanket debug-file-strip step has to know to skip.
@@ -257,14 +271,14 @@ def upload_to_symbol_store(
 
 # ── Version builder ────────────────────────────────────────────────────────────
 
-def build_version(app_version: str, git_hash: str, qt_version: str, platform: str) -> str:
+def build_version(app_version: str, git_hash: str, label: str, platform: str) -> str:
     """
     Assemble the BugSplat version string, e.g.:
-        1_1_0-gf4373acf9-Qt_6_10-macos-multibundle
+        1_1_0-gf4373acf9-Qt6_11_bigcodecs-macos-multibundle
 
     macOS always ships as a multibundle, so the suffix is unconditional there.
     """
-    parts = [app_version, git_hash, qt_version, platform]
+    parts = [app_version, git_hash, label, platform]
     if platform == "macos":
         parts.append("multibundle")
     return "-".join(parts)
@@ -302,6 +316,24 @@ def validate_commit_sha(commit_sha: str) -> None:
         raise SystemExit(
             f"[ERROR] --commit-sha must be a full 40-character hex git commit sha "
             f"(git rev-parse HEAD), got {commit_sha!r}."
+        )
+
+
+LABEL_RE = re.compile(r"^[A-Za-z0-9_]{1,32}$")
+
+
+def validate_label(label: str) -> None:
+    """
+    Reject anything that isn't a short alphanumeric/underscore build label.
+
+    An empty or typo'd label would otherwise build a valid-looking but wrong R2
+    key (and a BugSplat version string the shipped binary doesn't report), with
+    no error at upload time and no symbols at crash time. Same reasoning as
+    validate_commit_sha.
+    """
+    if not LABEL_RE.match(label):
+        raise SystemExit(
+            f"[ERROR] Invalid --label {label!r}: expected 1-32 chars of [A-Za-z0-9_], e.g. Qt_6_10."
         )
 
 
@@ -455,9 +487,13 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
              "this value.",
     )
     parser.add_argument(
-        "--qt-version",
-        required=True, metavar="QT_VERSION",
-        help="Qt version with underscores, e.g. Qt_6_10.",
+        "--label",
+        required=True, metavar="LABEL",
+        help="Build-variant label, e.g. Qt_6_10 (the default: this build's Qt version) or "
+             "Qt6_11_bigcodecs (a job that shares platform+arch+Qt with another job). Must "
+             "match [A-Za-z0-9_]{1,32}. Appears both in the R2 debug-symbol-store key and in "
+             "the BugSplat version string, and must be the same value the binary was compiled "
+             "with (-DCRASH_BUILD_LABEL) or crash reports won't resolve to these symbols.",
     )
     parser.add_argument(
         "--arch",
@@ -481,6 +517,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     validate_commit_sha(args.commit_sha)
+    validate_label(args.label)
 
     database   = get_env("BUGSPLAT_DATABASE")
     auth_flags = resolve_auth()
@@ -493,7 +530,7 @@ def main() -> None:
     version = build_version(
         app_version = args.app_version,
         git_hash    = args.git_hash,
-        qt_version  = args.qt_version,
+        label       = args.label,
         platform    = platform,
     )
 
@@ -506,6 +543,7 @@ def main() -> None:
     print(f"[INFO] Platform  : {platform}")
     print(f"[INFO] Build dir : {build_dir}")
     print(f"[INFO] Version   : {version}")
+    print(f"[INFO] Label     : {args.label}")
     print(f"[INFO] Database  : {database}")
     print(f"[INFO] Targets   : {len(targets)}")
     print()
@@ -540,6 +578,7 @@ def main() -> None:
             platform      = platform,
             commit_sha    = args.commit_sha,
             arch          = args.arch,
+            label         = args.label,
         )
 
     print(f"[INFO] Uploaded : {uploaded} / {len(targets)} target(s).")

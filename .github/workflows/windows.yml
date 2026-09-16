@@ -231,21 +231,24 @@ jobs:
 
       - name: Set up common Qbs args
         shell: bash
-        run: >
-          echo "COMMON_QBS_ARGS=
-          -f valentina.qbs
-          -d \"$RUNNER_TEMP/build\"
-          config:release
-          qbs.installRoot:\"$RUNNER_TEMP/build/release/install-root/valentina\"
-          profile:qt6
-          project.enableSigning:${{ env.SIGN }}
-          modules.buildconfig.signingThumbprint:${{ secrets.CERTUM_KEY_ID }}
-          project.enableConan:true
-          project.conanWithCrashReporting:${{ env.WITH_CRASH_REPORTING }}
-          project.conanWithXerces:true
-          project.conanProfiles:share/ci/conan/profiles/windows
-          modules.buildconfig.enablePCH:true
-          modules.windeployqt.compilerRuntime:true
+        run: |
+          CRASH_BUILD_LABEL=$("$QT_ROOT_DIR/bin/qmake.exe" -query QT_VERSION | awk -F. '{print "Qt_" $1 "_" $2}')
+          echo "CRASH_BUILD_LABEL=$CRASH_BUILD_LABEL" >> $GITHUB_ENV
+          echo "COMMON_QBS_ARGS= \
+          -f valentina.qbs \
+          -d \"$RUNNER_TEMP/build\" \
+          config:release \
+          qbs.installRoot:\"$RUNNER_TEMP/build/release/install-root/valentina\" \
+          profile:qt6 \
+          project.enableSigning:${{ env.SIGN }} \
+          modules.buildconfig.signingThumbprint:${{ secrets.CERTUM_KEY_ID }} \
+          project.enableConan:true \
+          project.conanWithCrashReporting:${{ env.WITH_CRASH_REPORTING }} \
+          project.conanWithXerces:true \
+          project.conanProfiles:share/ci/conan/profiles/windows \
+          project.crashBuildLabel:$CRASH_BUILD_LABEL \
+          modules.buildconfig.enablePCH:true \
+          modules.windeployqt.compilerRuntime:true \
           modules.windeployqt.noCompilerRuntime:false" >> $GITHUB_ENV
 
       - name: Build Valentina
@@ -269,8 +272,6 @@ jobs:
             -OutFile "${{ runner.temp }}\symbol-upload-windows.exe"
 
           # Build version components
-          $qtVersion = (& "$env:QT_ROOT_DIR\bin\qmake.exe" -query QT_VERSION) `
-            -replace '(\d+)\.(\d+).*', 'Qt_$1_$2'
           $shortSha  = git log --pretty=format:%h -n 1
           $commitSha = git rev-parse HEAD
 
@@ -285,7 +286,7 @@ jobs:
             --app-version $env:VALENTINA_VERSION `
             --git-hash    "g$shortSha" `
             --commit-sha  $commitSha `
-            --qt-version  $qtVersion `
+            --label       $env:CRASH_BUILD_LABEL `
             --arch        x64
 
       - name: Tests

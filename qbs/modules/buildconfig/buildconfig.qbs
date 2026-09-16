@@ -164,6 +164,12 @@ Module {
         if (useConanPackages && conanCrashReportingEnabled)
             defines.push('CRASH_REPORTING');
 
+        if (project.crashBuildLabel) {
+            if (!/^[A-Za-z0-9_]{1,32}$/.test(project.crashBuildLabel))
+                throw "project.crashBuildLabel must match [A-Za-z0-9_]{1,32}, got '" + project.crashBuildLabel + "'";
+            defines.push('CRASH_BUILD_LABEL="' + project.crashBuildLabel + '"');
+        }
+
         return defines;
     }
 
