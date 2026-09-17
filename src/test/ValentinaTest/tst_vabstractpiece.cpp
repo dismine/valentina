@@ -995,6 +995,23 @@ void TST_VAbstractPiece::PathLoopsRotationInvariant() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::PathLoopsCollinearFalseCrossing() const
+{
+    // See file valentina_private_collection/bugs/kira_nova_seam_allowance/Kira Nova 1_case2.val
+    // (private collection), seam allowance of piece "передня спідниця ліва".
+    // The path runs straight through its own start point, which leaves the second segment exactly collinear with
+    // the closing one. Their denominator is zero only in exact arithmetic, so QLineF calls them a bounded
+    // intersection and returns a point 3400 units away from the closing segment. Taken for a crossing it cut the
+    // path down to 4 points. Only the one real parasitic loop may go, leaving 243 out of 244.
+    QVector<QPointF> const path =
+        AbstractTest::VectorFromJson<QPointF>(QStringLiteral("://loop_collinear_false_crossing/input.json"));
+    QVector<QPointF> const expect =
+        AbstractTest::VectorFromJson<QPointF>(QStringLiteral("://loop_collinear_false_crossing/output.json"));
+
+    ComparePaths(CheckLoops(path), expect);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractPiece::BrokenDetailEquidistant_data()
 {
     QTest::addColumn<QVector<VSAPoint>>("points");

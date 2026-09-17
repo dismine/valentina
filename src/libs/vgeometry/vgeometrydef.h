@@ -231,7 +231,16 @@ inline auto CheckLoop(const QVector<T> &points, bool &loopFound) -> QVector<T>
             bool parallel = false;
 
             const QLineF::IntersectType intersect = line1.intersects(line2, &crosPoint);
-            if (intersect == QLineF::NoIntersection)
+
+            // Collinear segments have a zero denominator only in exact arithmetic. Rounding leaves it barely
+            // non-zero instead, and QLineF then calls them a bounded intersection and hands back a point that
+            // lies on neither segment. Taking that point for a crossing cuts away everything between the two
+            // segments, so make sure it really is on both of them.
+            const bool collinear = intersect == QLineF::BoundedIntersection
+                                   && (not IsPointOnLineSegment(crosPoint, line1.p1(), line1.p2())
+                                       || not IsPointOnLineSegment(crosPoint, line2.p1(), line2.p2()));
+
+            if (intersect == QLineF::NoIntersection || collinear)
             { // According to the documentation QLineF::NoIntersection indicates that the lines do not intersect;
                 // i.e. they are parallel. But parallel also mean they can be on the same line.
                 // Method IsLineSegmentOnLineSegment will check it.
