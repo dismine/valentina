@@ -1,4 +1,5 @@
 # Valentina 1.1.1 (unreleased)
+- [Valentina app] Fixed the `--dimensionC` console export option silently applying the value to dimension B instead, and console export capturing the pattern's geometry from before a `--dimensionA`/`--dimensionB`/`--dimensionC` change instead of after it.
 - [Valentina app] Fixed a piece's seam allowance sometimes rendering as a garbled, self-intersecting outline at some size and height combinations, while the very same piece was fine at others. Loop removal cut off the wrong part of the outline depending on which node happened to be first in the piece's main path.
 - [Valentina app] Fixed a crash closing a Move/Rotate/Flip operation's options dialog after a change that adds or removes an operated object: the dialog kept a dangling pointer to its tool once the pattern got fully reparsed, and closing the dialog afterward dereferenced it.
 - [Valentina app] Fixed launching Tape or Puzzle from Valentina on macOS failing to find them when installed outside of `/Applications` directly, e.g. in `~/Applications` or a subfolder (such as when keeping several versions side by side).
