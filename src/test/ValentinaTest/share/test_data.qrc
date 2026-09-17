@@ -8,6 +8,8 @@
         <file>loop_start_point_on_line/output.json</file>
         <file>loop_rotation_invariant/input.json</file>
         <file>loop_rotation_invariant/output.json</file>
+        <file>loop_collinear_false_crossing/input.json</file>
+        <file>loop_collinear_false_crossing/output.json</file>
         <file>seamtest1_by_second_right_angle/input.json</file>
         <file>seamtest1_by_second_right_angle/output.json</file>
         <file>seamtest1_by_first_right_angle/input.json</file>

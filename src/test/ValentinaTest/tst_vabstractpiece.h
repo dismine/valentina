@@ -55,6 +55,7 @@ private slots:
     void PathLoopsCase_data() const;
     void PathLoopsCase() const;
     void PathLoopsRotationInvariant() const;
+    void PathLoopsCollinearFalseCrossing() const;
     void BrokenDetailEquidistant_data();
     void BrokenDetailEquidistant() const;
     void EquidistantAngleType_data();
