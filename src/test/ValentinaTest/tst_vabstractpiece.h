@@ -54,6 +54,7 @@ private slots:
     void PathRemoveLoop() const;
     void PathLoopsCase_data() const;
     void PathLoopsCase() const;
+    void PathLoopsRotationInvariant() const;
     void BrokenDetailEquidistant_data();
     void BrokenDetailEquidistant() const;
     void EquidistantAngleType_data();

@@ -978,6 +978,23 @@ void TST_VAbstractPiece::PathLoopsCase() const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPiece::PathLoopsRotationInvariant() const
+{
+    // See file valentina_private_collection/bugs/kira_nova_seam_allowance/case_bad_164_80.val
+    // (private collection), seam allowance of a front relief piece at height 164, size 80.
+    // Which node comes first in a closed path is incidental, an ordinary edit can shift it. It must not decide how
+    // much of the path loop removal cuts off. Here the first crossing met in scan order spans almost the whole
+    // outline, and cutting that one off left 9 points out of 47. Every other rotation of the very same outline
+    // reaches the two small parasitic loops first and keeps 42.
+    QVector<QPointF> const path =
+        AbstractTest::VectorFromJson<QPointF>(QStringLiteral("://loop_rotation_invariant/input.json"));
+    QVector<QPointF> const expect =
+        AbstractTest::VectorFromJson<QPointF>(QStringLiteral("://loop_rotation_invariant/output.json"));
+
+    ComparePaths(CheckLoops(path), expect);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_VAbstractPiece::BrokenDetailEquidistant_data()
 {
     QTest::addColumn<QVector<VSAPoint>>("points");
