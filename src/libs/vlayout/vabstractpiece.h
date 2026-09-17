@@ -36,6 +36,7 @@
 #include <QSharedDataPointer>
 #include <QtGlobal>
 #include <algorithm>
+#include <iterator>
 
 #include "../ifc/exception/vexception.h"
 #include "../vgeometry/vabstractcurve.h"
@@ -689,79 +690,88 @@ template <class T> inline auto VAbstractPiece::CheckLoop(const QVector<T> &point
     loopFound = false;
 
     const bool pathClosed = VFuzzyComparePoints(points.constFirst(), points.constLast());
+    const auto size = points.size();
 
-    QVector<T> ekvPoints;
-    ekvPoints.reserve(points.size());
-
-    for (qint32 i = 0; i < points.size(); ++i)
+    // Shoelace prefix sums, so that the area of any loop costs O(1) to evaluate.
+    QVector<qreal> chain(size, 0);
+    for (auto k = decltype(size){1}; k < size; ++k)
     {
-        /*Last three points no need to check.*/
-        /*Triangle can not contain a loop*/
-        if (loopFound || i > points.size() - 4)
-        {
-            ekvPoints.append(points.at(i));
-            continue;
-        }
+        const QPointF &prev = points.at(k - 1);
+        const QPointF &cur = points.at(k);
+        chain[k] = chain.at(k - 1) + (prev.x() * cur.y() - cur.x() * prev.y());
+    }
 
-        enum LoopIntersectType
-        {
-            NoIntersection,
-            BoundedIntersection,
-            ParallelIntersection
-        };
+    auto Wedge = [](const QPointF &u, const QPointF &v) { return u.x() * v.y() - v.x() * u.y(); };
 
-        QPointF crosPoint;
-        LoopIntersectType status = NoIntersection;
+    // Cutting off the first loop met in scan order makes the result depend on which node happens to be first in
+    // the path: started at another index the very same outline hits a crossing that spans almost all of it, and
+    // everything in between is thrown away. A parasitic loop is a small one, so weigh every crossing and cut off
+    // the smallest loop only. The rest, if any, is handled by the next pass.
+    auto bestI = decltype(size){-1};
+    auto bestJ = decltype(size){-1};
+    qreal bestArea = 0;
+    T bestCross;
+    bool bestParallel = false;
+
+    for (auto i = decltype(size){0}; i < size - 3; ++i)
+    {
         const QLineF line1(points.at(i), points.at(i + 1));
-
         const int limit = pathClosed && i == 0 ? 2 : 1;
-        qint32 j;
-        for (j = i + 2; j < points.size() - limit; ++j)
+
+        for (auto j = i + 2; j < size - limit; ++j)
         {
-            QLineF line2(points.at(j), points.at(j + 1));
+            const QLineF line2(points.at(j), points.at(j + 1));
+
+            QPointF crosPoint;
+            bool parallel = false;
 
             const QLineF::IntersectType intersect = line1.intersects(line2, &crosPoint);
             if (intersect == QLineF::NoIntersection)
             { // According to the documentation QLineF::NoIntersection indicates that the lines do not intersect;
                 // i.e. they are parallel. But parallel also mean they can be on the same line.
                 // Method IsLineSegmentOnLineSegment will check it.
-                if (VGObject::IsLineSegmentOnLineSegment(line1, line2))
-                { // Now we really sure that segments are on the same line and have real intersections.
-                    status = ParallelIntersection;
-                    break;
+                if (not VGObject::IsLineSegmentOnLineSegment(line1, line2))
+                {
+                    continue;
                 }
+                parallel = true;
+                crosPoint = points.at(j + 1);
             }
-            else if (intersect == QLineF::BoundedIntersection)
+            else if (intersect != QLineF::BoundedIntersection)
             {
-                status = BoundedIntersection;
-                break;
+                continue;
             }
-        }
 
-        switch (status)
-        {
-            case ParallelIntersection:
-                /*We have found a loop.*/
-                ekvPoints.append(points.at(i));
-                ekvPoints.append(points.at(j + 1));
-                i = j + 1; // Skip a loop
-                loopFound = true;
-                break;
-            case BoundedIntersection:
-                ekvPoints.append(points.at(i));
-                ekvPoints.append(
-                    IntersectionPoint(crosPoint, points.at(i), points.at(i + 1), points.at(j), points.at(j + 1)));
-                i = j;
-                loopFound = true;
-                break;
-            case NoIntersection:
-                /*We have not found loop.*/
-                ekvPoints.append(points.at(i));
-                break;
-            default:
-                break;
+            // The loop is: the crossing, points i+1...j, back to the crossing.
+            const qreal loopArea = qAbs(Wedge(crosPoint, points.at(i + 1)) + (chain.at(j) - chain.at(i + 1))
+                                        + Wedge(points.at(j), crosPoint));
+
+            if (bestI == -1 || loopArea < bestArea)
+            {
+                bestI = i;
+                bestJ = j;
+                bestArea = loopArea;
+                bestCross = IntersectionPoint(crosPoint, points.at(i), points.at(i + 1), points.at(j), points.at(j + 1));
+                bestParallel = parallel;
+            }
         }
     }
+
+    if (bestI == -1)
+    {
+        return points;
+    }
+
+    loopFound = true;
+
+    QVector<T> ekvPoints;
+    ekvPoints.reserve(size);
+    std::copy(points.begin(), points.begin() + bestI + 1, std::back_inserter(ekvPoints));
+    if (not bestParallel)
+    { // For a parallel hit the crossing is points.at(bestJ + 1) itself and gets copied below anyway.
+        ekvPoints.append(bestCross);
+    }
+    std::copy(points.begin() + bestJ + 1, points.end(), std::back_inserter(ekvPoints));
     return ekvPoints;
 }
 
