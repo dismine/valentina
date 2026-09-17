@@ -7575,13 +7575,22 @@ void MainWindow::ProcessCMD()
 
         if (cmd->IsSetDimensionC())
         {
-            cSetted = SetDimensionB(cmd->OptDimensionC());
+            cSetted = SetDimensionC(cmd->OptDimensionC());
         }
 
         if (not(aSetted && bSetted && cSetted))
         {
             QCoreApplication::exit(V_EX_DATAERR);
             return;
+        }
+
+        // SetDimensionA/B/C() only start the m_gradation debounce timer; the actual recompute
+        // (GradationChanged()) is deferred to the next event loop iteration, which never comes
+        // before export in console mode since nothing here yields back to exec(). Flush it now
+        // so export sees geometry for the requested dimensions instead of stale pre-change data.
+        if (m_gradation->isActive())
+        {
+            GradationChanged();
         }
 
         if (not cmd->IsTestModeEnabled())
