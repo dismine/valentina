@@ -382,7 +382,7 @@ jobs:
       QT_VERSION: "Qt6"
       ARCH: "x86_64"
       TARGET_PLATFORM: "Linux"
-      VALENTINA_VERSION: "1_1_0"
+      VALENTINA_VERSION: "1_1_1"
       BUGSPLAT_DATABASE: "valentina"
 
     steps:
