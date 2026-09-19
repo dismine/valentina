@@ -188,6 +188,30 @@ auto VBackgroundPatternImage::IsValid() const -> bool
             return false;
         }
 
+        // SVG is well-formed XML, and depending on the platform's mimetype database, sniffing
+        // a buffer with no filename to go by can resolve it to a generic XML ancestor
+        // (application/xml, text/xml) instead of image/svg+xml -- observed on macOS arm builds
+        // using Qt 6.7.3. Verify declared SVG content directly with QSvgRenderer instead of
+        // trusting mimetype-alias matching, since we need a QSvgRenderer for the canvas-size
+        // check below anyway.
+        if (m_contentType == "image/svg+xml"_L1)
+        {
+            QSvgRenderer const renderer(QByteArray::fromBase64(m_contentData));
+            if (not renderer.isValid())
+            {
+                m_errorString = tr("Not image.");
+                return false;
+            }
+
+            if (not HasSaneSvgCanvasSize(renderer))
+            {
+                m_errorString = tr("The image declares a canvas size that is too large to render safely.");
+                return false;
+            }
+
+            return true;
+        }
+
         QMimeType const mime = MimeTypeFromData();
         QSet<QString> aliases = ConvertToSet<QString>(mime.aliases());
         aliases.insert(mime.name());
@@ -204,8 +228,8 @@ auto VBackgroundPatternImage::IsValid() const -> bool
             return false;
         }
 
-        if (mime.name().startsWith("image/svg+xml"_L1) &&
-            not HasSaneSvgCanvasSize(QSvgRenderer(QByteArray::fromBase64(m_contentData))))
+        if (mime.name().startsWith("image/svg+xml"_L1)
+            && not HasSaneSvgCanvasSize(QSvgRenderer(QByteArray::fromBase64(m_contentData))))
         {
             m_errorString = tr("The image declares a canvas size that is too large to render safely.");
             return false;
