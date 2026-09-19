@@ -582,7 +582,8 @@ auto VAbstractApplication::GetPlaceholderTranslator() -> QSharedPointer<VTransla
         pieceLabelLocale = settings->GetLocale();
     }
 
-    if (pieceLabelLocale.startsWith("ru"_L1, Qt::CaseInsensitive) || pieceLabelLocale.startsWith("ir"_L1, Qt::CaseInsensitive))
+    if (pieceLabelLocale.startsWith("ru"_L1, Qt::CaseInsensitive)
+        || pieceLabelLocale.startsWith("ir"_L1, Qt::CaseInsensitive))
     {
         return QSharedPointer<VTranslator>(new VTranslator);
     }

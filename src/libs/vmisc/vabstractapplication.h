@@ -82,7 +82,8 @@ public:
     virtual void OpenSettings() = 0;
     auto Settings() -> VCommonSettings *;
 
-    template <typename T> auto LocaleToString(const T &value) -> QString;
+    template<typename T>
+    auto LocaleToString(const T &value) -> QString;
 
     auto getUndoStack() const -> QUndoStack *;
 
@@ -179,7 +180,8 @@ private:
 QT_WARNING_POP
 
 //---------------------------------------------------------------------------------------------------------------------
-template <typename T> inline auto VAbstractApplication::LocaleToString(const T &value) -> QString
+template<typename T>
+inline auto VAbstractApplication::LocaleToString(const T &value) -> QString
 {
     QLocale loc;
     VAbstractApplication::VApp()->Settings()->GetOsSeparator() ? loc = QLocale() : loc = QLocale::c();
