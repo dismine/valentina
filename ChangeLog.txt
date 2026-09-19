@@ -1,4 +1,5 @@
 # Valentina 1.1.2 (unreleased)
+- [Valentina app] Fixed a crash in the Increments dialog when the formula field was edited right after the table was rebuilt (e.g. by adding/removing an increment) and the currently selected row had become a separator.
 
 # Valentina 1.1.1 September 18, 2026
 - [Valentina app] Fixed the `--dimensionC` console export option silently applying the value to dimension B instead, and console export capturing the pattern's geometry from before a `--dimensionA`/`--dimensionB`/`--dimensionC` change instead of after it.
