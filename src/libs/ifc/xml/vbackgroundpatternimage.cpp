@@ -68,6 +68,18 @@ auto ScaleVectorImage(const QSvgRenderer &renderer) -> QSize
     constexpr double ratio = PrintDPI / 90.;
     return {qRound(imageSize.width() * ratio), qRound(imageSize.height() * ratio)};
 }
+//---------------------------------------------------------------------------------------------------------------------
+// Same ceiling QImageReader applies to raster images by default (QImageIOHandler::allocationLimit()).
+// QSvgRenderer has no equivalent guard, so a document that declares an absurd canvas size sails through
+// isValid() and later makes QGraphicsItem::DeviceCoordinateCache try to allocate a cache pixmap of that
+// size, crashing deep inside QRasterPaintEngine.
+constexpr qint64 maxSvgCanvasPixels = 256LL * 1024 * 1024 / 4;
+
+auto HasSaneSvgCanvasSize(const QSvgRenderer &renderer) -> bool
+{
+    const QSize size = renderer.defaultSize();
+    return qint64(size.width()) * size.height() <= maxSvgCanvasPixels;
+}
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -161,6 +173,12 @@ auto VBackgroundPatternImage::IsValid() const -> bool
             qCritical() << tr("Unexpected mime type: %1").arg(mime.name());
             return false;
         }
+
+        if (mime.name().startsWith("image/svg+xml"_L1) && not HasSaneSvgCanvasSize(QSvgRenderer(m_filePath)))
+        {
+            m_errorString = tr("The image declares a canvas size that is too large to render safely.");
+            return false;
+        }
     }
     else
     {
@@ -183,6 +201,13 @@ auto VBackgroundPatternImage::IsValid() const -> bool
         if (not IsMimeTypeImage(mime))
         {
             m_errorString = tr("Not image.");
+            return false;
+        }
+
+        if (mime.name().startsWith("image/svg+xml"_L1) &&
+            not HasSaneSvgCanvasSize(QSvgRenderer(QByteArray::fromBase64(m_contentData))))
+        {
+            m_errorString = tr("The image declares a canvas size that is too large to render safely.");
             return false;
         }
     }

@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "tst_misc.h"
+#include "../ifc/xml/vbackgroundpatternimage.h"
 #include "../vmisc/def.h"
 #include "../vgeometry/vgobject.h"
 
@@ -217,4 +218,32 @@ void TST_Misc::TestIssue485()
     QPointF p1, p2;
     const int res = VGObject::LineIntersectCircle(QPointF(), radius, QLineF(QPointF(), sPoint-cPoint), p1, p2);
     QCOMPARE(res, 0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_Misc::TestOversizedSvgBackgroundImage()
+{
+    const QByteArray normalSvg = QByteArrayLiteral(
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+        "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\"><rect width=\"100\" "
+        "height=\"100\"/></svg>");
+
+    VBackgroundPatternImage normalImage;
+    normalImage.SetContentData(normalSvg.toBase64(), QStringLiteral("image/svg+xml"));
+    QVERIFY(normalImage.IsValid());
+
+    // Same document, but with a canvas far beyond anything a real pattern background needs. Regression test for
+    // a crash where such a declared size sailed through validation and later crashed Qt's paint engine when the
+    // item's device-coordinate pixmap cache tried to allocate a buffer that size.
+    const QByteArray oversizedSvg = QByteArrayLiteral(
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+        "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100000\" height=\"100000\"><rect width=\"100000\" "
+        "height=\"100000\"/></svg>");
+
+    VBackgroundPatternImage oversizedImage;
+    oversizedImage.SetContentData(oversizedSvg.toBase64(), QStringLiteral("image/svg+xml"));
+
+    QVERIFY(not oversizedImage.IsValid());
+    QCOMPARE(oversizedImage.ErrorString(),
+             QStringLiteral("The image declares a canvas size that is too large to render safely."));
 }
