@@ -127,6 +127,7 @@ public:
 #endif
 
     static void LogScreenInfo();
+    static void LogCpuInfo();
 
     static auto LogDirPath() -> QString;
     static auto CreateLogDir() -> bool;

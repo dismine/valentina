@@ -123,6 +123,7 @@ auto main(int argc, char *argv[]) -> int
     }
 
     VAbstractApplication::LogScreenInfo();
+    VAbstractApplication::LogCpuInfo();
 
     QT_REQUIRE_VERSION(argc, argv, "5.15.0") // clazy:exclude=qstring-arg,qstring-allocations NOLINT
 

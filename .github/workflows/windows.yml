@@ -210,6 +210,10 @@ jobs:
         shell: bash
         run: conan install . --build=missing -o '&:with_crash_reporting=${{ env.WITH_CRASH_REPORTING }}' -o '&:with_xerces=True' -o '&:with_icu=${{ env.WITH_ICU }}' -o '&:with_iconv=${{ env.WITH_ICONV }}' -o '&:with_immer=True' -pr:a=share/ci/conan/profiles/windows
 
+      - name: Patch immer to avoid MSVC POPCNT intrinsic (keeps Qt 5.15 CPU baseline)
+        shell: bash
+        run: python3 scripts/patch_immer_popcount.py
+
       - name: Cache SimplySign Installer
         if: ${{ matrix.qt.sign == true }}
         uses: actions/cache@v5

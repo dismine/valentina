@@ -45,6 +45,7 @@
 #include <QScopeGuard>
 #include <QScreen>
 #include <QStandardPaths>
+#include <QSysInfo>
 #include <QTimeZone>
 #include <QTranslator>
 #include <QUndoStack>
@@ -66,6 +67,17 @@
 #if defined(APPIMAGE) && defined(Q_OS_LINUX)
 #include "appimage.h"
 #endif // defined(APPIMAGE) && defined(Q_OS_LINUX)
+
+#if defined(Q_PROCESSOR_X86)
+#include <array>
+#if defined(_MSC_VER)
+#include <intrin.h>
+#else
+#include <cpuid.h>
+#endif
+#elif defined(Q_PROCESSOR_ARM_64) && defined(Q_OS_MAC)
+#include <sys/sysctl.h>
+#endif // defined(Q_PROCESSOR_X86)
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -828,6 +840,95 @@ void VAbstractApplication::LogScreenInfo()
                      &QGuiApplication::primaryScreenChanged,
                      [](const QScreen *screen) -> void
                      { qDebug() << "Primary screen changed to:" << DumpScreen(screen); });
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VAbstractApplication::LogCpuInfo()
+{
+    // Diagnostic logging for crashes tied to CPU feature support. A vendored dependency (immer) crashed with
+    // EXCEPTION_ILLEGAL_INSTRUCTION on a 2008-era CPU because its MSVC path assumed POPCNT support unconditionally.
+    // Logging the feature set at startup lets the next such report be diagnosed from the log alone, instead of
+    // needing the reporter to separately dig up and send their exact CPU model.
+    qDebug() << "=== CPU Information ===";
+    qDebug() << "Architecture:" << QSysInfo::currentCpuArchitecture();
+
+#if defined(Q_PROCESSOR_X86)
+#if defined(_MSC_VER)
+    std::array<int, 4> info{};
+    __cpuid(info.data(), 1);
+    const auto ecx = static_cast<quint32>(info[2]);
+    const auto edx = static_cast<quint32>(info[3]);
+#else
+    unsigned int eax = 0;
+    unsigned int ebx = 0;
+    unsigned int ecx = 0;
+    unsigned int edx = 0;
+    __get_cpuid(1, &eax, &ebx, &ecx, &edx);
+#endif
+
+    QStringList features;
+    if ((edx & (1u << 26)) != 0u)
+    {
+        features << "SSE2"_L1;
+    }
+    if ((ecx & (1u << 0)) != 0u)
+    {
+        features << "SSE3"_L1;
+    }
+    if ((ecx & (1u << 9)) != 0u)
+    {
+        features << "SSSE3"_L1;
+    }
+    if ((ecx & (1u << 19)) != 0u)
+    {
+        features << "SSE4.1"_L1;
+    }
+    if ((ecx & (1u << 20)) != 0u)
+    {
+        features << "SSE4.2"_L1;
+    }
+    if ((ecx & (1u << 23)) != 0u)
+    {
+        features << "POPCNT"_L1;
+    }
+    if ((ecx & (1u << 28)) != 0u)
+    {
+        features << "AVX"_L1;
+    }
+
+    qDebug() << "x86 features:" << (features.isEmpty() ? "none detected"_L1 : features.join(", "_L1));
+#elif defined(Q_PROCESSOR_ARM_64) && defined(Q_OS_MAC)
+    const auto HasFeature = [](const char *name) -> bool
+    {
+        qint32 value = 0;
+        auto size = sizeof(value);
+        return sysctlbyname(name, &value, &size, nullptr, 0) == 0 && value != 0;
+    };
+
+    QStringList features;
+    if (HasFeature("hw.optional.neon"))
+    {
+        features << "NEON"_L1;
+    }
+    if (HasFeature("hw.optional.arm.FEAT_AES"))
+    {
+        features << "AES"_L1;
+    }
+    if (HasFeature("hw.optional.arm.FEAT_SHA256"))
+    {
+        features << "SHA256"_L1;
+    }
+    if (HasFeature("hw.optional.arm.FEAT_CRC32"))
+    {
+        features << "CRC32"_L1;
+    }
+    if (HasFeature("hw.optional.arm.FEAT_LSE"))
+    {
+        features << "LSE"_L1;
+    }
+
+    qDebug() << "ARM features:" << (features.isEmpty() ? "none detected"_L1 : features.join(", "_L1));
+#endif // defined(Q_PROCESSOR_X86)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
