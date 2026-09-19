@@ -231,19 +231,22 @@ void TST_Misc::TestOversizedSvgBackgroundImage()
         "height=\"100\"/></svg>");
 
     // TEMP DIAGNOSTIC: investigating CI-only failure on macOS arm Qt 6.7.3, see run 35438615714.
+    // qWarning() is swallowed by the "-silent" flag the CI test runner uses, so route the findings
+    // through a QVERIFY2 failure message instead, which survives -silent.
     // Remove once root cause of QMimeDatabase::mimeTypeForData() behavior is confirmed.
     {
         const QMimeType svgMime = QMimeDatabase().mimeTypeForData(normalSvg);
-        qWarning() << "[diag] svg mimeTypeForData name:" << svgMime.name() << "aliases:" << svgMime.aliases()
-                   << "valid:" << svgMime.isValid() << "comment:" << svgMime.comment();
-
         const QByteArray pngMagic = QByteArray::fromHex("89504e470d0a1a0a0000000d49484452");
         const QMimeType pngMime = QMimeDatabase().mimeTypeForData(pngMagic);
-        qWarning() << "[diag] png-magic mimeTypeForData name:" << pngMime.name();
-
         const QMimeType octetMime = QMimeDatabase().mimeTypeForName(QStringLiteral("application/octet-stream"));
-        qWarning() << "[diag] octet-stream aliases:" << octetMime.aliases()
-                   << "allMimeTypesCount:" << QMimeDatabase().allMimeTypes().size();
+
+        const QString diag = QStringLiteral("svg name=%1 aliases=%2 valid=%3 | png-magic name=%4 | "
+                                             "octet aliases=%5 | allMimeTypesCount=%6")
+                                 .arg(svgMime.name(), svgMime.aliases().join(QLatin1Char(',')))
+                                 .arg(svgMime.isValid())
+                                 .arg(pngMime.name(), octetMime.aliases().join(QLatin1Char(',')))
+                                 .arg(QMimeDatabase().allMimeTypes().size());
+        QVERIFY2(svgMime.name() == QStringLiteral("image/svg+xml"), qUtf8Printable(diag));
     }
 
     VBackgroundPatternImage normalImage;
