@@ -31,6 +31,8 @@
 #include "../vmisc/def.h"
 #include "../vgeometry/vgobject.h"
 
+#include <QMimeDatabase>
+#include <QMimeType>
 #include <QtTest>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -227,6 +229,22 @@ void TST_Misc::TestOversizedSvgBackgroundImage()
         "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
         "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\"><rect width=\"100\" "
         "height=\"100\"/></svg>");
+
+    // TEMP DIAGNOSTIC: investigating CI-only failure on macOS arm Qt 6.7.3, see run 35438615714.
+    // Remove once root cause of QMimeDatabase::mimeTypeForData() behavior is confirmed.
+    {
+        const QMimeType svgMime = QMimeDatabase().mimeTypeForData(normalSvg);
+        qWarning() << "[diag] svg mimeTypeForData name:" << svgMime.name() << "aliases:" << svgMime.aliases()
+                   << "valid:" << svgMime.isValid() << "comment:" << svgMime.comment();
+
+        const QByteArray pngMagic = QByteArray::fromHex("89504e470d0a1a0a0000000d49484452");
+        const QMimeType pngMime = QMimeDatabase().mimeTypeForData(pngMagic);
+        qWarning() << "[diag] png-magic mimeTypeForData name:" << pngMime.name();
+
+        const QMimeType octetMime = QMimeDatabase().mimeTypeForName(QStringLiteral("application/octet-stream"));
+        qWarning() << "[diag] octet-stream aliases:" << octetMime.aliases()
+                   << "allMimeTypesCount:" << QMimeDatabase().allMimeTypes().size();
+    }
 
     VBackgroundPatternImage normalImage;
     normalImage.SetContentData(normalSvg.toBase64(), QStringLiteral("image/svg+xml"));
