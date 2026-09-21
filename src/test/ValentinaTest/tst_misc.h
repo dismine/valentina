@@ -50,6 +50,8 @@ private slots:
 
     void TestIssue485();
 
+    void TestOversizedSvgBackgroundImage();
+
 private:
     Q_DISABLE_COPY_MOVE(TST_Misc) // NOLINT
 };

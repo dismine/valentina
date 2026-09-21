@@ -73,6 +73,18 @@ auto ScaleVectorImage(const QSvgRenderer &renderer) -> QSize
     constexpr double ratio = PrintDPI / 90.;
     return {qRound(imageSize.width() * ratio), qRound(imageSize.height() * ratio)};
 }
+//---------------------------------------------------------------------------------------------------------------------
+// Same ceiling QImageReader applies to raster images by default (QImageIOHandler::allocationLimit()).
+// QSvgRenderer has no equivalent guard, so a document that declares an absurd canvas size sails through
+// isValid() and later makes QGraphicsItem::DeviceCoordinateCache try to allocate a cache pixmap of that
+// size, crashing deep inside QRasterPaintEngine.
+constexpr qint64 maxSvgCanvasPixels = 256LL * 1024 * 1024 / 4;
+
+auto HasSaneSvgCanvasSize(const QSvgRenderer &renderer) -> bool
+{
+    const QSize size = renderer.defaultSize();
+    return qint64(size.width()) * size.height() <= maxSvgCanvasPixels;
+}
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -166,6 +178,12 @@ auto VBackgroundPatternImage::IsValid() const -> bool
             qCritical() << tr("Unexpected mime type: %1").arg(mime.name());
             return false;
         }
+
+        if (mime.name().startsWith("image/svg+xml"_L1) && not HasSaneSvgCanvasSize(QSvgRenderer(m_filePath)))
+        {
+            m_errorString = tr("The image declares a canvas size that is too large to render safely.");
+            return false;
+        }
     }
     else
     {
@@ -173,6 +191,30 @@ auto VBackgroundPatternImage::IsValid() const -> bool
         {
             m_errorString = tr("Content type is empty.");
             return false;
+        }
+
+        // SVG is well-formed XML, and depending on the platform's mimetype database, sniffing
+        // a buffer with no filename to go by can resolve it to a generic XML ancestor
+        // (application/xml, text/xml) instead of image/svg+xml -- observed on macOS arm builds
+        // using Qt 6.7.3. Verify declared SVG content directly with QSvgRenderer instead of
+        // trusting mimetype-alias matching, since we need a QSvgRenderer for the canvas-size
+        // check below anyway.
+        if (m_contentType == "image/svg+xml"_L1)
+        {
+            QSvgRenderer const renderer(QByteArray::fromBase64(m_contentData));
+            if (not renderer.isValid())
+            {
+                m_errorString = tr("Not image.");
+                return false;
+            }
+
+            if (not HasSaneSvgCanvasSize(renderer))
+            {
+                m_errorString = tr("The image declares a canvas size that is too large to render safely.");
+                return false;
+            }
+
+            return true;
         }
 
         QMimeType const mime = MimeTypeFromData();
@@ -188,6 +230,13 @@ auto VBackgroundPatternImage::IsValid() const -> bool
         if (not IsMimeTypeImage(mime))
         {
             m_errorString = tr("Not image.");
+            return false;
+        }
+
+        if (mime.name().startsWith("image/svg+xml"_L1)
+            && not HasSaneSvgCanvasSize(QSvgRenderer(QByteArray::fromBase64(m_contentData))))
+        {
+            m_errorString = tr("The image declares a canvas size that is too large to render safely.");
             return false;
         }
     }

@@ -1,4 +1,5 @@
 # Valentina 1.0.6 (unreleased)
+- [Valentina app] Fixed a crash adding a background image with an oversized or malformed SVG canvas: the declared size was handed straight to Qt's item pixmap cache without a sanity check.
 - [Valentina app] Fixed a crash in the Increments dialog when the formula field was edited right after the table was rebuilt (e.g. by adding/removing an increment) and the currently selected row had become a separator.
 - [Valentina app] Fixed the `--dimensionC` console export option silently applying the value to dimension B instead, and console export capturing the pattern's geometry from before a `--dimensionA`/`--dimensionB`/`--dimensionC` change instead of after it.
 - [Valentina app] Fixed a piece's seam allowance sometimes rendering as a garbled, self-intersecting outline at some size and height combinations, while the very same piece was fine at others. Loop removal cut off the wrong part of the outline depending on which node happened to be first in the piece's main path.
