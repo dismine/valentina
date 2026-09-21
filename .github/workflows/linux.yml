@@ -23,7 +23,7 @@ jobs:
   # Mirrors Cirrus CI's changesInclude() skip filter.
   changes:
     name: Detect changed files
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       qbs: ${{ steps.filter.outputs.qbs }}
     steps:
@@ -53,7 +53,7 @@ jobs:
     name: 'latest Clang [Qt5 QBS]'
     needs: changes
     if: needs.changes.outputs.qbs == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container:
       image: dismine/clang-ubuntu:latest
     env:
@@ -111,7 +111,7 @@ jobs:
     name: 'latest Clang [Qt6]'
     needs: changes
     if: needs.changes.outputs.qbs == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container:
       image: dismine/clang-ubuntu:latest
     env:
@@ -168,7 +168,7 @@ jobs:
     name: 'latest GCC [Qt5 QBS]'
     needs: changes
     if: needs.changes.outputs.qbs == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container:
       image: dismine/gcc-ubuntu:latest
     env:
@@ -227,7 +227,7 @@ jobs:
     name: 'latest GCC [Qt6]'
     needs: changes
     if: needs.changes.outputs.qbs == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container:
       image: dismine/gcc-ubuntu:latest
     env:
@@ -285,7 +285,7 @@ jobs:
     name: 'Sonar, latest GCC [Qt6]'
     needs: changes
     if: needs.changes.outputs.qbs == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container:
       image: dismine/gcc-ubuntu:latest
     env:
@@ -369,7 +369,7 @@ jobs:
     name: 'AppImage'
     needs: changes
     if: needs.changes.outputs.qbs == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container:
       image: dismine/valentina-appimage-builder:latest
     env:
