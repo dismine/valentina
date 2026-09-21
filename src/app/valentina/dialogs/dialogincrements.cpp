@@ -1798,8 +1798,20 @@ void DialogIncrements::SaveIncrFormula()
 
     const QTableWidgetItem *nameField = table->item(row, 0);
 
+    if (nameField == nullptr)
+    {
+        return;
+    }
+
     QString const text = textEdit->toPlainText();
     QSharedPointer<VIncrement> const incr = m_data->GetVariable<VIncrement>(nameField->text());
+
+    // A separator row has no formula column (see FillIncrementsTable()). The row can end up current
+    // here if the table was rebuilt (LocalUpdateTree()) while this field still had focus.
+    if (incr->GetIncrementType() == IncrementType::Separator)
+    {
+        return;
+    }
 
     if (const QTableWidgetItem *formulaField = table->item(row, 2); formulaField->text() == text)
     {
@@ -1829,11 +1841,6 @@ void DialogIncrements::SaveIncrFormula()
             const QString postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits());
             labelCalculatedValue->setText(tr("Error") + " (" + postfix + "). " + tr("Empty field."));
         }
-        return;
-    }
-
-    if (incr->GetIncrementType() == IncrementType::Separator)
-    {
         return;
     }
 
