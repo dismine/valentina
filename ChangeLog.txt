@@ -1,5 +1,4 @@
 # Valentina 1.1.2 (unreleased)
-- [Valentina app] Fixed a regression that made the Union Details tool silently ignore every click, making it impossible to select even the first piece to unite.
 - [Valentina app / Tape app / Puzzle app] Fixed a crash on Windows on CPUs older than 2008 (pre-Nehalem, no POPCNT support), e.g. right after creating a new pattern: a bundled library used an MSVC intrinsic that assumes every CPU supports the POPCNT instruction.
 - [Valentina app] Fixed a crash adding a background image with an oversized or malformed SVG canvas: the declared size was handed straight to Qt's item pixmap cache without a sanity check.
 - [Valentina app] Fixed a crash in the Increments dialog when the formula field was edited right after the table was rebuilt (e.g. by adding/removing an increment) and the currently selected row had become a separator.

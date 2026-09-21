@@ -68,11 +68,6 @@ public slots:
 
 protected:
     auto IsValid() const -> bool final { return true; }
-    // Union has no on-canvas preview (it only picks existing pieces/points), so vis is never
-    // assigned. Without this override VisualizationBroken() (UsesVisualization() && vis.isNull())
-    // is permanently true and DialogTool::SceneObjectChosen() silently drops every scene click,
-    // including the first "select detail" click.
-    auto UsesVisualization() const -> bool override { return false; }
 
 private:
     Q_DISABLE_COPY_MOVE(DialogUnionDetails) // NOLINT
