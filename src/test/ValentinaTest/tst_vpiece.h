@@ -43,6 +43,8 @@ private slots:
     void TestSAPassmark_data();
     void TestSAPassmark();
     void TestSeamLineTurnPoints();
+    void PointOnCurveJointNoSpike();
+    void PointOnCurveJointAngleType();
 
 private:
     Q_DISABLE_COPY_MOVE(TST_VPiece) // NOLINT

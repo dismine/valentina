@@ -230,6 +230,43 @@ void AppendCurveSegment(QVector<T> &points, QVector<QPointF> &segment, const VSA
         points.append(lp);
     }
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+// A point node that splits one curve into two path segments, e.g. a cut point. Both neighbours are copies of the same
+// curve and the point lies on it.
+auto IsPointOnCurveJoint(const QVector<VPieceNode> &nodes, vsizetype i, const VContainer *data) -> bool
+{
+    if (nodes.at(i).GetTypeTool() != Tool::NodePoint)
+    {
+        return false;
+    }
+
+    const vsizetype prev = VPiecePath::FindInLoopNotExcludedUp(i, nodes);
+    const vsizetype next = VPiecePath::FindInLoopNotExcludedDown(i, nodes);
+
+    if (prev == -1 || next == -1 || prev == i || next == i || prev == next
+        || nodes.at(prev).GetTypeTool() == Tool::NodePoint || nodes.at(next).GetTypeTool() == Tool::NodePoint)
+    {
+        return false;
+    }
+
+    try
+    {
+        const auto before = data->GeometricObject<VAbstractCurve>(nodes.at(prev).GetId());
+        const auto after = data->GeometricObject<VAbstractCurve>(nodes.at(next).GetId());
+
+        if (before->getIdObject() == NULL_ID || before->getIdObject() != after->getIdObject())
+        {
+            return false;
+        }
+
+        return before->IsPointOnCurve(data->GeometricObject<VPointF>(nodes.at(i).GetId())->toQPointF());
+    }
+    catch (const VExceptionBadId &)
+    {
+        return false;
+    }
+}
 } // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -547,7 +584,7 @@ auto VPiecePath::SeamAllowancePoints(const VContainer *data, qreal width, bool r
         {
             case Tool::NodePoint:
             {
-                pointsEkv.append(PreparePointEkv(node, data));
+                pointsEkv.append(PreparePointEkv(d->m_nodes, i, data));
             }
             break;
             case Tool::NodeArc:
@@ -633,6 +670,11 @@ auto VPiecePath::StartSegment(const VContainer *data, const QVector<VPieceNode> 
         if (index != i && index != -1)
         {
             begin = CurveStartPoint(begin, data, nodes.at(index), points);
+
+            if (begin.GetAngleType() == PieceNodeAngle::ByLength && IsPointOnCurveJoint(nodes, index, data))
+            {
+                begin.SetAngleType(PieceNodeAngle::ByLengthCurve);
+            }
         }
     }
     return begin;
@@ -666,6 +708,11 @@ auto VPiecePath::EndSegment(const VContainer *data, const QVector<VPieceNode> &n
         if (const vsizetype index = FindInLoopNotExcludedDown(i, nodes); index != i && index != -1)
         {
             end = CurveEndPoint(end, data, nodes.at(index), points);
+
+            if (end.GetAngleType() == PieceNodeAngle::ByLength && IsPointOnCurveJoint(nodes, index, data))
+            {
+                end.SetAngleType(PieceNodeAngle::ByLengthCurve);
+            }
         }
     }
     return end;
@@ -1119,6 +1166,21 @@ auto VPiecePath::PreparePointEkv(const VPieceNode &node, const VContainer *data)
     p.SetPasskmarkAngle(node.GetPassmarkAngle(data));
     p.SetPassmarkClockwiseOpening(node.IsPassmarkClockwiseOpening());
     p.SetPasskmarkVisible(node.IsPassmarkVisible(data));
+
+    return p;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiecePath::PreparePointEkv(const QVector<VPieceNode> &nodes, vsizetype i, const VContainer *data) -> VSAPoint
+{
+    VSAPoint p = PreparePointEkv(nodes.at(i), data);
+
+    // The curve passes smoothly through such a point. Treated as a corner, a tiny wobble of the approximation produces
+    // a spike in the seam allowance.
+    if (p.GetAngleType() == PieceNodeAngle::ByLength && IsPointOnCurveJoint(nodes, i, data))
+    {
+        p.SetAngleType(PieceNodeAngle::ByLengthCurve);
+    }
 
     return p;
 }

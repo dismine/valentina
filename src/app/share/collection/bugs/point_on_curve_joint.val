@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern>
+    <!--Pattern created with Valentina v1.1.1.711 (https://smart-pattern.com.ua/).-->
+    <version>1.2.0</version>
+    <unit>cm</unit>
+    <description/>
+    <notes/>
+    <patternLabel/>
+    <measurements/>
+    <increments/>
+    <previewCalculations/>
+    <draw name="Front">
+        <calculation>
+            <point id="1" mx="0.132292" my="0.264583" name="A" type="single" x="0.926042" y="1.05833"/>
+            <point angle="290" basePoint="1" id="2" length="50" lineColor="black" mx="0.132292" my="0.264583" name="A1" type="endLine" typeLine="hair"/>
+            <point angle="0" basePoint="1" id="3" length="30" lineColor="black" mx="0.132292" my="0.264583" name="A2" type="endLine" typeLine="hair"/>
+            <spline aScale="0.6" angle1="199.044" angle2="30.6016" color="black" id="4" length1="24.5007" length2="35.2561" penStyle="hair" point1="3" point4="2" type="simpleInteractive"/>
+            <point curveName1="A2_A3" curveName2="A3_A1" id="5" length="Spl_A2_A1/4" mx="0.132292" my="0.264583" name="A3" segment1Id="36" segment2Id="37" spline="4" type="cutSpline"/>
+            <line firstPoint="1" id="8" lineColor="black" secondPoint="5" typeLine="hair"/>
+            <point firstPoint="1" id="9" length="Line_A_A3/2" lineColor="black" mx="0.132292" my="0.264583" name="A4" secondPoint="5" type="alongLine" typeLine="hair"/>
+            <line firstPoint="3" id="10" lineColor="black" secondPoint="9" typeLine="hair"/>
+            <point firstPoint="1" id="11" mx="0.132292" my="0.264583" name="A5" secondPoint="2" type="pointOfIntersection"/>
+            <line firstPoint="1" id="12" lineColor="black" secondPoint="11" typeLine="hair"/>
+            <line firstPoint="2" id="13" lineColor="black" secondPoint="11" typeLine="hair"/>
+            <point curveName1="A2_A1__ls" curveName2="A2_A1__rs" id="46" length="39.4758" mx="0.442405" my="0.65" name="Q1" segment1Id="47" segment1Mx="0.4" segment1My="0.65" segment2Id="48" segment2Mx="0.4" segment2My="0.4" showLabel="true" spline="4" type="cutSpline"/>
+        </calculation>
+        <modeling>
+            <point id="38" idObject="1" mx="0" my="0" type="modeling"/>
+            <point id="39" idObject="3" mx="0" my="0" type="modeling"/>
+            <spline id="40" idObject="4" type="modelingSpline"/>
+            <point id="41" idObject="5" mx="0" my="0" type="modeling"/>
+            <spline id="42" idObject="4" type="modelingSpline"/>
+            <point id="43" idObject="2" mx="0" my="0" type="modeling"/>
+            <point id="44" idObject="11" mx="0" my="0" type="modeling"/>
+            <spline id="50" idObject="4" type="modelingSpline"/>
+            <point id="52" idObject="46" mx="0" my="0" type="modeling"/>
+            <point id="56" idObject="53" mx="0" my="0" type="modeling"/>
+            <spline id="57" idObject="4" type="modelingSpline"/>
+        </modeling>
+        <details>
+            <detail followGrainline="false" forbidFlipping="false" forceFlipping="false" hideMainPath="false" id="45" inLayout="true" mx="0" my="0" name="Detail" seamAllowance="true" sewLineOnDrawing="false" uuid="{568e1350-2fb0-4e94-8c3c-5331af08daa8}" version="2" width="7">
+                <data annotation="" foldPosition="" height="10" letter="" mx="0" my="0" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="10"/>
+                <patternInfo height="10" mx="0" my="0" rotation="0" visible="false" width="10"/>
+                <grainline arrows="0" enabled="false" length="10" mx="0" my="0" rotation="90" visible="true"/>
+                <nodes>
+                    <node idObject="38" type="NodePoint"/>
+                    <node idObject="39" type="NodePoint"/>
+                    <node idObject="40" reverse="0" type="NodeSpline"/>
+                    <node idObject="41" type="NodePoint"/>
+                    <node idObject="42" reverse="0" type="NodeSpline"/>
+                    <node idObject="52" type="NodePoint"/>
+                    <node idObject="50" reverse="0" type="NodeSpline"/>
+                    <node idObject="43" type="NodePoint"/>
+                    <node idObject="44" type="NodePoint"/>
+                </nodes>
+                <mirrorLine type="2ArrowsTextAbove"/>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+</pattern>

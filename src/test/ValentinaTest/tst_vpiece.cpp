@@ -27,13 +27,31 @@
  *************************************************************************/
 
 #include "tst_vpiece.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vpatterndb/vcontainer.h"
 #include "../vpatterndb/vpassmark.h"
 #include "../vpatterndb/vpiece.h"
+#include "../vpatterndb/vpiecenode.h"
+#include "../vpatterndb/vpiecepath.h"
 
 #include "../vpatterndb/vpiece.h"
 #include <QtTest>
+
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+// A piece references a Draw::Modeling copy of a curve whose idObject points back at the original curve.
+auto AddModelingCurveCopy(const QSharedPointer<VContainer> &data, quint32 curveId) -> quint32
+{
+    auto *copy = new VSpline(*data->GeometricObject<VSpline>(curveId));
+    copy->setMode(Draw::Modeling);
+    copy->setIdObject(curveId);
+    return data->AddGObject(copy);
+}
+
+} // namespace
 
 //---------------------------------------------------------------------------------------------------------------------
 TST_VPiece::TST_VPiece(QObject *parent)
@@ -181,4 +199,72 @@ void TST_VPiece::TestSeamLineTurnPoints()
     {
         QFAIL(qUtf8Printable(e.ErrorMessage()));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// A point node lying on a curve that runs through it (a cut point) must not add a corner to the seam allowance. With a
+// wide allowance the joint produced a spike because the point was treated as a reflex corner.
+// See file src/app/share/collection/bugs/point_on_curve_joint.val
+void TST_VPiece::PointOnCurveJointNoSpike()
+{
+    try
+    {
+        const Unit unit = Unit::Cm;
+        QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+        VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+        VPiece detail;
+        AbstractTest::PieceFromJson(QStringLiteral("://point_on_curve_joint/input.json"), detail, data);
+
+        QVector<QPointF> pointsEkv;
+        CastTo(detail.SeamAllowancePoints(data.data()), pointsEkv);
+        QVector<QPointF> origPoints;
+        CastTo(AbstractTest::VectorFromJson<VLayoutPoint>(QStringLiteral("://point_on_curve_joint/output.json")),
+               origPoints);
+
+        // Begin comparison
+        ComparePaths(pointsEkv, origPoints);
+    }
+    catch (const VException &e)
+    {
+        QFAIL(qUtf8Printable(e.ErrorMessage()));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Only a point lying on the curve shared by both neighbours is a smooth joint. A point between two different curves
+// is a real corner, and a user-chosen angle type is always respected.
+void TST_VPiece::PointOnCurveJointAngleType()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    const VPointF p1(0, 0, QStringLiteral("P1"));
+    const VPointF p4(100, 100, QStringLiteral("P4"));
+    const quint32 splineId = data->AddGObject(new VSpline(p1, p4, 200, 30, 1, 1, 1));
+    const QVector<QPointF> curvePoints = data->GeometricObject<VSpline>(splineId)->GetPoints();
+
+    const quint32 startId = data->AddGObject(new VPointF(p1.toQPointF(), QStringLiteral("S"), 0, 0));
+    const quint32 cutId = data->AddGObject(
+        new VPointF(curvePoints.at(curvePoints.size() / 2), QStringLiteral("C"), 0, 0));
+    const quint32 endId = data->AddGObject(new VPointF(p4.toQPointF(), QStringLiteral("E"), 0, 0));
+
+    QVector<VPieceNode> nodes{VPieceNode(startId, Tool::NodePoint),
+                              VPieceNode(AddModelingCurveCopy(data, splineId), Tool::NodeSpline),
+                              VPieceNode(cutId, Tool::NodePoint),
+                              VPieceNode(AddModelingCurveCopy(data, splineId), Tool::NodeSpline),
+                              VPieceNode(endId, Tool::NodePoint)};
+
+    QCOMPARE(VPiecePath::PreparePointEkv(nodes, 2, data.data()).GetAngleType(), PieceNodeAngle::ByLengthCurve);
+    QCOMPARE(VPiecePath::PreparePointEkv(nodes, 0, data.data()).GetAngleType(), PieceNodeAngle::ByLength);
+
+    nodes[2].SetAngleType(PieceNodeAngle::ByPointsIntersection);
+    QCOMPARE(VPiecePath::PreparePointEkv(nodes, 2, data.data()).GetAngleType(), PieceNodeAngle::ByPointsIntersection);
+    nodes[2].SetAngleType(PieceNodeAngle::ByLength);
+
+    // Two different curves meeting at the point
+    const quint32 otherSplineId = data->AddGObject(new VSpline(p1, p4, 200, 30, 1, 1, 1));
+    nodes[3] = VPieceNode(AddModelingCurveCopy(data, otherSplineId), Tool::NodeSpline);
+    QCOMPARE(VPiecePath::PreparePointEkv(nodes, 2, data.data()).GetAngleType(), PieceNodeAngle::ByLength);
 }
