@@ -1405,9 +1405,10 @@ auto VAbstractPattern::PatternGraph() const -> VPatternGraph *
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VAbstractPattern::ProcessFormulaDependencies(const QString &formula, quint32 id,
-                                                   const QHash<QString, QList<quint32>> &variables,
-                                                   quint64 generation)
+void VAbstractPattern::ProcessFormulaDependencies(const QString &formula,
+                                                  quint32 id,
+                                                  const QHash<QString, QList<quint32>> &variables,
+                                                  quint64 generation)
 {
     QList<QString> tokens;
     try
@@ -1477,9 +1478,8 @@ void VAbstractPattern::FindFormulaDependencies(const QString &formula,
 
     // Create the async task
     const quint64 generation = m_dependencyCheckGeneration.load();
-    QFuture<void> const future = QtConcurrent::run(
-        [this, formula, id, variables, generation]() -> void
-        { ProcessFormulaDependencies(formula, id, variables, generation); });
+    QFuture<void> const future = QtConcurrent::run([this, formula, id, variables, generation]() -> void
+                                                   { ProcessFormulaDependencies(formula, id, variables, generation); });
 
     watcher->setFuture(future);
 

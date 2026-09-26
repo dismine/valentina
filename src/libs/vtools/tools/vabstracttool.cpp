@@ -28,6 +28,10 @@
 
 #include "vabstracttool.h"
 
+#include <limits>
+#include <map>
+#include <memory>
+#include <qnumeric.h>
 #include <QBrush>
 #include <QCache>
 #include <QDialog>
@@ -47,10 +51,6 @@
 #include <QThreadStorage>
 #include <QUndoStack>
 #include <QVector>
-#include <limits>
-#include <map>
-#include <memory>
-#include <qnumeric.h>
 
 #include "../dialogs/support/dialogeditwrongformula.h"
 #include "../dialogs/support/dialogundo.h"
@@ -86,7 +86,8 @@
 
 using namespace Qt::Literals::StringLiterals;
 
-template <class T> class QSharedPointer;
+template<class T>
+class QSharedPointer;
 
 bool VAbstractTool::m_suppressContextMenu = false;
 
@@ -315,10 +316,23 @@ auto VAbstractTool::CheckFormula(const quint32 &toolId, QString &formula, const 
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractTool::Colors() -> QStringList
 {
-    return QStringList{ColorBlack,       ColorGreen,         ColorBlue,        ColorDarkRed,        ColorDarkGreen,
-                       ColorDarkBlue,    ColorYellow,        ColorLightSalmon, ColorGoldenRod,      ColorOrange,
-                       ColorDeepPink,    ColorViolet,        ColorDarkViolet,  ColorMediumSeaGreen, ColorLime,
-                       ColorDeepSkyBlue, ColorCornFlowerBlue};
+    return QStringList{ColorBlack,
+                       ColorGreen,
+                       ColorBlue,
+                       ColorDarkRed,
+                       ColorDarkGreen,
+                       ColorDarkBlue,
+                       ColorYellow,
+                       ColorLightSalmon,
+                       ColorGoldenRod,
+                       ColorOrange,
+                       ColorDeepPink,
+                       ColorViolet,
+                       ColorDarkViolet,
+                       ColorMediumSeaGreen,
+                       ColorLime,
+                       ColorDeepSkyBlue,
+                       ColorCornFlowerBlue};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -571,9 +585,10 @@ auto VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagName, con
                                           node.IsPassmark(),
                                           [node](bool passmark) noexcept -> bool
                                           {
-                                              return not passmark &&
-                                                     node.GetPassmarkLineType() == PassmarkLineType::OneLine &&
-                                                     node.GetPassmarkAngleType() == PassmarkAngleType::Straightforward;
+                                              return not passmark
+                                                     && node.GetPassmarkLineType() == PassmarkLineType::OneLine
+                                                     && node.GetPassmarkAngleType()
+                                                            == PassmarkAngleType::Straightforward;
                                           });
         doc->SetAttributeOrRemoveIf<QString>(nod,
                                              VAbstractPattern::AttrNodePassmarkLine,
@@ -630,16 +645,16 @@ auto VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagName, con
                                           node.IsManualPassmarkWidth(),
                                           [node](bool manualPassmarkWidth) noexcept -> bool
                                           {
-                                              return not manualPassmarkWidth ||
-                                                     node.GetPassmarkLineType() == PassmarkLineType::OneLine;
+                                              return not manualPassmarkWidth
+                                                     || node.GetPassmarkLineType() == PassmarkLineType::OneLine;
                                           });
         doc->SetAttributeOrRemoveIf<QString>(nod,
                                              VAbstractPattern::AttrPassmarkWidth,
                                              node.GetFormulaPassmarkWidth(),
                                              [node](const QString &) noexcept -> bool
                                              {
-                                                 return not node.IsManualPassmarkWidth() ||
-                                                        node.GetPassmarkLineType() == PassmarkLineType::OneLine;
+                                                 return not node.IsManualPassmarkWidth()
+                                                        || node.GetPassmarkLineType() == PassmarkLineType::OneLine;
                                              });
 
         doc->SetAttributeOrRemoveIf<bool>(nod,
@@ -647,17 +662,18 @@ auto VAbstractTool::AddSANode(VAbstractPattern *doc, const QString &tagName, con
                                           node.IsManualPassmarkAngle(),
                                           [node](bool manualPassmarkAngle) noexcept -> bool
                                           {
-                                              return not manualPassmarkAngle ||
-                                                     node.GetPassmarkAngleType() != PassmarkAngleType::Straightforward;
+                                              return not manualPassmarkAngle
+                                                     || node.GetPassmarkAngleType()
+                                                            != PassmarkAngleType::Straightforward;
                                           });
         doc->SetAttributeOrRemoveIf<QString>(nod,
                                              VAbstractPattern::AttrPassmarkAngle,
                                              node.GetFormulaPassmarkAngle(),
                                              [node](const QString &) noexcept -> bool
                                              {
-                                                 return not node.IsManualPassmarkAngle() ||
-                                                        node.GetPassmarkAngleType() !=
-                                                            PassmarkAngleType::Straightforward;
+                                                 return not node.IsManualPassmarkAngle()
+                                                        || node.GetPassmarkAngleType()
+                                                               != PassmarkAngleType::Straightforward;
                                              });
         doc->SetAttributeOrRemoveIf<QString>(nod,
                                              VAbstractPattern::AttrPassmarkVisibility,
@@ -681,7 +697,9 @@ void VAbstractTool::AddNode(VAbstractPattern *doc, QDomElement &domElement, cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractTool::PrepareNodes(const VPiecePath &path, VMainGraphicsScene *scene, VAbstractPattern *doc,
+auto VAbstractTool::PrepareNodes(const VPiecePath &path,
+                                 VMainGraphicsScene *scene,
+                                 VAbstractPattern *doc,
                                  VContainer *data) -> QVector<VPieceNode>
 {
     QVector<VPieceNode> nodes;
@@ -698,7 +716,9 @@ auto VAbstractTool::PrepareNodes(const VPiecePath &path, VMainGraphicsScene *sce
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VAbstractTool::PrepareNode(const VPieceNode &node, VMainGraphicsScene *scene, VAbstractPattern *doc,
+auto VAbstractTool::PrepareNode(const VPieceNode &node,
+                                VMainGraphicsScene *scene,
+                                VAbstractPattern *doc,
                                 VContainer *data) -> quint32
 {
     SCASSERT(scene != nullptr)

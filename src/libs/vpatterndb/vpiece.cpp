@@ -657,8 +657,8 @@ void VPiece::SetPlaceLabels(const QVector<quint32> &labels)
 auto VPiece::Dependencies() const -> QList<quint32>
 {
     QList<quint32> list = d->m_path.Dependencies();
-    list.reserve(list.size() + d->m_customSARecords.size() + d->m_internalPaths.size() + d->m_pins.size() +
-                 d->m_placeLabels.size());
+    list.reserve(list.size() + d->m_customSARecords.size() + d->m_internalPaths.size() + d->m_pins.size()
+                 + d->m_placeLabels.size());
 
     for (const auto &record : d->m_customSARecords)
     {
@@ -996,9 +996,9 @@ auto VPiece::GetValidRecords() const -> QVector<CustomSARecord>
         const int indexStartPoint = d->m_path.indexOfNode(record.startPoint);
         const int indexEndPoint = d->m_path.indexOfNode(record.endPoint);
 
-        if (record.startPoint > NULL_ID && record.path > NULL_ID && record.endPoint > NULL_ID &&
-            indexStartPoint != -1 && not d->m_path.at(indexStartPoint).IsExcluded() && indexEndPoint != -1 &&
-            not d->m_path.at(indexEndPoint).IsExcluded())
+        if (record.startPoint > NULL_ID && record.path > NULL_ID && record.endPoint > NULL_ID && indexStartPoint != -1
+            && not d->m_path.at(indexStartPoint).IsExcluded() && indexEndPoint != -1
+            && not d->m_path.at(indexEndPoint).IsExcluded())
         {
             records.append(record);
         }
@@ -1068,14 +1068,22 @@ auto VPiece::GetNodeSAPoints(const QVector<VPieceNode> &path, vsizetype index, c
         const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
         const qreal width = ToPixel(GetSAWidth(), *data->GetPatternUnit());
 
-        points += VPiecePath::CurveSeamAllowanceSegment(data, path, curve, index, node.GetReverse(), width, QLineF(),
+        points += VPiecePath::CurveSeamAllowanceSegment(data,
+                                                        path,
+                                                        curve,
+                                                        index,
+                                                        node.GetReverse(),
+                                                        width,
+                                                        QLineF(),
                                                         GetName());
     }
     return points;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPiece::GetPassmarkSAPoint(const QVector<VPieceNode> &path, vsizetype index, const VContainer *data,
+auto VPiece::GetPassmarkSAPoint(const QVector<VPieceNode> &path,
+                                vsizetype index,
+                                const VContainer *data,
                                 VSAPoint &point) const -> bool
 {
     SCASSERT(data != nullptr)
@@ -1092,8 +1100,11 @@ auto VPiece::GetPassmarkSAPoint(const QVector<VPieceNode> &path, vsizetype index
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, vsizetype index,
-                                         const VSAPoint &passmarkSAPoint, const VContainer *data, VSAPoint &point,
+auto VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path,
+                                         vsizetype index,
+                                         const VSAPoint &passmarkSAPoint,
+                                         const VContainer *data,
+                                         VSAPoint &point,
                                          vsizetype passmarkIndex) const -> bool
 {
     SCASSERT(data != nullptr)
@@ -1133,8 +1144,12 @@ auto VPiece::GetPassmarkPreviousSAPoints(const QVector<VPieceNode> &path, vsizet
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path, vsizetype index, const VSAPoint &passmarkSAPoint,
-                                     const VContainer *data, VSAPoint &point, vsizetype passmarkIndex) const -> bool
+auto VPiece::GetPassmarkNextSAPoints(const QVector<VPieceNode> &path,
+                                     vsizetype index,
+                                     const VSAPoint &passmarkSAPoint,
+                                     const VContainer *data,
+                                     VSAPoint &point,
+                                     vsizetype passmarkIndex) const -> bool
 {
     SCASSERT(data != nullptr)
 
@@ -1213,8 +1228,11 @@ auto VPiece::IsPassmarkVisible(const QVector<VPieceNode> &path, vsizetype passma
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPiece::CreatePassmark(const QVector<VPieceNode> &path, vsizetype previousIndex, vsizetype passmarkIndex,
-                            vsizetype nextIndex, const VContainer *data) const -> VPassmark
+auto VPiece::CreatePassmark(const QVector<VPieceNode> &path,
+                            vsizetype previousIndex,
+                            vsizetype passmarkIndex,
+                            vsizetype nextIndex,
+                            const VContainer *data) const -> VPassmark
 {
     SCASSERT(data != nullptr);
 
@@ -1317,8 +1335,8 @@ auto VPiece::Area(const QVector<QPointF> &shape, const VContainer *data) const -
     for (auto id : pathsId)
     {
         const VPiecePath path = data->GetPiecePath(id);
-        if (path.GetType() != PiecePathType::InternalPath || not path.IsVisible(data->DataVariables()) ||
-            not path.IsCutPath())
+        if (path.GetType() != PiecePathType::InternalPath || not path.IsVisible(data->DataVariables())
+            || not path.IsCutPath())
         {
             continue;
         }
@@ -1417,8 +1435,8 @@ void VPiece::ProcessCurveNode(const VContainer *data,
 //---------------------------------------------------------------------------------------------------------------------
 auto VPiece::GlobalPassmarkLength(const VContainer *data) const -> qreal
 {
-    QString const passmarkLengthVariable =
-        VAbstractValApplication::VApp()->getCurrentDocument()->GetPassmarkLengthVariable();
+    QString const passmarkLengthVariable
+        = VAbstractValApplication::VApp()->getCurrentDocument()->GetPassmarkLengthVariable();
     if (passmarkLengthVariable.isEmpty())
     {
         return 0;
@@ -1452,8 +1470,8 @@ auto VPiece::GlobalPassmarkLength(const VContainer *data) const -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 auto VPiece::GlobalPassmarkWidth(const VContainer *data) const -> qreal
 {
-    QString const passmarkWidthVariable =
-        VAbstractValApplication::VApp()->getCurrentDocument()->GetPassmarkWidthVariable();
+    QString const passmarkWidthVariable
+        = VAbstractValApplication::VApp()->getCurrentDocument()->GetPassmarkWidthVariable();
     if (passmarkWidthVariable.isEmpty())
     {
         return 0;
@@ -1579,8 +1597,8 @@ void VPiece::TestInternalPathCuttingPathIntersection(const VContainer *data) con
     for (auto id : pathsId)
     {
         const VPiecePath path = data->GetPiecePath(id);
-        if (path.GetType() != PiecePathType::InternalPath || not path.IsVisible(data->DataVariables()) ||
-            not path.IsCutPath())
+        if (path.GetType() != PiecePathType::InternalPath || not path.IsVisible(data->DataVariables())
+            || not path.IsCutPath())
         {
             continue;
         }
@@ -1637,8 +1655,8 @@ void VPiece::TestInternalPathsIntersections(const VContainer *data) const
     {
         const VPiecePath path1 = data->GetPiecePath(pathsId.at(k));
 
-        if (path1.GetType() != PiecePathType::InternalPath || not path1.IsVisible(data->DataVariables()) ||
-            not path1.IsCutPath())
+        if (path1.GetType() != PiecePathType::InternalPath || not path1.IsVisible(data->DataVariables())
+            || not path1.IsCutPath())
         {
             continue;
         }
@@ -1661,8 +1679,8 @@ void VPiece::TestInternalPathsIntersections(const VContainer *data) const
 
             const VPiecePath path2 = data->GetPiecePath(pathsId.at(i));
 
-            if (path2.GetType() != PiecePathType::InternalPath || not path2.IsVisible(data->DataVariables()) ||
-                not path2.IsCutPath())
+            if (path2.GetType() != PiecePathType::InternalPath || not path2.IsVisible(data->DataVariables())
+                || not path2.IsCutPath())
             {
                 continue;
             }
@@ -1769,8 +1787,9 @@ auto VPiece::ShortNameRegExp() -> QString
 
     if (regex.isEmpty())
     {
-        const QList<QLocale> allLocales =
-            QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+        const QList<QLocale> allLocales = QLocale::matchingLocales(QLocale::AnyLanguage,
+                                                                   QLocale::AnyScript,
+                                                                   QLocale::AnyCountry);
 
         QString positiveSigns;
         QString negativeSigns;

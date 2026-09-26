@@ -35,8 +35,8 @@
 #include "vcontainer.h"
 #include "vpiecepath_p.h"
 
-#include <QPainterPath>
 #include <qnumeric.h>
+#include <QPainterPath>
 
 namespace
 {
@@ -60,7 +60,9 @@ auto CurvePoint(VSAPoint candidate, const VContainer *data, const VPieceNode &no
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto CurveStartPoint(VSAPoint candidate, const VContainer *data, const VPieceNode &node,
+auto CurveStartPoint(VSAPoint candidate,
+                     const VContainer *data,
+                     const VPieceNode &node,
                      const QVector<QPointF> &curvePoints) -> VSAPoint
 {
     if (node.GetTypeTool() == Tool::NodePoint)
@@ -100,7 +102,9 @@ auto CurveStartPoint(VSAPoint candidate, const VContainer *data, const VPieceNod
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto CurveEndPoint(VSAPoint candidate, const VContainer *data, const VPieceNode &node,
+auto CurveEndPoint(VSAPoint candidate,
+                   const VContainer *data,
+                   const VPieceNode &node,
                    const QVector<QPointF> &curvePoints) -> VSAPoint
 {
     if (node.GetTypeTool() == Tool::NodePoint)
@@ -160,7 +164,8 @@ auto IndexOfNode(const QVector<VPieceNode> &list, quint32 id) -> int
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T> auto FindTipDirection(const QVector<T> &points) -> qreal
+template<class T>
+auto FindTipDirection(const QVector<T> &points) -> qreal
 {
     if (points.size() <= 1)
     {
@@ -183,7 +188,8 @@ template <class T> auto FindTipDirection(const QVector<T> &points) -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto IntersectionWithCuttingContour(const QVector<QPointF> &cuttingPath, const QVector<VLayoutPoint> &points,
+auto IntersectionWithCuttingContour(const QVector<QPointF> &cuttingPath,
+                                    const QVector<VLayoutPoint> &points,
                                     QPointF *connection) -> bool
 {
     if (points.size() <= 1)
@@ -203,7 +209,7 @@ auto IntersectionWithCuttingContour(const QVector<QPointF> &cuttingPath, const Q
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T>
+template<class T>
 void AppendCurveSegment(QVector<T> &points, QVector<QPointF> &segment, const VSAPoint &begin, const VSAPoint &end)
 {
     points.reserve(points.size() + segment.size());
@@ -550,7 +556,13 @@ auto VPiecePath::SeamAllowancePoints(const VContainer *data, qreal width, bool r
             case Tool::NodeSplinePath:
             {
                 const QSharedPointer<VAbstractCurve> curve = data->GeometricObject<VAbstractCurve>(node.GetId());
-                pointsEkv += CurveSeamAllowanceSegment(data, d->m_nodes, curve, i, node.GetReverse(), width, QLineF(),
+                pointsEkv += CurveSeamAllowanceSegment(data,
+                                                       d->m_nodes,
+                                                       curve,
+                                                       i,
+                                                       node.GetReverse(),
+                                                       width,
+                                                       QLineF(),
                                                        GetName());
             }
             break;
@@ -1112,10 +1124,14 @@ auto VPiecePath::PreparePointEkv(const VPieceNode &node, const VContainer *data)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPiecePath::CurveSeamAllowanceSegment(const VContainer *data, const QVector<VPieceNode> &nodes,
-                                           const QSharedPointer<VAbstractCurve> &curve, vsizetype i, bool reverse,
-                                           qreal width, const QLineF &mirrorLine, const QString &piece)
-    -> QVector<VSAPoint>
+auto VPiecePath::CurveSeamAllowanceSegment(const VContainer *data,
+                                           const QVector<VPieceNode> &nodes,
+                                           const QSharedPointer<VAbstractCurve> &curve,
+                                           vsizetype i,
+                                           bool reverse,
+                                           qreal width,
+                                           const QLineF &mirrorLine,
+                                           const QString &piece) -> QVector<VSAPoint>
 {
     VSAPoint begin = StartSegment(data, nodes, i);
     if (!mirrorLine.isNull())

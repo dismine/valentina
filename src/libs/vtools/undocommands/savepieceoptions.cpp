@@ -180,9 +180,9 @@ auto SavePieceOptions::mergeWith(const QUndoCommand *command) -> bool
 
     for (int i = 0; i < nodes.size(); ++i)
     {
-        if (nodes.at(i).IsExcluded() != candidateNodes.at(i).IsExcluded() ||
-            nodes.at(i).IsCheckUniqueness() != candidateNodes.at(i).IsCheckUniqueness() ||
-            nodes.at(i).IsPassmark() != candidateNodes.at(i).IsPassmark())
+        if (nodes.at(i).IsExcluded() != candidateNodes.at(i).IsExcluded()
+            || nodes.at(i).IsCheckUniqueness() != candidateNodes.at(i).IsCheckUniqueness()
+            || nodes.at(i).IsPassmark() != candidateNodes.at(i).IsPassmark())
         {
             return false;
         }

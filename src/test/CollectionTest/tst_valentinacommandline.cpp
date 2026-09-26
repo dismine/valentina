@@ -80,8 +80,8 @@ void TST_ValentinaCommandLine::initTestCase()
             QFAIL("Fail to remove collection temp directory.");
         }
 
-        if (not CopyRecursively(QCoreApplication::applicationDirPath() + QDir::separator() +
-                                    "tst_valentina_collection"_L1,
+        if (not CopyRecursively(QCoreApplication::applicationDirPath() + QDir::separator()
+                                    + "tst_valentina_collection"_L1,
                                 QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestCollectionFolder))
         {
             QFAIL("Fail to prepare collection files for testing.");
@@ -124,8 +124,10 @@ void TST_ValentinaCommandLine::OpenPatterns()
 
     QString error;
     const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestFolder;
-    const int exit =
-        Run(exitCode, ValentinaPath(), QStringList() << arguments.split(";;") << tmp + QDir::separator() + file, error);
+    const int exit = Run(exitCode,
+                         ValentinaPath(),
+                         QStringList() << arguments.split(";;") << tmp + QDir::separator() + file,
+                         error);
 
     QVERIFY2(exit == exitCode, qUtf8Printable(error.right(350)));
 }

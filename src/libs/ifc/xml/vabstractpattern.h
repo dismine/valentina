@@ -525,8 +525,10 @@ private:
     mutable QMutex m_watchersMutex{};
     std::atomic<quint64> m_dependencyCheckGeneration{0};
 
-    void ProcessFormulaDependencies(const QString &formula, quint32 id,
-                                     const QHash<QString, QList<quint32>> &variables, quint64 generation);
+    void ProcessFormulaDependencies(const QString &formula,
+                                    quint32 id,
+                                    const QHash<QString, QList<quint32>> &variables,
+                                    quint64 generation);
 
     auto ListIncrements() const -> QStringList;
     auto ListPointExpressions() const -> QVector<VFormulaField>;

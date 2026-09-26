@@ -104,7 +104,8 @@ private:
 
     bool m_internalPathNode{false};
 
-    explicit VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent = nullptr,
+    explicit VNodePoint(const VAbstractNodeInitData &initData,
+                        QObject *qoParent = nullptr,
                         QGraphicsItem *parent = nullptr);
 
     auto InitContextMenu(QMenu *menu, vidtype pieceId, RemoveStatus status) -> QHash<int, QAction *>;

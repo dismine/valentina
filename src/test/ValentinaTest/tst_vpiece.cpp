@@ -57,8 +57,8 @@ void TST_VPiece::Issue620()
 
         QVector<QPointF> pointsEkv;
         CastTo(detail.MainPathPoints(data.data()), pointsEkv);
-        QVector<QPointF> const origPoints =
-            AbstractTest::VectorFromJson<QPointF>(QStringLiteral("://Issue_620/output.json"));
+        QVector<QPointF> const origPoints = AbstractTest::VectorFromJson<QPointF>(
+            QStringLiteral("://Issue_620/output.json"));
 
         // Begin comparison
         ComparePaths(pointsEkv, origPoints);
@@ -77,8 +77,11 @@ void TST_VPiece::TestSAPassmark_data()
     QTest::addColumn<QVector<QPointF>>("rotatedSeamAllowance");
     QTest::addColumn<QVector<QLineF>>("expectedResult");
 
-    auto ASSERT_TEST_CASE = [this](const char *title, const QString &passmarkData, const QString &seamAllowance,
-                                   const QString &rotatedSeamAllowance, const QString &shape)
+    auto ASSERT_TEST_CASE = [this](const char *title,
+                                   const QString &passmarkData,
+                                   const QString &seamAllowance,
+                                   const QString &rotatedSeamAllowance,
+                                   const QString &shape)
     {
         QT_WARNING_PUSH
         QT_WARNING_DISABLE_GCC("-Wnoexcept")
@@ -99,19 +102,22 @@ void TST_VPiece::TestSAPassmark_data()
     };
 
     // See file src/app/share/collection/bugs/Issue_#924.val
-    ASSERT_TEST_CASE("Test 1.", QStringLiteral("://Issue_924_Test_1/passmarkData.json"),
+    ASSERT_TEST_CASE("Test 1.",
+                     QStringLiteral("://Issue_924_Test_1/passmarkData.json"),
                      QStringLiteral("://Issue_924_Test_1/seamAllowance.json"),
                      QStringLiteral("://Issue_924_Test_1/rotatedSeamAllowance.json"),
                      QStringLiteral("://Issue_924_Test_1/passmarkShape.json"));
 
     // See file src/app/share/collection/bugs/Issue_#924.val
-    ASSERT_TEST_CASE("Test 2.", QStringLiteral("://Issue_924_Test_2/passmarkData.json"),
+    ASSERT_TEST_CASE("Test 2.",
+                     QStringLiteral("://Issue_924_Test_2/passmarkData.json"),
                      QStringLiteral("://Issue_924_Test_2/seamAllowance.json"),
                      QStringLiteral("://Issue_924_Test_2/rotatedSeamAllowance.json"),
                      QStringLiteral("://Issue_924_Test_2/passmarkShape.json"));
 
     // See file src/app/share/collection/bugs/incorrect_notch.val
-    ASSERT_TEST_CASE("Piece.", QStringLiteral("://incorrect_notch/passmarkData.json"),
+    ASSERT_TEST_CASE("Piece.",
+                     QStringLiteral("://incorrect_notch/passmarkData.json"),
                      QStringLiteral("://incorrect_notch/seamAllowance.json"),
                      QStringLiteral("://incorrect_notch/rotatedSeamAllowance.json"),
                      QStringLiteral("://incorrect_notch/passmarkShape.json"));
@@ -127,7 +133,8 @@ void TST_VPiece::TestSAPassmark_data()
     // point is already on the curve and produces several nearby intersections). The notch must follow the manual angle.
     // See file valentina_private_collection/bugs/notch_manual_angle/Jilet_rozwantajuwalniy.val
     // (private collection)
-    ASSERT_TEST_CASE("Manual passmark angle.", QStringLiteral("://manual_passmark_angle/passmarkData.json"),
+    ASSERT_TEST_CASE("Manual passmark angle.",
+                     QStringLiteral("://manual_passmark_angle/passmarkData.json"),
                      QStringLiteral("://manual_passmark_angle/seamAllowance.json"),
                      QStringLiteral("://manual_passmark_angle/rotatedSeamAllowance.json"),
                      QStringLiteral("://manual_passmark_angle/passmarkShape.json"));
@@ -162,8 +169,8 @@ void TST_VPiece::TestSeamLineTurnPoints()
         QVector<VLayoutPoint> const seamLine = detail.MainPathPoints(data.data());
         QVector<QPointF> pointsEkv;
         CastTo(TurnPointList(seamLine), pointsEkv);
-        QVector<VLayoutPoint> const turnPoints =
-            AbstractTest::VectorFromJson<VLayoutPoint>(QStringLiteral("://shirtv2_seam_line/output.json"));
+        QVector<VLayoutPoint> const turnPoints = AbstractTest::VectorFromJson<VLayoutPoint>(
+            QStringLiteral("://shirtv2_seam_line/output.json"));
         QVector<QPointF> origPoints;
         CastTo(turnPoints, origPoints);
 

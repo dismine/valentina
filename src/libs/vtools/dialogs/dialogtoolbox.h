@@ -88,8 +88,12 @@ auto FilterObject(QObject *object, QEvent *event) -> bool;
 auto EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag) -> qreal;
 void ChangeColor(QWidget *widget, const QColor &color);
 auto OkColor(const QWidget *widget) -> QColor;
-void CheckPointLabel(QDialog *dialog, QLineEdit *edit, QLabel *labelEditNamePoint, const QString &pointName,
-                     const VContainer *data, bool &flag);
+void CheckPointLabel(QDialog *dialog,
+                     QLineEdit *edit,
+                     QLabel *labelEditNamePoint,
+                     const QString &pointName,
+                     const VContainer *data,
+                     bool &flag);
 auto FindNotExcludedNeighborNodeDown(QListWidget *listWidget, int candidate) -> int;
 auto FindNotExcludedNeighborNodeUp(QListWidget *listWidget, int candidate) -> int;
 auto FindNotExcludedNodeDown(QListWidget *listWidget, int candidate) -> int;

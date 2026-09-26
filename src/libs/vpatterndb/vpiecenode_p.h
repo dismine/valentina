@@ -161,9 +161,9 @@ inline auto operator>>(QDataStream &in, VPieceNodeData &p) -> QDataStream &
         throw VException(message);
     }
 
-    in >> p.m_id >> p.m_typeTool >> p.m_reverse >> p.m_excluded >> p.m_isPassmark >> p.m_formulaWidthBefore >>
-        p.m_formulaWidthAfter >> p.m_formulaPassmarkLength >> p.m_angleType >> p.m_passmarkLineType >>
-        p.m_passmarkAngleType >> p.m_isShowSecondPassmark >> p.m_checkUniqueness >> p.m_manualPassmarkLength;
+    in >> p.m_id >> p.m_typeTool >> p.m_reverse >> p.m_excluded >> p.m_isPassmark >> p.m_formulaWidthBefore
+        >> p.m_formulaWidthAfter >> p.m_formulaPassmarkLength >> p.m_angleType >> p.m_passmarkLineType
+        >> p.m_passmarkAngleType >> p.m_isShowSecondPassmark >> p.m_checkUniqueness >> p.m_manualPassmarkLength;
 
     if (actualClassVersion >= 2)
     {
@@ -172,8 +172,8 @@ inline auto operator>>(QDataStream &in, VPieceNodeData &p) -> QDataStream &
 
     if (actualClassVersion >= 3)
     {
-        in >> p.m_formulaPassmarkWidth >> p.m_formulaPassmarkAngle >> p.m_manualPassmarkWidth >>
-            p.m_manualPassmarkAngle >> p.m_isPassmarkClockwiseOpening;
+        in >> p.m_formulaPassmarkWidth >> p.m_formulaPassmarkAngle >> p.m_manualPassmarkWidth >> p.m_manualPassmarkAngle
+            >> p.m_isPassmarkClockwiseOpening;
     }
 
     if (actualClassVersion >= 4)

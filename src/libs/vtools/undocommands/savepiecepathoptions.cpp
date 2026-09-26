@@ -40,12 +40,8 @@
 #include "../vpatterndb/vpiecenode.h"
 
 //---------------------------------------------------------------------------------------------------------------------
-SavePiecePathOptions::SavePiecePathOptions(quint32 pieceId,
-                                           VPiecePath oldPath,
-                                           VPiecePath newPath,
-                                           VAbstractPattern *doc,
-                                           quint32 id,
-                                           QUndoCommand *parent)
+SavePiecePathOptions::SavePiecePathOptions(
+    quint32 pieceId, VPiecePath oldPath, VPiecePath newPath, VAbstractPattern *doc, quint32 id, QUndoCommand *parent)
   : VUndoCommand(doc, id, parent),
     m_oldPath(std::move(oldPath)),
     m_newPath(std::move(newPath)),

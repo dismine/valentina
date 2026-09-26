@@ -121,7 +121,12 @@ enum class ContextMenuOption : std::uint8_t
  * @param parent parent object.
  */
 VNodePoint::VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent, QGraphicsItem *parent)
-  : VAbstractNode(initData.doc, initData.data, initData.id, initData.idObject, initData.drawName, initData.idTool,
+  : VAbstractNode(initData.doc,
+                  initData.data,
+                  initData.id,
+                  initData.idObject,
+                  initData.drawName,
+                  initData.idTool,
                   qoParent),
     VScenePoint(VColorRole::PiecePointColor, parent)
 {
@@ -141,7 +146,9 @@ VNodePoint::VNodePoint(const VAbstractNodeInitData &initData, QObject *qoParent,
         this,
         [this]() -> void { RefreshLine(); },
         Qt::QueuedConnection);
-    connect(m_namePoint, &VGraphicsSimpleTextItem::LabelHovered, this,
+    connect(m_namePoint,
+            &VGraphicsSimpleTextItem::LabelHovered,
+            this,
             [this](bool hovered)
             {
                 m_isHovered = hovered;
@@ -389,9 +396,9 @@ auto VNodePoint::InitContextMenu(QMenu *menu, vidtype pieceId, RemoveStatus stat
     separatorAct->setSeparator(true);
     menu->addAction(separatorAct);
 
-    contextMenu.insert(
-        static_cast<int>(ContextMenuOption::Option),
-        menu->addAction(FromTheme(VThemeIcon::PreferencesOther), QCoreApplication::translate("VNodePoint", "Options")));
+    contextMenu.insert(static_cast<int>(ContextMenuOption::Option),
+                       menu->addAction(FromTheme(VThemeIcon::PreferencesOther),
+                                       QCoreApplication::translate("VNodePoint", "Options")));
 
     const VPiece detail = VAbstractTool::data.GetPiece(pieceId);
 
@@ -425,13 +432,13 @@ auto VNodePoint::InitContextMenu(QMenu *menu, vidtype pieceId, RemoveStatus stat
     }
     contextMenu.insert(static_cast<int>(ContextMenuOption::ShowFullPiece), showFullPieceOption);
 
-    QAction *reseteLabelTemplateOption =
-        menu->addAction(QCoreApplication::translate("VNodePoint", "Reset piece label template"));
+    QAction *reseteLabelTemplateOption = menu->addAction(
+        QCoreApplication::translate("VNodePoint", "Reset piece label template"));
     reseteLabelTemplateOption->setEnabled(not doc->GetDefaultPieceLabelPath().isEmpty());
     contextMenu.insert(static_cast<int>(ContextMenuOption::ResetLabelTemplate), reseteLabelTemplateOption);
 
-    QAction *actionRemove =
-        menu->addAction(FromTheme(VThemeIcon::EditDelete), QCoreApplication::translate("VNodePoint", "Delete"));
+    QAction *actionRemove = menu->addAction(FromTheme(VThemeIcon::EditDelete),
+                                            QCoreApplication::translate("VNodePoint", "Delete"));
     actionRemove->setEnabled(status == RemoveStatus::Removable);
     if (status == RemoveStatus::Pending)
     {
@@ -570,20 +577,19 @@ void VNodePoint::InitPassmarkAngleTypeMenu(QMenu *menu, vidtype pieceId, QHash<i
                        InitPassmarkAngleAction(tr("Bisector"), PassmarkAngleType::Bisector));
     contextMenu.insert(static_cast<int>(ContextMenuOption::Intersection),
                        InitPassmarkAngleAction(tr("Intersection"), PassmarkAngleType::Intersection));
-    contextMenu.insert(
-        static_cast<int>(ContextMenuOption::IntersectionOnlyLeft),
-        InitPassmarkAngleAction(tr("Intersection (only left)"), PassmarkAngleType::IntersectionOnlyLeft));
-    contextMenu.insert(
-        static_cast<int>(ContextMenuOption::IntersectionOnlyRight),
-        InitPassmarkAngleAction(tr("Intersection (only right)"), PassmarkAngleType::IntersectionOnlyRight));
+    contextMenu.insert(static_cast<int>(ContextMenuOption::IntersectionOnlyLeft),
+                       InitPassmarkAngleAction(tr("Intersection (only left)"), PassmarkAngleType::IntersectionOnlyLeft));
+    contextMenu.insert(static_cast<int>(ContextMenuOption::IntersectionOnlyRight),
+                       InitPassmarkAngleAction(tr("Intersection (only right)"),
+                                               PassmarkAngleType::IntersectionOnlyRight));
     contextMenu.insert(static_cast<int>(ContextMenuOption::Intersection2),
                        InitPassmarkAngleAction(tr("Intersection 2"), PassmarkAngleType::Intersection2));
-    contextMenu.insert(
-        static_cast<int>(ContextMenuOption::Intersection2OnlyLeft),
-        InitPassmarkAngleAction(tr("Intersection 2 (only left)"), PassmarkAngleType::Intersection2OnlyLeft));
-    contextMenu.insert(
-        static_cast<int>(ContextMenuOption::Intersection2OnlyRight),
-        InitPassmarkAngleAction(tr("Intersection 2 (only right)"), PassmarkAngleType::Intersection2OnlyRight));
+    contextMenu.insert(static_cast<int>(ContextMenuOption::Intersection2OnlyLeft),
+                       InitPassmarkAngleAction(tr("Intersection 2 (only left)"),
+                                               PassmarkAngleType::Intersection2OnlyLeft));
+    contextMenu.insert(static_cast<int>(ContextMenuOption::Intersection2OnlyRight),
+                       InitPassmarkAngleAction(tr("Intersection 2 (only right)"),
+                                               PassmarkAngleType::Intersection2OnlyRight));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

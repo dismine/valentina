@@ -64,14 +64,14 @@
 #include "ui_tabpins.h"
 #include "ui_tabplacelabels.h"
 
+#include <array>
+#include <cstddef>
 #include <QMenu>
 #include <QMessageBox>
 #include <QScopeGuard>
 #include <QTimer>
 #include <QUuid>
 #include <QtNumeric>
-#include <array>
-#include <cstddef>
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
 #include "../vmisc/compatibility.h"
@@ -409,8 +409,10 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     InitFold(piece);
 
     uiTabPaths->checkBoxTrueZeroWidth->setChecked(piece.IsTrueZeroWidth());
-    uiTabPaths->plainTextEditFormulaWidth->setPlainText(VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        piece.GetFormulaSAWidth(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+    uiTabPaths->plainTextEditFormulaWidth->setPlainText(
+        VAbstractApplication::VApp()
+            ->TrVars()
+            ->FormulaToUser(piece.GetFormulaSAWidth(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
     m_saWidth = piece.GetSAWidth();
 
     const VPieceLabelData &ppData = piece.GetPieceLabelData();
@@ -586,13 +588,13 @@ void DialogSeamAllowance::ShowDialog(bool click)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto DialogSeamAllowance::eventFilter(QObject* obj, QEvent* event) -> bool
+auto DialogSeamAllowance::eventFilter(QObject *obj, QEvent *event) -> bool
 {
     if (obj == uiTabPaths->listWidgetMainPath && event->type() == QEvent::KeyPress)
     {
-        if (const auto* keyEvent = static_cast<QKeyEvent*>(event); keyEvent->key() == Qt::Key_Delete)
+        if (const auto *keyEvent = static_cast<QKeyEvent *>(event); keyEvent->key() == Qt::Key_Delete)
         {
-            if (QListWidgetItem* selectedItem = uiTabPaths->listWidgetMainPath->currentItem();selectedItem)
+            if (QListWidgetItem *selectedItem = uiTabPaths->listWidgetMainPath->currentItem(); selectedItem)
             {
                 delete selectedItem;
             }
@@ -639,9 +641,9 @@ void DialogSeamAllowance::CheckTabPathsState()
         QString tooltip = tr("Ready!");
         if (!applyAllowed)
         {
-            tooltip += "  <b>"_L1 +
-                       tr("To open all detail's features complete creating the main path. Please, press OK.") +
-                       "</b>"_L1;
+            tooltip += "  <b>"_L1
+                       + tr("To open all detail's features complete creating the main path. Please, press OK.")
+                       + "</b>"_L1;
         }
         uiTabPaths->helpLabel->setText(tooltip);
     }
@@ -660,15 +662,16 @@ void DialogSeamAllowance::CheckTabPassmarksState()
         flagFormulaPassmarkVisible = true;
     }
 
-    const bool allFormulasValid = flagFormulaPassmarkLength && flagFormulaPassmarkWidth && flagFormulaPassmarkAngle &&
-            flagFormulaPassmarkVisible;
+    const bool allFormulasValid = flagFormulaPassmarkLength && flagFormulaPassmarkWidth && flagFormulaPassmarkAngle
+                                  && flagFormulaPassmarkVisible;
 
     m_ftb->SetTabText(TabOrder::Passmarks, tr("Passmarks") + (allFormulasValid ? QString() : QChar('*')));
 
     const QIcon icon = FromTheme(VThemeIcon::DialogWarning);
     uiTabPassmarks->tabWidget->setTabIcon(uiTabPassmarks->tabWidget->indexOf(uiTabPassmarks->tabControl),
                                           flagFormulaPassmarkVisible ? QIcon() : icon);
-    bool const allShapeFormulasValid = flagFormulaPassmarkLength && flagFormulaPassmarkWidth && flagFormulaPassmarkAngle;
+    bool const allShapeFormulasValid = flagFormulaPassmarkLength && flagFormulaPassmarkWidth
+                                       && flagFormulaPassmarkAngle;
     uiTabPassmarks->tabWidget->setTabIcon(uiTabPassmarks->tabWidget->indexOf(uiTabPassmarks->tabManualShape),
                                           allShapeFormulasValid ? QIcon() : icon);
 
@@ -863,8 +866,9 @@ void DialogSeamAllowance::InitFoldHeightFormula(const VPiece &piece)
         uiTabFoldLine->label_3->setEnabled(uiTabFoldLine->groupBoxManualHeight->isChecked());
 
         QString foldHeight = piece.GetFormulaFoldHeight();
-        foldHeight = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-            foldHeight, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+        foldHeight = VAbstractApplication::VApp()
+                         ->TrVars()
+                         ->FormulaToUser(foldHeight, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         if (foldHeight.length() > 80) // increase height if needed.
         {
             this->DeployFoldHeight();
@@ -895,8 +899,9 @@ void DialogSeamAllowance::InitFoldWidthFormula(const VPiece &piece)
         uiTabFoldLine->label_4->setEnabled(uiTabFoldLine->groupBoxManualWidth->isChecked());
 
         QString foldWidth = piece.GetFormulaFoldWidth();
-        foldWidth = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-            foldWidth, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+        foldWidth = VAbstractApplication::VApp()
+                        ->TrVars()
+                        ->FormulaToUser(foldWidth, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         if (foldWidth.length() > 80) // increase height if needed.
         {
             this->DeployPassmarkWidth();
@@ -916,8 +921,9 @@ void DialogSeamAllowance::InitFoldWidthFormula(const VPiece &piece)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::InitFoldCenterFormula(const VPiece &piece)
 {
-    const QString defCenterFormula = VTranslateVars::TryFormulaToUser(
-        QString::number(0.5), VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString defCenterFormula
+        = VTranslateVars::TryFormulaToUser(QString::number(0.5),
+                                           VAbstractApplication::VApp()->Settings()->GetOsSeparator());
 
     if (piece.IsManualFoldCenter())
     {
@@ -930,8 +936,9 @@ void DialogSeamAllowance::InitFoldCenterFormula(const VPiece &piece)
         uiTabFoldLine->label_5->setEnabled(uiTabFoldLine->groupBoxManualCenter->isChecked());
 
         QString foldCenter = piece.GetFormulaFoldCenter();
-        foldCenter = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-            foldCenter, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+        foldCenter = VAbstractApplication::VApp()
+                         ->TrVars()
+                         ->FormulaToUser(foldCenter, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         if (foldCenter.length() > 80) // increase height if needed.
         {
             this->DeployPassmarkAngle();
@@ -941,7 +948,6 @@ void DialogSeamAllowance::InitFoldCenterFormula(const VPiece &piece)
     }
     else
     {
-
         uiTabFoldLine->plainTextEditCenter->setPlainText(defCenterFormula);
     }
 
@@ -1004,7 +1010,7 @@ void DialogSeamAllowance::showEvent(QShowEvent *event)
         uiTabLabels->lineEditPatternNumber->setText(m_doc->GetPatternNumber());
         uiTabLabels->lineEditCompanyName->setText(m_doc->GetCompanyName());
 
-        VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
+        VCommonSettings const *settings = VAbstractApplication::VApp()->Settings();
         m_patternMaterials = m_doc->GetPatternMaterials();
 
         InitComboBoxFormats(uiTabLabels->comboBoxDateFormat,
@@ -1071,7 +1077,7 @@ void DialogSeamAllowance::CheckDependencyTreeComplete()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::NameDetailChanged()
 {
-    if (const auto *edit = qobject_cast<QLineEdit *>(sender());edit)
+    if (const auto *edit = qobject_cast<QLineEdit *>(sender()); edit)
     {
         if (edit->text().isEmpty())
         {
@@ -1090,7 +1096,7 @@ void DialogSeamAllowance::NameDetailChanged()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DetailUUIDChanged()
 {
-    if (const auto *edit = qobject_cast<QLineEdit *>(sender());edit)
+    if (const auto *edit = qobject_cast<QLineEdit *>(sender()); edit)
     {
         static QRegularExpression const re("^$|^{[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-"
                                            "[0-9a-fA-F]{12}}$");
@@ -1237,7 +1243,7 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
     }
 
     QScopedPointer<QMenu> const menu(new QMenu());
-    QAction  const*actionOption = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
+    QAction const *actionOption = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
 
     QListWidgetItem *rowItem = uiTabPaths->listWidgetCustomSA->item(row);
     SCASSERT(rowItem != nullptr)
@@ -1247,9 +1253,9 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
     actionReverse->setCheckable(true);
     actionReverse->setChecked(record.reverse);
 
-    QAction  const*actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
+    QAction const *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
-    QAction  const*selectedAction = menu->exec(uiTabPaths->listWidgetCustomSA->viewport()->mapToGlobal(pos));
+    QAction const *selectedAction = menu->exec(uiTabPaths->listWidgetCustomSA->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
     {
         delete uiTabPaths->listWidgetCustomSA->item(row);
@@ -1282,24 +1288,24 @@ void DialogSeamAllowance::ShowCustomSAContextMenu(const QPoint &pos)
 void DialogSeamAllowance::ShowInternalPathsContextMenu(const QPoint &pos)
 {
     const int row = uiTabPaths->listWidgetInternalPaths->currentRow();
-    if (uiTabPaths->listWidgetInternalPaths->count() == 0 || row == -1 ||
-        row >= uiTabPaths->listWidgetInternalPaths->count())
+    if (uiTabPaths->listWidgetInternalPaths->count() == 0 || row == -1
+        || row >= uiTabPaths->listWidgetInternalPaths->count())
     {
         return;
     }
 
     QScopedPointer<QMenu> const menu(new QMenu());
-    QAction  const*actionOption = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
-    QAction  const*actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
+    QAction const *actionOption = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
+    QAction const *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
-    QAction  const*selectedAction = menu->exec(uiTabPaths->listWidgetInternalPaths->viewport()->mapToGlobal(pos));
+    QAction const *selectedAction = menu->exec(uiTabPaths->listWidgetInternalPaths->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
     {
         delete uiTabPaths->listWidgetInternalPaths->item(row);
     }
     else if (selectedAction == actionOption)
     {
-        QListWidgetItem  const*rowItem = uiTabPaths->listWidgetInternalPaths->item(row);
+        QListWidgetItem const *rowItem = uiTabPaths->listWidgetInternalPaths->item(row);
         SCASSERT(rowItem != nullptr)
         const auto pathId = qvariant_cast<quint32>(rowItem->data(Qt::UserRole));
 
@@ -1324,9 +1330,9 @@ void DialogSeamAllowance::ShowPinsContextMenu(const QPoint &pos)
     }
 
     QScopedPointer<QMenu> const menu(new QMenu());
-    QAction  const*actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
+    QAction const *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
-    QAction  const*selectedAction = menu->exec(uiTabPins->listWidgetPins->viewport()->mapToGlobal(pos));
+    QAction const *selectedAction = menu->exec(uiTabPins->listWidgetPins->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
     {
         delete uiTabPins->listWidgetPins->item(row);
@@ -1339,13 +1345,13 @@ void DialogSeamAllowance::ShowPinsContextMenu(const QPoint &pos)
 void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
 {
     const int row = uiTabPlaceLabels->listWidgetPlaceLabels->currentRow();
-    if (uiTabPlaceLabels->listWidgetPlaceLabels->count() == 0 || row == -1 ||
-        row >= uiTabPlaceLabels->listWidgetPlaceLabels->count())
+    if (uiTabPlaceLabels->listWidgetPlaceLabels->count() == 0 || row == -1
+        || row >= uiTabPlaceLabels->listWidgetPlaceLabels->count())
     {
         return;
     }
 
-    QListWidgetItem  const*rowItem = uiTabPlaceLabels->listWidgetPlaceLabels->item(row);
+    QListWidgetItem const *rowItem = uiTabPlaceLabels->listWidgetPlaceLabels->item(row);
     SCASSERT(rowItem != nullptr)
     const auto labelId = qvariant_cast<quint32>(rowItem->data(Qt::UserRole));
     VPlaceLabelItem currentLabel = CurrentPlaceLabel(labelId);
@@ -1367,28 +1373,27 @@ void DialogSeamAllowance::ShowPlaceLabelsContextMenu(const QPoint &pos)
         m_newPlaceLabels.insert(labelId, newLabel);
 
         QPointer<VUndoCommand> const saveCommand = new SavePlaceLabelOptions(
-            toolId, currentLabel, newLabel, VAbstractValApplication::VApp()->getCurrentDocument(),
-            labelId);
+            toolId, currentLabel, newLabel, VAbstractValApplication::VApp()->getCurrentDocument(), labelId);
         m_undoStack.append(saveCommand);
         UpdateCurrentPlaceLabelRecords();
     };
 
-    QAction  const*actionOption = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
+    QAction const *actionOption = menu->addAction(FromTheme(VThemeIcon::PreferencesOther), tr("Options"));
     menu->addSeparator();
-    QAction  const*actionSegment = InitAction(tr("Segment"), PlaceLabelType::Segment);
-    QAction  const*actionRectangle = InitAction(tr("Rectangle"), PlaceLabelType::Rectangle);
-    QAction  const*actionCross = InitAction(tr("Cross"), PlaceLabelType::Cross);
-    QAction  const*actionTshaped = InitAction(tr("T-shaped"), PlaceLabelType::Tshaped);
-    QAction  const*actionDoubletree = InitAction(tr("Doubletree"), PlaceLabelType::Doubletree);
-    QAction  const*actionCorner = InitAction(tr("Corner"), PlaceLabelType::Corner);
-    QAction  const*actionTriangle = InitAction(tr("Triangle"), PlaceLabelType::Triangle);
-    QAction  const*actionHshaped = InitAction(tr("H-shaped"), PlaceLabelType::Hshaped);
-    QAction  const*actionButton = InitAction(tr("Button"), PlaceLabelType::Button);
-    QAction  const*actionCircle = InitAction(tr("Circle"), PlaceLabelType::Circle);
+    QAction const *actionSegment = InitAction(tr("Segment"), PlaceLabelType::Segment);
+    QAction const *actionRectangle = InitAction(tr("Rectangle"), PlaceLabelType::Rectangle);
+    QAction const *actionCross = InitAction(tr("Cross"), PlaceLabelType::Cross);
+    QAction const *actionTshaped = InitAction(tr("T-shaped"), PlaceLabelType::Tshaped);
+    QAction const *actionDoubletree = InitAction(tr("Doubletree"), PlaceLabelType::Doubletree);
+    QAction const *actionCorner = InitAction(tr("Corner"), PlaceLabelType::Corner);
+    QAction const *actionTriangle = InitAction(tr("Triangle"), PlaceLabelType::Triangle);
+    QAction const *actionHshaped = InitAction(tr("H-shaped"), PlaceLabelType::Hshaped);
+    QAction const *actionButton = InitAction(tr("Button"), PlaceLabelType::Button);
+    QAction const *actionCircle = InitAction(tr("Circle"), PlaceLabelType::Circle);
     menu->addSeparator();
-    QAction  const*actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
+    QAction const *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete), tr("Delete"));
 
-    QAction  const*selectedAction = menu->exec(uiTabPlaceLabels->listWidgetPlaceLabels->viewport()->mapToGlobal(pos));
+    QAction const *selectedAction = menu->exec(uiTabPlaceLabels->listWidgetPlaceLabels->viewport()->mapToGlobal(pos));
     if (selectedAction == actionDelete)
     {
         delete uiTabPlaceLabels->listWidgetPlaceLabels->item(row);
@@ -1501,8 +1506,9 @@ void DialogSeamAllowance::NodeChanged(int index)
 
             QString w1Formula = node.GetFormulaSABefore();
             EnableDefButton(uiTabPaths->pushButtonDefBefore, w1Formula);
-            w1Formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-                w1Formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            w1Formula = VAbstractApplication::VApp()
+                            ->TrVars()
+                            ->FormulaToUser(w1Formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             if (w1Formula.length() > 80) // increase height if needed.
             {
                 this->DeployWidthBeforeFormulaTextEdit();
@@ -1516,8 +1522,9 @@ void DialogSeamAllowance::NodeChanged(int index)
 
             QString w2Formula = node.GetFormulaSAAfter();
             EnableDefButton(uiTabPaths->pushButtonDefAfter, w2Formula);
-            w2Formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-                w2Formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            w2Formula = VAbstractApplication::VApp()
+                            ->TrVars()
+                            ->FormulaToUser(w2Formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             if (w2Formula.length() > 80) // increase height if needed.
             {
                 this->DeployWidthAfterFormulaTextEdit();
@@ -1703,8 +1710,10 @@ void DialogSeamAllowance::NodeAngleChanged(int index)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::ReturnDefBefore()
 {
-    const QString def = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        currentSeamAllowance, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString def = VAbstractApplication::VApp()
+                            ->TrVars()
+                            ->FormulaToUser(currentSeamAllowance,
+                                            VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     uiTabPaths->plainTextEditFormulaWidthBefore->setPlainText(def);
     if (auto *button = qobject_cast<QPushButton *>(sender()))
     {
@@ -1715,8 +1724,10 @@ void DialogSeamAllowance::ReturnDefBefore()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::ReturnDefAfter()
 {
-    const QString def = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        currentSeamAllowance, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString def = VAbstractApplication::VApp()
+                            ->TrVars()
+                            ->FormulaToUser(currentSeamAllowance,
+                                            VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     uiTabPaths->plainTextEditFormulaWidthAfter->setPlainText(def);
     if (auto *button = qobject_cast<QPushButton *>(sender()))
     {
@@ -1797,17 +1808,22 @@ void DialogSeamAllowance::PathDialogClosed(int result)
             VPiecePath const newPath = dialogTool->GetPiecePath();
             m_newPaths.insert(dialogTool->GetToolId(), newPath);
 
-            QPointer<VUndoCommand> const saveCommand = new SavePiecePathOptions(
-                toolId, currentPath, newPath, VAbstractValApplication::VApp()->getCurrentDocument(),
-                dialogTool->GetToolId());
+            QPointer<VUndoCommand> const saveCommand
+                = new SavePiecePathOptions(toolId,
+                                           currentPath,
+                                           newPath,
+                                           VAbstractValApplication::VApp()->getCurrentDocument(),
+                                           dialogTool->GetToolId());
             m_undoStack.append(saveCommand);
             UpdateCurrentCustomSARecord();
             UpdateCurrentInternalPathRecord();
         }
         catch (const VExceptionBadId &e)
         {
-            qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("Error. Can't save piece path.")),
-                      qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+            qCritical("%s\n\n%s\n\n%s",
+                      qUtf8Printable(tr("Error. Can't save piece path.")),
+                      qUtf8Printable(e.ErrorMessage()),
+                      qUtf8Printable(e.DetailedInformation()));
         }
     }
     delete m_dialog.data();
@@ -1850,16 +1866,21 @@ void DialogSeamAllowance::PlaceLabelDialogClosed(int result)
 
             m_newPlaceLabels.insert(dialogTool->GetToolId(), newLabel);
 
-            QPointer<VUndoCommand> const saveCommand = new SavePlaceLabelOptions(
-                toolId, currentLabel, newLabel, VAbstractValApplication::VApp()->getCurrentDocument(),
-                dialogTool->GetToolId());
+            QPointer<VUndoCommand> const saveCommand
+                = new SavePlaceLabelOptions(toolId,
+                                            currentLabel,
+                                            newLabel,
+                                            VAbstractValApplication::VApp()->getCurrentDocument(),
+                                            dialogTool->GetToolId());
             m_undoStack.append(saveCommand);
             UpdateCurrentPlaceLabelRecords();
         }
         catch (const VExceptionBadId &e)
         {
-            qCritical("%s\n\n%s\n\n%s", qUtf8Printable(tr("Error. Can't save piece path.")),
-                      qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
+            qCritical("%s\n\n%s\n\n%s",
+                      qUtf8Printable(tr("Error. Can't save piece path.")),
+                      qUtf8Printable(e.ErrorMessage()),
+                      qUtf8Printable(e.DetailedInformation()));
         }
     }
     delete m_dialog.data();
@@ -1915,9 +1936,9 @@ void DialogSeamAllowance::FancyTabChanged(int index)
 
     QT_WARNING_POP
 
-    if (index == TabOrder::Pins || index == TabOrder::Grainline ||
-        (index == TabOrder::Labels &&
-         uiTabLabels->tabWidget->currentIndex() == uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels)))
+    if (index == TabOrder::Pins || index == TabOrder::Grainline
+        || (index == TabOrder::Labels
+            && uiTabLabels->tabWidget->currentIndex() == uiTabLabels->tabWidget->indexOf(uiTabLabels->tabLabels)))
     {
         ShowPieceSpecialPointsWithRect(uiTabPins->listWidgetPins, false);
     }
@@ -2140,8 +2161,9 @@ void DialogSeamAllowance::UpdateGrainlineValues()
         QString qsVal;
         try
         {
-            qsFormula = VAbstractApplication::VApp()->TrVars()->FormulaFromUser(
-                qsFormula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            qsFormula = VAbstractApplication::VApp()
+                            ->TrVars()
+                            ->FormulaFromUser(qsFormula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             Calculator cal;
             qreal const dVal = cal.EvalFormula(data.DataVariables(), qsFormula);
             if (qIsInf(dVal) || qIsNaN(dVal))
@@ -2186,8 +2208,9 @@ void DialogSeamAllowance::UpdateGrainlineValues()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::UpdateDetailLabelValues()
 {
-    std::array<const QPlainTextEdit *, 3> apleSender = {
-        uiTabLabels->lineEditDLWidthFormula, uiTabLabels->lineEditDLHeightFormula, uiTabLabels->lineEditDLAngleFormula};
+    std::array<const QPlainTextEdit *, 3> apleSender = {uiTabLabels->lineEditDLWidthFormula,
+                                                        uiTabLabels->lineEditDLHeightFormula,
+                                                        uiTabLabels->lineEditDLAngleFormula};
     std::array<bool, 3> bFormulasOK = {true, true, true};
 
     for (std::size_t i = 0; i < 3; ++i)
@@ -2220,9 +2243,9 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
         QString qsVal;
         try
         {
-
-            qsFormula = VAbstractApplication::VApp()->TrVars()->FormulaFromUser(
-                qsFormula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            qsFormula = VAbstractApplication::VApp()
+                            ->TrVars()
+                            ->FormulaFromUser(qsFormula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             Calculator cal;
             qreal const dVal = cal.EvalFormula(data.DataVariables(), qsFormula);
             if (qIsInf(dVal) || qIsNaN(dVal))
@@ -2270,8 +2293,9 @@ void DialogSeamAllowance::UpdateDetailLabelValues()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::UpdatePatternLabelValues()
 {
-    std::array<const QPlainTextEdit *, 3> apleSender = {
-        uiTabLabels->lineEditPLWidthFormula, uiTabLabels->lineEditPLHeightFormula, uiTabLabels->lineEditPLAngleFormula};
+    std::array<const QPlainTextEdit *, 3> apleSender = {uiTabLabels->lineEditPLWidthFormula,
+                                                        uiTabLabels->lineEditPLHeightFormula,
+                                                        uiTabLabels->lineEditPLAngleFormula};
     std::array<bool, 3> bFormulasOK = {true, true, true};
 
     for (std::size_t i = 0; i < 3; ++i)
@@ -2304,8 +2328,9 @@ void DialogSeamAllowance::UpdatePatternLabelValues()
         QString qsVal;
         try
         {
-            qsFormula = VAbstractApplication::VApp()->TrVars()->FormulaFromUser(
-                qsFormula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            qsFormula = VAbstractApplication::VApp()
+                            ->TrVars()
+                            ->FormulaFromUser(qsFormula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             Calculator cal;
             qreal const dVal = cal.EvalFormula(data.DataVariables(), qsFormula);
             if (qIsInf(dVal) || qIsNaN(dVal))
@@ -2699,8 +2724,7 @@ void DialogSeamAllowance::DeployDLWidth()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployDLHeight()
 {
-    DeployFormula(this, uiTabLabels->lineEditDLHeightFormula, uiTabLabels->pushButtonShowDLHeight,
-                  m_DLHeightBaseHeight);
+    DeployFormula(this, uiTabLabels->lineEditDLHeightFormula, uiTabLabels->pushButtonShowDLHeight, m_DLHeightBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2718,8 +2742,7 @@ void DialogSeamAllowance::DeployPLWidth()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployPLHeight()
 {
-    DeployFormula(this, uiTabLabels->lineEditPLHeightFormula, uiTabLabels->pushButtonShowPLHeight,
-                  m_PLHeightBaseHeight);
+    DeployFormula(this, uiTabLabels->lineEditPLHeightFormula, uiTabLabels->pushButtonShowPLHeight, m_PLHeightBaseHeight);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -2760,7 +2783,8 @@ void DialogSeamAllowance::EvalWidth()
                       .labelEditFormula = uiTabPaths->labelEditWidth,
                       .labelResult = uiTabPaths->labelResultWidth,
                       .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
-                      .checkLessThanZero = true}, flagFormula);
+                      .checkLessThanZero = true},
+                     flagFormula);
 
     if (m_saWidth >= 0)
     {
@@ -2789,7 +2813,8 @@ void DialogSeamAllowance::EvalWidthBefore()
                   .labelEditFormula = uiTabPaths->labelEditBefore,
                   .labelResult = uiTabPaths->labelResultBefore,
                   .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
-                  .checkLessThanZero = true}, flagFormulaBefore);
+                  .checkLessThanZero = true},
+                 flagFormulaBefore);
 
             const QString formulaSABefore = GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthBefore);
             UpdateNodeSABefore(formulaSABefore);
@@ -2816,7 +2841,8 @@ void DialogSeamAllowance::EvalWidthAfter()
                   .labelEditFormula = uiTabPaths->labelEditAfter,
                   .labelResult = uiTabPaths->labelResultAfter,
                   .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
-                  .checkLessThanZero = true}, flagFormulaAfter);
+                  .checkLessThanZero = true},
+                 flagFormulaAfter);
 
             const QString formulaSAAfter = GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidthAfter);
             UpdateNodeSAAfter(formulaSAAfter);
@@ -2844,7 +2870,8 @@ void DialogSeamAllowance::EvalPassmarkLength()
                   .labelResult = uiTabPassmarks->labelResultPassmarkLength,
                   .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
                   .checkZero = true,
-                  .checkLessThanZero = true}, flagFormulaPassmarkLength);
+                  .checkLessThanZero = true},
+                 flagFormulaPassmarkLength);
 
             UpdateNodePassmarkLength(GetFormulaFromUser(uiTabPassmarks->plainTextEditPassmarkLength));
         }
@@ -2869,7 +2896,8 @@ void DialogSeamAllowance::EvalPassmarkWidth()
                   .labelEditFormula = uiTabPassmarks->labelEditPassmarkWidth,
                   .labelResult = uiTabPassmarks->labelResultPassmarkWidth,
                   .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
-                  .checkZero = true}, flagFormulaPassmarkWidth);
+                  .checkZero = true},
+                 flagFormulaPassmarkWidth);
 
             UpdateNodePassmarkWidth(GetFormulaFromUser(uiTabPassmarks->plainTextEditPassmarkWidth));
         }
@@ -2893,7 +2921,8 @@ void DialogSeamAllowance::EvalPassmarkAngle()
                   .variables = data.DataVariables(),
                   .labelEditFormula = uiTabPassmarks->labelEditPassmarkAngle,
                   .labelResult = uiTabPassmarks->labelResultPassmarkAngle,
-                  .postfix = degreeSymbol}, flagFormulaPassmarkAngle);
+                  .postfix = degreeSymbol},
+                 flagFormulaPassmarkAngle);
 
             UpdateNodePassmarkAngle(GetFormulaFromUser(uiTabPassmarks->plainTextEditPassmarkAngle));
         }
@@ -2915,7 +2944,8 @@ void DialogSeamAllowance::EvalPassmarkVisible()
               .variables = data.DataVariables(),
               .labelEditFormula = uiTabPassmarks->labelEditPassmarkVisible,
               .labelResult = uiTabPassmarks->labelResultPassmarkVisible,
-              .checkLessThanZero = true}, flagFormulaPassmarkVisible);
+              .checkLessThanZero = true},
+             flagFormulaPassmarkVisible);
 
         UpdateNodePassmarkVisibility(GetFormulaFromUser(uiTabPassmarks->plainTextEditPassmarkVisible));
     }
@@ -2937,7 +2967,8 @@ void DialogSeamAllowance::EvalFoldHeight()
               .labelEditFormula = uiTabFoldLine->labelEditHeight,
               .labelResult = uiTabFoldLine->labelResultHeight,
               .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
-              .checkLessThanZero = true}, flagFormulaFoldHeight);
+              .checkLessThanZero = true},
+             flagFormulaFoldHeight);
     }
     else
     {
@@ -2955,7 +2986,8 @@ void DialogSeamAllowance::EvalFoldWidth()
               .labelEditFormula = uiTabFoldLine->labelEditWidth,
               .labelResult = uiTabFoldLine->labelResultWidth,
               .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
-              .checkLessThanZero = true}, flagFormulaFoldWidth);
+              .checkLessThanZero = true},
+             flagFormulaFoldWidth);
     }
     else
     {
@@ -2972,7 +3004,8 @@ void DialogSeamAllowance::EvalFoldCenter()
               .variables = data.DataVariables(),
               .labelEditFormula = uiTabFoldLine->labelEditCenter,
               .labelResult = uiTabFoldLine->labelResultCenter,
-              .checkLessThanZero = true}, flagFormulaFoldCenter);
+              .checkLessThanZero = true},
+             flagFormulaFoldCenter);
     }
     else
     {
@@ -3132,49 +3165,63 @@ void DialogSeamAllowance::DeployWidthFormulaTextEdit()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployWidthBeforeFormulaTextEdit()
 {
-    DeployFormula(this, uiTabPaths->plainTextEditFormulaWidthBefore, uiTabPaths->pushButtonGrowWidthBefore,
+    DeployFormula(this,
+                  uiTabPaths->plainTextEditFormulaWidthBefore,
+                  uiTabPaths->pushButtonGrowWidthBefore,
                   m_formulaBaseWidthBefore);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployWidthAfterFormulaTextEdit()
 {
-    DeployFormula(this, uiTabPaths->plainTextEditFormulaWidthAfter, uiTabPaths->pushButtonGrowWidthAfter,
+    DeployFormula(this,
+                  uiTabPaths->plainTextEditFormulaWidthAfter,
+                  uiTabPaths->pushButtonGrowWidthAfter,
                   m_formulaBaseWidthAfter);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployPassmarkLength()
 {
-    DeployFormula(this, uiTabPassmarks->plainTextEditPassmarkLength, uiTabPassmarks->pushButtonGrowPassmarkLength,
+    DeployFormula(this,
+                  uiTabPassmarks->plainTextEditPassmarkLength,
+                  uiTabPassmarks->pushButtonGrowPassmarkLength,
                   m_formulaBasePassmarkLength);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployPassmarkWidth()
 {
-    DeployFormula(this, uiTabPassmarks->plainTextEditPassmarkWidth, uiTabPassmarks->pushButtonGrowPassmarkWidth,
+    DeployFormula(this,
+                  uiTabPassmarks->plainTextEditPassmarkWidth,
+                  uiTabPassmarks->pushButtonGrowPassmarkWidth,
                   m_formulaBasePassmarkWidth);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployPassmarkAngle()
 {
-    DeployFormula(this, uiTabPassmarks->plainTextEditPassmarkAngle, uiTabPassmarks->pushButtonGrowPassmarkAngle,
+    DeployFormula(this,
+                  uiTabPassmarks->plainTextEditPassmarkAngle,
+                  uiTabPassmarks->pushButtonGrowPassmarkAngle,
                   m_formulaBasePassmarkAngle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployPassmarkVisible()
 {
-    DeployFormula(this, uiTabPassmarks->plainTextEditPassmarkVisible, uiTabPassmarks->pushButtonGrowPassmarkVisible,
+    DeployFormula(this,
+                  uiTabPassmarks->plainTextEditPassmarkVisible,
+                  uiTabPassmarks->pushButtonGrowPassmarkVisible,
                   m_formulaBasePassmarkVisible);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployFoldHeight()
 {
-    DeployFormula(this, uiTabFoldLine->plainTextEditHeight, uiTabFoldLine->pushButtonGrowHeight,
+    DeployFormula(this,
+                  uiTabFoldLine->plainTextEditHeight,
+                  uiTabFoldLine->pushButtonGrowHeight,
                   m_formulaBaseFoldHeight);
 }
 
@@ -3187,7 +3234,9 @@ void DialogSeamAllowance::DeployFoldWidth()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployFoldCenter()
 {
-    DeployFormula(this, uiTabFoldLine->plainTextEditCenter, uiTabFoldLine->pushButtonGrowCenter,
+    DeployFormula(this,
+                  uiTabFoldLine->plainTextEditCenter,
+                  uiTabFoldLine->pushButtonGrowCenter,
                   m_formulaBaseFoldCenter);
 }
 
@@ -3471,16 +3520,18 @@ auto DialogSeamAllowance::MainPathIsValid() const -> bool
 
     if (not MainPathIsClockwise())
     {
-        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel) +
-                                       tr("You have to choose points in a clockwise direction!"));
+        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel)
+                                       + tr("You have to choose points in a clockwise direction!"));
         return false;
     }
 
     QString error;
     if (FirstPointEqualLast(uiTabPaths->listWidgetMainPath, &data, error))
     {
-        uiTabPaths->helpLabel->setText(QStringLiteral("%1%2 %3").arg(
-            DialogWarningIcon(uiTabPaths->helpLabel), tr("First point cannot be equal to the last point!"), error));
+        uiTabPaths->helpLabel->setText(
+            QStringLiteral("%1%2 %3").arg(DialogWarningIcon(uiTabPaths->helpLabel),
+                                          tr("First point cannot be equal to the last point!"),
+                                          error));
         return false;
     }
 
@@ -3488,7 +3539,8 @@ auto DialogSeamAllowance::MainPathIsValid() const -> bool
     if (DoublePoints(uiTabPaths->listWidgetMainPath, &data, error))
     {
         uiTabPaths->helpLabel->setText(QStringLiteral("%1%2 %3").arg(DialogWarningIcon(uiTabPaths->helpLabel),
-                                                                     tr("You have double points!"), error));
+                                                                     tr("You have double points!"),
+                                                                     error));
         return false;
     }
 
@@ -3496,14 +3548,15 @@ auto DialogSeamAllowance::MainPathIsValid() const -> bool
     if (DoubleCurves(uiTabPaths->listWidgetMainPath, &data, error))
     {
         uiTabPaths->helpLabel->setText(QStringLiteral("%1%2 %3").arg(DialogWarningIcon(uiTabPaths->helpLabel),
-                                                                     tr("The same curve repeats twice!"), error));
+                                                                     tr("The same curve repeats twice!"),
+                                                                     error));
         return false;
     }
 
     if (not EachPointLabelIsUnique(uiTabPaths->listWidgetMainPath))
     {
-        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel) +
-                                       tr("Each point in the path must be unique!"));
+        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel)
+                                       + tr("Each point in the path must be unique!"));
         return false;
     }
 
@@ -3535,8 +3588,8 @@ auto DialogSeamAllowance::MirrorLineIsValid() const -> bool
     if (startPoint == NULL_ID && endPoint != NULL_ID)
     {
         ChangeColor(uiTabPaths->labelMLStartPoint, errorColor);
-        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel) +
-                                       tr("Invalid mirror line start point!"));
+        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel)
+                                       + tr("Invalid mirror line start point!"));
         return false;
     }
 
@@ -3551,8 +3604,8 @@ auto DialogSeamAllowance::MirrorLineIsValid() const -> bool
     {
         ChangeColor(uiTabPaths->labelMLStartPoint, errorColor);
         ChangeColor(uiTabPaths->labelMLEndPoint, errorColor);
-        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel) +
-                                       tr("Start and end mirror line points must be unique!"));
+        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel)
+                                       + tr("Start and end mirror line points must be unique!"));
         return false;
     }
 
@@ -3571,8 +3624,8 @@ auto DialogSeamAllowance::MirrorLineIsValid() const -> bool
     if (!uniquePoints.contains(startPoint))
     {
         ChangeColor(uiTabPaths->labelMLStartPoint, errorColor);
-        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel) +
-                                       tr("Invalid mirror line start point!"));
+        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel)
+                                       + tr("Invalid mirror line start point!"));
         return false;
     }
 
@@ -3587,8 +3640,8 @@ auto DialogSeamAllowance::MirrorLineIsValid() const -> bool
     {
         ChangeColor(uiTabPaths->labelMLStartPoint, errorColor);
         ChangeColor(uiTabPaths->labelMLEndPoint, errorColor);
-        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel) +
-                                       tr("Mirror points must be neighbors!"));
+        uiTabPaths->helpLabel->setText(DialogWarningIcon(uiTabPaths->helpLabel)
+                                       + tr("Mirror points must be neighbors!"));
         return false;
     }
 
@@ -3690,7 +3743,7 @@ auto DialogSeamAllowance::GetItemById(quint32 id) -> QListWidgetItem *
 {
     for (qint32 i = 0; i < uiTabPaths->listWidgetMainPath->count(); ++i)
     {
-        QListWidgetItem  *item = uiTabPaths->listWidgetMainPath->item(i);
+        QListWidgetItem *item = uiTabPaths->listWidgetMainPath->item(i);
         const auto node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
 
         if (node.GetId() == id)
@@ -3707,7 +3760,7 @@ auto DialogSeamAllowance::GetLastId() const -> quint32
     const int count = uiTabPaths->listWidgetMainPath->count();
     if (count > 0)
     {
-        QListWidgetItem  const*item = uiTabPaths->listWidgetMainPath->item(count - 1);
+        QListWidgetItem const *item = uiTabPaths->listWidgetMainPath->item(count - 1);
         const auto node = qvariant_cast<VPieceNode>(item->data(Qt::UserRole));
         return node.GetId();
     }
@@ -3732,7 +3785,7 @@ void DialogSeamAllowance::SetCurrentSAAfter(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::UpdateNodeSABefore(const QString &formula)
 {
-    if (const int index = uiTabPaths->comboBoxNodes->currentIndex();index != -1)
+    if (const int index = uiTabPaths->comboBoxNodes->currentIndex(); index != -1)
     {
         if (QListWidgetItem *rowItem = GetItemById(uiTabPaths->comboBoxNodes->currentData().toUInt()))
         {
@@ -3746,7 +3799,7 @@ void DialogSeamAllowance::UpdateNodeSABefore(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::UpdateNodeSAAfter(const QString &formula)
 {
-    if (const int index = uiTabPaths->comboBoxNodes->currentIndex();index != -1)
+    if (const int index = uiTabPaths->comboBoxNodes->currentIndex(); index != -1)
     {
         if (QListWidgetItem *rowItem = GetItemById(uiTabPaths->comboBoxNodes->currentData().toUInt()))
         {
@@ -3760,7 +3813,7 @@ void DialogSeamAllowance::UpdateNodeSAAfter(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::UpdateNodePassmarkLength(const QString &formula)
 {
-    if (const int index = uiTabPassmarks->comboBoxPassmarks->currentIndex();index != -1)
+    if (const int index = uiTabPassmarks->comboBoxPassmarks->currentIndex(); index != -1)
     {
         if (QListWidgetItem *rowItem = GetItemById(uiTabPassmarks->comboBoxPassmarks->currentData().toUInt()))
         {
@@ -3774,7 +3827,7 @@ void DialogSeamAllowance::UpdateNodePassmarkLength(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::UpdateNodePassmarkWidth(const QString &formula)
 {
-    if (const int index = uiTabPassmarks->comboBoxPassmarks->currentIndex();index != -1)
+    if (const int index = uiTabPassmarks->comboBoxPassmarks->currentIndex(); index != -1)
     {
         if (QListWidgetItem *rowItem = GetItemById(uiTabPassmarks->comboBoxPassmarks->currentData().toUInt()))
         {
@@ -3788,7 +3841,7 @@ void DialogSeamAllowance::UpdateNodePassmarkWidth(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::UpdateNodePassmarkAngle(const QString &formula)
 {
-    if (const int index = uiTabPassmarks->comboBoxPassmarks->currentIndex();index != -1)
+    if (const int index = uiTabPassmarks->comboBoxPassmarks->currentIndex(); index != -1)
     {
         if (QListWidgetItem *rowItem = GetItemById(uiTabPassmarks->comboBoxPassmarks->currentData().toUInt()))
         {
@@ -3800,7 +3853,7 @@ void DialogSeamAllowance::UpdateNodePassmarkAngle(const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::UpdateNodePassmarkVisibility(const QString& formula)
+void DialogSeamAllowance::UpdateNodePassmarkVisibility(const QString &formula)
 {
     if (const int index = uiTabPassmarks->comboBoxPassmarks->currentIndex(); index != -1)
     {
@@ -3866,49 +3919,73 @@ void DialogSeamAllowance::InitMainPathTab()
     uiTabPaths->checkBoxHideMainPath->setChecked(VAbstractApplication::VApp()->Settings()->IsHideMainPath());
 
     uiTabPaths->listWidgetMainPath->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(uiTabPaths->listWidgetMainPath, &QListWidget::customContextMenuRequested, this,
+    connect(uiTabPaths->listWidgetMainPath,
+            &QListWidget::customContextMenuRequested,
+            this,
             &DialogSeamAllowance::ShowMainPathContextMenu);
-    connect(uiTabPaths->listWidgetMainPath->model(), &QAbstractItemModel::rowsMoved, this,
+    connect(uiTabPaths->listWidgetMainPath->model(),
+            &QAbstractItemModel::rowsMoved,
+            this,
             &DialogSeamAllowance::ListChanged);
-    connect(uiTabPaths->listWidgetMainPath, &QListWidget::itemSelectionChanged, this,
+    connect(uiTabPaths->listWidgetMainPath,
+            &QListWidget::itemSelectionChanged,
+            this,
             &DialogSeamAllowance::SetMoveControls);
-    connect(uiTabPaths->listWidgetMainPath, &QListWidget::itemSelectionChanged, this,
+    connect(uiTabPaths->listWidgetMainPath,
+            &QListWidget::itemSelectionChanged,
+            this,
             &DialogSeamAllowance::SetOptionControls);
 
-    connect(uiTabPaths->listWidgetMainPath->model(), &QAbstractItemModel::rowsMoved, this,
+    connect(uiTabPaths->listWidgetMainPath->model(),
+            &QAbstractItemModel::rowsMoved,
+            this,
             [this]() { ValidObjects(MainPathIsValid()); });
 
-    connect(uiTabPaths->toolButtonTop, &QToolButton::clicked, this,
+    connect(uiTabPaths->toolButtonTop,
+            &QToolButton::clicked,
+            this,
             [this]()
             {
                 MoveListRowTop(uiTabPaths->listWidgetMainPath);
                 ValidObjects(MainPathIsValid());
             });
-    connect(uiTabPaths->toolButtonUp, &QToolButton::clicked, this,
+    connect(uiTabPaths->toolButtonUp,
+            &QToolButton::clicked,
+            this,
             [this]()
             {
                 MoveListRowUp(uiTabPaths->listWidgetMainPath);
                 ValidObjects(MainPathIsValid());
             });
-    connect(uiTabPaths->toolButtonDown, &QToolButton::clicked, this,
+    connect(uiTabPaths->toolButtonDown,
+            &QToolButton::clicked,
+            this,
             [this]()
             {
                 MoveListRowDown(uiTabPaths->listWidgetMainPath);
                 ValidObjects(MainPathIsValid());
             });
-    connect(uiTabPaths->toolButtonBottom, &QToolButton::clicked, this,
+    connect(uiTabPaths->toolButtonBottom,
+            &QToolButton::clicked,
+            this,
             [this]()
             {
                 MoveListRowBottom(uiTabPaths->listWidgetMainPath);
                 ValidObjects(MainPathIsValid());
             });
 
-    connect(uiTabPaths->comboBoxMLStartPoint, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+    connect(uiTabPaths->comboBoxMLStartPoint,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
             &DialogSeamAllowance::MirrorLinePointChanged);
-    connect(uiTabPaths->comboBoxMLEndPoint, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+    connect(uiTabPaths->comboBoxMLEndPoint,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
             &DialogSeamAllowance::MirrorLinePointChanged);
 
-    connect(uiTabPaths->toolButtonReverse, &QToolButton::toggled, this,
+    connect(uiTabPaths->toolButtonReverse,
+            &QToolButton::toggled,
+            this,
             [this]()
             {
                 const int row = uiTabPaths->listWidgetMainPath->currentRow();
@@ -3930,7 +4007,9 @@ void DialogSeamAllowance::InitMainPathTab()
                 ListChanged();
             });
 
-    connect(uiTabPaths->toolButtonExcluded, &QToolButton::toggled, this,
+    connect(uiTabPaths->toolButtonExcluded,
+            &QToolButton::toggled,
+            this,
             [this]()
             {
                 const int row = uiTabPaths->listWidgetMainPath->currentRow();
@@ -3953,7 +4032,9 @@ void DialogSeamAllowance::InitMainPathTab()
                 ListChanged();
             });
 
-    connect(uiTabPaths->toolButtonTurnPoint, &QToolButton::toggled, this,
+    connect(uiTabPaths->toolButtonTurnPoint,
+            &QToolButton::toggled,
+            this,
             [this]()
             {
                 const int row = uiTabPaths->listWidgetMainPath->currentRow();
@@ -3975,7 +4056,9 @@ void DialogSeamAllowance::InitMainPathTab()
                 ListChanged();
             });
 
-    connect(uiTabPaths->toolButtonCheckUniqness, &QToolButton::toggled, this,
+    connect(uiTabPaths->toolButtonCheckUniqness,
+            &QToolButton::toggled,
+            this,
             [this]()
             {
                 const int row = uiTabPaths->listWidgetMainPath->currentRow();
@@ -3997,7 +4080,9 @@ void DialogSeamAllowance::InitMainPathTab()
                 ListChanged();
             });
 
-    connect(uiTabPaths->toolButtonPassmark, &QToolButton::toggled, this,
+    connect(uiTabPaths->toolButtonPassmark,
+            &QToolButton::toggled,
+            this,
             [this](bool checked)
             {
                 const int row = uiTabPaths->listWidgetMainPath->currentRow();
@@ -4019,7 +4104,9 @@ void DialogSeamAllowance::InitMainPathTab()
                 ListChanged();
             });
 
-    connect(uiTabPaths->toolButtonDuplicateNode, &QToolButton::toggled, this,
+    connect(uiTabPaths->toolButtonDuplicateNode,
+            &QToolButton::toggled,
+            this,
             [this]()
             {
                 const int row = uiTabPaths->listWidgetMainPath->currentRow();
@@ -4045,7 +4132,9 @@ void DialogSeamAllowance::InitMainPathTab()
                 ListChanged();
             });
 
-    connect(uiTabPaths->toolButtonDelete, &QToolButton::clicked, this,
+    connect(uiTabPaths->toolButtonDelete,
+            &QToolButton::clicked,
+            this,
             [this]()
             {
                 const int row = uiTabPaths->listWidgetMainPath->currentRow();
@@ -4075,7 +4164,9 @@ void DialogSeamAllowance::InitPieceTab()
     uiTabPaths->lineEditName->setClearButtonEnabled(true);
     uiTabPaths->lineEditName->setText(GetDefaultPieceName());
 
-    connect(uiTabPaths->checkBoxForbidFlipping, CHECKBOX_STATE_CHANGED, this,
+    connect(uiTabPaths->checkBoxForbidFlipping,
+            CHECKBOX_STATE_CHANGED,
+            this,
             [this](int state)
             {
                 if (state == Qt::Checked)
@@ -4084,7 +4175,9 @@ void DialogSeamAllowance::InitPieceTab()
                 }
             });
 
-    connect(uiTabPaths->checkBoxForceFlipping, CHECKBOX_STATE_CHANGED, this,
+    connect(uiTabPaths->checkBoxForceFlipping,
+            CHECKBOX_STATE_CHANGED,
+            this,
             [this](int state)
             {
                 if (state == Qt::Checked)
@@ -4093,7 +4186,7 @@ void DialogSeamAllowance::InitPieceTab()
                 }
             });
 
-    VCommonSettings  const*settings = VAbstractApplication::VApp()->Settings();
+    VCommonSettings const *settings = VAbstractApplication::VApp()->Settings();
     uiTabPaths->checkBoxForbidFlipping->setChecked(settings->GetForbidWorkpieceFlipping());
     uiTabPaths->checkBoxForceFlipping->setChecked(settings->GetForceWorkpieceFlipping());
     uiTabPaths->checkBoxOnDrawing->setChecked(settings->GetSewLineOnDrawing());
@@ -4129,7 +4222,9 @@ void DialogSeamAllowance::InitSeamAllowanceTab()
     m_timerWidthAfter->setSingleShot(true);
     connect(m_timerWidthAfter, &QTimer::timeout, this, &DialogSeamAllowance::EvalWidthAfter);
 
-    connect(uiTabPaths->checkBoxSeams, &QCheckBox::toggled, this,
+    connect(uiTabPaths->checkBoxSeams,
+            &QCheckBox::toggled,
+            this,
             [this](bool enable)
             {
                 uiTabPaths->checkBoxBuiltIn->setEnabled(enable);
@@ -4145,7 +4240,9 @@ void DialogSeamAllowance::InitSeamAllowanceTab()
                 }
             });
 
-    connect(uiTabPaths->checkBoxBuiltIn, &QCheckBox::toggled, this,
+    connect(uiTabPaths->checkBoxBuiltIn,
+            &QCheckBox::toggled,
+            this,
             [this](bool enable)
             {
                 uiTabPaths->groupBoxAutomatic->setEnabled(not enable);
@@ -4165,46 +4262,72 @@ void DialogSeamAllowance::InitSeamAllowanceTab()
     uiTabPaths->plainTextEditFormulaWidth->setPlainText(VAbstractApplication::VApp()->LocaleToString(m_saWidth));
 
     InitNodesList();
-    connect(uiTabPaths->comboBoxNodes, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+    connect(uiTabPaths->comboBoxNodes,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
             &DialogSeamAllowance::NodeChanged);
 
     connect(uiTabPaths->pushButtonDefBefore, &QPushButton::clicked, this, &DialogSeamAllowance::ReturnDefBefore);
     connect(uiTabPaths->pushButtonDefAfter, &QPushButton::clicked, this, &DialogSeamAllowance::ReturnDefAfter);
 
     InitNodeAngles(uiTabPaths->comboBoxAngle);
-    connect(uiTabPaths->comboBoxAngle, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+    connect(uiTabPaths->comboBoxAngle,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
             &DialogSeamAllowance::NodeAngleChanged);
 
     uiTabPaths->listWidgetCustomSA->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(uiTabPaths->listWidgetCustomSA, &QListWidget::customContextMenuRequested, this,
+    connect(uiTabPaths->listWidgetCustomSA,
+            &QListWidget::customContextMenuRequested,
+            this,
             &DialogSeamAllowance::ShowCustomSAContextMenu);
-    connect(uiTabPaths->listWidgetCustomSA, &QListWidget::currentRowChanged, this,
+    connect(uiTabPaths->listWidgetCustomSA,
+            &QListWidget::currentRowChanged,
+            this,
             &DialogSeamAllowance::CustomSAChanged);
-    connect(uiTabPaths->comboBoxStartPoint, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+    connect(uiTabPaths->comboBoxStartPoint,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
             &DialogSeamAllowance::CSAStartPointChanged);
-    connect(uiTabPaths->comboBoxEndPoint, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+    connect(uiTabPaths->comboBoxEndPoint,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
             &DialogSeamAllowance::CSAEndPointChanged);
-    connect(uiTabPaths->comboBoxIncludeType, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+    connect(uiTabPaths->comboBoxIncludeType,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
             &DialogSeamAllowance::CSAIncludeTypeChanged);
 
     connect(uiTabPaths->toolButtonExprWidth, &QPushButton::clicked, this, &DialogSeamAllowance::FXWidth);
     connect(uiTabPaths->toolButtonExprBefore, &QPushButton::clicked, this, &DialogSeamAllowance::FXWidthBefore);
     connect(uiTabPaths->toolButtonExprAfter, &QPushButton::clicked, this, &DialogSeamAllowance::FXWidthAfter);
 
-    connect(uiTabPaths->plainTextEditFormulaWidth, &QPlainTextEdit::textChanged, this,
+    connect(uiTabPaths->plainTextEditFormulaWidth,
+            &QPlainTextEdit::textChanged,
+            this,
             [this]() { m_timerWidth->start(formulaTimerTimeout); });
 
-    connect(uiTabPaths->plainTextEditFormulaWidthBefore, &QPlainTextEdit::textChanged, this,
+    connect(uiTabPaths->plainTextEditFormulaWidthBefore,
+            &QPlainTextEdit::textChanged,
+            this,
             [this]() { m_timerWidthBefore->start(formulaTimerTimeout); });
 
-    connect(uiTabPaths->plainTextEditFormulaWidthAfter, &QPlainTextEdit::textChanged, this,
+    connect(uiTabPaths->plainTextEditFormulaWidthAfter,
+            &QPlainTextEdit::textChanged,
+            this,
             [this]() { m_timerWidthAfter->start(formulaTimerTimeout); });
 
-    connect(uiTabPaths->pushButtonGrowWidth, &QPushButton::clicked, this,
+    connect(uiTabPaths->pushButtonGrowWidth,
+            &QPushButton::clicked,
+            this,
             &DialogSeamAllowance::DeployWidthFormulaTextEdit);
-    connect(uiTabPaths->pushButtonGrowWidthBefore, &QPushButton::clicked, this,
+    connect(uiTabPaths->pushButtonGrowWidthBefore,
+            &QPushButton::clicked,
+            this,
             &DialogSeamAllowance::DeployWidthBeforeFormulaTextEdit);
-    connect(uiTabPaths->pushButtonGrowWidthAfter, &QPushButton::clicked, this,
+    connect(uiTabPaths->pushButtonGrowWidthAfter,
+            &QPushButton::clicked,
+            this,
             &DialogSeamAllowance::DeployWidthAfterFormulaTextEdit);
 }
 
@@ -4308,7 +4431,9 @@ void DialogSeamAllowance::InitSAIncludeType()
 void DialogSeamAllowance::InitInternalPathsTab()
 {
     uiTabPaths->listWidgetInternalPaths->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(uiTabPaths->listWidgetInternalPaths, &QListWidget::customContextMenuRequested, this,
+    connect(uiTabPaths->listWidgetInternalPaths,
+            &QListWidget::customContextMenuRequested,
+            this,
             &DialogSeamAllowance::ShowInternalPathsContextMenu);
 }
 
@@ -4345,20 +4470,30 @@ void DialogSeamAllowance::InitLabelsTab()
     InitPinPoint(uiTabLabels->comboBoxDLTopLeftPin);
     InitPinPoint(uiTabLabels->comboBoxDLBottomRightPin);
 
-    connect(uiTabLabels->comboBoxDLTopLeftPin, &QComboBox::currentTextChanged, this,
+    connect(uiTabLabels->comboBoxDLTopLeftPin,
+            &QComboBox::currentTextChanged,
+            this,
             &DialogSeamAllowance::DetailPinPointChanged);
-    connect(uiTabLabels->comboBoxDLBottomRightPin, &QComboBox::currentTextChanged, this,
+    connect(uiTabLabels->comboBoxDLBottomRightPin,
+            &QComboBox::currentTextChanged,
+            this,
             &DialogSeamAllowance::DetailPinPointChanged);
 
     connect(uiTabLabels->pushButtonDLWidth, &QPushButton::clicked, this, &DialogSeamAllowance::EditDLFormula);
     connect(uiTabLabels->pushButtonDLHeight, &QPushButton::clicked, this, &DialogSeamAllowance::EditDLFormula);
     connect(uiTabLabels->pushButtonDLAngle, &QPushButton::clicked, this, &DialogSeamAllowance::EditDLFormula);
 
-    connect(uiTabLabels->lineEditDLWidthFormula, &QPlainTextEdit::textChanged, this,
+    connect(uiTabLabels->lineEditDLWidthFormula,
+            &QPlainTextEdit::textChanged,
+            this,
             &DialogSeamAllowance::UpdateDetailLabelValues);
-    connect(uiTabLabels->lineEditDLHeightFormula, &QPlainTextEdit::textChanged, this,
+    connect(uiTabLabels->lineEditDLHeightFormula,
+            &QPlainTextEdit::textChanged,
+            this,
             &DialogSeamAllowance::UpdateDetailLabelValues);
-    connect(uiTabLabels->lineEditDLAngleFormula, &QPlainTextEdit::textChanged, this,
+    connect(uiTabLabels->lineEditDLAngleFormula,
+            &QPlainTextEdit::textChanged,
+            this,
             &DialogSeamAllowance::UpdateDetailLabelValues);
 
     connect(uiTabLabels->pushButtonShowDLWidth, &QPushButton::clicked, this, &DialogSeamAllowance::DeployDLWidth);
@@ -4376,20 +4511,30 @@ void DialogSeamAllowance::InitLabelsTab()
     InitPinPoint(uiTabLabels->comboBoxPLTopLeftPin);
     InitPinPoint(uiTabLabels->comboBoxPLBottomRightPin);
 
-    connect(uiTabLabels->comboBoxPLTopLeftPin, &QComboBox::currentTextChanged, this,
+    connect(uiTabLabels->comboBoxPLTopLeftPin,
+            &QComboBox::currentTextChanged,
+            this,
             &DialogSeamAllowance::PatternPinPointChanged);
-    connect(uiTabLabels->comboBoxPLBottomRightPin, &QComboBox::currentTextChanged, this,
+    connect(uiTabLabels->comboBoxPLBottomRightPin,
+            &QComboBox::currentTextChanged,
+            this,
             &DialogSeamAllowance::PatternPinPointChanged);
 
     connect(uiTabLabels->pushButtonPLWidth, &QPushButton::clicked, this, &DialogSeamAllowance::EditPLFormula);
     connect(uiTabLabels->pushButtonPLHeight, &QPushButton::clicked, this, &DialogSeamAllowance::EditPLFormula);
     connect(uiTabLabels->pushButtonPLAngle, &QPushButton::clicked, this, &DialogSeamAllowance::EditPLFormula);
 
-    connect(uiTabLabels->lineEditPLWidthFormula, &QPlainTextEdit::textChanged, this,
+    connect(uiTabLabels->lineEditPLWidthFormula,
+            &QPlainTextEdit::textChanged,
+            this,
             &DialogSeamAllowance::UpdatePatternLabelValues);
-    connect(uiTabLabels->lineEditPLHeightFormula, &QPlainTextEdit::textChanged, this,
+    connect(uiTabLabels->lineEditPLHeightFormula,
+            &QPlainTextEdit::textChanged,
+            this,
             &DialogSeamAllowance::UpdatePatternLabelValues);
-    connect(uiTabLabels->lineEditPLAngleFormula, &QPlainTextEdit::textChanged, this,
+    connect(uiTabLabels->lineEditPLAngleFormula,
+            &QPlainTextEdit::textChanged,
+            this,
             &DialogSeamAllowance::UpdatePatternLabelValues);
 
     connect(uiTabLabels->pushButtonShowPLWidth, &QPushButton::clicked, this, &DialogSeamAllowance::DeployPLWidth);
@@ -4422,27 +4567,47 @@ void DialogSeamAllowance::InitLabelsTab()
         uiTabLabels->dateEditCustomerBirthDate->setDate(m_doc->GetCustomerBirthDate());
     }
 
-    connect(uiTabLabels->lineEditPatternName, &QLineEdit::editingFinished, this,
+    connect(uiTabLabels->lineEditPatternName,
+            &QLineEdit::editingFinished,
+            this,
             &DialogSeamAllowance::PatternLabelDataChanged);
-    connect(uiTabLabels->lineEditPatternNumber, &QLineEdit::editingFinished, this,
+    connect(uiTabLabels->lineEditPatternNumber,
+            &QLineEdit::editingFinished,
+            this,
             &DialogSeamAllowance::PatternLabelDataChanged);
-    connect(uiTabLabels->lineEditCompanyName, &QLineEdit::editingFinished, this,
+    connect(uiTabLabels->lineEditCompanyName,
+            &QLineEdit::editingFinished,
+            this,
             &DialogSeamAllowance::PatternLabelDataChanged);
-    connect(uiTabLabels->lineEditCustomerName, &QLineEdit::editingFinished, this,
+    connect(uiTabLabels->lineEditCustomerName,
+            &QLineEdit::editingFinished,
+            this,
             &DialogSeamAllowance::PatternLabelDataChanged);
-    connect(uiTabLabels->lineEditCustomerEmail, &QLineEdit::editingFinished, this,
+    connect(uiTabLabels->lineEditCustomerEmail,
+            &QLineEdit::editingFinished,
+            this,
             &DialogSeamAllowance::PatternLabelDataChanged);
-    connect(uiTabLabels->dateEditCustomerBirthDate, &QDateEdit::editingFinished, this,
+    connect(uiTabLabels->dateEditCustomerBirthDate,
+            &QDateEdit::editingFinished,
+            this,
             &DialogSeamAllowance::PatternLabelDataChanged);
 
-    connect(uiTabLabels->pushButtonEditPatternLabel, &QPushButton::clicked, this,
+    connect(uiTabLabels->pushButtonEditPatternLabel,
+            &QPushButton::clicked,
+            this,
             &DialogSeamAllowance::EditPatternLabel);
-    connect(uiTabLabels->pushButtonPatternMaterials, &QPushButton::clicked, this,
+    connect(uiTabLabels->pushButtonPatternMaterials,
+            &QPushButton::clicked,
+            this,
             &DialogSeamAllowance::ManagePatternMaterials);
 
-    connect(uiTabLabels->comboBoxDateFormat, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+    connect(uiTabLabels->comboBoxDateFormat,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
             &DialogSeamAllowance::PatternLabelDataChanged);
-    connect(uiTabLabels->comboBoxTimeFormat, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+    connect(uiTabLabels->comboBoxTimeFormat,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
             &DialogSeamAllowance::PatternLabelDataChanged);
 }
 
@@ -4455,15 +4620,20 @@ void DialogSeamAllowance::InitGrainlineTab()
     connect(uiTabGrainline->groupBoxGrainline, &QGroupBox::toggled, this, &DialogSeamAllowance::EnabledGrainline);
     connect(uiTabGrainline->pushButtonRot, &QPushButton::clicked, this, &DialogSeamAllowance::EditGrainlineFormula);
     connect(uiTabGrainline->pushButtonLen, &QPushButton::clicked, this, &DialogSeamAllowance::EditGrainlineFormula);
-    connect(uiTabGrainline->lineEditLenFormula, &QPlainTextEdit::textChanged, this,
+    connect(uiTabGrainline->lineEditLenFormula,
+            &QPlainTextEdit::textChanged,
+            this,
             &DialogSeamAllowance::UpdateGrainlineValues);
-    connect(uiTabGrainline->lineEditRotFormula, &QPlainTextEdit::textChanged, this,
+    connect(uiTabGrainline->lineEditRotFormula,
+            &QPlainTextEdit::textChanged,
+            this,
             &DialogSeamAllowance::UpdateGrainlineValues);
 
-    connect(uiTabGrainline->pushButtonShowRot, &QPushButton::clicked, this,
+    connect(uiTabGrainline->pushButtonShowRot,
+            &QPushButton::clicked,
+            this,
             &DialogSeamAllowance::DeployGrainlineRotation);
-    connect(uiTabGrainline->pushButtonShowLen, &QPushButton::clicked, this,
-            &DialogSeamAllowance::DeployGrainlineLength);
+    connect(uiTabGrainline->pushButtonShowLen, &QPushButton::clicked, this, &DialogSeamAllowance::DeployGrainlineLength);
 
     EnabledGrainline();
 
@@ -4499,9 +4669,13 @@ void DialogSeamAllowance::InitGrainlineTab()
     InitPinPoint(uiTabGrainline->comboBoxGrainlineTopPin);
     InitPinPoint(uiTabGrainline->comboBoxGrainlineBottomPin);
 
-    connect(uiTabGrainline->comboBoxGrainlineTopPin, &QComboBox::currentTextChanged, this,
+    connect(uiTabGrainline->comboBoxGrainlineTopPin,
+            &QComboBox::currentTextChanged,
+            this,
             &DialogSeamAllowance::GrainlinePinPointChanged);
-    connect(uiTabGrainline->comboBoxGrainlineBottomPin, &QComboBox::currentTextChanged, this,
+    connect(uiTabGrainline->comboBoxGrainlineBottomPin,
+            &QComboBox::currentTextChanged,
+            this,
             &DialogSeamAllowance::GrainlinePinPointChanged);
 }
 
@@ -4509,7 +4683,9 @@ void DialogSeamAllowance::InitGrainlineTab()
 void DialogSeamAllowance::InitPinsTab()
 {
     uiTabPins->listWidgetPins->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(uiTabPins->listWidgetPins, &QListWidget::customContextMenuRequested, this,
+    connect(uiTabPins->listWidgetPins,
+            &QListWidget::customContextMenuRequested,
+            this,
             &DialogSeamAllowance::ShowPinsContextMenu);
 }
 
@@ -4522,12 +4698,18 @@ void DialogSeamAllowance::InitPassmarksTab()
     m_timerPassmarkLength->setSingleShot(true);
 
     connect(m_timerPassmarkLength, &QTimer::timeout, this, &DialogSeamAllowance::EvalPassmarkLength);
-    connect(uiTabPassmarks->groupBoxManualLength, &QGroupBox::toggled, this,
+    connect(uiTabPassmarks->groupBoxManualLength,
+            &QGroupBox::toggled,
+            this,
             &DialogSeamAllowance::EnabledManualPassmarkLength);
     connect(uiTabPassmarks->toolButtonExprLength, &QPushButton::clicked, this, &DialogSeamAllowance::FXPassmarkLength);
-    connect(uiTabPassmarks->plainTextEditPassmarkLength, &QPlainTextEdit::textChanged, this,
+    connect(uiTabPassmarks->plainTextEditPassmarkLength,
+            &QPlainTextEdit::textChanged,
+            this,
             [this]() -> void { m_timerPassmarkLength->start(formulaTimerTimeout); });
-    connect(uiTabPassmarks->pushButtonGrowPassmarkLength, &QPushButton::clicked, this,
+    connect(uiTabPassmarks->pushButtonGrowPassmarkLength,
+            &QPushButton::clicked,
+            this,
             &DialogSeamAllowance::DeployPassmarkLength);
 
     // Width formula
@@ -4536,12 +4718,18 @@ void DialogSeamAllowance::InitPassmarksTab()
     m_timerPassmarkWidth->setSingleShot(true);
 
     connect(m_timerPassmarkWidth, &QTimer::timeout, this, &DialogSeamAllowance::EvalPassmarkWidth);
-    connect(uiTabPassmarks->groupBoxManualWidth, &QGroupBox::toggled, this,
+    connect(uiTabPassmarks->groupBoxManualWidth,
+            &QGroupBox::toggled,
+            this,
             &DialogSeamAllowance::EnabledManualPassmarkWidth);
     connect(uiTabPassmarks->toolButtonExprWidth, &QPushButton::clicked, this, &DialogSeamAllowance::FXPassmarkWidth);
-    connect(uiTabPassmarks->plainTextEditPassmarkWidth, &QPlainTextEdit::textChanged, this,
+    connect(uiTabPassmarks->plainTextEditPassmarkWidth,
+            &QPlainTextEdit::textChanged,
+            this,
             [this]() -> void { m_timerPassmarkWidth->start(formulaTimerTimeout); });
-    connect(uiTabPassmarks->pushButtonGrowPassmarkWidth, &QPushButton::clicked, this,
+    connect(uiTabPassmarks->pushButtonGrowPassmarkWidth,
+            &QPushButton::clicked,
+            this,
             &DialogSeamAllowance::DeployPassmarkWidth);
 
     // Angle formula
@@ -4550,28 +4738,46 @@ void DialogSeamAllowance::InitPassmarksTab()
     m_timerPassmarkAngle->setSingleShot(true);
 
     connect(m_timerPassmarkAngle, &QTimer::timeout, this, &DialogSeamAllowance::EvalPassmarkAngle);
-    connect(uiTabPassmarks->groupBoxManualAngle, &QGroupBox::toggled, this,
+    connect(uiTabPassmarks->groupBoxManualAngle,
+            &QGroupBox::toggled,
+            this,
             &DialogSeamAllowance::EnabledManualPassmarkAngle);
     connect(uiTabPassmarks->toolButtonExprAngle, &QPushButton::clicked, this, &DialogSeamAllowance::FXPassmarkAngle);
-    connect(uiTabPassmarks->plainTextEditPassmarkAngle, &QPlainTextEdit::textChanged, this,
+    connect(uiTabPassmarks->plainTextEditPassmarkAngle,
+            &QPlainTextEdit::textChanged,
+            this,
             [this]() -> void { m_timerPassmarkAngle->start(formulaTimerTimeout); });
-    connect(uiTabPassmarks->pushButtonGrowPassmarkAngle, &QPushButton::clicked, this,
+    connect(uiTabPassmarks->pushButtonGrowPassmarkAngle,
+            &QPushButton::clicked,
+            this,
             &DialogSeamAllowance::DeployPassmarkAngle);
 
     // notch list
     InitPassmarksList();
-    connect(uiTabPassmarks->comboBoxPassmarks, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
+    connect(uiTabPassmarks->comboBoxPassmarks,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
             &DialogSeamAllowance::PassmarkChanged);
 
-    connect(uiTabPassmarks->buttonGroupLineType, &QButtonGroup::idClicked, this,
+    connect(uiTabPassmarks->buttonGroupLineType,
+            &QButtonGroup::idClicked,
+            this,
             &DialogSeamAllowance::PassmarkLineTypeChanged);
-    connect(uiTabPassmarks->buttonGroupAngleType, &QButtonGroup::idClicked, this,
+    connect(uiTabPassmarks->buttonGroupAngleType,
+            &QButtonGroup::idClicked,
+            this,
             &DialogSeamAllowance::PassmarkAngleTypeChanged);
-    connect(uiTabPassmarks->checkBoxShowSecondPassmark, CHECKBOX_STATE_CHANGED, this,
+    connect(uiTabPassmarks->checkBoxShowSecondPassmark,
+            CHECKBOX_STATE_CHANGED,
+            this,
             &DialogSeamAllowance::PassmarkShowSecondChanged);
-    connect(uiTabPassmarks->checkBoxClockwiseOpening, CHECKBOX_STATE_CHANGED, this,
+    connect(uiTabPassmarks->checkBoxClockwiseOpening,
+            CHECKBOX_STATE_CHANGED,
+            this,
             &DialogSeamAllowance::PassmarkClockwiseOrientationChanged);
-    connect(uiTabPassmarks->checkBoxNotMirrored, CHECKBOX_STATE_CHANGED, this,
+    connect(uiTabPassmarks->checkBoxNotMirrored,
+            CHECKBOX_STATE_CHANGED,
+            this,
             &DialogSeamAllowance::PassmarkNotMirroredStateChanged);
 
     // Visibility formula
@@ -4580,11 +4786,17 @@ void DialogSeamAllowance::InitPassmarksTab()
     m_timerPassmarkVisible->setSingleShot(true);
 
     connect(m_timerPassmarkVisible, &QTimer::timeout, this, &DialogSeamAllowance::EvalPassmarkVisible);
-    connect(uiTabPassmarks->toolButtonExprPassmarkVisible, &QPushButton::clicked, this,
+    connect(uiTabPassmarks->toolButtonExprPassmarkVisible,
+            &QPushButton::clicked,
+            this,
             &DialogSeamAllowance::FXPassmarkVisible);
-    connect(uiTabPassmarks->plainTextEditPassmarkVisible, &QPlainTextEdit::textChanged, this,
+    connect(uiTabPassmarks->plainTextEditPassmarkVisible,
+            &QPlainTextEdit::textChanged,
+            this,
             [this]() -> void { m_timerPassmarkVisible->start(formulaTimerTimeout); });
-    connect(uiTabPassmarks->pushButtonGrowPassmarkVisible, &QPushButton::clicked, this,
+    connect(uiTabPassmarks->pushButtonGrowPassmarkVisible,
+            &QPushButton::clicked,
+            this,
             &DialogSeamAllowance::DeployPassmarkVisible);
 }
 
@@ -4592,7 +4804,9 @@ void DialogSeamAllowance::InitPassmarksTab()
 void DialogSeamAllowance::InitPlaceLabelsTab()
 {
     uiTabPlaceLabels->listWidgetPlaceLabels->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(uiTabPlaceLabels->listWidgetPlaceLabels, &QListWidget::currentRowChanged, this,
+    connect(uiTabPlaceLabels->listWidgetPlaceLabels,
+            &QListWidget::currentRowChanged,
+            this,
             [this]()
             {
                 if (not m_visSpecialPoints.isNull())
@@ -4602,7 +4816,9 @@ void DialogSeamAllowance::InitPlaceLabelsTab()
                     m_visSpecialPoints->RefreshGeometry();
                 }
             });
-    connect(uiTabPlaceLabels->listWidgetPlaceLabels, &QListWidget::customContextMenuRequested, this,
+    connect(uiTabPlaceLabels->listWidgetPlaceLabels,
+            &QListWidget::customContextMenuRequested,
+            this,
             &DialogSeamAllowance::ShowPlaceLabelsContextMenu);
 }
 
@@ -4619,10 +4835,14 @@ void DialogSeamAllowance::InitFoldLineTab()
     m_timerFoldHeight->setSingleShot(true);
 
     connect(m_timerFoldHeight, &QTimer::timeout, this, &DialogSeamAllowance::EvalFoldHeight);
-    connect(uiTabFoldLine->groupBoxManualHeight, &QGroupBox::toggled, this,
+    connect(uiTabFoldLine->groupBoxManualHeight,
+            &QGroupBox::toggled,
+            this,
             &DialogSeamAllowance::EnabledManualFoldHeight);
     connect(uiTabFoldLine->toolButtonExprHeight, &QPushButton::clicked, this, &DialogSeamAllowance::FXFoldHeight);
-    connect(uiTabFoldLine->plainTextEditHeight, &QPlainTextEdit::textChanged, this,
+    connect(uiTabFoldLine->plainTextEditHeight,
+            &QPlainTextEdit::textChanged,
+            this,
             [this]() { m_timerFoldHeight->start(formulaTimerTimeout); });
     connect(uiTabFoldLine->pushButtonGrowHeight, &QPushButton::clicked, this, &DialogSeamAllowance::DeployFoldHeight);
 
@@ -4632,10 +4852,11 @@ void DialogSeamAllowance::InitFoldLineTab()
     m_timerFoldWidth->setSingleShot(true);
 
     connect(m_timerFoldWidth, &QTimer::timeout, this, &DialogSeamAllowance::EvalFoldWidth);
-    connect(uiTabFoldLine->groupBoxManualWidth, &QGroupBox::toggled, this,
-            &DialogSeamAllowance::EnabledManualFoldWidth);
+    connect(uiTabFoldLine->groupBoxManualWidth, &QGroupBox::toggled, this, &DialogSeamAllowance::EnabledManualFoldWidth);
     connect(uiTabFoldLine->toolButtonExprWidth, &QPushButton::clicked, this, &DialogSeamAllowance::FXFoldWidth);
-    connect(uiTabFoldLine->plainTextEditWidth, &QPlainTextEdit::textChanged, this,
+    connect(uiTabFoldLine->plainTextEditWidth,
+            &QPlainTextEdit::textChanged,
+            this,
             [this]() { m_timerFoldWidth->start(formulaTimerTimeout); });
     connect(uiTabFoldLine->pushButtonGrowWidth, &QPushButton::clicked, this, &DialogSeamAllowance::DeployFoldWidth);
 
@@ -4645,10 +4866,14 @@ void DialogSeamAllowance::InitFoldLineTab()
     m_timerFoldCenter->setSingleShot(true);
 
     connect(m_timerFoldCenter, &QTimer::timeout, this, &DialogSeamAllowance::EvalFoldCenter);
-    connect(uiTabFoldLine->groupBoxManualCenter, &QGroupBox::toggled, this,
+    connect(uiTabFoldLine->groupBoxManualCenter,
+            &QGroupBox::toggled,
+            this,
             &DialogSeamAllowance::EnabledManualFoldCenter);
     connect(uiTabFoldLine->toolButtonExprCenter, &QPushButton::clicked, this, &DialogSeamAllowance::FXFoldCenter);
-    connect(uiTabFoldLine->plainTextEditCenter, &QPlainTextEdit::textChanged, this,
+    connect(uiTabFoldLine->plainTextEditCenter,
+            &QPlainTextEdit::textChanged,
+            this,
             [this]() { m_timerFoldCenter->start(formulaTimerTimeout); });
     connect(uiTabFoldLine->pushButtonGrowCenter, &QPushButton::clicked, this, &DialogSeamAllowance::DeployFoldCenter);
 }
@@ -4742,8 +4967,9 @@ auto DialogSeamAllowance::UndoStack() -> QVector<QPointer<VUndoCommand>> &
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SetFormulaSAWidth(const QString &formula)
 {
-    const QString width = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString width = VAbstractApplication::VApp()
+                              ->TrVars()
+                              ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (width.length() > 80)
     {
@@ -4765,8 +4991,9 @@ void DialogSeamAllowance::SetFormulaSAWidth(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SetFormulaPassmarkLength(const QString &formula)
 {
-    const QString width = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString width = VAbstractApplication::VApp()
+                              ->TrVars()
+                              ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (width.length() > 80)
     {
@@ -4780,8 +5007,9 @@ void DialogSeamAllowance::SetFormulaPassmarkLength(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SetFormulaPassmarkWidth(const QString &formula)
 {
-    const QString width = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString width = VAbstractApplication::VApp()
+                              ->TrVars()
+                              ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (width.length() > 80)
     {
@@ -4795,8 +5023,9 @@ void DialogSeamAllowance::SetFormulaPassmarkWidth(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SetFormulaPassmarkAngle(const QString &formula)
 {
-    const QString angle = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString angle = VAbstractApplication::VApp()
+                              ->TrVars()
+                              ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (angle.length() > 80)
     {
@@ -4808,10 +5037,11 @@ void DialogSeamAllowance::SetFormulaPassmarkAngle(const QString &formula)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::SetFormulaPassmarkVisibility(const QString& formula)
+void DialogSeamAllowance::SetFormulaPassmarkVisibility(const QString &formula)
 {
-    const QString visibility = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString visibility = VAbstractApplication::VApp()
+                                   ->TrVars()
+                                   ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (visibility.length() > 80)
     {
@@ -4825,8 +5055,9 @@ void DialogSeamAllowance::SetFormulaPassmarkVisibility(const QString& formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SetFormulaFoldHeight(const QString &formula)
 {
-    const QString width = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString width = VAbstractApplication::VApp()
+                              ->TrVars()
+                              ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (width.length() > 80)
     {
@@ -4840,8 +5071,9 @@ void DialogSeamAllowance::SetFormulaFoldHeight(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SetFormulaFoldWidth(const QString &formula)
 {
-    const QString width = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString width = VAbstractApplication::VApp()
+                              ->TrVars()
+                              ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (width.length() > 80)
     {
@@ -4855,8 +5087,9 @@ void DialogSeamAllowance::SetFormulaFoldWidth(const QString &formula)
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SetFormulaFoldCenter(const QString &formula)
 {
-    const QString width = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString width = VAbstractApplication::VApp()
+                              ->TrVars()
+                              ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (width.length() > 80)
     {
@@ -4920,8 +5153,10 @@ void DialogSeamAllowance::SetGrainlineAngle(QString angleFormula)
         angleFormula = '0';
     }
 
-    const QString formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        angleFormula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()
+                                ->TrVars()
+                                ->FormulaToUser(angleFormula,
+                                                VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -4940,8 +5175,10 @@ void DialogSeamAllowance::SetGrainlineLength(QString lengthFormula)
         lengthFormula = QString().setNum(UnitConvertor(10, Unit::Cm, *data.GetPatternUnit()));
     }
 
-    const QString formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        lengthFormula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()
+                                ->TrVars()
+                                ->FormulaToUser(lengthFormula,
+                                                VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -4961,8 +5198,10 @@ void DialogSeamAllowance::SetDLWidth(QString widthFormula)
         widthFormula = QString().setNum(UnitConvertor(10, Unit::Cm, *data.GetPatternUnit()));
     }
 
-    const QString formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        widthFormula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()
+                                ->TrVars()
+                                ->FormulaToUser(widthFormula,
+                                                VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -4982,8 +5221,10 @@ void DialogSeamAllowance::SetDLHeight(QString heightFormula)
         heightFormula = QString().setNum(UnitConvertor(10, Unit::Cm, *data.GetPatternUnit()));
     }
 
-    const QString formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        heightFormula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()
+                                ->TrVars()
+                                ->FormulaToUser(heightFormula,
+                                                VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -5003,8 +5244,10 @@ void DialogSeamAllowance::SetDLAngle(QString angleFormula)
         angleFormula = '0';
     }
 
-    const QString formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        angleFormula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()
+                                ->TrVars()
+                                ->FormulaToUser(angleFormula,
+                                                VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -5024,8 +5267,10 @@ void DialogSeamAllowance::SetPLWidth(QString widthFormula)
         widthFormula = QString().setNum(UnitConvertor(10, Unit::Cm, *data.GetPatternUnit()));
     }
 
-    const QString formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        widthFormula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()
+                                ->TrVars()
+                                ->FormulaToUser(widthFormula,
+                                                VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -5045,8 +5290,10 @@ void DialogSeamAllowance::SetPLHeight(QString heightFormula)
         heightFormula = QString().setNum(UnitConvertor(10, Unit::Cm, *data.GetPatternUnit()));
     }
 
-    const QString formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        heightFormula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()
+                                ->TrVars()
+                                ->FormulaToUser(heightFormula,
+                                                VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -5066,8 +5313,10 @@ void DialogSeamAllowance::SetPLAngle(QString angleFormula)
         angleFormula = '0';
     }
 
-    const QString formula = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        angleFormula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    const QString formula = VAbstractApplication::VApp()
+                                ->TrVars()
+                                ->FormulaToUser(angleFormula,
+                                                VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     // increase height if needed.
     if (formula.length() > 80)
     {
@@ -5083,7 +5332,7 @@ void DialogSeamAllowance::SetPLAngle(QString angleFormula)
 auto DialogSeamAllowance::CurrentRect() const -> QRectF
 {
     QRectF rect;
-    if (QListWidgetItem  const*item = uiTabPlaceLabels->listWidgetPlaceLabels->currentItem())
+    if (QListWidgetItem const *item = uiTabPlaceLabels->listWidgetPlaceLabels->currentItem())
     {
         VPlaceLabelItem const label = CurrentPlaceLabel(qvariant_cast<quint32>(item->data(Qt::UserRole)));
         rect = QRectF(QPointF(label.x() - label.GetWidth() / 2.0, label.y() - label.GetHeight() / 2.0),
@@ -5274,28 +5523,35 @@ void DialogSeamAllowance::InitGradationPlaceholders()
 
     {
         QString label = VAbstractValApplication::VApp()->GetDimensionHeightLabel();
-        m_gradationPlaceholders.insert(
-            pl_heightLabel, qMakePair(tr("Height label", "dimension"), not label.isEmpty() ? label : heightValue));
-        m_gradationPlaceholders.insert(pl_dimensionXLabel, qMakePair(tr("Dimension X label", "dimension"),
-                                                                     not label.isEmpty() ? label : heightValue));
+        m_gradationPlaceholders.insert(pl_heightLabel,
+                                       qMakePair(tr("Height label", "dimension"),
+                                                 not label.isEmpty() ? label : heightValue));
+        m_gradationPlaceholders.insert(pl_dimensionXLabel,
+                                       qMakePair(tr("Dimension X label", "dimension"),
+                                                 not label.isEmpty() ? label : heightValue));
 
         label = VAbstractValApplication::VApp()->GetDimensionSizeLabel();
-        m_gradationPlaceholders.insert(
-            pl_sizeLabel, qMakePair(tr("Size label", "dimension"), not label.isEmpty() ? label : sizeValue));
-        m_gradationPlaceholders.insert(pl_dimensionYLabel, qMakePair(tr("Dimension Y label", "dimension"),
-                                                                     not label.isEmpty() ? label : sizeValue));
+        m_gradationPlaceholders.insert(pl_sizeLabel,
+                                       qMakePair(tr("Size label", "dimension"),
+                                                 not label.isEmpty() ? label : sizeValue));
+        m_gradationPlaceholders.insert(pl_dimensionYLabel,
+                                       qMakePair(tr("Dimension Y label", "dimension"),
+                                                 not label.isEmpty() ? label : sizeValue));
 
         label = VAbstractValApplication::VApp()->GetDimensionHipLabel();
         m_gradationPlaceholders.insert(pl_hipLabel,
                                        qMakePair(tr("Hip label", "dimension"), not label.isEmpty() ? label : hipValue));
-        m_gradationPlaceholders.insert(pl_dimensionZLabel, qMakePair(tr("Dimension Z label", "dimension"),
-                                                                     not label.isEmpty() ? label : hipValue));
+        m_gradationPlaceholders.insert(pl_dimensionZLabel,
+                                       qMakePair(tr("Dimension Z label", "dimension"),
+                                                 not label.isEmpty() ? label : hipValue));
 
         label = VAbstractValApplication::VApp()->GetDimensionWaistLabel();
-        m_gradationPlaceholders.insert(
-            pl_waistLabel, qMakePair(tr("Waist label", "dimension"), not label.isEmpty() ? label : waistValue));
-        m_gradationPlaceholders.insert(pl_dimensionWLabel, qMakePair(tr("Dimension W label", "dimension"),
-                                                                     not label.isEmpty() ? label : waistValue));
+        m_gradationPlaceholders.insert(pl_waistLabel,
+                                       qMakePair(tr("Waist label", "dimension"),
+                                                 not label.isEmpty() ? label : waistValue));
+        m_gradationPlaceholders.insert(pl_dimensionWLabel,
+                                       qMakePair(tr("Dimension W label", "dimension"),
+                                                 not label.isEmpty() ? label : waistValue));
     }
 
     {
@@ -5304,9 +5560,9 @@ void DialogSeamAllowance::InitGradationPlaceholders()
         while (i != measurements.constEnd())
         {
             QString const description = i.value()->GetGuiText().isEmpty() ? i.key() : i.value()->GetGuiText();
-            m_gradationPlaceholders.insert(
-                pl_measurement + i.key(),
-                qMakePair(tr("Measurement: %1").arg(description), QString::number(*i.value()->GetValue())));
+            m_gradationPlaceholders.insert(pl_measurement + i.key(),
+                                           qMakePair(tr("Measurement: %1").arg(description),
+                                                     QString::number(*i.value()->GetValue())));
             m_gradationPlaceholders.insert(pl_measurement + i.key() + pl_valueAlias,
                                            qMakePair(tr("Measurement %1 value alias").arg(description),
                                                      i.value()->GetValueAlias()));
@@ -5332,8 +5588,9 @@ void DialogSeamAllowance::InitPassmarkLengthFormula(const VPieceNode &node)
         uiTabPassmarks->label_3->setEnabled(uiTabPassmarks->groupBoxManualLength->isChecked());
 
         QString passmarkLength = node.GetFormulaPassmarkLength();
-        passmarkLength = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-            passmarkLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+        passmarkLength = VAbstractApplication::VApp()
+                             ->TrVars()
+                             ->FormulaToUser(passmarkLength, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
         if (passmarkLength.length() > 80) // increase height if needed.
         {
             this->DeployPassmarkLength();
@@ -5379,8 +5636,10 @@ void DialogSeamAllowance::InitPassmarkWidthFormula(const VPieceNode &node)
             uiTabPassmarks->label_4->setEnabled(uiTabPassmarks->groupBoxManualWidth->isChecked());
 
             QString passmarkWidth = node.GetFormulaPassmarkWidth();
-            passmarkWidth = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-                passmarkWidth, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            passmarkWidth = VAbstractApplication::VApp()
+                                ->TrVars()
+                                ->FormulaToUser(passmarkWidth,
+                                                VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             if (passmarkWidth.length() > 80) // increase height if needed.
             {
                 this->DeployPassmarkWidth();
@@ -5433,8 +5692,10 @@ void DialogSeamAllowance::InitPassmarkAngleFormula(const VPieceNode &node)
             uiTabPassmarks->label_5->setEnabled(uiTabPassmarks->groupBoxManualAngle->isChecked());
 
             QString passmarkAngle = node.GetFormulaPassmarkAngle();
-            passmarkAngle = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-                passmarkAngle, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            passmarkAngle = VAbstractApplication::VApp()
+                                ->TrVars()
+                                ->FormulaToUser(passmarkAngle,
+                                                VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             if (passmarkAngle.length() > 80) // increase height if needed.
             {
                 this->DeployPassmarkAngle();
@@ -5458,7 +5719,7 @@ void DialogSeamAllowance::InitPassmarkAngleFormula(const VPieceNode &node)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void DialogSeamAllowance::InitPassmarkVisibilityFormula(const VPieceNode& node)
+void DialogSeamAllowance::InitPassmarkVisibilityFormula(const VPieceNode &node)
 {
     uiTabPassmarks->labelEditPassmarkVisible->setEnabled(true);
     uiTabPassmarks->toolButtonExprPassmarkVisible->setEnabled(true);
@@ -5468,8 +5729,10 @@ void DialogSeamAllowance::InitPassmarkVisibilityFormula(const VPieceNode& node)
     uiTabPassmarks->pushButtonGrowPassmarkVisible->setEnabled(true);
 
     QString passmarkVisibility = node.GetFormulaPassmarkVisibility();
-    passmarkVisibility = VAbstractApplication::VApp()->TrVars()->FormulaToUser(
-        passmarkVisibility, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    passmarkVisibility = VAbstractApplication::VApp()
+                             ->TrVars()
+                             ->FormulaToUser(passmarkVisibility,
+                                             VAbstractApplication::VApp()->Settings()->GetOsSeparator());
     if (passmarkVisibility.length() > 80) // increase height if needed.
     {
         this->DeployPassmarkVisible();
@@ -5618,7 +5881,7 @@ auto DialogSeamAllowance::InitMainPathContextMenu(QMenu *menu, const VPieceNode 
         contextMenu.insert(static_cast<int>(MainPathContextMenuOption::Reverse), actionReverse);
 
         QAction *actionDuplicate = menu->addAction(FromTheme(VThemeIcon::DuplicateNode),
-                                                  QApplication::translate("DialogSeamAllowance", "Duplicate"));
+                                                   QApplication::translate("DialogSeamAllowance", "Duplicate"));
         contextMenu.insert(static_cast<int>(MainPathContextMenuOption::DuplicateNode), actionDuplicate);
     }
     else
@@ -5628,8 +5891,8 @@ auto DialogSeamAllowance::InitMainPathContextMenu(QMenu *menu, const VPieceNode 
             QMenu *passmarkSubmenu = menu->addMenu(FromTheme(VThemeIcon::AddPlacemark),
                                                    QApplication::translate("DialogSeamAllowance", "Passmark"));
 
-            QAction *actionNonePassmark =
-                passmarkSubmenu->addAction(QApplication::translate("DialogSeamAllowance", "None"));
+            QAction *actionNonePassmark = passmarkSubmenu->addAction(
+                QApplication::translate("DialogSeamAllowance", "None"));
             actionNonePassmark->setCheckable(true);
             actionNonePassmark->setChecked(!rowNode.IsPassmark());
             contextMenu.insert(static_cast<int>(MainPathContextMenuOption::NonePassmark), actionNonePassmark);
@@ -5657,14 +5920,14 @@ auto DialogSeamAllowance::InitMainPathContextMenu(QMenu *menu, const VPieceNode 
             contextMenu.insert(static_cast<int>(MainPathContextMenuOption::TMark),
                                InitPassmarkLineTypeAction(QApplication::translate("DialogSeamAllowance", "T mark"),
                                                           PassmarkLineType::TMark));
-            contextMenu.insert(
-                static_cast<int>(MainPathContextMenuOption::ExternalVMark),
-                InitPassmarkLineTypeAction(QApplication::translate("DialogSeamAllowance", "External V mark"),
-                                           PassmarkLineType::ExternalVMark));
-            contextMenu.insert(
-                static_cast<int>(MainPathContextMenuOption::InternalVMark),
-                InitPassmarkLineTypeAction(QApplication::translate("DialogSeamAllowance", "Internal V mark"),
-                                           PassmarkLineType::InternalVMark));
+            contextMenu.insert(static_cast<int>(MainPathContextMenuOption::ExternalVMark),
+                               InitPassmarkLineTypeAction(QApplication::translate("DialogSeamAllowance",
+                                                                                  "External V mark"),
+                                                          PassmarkLineType::ExternalVMark));
+            contextMenu.insert(static_cast<int>(MainPathContextMenuOption::InternalVMark),
+                               InitPassmarkLineTypeAction(QApplication::translate("DialogSeamAllowance",
+                                                                                  "Internal V mark"),
+                                                          PassmarkLineType::InternalVMark));
             contextMenu.insert(static_cast<int>(MainPathContextMenuOption::UMark),
                                InitPassmarkLineTypeAction(QApplication::translate("DialogSeamAllowance", "U mark"),
                                                           PassmarkLineType::UMark));
@@ -5695,8 +5958,8 @@ auto DialogSeamAllowance::InitMainPathContextMenu(QMenu *menu, const VPieceNode 
     actionExcluded->setChecked(rowNode.IsExcluded());
     contextMenu.insert(static_cast<int>(MainPathContextMenuOption::Excluded), actionExcluded);
 
-    QAction *actionDelete =
-        menu->addAction(FromTheme(VThemeIcon::EditDelete), QApplication::translate("DialogSeamAllowance", "Delete"));
+    QAction *actionDelete = menu->addAction(FromTheme(VThemeIcon::EditDelete),
+                                            QApplication::translate("DialogSeamAllowance", "Delete"));
     actionDelete->setShortcut(QKeySequence::Delete);
     contextMenu.insert(static_cast<int>(MainPathContextMenuOption::Delete), actionDelete);
 
@@ -5805,9 +6068,11 @@ void DialogSeamAllowance::EditPatternLabel()
     if (m_patternLabelDataChanged && m_askSavePatternLabelData)
     {
         if (QMessageBox::StandardButton const answer = QMessageBox::question(
-                this, tr("Save label data."),
+                this,
+                tr("Save label data."),
                 tr("Label data were changed. Do you want to save them before editing label template?"),
-                QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+                QMessageBox::Yes | QMessageBox::No,
+                QMessageBox::Yes);
             answer == QMessageBox::Yes)
         {
             SavePatternLabelData();

@@ -82,8 +82,8 @@ const int dialogMaxFormulaHeight = 80;
 auto DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, const VContainer *data, QString &error)
     -> bool
 {
-    if (firstNode.GetTypeTool() == Tool::NodePoint && not(firstNode.GetId() == NULL_ID) &&
-        secondNode.GetTypeTool() == Tool::NodePoint && not(secondNode.GetId() == NULL_ID))
+    if (firstNode.GetTypeTool() == Tool::NodePoint && not(firstNode.GetId() == NULL_ID)
+        && secondNode.GetTypeTool() == Tool::NodePoint && not(secondNode.GetId() == NULL_ID))
     {
         QSharedPointer<VPointF> firstPoint;
         QSharedPointer<VPointF> secondPoint;
@@ -106,9 +106,9 @@ auto DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, cons
         }
 
         // The same point, but different modeling objects
-        if (firstPoint->getIdObject() != NULL_ID && secondPoint->getIdObject() != NULL_ID &&
-            firstPoint->getMode() == Draw::Modeling && secondPoint->getMode() == Draw::Modeling &&
-            firstPoint->getIdObject() == secondPoint->getIdObject())
+        if (firstPoint->getIdObject() != NULL_ID && secondPoint->getIdObject() != NULL_ID
+            && firstPoint->getMode() == Draw::Modeling && secondPoint->getMode() == Draw::Modeling
+            && firstPoint->getIdObject() == secondPoint->getIdObject())
         {
             error = QObject::tr("Point '%1' repeats twice").arg(firstPoint->name());
             return true;
@@ -137,8 +137,8 @@ auto DoublePoint(const VPieceNode &firstNode, const VPieceNode &secondNode, cons
 auto DoubleCurve(const VPieceNode &firstNode, const VPieceNode &secondNode, const VContainer *data, QString &error)
     -> bool
 {
-    if (firstNode.GetTypeTool() != Tool::NodePoint && not(firstNode.GetId() == NULL_ID) &&
-        secondNode.GetTypeTool() != Tool::NodePoint && not(secondNode.GetId() == NULL_ID))
+    if (firstNode.GetTypeTool() != Tool::NodePoint && not(firstNode.GetId() == NULL_ID)
+        && secondNode.GetTypeTool() != Tool::NodePoint && not(secondNode.GetId() == NULL_ID))
     {
         QSharedPointer<VGObject> curve1;
         QSharedPointer<VGObject> curve2;
@@ -161,9 +161,9 @@ auto DoubleCurve(const VPieceNode &firstNode, const VPieceNode &secondNode, cons
         }
 
         // The same curve, but different modeling objects
-        if (curve1->getMode() == Draw::Modeling && curve2->getMode() == Draw::Modeling &&
-            curve1->getIdObject() != NULL_ID && curve2->getIdObject() != NULL_ID &&
-            curve1->getIdObject() == curve2->getIdObject())
+        if (curve1->getMode() == Draw::Modeling && curve2->getMode() == Draw::Modeling
+            && curve1->getIdObject() != NULL_ID && curve2->getIdObject() != NULL_ID
+            && curve1->getIdObject() == curve2->getIdObject())
         {
             error = QObject::tr("Leave only one copy of curve '%1'").arg(curve1->name());
             return true;
@@ -174,7 +174,8 @@ auto DoubleCurve(const VPieceNode &firstNode, const VPieceNode &secondNode, cons
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-template <class T> auto CurveAliases(const QString &alias1, const QString &alias2) -> QPair<QString, QString>
+template<class T>
+auto CurveAliases(const QString &alias1, const QString &alias2) -> QPair<QString, QString>
 {
     T curve1;
     curve1.SetAliasSuffix(alias1);
@@ -318,8 +319,10 @@ auto EvalToolFormula(QDialog *dialog, const FormulaData &data, bool &flag) -> qr
         try
         {
             // Translate to internal look.
-            QString const formula = VAbstractApplication::VApp()->TrVars()->FormulaFromUser(
-                data.formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+            QString const formula = VAbstractApplication::VApp()
+                                        ->TrVars()
+                                        ->FormulaFromUser(data.formula,
+                                                          VAbstractApplication::VApp()->Settings()->GetOsSeparator());
             QScopedPointer<Calculator> const cal(new Calculator());
             result = cal->EvalFormula(data.variables, formula);
 
@@ -392,8 +395,12 @@ auto OkColor(const QWidget *widget) -> QColor
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void CheckPointLabel(QDialog *dialog, QLineEdit *edit, QLabel *labelEditNamePoint, const QString &pointName,
-                     const VContainer *data, bool &flag)
+void CheckPointLabel(QDialog *dialog,
+                     QLineEdit *edit,
+                     QLabel *labelEditNamePoint,
+                     const QString &pointName,
+                     const VContainer *data,
+                     bool &flag)
 {
     SCASSERT(dialog != nullptr)
     SCASSERT(edit != nullptr)
@@ -988,7 +995,7 @@ void InitDialogButtonBoxIcons(QDialogButtonBox *buttonBox)
 {
     SCASSERT(buttonBox != nullptr)
 
-    QStyle  const*style = QApplication::style();
+    QStyle const *style = QApplication::style();
 
     if (QPushButton *bOk = buttonBox->button(QDialogButtonBox::Ok))
     {
@@ -1037,8 +1044,8 @@ auto MirrorLinePointsNeighbors(QListWidget *listWidget, quint32 startPoint, quin
     const int next = FindNotExcludedNeighborNodeDown(listWidget, nextIndex);
     const int prev = FindNotExcludedNeighborNodeUp(listWidget, prevIndex);
 
-    return (next >= 0 && endPoint == RowNode(listWidget, next).GetId()) ||
-           (prev >= 0 && endPoint == RowNode(listWidget, prev).GetId());
+    return (next >= 0 && endPoint == RowNode(listWidget, next).GetId())
+           || (prev >= 0 && endPoint == RowNode(listWidget, prev).GetId());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
