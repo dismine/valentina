@@ -193,6 +193,14 @@ void TST_ValentinaCommandLine::TestMode_data() const
 
     QTest::newRow("Legacy cutArc point without name1/name2 attributes.")
         << "legacy_cutarc_name.val" << u"--test"_s << V_EX_OK;
+
+    // A measurement file with only 2 dimensions (size + height). Requesting a dimension the file
+    // doesn't have used to crash (null QPointer<QComboBox> dereference in SetDimensionC) instead
+    // of failing gracefully.
+    QTest::newRow("Dimension letter unsupported by the measurement file.")
+        << "issue_256.val"
+        << u"--test;;-m;;%1;;--dimensionC;;62"_s.arg(tmp + QDir::separator() + "issue_256_correct.vst"_L1)
+        << V_EX_DATAERR;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -1,4 +1,5 @@
 # Valentina 1.1.2 (unreleased)
+- [Valentina app] Fixed a crash setting `--dimensionA`/`--dimensionB`/`--dimensionC` from the console on a pattern whose measurement file doesn't define that many dimensions: the dimension combo box was never created for the missing letter and got dereferenced anyway.
 - [Valentina app] Fixed a crash undoing the last remaining pattern piece: resetting the main window in response cleared the undo stack while it was still running the very undo command being cleared, so Qt's undo stack dereferenced the just-deleted command afterward.
 - [Valentina app] Fixed a spike in the seam allowance at a point placed on a curve.
 - [Valentina app / Tape app / Puzzle app] Fixed a crash on Windows on CPUs older than 2008 (pre-Nehalem, no POPCNT support), e.g. right after creating a new pattern: a bundled library used an MSVC intrinsic that assumes every CPU supports the POPCNT instruction.
