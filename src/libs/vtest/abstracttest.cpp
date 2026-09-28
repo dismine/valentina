@@ -833,6 +833,9 @@ void AbstractTest::SplineFromJson(const QJsonObject &itemObject, QSharedPointer<
     qreal aScale = 0;
     AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("aScale"), aScale);
 
+    vidtype idObject = NULL_ID;
+    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("idObject"), idObject, QString::number(NULL_ID));
+
     qreal angle1 = 0;
     AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("angle1"), angle1);
 
@@ -868,6 +871,7 @@ void AbstractTest::SplineFromJson(const QJsonObject &itemObject, QSharedPointer<
     auto *spl = new VSpline(p1, p4, angle1, angle1Formula, angle2, angle2Formula, c1Length, c1LengthFormula, c2Length,
                             c2LengthFormula);
     spl->SetApproximationScale(aScale);
+    spl->setIdObject(idObject);
     data->UpdateGObject(id, spl);
 }
 
@@ -880,6 +884,9 @@ void AbstractTest::SplinePathFromJson(const QJsonObject &itemObject, QSharedPoin
     qreal aScale = 0;
     AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("aScale"), aScale);
 
+    vidtype idObject = NULL_ID;
+    AbstractTest::ReadDoubleValue(itemObject, QStringLiteral("idObject"), idObject, QString::number(NULL_ID));
+
     QVector<VSplinePoint> points;
     AbstractTest::ReadSplinePointValues(itemObject, QStringLiteral("nodes"), points);
     for (auto &point : points)
@@ -889,6 +896,7 @@ void AbstractTest::SplinePathFromJson(const QJsonObject &itemObject, QSharedPoin
 
     auto *path = new VSplinePath(points);
     path->SetApproximationScale(aScale);
+    path->setIdObject(idObject);
     data->UpdateGObject(id, path);
 }
 

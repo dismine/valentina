@@ -133,6 +133,7 @@ public:
     static auto EndSegment(const VContainer *data, const QVector<VPieceNode> &nodes, vsizetype i) -> VSAPoint;
 
     static auto PreparePointEkv(const VPieceNode &node, const VContainer *data) -> VSAPoint;
+    static auto PreparePointEkv(const QVector<VPieceNode> &nodes, vsizetype i, const VContainer *data) -> VSAPoint;
 
     static auto CurveSeamAllowanceSegment(const VContainer *data, const QVector<VPieceNode> &nodes,
                                           const QSharedPointer<VAbstractCurve> &curve, vsizetype i, bool reverse,

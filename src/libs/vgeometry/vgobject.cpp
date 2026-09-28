@@ -290,6 +290,7 @@ auto VGObject::ToJson() const -> QJsonObject
     QJsonObject object{
         {"id", static_cast<qint64>(id())},
         {"type", static_cast<int>(getType())},
+        {"idObject", static_cast<qint64>(getIdObject())},
     };
 
     return object;

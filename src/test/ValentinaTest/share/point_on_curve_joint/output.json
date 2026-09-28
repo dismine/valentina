@@ -1,0 +1,339 @@
+{
+    "vector": [
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": -229.56691653543305,
+            "y": -224.56705511811015
+        },
+        {
+            "curvePoint": true,
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 1391.935480418697,
+            "y": -224.5670551181103
+        },
+        {
+            "curvePoint": true,
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 1467.3092552118703,
+            "y": 215.17439493853098
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1241.4435057082285,
+            "y": 294.94700773034964
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1214.6995913044223,
+            "y": 305.54147932573375
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1193.3269711870616,
+            "y": 315.2770850695127
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1176.3257120492697,
+            "y": 324.20902831041127
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1163.4959907630023,
+            "y": 332.0156692562308
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1154.5290569787287,
+            "y": 338.37038389155845
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1149.3091474819016,
+            "y": 342.7102288727663
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1149.405444370742,
+            "y": 346.99632051467466
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1150.1323119292676,
+            "y": 355.2728035467059
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1151.7745934608688,
+            "y": 366.5210504200309
+        },
+        {
+            "curvePoint": true,
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 1153.9999886937935,
+            "y": 377.9749037251897
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1158.1055949638744,
+            "y": 394.910786661306
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1163.069989634702,
+            "y": 412.5011825401104
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1169.2275629119792,
+            "y": 431.9767303770786
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1176.4028873426894,
+            "y": 452.7786013906364
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1189.4461037994108,
+            "y": 487.8060448389025
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1210.0993702523715,
+            "y": 539.0863861378284
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1246.4204369621616,
+            "y": 625.329484220212
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1285.2279436728152,
+            "y": 719.8078170528476
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1311.3056402099896,
+            "y": 788.4751131726237
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1329.8281624489646,
+            "y": 842.5115158262828
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1341.7362809188053,
+            "y": 880.5047267515739
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1352.7438015698642,
+            "y": 919.1525973917236
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1362.806871574984,
+            "y": 958.9274530314036
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1371.7277298715019,
+            "y": 999.8494472571206
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1379.2942497464187,
+            "y": 1041.9304248039468
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1385.2798107542947,
+            "y": 1085.1682935744675
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1389.4445721842512,
+            "y": 1129.540572754066
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1391.5386753846592,
+            "y": 1174.9975504088777
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1391.307809339249,
+            "y": 1221.4558214130184
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1388.5012991150138,
+            "y": 1268.7933162049196
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1382.8823920428476,
+            "y": 1316.84715219996
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1374.2397704099096,
+            "y": 1365.4155865846833
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1361.93156679053,
+            "y": 1416.1918787079262
+        },
+        {
+            "curvePoint": true,
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 1358.7535186348882,
+            "y": 1425.9152164789173
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1347.2732019957125,
+            "y": 1463.026861526122
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1328.6525953514267,
+            "y": 1511.7853758259057
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1306.636196482762,
+            "y": 1559.9510418023858
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1281.1903816255683,
+            "y": 1607.4191763983333
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1252.3553485523823,
+            "y": 1654.0107202347301
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1220.1878007657763,
+            "y": 1699.593281603204
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1184.7472267160606,
+            "y": 1744.0823885499083
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1146.0841232171158,
+            "y": 1787.437958746266
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1104.2313620519765,
+            "y": 1829.6574674325277
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1059.1990500620002,
+            "y": 1870.7674783806383
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 1010.9725606208295,
+            "y": 1910.8149813007717
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 959.513028938452,
+            "y": 1949.8595465622357
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 904.7594893887601,
+            "y": 1987.9668456266302
+        },
+        {
+            "curvePoint": true,
+            "type": "VLayoutPoint",
+            "x": 847.2759181772936,
+            "y": 2024.7911492443627
+        },
+        {
+            "curvePoint": true,
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": 754.5410840690602,
+            "y": 2080.363881800142
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": -229.56691653543305,
+            "y": 2080.363881800142
+        },
+        {
+            "turnPoint": true,
+            "type": "VLayoutPoint",
+            "x": -229.56691653543305,
+            "y": -224.56705511811015
+        }
+    ]
+}
