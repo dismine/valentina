@@ -7407,6 +7407,14 @@ auto MainWindow::SetDimensionA(int value) -> bool
         {
             if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize)
             {
+                if (m_dimensionA.isNull())
+                {
+                    qCCritical(vMainWindow, "%s",
+                               qUtf8Printable(tr("Couldn't set dimension A. This pattern file doesn't have "
+                                                  "dimension A.")));
+                    return false;
+                }
+
                 const qint32 index = m_dimensionA->findData(value);
                 if (index != -1)
                 {
@@ -7450,6 +7458,14 @@ auto MainWindow::SetDimensionB(int value) -> bool
         {
             if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize)
             {
+                if (m_dimensionB.isNull())
+                {
+                    qCCritical(vMainWindow, "%s",
+                               qUtf8Printable(tr("Couldn't set dimension B. This pattern file doesn't have "
+                                                  "dimension B.")));
+                    return false;
+                }
+
                 const qint32 index = m_dimensionB->findData(value);
                 if (index != -1)
                 {
@@ -7493,6 +7509,14 @@ auto MainWindow::SetDimensionC(int value) -> bool
         {
             if (VAbstractValApplication::VApp()->GetMeasurementsType() == MeasurementsType::Multisize)
             {
+                if (m_dimensionC.isNull())
+                {
+                    qCCritical(vMainWindow, "%s",
+                               qUtf8Printable(tr("Couldn't set dimension C. This pattern file doesn't have "
+                                                  "dimension C.")));
+                    return false;
+                }
+
                 const qint32 index = m_dimensionC->findData(value);
                 if (index != -1)
                 {

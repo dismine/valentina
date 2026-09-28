@@ -188,6 +188,14 @@ void TST_ValentinaCommandLine::TestMode_data() const
         << V_EX_NOINPUT;
 
     QTest::newRow("Wrong formula.") << "wrong_formula.val" << u"--test"_s << V_EX_DATAERR;
+
+    // A measurement file with only 2 dimensions (size + height). Requesting a dimension the file
+    // doesn't have used to crash (null QPointer<QComboBox> dereference in SetDimensionC) instead
+    // of failing gracefully.
+    QTest::newRow("Dimension letter unsupported by the measurement file.")
+        << "issue_256.val"
+        << u"--test;;-m;;%1;;--dimensionC;;62"_s.arg(tmp + QDir::separator() + "issue_256_correct.vst"_L1)
+        << V_EX_DATAERR;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
