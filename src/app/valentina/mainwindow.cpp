@@ -352,7 +352,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_gradation, &QTimer::timeout, this, &MainWindow::GradationChanged);
 
     doc = new VPattern(pattern, m_sceneDraw, m_sceneDetails);
-    connect(doc, &VPattern::ClearMainWindow, this, &MainWindow::Clear);
+    connect(doc, &VPattern::ClearMainWindow, this, &MainWindow::Clear, Qt::QueuedConnection);
     connect(doc, &VPattern::patternChanged, this, &MainWindow::PatternChangesWereSaved);
     connect(doc, &VPattern::UndoCommand, this, &MainWindow::FullParseFile, Qt::QueuedConnection);
     connect(doc, &VPattern::SetEnabledGUI, this, &MainWindow::SetEnabledGUI);
