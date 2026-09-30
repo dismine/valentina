@@ -31,6 +31,7 @@
 #include <QMessageBox>
 #include <QMessageLogger>
 #include <QMutex>
+#include <QNetworkProxy>
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QSslConfiguration>
@@ -124,6 +125,14 @@ FvUpdater::~FvUpdater()
 //---------------------------------------------------------------------------------------------------------------------
 void FvUpdater::showUpdaterWindowUpdatedWithCurrentUpdateProposal()
 {
+    if (m_mainWindow.isNull())
+    {
+        // The window that started this check is gone (e.g. closed while the feed was
+        // downloading). Nothing to anchor the notification to, so drop it.
+        qDebug() << "Main window is gone, skipping the update notification.";
+        return;
+    }
+
     // Destroy window if already exists
     hideUpdaterWindow();
 
@@ -329,6 +338,12 @@ void FvUpdater::startDownloadFeed(const QUrl &url)
 #ifndef QT_NO_SSL
     request.setSslConfiguration(QSslConfiguration::defaultConfiguration());
 #endif
+
+    // On Windows the first request through a manager resolves the system proxy synchronously on the
+    // calling thread, and this one runs on the GUI thread. With WPAD enabled and the PAC host
+    // unreachable that blocks the whole UI for as long as WinHTTP takes to give up. Valentina has no
+    // proxy settings of its own, so skip the lookup entirely.
+    m_qnam.setProxy(QNetworkProxy::NoProxy);
 
     m_reply = m_qnam.get(request);
 

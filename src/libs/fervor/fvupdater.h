@@ -101,7 +101,7 @@ private:
     // HTTP feed fetcher infrastructure
     //
     QUrl m_feedURL{}; // Feed URL that will be fetched
-    QWidget *m_mainWindow{nullptr};
+    QPointer<QWidget> m_mainWindow{nullptr};
     QNetworkAccessManager m_qnam{};
     QPointer<QNetworkReply> m_reply{nullptr};
     bool m_httpRequestAborted{false};
