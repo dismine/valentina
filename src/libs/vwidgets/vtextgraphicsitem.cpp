@@ -209,7 +209,14 @@ void DrawTextAsPaths(const TextLine &tl,
     VSingleLineOutlineChar const corrector(fnt);
     if (!corrector.IsPopulated())
     {
-        corrector.LoadCorrections(VAbstractApplication::VApp()->Settings()->GetPathFontCorrections());
+        // Runs from paint(): must never block the UI thread on a slow/unreachable corrections
+        // path, so this loads in the background instead. This paint may draw the glyphs
+        // uncorrected; a later repaint (nothing here forces one) will pick up the real result.
+        // Relies on this item only ever being painted in GUI mode (MainWindow::m_sceneDetails is
+        // never shown or explicitly rendered in a console/no-GUI run -- export goes through
+        // VLayoutPiece's own, synchronous corrector call instead), so "a later repaint" is a real
+        // guarantee here, not a hope: the event loop that would provide it is always running.
+        corrector.LoadCorrectionsAsync(VAbstractApplication::VApp()->Settings()->GetPathFontCorrections());
     }
 
     QPainterPath path;
@@ -249,6 +256,18 @@ VTextGraphicsItem::VTextGraphicsItem(ItemType type, QGraphicsItem *pParent)
     m_inactiveZ = 2;
     SetSize(minW, minH);
     setZValue(m_inactiveZ);
+
+    // DrawTextAsPaths() may have painted this item's glyphs uncorrected while a
+    // LoadCorrectionsAsync() load was still running (see its doc comment); repaint once that
+    // load lands so the label doesn't sit uncorrected until an unrelated redraw happens to pass
+    // by. Not filtered by font family: this item is cheap to repaint, and it may not be this
+    // item's own load that just finished anyway (labels share the one global corrections cache).
+    connect(GetOutlineCorrectionsNotifier(), &VOutlineCorrectionsNotifier::CorrectionsLoaded, this,
+            [this](const QString &fontFamily)
+            {
+                Q_UNUSED(fontFamily)
+                update();
+            });
 }
 
 //---------------------------------------------------------------------------------------------------------------------

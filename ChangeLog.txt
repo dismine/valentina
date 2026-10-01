@@ -1,4 +1,5 @@
 # Valentina 1.1.2 (unreleased)
+- [Valentina app] Fixed the UI freezing while drawing a piece or pattern info label if the font-corrections folder is slow or unreachable.
 - [Tape app / Puzzle app] Fixed a crash showing the update notification if the window that started the check had been closed.
 - [Tape app / Puzzle app] Fixed the UI freezing during the startup update check when Windows proxy detection is slow.
 - [Valentina app] Fixed a crash setting `--dimensionA`/`--dimensionB`/`--dimensionC` from the console on a pattern whose measurement file doesn't define that many dimensions: the dimension combo box was never created for the missing letter and got dereferenced anyway.

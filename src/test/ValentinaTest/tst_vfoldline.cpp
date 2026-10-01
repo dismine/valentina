@@ -39,6 +39,7 @@
 #include <QJsonObject>
 #include <QLineF>
 #include <QScopeGuard>
+#include <QSignalSpy>
 #include <QTemporaryDir>
 #include <QtTest>
 
@@ -777,4 +778,137 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
                                     .arg(angleDeg)
                                     .arg(angleErrDeg)));
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Regression guard for a hang: VSingleLineOutlineChar::LoadCorrections() used to leave the global
+// corrections cache empty whenever no corrections file was found, so IsPopulated() kept returning
+// false and every single repaint of a label re-hit the (possibly slow or unreachable) corrections
+// directory. Both entry points must now mark a font family as resolved -- synchronously, before
+// returning -- whether or not anything was actually found. Also covers a second bug that fix
+// could have introduced: LoadCorrectionsAsync()'s worker runs on a detached, unjoinable
+// std::thread (deliberately, so it can never block app shutdown -- see its doc comment), so a
+// load already in flight when the cache is invalidated (a corrections-path change, or
+// ClearCorrectionsCache() after exporting a new file) must not resurrect stale data afterward.
+void TST_VFoldLine::OutlineCorrectionsCacheGuardsAgainstRepeatedDiskHits() const
+{
+    auto UniqueFamily = [](const QString &suffix)
+    { return QStringLiteral("TST_VFoldLine_NoSuchFamily_%1").arg(suffix); };
+
+    {
+        QFont font;
+        font.setFamily(UniqueFamily(QStringLiteral("Sync")));
+        VSingleLineOutlineChar corrector(font);
+        auto restore = qScopeGuard([&corrector]() { corrector.ClearCorrectionsCache(); });
+
+        QVERIFY(!corrector.IsPopulated());
+        corrector.LoadCorrections(QStringLiteral("/does/not/exist"));
+        QVERIFY2(corrector.IsPopulated(), "A miss must be cached too, or every repaint retries the disk.");
+    }
+
+    {
+        // LoadCorrectionsAsync() is what paint() calls -- IsPopulated() must flip to true right
+        // after this call returns, not only once its worker thread finishes, otherwise every
+        // repaint before that dispatches yet another worker for the same font family.
+        QFont font;
+        font.setFamily(UniqueFamily(QStringLiteral("Async")));
+        VSingleLineOutlineChar corrector(font);
+        auto restore = qScopeGuard([&corrector]() { corrector.ClearCorrectionsCache(); });
+
+        QVERIFY(!corrector.IsPopulated());
+        corrector.LoadCorrectionsAsync(QStringLiteral("/does/not/exist"));
+        QVERIFY2(corrector.IsPopulated(), "The placeholder must be inserted before returning, not after the load.");
+    }
+
+    // And once its worker thread finishes, LoadCorrectionsAsync() must still end up applying real
+    // corrections when a file does exist -- it must not just permanently cache "nothing found".
+    // The worker is a detached std::thread with no join/wait handle, so poll for it instead.
+    {
+        QTemporaryDir correctionsDir;
+        QVERIFY(correctionsDir.isValid());
+        QFont const realFont;
+        DisableSingleStrokeTrimForText(QStringLiteral("A"), realFont.family(), QDir(correctionsDir.path()));
+
+        VSingleLineOutlineChar syncCorrector(realFont);
+        syncCorrector.LoadCorrections(correctionsDir.path());
+        QPainterPath const expected = syncCorrector.DrawChar(0, 0, QChar('A'));
+        syncCorrector.ClearCorrectionsCache();
+
+        VSingleLineOutlineChar asyncCorrector(realFont);
+        auto restore = qScopeGuard([&asyncCorrector]() { asyncCorrector.ClearCorrectionsCache(); });
+        asyncCorrector.LoadCorrectionsAsync(correctionsDir.path());
+
+        qsizetype actualCount = 0;
+        QTRY_VERIFY2((actualCount = asyncCorrector.DrawChar(0, 0, QChar('A')).toSubpathPolygons().size())
+                         == expected.toSubpathPolygons().size(),
+                     qUtf8Printable(QStringLiteral("LoadCorrectionsAsync() never applied the real corrections "
+                                                   "(got %1 subpaths, want %2).")
+                                        .arg(actualCount)
+                                        .arg(expected.toSubpathPolygons().size())));
+    }
+
+    // A load started under the old state must not land after the cache backing it was cleared --
+    // otherwise changing the corrections path (Preferences -> Paths) or re-exporting corrections
+    // while a paint()-triggered load for the old state is still in flight could silently bring
+    // back data for a directory that no longer applies.
+    {
+        QFont font;
+        font.setFamily(UniqueFamily(QStringLiteral("InvalidatedMidFlight")));
+
+        QTemporaryDir correctionsDir;
+        QVERIFY(correctionsDir.isValid());
+        DisableSingleStrokeTrimForText(QStringLiteral("A"), font.family(), QDir(correctionsDir.path()));
+
+        VSingleLineOutlineChar corrector(font);
+        auto restore = qScopeGuard([&corrector]() { corrector.ClearCorrectionsCache(); });
+
+        corrector.LoadCorrectionsAsync(correctionsDir.path());
+        VSingleLineOutlineChar::ClearAllCorrectionsCache(); // simulates a path change mid-flight
+
+        // Give the detached worker time to finish, whichever side of the clear it lands on.
+        QTest::qWait(200);
+
+        QVERIFY2(!corrector.IsPopulated(),
+                 "A load already in flight when the cache was cleared must not repopulate it afterward.");
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Regression guard: a real corrections load landing after paint() already drew a label
+// uncorrected must not just sit silently in the cache -- VTextGraphicsItem::VTextGraphicsItem()
+// connects to GetOutlineCorrectionsNotifier() and calls update() so the label repaints once the
+// load lands (not exercised here -- that needs a live QGraphicsScene/view -- but the signal it
+// depends on is verified directly).
+void TST_VFoldLine::OutlineCorrectionsAsyncLoadNotifiesOnCompletion() const
+{
+    QFont font;
+    font.setFamily(QStringLiteral("TST_VFoldLine_NotifierFamily"));
+
+    QTemporaryDir correctionsDir;
+    QVERIFY(correctionsDir.isValid());
+    DisableSingleStrokeTrimForText(QStringLiteral("A"), font.family(), QDir(correctionsDir.path()));
+
+    VSingleLineOutlineChar corrector(font);
+    auto restore = qScopeGuard([&corrector]() { corrector.ClearCorrectionsCache(); });
+
+    QSignalSpy spy(GetOutlineCorrectionsNotifier(), &VOutlineCorrectionsNotifier::CorrectionsLoaded);
+    QVERIFY(spy.isValid());
+
+    corrector.LoadCorrectionsAsync(correctionsDir.path());
+
+    // Search the whole spy history, not just the latest emission -- other tests' own background
+    // loads (a different font family each) can still be landing around the same time.
+    auto EmittedForThisFamily = [&spy, &font]() -> bool
+    {
+        for (const QList<QVariant> &emission : spy)
+        {
+            if (emission.at(0).toString() == font.family())
+            {
+                return true;
+            }
+        }
+        return false;
+    };
+    QTRY_VERIFY2(EmittedForThisFamily(),
+                 "LoadCorrectionsAsync() never emitted CorrectionsLoaded after committing a real result.");
 }

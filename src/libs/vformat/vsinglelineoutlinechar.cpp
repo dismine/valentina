@@ -40,6 +40,9 @@
 #include <QRawFont>
 #include <QtDebug>
 
+#include <memory>
+#include <thread>
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
 #include <QDirListing>
 #endif
@@ -51,6 +54,14 @@ QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
 Q_GLOBAL_STATIC(QMutex, singleLineOutlineCharMutex)                         // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(VOutlineCorrectionsCache, cachedCorrections, (5)) // NOLINT
+// Bumped by every cache-clearing call. LoadCorrectionsAsync() captures the value before
+// dispatching its worker and checks it again before committing the result, so a load that was
+// already in flight when the corrections path changed (ClearAllCorrectionsCache()) or a single
+// family was invalidated (ClearCorrectionsCache()) can't resurrect stale data afterward. Every
+// access happens under singleLineOutlineCharMutex already (the cache ops right next to it need
+// the same lock anyway), so a plain int guarded by that mutex is enough -- no atomic needed.
+Q_GLOBAL_STATIC(int, correctionsGeneration)                       // NOLINT
+Q_GLOBAL_STATIC(VOutlineCorrectionsNotifier, correctionsNotifier) // NOLINT
 
 QT_WARNING_POP
 
@@ -104,7 +115,78 @@ auto CorrectPath(const QPainterPath &path, const QHash<int, bool> &segmentCorrec
 
     return outlinePath;
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief FindAndParseCorrections locates and parses "<fontFamily>.json" under dirPath.
+ *
+ * dirPath is a user-configurable setting (Preferences -> Paths) and its default lives under the
+ * platform "Documents" folder, which is commonly redirected to a network share or a cloud-sync
+ * placeholder, so this can block for a long time. Returns nullptr if nothing usable was found, so
+ * callers can cache that explicitly and never repeat the disk hit for this font family.
+ */
+Q_REQUIRED_RESULT auto FindAndParseCorrections(const QString &dirPath, const QString &fontFamily)
+    -> VOutlineCorrections *
+{
+    auto const fileName = QStringLiteral("%1.json").arg(fontFamily);
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
+    using F = QDirListing::IteratorFlag;
+
+    QDirListing dirListing(dirPath, QStringList(fileName), F::FilesOnly);
+    QString filePath;
+    for (const auto &entry : dirListing)
+    {
+        if (entry.fileName() == fileName)
+        {
+            filePath = entry.absoluteFilePath();
+            break; // Exit after finding the first match
+        }
+    }
+
+    if (filePath.isEmpty())
+    {
+        return nullptr; // No matching files found
+    }
+#else
+    QDir directory(dirPath);
+    directory.setNameFilters(QStringList(fileName));
+    QStringList const matchingFiles = directory.entryList();
+    if (matchingFiles.isEmpty())
+    {
+        return nullptr; // No matching files found
+    }
+    QString const filePath = directory.absoluteFilePath(matchingFiles.constFirst());
+#endif
+
+    QFile jsonFile(filePath);
+    if (!jsonFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        qDebug() << "Failed to open file for reading.";
+        return nullptr;
+    }
+
+    // Read the JSON data from the file
+    QByteArray const jsonData = jsonFile.readAll();
+
+    // Create a JSON document from the JSON data
+    QJsonDocument const jsonDocument = QJsonDocument::fromJson(jsonData);
+
+    if (jsonDocument.isNull())
+    {
+        qDebug() << "Failed to parse JSON document.";
+        return nullptr;
+    }
+
+    return ParseCorrectiosn(jsonDocument.object());
+}
 } // namespace
+
+//---------------------------------------------------------------------------------------------------------------------
+auto GetOutlineCorrectionsNotifier() -> VOutlineCorrectionsNotifier *
+{
+    return correctionsNotifier();
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VSingleLineOutlineChar::VSingleLineOutlineChar(const QFont &font)
@@ -160,74 +242,145 @@ void VSingleLineOutlineChar::ExportCorrections(const QString &dirPath) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief LoadCorrections looks for corrections for the current font and blocks until it knows.
+ *
+ * Callers that consume the result right after calling this (export, printing/layout, the
+ * preferences preview) need the correct data, not "eventually correct", so this stays
+ * synchronous. It does cache a miss (no file, unreadable, unparsable) the same as a hit, so a
+ * missing or permanently unreachable corrections directory is only ever hit once per font family
+ * per run rather than on every call. Painting on the UI thread should use LoadCorrectionsAsync()
+ * instead.
+ */
 void VSingleLineOutlineChar::LoadCorrections(const QString &dirPath) const
 {
-    auto const fileName = QStringLiteral("%1.json").arg(m_font.family());
-
-#if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
-    using F = QDirListing::IteratorFlag;
-
-    QDirListing const dirListing(dirPath, QStringList(fileName), F::FilesOnly);
-    QString filePath;
-    for (const auto &entry : dirListing)
+    std::unique_ptr<VOutlineCorrections> corrections(FindAndParseCorrections(dirPath, m_font.family()));
+    QMutexLocker const locker(singleLineOutlineCharMutex());
+    if (VOutlineCorrectionsCache *cache = cachedCorrections())
     {
-        if (entry.fileName() == fileName)
+        cache->insert(m_font.family(), corrections ? corrections.release() : new VOutlineCorrections);
+    }
+    // else: the cache is already gone (shutting down); corrections, if any, frees itself.
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief LoadCorrectionsAsync is LoadCorrections() for call sites inside paint().
+ *
+ * dirPath is a user-configurable setting (Preferences -> Paths) whose default lives under the
+ * platform "Documents" folder, which is commonly redirected to a network share or a cloud-sync
+ * placeholder, so finding/reading the corrections file there can block for a long time -- painting
+ * on the main thread must never do that. This marks the font family as loading (an empty
+ * placeholder, so IsPopulated() stops retrying and paint() draws uncorrected glyphs for now) and
+ * runs the actual disk access on a detached worker thread, which emits
+ * GetOutlineCorrectionsNotifier()'s CorrectionsLoaded signal once it commits a real result, so a
+ * caller that painted uncorrected glyphs while the load was in flight can connect to it and
+ * repaint itself instead of waiting on an unrelated redraw.
+ *
+ * A raw detached std::thread, not QThreadPool, is deliberate: QThreadPool::~QThreadPool()
+ * (including the global instance, destroyed at process exit) blocks until every runnable has
+ * finished, so a worker stuck on the same kind of slow/unreachable path this function exists to
+ * route around would turn "painting hangs" into "closing the app hangs" instead. A detached
+ * thread is never joined by anyone, so it cannot block shutdown; if it is still running when the
+ * process exits, the OS simply reclaims it. That also means it can still be running after this
+ * translation unit's Q_GLOBAL_STATICs are destroyed, hence the generation check and null guards
+ * below instead of a bare cachedCorrections()->insert(...).
+ */
+void VSingleLineOutlineChar::LoadCorrectionsAsync(const QString &dirPath) const
+{
+    int startGeneration = 0;
+    {
+        QMutexLocker const locker(singleLineOutlineCharMutex());
+        VOutlineCorrectionsCache *cache = cachedCorrections();
+        if (cache == nullptr || cache->contains(m_font.family()))
         {
-            filePath = entry.absoluteFilePath();
-            break; // Exit after finding the first match
+            return; // Shutting down, already loaded, or a background load is already in progress.
+        }
+        cache->insert(m_font.family(), new VOutlineCorrections);
+        if (const int *generation = correctionsGeneration())
+        {
+            startGeneration = *generation;
         }
     }
 
-    if (filePath.isEmpty())
-    {
-        return; // No matching files found
-    }
-#else
-    QDir directory(dirPath);
-    directory.setNameFilters(QStringList(fileName));
-    QStringList const matchingFiles = directory.entryList();
-    if (matchingFiles.isEmpty())
-    {
-        return; // No matching files found
-    }
-    QString const filePath = directory.absoluteFilePath(matchingFiles.constFirst());
-#endif
+    const QFont font = m_font;
+    std::thread(
+        [font, dirPath, startGeneration]()
+        {
+            std::unique_ptr<VOutlineCorrections> corrections(FindAndParseCorrections(dirPath, font.family()));
+            if (!corrections)
+            {
+                return;
+            }
 
-    QFile jsonFile(filePath);
-    if (!jsonFile.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        qDebug() << "Failed to open file for reading.";
-        return;
-    }
+            {
+                QMutexLocker const locker(singleLineOutlineCharMutex());
+                VOutlineCorrectionsCache *cache = cachedCorrections();
+                const int *generation = correctionsGeneration();
+                if (cache == nullptr || generation == nullptr || *generation != startGeneration)
+                {
+                    // The cache was cleared (corrections path changed via
+                    // ClearAllCorrectionsCache(), this family invalidated via
+                    // ClearCorrectionsCache(), or the process is shutting down) while this load
+                    // was in flight -- that result is for a state that no longer exists, so drop
+                    // it instead of resurrecting stale data (corrections frees itself on return).
+                    return;
+                }
+                cache->insert(font.family(), corrections.release());
+            }
 
-    // Read the JSON data from the file
-    QByteArray const jsonData = jsonFile.readAll();
-
-    // Create a JSON document from the JSON data
-    QJsonDocument const jsonDocument = QJsonDocument::fromJson(jsonData);
-
-    if (jsonDocument.isNull())
-    {
-        qDebug() << "Failed to parse JSON document.";
-        return;
-    }
-
-    QMutexLocker const locker(singleLineOutlineCharMutex());
-    cachedCorrections()->insert(m_font.family(), ParseCorrectiosn(jsonDocument.object()));
+            // Whatever painted this family's glyphs uncorrected while this load was running (see
+            // LoadCorrectionsAsync()'s doc comment) can now redraw itself with the real result.
+            // Emitted outside the lock above, and safe from a worker thread: Qt queues delivery
+            // to whichever thread each connected receiver actually lives on.
+            if (VOutlineCorrectionsNotifier *notifier = GetOutlineCorrectionsNotifier())
+            {
+                emit notifier->CorrectionsLoaded(font.family());
+            }
+        })
+        .detach();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void VSingleLineOutlineChar::ClearCorrectionsCache()
 {
     QMutexLocker const locker(singleLineOutlineCharMutex());
-    cachedCorrections()->remove(m_font.family());
+    if (int *generation = correctionsGeneration())
+    {
+        ++(*generation);
+    }
+    if (VOutlineCorrectionsCache *cache = cachedCorrections())
+    {
+        cache->remove(m_font.family());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+/**
+ * @brief ClearAllCorrectionsCache invalidates every font family's cached corrections at once.
+ *
+ * Call this whenever the corrections directory itself changes (Preferences -> Paths): a path
+ * change can affect every font family that has already been resolved, not just one, so the
+ * per-instance ClearCorrectionsCache() is not enough.
+ */
+void VSingleLineOutlineChar::ClearAllCorrectionsCache()
+{
+    QMutexLocker const locker(singleLineOutlineCharMutex());
+    if (int *generation = correctionsGeneration())
+    {
+        ++(*generation);
+    }
+    if (VOutlineCorrectionsCache *cache = cachedCorrections())
+    {
+        cache->clear();
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VSingleLineOutlineChar::DrawChar(qreal x, qreal y, QChar c) const -> QPainterPath
 {
-    if (c == QChar(0x042B) || c == QChar(0x044B) || c == QChar(0x042A) || c == QChar(0x044A) || c == QChar(0x0401) ||
-        c == QChar(0x0451) || c == QChar(0x042D) || c == QChar(0x044D))
+    if (c == QChar(0x042B) || c == QChar(0x044B) || c == QChar(0x042A) || c == QChar(0x044A) || c == QChar(0x0401)
+        || c == QChar(0x0451) || c == QChar(0x042D) || c == QChar(0x044D))
     {
         c = QChar(0xFFFD);
     }
@@ -235,14 +388,14 @@ auto VSingleLineOutlineChar::DrawChar(qreal x, qreal y, QChar c) const -> QPaint
     QPainterPath path;
     path.addText(x, y, m_font, c);
 
-    QMutexLocker locker(singleLineOutlineCharMutex());
     QHash<int, bool> segmentCorrections;
-
-    if (cachedCorrections()->contains(m_font.family()))
     {
-        segmentCorrections = cachedCorrections()->object(m_font.family())->value(c);
+        QMutexLocker const locker(singleLineOutlineCharMutex());
+        if (VOutlineCorrectionsCache *cache = cachedCorrections(); cache != nullptr && cache->contains(m_font.family()))
+        {
+            segmentCorrections = cache->object(m_font.family())->value(c);
+        }
     }
-    locker.unlock();
 
     return CorrectPath(path, segmentCorrections);
 }
@@ -250,5 +403,7 @@ auto VSingleLineOutlineChar::DrawChar(qreal x, qreal y, QChar c) const -> QPaint
 //---------------------------------------------------------------------------------------------------------------------
 auto VSingleLineOutlineChar::IsPopulated() const -> bool
 {
-    return cachedCorrections()->contains(m_font.family());
+    QMutexLocker const locker(singleLineOutlineCharMutex());
+    VOutlineCorrectionsCache *cache = cachedCorrections();
+    return cache != nullptr && cache->contains(m_font.family());
 }
