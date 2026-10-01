@@ -1,4 +1,5 @@
 # Valentina 1.1.2 (unreleased)
+- [Valentina app] Fixed a crash when a piece path used a curve that had no points, e.g. after a formula edit made the curve invalid.
 - [Valentina app / Puzzle app / Tape app] Fixed a crash on macOS when the app terminated itself after a fatal internal error.
 - [Valentina app] Fixed the UI freezing while a background image's resize/rotate handles were visible if the image file was on a slow or unreachable path.
 - [Valentina app] Fixed the UI freezing while drawing a piece or pattern info label if the font-corrections folder is slow or unreachable.

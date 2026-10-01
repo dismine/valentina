@@ -42,6 +42,7 @@ private slots:
     void IsPointOnCurve() const;
     void CurveIntersectLine_data();
     void CurveIntersectLine() const;
+    void GetSegmentPoints_EmptyCurve() const;
 };
 
 #endif // TST_VABSTRACTCURVE_H
