@@ -144,6 +144,7 @@ void VBackgroundPatternImage::SetContentData(const QByteArray &newContentData, c
     m_contentType = newContentType;
     m_filePath.clear();
     m_size = QSize();
+    m_validCache.reset();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -154,6 +155,17 @@ auto VBackgroundPatternImage::IsNull() const -> bool
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VBackgroundPatternImage::IsValid() const -> bool
+{
+    if (not m_validCache.has_value())
+    {
+        m_validCache = ComputeValid();
+    }
+
+    return *m_validCache;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VBackgroundPatternImage::ComputeValid() const -> bool
 {
     m_errorString.clear();
 
@@ -273,6 +285,7 @@ void VBackgroundPatternImage::SetFilePath(const QString &newFilePath)
     m_contentData.clear();
     m_contentType.clear();
     m_size = QSize();
+    m_validCache.reset();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -321,6 +334,7 @@ auto VBackgroundPatternImage::Id() const -> QUuid
 void VBackgroundPatternImage::SetId(const QUuid &newId)
 {
     m_id = newId;
+    m_validCache.reset();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
