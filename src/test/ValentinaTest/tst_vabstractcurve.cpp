@@ -203,3 +203,15 @@ void TST_VAbstractCurve::CurveIntersectLine() const
     const QVector<QPointF> result = VAbstractCurve::CurveIntersectLine(points, line);
     QCOMPARE(result, intersections);
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractCurve::GetSegmentPoints_EmptyCurve() const
+{
+    // A curve whose geometry failed to build has no points. Asking for its whole segment (begin == end) used to
+    // dereference the empty vector.
+    QString error;
+    const QVector<QPointF> segment = VAbstractCurve::GetSegmentPoints({}, QPointF(), QPointF(), false, error);
+
+    QVERIFY(segment.isEmpty());
+    QVERIFY(not error.isEmpty());
+}
