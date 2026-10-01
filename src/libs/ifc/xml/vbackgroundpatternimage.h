@@ -32,6 +32,7 @@
 #include <QCoreApplication>
 #include <QUuid>
 #include <QTransform>
+#include <optional>
 
 class QPixmap;
 class QMimeType;
@@ -108,9 +109,16 @@ private:
     bool            m_visible{true};
     qreal           m_opacity{1.0};
     mutable QSize   m_size{};
+    // IsValid() sniffs the mimetype (file-system lookup for a linked image, content sniffing for an
+    // embedded one) and, for SVG, parses the document -- all in the paint/hit-test hot path
+    // (VBackgroundImageControls::shape()/boundingRect() call it on every hover-move). Cache the
+    // result until something that could change it is set; a linked file on a slow or unreachable
+    // path otherwise reruns that lookup dozens of times a second and stalls the UI.
+    mutable std::optional<bool> m_validCache{};
 
     auto LinkedImageSize() const -> QSize;
     auto BuiltInImageSize() const -> QSize;
+    auto ComputeValid() const -> bool;
 };
 
 #endif // VBACKGROUNDPATTERNIMAGE_H

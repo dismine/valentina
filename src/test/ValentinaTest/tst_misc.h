@@ -52,6 +52,8 @@ private slots:
 
     void TestOversizedSvgBackgroundImage();
 
+    void TestBackgroundImageValidityCacheInvalidation();
+
 private:
     Q_DISABLE_COPY_MOVE(TST_Misc) // NOLINT
 };

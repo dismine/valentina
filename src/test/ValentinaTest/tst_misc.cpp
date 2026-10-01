@@ -247,3 +247,25 @@ void TST_Misc::TestOversizedSvgBackgroundImage()
     QCOMPARE(oversizedImage.ErrorString(),
              QStringLiteral("The image declares a canvas size that is too large to render safely."));
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_Misc::TestBackgroundImageValidityCacheInvalidation()
+{
+    // IsValid() caches its result because VBackgroundImageControls::shape()/boundingRect() call it
+    // repeatedly on every hover-move during interactive use. Regression test: replacing the data
+    // after an IsValid() call must not leave the stale cached answer behind.
+    const QByteArray normalSvg = QByteArrayLiteral(
+        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+        "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\"><rect width=\"100\" "
+        "height=\"100\"/></svg>");
+
+    VBackgroundPatternImage image;
+    QVERIFY(not image.IsValid()); // no data yet, and this call must populate the cache
+    QCOMPARE(image.ErrorString(), QStringLiteral("No data."));
+
+    image.SetContentData(normalSvg.toBase64(), QStringLiteral("image/svg+xml"));
+    QVERIFY(image.IsValid()); // SetContentData() must have invalidated the stale "No data." cache
+
+    image.SetContentData(QByteArray(), QStringLiteral("image/svg+xml"));
+    QVERIFY(not image.IsValid()); // must not keep returning the previous "valid" cached answer
+}
