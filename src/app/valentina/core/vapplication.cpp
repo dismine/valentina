@@ -47,6 +47,7 @@
 
 #include "QtConcurrent/qtconcurrentrun.h"
 #include <vcsRepoState.h>
+#include <QAtomicInt>
 #include <QDateTime>
 #include <QDir>
 #include <QEvent>
@@ -91,6 +92,19 @@ QT_WARNING_POP
 
 namespace
 {
+// ::exit(), called from VApplication::notify()'s fatal-exception catch blocks, runs Qt's own static/
+// atexit teardown, which can itself emit a stray Qt warning (seen on macOS). Routing that warning back
+// through this file's message handler mid-teardown touches Qt internals the teardown may have already
+// torn down, which crashed with EXC_BAD_ACCESS (null deref in QApplication::translate()). Once a catch
+// block below has decided to terminate, every later message handler call is dropped instead of processed.
+QAtomicInt g_terminatingOnFatalException{0};
+
+Q_NORETURN void TerminateOnFatalException(int exitCode)
+{
+    g_terminatingOnFatalException.storeRelease(1);
+    ::exit(exitCode); // NOLINT(concurrency-mt-unsafe)
+}
+
 auto AppFilePath(const QString &appName) -> QString
 {
 #ifdef Q_OS_WIN
@@ -243,6 +257,14 @@ inline void ShowNoisyMessageBox(QtMsgType type, const QString &logMsg, bool isPa
 //---------------------------------------------------------------------------------------------------------------------
 inline void noisyFailureMsgHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
+    if (g_terminatingOnFatalException.loadAcquire() != 0)
+    {
+        // A fatal exception already decided to terminate (see TerminateOnFatalException). Handling a
+        // further message here would touch Qt internals that exit()'s own teardown may already have
+        // torn down, so drop it instead of crashing on it.
+        return;
+    }
+
     // only the GUI thread should display message boxes.  If you are
     // writing a multithreaded application and the error happens on
     // a non-GUI thread, you'll have to queue the message to the GUI
@@ -474,11 +496,12 @@ void VApplication::NewValentina(const QString &fileName)
 // reimplemented from QApplication so we can throw exceptions in slots
 auto VApplication::notify(QObject *receiver, QEvent *event) -> bool
 {
-    // Every catch below must call the qualified ::exit() (the C library one), not exit() unqualified. Inside
-    // a QCoreApplication-derived member function, unqualified exit() resolves to the inherited static slot
+    // Every catch below must terminate via TerminateOnFatalException(), not a bare exit() call. Inside a
+    // QCoreApplication-derived member function, unqualified exit() resolves to the inherited static slot
     // QCoreApplication::exit(int), which does not terminate the process: it just flags the nearest event
-    // loop(s) to quit and returns control here. Control then keeps running on data that is known bad (the
-    // exception that got us into this catch), which crashed once teardown eventually caught up with it.
+    // loop(s) to quit and returns control here, running on data already known bad. TerminateOnFatalException()
+    // calls the qualified ::exit() and also flags the message handler to drop any message Qt's own teardown
+    // emits afterward, which has separately crashed (see its definition).
     try
     {
         return QApplication::notify(receiver, event);
@@ -488,44 +511,44 @@ auto VApplication::notify(QObject *receiver, QEvent *event) -> bool
         qCCritical(vApp, "%s\n\n%s\n\n%s",
                    qUtf8Printable(tr("Error parsing file. Program will be terminated.")), //-V807
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        ::exit(V_EX_DATAERR);
+        TerminateOnFatalException(V_EX_DATAERR);
     }
     catch (const VExceptionBadId &e)
     {
         qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error bad id. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        ::exit(V_EX_DATAERR);
+        TerminateOnFatalException(V_EX_DATAERR);
     }
     catch (const VExceptionConversionError &e)
     {
         qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error can't convert value. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        ::exit(V_EX_DATAERR);
+        TerminateOnFatalException(V_EX_DATAERR);
     }
     catch (const VExceptionEmptyParameter &e)
     {
         qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error empty parameter. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        ::exit(V_EX_DATAERR);
+        TerminateOnFatalException(V_EX_DATAERR);
     }
     catch (const VExceptionWrongId &e)
     {
         qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Error wrong id. Program will be terminated.")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        ::exit(V_EX_DATAERR);
+        TerminateOnFatalException(V_EX_DATAERR);
     }
     catch (const VExceptionToolWasDeleted &e)
     {
         qCCritical(vApp, "%s\n\n%s\n\n%s",
                    qUtf8Printable(QStringLiteral("Unhadled deleting tool. Continue use object after deleting")),
                    qUtf8Printable(e.ErrorMessage()), qUtf8Printable(e.DetailedInformation()));
-        ::exit(V_EX_DATAERR);
+        TerminateOnFatalException(V_EX_DATAERR);
     }
     catch (const VExceptionInvalidNotch &e)
     {
         qCCritical(vApp, "%s\n\n%s\n\n%s", qUtf8Printable(tr("Invalid notch.")), qUtf8Printable(e.ErrorMessage()),
                    qUtf8Printable(e.DetailedInformation()));
-        ::exit(V_EX_DATAERR);
+        TerminateOnFatalException(V_EX_DATAERR);
     }
     catch (const VException &e)
     {
@@ -536,7 +559,7 @@ auto VApplication::notify(QObject *receiver, QEvent *event) -> bool
     catch (const qmu::QmuParserWarning &e)
     {
         qCCritical(vApp, "%s", qUtf8Printable(tr("Formula warning: %1. Program will be terminated.").arg(e.GetMsg())));
-        ::exit(V_EX_DATAERR);
+        TerminateOnFatalException(V_EX_DATAERR);
     }
     // These last two cases are special. I found that we can't show here a modal dialog with an error message.
     // Somehow program doesn't wait until an error dialog will be closed. But if ignore the exception the program will
@@ -544,12 +567,12 @@ auto VApplication::notify(QObject *receiver, QEvent *event) -> bool
     catch (const qmu::QmuParserError &e)
     {
         qCCritical(vApp, "%s", qUtf8Printable(tr("Parser error: %1. Program will be terminated.").arg(e.GetMsg())));
-        ::exit(V_EX_DATAERR);
+        TerminateOnFatalException(V_EX_DATAERR);
     }
     catch (std::exception &e)
     {
         qCCritical(vApp, "%s", qUtf8Printable(tr("Exception thrown: %1. Program will be terminated.").arg(e.what())));
-        ::exit(V_EX_SOFTWARE);
+        TerminateOnFatalException(V_EX_SOFTWARE);
     }
     return false;
 }
