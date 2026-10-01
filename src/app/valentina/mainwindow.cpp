@@ -4477,8 +4477,11 @@ void MainWindow::ActionExportFontCorrections()
             return;
         }
 
-        VSingleLineOutlineChar const corrector(labelFont);
+        VSingleLineOutlineChar corrector(labelFont);
         corrector.ExportCorrections(dir);
+        // The freshly-written file may be the one LoadCorrections()/LoadCorrectionsAsync() will
+        // read on the next label paint; forget any earlier "nothing found" result for this font.
+        corrector.ClearCorrectionsCache();
     }
 }
 

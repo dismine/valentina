@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "preferencespathpage.h"
+#include "../vformat/vsinglelineoutlinechar.h"
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vmisc/vvalentinasettings.h"
 #include "ui_preferencespathpage.h"
@@ -68,7 +69,16 @@ auto PreferencesPathPage::Apply() -> QStringList
 {
     VValentinaSettings *settings = VAbstractValApplication::VApp()->ValentinaSettings();
     settings->SetPathSVGFonts(ui->pathTable->item(0, 1)->text());
-    settings->SetPathFontCorrections(ui->pathTable->item(1, 1)->text());
+
+    const QString newPathFontCorrections = ui->pathTable->item(1, 1)->text();
+    if (settings->GetPathFontCorrections() != newPathFontCorrections)
+    {
+        settings->SetPathFontCorrections(newPathFontCorrections);
+        // A directory that used to have no corrections file for a font, or was slow/unreachable,
+        // may not be true of the new path -- forget every cached result, not just one font.
+        VSingleLineOutlineChar::ClearAllCorrectionsCache();
+    }
+
     settings->SetPathKnownMeasurements(ui->pathTable->item(2, 1)->text());
 
     return {}; // No changes which require restart.

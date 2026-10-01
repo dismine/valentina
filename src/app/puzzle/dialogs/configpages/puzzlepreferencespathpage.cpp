@@ -27,6 +27,7 @@
  *************************************************************************/
 #include "puzzlepreferencespathpage.h"
 #include "../../vpapplication.h"
+#include "../vformat/vsinglelineoutlinechar.h"
 #include "ui_puzzlepreferencespathpage.h"
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -60,7 +61,16 @@ void PuzzlePreferencesPathPage::Apply() const
 {
     VPSettings *settings = VPApplication::VApp()->PuzzleSettings();
     settings->SetPathSVGFonts(ui->pathTable->item(0, 1)->text());
-    settings->SetPathFontCorrections(ui->pathTable->item(1, 1)->text());
+
+    const QString newPathFontCorrections = ui->pathTable->item(1, 1)->text();
+    if (settings->GetPathFontCorrections() != newPathFontCorrections)
+    {
+        settings->SetPathFontCorrections(newPathFontCorrections);
+        // A directory that used to have no corrections file for a font, or was slow/unreachable,
+        // may not be true of the new path -- forget every cached result, not just one font.
+        VSingleLineOutlineChar::ClearAllCorrectionsCache();
+    }
+
     settings->SetPathKnownMeasurements(ui->pathTable->item(1, 1)->text());
 }
 

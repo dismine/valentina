@@ -34,6 +34,7 @@
 class TST_VFoldLine : public AbstractTest
 {
     Q_OBJECT // NOLINT
+
 public:
     explicit TST_VFoldLine(QObject *parent = nullptr);
 
@@ -55,6 +56,9 @@ private slots:
 
     void LabelPathOrientationMatchesNonFlipped_data() const;
     void LabelPathOrientationMatchesNonFlipped() const;
+
+    void OutlineCorrectionsCacheGuardsAgainstRepeatedDiskHits() const;
+    void OutlineCorrectionsAsyncLoadNotifiesOnCompletion() const;
 };
 
 #endif // TST_VFOLDLINE_H

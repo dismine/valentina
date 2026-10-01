@@ -30,11 +30,36 @@
 
 #include <QCoreApplication>
 #include <QFont>
+#include <QObject>
 
 using VOutlineCorrections = QHash<QChar, QHash<int, bool>>;
 using VOutlineCorrectionsCache = QCache<QString, VOutlineCorrections>;
 
 class QPainterPath;
+
+/**
+ * @brief VOutlineCorrectionsNotifier fires once a background LoadCorrectionsAsync() load commits
+ * real corrections to the shared cache, so a QGraphicsItem that painted uncorrected glyphs while
+ * the load was in flight knows to repaint itself. GetOutlineCorrectionsNotifier() always returns
+ * the same instance; connect to it once per interested item, not once per load. Emitting from a
+ * worker thread is safe -- Qt queues delivery to whichever thread each connected receiver lives
+ * on -- and there is nothing here to join or wait on, so this cannot block shutdown either.
+ */
+class VOutlineCorrectionsNotifier : public QObject
+{
+    Q_OBJECT // NOLINT
+
+public:
+    explicit VOutlineCorrectionsNotifier(QObject *parent = nullptr)
+      : QObject(parent)
+    {
+    }
+
+signals:
+    void CorrectionsLoaded(const QString &fontFamily);
+};
+
+auto GetOutlineCorrectionsNotifier() -> VOutlineCorrectionsNotifier *;
 
 class VSingleLineOutlineChar
 {
@@ -45,8 +70,10 @@ public:
 
     void ExportCorrections(const QString &dirPath) const;
     void LoadCorrections(const QString &dirPath) const;
+    void LoadCorrectionsAsync(const QString &dirPath) const;
 
     void ClearCorrectionsCache();
+    static void ClearAllCorrectionsCache();
 
     auto DrawChar(qreal x, qreal y, QChar c) const -> QPainterPath;
 
