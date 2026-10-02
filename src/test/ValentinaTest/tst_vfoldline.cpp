@@ -440,8 +440,13 @@ void TST_VFoldLine::LabelPathStaysCloseToFoldLine() const
     VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
     bool const wasSingleStroke = settings->GetSingleStrokeOutlineFont();
     settings->SetSingleStrokeOutlineFont(true);
-    auto restoreSettings = qScopeGuard([settings, wasSingleStroke]()
-                                       { settings->SetSingleStrokeOutlineFont(wasSingleStroke); });
+    auto restoreSettings = qScopeGuard(
+        [settings, wasSingleStroke]()
+        {
+            settings->SetSingleStrokeOutlineFont(wasSingleStroke);
+            // Drawing cached "no corrections" for the font; don't leak that into tests that supply their own.
+            VSingleLineOutlineChar(QFont()).ClearCorrectionsCache();
+        });
 
     const QPointF center(500, 500);
     const qreal foldLineLength = 800;
@@ -704,6 +709,10 @@ void TST_VFoldLine::LabelPathOrientationMatchesNonFlipped() const
         QVERIFY(correctionsDir.isValid());
         DisableSingleStrokeTrimForText(QStringLiteral("Test label"), QFont().family(), QDir(correctionsDir.path()));
         settings->SetPathFontCorrections(correctionsDir.path());
+        // VFoldLine only calls LoadCorrections() while the font's cache entry is empty. An earlier test (or a
+        // leftover background load) may have already cached "no corrections" for this font, so drop it to make
+        // sure the file written above is the one that gets read.
+        VSingleLineOutlineChar(QFont()).ClearCorrectionsCache();
     }
 
     auto restoreSettings = qScopeGuard(
