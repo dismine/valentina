@@ -135,7 +135,36 @@ auto main(int argc, char **argv) -> int
     {
         std::fprintf(stdout, "[main] running %s\n", obj->metaObject()->className());
         std::fflush(stdout);
-        status |= QTest::qExec(obj, argc, argv); // NOLINT(hicpp-signed-bitwise)
+        // ponytail: also log to a per-class file and dump it on failure; qbs' autotest-runner drops this
+        // binary's stdout on Windows CI. Revert once found.
+        const QString className = QString::fromLatin1(obj->metaObject()->className());
+        const QString logFile = QDir::temp().filePath(className + QStringLiteral(".txt"));
+        QList<QByteArray> args;
+        for (int i = 0; i < argc; ++i)
+        {
+            args.append(argv[i]);
+        }
+        args.append("-o");
+        args.append((logFile + QStringLiteral(",txt")).toLocal8Bit());
+        QVector<char *> argvExt;
+        for (QByteArray &arg : args)
+        {
+            argvExt.append(arg.data());
+        }
+        argvExt.append(nullptr);
+
+        const int result = QTest::qExec(obj, static_cast<int>(args.size()), argvExt.data());
+        std::fprintf(stdout, "[main] %s failures=%d\n", qUtf8Printable(className), result);
+        if (result != 0)
+        {
+            QFile file(logFile);
+            if (file.open(QIODevice::ReadOnly))
+            {
+                std::fprintf(stdout, "%s\n", file.readAll().constData());
+            }
+        }
+        std::fflush(stdout);
+        status |= result; // NOLINT(hicpp-signed-bitwise)
         delete obj;
     };
 
