@@ -1150,6 +1150,14 @@ void VPattern::ParseDetailElement(QDomElement &domElement, const Document &parse
             domElement, AttrSewLineOnDrawing,
             QString().setNum(VAbstractValApplication::VApp()->ValentinaSettings()->GetSewLineOnDrawing())));
         initData.detail.SetInLayout(GetParametrBool(domElement, AttrInLayout, trueStr));
+        initData.detail.SetBufferName(GetParametrEmptyString(domElement, VToolSeamAllowance::AttrBufferName));
+        initData.detail.SetBufferInLayout(GetParametrBool(domElement, VToolSeamAllowance::AttrBufferInLayout, trueStr));
+        initData.detail.SetFormulaBufferVisible(GetParametrString(domElement,
+                                                                  VToolSeamAllowance::AttrBufferVisible,
+                                                                  QChar('0')),
+                                                0);
+        initData.detail
+            .SetFormulaBufferWidth(GetParametrString(domElement, VToolSeamAllowance::AttrBufferWidth, QChar('0')), 0);
         initData.detail.SetUnited(GetParametrBool(domElement, VToolSeamAllowance::AttrUnited, falseStr));
         initData.detail.SetPriority(GetParametrUInt(domElement, VToolSeamAllowance::AttrPiecePriority, QChar('0')));
         initData.detail.SetTrueZeroWidth(GetParametrBool(domElement, AttrTrueZeroWidth, falseStr));
@@ -1366,6 +1374,9 @@ auto VPattern::ParsePieceDataTag(const QDomElement &domElement, VPieceLabelData 
     ppData.SetTilt(GetParametrEmptyString(domElement, AttrTilt));
     ppData.SetFoldPosition(GetParametrEmptyString(domElement, AttrFoldPosition));
     ppData.SetQuantity(static_cast<quint16>(GetParametrUInt(domElement, AttrQuantity, QChar('1'))));
+    ppData.SetNoBufferMaterial(static_cast<int>(GetParametrUInt(domElement, AttrNoBufferMaterial, QChar('0'))));
+    ppData.SetWithBufferMaterial(static_cast<int>(GetParametrUInt(domElement, AttrWithBufferMaterial, QChar('0'))));
+    ppData.SetBufferMaterial(static_cast<int>(GetParametrUInt(domElement, AttrBufferMaterial, QChar('0'))));
     ppData.SetOnFold(GetParametrBool(domElement, AttrOnFold, falseStr));
     ppData.SetPos(
         QPointF(GetParametrDouble(domElement, AttrMx, QChar('0')), GetParametrDouble(domElement, AttrMy, QChar('0'))));

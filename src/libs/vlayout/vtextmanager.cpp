@@ -670,6 +670,7 @@ void InitPiecePlaceholders(QMap<QString, QString> &placeholders, const VPieceLab
     AddPlaceholder(pl_pFoldPosition, data.GetFoldPosition());
     AddPlaceholder(pl_pName, info.pieceName);
     AddPlaceholder(pl_pQuantity, QString::number(data.GetQuantity()));
+    AddPlaceholder(pl_pMaterial, info.patternMaterials.value(info.pieceMaterial));
 
     if (uniquePlaceholders.contains('%' + pl_wOnFold + '%'))
     {
@@ -999,6 +1000,7 @@ void VTextManager::UpdatePatternLabelInfo(const VPieceLabelInfo &info)
         AddPlaceholder(pl_pFoldPosition, errorValue);
         AddPlaceholder(pl_pName, errorValue);
         AddPlaceholder(pl_pQuantity, errorValue);
+        AddPlaceholder(pl_pMaterial, errorValue);
         AddPlaceholder(pl_wOnFold, errorValue);
     }
 

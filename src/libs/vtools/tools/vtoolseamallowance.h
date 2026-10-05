@@ -67,6 +67,8 @@ struct VToolSeamAllowanceGeometry
     bool seamAllowanceValid{true};
     QPainterPath seamAllowance{};
     QPainterPath placeLabels{};
+    QPainterPath buffer{};
+    QStringList bufferProblems{};
     QString pieceName{};
 };
 
@@ -102,6 +104,10 @@ public:
     static const QString AttrSeamAllowance;
     static const QString AttrHideMainPath;
     static const QString AttrShowFullPiece;
+    static const QString AttrBufferName;
+    static const QString AttrBufferInLayout;
+    static const QString AttrBufferVisible;
+    static const QString AttrBufferWidth;
     static const QString AttrSeamAllowanceBuiltIn;
     static const QString AttrUnited;
     static const QString AttrFont;
@@ -189,6 +195,7 @@ private slots:
     void SaveResizeGrainline(qreal dLength);
     void SaveRotateGrainline(qreal dRot, const QPointF &ptPos);
     void ToggleInLayout(bool checked);
+    void ToggleBufferInLayout(bool checked);
     void ToggleHideMainPath(bool checked);
     void ToggleForbidFlipping(bool checked);
     void ToggleForceFlipping(bool checked);
@@ -212,6 +219,7 @@ private:
     QString m_drawName;
 
     VNoBrushScalePathItem *m_seamAllowance;
+    QGraphicsPathItem *m_buffer;
     VTextGraphicsItem *m_dataLabel;
     VTextGraphicsItem *m_patternInfo;
     VGrainlineItem *m_grainLine;

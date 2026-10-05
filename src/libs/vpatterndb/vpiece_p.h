@@ -87,6 +87,13 @@ public:
     QString m_formulaFoldWidth{};  // NOLINT(misc-non-private-member-variables-in-classes)
     QString m_formulaFoldCenter{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
+    QString m_bufferName{};              // NOLINT(misc-non-private-member-variables-in-classes)
+    bool m_bufferInLayout{true};         // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_formulaBufferVisible{'0'}; // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal m_bufferVisible{0};            // NOLINT(misc-non-private-member-variables-in-classes)
+    QString m_formulaBufferWidth{'0'};   // NOLINT(misc-non-private-member-variables-in-classes)
+    qreal m_bufferWidth{0};              // NOLINT(misc-non-private-member-variables-in-classes)
+
 private:
     Q_DISABLE_ASSIGN_MOVE(VPieceData) // NOLINT
 };

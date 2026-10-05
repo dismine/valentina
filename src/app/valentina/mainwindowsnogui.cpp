@@ -888,7 +888,7 @@ auto MainWindowsNoGUI::PrepareDetailsForLayout(const QVector<DetailForLayout> &d
     {
         auto *tool = qobject_cast<VAbstractTool *>(VAbstractPattern::getTool(data.id));
         SCASSERT(tool != nullptr)
-        return VLayoutPiece::Create(data.piece, data.id, tool->getData());
+        return VLayoutPiece::Create(data.piece, data.id, tool->getData(), data.buffer);
     };
 
     QProgressDialog progress(QCoreApplication::translate("MainWindowsNoGUI", "Preparing details for layout"), QString(),

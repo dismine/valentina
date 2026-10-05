@@ -58,6 +58,7 @@ struct DetailForLayout
 {
     quint32 id{NULL_ID}; // NOLINT(misc-non-private-member-variables-in-classes)
     VPiece piece{};      // NOLINT(misc-non-private-member-variables-in-classes)
+    bool buffer{false};  // NOLINT(misc-non-private-member-variables-in-classes)
 };
 
 QT_WARNING_POP

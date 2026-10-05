@@ -86,6 +86,7 @@ struct VPieceLabelInfo
 
     QString pieceName{};                                        // NOLINT(misc-non-private-member-variables-in-classes)
     VPieceLabelData labelData{};                                // NOLINT(misc-non-private-member-variables-in-classes)
+    int pieceMaterial{0};                                       // NOLINT(misc-non-private-member-variables-in-classes)
     QMap<QString, QSharedPointer<VMeasurement>> measurements{}; // NOLINT(misc-non-private-member-variables-in-classes)
     VContainer completeData;                                    // NOLINT(misc-non-private-member-variables-in-classes)
     QVector<VFinalMeasurement> finalMeasurements{};             // NOLINT(misc-non-private-member-variables-in-classes)

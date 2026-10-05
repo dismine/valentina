@@ -619,8 +619,26 @@ auto VLayoutPiece::operator=(VLayoutPiece &&detail) noexcept -> VLayoutPiece &
 VLayoutPiece::~VLayoutPiece() = default;
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pattern) -> VLayoutPiece
+auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pattern, bool buffer) -> VLayoutPiece
 {
+    if (buffer)
+    {
+        for (const QString &problem : piece.BufferProblems(pattern))
+        {
+            VAbstractApplication::VApp()->IsPedantic()
+                ? throw VException(problem)
+                : qWarning() << VAbstractValApplication::warningMessageSignature + problem;
+        }
+
+        // Computed from the original piece: AsBuffer() drops the mirror line.
+        const QVector<VLayoutPoint> bufferPoints = piece.BufferAllowancePoints(pattern);
+        VLayoutPiece det = Create(piece.AsBuffer(), id, pattern, false);
+        det.SetContourPoints(det.GetContourPoints(), true); // Main path hidden, the buffer is the cutting line
+        det.SetSeamAllowancePoints(bufferPoints, true, false);
+        det.SetPassmarks({});
+        return det;
+    }
+
     QFuture<QVector<VLayoutPoint>> const futureSeamAllowance = QtConcurrent::run(
         [piece, pattern]() -> QVector<VLayoutPoint>
         {
@@ -690,7 +708,13 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
     if (data.IsEnabled())
     {
         const VAbstractPattern *pDoc = VAbstractValApplication::VApp()->getCurrentDocument();
-        det.SetPieceText(pDoc, piece.GetName(), data, settings->GetLabelFont(), settings->GetLabelSVGFont(), pattern);
+        det.SetPieceText(pDoc,
+                         piece.GetName(),
+                         data,
+                         settings->GetLabelFont(),
+                         settings->GetLabelSVGFont(),
+                         pattern,
+                         data.PieceMaterial(piece.IsBufferVisible()));
     }
 
     if (const VPatternLabelData &geom = piece.GetPatternLabelData(); geom.IsEnabled())
@@ -951,8 +975,13 @@ auto VLayoutPiece::GetPieceText() const -> QStringList
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VLayoutPiece::SetPieceText(const VAbstractPattern *pDoc, const QString &qsName, const VPieceLabelData &data,
-                                const QFont &font, const QString &SVGFontFamily, const VContainer *pattern)
+void VLayoutPiece::SetPieceText(const VAbstractPattern *pDoc,
+                                const QString &qsName,
+                                const VPieceLabelData &data,
+                                const QFont &font,
+                                const QString &SVGFontFamily,
+                                const VContainer *pattern,
+                                int pieceMaterial)
 {
     QPointF ptPos;
     qreal labelWidth = 0;
@@ -993,6 +1022,7 @@ void VLayoutPiece::SetPieceText(const VAbstractPattern *pDoc, const QString &qsN
     VPieceLabelInfo info = VTextManager::PrepareLabelInfo(pDoc, pattern, true);
     info.pieceName = qsName;
     info.labelData = data;
+    info.pieceMaterial = pieceMaterial;
     d->m_tmDetail.UpdatePieceLabelInfo(info);
 }
 

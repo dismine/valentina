@@ -59,6 +59,10 @@ public:
     quint16 m_quantity{1}; // NOLINT(misc-non-private-member-variables-in-classes)
     bool m_onFold{false};  // NOLINT(misc-non-private-member-variables-in-classes)
 
+    int m_noBufferMaterial{0};   // NOLINT(misc-non-private-member-variables-in-classes)
+    int m_withBufferMaterial{0}; // NOLINT(misc-non-private-member-variables-in-classes)
+    int m_bufferMaterial{0};     // NOLINT(misc-non-private-member-variables-in-classes)
+
     QVector<VLabelTemplateLine> m_lines{}; // NOLINT(misc-non-private-member-variables-in-classes)
 
 private:

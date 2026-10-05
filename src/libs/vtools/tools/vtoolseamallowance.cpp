@@ -106,9 +106,13 @@ const QString VToolSeamAllowance::TagIPaths = QStringLiteral("iPaths");         
 const QString VToolSeamAllowance::TagPins = QStringLiteral("pins");               // NOLINT(cert-err58-cpp)
 const QString VToolSeamAllowance::TagPlaceLabels = QStringLiteral("placeLabels"); // NOLINT(cert-err58-cpp)
 
-const QString VToolSeamAllowance::AttrSeamAllowance = QStringLiteral("seamAllowance"); // NOLINT(cert-err58-cpp)
-const QString VToolSeamAllowance::AttrHideMainPath = QStringLiteral("hideMainPath");   // NOLINT(cert-err58-cpp)
-const QString VToolSeamAllowance::AttrShowFullPiece = QStringLiteral("showFullPiece"); // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::AttrSeamAllowance = QStringLiteral("seamAllowance");   // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::AttrHideMainPath = QStringLiteral("hideMainPath");     // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::AttrShowFullPiece = QStringLiteral("showFullPiece");   // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::AttrBufferName = QStringLiteral("bufferName");         // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::AttrBufferInLayout = QStringLiteral("bufferInLayout"); // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::AttrBufferVisible = QStringLiteral("bufferVisible");   // NOLINT(cert-err58-cpp)
+const QString VToolSeamAllowance::AttrBufferWidth = QStringLiteral("bufferWidth");       // NOLINT(cert-err58-cpp)
 // NOLINTNEXTLINE(cert-err58-cpp)
 const QString VToolSeamAllowance::AttrSeamAllowanceBuiltIn = QStringLiteral("seamAllowanceBuiltIn");
 const QString VToolSeamAllowance::AttrUnited = QStringLiteral("united");                 // NOLINT(cert-err58-cpp)
@@ -605,6 +609,14 @@ auto VToolSeamAllowance::Create(VToolSeamAllowanceInitData &initData) -> VToolSe
         const qreal calcWidth = CheckFormula(initData.id, initData.width, initData.data);
         initData.detail.SetFormulaSAWidth(initData.width, calcWidth);
 
+        QString bufferVisible = initData.detail.GetFormulaBufferVisible();
+        const qreal calcBufferVisible = CheckFormula(initData.id, bufferVisible, initData.data);
+        initData.detail.SetFormulaBufferVisible(bufferVisible, calcBufferVisible);
+
+        QString bufferWidth = initData.detail.GetFormulaBufferWidth();
+        const qreal calcBufferWidth = CheckFormula(initData.id, bufferWidth, initData.data);
+        initData.detail.SetFormulaBufferWidth(bufferWidth, calcBufferWidth);
+
         auto *currentSA = new VIncrement(initData.data, currentSeamAllowance);
         currentSA->SetFormula(calcWidth, initData.width, true);
         currentSA->SetDescription(tr("Current seam allowance"));
@@ -717,6 +729,8 @@ void VToolSeamAllowance::AddPieceDependencies(quint32 id,
     SCASSERT(patternGraph != nullptr)
 
     doc->FindFormulaDependencies(piece.GetFormulaSAWidth(), id, variables);
+    doc->FindFormulaDependencies(piece.GetFormulaBufferVisible(), id, variables);
+    doc->FindFormulaDependencies(piece.GetFormulaBufferWidth(), id, variables);
 
     if (piece.IsManualFoldHeight())
     {
@@ -883,6 +897,24 @@ void VToolSeamAllowance::AddAttributes(VAbstractPattern *doc, QDomElement &domEl
                                       AttrInLayout,
                                       piece.IsInLayout(),
                                       [](bool inLayout) noexcept { return inLayout; });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrBufferName,
+                                         piece.GetBufferName(),
+                                         [](const QString &name) noexcept { return name.isEmpty(); });
+    doc->SetAttributeOrRemoveIf<bool>(domElement,
+                                      AttrBufferInLayout,
+                                      piece.IsBufferInLayout(),
+                                      [](bool inLayout) noexcept { return inLayout; });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrBufferVisible,
+                                         piece.GetFormulaBufferVisible(),
+                                         [](const QString &formula) noexcept
+                                         { return formula.isEmpty() || formula == QChar('0'); });
+    doc->SetAttributeOrRemoveIf<QString>(domElement,
+                                         AttrBufferWidth,
+                                         piece.GetFormulaBufferWidth(),
+                                         [](const QString &formula) noexcept
+                                         { return formula.isEmpty() || formula == QChar('0'); });
     doc->SetAttribute(domElement, AttrForbidFlipping, piece.IsForbidFlipping());
     doc->SetAttribute(domElement, AttrForceFlipping, piece.IsForceFlipping());
     doc->SetAttributeOrRemoveIf<bool>(domElement,
@@ -991,6 +1023,16 @@ void VToolSeamAllowance::AddPatternPieceData(VAbstractPattern *doc, QDomElement 
     doc->SetAttribute(domData, VAbstractPattern::AttrTilt, data.GetTilt());
     doc->SetAttribute(domData, VAbstractPattern::AttrFoldPosition, data.GetFoldPosition());
     doc->SetAttribute(domData, VAbstractPattern::AttrQuantity, data.GetQuantity());
+    auto IsZero = [](int value) noexcept { return value == 0; };
+    doc->SetAttributeOrRemoveIf<int>(domData,
+                                     VAbstractPattern::AttrNoBufferMaterial,
+                                     data.GetNoBufferMaterial(),
+                                     IsZero);
+    doc->SetAttributeOrRemoveIf<int>(domData,
+                                     VAbstractPattern::AttrWithBufferMaterial,
+                                     data.GetWithBufferMaterial(),
+                                     IsZero);
+    doc->SetAttributeOrRemoveIf<int>(domData, VAbstractPattern::AttrBufferMaterial, data.GetBufferMaterial(), IsZero);
     doc->SetAttribute(domData, VAbstractPattern::AttrVisible, data.IsEnabled());
     doc->SetAttribute(domData, VAbstractPattern::AttrOnFold, data.IsOnFold());
     doc->SetAttribute(domData, AttrMx, data.GetPos().x());
@@ -1357,6 +1399,7 @@ void VToolSeamAllowance::UpdateDetailLabel()
                 VPieceLabelInfo info = VTextManager::PrepareLabelInfo(doc, getData(), true);
                 info.pieceName = detail.GetName();
                 info.labelData = detail.GetPieceLabelData();
+                info.pieceMaterial = info.labelData.PieceMaterial(detail.IsBufferVisible());
 
                 m_pieceLabelInfoStale = false;
                 qCDebug(vTool,
@@ -1661,6 +1704,11 @@ void VToolSeamAllowance::RefreshScale()
 
     setPen(toolPen);
     m_seamAllowance->setPen(toolPen);
+
+    QPen bufferPen = toolPen;
+    bufferPen.setStyle(Qt::DashLine);
+    m_buffer->setPen(bufferPen);
+
     m_passmarks->setPen(toolPen);
     m_placeLabels->setPen(toolPen);
     m_foldLineMark->setPen(toolPen);
@@ -1941,6 +1989,11 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     inLayoutOption->setCheckable(true);
     inLayoutOption->setChecked(detail.IsInLayout());
 
+    QAction *bufferInLayoutOption = menu.addAction(tr("Buffer in layout"));
+    bufferInLayoutOption->setCheckable(true);
+    bufferInLayoutOption->setChecked(detail.IsBufferInLayout());
+    bufferInLayoutOption->setEnabled(detail.IsBufferVisible());
+
     QAction *hideMainPathOption = menu.addAction(tr("Hide main path"));
     hideMainPathOption->setCheckable(true);
     hideMainPathOption->setChecked(detail.IsHideMainPath());
@@ -1979,6 +2032,10 @@ void VToolSeamAllowance::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     else if (selectedAction == inLayoutOption)
     {
         ToggleInLayout(selectedAction->isChecked());
+    }
+    else if (selectedAction == bufferInLayoutOption)
+    {
+        ToggleBufferInLayout(selectedAction->isChecked());
     }
     else if (selectedAction == hideMainPathOption)
     {
@@ -2073,6 +2130,7 @@ VToolSeamAllowance::VToolSeamAllowance(const VToolSeamAllowanceInitData &initDat
     m_sceneDetails(initData.scene),
     m_drawName(initData.drawName),
     m_seamAllowance(new VNoBrushScalePathItem(this)),
+    m_buffer(new QGraphicsPathItem(this)),
     m_dataLabel(new VTextGraphicsItem(VTextGraphicsItem::ItemType::PieceLabel, this)),
     m_patternInfo(new VTextGraphicsItem(VTextGraphicsItem::ItemType::PatternLabel, this)),
     m_grainLine(new VGrainlineItem(VColorRole::PieceColor, this)),
@@ -2277,6 +2335,14 @@ auto VToolSeamAllowance::ComputePieceGeometry(bool combineTogether, bool pieceSh
 
     geom.placeLabels = detail.PlaceLabelPath(containerData);
 
+    if (detail.IsBufferVisible())
+    {
+        QVector<QPointF> bufferPoints;
+        CastTo(detail.BufferAllowancePoints(containerData), bufferPoints);
+        geom.buffer = VPiece::MainPathPath(bufferPoints);
+        geom.bufferProblems = detail.BufferProblems(containerData);
+    }
+
     geom.valid = true;
     return geom;
 }
@@ -2330,6 +2396,19 @@ void VToolSeamAllowance::ApplyPieceGeometry(const VToolSeamAllowanceGeometry &ge
         m_seamAllowance->setPath(QPainterPath());
 
         m_pieceBoundingRect = m_mainPath.controlPointRect();
+    }
+
+    for (const QString &problem : geom.bufferProblems)
+    {
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(problem)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + problem;
+    }
+
+    m_buffer->setPath(geom.buffer);
+    if (not geom.buffer.isEmpty())
+    {
+        m_pieceBoundingRect = m_pieceBoundingRect.united(geom.buffer.controlPointRect());
     }
 
     m_mirrorLine->setPath(geom.mirrorLine);
@@ -2445,6 +2524,14 @@ void VToolSeamAllowance::ToggleInLayout(bool checked)
     auto *toggleInLayout = new TogglePieceInLayout(m_id, checked, &(VAbstractTool::data), doc);
     connect(toggleInLayout, &TogglePieceInLayout::Toggled, doc, &VAbstractPattern::CheckInLayoutList);
     VAbstractApplication::VApp()->getUndoStack()->push(toggleInLayout);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::ToggleBufferInLayout(bool checked)
+{
+    auto *toggle = new TogglePieceBufferInLayout(m_id, checked, &(VAbstractTool::data), doc);
+    connect(toggle, &TogglePieceBufferInLayout::Toggled, doc, &VAbstractPattern::CheckInLayoutList);
+    VAbstractApplication::VApp()->getUndoStack()->push(toggle);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

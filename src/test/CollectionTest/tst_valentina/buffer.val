@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern>
+    <!--Pattern created with Valentina v1.1.1.711 (https://smart-pattern.com.ua/).-->
+    <version>1.2.0</version>
+    <unit>cm</unit>
+    <description/>
+    <notes/>
+    <patternLabel/>
+    <patternMaterials>
+        <material name="Fabric" number="1"/>
+        <material name="Fusing" number="2"/>
+    </patternMaterials>
+    <measurements/>
+    <increments>
+        <increment description="" formula="2" name="#buffer"/>
+    </increments>
+    <previewCalculations/>
+    <draw name="Square">
+        <calculation>
+            <point id="1" mx="0.132292" my="0.264583" name="A" type="single" x="0" y="0"/>
+            <point angle="0" basePoint="1" id="2" length="10" lineColor="black" mx="0.132292" my="0.264583" name="A1" type="endLine" typeLine="hair"/>
+            <point angle="270" basePoint="2" id="3" length="10" lineColor="black" mx="0.132292" my="0.264583" name="A2" type="endLine" typeLine="hair"/>
+            <point angle="270" basePoint="1" id="4" length="10" lineColor="black" mx="0.132292" my="0.264583" name="A3" type="endLine" typeLine="hair"/>
+        </calculation>
+        <modeling>
+            <point id="5" idObject="1" mx="0" my="0" type="modeling"/>
+            <point id="6" idObject="2" mx="0" my="0" type="modeling"/>
+            <point id="7" idObject="3" mx="0" my="0" type="modeling"/>
+            <point id="8" idObject="4" mx="0" my="0" type="modeling"/>
+        </modeling>
+        <details>
+            <detail bufferName="Square buffer" bufferVisible="1" bufferWidth="#buffer" id="9" inLayout="true" mx="0" my="0" name="Square" seamAllowance="true" uuid="{11111111-2222-3333-4444-555555555555}" version="2" width="1">
+                <data annotation="" bufferMaterial="2" foldPosition="" height="1" letter="" mx="0" my="0" noBufferMaterial="1" onFold="false" orientation="" quantity="1" rotation="0" rotationWay="" tilt="" visible="false" width="1" withBufferMaterial="1"/>
+                <patternInfo height="1" mx="0" my="0" rotation="0" visible="false" width="1"/>
+                <grainline arrows="0" enabled="false" length="1" mx="0" my="0" rotation="90" visible="true"/>
+                <nodes>
+                    <node idObject="5" type="NodePoint"/>
+                    <node idObject="6" type="NodePoint"/>
+                    <node idObject="7" type="NodePoint"/>
+                    <node idObject="8" type="NodePoint"/>
+                </nodes>
+            </detail>
+        </details>
+        <groups/>
+    </draw>
+</pattern>

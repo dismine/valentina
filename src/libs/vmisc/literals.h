@@ -133,6 +133,7 @@ extern const QString pl_pTilt;
 extern const QString pl_pFoldPosition;
 extern const QString pl_pName;
 extern const QString pl_pQuantity;
+extern const QString pl_pMaterial;
 extern const QString pl_mFabric;
 extern const QString pl_mLining;
 extern const QString pl_mInterfacing;

@@ -80,6 +80,7 @@ private:
     void ToggledPieceItem(QTableWidgetItem *item);
 
     Q_REQUIRED_RESULT static auto PrepareInLayoutColumnCell(const VPiece &det, quint32 id) -> QTableWidgetItem *;
+    Q_REQUIRED_RESULT static auto PrepareBufferInLayoutColumnCell(const VPiece &det) -> QTableWidgetItem *;
     Q_REQUIRED_RESULT static auto PreparePieceNameColumnCell(const VPiece &det) -> QTableWidgetItem *;
 };
 

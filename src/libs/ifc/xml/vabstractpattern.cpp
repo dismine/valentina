@@ -127,6 +127,11 @@ const QString VAbstractPattern::AttrRotationWay = QStringLiteral("rotationWay");
 const QString VAbstractPattern::AttrTilt = QStringLiteral("tilt");
 const QString VAbstractPattern::AttrFoldPosition = QStringLiteral("foldPosition");
 const QString VAbstractPattern::AttrQuantity = QStringLiteral("quantity");
+const QString VAbstractPattern::AttrNoBufferMaterial = QStringLiteral("noBufferMaterial");
+const QString VAbstractPattern::AttrWithBufferMaterial = QStringLiteral("withBufferMaterial");
+const QString VAbstractPattern::AttrBufferMaterial = QStringLiteral("bufferMaterial");
+const QString VAbstractPattern::AttrBufferVisible = QStringLiteral("bufferVisible");
+const QString VAbstractPattern::AttrBufferWidth = QStringLiteral("bufferWidth");
 const QString VAbstractPattern::AttrOnFold = QStringLiteral("onFold");
 const QString VAbstractPattern::AttrDateFormat = QStringLiteral("dateFormat");
 const QString VAbstractPattern::AttrTimeFormat = QStringLiteral("timeFormat");
@@ -1927,6 +1932,8 @@ auto VAbstractPattern::ListPieceExpressions() const -> QVector<VFormulaField>
 
         // Each tag can contains several attributes.
         ReadExpressionAttribute(expressions, dom, AttrWidth);
+        ReadExpressionAttribute(expressions, dom, AttrBufferVisible);
+        ReadExpressionAttribute(expressions, dom, AttrBufferWidth);
 
         expressions << ListNodesExpressions(dom.firstChildElement(TagNodes));
         expressions << ListGrainlineExpressions(dom.firstChildElement(TagGrainline));

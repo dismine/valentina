@@ -80,6 +80,17 @@ public:
     auto IsOnFold() const -> bool;
     void SetOnFold(bool onFold);
 
+    auto GetNoBufferMaterial() const -> int;
+    void SetNoBufferMaterial(int value);
+
+    auto GetWithBufferMaterial() const -> int;
+    void SetWithBufferMaterial(int value);
+
+    auto GetBufferMaterial() const -> int;
+    void SetBufferMaterial(int value);
+
+    auto PieceMaterial(bool bufferVisible) const -> int;
+
     auto GetAreaShortName() const -> QString;
     void SetAreaShortName(const QString &val);
 

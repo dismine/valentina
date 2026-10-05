@@ -87,6 +87,55 @@ void TogglePieceInLayout::Do(bool state)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+TogglePieceBufferInLayout::TogglePieceBufferInLayout(
+    quint32 id, bool state, VContainer *data, VAbstractPattern *doc, QUndoCommand *parent)
+  : VUndoCommand(doc, parent),
+    m_id(id),
+    m_data(data),
+    m_oldState(not state),
+    m_newState(state)
+{
+    setText(tr("buffer in layout"));
+    m_oldState = m_data->DataPieces()->value(m_id).IsBufferInLayout();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TogglePieceBufferInLayout::undo()
+{
+    qCDebug(vUndo, "TogglePieceBufferInLayout::undo().");
+    Do(m_oldState);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TogglePieceBufferInLayout::redo()
+{
+    qCDebug(vUndo, "TogglePieceBufferInLayout::redo().");
+    Do(m_newState);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TogglePieceBufferInLayout::Do(bool state)
+{
+    QDomElement detail = Doc()->FindElementById(m_id, VAbstractPattern::TagDetail);
+    if (detail.isElement())
+    {
+        Doc()->SetAttributeOrRemoveIf<bool>(detail,
+                                            VToolSeamAllowance::AttrBufferInLayout,
+                                            state,
+                                            [](bool state) noexcept { return state; });
+
+        VPiece det = m_data->DataPieces()->value(m_id);
+        det.SetBufferInLayout(state);
+        m_data->UpdatePiece(m_id, det);
+        emit Toggled(m_id);
+    }
+    else
+    {
+        qDebug("Can't get detail by id = %u.", m_id);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 TogglePieceForceForbidFlipping::TogglePieceForceForbidFlipping(
     quint32 id, bool state, ForceForbidFlippingType type, VContainer *data, VAbstractPattern *doc, QUndoCommand *parent)
   : VUndoCommand(doc, parent),

@@ -112,6 +112,12 @@ void TST_ValentinaCommandLine::OpenPatterns_data() const
 
     QTest::newRow("Pattern with a warning") << "test_pedantic.val"
                                             << "--test;;--pedantic" << V_EX_DATAERR;
+
+    QTest::newRow("Pattern with a buffer") << "buffer.val"
+                                           << "--test;;--pedantic" << V_EX_OK;
+
+    QTest::newRow("Pattern with a zero width buffer") << "buffer_zero_width.val"
+                                                      << "--test;;--pedantic" << V_EX_DATAERR;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -144,6 +150,14 @@ void TST_ValentinaCommandLine::ExportMode_data() const
 
     QTest::newRow("Issue #372") << "issue_372.val" << u"-p;;0;;-d;;%1;;-b;;output;;--coefficient;;1"_s.arg(tmp)
                                 << V_EX_OK;
+
+    QTest::newRow("Buffer piece export") << "buffer.val"
+                                         << u"-d;;%1;;-b;;buffer;;-f;;0;;--exportOnlyDetails;;--pedantic"_s.arg(tmp)
+                                         << V_EX_OK;
+
+    QTest::newRow("Buffer with zero width, pedantic")
+        << "buffer_zero_width.val" << u"-d;;%1;;-b;;buffer_zero;;-f;;0;;--exportOnlyDetails;;--pedantic"_s.arg(tmp)
+        << V_EX_DATAERR;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

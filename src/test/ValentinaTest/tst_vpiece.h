@@ -45,6 +45,12 @@ private slots:
     void TestSeamLineTurnPoints();
     void PointOnCurveJointNoSpike();
     void PointOnCurveJointAngleType();
+    void BufferRectangle();
+    void BufferZeroWidthReturnsBase();
+    void BufferWithoutSeamAllowance();
+    void AsBufferStripsExtras();
+    void PieceMaterialSelection();
+    void PieceMaterialPlaceholder();
 
 private:
     Q_DISABLE_COPY_MOVE(TST_VPiece) // NOLINT

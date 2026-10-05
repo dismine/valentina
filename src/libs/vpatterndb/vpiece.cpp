@@ -51,6 +51,7 @@
 #include <QPainterPath>
 #include <QSharedPointer>
 #include <QTemporaryFile>
+#include <QUuid>
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -582,6 +583,158 @@ void VPiece::SetFormulaSAWidth(const QString &formula, qreal value)
     SetSAWidth(value);
     const qreal width = GetSAWidth();
     width >= 0 ? d->m_formulaWidth = formula : d->m_formulaWidth = '0'_L1;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::GetBufferName() const -> QString
+{
+    return d->m_bufferName;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetBufferName(const QString &name)
+{
+    d->m_bufferName = name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::IsBufferInLayout() const -> bool
+{
+    return d->m_bufferInLayout;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetBufferInLayout(bool value)
+{
+    d->m_bufferInLayout = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::GetFormulaBufferVisible() const -> QString
+{
+    return d->m_formulaBufferVisible;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetFormulaBufferVisible(const QString &formula, qreal value)
+{
+    d->m_formulaBufferVisible = formula;
+    d->m_bufferVisible = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::IsBufferVisible() const -> bool
+{
+    return qFuzzyCompare(d->m_bufferVisible, 1.0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::GetFormulaBufferWidth() const -> QString
+{
+    return d->m_formulaBufferWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetFormulaBufferWidth(const QString &formula, qreal value)
+{
+    d->m_formulaBufferWidth = formula;
+    SetBufferWidth(value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::GetBufferWidth() const -> qreal
+{
+    return d->m_bufferWidth;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetBufferWidth(qreal value)
+{
+    d->m_bufferWidth = qMax(0.0, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::BufferAllowancePoints(const VContainer *data) const -> QVector<VLayoutPoint>
+{
+    SCASSERT(data != nullptr)
+
+    // ponytail: honours "show full piece" like the scene does; a folded piece gets a buffer around what is shown.
+    const QVector<VLayoutPoint> base = IsSeamAllowance() && not IsSeamAllowanceBuiltIn() ? FullSeamAllowancePoints(data)
+                                                                                         : FullMainPathPoints(data);
+
+    const qreal width = ToPixel(GetBufferWidth(), *data->GetPatternUnit());
+    if (width <= 0)
+    {
+        return base;
+    }
+
+    const bool removeFirstAndLast = false;
+    const QVector<VLayoutPoint> corrected = CorrectEquidistantPoints(base, removeFirstAndLast);
+
+    QVector<VSAPoint> points;
+    points.reserve(corrected.size());
+    for (const auto &p : corrected)
+    {
+        points.append(VSAPoint(p));
+    }
+
+    return Equidistant(points, width, false, GetBufferName().isEmpty() ? GetName() : GetBufferName());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::BufferProblems(const VContainer *data) const -> QStringList
+{
+    if (not IsBufferVisible())
+    {
+        return {};
+    }
+
+    if (GetBufferWidth() <= 0)
+    {
+        return {tr("Buffer for piece '%1' is visible, but buffer width is <= 0.").arg(GetName())};
+    }
+
+    QVector<QPointF> base;
+    CastTo(IsSeamAllowance() && not IsSeamAllowanceBuiltIn() ? FullSeamAllowancePoints(data) : FullMainPathPoints(data),
+           base);
+
+    QVector<QPointF> buffer;
+    CastTo(BufferAllowancePoints(data), buffer);
+
+    if (not IsAllowanceValid(base, buffer))
+    {
+        return {tr("Piece '%1'. Buffer allowance is not valid.").arg(GetName())};
+    }
+
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::DefaultBufferName(const QString &pieceName) -> QString
+{
+    return tr("%1 buffer").arg(pieceName);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::AsBuffer() const -> VPiece
+{
+    VPiece buffer = *this;
+    buffer.SetName(GetBufferName().isEmpty() ? DefaultBufferName(GetName()) : GetBufferName());
+    buffer.SetUUID(QUuid::createUuidV5(GetUUID(), QStringLiteral("buffer")));
+
+    QVector<VPieceNode> nodes = buffer.GetPath().GetNodes();
+    for (auto &node : nodes)
+    {
+        node.SetPassmark(false);
+    }
+    buffer.GetPath().SetNodes(nodes);
+
+    buffer.SetInternalPaths({});
+    buffer.SetPlaceLabels({});
+    buffer.SetMirrorLineStartPoint(NULL_ID);
+    buffer.SetMirrorLineEndPoint(NULL_ID);
+    buffer.GetPieceLabelData().SetWithBufferMaterial(GetPieceLabelData().GetBufferMaterial());
+    return buffer;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -174,6 +174,13 @@ private slots:
     void DeployFoldWidth();
     void DeployFoldCenter();
 
+    void EvalBufferVisible();
+    void EvalBufferWidth();
+    void FXBufferVisible();
+    void FXBufferWidth();
+    void DeployBufferVisible();
+    void DeployBufferWidth();
+
     void GrainlinePinPointChanged();
     void DetailPinPointChanged();
     void PatternPinPointChanged();
@@ -227,6 +234,8 @@ private:
     bool flagFormulaPassmarkVisible{true};
     bool flagFormulaFoldHeight{true};
     bool flagFormulaFoldWidth{true};
+    bool flagFormulaBufferVisible{true};
+    bool flagFormulaBufferWidth{true};
     bool flagFormulaFoldCenter{true};
     bool flagMainPathIsValid{true};
     bool flagName{true}; // We have default name of piece.
@@ -263,6 +272,8 @@ private:
     int m_formulaBasePassmarkVisible{0};
     int m_formulaBaseFoldHeight{0};
     int m_formulaBaseFoldWidth{0};
+    int m_formulaBaseBufferVisible{0};
+    int m_formulaBaseBufferWidth{0};
     int m_formulaBaseFoldCenter{0};
 
     QTimer *m_timerWidth{nullptr};
@@ -275,7 +286,11 @@ private:
     QTimer *m_timerFoldHeight{nullptr};
     QTimer *m_timerFoldWidth{nullptr};
     QTimer *m_timerFoldCenter{nullptr};
+    QTimer *m_timerBufferVisible{nullptr};
+    QTimer *m_timerBufferWidth{nullptr};
     qreal m_saWidth{0};
+    qreal m_bufferVisible{0};
+    qreal m_bufferWidth{0};
 
     QVector<VLabelTemplateLine> m_templateLines{};
 
@@ -334,6 +349,9 @@ private:
     void InitPassmarksTab();
     void InitPlaceLabelsTab();
     void InitFoldLineTab();
+    void InitBufferTab();
+    void InitMaterialComboBoxes();
+    void SetBufferFormula(QPlainTextEdit *edit, QPushButton *growButton, int &baseHeight, const QString &formula);
     void InitAllPinComboboxes();
     void InitFoldLineType();
     void InitFoldLabelFontSizes();
@@ -418,7 +436,7 @@ inline auto DialogSeamAllowance::IsValid() const -> bool
            && (flagGFormulas || flagGPin) && flagDLAngle && (flagDLFormulas || flagDPin) && flagPLAngle
            && (flagPLFormulas || flagPPin) && flagFormulaPassmarkLength && flagFormulaPassmarkWidth
            && flagFormulaPassmarkAngle && flagMirrorLineIsValid && flagFormulaFoldHeight && flagFormulaFoldWidth
-           && flagFormulaFoldCenter && flagFormulaPassmarkVisible;
+           && flagFormulaFoldCenter && flagFormulaPassmarkVisible && flagFormulaBufferVisible && flagFormulaBufferWidth;
 }
 
 #endif // DIALOGSEAMALLOWANCE_H

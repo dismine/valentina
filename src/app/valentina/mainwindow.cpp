@@ -320,7 +320,16 @@ auto SortDetailsForLayout(const QHash<quint32, VPiece> *allDetails, const QStrin
     -> QVector<DetailForLayout>
 {
     QVector<DetailForLayout> details;
-    details.reserve(allDetails->size());
+    details.reserve(allDetails->size() * 2);
+
+    auto Append = [&details](quint32 id, const VPiece &piece)
+    {
+        details.append({.id = id, .piece = piece});
+        if (piece.IsBufferVisible() && piece.IsBufferInLayout())
+        {
+            details.append({.id = id, .piece = piece, .buffer = true});
+        }
+    };
 
     if (QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin(); nameRegex.isEmpty())
     {
@@ -328,7 +337,7 @@ auto SortDetailsForLayout(const QHash<quint32, VPiece> *allDetails, const QStrin
         {
             if (i.value().IsInLayout())
             {
-                details.append({.id = i.key(), .piece = i.value()});
+                Append(i.key(), i.value());
             }
 
             ++i;
@@ -341,7 +350,7 @@ auto SortDetailsForLayout(const QHash<quint32, VPiece> *allDetails, const QStrin
         {
             if (nameRe.match(i.value().GetName()).hasMatch())
             {
-                details.append({.id = i.key(), .piece = i.value()});
+                Append(i.key(), i.value());
             }
 
             ++i;
@@ -354,24 +363,34 @@ auto SortDetailsForLayout(const QHash<quint32, VPiece> *allDetails, const QStrin
 //---------------------------------------------------------------------------------------------------------------------
 void WarningNotUniquePieceName(const QHash<quint32, VPiece> *allDetails)
 {
-    QHash<quint32, VPiece>::const_iterator i = allDetails->constBegin();
     QSet<QString> uniqueNames;
 
-    while (i != allDetails->constEnd())
+    auto Check = [&uniqueNames](const QString &name)
     {
-        if (const QString pieceName = i.value().GetName(); not uniqueNames.contains(pieceName))
+        if (not uniqueNames.contains(name))
         {
-            uniqueNames.insert(pieceName);
+            uniqueNames.insert(name);
         }
         else
         {
-            const QString errorMsg = QObject::tr("Piece name '%1' is not unique.").arg(pieceName);
+            const QString errorMsg = QObject::tr("Piece name '%1' is not unique.").arg(name);
             VAbstractApplication::VApp()->IsPedantic()
                 ? throw VException(errorMsg)
                 : qWarning() << VAbstractValApplication::warningMessageSignature + errorMsg;
         }
+    };
 
-        ++i;
+    for (auto i = allDetails->constBegin(); i != allDetails->constEnd(); ++i)
+    {
+        const VPiece &piece = i.value();
+        Check(piece.GetName());
+
+        // A visible buffer is laid out as a separate piece, so its name must be unique too.
+        if (piece.IsBufferVisible())
+        {
+            Check(piece.GetBufferName().isEmpty() ? VPiece::DefaultBufferName(piece.GetName())
+                                                  : piece.GetBufferName());
+        }
     }
 }
 
@@ -7804,7 +7823,17 @@ auto MainWindow::DoExport(const VCommandLinePtr &expParams) -> bool
             return false;
         }
     }
-    listDetails = PrepareDetailsForLayout(details);
+    try
+    {
+        listDetails = PrepareDetailsForLayout(details);
+    }
+    catch (const VException &e)
+    {
+        // A pedantic piece warning must end the export, not escape into the event loop.
+        qCCritical(vMainWindow, "%s\n\n%s", qUtf8Printable(tr("Export error.")), qUtf8Printable(e.ErrorMessage()));
+        QCoreApplication::exit(V_EX_DATAERR);
+        return false;
+    }
 
     if (const bool exportOnlyDetails = expParams->IsExportOnlyDetails(); exportOnlyDetails)
     {
@@ -8115,9 +8144,22 @@ void MainWindow::ProcessCMD()
 
         VAbstractValApplication::VApp()->SetUserMaterials(cmd->OptUserMaterials());
 
-        if (const bool loaded = LoadPattern(args.constFirst(), cmd->OptMeasurePath()); not loaded)
+        try
         {
-            return; // process only one input file
+            if (const bool loaded = LoadPattern(args.constFirst(), cmd->OptMeasurePath()); not loaded)
+            {
+                return; // process only one input file
+            }
+        }
+        catch (const VException &e)
+        {
+            // A pedantic piece warning on first show must end the run, not escape into the event loop.
+            qCCritical(vMainWindow,
+                       "%s\n\n%s",
+                       qUtf8Printable(tr("Error parsing file.")),
+                       qUtf8Printable(e.ErrorMessage()));
+            QCoreApplication::exit(V_EX_DATAERR);
+            return;
         }
 
         bool aSetted = true;

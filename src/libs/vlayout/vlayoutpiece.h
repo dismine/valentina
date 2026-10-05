@@ -79,7 +79,7 @@ public:
     VLayoutPiece(VLayoutPiece &&detail) noexcept;
     auto operator=(VLayoutPiece &&detail) noexcept -> VLayoutPiece &;
 
-    static auto Create(const VPiece &piece, vidtype id, const VContainer *pattern) -> VLayoutPiece;
+    static auto Create(const VPiece &piece, vidtype id, const VContainer *pattern, bool buffer = false) -> VLayoutPiece;
     static auto ConvertPassmarks(const VPiece &piece, const VContainer *pattern) -> QVector<VLayoutPassmark>;
 
     auto GetUniqueID() const -> QString override;
@@ -124,8 +124,13 @@ public:
     void SetInternalPaths(const QVector<VLayoutPiecePath> &internalPaths);
 
     auto GetPieceText() const -> QStringList;
-    void SetPieceText(const VAbstractPattern *pDoc, const QString &qsName, const VPieceLabelData &data,
-                      const QFont &font, const QString &SVGFontFamily, const VContainer *pattern);
+    void SetPieceText(const VAbstractPattern *pDoc,
+                      const QString &qsName,
+                      const VPieceLabelData &data,
+                      const QFont &font,
+                      const QString &SVGFontFamily,
+                      const VContainer *pattern,
+                      int pieceMaterial);
 
     auto GetPatternText() const -> QStringList;
     void SetPatternInfo(const VAbstractPattern *pDoc, const VPatternLabelData &geom, const QFont &font,

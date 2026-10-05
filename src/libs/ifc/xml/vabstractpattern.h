@@ -343,6 +343,11 @@ public:
     static const QString AttrTilt;
     static const QString AttrFoldPosition;
     static const QString AttrQuantity;
+    static const QString AttrNoBufferMaterial;
+    static const QString AttrWithBufferMaterial;
+    static const QString AttrBufferMaterial;
+    static const QString AttrBufferVisible;
+    static const QString AttrBufferWidth;
     static const QString AttrOnFold;
     static const QString AttrDateFormat;
     static const QString AttrTimeFormat;

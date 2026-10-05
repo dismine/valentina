@@ -101,7 +101,9 @@ VTestApp {
             "issue_256_correct.vst",
             "wrong_formula.val",
             "test_pedantic.val",
-            "legacy_cutarc_name.val"
+            "legacy_cutarc_name.val",
+            "buffer.val",
+            "buffer_zero_width.val"
         ]
         fileTags: ["tst_valentina_files"]
     }

@@ -47,7 +47,8 @@ namespace
 enum PieceColumn : quint8
 {
     InLayout = 0,
-    PieceName = 1
+    BufferInLayout = 1,
+    PieceName = 2
 };
 } // namespace
 
@@ -139,12 +140,26 @@ void VWidgetDetails::InLayoutStateChanged(int row, int column)
     const quint32 id = item->data(Qt::UserRole).toUInt();
     emit Highlight(id);
 
-    if (column != PieceColumn::InLayout)
+    if (column != PieceColumn::InLayout && column != PieceColumn::BufferInLayout)
     {
         return;
     }
 
     const QHash<quint32, VPiece> *allDetails = m_data->DataPieces();
+
+    if (column == PieceColumn::BufferInLayout)
+    {
+        const VPiece piece = allDetails->value(id);
+        if (not piece.IsBufferVisible())
+        {
+            return;
+        }
+
+        auto *toggle = new TogglePieceBufferInLayout(id, not piece.IsBufferInLayout(), m_data, m_doc);
+        connect(toggle, &TogglePieceBufferInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
+        VAbstractApplication::VApp()->getUndoStack()->push(toggle);
+        return;
+    }
     const bool inLayout = not allDetails->value(id).IsInLayout();
 
     auto *togglePrint = new TogglePieceInLayout(id, inLayout, m_data, m_doc);
@@ -179,7 +194,7 @@ void VWidgetDetails::FillTable(const QHash<quint32, VPiece> *details)
     const int selectedRow = ui->tableWidget->currentRow();
     ui->tableWidget->clearContents();
 
-    ui->tableWidget->setColumnCount(2);
+    ui->tableWidget->setColumnCount(3);
     ui->tableWidget->setRowCount(static_cast<int>(details->size()));
     qint32 currentRow = -1;
     auto i = details->constBegin();
@@ -189,6 +204,7 @@ void VWidgetDetails::FillTable(const QHash<quint32, VPiece> *details)
         const VPiece det = i.value();
 
         ui->tableWidget->setItem(currentRow, PieceColumn::InLayout, PrepareInLayoutColumnCell(det, i.key()));
+        ui->tableWidget->setItem(currentRow, PieceColumn::BufferInLayout, PrepareBufferInLayoutColumnCell(det));
         ui->tableWidget->setItem(currentRow, PieceColumn::PieceName, PreparePieceNameColumnCell(det));
         ++i;
     }
@@ -222,6 +238,13 @@ void VWidgetDetails::ToggleSectionDetails(bool select)
             connect(togglePrint, &TogglePieceInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
             VAbstractApplication::VApp()->getUndoStack()->push(togglePrint);
         }
+
+        if (const VPiece piece = allDetails->value(id); piece.IsBufferVisible() && piece.IsBufferInLayout() != select)
+        {
+            auto *toggle = new TogglePieceBufferInLayout(id, select, m_data, m_doc);
+            connect(toggle, &TogglePieceBufferInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
+            VAbstractApplication::VApp()->getUndoStack()->push(toggle);
+        }
     }
 }
 
@@ -237,6 +260,13 @@ void VWidgetDetails::ToggledPieceItem(QTableWidgetItem *item)
     {
         const bool inLayout = details->value(id).IsInLayout();
         item->setIcon(FromTheme(inLayout ? VThemeIcon::GtkOk : VThemeIcon::GtkNo));
+
+        if (QTableWidgetItem *bufferItem = ui->tableWidget->item(item->row(), PieceColumn::BufferInLayout);
+            bufferItem != nullptr)
+        {
+            bufferItem->setIcon(
+                FromTheme(details->value(id).IsBufferInLayout() ? VThemeIcon::GtkOk : VThemeIcon::GtkNo));
+        }
 
         VToolSeamAllowance *tool = nullptr;
         try
@@ -265,6 +295,25 @@ auto VWidgetDetails::PrepareInLayoutColumnCell(const VPiece &det, quint32 id) ->
     // set the item non-editable (view only), and non-selectable
     Qt::ItemFlags flags = item->flags();
     flags &= ~(Qt::ItemIsEditable); // reset/clear the flag
+    item->setFlags(flags);
+    return item;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VWidgetDetails::PrepareBufferInLayoutColumnCell(const VPiece &det) -> QTableWidgetItem *
+{
+    auto *item = new QTableWidgetItem();
+    item->setTextAlignment(Qt::AlignHCenter);
+    item->setIcon(FromTheme(det.IsBufferInLayout() ? VThemeIcon::GtkOk : VThemeIcon::GtkNo));
+    item->setToolTip(tr("Buffer in layout"));
+
+    // set the item non-editable (view only), and disabled while the buffer is hidden
+    Qt::ItemFlags flags = item->flags();
+    flags &= ~(Qt::ItemIsEditable); // reset/clear the flag
+    if (not det.IsBufferVisible())
+    {
+        flags &= ~(Qt::ItemIsEnabled);
+    }
     item->setFlags(flags);
     return item;
 }
@@ -332,23 +381,35 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
         return;
     }
 
-    int selectedDetails = 0;
+    // Toggles that select all/none act on: in layout of every piece, buffer in layout of every visible buffer
+    int toggles = 0;
+    int selectedToggles = 0;
 
     auto iter = allDetails->constBegin();
     while (iter != allDetails->constEnd())
     {
+        ++toggles;
         if (iter.value().IsInLayout())
         {
-            selectedDetails++;
+            ++selectedToggles;
+        }
+
+        if (iter.value().IsBufferVisible())
+        {
+            ++toggles;
+            if (iter.value().IsBufferInLayout())
+            {
+                ++selectedToggles;
+            }
         }
         ++iter;
     }
 
-    if (selectedDetails == 0)
+    if (selectedToggles == 0)
     {
         actionSelectNone->setDisabled(true);
     }
-    else if (selectedDetails == allDetails->size())
+    else if (selectedToggles == toggles)
     {
         actionSelectAll->setDisabled(true);
     }
@@ -385,6 +446,13 @@ void VWidgetDetails::ShowContextMenu(const QPoint &pos)
                 auto *togglePrint = new TogglePieceInLayout(id, select, m_data, m_doc);
                 connect(togglePrint, &TogglePieceInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
                 VAbstractApplication::VApp()->getUndoStack()->push(togglePrint);
+
+                if (const VPiece piece = allDetails->value(id); piece.IsBufferVisible())
+                {
+                    auto *toggle = new TogglePieceBufferInLayout(id, not piece.IsBufferInLayout(), m_data, m_doc);
+                    connect(toggle, &TogglePieceBufferInLayout::Toggled, this, &VWidgetDetails::ToggledPiece);
+                    VAbstractApplication::VApp()->getUndoStack()->push(toggle);
+                }
             }
         }
 

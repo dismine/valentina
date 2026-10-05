@@ -219,3 +219,27 @@ void TST_VAbstractPattern::MaxRecordedIdOnEmptyDocumentIsZero()
 
     QCOMPARE(doc.MaxRecordedId(), static_cast<quint32>(NULL_ID));
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+// Increment rename and the "used" check go through ListExpressions(); buffer formulas must be part of it.
+void TST_VAbstractPattern::ListExpressionsIncludesBufferFormulas()
+{
+    TestDoc doc;
+    QVERIFY(doc.setContent(QByteArray(R"(
+        <pattern>
+            <draw name="Block A">
+                <details>
+                    <detail id="9" width="1" bufferVisible="#show" bufferWidth="#buffer"/>
+                </details>
+            </draw>
+        </pattern>)")));
+
+    QStringList formulas;
+    for (const auto &field : doc.ListExpressions())
+    {
+        formulas.append(field.expression);
+    }
+
+    QVERIFY2(formulas.contains(u"#show"_s), qUtf8Printable(formulas.join(", "_L1)));
+    QVERIFY2(formulas.contains(u"#buffer"_s), qUtf8Printable(formulas.join(", "_L1)));
+}

@@ -62,6 +62,32 @@ private:
     void Do(bool state);
 };
 
+class TogglePieceBufferInLayout : public VUndoCommand
+{
+    Q_OBJECT // NOLINT
+
+public:
+    TogglePieceBufferInLayout(
+        quint32 id, bool state, VContainer *data, VAbstractPattern *doc, QUndoCommand *parent = nullptr);
+    ~TogglePieceBufferInLayout() override = default;
+
+    void undo() override;
+    void redo() override;
+
+signals:
+    void Toggled(quint32 id);
+
+private:
+    // cppcheck-suppress unknownMacro
+    Q_DISABLE_COPY_MOVE(TogglePieceBufferInLayout) // NOLINT
+    quint32 m_id;
+    VContainer *m_data;
+    bool m_oldState;
+    bool m_newState;
+
+    void Do(bool state);
+};
+
 class ToggleHideMainPath : public VUndoCommand
 {
     Q_OBJECT // NOLINT

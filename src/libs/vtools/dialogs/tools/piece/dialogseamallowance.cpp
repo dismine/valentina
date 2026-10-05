@@ -182,6 +182,8 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, VAbstractPatter
     m_timerFoldHeight(new QTimer(this)),
     m_timerFoldWidth(new QTimer(this)),
     m_timerFoldCenter(new QTimer(this)),
+    m_timerBufferVisible(new QTimer(this)),
+    m_timerBufferWidth(new QTimer(this)),
     m_placeholdersMenu(new VScrollableMenu(this))
 {
     ui->setupUi(this);
@@ -203,6 +205,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, VAbstractPatter
     InitPassmarksTab();
     InitPlaceLabelsTab();
     InitFoldLineTab();
+    InitBufferTab();
 
     InitIcons();
 
@@ -426,6 +429,28 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
     uiTabLabels->checkBoxFold->setChecked(ppData.IsOnFold());
     m_templateLines = ppData.GetLabelTemplate();
 
+    if (m_doc != nullptr && not m_patternMaterialsChanged)
+    {
+        m_patternMaterials = m_doc->GetPatternMaterials();
+    }
+    InitMaterialComboBoxes();
+    auto SelectMaterial = [](QComboBox *box, int material) { box->setCurrentIndex(qMax(0, box->findData(material))); };
+    SelectMaterial(uiTabLabels->comboBoxNoBufferMaterial, ppData.GetNoBufferMaterial());
+    SelectMaterial(uiTabLabels->comboBoxWithBufferMaterial, ppData.GetWithBufferMaterial());
+    SelectMaterial(uiTabLabels->comboBoxBufferMaterial, ppData.GetBufferMaterial());
+
+    uiTabPaths->lineEditBufferName->setText(piece.GetBufferName());
+    m_bufferVisible = piece.IsBufferVisible() ? 1 : 0;
+    m_bufferWidth = piece.GetBufferWidth();
+    SetBufferFormula(uiTabPaths->plainTextEditFormulaBufferVisible,
+                     uiTabPaths->pushButtonGrowBufferVisible,
+                     m_formulaBaseBufferVisible,
+                     piece.GetFormulaBufferVisible());
+    SetBufferFormula(uiTabPaths->plainTextEditFormulaBufferWidth,
+                     uiTabPaths->pushButtonGrowBufferWidth,
+                     m_formulaBaseBufferWidth,
+                     piece.GetFormulaBufferWidth());
+
     {
         const int piceFontSizeIndex = uiTabLabels->comboBoxPieceLabelSize->findData(ppData.GetFontSize());
         uiTabLabels->comboBoxPieceLabelSize->setCurrentIndex(piceFontSizeIndex != -1 ? piceFontSizeIndex : 0);
@@ -620,7 +645,8 @@ void DialogSeamAllowance::SaveData()
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::CheckTabPathsState()
 {
-    bool const isValid = flagFormula && flagFormulaBefore && flagFormulaAfter;
+    bool const isBufferValid = flagFormulaBufferVisible && flagFormulaBufferWidth;
+    bool const isValid = flagFormula && flagFormulaBefore && flagFormulaAfter && isBufferValid;
     bool const isMainPathValid = flagMainPathIsValid && flagMirrorLineIsValid;
     bool const isNameAndUUIDValid = flagName && flagUUID;
 
@@ -635,6 +661,8 @@ void DialogSeamAllowance::CheckTabPathsState()
                                       isMainPathValid ? QIcon() : warningIcon);
     uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabPiece),
                                       isNameAndUUIDValid ? QIcon() : warningIcon);
+    uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabBuffer),
+                                      isBufferValid ? QIcon() : warningIcon);
 
     if (flagMainPathIsValid && flagMirrorLineIsValid)
     {
@@ -1012,6 +1040,7 @@ void DialogSeamAllowance::showEvent(QShowEvent *event)
 
         VCommonSettings const *settings = VAbstractApplication::VApp()->Settings();
         m_patternMaterials = m_doc->GetPatternMaterials();
+        InitMaterialComboBoxes();
 
         InitComboBoxFormats(uiTabLabels->comboBoxDateFormat,
                             VCommonSettings::PredefinedDateFormats() + settings->GetUserDefinedDateFormats(),
@@ -3232,6 +3261,80 @@ void DialogSeamAllowance::DeployFoldWidth()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EvalBufferVisible()
+{
+    m_bufferVisible = Eval({.formula = uiTabPaths->plainTextEditFormulaBufferVisible->toPlainText(),
+                            .variables = data.DataVariables(),
+                            .labelEditFormula = uiTabPaths->labelEditBufferVisible,
+                            .labelResult = uiTabPaths->labelResultBufferVisible,
+                            .postfix = QString(),
+                            .checkLessThanZero = false},
+                           flagFormulaBufferVisible);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EvalBufferWidth()
+{
+    m_bufferWidth = Eval({.formula = uiTabPaths->plainTextEditFormulaBufferWidth->toPlainText(),
+                          .variables = data.DataVariables(),
+                          .labelEditFormula = uiTabPaths->labelEditBufferWidth,
+                          .labelResult = uiTabPaths->labelResultBufferWidth,
+                          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+                          .checkLessThanZero = true},
+                         flagFormulaBufferWidth);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::FXBufferVisible()
+{
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&data, toolId, this));
+    dialog->setWindowTitle(tr("Edit buffer visibility"));
+    dialog->SetFormula(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaBufferVisible));
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetBufferFormula(uiTabPaths->plainTextEditFormulaBufferVisible,
+                         uiTabPaths->pushButtonGrowBufferVisible,
+                         m_formulaBaseBufferVisible,
+                         dialog->GetFormula());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::FXBufferWidth()
+{
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&data, toolId, this));
+    dialog->setWindowTitle(tr("Edit buffer width"));
+    dialog->SetFormula(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaBufferWidth));
+    dialog->setCheckLessThanZero(true); // Width 0 is allowed
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        SetBufferFormula(uiTabPaths->plainTextEditFormulaBufferWidth,
+                         uiTabPaths->pushButtonGrowBufferWidth,
+                         m_formulaBaseBufferWidth,
+                         dialog->GetFormula());
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::DeployBufferVisible()
+{
+    DeployFormula(this,
+                  uiTabPaths->plainTextEditFormulaBufferVisible,
+                  uiTabPaths->pushButtonGrowBufferVisible,
+                  m_formulaBaseBufferVisible);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::DeployBufferWidth()
+{
+    DeployFormula(this,
+                  uiTabPaths->plainTextEditFormulaBufferWidth,
+                  uiTabPaths->pushButtonGrowBufferWidth,
+                  m_formulaBaseBufferWidth);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::DeployFoldCenter()
 {
     DeployFormula(this,
@@ -3374,6 +3477,12 @@ auto DialogSeamAllowance::CreatePiece() const -> VPiece
     piece.SetPriority(static_cast<uint>(uiTabPaths->spinBoxPriority->value()));
     piece.SetTrueZeroWidth(uiTabPaths->checkBoxTrueZeroWidth->isChecked());
     piece.SetFormulaSAWidth(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaWidth), m_saWidth);
+    piece.SetBufferName(uiTabPaths->lineEditBufferName->text());
+    piece.SetFormulaBufferVisible(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaBufferVisible), m_bufferVisible);
+    piece.SetFormulaBufferWidth(GetFormulaFromUser(uiTabPaths->plainTextEditFormulaBufferWidth), m_bufferWidth);
+    piece.GetPieceLabelData().SetNoBufferMaterial(uiTabLabels->comboBoxNoBufferMaterial->currentData().toInt());
+    piece.GetPieceLabelData().SetWithBufferMaterial(uiTabLabels->comboBoxWithBufferMaterial->currentData().toInt());
+    piece.GetPieceLabelData().SetBufferMaterial(uiTabLabels->comboBoxBufferMaterial->currentData().toInt());
     piece.GetPieceLabelData().SetLetter(uiTabLabels->lineEditLetter->text());
     piece.GetPieceLabelData().SetAnnotation(uiTabLabels->lineEditAnnotation->text());
     piece.GetPieceLabelData().SetOrientation(uiTabLabels->lineEditOrientation->text());
@@ -4163,6 +4272,13 @@ void DialogSeamAllowance::InitPieceTab()
 
     uiTabPaths->lineEditName->setClearButtonEnabled(true);
     uiTabPaths->lineEditName->setText(GetDefaultPieceName());
+
+    auto UpdateBufferNamePlaceholder = [this]()
+    {
+        uiTabPaths->lineEditBufferName->setPlaceholderText(VPiece::DefaultBufferName(uiTabPaths->lineEditName->text()));
+    };
+    connect(uiTabPaths->lineEditName, &QLineEdit::textChanged, this, UpdateBufferNamePlaceholder);
+    UpdateBufferNamePlaceholder();
 
     connect(uiTabPaths->checkBoxForbidFlipping,
             CHECKBOX_STATE_CHANGED,
@@ -5066,6 +5182,77 @@ void DialogSeamAllowance::SetFormulaFoldHeight(const QString &formula)
     uiTabFoldLine->plainTextEditHeight->setPlainText(width);
 
     MoveCursorToEnd(uiTabFoldLine->plainTextEditHeight);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::SetBufferFormula(QPlainTextEdit *edit,
+                                           QPushButton *growButton,
+                                           int &baseHeight,
+                                           const QString &formula)
+{
+    const QString text = VAbstractApplication::VApp()
+                             ->TrVars()
+                             ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    // increase height if needed.
+    if (text.length() > 80)
+    {
+        DeployFormula(this, edit, growButton, baseHeight);
+    }
+    edit->setPlainText(text);
+
+    MoveCursorToEnd(edit);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitBufferTab()
+{
+    m_formulaBaseBufferVisible = uiTabPaths->plainTextEditFormulaBufferVisible->height();
+    uiTabPaths->plainTextEditFormulaBufferVisible->installEventFilter(this);
+    m_timerBufferVisible->setSingleShot(true);
+    connect(m_timerBufferVisible, &QTimer::timeout, this, &DialogSeamAllowance::EvalBufferVisible);
+    connect(uiTabPaths->toolButtonExprBufferVisible, &QPushButton::clicked, this, &DialogSeamAllowance::FXBufferVisible);
+    connect(uiTabPaths->plainTextEditFormulaBufferVisible,
+            &QPlainTextEdit::textChanged,
+            this,
+            [this]() { m_timerBufferVisible->start(formulaTimerTimeout); });
+    connect(uiTabPaths->pushButtonGrowBufferVisible,
+            &QPushButton::clicked,
+            this,
+            &DialogSeamAllowance::DeployBufferVisible);
+
+    m_formulaBaseBufferWidth = uiTabPaths->plainTextEditFormulaBufferWidth->height();
+    uiTabPaths->plainTextEditFormulaBufferWidth->installEventFilter(this);
+    m_timerBufferWidth->setSingleShot(true);
+    connect(m_timerBufferWidth, &QTimer::timeout, this, &DialogSeamAllowance::EvalBufferWidth);
+    connect(uiTabPaths->toolButtonExprBufferWidth, &QPushButton::clicked, this, &DialogSeamAllowance::FXBufferWidth);
+    connect(uiTabPaths->plainTextEditFormulaBufferWidth,
+            &QPlainTextEdit::textChanged,
+            this,
+            [this]() { m_timerBufferWidth->start(formulaTimerTimeout); });
+    connect(uiTabPaths->pushButtonGrowBufferWidth, &QPushButton::clicked, this, &DialogSeamAllowance::DeployBufferWidth);
+
+    // Defaults for a new piece; SetPiece() overrides them for an existing one.
+    uiTabPaths->plainTextEditFormulaBufferVisible->setPlainText(QChar('0'));
+    uiTabPaths->plainTextEditFormulaBufferWidth->setPlainText(QChar('0'));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitMaterialComboBoxes()
+{
+    for (QComboBox *box : {uiTabLabels->comboBoxNoBufferMaterial,
+                           uiTabLabels->comboBoxWithBufferMaterial,
+                           uiTabLabels->comboBoxBufferMaterial})
+    {
+        const int current = box->currentData().toInt();
+        const QSignalBlocker blocker(box);
+        box->clear();
+        box->addItem(tr("<empty>"), 0);
+        for (auto i = m_patternMaterials.cbegin(); i != m_patternMaterials.cend(); ++i)
+        {
+            box->addItem(i.value(), i.key());
+        }
+        box->setCurrentIndex(qMax(0, box->findData(current)));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -6112,6 +6299,7 @@ void DialogSeamAllowance::ManagePatternMaterials()
     {
         m_patternMaterials = editor.GetPatternMaterials();
         m_patternMaterialsChanged = true;
+        InitMaterialComboBoxes();
 
         if (settings->IsRememberPatternMaterials())
         {

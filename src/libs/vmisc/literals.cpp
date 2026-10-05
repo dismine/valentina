@@ -129,6 +129,7 @@ const QString pl_pTilt = QStringLiteral("pTilt");
 const QString pl_pFoldPosition = QStringLiteral("pFoldPosition");
 const QString pl_pName = QStringLiteral("pName");
 const QString pl_pQuantity = QStringLiteral("pQuantity");
+const QString pl_pMaterial = QStringLiteral("pMaterial");
 const QString pl_mFabric = QStringLiteral("mFabric");
 const QString pl_mLining = QStringLiteral("mLining");
 const QString pl_mInterfacing = QStringLiteral("mInterfacing");

@@ -29,6 +29,9 @@
 #include "vpiecelabeldata.h"
 #include "vpiecelabeldata_p.h"
 
+#include "../vmisc/def.h"
+
+#include <algorithm>
 #include <QList>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -171,6 +174,48 @@ auto VPieceLabelData::IsOnFold() const -> bool
 void VPieceLabelData::SetOnFold(bool onFold)
 {
     d->m_onFold = onFold;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceLabelData::GetNoBufferMaterial() const -> int
+{
+    return d->m_noBufferMaterial;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetNoBufferMaterial(int value)
+{
+    d->m_noBufferMaterial = std::clamp(value, 0, userMaterialPlaceholdersQuantity);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceLabelData::GetWithBufferMaterial() const -> int
+{
+    return d->m_withBufferMaterial;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetWithBufferMaterial(int value)
+{
+    d->m_withBufferMaterial = std::clamp(value, 0, userMaterialPlaceholdersQuantity);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceLabelData::GetBufferMaterial() const -> int
+{
+    return d->m_bufferMaterial;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPieceLabelData::SetBufferMaterial(int value)
+{
+    d->m_bufferMaterial = std::clamp(value, 0, userMaterialPlaceholdersQuantity);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPieceLabelData::PieceMaterial(bool bufferVisible) const -> int
+{
+    return bufferVisible ? d->m_withBufferMaterial : d->m_noBufferMaterial;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

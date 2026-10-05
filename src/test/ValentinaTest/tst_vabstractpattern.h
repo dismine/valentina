@@ -46,6 +46,7 @@ private slots:
     void ClearCancelsPendingWorkers();
     void MaxRecordedIdCountsOrphanedNodes();
     void MaxRecordedIdOnEmptyDocumentIsZero();
+    void ListExpressionsIncludesBufferFormulas();
 
 private:
     Q_DISABLE_COPY_MOVE(TST_VAbstractPattern) // NOLINT

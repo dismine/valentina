@@ -101,6 +101,26 @@ public:
     auto GetFormulaSAWidth() const -> QString;
     void SetFormulaSAWidth(const QString &formula, qreal value);
 
+    auto GetBufferName() const -> QString;
+    void SetBufferName(const QString &name);
+    static auto DefaultBufferName(const QString &pieceName) -> QString;
+
+    auto IsBufferInLayout() const -> bool;
+    void SetBufferInLayout(bool value);
+
+    auto GetFormulaBufferVisible() const -> QString;
+    void SetFormulaBufferVisible(const QString &formula, qreal value);
+    auto IsBufferVisible() const -> bool;
+
+    auto GetFormulaBufferWidth() const -> QString;
+    void SetFormulaBufferWidth(const QString &formula, qreal value);
+    auto GetBufferWidth() const -> qreal;
+    void SetBufferWidth(qreal value);
+
+    auto BufferAllowancePoints(const VContainer *data) const -> QVector<VLayoutPoint>;
+    auto BufferProblems(const VContainer *data) const -> QStringList;
+    auto AsBuffer() const -> VPiece;
+
     auto GetInternalPaths() const -> QVector<quint32>;
     auto GetInternalPaths() -> QVector<quint32> &;
     void SetInternalPaths(const QVector<quint32> &iPaths);
