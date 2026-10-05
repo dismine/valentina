@@ -1876,32 +1876,32 @@
         <translation>Kuantitas</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="715"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="716"/>
         <source>Material: Fabric</source>
         <translation>Bahan: Kain</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="716"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="717"/>
         <source>Material: Lining</source>
         <translation>Bahan: Furing</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="718"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="719"/>
         <source>Material: Interfacing</source>
         <translation>Bahan: Interfacing</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="720"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="721"/>
         <source>Material: Interlining</source>
         <translation>Bahan: Interlining</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="721"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="722"/>
         <source>Word: Cut</source>
         <translation>Kata: Potong</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="722"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="723"/>
         <source>Word: on fold</source>
         <translation>Kata: pada lipatan</translation>
     </message>
@@ -2026,22 +2026,22 @@
         <translation>Ukuran akhir: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="740"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="741"/>
         <source>No data for the height dimension.</source>
         <translation>Tidak ada data untuk dimensi tinggi.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="741"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="742"/>
         <source>No data for the size dimension.</source>
         <translation>Tidak ada data untuk dimensi ukuran.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="742"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="743"/>
         <source>No data for the hip dimension.</source>
         <translation>Tidak ada data untuk dimensi pinggul.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="743"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="744"/>
         <source>No data for the waist dimension.</source>
         <translation>Tidak ada data untuk dimensi pinggang.</translation>
     </message>
@@ -2109,22 +2109,27 @@
         <translation>Alias nilai ukuran %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="745"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="715"/>
+        <source>Piece material</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="746"/>
         <source>No data for the X dimension.</source>
         <translation>Tidak ada data untuk dimensi X.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="746"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="747"/>
         <source>No data for the Y dimension.</source>
         <translation>Tidak ada data untuk dimensi Y.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="747"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="748"/>
         <source>No data for the Z dimension.</source>
         <translation>Tidak ada data untuk dimensi Z.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="748"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="749"/>
         <source>No data for the W dimension.</source>
         <translation>Tidak ada data untuk dimensi W.</translation>
     </message>
@@ -3806,15 +3811,15 @@
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="464"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="487"/>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="498"/>
-        <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="2217"/>
-        <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="2223"/>
+        <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="2229"/>
+        <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="2235"/>
         <source>Error</source>
         <translation>Kesalahan</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="464"/>
-        <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="2217"/>
-        <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="2223"/>
+        <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="2229"/>
+        <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="2235"/>
         <source>Empty field.</source>
         <translation>Bidang kosong.</translation>
     </message>
@@ -3912,7 +3917,7 @@
         <translation>nilai</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="2355"/>
+        <location filename="../../src/app/valentina/dialogs/dialogincrements.cpp" line="2362"/>
         <source>Edit increment</source>
         <translation>Edit increment</translation>
     </message>
@@ -6125,14 +6130,14 @@ Tetap terapkan pengaturan?</translation>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="339"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1457"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2234"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2254"/>
         <source>Ready!</source>
         <translation>Siap!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="356"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1509"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2087"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2105"/>
         <source>Seam allowance</source>
         <translation>kampuh</translation>
     </message>
@@ -6277,64 +6282,64 @@ Tetap terapkan pengaturan?</translation>
         <translation>Buat rumus yang mengatur visibilitas. Nilai selain &quot;0&quot; membuat jalur terlihat</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1069"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1078"/>
         <source>Edit seam allowance width</source>
         <translation>Edit lebar kampuh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1083"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1092"/>
         <source>Edit seam allowance width before</source>
         <translation>Edit lebar kampuh sebelum</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1097"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1106"/>
         <source>Edit seam allowance width after</source>
         <translation>Edit lebar kampuh setelah</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1138"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1147"/>
         <source>Edit passmark width</source>
         <translation>Edit lebar takik</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1152"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1161"/>
         <source>Edit passmark angle</source>
         <translation>Edit sudut takik</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1165"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1174"/>
         <source>Edit notch visibility</source>
         <translation>Edit visibilitas takik</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1677"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1694"/>
         <source>Internal path</source>
         <translation>Jalur internal</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1678"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1695"/>
         <source>Custom seam allowance</source>
         <translation>Kampuh kustom</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2178"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2196"/>
         <source>You need more points!</source>
         <translation>Anda memerlukan lebih banyak titik!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2187"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2206"/>
         <source>First point of &lt;b&gt;custom seam allowance&lt;/b&gt; cannot be equal to the last point!</source>
         <translation>Titik pertama &lt;b&gt;kampuh kustom&lt;/b&gt; tidak boleh sama dengan titik terakhir!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2195"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2215"/>
         <source>You have double points!</source>
         <translation>Anda memiliki titik ganda!</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.ui" line="1028"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_dialogpiecepath.h" line="1619"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2092"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2110"/>
         <source>Passmarks</source>
         <translation>Takik</translation>
     </message>
@@ -6401,12 +6406,12 @@ Tetap terapkan pengaturan?</translation>
         <translation>Tanda V</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2222"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2242"/>
         <source>Please, select a detail to insert into!</source>
         <translation>Silakan pilih potongan untuk disisipkan!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2216"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2236"/>
         <source>List of details is empty!</source>
         <translation>Daftar potongan kosong!</translation>
     </message>
@@ -6425,7 +6430,7 @@ Tetap terapkan pengaturan?</translation>
         <translation>Perpotongan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2210"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2230"/>
         <source>Each point in the &lt;b&gt;custom seam allowance&lt;/b&gt; path must be unique!</source>
         <translation>Setiap titik dalam jalur &lt;b&gt;kampuh kustom&lt;/b&gt; harus unik!</translation>
     </message>
@@ -6553,7 +6558,7 @@ Tetap terapkan pengaturan?</translation>
         <translation>1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1111"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1120"/>
         <source>Control visibility</source>
         <translation>Kontrol visibilitas</translation>
     </message>
@@ -6618,7 +6623,7 @@ Tetap terapkan pengaturan?</translation>
         <translation>Jalur ini adalah kontur potong. Digunakan untuk mengontrol ekspor ke DXF-AAMA</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2139"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2157"/>
         <source>The list of pieces is empty. Please, first create at least one piece for current pattern piece.</source>
         <translation>Daftar potongan kosong. Silakan buat setidaknya satu potongan untuk pola saat ini terlebih dahulu.</translation>
     </message>
@@ -6635,27 +6640,27 @@ Tetap terapkan pengaturan?</translation>
         <translation>Tampilkan takik kedua pada garis jahitan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2203"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2223"/>
         <source>The same curve repeats twice!</source>
         <translation>Kurva yang sama berulang dua kali!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="909"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="941"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="980"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1008"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1035"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1060"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="918"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="950"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="989"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1017"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1044"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1069"/>
         <source>&lt;Empty&gt;</source>
         <translation>&lt;Kosong&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="190"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="193"/>
         <source>Select main path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation>Pilih objek jalur utama, &lt;b&gt;%1&lt;/b&gt; - balikkan arah kurva, &lt;b&gt;%2&lt;/b&gt; - selesaikan pembuatan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="873"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="882"/>
         <source>Current seam allowance</source>
         <translation>Kampuh saat ini</translation>
     </message>
@@ -6690,12 +6695,12 @@ Tetap terapkan pengaturan?</translation>
         <translation>Tanda Kotak</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1123"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="1132"/>
         <source>Edit passmark length</source>
         <translation>Edit panjang takik</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2230"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2250"/>
         <source>Invalid segment!</source>
         <translation>Segmen tidak valid!</translation>
     </message>
@@ -8276,304 +8281,304 @@ Tetap terapkan pengaturan?</translation>
 <context>
     <name>DialogSeamAllowance</name>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="639"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="669"/>
         <source>Ready!</source>
         <translation>Siap!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2137"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2217"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2301"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2187"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2269"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2354"/>
         <source>Value</source>
         <translation>Nilai</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4717"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5058"/>
         <source>Default</source>
         <translation>Default</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5145"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5581"/>
         <source>Detail</source>
         <translation>rincial</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2177"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2736"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3214"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3822"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2228"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2788"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3366"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3984"/>
         <source>Grainline</source>
         <translation>Arah serat kain</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2660"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1246"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5615"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2689"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1281"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6065"/>
         <source>Reverse</source>
         <translation>Balik</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2670"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5629"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2699"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6079"/>
         <source>Passmark</source>
         <translation>Takik</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2690"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5649"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2719"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6099"/>
         <source>One line</source>
         <translation>Satu garis</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2693"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5652"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2722"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6102"/>
         <source>Two lines</source>
         <translation>Dua garis</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2696"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5655"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2725"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6105"/>
         <source>Three lines</source>
         <translation>Tiga garis</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2699"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5658"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2728"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6108"/>
         <source>T mark</source>
         <translation>Tanda T</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2703"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5662"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2731"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6111"/>
         <source>External V mark</source>
         <translation>Tanda V eksternal</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2707"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5666"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2735"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6115"/>
         <source>Internal V mark</source>
         <translation>Tanda V internal</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2710"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5669"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2739"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6119"/>
         <source>U mark</source>
         <translation>Tanda U</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2713"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5672"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2742"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6122"/>
         <source>Box mark</source>
         <translation>Tanda Kotak</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2716"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5675"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2745"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6125"/>
         <source>Check mark</source>
         <translation>Tanda centang</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2720"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5680"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2749"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6130"/>
         <source>Check uniqueness</source>
         <translation>Periksa keunikan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2725"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5686"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2754"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6136"/>
         <source>Turn point</source>
         <translation>Titik belok</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2731"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5693"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2760"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6143"/>
         <source>Excluded</source>
         <translation>Dikecualikan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2737"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1250"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1293"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1327"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1389"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5699"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2766"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1328"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1362"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1423"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6149"/>
         <source>Delete</source>
         <translation>hapus</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1240"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1292"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1376"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1275"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1410"/>
         <source>Options</source>
         <translation>pilihan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1809"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1861"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1853"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1910"/>
         <source>Error. Can&apos;t save piece path.</source>
         <translation>Kesalahan. Tidak dapat menyimpan jalur potongan.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2149"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2230"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2313"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2200"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2282"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2367"/>
         <source>Infinite/undefined result</source>
         <translation>Hasil tak terhingga/tidak terdefinisi</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2153"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2234"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2317"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2204"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2286"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2371"/>
         <source>Length should be positive</source>
         <translation>Panjang harus positif</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2164"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2245"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2328"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2215"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2297"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2382"/>
         <source>Parser error: %1</source>
         <translation>Kesalahan parser: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2771"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2824"/>
         <source>Current seam allowance</source>
         <translation>Kampuh saat ini</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2992"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3054"/>
         <source>Edit seam allowance width</source>
         <translation>Edit lebar kampuh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3006"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3068"/>
         <source>Edit seam allowance width before</source>
         <translation>Edit lebar kampuh sebelum</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3020"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3082"/>
         <source>Edit seam allowance width after</source>
         <translation>Edit lebar kampuh setelah</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3049"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3111"/>
         <source>Edit passmark width</source>
         <translation>Edit lebar takik</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3063"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3125"/>
         <source>Edit passmark angle</source>
         <translation>Edit sudut takik</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3468"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3626"/>
         <source>You need more points!</source>
         <translation>Anda memerlukan lebih banyak titik!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3475"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3633"/>
         <source>You have to choose points in a clockwise direction!</source>
         <translation>Anda harus memilih titik searah jarum jam!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3483"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3642"/>
         <source>First point cannot be equal to the last point!</source>
         <translation>Titik pertama tidak boleh sama dengan titik terakhir!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3491"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3651"/>
         <source>You have double points!</source>
         <translation>Anda memiliki titik ganda!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4216"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4455"/>
         <source>Empty</source>
         <translation>Kosong</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4301"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4540"/>
         <source>main path</source>
         <translation>jalur utama</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4303"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4542"/>
         <source>custom seam allowance</source>
         <translation>kampuh kustom</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2673"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4282"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4685"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5632"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogpiecepath.cpp" line="2702"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4521"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5026"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6082"/>
         <source>None</source>
         <translation>Tidak ada</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3820"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3982"/>
         <source>Pins</source>
         <translation>Pin</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4242"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4481"/>
         <source>no pin</source>
         <translation>tanpa pin</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2259"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2342"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2745"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3237"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3246"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3270"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3279"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3821"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2311"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2396"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2797"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3389"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3398"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3422"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3431"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3983"/>
         <source>Labels</source>
         <translation>Label</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2161"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2242"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2325"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2212"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2294"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2379"/>
         <source>Error</source>
         <translation>Kesalahan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2521"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2575"/>
         <source>Edit length</source>
         <translation>Edit panjang</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2527"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2584"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2644"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2581"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2638"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2698"/>
         <source>Edit angle</source>
         <translation>Edit sudut</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2572"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2632"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2626"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2686"/>
         <source>Edit height</source>
         <translation>Edit tinggi</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2578"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2638"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2632"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2692"/>
         <source>Edit width</source>
         <translation>Edit lebar</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="626"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3819"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="654"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3981"/>
         <source>Paths</source>
         <translation>Jalur</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3506"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3668"/>
         <source>Each point in the path must be unique!</source>
         <translation>Setiap titik dalam jalur harus unik!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="666"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3823"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="696"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3985"/>
         <source>Passmarks</source>
         <translation>Takik</translation>
     </message>
@@ -8584,377 +8589,392 @@ Tetap terapkan pengaturan?</translation>
         <translation>Alat potongan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1378"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1412"/>
         <source>Segment</source>
         <translation>Segmen</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1379"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1413"/>
         <source>Rectangle</source>
         <translation>Persegi panjang</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1380"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1414"/>
         <source>Cross</source>
         <translation>Silang</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1381"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1415"/>
         <source>T-shaped</source>
         <translation>Berbentuk T</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1382"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1416"/>
         <source>Doubletree</source>
         <translation>Pohon ganda</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1383"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1417"/>
         <source>Corner</source>
         <translation>Sudut</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1384"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1418"/>
         <source>Triangle</source>
         <translation>Segitiga</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1385"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1419"/>
         <source>H-shaped</source>
         <translation>Berbentuk H</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1386"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1420"/>
         <source>Button</source>
         <translation>Kancing</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3824"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3986"/>
         <source>Place label</source>
         <translation>Tempatkan label</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="643"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="673"/>
         <source>To open all detail&apos;s features complete creating the main path. Please, press OK.</source>
         <translation>Untuk membuka semua fitur potongan, selesaikan pembuatan jalur utama terlebih dahulu. Silakan tekan OK.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3499"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3660"/>
         <source>The same curve repeats twice!</source>
         <translation>Kurva yang sama berulang dua kali!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2801"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2828"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2854"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2879"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2903"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2925"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2855"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2883"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2910"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2936"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2961"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="2984"/>
         <source>&lt;Empty&gt;</source>
         <translation>&lt;Kosong&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="546"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="573"/>
         <source>Select main path objects clockwise, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation>Pilih objek jalur utama searah jarum jam, &lt;b&gt;%1&lt;/b&gt; - balikkan arah kurva, &lt;b&gt;%2&lt;/b&gt; - selesaikan pembuatan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="698"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3825"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="729"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3987"/>
         <source>Fold line</source>
         <translation>Garis lipatan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1387"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="1421"/>
         <source>Circle</source>
         <translation>Lingkaran</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3034"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3096"/>
         <source>Edit passmark length</source>
         <translation>Edit panjang takik</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3076"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3138"/>
         <source>Edit notch visibility</source>
         <translation>Edit visibilitas takik</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3088"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3150"/>
         <source>Edit fold line height</source>
         <translation>Edit tinggi garis lipatan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3103"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3165"/>
         <source>Edit fold line width</source>
         <translation>Edit lebar garis lipatan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3118"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3180"/>
         <source>Edit fold line center position</source>
         <translation>Edit posisi tengah garis lipatan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3539"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3575"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3291"/>
+        <source>Edit buffer visibility</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3306"/>
+        <source>Edit buffer width</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3701"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3737"/>
         <source>Invalid mirror line start point!</source>
         <translation>Titik awal garis cermin tidak valid!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3546"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3582"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3708"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3744"/>
         <source>Invalid mirror line end point!</source>
         <translation>Titik akhir garis cermin tidak valid!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3555"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3717"/>
         <source>Start and end mirror line points must be unique!</source>
         <translation>Titik awal dan akhir garis cermin harus unik!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3591"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3753"/>
         <source>Mirror points must be neighbors!</source>
         <translation>Titik cermin harus bertetangga!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4408"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4669"/>
         <source>The customer name from individual measurements</source>
         <translation>Nama pelanggan dari ukuran individu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4412"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4673"/>
         <source>The customer email from individual measurements</source>
         <translation>Email pelanggan dari ukuran individu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4416"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4677"/>
         <source>The customer birth date from individual measurements</source>
         <translation>Tanggal lahir pelanggan dari ukuran individu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4470"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4756"/>
         <source>Two ways (Up/Down)</source>
         <comment>grainline direction</comment>
         <translation>Dua arah (Atas/Bawah)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4472"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4758"/>
         <source>One way (Up)</source>
         <comment>grainline direction</comment>
         <translation>Satu arah (Atas)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4474"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4760"/>
         <source>One way (Down)</source>
         <comment>grainline direction</comment>
         <translation>Satu arah (Bawah)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4476"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4762"/>
         <source>Four ways</source>
         <comment>grainline direction</comment>
         <translation>Empat arah</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4478"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4764"/>
         <source>Two ways (Up/Left)</source>
         <comment>grainline direction</comment>
         <translation>Dua arah (Atas/Kiri)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4480"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4766"/>
         <source>Two ways (Up/Right)</source>
         <comment>grainline direction</comment>
         <translation>Dua arah (Atas/Kanan)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4482"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4768"/>
         <source>Two ways (Down/Left)</source>
         <comment>grainline direction</comment>
         <translation>Dua arah (Bawah/Kiri)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4484"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4770"/>
         <source>Two ways (Down/Right)</source>
         <comment>grainline direction</comment>
         <translation>Dua arah (Bawah/Kanan)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4486"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4772"/>
         <source>Three ways (Up/Down/Left)</source>
         <comment>grainline direction</comment>
         <translation>Tiga arah (Atas/Bawah/Kiri)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4488"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4774"/>
         <source>Three ways (Up/Down/Right)</source>
         <comment>grainline direction</comment>
         <translation>Tiga arah (Atas/Bawah/Kanan)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4490"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4776"/>
         <source>Three ways (Up/Left/Right)</source>
         <comment>grainline direction</comment>
         <translation>Tiga arah (Atas/Kiri/Kanan)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4492"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4778"/>
         <source>Three ways (Down/Left/Right)</source>
         <comment>grainline direction</comment>
         <translation>Tiga arah (Bawah/Kiri/Kanan)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4677"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5018"/>
         <source>Two arrows (text above)</source>
         <translation>Dua panah (teks di atas)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4679"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5020"/>
         <source>Two arrows (text under)</source>
         <translation>Dua panah (teks di bawah)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4681"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5022"/>
         <source>Two arrows</source>
         <translation>Dua panah</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4682"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5023"/>
         <source>Text</source>
         <translation>Teks</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4683"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5024"/>
         <source>Three dots</source>
         <translation>Tiga titik</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="4684"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5025"/>
         <source>Three X</source>
         <translation>Tiga X</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5311"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5249"/>
+        <source>&lt;empty&gt;</source>
+        <translation type="unfinished">&lt;empty&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5754"/>
         <source>Measurement %1 value alias</source>
         <translation>Alias nilai ukuran %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5621"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6071"/>
         <source>Duplicate</source>
         <translation>Duplikat</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5808"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6259"/>
         <source>Save label data.</source>
         <translation>Simpan data label.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5809"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="6260"/>
         <source>Label data were changed. Do you want to save them before editing label template?</source>
         <translation>Data label telah diubah. Apakah Anda ingin menyimpannya sebelum mengedit templat label?</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5260"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5696"/>
         <source>Height</source>
         <comment>dimension</comment>
         <translation>Tinggi</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5264"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5700"/>
         <source>Size</source>
         <comment>dimension</comment>
         <translation>Ukuran</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5268"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5704"/>
         <source>Hip</source>
         <comment>dimension</comment>
         <translation>Pinggul</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5272"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5708"/>
         <source>Waist</source>
         <comment>dimension</comment>
         <translation>Pinggang</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5278"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5714"/>
         <source>Height label</source>
         <comment>dimension</comment>
         <translation>Label tinggi</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5284"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5722"/>
         <source>Size label</source>
         <comment>dimension</comment>
         <translation>Label ukuran</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5290"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5730"/>
         <source>Hip label</source>
         <comment>dimension</comment>
         <translation>Label pinggul</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5296"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5737"/>
         <source>Waist label</source>
         <comment>dimension</comment>
         <translation>Label pinggang</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5309"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5751"/>
         <source>Measurement: %1</source>
         <translation>Ukuran: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3514"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="3676"/>
         <source>Invalid segment!</source>
         <translation>Segmen tidak valid!</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5261"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5697"/>
         <source>Dimension X</source>
         <comment>dimension</comment>
         <translation>Dimensi X</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5265"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5701"/>
         <source>Dimension Y</source>
         <comment>dimension</comment>
         <translation>Dimensi Y</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5269"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5705"/>
         <source>Dimension Z</source>
         <comment>dimension</comment>
         <translation>Dimensi Z</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5273"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5709"/>
         <source>Dimension W</source>
         <comment>dimension</comment>
         <translation>Dimensi W</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5279"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5717"/>
         <source>Dimension X label</source>
         <comment>dimension</comment>
         <translation>Label dimensi X</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5725"/>
         <source>Dimension Y label</source>
         <comment>dimension</comment>
         <translation>Label dimensi Y</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5291"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5732"/>
         <source>Dimension Z label</source>
         <comment>dimension</comment>
         <translation>Label dimensi Z</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5297"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/dialogseamallowance.cpp" line="5740"/>
         <source>Dimension W label</source>
         <comment>dimension</comment>
         <translation>Label dimensi W</translation>
@@ -10093,28 +10113,28 @@ Tetap terapkan pengaturan?</translation>
 <context>
     <name>FvUpdater</name>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="238"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="247"/>
         <source>Cannot open your default browser.</source>
         <translation>Tidak dapat membuka peramban default Anda.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="381"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="396"/>
         <source>Feed download failed: %1.</source>
         <translation>Unduhan feed gagal: %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="468"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="483"/>
         <source>Feed parsing failed: %1 %2.</source>
         <translation>Penguraian feed gagal: %1 %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="475"/>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="500"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="490"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="515"/>
         <source>No updates were found.</source>
         <translation>Tidak ada pembaruan yang ditemukan.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/fervor/fvupdater.cpp" line="491"/>
+        <location filename="../../src/libs/fervor/fvupdater.cpp" line="506"/>
         <source>Feed error: invalid &quot;enclosure&quot; with the download link</source>
         <translation>Kesalahan feed: &quot;enclosure&quot; tidak valid dengan tautan unduhan</translation>
     </message>
@@ -10192,147 +10212,147 @@ Tetap terapkan pengaturan?</translation>
 <context>
     <name>MApplication</name>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="440"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="463"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Kesalahan menguraikan berkas. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="446"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="469"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Kesalahan id buruk. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="452"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="475"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Kesalahan tidak dapat mengonversi nilai. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="458"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="481"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Kesalahan parameter kosong. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="464"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="487"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Kesalahan id salah. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="477"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="500"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Ada yang salah!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="490"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="513"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Kesalahan parser: %1. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="495"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="518"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Pengecualian dilemparkan: %1. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="725"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="748"/>
         <source>Valentina&apos;s measurements editor.</source>
         <translation>Editor ukuran Valentina.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1113"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1136"/>
         <source>The measurement file.</source>
         <translation>Berkas ukuran.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1363"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1386"/>
         <source>Invalid base size argument. Must be cm, mm or inch.</source>
         <translation>Argumen ukuran dasar tidak valid. Harus cm, mm, atau inch.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1159"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1182"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Tidak dapat mulai mendengarkan koneksi masuk pada nama &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1279"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1302"/>
         <source>Please, provide one input file.</source>
         <translation>Silakan berikan satu berkas input.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1135"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1158"/>
         <source>Use for unit testing. Run the program and open a file without showing the main window.</source>
         <translation>Gunakan untuk pengujian unit. Jalankan program dan buka berkas tanpa menampilkan jendela utama.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1138"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1161"/>
         <source>Disable high dpi scaling. Call this option if has problem with scaling (by default scaling enabled). Alternatively you can use the %1 environment variable.</source>
         <translation>Nonaktifkan penskalaan dpi tinggi. Gunakan opsi ini jika memiliki masalah dengan penskalaan (penskalaan diaktifkan secara default). Sebagai alternatif, Anda dapat menggunakan variabel lingkungan %1.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1117"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1140"/>
         <source>Set base for dimension A in the table units.</source>
         <translation>Atur dasar untuk dimensi A dalam satuan tabel.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1118"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1141"/>
         <source>The dimension A base</source>
         <translation>Dasar dimensi A</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1121"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1144"/>
         <source>Set base for dimension B in the table units.</source>
         <translation>Atur dasar untuk dimensi B dalam satuan tabel.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1122"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1145"/>
         <source>The dimension B base</source>
         <translation>Dasar dimensi B</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1125"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1148"/>
         <source>Set base for dimension C in the table units.</source>
         <translation>Atur dasar untuk dimensi C dalam satuan tabel.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1126"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1149"/>
         <source>The dimension C base</source>
         <translation>Dasar dimensi C</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1129"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1152"/>
         <source>Set pattern file units: cm, mm, inch.</source>
         <translation>Atur satuan berkas pola: cm, mm, inch.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1130"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1153"/>
         <source>The pattern units</source>
         <translation>Satuan pola</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1132"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1155"/>
         <source>Activate known measurements mode.</source>
         <translation>Aktifkan mode ukuran yang diketahui.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1302"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1325"/>
         <source>Invalid dimension A base value.</source>
         <translation>Nilai dasar dimensi A tidak valid.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1323"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1346"/>
         <source>Invalid dimension B base value.</source>
         <translation>Nilai dasar dimensi B tidak valid.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1344"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1367"/>
         <source>Invalid dimension C base value.</source>
         <translation>Nilai dasar dimensi C tidak valid.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="483"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="506"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Peringatan rumus: %1. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/tape/mapplication.cpp" line="1177"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="1200"/>
         <source>Test mode doesn&apos;t support opening several files.</source>
         <translation>Mode uji tidak mendukung membuka beberapa berkas.</translation>
     </message>
@@ -10413,7 +10433,7 @@ Tetap terapkan pengaturan?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="136"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2661"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2680"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1674"/>
         <source>Measurements</source>
         <translation>pengukuran</translation>
@@ -10576,7 +10596,7 @@ Tetap terapkan pengaturan?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="762"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6310"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6332"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1427"/>
         <source>Save</source>
         <translation>Simpan</translation>
@@ -10667,7 +10687,7 @@ Tetap terapkan pengaturan?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="2651"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8685"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8763"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1659"/>
         <source>Auto-arrange labels</source>
         <translation>Atur label otomatis</translation>
@@ -10718,8 +10738,8 @@ Tetap terapkan pengaturan?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="836"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2134"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4378"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2153"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4397"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1440"/>
         <source>Details</source>
         <translation>Potongan</translation>
@@ -10780,7 +10800,7 @@ Tetap terapkan pengaturan?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1006"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="618"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="637"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1470"/>
         <source>Preferences</source>
         <translation>Preferensi</translation>
@@ -10828,213 +10848,214 @@ Tetap terapkan pengaturan?</translation>
         <translation>Laporkan bug</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5304"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5685"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5326"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5707"/>
         <source>Pattern piece %1</source>
         <translation>Potongan pola %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1288"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1316"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1327"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1341"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1307"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1335"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1346"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1360"/>
         <source>Select point</source>
         <translation>Pilih titik</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1301"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1320"/>
         <source>Select first point</source>
         <translation>Pilih titik pertama</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1355"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1503"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1867"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1374"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1522"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1886"/>
         <source>Select first point of line</source>
         <translation>Pilih titik pertama garis</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1369"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1388"/>
         <source>Select first point of angle</source>
         <translation>Pilih titik pertama sudut</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1383"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1402"/>
         <source>Select first point of first line</source>
         <translation>Pilih titik pertama garis pertama</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1397"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1416"/>
         <source>Select first point curve</source>
         <translation>Pilih titik pertama kurva</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1421"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1440"/>
         <source>Select simple curve</source>
         <translation>Pilih kurva sederhana</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1435"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1454"/>
         <source>Select point of center of arc</source>
         <translation>pilih titik tengah dari busur</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1464"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1483"/>
         <source>Select point of curve path</source>
         <translation>Pilih titik jalur kurva</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1489"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1508"/>
         <source>Select curve path</source>
         <translation>Pilih jalur kurva</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1561"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1580"/>
         <source>Select base point</source>
         <translation>Pilih titik dasar</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1575"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1594"/>
         <source>Select first point of axis</source>
         <translation>Pilih titik pertama sumbu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1604"/>
         <location filename="../../src/app/valentina/mainwindow.cpp" line="1623"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1642"/>
         <source>Select detail</source>
         <translation>Pilih potongan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1659"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1671"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1683"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1695"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1975"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1678"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1690"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1702"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1714"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1994"/>
         <source>Select one or more objects, &lt;b&gt;%1&lt;/b&gt; - confirm selection</source>
         <translation>Pilih satu atau lebih objek, &lt;b&gt;%1&lt;/b&gt; - konfirmasi pemilihan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1855"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1889"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1988"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1998"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1874"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1908"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2007"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2017"/>
         <source>Select arc</source>
         <translation>Pilih busur</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1877"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2022"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2033"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1896"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2041"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2052"/>
         <source>Select curve</source>
         <translation>Pilih kurva</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6737"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6759"/>
         <source>About Qt</source>
         <translation>Tentang Qt</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4529"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4548"/>
         <source>pattern</source>
         <translation>pola</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4536"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4555"/>
         <source>Save as</source>
         <translation>Simpan sebagai</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3068"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3087"/>
         <source>Could not save file</source>
         <translation>Tidak dapat menyimpan berkas</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2425"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2700"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4636"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7586"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2444"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2719"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4655"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7608"/>
         <source>Open file</source>
         <translation>Buka File</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3150"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3178"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3169"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3197"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8159"/>
         <source>Error parsing file.</source>
         <translation>Kesalahan menguraikan berkas.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3157"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3176"/>
         <source>Error can&apos;t convert value.</source>
         <translation>Kesalahan tidak dapat mengonversi nilai.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3164"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5143"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3183"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5165"/>
         <source>Error empty parameter.</source>
         <translation>Kesalahan parameter kosong.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3171"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3190"/>
         <source>Error wrong id.</source>
         <translation>Kesalahan id salah.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3185"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3204"/>
         <source>Error parsing file (std::bad_alloc).</source>
         <translation>Kesalahan menguraikan berkas (std::bad_alloc).</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5132"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5154"/>
         <source>Bad id.</source>
         <translation>Id buruk.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6133"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6155"/>
         <source>File saved</source>
         <translation>File telah disimpan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8140"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8218"/>
         <source>untitled.val</source>
         <translation>tanpajudul.val</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2122"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6357"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2141"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6379"/>
         <source>&amp;Undo</source>
         <translation>&amp;Urungkan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2123"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6372"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2142"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6394"/>
         <source>&amp;Redo</source>
         <translation>&amp;Ulangi</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6911"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6933"/>
         <source>Pattern piece:</source>
         <translation>Potongan pola:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6913"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6935"/>
         <source>Enter a new label for the pattern piece.</source>
         <translation>Masukkan label baru untuk potongan pola.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="912"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="960"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7023"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7214"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="931"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="979"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7045"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7236"/>
         <source>File error.</source>
         <translation>Kesalahan berkas.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7548"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7570"/>
         <source>Valentina didn&apos;t shut down correctly. Do you want reopen files (%1) you had open?</source>
         <translation>Valentina tidak dimatikan dengan benar. Apakah Anda ingin membuka kembali berkas (%1) yang sebelumnya terbuka?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7550"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7572"/>
         <source>Reopen files.</source>
         <translation>Buka kembali berkas.</translation>
     </message>
@@ -11117,7 +11138,7 @@ Tetap terapkan pengaturan?</translation>
         <translation>Aktifkan kembali alat yang terakhir digunakan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1590"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1609"/>
         <source>Select point for X value (vertical)</source>
         <translation>Pilih titik untuk nilai X (vertikal)</translation>
     </message>
@@ -11234,47 +11255,47 @@ Tetap terapkan pengaturan?</translation>
         <translation>Ekspor tata letak asli</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1901"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1920"/>
         <source>Select first an arc</source>
         <translation>Pilih busur pertama</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1956"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1975"/>
         <source>Select point of the center of the arc</source>
         <translation>Pilih titik pusat busur</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1966"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1985"/>
         <source>Select the first base line point</source>
         <translation>Pilih titik garis dasar pertama</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4343"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4362"/>
         <source>Detail mode</source>
         <translation>Mode potongan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4436"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4449"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4472"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4669"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4748"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7476"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4455"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4468"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4491"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4688"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4767"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7498"/>
         <source>Layout mode</source>
         <translation>Mode tata letak</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6299"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6321"/>
         <source>Unsaved changes</source>
         <translation>Perubahan belum disimpan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2451"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2470"/>
         <source>Measurements loaded</source>
         <translation>Ukuran dimuat</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7788"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7810"/>
         <source>You can&apos;t export empty scene.</source>
         <translation>Anda tidak dapat mengekspor adegan kosong.</translation>
     </message>
@@ -11285,63 +11306,64 @@ Tetap terapkan pengaturan?</translation>
         <translation>Buat Tata Letak baru</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4563"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4582"/>
         <source>Failed to lock. This file already opened in another window.</source>
         <translation>Gagal mengunci. Berkas ini sudah dibuka di jendela lain.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3110"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3129"/>
         <source>Failed to lock. This file already opened in another window. Expect collissions when run 2 copies of the program.</source>
         <translation>Gagal mengunci. Berkas ini sudah dibuka di jendela lain. Bentrokan dapat terjadi jika menjalankan 2 salinan program.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7696"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7718"/>
         <source>Measurement file has unknown format.</source>
         <translation>Berkas ukuran memiliki format yang tidak dikenal.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="946"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="965"/>
         <source>Measurement files types have not match.</source>
         <translation>Jenis berkas ukuran tidak cocok.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2630"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2649"/>
         <source>Couldn&apos;t sync measurements.</source>
         <translation>Tidak dapat menyinkronkan ukuran.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5456"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5478"/>
         <source>Couldn&apos;t update measurements.</source>
         <translation>Tidak dapat memperbarui ukuran.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7141"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7158"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7163"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7180"/>
         <source>The measurements file &apos;%1&apos; could not be found.</source>
         <translation>Berkas ukuran &apos;%1&apos; tidak dapat ditemukan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7617"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7639"/>
         <source>Loading measurements file</source>
         <translation>Memuat berkas ukuran</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7971"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8014"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8057"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8011"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8062"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8113"/>
         <source>The method %1 does nothing in GUI mode</source>
         <translation>Metode %1 tidak melakukan apa pun dalam mode GUI</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7459"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7515"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7836"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7876"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7481"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7537"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7833"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7868"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7908"/>
         <source>Export error.</source>
         <translation>Kesalahan ekspor.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8084"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8140"/>
         <source>Please, provide one input file.</source>
         <translation>Silakan berikan satu berkas input.</translation>
     </message>
@@ -11382,12 +11404,12 @@ Tetap terapkan pengaturan?</translation>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode untuk membuat tata letak potongan. Mode ini tersedia jika setidaknya satu potongan telah dibuat pada tahap &quot;Mode Potongan&quot;. Tata letak dapat diekspor ke format berkas pilihan Anda dan disimpan ke hard drive Anda.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2512"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2531"/>
         <source>Measurements unloaded</source>
         <translation>Ukuran dilepas</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2519"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2538"/>
         <source>Couldn&apos;t unload measurements. Some of them are used in the pattern.</source>
         <translation>Tidak dapat melepas ukuran. Beberapa di antaranya digunakan dalam pola.</translation>
     </message>
@@ -11398,22 +11420,22 @@ Tetap terapkan pengaturan?</translation>
         <translation>Kupnat sejati</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="606"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="625"/>
         <source>New pattern</source>
         <translation>Pola baru</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="610"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="629"/>
         <source>Open pattern</source>
         <translation>Buka pola</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="614"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="633"/>
         <source>Create/Edit measurements</source>
         <translation>Buat/Edit ukuran</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6315"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6337"/>
         <source>Don&apos;t Save</source>
         <translation>Jangan Simpan</translation>
     </message>
@@ -11424,7 +11446,7 @@ Tetap terapkan pengaturan?</translation>
         <translation>Titik perpotongan kurva</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1923"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1942"/>
         <source>Select first curve</source>
         <translation>Pilih kurva pertama</translation>
     </message>
@@ -11435,12 +11457,12 @@ Tetap terapkan pengaturan?</translation>
         <translation>Alat kurva yang menggunakan titik sebagai pegangan kontrol</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1407"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1426"/>
         <source>Select first curve point</source>
         <translation>Pilih titik kurva pertama</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1475"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1494"/>
         <source>Select point of cubic bezier path</source>
         <translation>Pilih titik jalur bezier kubik</translation>
     </message>
@@ -11473,14 +11495,14 @@ Tetap terapkan pengaturan?</translation>
         <translation>Grup</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2130"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4298"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2149"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4317"/>
         <source>Contains all visibility groups</source>
         <translation>Berisi semua grup visibilitas</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2135"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4380"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2154"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4399"/>
         <source>Show which details will go in layout</source>
         <translation>Tampilkan potongan mana yang akan masuk ke tata letak</translation>
     </message>
@@ -11493,24 +11515,24 @@ Tetap terapkan pengaturan?</translation>
         <translation>Zoom asli</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1912"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1931"/>
         <source>Select first circle center</source>
         <translation>Pilih pusat lingkaran pertama</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1934"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1945"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1953"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1964"/>
         <source>Select point on tangent</source>
         <translation>Pilih titik pada garis singgung</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2125"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3278"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2144"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3297"/>
         <source>Pattern Piece:</source>
         <translation>Potongan Pola:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7612"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7634"/>
         <source>The measurements file &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; could not be found. Do you want to update the file location?</source>
         <translation>Berkas ukuran &lt;br/&gt;&lt;br/&gt; &lt;b&gt;%1&lt;/b&gt; &lt;br/&gt;&lt;br/&gt; tidak dapat ditemukan. Apakah Anda ingin memperbarui lokasi berkas?</translation>
     </message>
@@ -11533,12 +11555,12 @@ Tetap terapkan pengaturan?</translation>
         <translation>Pindahkan objek</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2662"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2681"/>
         <source>Measurements were changed. Do you want to sync measurements now?</source>
         <translation>Ukuran telah diubah. Apakah Anda ingin menyinkronkan ukuran sekarang?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2616"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2635"/>
         <source>Measurements have been synced</source>
         <translation>Ukuran telah disinkronkan</translation>
     </message>
@@ -11549,22 +11571,22 @@ Tetap terapkan pengaturan?</translation>
         <translation>Busur Elips</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1449"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1468"/>
         <source>Select point of center of elliptical arc</source>
         <translation>Pilih titik pusat busur elips</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1517"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1536"/>
         <source>Select main path objects clockwise.</source>
         <translation>Pilih objek jalur utama searah jarum jam.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4606"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4625"/>
         <source>Could not save the file</source>
         <translation>Tidak dapat menyimpan berkas</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8190"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8268"/>
         <source>read only</source>
         <translation>hanya baca</translation>
     </message>
@@ -11629,22 +11651,22 @@ Tetap terapkan pengaturan?</translation>
         <translation>Lepas ukuran jika tidak digunakan dalam berkas pola</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2409"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7658"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7672"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2428"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7680"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7694"/>
         <source>Individual measurements</source>
         <translation>Ukuran individu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2415"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7658"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7672"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2434"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7680"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7694"/>
         <source>Multisize measurements</source>
         <translation>Ukuran multiukuran</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4535"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4622"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4554"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4641"/>
         <source>Pattern files</source>
         <translation>Berkas pola</translation>
     </message>
@@ -11655,7 +11677,7 @@ Tetap terapkan pengaturan?</translation>
         <translation>Alat pin</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1538"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1557"/>
         <source>Select pin point</source>
         <translation>Pilih titik pin</translation>
     </message>
@@ -11672,37 +11694,37 @@ Tetap terapkan pengaturan?</translation>
         <translation>Buka aplikasi Tape untuk membuat atau mengedit berkas ukuran</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3466"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3485"/>
         <source>Point at the intersections of lines/axis tools</source>
         <translation>Alat titik pada perpotongan garis/sumbu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3509"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3528"/>
         <source>Point segmenting curves/arcs tools</source>
         <translation>Alat titik penyegmentasi kurva/busur</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3523"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3542"/>
         <source>Points intersecting with 2 curves/arcs/circles tools</source>
         <translation>Alat titik perpotongan dengan 2 kurva/busur/lingkaran</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4344"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4363"/>
         <source>You can&apos;t use Detail mode yet. Please, create at least one workpiece.</source>
         <translation>Anda belum bisa menggunakan Mode Potongan. Silakan buat setidaknya satu potongan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4437"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4456"/>
         <source>You can&apos;t use Layout mode yet. Please, create at least one workpiece.</source>
         <translation>Anda belum bisa menggunakan Mode Tata Letak. Silakan buat setidaknya satu potongan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4450"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4469"/>
         <source>You can&apos;t use Layout mode yet. Please, include at least one detail in layout.</source>
         <translation>Anda belum bisa menggunakan Mode Tata Letak. Silakan sertakan setidaknya satu potongan dalam tata letak.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4473"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4492"/>
         <source>You can&apos;t use Layout mode yet.</source>
         <translation>Anda belum bisa menggunakan Mode Tata Letak.</translation>
     </message>
@@ -11725,23 +11747,23 @@ Tetap terapkan pengaturan?</translation>
         <translation>Ekspor potongan dengan melewati tahap Tata Letak</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4670"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4749"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7477"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4689"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4768"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7499"/>
         <source>You don&apos;t have enough details to export. Please, include at least one detail in layout.</source>
         <translation>Anda tidak memiliki cukup potongan untuk diekspor. Silakan sertakan setidaknya satu potongan dalam tata letak.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4683"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4762"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7490"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4702"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4781"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7512"/>
         <source>Export details</source>
         <translation>Ekspor potongan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4683"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4762"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7490"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4702"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4781"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7512"/>
         <source>Can&apos;t export details.</source>
         <translation>Tidak dapat mengekspor potongan.</translation>
     </message>
@@ -11782,7 +11804,7 @@ Tetap terapkan pengaturan?</translation>
         <translation>Ekspor Sebagai…</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6309"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6331"/>
         <source>Save…</source>
         <translation>Simpan…</translation>
     </message>
@@ -11799,17 +11821,17 @@ Tetap terapkan pengaturan?</translation>
         <translation>Ekspor Ukuran Akhir ke CSV</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7798"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7820"/>
         <source>You can&apos;t export empty scene. Please, include at least one detail in layout.</source>
         <translation>Anda tidak dapat mengekspor adegan kosong. Silakan sertakan setidaknya satu potongan dalam tata letak.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7904"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7936"/>
         <source>Export final measurements error.</source>
         <translation>Kesalahan ekspor ukuran akhir.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7905"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7937"/>
         <source>Destination path is empty.</source>
         <translation>Jalur tujuan kosong.</translation>
     </message>
@@ -11868,32 +11890,32 @@ Tetap terapkan pengaturan?</translation>
         <translation>Alat duplikat potongan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1548"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1567"/>
         <source>Select placelabel center point</source>
         <translation>Pilih titik pusat label tempat</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7172"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7194"/>
         <source>The measurements file &apos;%1&apos; could not be found or provides not enough information.</source>
         <translation>Berkas ukuran &apos;%1&apos; tidak dapat ditemukan atau tidak menyediakan informasi yang cukup.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3236"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3255"/>
         <source>Scale:</source>
         <translation>Skala:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="569"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="588"/>
         <source>Create new pattern piece to start working.</source>
         <translation>Buat potongan pola baru untuk mulai bekerja.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2124"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2143"/>
         <source>Changes applied.</source>
         <translation>Perubahan diterapkan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6285"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6307"/>
         <source>Cannot save settings. Access denied.</source>
         <translation>Tidak dapat menyimpan pengaturan. Akses ditolak.</translation>
     </message>
@@ -11904,17 +11926,17 @@ Tetap terapkan pengaturan?</translation>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6260"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6282"/>
         <source>Cannot read settings from a malformed .INI file.</source>
         <translation>Tidak dapat membaca pengaturan dari berkas .INI yang rusak.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1529"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1548"/>
         <source>Select path objects, &lt;b&gt;%1&lt;/b&gt; - reverse direction curve</source>
         <translation>Pilih objek jalur, &lt;b&gt;%1&lt;/b&gt; - balikkan arah kurva</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1647"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1666"/>
         <source>Select one or more objects, hold &lt;b&gt;%1&lt;/b&gt; - for multiple selection, &lt;b&gt;%2&lt;/b&gt; - finish creation</source>
         <translation>Pilih satu atau lebih objek, tahan &lt;b&gt;%1&lt;/b&gt; - untuk pemilihan ganda, &lt;b&gt;%2&lt;/b&gt; - selesaikan pembuatan</translation>
     </message>
@@ -11949,30 +11971,30 @@ Tetap terapkan pengaturan?</translation>
         <translation>Sembunyikan label</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2129"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4296"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2148"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4315"/>
         <source>Groups of visibility</source>
         <translation>Grup visibilitas</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="1523"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5659"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5681"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1565"/>
         <source>Export recipe</source>
         <translation>Ekspor resep</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5657"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5679"/>
         <source>Recipe files</source>
         <translation>Berkas resep</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5659"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5681"/>
         <source>recipe</source>
         <translation>resep</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5672"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5694"/>
         <source>Could not save recipe. %1</source>
         <translation>Tidak dapat menyimpan resep. %1</translation>
     </message>
@@ -12002,7 +12024,7 @@ Tetap terapkan pengaturan?</translation>
     </message>
     <message>
         <location filename="../../src/app/valentina/mainwindow.ui" line="413"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8600"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8678"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/Valentina.b7241147/qt.headers/ui_mainwindow.h" line="1691"/>
         <source>Pattern messages</source>
         <translation>Pesan pola</translation>
@@ -12020,27 +12042,27 @@ Tetap terapkan pengaturan?</translation>
         <translation>Filter</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8575"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8653"/>
         <source>DEBUG</source>
         <translation>DEBUG</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8578"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8656"/>
         <source>WARNING</source>
         <translation>PERINGATAN</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8581"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8659"/>
         <source>CRITICAL</source>
         <translation>KRITIS</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8584"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8662"/>
         <source>FATAL</source>
         <translation>FATAL</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8587"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8665"/>
         <source>INFO</source>
         <translation>INFO</translation>
     </message>
@@ -12087,7 +12109,7 @@ Tetap terapkan pengaturan?</translation>
         <translation>Buat atau edit tanda air</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2697"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2716"/>
         <source>Watermark files</source>
         <translation>Berkas tanda air</translation>
     </message>
@@ -12134,78 +12156,78 @@ Tetap terapkan pengaturan?</translation>
         <translation>Perbarui tata letak manual</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4717"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4792"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4736"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4811"/>
         <source>Unable to prepare raw layout data.</source>
         <translation>Tidak dapat menyiapkan data tata letak mentah.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4724"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4743"/>
         <source>Manual layout files</source>
         <translation>Berkas tata letak manual</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4731"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4750"/>
         <source>Select manual layout</source>
         <translation>Pilih tata letak manual</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4834"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4853"/>
         <source>Select folder</source>
         <translation>Pilih folder</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="6300"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="6322"/>
         <source>The pattern has been modified. Do you want to save your changes?</source>
         <translation>Pola telah diubah. Apakah Anda ingin menyimpan perubahan Anda?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7952"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7992"/>
         <source>Not supported dimension A value &apos;%1&apos; for this pattern file.</source>
         <translation>Nilai dimensi A &apos;%1&apos; tidak didukung untuk berkas pola ini.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7959"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7999"/>
         <source>Couldn&apos;t set dimension A. Need a file with multisize measurements.</source>
         <translation>Tidak dapat mengatur dimensi A. Diperlukan berkas dengan ukuran multiukuran.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7965"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8005"/>
         <source>Couldn&apos;t set dimension A. File wasn&apos;t opened.</source>
         <translation>Tidak dapat mengatur dimensi A. Berkas tidak dibuka.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7995"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8043"/>
         <source>Not supported dimension B value &apos;%1&apos; for this pattern file.</source>
         <translation>Nilai dimensi B &apos;%1&apos; tidak didukung untuk berkas pola ini.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8002"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8050"/>
         <source>Couldn&apos;t set dimension B. Need a file with multisize measurements.</source>
         <translation>Tidak dapat mengatur dimensi B. Diperlukan berkas dengan ukuran multiukuran.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8008"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8056"/>
         <source>Couldn&apos;t set dimension B. File wasn&apos;t opened.</source>
         <translation>Tidak dapat mengatur dimensi B. Berkas tidak dibuka.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8038"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8094"/>
         <source>Not supported dimension C value &apos;%1&apos; for this pattern file.</source>
         <translation>Nilai dimensi C &apos;%1&apos; tidak didukung untuk berkas pola ini.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8045"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8101"/>
         <source>Couldn&apos;t set dimension C. Need a file with multisize measurements.</source>
         <translation>Tidak dapat mengatur dimensi C. Diperlukan berkas dengan ukuran multiukuran.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8051"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8107"/>
         <source>Couldn&apos;t set dimension C. File wasn&apos;t opened.</source>
         <translation>Tidak dapat mengatur dimensi C. Berkas tidak dibuka.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5677"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5699"/>
         <source>Could not create recipe file. %1</source>
         <translation>Tidak dapat membuat berkas resep. %1</translation>
     </message>
@@ -12216,12 +12238,12 @@ Tetap terapkan pengaturan?</translation>
         <translation>Toko</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7411"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7433"/>
         <source>Scalable Vector Graphics files</source>
         <translation>Berkas Scalable Vector Graphics</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="7413"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7435"/>
         <source>Save draw</source>
         <translation>Simpan gambar</translation>
     </message>
@@ -12244,139 +12266,139 @@ Tetap terapkan pengaturan?</translation>
         <translation>Tambah gambar latar belakang</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1806"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1825"/>
         <source>Unable to add background image</source>
         <translation>Tidak dapat menambahkan gambar latar belakang</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="1826"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="1845"/>
         <source>Invalid image. Error: %1</source>
         <translation>Gambar tidak valid. Kesalahan: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2010"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2029"/>
         <source>Select point of the center of the elliptical arc</source>
         <translation>Pilih titik pusat busur elips</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2148"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3305"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2167"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3324"/>
         <source>Pen style:</source>
         <translation>Gaya pena:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2149"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3329"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2168"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3348"/>
         <source>Color:</source>
         <translation>Warna:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3310"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3329"/>
         <source>Sets the &lt;b&gt;default pen style&lt;/b&gt; for all newly created objects. This style is applied the first time an object is drawn.</source>
         <translation>Mengatur &lt;b&gt;gaya pena default&lt;/b&gt; untuk semua objek yang baru dibuat. Gaya ini diterapkan saat pertama kali objek digambar.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3333"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3352"/>
         <source>Defines the &lt;b&gt;global object color property&lt;/b&gt;. This color is applied automatically the first time a new object is drawn.</source>
         <translation>Menentukan &lt;b&gt;properti warna objek global&lt;/b&gt;. Warna ini diterapkan secara otomatis saat pertama kali objek baru digambar.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3439"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3458"/>
         <source>Point at a given distance tools</source>
         <translation>Alat titik pada jarak tertentu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3453"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3472"/>
         <source>Perpendicular/Bisector tools</source>
         <translation>Alat Tegak Lurus/Garis Bagi</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3479"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3498"/>
         <source>Triangular tools</source>
         <translation>Alat segitiga</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3493"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3512"/>
         <source>Point intersecting with axis tools</source>
         <translation>Alat titik perpotongan dengan sumbu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3538"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3557"/>
         <source>Points intersecting with arcs/curves and tangents/segments tools</source>
         <translation>Alat titik perpotongan dengan busur/kurva dan garis singgung/segmen</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3598"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3617"/>
         <source>Curves and arcs tools</source>
         <translation>Alat kurva dan busur</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3631"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3650"/>
         <source>Flipping objects tools</source>
         <translation>Alat pembalik objek</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3644"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3663"/>
         <source>Rotating/moving objects tools</source>
         <translation>Alat pemutar/pemindah objek</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3679"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3698"/>
         <source>Merge/duplicate pieces tools</source>
         <translation>Alat penggabung/penduplikat potongan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="3694"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="3713"/>
         <source>Adding objects for Details mode tools</source>
         <translation>Alat penambah objek untuk mode Potongan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4800"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4819"/>
         <source>Select background image</source>
         <translation>Pilih gambar latar belakang</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4841"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4860"/>
         <source>Export corrections</source>
         <translation>Ekspor koreksi</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4842"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4861"/>
         <source>File &apos;%1&apos; already exists. Overwrite it?</source>
         <translation>Berkas &apos;%1&apos; sudah ada. Timpa berkas tersebut?</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4871"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4893"/>
         <source>All Single-Line Fonts</source>
         <translation>Semua Fon Satu Baris</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4872"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4894"/>
         <source>TrueType Fonts</source>
         <translation>Fon TrueType</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4873"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4895"/>
         <source>OpenType Fonts</source>
         <translation>Fon OpenType</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4874"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4896"/>
         <source>SVG Fonts</source>
         <translation>Fon SVG</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4875"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4897"/>
         <source>All Files</source>
         <translation>Semua Berkas</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4880"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4902"/>
         <source>Select Font Files to Install</source>
         <translation>Pilih Berkas Fon untuk Dipasang</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4914"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4936"/>
         <source>Failed to install font file: %1
 
 Reason: %2</source>
@@ -12385,7 +12407,7 @@ Reason: %2</source>
 Alasan: %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4920"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4942"/>
         <source>Font Installation Summary:
 
 Successful Installations: %1
@@ -12396,45 +12418,60 @@ Pemasangan Berhasil: %1
 Pemasangan Gagal: %2</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4926"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4948"/>
         <source>Installation Complete with Errors</source>
         <translation>Pemasangan Selesai dengan Kesalahan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="4930"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="4952"/>
         <source>Installation Successful</source>
         <translation>Pemasangan Berhasil</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5594"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5634"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5616"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5656"/>
         <source>Unable to save image. Error: %1</source>
         <translation>Tidak dapat menyimpan gambar. Kesalahan: %1</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5600"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5622"/>
         <source>Unable to save image. No data.</source>
         <translation>Tidak dapat menyimpan gambar. Tidak ada data.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5606"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5628"/>
         <source>untitled</source>
         <translation>tanpa judul</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="8635"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="7978"/>
+        <source>Couldn&apos;t set dimension A. This pattern file doesn&apos;t have dimension A.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8029"/>
+        <source>Couldn&apos;t set dimension B. This pattern file doesn&apos;t have dimension B.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8080"/>
+        <source>Couldn&apos;t set dimension C. This pattern file doesn&apos;t have dimension C.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="8713"/>
         <source>Auto-Arrange Labels</source>
         <translation>Atur Label Otomatis</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2409"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="2415"/>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5619"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2428"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="2434"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5641"/>
         <source>All files</source>
         <translation>Semua berkas</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="5623"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="5645"/>
         <source>Save Image</source>
         <translation>Simpan Gambar</translation>
     </message>
@@ -12693,42 +12730,42 @@ Apakah Anda ingin memilih berkas lain?</translation>
     <name>Placeholder</name>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="641"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="715"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="716"/>
         <source>Fabric</source>
         <translation>Kain</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="642"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="716"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="717"/>
         <source>Lining</source>
         <translation>Furing</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="643"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="718"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="719"/>
         <source>Interfacing</source>
         <translation>Interfacing</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="644"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="720"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="721"/>
         <source>Interlining</source>
         <translation>Interlining</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="645"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="721"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="722"/>
         <source>Cut</source>
         <translation>Potong</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="680"/>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="829"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="681"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="835"/>
         <source>on fold</source>
         <translation>pada lipatan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="977"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="978"/>
         <source>Error</source>
         <translation>Kesalahan</translation>
     </message>
@@ -13196,22 +13233,22 @@ Apakah Anda ingin memilih berkas lain?</translation>
         <translation>Edit</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="148"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="158"/>
         <source>Open Directory</source>
         <translation>Buka Direktori</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="179"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="189"/>
         <source>My SVG Fonts</source>
         <translation>Fon SVG Saya</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="186"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="196"/>
         <source>My font corrections</source>
         <translation>Koreksi fon saya</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="193"/>
+        <location filename="../../src/app/valentina/dialogs/configpages/preferencespathpage.cpp" line="203"/>
         <source>My known measurements</source>
         <translation>Ukuran yang diketahui milik saya</translation>
     </message>
@@ -13973,22 +14010,22 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>Edit</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="137"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="147"/>
         <source>Open Directory</source>
         <translation>Buka Direktori</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="164"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="174"/>
         <source>My SVG Fonts</source>
         <translation>Fon SVG Saya</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="171"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="181"/>
         <source>My font corrections</source>
         <translation>Koreksi fon saya</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="178"/>
+        <location filename="../../src/app/puzzle/dialogs/configpages/puzzlepreferencespathpage.cpp" line="188"/>
         <source>My known measurements</source>
         <translation>Ukuran yang diketahui milik saya</translation>
     </message>
@@ -14149,7 +14186,7 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vpropertyexplorer/vpropertymodel_p.h" line="54"/>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="358"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="361"/>
         <source>Value</source>
         <extracomment>The text that appears in the second column header</extracomment>
         <translation>Nilai</translation>
@@ -14201,13 +14238,13 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vgeometry/vplacelabelitem.cpp" line="146"/>
-        <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="989"/>
-        <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="999"/>
+        <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="1048"/>
+        <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="1058"/>
         <source>Visibility trigger contains error and will be ignored</source>
         <translation>Pemicu visibilitas berisi kesalahan dan akan diabaikan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="260"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="265"/>
         <source>User material number %1 was not defined in this pattern.</source>
         <translation>Bahan pengguna nomor %1 tidak ditentukan dalam pola ini.</translation>
     </message>
@@ -14222,62 +14259,62 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>Potongan &apos;%1&apos;. Takik kolaps untuk titik &apos;%2&apos;. Berikan nilai sudut secara manual.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="228"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="233"/>
         <source>Cannot get tokens from formula &apos;%1&apos;. Parser error: %2.</source>
         <translation>Tidak dapat mengambil token dari rumus &apos;%1&apos;. Kesalahan parser: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="301"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="302"/>
         <source>Error</source>
         <translation>Kesalahan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="314"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="315"/>
         <source>Empty formula</source>
         <translation>Rumus kosong</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="331"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="334"/>
         <source>Invalid result. Value is infinite or NaN. Please, check your calculations.</source>
         <translation>Hasil tidak valid. Nilai tak terhingga atau NaN. Silakan periksa perhitungan Anda.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="340"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="343"/>
         <source>Value can&apos;t be 0</source>
         <translation>Nilai tidak boleh 0</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="346"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="349"/>
         <source>Value can&apos;t be less than 0</source>
         <translation>Nilai tidak boleh kurang dari 0</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="366"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="369"/>
         <source>Parser error: %1</source>
         <translation>Kesalahan parser: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1232"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1239"/>
         <source>Point</source>
         <translation>Titik</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1233"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1240"/>
         <source>Spline</source>
         <translation>Spline</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1234"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1241"/>
         <source>Spline path</source>
         <translation>Jalur spline</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1235"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1242"/>
         <source>Arc</source>
         <translation>busur</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1236"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="1243"/>
         <source>Elliptical arc</source>
         <translation>Busur elips</translation>
     </message>
@@ -14287,8 +14324,8 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>Potongan &apos;%1&apos; memiliki kelonggaran tata letak yang tidak valid. Silakan periksa kampuh untuk melihat bagaimana kampuh berperilaku.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="668"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2247"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="686"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2383"/>
         <source>Piece &apos;%1&apos;. Seam allowance is not valid.</source>
         <translation>Potongan &apos;%1&apos;. Kampuh tidak valid.</translation>
     </message>
@@ -14360,32 +14397,37 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>Tidak dapat mengonversi parameter toInt</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/mainwindow.cpp" line="368"/>
+        <location filename="../../src/app/valentina/mainwindow.cpp" line="376"/>
         <source>Piece name &apos;%1&apos; is not unique.</source>
         <translation>Nama potongan &apos;%1&apos; tidak unik.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="141"/>
+        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="124"/>
+        <source>Curve has no points.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="148"/>
         <source>Could not find the segment start.</source>
         <translation>Tidak dapat menemukan awal segmen.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="150"/>
+        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="157"/>
         <source>Could not find the segment end.</source>
         <translation>Tidak dapat menemukan akhir segmen.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="156"/>
+        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="163"/>
         <source>Segment is too short.</source>
         <translation>Segmen terlalu pendek.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="174"/>
+        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="181"/>
         <source>Error calculating segment for curve &apos;%1&apos;. %2</source>
         <translation>Kesalahan menghitung segmen untuk kurva &apos;%1&apos;. %2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="178"/>
+        <location filename="../../src/libs/vgeometry/vabstractcurve.cpp" line="185"/>
         <source>Error in path &apos;%1&apos;. Calculating segment for curve &apos;%2&apos; has failed. %3</source>
         <translation>Kesalahan pada jalur &apos;%1&apos;. Menghitung segmen untuk kurva &apos;%2&apos; gagal. %3</translation>
     </message>
@@ -14410,7 +14452,7 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>Tidak dapat menyiapkan takik &apos;%1&apos; untuk potongan &apos;%2&apos;. Takik kosong.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="234"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="239"/>
         <source>Cannot get tokens from formula &apos;%1&apos;. Formula error: %2.</source>
         <translation>Tidak dapat mengambil token dari rumus &apos;%1&apos;. Kesalahan rumus: %2.</translation>
     </message>
@@ -14421,62 +14463,62 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>Gagal menyiapkan placeholder ukuran akhir. Kesalahan parser pada baris %1: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="848"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="854"/>
         <source>Failed to prepare full piece area placeholder. %1.</source>
         <translation>Gagal menyiapkan placeholder luas penuh potongan. %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="862"/>
+        <location filename="../../src/libs/vtools/dialogs/support/dialogeditlabel.cpp" line="868"/>
         <source>Failed to prepare piece seam line area placeholder. %1.</source>
         <translation>Gagal menyiapkan placeholder luas garis jahitan potongan. %1.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="984"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="985"/>
         <source>Incorrect use of placeholder %1. This placeholder is not available in pattern label.</source>
         <translation>Penggunaan placeholder %1 tidak tepat. Placeholder ini tidak tersedia dalam label pola.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="442"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="705"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="706"/>
         <source>No data for the height dimension.</source>
         <translation>Tidak ada data untuk dimensi tinggi.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="443"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="706"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="707"/>
         <source>No data for the size dimension.</source>
         <translation>Tidak ada data untuk dimensi ukuran.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="444"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="707"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="708"/>
         <source>No data for the hip dimension.</source>
         <translation>Tidak ada data untuk dimensi pinggul.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="445"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="708"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="709"/>
         <source>No data for the waist dimension.</source>
         <translation>Tidak ada data untuk dimensi pinggang.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="375"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="381"/>
         <source>Cannot calculate fold line height for piece &apos;%1&apos;. Reason: %2.</source>
         <translation>Tidak dapat menghitung tinggi garis lipatan untuk potongan &apos;%1&apos;. Alasan: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="396"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="402"/>
         <source>Cannot calculate fold line width for piece &apos;%1&apos;. Reason: %2.</source>
         <translation>Tidak dapat menghitung lebar garis lipatan untuk potongan &apos;%1&apos;. Alasan: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="418"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="423"/>
         <source>Cannot calculate fold line center position for piece &apos;%1&apos;. Reason: %2.</source>
         <translation>Tidak dapat menghitung posisi tengah garis lipatan untuk potongan &apos;%1&apos;. Alasan: %2.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="561"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2573"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="569"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2740"/>
         <source>Piece &apos;%1&apos;. Unable to load default piece label template.
 %2
 %3</source>
@@ -14485,17 +14527,17 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
 %3</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1415"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1525"/>
         <source>Piece &apos;%1&apos;. Grainline is not valid.</source>
         <translation>Potongan &apos;%1&apos;. Arah serat kain tidak valid.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="3290"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="3500"/>
         <source>Piece &apos;%1&apos;. Fold line is not valid.</source>
         <translation>Potongan &apos;%1&apos;. Garis lipatan tidak valid.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1436"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1618"/>
         <source>Invalid global value for a passmark length. Piece &apos;%1&apos;. Length is less than minimal allowed.</source>
         <translation>Nilai global tidak valid untuk panjang takik. Potongan &apos;%1&apos;. Panjang kurang dari minimum yang diizinkan.</translation>
     </message>
@@ -14552,7 +14594,7 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>Sisakan hanya satu salinan kurva &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="969"/>
+        <location filename="../../src/libs/vtools/dialogs/dialogtoolbox.cpp" line="976"/>
         <source>Point &apos;%1&apos; does not lie on a curve &apos;%2&apos;</source>
         <translation>Titik &apos;%1&apos; tidak berada pada kurva &apos;%2&apos;</translation>
     </message>
@@ -14578,25 +14620,25 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="447"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="710"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="711"/>
         <source>No data for the X dimension.</source>
         <translation>Tidak ada data untuk dimensi X.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="448"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="711"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="712"/>
         <source>No data for the Y dimension.</source>
         <translation>Tidak ada data untuk dimensi Y.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="449"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="712"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="713"/>
         <source>No data for the Z dimension.</source>
         <translation>Tidak ada data untuk dimensi Z.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="450"/>
-        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="713"/>
+        <location filename="../../src/libs/vlayout/vtextmanager.cpp" line="714"/>
         <source>No data for the W dimension.</source>
         <translation>Tidak ada data untuk dimensi W.</translation>
     </message>
@@ -14623,32 +14665,32 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>Kurva &apos;%1&apos;. Panjang segmen potong (%2) terlalu besar. Optimalkan ke nilai maksimum.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1684"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1866"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with internal path &apos;%3&apos;.</source>
         <translation>Potongan &apos;%1&apos;. Jalur internal &apos;%2&apos; berpotongan dengan jalur internal &apos;%3&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1599"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1781"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; intersects with cutting contour.</source>
         <translation>Potongan &apos;%1&apos;. Jalur internal &apos;%2&apos; berpotongan dengan kontur potong.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1471"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1653"/>
         <source>Invalid global value for a passmark width. Piece &apos;%1&apos;. Width is less than minimal allowed.</source>
         <translation>Nilai global tidak valid untuk lebar takik. Potongan &apos;%1&apos;. Lebar kurang dari minimum yang diizinkan.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1610"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1792"/>
         <source>Piece &apos;%1&apos;. Internal path &apos;%2&apos; not inside of cutting contour.</source>
         <translation>Potongan &apos;%1&apos;. Jalur internal &apos;%2&apos; tidak berada di dalam kontur potong.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="428"/>
+        <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="471"/>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of first point with cutting contour</source>
         <translation>Kesalahan pada jalur internal &apos;%1&apos;. Tidak ada perpotongan titik pertama dengan kontur potong</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="447"/>
+        <location filename="../../src/libs/vpatterndb/vpiecepath.cpp" line="490"/>
         <source>Error in internal path &apos;%1&apos;. There is no intersection of last point with cutting contour</source>
         <translation>Kesalahan pada jalur internal &apos;%1&apos;. Tidak ada perpotongan titik terakhir dengan kontur potong</translation>
     </message>
@@ -14999,7 +15041,7 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
 <context>
     <name>SavePiecePathOptions</name>
     <message>
-        <location filename="../../src/libs/vtools/undocommands/savepiecepathoptions.cpp" line="54"/>
+        <location filename="../../src/libs/vtools/undocommands/savepiecepathoptions.cpp" line="50"/>
         <source>save path options</source>
         <translation>simpan opsi jalur</translation>
     </message>
@@ -16948,26 +16990,26 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>Penempatan:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="431"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="473"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1275"/>
         <source>Labels</source>
         <translation>Label</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="528"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1206"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="570"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1248"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1180"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1230"/>
         <source>Width:</source>
         <translation>Lebar:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="548"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="737"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="984"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1226"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1415"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1662"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="590"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="779"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1026"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1268"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1457"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1704"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1182"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1196"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1213"/>
@@ -16978,12 +17020,12 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>Wizard rumus</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="596"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="785"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1032"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1274"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1463"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1710"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="638"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="827"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1074"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1316"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1505"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1752"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1186"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1200"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1217"/>
@@ -16994,12 +17036,12 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>Nilai</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="622"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="811"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1058"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1300"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1489"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1736"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="664"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="853"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1100"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1342"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1531"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1778"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1189"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1203"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1220"/>
@@ -17010,12 +17052,12 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>Perhitungan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="647"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="836"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1083"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1325"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1514"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1761"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="689"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="878"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1125"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1367"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1556"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1803"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1192"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1206"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1223"/>
@@ -17026,54 +17068,54 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tampilkan perhitungan lengkap di kotak pesan&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="717"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1395"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="759"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1437"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1194"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1244"/>
         <source>Height:</source>
         <translation>Tinggi:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="866"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1544"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="908"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1586"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1208"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1258"/>
         <source>Center pin:</source>
         <translation>Pin tengah:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="890"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1568"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="932"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1610"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1209"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1259"/>
         <source>Top left pin:</source>
         <translation>Pin kiri atas:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="900"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1578"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="942"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1620"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1210"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1260"/>
         <source>Bottom right pin:</source>
         <translation>Pin kanan bawah:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="964"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1642"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1006"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1684"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1211"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1261"/>
         <source>Angle:</source>
         <translation>Sudut:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1128"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1170"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1228"/>
         <source>Pattern label visible</source>
         <translation>Label pola terlihat</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="51"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="238"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="280"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1135"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1153"/>
         <source>Label template:</source>
@@ -17081,7 +17123,7 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="61"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="248"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="290"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1139"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1157"/>
         <source>Edit template</source>
@@ -17089,7 +17131,7 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="83"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="276"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="318"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1140"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1158"/>
         <source>Label data</source>
@@ -17150,117 +17192,142 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>Edit templat label potongan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="444"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="486"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1176"/>
         <source>Options to control position a detail label. &lt;b&gt;Not available if a detail label template is empty&lt;/b&gt;.</source>
         <translation>Opsi untuk mengontrol posisi label potongan. &lt;b&gt;Tidak tersedia jika templat label potongan kosong&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="464"/>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1142"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="506"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1184"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1179"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1229"/>
         <source>Font size:</source>
         <translation>Ukuran fon:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1125"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="1167"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1226"/>
         <source>Options to control position a pattern label. &lt;b&gt;Not available if a pattern label template is empty&lt;/b&gt;.</source>
         <translation>Opsi untuk mengontrol posisi label pola. &lt;b&gt;Tidak tersedia jika templat label pola kosong&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="230"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="272"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1174"/>
         <source>Pattern label data</source>
         <translation>Data label pola</translation>
     </message>
     <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="216"/>
+        <source>The lists contain only the pattern materials. If they are empty, add materials first with the &quot;Manage&quot; button in the pattern materials section.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="219"/>
+        <source>Material</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="225"/>
+        <source>No buffer:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="235"/>
+        <source>With buffer:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="245"/>
+        <source>Buffer:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="287"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1155"/>
         <source>Edit pattern label</source>
         <translation>Edit label pola</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="285"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="327"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1159"/>
         <source>Pattern name:</source>
         <translation>Nama pola:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="299"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="341"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1160"/>
         <source>Pattern number:</source>
         <translation>Nomor pola:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="313"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="355"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1161"/>
         <source>Company/Designer name:</source>
         <translation>Nama perusahaan/desainer:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="327"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="369"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1162"/>
         <source>Customer name:</source>
         <translation>Nama pelanggan:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="341"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="383"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1163"/>
         <source>Date format:</source>
         <translation>Format tanggal:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="351"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="393"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1164"/>
         <source>Time format:</source>
         <translation>Format waktu:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="361"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="403"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1165"/>
         <source>Customer birth date:</source>
         <translation>Tanggal lahir pelanggan:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="368"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="410"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1166"/>
         <source>yyyy-MM-dd</source>
         <translation>yyyy-MM-dd</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="375"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="417"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1167"/>
         <source>Customer email:</source>
         <translation>Email pelanggan:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="388"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="430"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1168"/>
         <source>Materials</source>
         <translation>Bahan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="397"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="439"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1169"/>
         <source>Pattern materials:</source>
         <translation>Bahan pola:</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="404"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="446"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1171"/>
         <source>Manage list of pattern materials</source>
         <translation>Kelola daftar bahan pola</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="407"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="449"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1173"/>
         <source>Manage</source>
         <translation>Kelola</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="447"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tablabels.ui" line="489"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tablabels.h" line="1178"/>
         <source>Piece label visible</source>
         <translation>Label potongan terlihat</translation>
@@ -17707,6 +17774,7 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="657"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1615"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1035"/>
         <source>Width:</source>
         <translation>Lebar:</translation>
@@ -17715,6 +17783,8 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="677"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="916"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1106"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1455"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1635"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1037"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1057"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1075"/>
@@ -17725,6 +17795,8 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="719"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="958"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1148"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1497"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1677"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1041"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1061"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1079"/>
@@ -17735,6 +17807,7 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="745"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="984"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1174"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1703"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1044"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1064"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1082"/>
@@ -17745,6 +17818,8 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="767"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1006"/>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1196"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1545"/>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1725"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1047"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1067"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1085"/>
@@ -17821,6 +17896,36 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
     </message>
     <message>
         <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1360"/>
+        <source>Buffer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1368"/>
+        <source>Name:</source>
+        <translation type="unfinished">Nama:</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1375"/>
+        <source>Name of the buffer piece. If empty, the piece name followed by &quot;buffer&quot; is used. The name should be unique among all pieces and buffers.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1432"/>
+        <source>Buffer is visible when the formula result is 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1435"/>
+        <source>Visible:</source>
+        <translation type="unfinished">Terlihat:</translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1523"/>
+        <source>Formula that controls whether the buffer is shown. The buffer is visible when the result is 1; any other value (e.g. 0) hides it. You can use variables, increments and measurements.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/dialogs/tools/piece/tabs/tabpaths.ui" line="1764"/>
         <location filename="../../src/libs/vtools/dialogs/tools/build/claude_debug/Debug_Qt6_Clan_05d4df5699158e4b/VToolsLib.bc8f3301/qt.headers/ui_tabpaths.h" line="1093"/>
         <source>Internal paths</source>
         <translation>Jalur internal</translation>
@@ -18231,15 +18336,23 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
 <context>
     <name>ToggleHideMainPath</name>
     <message>
-        <location filename="../../src/libs/vtools/undocommands/togglepiecestate.cpp" line="181"/>
+        <location filename="../../src/libs/vtools/undocommands/togglepiecestate.cpp" line="230"/>
         <source>detail hide main path</source>
         <translation>sembunyikan jalur utama potongan</translation>
     </message>
 </context>
 <context>
+    <name>TogglePieceBufferInLayout</name>
+    <message>
+        <location filename="../../src/libs/vtools/undocommands/togglepiecestate.cpp" line="98"/>
+        <source>buffer in layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TogglePieceForceForbidFlipping</name>
     <message>
-        <location filename="../../src/libs/vtools/undocommands/togglepiecestate.cpp" line="97"/>
+        <location filename="../../src/libs/vtools/undocommands/togglepiecestate.cpp" line="146"/>
         <source>piece flipping</source>
         <translation>pembalikan potongan</translation>
     </message>
@@ -18255,7 +18368,7 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
 <context>
     <name>ToggleShowFullPiece</name>
     <message>
-        <location filename="../../src/libs/vtools/undocommands/togglepiecestate.cpp" line="227"/>
+        <location filename="../../src/libs/vtools/undocommands/togglepiecestate.cpp" line="276"/>
         <source>show full piece</source>
         <translation>tampilkan potongan penuh</translation>
     </message>
@@ -18642,29 +18755,29 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
 <context>
     <name>VAbstractPattern</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1514"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="1519"/>
         <source>Can&apos;t find tool in table.</source>
         <translation>Tidak dapat menemukan alat dalam tabel.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2023"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2030"/>
         <source>Error creating or updating group</source>
         <translation>Kesalahan membuat atau memperbarui grup</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2091"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2098"/>
         <source>measurement</source>
         <translation>ukuran</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2350"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2534"/>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2593"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2357"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2541"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="2600"/>
         <source>New group</source>
         <translation>Grup baru</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="687"/>
+        <location filename="../../src/libs/ifc/xml/vabstractpattern.cpp" line="692"/>
         <source>Wrong tag name &apos;%1&apos;.</source>
         <translation>Nama tag salah &apos;%1&apos;.</translation>
     </message>
@@ -19233,92 +19346,92 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
 <context>
     <name>VAbstractTool</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="385"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="399"/>
         <source>black</source>
         <translation>hitam</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="336"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="350"/>
         <source>green</source>
         <translation>hijau</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="339"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="353"/>
         <source>blue</source>
         <translation>biru</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="342"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="356"/>
         <source>dark red</source>
         <translation>merah tua</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="345"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="359"/>
         <source>dark green</source>
         <translation>hijau tua</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="348"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="362"/>
         <source>dark blue</source>
         <translation>biru tua</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="351"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="365"/>
         <source>yellow</source>
         <translation>kuning</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="354"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="368"/>
         <source>light salmon</source>
         <translation>salmon muda</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="357"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="371"/>
         <source>goldenrod</source>
         <translation>kuning keemasan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="360"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="374"/>
         <source>orange</source>
         <translation>oranye</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="363"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="377"/>
         <source>deep pink</source>
         <translation>merah muda tua</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="366"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="380"/>
         <source>violet</source>
         <translation>ungu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="369"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="383"/>
         <source>dark violet</source>
         <translation>ungu tua</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="372"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="386"/>
         <source>medium sea green</source>
         <translation>hijau laut sedang</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="375"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="389"/>
         <source>lime</source>
         <translation>hijau limau</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="378"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="392"/>
         <source>deep sky blue</source>
         <translation>biru langit tua</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="381"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="395"/>
         <source>corn flower blue</source>
         <translation>biru bunga jagung</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="276"/>
+        <location filename="../../src/libs/vtools/tools/vabstracttool.cpp" line="277"/>
         <source>Edit wrong formula</source>
         <translation>Edit rumus yang salah</translation>
     </message>
@@ -19326,57 +19439,57 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
 <context>
     <name>VApplication</name>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="489"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="512"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Kesalahan menguraikan berkas. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="495"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="518"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Kesalahan id buruk. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="501"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="524"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Kesalahan tidak dapat mengonversi nilai. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="507"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="530"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Kesalahan parameter kosong. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="513"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="536"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Kesalahan id salah. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="532"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="555"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Ada yang salah!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="546"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="569"/>
         <source>Parser error: %1. Program will be terminated.</source>
         <translation>Kesalahan parser: %1. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="551"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="574"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Pengecualian dilemparkan: %1. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="713"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="736"/>
         <source>Unable to start &apos;%1&apos;. Make sure the application is installed correctly.</source>
         <translation>Tidak dapat memulai &apos;%1&apos;. Pastikan aplikasi terinstal dengan benar.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="526"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="549"/>
         <source>Invalid notch.</source>
         <translation>Takik tidak valid.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="538"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="561"/>
         <source>Formula warning: %1. Program will be terminated.</source>
         <translation>Peringatan rumus: %1. Program akan dihentikan.</translation>
     </message>
@@ -19449,38 +19562,46 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
 <context>
     <name>VBackgroundPatternImage</name>
     <message>
-        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="87"/>
-        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="161"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="99"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="185"/>
         <source>Unexpected mime type: %1</source>
         <translation>Jenis MIME tak terduga: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="96"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="108"/>
         <source>Couldn&apos;t read the image. Error: %1</source>
         <translation>Tidak dapat membaca gambar. Kesalahan: %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="145"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="169"/>
         <source>No data.</source>
         <translation>Tidak ada data.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="151"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="175"/>
         <source>Invalid id.</source>
         <translation>Id tidak valid.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="169"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="191"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="220"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="246"/>
+        <source>The image declares a canvas size that is too large to render safely.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="199"/>
         <source>Content type is empty.</source>
         <translation>Jenis konten kosong.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="185"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="214"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="239"/>
         <source>Not image.</source>
         <translation>Bukan gambar.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="179"/>
+        <location filename="../../src/libs/ifc/xml/vbackgroundpatternimage.cpp" line="233"/>
         <source>Content type mismatch.</source>
         <translation>Ketidakcocokan jenis konten.</translation>
     </message>
@@ -20185,17 +20306,17 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>Tidak dapat menemukan objek. Jenis tidak cocok. Nama = &apos;%1&apos;, jenis yang ada = %2, jenis yang masuk = %3.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="399"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="324"/>
         <source>The pattern has two objects sharing the name &apos;%1&apos;: one from the tool with id %2, another from the tool with id %3. Formulas or tools referencing this name may resolve to the wrong one.</source>
         <translation>Pola memiliki dua objek dengan nama yang sama &apos;%1&apos;: satu dari alat dengan id %2, satunya lagi dari alat dengan id %3. Rumus atau alat yang merujuk ke nama ini dapat merujuk ke objek yang salah.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="493"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="418"/>
         <source>Number of free id exhausted.</source>
         <translation>Jumlah id bebas habis.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="670"/>
+        <location filename="../../src/libs/vpatterndb/vcontainer.cpp" line="595"/>
         <source>Can&apos;t create a curve with type &apos;%1&apos;</source>
         <translation>Tidak dapat membuat kurva dengan jenis &apos;%1&apos;</translation>
     </message>
@@ -20922,12 +21043,12 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
 <context>
     <name>VLayoutPiece</name>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="685"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="703"/>
         <source>Piece %1 doesn&apos;t have shape.</source>
         <translation>Potongan %1 tidak memiliki bentuk.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="1977"/>
+        <location filename="../../src/libs/vlayout/vlayoutpiece.cpp" line="2007"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
         <translation>Fon SVG &apos;%1&apos; tidak valid. Kembali ke fon garis luar.</translation>
     </message>
@@ -20991,192 +21112,192 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
 <context>
     <name>VNodePoint</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="394"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="401"/>
         <source>Options</source>
         <translation>pilihan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="398"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="405"/>
         <source>In layout</source>
         <translation>Dalam tata letak</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="434"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="441"/>
         <source>Delete</source>
         <translation>hapus</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="403"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="410"/>
         <source>Forbid flipping</source>
         <translation>Larang pembalikan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="529"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="536"/>
         <source>by length</source>
         <translation>berdasarkan panjang</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="531"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="538"/>
         <source>by points intersetions</source>
         <translation>berdasarkan perpotongan titik</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="533"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="540"/>
         <source>by first edge symmetry</source>
         <translation>berdasarkan simetri tepi pertama</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="535"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="542"/>
         <source>by second edge symmetry</source>
         <translation>berdasarkan simetri tepi kedua</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="537"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="544"/>
         <source>by first edge right angle</source>
         <translation>berdasarkan sudut siku tepi pertama</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="539"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="546"/>
         <source>by second edge right angle</source>
         <translation>berdasarkan sudut siku tepi kedua</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="461"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="468"/>
         <source>Passmark</source>
         <translation>Takik</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="367"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="374"/>
         <source>Show label</source>
         <translation>Tampilkan label</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="383"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="390"/>
         <source>Exclude</source>
         <translation>Kecualikan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="408"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="415"/>
         <source>Force flipping</source>
         <translation>Paksa pembalikan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="413"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="420"/>
         <source>Show full piece</source>
         <translation>Tampilkan potongan penuh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="429"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="436"/>
         <source>Reset piece label template</source>
         <translation>Atur ulang templat label potongan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="438"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="445"/>
         <source>Pending</source>
         <translation>Menunggu</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="463"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="470"/>
         <source>None</source>
         <translation>Tidak ada</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="516"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="523"/>
         <source>Seam allowance angle</source>
         <translation>Sudut kampuh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="555"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="562"/>
         <source>Passmark angle</source>
         <translation>Sudut takik</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="568"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="575"/>
         <source>Straightforward</source>
         <translation>Lurus</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="570"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="577"/>
         <source>Bisector</source>
         <translation>Garis bagi</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="572"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="579"/>
         <source>Intersection</source>
         <translation>Perpotongan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="575"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="581"/>
         <source>Intersection (only left)</source>
         <translation>Perpotongan (hanya kiri)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="578"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="583"/>
         <source>Intersection (only right)</source>
         <translation>Perpotongan (hanya kanan)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="580"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="586"/>
         <source>Intersection 2</source>
         <translation>Perpotongan 2</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="583"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="588"/>
         <source>Intersection 2 (only left)</source>
         <translation>Perpotongan 2 (hanya kiri)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="586"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="591"/>
         <source>Intersection 2 (only right)</source>
         <translation>Perpotongan 2 (hanya kanan)</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="480"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="487"/>
         <source>One line</source>
         <translation>Satu garis</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="482"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="489"/>
         <source>Two lines</source>
         <translation>Dua garis</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="484"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="491"/>
         <source>Three lines</source>
         <translation>Tiga garis</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="486"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="493"/>
         <source>T mark</source>
         <translation>Tanda T</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="488"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="495"/>
         <source>External V mark</source>
         <translation>Tanda V eksternal</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="490"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="497"/>
         <source>Internal V mark</source>
         <translation>Tanda V internal</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="496"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="503"/>
         <source>Check mark</source>
         <translation>Tanda centang</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="492"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="499"/>
         <source>U mark</source>
         <translation>Tanda U</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="494"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="501"/>
         <source>Box mark</source>
         <translation>Tanda Kotak</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="498"/>
+        <location filename="../../src/libs/vtools/tools/nodeDetails/vnodepoint.cpp" line="505"/>
         <source>Turn point</source>
         <translation>Titik belok</translation>
     </message>
@@ -21184,52 +21305,52 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
 <context>
     <name>VPApplication</name>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="382"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="408"/>
         <source>Error parsing file. Program will be terminated.</source>
         <translation>Kesalahan menguraikan berkas. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="388"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="414"/>
         <source>Error bad id. Program will be terminated.</source>
         <translation>Kesalahan id buruk. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="394"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="420"/>
         <source>Error can&apos;t convert value. Program will be terminated.</source>
         <translation>Kesalahan tidak dapat mengonversi nilai. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="400"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="426"/>
         <source>Error empty parameter. Program will be terminated.</source>
         <translation>Kesalahan parameter kosong. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="406"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="432"/>
         <source>Error wrong id. Program will be terminated.</source>
         <translation>Kesalahan id salah. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="419"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="445"/>
         <source>Something&apos;s wrong!!</source>
         <translation>Ada yang salah!!</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="425"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="451"/>
         <source>Exception thrown: %1. Program will be terminated.</source>
         <translation>Pengecualian dilemparkan: %1. Program akan dihentikan.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="773"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="799"/>
         <source>Can&apos;t begin to listen for incoming connections on name &apos;%1&apos;</source>
         <translation>Tidak dapat mulai mendengarkan koneksi masuk pada nama &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="792"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="818"/>
         <source>Export mode doesn&apos;t support opening several files.</source>
         <translation>Mode ekspor tidak mendukung membuka beberapa berkas.</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="799"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="825"/>
         <source>Import raw layout data does not support opening several layout files.</source>
         <translation>Impor data tata letak mentah tidak mendukung membuka beberapa berkas tata letak.</translation>
     </message>
@@ -22636,186 +22757,186 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>Kesalahan memperbarui adegan setelah penguraian.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1182"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1190"/>
         <source>Error creating or updating detail</source>
         <translation>Kesalahan membuat atau memperbarui potongan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1804"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1815"/>
         <source>Error creating or updating single point</source>
         <translation>Kesalahan membuat atau memperbarui titik tunggal</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1849"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1855"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1860"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1866"/>
         <source>Error creating or updating point of end line</source>
         <translation>Kesalahan membuat atau memperbarui titik akhir garis</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1899"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1905"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1910"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1916"/>
         <source>Error creating or updating point along line</source>
         <translation>Kesalahan membuat atau memperbarui titik sepanjang garis</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1944"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1950"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1955"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1961"/>
         <source>Error creating or updating point of shoulder</source>
         <translation>Kesalahan membuat atau memperbarui titik bahu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1989"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1995"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2000"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2006"/>
         <source>Error creating or updating point of normal</source>
         <translation>Kesalahan membuat atau memperbarui titik normal</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2034"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2040"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2045"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2051"/>
         <source>Error creating or updating point of bisector</source>
         <translation>Kesalahan membuat atau memperbarui titik garis bagi</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2110"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2116"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2121"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2127"/>
         <source>Error creating or updating point of contact</source>
         <translation>Kesalahan membuat atau memperbarui titik kontak</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2146"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2157"/>
         <source>Error creating or updating modeling point</source>
         <translation>Kesalahan membuat atau memperbarui titik pemodelan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2278"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2289"/>
         <source>Error creating or updating height</source>
         <translation>Kesalahan membuat atau memperbarui tinggi</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2309"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2320"/>
         <source>Error creating or updating triangle</source>
         <translation>Kesalahan membuat atau memperbarui segitiga</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2339"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2350"/>
         <source>Error creating or updating point of intersection</source>
         <translation>Kesalahan membuat atau memperbarui titik perpotongan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2395"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2401"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2406"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2412"/>
         <source>Error creating or updating cut spline point</source>
         <translation>Kesalahan membuat atau memperbarui titik potong kurva</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2457"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2463"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2468"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2474"/>
         <source>Error creating or updating cut spline path point</source>
         <translation>Kesalahan membuat atau memperbarui titik potong jalur kurva</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2519"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2525"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2530"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2536"/>
         <source>Error creating or updating cut arc point</source>
         <translation>Kesalahan membuat atau memperbarui titik potong busur</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2566"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2572"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2577"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2583"/>
         <source>Error creating or updating point of intersection line and axis</source>
         <translation>Kesalahan membuat atau memperbarui titik perpotongan garis dan sumbu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2633"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2639"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2644"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2650"/>
         <source>Error creating or updating point of intersection curve and axis</source>
         <translation>Kesalahan membuat atau memperbarui titik perpotongan kurva dan sumbu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1680"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1691"/>
         <source>Error creating or updating line</source>
         <translation>Kesalahan membuat atau memperbarui garis</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2975"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3038"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2986"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3049"/>
         <source>Error creating or updating simple curve</source>
         <translation>Kesalahan membuat atau memperbarui kurva sederhana</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3166"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3245"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3177"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3256"/>
         <source>Error creating or updating curve path</source>
         <translation>Kesalahan membuat atau memperbarui jalur kurva</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3304"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3310"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3315"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3321"/>
         <source>Error creating or updating a parallel curve</source>
         <translation>Kesalahan membuat atau memperbarui kurva paralel</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3379"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3385"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3390"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3396"/>
         <source>Error creating or updating a graduated curve</source>
         <translation>Kesalahan membuat atau memperbarui kurva bertingkat</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3466"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3477"/>
         <source>Error creating or updating modeling simple curve</source>
         <translation>Kesalahan membuat atau memperbarui kurva sederhana pemodelan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3491"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3502"/>
         <source>Error creating or updating modeling curve path</source>
         <translation>Kesalahan membuat atau memperbarui jalur kurva pemodelan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3538"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3544"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3767"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3773"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3549"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3555"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3778"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3784"/>
         <source>Error creating or updating simple arc</source>
         <translation>Kesalahan membuat atau memperbarui busur sederhana</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3687"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3693"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3698"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3704"/>
         <source>Error creating or updating elliptical arc with length</source>
         <translation>Kesalahan membuat atau memperbarui busur elips dengan panjang</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3720"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3731"/>
         <source>Error creating or updating modeling arc</source>
         <translation>Kesalahan membuat atau memperbarui busur pemodelan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4459"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4470"/>
         <source>Error creating or updating union details</source>
         <translation>Kesalahan membuat atau memperbarui gabungan potongan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2696"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2707"/>
         <source>Error creating or updating point of intersection arcs</source>
         <translation>Kesalahan membuat atau memperbarui titik perpotongan busur</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2739"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2750"/>
         <source>Error creating or updating point of intersection circles</source>
         <translation>Kesalahan membuat atau memperbarui titik perpotongan lingkaran</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2843"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2854"/>
         <source>Error creating or updating point from circle and tangent</source>
         <translation>Kesalahan membuat atau memperbarui titik dari lingkaran dan garis singgung</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2874"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2885"/>
         <source>Error creating or updating point from arc and tangent</source>
         <translation>Kesalahan membuat atau memperbarui titik dari busur dan garis singgung</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2925"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2936"/>
         <source>Error creating or updating true darts</source>
         <translation>Kesalahan membuat atau memperbarui kupnat sejati</translation>
     </message>
@@ -22827,22 +22948,22 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>Nama tag salah &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1647"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="1658"/>
         <source>Unknown point type &apos;%1&apos;.</source>
         <translation>Jenis titik tidak dikenal &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4346"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4357"/>
         <source>Unknown spline type &apos;%1&apos;.</source>
         <translation>Jenis kurva tidak dikenal &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4381"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4392"/>
         <source>Unknown arc type &apos;%1&apos;.</source>
         <translation>Jenis busur tidak dikenal &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4465"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4476"/>
         <source>Unknown tools type &apos;%1&apos;.</source>
         <translation>Jenis alat tidak dikenal &apos;%1&apos;.</translation>
     </message>
@@ -22852,75 +22973,75 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>Kesalahan id tidak unik.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2803"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2814"/>
         <source>Error creating or updating point of intersection curves</source>
         <translation>Kesalahan membuat atau memperbarui titik perpotongan kurva</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3044"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3055"/>
         <source>Error creating or updating simple interactive spline</source>
         <translation>Kesalahan membuat atau memperbarui kurva interaktif sederhana</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3251"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3262"/>
         <source>Error creating or updating interactive spline path</source>
         <translation>Kesalahan membuat atau memperbarui jalur kurva interaktif</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3098"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3109"/>
         <source>Error creating or updating cubic bezier curve</source>
         <translation>Kesalahan membuat atau memperbarui kurva bezier kubik</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3441"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3452"/>
         <source>Error creating or updating cubic bezier path curve</source>
         <translation>Kesalahan membuat atau memperbarui jalur kurva bezier kubik</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3816"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3822"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3827"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3833"/>
         <source>Error creating or updating operation of rotation</source>
         <translation>Kesalahan membuat atau memperbarui operasi rotasi</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4497"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4508"/>
         <source>Unknown operation type &apos;%1&apos;.</source>
         <translation>Jenis operasi tidak dikenal &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3857"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3868"/>
         <source>Error creating or updating operation of flipping by line</source>
         <translation>Kesalahan membuat atau memperbarui operasi pembalikan berdasarkan garis</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3892"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3903"/>
         <source>Error creating or updating operation of flipping by axis</source>
         <translation>Kesalahan membuat atau memperbarui operasi pembalikan berdasarkan sumbu</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3941"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3947"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3952"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3958"/>
         <source>Error creating or updating operation of moving</source>
         <translation>Kesalahan membuat atau memperbarui operasi pemindahan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2071"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2082"/>
         <source>Error creating or updating point of line intersection</source>
         <translation>Kesalahan membuat atau memperbarui titik perpotongan garis</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3598"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3604"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3609"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3615"/>
         <source>Error creating or updating simple elliptical arc</source>
         <translation>Kesalahan membuat atau memperbarui busur elips sederhana</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4418"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4429"/>
         <source>Unknown elliptical arc type &apos;%1&apos;.</source>
         <translation>Jenis busur elips tidak dikenal &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3631"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="3642"/>
         <source>Error creating or updating modeling elliptical arc</source>
         <translation>Kesalahan membuat atau memperbarui busur elips pemodelan</translation>
     </message>
@@ -22930,34 +23051,34 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
         <translation>rincial</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4531"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4542"/>
         <source>Unnamed path</source>
         <translation>Jalur tanpa nama</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4524"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4547"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4535"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4558"/>
         <source>Error creating or updating a piece path</source>
         <translation>Kesalahan membuat atau memperbarui jalur potongan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2173"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2184"/>
         <source>Error creating or updating pin point</source>
         <translation>Kesalahan membuat atau memperbarui titik pin</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4525"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4536"/>
         <source>Piece path doesn&apos;t contain nodes</source>
         <translation>Jalur potongan tidak berisi simpul</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2242"/>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2248"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2253"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="2259"/>
         <source>Error creating or updating place label</source>
         <translation>Kesalahan membuat atau memperbarui label tempat</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4700"/>
+        <location filename="../../src/app/valentina/xml/vpattern.cpp" line="4711"/>
         <source>Can&apos;t find increment &apos;%1&apos;</source>
         <translation>Tidak dapat menemukan increment &apos;%1&apos;</translation>
     </message>
@@ -23041,20 +23162,35 @@ Opsi ini akan berlaku setelah dimulai ulang.</translation>
 <context>
     <name>VPiece</name>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="258"/>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="275"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="262"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="279"/>
         <source>Main path of piece %1</source>
         <translation>Jalur utama potongan %1</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1105"/>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1145"/>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1229"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="694"/>
+        <source>Buffer for piece &apos;%1&apos; is visible, but buffer width is &lt;= 0.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="706"/>
+        <source>Piece &apos;%1&apos;. Buffer allowance is not valid.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="715"/>
+        <source>%1 buffer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1272"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1316"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1403"/>
         <source>Cannot calculate a notch for point &apos;%1&apos; in piece &apos;%2&apos;.</source>
         <translation>Tidak dapat menghitung takik untuk titik &apos;%1&apos; pada potongan &apos;%2&apos;.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1282"/>
+        <location filename="../../src/libs/vpatterndb/vpiece.cpp" line="1456"/>
         <source>Notch for point &apos;%1&apos; in piece &apos;%2&apos; will be disabled. Manual length is less than allowed value.</source>
         <translation>Takik untuk titik &apos;%1&apos; pada potongan &apos;%2&apos; akan dinonaktifkan. Panjang manual kurang dari nilai yang diizinkan.</translation>
     </message>
@@ -23224,7 +23360,7 @@ Kesalahan kompatibilitas format tata letak mentah: actualFileVersion = %1 dan fi
 <context>
     <name>VSingleLineOutlineChar</name>
     <message>
-        <location filename="../../src/libs/vformat/vsinglelineoutlinechar.cpp" line="151"/>
+        <location filename="../../src/libs/vformat/vsinglelineoutlinechar.cpp" line="233"/>
         <source>Failed to open file for writing.</source>
         <translation>Gagal membuka berkas untuk penulisan.</translation>
     </message>
@@ -23294,22 +23430,22 @@ Kesalahan kompatibilitas format tata letak mentah: actualFileVersion = %1 dan fi
 <context>
     <name>VTextGraphicsItem</name>
     <message>
-        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="890"/>
+        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="909"/>
         <source>Invalid SVG font &apos;%1&apos;. Fallback to outline font.</source>
         <translation>Fon SVG &apos;%1&apos; tidak valid. Kembali ke fon garis luar.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="948"/>
+        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="967"/>
         <source>Piece &apos;%1&apos;. Not enough space for pattern info label.</source>
         <translation>Potongan &apos;%1&apos;. Ruang tidak cukup untuk label info pola.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="951"/>
+        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="970"/>
         <source>Piece &apos;%1&apos;. Not enough space for piece info label.</source>
         <translation>Potongan &apos;%1&apos;. Ruang tidak cukup untuk label info potongan.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="955"/>
+        <location filename="../../src/libs/vwidgets/vtextgraphicsitem.cpp" line="974"/>
         <source>Piece &apos;%1&apos;. Not enough space for label.</source>
         <translation>Potongan &apos;%1&apos;. Ruang tidak cukup untuk label.</translation>
     </message>
@@ -24853,113 +24989,118 @@ Kesalahan kompatibilitas format tata letak mentah: actualFileVersion = %1 dan fi
 <context>
     <name>VToolSeamAllowance</name>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="595"/>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="607"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="602"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="622"/>
         <source>Current seam allowance</source>
         <translation>Kampuh saat ini</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1438"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1548"/>
         <source>move pattern piece label</source>
         <translation>pindahkan label potongan pola</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1457"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1567"/>
         <source>resize pattern piece label</source>
         <translation>ubah ukuran label potongan pola</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1477"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1587"/>
         <source>rotate pattern piece label</source>
         <translation>putar label potongan pola</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1492"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1602"/>
         <source>move pattern info label</source>
         <translation>pindahkan label info pola</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1511"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1621"/>
         <source>resize pattern info label</source>
         <translation>ubah ukuran label info pola</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1529"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1639"/>
         <source>rotate pattern info label</source>
         <translation>putar label info pola</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1542"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1652"/>
         <source>move grainline</source>
         <translation>pindahkan arah serat kain</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1557"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1667"/>
         <source>resize grainline</source>
         <translation>ubah ukuran arah serat kain</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1571"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1681"/>
         <source>rotate grainline</source>
         <translation>putar arah serat kain</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1870"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1984"/>
         <source>Options</source>
         <translation>pilihan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1874"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1988"/>
         <source>In layout</source>
         <translation>Dalam tata letak</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1878"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1992"/>
+        <source>Buffer in layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1997"/>
         <source>Hide main path</source>
         <translation>Sembunyikan jalur utama</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1890"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2009"/>
         <source>Show full piece</source>
         <translation>Tampilkan potongan penuh</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1902"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2021"/>
         <source>Reset piece label template</source>
         <translation>Atur ulang templat label potongan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1905"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2024"/>
         <source>Delete</source>
         <translation>hapus</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1666"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1781"/>
         <source>apply save detail options</source>
         <translation>terapkan simpan opsi potongan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1966"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2089"/>
         <source>multi deletion</source>
         <translation>penghapusan ganda</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1882"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2001"/>
         <source>Forbid flipping</source>
         <translation>Larang pembalikan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1886"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2005"/>
         <source>Force flipping</source>
         <translation>Paksa pembalikan</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1675"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="1790"/>
         <source>This id (%1) is not unique.</source>
         <translation>Id ini (%1) tidak unik.</translation>
     </message>
     <message>
-        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="2943"/>
+        <location filename="../../src/libs/vtools/tools/vtoolseamallowance.cpp" line="3149"/>
         <source>Tool was used after deleting.</source>
         <translation>Alat digunakan setelah penghapusan.</translation>
     </message>
@@ -25882,37 +26023,42 @@ Kesalahan kompatibilitas format tata letak mentah: actualFileVersion = %1 dan fi
         <translation>Formulir</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="278"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="327"/>
         <source>Unnamed</source>
         <translation>Tanpa Nama</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="291"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="340"/>
         <source>Select all</source>
         <translation>Pilih semua</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="292"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="341"/>
         <source>Select none</source>
         <translation>Batalkan pilihan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="362"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="423"/>
         <source>select all details</source>
         <translation>pilih semua potongan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="369"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="430"/>
         <source>select none details</source>
         <translation>batalkan pilihan potongan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="296"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="345"/>
         <source>Invert selection</source>
         <translation>Balikkan pilihan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="375"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="308"/>
+        <source>Buffer in layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="436"/>
         <source>invert selection</source>
         <translation>balikkan pilihan</translation>
     </message>
@@ -25923,17 +26069,17 @@ Kesalahan kompatibilitas format tata letak mentah: actualFileVersion = %1 dan fi
         <translation>Sembunyikan yang tidak dalam tata letak</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="316"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="365"/>
         <source>Piece options</source>
         <translation>Opsi potongan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="318"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="367"/>
         <source>Delete piece</source>
         <translation>Hapus potongan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="324"/>
+        <location filename="../../src/app/valentina/dialogs/vwidgetdetails.cpp" line="373"/>
         <source>Cannot find piece by id &apos;%1&apos;</source>
         <translation>Tidak dapat menemukan potongan berdasarkan id &apos;%1&apos;</translation>
     </message>
@@ -26661,56 +26807,56 @@ Kesalahan kompatibilitas format tata letak mentah: actualFileVersion = %1 dan fi
 <context>
     <name>mNoisyHandler</name>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="89"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="126"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="106"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="140"/>
         <source>DEBUG:</source>
         <translation>DEBUG:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="96"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="133"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="113"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="147"/>
         <source>WARNING:</source>
         <translation>PERINGATAN:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="103"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="140"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="120"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="154"/>
         <source>CRITICAL:</source>
         <translation>KRITIS:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="110"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="147"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="127"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="161"/>
         <source>FATAL:</source>
         <translation>FATAL:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="117"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="154"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="134"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="168"/>
         <source>INFO:</source>
         <translation>INFO:</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="143"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="180"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="160"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="194"/>
         <source>Warning</source>
         <translation>peringatan</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="147"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="184"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="164"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="198"/>
         <source>Critical error</source>
         <translation>Kesalahan kritis</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="151"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="188"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="168"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="202"/>
         <source>Fatal error</source>
         <translation>Kesalahan fatal</translation>
     </message>
     <message>
-        <location filename="../../src/app/puzzle/vpapplication.cpp" line="155"/>
-        <location filename="../../src/app/tape/mapplication.cpp" line="192"/>
+        <location filename="../../src/app/puzzle/vpapplication.cpp" line="172"/>
+        <location filename="../../src/app/tape/mapplication.cpp" line="206"/>
         <source>Information</source>
         <translation>Informasi</translation>
     </message>
@@ -26718,47 +26864,47 @@ Kesalahan kompatibilitas format tata letak mentah: actualFileVersion = %1 dan fi
 <context>
     <name>vNoisyHandler</name>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="144"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="158"/>
         <source>DEBUG:</source>
         <translation>DEBUG:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="155"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="169"/>
         <source>WARNING:</source>
         <translation>PERINGATAN:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="166"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="180"/>
         <source>CRITICAL:</source>
         <translation>KRITIS:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="173"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="187"/>
         <source>FATAL:</source>
         <translation>FATAL:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="184"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="198"/>
         <source>INFO:</source>
         <translation>INFO:</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="209"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="223"/>
         <source>Warning</source>
         <translation>peringatan</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="213"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="227"/>
         <source>Critical error</source>
         <translation>Kesalahan kritis</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="217"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="231"/>
         <source>Fatal error</source>
         <translation>Kesalahan fatal</translation>
     </message>
     <message>
-        <location filename="../../src/app/valentina/core/vapplication.cpp" line="221"/>
+        <location filename="../../src/app/valentina/core/vapplication.cpp" line="235"/>
         <source>Information</source>
         <translation>Informasi</translation>
     </message>
