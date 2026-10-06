@@ -326,18 +326,6 @@
            </item>
            <item row="1" column="1">
             <widget class="QDoubleSpinBox" name="doubleSpinBoxAngle">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>56</width>
-               <height>0</height>
-              </size>
-             </property>
              <property name="minimum">
               <double>-360.000000000000000</double>
              </property>
