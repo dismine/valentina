@@ -1,4 +1,5 @@
 # Valentina 1.1.2 (unreleased)
+- [Valentina app] Fixed the angle value being hidden in the "Point along perpendicular" dialog on Windows 11.
 - [Puzzle app] Added "Restore transformation origin" to the piece context menu and made its shortcut configurable.
 - [Puzzle app] Fixed the piece context menu showing the sheet menu with disabled items when "Show tiles" was enabled.
 - [Valentina app] Fixed curves of old patterns turning into straight lines after saving, and repair patterns already saved that way.
