@@ -103,7 +103,9 @@ VTestApp {
             "test_pedantic.val",
             "legacy_cutarc_name.val",
             "buffer.val",
-            "buffer_zero_width.val"
+            "buffer_zero_width.val",
+            "spline_old_format.val",
+            "spline_damaged_format.val"
         ]
         fileTags: ["tst_valentina_files"]
     }

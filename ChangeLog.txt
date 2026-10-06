@@ -1,4 +1,5 @@
 # Valentina 1.1.2 (unreleased)
+- [Valentina app] Fixed curves of old patterns turning into straight lines after saving, and repair patterns already saved that way.
 - [Valentina app / Puzzle app] Added a piece buffer: a second contour offset from the piece by a formula-driven width, with its own name, visibility, per-piece materials and optional inclusion in the layout.
 - [Valentina app] Fixed a crash when a piece path used a curve that had no points, e.g. after a formula edit made the curve invalid.
 - [Valentina app / Puzzle app / Tape app] Fixed a crash on macOS when the app terminated itself after a fatal internal error.

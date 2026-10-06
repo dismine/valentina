@@ -47,6 +47,11 @@ private slots:
     void MaxRecordedIdCountsOrphanedNodes();
     void MaxRecordedIdOnEmptyDocumentIsZero();
     void ListExpressionsIncludesBufferFormulas();
+    // Old patterns: curves must keep their shape when converted to the new attributes
+    void IsOldFormatSplineDetection();
+    void IsOldFormatSplinePathDetection();
+    void ConvertedSplineKeepsShape();
+    void ConvertedSplinePathGetsNewAttributes();
 
 private:
     Q_DISABLE_COPY_MOVE(TST_VAbstractPattern) // NOLINT

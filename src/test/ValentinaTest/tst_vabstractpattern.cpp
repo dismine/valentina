@@ -29,6 +29,13 @@
 #include "tst_vabstractpattern.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../ifc/xml/vpatterngraph.h"
+#include "../vgeometry/vpointf.h"
+#include "../vgeometry/vspline.h"
+#include "../vgeometry/vsplinepath.h"
+#include "../vgeometry/vsplinepoint.h"
+#include "../vmisc/vabstractvalapplication.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolspline.h"
+#include "../vtools/tools/drawTools/toolcurve/vtoolsplinepath.h"
 
 #include <QElapsedTimer>
 #include <QThreadPool>
@@ -242,4 +249,180 @@ void TST_VAbstractPattern::ListExpressionsIncludesBufferFormulas()
 
     QVERIFY2(formulas.contains(u"#show"_s), qUtf8Printable(formulas.join(", "_L1)));
     QVERIFY2(formulas.contains(u"#buffer"_s), qUtf8Printable(formulas.join(", "_L1)));
+}
+
+namespace
+{
+//---------------------------------------------------------------------------------------------------------------------
+auto ElementById(const QDomDocument &doc, int id) -> QDomElement
+{
+    for (QDomElement e = doc.documentElement().firstChildElement(); not e.isNull(); e = e.nextSiblingElement())
+    {
+        if (e.attribute(u"id"_s).toInt() == id)
+        {
+            return e;
+        }
+    }
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto PointWithId(qreal x, qreal y, const QString &name, quint32 id) -> VPointF
+{
+    VPointF point(x, y, name, 0, 0);
+    point.setId(id);
+    return point;
+}
+} // namespace
+
+//---------------------------------------------------------------------------------------------------------------------
+// A spline is in the old format until it has the length attributes. Older versions changed only the type when they
+// converted a spline and saved such a file, so the type alone can't tell.
+void TST_VAbstractPattern::IsOldFormatSplineDetection()
+{
+    TestDoc doc;
+    QVERIFY(doc.setContent(QByteArray(R"(
+        <root>
+            <spline id="1" type="simple" angle1="1" angle2="2" kAsm1="1" kAsm2="1" kCurve="1" point1="1" point4="2"/>
+            <spline id="2" type="simpleInteractive" angle1="1" angle2="2" kAsm1="1" kAsm2="1" kCurve="1" point1="1"
+                    point4="2"/>
+            <spline id="3" type="simpleInteractive" angle1="1" angle2="2" length1="3" length2="4" point1="1"
+                    point4="2"/>
+            <spline id="4" type="simpleInteractive" point1="1" point4="2"/>
+        </root>)")));
+
+    QVERIFY2(VAbstractPattern::IsOldFormatSpline(ElementById(doc, 1)), "old type");
+    QVERIFY2(VAbstractPattern::IsOldFormatSpline(ElementById(doc, 2)), "new type, old attributes");
+    QVERIFY2(not VAbstractPattern::IsOldFormatSpline(ElementById(doc, 3)), "new format");
+    QVERIFY2(not VAbstractPattern::IsOldFormatSpline(ElementById(doc, 4)), "nothing of the old format");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPattern::IsOldFormatSplinePathDetection()
+{
+    TestDoc doc;
+    QVERIFY(doc.setContent(QByteArray(R"(
+        <root>
+            <spline id="1" type="path" kCurve="1">
+                <pathPoint kAsm1="1" kAsm2="1" angle="10" pSpline="1"/>
+                <pathPoint kAsm1="1" kAsm2="1" angle="20" pSpline="2"/>
+                <pathPoint kAsm1="1" kAsm2="1" angle="30" pSpline="3"/>
+            </spline>
+            <spline id="2" type="pathInteractive" kCurve="1">
+                <pathPoint kAsm1="1" kAsm2="1" angle="10" pSpline="1"/>
+                <pathPoint kAsm1="1" kAsm2="1" angle="20" pSpline="2"/>
+                <pathPoint kAsm1="1" kAsm2="1" angle="30" pSpline="3"/>
+            </spline>
+            <spline id="3" type="pathInteractive">
+                <pathPoint length1="0" length2="1" angle1="10" angle2="190" pSpline="1"/>
+                <pathPoint length1="1" length2="1" angle1="20" angle2="200" pSpline="2"/>
+                <pathPoint length1="1" length2="0" angle1="30" angle2="210" pSpline="3"/>
+            </spline>
+        </root>)")));
+
+    QVERIFY2(VAbstractPattern::IsOldFormatSplinePath(ElementById(doc, 1)), "old type");
+    QVERIFY2(VAbstractPattern::IsOldFormatSplinePath(ElementById(doc, 2)), "new type, old attributes");
+    QVERIFY2(not VAbstractPattern::IsOldFormatSplinePath(ElementById(doc, 3)), "new format");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// The converted spline must describe the same curve. With the old attributes dropped and no length attributes written
+// the control points collapse into the end points, and the curve becomes a straight line.
+void TST_VAbstractPattern::ConvertedSplineKeepsShape()
+{
+    const Unit unit = Unit::Cm;
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    TestDoc doc;
+    QVERIFY(doc.setContent(QByteArray(R"(
+        <root>
+            <spline id="4" type="simple" angle1="229.381" angle2="41.6325" kAsm1="0.962941" kAsm2="1.00054" kCurve="1"
+                    point1="3" point4="2"/>
+        </root>)")));
+    QDomElement element = ElementById(doc, 4);
+
+    const VPointF p1 = PointWithId(ToPixel(30.926, unit), ToPixel(1.058, unit), u"A2"_s, 3);
+    const VPointF p4 = PointWithId(ToPixel(18.03, unit), ToPixel(48.04, unit), u"A1"_s, 2);
+    const VSpline spline(p1, p4, 229.381, 41.6325, 0.962941, 1.00054, 1.0);
+    QVERIFY(QLineF(p1.toQPointF(), spline.GetP2().toQPointF()).length() > 1); // the curve is not a straight line
+
+    VToolSpline::SetSplineAttributes(&doc, element, spline);
+
+    QCOMPARE(element.attribute(u"type"_s), VToolSpline::ToolType);
+    QCOMPARE(element.attribute(u"point1"_s).toUInt(), 3U);
+    QCOMPARE(element.attribute(u"point4"_s).toUInt(), 2U);
+    QVERIFY(not element.hasAttribute(u"kAsm1"_s));
+    QVERIFY(not element.hasAttribute(u"kAsm2"_s));
+    QVERIFY(not element.hasAttribute(u"kCurve"_s));
+    QVERIFY(not VAbstractPattern::IsOldFormatSpline(element));
+
+    // Rebuild the spline from what was written, the way the new format is read
+    const VSpline loaded(p1,
+                         p4,
+                         element.attribute(u"angle1"_s).toDouble(),
+                         element.attribute(u"angle1"_s),
+                         element.attribute(u"angle2"_s).toDouble(),
+                         element.attribute(u"angle2"_s),
+                         ToPixel(element.attribute(u"length1"_s).toDouble(), unit),
+                         element.attribute(u"length1"_s),
+                         ToPixel(element.attribute(u"length2"_s).toDouble(), unit),
+                         element.attribute(u"length2"_s));
+
+    constexpr qreal tolerance = 0.01; // px, the lengths are written with six significant digits
+    QVERIFY2(QLineF(spline.GetP2().toQPointF(), loaded.GetP2().toQPointF()).length() < tolerance,
+             "first control point moved");
+    QVERIFY2(QLineF(spline.GetP3().toQPointF(), loaded.GetP3().toQPointF()).length() < tolerance,
+             "second control point moved");
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPattern::ConvertedSplinePathGetsNewAttributes()
+{
+    const Unit unit = Unit::Cm;
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    TestDoc doc;
+    QVERIFY(doc.setContent(QByteArray(R"(
+        <root>
+            <spline id="7" type="path" kCurve="1">
+                <pathPoint kAsm1="1" kAsm2="1" angle="10" pSpline="1"/>
+                <pathPoint kAsm1="1" kAsm2="1" angle="40" pSpline="2"/>
+                <pathPoint kAsm1="1" kAsm2="1" angle="70" pSpline="3"/>
+            </spline>
+        </root>)")));
+    QDomElement element = ElementById(doc, 7);
+
+    const QVector<VFSplinePoint>
+        points{VFSplinePoint(PointWithId(0, 0, u"A"_s, 1), 1, 190, 1, 10),
+               VFSplinePoint(PointWithId(ToPixel(10, unit), ToPixel(10, unit), u"B"_s, 2), 1, 220, 1, 40),
+               VFSplinePoint(PointWithId(ToPixel(20, unit), 0, u"C"_s, 3), 1, 250, 1, 70)};
+    const VSplinePath path(points, 1.0);
+
+    VToolSplinePath::SetSplinePathAttributes(&doc, element, path);
+
+    QCOMPARE(element.attribute(u"type"_s), VToolSplinePath::ToolType);
+    QVERIFY(not element.hasAttribute(u"kCurve"_s));
+    QVERIFY(not VAbstractPattern::IsOldFormatSplinePath(element));
+
+    const QDomNodeList children = element.childNodes();
+    QCOMPARE(children.size(), 3); // the old points were replaced, not kept next to the new ones
+
+    for (int i = 0; i < children.size(); ++i)
+    {
+        const QDomElement point = children.at(i).toElement();
+        QCOMPARE(point.attribute(u"pSpline"_s).toUInt(), static_cast<uint>(i + 1));
+        QVERIFY(not point.hasAttribute(u"kAsm1"_s));
+        QVERIFY(not point.hasAttribute(u"kAsm2"_s));
+        QVERIFY(not point.hasAttribute(u"angle"_s));
+        for (const auto &name : {u"length1"_s, u"length2"_s, u"angle1"_s, u"angle2"_s})
+        {
+            QVERIFY2(point.hasAttribute(name), qUtf8Printable(u"point %1 lacks %2"_s.arg(i).arg(name)));
+        }
+    }
+
+    // The handles that exist are not zero: a zero length is a straight line
+    QVERIFY(children.at(0).toElement().attribute(u"length2"_s).toDouble() > 0);
+    QVERIFY(children.at(1).toElement().attribute(u"length1"_s).toDouble() > 0);
+    QVERIFY(children.at(1).toElement().attribute(u"length2"_s).toDouble() > 0);
+    QVERIFY(children.at(2).toElement().attribute(u"length1"_s).toDouble() > 0);
 }

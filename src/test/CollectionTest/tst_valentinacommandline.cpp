@@ -177,6 +177,64 @@ void TST_ValentinaCommandLine::ExportMode()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void TST_ValentinaCommandLine::ExportSplineKeepsCurve_data() const
+{
+    QTest::addColumn<QString>("file");
+    QTest::addColumn<QString>("base");
+
+    // A simple spline in a pattern of the old format.
+    QTest::newRow("Old format spline") << "spline_old_format.val"
+                                       << "spline_old";
+
+    // What older versions wrote after opening such a pattern: the new spline type, but the old attributes. The curve must
+    // not turn into a straight line.
+    QTest::newRow("Spline saved with the old attributes") << "spline_damaged_format.val"
+                                                          << "spline_damaged";
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// The pieces of the pattern are bounded by a curve. A curve is exported as many points, a straight line as one segment,
+// so the longest path of the exported SVG tells which one we got: about 50 commands for the curve, 10 for the line.
+void TST_ValentinaCommandLine::ExportSplineKeepsCurve()
+{
+    QFETCH(QString, file);
+    QFETCH(QString, base);
+
+    const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestFolder;
+    const QStringList arg{tmp + QDir::separator() + file,
+                          "-d"_L1,
+                          tmp,
+                          "-b"_L1,
+                          base,
+                          "-f"_L1,
+                          "0"_L1, // SVG
+                          "--exportOnlyDetails"_L1,
+                          "--pedantic"_L1};
+    QString error;
+    const int exit = Run(V_EX_OK, ValentinaPath(), arg, error);
+    QVERIFY2(exit == V_EX_OK, qUtf8Printable(error.right(350)));
+
+    const QStringList files = QDir(tmp).entryList({base + "*.svg"_L1}, QDir::Files);
+    QVERIFY2(not files.isEmpty(), "No SVG produced");
+
+    QFile svg(tmp + QDir::separator() + files.constFirst());
+    QVERIFY(svg.open(QIODevice::ReadOnly | QIODevice::Text));
+    const QString content = QString::fromUtf8(svg.readAll());
+
+    static const QRegularExpression pathData(R"re(<path[^>]*\sd="([^"]+)")re"_L1);
+        static const QRegularExpression command(u"[MLCQZ]"_s);
+    qsizetype longest = 0;
+    for (auto it = pathData.globalMatch(content); it.hasNext();)
+    {
+        longest = qMax(longest, it.next().captured(1).count(command));
+    }
+
+    constexpr qsizetype curveCommands = 30;
+    QVERIFY2(longest >= curveCommands,
+             qUtf8Printable(u"The longest path has %1 commands, the curve is lost"_s.arg(longest)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TST_ValentinaCommandLine::TestMode_data() const
 {
     QTest::addColumn<QString>("file");

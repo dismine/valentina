@@ -592,6 +592,32 @@ auto VAbstractPattern::ParsePieceInternalPaths(const QDomElement &domElement) ->
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::IsOldFormatSpline(const QDomElement &domElement) -> bool
+{
+    // TODO. Delete if minimal supported version is 0.2.7
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 7), "Time to refactor the code.");
+
+    return not domElement.hasAttribute(AttrLength1) && not domElement.hasAttribute(AttrLength2)
+           && (domElement.hasAttribute(AttrKAsm1) || domElement.hasAttribute(AttrKAsm2)
+               || domElement.hasAttribute(AttrKCurve));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::IsOldFormatSplinePath(const QDomElement &domElement) -> bool
+{
+    // TODO. Delete if minimal supported version is 0.2.7
+    Q_STATIC_ASSERT_X(VPatternConverter::PatternMinVer < FormatVersion(0, 2, 7), "Time to refactor the code.");
+
+    if (domElement.hasAttribute(AttrKCurve))
+    {
+        return true; // The new format keeps no coefficient on the path
+    }
+
+    const QDomElement point = domElement.firstChildElement(TagPathPoint);
+    return not point.isNull() && point.hasAttribute(AttrKAsm1) && not point.hasAttribute(AttrLength1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VAbstractPattern::ParsePiecePointRecords(const QDomElement &domElement) -> QVector<quint32>
 {
     const QDomNodeList nodeList = domElement.childNodes();

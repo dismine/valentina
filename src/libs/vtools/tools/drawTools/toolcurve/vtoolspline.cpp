@@ -383,7 +383,7 @@ void VToolSpline::SaveDialog(QDomElement &domElement)
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
                                          [](const QString &notes) noexcept { return notes.isEmpty(); });
 
-    SetSplineAttributes(domElement, spl);
+    SetSplineAttributes(doc, domElement, spl);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -393,7 +393,7 @@ void VToolSpline::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &obj)
 
     auto spl = qSharedPointerDynamicCast<VSpline>(obj);
     SCASSERT(spl.isNull() == false)
-    SetSplineAttributes(tag, *spl);
+    SetSplineAttributes(doc, tag, *spl);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -693,7 +693,7 @@ void VToolSpline::CurveSelected(bool selected)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSpline::SetSplineAttributes(QDomElement &domElement, const VSpline &spl)
+void VToolSpline::SetSplineAttributes(VAbstractPattern *doc, QDomElement &domElement, const VSpline &spl)
 {
     SCASSERT(doc != nullptr)
 
