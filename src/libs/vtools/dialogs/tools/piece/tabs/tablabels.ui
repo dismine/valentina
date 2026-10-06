@@ -213,7 +213,9 @@
            <item>
             <widget class="QGroupBox" name="groupBoxMaterial">
              <property name="toolTip">
-              <string>The lists contain only the pattern materials. If they are empty, add materials first with the &quot;Manage&quot; button in the pattern materials section.</string>
+              <string>The lists contain only the pattern materials. If they are empty, add materials first with the &quot;Manage&quot; button in the pattern materials section.
+
+Use the %pMaterial% placeholder in the piece label template to print the selected material. &quot;With buffer&quot; is used when the piece buffer is visible, &quot;No buffer&quot; otherwise.</string>
              </property>
              <property name="title">
               <string>Material</string>
