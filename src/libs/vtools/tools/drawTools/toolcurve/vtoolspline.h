@@ -73,6 +73,7 @@ public:
     static auto Create(VToolSplineInitData &initData) -> VToolSpline *;
     static const QString ToolType;
     static const QString OldToolType;
+    static void SetSplineAttributes(VAbstractPattern *doc, QDomElement &domElement, const VSpline &spl);
     auto type() const -> int override { return Type; }
     enum
     {
@@ -125,7 +126,6 @@ private:
     explicit VToolSpline(const VToolSplineInitData &initData, QGraphicsItem *parent = nullptr);
 
     auto IsMovable() const -> bool;
-    void SetSplineAttributes(QDomElement &domElement, const VSpline &spl);
 
     void UndoCommandMove(const VSpline &oldSpl, const VSpline &newSpl);
 };

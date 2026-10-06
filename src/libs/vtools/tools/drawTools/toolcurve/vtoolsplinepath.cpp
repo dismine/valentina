@@ -373,8 +373,10 @@ void VToolSplinePath::UpdateControlPoints(const VSpline &spl, QSharedPointer<VSp
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VToolSplinePath::SetSplinePathAttributes(QDomElement &domElement, const VSplinePath &path)
+void VToolSplinePath::SetSplinePathAttributes(VAbstractPattern *doc, QDomElement &domElement, const VSplinePath &path)
 {
+    SCASSERT(doc != nullptr)
+
     doc->SetAttribute(domElement, AttrType, ToolType);
     doc->SetAttributeOrRemoveIf<quint32>(domElement, AttrDuplicate, path.GetDuplicate(),
                                          [](quint32 duplicate) noexcept { return duplicate == 0; });
@@ -588,7 +590,7 @@ void VToolSplinePath::SaveDialog(QDomElement &domElement, QList<quint32> &oldDep
     doc->SetAttributeOrRemoveIf<QString>(domElement, AttrNotes, dialogTool->GetNotes(),
                                          [](const QString &notes) noexcept { return notes.isEmpty(); });
 
-    SetSplinePathAttributes(domElement, splPath);
+    SetSplinePathAttributes(doc, domElement, splPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -599,7 +601,7 @@ void VToolSplinePath::SaveOptions(QDomElement &tag, QSharedPointer<VGObject> &ob
     QSharedPointer<VSplinePath> const splPath = qSharedPointerDynamicCast<VSplinePath>(obj);
     SCASSERT(splPath.isNull() == false)
 
-    SetSplinePathAttributes(tag, *splPath);
+    SetSplinePathAttributes(doc, tag, *splPath);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

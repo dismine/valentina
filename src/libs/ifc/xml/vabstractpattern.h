@@ -175,6 +175,10 @@ public:
     static auto ParsePieceNodes(const QDomElement &domElement) -> VPiecePath;
     static auto ParsePieceCSARecords(const QDomElement &domElement) -> QVector<CustomSARecord>;
     static auto ParsePieceInternalPaths(const QDomElement &domElement) -> QVector<quint32>;
+    // A curve is in the old format until it has the new attributes, whatever its type says. Older versions changed
+    // only the type when they converted a curve.
+    static auto IsOldFormatSpline(const QDomElement &domElement) -> bool;
+    static auto IsOldFormatSplinePath(const QDomElement &domElement) -> bool;
     static auto ParsePiecePointRecords(const QDomElement &domElement) -> QVector<quint32>;
 
     void AddToolOnRemove(VDataTool *tool);

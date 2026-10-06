@@ -74,6 +74,7 @@ public:
     static const QString ToolType;
     static const QString OldToolType;
     static void UpdatePathPoints(VAbstractPattern *doc, QDomElement &element, const VSplinePath &path);
+    static void SetSplinePathAttributes(VAbstractPattern *doc, QDomElement &domElement, const VSplinePath &path);
     auto type() const -> int override { return Type; }
     enum
     {
@@ -139,7 +140,6 @@ private:
     auto IsMovable(int index) const -> bool;
     static void AddPathPoint(VAbstractPattern *doc, QDomElement &domElement, const VSplinePoint &splPoint);
     void UpdateControlPoints(const VSpline &spl, QSharedPointer<VSplinePath> &splPath, qint32 indexSpline) const;
-    void SetSplinePathAttributes(QDomElement &domElement, const VSplinePath &path);
 
     void UndoCommandMove(const VSplinePath &oldPath, const VSplinePath &newPath);
 

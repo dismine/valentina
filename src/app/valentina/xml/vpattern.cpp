@@ -2827,10 +2827,11 @@ void VPattern::ParseOldToolSpline(VMainGraphicsScene *scene, QDomElement &domEle
         }
         spline->SetColor(color);
 
-        VToolSpline::Create(initData, spline);
+        // Convert to newer format. The type alone is not enough: the new format keeps the lengths of the control
+        // handles instead of the coefficients, and without them the curve becomes a straight line.
+        VToolSpline::SetSplineAttributes(this, domElement, *spline);
 
-        // Convert to newer format
-        SetAttribute(domElement, AttrType, VToolSpline::ToolType);
+        VToolSpline::Create(initData, spline);
     }
     catch (const VExceptionBadId &e)
     {
@@ -3019,10 +3020,18 @@ void VPattern::ParseOldToolSplinePath(VMainGraphicsScene *scene, QDomElement &do
         path->SetColor(color);
         path->SetApproximationScale(approximationScale);
 
-        VToolSplinePath::Create(initData, path);
+        // Convert to newer format. The type alone is not enough, see ParseOldToolSpline(). A path with too few points
+        // is empty; keep its points as they are.
+        if (path->CountPoints() > 0)
+        {
+            VToolSplinePath::SetSplinePathAttributes(this, domElement, *path);
+        }
+        else
+        {
+            SetAttribute(domElement, AttrType, VToolSplinePath::ToolType);
+        }
 
-        // Convert to newer format
-        SetAttribute(domElement, AttrType, VToolSplinePath::ToolType);
+        VToolSplinePath::Create(initData, path);
     }
     catch (const VExceptionBadId &e)
     {
@@ -3971,7 +3980,22 @@ void VPattern::ParseSplineElement(VMainGraphicsScene *scene, QDomElement &domEle
                                       VNodeSplinePath::ToolType,        /*5*/
                                       VToolCubicBezier::ToolType,       /*6*/
                                       VToolCubicBezierPath::ToolType}); /*7*/
-    switch (splines.indexOf(type))
+    auto index = splines.indexOf(type);
+
+    // Older versions converted a curve by changing only its type and saved the file with the old attributes left. Read
+    // such a curve as the old one: that restores its shape and writes the new attributes.
+    if (index == 1 && IsOldFormatSpline(domElement))
+    {
+        qCDebug(vXML, "Spline of the new type has the old attributes. Convert.");
+        index = 0;
+    }
+    else if (index == 3 && IsOldFormatSplinePath(domElement))
+    {
+        qCDebug(vXML, "Spline path of the new type has the old attributes. Convert.");
+        index = 2;
+    }
+
+    switch (index)
     {
         case 0: // VToolSpline::OldToolType
             qCDebug(vXML, "VOldToolSpline.");

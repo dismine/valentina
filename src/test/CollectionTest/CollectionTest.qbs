@@ -100,7 +100,9 @@ VTestApp {
             "issue_256_wrong.vit",
             "issue_256_correct.vst",
             "wrong_formula.val",
-            "test_pedantic.val"
+            "test_pedantic.val",
+            "spline_old_format.val",
+            "spline_damaged_format.val"
         ]
         fileTags: ["tst_valentina_files"]
     }
