@@ -181,6 +181,17 @@ private slots:
     void DeployBufferVisible();
     void DeployBufferWidth();
 
+    void AddOffsetLine();
+    void RemoveOffsetLine();
+    void OffsetLineChanged(int row);
+    void EvalOffsetLineWidth();
+    void EvalOffsetLineVisible();
+    void FXOffsetLineWidth();
+    void FXOffsetLineVisible();
+    void UpdateCurrentOffsetLine();
+    void CurrentOffsetLineChanged(QListWidgetItem *current, QListWidgetItem *previous);
+    void UpdateOffsetLinesTabState();
+
     void GrainlinePinPointChanged();
     void DetailPinPointChanged();
     void PatternPinPointChanged();
@@ -236,6 +247,8 @@ private:
     bool flagFormulaFoldWidth{true};
     bool flagFormulaBufferVisible{true};
     bool flagFormulaBufferWidth{true};
+    bool flagFormulaOffsetLineWidth{true};
+    bool flagFormulaOffsetLineVisible{true};
     bool flagFormulaFoldCenter{true};
     bool flagMainPathIsValid{true};
     bool flagName{true}; // We have default name of piece.
@@ -288,6 +301,7 @@ private:
     QTimer *m_timerFoldCenter{nullptr};
     QTimer *m_timerBufferVisible{nullptr};
     QTimer *m_timerBufferWidth{nullptr};
+    QTimer *m_timerOffsetLine{nullptr};
     qreal m_saWidth{0};
     qreal m_bufferVisible{0};
     qreal m_bufferWidth{0};
@@ -350,6 +364,14 @@ private:
     void InitPlaceLabelsTab();
     void InitFoldLineTab();
     void InitBufferTab();
+    void InitOffsetLinesTab();
+    void InitOffsetLinePoints();
+    auto OffsetLineName(const VPieceOffsetLine &line) const -> QString;
+    auto OffsetLineText(int row, const VPieceOffsetLine &line) const -> QString;
+    void RefreshOffsetLineTexts();
+    void WriteOffsetLine(QListWidgetItem *item);
+    void FlushOffsetLine(QListWidgetItem *item);
+    void UpdateOffsetLineNotMirroredState();
     void InitMaterialComboBoxes();
     void SetBufferFormula(QPlainTextEdit *edit, QPushButton *growButton, int &baseHeight, const QString &formula);
     void InitAllPinComboboxes();
@@ -436,7 +458,8 @@ inline auto DialogSeamAllowance::IsValid() const -> bool
            && (flagGFormulas || flagGPin) && flagDLAngle && (flagDLFormulas || flagDPin) && flagPLAngle
            && (flagPLFormulas || flagPPin) && flagFormulaPassmarkLength && flagFormulaPassmarkWidth
            && flagFormulaPassmarkAngle && flagMirrorLineIsValid && flagFormulaFoldHeight && flagFormulaFoldWidth
-           && flagFormulaFoldCenter && flagFormulaPassmarkVisible && flagFormulaBufferVisible && flagFormulaBufferWidth;
+           && flagFormulaFoldCenter && flagFormulaPassmarkVisible && flagFormulaBufferVisible && flagFormulaBufferWidth
+           && flagFormulaOffsetLineWidth && flagFormulaOffsetLineVisible;
 }
 
 #endif // DIALOGSEAMALLOWANCE_H

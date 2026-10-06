@@ -251,6 +251,33 @@ void TST_VAbstractPattern::ListExpressionsIncludesBufferFormulas()
     QVERIFY2(formulas.contains(u"#buffer"_s), qUtf8Printable(formulas.join(", "_L1)));
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+// Last known point names are optional hints; a record without them parses as before.
+void TST_VAbstractPattern::ParsePieceOffsetLinesReadsNames()
+{
+    TestDoc doc;
+    QVERIFY(doc.setContent(QByteArray(R"(
+        <offsetLines>
+            <offsetLine start="6" end="7" startName="A1" endName="A2" width="0.3" visible="#show" typeLine="dashLine"
+                        notMirrored="true"/>
+            <offsetLine width="1"/>
+        </offsetLines>)")));
+
+    const QVector<VPieceOffsetLine> lines = VAbstractPattern::ParsePieceOffsetLines(doc.documentElement());
+    QCOMPARE(lines.size(), 2);
+
+    QCOMPARE(lines.at(0).start, 6U);
+    QCOMPARE(lines.at(0).end, 7U);
+    QCOMPARE(lines.at(0).startName, u"A1"_s);
+    QCOMPARE(lines.at(0).endName, u"A2"_s);
+    QCOMPARE(lines.at(0).formulaVisible, u"#show"_s);
+    QVERIFY(lines.at(0).notMirrored);
+
+    QVERIFY(lines.at(1).IsFull());
+    QVERIFY(lines.at(1).startName.isEmpty());
+    QVERIFY(lines.at(1).endName.isEmpty());
+}
+
 namespace
 {
 //---------------------------------------------------------------------------------------------------------------------

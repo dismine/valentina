@@ -72,6 +72,7 @@ void SavePieceOptions::undo()
     VToolSeamAllowance::AddPins(Doc(), domElement, m_oldDet.GetPins());
     VToolSeamAllowance::AddPlaceLabels(Doc(), domElement, m_oldDet.GetPlaceLabels());
     VToolSeamAllowance::AddMirrorLine(Doc(), domElement, m_oldDet);
+    VToolSeamAllowance::AddOffsetLines(Doc(), domElement, m_oldDet.GetOffsetLines());
     qCDebug(vUndo, "Undo: dom element for id = %u rewritten.", ElementId());
 
     VPatternGraph *patternGraph = Doc()->PatternGraph();
@@ -122,6 +123,7 @@ void SavePieceOptions::redo()
     VToolSeamAllowance::AddPins(Doc(), domElement, m_newDet.GetPins());
     VToolSeamAllowance::AddPlaceLabels(Doc(), domElement, m_newDet.GetPlaceLabels());
     VToolSeamAllowance::AddMirrorLine(Doc(), domElement, m_newDet);
+    VToolSeamAllowance::AddOffsetLines(Doc(), domElement, m_newDet.GetOffsetLines());
     qCDebug(vUndo, "Redo: dom element for id = %u rewritten.", ElementId());
 
     VPatternGraph *patternGraph = Doc()->PatternGraph();

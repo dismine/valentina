@@ -693,6 +693,7 @@ auto VToolSeamAllowance::Duplicate(VToolSeamAllowanceInitData &initData) -> VToo
     QMap<quint32, quint32> replacements;
     dupDetail.GetPath().SetNodes(DuplicateNodes(initData.detail.GetPath(), initData, replacements));
     dupDetail.SetCustomSARecords(DuplicateCustomSARecords(initData.detail.GetCustomSARecords(), initData, replacements));
+    dupDetail.RemapOffsetLineNodes(replacements);
     dupDetail.SetInternalPaths(DuplicateInternalPaths(initData.detail.GetInternalPaths(), initData));
     dupDetail.SetPlaceLabels(DuplicatePlaceLabels(initData.detail.GetPlaceLabels(), initData));
     dupDetail.SetUUID(QUuid::createUuid());
@@ -731,6 +732,12 @@ void VToolSeamAllowance::AddPieceDependencies(quint32 id,
     doc->FindFormulaDependencies(piece.GetFormulaSAWidth(), id, variables);
     doc->FindFormulaDependencies(piece.GetFormulaBufferVisible(), id, variables);
     doc->FindFormulaDependencies(piece.GetFormulaBufferWidth(), id, variables);
+
+    for (const auto &line : piece.GetOffsetLines())
+    {
+        doc->FindFormulaDependencies(line.formulaWidth, id, variables);
+        doc->FindFormulaDependencies(line.formulaVisible, id, variables);
+    }
 
     if (piece.IsManualFoldHeight())
     {
@@ -979,6 +986,54 @@ void VToolSeamAllowance::AddCSARecords(VAbstractPattern *doc,
         }
         domElement.appendChild(csaRecordsElement);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VToolSeamAllowance::AddOffsetLines(VAbstractPattern *doc,
+                                        QDomElement &domElement,
+                                        const QVector<VPieceOffsetLine> &lines)
+{
+    if (lines.isEmpty())
+    {
+        return;
+    }
+
+    QDomElement linesElement = doc->createElement(VAbstractPattern::TagOffsetLines);
+    for (const auto &line : lines)
+    {
+        QDomElement element = doc->createElement(VAbstractPattern::TagOffsetLine);
+        doc->SetAttributeOrRemoveIf<quint32>(element,
+                                             VAbstractPattern::AttrStart,
+                                             line.start,
+                                             [](quint32 id) noexcept { return id == NULL_ID; });
+        doc->SetAttributeOrRemoveIf<quint32>(element,
+                                             VAbstractPattern::AttrEnd,
+                                             line.end,
+                                             [](quint32 id) noexcept { return id == NULL_ID; });
+        doc->SetAttribute(element, AttrWidth, line.formulaWidth);
+        doc->SetAttributeOrRemoveIf<QString>(element,
+                                             VAbstractPattern::AttrVisible,
+                                             line.formulaVisible,
+                                             [](const QString &formula) noexcept { return formula == QChar('1'); });
+        doc->SetAttribute(element, AttrTypeLine, PenStyleToLineStyle(line.penStyle));
+        doc->SetAttributeOrRemoveIf<bool>(element,
+                                          AttrNotMirrored,
+                                          line.notMirrored,
+                                          [](bool value) noexcept { return not value; });
+        if (not line.IsFull())
+        {
+            doc->SetAttributeOrRemoveIf<QString>(element,
+                                                 VAbstractPattern::AttrStartName,
+                                                 line.startName,
+                                                 [](const QString &name) noexcept { return name.isEmpty(); });
+            doc->SetAttributeOrRemoveIf<QString>(element,
+                                                 VAbstractPattern::AttrEndName,
+                                                 line.endName,
+                                                 [](const QString &name) noexcept { return name.isEmpty(); });
+        }
+        linesElement.appendChild(element);
+    }
+    domElement.appendChild(linesElement);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1709,6 +1764,13 @@ void VToolSeamAllowance::RefreshScale()
     bufferPen.setStyle(Qt::DashLine);
     m_buffer->setPen(bufferPen);
 
+    for (auto *item : std::as_const(m_offsetLines))
+    {
+        QPen linePen = toolPen;
+        linePen.setStyle(item->pen().style());
+        item->setPen(linePen);
+    }
+
     m_passmarks->setPen(toolPen);
     m_placeLabels->setPen(toolPen);
     m_foldLineMark->setPen(toolPen);
@@ -1807,6 +1869,7 @@ void VToolSeamAllowance::AddToFile()
     AddPins(doc, domElement, piece.GetPins());
     AddPlaceLabels(doc, domElement, piece.GetPlaceLabels());
     AddMirrorLine(doc, domElement, piece);
+    AddOffsetLines(doc, domElement, piece.GetOffsetLines());
 
     VAbstractApplication::VApp()->getUndoStack()->push(
         new AddPiece(domElement, doc, VAbstractTool::data, m_sceneDetails, m_drawName));
@@ -1843,6 +1906,7 @@ void VToolSeamAllowance::RefreshDataInFile()
         AddPins(doc, domElement, piece.GetPins());
         AddPlaceLabels(doc, domElement, piece.GetPlaceLabels());
         AddMirrorLine(doc, domElement, piece);
+        AddOffsetLines(doc, domElement, piece.GetOffsetLines());
     }
 }
 
@@ -2343,6 +2407,26 @@ auto VToolSeamAllowance::ComputePieceGeometry(bool combineTogether, bool pieceSh
         geom.bufferProblems = detail.BufferProblems(containerData);
     }
 
+    const QLineF mirrorLine = detail.SeamMirrorLine(containerData);
+    for (const auto &line : detail.GetOffsetLines())
+    {
+        QVector<QPointF> points;
+        CastTo(detail.OffsetLinePoints(containerData, line), points);
+        if (points.size() < 2)
+        {
+            continue;
+        }
+
+        QPainterPath path;
+        path.addPolygon(QPolygonF(points));
+        if (not mirrorLine.isNull() && detail.IsShowFullPiece() && not line.notMirrored)
+        {
+            path.addPolygon(QPolygonF(VAbstractPiece::MirrorPath(points, mirrorLine)));
+        }
+        geom.offsetLines.append({line.penStyle, path});
+    }
+    geom.offsetLineProblems = detail.OffsetLineProblems(containerData);
+
     geom.valid = true;
     return geom;
 }
@@ -2409,6 +2493,26 @@ void VToolSeamAllowance::ApplyPieceGeometry(const VToolSeamAllowanceGeometry &ge
     if (not geom.buffer.isEmpty())
     {
         m_pieceBoundingRect = m_pieceBoundingRect.united(geom.buffer.controlPointRect());
+    }
+
+    for (const QString &problem : geom.offsetLineProblems)
+    {
+        VAbstractApplication::VApp()->IsPedantic()
+            ? throw VException(problem)
+            : qWarning() << VAbstractValApplication::warningMessageSignature + problem;
+    }
+
+    qDeleteAll(m_offsetLines);
+    m_offsetLines.clear();
+    for (const auto &line : geom.offsetLines) // QPair: no structured bindings on Qt 5.15
+    {
+        auto *item = new QGraphicsPathItem(this);
+        QPen linePen = pen();
+        linePen.setStyle(line.first);
+        item->setPen(linePen);
+        item->setPath(line.second);
+        m_offsetLines.append(item);
+        m_pieceBoundingRect = m_pieceBoundingRect.united(line.second.controlPointRect());
     }
 
     m_mirrorLine->setPath(geom.mirrorLine);

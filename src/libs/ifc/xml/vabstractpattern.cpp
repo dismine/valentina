@@ -112,7 +112,9 @@ const QString VAbstractPattern::TagBackgroundImages = QStringLiteral("backgroudI
 const QString VAbstractPattern::TagBackgroundImage = QStringLiteral("backgroudImage");
 const QString VAbstractPattern::TagPieceLabel = QStringLiteral("pieceLabel");
 const QString VAbstractPattern::TagOffset = QStringLiteral("offset");
-const QString VAbstractPattern::TagMirrorLine = QStringLiteral("mirrorLine"); // NOLINT(cert-err58-cpp)
+const QString VAbstractPattern::TagMirrorLine = QStringLiteral("mirrorLine");   // NOLINT(cert-err58-cpp)
+const QString VAbstractPattern::TagOffsetLines = QStringLiteral("offsetLines"); // NOLINT(cert-err58-cpp)
+const QString VAbstractPattern::TagOffsetLine = QStringLiteral("offsetLine");   // NOLINT(cert-err58-cpp)
 
 const QString VAbstractPattern::AttrName = QStringLiteral("name");
 const QString VAbstractPattern::AttrEnabled = QStringLiteral("enabled");
@@ -150,6 +152,8 @@ const QString VAbstractPattern::AttrSAAfter = QStringLiteral("after");
 const QString VAbstractPattern::AttrStart = QStringLiteral("start");
 const QString VAbstractPattern::AttrPath = QStringLiteral("path");
 const QString VAbstractPattern::AttrEnd = QStringLiteral("end");
+const QString VAbstractPattern::AttrStartName = QStringLiteral("startName");
+const QString VAbstractPattern::AttrEndName = QStringLiteral("endName");
 const QString VAbstractPattern::AttrIncludeAs = QStringLiteral("includeAs");
 const QString VAbstractPattern::AttrRotation = QStringLiteral("rotation");
 const QString VAbstractPattern::AttrNumber = QStringLiteral("number");
@@ -589,6 +593,29 @@ auto VAbstractPattern::ParsePieceInternalPaths(const QDomElement &domElement) ->
         }
     }
     return records;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VAbstractPattern::ParsePieceOffsetLines(const QDomElement &domElement) -> QVector<VPieceOffsetLine>
+{
+    const QDomNodeList nodeList = domElement.childNodes();
+    QVector<VPieceOffsetLine> lines;
+    lines.reserve(nodeList.size());
+    QDOM_LOOP(nodeList, i)
+    {
+        if (const QDomElement element = QDOM_ELEMENT(nodeList, i).toElement(); not element.isNull())
+        {
+            lines.append({.start = GetParametrUInt(element, AttrStart, NULL_ID_STR),
+                          .end = GetParametrUInt(element, AttrEnd, NULL_ID_STR),
+                          .formulaWidth = GetParametrString(element, AttrWidth, QChar('0')),
+                          .formulaVisible = GetParametrString(element, AttrVisible, QChar('1')),
+                          .penStyle = LineStyleToPenStyle(GetParametrString(element, AttrTypeLine, TypeLineLine)),
+                          .notMirrored = GetParametrBool(element, AttrNotMirrored, falseStr),
+                          .startName = GetParametrEmptyString(element, AttrStartName),
+                          .endName = GetParametrEmptyString(element, AttrEndName)});
+        }
+    }
+    return lines;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1960,6 +1987,16 @@ auto VAbstractPattern::ListPieceExpressions() const -> QVector<VFormulaField>
         ReadExpressionAttribute(expressions, dom, AttrWidth);
         ReadExpressionAttribute(expressions, dom, AttrBufferVisible);
         ReadExpressionAttribute(expressions, dom, AttrBufferWidth);
+
+        const QDomNodeList offsetLines = dom.firstChildElement(TagOffsetLines).childNodes();
+        QDOM_LOOP(offsetLines, j)
+        {
+            if (const QDomElement line = QDOM_ELEMENT(offsetLines, j).toElement(); not line.isNull())
+            {
+                ReadExpressionAttribute(expressions, line, AttrWidth);
+                ReadExpressionAttribute(expressions, line, AttrVisible);
+            }
+        }
 
         expressions << ListNodesExpressions(dom.firstChildElement(TagNodes));
         expressions << ListGrainlineExpressions(dom.firstChildElement(TagGrainline));

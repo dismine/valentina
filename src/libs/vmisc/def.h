@@ -820,6 +820,30 @@ private:
 
 Q_DECLARE_METATYPE(CustomSARecord)
 Q_DECLARE_TYPEINFO(CustomSARecord, Q_MOVABLE_TYPE); // NOLINT
+
+/**
+ * @brief The VPieceOffsetLine struct describes a line offset from the seam line inside the seam allowance.
+ *
+ * A record with no start or end node is a full (closed) line, otherwise only the segment from start to end.
+ */
+struct VPieceOffsetLine
+{
+    quint32 start{0}; // 0 (NULL_ID) - full line
+    quint32 end{0};   // 0 (NULL_ID) - full line
+    QString formulaWidth{'0'};
+    QString formulaVisible{'1'};
+    Qt::PenStyle penStyle{Qt::SolidLine};
+    bool notMirrored{false};
+    // Last known names of the start and end points. Only a hint to tell the user which point is meant when the point
+    // is gone; the live name always wins.
+    QString startName{};
+    QString endName{};
+
+    auto IsFull() const -> bool { return start == 0 || end == 0; }
+};
+
+Q_DECLARE_METATYPE(VPieceOffsetLine)
+Q_DECLARE_TYPEINFO(VPieceOffsetLine, Q_MOVABLE_TYPE); // NOLINT
 /****************************************************************************
 ** This file is derived from code bearing the following notice:
 ** The sole author of this file, Adam Higerd, has explicitly disclaimed all

@@ -44,6 +44,7 @@ private slots:
     void OpenPatterns();
     void ExportMode_data() const;
     void ExportMode();
+    void ExportOffsetLinesASTM();
     void ExportSplineKeepsCurve_data() const;
     void ExportSplineKeepsCurve();
     void TestMode_data() const;

@@ -69,6 +69,8 @@ struct VToolSeamAllowanceGeometry
     QPainterPath placeLabels{};
     QPainterPath buffer{};
     QStringList bufferProblems{};
+    QVector<QPair<Qt::PenStyle, QPainterPath>> offsetLines{};
+    QStringList offsetLineProblems{};
     QString pieceName{};
 };
 
@@ -136,6 +138,7 @@ public:
     static void AddPatternInfo(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddGrainline(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
     static void AddMirrorLine(VAbstractPattern *doc, QDomElement &domElement, const VPiece &piece);
+    static void AddOffsetLines(VAbstractPattern *doc, QDomElement &domElement, const QVector<VPieceOffsetLine> &lines);
 
     void SetName(const QString &name);
     void Move(qreal x, qreal y);
@@ -220,6 +223,7 @@ private:
 
     VNoBrushScalePathItem *m_seamAllowance;
     QGraphicsPathItem *m_buffer;
+    QVector<QGraphicsPathItem *> m_offsetLines{};
     VTextGraphicsItem *m_dataLabel;
     VTextGraphicsItem *m_patternInfo;
     VGrainlineItem *m_grainLine;

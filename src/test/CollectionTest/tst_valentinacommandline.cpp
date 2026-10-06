@@ -118,6 +118,12 @@ void TST_ValentinaCommandLine::OpenPatterns_data() const
 
     QTest::newRow("Pattern with a zero width buffer") << "buffer_zero_width.val"
                                                       << "--test;;--pedantic" << V_EX_DATAERR;
+
+    QTest::newRow("Pattern with offset lines") << "offset_lines.val"
+                                               << "--test;;--pedantic" << V_EX_OK;
+
+    QTest::newRow("Pattern with a too wide offset line") << "offset_lines_too_wide.val"
+                                                         << "--test;;--pedantic" << V_EX_DATAERR;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -174,6 +180,49 @@ void TST_ValentinaCommandLine::ExportMode()
     const int exit = Run(exitCode, ValentinaPath(), arg, error);
 
     QVERIFY2(exit == exitCode, qUtf8Printable(error.right(350)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Offset lines reach DXF ASTM as internal lines: layer 8, quality validation on layer 85, NM for the not mirrored one.
+void TST_ValentinaCommandLine::ExportOffsetLinesASTM()
+{
+    const QString tmp = QCoreApplication::applicationDirPath() + QDir::separator() + *tmpTestFolder;
+    const QStringList arg{tmp + QDir::separator() + "offset_lines.val"_L1,
+                          "-d"_L1,
+                          tmp,
+                          "-b"_L1,
+                          "offset_lines"_L1,
+                          "-f"_L1,
+                          "25"_L1, // DXF_ASTM
+                          "--exportOnlyDetails"_L1,
+                          "--pedantic"_L1};
+    QString error;
+    const int exit = Run(V_EX_OK, ValentinaPath(), arg, error);
+    QVERIFY2(exit == V_EX_OK, qUtf8Printable(error.right(350)));
+
+    const QStringList files = QDir(tmp).entryList({"offset_lines*.dxf"_L1}, QDir::Files);
+    QVERIFY2(not files.isEmpty(), "No DXF produced");
+
+    QFile file(tmp + QDir::separator() + files.constFirst());
+    QVERIFY(file.open(QIODevice::ReadOnly | QIODevice::Text));
+    QStringList lines;
+    const QStringList rawLines = QString::fromLatin1(file.readAll()).split('\n');
+    lines.reserve(rawLines.size());
+    for (const QString &line : rawLines)
+    {
+        lines.append(line.trimmed());
+    }
+
+    int layer85 = 0;
+    for (int i = 0; i + 1 < lines.size(); ++i)
+    {
+        if (lines.at(i) == "8"_L1 && lines.at(i + 1) == "85"_L1)
+        {
+            ++layer85;
+        }
+    }
+    QVERIFY2(layer85 >= 2, qUtf8Printable(u"layer 85 entities: %1"_s.arg(layer85))); // one per offset line
+    QVERIFY(lines.contains("NM"_L1));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

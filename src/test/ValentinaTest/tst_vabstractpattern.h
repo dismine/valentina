@@ -47,6 +47,7 @@ private slots:
     void MaxRecordedIdCountsOrphanedNodes();
     void MaxRecordedIdOnEmptyDocumentIsZero();
     void ListExpressionsIncludesBufferFormulas();
+    void ParsePieceOffsetLinesReadsNames();
     // Old patterns: curves must keep their shape when converted to the new attributes
     void IsOldFormatSplineDetection();
     void IsOldFormatSplinePathDetection();

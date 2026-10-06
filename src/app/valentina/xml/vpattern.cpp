@@ -1206,7 +1206,8 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
                            VToolSeamAllowance::TagIPaths,
                            VToolSeamAllowance::TagPins,
                            VToolSeamAllowance::TagPlaceLabels,
-                           VAbstractPattern::TagMirrorLine};
+                           VAbstractPattern::TagMirrorLine,
+                           VAbstractPattern::TagOffsetLines};
 
     QFuture<QVector<VPieceNode>> futurePathV1;
     QFuture<VPiecePath> futurePathV2;
@@ -1273,6 +1274,9 @@ void VPattern::ParseDetailInternals(const QDomElement &domElement, VPiece &detai
                     break;
                 case 8: // VToolSeamAllowance::TagMirrorLine
                     futureMirrorLine = QtConcurrent::run(&ParsePieceMirrorLine, element);
+                    break;
+                case 9: // VAbstractPattern::TagOffsetLines
+                    detail.SetOffsetLines(ParsePieceOffsetLines(element));
                     break;
                 default:
                     break;

@@ -125,6 +125,21 @@ public:
     auto GetInternalPaths() -> QVector<quint32> &;
     void SetInternalPaths(const QVector<quint32> &iPaths);
 
+    auto GetOffsetLines() const -> QVector<VPieceOffsetLine>;
+    void SetOffsetLines(const QVector<VPieceOffsetLine> &lines);
+    auto IsOffsetLineVisible(const VContainer *data, const VPieceOffsetLine &line) const -> bool;
+    auto OffsetLineWidth(const VContainer *data, const VPieceOffsetLine &line) const -> qreal;
+    auto OffsetLinePoints(const VContainer *data, const VPieceOffsetLine &line) const -> QVector<VLayoutPoint>;
+    auto OffsetLineProblems(const VContainer *data) const -> QStringList;
+    void RemapOffsetLineNodes(const QMap<quint32, quint32> &replacements);
+    static auto OffsetPointName(const VContainer *data,
+                                const QVector<VPieceNode> &path,
+                                quint32 id,
+                                const QString &lastKnownName) -> QString;
+    static auto OffsetLineName(const VContainer *data, const QVector<VPieceNode> &path, const VPieceOffsetLine &line)
+        -> QString;
+    void RefreshOffsetLineNames(const VContainer *data);
+
     auto GetCustomSARecords() const -> QVector<CustomSARecord>;
     auto GetCustomSARecords() -> QVector<CustomSARecord> &;
     void SetCustomSARecords(const QVector<CustomSARecord> &records);
@@ -230,6 +245,11 @@ private:
 
     auto BuildSeamAllowancePoints(const VContainer *data, const QVector<VPieceNode> &unitedPath, qreal width) const
         -> QVector<VSAPoint>;
+    auto OffsetLineContour(const VContainer *data, qreal width) const -> QVector<VLayoutPoint>;
+    auto IsOffsetLineNodeValid(quint32 id) const -> bool;
+    auto PartialOffsetLine(const VContainer *data,
+                           const VPieceOffsetLine &line,
+                           const QVector<VLayoutPoint> &contour) const -> QVector<VLayoutPoint>;
     void ProcessNode(const VContainer *data,
                      const QVector<VPieceNode> &unitedPath,
                      const VPieceNode &node,

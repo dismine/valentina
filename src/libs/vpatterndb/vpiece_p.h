@@ -94,6 +94,8 @@ public:
     QString m_formulaBufferWidth{'0'};   // NOLINT(misc-non-private-member-variables-in-classes)
     qreal m_bufferWidth{0};              // NOLINT(misc-non-private-member-variables-in-classes)
 
+    QVector<VPieceOffsetLine> m_offsetLines{}; // NOLINT(misc-non-private-member-variables-in-classes)
+
 private:
     Q_DISABLE_ASSIGN_MOVE(VPieceData) // NOLINT
 };

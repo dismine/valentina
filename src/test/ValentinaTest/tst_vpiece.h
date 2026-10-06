@@ -51,6 +51,32 @@ private slots:
     void AsBufferStripsExtras();
     void PieceMaterialSelection();
     void PieceMaterialPlaceholder();
+    void OffsetLineFull();
+    void OffsetLineHiddenWithoutSeamAllowance();
+    void OffsetLineInvisible();
+    void OffsetLineBadFormula();
+    void OffsetLinePartial();
+    void OffsetLinePartialDirection();
+    void OffsetLinePartialConcaveEnd();
+    void OffsetLineMirrored();
+    void MiniatureDoesNotFillInternalPaths();
+    void OffsetLinePartialEndsOnMirrorLine();
+    void OffsetLineProblemsValid();
+    void OffsetLineTooWide();
+    void OffsetLineZeroWidth();
+    void OffsetLineDuplicate();
+    void OffsetLineMissingNode();
+    void OffsetLineSameNodes();
+    void OffsetLineExcludedNode();
+    void OffsetLineEmpty();
+    void OffsetLineAcrossFold();
+    void OffsetLineProblemsSkipped();
+    void OffsetLineInvalidNodesNoPoints();
+    void OffsetLineRemapNodes();
+    void OffsetLineProblemNamesLine();
+    void OffsetLineNameMarksMissingPoints();
+    void OffsetLineNameFollowsRename();
+    void OffsetLineRefreshNames();
 
 private:
     Q_DISABLE_COPY_MOVE(TST_VPiece) // NOLINT

@@ -160,6 +160,7 @@ public:
     static auto ParsePieceNodes(const QDomElement &domElement) -> VPiecePath;
     static auto ParsePieceCSARecords(const QDomElement &domElement) -> QVector<CustomSARecord>;
     static auto ParsePieceInternalPaths(const QDomElement &domElement) -> QVector<quint32>;
+    static auto ParsePieceOffsetLines(const QDomElement &domElement) -> QVector<VPieceOffsetLine>;
     // A curve is in the old format until it has the new attributes, whatever its type says. Older versions changed
     // only the type when they converted a curve.
     static auto IsOldFormatSpline(const QDomElement &domElement) -> bool;
@@ -333,6 +334,8 @@ public:
     static const QString TagPieceLabel;
     static const QString TagOffset;
     static const QString TagMirrorLine;
+    static const QString TagOffsetLines;
+    static const QString TagOffsetLine;
 
     static const QString AttrName;
     static const QString AttrEnabled;
@@ -370,6 +373,8 @@ public:
     static const QString AttrStart;
     static const QString AttrPath;
     static const QString AttrEnd;
+    static const QString AttrStartName;
+    static const QString AttrEndName;
     static const QString AttrIncludeAs;
     static const QString AttrRotation;
     static const QString AttrNumber;

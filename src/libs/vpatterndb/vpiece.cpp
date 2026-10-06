@@ -39,10 +39,12 @@
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vpatterndb/variables/vpiecearea.h"
 #include "../vpatterndb/vpiecenode.h"
+#include "calculator.h"
 #include "vcontainer.h"
 #include "vgeometrydef.h"
 #include "vpassmark.h"
 #include "vpiece_p.h"
+#include "vtranslatevars.h"
 
 #include <QDebug>
 #include <QJsonArray>
@@ -109,6 +111,195 @@ void AddRegularPoint(const VContainer *data,
     }
 
     pointsEkv.append(ekvPoint);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto EvalOffsetLineFormula(const VContainer *data, const QString &formula, qreal fallback) -> qreal
+{
+    try
+    {
+        Calculator cal;
+        const qreal result = cal.EvalFormula(data->DataVariables(), formula);
+        return qIsInf(result) || qIsNaN(result) ? fallback : result;
+    }
+    catch (qmu::QmuParserError &)
+    {
+        return fallback;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ClosedPolyline(QVector<QPointF> points) -> QVector<QPointF>
+{
+    if (not points.isEmpty() && not VFuzzyComparePoints(points.constFirst(), points.constLast()))
+    {
+        points.append(points.constFirst());
+    }
+    return points;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ClosestPointOnPolyline(const QVector<QPointF> &polyline, const QPointF &p) -> QPointF
+{
+    QPointF closest = polyline.constFirst();
+    qreal best = QLineF(p, closest).length();
+    for (int i = 0; i < polyline.size() - 1; ++i)
+    {
+        const QLineF segment(polyline.at(i), polyline.at(i + 1));
+        QPointF candidate = VGObject::ClosestPoint(segment, p);
+        if (not IsPointOnLineSegment(candidate, segment.p1(), segment.p2()))
+        {
+            candidate = QLineF(p, segment.p1()).length() < QLineF(p, segment.p2()).length() ? segment.p1()
+                                                                                            : segment.p2();
+        }
+
+        if (const qreal distance = QLineF(p, candidate).length(); distance < best)
+        {
+            best = distance;
+            closest = candidate;
+        }
+    }
+    return closest;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// The point of the offset line opposite node p: where the offset of the edge at p starts (or ends). At a concave
+// corner that point is cut away, so take the closest point of the offset line. The outward side is the one closer to
+// the offset line, which keeps this independent of the path direction.
+auto OffsetAnchor(const QVector<QPointF> &offset, const QPointF &p, const QLineF &edge, qreal width) -> QPointF
+{
+    QLineF normal = edge.normalVector();
+    normal.setLength(width);
+    const QPointF side1 = p + (normal.p2() - normal.p1());
+    const QPointF side2 = p - (normal.p2() - normal.p1());
+    const QPointF anchor1 = ClosestPointOnPolyline(offset, side1);
+    const QPointF anchor2 = ClosestPointOnPolyline(offset, side2);
+    return QLineF(side1, anchor1).length() <= QLineF(side2, anchor2).length() ? anchor1 : anchor2;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto NearestIntersection(const QVector<QPointF> &polyline, const QLineF &line, const QPointF &from, QPointF &result)
+    -> bool
+{
+    const QVector<QPointF> points = VAbstractCurve::CurveIntersectLine(polyline, line);
+    if (points.isEmpty())
+    {
+        return false;
+    }
+
+    result = *std::min_element(points.cbegin(),
+                               points.cend(),
+                               [from](const QPointF &a, const QPointF &b)
+                               { return QLineF(from, a).length() < QLineF(from, b).length(); });
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Continue the open polyline straight past its first (atStart) or last point until it meets the closed polyline or
+// the fold, whichever is nearer. The closing edge of the half piece's cut line only approximates the fold: it can run
+// past it, so the fold has to win.
+auto ExtendToPolyline(const QVector<QPointF> &closed,
+                      const QVector<QPointF> &fold,
+                      const QVector<QPointF> &line,
+                      bool atStart,
+                      QPointF &result) -> bool
+{
+    if (line.size() < 2)
+    {
+        return false;
+    }
+
+    const QPointF end = atStart ? line.constFirst() : line.constLast();
+    // Direction of the end segment, skipping zero-length steps
+    QPointF inner = end;
+    for (int i = 1; i < line.size() && VFuzzyComparePoints(inner, end); ++i)
+    {
+        inner = atStart ? line.at(i) : line.at(line.size() - 1 - i);
+    }
+
+    if (VFuzzyComparePoints(inner, end))
+    {
+        return false;
+    }
+
+    QLineF ray(inner, end);
+    ray.setLength(INT_MAX / 4.);
+    ray.setP1(end); // one-sided: from the end outwards
+
+    QPointF onFold;
+    if (not NearestIntersection(closed, ray, end, result))
+    {
+        return false;
+    }
+
+    if (fold.size() == 2 && NearestIntersection(fold, ray, end, onFold)
+        && QLineF(end, onFold).length() < QLineF(end, result).length())
+    {
+        result = onFold;
+    }
+    return true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Edge of the closed polyline that contains p. outgoing: the edge leaving p, otherwise the edge entering p.
+auto EdgeAt(const QVector<QPointF> &closed, const QPointF &p, bool outgoing, QLineF &edge) -> bool
+{
+    for (int i = 0; i < closed.size() - 1; ++i)
+    {
+        const QPointF &a = closed.at(i);
+        const QPointF &b = closed.at(i + 1);
+        if (not IsPointOnLineSegment(p, a, b))
+        {
+            continue;
+        }
+
+        if (outgoing && not VFuzzyComparePoints(p, b))
+        {
+            edge = QLineF(p, b);
+            return true;
+        }
+
+        if (not outgoing && not VFuzzyComparePoints(p, a))
+        {
+            edge = QLineF(a, p);
+            return true;
+        }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto PolylineLength(const QVector<VLayoutPoint> &points) -> qreal
+{
+    qreal length = 0;
+    for (int i = 1; i < points.size(); ++i)
+    {
+        length += QLineF(points.at(i - 1), points.at(i)).length();
+    }
+    return length;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// ponytail: O(n*m) segment scan; fine for piece-sized polylines.
+auto PolylinesIntersect(const QVector<QPointF> &a, const QVector<QPointF> &b) -> bool
+{
+    for (int i = 0; i < b.size() - 1; ++i)
+    {
+        if (not VAbstractCurve::CurveIntersectLine(a, QLineF(b.at(i), b.at(i + 1))).isEmpty())
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto IsUsablePathNode(const QVector<VPieceNode> &path, quint32 id) -> bool
+{
+    return std::any_of(path.cbegin(),
+                       path.cend(),
+                       [id](const VPieceNode &node)
+                       { return node.GetId() == id && node.GetTypeTool() == Tool::NodePoint && not node.IsExcluded(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -731,6 +922,7 @@ auto VPiece::AsBuffer() const -> VPiece
 
     buffer.SetInternalPaths({});
     buffer.SetPlaceLabels({});
+    buffer.SetOffsetLines({});
     buffer.SetMirrorLineStartPoint(NULL_ID);
     buffer.SetMirrorLineEndPoint(NULL_ID);
     buffer.GetPieceLabelData().SetWithBufferMaterial(GetPieceLabelData().GetBufferMaterial());
@@ -753,6 +945,382 @@ auto VPiece::GetInternalPaths() -> QVector<quint32> &
 void VPiece::SetInternalPaths(const QVector<quint32> &iPaths)
 {
     d->m_internalPaths = iPaths;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::GetOffsetLines() const -> QVector<VPieceOffsetLine>
+{
+    return d->m_offsetLines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::SetOffsetLines(const QVector<VPieceOffsetLine> &lines)
+{
+    d->m_offsetLines = lines;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::IsOffsetLineVisible(const VContainer *data, const VPieceOffsetLine &line) const -> bool
+{
+    SCASSERT(data != nullptr)
+    return IsSeamAllowance() && not IsSeamAllowanceBuiltIn()
+           && not qFuzzyIsNull(EvalOffsetLineFormula(data, line.formulaVisible, 1));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::OffsetLineWidth(const VContainer *data, const VPieceOffsetLine &line) const -> qreal
+{
+    SCASSERT(data != nullptr)
+    return qMax(0.0, ToPixel(EvalOffsetLineFormula(data, line.formulaWidth, 0), *data->GetPatternUnit()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::OffsetLineContour(const VContainer *data, qreal width) const -> QVector<VLayoutPoint>
+{
+    // Every node gets the offset width and custom seam allowance paths are ignored: the line follows the seam line,
+    // not the cut line. Paths included "as main path" stay, they are part of the seam line.
+    QVector<VPieceNode> nodes = GetUnitedPath(data);
+    for (auto &node : nodes)
+    {
+        node.SetFormulaSABefore(currentSeamAllowance);
+        node.SetFormulaSAAfter(currentSeamAllowance);
+    }
+
+    VPiece tmp = *this;
+    tmp.SetCustomSARecords({});
+    return Equidistant(tmp.BuildSeamAllowancePoints(data, nodes, width), width, false, GetName());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::RemapOffsetLineNodes(const QMap<quint32, quint32> &replacements)
+{
+    for (auto &line : d->m_offsetLines)
+    {
+        if (not line.IsFull())
+        {
+            line.start = replacements.value(line.start, line.start);
+            line.end = replacements.value(line.end, line.end);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::OffsetPointName(const VContainer *data,
+                             const QVector<VPieceNode> &path,
+                             quint32 id,
+                             const QString &lastKnownName) -> QString
+{
+    // The live name wins, so a renamed point shows its new name. The stored name is only a hint for a point that is
+    // gone from the pattern.
+    bool exists = true;
+    QString name;
+    try
+    {
+        name = data->GetGObject(id)->name();
+    }
+    catch (const VExceptionBadId &)
+    {
+        exists = false;
+        name = lastKnownName;
+    }
+
+    if (exists && IsUsablePathNode(path, id))
+    {
+        return name;
+    }
+
+    return name.isEmpty() ? tr("<missing>") : tr("<missing: %1>").arg(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::OffsetLineName(const VContainer *data, const QVector<VPieceNode> &path, const VPieceOffsetLine &line)
+    -> QString
+{
+    // Same text in the dialog list and in warnings, so a warning can be traced to its record.
+    const VTranslateVars *trVars = VAbstractApplication::VApp()->TrVars();
+    const QString width = trVars != nullptr
+                              ? trVars->FormulaToUser(line.formulaWidth,
+                                                      VAbstractApplication::VApp()->Settings()->GetOsSeparator())
+                              : line.formulaWidth;
+
+    if (line.IsFull())
+    {
+        return tr("Full, %1").arg(width);
+    }
+
+    return QStringLiteral("%1 → %2, %3")
+        .arg(OffsetPointName(data, path, line.start, line.startName),
+             OffsetPointName(data, path, line.end, line.endName),
+             width);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPiece::RefreshOffsetLineNames(const VContainer *data)
+{
+    SCASSERT(data != nullptr)
+
+    auto Refresh = [data](quint32 id, QString &name)
+    {
+        try
+        {
+            name = data->GetGObject(id)->name();
+        }
+        catch (const VExceptionBadId &)
+        {
+            // The point is gone: keep the last known name
+        }
+    };
+
+    for (auto &line : d->m_offsetLines)
+    {
+        if (line.IsFull())
+        {
+            line.startName.clear();
+            line.endName.clear();
+            continue;
+        }
+
+        Refresh(line.start, line.startName);
+        Refresh(line.end, line.endName);
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::IsOffsetLineNodeValid(quint32 id) const -> bool
+{
+    return IsUsablePathNode(GetPath().GetNodes(), id);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::OffsetLineProblems(const VContainer *data) const -> QStringList
+{
+    SCASSERT(data != nullptr)
+
+    QStringList problems;
+    const QVector<VPieceOffsetLine> lines = GetOffsetLines();
+    for (int i = 0; i < lines.size(); ++i)
+    {
+        const VPieceOffsetLine &line = lines.at(i);
+        if (not IsOffsetLineVisible(data, line))
+        {
+            continue;
+        }
+
+        const qreal width = OffsetLineWidth(data, line);
+        if (width <= 0)
+        {
+            problems.append(
+                tr("Piece '%1'. Offset line #%2 (%3): width must be greater than 0.")
+                    .arg(GetName(), QString::number(i + 1), OffsetLineName(data, GetPath().GetNodes(), line)));
+            continue;
+        }
+
+        if (not line.IsFull()
+            && (line.start == line.end || not IsOffsetLineNodeValid(line.start) || not IsOffsetLineNodeValid(line.end)))
+        {
+            problems.append(
+                tr("Piece '%1'. Offset line #%2 (%3): start or end node is not a valid main path point.")
+                    .arg(GetName(), QString::number(i + 1), OffsetLineName(data, GetPath().GetNodes(), line)));
+            continue;
+        }
+
+        const QVector<VLayoutPoint> points = OffsetLinePoints(data, line);
+        if (points.size() < 2 || PolylineLength(points) < accuracyPointOnLine)
+        {
+            problems.append(
+                tr("Piece '%1'. Offset line #%2 (%3) is empty.")
+                    .arg(GetName(), QString::number(i + 1), OffsetLineName(data, GetPath().GetNodes(), line)));
+            continue;
+        }
+
+        QVector<QPointF> seam;
+        CastTo(UniteMainPathPoints(data), seam);
+        QVector<QPointF> cut;
+        CastTo(SeamAllowancePoints(data), cut);
+
+        bool valid = false;
+        if (line.IsFull() && SeamMirrorLine(data).isNull())
+        {
+            QVector<QPointF> contour;
+            CastTo(points, contour);
+            valid = IsAllowanceValid(seam, contour) && IsAllowanceValid(contour, cut);
+        }
+        else
+        {
+            // An open line: a partial line (its ends lie on the cut line, so they are left out of the cut line check)
+            // or the half of a full line on a mirrored piece (ends on the fold).
+            QVector<QPointF> whole;
+            CastTo(points, whole);
+            const QVector<QPointF> body = line.IsFull() ? whole : whole.mid(1, whole.size() - 2);
+            valid = not PolylinesIntersect(ClosedPolyline(seam), whole)
+                    && not PolylinesIntersect(ClosedPolyline(cut), body);
+        }
+
+        if (not valid)
+        {
+            problems.append(
+                tr("Piece '%1'. Offset line #%2 (%3) is not between the seam line and the cut line.")
+                    .arg(GetName(), QString::number(i + 1), OffsetLineName(data, GetPath().GetNodes(), line)));
+        }
+
+        // The same line twice would be exported, and cut, twice. Compare what is drawn, not the formula text.
+        for (int j = 0; j < i; ++j)
+        {
+            const VPieceOffsetLine &other = lines.at(j);
+            const bool sameNodes = line.IsFull() ? other.IsFull()
+                                                 : (line.start == other.start && line.end == other.end);
+            if (sameNodes && IsOffsetLineVisible(data, other)
+                && qAbs(OffsetLineWidth(data, other) - width) < accuracyPointOnLine)
+            {
+                problems.append(tr("Piece '%1'. Offset line #%2 (%3) duplicates offset line #%4.")
+                                    .arg(GetName(),
+                                         QString::number(i + 1),
+                                         OffsetLineName(data, GetPath().GetNodes(), line),
+                                         QString::number(j + 1)));
+                break;
+            }
+        }
+    }
+    return problems;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::PartialOffsetLine(const VContainer *data,
+                               const VPieceOffsetLine &line,
+                               const QVector<VLayoutPoint> &contour) const -> QVector<VLayoutPoint>
+{
+    QPointF start;
+    QPointF end;
+    try
+    {
+        start = data->GeometricObject<VPointF>(line.start)->toQPointF();
+        end = data->GeometricObject<VPointF>(line.end)->toQPointF();
+    }
+    catch (const VExceptionBadId &)
+    {
+        return {};
+    }
+
+    QVector<QPointF> seam;
+    CastTo(UniteMainPathPoints(data), seam);
+    seam = ClosedPolyline(seam);
+
+    QVector<QPointF> cut;
+    CastTo(SeamAllowancePoints(data), cut);
+    // Only a full piece is cut at the fold; a half piece is drawn and exported with its own cut line.
+    QVector<QPointF> fold;
+    if (const QLineF foldLine = VAbstractPiece::SeamAllowanceMirrorLine(SeamMirrorLine(data), cut);
+        IsShowFullPiece() && not foldLine.isNull())
+    {
+        fold = {foldLine.p1(), foldLine.p2()};
+    }
+    cut = ClosedPolyline(cut);
+
+    QVector<QPointF> offset;
+    CastTo(contour, offset);
+    offset = ClosedPolyline(offset);
+
+    QLineF startEdge;
+    QLineF endEdge;
+    if (not EdgeAt(seam, start, true, startEdge) || not EdgeAt(seam, end, false, endEdge))
+    {
+        return {};
+    }
+
+    // P1 and P2: the points of the offset line opposite the start and end nodes.
+    const qreal width = OffsetLineWidth(data, line);
+    const QPointF p1 = OffsetAnchor(offset, start, startEdge, width);
+    const QPointF p2 = OffsetAnchor(offset, end, endEdge, width);
+
+    // ponytail: walk the contour twice so P1 -> P2 never has to wrap around the end of the vector.
+    QVector<VLayoutPoint> sub1;
+    QVector<VLayoutPoint> fromP1;
+    if (not SubdividePath(contour + contour, p1, sub1, fromP1))
+    {
+        return {};
+    }
+
+    QVector<VLayoutPoint> p1ToP2;
+    QVector<VLayoutPoint> rest;
+    if (not SubdividePath(fromP1, p2, p1ToP2, rest))
+    {
+        return {};
+    }
+
+    // Both ends continue straight in the line's own direction until they meet the cut line.
+    QVector<QPointF> body;
+    CastTo(p1ToP2, body);
+    QPointF q1;
+    QPointF q2;
+    if (not ExtendToPolyline(cut, fold, body, true, q1) || not ExtendToPolyline(cut, fold, body, false, q2))
+    {
+        return {};
+    }
+
+    QVector<VLayoutPoint> result;
+    result.reserve(p1ToP2.size() + 2);
+    result.append(VLayoutPoint(q1));
+    result += p1ToP2;
+    result.append(VLayoutPoint(q2));
+    return result;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPiece::OffsetLinePoints(const VContainer *data, const VPieceOffsetLine &line) const -> QVector<VLayoutPoint>
+{
+    if (not IsOffsetLineVisible(data, line))
+    {
+        return {};
+    }
+
+    const qreal width = OffsetLineWidth(data, line);
+    if (width <= 0)
+    {
+        return {};
+    }
+
+    QVector<VLayoutPoint> contour = OffsetLineContour(data, width);
+    if (contour.size() < 3)
+    {
+        return {};
+    }
+
+    if (not line.IsFull())
+    {
+        if (line.start == line.end || not IsOffsetLineNodeValid(line.start) || not IsOffsetLineNodeValid(line.end))
+        {
+            return {}; // Reported by OffsetLineProblems
+        }
+        return PartialOffsetLine(data, line, contour);
+    }
+
+    if (const QLineF seamMirrorLine = SeamMirrorLine(data); not seamMirrorLine.isNull())
+    {
+        QVector<QPointF> contourPoints;
+        CastTo(contour, contourPoints);
+        const QLineF mirrorLine = VAbstractPiece::SeamAllowanceMirrorLine(seamMirrorLine, contourPoints);
+        if (mirrorLine.isNull())
+        {
+            return {}; // Unable to cut at the fold; reported as "empty" by OffsetLineProblems
+        }
+
+        const QVector<VLayoutPoint> full = VAbstractPiece::FullSeamAllowancePath(contour, mirrorLine, GetName());
+        QVector<QPointF> fullPoints;
+        CastTo(full, fullPoints);
+        if (fullPoints == contourPoints)
+        {
+            return {}; // Unable to cut at the fold, the path came back untouched
+        }
+
+        // FullSeamAllowancePath returns mirrored(base) + base; the base half is all consumers need, they mirror it.
+        return full.mid(full.size() / 2);
+    }
+
+    if (not VFuzzyComparePoints(contour.constFirst(), contour.constLast()))
+    {
+        contour.append(contour.constFirst());
+    }
+    return contour;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

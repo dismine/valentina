@@ -104,6 +104,8 @@ VTestApp {
             "legacy_cutarc_name.val",
             "buffer.val",
             "buffer_zero_width.val",
+            "offset_lines.val",
+            "offset_lines_too_wide.val",
             "spline_old_format.val",
             "spline_damaged_format.val"
         ]

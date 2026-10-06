@@ -184,6 +184,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, VAbstractPatter
     m_timerFoldCenter(new QTimer(this)),
     m_timerBufferVisible(new QTimer(this)),
     m_timerBufferWidth(new QTimer(this)),
+    m_timerOffsetLine(new QTimer(this)),
     m_placeholdersMenu(new VScrollableMenu(this))
 {
     ui->setupUi(this);
@@ -206,6 +207,7 @@ DialogSeamAllowance::DialogSeamAllowance(const VContainer *data, VAbstractPatter
     InitPlaceLabelsTab();
     InitFoldLineTab();
     InitBufferTab();
+    InitOffsetLinesTab();
 
     InitIcons();
 
@@ -451,6 +453,17 @@ void DialogSeamAllowance::SetPiece(const VPiece &piece)
                      m_formulaBaseBufferWidth,
                      piece.GetFormulaBufferWidth());
 
+    uiTabPaths->listWidgetOffsetLines->clear();
+    for (const auto &line : piece.GetOffsetLines())
+    {
+        auto *item = new QListWidgetItem();
+        item->setData(Qt::UserRole, QVariant::fromValue(line));
+        uiTabPaths->listWidgetOffsetLines->addItem(item);
+    }
+    RefreshOffsetLineTexts();
+    uiTabPaths->listWidgetOffsetLines->setCurrentRow(uiTabPaths->listWidgetOffsetLines->count() > 0 ? 0 : -1);
+    UpdateOffsetLinesTabState();
+
     {
         const int piceFontSizeIndex = uiTabLabels->comboBoxPieceLabelSize->findData(ppData.GetFontSize());
         uiTabLabels->comboBoxPieceLabelSize->setCurrentIndex(piceFontSizeIndex != -1 ? piceFontSizeIndex : 0);
@@ -632,6 +645,8 @@ auto DialogSeamAllowance::eventFilter(QObject *obj, QEvent *event) -> bool
 //---------------------------------------------------------------------------------------------------------------------
 void DialogSeamAllowance::SaveData()
 {
+    FlushOffsetLine(uiTabPaths->listWidgetOffsetLines->currentItem());
+
     SavePatternLabelData();
     SavePatternTemplateData();
     SavePatternMaterialData();
@@ -646,12 +661,15 @@ void DialogSeamAllowance::SaveData()
 void DialogSeamAllowance::CheckTabPathsState()
 {
     bool const isBufferValid = flagFormulaBufferVisible && flagFormulaBufferWidth;
+    bool const isOffsetLinesValid = flagFormulaOffsetLineWidth && flagFormulaOffsetLineVisible;
     bool const isValid = flagFormula && flagFormulaBefore && flagFormulaAfter && isBufferValid;
     bool const isMainPathValid = flagMainPathIsValid && flagMirrorLineIsValid;
     bool const isNameAndUUIDValid = flagName && flagUUID;
 
     m_ftb->SetTabText(TabOrder::Paths,
-                      (isValid && flagMainPathIsValid && isNameAndUUIDValid) ? tr("Paths") : tr("Paths") + '*'_L1);
+                      (isValid && isOffsetLinesValid && flagMainPathIsValid && isNameAndUUIDValid)
+                          ? tr("Paths")
+                          : tr("Paths") + '*'_L1);
 
     const QIcon warningIcon = FromTheme(VThemeIcon::DialogWarning);
 
@@ -663,6 +681,8 @@ void DialogSeamAllowance::CheckTabPathsState()
                                       isNameAndUUIDValid ? QIcon() : warningIcon);
     uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabBuffer),
                                       isBufferValid ? QIcon() : warningIcon);
+    uiTabPaths->tabWidget->setTabIcon(uiTabPaths->tabWidget->indexOf(uiTabPaths->tabOffsetLines),
+                                      isOffsetLinesValid ? QIcon() : warningIcon);
 
     if (flagMainPathIsValid && flagMirrorLineIsValid)
     {
@@ -1501,6 +1521,8 @@ void DialogSeamAllowance::ListChanged()
     InitPassmarksList();
     InitMirrorLine();
     CustomSAChanged(uiTabPaths->listWidgetCustomSA->currentRow());
+    RefreshOffsetLineTexts();
+    OffsetLineChanged(uiTabPaths->listWidgetOffsetLines->currentRow());
     SetMoveControls();
     SetOptionControls();
 }
@@ -1697,7 +1719,18 @@ void DialogSeamAllowance::MirrorLinePointChanged(int index)
 
     flagMirrorLineIsValid = MirrorLineIsValid();
     uiTabPaths->checkBoxShowFullPiece->setEnabled(flagMirrorLineIsValid);
+    UpdateOffsetLineNotMirroredState();
     CheckState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::UpdateOffsetLineNotMirroredState()
+{
+    // The flag only means something for a piece with a mirror line. Follows mirror line edits in this dialog.
+    const bool hasMirrorLine = flagMirrorLineIsValid && GetMirrorLineStartPoint() != NULL_ID
+                               && GetMirrorLineEndPoint() != NULL_ID;
+    uiTabPaths->checkBoxOffsetLineNotMirrored->setEnabled(
+        hasMirrorLine && uiTabPaths->listWidgetOffsetLines->currentItem() != nullptr);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -3460,6 +3493,8 @@ auto DialogSeamAllowance::CreatePiece() const -> VPiece
     piece.GetPath().SetNodes(GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath));
     piece.SetCustomSARecords(GetListInternals<CustomSARecord>(uiTabPaths->listWidgetCustomSA));
     piece.SetInternalPaths(GetListInternals<quint32>(uiTabPaths->listWidgetInternalPaths));
+    piece.SetOffsetLines(GetListInternals<VPieceOffsetLine>(uiTabPaths->listWidgetOffsetLines));
+    piece.RefreshOffsetLineNames(&data);
     piece.SetPins(GetListInternals<quint32>(uiTabPins->listWidgetPins));
     piece.SetPlaceLabels(GetListInternals<quint32>(uiTabPlaceLabels->listWidgetPlaceLabels));
     piece.SetForbidFlipping(uiTabPaths->checkBoxForbidFlipping->isChecked());
@@ -4508,6 +4543,7 @@ void DialogSeamAllowance::InitMirrorLine()
 
     flagMirrorLineIsValid = MirrorLineIsValid();
     uiTabPaths->checkBoxShowFullPiece->setEnabled(flagMirrorLineIsValid);
+    UpdateOffsetLineNotMirroredState();
     CheckState();
 }
 
@@ -5234,6 +5270,365 @@ void DialogSeamAllowance::InitBufferTab()
     // Defaults for a new piece; SetPiece() overrides them for an existing one.
     uiTabPaths->plainTextEditFormulaBufferVisible->setPlainText(QChar('0'));
     uiTabPaths->plainTextEditFormulaBufferWidth->setPlainText(QChar('0'));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitOffsetLinesTab()
+{
+    FillComboBoxTypeLine(uiTabPaths->comboBoxOffsetLinePenStyle,
+                         CurvePenStylesPics(uiTabPaths->comboBoxOffsetLinePenStyle->palette().color(QPalette::Base),
+                                            uiTabPaths->comboBoxOffsetLinePenStyle->palette().color(QPalette::Text)));
+
+    m_timerOffsetLine->setSingleShot(true);
+    connect(m_timerOffsetLine,
+            &QTimer::timeout,
+            this,
+            [this]()
+            {
+                EvalOffsetLineWidth();
+                EvalOffsetLineVisible();
+                UpdateCurrentOffsetLine();
+            });
+
+    for (auto *edit : {uiTabPaths->plainTextEditOffsetLineWidth, uiTabPaths->plainTextEditOffsetLineVisible})
+    {
+        connect(edit, &QPlainTextEdit::textChanged, this, [this]() { m_timerOffsetLine->start(formulaTimerTimeout); });
+    }
+
+    connect(uiTabPaths->toolButtonExprOffsetLineWidth,
+            &QToolButton::clicked,
+            this,
+            &DialogSeamAllowance::FXOffsetLineWidth);
+    connect(uiTabPaths->toolButtonExprOffsetLineVisible,
+            &QToolButton::clicked,
+            this,
+            &DialogSeamAllowance::FXOffsetLineVisible);
+    connect(uiTabPaths->pushButtonAddOffsetLine, &QPushButton::clicked, this, &DialogSeamAllowance::AddOffsetLine);
+    connect(uiTabPaths->pushButtonRemoveOffsetLine, &QPushButton::clicked, this, &DialogSeamAllowance::RemoveOffsetLine);
+    connect(uiTabPaths->listWidgetOffsetLines,
+            &QListWidget::currentItemChanged,
+            this,
+            &DialogSeamAllowance::CurrentOffsetLineChanged);
+
+    // A line with a "full" end is a full line, so the other end can't keep a node: show what will be saved.
+    for (auto *box : {uiTabPaths->comboBoxOffsetLineStart, uiTabPaths->comboBoxOffsetLineEnd})
+    {
+        QComboBox *other = box == uiTabPaths->comboBoxOffsetLineStart ? uiTabPaths->comboBoxOffsetLineEnd
+                                                                      : uiTabPaths->comboBoxOffsetLineStart;
+        connect(box,
+                QOverload<int>::of(&QComboBox::currentIndexChanged),
+                this,
+                [this, box, other]()
+                {
+                    if (box->currentData().toUInt() == NULL_ID)
+                    {
+                        const int full = other->findData(NULL_ID);
+                        if (full != -1 && other->currentIndex() != full)
+                        {
+                            const QSignalBlocker blocker(other);
+                            other->setCurrentIndex(full);
+                        }
+                    }
+                    UpdateCurrentOffsetLine();
+                });
+    }
+
+    connect(uiTabPaths->comboBoxOffsetLinePenStyle,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
+            &DialogSeamAllowance::UpdateCurrentOffsetLine);
+    connect(uiTabPaths->checkBoxOffsetLineNotMirrored,
+            &QCheckBox::toggled,
+            this,
+            &DialogSeamAllowance::UpdateCurrentOffsetLine);
+
+    connect(uiTabPaths->checkBoxSeams, &QCheckBox::toggled, this, &DialogSeamAllowance::UpdateOffsetLinesTabState);
+    connect(uiTabPaths->checkBoxBuiltIn, &QCheckBox::toggled, this, &DialogSeamAllowance::UpdateOffsetLinesTabState);
+
+    OffsetLineChanged(-1);
+    UpdateOffsetLinesTabState();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::UpdateOffsetLinesTabState()
+{
+    // Offset lines exist only between a seam line and a real (not built-in) seam allowance.
+    const bool enabled = uiTabPaths->checkBoxSeams->isChecked() && not uiTabPaths->checkBoxBuiltIn->isChecked();
+    const int index = uiTabPaths->tabWidget->indexOf(uiTabPaths->tabOffsetLines);
+    uiTabPaths->tabWidget->setTabEnabled(index, enabled);
+    uiTabPaths->tabWidget->setTabToolTip(index,
+                                         enabled ? QString() : tr("Requires a seam allowance that is not built-in."));
+
+    // A disabled tab can't be fixed by the user, so it must not block OK. The records are kept as they are.
+    if (enabled)
+    {
+        OffsetLineChanged(uiTabPaths->listWidgetOffsetLines->currentRow());
+    }
+    else
+    {
+        m_timerOffsetLine->stop();
+        flagFormulaOffsetLineWidth = true;
+        flagFormulaOffsetLineVisible = true;
+        CheckState();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::CurrentOffsetLineChanged(QListWidgetItem *current, QListWidgetItem *previous)
+{
+    FlushOffsetLine(previous); // The editors still show the previous record
+    OffsetLineChanged(current != nullptr ? uiTabPaths->listWidgetOffsetLines->row(current) : -1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::FlushOffsetLine(QListWidgetItem *item)
+{
+    // Formula edits reach the record only when the timer fires; don't lose an edit made just before switching or OK.
+    if (item == nullptr || not m_timerOffsetLine->isActive())
+    {
+        return;
+    }
+
+    m_timerOffsetLine->stop();
+    EvalOffsetLineWidth();
+    EvalOffsetLineVisible();
+    WriteOffsetLine(item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::InitOffsetLinePoints()
+{
+    for (QComboBox *box : {uiTabPaths->comboBoxOffsetLineStart, uiTabPaths->comboBoxOffsetLineEnd})
+    {
+        const QSignalBlocker blocker(box);
+        InitCSAPoint(box);
+        box->setItemText(0, tr("Full"));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogSeamAllowance::OffsetLineName(const VPieceOffsetLine &line) const -> QString
+{
+    return VPiece::OffsetLineName(&data, GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath), line);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto DialogSeamAllowance::OffsetLineText(int row, const VPieceOffsetLine &line) const -> QString
+{
+    // The index is the one a warning uses
+    return tr("#%1: %2").arg(QString::number(row + 1), OffsetLineName(line));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::RefreshOffsetLineTexts()
+{
+    QListWidget *list = uiTabPaths->listWidgetOffsetLines;
+    for (int row = 0; row < list->count(); ++row)
+    {
+        QListWidgetItem *item = list->item(row);
+        item->setText(OffsetLineText(row, qvariant_cast<VPieceOffsetLine>(item->data(Qt::UserRole))));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::AddOffsetLine()
+{
+    const VPieceOffsetLine line{.formulaWidth = currentSeamAllowance + "/2"_L1};
+    auto *item = new QListWidgetItem();
+    item->setData(Qt::UserRole, QVariant::fromValue(line));
+    uiTabPaths->listWidgetOffsetLines->addItem(item);
+    RefreshOffsetLineTexts();
+    uiTabPaths->listWidgetOffsetLines->setCurrentItem(item);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::RemoveOffsetLine()
+{
+    m_timerOffsetLine->stop(); // Pending edits belong to the removed record
+    delete uiTabPaths->listWidgetOffsetLines->takeItem(uiTabPaths->listWidgetOffsetLines->currentRow());
+    RefreshOffsetLineTexts(); // The indexes of the following records shift
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::OffsetLineChanged(int row)
+{
+    const bool hasRecord = row >= 0 && row < uiTabPaths->listWidgetOffsetLines->count();
+    for (QWidget *w : QList<QWidget *>{uiTabPaths->comboBoxOffsetLineStart,
+                                       uiTabPaths->comboBoxOffsetLineEnd,
+                                       uiTabPaths->plainTextEditOffsetLineWidth,
+                                       uiTabPaths->plainTextEditOffsetLineVisible,
+                                       uiTabPaths->toolButtonExprOffsetLineWidth,
+                                       uiTabPaths->toolButtonExprOffsetLineVisible,
+                                       uiTabPaths->comboBoxOffsetLinePenStyle,
+                                       uiTabPaths->checkBoxOffsetLineNotMirrored,
+                                       uiTabPaths->pushButtonRemoveOffsetLine})
+    {
+        w->setEnabled(hasRecord);
+    }
+
+    if (not hasRecord)
+    {
+        flagFormulaOffsetLineWidth = true;
+        flagFormulaOffsetLineVisible = true;
+        CheckState();
+        return;
+    }
+
+    const auto line = qvariant_cast<VPieceOffsetLine>(uiTabPaths->listWidgetOffsetLines->item(row)->data(Qt::UserRole));
+
+    InitOffsetLinePoints();
+
+    // Block every editor so loading a record never writes back into it (keeps a dangling node id intact).
+    const QSignalBlocker b1(uiTabPaths->comboBoxOffsetLineStart);
+    const QSignalBlocker b2(uiTabPaths->comboBoxOffsetLineEnd);
+    const QSignalBlocker b3(uiTabPaths->comboBoxOffsetLinePenStyle);
+    const QSignalBlocker b4(uiTabPaths->checkBoxOffsetLineNotMirrored);
+    const QSignalBlocker b5(uiTabPaths->plainTextEditOffsetLineWidth);
+    const QSignalBlocker b6(uiTabPaths->plainTextEditOffsetLineVisible);
+
+    const QVector<VPieceNode> path = GetListInternals<VPieceNode>(uiTabPaths->listWidgetMainPath);
+    auto SelectPoint = [this, &path](QComboBox *box, quint32 id, const QString &lastKnownName)
+    {
+        int index = box->findData(id);
+        if (index == -1)
+        {
+            // Not a usable node of the piece: say which point it was, and remember its name for WriteOffsetLine()
+            box->addItem(VPiece::OffsetPointName(&data, path, id, lastKnownName), id);
+            index = box->count() - 1;
+            box->setItemData(index, lastKnownName, Qt::UserRole + 1);
+        }
+        box->setCurrentIndex(index);
+    };
+    SelectPoint(uiTabPaths->comboBoxOffsetLineStart, line.IsFull() ? NULL_ID : line.start, line.startName);
+    SelectPoint(uiTabPaths->comboBoxOffsetLineEnd, line.IsFull() ? NULL_ID : line.end, line.endName);
+
+    ChangeCurrentData(uiTabPaths->comboBoxOffsetLinePenStyle, PenStyleToLineStyle(line.penStyle));
+    uiTabPaths->checkBoxOffsetLineNotMirrored->setChecked(line.notMirrored);
+    UpdateOffsetLineNotMirroredState();
+
+    const auto ToUser = [](const QString &formula)
+    {
+        return VAbstractApplication::VApp()
+            ->TrVars()
+            ->FormulaToUser(formula, VAbstractApplication::VApp()->Settings()->GetOsSeparator());
+    };
+    uiTabPaths->plainTextEditOffsetLineWidth->setPlainText(ToUser(line.formulaWidth));
+    uiTabPaths->plainTextEditOffsetLineVisible->setPlainText(ToUser(line.formulaVisible));
+
+    EvalOffsetLineWidth();
+    EvalOffsetLineVisible();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::UpdateCurrentOffsetLine()
+{
+    WriteOffsetLine(uiTabPaths->listWidgetOffsetLines->currentItem());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::WriteOffsetLine(QListWidgetItem *item)
+{
+    if (item == nullptr)
+    {
+        return;
+    }
+
+    // The name of an end is the name of the chosen point. A point that is gone is shown by a "missing" item that carries
+    // the last known name, keep that one.
+    auto EndName = [](QComboBox *box, quint32 id) -> QString
+    {
+        if (id == NULL_ID)
+        {
+            return {};
+        }
+
+        const QVariant lastKnown = box->currentData(Qt::UserRole + 1);
+        return lastKnown.isValid() ? lastKnown.toString() : box->currentText();
+    };
+
+    VPieceOffsetLine line;
+    line.start = uiTabPaths->comboBoxOffsetLineStart->currentData().toUInt();
+    line.end = uiTabPaths->comboBoxOffsetLineEnd->currentData().toUInt();
+    line.startName = EndName(uiTabPaths->comboBoxOffsetLineStart, line.start);
+    line.endName = EndName(uiTabPaths->comboBoxOffsetLineEnd, line.end);
+    line.formulaWidth = GetFormulaFromUser(uiTabPaths->plainTextEditOffsetLineWidth);
+    line.formulaVisible = GetFormulaFromUser(uiTabPaths->plainTextEditOffsetLineVisible);
+    line.penStyle = LineStyleToPenStyle(GetComboBoxCurrentData(uiTabPaths->comboBoxOffsetLinePenStyle, TypeLineLine));
+    line.notMirrored = uiTabPaths->checkBoxOffsetLineNotMirrored->isChecked();
+
+    item->setData(Qt::UserRole, QVariant::fromValue(line));
+    item->setText(OffsetLineText(uiTabPaths->listWidgetOffsetLines->row(item), line));
+    item->setForeground(flagFormulaOffsetLineWidth && flagFormulaOffsetLineVisible
+                            ? uiTabPaths->listWidgetOffsetLines->palette().text()
+                            : QBrush(Qt::red));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EvalOffsetLineWidth()
+{
+    if (uiTabPaths->listWidgetOffsetLines->currentItem() == nullptr)
+    {
+        return;
+    }
+
+    Eval({.formula = uiTabPaths->plainTextEditOffsetLineWidth->toPlainText(),
+          .variables = data.DataVariables(),
+          .labelEditFormula = uiTabPaths->labelEditOffsetLineWidth,
+          .labelResult = uiTabPaths->labelResultOffsetLineWidth,
+          .postfix = UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true),
+          .checkZero = true,
+          .checkLessThanZero = true},
+         flagFormulaOffsetLineWidth);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::EvalOffsetLineVisible()
+{
+    if (uiTabPaths->listWidgetOffsetLines->currentItem() == nullptr)
+    {
+        return;
+    }
+
+    Eval({.formula = uiTabPaths->plainTextEditOffsetLineVisible->toPlainText(),
+          .variables = data.DataVariables(),
+          .labelEditFormula = uiTabPaths->labelEditOffsetLineVisible,
+          .labelResult = uiTabPaths->labelResultOffsetLineVisible,
+          .postfix = QString(),
+          .checkLessThanZero = false},
+         flagFormulaOffsetLineVisible);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::FXOffsetLineWidth()
+{
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&data, toolId, this));
+    dialog->setWindowTitle(tr("Edit offset line width"));
+    dialog->SetFormula(GetFormulaFromUser(uiTabPaths->plainTextEditOffsetLineWidth));
+    dialog->setCheckZero(true);
+    dialog->setCheckLessThanZero(true);
+    dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        uiTabPaths->plainTextEditOffsetLineWidth->setPlainText(
+            VAbstractApplication::VApp()
+                ->TrVars()
+                ->FormulaToUser(dialog->GetFormula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogSeamAllowance::FXOffsetLineVisible()
+{
+    QScopedPointer<DialogEditWrongFormula> const dialog(new DialogEditWrongFormula(&data, toolId, this));
+    dialog->setWindowTitle(tr("Edit offset line visibility"));
+    dialog->SetFormula(GetFormulaFromUser(uiTabPaths->plainTextEditOffsetLineVisible));
+    if (dialog->exec() == QDialog::Accepted)
+    {
+        uiTabPaths->plainTextEditOffsetLineVisible->setPlainText(
+            VAbstractApplication::VApp()
+                ->TrVars()
+                ->FormulaToUser(dialog->GetFormula(), VAbstractApplication::VApp()->Settings()->GetOsSeparator()));
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------

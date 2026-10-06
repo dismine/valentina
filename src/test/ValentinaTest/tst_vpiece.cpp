@@ -36,11 +36,17 @@
 #include "../vpatterndb/vpiecenode.h"
 #include "../vpatterndb/vpiecepath.h"
 
+#include "../vlayout/vlayoutpiece.h"
+#include "../vlayout/vlayoutpiecepath.h"
 #include "../vlayout/vtextmanager.h"
 #include "../vpatterndb/floatItemData/vpiecelabeldata.h"
 #include "../vpatterndb/vpiece.h"
+#include <QImage>
+#include <QPainter>
 #include <QPolygonF>
 #include <QtTest>
+
+using namespace Qt::Literals::StringLiterals;
 
 namespace
 {
@@ -98,6 +104,19 @@ auto SameRect(const QRectF &actual, const QRectF &expected) -> bool
 auto RectToString(const QRectF &rect) -> QString
 {
     return QStringLiteral("(%1, %2, %3, %4)").arg(rect.left()).arg(rect.top()).arg(rect.right()).arg(rect.bottom());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ProblemsFor(const QSharedPointer<VContainer> &data, VPiece piece, const VPieceOffsetLine &line) -> QStringList
+{
+    piece.SetOffsetLines({line});
+    return piece.OffsetLineProblems(data.data());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto ContainsProblem(const QStringList &problems, const QString &needle) -> bool
+{
+    return problems.size() == 1 && problems.constFirst().contains(needle);
 }
 
 } // namespace
@@ -381,6 +400,7 @@ void TST_VPiece::AsBufferStripsExtras()
     piece.SetPlaceLabels({43});
     piece.SetUUID(QUuid::createUuid());
     piece.GetPieceLabelData().SetBufferMaterial(3);
+    piece.SetOffsetLines({VPieceOffsetLine{.formulaWidth = QStringLiteral("0.3")}});
 
     const VPiece buffer = piece.AsBuffer();
     QCOMPARE(buffer.GetName(), QStringLiteral("Square buffer"));
@@ -388,6 +408,7 @@ void TST_VPiece::AsBufferStripsExtras()
     QCOMPARE(buffer.GetUUID(), piece.AsBuffer().GetUUID()); // deterministic
     QVERIFY(buffer.GetInternalPaths().isEmpty());
     QVERIFY(buffer.GetPlaceLabels().isEmpty());
+    QVERIFY(buffer.GetOffsetLines().isEmpty());
     const QVector<VPieceNode> bufferNodes = buffer.GetPath().GetNodes();
     QVERIFY(std::none_of(bufferNodes.cbegin(),
                          bufferNodes.cend(),
@@ -426,4 +447,634 @@ void TST_VPiece::PieceMaterialPlaceholder()
     info.pieceMaterial = 0; // <empty>
     manager.UpdatePieceLabelInfo(info);
     QCOMPARE(manager.GetSourceLine(0).qsText, QStringLiteral("M:"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// A 0.3 cm offset line around a 10 cm square is a 10.6 cm square.
+void TST_VPiece::OffsetLineFull()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    const VPiece piece = MakeSquarePiece(data);
+    const VPieceOffsetLine line{.formulaWidth = QStringLiteral("0.3")};
+
+    const QVector<VLayoutPoint> points = piece.OffsetLinePoints(data.data(), line);
+    const qreal off = ToPixel(0.3, Unit::Cm);
+    const qreal side = ToPixel(10, Unit::Cm);
+    const QRectF expected(-off, -off, side + 2 * off, side + 2 * off);
+    const QRectF actual = BoundingRect(points);
+    QVERIFY2(SameRect(actual, expected), qUtf8Printable(RectToString(actual)));
+    QVERIFY(points.size() >= 5);
+    QVERIFY(VFuzzyComparePoints(points.constFirst(), points.constLast())); // closed
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VPiece::OffsetLineHiddenWithoutSeamAllowance()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    VPiece piece = MakeSquarePiece(data);
+    const VPieceOffsetLine line{.formulaWidth = QStringLiteral("0.3")};
+
+    piece.SetSeamAllowance(false);
+    QVERIFY(piece.OffsetLinePoints(data.data(), line).isEmpty());
+
+    piece.SetSeamAllowance(true);
+    piece.SetSeamAllowanceBuiltIn(true);
+    QVERIFY(piece.OffsetLinePoints(data.data(), line).isEmpty());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VPiece::OffsetLineInvisible()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    const VPiece piece = MakeSquarePiece(data);
+    const VPieceOffsetLine line{.formulaWidth = QStringLiteral("0.3"), .formulaVisible = QStringLiteral("0")};
+    QVERIFY(not piece.IsOffsetLineVisible(data.data(), line));
+    QVERIFY(piece.OffsetLinePoints(data.data(), line).isEmpty());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VPiece::OffsetLineBadFormula()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    const VPiece piece = MakeSquarePiece(data);
+    const VPieceOffsetLine line{.formulaWidth = QStringLiteral("#missing")};
+    QCOMPARE(piece.OffsetLineWidth(data.data(), line), 0.0);
+    QVERIFY(piece.OffsetLinePoints(data.data(), line).isEmpty());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Partial B -> C: the right side only. The line continues straight past both ends until it meets the cut line
+// (1 cm SA): x = side + off from y = -sa to y = side + sa.
+void TST_VPiece::OffsetLinePartial()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    const VPiece piece = MakeSquarePiece(data);
+    const QVector<VPieceNode> nodes = piece.GetPath().GetNodes();
+    const VPieceOffsetLine line{.start = nodes.at(1).GetId(),
+                                .end = nodes.at(2).GetId(),
+                                .formulaWidth = QStringLiteral("0.3")};
+
+    const QVector<VLayoutPoint> points = piece.OffsetLinePoints(data.data(), line);
+    const qreal off = ToPixel(0.3, Unit::Cm);
+    const qreal sa = ToPixel(1, Unit::Cm);
+    const qreal side = ToPixel(10, Unit::Cm);
+    const QRectF expected(side + off, -sa, 0, side + 2 * sa);
+    const QRectF actual = BoundingRect(points);
+    QVERIFY2(SameRect(actual, expected), qUtf8Printable(RectToString(actual)));
+    QVERIFY(qAbs(points.constFirst().y() + sa) < 0.01);         // on the top cut line
+    QVERIFY(qAbs(points.constLast().y() - (side + sa)) < 0.01); // on the bottom cut line
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Partial C -> B follows the main path direction: C -> D -> A -> B, i.e. three sides. Both ends continue straight
+// (to the right) until they meet the right cut line at x = side + sa.
+void TST_VPiece::OffsetLinePartialDirection()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    const VPiece piece = MakeSquarePiece(data);
+    const QVector<VPieceNode> nodes = piece.GetPath().GetNodes();
+    const VPieceOffsetLine line{.start = nodes.at(2).GetId(),
+                                .end = nodes.at(1).GetId(),
+                                .formulaWidth = QStringLiteral("0.3")};
+
+    const QVector<VLayoutPoint> points = piece.OffsetLinePoints(data.data(), line);
+    const QRectF actual = BoundingRect(points);
+    const qreal off = ToPixel(0.3, Unit::Cm);
+    const qreal sa = ToPixel(1, Unit::Cm);
+    const qreal side = ToPixel(10, Unit::Cm);
+    const QRectF expected(-off, -off, side + sa + off, side + 2 * off);
+    QVERIFY2(SameRect(actual, expected), qUtf8Printable(RectToString(actual)));
+    QVERIFY(qAbs(points.constFirst().x() - (side + sa)) < 0.01);
+    QVERIFY(qAbs(points.constLast().x() - (side + sa)) < 0.01);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// L-shaped piece, the partial line ends at the inner (concave) corner E(5, 5). The end of the line must be the offset
+// corner next to E (5.3, 5.3), not a point on a far side of the piece. Continuing straight from there crosses the seam
+// line, so the line is reported.
+void TST_VPiece::OffsetLinePartialConcaveEnd()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    VPiece piece;
+    piece.SetName(QStringLiteral("L"));
+    const QVector<QPointF> corners{{0, 0}, {10, 0}, {10, 5}, {5, 5}, {5, 10}, {0, 10}};
+    QVector<quint32> ids;
+    for (int i = 0; i < corners.size(); ++i)
+    {
+        ids.append(data->AddGObject(new VPointF(ToPixel(corners.at(i).x(), Unit::Cm),
+                                                ToPixel(corners.at(i).y(), Unit::Cm),
+                                                QStringLiteral("P%1").arg(i),
+                                                0,
+                                                0)));
+        piece.GetPath().Append(VPieceNode(ids.constLast(), Tool::NodePoint));
+    }
+    piece.SetSeamAllowance(true);
+    piece.SetFormulaSAWidth(QStringLiteral("1"), 1);
+
+    const VPieceOffsetLine line{.start = ids.at(4), .end = ids.at(3), .formulaWidth = QStringLiteral("0.3")};
+    const QVector<VLayoutPoint> points = piece.OffsetLinePoints(data.data(), line);
+    QVERIFY(points.size() >= 4);
+    const QPointF p2 = points.at(points.size() - 2);
+    const QPointF expected(ToPixel(5.3, Unit::Cm), ToPixel(5.3, Unit::Cm));
+    QVERIFY2(VFuzzyComparePoints(p2, expected), qUtf8Printable(u"(%1, %2)"_s.arg(p2.x()).arg(p2.y())));
+
+    piece.SetOffsetLines({line});
+    QVERIFY(ContainsProblem(piece.OffsetLineProblems(data.data()), QStringLiteral("not between")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Fold on the left side D -> A: the full line becomes an open half that ends on the fold.
+void TST_VPiece::OffsetLineMirrored()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    VPiece piece = MakeSquarePiece(data);
+    const QVector<VPieceNode> nodes = piece.GetPath().GetNodes();
+    piece.SetMirrorLineStartPoint(nodes.at(3).GetId());
+    piece.SetMirrorLineEndPoint(nodes.at(0).GetId());
+
+    const QVector<VLayoutPoint> points = piece.OffsetLinePoints(data.data(),
+                                                                VPieceOffsetLine{
+                                                                    .formulaWidth = QStringLiteral("0.3")});
+    const qreal off = ToPixel(0.3, Unit::Cm);
+    const qreal side = ToPixel(10, Unit::Cm);
+    const QRectF expected(0, -off, side + off, side + 2 * off);
+    const QRectF actual = BoundingRect(points);
+    QVERIFY2(SameRect(actual, expected), qUtf8Printable(RectToString(actual)));
+    QVERIFY(not VFuzzyComparePoints(points.constFirst(), points.constLast())); // open
+
+    const QStringList problems = ProblemsFor(data, piece, {.formulaWidth = QStringLiteral("0.3")});
+    QVERIFY2(problems.isEmpty(), qUtf8Printable(problems.join('\n')));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// A partial line that ends at a node of the mirror line stops on the mirror line itself, so the mirrored copy meets it.
+// The mirror line is oblique to the last edge here, which is where the cut line of the half piece stops short of or
+// runs past the mirror line.
+void TST_VPiece::OffsetLinePartialEndsOnMirrorLine()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    const quint32 a = data->AddGObject(new VPointF(0, 0, QStringLiteral("A"), 0, 0));
+    const quint32 b = data->AddGObject(
+        new VPointF(ToPixel(10, Unit::Cm), ToPixel(2, Unit::Cm), QStringLiteral("B"), 0, 0));
+    const quint32 c = data->AddGObject(
+        new VPointF(ToPixel(6, Unit::Cm), ToPixel(8, Unit::Cm), QStringLiteral("C"), 0, 0));
+
+    VPiece piece;
+    piece.SetName(QStringLiteral("Triangle"));
+    for (quint32 const id : {a, b, c})
+    {
+        piece.GetPath().Append(VPieceNode(id, Tool::NodePoint));
+    }
+    piece.SetSeamAllowance(true);
+    piece.SetFormulaSAWidth(QStringLiteral("1"), 1);
+    piece.SetMirrorLineStartPoint(c);
+    piece.SetMirrorLineEndPoint(a);
+    piece.SetShowFullPiece(true);
+
+    const VPieceOffsetLine line{.start = b, .end = c, .formulaWidth = QStringLiteral("0.3")};
+    const QVector<VLayoutPoint> points = piece.OffsetLinePoints(data.data(), line);
+    QVERIFY(points.size() >= 2);
+
+    const QLineF mirror = piece.SeamMirrorLine(data.data());
+    const QPointF last = points.constLast();
+    const QLineF normal = QLineF(mirror.p1(), last);
+    const qreal distance = qAbs(QLineF(mirror.p1(), last).length() * qSin(qDegreesToRadians(mirror.angleTo(normal))));
+    QVERIFY2(distance < 0.01, qUtf8Printable(QStringLiteral("Distance to the mirror line %1").arg(distance)));
+
+    // A half piece keeps its own cut line: the end must reach it, whatever the fold does
+    piece.SetShowFullPiece(false);
+    const QVector<VLayoutPoint> half = piece.OffsetLinePoints(data.data(), line);
+    QVERIFY(half.size() >= 2);
+    QVector<QPointF> cut;
+    CastTo(piece.SeamAllowancePoints(data.data()), cut);
+    cut.append(cut.constFirst());
+    qreal nearest = std::numeric_limits<qreal>::max();
+    for (int i = 0; i < cut.size() - 1; ++i)
+    {
+        const QLineF edge(cut.at(i), cut.at(i + 1));
+        QLineF perpendicular = edge.normalVector();
+        perpendicular.translate(half.constLast() - perpendicular.p1());
+        QPointF foot;
+        if (edge.intersects(perpendicular, &foot) != QLineF::NoIntersection
+            && QLineF(edge.p1(), foot).length() + QLineF(foot, edge.p2()).length() < edge.length() + 0.01)
+        {
+            nearest = qMin(nearest, QLineF(half.constLast(), foot).length());
+        }
+    }
+    QVERIFY2(nearest < 0.01, qUtf8Printable(QStringLiteral("Distance to the cut line %1").arg(nearest)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// The piece icon is painted with a fill brush. An open internal path (an offset line is one) must not be filled, or the
+// fill of its implicit closing chord paints over the contour lines it crosses.
+void TST_VPiece::MiniatureDoesNotFillInternalPaths()
+{
+    VLayoutPiece piece;
+    piece.SetContourPoints(
+        {VLayoutPoint(0, 0), VLayoutPoint(100, 0), VLayoutPoint(100, 100), VLayoutPoint(0, 100), VLayoutPoint(0, 0)});
+    // The chord from the last to the first point encloses the contour edge x = 100 between y = 50 and y = 90.
+    piece.SetInternalPaths({VLayoutPiecePath({VLayoutPoint(50, 10), VLayoutPoint(50, 90), VLayoutPoint(150, 90)})});
+
+    QImage image(200, 200, QImage::Format_ARGB32);
+    image.fill(Qt::white);
+    {
+        QPainter painter(&image);
+        painter.setPen(QPen(Qt::red, 2));
+        painter.setBrush(Qt::blue);
+        piece.DrawMiniature(painter, false);
+    }
+
+    QCOMPARE(image.pixelColor(100, 70), QColor(Qt::red));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// The same nodes and the same evaluated width make a duplicate, however the formulas are written. A different width, the
+// opposite direction or an invisible twin is a different line.
+void TST_VPiece::OffsetLineDuplicate()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    VPiece piece = MakeSquarePiece(data);
+    const QVector<VPieceNode> nodes = piece.GetPath().GetNodes();
+    const quint32 b = nodes.at(1).GetId();
+    const quint32 c = nodes.at(2).GetId();
+
+    const auto problems = [&piece, &data](const QVector<VPieceOffsetLine> &lines)
+    {
+        piece.SetOffsetLines(lines);
+        return piece.OffsetLineProblems(data.data());
+    };
+
+    const VPieceOffsetLine full{.formulaWidth = QStringLiteral("0.3")};
+    const VPieceOffsetLine partial{.start = b, .end = c, .formulaWidth = QStringLiteral("0.3")};
+
+    QStringList found = problems({full, full});
+    QVERIFY2(found.size() == 1 && found.constFirst().contains(u"Offset line #2"_s)
+                 && found.constFirst().contains(u"duplicates offset line #1"_s),
+             qUtf8Printable(found.join('\n')));
+
+    found = problems({partial, {.start = b, .end = c, .formulaWidth = QStringLiteral("0.6/2")}});
+    QVERIFY2(found.size() == 1 && found.constFirst().contains(u"duplicates offset line #1"_s),
+             qUtf8Printable(found.join('\n')));
+
+    QVERIFY(problems({partial, {.start = b, .end = c, .formulaWidth = QStringLiteral("0.4")}}).isEmpty());
+    QVERIFY(problems({partial, {.start = c, .end = b, .formulaWidth = QStringLiteral("0.3")}}).isEmpty());
+    QVERIFY(problems({partial, full}).isEmpty());
+    QVERIFY(
+        problems({partial,
+                  {.start = b, .end = c, .formulaWidth = QStringLiteral("0.3"), .formulaVisible = QStringLiteral("0")}})
+            .isEmpty());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VPiece::OffsetLineProblemsValid()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    const VPiece piece = MakeSquarePiece(data);
+    const QVector<VPieceNode> nodes = piece.GetPath().GetNodes();
+    QStringList problems = ProblemsFor(data, piece, {.formulaWidth = QStringLiteral("0.3")});
+    QVERIFY2(problems.isEmpty(), qUtf8Printable(problems.join('\n')));
+    problems = ProblemsFor(data,
+                           piece,
+                           {.start = nodes.at(1).GetId(),
+                            .end = nodes.at(2).GetId(),
+                            .formulaWidth = QStringLiteral("0.3")});
+    QVERIFY2(problems.isEmpty(), qUtf8Printable(problems.join('\n')));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VPiece::OffsetLineTooWide()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    const VPiece piece = MakeSquarePiece(data); // SA 1 cm
+    QVERIFY(ContainsProblem(ProblemsFor(data, piece, {.formulaWidth = QStringLiteral("1.5")}),
+                            QStringLiteral("not between")));
+    QVERIFY(ContainsProblem(ProblemsFor(data, piece, {.formulaWidth = QStringLiteral("1")}),
+                            QStringLiteral("not between")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VPiece::OffsetLineZeroWidth()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    const VPiece piece = MakeSquarePiece(data);
+    QVERIFY(ContainsProblem(ProblemsFor(data, piece, {.formulaWidth = QStringLiteral("0")}),
+                            QStringLiteral("greater than 0")));
+    QVERIFY(ContainsProblem(ProblemsFor(data, piece, {.formulaWidth = QStringLiteral("-1")}),
+                            QStringLiteral("greater than 0")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VPiece::OffsetLineMissingNode()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    const VPiece piece = MakeSquarePiece(data);
+    const QVector<VPieceNode> nodes = piece.GetPath().GetNodes();
+    const quint32 stranger = data->AddGObject(new VPointF(5, 5, QStringLiteral("X"), 0, 0));
+    QVERIFY(ContainsProblem(ProblemsFor(data,
+                                        piece,
+                                        {.start = stranger,
+                                         .end = nodes.at(2).GetId(),
+                                         .formulaWidth = QStringLiteral("0.3")}),
+                            QStringLiteral("not a valid main path point")));
+    QVERIFY(
+        ContainsProblem(ProblemsFor(data,
+                                    piece,
+                                    {.start = 9999, .end = nodes.at(2).GetId(), .formulaWidth = QStringLiteral("0.3")}),
+                        QStringLiteral("not a valid main path point")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VPiece::OffsetLineSameNodes()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    const VPiece piece = MakeSquarePiece(data);
+    const quint32 b = piece.GetPath().GetNodes().at(1).GetId();
+    QVERIFY(ContainsProblem(ProblemsFor(data, piece, {.start = b, .end = b, .formulaWidth = QStringLiteral("0.3")}),
+                            QStringLiteral("not a valid main path point")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VPiece::OffsetLineExcludedNode()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    VPiece piece = MakeSquarePiece(data);
+    QVector<VPieceNode> nodes = piece.GetPath().GetNodes();
+    nodes[1].SetExcluded(true);
+    piece.GetPath().SetNodes(nodes);
+    QVERIFY(ContainsProblem(ProblemsFor(data,
+                                        piece,
+                                        {.start = nodes.at(1).GetId(),
+                                         .end = nodes.at(2).GetId(),
+                                         .formulaWidth = QStringLiteral("0.3")}),
+                            QStringLiteral("not a valid main path point")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Degenerate piece: all nodes at one point -> no contour -> "empty".
+void TST_VPiece::OffsetLineEmpty()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    VPiece piece;
+    piece.SetName(QStringLiteral("Dot"));
+    for (int i = 0; i < 4; ++i)
+    {
+        piece.GetPath().Append(
+            VPieceNode(data->AddGObject(new VPointF(0, 0, QStringLiteral("P%1").arg(i), 0, 0)), Tool::NodePoint));
+    }
+    piece.SetSeamAllowance(true);
+    piece.SetFormulaSAWidth(QStringLiteral("1"), 1);
+
+    QVERIFY(
+        ContainsProblem(ProblemsFor(data, piece, {.formulaWidth = QStringLiteral("0.3")}), QStringLiteral("is empty")));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Fold on D -> A; a partial line C -> B runs C -> D -> A -> B, i.e. along the fold, where the offset is 0.
+void TST_VPiece::OffsetLineAcrossFold()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    VPiece piece = MakeSquarePiece(data);
+    const QVector<VPieceNode> nodes = piece.GetPath().GetNodes();
+    piece.SetMirrorLineStartPoint(nodes.at(3).GetId());
+    piece.SetMirrorLineEndPoint(nodes.at(0).GetId());
+    const QStringList problems = ProblemsFor(data,
+                                             piece,
+                                             {.start = nodes.at(2).GetId(),
+                                              .end = nodes.at(1).GetId(),
+                                              .formulaWidth = QStringLiteral("0.3")});
+    QCOMPARE(problems.size(), 1); // "empty" or "not between" are both acceptable; no crash, exactly one message
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VPiece::OffsetLineProblemsSkipped()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    VPiece piece = MakeSquarePiece(data);
+    QVERIFY(ProblemsFor(data, piece, {.formulaWidth = QStringLiteral("0"), .formulaVisible = QStringLiteral("0")})
+                .isEmpty());
+    piece.SetSeamAllowance(false);
+    QVERIFY(ProblemsFor(data, piece, {.formulaWidth = QStringLiteral("0")}).isEmpty());
+    piece.SetSeamAllowance(true);
+    piece.SetSeamAllowanceBuiltIn(true);
+    QVERIFY(ProblemsFor(data, piece, {.formulaWidth = QStringLiteral("0")}).isEmpty());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Geometry the problem check rejects must never be drawn or exported.
+void TST_VPiece::OffsetLineInvalidNodesNoPoints()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    VPiece piece = MakeSquarePiece(data);
+    QVector<VPieceNode> nodes = piece.GetPath().GetNodes();
+    const quint32 b = nodes.at(1).GetId();
+    const quint32 c = nodes.at(2).GetId();
+
+    // Same node
+    QVERIFY(
+        piece.OffsetLinePoints(data.data(), {.start = b, .end = b, .formulaWidth = QStringLiteral("0.3")}).isEmpty());
+
+    // A point lying on the seam line that is not a node of the main path
+    const quint32 onSeam = data->AddGObject(
+        new VPointF(ToPixel(10, Unit::Cm), ToPixel(5, Unit::Cm), QStringLiteral("M"), 0, 0));
+    QVERIFY(piece.OffsetLinePoints(data.data(), {.start = onSeam, .end = c, .formulaWidth = QStringLiteral("0.3")})
+                .isEmpty());
+
+    // Excluded node
+    nodes[1].SetExcluded(true);
+    piece.GetPath().SetNodes(nodes);
+    QVERIFY(
+        piece.OffsetLinePoints(data.data(), {.start = b, .end = c, .formulaWidth = QStringLiteral("0.3")}).isEmpty());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// A duplicated piece gets new node ids; partial offset lines must follow them, full lines stay full.
+void TST_VPiece::OffsetLineRemapNodes()
+{
+    VPiece piece;
+    piece.SetOffsetLines({{.formulaWidth = QStringLiteral("0.3")},
+                          {.start = 1, .end = 2, .formulaWidth = QStringLiteral("0.2")},
+                          {.start = 1, .end = 7, .formulaWidth = QStringLiteral("0.2")}});
+
+    piece.RemapOffsetLineNodes({{1, 11}, {2, 12}});
+
+    const QVector<VPieceOffsetLine> lines = piece.GetOffsetLines();
+    QCOMPARE(lines.size(), 3);
+    QVERIFY(lines.at(0).IsFull());
+    QCOMPARE(lines.at(1).start, 11U);
+    QCOMPARE(lines.at(1).end, 12U);
+    QCOMPARE(lines.at(2).start, 11U);
+    QCOMPARE(lines.at(2).end, 7U); // unknown id kept, reported as a problem later
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// A warning names the line the same way the dialog list does, so the user can find it.
+void TST_VPiece::OffsetLineProblemNamesLine()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    const VPiece piece = MakeSquarePiece(data);
+    const quint32 b = piece.GetPath().GetNodes().at(1).GetId();
+
+    const VPieceOffsetLine partial{.start = b, .end = b, .formulaWidth = QStringLiteral("0.3")};
+    QCOMPARE(VPiece::OffsetLineName(data.data(), piece.GetPath().GetNodes(), partial), u"B \u2192 B, 0.3"_s);
+    QVERIFY(ContainsProblem(ProblemsFor(data, piece, partial), u"Offset line #1 (B \u2192 B, 0.3)"_s));
+
+    const VPieceOffsetLine full{.formulaWidth = QStringLiteral("0")};
+    QVERIFY(ContainsProblem(ProblemsFor(data, piece, full),
+                            u"Offset line #1 (%1)"_s.arg(
+                                VPiece::OffsetLineName(data.data(), piece.GetPath().GetNodes(), full))));
+
+    const VPieceOffsetLine missing{.start = 9999, .end = b, .formulaWidth = QStringLiteral("0.3")};
+    QVERIFY(VPiece::OffsetLineName(data.data(), piece.GetPath().GetNodes(), missing).startsWith(u"<"_s));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// An end that is not a usable node of the piece is marked and, where possible, named: by the live object if it still
+// exists, otherwise by the last known name stored with the record.
+void TST_VPiece::OffsetLineNameMarksMissingPoints()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    VPiece piece = MakeSquarePiece(data);
+    QVector<VPieceNode> nodes = piece.GetPath().GetNodes();
+    const quint32 b = nodes.at(1).GetId();
+    const quint32 c = nodes.at(2).GetId();
+    const QString w = QStringLiteral("0.3");
+
+    // Gone from the pattern, no hint: nothing to name
+    QCOMPARE(VPiece::OffsetLineName(data.data(), nodes, {.start = b, .end = 9999, .formulaWidth = w}),
+             u"B \u2192 <missing>, 0.3"_s);
+
+    // Gone from the pattern, last known name stored
+    QCOMPARE(VPiece::OffsetLineName(data.data(), nodes, {.start = b, .end = 9999, .formulaWidth = w, .endName = u"Q"_s}),
+             u"B \u2192 <missing: Q>, 0.3"_s);
+
+    // Not in the piece any more but still in the pattern: live name
+    const quint32 stranger = data->AddGObject(new VPointF(5, 5, QStringLiteral("X"), 0, 0));
+    QCOMPARE(VPiece::OffsetLineName(data.data(), nodes, {.start = stranger, .end = c, .formulaWidth = w}),
+             u"<missing: X> \u2192 C, 0.3"_s);
+
+    // Excluded from the piece
+    nodes[2].SetExcluded(true);
+    QCOMPARE(VPiece::OffsetLineName(data.data(), nodes, {.start = b, .end = c, .formulaWidth = w}),
+             u"B \u2192 <missing: C>, 0.3"_s);
+
+    // A full line has no ends to mark, and ignores stray hints
+    QCOMPARE(VPiece::OffsetLineName(data.data(), nodes, {.formulaWidth = w, .startName = u"Z"_s}), u"Full, 0.3"_s);
+
+    // The problem text carries the marker too
+    piece.GetPath().SetNodes(nodes);
+    piece.SetOffsetLines({{.start = b, .end = 9999, .formulaWidth = w, .endName = u"Q"_s}});
+    const QStringList problems = piece.OffsetLineProblems(data.data());
+    QVERIFY2(problems.size() == 1 && problems.constFirst().contains(u"B \u2192 <missing: Q>, 0.3"_s),
+             qUtf8Printable(problems.join('\n')));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// The live name wins over the stored one, so a renamed point shows its new name.
+void TST_VPiece::OffsetLineNameFollowsRename()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    const VPiece piece = MakeSquarePiece(data);
+    const QVector<VPieceNode> nodes = piece.GetPath().GetNodes();
+    const VPieceOffsetLine line{.start = nodes.at(1).GetId(),
+                                .end = nodes.at(2).GetId(),
+                                .formulaWidth = QStringLiteral("0.3"),
+                                .startName = u"OldB"_s,
+                                .endName = u"OldC"_s};
+    QCOMPARE(VPiece::OffsetLineName(data.data(), nodes, line), u"B \u2192 C, 0.3"_s);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// Names are refreshed from live objects; where an object is gone the last known name is kept.
+void TST_VPiece::OffsetLineRefreshNames()
+{
+    const Unit unit = Unit::Cm;
+    QSharedPointer<VContainer> data(new VContainer(nullptr, &unit, VContainer::UniqueNamespace()));
+    VAbstractValApplication::VApp()->SetPatternUnits(unit);
+
+    VPiece piece = MakeSquarePiece(data);
+    const QVector<VPieceNode> nodes = piece.GetPath().GetNodes();
+    const QString w = QStringLiteral("0.3");
+    piece.SetOffsetLines(
+        {{.start = nodes.at(1).GetId(), .end = nodes.at(2).GetId(), .formulaWidth = w, .startName = u"OldB"_s},
+         {.start = nodes.at(1).GetId(), .end = 9999, .formulaWidth = w, .endName = u"Q"_s},
+         {.formulaWidth = w, .startName = u"Stray"_s}});
+
+    piece.RefreshOffsetLineNames(data.data());
+
+    const QVector<VPieceOffsetLine> lines = piece.GetOffsetLines();
+    QCOMPARE(lines.at(0).startName, u"B"_s);
+    QCOMPARE(lines.at(0).endName, u"C"_s);
+    QCOMPARE(lines.at(1).startName, u"B"_s);
+    QCOMPARE(lines.at(1).endName, u"Q"_s);    // 9999 doesn't exist: keep the last known name
+    QVERIFY(lines.at(2).startName.isEmpty()); // full lines carry no names
+    QVERIFY(lines.at(2).endName.isEmpty());
 }

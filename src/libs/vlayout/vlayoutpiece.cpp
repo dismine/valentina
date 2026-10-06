@@ -115,6 +115,29 @@ auto ConvertInternalPaths(const VPiece &piece, const VContainer *pattern) -> QVe
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto ConvertOffsetLines(const VPiece &piece, const VContainer *pattern) -> QVector<VLayoutPiecePath>
+{
+    SCASSERT(pattern != nullptr)
+
+    QVector<VLayoutPiecePath> paths;
+    for (const auto &line : piece.GetOffsetLines())
+    {
+        const QVector<VLayoutPoint> points = piece.OffsetLinePoints(pattern, line);
+        if (points.size() < 2)
+        {
+            continue; // Invisible or empty; problems are reported by the piece tool
+        }
+
+        VLayoutPiecePath path(points);
+        path.SetCutPath(false);
+        path.SetPenStyle(line.penStyle);
+        path.SetNotMirrored(line.notMirrored);
+        paths.append(path);
+    }
+    return paths;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto FindLabelGeometry(const VPatternLabelData &labelData, const VContainer *pattern, qreal &rotationAngle,
                        qreal &labelWidth, qreal &labelHeight, QPointF &pos) -> bool
 {
@@ -692,7 +715,7 @@ auto VLayoutPiece::Create(const VPiece &piece, vidtype id, const VContainer *pat
     VCommonSettings const *settings = VAbstractApplication::VApp()->Settings();
     det.SetContourPoints(futureMainPath.result(), settings->IsPieceShowMainPath() ? false : piece.IsHideMainPath());
     det.SetSeamAllowancePoints(futureSeamAllowance.result(), piece.IsSeamAllowance(), piece.IsSeamAllowanceBuiltIn());
-    det.SetInternalPaths(futureInternalPaths.result());
+    det.SetInternalPaths(futureInternalPaths.result() + ConvertOffsetLines(piece, pattern));
     det.SetPassmarks(futurePassmarks.result());
     det.SetPlaceLabels(futurePlaceLabels.result());
     det.SetPriority(piece.GetPriority());
@@ -1774,6 +1797,7 @@ void VLayoutPiece::DrawMiniature(QPainter &painter, bool togetherWithNotches) co
         QPen pen = painter.pen();
         pen.setStyle(path.PenStyle());
         painter.setPen(pen);
+        painter.setBrush(Qt::NoBrush); // An open path would be filled up to its implicit closing chord
 
         painter.drawPath(m.map(path.GetPainterPath()));
     }
