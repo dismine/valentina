@@ -64,6 +64,9 @@ Project {
     AutotestRunner {
         Depends { name: "buildconfig" }
 
+        // NOTE: on Windows QTest sends its output to OutputDebugString unless stderr is a console or
+        // QT_FORCE_STDERR_LOGGING is set, so a redirected run (CI) shows no test output. windows.yml sets it for
+        // the CI test steps; set it yourself when running this target from a non-console Windows shell.
         arguments: ["-silent"]
 
         Properties {
