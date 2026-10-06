@@ -27,6 +27,7 @@
  *************************************************************************/
 
 #include "tst_valentinacommandline.h"
+#include "../vmisc/defglobal.h"
 #include "../vmisc/vsysexits.h"
 
 #include <QGlobalStatic>
@@ -207,13 +208,13 @@ void TST_ValentinaCommandLine::ExportSplineKeepsCurve()
 
     static const QRegularExpression pathData(R"re(<path[^>]*\sd="([^"]+)")re"_L1);
     static const QRegularExpression command(u"[MLCQZ]"_s);
-    qsizetype longest = 0;
+    vsizetype longest = 0;
     for (auto it = pathData.globalMatch(content); it.hasNext();)
     {
-        longest = qMax(longest, it.next().captured(1).count(command));
+        longest = qMax<vsizetype>(longest, it.next().captured(1).count(command));
     }
 
-    constexpr qsizetype curveCommands = 30;
+    constexpr vsizetype curveCommands = 30;
     QVERIFY2(longest >= curveCommands,
              qUtf8Printable(u"The longest path has %1 commands, the curve is lost"_s.arg(longest)));
 }
