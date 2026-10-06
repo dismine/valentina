@@ -107,7 +107,7 @@ auto VAbstractShortcutManager::GetShortcutsList() const -> QList<VAbstractShortc
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> QString
 {
-    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 89, "Convert all actions.");
+    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 90, "Convert all actions.");
 
     switch (type)
     {
@@ -289,6 +289,8 @@ auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> Q
             return "toolgraduatedcurve"_L1;
         case VShortcutAction::AutoArrangeLabels:
             return "autoarrangelabels"_L1;
+        case VShortcutAction::RestoreTransformationOrigin:
+            return "restoretransformationorigin"_L1;
         case VShortcutAction::LAST_ONE_DO_NOT_USE:
             Q_UNREACHABLE();
             break;
@@ -301,7 +303,7 @@ auto VAbstractShortcutManager::ShortcutActionToString(VShortcutAction type) -> Q
 //---------------------------------------------------------------------------------------------------------------------
 auto VAbstractShortcutManager::ReadableName(VShortcutAction type) -> QString
 {
-    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 89, "Translate all actions.");
+    Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 90, "Translate all actions.");
 
     switch (type)
     {
@@ -483,6 +485,8 @@ auto VAbstractShortcutManager::ReadableName(VShortcutAction type) -> QString
             return tr("Tool 'Graduated curve'", "shortcut for action");
         case VShortcutAction::AutoArrangeLabels:
             return tr("Auto-arrange labels", "shortcut for action");
+        case VShortcutAction::RestoreTransformationOrigin:
+            return tr("Restore transformation origin", "shortcut for action");
         case VShortcutAction::LAST_ONE_DO_NOT_USE:
             Q_UNREACHABLE(); //-V501
             break;

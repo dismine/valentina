@@ -127,6 +127,7 @@ enum class VShortcutAction : quint8
     ToolParallelCurve,
     ToolGraduatedCurve,
     AutoArrangeLabels,
+    RestoreTransformationOrigin,
     LAST_ONE_DO_NOT_USE
 };
 

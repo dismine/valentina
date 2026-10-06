@@ -53,6 +53,7 @@
 #include "../vmisc/svgfont/vsvgfontdatabase.h"
 #include "../vmisc/svgfont/vsvgfontengine.h"
 #include "../vmisc/theme/vscenestylesheet.h"
+#include "../vmisc/theme/themeDef.h"
 #include "../vpapplication.h"
 #include "../vpatterndb/vpiecepath.h"
 #include "undocommands/vpundomovepieceonsheet.h"
@@ -335,8 +336,15 @@ void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         }
     }
 
+    QAction *restoreOriginAction = menu.addAction(tr("Restore transformation origin"));
+    ApplyRestoreOriginShortcut(restoreOriginAction);
+    const VPSheetPtr focusedSheet = layout->GetFocusedSheet();
+    restoreOriginAction->setEnabled(not focusedSheet.isNull() && focusedSheet->TransformationOrigin().custom);
+
+    menu.addSeparator();
+
     // remove from layout action
-    QAction  const*removeAction = menu.addAction(tr("Remove from Sheet"));
+    QAction const *removeAction = menu.addAction(FromTheme(VThemeIcon::EditDelete), tr("Remove from Sheet"));
 
     QAction *const selectedAction = menu.exec(event->screenPos()); // NOLINT(misc-const-correctness)
 
@@ -349,6 +357,10 @@ void VPGraphicsPiece::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     {
         auto *command = new VPUndoMovePieceOnSheet(VPSheetPtr(), piece);
         layout->UndoStack()->push(command);
+    }
+    else if (selectedAction == restoreOriginAction)
+    {
+        emit layout->RestoreOriginRequested();
     }
 }
 

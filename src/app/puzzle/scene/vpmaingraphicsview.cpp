@@ -61,18 +61,6 @@ Q_LOGGING_CATEGORY(pMainGraphicsView, "p.mainGraphicsView") // NOLINT
 
 QT_WARNING_POP
 
-namespace
-{
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
-
-// NOLINTNEXTLINE
-Q_GLOBAL_STATIC_WITH_ARGS(const QKeySequence, restoreOriginShortcut,
-                          (QKeySequence(Qt::ControlModifier | Qt::Key_Asterisk)))
-
-QT_WARNING_POP
-} // namespace
-
 //---------------------------------------------------------------------------------------------------------------------
 VPMainGraphicsView::VPMainGraphicsView(const VPLayoutPtr &layout, QWidget *parent)
   : VMainGraphicsView(parent),
@@ -87,11 +75,18 @@ VPMainGraphicsView::VPMainGraphicsView(const VPLayoutPtr &layout, QWidget *paren
     // add the connections
     connect(layout.data(), &VPLayout::PieceSheetChanged, this, &VPMainGraphicsView::on_PieceSheetChanged);
     connect(layout.data(), &VPLayout::ActiveSheetChanged, this, &VPMainGraphicsView::on_ActiveSheetChanged);
+    connect(layout.data(), &VPLayout::RestoreOriginRequested, this, &VPMainGraphicsView::RestoreOrigin);
 
     auto *restoreOrigin = new QAction(this);
-    restoreOrigin->setShortcut(*restoreOriginShortcut);
     connect(restoreOrigin, &QAction::triggered, this, &VPMainGraphicsView::RestoreOrigin);
     this->addAction(restoreOrigin);
+
+    if (const VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    {
+        connect(manager, &VAbstractShortcutManager::ShortcutsUpdated, restoreOrigin,
+                [restoreOrigin]() { ApplyRestoreOriginShortcut(restoreOrigin); });
+        ApplyRestoreOriginShortcut(restoreOrigin);
+    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -327,7 +322,7 @@ void VPMainGraphicsView::contextMenuEvent(QContextMenuEvent *event)
     QMenu menu;
 
     QAction *restoreOriginAction = menu.addAction(tr("Restore transformation origin"));
-    restoreOriginAction->setShortcut(*restoreOriginShortcut);
+    ApplyRestoreOriginShortcut(restoreOriginAction);
     restoreOriginAction->setEnabled(not sheet.isNull() && sheet->TransformationOrigin().custom);
 
     QAction *removeSheetAction = menu.addAction(FromTheme(VThemeIcon::EditDelete), tr("Remove sheet"));

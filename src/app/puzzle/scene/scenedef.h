@@ -28,8 +28,13 @@
 #ifndef SCENEDEF_H
 #define SCENEDEF_H
 
+#include <QAction>
 #include <QColor>
+#include <QMultiHash>
 #include <QtGlobal>
+
+#include "../vmisc/vabstractapplication.h"
+#include "../vmisc/vabstractshortcutmanager.h"
 
 enum class PGraphicsItem : int
 {
@@ -41,5 +46,13 @@ enum class PGraphicsItem : int
 constexpr qreal foldTextMargin = 5;
 constexpr int foldFontSize = 34;
 constexpr QColor tileColor(180, 180, 180);
+
+inline void ApplyRestoreOriginShortcut(QAction *action)
+{
+    if (VAbstractShortcutManager *manager = VAbstractApplication::VApp()->GetShortcutManager())
+    {
+        manager->UpdateActionShortcuts({{VShortcutAction::RestoreTransformationOrigin, action}});
+    }
+}
 
 #endif // SCENEDEF_H

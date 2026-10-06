@@ -110,6 +110,7 @@ signals:
     void BoundaryTogetherWithNotchesChanged(const VPPiecePtr &piece);
     void PieceZValueChanged(const VPPiecePtr &piece);
     void TransformationOriginChanged();
+    void RestoreOriginRequested();
     void SheetListChanged();
     void PieceSelectionChanged(const VPPiecePtr &piece);
     void PiecePositionValidityChanged(const VPPiecePtr &piece);

@@ -47,4 +47,7 @@ VPuzzleShortcutManager::VPuzzleShortcutManager(QObject *parent)
                  {}});
     AddShortcut({VShortcutAction::ZoomFitBest, {QKeySequence(Qt::ControlModifier | Qt::Key_Equal).toString()}, {}});
     AddShortcut({VShortcutAction::Quit, KeyBindingsToStringList(QKeySequence::Quit), {}});
+    AddShortcut({VShortcutAction::RestoreTransformationOrigin,
+                 {QKeySequence(Qt::ControlModifier | Qt::Key_Asterisk).toString()},
+                 {}});
 }
