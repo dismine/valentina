@@ -257,6 +257,14 @@ auto VPGraphicsTileGrid::boundingRect() const -> QRectF
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPGraphicsTileGrid::shape() const -> QPainterPath
+{
+    // The grid is purely decorative and sits above pieces (z=10). An empty shape keeps it out of hit testing, so
+    // itemAt() and context menus reach the pieces underneath.
+    return {};
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget);
