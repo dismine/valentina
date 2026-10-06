@@ -47,6 +47,7 @@ public:
     ~VPGraphicsTileGrid() override = default;
 
     auto boundingRect() const -> QRectF override;
+    auto shape() const -> QPainterPath override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
     void SetPrintMode(bool newPrintMode);
