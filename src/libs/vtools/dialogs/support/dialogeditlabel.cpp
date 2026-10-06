@@ -824,11 +824,8 @@ void DialogEditLabel::SetPiece(const VPiece &piece)
     m_placeholders[pl_pFoldPosition].second = pieceData.GetFoldPosition();
     m_placeholders[pl_pName].second = piece.GetName();
     m_placeholders[pl_pQuantity].second = QString::number(pieceData.GetQuantity());
-    if (m_doc != nullptr)
-    {
-        m_placeholders[pl_pMaterial].second = m_doc->GetPatternMaterials().value(
-            pieceData.PieceMaterial(piece.IsBufferVisible()));
-    }
+    m_placeholders[pl_pMaterial].second =
+        m_doc->GetPatternMaterials().value(pieceData.PieceMaterial(piece.IsBufferVisible()));
     if (pieceData.IsOnFold())
     {
         QSharedPointer<VTranslator> const phTr = VAbstractApplication::VApp()->GetPlaceholderTranslator();
