@@ -1,4 +1,5 @@
 # Valentina 1.0.6 (unreleased)
+- [Valentina app] Fixed a crash adding a background image after closing or resetting a pattern that already had background images.
 - [Puzzle app] Fixed the piece context menu showing the sheet menu with disabled items when "Show tiles" was enabled.
 - [Valentina app] Fixed curves of old patterns turning into straight lines after saving, and repair patterns already saved that way.
 - [Valentina app] Fixed a crash when a piece path used a curve that had no points, e.g. after a formula edit made the curve invalid.

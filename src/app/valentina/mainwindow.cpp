@@ -4510,6 +4510,9 @@ void MainWindow::Clear()
     m_backgroundImagesWidget->UpdateImages();
     qCDebug(vMainWindow, "Clearing scenes.");
     m_sceneDraw->clear();
+    // The scene has just deleted the background image items and their controls
+    m_backgroudcontrols = nullptr;
+    m_backgroundImages.clear();
     m_sceneDraw->SetAcceptDrop(false);
     m_sceneDetails->clear();
     ArrowTool(true);
