@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern labelPrefix="en">
+    <!--Pattern created with Valentina v1.0.4.0 (https://smart-pattern.com.ua/).-->
+    <version>0.9.8</version>
+    <unit>cm</unit>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <previewCalculations/>
+    <draw name="Piece1">
+        <calculation>
+            <point id="1" mx="0.132292" my="0.264583" name="A" showLabel="true" type="single" x="0" y="20"/>
+            <point id="2" mx="0.132292" my="0.264583" name="B" showLabel="true" type="single" x="10" y="20"/>
+            <point id="3" mx="0.132292" my="0.264583" name="C" showLabel="true" type="single" x="20" y="20"/>
+            <point id="4" mx="0.132292" my="0.264583" name="P" showLabel="true" type="single" x="5" y="70"/>
+            <spline aScale="0" color="black" id="10" penStyle="hair" type="pathInteractive">
+                <pathPoint angle1="180" angle2="0" length1="0" length2="1" pSpline="1"/>
+                <pathPoint angle1="180" angle2="0" length1="1" length2="1" pSpline="2"/>
+                <pathPoint angle1="180" angle2="0" length1="1" length2="0" pSpline="3"/>
+            </spline>
+            <point angle="0" basePoint="4" curve="10" id="20" lineColor="black" mx="0.132292" my="0.264583" name="X" showLabel="true" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="0" basePoint="1" id="30" length="SplPath_X_C+1" lineColor="black" mx="0.132292" my="0.264583" name="X1" showLabel="true" type="endLine" typeLine="hair"/>
+            <spline angle1="0" angle2="180" color="black" id="40" length1="1" length2="1" penStyle="hair" point1="1" point4="3" type="simpleInteractive"/>
+            <point angle="0" basePoint="4" curve="40" id="50" lineColor="black" mx="0.132292" my="0.264583" name="Y" showLabel="true" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="0" basePoint="1" id="60" length="Spl_Y_C+1" lineColor="black" mx="0.132292" my="0.264583" name="Y1" showLabel="true" type="endLine" typeLine="hair"/>
+            <arc aScale="0" angle1="0" angle2="180" center="2" color="black" id="70" penStyle="hair" radius="1" type="simple"/>
+            <point angle="0" basePoint="4" curve="70" id="80" lineColor="black" mx="0.132292" my="0.264583" name="Z" showLabel="true" type="curveIntersectAxis" typeLine="hair"/>
+            <point angle="0" basePoint="1" id="90" length="Arc_B_81+Arc_B_82+1" lineColor="black" mx="0.132292" my="0.264583" name="Z1" showLabel="true" type="endLine" typeLine="hair"/>
+        </calculation>
+        <modeling/>
+        <details/>
+        <groups/>
+    </draw>
+</pattern>

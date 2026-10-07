@@ -316,6 +316,12 @@ void TST_ValentinaCommandLine::TestMode_data() const
     QTest::newRow("Legacy cutArc point without name1/name2 attributes.")
         << "legacy_cutarc_name.val" << u"--test"_s << V_EX_OK;
 
+    QTest::newRow("Legacy formula with the reversed line name of a Height point.")
+        << "legacy_height_line_name.val" << u"--test"_s << V_EX_OK;
+
+    QTest::newRow("Legacy formula with segment names of an axis point without intersection.")
+        << "legacy_axis_no_intersection.val" << u"--test"_s << V_EX_OK;
+
     // A measurement file with only 2 dimensions (size + height). Requesting a dimension the file
     // doesn't have used to crash (null QPointer<QComboBox> dereference in SetDimensionC) instead
     // of failing gracefully.

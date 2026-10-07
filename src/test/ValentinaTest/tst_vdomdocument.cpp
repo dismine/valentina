@@ -169,3 +169,65 @@ void TST_VDomDocument::FindElementByIdStepsOverNonElementNodes()
     QVERIFY2(not e.isNull(), "Element sitting after comment and text nodes was not found.");
     QCOMPARE(e.tagName(), QStringLiteral("point"));
 }
+
+//---------------------------------------------------------------------------------------------------------------------
+// Before 1.1.0 a Height point H with second line point P registered Line_P_H and AngleLine_P_H. Now it registers
+// Line_H_P and AngleLine_H_P, so the converter must rewrite old formulas. The reversed angle has to stay in [0; 360),
+// otherwise an angle >= 180 becomes off by 360. P can be produced by a chain of operations (name = source + suffix).
+void TST_VDomDocument::ConvertHeightLineNamesToV1_1_0() const
+{
+    QTemporaryDir dir;
+    QVERIFY2(dir.isValid(), "Failed to create temporary directory.");
+
+    const QString path = dir.filePath(QStringLiteral("pattern.val"));
+    {
+        QFile file(path);
+        QVERIFY2(file.open(QIODevice::WriteOnly), "Failed to write test pattern.");
+        file.write(QByteArrayLiteral(
+            R"(<?xml version="1.0" encoding="UTF-8"?>
+<pattern>
+    <version>0.9.8</version>
+    <unit>cm</unit>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments>
+        <increment description="" formula="Line_B_H*2" name="#inc"/>
+    </increments>
+    <previewCalculations/>
+    <draw name="Piece1">
+        <calculation>
+            <point id="1" mx="0" my="0" name="A" type="single" x="0" y="0"/>
+            <point id="2" mx="0" my="0" name="B" type="single" x="0" y="10"/>
+            <point id="3" mx="0" my="0" name="C" type="single" x="5" y="5"/>
+            <point basePoint="3" id="4" lineColor="black" mx="0" my="0" name="H" p1Line="1" p2Line="2" type="height" typeLine="hair"/>
+            <operation angle="0" id="5" length="1" suffix="a" type="moving">
+                <source><item idObject="2"/></source>
+                <destination><item idObject="6" mx="0" my="0"/></destination>
+            </operation>
+            <operation angle="0" id="7" length="1" suffix="b" type="moving">
+                <source><item idObject="6"/></source>
+                <destination><item idObject="8" mx="0" my="0"/></destination>
+            </operation>
+            <point basePoint="3" id="9" lineColor="black" mx="0" my="0" name="H2" p1Line="1" p2Line="8" type="height" typeLine="hair"/>
+            <point angle="AngleLine_B_H+AngleLine_A_H" basePoint="1" id="10" length="Line_B_H+Line_Bab_H2" lineColor="black" mx="0" my="0" name="D" type="endLine" typeLine="hair"/>
+        </calculation>
+        <modeling/>
+        <details/>
+        <groups/>
+    </draw>
+</pattern>
+)"));
+    }
+
+    VPatternConverter converter(path);
+    VDomDocument doc;
+    doc.setXMLContent(converter.Convert());
+
+    const QDomElement point = doc.FindElementById(10);
+    QCOMPARE(point.attribute(QStringLiteral("angle")), QStringLiteral("fmod(AngleLine_H_B+180;360)+AngleLine_A_H"));
+    QCOMPARE(point.attribute(QStringLiteral("length")), QStringLiteral("Line_H_B+Line_H2_Bab"));
+
+    const QDomElement increment = doc.elementsByTagName(QStringLiteral("increment")).at(0).toElement();
+    QCOMPARE(increment.attribute(QStringLiteral("formula")), QStringLiteral("Line_H_B*2"));
+}

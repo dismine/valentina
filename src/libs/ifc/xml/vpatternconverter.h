@@ -163,6 +163,7 @@ private:
     void ConvertMirrorLineToV0_9_7() const;
 
     void RemoveInUseAttributeV1_1_0() const;
+    void ConvertHeightLineNamesV1_1_0() const;
 
     void ProcessCalculationSectionsV1_2_0(quint32 &maxId, QSet<quint32> &usedIds, QSet<quint32> &arcs) const;
     void ProcessCalculationElementV1_2_0(const QDomElement &el,

@@ -468,6 +468,10 @@ void VToolSinglePoint::InitSplinePath(SegmentDetails &details)
     SCASSERT(splPath1 != nullptr)
     SCASSERT(splPath2 != nullptr)
 
+    // Donors keep the names even if the segments are empty
+    const QSharedPointer<VAbstractCubicBezierPath> donor1(splPath1);
+    const QSharedPointer<VAbstractCubicBezierPath> donor2(splPath2);
+
     QSharedPointer<VAbstractCubicBezierPath> splP1;
     QSharedPointer<VAbstractCubicBezierPath> splP2;
 
@@ -487,7 +491,7 @@ void VToolSinglePoint::InitSplinePath(SegmentDetails &details)
 
     // This fix can be removed since name1 and name2 no longer should be empty
     Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
-    FixSubCurveNames(details, splPath, splP1, splP2);
+    FixSubCurveNames(details, splPath, donor1, donor2);
 
     splP1->SetNameSuffix(details.name1);
     splP2->SetNameSuffix(details.name2);
@@ -533,10 +537,14 @@ void VToolSinglePoint::InitSpline(SegmentDetails &details)
         spl->CutSpline(0, spl1p2, spl1p3, spl2p2, spl2p3, details.p.name());
     }
 
+    // Donors keep the names even if the segments are empty
+    const QSharedPointer<VAbstractCubicBezier> donor1(new VSpline(spl->GetP1(), spl1p2, spl1p3, details.p));
+    const QSharedPointer<VAbstractCubicBezier> donor2(new VSpline(details.p, spl2p2, spl2p3, spl->GetP4()));
+
     if (not VFuzzyComparePossibleNulls(details.segLength, -1))
     {
-        spline1 = QSharedPointer<VAbstractCubicBezier>(new VSpline(spl->GetP1(), spl1p2, spl1p3, details.p));
-        spline2 = QSharedPointer<VAbstractCubicBezier>(new VSpline(details.p, spl2p2, spl2p3, spl->GetP4()));
+        spline1 = donor1;
+        spline2 = donor2;
     }
     else
     {
@@ -544,12 +552,12 @@ void VToolSinglePoint::InitSpline(SegmentDetails &details)
         spline2 = QSharedPointer<VAbstractCubicBezier>(new VSpline());
     }
 
-    spline1->SetDerivative(true);
-    spline2->SetDerivative(true);
-
     // This fix can be removed since name1 and name2 no longer should be empty
     Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
-    FixSubCurveNames(details, spl, spline1, spline2);
+    FixSubCurveNames(details, spl, donor1, donor2);
+
+    spline1->SetDerivative(true);
+    spline2->SetDerivative(true);
 
     spline1->SetNameSuffix(details.name1);
     spline2->SetNameSuffix(details.name2);
@@ -676,6 +684,10 @@ void VToolSinglePoint::InitArc(SegmentDetails &details)
         arc2.setId(details.segment2Id);
     }
 
+    // Donors keep the names even if the segments are empty
+    const auto donor1 = QSharedPointer<Item>::create(arc1);
+    const auto donor2 = QSharedPointer<Item>::create(arc2);
+
     QSharedPointer<Item> a1;
     QSharedPointer<Item> a2;
 
@@ -695,7 +707,7 @@ void VToolSinglePoint::InitArc(SegmentDetails &details)
 
     // This fix can be removed since name1 and name2 no longer should be empty
     Q_STATIC_ASSERT(VPatternConverter::PatternMinVer < FormatVersion(1, 1, 1));
-    FixSubCurveNames(details, arc, a1, a2);
+    FixSubCurveNames(details, arc, donor1, donor2);
 
     a1->SetNameSuffix(details.name1);
     a2->SetNameSuffix(details.name2);

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern labelPrefix="en">
+    <!--Pattern created with Valentina v1.0.4.0 (https://smart-pattern.com.ua/).-->
+    <version>0.9.8</version>
+    <unit>cm</unit>
+    <description/>
+    <notes/>
+    <measurements/>
+    <increments/>
+    <previewCalculations/>
+    <draw name="Piece1">
+        <calculation>
+            <point id="1" mx="0.132292" my="0.264583" name="A" showLabel="true" type="single" x="0" y="0"/>
+            <point id="2" mx="0.132292" my="0.264583" name="B" showLabel="true" type="single" x="10" y="0"/>
+            <point id="3" mx="0.132292" my="0.264583" name="C" showLabel="true" type="single" x="5" y="5"/>
+            <point basePoint="3" id="4" lineColor="black" mx="0.132292" my="0.264583" name="H" p1Line="1" p2Line="2" showLabel="true" type="height" typeLine="hair"/>
+            <point angle="AngleLine_B_H" basePoint="3" id="5" length="Line_B_H" lineColor="black" mx="0.132292" my="0.264583" name="D" showLabel="true" type="endLine" typeLine="hair"/>
+            <point angle="AngleLine_H_B" basePoint="3" id="6" length="Line_H_B" lineColor="black" mx="0.132292" my="0.264583" name="E" showLabel="true" type="endLine" typeLine="hair"/>
+        </calculation>
+        <modeling/>
+        <details/>
+        <groups/>
+    </draw>
+</pattern>

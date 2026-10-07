@@ -45,6 +45,7 @@ private slots:
     void TestUniqueId_data() const;
     void TestUniqueId() const;
     void FindElementByIdStepsOverNonElementNodes();
+    void ConvertHeightLineNamesToV1_1_0() const;
 
 private:
     Q_DISABLE_COPY_MOVE(TST_VDomDocument) // NOLINT

@@ -102,6 +102,8 @@ VTestApp {
             "wrong_formula.val",
             "test_pedantic.val",
             "legacy_cutarc_name.val",
+            "legacy_height_line_name.val",
+            "legacy_axis_no_intersection.val",
             "buffer.val",
             "buffer_zero_width.val",
             "offset_lines.val",
