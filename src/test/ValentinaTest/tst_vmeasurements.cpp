@@ -29,6 +29,8 @@
 #include "tst_vmeasurements.h"
 #include "../ifc/xml/vvitconverter.h"
 #include "../ifc/xml/vvstconverter.h"
+#include "../vformat/knownmeasurements/vknownmeasurement.h"
+#include "../vformat/knownmeasurements/vknownmeasurements.h"
 #include "../vformat/vmeasurements.h"
 #include "../vpatterndb/vcontainer.h"
 
@@ -176,4 +178,30 @@ void TST_VMeasurements::ReadMeasurementsUnknownType()
     m.ReadMeasurements(0); // Used to crash here dereferencing a null container.
 
     QVERIFY(data->DataVariables()->count(QStringLiteral("height")) != 0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VMeasurements::KnownGroupsKeepFileOrder()
+{
+    // Names are deliberately not alphabetical and the groups are interleaved.
+    const QStringList groups{QStringLiteral("Zeta"),
+                             QStringLiteral("Alpha"),
+                             QStringLiteral("Mid"),
+                             QStringLiteral("Beta"),
+                             QStringLiteral("Omega"),
+                             QStringLiteral("Gamma")};
+
+    VKnownMeasurements known;
+    int index = 0;
+    for (int round = 0; round < 2; ++round)
+    {
+        for (const auto &group : groups)
+        {
+            known.AddMeasurement({.name = QStringLiteral("m%1").arg(index), .index = index, .group = group});
+            ++index;
+        }
+    }
+    known.AddMeasurement({.name = QStringLiteral("general"), .index = index}); // no group, must not be listed
+
+    QCOMPARE(known.Groups(), groups);
 }

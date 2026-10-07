@@ -42,6 +42,7 @@ private slots:
     void CreateEmptyMultisizeFile();
     void CreateEmptyIndividualFile();
     void ReadMeasurementsUnknownType();
+    void KnownGroupsKeepFileOrder();
 };
 
 #endif // TST_VMEASUREMENTS_H

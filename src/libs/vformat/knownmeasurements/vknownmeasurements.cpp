@@ -30,7 +30,6 @@
 #include "vknownmeasurements_p.h"
 
 #include <QMap>
-#include <QSet>
 #include <QString>
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -171,19 +170,19 @@ auto VKnownMeasurements::Images() const -> QMap<QUuid, VPatternImage>
 //---------------------------------------------------------------------------------------------------------------------
 auto VKnownMeasurements::Groups() const -> QStringList
 {
-    QSet<QString> groups;
+    // Groups in order of first appearance in the file; a QSet would give arbitrary hash order.
+    QStringList groups;
 
-    auto i = d->m_measurements.constBegin();
-    while (i != d->m_measurements.constEnd())
+    const QMap<int, VKnownMeasurement> ordered = OrderedMeasurements();
+    for (auto i = ordered.constBegin(); i != ordered.constEnd(); ++i)
     {
-        if (!i.value().group.isEmpty())
+        if (const QString &group = i.value().group; !group.isEmpty() && !groups.contains(group))
         {
-            groups.insert(i.value().group);
+            groups.append(group);
         }
-        ++i;
     }
 
-    return groups.values();
+    return groups;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

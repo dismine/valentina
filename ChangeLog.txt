@@ -1,4 +1,5 @@
 # Valentina 1.1.2 (unreleased)
+- [Tape app] Fixed the groups in the known measurements database dialog appearing in random order instead of the order defined in the file.
 - [Valentina app] Fixed a crash adding a background image after closing or resetting a pattern that already had background images.
 - [Valentina app] Fixed the angle value being hidden in the "Point along perpendicular" dialog on Windows 11.
 - [Puzzle app] Added "Restore transformation origin" to the piece context menu and made its shortcut configurable.
