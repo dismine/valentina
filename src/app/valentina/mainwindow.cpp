@@ -5071,6 +5071,16 @@ void MainWindow::FullParseFile()
 {
     qCDebug(vMainWindow, "Full parsing file");
 
+    if (not m_dialogTool.isNull())
+    {
+        // A reparse clears the scene and deletes the visualization of a creation dialog that is still open.
+        // Without this line the only trace of that state is a missing ~DialogTool entry.
+        qCDebug(vMainWindow,
+                "Full parsing with a creation dialog open: %s, visualization %s.",
+                m_dialogTool->metaObject()->className(),
+                m_dialogTool->VisualizationBroken() ? "already gone" : "alive");
+    }
+
     if (m_toolOptionsDialogVisible)
     {
         // A full reparse tears down all tools and the VContainer. Any tool options dialog still open
