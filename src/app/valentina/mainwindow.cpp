@@ -4980,6 +4980,9 @@ void MainWindow::Clear()
     qCDebug(vMainWindow, "Clearing scenes.");
     m_sceneDraw->clear();
     qCDebug(vMainWindow, "Draw scene cleared.");
+    // The scene has just deleted the background image items and their controls
+    m_backgroudcontrols = nullptr;
+    m_backgroundImages.clear();
     m_sceneDraw->SetAcceptDrop(false);
     m_sceneDetails->clear();
     qCDebug(vMainWindow, "Details scene cleared.");
