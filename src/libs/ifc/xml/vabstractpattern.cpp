@@ -1767,6 +1767,7 @@ auto VAbstractPattern::ListPointExpressions() const -> QVector<VFormulaField>
         ReadExpressionAttribute(expressions, dom, AttrRadius);
         ReadExpressionAttribute(expressions, dom, AttrWidth);
         ReadExpressionAttribute(expressions, dom, AttrHeight);
+        ReadExpressionAttribute(expressions, dom, AttrVisible);
     }
 
     return expressions;
@@ -1897,6 +1898,7 @@ auto VAbstractPattern::ListOperationExpressions() const -> QVector<VFormulaField
 
         // Each tag can contains several attributes.
         ReadExpressionAttribute(expressions, dom, AttrAngle);
+        ReadExpressionAttribute(expressions, dom, AttrRotationAngle);
         ReadExpressionAttribute(expressions, dom, AttrLength);
     }
 
@@ -1922,6 +1924,9 @@ auto VAbstractPattern::ListNodesExpressions(const QDomElement &nodes) const -> Q
             ReadExpressionAttribute(expressions, element, VAbstractPattern::AttrSABefore);
             ReadExpressionAttribute(expressions, element, VAbstractPattern::AttrSAAfter);
             ReadExpressionAttribute(expressions, element, VAbstractPattern::AttrPassmarkLength);
+            ReadExpressionAttribute(expressions, element, VAbstractPattern::AttrPassmarkWidth);
+            ReadExpressionAttribute(expressions, element, VAbstractPattern::AttrPassmarkAngle);
+            ReadExpressionAttribute(expressions, element, VAbstractPattern::AttrPassmarkVisibility);
         }
     }
     return expressions;
@@ -1945,6 +1950,7 @@ auto VAbstractPattern::ListPathExpressions() const -> QVector<VFormulaField>
             continue;
         }
 
+        ReadExpressionAttribute(expressions, dom, AttrVisible);
         expressions << ListNodesExpressions(dom.firstChildElement(TagNodes));
     }
 
@@ -1996,6 +2002,23 @@ auto VAbstractPattern::ListPieceExpressions() const -> QVector<VFormulaField>
                 ReadExpressionAttribute(expressions, line, AttrWidth);
                 ReadExpressionAttribute(expressions, line, AttrVisible);
             }
+        }
+
+        for (const auto &tag : {TagData, TagPatternInfo})
+        {
+            if (const QDomElement label = dom.firstChildElement(tag); not label.isNull())
+            {
+                ReadExpressionAttribute(expressions, label, AttrWidth);
+                ReadExpressionAttribute(expressions, label, AttrHeight);
+                ReadExpressionAttribute(expressions, label, AttrRotation);
+            }
+        }
+
+        if (const QDomElement mirrorLine = dom.firstChildElement(TagMirrorLine); not mirrorLine.isNull())
+        {
+            ReadExpressionAttribute(expressions, mirrorLine, AttrFoldLineHeightFormula);
+            ReadExpressionAttribute(expressions, mirrorLine, AttrFoldLineWidthFormula);
+            ReadExpressionAttribute(expressions, mirrorLine, AttrFoldLineCenterFormula);
         }
 
         expressions << ListNodesExpressions(dom.firstChildElement(TagNodes));

@@ -47,6 +47,10 @@ private slots:
     void MaxRecordedIdCountsOrphanedNodes();
     void MaxRecordedIdOnEmptyDocumentIsZero();
     void ListExpressionsIncludesBufferFormulas();
+    // Increment rename and the "used" check must see every formula attribute the pattern stores
+    void ListExpressionsIncludesAllFormulas();
+    // Renaming an object must update every piece formula that refers to it
+    void RenameObjectUpdatesAllPieceFormulas();
     void ParsePieceOffsetLinesReadsNames();
     // Old patterns: curves must keep their shape when converted to the new attributes
     void IsOldFormatSplineDetection();

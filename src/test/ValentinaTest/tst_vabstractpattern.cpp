@@ -36,6 +36,7 @@
 #include "../vmisc/vabstractvalapplication.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolspline.h"
 #include "../vtools/tools/drawTools/toolcurve/vtoolsplinepath.h"
+#include "../vtools/undocommands/renameobject.h"
 
 #include <QElapsedTimer>
 #include <QThreadPool>
@@ -249,6 +250,117 @@ void TST_VAbstractPattern::ListExpressionsIncludesBufferFormulas()
 
     QVERIFY2(formulas.contains(u"#show"_s), qUtf8Printable(formulas.join(", "_L1)));
     QVERIFY2(formulas.contains(u"#buffer"_s), qUtf8Printable(formulas.join(", "_L1)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPattern::ListExpressionsIncludesAllFormulas()
+{
+    TestDoc doc;
+    QVERIFY(doc.setContent(QByteArray(R"(
+        <pattern>
+            <draw name="Block A">
+                <calculation>
+                    <operation id="5" type="moveOperation" angle="0" length="0" rotationAngle="#rotationAngle"/>
+                </calculation>
+                <modeling>
+                    <point id="6" type="placeLabel" visible="#placeLabelVisible"/>
+                    <path id="7" visible="#pathVisible"/>
+                </modeling>
+                <details>
+                    <detail id="9">
+                        <data width="#dataWidth" height="#dataHeight" rotation="#dataRotation"/>
+                        <patternInfo width="#infoWidth" height="#infoHeight" rotation="#infoRotation"/>
+                        <mirrorLine height="#foldHeight" width="#foldWidth" center="#foldCenter"/>
+                        <nodes>
+                            <node idObject="1" type="NodePoint" passmarkWidth="#passmarkWidth"
+                                  passmarkAngleFormula="#passmarkAngle"
+                                  passmarkVisibilityFormula="#passmarkVisibility"/>
+                        </nodes>
+                    </detail>
+                </details>
+            </draw>
+        </pattern>)")));
+
+    QStringList formulas;
+    for (const auto &field : doc.ListExpressions())
+    {
+        formulas.append(field.expression);
+    }
+
+    const QStringList expected{u"#rotationAngle"_s,
+                               u"#placeLabelVisible"_s,
+                               u"#pathVisible"_s,
+                               u"#dataWidth"_s,
+                               u"#dataHeight"_s,
+                               u"#dataRotation"_s,
+                               u"#infoWidth"_s,
+                               u"#infoHeight"_s,
+                               u"#infoRotation"_s,
+                               u"#foldHeight"_s,
+                               u"#foldWidth"_s,
+                               u"#foldCenter"_s,
+                               u"#passmarkWidth"_s,
+                               u"#passmarkAngle"_s,
+                               u"#passmarkVisibility"_s};
+    QStringList missing;
+    for (const auto &formula : expected)
+    {
+        if (not formulas.contains(formula))
+        {
+            missing.append(formula);
+        }
+    }
+
+    QVERIFY2(missing.isEmpty(), qUtf8Printable(u"Missing: "_s + missing.join(", "_L1)));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VAbstractPattern::RenameObjectUpdatesAllPieceFormulas()
+{
+    TestDoc doc;
+    QVERIFY(doc.setContent(QByteArray(R"(
+        <pattern>
+            <draw name="Block A">
+                <details>
+                    <detail id="9" width="Line_A_B" bufferVisible="Line_A_B" bufferWidth="Line_A_B">
+                        <offsetLines>
+                            <offsetLine width="Line_A_B" visible="Line_A_B"/>
+                        </offsetLines>
+                        <nodes>
+                            <node idObject="1" type="NodePoint" passmarkVisibilityFormula="Line_A_B"/>
+                        </nodes>
+                    </detail>
+                </details>
+            </draw>
+        </pattern>)")));
+    doc.RefreshElementIdCache();
+
+    VPatternGraph *graph = doc.PatternGraph();
+    graph->AddVertex(1, VNodeType::OBJECT, 0);
+    graph->AddVertex(9, VNodeType::MODELING_TOOL, 0);
+    graph->AddEdge(1, 9);
+
+    RenameLabel rename(u"A"_s, u"C"_s, &doc, 1);
+    rename.redo();
+
+    QStringList stale;
+    const QDomElement detail = doc.elementsByTagName(VAbstractPattern::TagDetail).at(0).toElement();
+    const auto Check = [&stale](const QDomElement &element, const QString &attr)
+    {
+        if (element.attribute(attr) != "Line_C_B"_L1)
+        {
+            stale.append(element.tagName() + '/'_L1 + attr + '='_L1 + element.attribute(attr));
+        }
+    };
+    Check(detail, u"width"_s);
+    Check(detail, u"bufferVisible"_s);
+    Check(detail, u"bufferWidth"_s);
+    const QDomElement line = detail.firstChildElement(u"offsetLines"_s).firstChildElement();
+    Check(line, u"width"_s);
+    Check(line, u"visible"_s);
+    Check(detail.firstChildElement(u"nodes"_s).firstChildElement(), u"passmarkVisibilityFormula"_s);
+
+    QVERIFY2(stale.isEmpty(), qUtf8Printable(u"Not renamed: "_s + stale.join(", "_L1)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

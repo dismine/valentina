@@ -2686,7 +2686,7 @@ void VPatternConverter::ConvertHeightLineNamesV1_1_0() const
                                                "kAsm2"_L1,          "formula"_L1,       "before"_L1,
                                                "after"_L1,          "rotation"_L1,      "rotationAngle"_L1,
                                                "passmarkLength"_L1, "passmarkWidth"_L1, "passmarkAngleFormula"_L1,
-                                               "visible"_L1};
+                                               "visible"_L1,        "center"_L1};
 
     // Walk the tree by siblings, a live QDomNodeList is rebuilt after each attribute change
     QDomElement el = documentElement();

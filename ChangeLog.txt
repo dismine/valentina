@@ -1,4 +1,5 @@
 # Valentina 1.1.2 (unreleased)
+- [Valentina app] Fixed renaming an increment or object not updating some passmark, label, fold line and visibility formulas.
 - [Valentina app] Fixed formula errors when opening older patterns that use a Height point's line in reverse order or a segment of an axis point without an intersection.
 - [Tape app] Fixed the groups in the known measurements database dialog appearing in random order instead of the order defined in the file.
 - [Valentina app] Fixed a crash adding a background image after closing or resetting a pattern that already had background images.

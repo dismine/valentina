@@ -288,7 +288,8 @@ void AbstractObjectRename::ProcessNodeElement(QDomElement &node) const
                                    VAbstractPattern::AttrSAAfter,
                                    VAbstractPattern::AttrPassmarkLength,
                                    VAbstractPattern::AttrPassmarkWidth,
-                                   VAbstractPattern::AttrPassmarkAngle};
+                                   VAbstractPattern::AttrPassmarkAngle,
+                                   VAbstractPattern::AttrPassmarkVisibility};
     for (const auto &attr : nodeAttrs)
     {
         ProcessAttribute(node, attr);
@@ -339,6 +340,17 @@ void AbstractObjectRename::ProcessDetailElement(QDomElement &element) const
 
     // Process detail's own attributes
     ProcessAttribute(element, AttrWidth);
+    ProcessAttribute(element, VAbstractPattern::AttrBufferVisible);
+    ProcessAttribute(element, VAbstractPattern::AttrBufferWidth);
+
+    // Process offset lines
+    const QDomNodeList offsetLines = element.elementsByTagName(VAbstractPattern::TagOffsetLine);
+    for (int i = 0; i < offsetLines.count(); ++i)
+    {
+        QDomElement line = offsetLines.at(i).toElement();
+        ProcessAttribute(line, AttrWidth);
+        ProcessAttribute(line, VAbstractPattern::AttrVisible);
+    }
 
     // Process data child - can use firstChildElement for single elements
     QDomElement data = element.firstChildElement(VAbstractPattern::TagData);

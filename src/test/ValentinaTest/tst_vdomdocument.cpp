@@ -213,7 +213,12 @@ void TST_VDomDocument::ConvertHeightLineNamesToV1_1_0() const
             <point angle="AngleLine_B_H+AngleLine_A_H" basePoint="1" id="10" length="Line_B_H+Line_Bab_H2" lineColor="black" mx="0" my="0" name="D" type="endLine" typeLine="hair"/>
         </calculation>
         <modeling/>
-        <details/>
+        <details>
+            <detail id="11">
+                <nodes><node idObject="1" type="NodePoint"/></nodes>
+                <mirrorLine center="Line_B_H"/>
+            </detail>
+        </details>
         <groups/>
     </draw>
 </pattern>
@@ -230,4 +235,7 @@ void TST_VDomDocument::ConvertHeightLineNamesToV1_1_0() const
 
     const QDomElement increment = doc.elementsByTagName(QStringLiteral("increment")).at(0).toElement();
     QCOMPARE(increment.attribute(QStringLiteral("formula")), QStringLiteral("Line_H_B*2"));
+
+    const QDomElement mirrorLine = doc.elementsByTagName(QStringLiteral("mirrorLine")).at(0).toElement();
+    QCOMPARE(mirrorLine.attribute(QStringLiteral("center")), QStringLiteral("Line_H_B"));
 }
