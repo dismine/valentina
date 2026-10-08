@@ -578,7 +578,7 @@ void TKMMainWindow::ExportToCSVData(const QString &fileName, bool withHeader, in
         }
     }
 
-    const QMap<int, VKnownMeasurement> orderedTable = m_known.OrderedMeasurements();
+    const QMap<int, VKnownMeasurement> orderedTable = Known().OrderedMeasurements();
     int row = 0;
     for (auto iMap = orderedTable.constBegin(); iMap != orderedTable.constEnd(); ++iMap)
     {
@@ -1066,7 +1066,7 @@ void TKMMainWindow::RemoveImage()
     m_known = VKnownMeasurements();
     RefreshImages();
 
-    if (m_known.Images().isEmpty())
+    if (Known().Images().isEmpty())
     {
         ui->toolButtonRemoveImage->setDisabled(true);
         ui->toolButtonSaveImage->setDisabled(true);
@@ -1092,7 +1092,7 @@ void TKMMainWindow::SaveImage()
         return;
     }
 
-    QMap<QUuid, VPatternImage> const images = m_known.Images();
+    QMap<QUuid, VPatternImage> const images = Known().Images();
 
     QUuid const id = item->data(Qt::UserRole).toUuid();
     if (!images.contains(id))
@@ -1161,8 +1161,8 @@ void TKMMainWindow::ShowImage()
             return;
         }
 
-        VKnownMeasurement const m = m_known.Measurement(nameField->data(Qt::UserRole).toString());
-        image = m_known.Image(m.diagram);
+        VKnownMeasurement const m = Known().Measurement(nameField->data(Qt::UserRole).toString());
+        image = Known().Image(m.diagram);
     }
     else if (lastSelectedTab == ui->tabWidget->indexOf(ui->tabImages)
              || ui->tabWidget->currentIndex() == ui->tabWidget->indexOf(ui->tabImages))
@@ -1173,7 +1173,7 @@ void TKMMainWindow::ShowImage()
             return;
         }
 
-        QMap<QUuid, VPatternImage> const images = m_known.Images();
+        QMap<QUuid, VPatternImage> const images = Known().Images();
 
         QUuid const id = item->data(Qt::UserRole).toUuid();
         if (!images.contains(id))
@@ -1268,9 +1268,9 @@ void TKMMainWindow::ShowMData()
     const QTableWidgetItem *nameField = ui->tableWidget->item(ui->tableWidget->currentRow(), ColumnName); // name
     SCASSERT(nameField != nullptr)
 
-    VKnownMeasurement const m = m_known.Measurement(nameField->data(Qt::UserRole).toString());
+    VKnownMeasurement const m = Known().Measurement(nameField->data(Qt::UserRole).toString());
 
-    ShowMDiagram(m_known.Image(m.diagram));
+    ShowMDiagram(Known().Image(m.diagram));
 
     ui->plainTextEditDescription->blockSignals(true);
     ui->plainTextEditDescription->setPlainText(m.description);
@@ -1324,7 +1324,7 @@ void TKMMainWindow::ShowImageData()
 
     const QListWidgetItem *activeImage = ui->listWidget->item(ui->listWidget->currentRow());
     QUuid const imageId = activeImage->data(Qt::UserRole).toUuid();
-    VPatternImage const image = m_known.Image(imageId);
+    VPatternImage const image = Known().Image(imageId);
 
     ShowMDiagram(image);
 
@@ -1383,7 +1383,7 @@ void TKMMainWindow::SaveMName()
 
     QString newName = ui->lineEditName->text().isEmpty() ? GenerateMeasurementName() : ui->lineEditName->text();
 
-    if (QHash<QString, VKnownMeasurement> const m = m_known.Measurements(); m.contains(newName))
+    if (QHash<QString, VKnownMeasurement> const m = Known().Measurements(); m.contains(newName))
     {
         qint32 num = 2;
         QString name = newName;
@@ -1560,7 +1560,7 @@ void TKMMainWindow::SaveMDiagram()
     ui->tableWidget->selectRow(row);
     ui->tableWidget->blockSignals(false);
 
-    ShowMDiagram(m_known.Image(id));
+    ShowMDiagram(Known().Image(id));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1604,8 +1604,12 @@ void TKMMainWindow::SaveImageSizeScale()
 
     // The size scale does not affect the list thumbnails (scaled to a fixed iconSize) or any
     // visible widget, so there is no need to rebuild the image list or the measurement panel
-    // here. Just invalidate the cache; it is reloaded lazily on the next access.
-    m_known = VKnownMeasurements();
+    // here. This slot fires on every spin box step, so patch the cached image instead of
+    // re-reading the whole document.
+    const QUuid id = item->data(Qt::UserRole).toUuid();
+    VPatternImage image = Known().Image(id);
+    image.SetSizeScale(ui->doubleSpinBoxImageSize->value());
+    m_known.AddImage(id, image);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1866,7 +1870,7 @@ void TKMMainWindow::InitWindow()
     connect(ui->comboBoxDiagram, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
             &TKMMainWindow::SaveMDiagram);
 
-    m_groupCompleter = new QCompleter(m_known.Groups(), this);
+    m_groupCompleter = new QCompleter(Known().Groups(), this);
     m_groupCompleter->setCompletionMode(QCompleter::PopupCompletion);
     m_groupCompleter->setModelSorting(QCompleter::UnsortedModel);
     m_groupCompleter->setFilterMode(Qt::MatchContains);
@@ -2352,6 +2356,16 @@ void TKMMainWindow::CreateWindowMenu(QMenu *menu)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto TKMMainWindow::Known() const -> const VKnownMeasurements &
+{
+    if (!m_known.IsValid() && m_m != nullptr)
+    {
+        m_known = m_m->KnownMeasurements();
+    }
+    return m_known;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void TKMMainWindow::RefreshTable()
 {
     QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
@@ -2359,12 +2373,8 @@ void TKMMainWindow::RefreshTable()
     ui->tableWidget->blockSignals(true);
     ui->tableWidget->clearContents();
 
-    if (!m_known.IsValid())
-    {
-        m_known = m_m->KnownMeasurements();
-    }
 
-    const QMap<int, VKnownMeasurement> orderedTable = m_known.OrderedMeasurements();
+    const QMap<int, VKnownMeasurement> orderedTable = Known().OrderedMeasurements();
     qint32 currentRow = -1;
     ui->tableWidget->setRowCount(static_cast<int>(orderedTable.size()));
     for (auto iMap = orderedTable.constBegin(); iMap != orderedTable.constEnd(); ++iMap)
@@ -2383,7 +2393,7 @@ void TKMMainWindow::RefreshTable()
 
     ui->actionExportToCSV->setEnabled(ui->tableWidget->rowCount() > 0);
 
-    m_groupCompleter->setModel(new QStringListModel(m_known.Groups(), m_groupCompleter));
+    m_groupCompleter->setModel(new QStringListModel(Known().Groups(), m_groupCompleter));
 
     QGuiApplication::restoreOverrideCursor();
 }
@@ -2398,11 +2408,7 @@ void TKMMainWindow::RefreshImages()
     ui->listWidget->blockSignals(true);
     ui->listWidget->clear();
 
-    if (!m_known.IsValid())
-    {
-        m_known = m_m->KnownMeasurements();
-    }
-    QMap<QUuid, VPatternImage> const images = m_known.Images();
+    QMap<QUuid, VPatternImage> const images = Known().Images();
 
     int index = 1;
     for (auto i = images.cbegin(), end = images.cend(); i != end; ++i)
@@ -2600,7 +2606,7 @@ void TKMMainWindow::ImageFields(bool enabled)
 //---------------------------------------------------------------------------------------------------------------------
 auto TKMMainWindow::GenerateMeasurementName() const -> QString
 {
-    QHash<QString, VKnownMeasurement> const m = m_known.Measurements();
+    QHash<QString, VKnownMeasurement> const m = Known().Measurements();
     qint32 num = 1;
     QString name;
     do
@@ -2640,7 +2646,7 @@ void TKMMainWindow::InitMeasurementDiagramList()
 {
     ui->comboBoxDiagram->clear();
 
-    QMap<QUuid, VPatternImage> const images = m_known.Images();
+    QMap<QUuid, VPatternImage> const images = Known().Images();
 
     ui->comboBoxDiagram->addItem(tr("None"), QUuid());
 
@@ -2700,7 +2706,7 @@ auto TKMMainWindow::CheckMName(const QString &name, const QSet<QString> &importe
         throw VException(tr("Measurement '%1' doesn't match regex pattern.").arg(name));
     }
 
-    if (m_known.Measurements().contains(name))
+    if (Known().Measurements().contains(name))
     {
         throw VException(tr("Measurement '%1' already used in the file.").arg(name));
     }

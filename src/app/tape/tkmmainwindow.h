@@ -142,7 +142,8 @@ private:
 
     QPointer<QTemporaryFile> m_tmpImage{};
 
-    VKnownMeasurements m_known{};
+    // Cache of m_m's data. Invalidate with m_known = VKnownMeasurements(); read only through Known().
+    mutable VKnownMeasurements m_known{};
 
     QCompleter *m_groupCompleter{};
 
@@ -174,6 +175,8 @@ private:
     static auto UnknownMeasurementImage() -> QString;
 
     void CreateWindowMenu(QMenu *menu);
+
+    auto Known() const -> const VKnownMeasurements &;
 
     void RefreshTable();
     void RefreshImages();
