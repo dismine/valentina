@@ -59,6 +59,7 @@ using namespace Qt::Literals::StringLiterals;
 //---------------------------------------------------------------------------------------------------------------------
 auto main(int argc, char *argv[]) -> int
 {
+    // Register the Qt resources compiled into the application (cursors, icons, schemas, flags...).
     Q_INIT_RESOURCE(cursor);     // NOLINT
     Q_INIT_RESOURCE(toolcursor); // NOLINT
     Q_INIT_RESOURCE(icon);       // NOLINT
