@@ -34,6 +34,13 @@ VApp {
     }
 
     Properties {
+        // Un-bundled (debug) builds never run macdeployqt, and a Qt whose install names use @rpath (the online
+        // installer's, unlike Homebrew's) is then only found through an explicit rpath to its lib dir.
+        condition: qbs.targetOS.contains("macos") && !bundle.isBundle && buildconfig.enableRPath
+        cpp.rpaths: base.concat([Qt.core.libPath])
+    }
+
+    Properties {
         condition: buildconfig.enableAppImage && qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos")
         cpp.dynamicLibraries: ["icudata", "icui18n", "icuuc"]
     }

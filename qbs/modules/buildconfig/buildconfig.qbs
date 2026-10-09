@@ -214,7 +214,7 @@ Module {
             if (Qt.core.versionMinor >= 12)
                 qtRequiredMinVersion = "14.4";
             // For Qt 6.10 https://doc-snapshots.qt.io/qt6-6.10/supported-platforms.html
-            if (Qt.core.versionMinor >= 10)
+            else if (Qt.core.versionMinor >= 10)
                 qtRequiredMinVersion = "13.0";
             // For Qt 6.8 https://doc-snapshots.qt.io/qt6-6.8/supported-platforms.html
             else if (Qt.core.versionMinor >= 8)

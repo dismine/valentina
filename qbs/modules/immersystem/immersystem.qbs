@@ -18,7 +18,10 @@ Module {
         property bool found
 
         configure: {
-            var candidates = ["/usr/include", "/usr/local/include", "/opt/homebrew/include"];
+            // Homebrew's per-formula prefix first: its global include dir also holds the Homebrew Qt
+            // headers, which would shadow a different Qt (e.g. the online installer's) as -isystem.
+            var candidates = ["/opt/homebrew/opt/immer/include", "/usr/local/opt/immer/include",
+                              "/usr/include", "/usr/local/include", "/opt/homebrew/include"];
             found = false;
             for (var i = 0; i < candidates.length; ++i) {
                 if (File.exists(FileInfo.joinPaths(candidates[i], "immer", "map.hpp"))) {
