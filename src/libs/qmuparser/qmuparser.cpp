@@ -26,6 +26,7 @@
 #include <QtDebug>
 #include <QtGlobal>
 #include <QtMath>
+#include <cmath>
 #include <sstream>
 #include <string>
 
@@ -246,7 +247,8 @@ auto QmuParser::Abs(qreal v) -> qreal
 //---------------------------------------------------------------------------------------------------------------------
 auto QmuParser::Rint(qreal v) -> qreal
 {
-    return qFloor(v + 0.5);
+    // Not qFloor(): it converts to int, which asserts on NaN since Qt 6.12 (token parsing evaluates with NaN).
+    return std::floor(v + 0.5);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

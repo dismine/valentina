@@ -2532,7 +2532,8 @@ VTextStream &VTextStream::operator<<(qlonglong i)
 {
     Q_D(VTextStream);
     CHECK_VALID_STREAM(*this);
-    d->putNumber(static_cast<qulonglong>(qAbs(i)), i < 0);
+    // Unsigned negation: qAbs() is undefined (and asserts since Qt 6.12) for the minimum qlonglong.
+    d->putNumber(i < 0 ? 0 - static_cast<qulonglong>(i) : static_cast<qulonglong>(i), i < 0);
     return *this;
 }
 
