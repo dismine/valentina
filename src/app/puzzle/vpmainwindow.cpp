@@ -5488,12 +5488,16 @@ void VPMainWindow::on_actionOptimizeOnline_triggered()
                       });
     if (VAbstractApplication::VApp()->Settings()->GetShareFiles())
     {
-        // spec 17.1: the layout file as last saved (nothing if never saved) and what the job was asked for
+        // spec 17.1: the layout as it is in memory (even unsaved) and what the job was asked for
+        QByteArray data;
+        QBuffer buffer(&data);
+        buffer.open(QIODevice::WriteOnly);
+        VPLayoutFileWriter fileWriter;
+        fileWriter.WriteFile(m_layout, &buffer);
         QList<QPair<QString, QByteArray>> files;
-        QFile layout(curFile);
-        if (not curFile.isEmpty() && layout.open(QIODevice::ReadOnly))
+        if (not fileWriter.hasError())
         {
-            files.append({curFile, layout.readAll()});
+            files.append({curFile.isEmpty() ? QStringLiteral("layout.vlt") : curFile, data});
         }
         m_nestor->SetFiles(files, QJsonObject{{"sheet", sheet->GetName()},
                                               {"pieces_mode", static_cast<int>(dialog.Mode())},
