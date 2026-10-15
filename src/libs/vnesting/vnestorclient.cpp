@@ -39,6 +39,10 @@
 #include <QRandomGenerator>
 #include <QtMath>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 4, 0)
+#include "../vmisc/compatibility.h"
+#endif
+
 using namespace Qt::Literals::StringLiterals;
 
 namespace

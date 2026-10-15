@@ -29,7 +29,6 @@
 #include "vaccounttoken.h"
 
 #include <QJsonDocument>
-#include <QTimeZone>
 
 //---------------------------------------------------------------------------------------------------------------------
 VAccountToken::VAccountToken(const QString &jwt)
@@ -99,8 +98,8 @@ auto VAccountToken::Expiry() const -> QDateTime
     {
         return {};
     }
-    return QDateTime::fromSecsSinceEpoch(static_cast<qint64>(m_claims.value(QStringLiteral("exp")).toDouble()),
-                                         QTimeZone::UTC);
+    // QTimeZone::UTC needs Qt 6.5
+    return QDateTime::fromSecsSinceEpoch(static_cast<qint64>(m_claims.value(QStringLiteral("exp")).toDouble())).toUTC();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

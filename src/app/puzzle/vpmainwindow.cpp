@@ -33,6 +33,7 @@
 #include <QBuffer>
 #include <QCloseEvent>
 #include <QFile>
+#include <QDesktopServices>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QFileSystemWatcher>

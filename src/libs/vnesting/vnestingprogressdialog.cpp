@@ -33,6 +33,7 @@
 #include <QLocale>
 #include <QProgressBar>
 #include <QPushButton>
+#include <QStyle>
 #include <QStyleFactory>
 #include <QtMath>
 
