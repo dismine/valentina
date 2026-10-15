@@ -360,6 +360,21 @@ public:
     auto GetClientID() const -> QString;
     void SetClientID(const QString &clientID) const;
 
+    // Account and online nesting service, shared by Valentina and Puzzle (common.ini)
+    auto GetAccountIssuerUrl() const -> QString;
+    void SetAccountIssuerUrl(const QString &value) const;
+    auto GetAccountToken() const -> QString;
+    void SetAccountToken(const QString &value) const;
+    auto GetAccountEmail() const -> QString;
+    void SetAccountEmail(const QString &value) const;
+    auto GetAccountName() const -> QString;
+    void SetAccountName(const QString &value) const;
+    /** @brief Spec 17.1: send pattern, measurement and layout files with online nesting jobs (beta programme). */
+    auto GetShareFiles() const -> bool;
+    void SetShareFiles(bool value) const;
+    auto GetNestorServiceUrl() const -> QString;
+    void SetNestorServiceUrl(const QString &value) const;
+
     auto IsTranslateFormula() const -> bool;
     void SetTranslateFormula(bool value) const;
 

@@ -40,6 +40,7 @@ class QStringList;
 // furthermore blows up the binary sizes.
 
 extern const QString LONG_OPTION_NO_HDPI_SCALING;
+extern const QString LONG_OPTION_GROUP; // Puzzle: group name of the pieces imported with -r (spec 21.2)
 
 extern const QString degreeSymbol;
 extern const QString trueStr;

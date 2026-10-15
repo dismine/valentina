@@ -42,6 +42,7 @@
 #include "vbank.h"
 #include "vlayoutdef.h"
 #include "vlayoutpaper.h"
+#include "vnestingframe.h"
 
 class QGraphicsItem;
 class QElapsedTimer;
@@ -138,6 +139,14 @@ public:
     auto IsShowLayoutAllowance() const -> bool;
     void SetShowLayoutAllowance(bool value);
 
+    void SetPapers(const QVector<VLayoutPaper> &value);
+    auto GetLayoutWidth() const -> qreal;
+
+    auto IsNestOnline() const -> bool;
+    void SetNestOnline(bool value);
+    auto GetOnlineOptions() const -> VNestingOptions;
+    void SetOnlineOptions(const VNestingOptions &value);
+
     auto IsRotationNeeded() const -> bool;
 
     auto IsPortrait() const -> bool;
@@ -179,6 +188,8 @@ private:
     int nestingTime{1};
     qreal efficiencyCoefficient{0.0};
     bool showLayoutAllowance{false};
+    bool nestOnline{false};
+    VNestingOptions onlineOptions{};
 
     auto PageHeight() const -> int;
     auto PageWidth() const -> int;

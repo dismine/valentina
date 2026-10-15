@@ -46,6 +46,8 @@ enum class UndoCommand : qint8
     RemoveSheet = 7,
     ZValueMovePiece = 8,
     ZValueMovePieces = 9,
+    OptimizeOnline = 10,
+    PieceGroup = 11,
 };
 } // namespace ML
 

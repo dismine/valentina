@@ -63,6 +63,9 @@
 #include "tst_vmeasurements.h"
 #include "tst_vpiece.h"
 #include "tst_vpointf.h"
+#include "tst_vaccounttoken.h"
+#include "tst_vnestorclient.h"
+#include "tst_vnestingframe.h"
 #include "tst_vposter.h"
 #include "tst_vspline.h"
 #include "tst_vsplinepath.h"
@@ -136,6 +139,9 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_FancyTabBar());
     ASSERT_TEST(new TST_VPiece());
     ASSERT_TEST(new TST_VPoster());
+    ASSERT_TEST(new TST_VAccountToken());
+    ASSERT_TEST(new TST_VNestorClient());
+    ASSERT_TEST(new TST_VNestingFrame());
     ASSERT_TEST(new TST_VAbstractPiece());
     ASSERT_TEST(new TST_VAsyncFileIO());
     ASSERT_TEST(new TST_VSpline());

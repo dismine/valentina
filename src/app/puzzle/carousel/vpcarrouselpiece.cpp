@@ -29,6 +29,10 @@
 #include "vpcarrouselpiece.h"
 
 #include <QApplication>
+#include <QCollator>
+#include <QColor>
+#include <QHBoxLayout>
+#include <QLabel>
 #include <QMenu>
 #include <QPainter>
 
@@ -57,6 +61,102 @@ VPCarrouselPiece::VPCarrouselPiece(const VPPiecePtr &piece, QListWidget *parent)
     RefreshPieceIcon();
     setText(clippedText);
     setToolTip(piece->GetName());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+namespace
+{
+// spec 21.3: group (natural order), then the group's header, then its pieces by name
+auto CarrouselLess(const QListWidgetItem &a, const QListWidgetItem &b) -> bool
+{
+    auto key = [](const QListWidgetItem &item, QString &group, int &rank, QString &name)
+    {
+        if (const auto *header = dynamic_cast<const VPCarrouselGroupHeader *>(&item))
+        {
+            group = header->Group();
+            rank = 0;
+        }
+        else if (const auto *piece = dynamic_cast<const VPCarrouselPiece *>(&item);
+                 piece != nullptr && not piece->GetPiece().isNull())
+        {
+            group = piece->GetPiece()->Group();
+            rank = 1;
+            name = item.text();
+        }
+    };
+    QString ga, gb, na, nb;
+    int ra = 1, rb = 1;
+    key(a, ga, ra, na);
+    key(b, gb, rb, nb);
+    static const QCollator collator = []
+    {
+        QCollator c;
+        c.setNumericMode(true);
+        return c;
+    }();
+    if (const int byGroup = collator.compare(ga, gb); byGroup != 0)
+    {
+        return byGroup < 0;
+    }
+    return ra != rb ? ra < rb : collator.compare(na, nb) < 0;
+}
+} // namespace
+
+//---------------------------------------------------------------------------------------------------------------------
+VPCarrouselGroupHeader::VPCarrouselGroupHeader(const QString &group, const QColor &color, bool collapsed,
+                                               QListWidget *parent)
+  : QListWidgetItem(parent, Type),
+    m_group(group)
+{
+    setFlags(Qt::ItemIsEnabled);
+
+    QPixmap badge(14, 14);
+    badge.fill(Qt::transparent);
+    QPainter painter(&badge);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setBrush(color);
+    painter.setPen(color.darker(150));
+    painter.drawEllipse(1, 1, 11, 11);
+
+    // The row is a widget (badge + name) transparent to the mouse, so a click reaches the list and toggles the group
+    auto *row = new QWidget(parent);
+    auto *layout = new QHBoxLayout(row);
+    layout->setContentsMargins(4, 2, 4, 2);
+    auto *dot = new QLabel(row);
+    dot->setPixmap(badge);
+    m_name = new QLabel(row);
+    m_name->setTextFormat(Qt::PlainText);
+    layout->addWidget(dot);
+    layout->addWidget(m_name, 1);
+    row->setAttribute(Qt::WA_TransparentForMouseEvents);
+    parent->setItemWidget(this, row);
+    SetCollapsed(collapsed);
+    setSizeHint(row->sizeHint());
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPCarrouselGroupHeader::SetCollapsed(bool collapsed)
+{
+    m_name->setText((collapsed ? QStringLiteral("\u25B8 ") : QStringLiteral("\u25BE ")) + m_group);
+    setToolTip(collapsed ? QObject::tr("Show the pieces of this group") : QObject::tr("Hide the pieces of this group"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPCarrouselGroupHeader::Group() const -> QString
+{
+    return m_group;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPCarrouselGroupHeader::operator<(const QListWidgetItem &other) const -> bool
+{
+    return CarrouselLess(*this, other);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPCarrouselPiece::operator<(const QListWidgetItem &other) const -> bool
+{
+    return CarrouselLess(*this, other);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -122,6 +122,9 @@ public:
 
     auto IsValid(QString &error) const -> bool;
 
+    auto Group() const -> QString; // spec 21: pieces of one import; empty = none
+    void SetGroup(const QString &group);
+
     auto CopyNumber() const -> quint16;
     void SetCopyNumber(quint16 newCopyNumber);
 
@@ -142,6 +145,7 @@ private:
     bool m_invalidPieceGapPosition{false};
 
     quint16 m_copyNumber{1};
+    QString m_group{};
 
     qreal m_zValue{1.0};
 

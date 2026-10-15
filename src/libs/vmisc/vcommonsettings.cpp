@@ -242,6 +242,12 @@ auto ClearFormats(const QStringList &predefinedFormats, QStringList formats) -> 
 } // namespace
 
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, commonIniFilename, ("common"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAccountIssuerUrl, ("account/issuerUrl"_L1))   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAccountToken, ("account/token"_L1))           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAccountEmail, ("account/email"_L1))           // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAccountName, ("account/name"_L1))             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAccountShareFiles, ("account/shareFiles"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingNestorServiceUrl, ("nestor/serviceUrl"_L1))   // NOLINT
 
 #if !defined(Q_OS_WIN)
 const QString VCommonSettings::unixStandardSharePath = QStringLiteral(PKGDATADIR); // NOLINT(cert-err58-cpp)
@@ -1864,6 +1870,96 @@ void VCommonSettings::SetClientID(const QString &clientID) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.setValue(*settingsStatistictClientID, clientID);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetAccountIssuerUrl() const -> QString
+{
+    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingAccountIssuerUrl, QStringLiteral("https://smart-pattern.com.ua")).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetAccountIssuerUrl(const QString &value) const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingAccountIssuerUrl, value);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetAccountToken() const -> QString
+{
+    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingAccountToken).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetAccountToken(const QString &value) const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingAccountToken, value);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetAccountEmail() const -> QString
+{
+    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingAccountEmail).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetAccountEmail(const QString &value) const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingAccountEmail, value);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetAccountName() const -> QString
+{
+    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingAccountName).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetAccountName(const QString &value) const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingAccountName, value);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetShareFiles() const -> bool
+{
+    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingAccountShareFiles, true).toBool(); // on by default: beta testers are told
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetShareFiles(bool value) const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingAccountShareFiles, value);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetNestorServiceUrl() const -> QString
+{
+    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingNestorServiceUrl, QStringLiteral("https://nestor.lossouarn.net")).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetNestorServiceUrl(const QString &value) const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingNestorServiceUrl, value);
     settings.sync();
 }
 

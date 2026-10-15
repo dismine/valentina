@@ -1,4 +1,6 @@
 # Valentina 1.1.2 (unreleased)
+- [Valentina app / Puzzle app] Added online nesting: pieces are sent to the Nestor nesting service and the resulting layout is placed in the sheet.
+- [Puzzle app] Added piece groups in the carousel, with an option to nest online group by group.
 - [Tape app] Fixed the known measurements editor showing empty measurement details after changing an image size.
 - [Valentina app] Fixed renaming an increment or object not updating some passmark, label, fold line and visibility formulas.
 - [Valentina app] Fixed formula errors when opening older patterns that use a Height point's line in reverse order or a segment of an axis point without an intersection.

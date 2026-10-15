@@ -33,6 +33,31 @@
 
 #include "../layout/layoutdef.h"
 
+class QColor;
+class QLabel;
+
+/// spec 21.3: a collapsible header before the pieces of one group, with the group's tint as a badge
+class VPCarrouselGroupHeader : public QListWidgetItem
+{
+public:
+    enum
+    {
+        Type = UserType + 2
+    };
+
+    VPCarrouselGroupHeader(const QString &group, const QColor &color, bool collapsed, QListWidget *parent);
+    ~VPCarrouselGroupHeader() override = default;
+
+    auto Group() const -> QString;
+    void SetCollapsed(bool collapsed);
+    auto operator<(const QListWidgetItem &other) const -> bool override;
+
+private:
+    Q_DISABLE_COPY_MOVE(VPCarrouselGroupHeader) // NOLINT
+    QString m_group;
+    QLabel *m_name{nullptr};
+};
+
 class VPCarrouselPiece : public QListWidgetItem
 {
 public:
@@ -49,6 +74,9 @@ public:
      * @return  the corresponding layout piece
      */
     auto GetPiece() const -> VPPiecePtr;
+
+    // spec 21.3: the list is sorted by group (natural order), then by name
+    auto operator<(const QListWidgetItem &other) const -> bool override;
 
     /**
      * @brief RefreshSelection refreshes the selection of the piece according to the selection information of m_piece

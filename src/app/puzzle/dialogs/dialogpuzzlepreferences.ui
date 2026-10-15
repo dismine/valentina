@@ -97,6 +97,18 @@
          <set>ItemIsSelectable|ItemIsUserCheckable|ItemIsEnabled</set>
         </property>
        </item>
+       <item>
+        <property name="text">
+         <string>Account</string>
+        </property>
+        <property name="textAlignment">
+         <set>AlignCenter</set>
+        </property>
+        <property name="icon">
+         <iconset resource="../../../libs/vmisc/share/resources/icon.qrc">
+          <normaloff>:/icon/config.png</normaloff>:/icon/config.png</iconset>
+        </property>
+       </item>
       </widget>
      </item>
      <item>

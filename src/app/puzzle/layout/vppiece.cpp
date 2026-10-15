@@ -509,6 +509,22 @@ auto VPPiece::IsValid(QString &error) const -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+auto VPPiece::Group() const -> QString
+{
+    return m_group;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPPiece::SetGroup(const QString &group)
+{
+    m_group = group;
+    if (VPLayoutPtr const layout = Layout(); not layout.isNull())
+    {
+        layout->InvalidateGroups();
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VPPiece::CopyNumber() const -> quint16
 {
     return m_copyNumber;

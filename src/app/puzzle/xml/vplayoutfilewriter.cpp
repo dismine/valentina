@@ -293,6 +293,8 @@ void VPLayoutFileWriter::WritePiece(const VPPiecePtr &piece)
     SetAttributeOrRemoveIf<QString>(ML::AttrGradationLabel, piece->GetGradationId(),
                                     [](const QString &label) noexcept { return label.isEmpty(); });
     SetAttribute(ML::AttrCopyNumber, piece->CopyNumber());
+    SetAttributeOrRemoveIf<QString>(ML::AttrGroup, piece->Group(),
+                                    [](const QString &group) noexcept { return group.isEmpty(); });
     SetAttributeOrRemoveIf<bool>(ML::AttrShowSeamline,
                                  not piece->IsHideMainPath(),
                                  [](bool show) noexcept -> bool { return show; });

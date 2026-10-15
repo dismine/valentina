@@ -392,6 +392,40 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
+           <layout class="QHBoxLayout" name="horizontalLayoutNestOnline">
+            <item>
+             <widget class="QCheckBox" name="checkBoxNestOnline">
+              <property name="toolTip">
+               <string>Send the pieces to the online nesting service (smart-pattern.com.ua premium account).</string>
+              </property>
+              <property name="text">
+               <string>Nest online (premium account)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBoxOnlineRotations">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelNestOnlineHint">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>One sheet of the marker's length; the paper height and the printer margins are ignored.</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
            <layout class="QGridLayout" name="gridLayout_2">
             <item row="1" column="0">
              <widget class="QLabel" name="label_2">
@@ -472,6 +506,13 @@
              </widget>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="VNestingOptionsWidget" name="optionsWidget" native="true">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QCheckBox" name="checkBoxSaveLength">
@@ -685,6 +726,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VNestingOptionsWidget</class>
+   <extends>QWidget</extends>
+   <header>../vnesting/vnestingoptionswidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../../libs/vmisc/share/resources/icon.qrc"/>
  </resources>

@@ -30,6 +30,7 @@
 #include <QApplication>
 #include <QDrag>
 #include <QDragMoveEvent>
+#include <QInputDialog>
 #include <QLoggingCategory>
 #include <QMenu>
 #include <QPainter>
@@ -38,6 +39,7 @@
 #include "../layout/vppiece.h"
 #include "../layout/vpsheet.h"
 #include "../undocommands/vpundomovepieceonsheet.h"
+#include "../undocommands/vpundopiecegroup.h"
 #include "../vmisc/theme/vtheme.h"
 #include "vpcarrousel.h"
 #include "vpcarrouselpiece.h"
@@ -94,6 +96,7 @@ void VPCarrouselPieceList::Refresh()
     }
 
     // create the corresponding carrousel pieces
+    QStringList groups;
     for (const auto &piece : std::as_const(m_pieceList)) // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
     {
         if (not piece.isNull())
@@ -101,9 +104,52 @@ void VPCarrouselPieceList::Refresh()
             // update the label of the piece
             auto *carrouselpiece = new VPCarrouselPiece(piece, this);
             carrouselpiece->setSelected(piece->IsSelected());
+            carrouselpiece->setHidden(m_collapsed.contains(piece->Group()));
+            if (not piece->Group().isEmpty() && not groups.contains(piece->Group()))
+            {
+                groups.append(piece->Group());
+            }
         }
     }
+
+    // spec 21.3: one collapsible header per group, with the tint the sheet uses
+    VPLayoutPtr const layout = m_carrousel != nullptr ? m_carrousel->Layout().toStrongRef() : VPLayoutPtr();
+    for (const auto &group : std::as_const(groups)) // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
+    {
+        const QColor color = layout.isNull() ? QColor() : VPLayout::GroupColor(layout->GroupIndex(group));
+        new VPCarrouselGroupHeader(group, color, m_collapsed.contains(group), this);
+    }
     sortItems();
+    LayoutHeaders();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPCarrouselPieceList::LayoutHeaders()
+{
+    // A header takes the whole row (vertical carrousel) or column (horizontal one), so it sits alone
+    for (int i = 0; i < count(); ++i)
+    {
+        if (QListWidgetItem *_item = item(i); _item->type() == VPCarrouselGroupHeader::Type)
+        {
+            QSize hint = _item->sizeHint();
+            if (flow() == QListView::LeftToRight)
+            {
+                hint.setWidth(viewport()->width() - 2 * spacing() - 1);
+            }
+            else
+            {
+                hint.setHeight(viewport()->height() - 2 * spacing() - 1);
+            }
+            _item->setSizeHint(hint);
+        }
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPCarrouselPieceList::resizeEvent(QResizeEvent *event)
+{
+    QListWidget::resizeEvent(event);
+    LayoutHeaders();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -120,6 +166,29 @@ void VPCarrouselPieceList::mousePressEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton)
     {
         m_dragStart = event->pos();
+        if (auto *header = dynamic_cast<VPCarrouselGroupHeader *>(itemAt(event->pos())))
+        {
+            // spec 21.3: a click on a header folds or unfolds its group, in place: rebuilding the list would render
+            // every piece icon again
+            const bool collapsed = not m_collapsed.remove(header->Group());
+            if (collapsed)
+            {
+                m_collapsed.insert(header->Group());
+            }
+            header->SetCollapsed(collapsed);
+            setUpdatesEnabled(false);
+            for (int i = 0; i < count(); ++i)
+            {
+                if (const auto *pieceItem = dynamic_cast<const VPCarrouselPiece *>(item(i));
+                    pieceItem != nullptr && not pieceItem->GetPiece().isNull() &&
+                    pieceItem->GetPiece()->Group() == header->Group())
+                {
+                    item(i)->setHidden(collapsed);
+                }
+            }
+            setUpdatesEnabled(true);
+            return;
+        }
     }
 
     if (!(event->modifiers() & Qt::ControlModifier))
@@ -258,6 +327,36 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
         }
     }
 
+    // spec 21.3: groups. The selection when it holds the piece, else the piece alone
+    QList<VPPiecePtr> targets;
+    for (const auto *selected : selectedItems())
+    {
+        if (const auto *selectedPiece = dynamic_cast<const VPCarrouselPiece *>(selected);
+            selectedPiece != nullptr && not selectedPiece->GetPiece().isNull())
+        {
+            targets.append(selectedPiece->GetPiece());
+        }
+    }
+    if (not targets.contains(piece))
+    {
+        targets = {piece};
+    }
+    QMenu *groupMenu = menu.addMenu(tr("Move to group"));
+    QVector<QAction *> groupActions;
+    const QStringList groups = layout->Groups();
+    for (const auto &group : groups)
+    {
+        QAction *action = groupMenu->addAction(group);
+        action->setData(group);
+        action->setEnabled(group != piece->Group());
+        groupActions.append(action);
+    }
+    QAction *noGroup = groupMenu->addAction(tr("Without group"));
+    noGroup->setEnabled(not piece->Group().isEmpty());
+    QAction *newGroup = groupMenu->addAction(tr("New group…"));
+    QAction *renameGroup = menu.addAction(tr("Rename group…"));
+    renameGroup->setEnabled(not piece->Group().isEmpty());
+
     QAction *moveAction = menu.addAction(tr("Move to Sheet"));
     moveAction->setVisible(false);
 
@@ -307,6 +406,40 @@ void VPCarrouselPieceList::contextMenuEvent(QContextMenuEvent *event)
     {
         auto *command = new VPUndoMovePieceOnSheet(qvariant_cast<VPSheetPtr>(selectedAction->data()), piece);
         layout->UndoStack()->push(command);
+    }
+    else if (groupActions.contains(selectedAction))
+    {
+        layout->UndoStack()->push(new VPUndoPieceGroup(targets, selectedAction->data().toString()));
+    }
+    else if (selectedAction == noGroup)
+    {
+        layout->UndoStack()->push(new VPUndoPieceGroup(targets, QString()));
+    }
+    else if (selectedAction == newGroup)
+    {
+        const QString name = QInputDialog::getText(this, tr("New group"), tr("Group name:")).trimmed();
+        if (not name.isEmpty())
+        {
+            layout->UndoStack()->push(new VPUndoPieceGroup(targets, layout->UniqueGroupName(name)));
+        }
+    }
+    else if (selectedAction == renameGroup)
+    {
+        const QString name = QInputDialog::getText(this, tr("Rename group"), tr("Group name:"), QLineEdit::Normal,
+                                                   piece->Group())
+                                 .trimmed();
+        if (not name.isEmpty() && name != piece->Group())
+        {
+            QList<VPPiecePtr> members;
+            for (const auto &p : layout->GetPieces())
+            {
+                if (not p.isNull() && p->Group() == piece->Group())
+                {
+                    members.append(p);
+                }
+            }
+            layout->UndoStack()->push(new VPUndoPieceGroup(members, layout->UniqueGroupName(name)));
+        }
     }
 }
 

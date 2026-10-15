@@ -7,6 +7,7 @@ Project {
         "vformat/vformat.qbs",
         "vgeometry/vgeometry.qbs",
         "vlayout/vlayout.qbs",
+        "vnesting/vnesting.qbs",
         "vmisc/vmisc.qbs",
         "vobj/vobj.qbs",
         "vpatterndb/vpatterndb.qbs",

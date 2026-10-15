@@ -75,36 +75,6 @@ auto HandleSymmetricalCopy(const VLayoutPiece &piece, int copyIndex) -> VLayoutP
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto PrepareQuantity(const QVector<VLayoutPiece> &details) -> QVector<VLayoutPiece>
-{
-    QVector<VLayoutPiece> withQuantity;
-    withQuantity.reserve(details.size());
-    for (const auto &piece : details)
-    {
-        if (const int quantity = piece.GetQuantity(); quantity > 1)
-        {
-            for (int i = 0; i < quantity; ++i)
-            {
-                if (piece.IsSymmetricalCopy() && (piece.IsForceFlipping() || piece.IsForbidFlipping()))
-                {
-                    withQuantity.append(HandleSymmetricalCopy(piece, i));
-                }
-                else
-                {
-                    withQuantity.append(piece);
-                }
-            }
-        }
-        else
-        {
-            withQuantity.append(piece);
-        }
-    }
-
-    return withQuantity;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void Insert(QMap<uint, QHash<int, qint64>> &container, uint key, int valKey, qint64 valValue)
 {
     QHash<int, qint64> containerSequence = container.value(key);
@@ -194,6 +164,36 @@ auto TakeFirstForPriority(const QMap<uint, QHash<int, qint64>> &container, uint 
     return -1;
 }
 } // namespace
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VBank::PrepareQuantity(const QVector<VLayoutPiece> &details) -> QVector<VLayoutPiece>
+{
+    QVector<VLayoutPiece> withQuantity;
+    withQuantity.reserve(details.size());
+    for (const auto &piece : details)
+    {
+        if (const int quantity = piece.GetQuantity(); quantity > 1)
+        {
+            for (int i = 0; i < quantity; ++i)
+            {
+                if (piece.IsSymmetricalCopy() && (piece.IsForceFlipping() || piece.IsForbidFlipping()))
+                {
+                    withQuantity.append(HandleSymmetricalCopy(piece, i));
+                }
+                else
+                {
+                    withQuantity.append(piece);
+                }
+            }
+        }
+        else
+        {
+            withQuantity.append(piece);
+        }
+    }
+
+    return withQuantity;
+}
 
 //---------------------------------------------------------------------------------------------------------------------
 VBank::VBank()
@@ -407,7 +407,7 @@ auto VBank::PrepareDetails(bool togetherWithNotches) -> bool
 
     if (m_nestQuantity)
     {
-        details = PrepareQuantity(details);
+        details = VBank::PrepareQuantity(details);
     }
 
     diagonal = 0;

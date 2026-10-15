@@ -154,6 +154,8 @@ private slots:
     void ToolboxIconSize();
     void ShowPaper(int index);
     void Preferences();
+    void ShowPreferences(int page);
+    void OpenAccountPreferences() override;
 #if defined(Q_OS_MAC)
     void CreateMeasurements();
 #endif

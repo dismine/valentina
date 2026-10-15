@@ -8,6 +8,7 @@ VToolApp {
     Depends { name: "Qt"; submodules: ["core", "widgets", "svg", "concurrent"] }
     Depends { name: "VMiscLib" }
     Depends { name: "VLayoutLib" }
+    Depends { name: "VNestingLib" }
     Depends { name: "IFCLib" }
     Depends { name: "VFormatLib" }
     Depends { name: "VWidgetsLib" }
@@ -104,18 +105,21 @@ VToolApp {
             "configpages/puzzlepreferenceslayoutpage.cpp",
             "dialogpuzzlepreferences.cpp",
             "vpdialogabout.cpp",
+            "vpdialogoptimizeonline.cpp",
             "dialogsavemanuallayout.cpp",
             "configpages/puzzlepreferencesconfigurationpage.h",
             "configpages/puzzlepreferencespathpage.h",
             "configpages/puzzlepreferenceslayoutpage.h",
             "dialogpuzzlepreferences.h",
             "vpdialogabout.h",
+            "vpdialogoptimizeonline.h",
             "dialogsavemanuallayout.h",
             "configpages/puzzlepreferencesconfigurationpage.ui",
             "configpages/puzzlepreferencespathpage.ui",
             "configpages/puzzlepreferenceslayoutpage.ui",
             "dialogpuzzlepreferences.ui",
             "vpdialogabout.ui",
+            "vpdialogoptimizeonline.ui",
             "dialogsavemanuallayout.ui",
         ]
     }
@@ -129,6 +133,8 @@ VToolApp {
             "vpundomovepieceonsheet.cpp",
             "vpundooriginmove.cpp",
             "vpundopiecemove.cpp",
+            "vpundooptimizeonline.cpp",
+            "vpundopiecegroup.cpp",
             "vpundopiecerotate.cpp",
             "vpundopiecezvaluemove.cpp",
             "vpundoremovesheet.cpp",
@@ -137,6 +143,8 @@ VToolApp {
             "vpundomovepieceonsheet.h",
             "vpundooriginmove.h",
             "vpundopiecemove.h",
+            "vpundooptimizeonline.h",
+            "vpundopiecegroup.h",
             "vpundopiecerotate.h",
             "vpundopiecezvaluemove.h",
             "vpundoremovesheet.h",

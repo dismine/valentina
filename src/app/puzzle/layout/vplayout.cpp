@@ -36,6 +36,8 @@
 #include "vpsheet.h"
 
 #include <QLoggingCategory>
+#include <QCollator>
+#include <QColor>
 #include <QPixmapCache>
 #include <QUndoStack>
 
@@ -122,6 +124,7 @@ void VPLayout::AddPiece(const VPPiecePtr &piece)
     }
 
     VPPiece::CleanPosition(piece);
+    InvalidateGroups();
 
     const QString uniqueId = piece->GetUniqueID();
     if (not m_pieces.contains(uniqueId))
@@ -439,4 +442,59 @@ void VPLayout::AddTrashSheet(const VPSheetPtr &sheet)
 {
     m_trashSheet = sheet;
     m_trashSheet->SetTrashSheet(true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayout::Groups() const -> QStringList
+{
+    if (not m_groupsDirty)
+    {
+        return m_groups;
+    }
+    QStringList groups;
+    for (const auto &piece : m_pieces)
+    {
+        if (not piece.isNull() && not piece->Group().isEmpty() && not groups.contains(piece->Group()))
+        {
+            groups.append(piece->Group());
+        }
+    }
+    QCollator collator;
+    collator.setNumericMode(true);
+    std::sort(groups.begin(), groups.end(),
+              [&collator](const QString &a, const QString &b) { return collator.compare(a, b) < 0; });
+    m_groups = groups;
+    m_groupsDirty = false;
+    return groups;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPLayout::InvalidateGroups()
+{
+    m_groupsDirty = true;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayout::UniqueGroupName(const QString &wanted) const -> QString
+{
+    const QStringList groups = Groups();
+    QString name = wanted;
+    for (int n = 2; groups.contains(name); ++n)
+    {
+        name = QStringLiteral("%1 (%2)").arg(wanted).arg(n);
+    }
+    return name;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayout::GroupIndex(const QString &group) const -> int
+{
+    return group.isEmpty() ? -1 : static_cast<int>(Groups().indexOf(group));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPLayout::GroupColor(int index) -> QColor
+{
+    static const QVector<int> hues{205, 30, 120, 275, 60, 340, 160, 20}; // same order as nest.py GROUP_HUES
+    return index < 0 ? QColor() : QColor::fromHsl(hues.at(index % hues.size()), 180, 220);
 }

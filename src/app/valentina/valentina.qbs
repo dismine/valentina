@@ -5,12 +5,13 @@ import qbs.File
 VToolApp {
     Depends { name: "buildconfig" }
     Depends { name: "ib"; condition: qbs.targetOS.contains("macos") }
-    Depends { name: "Qt"; submodules: ["core", "widgets", "svg", "concurrent"] }
+    Depends { name: "Qt"; submodules: ["core", "widgets", "svg", "concurrent", "network"] }
     Depends { name: "VPatternDBLib"; }
     Depends { name: "VWidgetsLib"; }
     Depends { name: "FervorLib"; }
     Depends { name: "IFCLib"; }
     Depends { name: "VLayoutLib"; }
+    Depends { name: "VNestingLib"; }
     Depends { name: "VToolsLib"; }
     Depends { name: "VFormatLib"; }
     Depends { name: "VMiscLib"; }

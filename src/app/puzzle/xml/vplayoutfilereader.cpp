@@ -501,6 +501,7 @@ void VPLayoutFileReader::ReadPiece(const VPPiecePtr &piece)
 
     piece->SetGradationId(ReadAttributeEmptyString(attribs, ML::AttrGradationLabel));
     piece->SetCopyNumber(static_cast<quint16>(ReadAttributeUInt(attribs, ML::AttrCopyNumber, QChar('1'))));
+    piece->SetGroup(ReadAttributeEmptyString(attribs, ML::AttrGroup));
     piece->SetHideMainPath(not ReadAttributeBool(attribs, ML::AttrShowSeamline, trueStr));
     piece->SetXScale(ReadAttributeDouble(attribs, ML::AttrXScale, QChar('1')));
     piece->SetYScale(ReadAttributeDouble(attribs, ML::AttrYScale, QChar('1')));
