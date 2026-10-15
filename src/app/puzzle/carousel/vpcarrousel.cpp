@@ -33,6 +33,7 @@
 #include <QVBoxLayout>
 
 #include "../layout/vplayout.h"
+#include "../layout/vppiece.h"
 #include "../layout/vpsheet.h"
 
 #include <QLoggingCategory>

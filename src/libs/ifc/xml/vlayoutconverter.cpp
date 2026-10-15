@@ -45,8 +45,8 @@ using namespace Qt::Literals::StringLiterals;
  */
 
 const QString VLayoutConverter::LayoutMinVerStr = QStringLiteral("0.1.0");
-const QString VLayoutConverter::LayoutMaxVerStr = QStringLiteral("0.2.2");
-const QString VLayoutConverter::CurrentSchema = QStringLiteral("://schema/layout/v0.2.2.xsd");
+const QString VLayoutConverter::LayoutMaxVerStr = QStringLiteral("0.2.3");
+const QString VLayoutConverter::CurrentSchema = QStringLiteral("://schema/layout/v0.2.3.xsd");
 
 // VLayoutConverter::LayoutMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 // VLayoutConverter::LayoutMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -154,7 +154,8 @@ auto VLayoutConverter::XSDSchemas() -> QHash<unsigned int, QString>
         std::make_pair(FormatVersion(0, 1, 9), QStringLiteral("://schema/layout/v0.1.9.xsd")),
         std::make_pair(FormatVersion(0, 2, 0), QStringLiteral("://schema/layout/v0.2.0.xsd")),
         std::make_pair(FormatVersion(0, 2, 1), QStringLiteral("://schema/layout/v0.2.1.xsd")),
-        std::make_pair(FormatVersion(0, 2, 2), CurrentSchema),
+        std::make_pair(FormatVersion(0, 2, 2), QStringLiteral("://schema/layout/v0.2.2.xsd")),
+        std::make_pair(FormatVersion(0, 2, 3), CurrentSchema),
     };
 
     return schemas;
@@ -200,9 +201,12 @@ void VLayoutConverter::ApplyPatches()
         case FormatVersion(0, 2, 0):
         case FormatVersion(0, 2, 1):
             ToV0_2_2();
-            ValidateXML(CurrentSchema);
             Q_FALLTHROUGH();
         case FormatVersion(0, 2, 2):
+            ToV0_2_3();
+            ValidateXML(CurrentSchema);
+            Q_FALLTHROUGH();
+        case FormatVersion(0, 2, 3):
             break;
         default:
             InvalidVersion(m_ver);
@@ -447,5 +451,15 @@ void VLayoutConverter::ToV0_2_2()
     Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 2, 2), "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.2.2"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutConverter::ToV0_2_3()
+{
+    // TODO. Delete if minimal supported version is 0.2.3
+    Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 2, 3), "Time to refactor the code.");
+
+    SetVersion(QStringLiteral("0.2.3"));
     Save();
 }

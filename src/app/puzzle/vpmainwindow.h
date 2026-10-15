@@ -29,6 +29,7 @@
 #define VPMAINWINDOW_H
 
 #include <QDoubleSpinBox>
+#include <QJsonObject>
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QPointer>
@@ -55,6 +56,7 @@ template <typename T> class QSharedPointer;
 class DialogPuzzlePreferences;
 struct VPExportData;
 class WatermarkWindow;
+class VNestorClient;
 
 class VPMainWindow : public VAbstractMainWindow
 {
@@ -88,7 +90,7 @@ public:
      * @brief ImportRawLayouts The function imports the raw layouts of given paths
      * @param rawLayouts paths of the layouts to import
      */
-    void ImportRawLayouts(const QStringList &rawLayouts);
+    void ImportRawLayouts(const QStringList &rawLayouts, const QString &group = QString());
 
     /**
      * @brief InitZoom Initialises the zoom to fit best
@@ -256,6 +258,7 @@ private slots:
     void ToolBarStyles();
 
     void on_actionAddSheet_triggered();
+    void on_actionOptimizeOnline_triggered();
 
     void on_ApplyPieceTransformation();
 
@@ -323,6 +326,10 @@ private:
     VPCommandLinePtr m_cmd;
 
     QUndoStack *m_undoStack;
+    VNestorClient *m_nestor{nullptr};
+
+    auto ApplyNestingResult(const VPSheetPtr &sheet, const QList<VPPiecePtr> &sent, const QVector<int> &sentItems,
+                            const QJsonObject &result) -> bool;
 
     VPLayoutPtr m_layout;
 
@@ -528,8 +535,8 @@ private:
 
     void ZValueMove(int move);
 
-    auto ImportRawLayout(const QString &rawLayout) -> bool;
-    auto AddLayoutPieces(const QVector<VLayoutPiece> &pieces) -> bool;
+    auto ImportRawLayout(const QString &rawLayout, const QString &group) -> bool;
+    auto AddLayoutPieces(const QVector<VLayoutPiece> &pieces, const QString &group) -> bool;
 
     void TranslatePieces();
     void TranslatePieceRelatively(const VPPiecePtr &piece, const QRectF &rect, vsizetype selectedPiecesCount, qreal dx,

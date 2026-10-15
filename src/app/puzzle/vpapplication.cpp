@@ -847,7 +847,7 @@ auto VPApplication::StartWithFiles(const VPCommandLinePtr &cmd, const QStringLis
                 if (w != list.end())
                 {
                     (*w)->activateWindow();
-                    (*w)->ImportRawLayouts(rawLayouts);
+                    (*w)->ImportRawLayouts(rawLayouts, cmd->OptionGroup());
                 }
             }
             continue;
@@ -859,7 +859,7 @@ auto VPApplication::StartWithFiles(const VPCommandLinePtr &cmd, const QStringLis
 
         if (not rawLayouts.isEmpty())
         {
-            MainWindow()->ImportRawLayouts(rawLayouts);
+            MainWindow()->ImportRawLayouts(rawLayouts, cmd->OptionGroup());
         }
     }
 
@@ -872,7 +872,7 @@ auto VPApplication::SingleStart(const VPCommandLinePtr &cmd, const QStringList &
     NewMainWindow(cmd);
     if (not rawLayouts.isEmpty())
     {
-        MainWindow()->ImportRawLayouts(rawLayouts);
+        MainWindow()->ImportRawLayouts(rawLayouts, cmd->OptionGroup());
     }
 
     return true;

@@ -31,6 +31,7 @@
 #include <QStringList>
 
 const QString LONG_OPTION_NO_HDPI_SCALING = QStringLiteral("no-scaling");
+const QString LONG_OPTION_GROUP = QStringLiteral("group");
 
 const QString degreeSymbol = QStringLiteral("°");
 const QString trueStr = QStringLiteral("true");

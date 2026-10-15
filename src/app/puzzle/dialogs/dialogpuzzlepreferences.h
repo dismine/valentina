@@ -38,6 +38,7 @@ class DialogPuzzlePreferences;
 
 class PuzzlePreferencesConfigurationPage;
 class PuzzlePreferencesPathPage;
+class VNestingAccountPage;
 class QListWidgetItem;
 class PuzzlePreferencesLayoutPage;
 
@@ -70,6 +71,7 @@ private:
     PuzzlePreferencesConfigurationPage *m_configurationPage{nullptr};
     PuzzlePreferencesLayoutPage *m_layoutPage{nullptr};
     PuzzlePreferencesPathPage *m_pathPage{nullptr};
+    VNestingAccountPage *m_accountPage{nullptr};
 };
 
 #endif // DIALOGPUZZLEPREFERENCES_H

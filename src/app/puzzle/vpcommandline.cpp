@@ -43,6 +43,12 @@ auto VPCommandLine::OptionRawLayouts() const -> QStringList
     return OptionValues(LONG_OPTION_RAW_LAYOUT);
 }
 
+//---------------------------------------------------------------------------------------------------------------------
+auto VPCommandLine::OptionGroup() const -> QString
+{
+    return OptionValues(LONG_OPTION_GROUP).value(0);
+}
+
 //--------------------------------------------------------------------------------------------
 auto VPCommandLine::IsGuiEnabled() const -> bool
 {
@@ -104,6 +110,9 @@ void VPCommandLine::InitCommandLineOptions()
         {{SINGLE_OPTION_RAW_LAYOUT, LONG_OPTION_RAW_LAYOUT},
          translate("VCommandLine", "Load pattern pieces from the raw layout data file."),
          translate("VCommandLine", "The raw layout data file")},
+        {LONG_OPTION_GROUP,
+         translate("VCommandLine", "Group name given to the pieces imported from the raw layout data file."),
+         translate("VCommandLine", "The group name")},
         {LONG_OPTION_NO_HDPI_SCALING,
          translate("VCommandLine", "Disable high dpi scaling. Call this option if has problem with scaling (by default "
                                    "scaling enabled). Alternatively you can use the %1 environment variable.")

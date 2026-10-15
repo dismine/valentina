@@ -39,6 +39,7 @@ class DialogPreferences;
 class PreferencesConfigurationPage;
 class PreferencesPatternPage;
 class PreferencesPathPage;
+class VNestingAccountPage;
 class QListWidgetItem;
 class VPattern;
 
@@ -49,6 +50,8 @@ class DialogPreferences : public QDialog
 public:
     explicit DialogPreferences(QWidget *parent = nullptr);
     ~DialogPreferences() override;
+
+    void ShowPage(int index);
 signals:
     void UpdateProperties();
     void RequestFullParse();
@@ -68,6 +71,7 @@ private:
     PreferencesConfigurationPage *m_configurePage{nullptr};
     PreferencesPatternPage *m_patternPage{nullptr};
     PreferencesPathPage *m_pathPage{nullptr};
+    VNestingAccountPage *m_accountPage{nullptr};
 
     void Apply();
     void Ok();

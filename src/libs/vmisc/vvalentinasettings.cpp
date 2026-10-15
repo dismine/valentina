@@ -91,6 +91,9 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutFollowGrainline, ("layout/
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutManualPriority, ("layout/manualPriority"_L1))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutNestQuantity, ("layout/nestQuantity"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutNestOnline, ("layout/nestOnline"_L1))             // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutOnlineRotations, ("layout/onlineRotations"_L1))   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutOnlineSpeed, ("layout/onlineSpeed"_L1))           // NOLINT
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutAutoCropLength, ("layout/autoCropLength"_L1))
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutAutoCropWidth, ("layout/autoCropWidth"_L1)) // NOLINT
@@ -381,6 +384,42 @@ auto VValentinaSettings::GetDefLayoutNestQuantity() -> bool
 void VValentinaSettings::SetLayoutNestQuantity(bool value)
 {
     setValue(*settingLayoutNestQuantity, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetLayoutNestOnline() const -> bool
+{
+    return value(*settingLayoutNestOnline, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetLayoutNestOnline(bool value)
+{
+    setValue(*settingLayoutNestOnline, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetLayoutOnlineRotations() const -> int
+{
+    return value(*settingLayoutOnlineRotations, 0).toInt();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetLayoutOnlineRotations(int value)
+{
+    setValue(*settingLayoutOnlineRotations, value);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VValentinaSettings::GetLayoutOnlineSpeed() const -> int
+{
+    return value(*settingLayoutOnlineSpeed, 0).toInt();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaSettings::SetLayoutOnlineSpeed(int value)
+{
+    setValue(*settingLayoutOnlineSpeed, value);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

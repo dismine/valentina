@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>VNestingAccountPage</class>
+ <widget class="QWidget" name="VNestingAccountPage">
+  <property name="windowTitle">
+   <string>Account</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="groupBoxAccount">
+     <property name="title">
+      <string>smart-pattern.com.ua account</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayoutAccount">
+      <item>
+       <widget class="QLabel" name="labelStatus">
+        <property name="text">
+         <string>Not signed in.</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelPremium">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelCode">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+        <property name="textInteractionFlags">
+         <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayoutButtons">
+        <item>
+         <widget class="QPushButton" name="buttonSignIn">
+          <property name="text">
+           <string>Sign in…</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="buttonCancel">
+          <property name="text">
+           <string>Cancel</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="buttonRefresh">
+          <property name="text">
+           <string>Refresh</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="buttonCopyToken">
+          <property name="toolTip">
+           <string>Copies your account token to the clipboard, to sign in on the service's administration pages. Keep it private: it is your session.</string>
+          </property>
+          <property name="text">
+           <string>Copy account token</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="buttonSignOut">
+          <property name="text">
+           <string>Sign out</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelError">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBoxBeta">
+     <property name="title">
+      <string>Beta programme</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayoutBeta">
+      <item>
+       <widget class="QCheckBox" name="checkBoxShareFiles">
+        <property name="text">
+         <string>Share my files with the nestor beta programme</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelShareFiles">
+        <property name="text">
+         <string>With each online nesting job, the pattern, its measurement file, the layout file and the job settings are sent to the maintainer of the service, to measure and improve nestor. They are kept for 90 days, then deleted. Free previews send nothing.</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayoutBeta">
+        <item>
+         <widget class="QPushButton" name="buttonDeleteFiles">
+          <property name="text">
+           <string>Delete my shared files now</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelDeleteFiles">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBoxAdvanced">
+     <property name="title">
+      <string>Advanced</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <layout class="QFormLayout" name="formLayoutAdvanced">
+      <item row="0" column="0">
+       <widget class="QLabel" name="labelIssuer">
+        <property name="text">
+         <string>Account server:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEditIssuer"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="labelService">
+        <property name="text">
+         <string>Nesting service:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayoutService">
+        <item>
+         <widget class="QLineEdit" name="lineEditService"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="buttonTestService">
+          <property name="text">
+           <string>Test</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="labelServiceStatus">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

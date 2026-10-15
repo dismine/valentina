@@ -10,6 +10,7 @@ VTestApp {
     Depends { name: "IFCLib" }
     Depends { name: "VDXFLib" }
     Depends { name: "VFormatLib" }
+    Depends { name: "VNestingLib" }
     Depends { name: "ebr" }
     Depends { name: "autotest" }
     Depends { name: "QMUParserLib" }
@@ -88,6 +89,9 @@ VTestApp {
         "tst_svgfontwritingsystem.h",
         "tst_vboundary.cpp",
         "tst_vboundary.h",
+        "tst_vaccounttoken.cpp",
+        "tst_vnestorclient.cpp",
+        "tst_vnestingframe.cpp",
         "tst_vposter.cpp",
         "tst_vspline.cpp",
         "tst_nameregexp.cpp",
@@ -133,6 +137,9 @@ VTestApp {
         "tst_toolsdef.cpp",
         "tst_toolsdef.h",
         "tst_vtooluniondetails.cpp",
+        "tst_vaccounttoken.h",
+        "tst_vnestorclient.h",
+        "tst_vnestingframe.h",
         "tst_vposter.h",
         "tst_vspline.h",
         "tst_nameregexp.h",

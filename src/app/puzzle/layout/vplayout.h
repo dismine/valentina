@@ -103,12 +103,20 @@ public:
 
     auto Uuid() const -> const QUuid &;
 
+    // spec 21: the distinct non-empty group names of the pieces, in natural order (= nesting order)
+    auto Groups() const -> QStringList; // cached: VPPiece::SetGroup and AddPiece invalidate
+    void InvalidateGroups();
+    auto UniqueGroupName(const QString &wanted) const -> QString; // "Veste", "Veste (2)", ...
+    auto GroupIndex(const QString &group) const -> int;           // -1 for empty or unknown
+    static auto GroupColor(int index) -> QColor;                  // light tint per group rank, invalid for -1
+
 signals:
     void PieceSheetChanged(const VPPiecePtr &piece);
     void ActiveSheetChanged(const VPSheetPtr &focusedSheet);
     void PieceTransformationChanged(const VPPiecePtr &piece);
     void BoundaryTogetherWithNotchesChanged(const VPPiecePtr &piece);
     void PieceZValueChanged(const VPPiecePtr &piece);
+    void PieceGroupChanged(const VPPiecePtr &piece); // spec 21.3
     void TransformationOriginChanged();
     void RestoreOriginRequested();
     void SheetListChanged();
@@ -126,6 +134,8 @@ private:
     Q_DISABLE_COPY_MOVE(VPLayout) // NOLINT
 
     QMap<QString, VPPiecePtr> m_pieces{};
+    mutable QStringList m_groups{};
+    mutable bool m_groupsDirty{true};
 
     VPSheetPtr m_trashSheet{};
 

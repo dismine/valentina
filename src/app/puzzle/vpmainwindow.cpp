@@ -32,6 +32,7 @@
 #include <utility>
 #include <QBuffer>
 #include <QCloseEvent>
+#include <QFile>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QFileSystemWatcher>
@@ -45,19 +46,28 @@
 #include <QSvgGenerator>
 #include <QTimer>
 #include <QUndoStack>
+#include <QSet>
 #include <QtMath>
+#include <climits>
 
 #include "../ifc/xml/vlayoutconverter.h"
 #include "../vdxf/libdxfrw/drw_base.h"
 #include "../vganalytics/vganalytics.h"
 #include "../vlayout/dialogs/watermarkwindow.h"
 #include "../vlayout/vlayoutexporter.h"
+#include "../vlayout/vnestingframe.h"
 #include "../vlayout/vprintlayout.h"
 #include "../vlayout/vrawlayout.h"
 #include "../vmisc/dialogs/dialogaskcollectstatistic.h"
 #include "../vmisc/dialogs/dialogselectlanguage.h"
 #include "../vmisc/exception/vexception.h"
 #include "../vmisc/lambdaconstants.h"
+#include "../vnesting/vaccounttoken.h"
+#include "dialogs/vpdialogoptimizeonline.h"
+#include "../vnesting/vnestingprogressdialog.h"
+#include "../vnesting/vnestorclient.h"
+#include <QJsonArray>
+#include "undocommands/vpundooptimizeonline.h"
 #include "../vmisc/projectversion.h"
 #include "../vmisc/theme/themeDef.h"
 #include "../vmisc/theme/vtheme.h"
@@ -407,6 +417,13 @@ VPMainWindow::VPMainWindow(VPCommandLinePtr cmd, QWidget *parent)
     connect(m_layout.data(), &VPLayout::LayoutChanged, this, [this]() { LayoutWasSaved(false); });
     connect(m_layout.data(), &VPLayout::PieceTransformationChanged, this,
             [this]() { SetPropertyTabCurrentPieceData(); });
+    connect(m_layout.data(), &VPLayout::PieceGroupChanged, this,
+            [this]()
+            {
+                m_carrousel->Refresh(); // the group combo and the sorting
+                m_graphicsView->RefreshPieces(); // the tint
+                SetPropertyTabCurrentPieceData();
+            });
     connect(m_layout.data(), &VPLayout::ActiveSheetChanged, this,
             [this]()
             {
@@ -703,11 +720,11 @@ auto VPMainWindow::SaveLayout(const QString &path, QString &error) -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts)
+void VPMainWindow::ImportRawLayouts(const QStringList &rawLayouts, const QString &group)
 {
     for (const auto &path : rawLayouts)
     {
-        if (not ImportRawLayout(path))
+        if (not ImportRawLayout(path, group))
         {
             return;
         }
@@ -1488,6 +1505,7 @@ void VPMainWindow::SetPropertyTabCurrentPieceData()
 
         // set the value to the current piece
         SetLineEditValue(ui->lineEditCurrentPieceName, selectedPiece->GetName());
+        SetLineEditValue(ui->lineEditCurrentPieceGroup, selectedPiece->Group());
         SetPlainTextEditValue(ui->plainTextEditCurrentPieceUUID, selectedPiece->GetUUID().toString());
         SetLineEditValue(ui->lineEditCurrentPieceGradationId, selectedPiece->GetGradationId());
         SetLineEditValue(ui->lineEditCopyNumber, QString::number(selectedPiece->CopyNumber()));
@@ -3487,12 +3505,12 @@ void VPMainWindow::ZValueMove(int move)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPMainWindow::ImportRawLayout(const QString &rawLayout) -> bool
+auto VPMainWindow::ImportRawLayout(const QString &rawLayout, const QString &group) -> bool
 {
     VRawLayout rawLayoutReader;
     if (VRawLayoutData data; rawLayoutReader.ReadFile(rawLayout, data))
     {
-        return AddLayoutPieces(data.pieces);
+        return AddLayoutPieces(data.pieces, group);
     }
 
     qCCritical(
@@ -3508,14 +3526,17 @@ auto VPMainWindow::ImportRawLayout(const QString &rawLayout) -> bool
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VPMainWindow::AddLayoutPieces(const QVector<VLayoutPiece> &pieces) -> bool
+auto VPMainWindow::AddLayoutPieces(const QVector<VLayoutPiece> &pieces, const QString &group) -> bool
 {
+    // spec 21.2: the new pieces of this import form one group, named uniquely; updated pieces keep theirs
+    const QString name = group.isEmpty() ? QString() : m_layout->UniqueGroupName(group);
     for (const auto &rawPiece : pieces)
     {
         for (quint16 i = 1; i <= rawPiece.GetQuantity(); ++i)
         {
             VPPiecePtr const piece(new VPPiece(rawPiece));
             piece->SetCopyNumber(i);
+            piece->SetGroup(name);
 
             if (QString error; not piece->IsValid(error))
             {
@@ -3988,7 +4009,7 @@ void VPMainWindow::on_actionImportRawLayout_triggered()
     if (not filePath.isEmpty())
     {
         settings->SetPathRawLayoutData(QFileInfo(filePath).absolutePath());
-        ImportRawLayouts({filePath});
+        ImportRawLayouts({filePath}, QFileInfo(filePath).completeBaseName());
     }
 }
 
@@ -5201,3 +5222,349 @@ void VPMainWindow::AboutToShowDockMenu()
     }
 }
 #endif // defined(Q_OS_MAC)
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPMainWindow::on_actionOptimizeOnline_triggered()
+{
+    if (m_layout.isNull())
+    {
+        return;
+    }
+    VPSheetPtr const sheet = m_layout->GetFocusedSheet();
+    if (sheet.isNull())
+    {
+        return;
+    }
+
+    // access first: a valid, premium token
+    const VAccountToken token(VAbstractApplication::VApp()->Settings()->GetAccountToken());
+    if (token.IsExpired())
+    {
+        QMessageBox box(QMessageBox::Information, tr("Online nesting"),
+                        tr("Connect Puzzle to your smart-pattern.com.ua account to use online nesting."),
+                        QMessageBox::Cancel, this);
+        QPushButton *open = box.addButton(tr("Open account settings"), QMessageBox::AcceptRole);
+        box.exec();
+        if (box.clickedButton() == open)
+        {
+            on_actionPreferences_triggered();
+        }
+        return;
+    }
+    if (not token.IsPremium())
+    {
+        QMessageBox box(QMessageBox::Information, tr("Online nesting"),
+                        tr("Online nesting is reserved to premium subscribers."), QMessageBox::Cancel, this);
+        QPushButton *subscribe = box.addButton(tr("See the subscription"), QMessageBox::AcceptRole);
+        box.exec();
+        if (box.clickedButton() == subscribe)
+        {
+            QDesktopServices::openUrl(
+                QUrl(QStringLiteral("https://smart-pattern.com.ua/en/catalogue/premium-subscription_66/")));
+        }
+        return;
+    }
+
+    const bool vertical = sheet->GrainlineOrientation() == GrainlineType::Vertical;
+    const QRectF margins = sheet->GetMarginsRect();
+    const qreal fabricWidthMm = (vertical ? margins.width() : margins.height()) / NestingPxPerMm;
+    const qreal gapMm = m_layout->LayoutSettings().GetPiecesGap() / NestingPxPerMm;
+    const QList<VPPiecePtr> onSheet = m_layout->PiecesForSheet(sheet);
+    const QList<VPPiecePtr> unplaced = m_layout->GetUnplacedPieces();
+
+    // request: each free piece's own contour in its reset frame (scale and forced flip only); a fixed piece (spec
+    // 21.4) sends its placed outline, sheet px -> strip mm, and the service nests the free ones around it
+    auto inputsFor = [margins, vertical](const QList<VPPiecePtr> &pieces, bool fixed)
+    {
+        QVector<VNestingPieceInput> inputs;
+        inputs.reserve(pieces.size());
+        for (const auto &piece : pieces)
+        {
+            VNestingPieceInput input;
+            input.name = piece->GetName();
+            input.group = piece->Group();
+            if (fixed)
+            {
+                QVector<QPointF> contour;
+                CastTo(piece->GetMappedExternalContourPoints(), contour);
+                input.fixedMm = NestingFixedPolygon(contour, margins, vertical);
+            }
+            else
+            {
+                const VPPiece reset(static_cast<const VLayoutPiece &>(*piece)); // the constructor clears transformations
+                CastTo(piece->GetExternalContourPoints(), input.contourPx);
+                input.base = reset.GetMatrix() * NestingGrainlineAlignment(*piece, reset.GetMatrix());
+                input.forbidFlipping = piece->IsForbidFlipping();
+                input.forceFlipping = piece->IsForceFlipping();
+            }
+            inputs.append(input);
+        }
+        return inputs;
+    };
+    // the free pieces (sorted by group, spec 21.5: the service nests groups in order of first appearance) and the
+    // fixed ones, which come last so that the free pieces keep ids 0..n-1
+    auto candidatesFor = [this, onSheet, unplaced](NestingPieces mode)
+    {
+        QList<VPPiecePtr> free = mode == NestingPieces::UnplacedAroundSheet ? unplaced : onSheet;
+        if (mode == NestingPieces::SheetAndUnplaced)
+        {
+            free += unplaced;
+        }
+        std::stable_sort(free.begin(), free.end(),
+                         [this](const VPPiecePtr &a, const VPPiecePtr &b)
+                         {
+                             const int ia = m_layout->GroupIndex(a->Group());
+                             const int ib = m_layout->GroupIndex(b->Group());
+                             return (ia < 0 ? INT_MAX : ia) < (ib < 0 ? INT_MAX : ib);
+                         });
+        return std::make_pair(free, mode == NestingPieces::UnplacedAroundSheet ? onSheet : QList<VPPiecePtr>());
+    };
+    QSet<QString> groupNames;
+    for (const auto &piece : onSheet + unplaced)
+    {
+        if (not piece->Group().isEmpty())
+        {
+            groupNames.insert(piece->Group());
+        }
+    }
+
+    VPDialogOptimizeOnline dialog(static_cast<int>(onSheet.size()), static_cast<int>(unplaced.size()),
+                                  static_cast<int>(groupNames.size()), fabricWidthMm, gapMm, vertical,
+                                  sheet->GetGrainlineType() != GrainlineType::NotFixed, this);
+    dialog.SetRequestBuilder(
+        [&dialog, &inputsFor, &candidatesFor, fabricWidthMm, gapMm]()
+        {
+            QVector<int> skipped;
+            const auto [free, fixed] = candidatesFor(dialog.Mode());
+            const QJsonObject request = NestingRequest(inputsFor(free, false) + inputsFor(fixed, true), fabricWidthMm,
+                                                       gapMm, dialog.Options(), skipped);
+            return request.value(QLatin1String("pieces")).toArray().isEmpty() ? QJsonObject() : request;
+        });
+    if (dialog.exec() != QDialog::Accepted)
+    {
+        return;
+    }
+
+    const auto [candidates, fixedPieces] = candidatesFor(dialog.Mode());
+    if (candidates.isEmpty())
+    {
+        QMessageBox::information(this, tr("Online nesting"), tr("There is no piece to place."));
+        return;
+    }
+
+    const QVector<VNestingPieceInput> inputs = inputsFor(candidates, false) + inputsFor(fixedPieces, true);
+    QVector<int> skipped, itemOf;
+    QJsonObject request = NestingRequest(inputs, fabricWidthMm, gapMm, dialog.Options(), skipped, &itemOf);
+    request.insert(QStringLiteral("app"), QStringLiteral("puzzle")); // spec 18.2
+    request.insert(QStringLiteral("app_version"), AppVersionStr());
+    QList<VPPiecePtr> sent;
+    QVector<int> sentItems; // the request item each sent piece is a copy of
+    QStringList skippedNames;
+    for (vsizetype i = 0; i < candidates.size(); ++i)
+    {
+        if (skipped.contains(static_cast<int>(i)))
+        {
+            skippedNames.append(candidates.at(i)->GetName());
+        }
+        else
+        {
+            sent.append(candidates.at(i));
+            sentItems.append(itemOf.at(static_cast<int>(i)));
+        }
+    }
+    if (sent.isEmpty())
+    {
+        QMessageBox::warning(this, tr("Online nesting"), tr("No piece has a usable outline."));
+        return;
+    }
+    if (not skippedNames.isEmpty())
+    {
+        QMessageBox::warning(this, tr("Online nesting"),
+                             tr("%n piece(s) without a usable outline will not be sent: %1", "",
+                                static_cast<int>(skippedNames.size()))
+                                 .arg(skippedNames.join(QStringLiteral(", "))));
+    }
+
+    if (m_nestor == nullptr)
+    {
+        m_nestor = new VNestorClient(this);
+    }
+    const bool unlimited = request.value(QLatin1String("time_s")).toInt() == 0; // spec 15: ends when the user says so
+    auto *progress = new VNestingProgressDialog(request, unlimited, this);
+    progress->setAttribute(Qt::WA_DeleteOnClose);
+    progress->show();
+
+    // one-shot connections for this run, all dropped together
+    auto conns = QSharedPointer<QList<QMetaObject::Connection>>::create();
+    auto cleanup = [progress, conns]()
+    {
+        for (const auto &c : std::as_const(*conns))
+        {
+            QObject::disconnect(c);
+        }
+        conns->clear();
+        progress->close();
+    };
+    auto stopping = QSharedPointer<bool>::create(false);
+    *conns << connect(progress, &VNestingProgressDialog::canceled, this,
+                      [this, cleanup, conns, progress, unlimited, stopping]()
+                      {
+                          // one shot without Qt::SingleShotConnection (Qt 6 only): the lambda drops its own connection
+                          auto once = QSharedPointer<QMetaObject::Connection>::create();
+                          *once = connect(m_nestor, &VNestorClient::Cancelled, this,
+                                          [this, once, cleanup](const QJsonObject &summary)
+                                          {
+                                              disconnect(*once);
+                                              cleanup();
+                                              QMessageBox::information(this, tr("Online nesting"),
+                                                                       VNestorClient::CancelSummaryText(summary));
+                                          });
+                          if (unlimited && not *stopping)
+                          {
+                              // first press keeps the best layout (Finished follows, or Cancelled if there was nothing
+                              // to keep); a second press cancels for good
+                              *stopping = true;
+                              *conns << *once;
+                              m_nestor->Stop();
+                              progress->SetStopping();
+                              return;
+                          }
+                          m_nestor->Cancel();
+                          cleanup();
+                      });
+    *conns << connect(m_nestor, &VNestorClient::Progress, progress,
+                      [progress](const QString &status, int position, const QJsonObject &running)
+                      { progress->Update(status, position, running); });
+    const qint64 bodyBytes = QJsonDocument(request).toJson(QJsonDocument::Compact).size();
+    *conns << connect(m_nestor, &VNestorClient::Failed, this,
+                      [this, cleanup, bodyBytes, sent](int status, const QString &message)
+                      {
+                          cleanup();
+                          if (status == 413)
+                          {
+                              const QLocale locale;
+                              QMessageBox::warning(this, tr("Online nesting"),
+                                                   tr("The request is too large for the service (%1 MB for %n "
+                                                      "piece(s)). Nest fewer pieces at a time.",
+                                                      "", static_cast<int>(sent.size()))
+                                                       .arg(locale.toString(static_cast<double>(bodyBytes) / 1048576.0, 'f', 1)));
+                          }
+                          else if (status == 401)
+                          {
+                              QMessageBox::warning(this, tr("Online nesting"),
+                                                   tr("The service rejected your session. Sign in again in "
+                                                      "Preferences > Account.\n%1")
+                                                       .arg(message));
+                          }
+                          else if (status == 403)
+                          {
+                              QMessageBox::warning(this, tr("Online nesting"), tr("Access refused: %1").arg(message));
+                          }
+                          else if (message.contains(QLatin1String("longer than the usable roll length")))
+                          {
+                              QMessageBox::warning(this, tr("Online nesting"),
+                                                   tr("A piece is longer than a roll minus the junction loss: %1").arg(message));
+                          }
+                          else if (message.contains(QLatin1String("could not construct an initial placement")))
+                          {
+                              QMessageBox::warning(this, tr("Online nesting"),
+                                                   tr("A piece does not fit across the fabric width. Check the sheet "
+                                                      "size and its grainline direction."));
+                          }
+                          else
+                          {
+                              QMessageBox::warning(this, tr("Online nesting"), tr("Nesting failed: %1").arg(message));
+                          }
+                      });
+    *conns << connect(m_nestor, &VNestorClient::Finished, this,
+                      [this, cleanup, sheet, sent, sentItems](const QJsonObject &result)
+                      {
+                          cleanup();
+                          if (ApplyNestingResult(sheet, sent, sentItems, result))
+                          {
+                              QMessageBox::information(this, tr("Online nesting"), VNestorClient::SummaryText(result));
+                          }
+                      });
+    if (VAbstractApplication::VApp()->Settings()->GetShareFiles())
+    {
+        // spec 17.1: the layout file as last saved (nothing if never saved) and what the job was asked for
+        QList<QPair<QString, QByteArray>> files;
+        QFile layout(curFile);
+        if (not curFile.isEmpty() && layout.open(QIODevice::ReadOnly))
+        {
+            files.append({curFile, layout.readAll()});
+        }
+        m_nestor->SetFiles(files, QJsonObject{{"sheet", sheet->GetName()},
+                                              {"pieces_mode", static_cast<int>(dialog.Mode())},
+                                              {"grainline_vertical", vertical}});
+    }
+    m_nestor->Submit(request);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPMainWindow::ApplyNestingResult(const VPSheetPtr &sheet, const QList<VPPiecePtr> &sent,
+                                      const QVector<int> &sentItems, const QJsonObject &result) -> bool
+{
+    // copies per request item: the service places quantity copies of every merged item
+    QVector<int> quantities(sentItems.isEmpty() ? 0 : *std::max_element(sentItems.cbegin(), sentItems.cend()) + 1, 0);
+    for (const int item : sentItems)
+    {
+        ++quantities[item];
+    }
+    if (sheet.isNull() || not NestingPlanComplete(result, quantities))
+    {
+        QMessageBox::warning(this, tr("Online nesting"),
+                             tr("The service returned an incomplete result; nothing was changed."));
+        return false;
+    }
+    const bool vertical = sheet->GrainlineOrientation() == GrainlineType::Vertical;
+    const QRectF margins = sheet->GetMarginsRect();
+    const qreal lengthPx = result.value(QStringLiteral("marker_length_mm")).toDouble() * NestingPxPerMm;
+    const qreal availablePx = vertical ? margins.height() : margins.width();
+    QSizeF const oldSize = sheet->GetSheetSize();
+    QSizeF newSize = oldSize;
+    if (lengthPx > availablePx + 0.5)
+    {
+        const qreal extra = lengthPx - availablePx;
+        newSize = vertical ? QSizeF(oldSize.width(), oldSize.height() + extra)
+                           : QSizeF(oldSize.width() + extra, oldSize.height());
+        const QLocale locale;
+        const qreal newLengthCm = (vertical ? newSize.height() : newSize.width()) / NestingPxPerMm / 10;
+        if (QMessageBox::question(this, tr("Online nesting"),
+                                  tr("The marker is longer than the sheet. Lengthen the sheet to %1 cm?")
+                                      .arg(locale.toString(newLengthCm, 'f', 1))) != QMessageBox::Yes)
+        {
+            return false;
+        }
+    }
+
+    const QMultiMap<int, VNestingPlacement> placements = NestingPlacements(result);
+    QHash<int, int> taken; // copies of an item already handed to a piece
+    QList<VPNestedPiece> entries;
+    entries.reserve(sent.size());
+    for (vsizetype i = 0; i < sent.size(); ++i)
+    {
+        const VPPiecePtr &piece = sent.at(i);
+        const VPPiece reset(static_cast<const VLayoutPiece &>(*piece));
+        const int item = sentItems.at(i);
+        const VNestingPlacement placement = placements.values(item).at(taken[item]++);
+        VPNestedPiece entry;
+        entry.piece = piece;
+        entry.oldSheet = piece->Sheet();
+        entry.oldMatrix = piece->GetMatrix();
+        entry.oldFlipped = piece->IsVerticallyFlipped();
+        entry.oldHFlipped = piece->IsHorizontallyFlipped();
+        const QTransform base = reset.GetMatrix() * NestingGrainlineAlignment(*piece, reset.GetMatrix());
+        entry.newMatrix = NestingPieceMatrix(base, placement, margins, vertical);
+        entry.newFlipped = NestingFlipped(reset.IsVerticallyFlipped(), placement.mirrored);
+        entry.newHFlipped = reset.IsHorizontallyFlipped(); // the reset base carries no user flip
+        entries.append(entry);
+    }
+    m_layout->UndoStack()->push(new VPUndoOptimizeOnline(sheet, entries, oldSize, newSize));
+    const QLocale locale;
+    // the permanent status label takes the whole bar, so a temporary message would not be visible
+    m_statusLabel->setText(
+        tr("Online nesting: %1 pieces placed, utilisation %2 %")
+            .arg(sent.size())
+            .arg(locale.toString(result.value(QStringLiteral("utilisation")).toDouble() * 100, 'f', 1)));    return true;
+}

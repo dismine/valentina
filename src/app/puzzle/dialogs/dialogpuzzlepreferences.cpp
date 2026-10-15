@@ -28,6 +28,7 @@
 
 #include "dialogpuzzlepreferences.h"
 #include "../vpapplication.h"
+#include "../vnesting/vnestingaccountpage.h"
 #include "configpages/puzzlepreferencesconfigurationpage.h"
 #include "configpages/puzzlepreferenceslayoutpage.h"
 #include "configpages/puzzlepreferencespathpage.h"
@@ -56,6 +57,7 @@ DialogPuzzlePreferences::DialogPuzzlePreferences(QWidget *parent)
     m_configurationPage = new PuzzlePreferencesConfigurationPage;
     m_layoutPage = new PuzzlePreferencesLayoutPage;
     m_pathPage = new PuzzlePreferencesPathPage;
+    m_accountPage = new VNestingAccountPage;
 
 #if defined(Q_OS_MAC)
     setWindowFlags(Qt::Window);
@@ -74,6 +76,7 @@ DialogPuzzlePreferences::DialogPuzzlePreferences(QWidget *parent)
     ui->pagesWidget->insertWidget(0, m_configurationPage);
     ui->pagesWidget->insertWidget(1, m_layoutPage);
     ui->pagesWidget->insertWidget(2, m_pathPage);
+    ui->pagesWidget->insertWidget(3, m_accountPage);
 
     connect(ui->contentsWidget, &QListWidget::currentItemChanged, this, &DialogPuzzlePreferences::PageChanged);
     ui->pagesWidget->setCurrentIndex(0);
@@ -156,6 +159,7 @@ void DialogPuzzlePreferences::Apply()
     preferences += m_configurationPage->Apply();
     preferences += m_layoutPage->Apply();
     m_pathPage->Apply();
+    m_accountPage->Apply();
 
     if (not preferences.isEmpty())
     {

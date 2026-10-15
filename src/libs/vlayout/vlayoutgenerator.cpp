@@ -391,6 +391,42 @@ void VLayoutGenerator::SetShowLayoutAllowance(bool value)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetPapers(const QVector<VLayoutPaper> &value)
+{
+    papers = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutGenerator::GetLayoutWidth() const -> qreal
+{
+    return bank->GetLayoutWidth();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutGenerator::IsNestOnline() const -> bool
+{
+    return nestOnline;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetNestOnline(bool value)
+{
+    nestOnline = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VLayoutGenerator::GetOnlineOptions() const -> VNestingOptions
+{
+    return onlineOptions;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutGenerator::SetOnlineOptions(const VNestingOptions &value)
+{
+    onlineOptions = value;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 auto VLayoutGenerator::IsRotationNeeded() const -> bool
 {
     if (followGrainline)

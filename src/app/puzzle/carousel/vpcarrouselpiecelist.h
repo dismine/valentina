@@ -30,6 +30,7 @@
 #define VPCARROUSELPIECELIST_H
 
 #include <QListWidget>
+#include <QSet>
 
 #include "vpcarrousel.h"
 
@@ -72,6 +73,7 @@ protected:
     void mouseMoveEvent(QMouseEvent *event) override;
 
     void contextMenuEvent(QContextMenuEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
 
 private:
     Q_DISABLE_COPY_MOVE(VPCarrouselPieceList) // NOLINT
@@ -79,6 +81,9 @@ private:
     QList<VPPiecePtr> m_pieceList{};
     QPoint m_dragStart{};
     VPCarrousel *m_carrousel{nullptr};
+    QSet<QString> m_collapsed{}; // spec 21.3: groups whose pieces are hidden, kept across refreshes
+
+    void LayoutHeaders();
 
     void InitStyleSheet();
 };

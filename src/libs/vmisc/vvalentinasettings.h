@@ -96,6 +96,15 @@ public:
     static auto GetDefLayoutNestQuantity() -> bool;
     void SetLayoutNestQuantity(bool value);
 
+    auto GetLayoutNestOnline() const -> bool;
+    void SetLayoutNestOnline(bool value);
+
+    auto GetLayoutOnlineRotations() const -> int;
+    void SetLayoutOnlineRotations(int value);
+
+    auto GetLayoutOnlineSpeed() const -> int;
+    void SetLayoutOnlineSpeed(int value);
+
     auto GetLayoutAutoCropLength() const -> bool;
     static auto GetDefLayoutAutoCropLength() -> bool;
     void SetLayoutAutoCropLength(bool value);

@@ -44,6 +44,7 @@ public:
 
     /** @brief list with paths to the raw layout data files */
     auto OptionRawLayouts() const -> QStringList;
+    auto OptionGroup() const -> QString; // spec 21.2: group of the imported pieces, empty = none
 
     /** @brief if gui enabled or not */
     auto IsGuiEnabled() const -> bool;

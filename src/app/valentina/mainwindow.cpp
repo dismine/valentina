@@ -283,6 +283,26 @@ QT_WARNING_POP
 
 namespace
 {
+//---------------------------------------------------------------------------------------------------------------------
+/// spec 21.2: "<pattern> <size labels>" for multisize measurements, "<pattern> <measurements file>" for individual
+/// ones, the pattern name alone otherwise, so two exports of one pattern at two sizes land in two groups.
+auto LayoutGroupName(const QString &mPath) -> QString
+{
+    const auto *app = VAbstractValApplication::VApp();
+    QStringList parts{QFileInfo(app->GetPatternPath()).completeBaseName()};
+    if (app->GetMeasurementsType() == MeasurementsType::Multisize)
+    {
+        parts << app->GetDimensionHeightLabel() << app->GetDimensionSizeLabel() << app->GetDimensionWaistLabel()
+              << app->GetDimensionHipLabel();
+    }
+    else if (app->GetMeasurementsType() == MeasurementsType::Individual)
+    {
+        parts << QFileInfo(mPath).completeBaseName();
+    }
+    parts.removeAll(QString());
+    return parts.join(' ');
+}
+
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_CLANG("-Wunused-member-function")
 
@@ -4720,6 +4740,11 @@ void MainWindow::on_actionCreateManualLayout_triggered()
         exporter.ExportToRLD(listDetails);
 
         QStringList arguments{"-r", rldFile.fileName()};
+        // spec 21.2: the imported pieces form a group named after the pattern and the selected size
+        if (const QString group = LayoutGroupName(doc->MPath()); not group.isEmpty())
+        {
+            arguments << "--"_L1 + LONG_OPTION_GROUP << group;
+        }
         if (isNoScaling)
         {
             arguments.append(QStringLiteral("--") + LONG_OPTION_NO_HDPI_SCALING);
@@ -4795,6 +4820,11 @@ void MainWindow::on_actionUpdateManualLayout_triggered()
         exporter.ExportToRLD(listDetails);
 
         QStringList arguments{filePath, "-r", rldFile.fileName()};
+        // spec 21.2: the imported pieces form a group named after the pattern and the selected size
+        if (const QString group = LayoutGroupName(doc->MPath()); not group.isEmpty())
+        {
+            arguments << "--"_L1 + LONG_OPTION_GROUP << group;
+        }
         if (isNoScaling)
         {
             arguments.append("--"_L1 + LONG_OPTION_NO_HDPI_SCALING);
@@ -7382,7 +7412,19 @@ void MainWindow::ShowPaper(int index)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void MainWindow::OpenAccountPreferences()
+{
+    ShowPreferences(3);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void MainWindow::Preferences()
+{
+    ShowPreferences(0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void MainWindow::ShowPreferences(int page)
 {
     // Calling constructor of the dialog take some time. Because of this user have time to call the dialog twice.
     static QPointer<DialogPreferences> guard; // Prevent any second run
@@ -7390,6 +7432,7 @@ void MainWindow::Preferences()
     {
         QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
         auto *preferences = new DialogPreferences(this);
+        preferences->ShowPage(page);
         // QScopedPointer needs to be sure any exception will never block guard
         QScopedPointer<DialogPreferences> const dlg(preferences);
         guard = preferences;

@@ -1134,7 +1134,21 @@ auto VPGraphicsPiece::PieceColor() const -> QColor
 //---------------------------------------------------------------------------------------------------------------------
 auto VPGraphicsPiece::NoBrush() const -> QBrush
 {
-    return m_hoverMode ? QBrush(VSceneStylesheet::ManualLayoutStyle().PieceHoverColor()) : QBrush(Qt::NoBrush);
+    if (m_hoverMode)
+    {
+        return QBrush(VSceneStylesheet::ManualLayoutStyle().PieceHoverColor());
+    }
+    VPPiecePtr const piece = m_piece.toStrongRef();
+    VPLayoutPtr const layout = piece.isNull() ? VPLayoutPtr() : piece->Layout();
+    if (not layout.isNull())
+    {
+        const QColor tint = VPLayout::GroupColor(layout->GroupIndex(piece->Group())); // spec 21.3: the group's tint
+        if (tint.isValid())
+        {
+            return QBrush(tint);
+        }
+    }
+    return QBrush(Qt::NoBrush);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -63,6 +63,7 @@
     </property>
     <addaction name="separator"/>
     <addaction name="actionAddSheet"/>
+    <addaction name="actionOptimizeOnline"/>
     <addaction name="separator"/>
     <addaction name="actionPrintSheet"/>
     <addaction name="actionPrintPreviewSheet"/>
@@ -132,6 +133,8 @@
    <addaction name="actionNew"/>
    <addaction name="actionOpen"/>
    <addaction name="actionSave"/>
+     <addaction name="separator"/>
+   <addaction name="actionOptimizeOnline"/>
   </widget>
   <widget class="QDockWidget" name="dockWidgetCarrousel">
    <property name="sizePolicy">
@@ -326,6 +329,26 @@
                     <widget class="QLabel" name="labelCurrentPieceName">
                      <property name="text">
                       <string>Name:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="5" column="0">
+                    <widget class="QLabel" name="labelCurrentPieceGroup">
+                     <property name="text">
+                      <string>Group:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="5" column="1">
+                    <widget class="QLineEdit" name="lineEditCurrentPieceGroup">
+                     <property name="text">
+                      <string/>
+                     </property>
+                     <property name="frame">
+                      <bool>false</bool>
+                     </property>
+                     <property name="readOnly">
+                      <bool>true</bool>
                      </property>
                     </widget>
                    </item>
@@ -2316,6 +2339,20 @@
   <action name="actionAddSheet">
    <property name="text">
     <string>Add Sheet</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionOptimizeOnline">
+   <property name="icon">
+    <iconset theme="system-run"/>
+   </property>
+   <property name="text">
+    <string>Optimise placement online…</string>
+   </property>
+   <property name="toolTip">
+    <string>Send the sheet's pieces to the online nesting service (premium account required)</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>

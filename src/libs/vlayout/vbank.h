@@ -55,6 +55,8 @@ class VBank
     Q_DECLARE_TR_FUNCTIONS(VBank) // NOLINT
 
 public:
+    // Expands piece quantities the way the nester does: odd copies of a symmetrical, flip-constrained piece swap side.
+    static auto PrepareQuantity(const QVector<VLayoutPiece> &details) -> QVector<VLayoutPiece>;
     VBank();
     ~VBank() = default;
 

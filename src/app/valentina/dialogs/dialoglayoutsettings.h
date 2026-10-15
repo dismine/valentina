@@ -34,6 +34,7 @@
 
 #include "../vlayout/dialogs/vabstractlayoutdialog.h"
 #include "../vlayout/vlayoutdef.h"
+#include "../vlayout/vnestingframe.h"
 
 namespace Ui
 {
@@ -107,6 +108,16 @@ public:
     auto IsNestQuantity() const -> bool;
     void SetNestQuantity(bool state);
 
+    auto IsNestOnline() const -> bool;
+    void SetNestOnline(bool state);
+
+    auto GetOnlineRotations() const -> NestingRotations;
+    void SetOnlineRotations(NestingRotations value);
+    auto GetOnlineOptions() const -> VNestingOptions; // rotations, time (s), speed, target, convergence
+    void SetOnlineSpeed(NestingSpeed speed);
+    /** @brief Enables the free preview; the builder reads this dialog's current values. */
+    void SetOnlineRequestBuilder(const std::function<QJsonObject()> &builder);
+
     void SetBoundaryTogetherWithNotches(bool value);
     auto IsBoundaryTogetherWithNotches() const -> bool;
 
@@ -146,6 +157,7 @@ private slots:
 
     void CorrectMaxFileds();
     void IgnoreAllFields(int state);
+    void NestOnlineToggled(bool on);
 
 private:
     // cppcheck-suppress unknownMacro

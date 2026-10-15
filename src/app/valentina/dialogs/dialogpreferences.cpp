@@ -33,6 +33,7 @@
 #include "configpages/preferencesconfigurationpage.h"
 #include "configpages/preferencespathpage.h"
 #include "configpages/preferencespatternpage.h"
+#include "../vnesting/vnestingaccountpage.h"
 #include "ui_dialogpreferences.h"
 
 #include <QApplication>
@@ -56,6 +57,7 @@ DialogPreferences::DialogPreferences(QWidget *parent)
     m_configurePage = new PreferencesConfigurationPage;
     m_patternPage = new PreferencesPatternPage;
     m_pathPage = new PreferencesPathPage;
+    m_accountPage = new VNestingAccountPage;
 
 #if defined(Q_OS_MAC)
     setWindowFlags(Qt::Window);
@@ -74,6 +76,7 @@ DialogPreferences::DialogPreferences(QWidget *parent)
     ui->pagesWidget->insertWidget(0, m_configurePage);
     ui->pagesWidget->insertWidget(1, m_patternPage);
     ui->pagesWidget->insertWidget(2, m_pathPage);
+    ui->pagesWidget->insertWidget(3, m_accountPage);
 
     connect(ui->contentsWidget, &QListWidget::currentItemChanged, this, &DialogPreferences::PageChanged);
     ui->pagesWidget->setCurrentIndex(0);
@@ -140,6 +143,12 @@ void DialogPreferences::changeEvent(QEvent *event)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void DialogPreferences::ShowPage(int index)
+{
+    ui->contentsWidget->setCurrentRow(index);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void DialogPreferences::PageChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
     if (current == nullptr)
@@ -158,6 +167,7 @@ void DialogPreferences::Apply()
     preferences += m_configurePage->Apply();
     preferences += m_patternPage->Apply();
     preferences += m_pathPage->Apply();
+    m_accountPage->Apply();
 
     if (m_patternPage->IsCurveApproximationScaleChanged())
     {

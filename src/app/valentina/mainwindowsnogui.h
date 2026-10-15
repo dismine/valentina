@@ -35,12 +35,14 @@
 #include <QPrinter>
 
 #include "../vlayout/vlayoutgenerator.h"
+#include <QJsonObject>
 #include "../vlayout/vlayoutpiece.h"
 #include "../vlayout/vprintlayout.h"
 #include "../vwidgets/vabstractmainwindow.h"
 #include "dialogs/dialogsavelayout.h"
 #include "xml/vpattern.h"
 
+class VNestorClient;
 class QGraphicsScene;
 struct PosterData;
 class QGraphicsRectItem;
@@ -116,6 +118,7 @@ protected:
     bool isNoScaling{false};                                // NOLINT(misc-non-private-member-variables-in-classes)
     bool isNeedAutosave{false};                             // NOLINT(misc-non-private-member-variables-in-classes)
     VPrintLayout *m_layoutSettings{new VPrintLayout(this)}; // NOLINT(misc-non-private-member-variables-in-classes)
+    VNestorClient *m_nestor{nullptr};                      // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief mouseCoordinate pointer to label who show mouse coordinate. */
     QPointer<QLabel> m_mouseCoordinate{nullptr};      // NOLINT(misc-non-private-member-variables-in-classes)
@@ -138,6 +141,12 @@ protected:
     auto RecentFileList() const -> QStringList override;
     auto ScenePreview(int i, QSize iconSize, PreviewQuatilty quality) const -> QIcon;
     auto GenerateLayout(VLayoutGenerator &lGenerator) -> bool;
+    auto GenerateLayoutOnline(VLayoutGenerator &lGenerator) -> bool;
+    auto OnlineRequest(qreal paperWidthPx, qreal layoutWidthPx, bool together, bool nestQuantity,
+                       const VNestingOptions &options, QVector<VLayoutPiece> &sent, QStringList &skippedNames) const
+        -> QJsonObject;
+    void ApplyGeneratorResult(const VLayoutGenerator &lGenerator);
+    virtual void OpenAccountPreferences() = 0;
     auto FileName() const -> QString;
 
     auto ExportFMeasurementsToCSVData(const QString &fileName, bool withHeader, int mib, const QChar &separator) const
