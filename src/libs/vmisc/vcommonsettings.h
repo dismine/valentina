@@ -379,7 +379,19 @@ public:
     void SetTranslateFormula(bool value) const;
 
     auto GetActionShortcuts(const QString &name, const QStringList &defaultShortcuts) -> QStringList;
-    void SetActionShortcuts(const QString &name, const QStringList &shortcuts) const;
+    // An empty list is removed when defaultShortcuts is also empty. It is stored as @Invalid() when the
+    // built-in default has a key, which is an explicit clear. A blank value is not written.
+    void SetActionShortcuts(const QString &name, const QStringList &shortcuts,
+                            const QStringList &defaultShortcuts) const;
+    void RemoveActionShortcut(const QString &name) const;
+    // Drops unknown [shortcuts] keys whose value is an empty shortcut. schemeversion and knownNames stay.
+    void RemoveEmptyShortcutPlaceholders(const QStringList &knownNames) const;
+    auto HasActionShortcut(const QString &name) const -> bool;
+
+    // Bumped when built-in shortcuts change, so a saved copy of the old default can be upgraded once.
+    // common.ini shares this file across Valentina, Tape and Puzzle; only Valentina writes it.
+    auto GetShortcutScheme() const -> int;
+    void SetShortcutScheme(int scheme) const;
 
     auto GetCrashEmail() const -> QString;
     void SetCrashEmail(const QString &value) const;

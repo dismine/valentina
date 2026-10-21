@@ -111,6 +111,8 @@ VTestApp {
         "tst_vlockguard.cpp",
         "tst_vcommonsettings.cpp",
         "tst_vcommonsettings.h",
+        "tst_vshortcutresolver.cpp",
+        "tst_vshortcutresolver.h",
         "tst_misc.cpp",
         "tst_vcommandline.cpp",
         "tst_vpiece.cpp",

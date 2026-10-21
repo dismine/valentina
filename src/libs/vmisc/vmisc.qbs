@@ -114,6 +114,7 @@ VLib {
         "typedef.h",
         "vabstractshortcutmanager.h",
         "vabstractshortcutmanager.cpp",
+        "vshortcutresolver.h",
         "vtranslator.h",
         "vtranslator.cpp",
         "vmainbase.h",

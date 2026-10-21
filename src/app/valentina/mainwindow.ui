@@ -815,7 +815,7 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mode for working with pattern pieces. These pattern pieces are base for going to the next stage &amp;quot;Details mode&amp;quot;. Before you will be able to enable the &amp;quot;Details mode&amp;quot; need create at least one detail.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="shortcut">
-    <string notr="true">Ctrl+W</string>
+    <string notr="true">Ctrl+Shift+W</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
@@ -1145,7 +1145,7 @@
     <string>Activate last used tool again</string>
    </property>
    <property name="shortcut">
-    <string notr="true">L</string>
+    <string notr="true">Ctrl+Shift+L</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
@@ -1411,7 +1411,7 @@
     <string>Final measurements</string>
    </property>
    <property name="shortcut">
-    <string notr="true">Ctrl+I</string>
+    <string notr="true">Ctrl+Shift+I</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>

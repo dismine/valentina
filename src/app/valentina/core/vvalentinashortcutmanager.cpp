@@ -26,14 +26,20 @@
  **
  *************************************************************************/
 #include "vvalentinashortcutmanager.h"
-#include "qnamespace.h"
-#include "vabstractshortcutmanager.h"
 
 #include <QKeySequence>
+#include <QList>
+#include <QStringList>
+
+#include "vabstractapplication.h"
+#include "vcommonsettings.h"
+#include "vshortcutresolver.h"
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include "../vmisc/compatibility.h"
 #endif
+
+using namespace Qt::Literals::StringLiterals;
 
 //---------------------------------------------------------------------------------------------------------------------
 VValentinaShortcutManager::VValentinaShortcutManager(QObject *parent)
@@ -41,135 +47,101 @@ VValentinaShortcutManager::VValentinaShortcutManager(QObject *parent)
 {
     Q_STATIC_ASSERT_X(static_cast<int>(VShortcutAction::LAST_ONE_DO_NOT_USE) == 90, "Check if all actions were used.");
 
-    AddShortcut({VShortcutAction::ZoomIn, KeyBindingsToStringList(QKeySequence::ZoomIn), {}});
-    AddShortcut({VShortcutAction::ZoomOut, KeyBindingsToStringList(QKeySequence::ZoomOut), {}});
-    AddShortcut({VShortcutAction::ZoomOriginal,
-                 {QKeySequence(Qt::ControlModifier | Qt::Key_0).toString(),
-                  QKeySequence(Qt::ControlModifier | Qt::KeypadModifier | Qt::Key_0).toString()
-                 },
-                 {}});
-    AddShortcut({VShortcutAction::ZoomFitBest,
-                 {QKeySequence(Qt::ControlModifier | Qt::Key_Equal).toString()},
-                 {}});
-    AddShortcut({VShortcutAction::ZoomFitBestCurrent,
-                 {QKeySequence(Qt::ControlModifier | Qt::Key_M).toString()},
-                 {}});
-    AddShortcut({VShortcutAction::IncreaseLabelFont,
-                 {QKeySequence(Qt::ShiftModifier | Qt::Key_Plus).toString()},
-                 {}});
-    AddShortcut({VShortcutAction::DecreaseLabelFont,
-                 {QKeySequence(Qt::ShiftModifier | Qt::Key_Minus).toString()},
-                 {}});
-    AddShortcut({VShortcutAction::OriginalLabelFont,
-                 {QKeySequence(Qt::ShiftModifier | Qt::Key_0).toString()},
-                 {}});
-    AddShortcut(
-        {VShortcutAction::HideLabels, {QKeySequence(Qt::AltModifier | Qt::Key_L).toString()}, {}});
-    AddShortcut({VShortcutAction::Undo, KeyBindingsToStringList(QKeySequence::Undo), {}});
-    AddShortcut({VShortcutAction::Redo, KeyBindingsToStringList(QKeySequence::Redo), {}});
-    AddShortcut({VShortcutAction::New, KeyBindingsToStringList(QKeySequence::New), {}});
-    AddShortcut({VShortcutAction::Open, KeyBindingsToStringList(QKeySequence::Open), {}});
-    AddShortcut({VShortcutAction::Save, KeyBindingsToStringList(QKeySequence::Save), {}});
-    AddShortcut({VShortcutAction::SaveAs, KeyBindingsToStringList(QKeySequence::SaveAs), {}});
-    AddShortcut(
-        {VShortcutAction::DrawMode, {QKeySequence(Qt::ControlModifier | Qt::Key_W).toString()}, {}});
-    AddShortcut(
-        {VShortcutAction::DetailsMode, {QKeySequence(Qt::ControlModifier | Qt::Key_E).toString()}, {}});
-    AddShortcut(
-        {VShortcutAction::LayoutMode, {QKeySequence(Qt::ControlModifier | Qt::Key_L).toString()}, {}});
-    AddShortcut(
-        {VShortcutAction::NewPatternPiece,
-         {QKeySequence(Qt::ControlModifier | Qt::ShiftModifier | Qt::Key_N).toString()},
-         {}});
-    AddShortcut({VShortcutAction::NextPatternPiece,
-                 {QKeySequence(Qt::ControlModifier | Qt::Key_PageDown).toString()},
-                 {}});
-    AddShortcut({VShortcutAction::PreviusPatternPiece,
-                 {QKeySequence(Qt::ControlModifier | Qt::Key_PageUp).toString()},
-                 {}});
-    AddShortcut({VShortcutAction::InteractiveTools,
-                 {QKeySequence(Qt::ControlModifier | Qt::Key_D).toString()},
-                 {}});
-    AddShortcut({VShortcutAction::TableOfVariables,
-                 {QKeySequence(Qt::ControlModifier | Qt::Key_T).toString()},
-                 {}});
-    AddShortcut({VShortcutAction::Quit, KeyBindingsToStringList(QKeySequence::Quit), {}});
-    AddShortcut({VShortcutAction::CurveDetails, {QKeySequence(Qt::Key_F2).toString()}, {}});
-    AddShortcut({VShortcutAction::ShowSegmentLabels, {}, {}});
-    AddShortcut({VShortcutAction::FinalMeasurements,
-                 {QKeySequence(Qt::ControlModifier | Qt::Key_I).toString()},
-                 {}});
-    AddShortcut({VShortcutAction::ReloadPieceLabels, {QKeySequence(Qt::Key_F9).toString()}, {}});
+    const QList<VSShortcut> defaults = DefaultShortcuts();
+    QList<QStringList> bindings;
+    bindings.reserve(defaults.size());
+    for (const VSShortcut &shortcut : defaults)
+    {
+        AddShortcut(shortcut);
+        bindings.append(shortcut.defaultShortcuts);
+    }
 
-    AddShortcut({VShortcutAction::CaseSensitiveMatch,
-                 {QKeySequence(Qt::AltModifier | Qt::Key_C).toString()},
-                 {}});
-    AddShortcut(
-        {VShortcutAction::WholeWordMatch, {QKeySequence(Qt::AltModifier | Qt::Key_W).toString()}, {}});
-    AddShortcut(
-        {VShortcutAction::RegexMatch, {QKeySequence(Qt::AltModifier | Qt::Key_X).toString()}, {}});
-    AddShortcut(
-        {VShortcutAction::SearchHistory, {QKeySequence(Qt::AltModifier | Qt::Key_Down).toString()}, {}});
-    AddShortcut({VShortcutAction::RegexMatchUnicodeProperties,
-                 {QKeySequence(Qt::AltModifier | Qt::Key_U).toString()},
-                 {}});
-    AddShortcut({VShortcutAction::FindNext, {QKeySequence(Qt::Key_F3).toString()}, {}});
-    AddShortcut(
-        {VShortcutAction::FindPrevious, {QKeySequence(Qt::ShiftModifier | Qt::Key_F3).toString()}, {}});
-    AddShortcut({VShortcutAction::LastTool, {QKeySequence(Qt::Key_L).toString()}, {}});
-    AddShortcut({VShortcutAction::ToolEndLine, {}, {}});
-    AddShortcut({VShortcutAction::ToolLine, {}, {}});
-    AddShortcut({VShortcutAction::ToolAlongLine, {}, {}});
-    AddShortcut({VShortcutAction::ToolShoulderPoint, {}, {}});
-    AddShortcut({VShortcutAction::ToolNormal, {}, {}});
-    AddShortcut({VShortcutAction::ToolBisector, {}, {}});
-    AddShortcut({VShortcutAction::ToolLineIntersect, {}, {}});
-    AddShortcut({VShortcutAction::ToolSpline, {}, {}});
-    AddShortcut({VShortcutAction::ToolCubicBezier, {}, {}});
-    AddShortcut({VShortcutAction::ToolArc, {}, {}});
-    AddShortcut({VShortcutAction::ToolSplinePath, {}, {}});
-    AddShortcut({VShortcutAction::ToolCubicBezierPath, {}, {}});
-    AddShortcut({VShortcutAction::ToolPointOfContact, {}, {}});
-    AddShortcut({VShortcutAction::ToolPiece, {}, {}});
-    AddShortcut({VShortcutAction::ToolPiecePath, {}, {}});
-    AddShortcut({VShortcutAction::ToolHeight, {}, {}});
-    AddShortcut({VShortcutAction::ToolTriangle, {}, {}});
-    AddShortcut({VShortcutAction::ToolPointOfIntersection, {}, {}});
-    AddShortcut({VShortcutAction::ToolCutSpline, {}, {}});
-    AddShortcut({VShortcutAction::ToolCutSplinePath, {}, {}});
-    AddShortcut({VShortcutAction::ToolUnionDetails, {}, {}});
-    AddShortcut({VShortcutAction::ToolDuplicateDetail, {}, {}});
-    AddShortcut({VShortcutAction::ToolCutArc, {}, {}});
-    AddShortcut({VShortcutAction::ToolLineIntersectAxis, {}, {}});
-    AddShortcut({VShortcutAction::ToolCurveIntersectAxis, {}, {}});
-    AddShortcut({VShortcutAction::ToolArcIntersectAxis, {}, {}});
-    AddShortcut({VShortcutAction::LayoutSettings, {}, {}});
-    AddShortcut({VShortcutAction::ToolPointOfIntersectionArcs, {}, {}});
-    AddShortcut({VShortcutAction::ToolPointOfIntersectionCircles, {}, {}});
-    AddShortcut({VShortcutAction::ToolPointOfIntersectionCurves, {}, {}});
-    AddShortcut({VShortcutAction::ToolPointFromCircleAndTangent, {}, {}});
-    AddShortcut({VShortcutAction::ToolPointFromArcAndTangent, {}, {}});
-    AddShortcut({VShortcutAction::ToolArcWithLength, {}, {}});
-    AddShortcut({VShortcutAction::ToolTrueDarts, {}, {}});
-    AddShortcut({VShortcutAction::ToolGroup, {}, {}});
-    AddShortcut({VShortcutAction::ToolRotation, {}, {}});
-    AddShortcut({VShortcutAction::ToolFlippingByLine, {}, {}});
-    AddShortcut({VShortcutAction::ToolFlippingByAxis, {}, {}});
-    AddShortcut({VShortcutAction::ToolMove, {}, {}});
-    AddShortcut({VShortcutAction::ToolMidpoint, {}, {}});
-    AddShortcut({VShortcutAction::ExportDrawAs, {}, {}});
-    AddShortcut({VShortcutAction::ExportLayoutAs, {}, {}});
-    AddShortcut({VShortcutAction::ExportDetailsAs, {}, {}});
-    AddShortcut({VShortcutAction::ToolEllipticalArc, {}, {}});
-    AddShortcut({VShortcutAction::ToolPin, {}, {}});
-    AddShortcut({VShortcutAction::ToolInsertNode, {}, {}});
-    AddShortcut({VShortcutAction::ToolPlaceLabel, {}, {}});
-    AddShortcut({VShortcutAction::ToolArcStart, {}, {}});
-    AddShortcut({VShortcutAction::ToolArcEnd, {}, {}});
-    AddShortcut({VShortcutAction::ToolEllipticalArcWithLength, {}, {}});
-    AddShortcut({VShortcutAction::ToolParallelCurve, {}, {}});
-    AddShortcut({VShortcutAction::ToolGraduatedCurve, {}, {}});
-    AddShortcut({VShortcutAction::AutoArrangeLabels,
-                 {QKeySequence(Qt::ControlModifier | Qt::ShiftModifier | Qt::Key_A).toString()},
-                 {}});
+    // Two actions on one key both fire. Fail here instead of shipping that.
+    const QStringList conflicts = ConflictingShortcutSequences(bindings);
+    Q_ASSERT_X(conflicts.isEmpty(), Q_FUNC_INFO, qPrintable(conflicts.join(", "_L1)));
+    Q_UNUSED(conflicts)
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VValentinaShortcutManager::UpdateShortcuts()
+{
+    VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
+    const int storedScheme = settings->GetShortcutScheme();
+    // Binding upgrades stay on scheme 1. Placeholder cleanup is scheme 2 and must not run those upgrades
+    // again, or a tool the user cleared after the upgrade (stored as @Invalid()) would come back.
+    const bool migrateBindings = storedScheme < bindingUpgradeScheme;
+    const bool clearPlaceholders = storedScheme < shortcutScheme;
+
+    QList<VShortcutPreference> preferences;
+    preferences.reserve(m_shortcutsList.size());
+    QStringList knownNames;
+    knownNames.reserve(m_shortcutsList.size());
+    for (const VSShortcut &shortcut : m_shortcutsList)
+    {
+        const QString name = ShortcutActionToString(shortcut.type);
+        knownNames.append(name);
+
+        VShortcutPreference preference;
+        preference.defaults = shortcut.defaultShortcuts;
+        if (migrateBindings)
+        {
+            preference.previousDefaults = shortcut.previousDefaults;
+        }
+
+        preference.isStored = settings->HasActionShortcut(name);
+        if (preference.isStored)
+        {
+            preference.stored = settings->GetActionShortcuts(name, {});
+        }
+
+        preferences.append(preference);
+    }
+
+    const QList<VShortcutResolution> resolved = ResolveShortcutPreferences(preferences);
+    for (int i = 0; i < m_shortcutsList.size(); ++i)
+    {
+        const QString name = knownNames.at(i);
+        QStringList shortcuts = resolved.at(i).shortcuts;
+        // A blank ini value is one empty string. That is not a shortcut.
+        if (NormalizeShortcutSequences(shortcuts).isEmpty())
+        {
+            shortcuts.clear();
+        }
+
+        m_shortcutsList[i].shortcuts = shortcuts;
+
+        const QStringList defaults = m_shortcutsList.at(i).defaultShortcuts;
+        if (resolved.at(i).persist)
+        {
+            settings->SetActionShortcuts(name, shortcuts, defaults);
+            continue;
+        }
+
+        if (!clearPlaceholders || !preferences.at(i).isStored || !shortcuts.isEmpty())
+        {
+            continue;
+        }
+
+        if (NormalizeShortcutSequences(defaults).isEmpty())
+        {
+            // Still unbound. @Invalid() here only repeats the built-in default, so drop the key.
+            settings->RemoveActionShortcut(name);
+            continue;
+        }
+
+        // Cleared on purpose. A blank `key=` has to become an empty list, which is stored as @Invalid().
+        if (!preferences.at(i).stored.isEmpty())
+        {
+            settings->SetActionShortcuts(name, {}, defaults);
+        }
+    }
+
+    if (clearPlaceholders)
+    {
+        settings->RemoveEmptyShortcutPlaceholders(knownNames);
+        // Missing keys keep following the built-in binding. A shortcut cleared after this stays cleared.
+        settings->SetShortcutScheme(shortcutScheme);
+    }
+
+    emit ShortcutsUpdated();
 }

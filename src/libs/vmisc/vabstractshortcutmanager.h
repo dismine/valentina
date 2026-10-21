@@ -28,7 +28,9 @@
 #ifndef VABSTRACTSHORTCUTMANAGER_H
 #define VABSTRACTSHORTCUTMANAGER_H
 
+#include <optional>
 #include <utility>
+
 #include <QKeySequence>
 #include <QObject>
 
@@ -153,11 +155,17 @@ public:
         QStringList defaultShortcuts{}; // NOLINT(misc-non-private-member-variables-in-classes)
         QStringList shortcuts{};        // NOLINT(misc-non-private-member-variables-in-classes)
 
+        // Set when this release changes the built-in binding. A saved shortcut equal to it is the old
+        // default and may be upgraded. Leave disengaged for actions whose built-in binding did not change.
+        std::optional<QStringList> previousDefaults{}; // NOLINT(misc-non-private-member-variables-in-classes)
+
         VSShortcut() = default;
-        VSShortcut(VShortcutAction type, QStringList defaultShortcuts, QStringList shortcuts)
+        VSShortcut(VShortcutAction type, QStringList defaultShortcuts, QStringList shortcuts,
+                   std::optional<QStringList> previousDefaults = std::nullopt)
           : type(type),
             defaultShortcuts(std::move(defaultShortcuts)),
-            shortcuts(std::move(shortcuts))
+            shortcuts(std::move(shortcuts)),
+            previousDefaults(std::move(previousDefaults))
         {
         }
     };
@@ -165,7 +173,7 @@ public:
     explicit VAbstractShortcutManager(QObject *parent = nullptr);
     ~VAbstractShortcutManager() override = default;
 
-    void UpdateShortcuts();
+    virtual void UpdateShortcuts();
     void UpdateActionShortcuts(const QMultiHash<VShortcutAction, QAction *> &actions);
     void UpdateButtonShortcut(const QMultiHash<VShortcutAction, QAbstractButton *> &buttons);
 
@@ -185,10 +193,10 @@ protected:
     static auto CustomKeyBindings(QKeySequence::StandardKey sequence) -> QList<QKeySequence>;
     static auto KeyBindingsToStringList(QKeySequence::StandardKey sequence) -> QStringList;
 
+    QList<VSShortcut> m_shortcutsList{};
+
 private:
     Q_DISABLE_COPY_MOVE(VAbstractShortcutManager) // NOLINT
-
-    QList<VSShortcut> m_shortcutsList{};
 };
 
 #endif // VABSTRACTSHORTCUTMANAGER_H

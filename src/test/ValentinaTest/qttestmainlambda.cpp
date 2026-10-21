@@ -54,6 +54,7 @@
 #include "tst_vboundary.h"
 #include "tst_vcommandline.h"
 #include "tst_vcommonsettings.h"
+#include "tst_vshortcutresolver.h"
 #include "tst_vcontainer.h"
 #include "tst_vcubicbezierpath.h"
 #include "tst_vdomdocument.h"
@@ -160,6 +161,7 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_VDomDocument());
     ASSERT_TEST(new TST_VLockGuard());
     ASSERT_TEST(new TST_VCommonSettings());
+    ASSERT_TEST(new TST_VShortcutResolver());
     ASSERT_TEST(new TST_Misc());
     ASSERT_TEST(new TST_VCommandLine());
     ASSERT_TEST(new TST_VAbstractCurve());

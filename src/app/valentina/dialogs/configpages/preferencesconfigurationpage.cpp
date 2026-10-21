@@ -311,7 +311,7 @@ auto PreferencesConfigurationPage::Apply() -> QStringList
         for (int i = 0; i < m_transientShortcuts.length(); i++)
         {
             settings->SetActionShortcuts(VAbstractShortcutManager::ShortcutActionToString(shortcutsList.value(i).type),
-                                         m_transientShortcuts.value(i));
+                                         m_transientShortcuts.value(i), shortcutsList.value(i).defaultShortcuts);
         }
 
         manager->UpdateShortcuts();

@@ -57,6 +57,7 @@ using QTextCodec = VTextCodec;
 #include "def.h"
 #include "defglobal.h"
 #include "literals.h"
+#include "vshortcutresolver.h"
 
 using namespace Qt::Literals::StringLiterals;
 
@@ -1993,11 +1994,83 @@ auto VCommonSettings::GetActionShortcuts(const QString &name, const QStringList 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetActionShortcuts(const QString &name, const QStringList &shortcuts) const
+void VCommonSettings::SetActionShortcuts(const QString &name, const QStringList &shortcuts,
+                                         const QStringList &defaultShortcuts) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
     settings.beginGroup("shortcuts"_L1);
-    settings.setValue(name, shortcuts);
+
+    switch (ShortcutSaveAction(shortcuts, defaultShortcuts))
+    {
+        case VShortcutSave::RemoveKey:
+            settings.remove(name);
+            break;
+        case VShortcutSave::WriteExplicitEmpty:
+            // QSettings writes an empty list as @Invalid(). A blank QString would come back as one empty string.
+            settings.setValue(name, QStringList{});
+            break;
+        case VShortcutSave::WriteSequences:
+        default:
+            settings.setValue(name, shortcuts);
+            break;
+    }
+
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::RemoveActionShortcut(const QString &name) const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.beginGroup("shortcuts"_L1);
+    settings.remove(name);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::RemoveEmptyShortcutPlaceholders(const QStringList &knownNames) const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.beginGroup("shortcuts"_L1);
+
+    const QStringList keys = settings.childKeys();
+    QHash<QString, QVariant> values;
+    for (const QString &key : keys)
+    {
+        values.insert(key, settings.value(key));
+    }
+
+    const QStringList drop = EmptyShortcutPlaceholderKeys(keys, values, knownNames);
+    for (const QString &key : drop)
+    {
+        settings.remove(key);
+    }
+
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::HasActionShortcut(const QString &name) const -> bool
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.beginGroup("shortcuts"_L1);
+    return settings.contains(name);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetShortcutScheme() const -> int
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.beginGroup("shortcuts"_L1);
+    return settings.value("schemeversion"_L1, 0).toInt();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetShortcutScheme(int scheme) const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.beginGroup("shortcuts"_L1);
+    settings.setValue("schemeversion"_L1, scheme);
     settings.sync();
 }
 
