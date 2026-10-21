@@ -40,6 +40,7 @@
 class VMeasurement;
 struct FormulaData;
 class VContainer;
+class LengthShortcutBar;
 
 namespace Ui
 {
@@ -71,6 +72,7 @@ public:
     void SetIncrementsMode();
     void SetPreviewCalculationsMode();
     void ShowPieceArea(bool show) const;
+    void EnableLengthToken(const QString &token);
 
 public slots:
     void DialogAccepted();
@@ -133,6 +135,9 @@ private:
 
     /** @brief m_isInitialized true if window is initialized */
     bool m_isInitialized{false};
+
+    LengthShortcutBar *m_lengthShortcuts{nullptr};
+    bool m_hasLengthToken{false};
 
     void InitVariables();
 

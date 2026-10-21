@@ -38,7 +38,9 @@
 
 #include "../../visualization/path/vistoolcutspline.h"
 #include "../../visualization/visualization.h"
+#include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../lengthshortcutbar.h"
 #include "../qmuparser/qmudef.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../vgeometry/vspline.h"
@@ -90,6 +92,9 @@ DialogCutSpline::DialogCutSpline(const VContainer *data, VAbstractPattern *doc, 
     connect(ui->lineEditName2, &QLineEdit::textEdited, this, &DialogCutSpline::ValidateCurveNames);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutSpline::FXLength);
+    m_lengthShortcuts =
+        InstallLengthShortcutBar(ui->plainTextEditFormula, ui->horizontalLayout, ui->toolButtonExprLength);
+    UpdateLengthShortcutLabels();
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
             [this]()
             {
@@ -269,6 +274,7 @@ void DialogCutSpline::changeEvent(QEvent *event)
     if (event->type() == QEvent::LanguageChange)
     {
         ui->retranslateUi(this);
+        UpdateLengthShortcutLabels();
     }
 
     if (event->type() == QEvent::PaletteChange)
@@ -279,6 +285,13 @@ void DialogCutSpline::changeEvent(QEvent *event)
 
     // remember to call base class implementation
     DialogTool::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutSpline::UpdateLengthShortcutLabels()
+{
+    const QString token = VAbstractApplication::VApp()->TrVars()->VarToUser(currentLength);
+    m_lengthShortcuts->SetLengthToken(token);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -414,6 +427,7 @@ void DialogCutSpline::DeployFormulaTextEdit()
 void DialogCutSpline::FXLength()
 {
     auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
+    dialog->EnableLengthToken(VAbstractApplication::VApp()->TrVars()->VarToUser(currentLength));
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetFormula());
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));

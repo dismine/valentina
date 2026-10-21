@@ -42,6 +42,8 @@ namespace Ui
 class DialogCutArc;
 }
 
+class LengthShortcutBar;
+
 /**
  * @brief The DialogCutArc class dialog for ToolCutArc.
  */
@@ -112,6 +114,7 @@ private:
     Q_DISABLE_COPY_MOVE(DialogCutArc) // NOLINT
     /** @brief ui keeps information about user interface */
     Ui::DialogCutArc *ui;
+    LengthShortcutBar *m_lengthShortcuts{nullptr};
 
     /** @brief formula string with formula */
     QString m_formula{};
@@ -143,6 +146,8 @@ private:
     void FinishCreating();
 
     void InitIcons();
+
+    void UpdateLengthShortcutLabels();
 
     auto GenerateDefLeftSubName() const -> QString;
     auto GenerateDefRightSubName() const -> QString;

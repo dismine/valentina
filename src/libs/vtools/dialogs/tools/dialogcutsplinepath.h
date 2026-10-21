@@ -42,6 +42,8 @@ namespace Ui
 class DialogCutSplinePath;
 }
 
+class LengthShortcutBar;
+
 /**
  * @brief The DialogCutSplinePath class dialog for ToolCutSplinePath.
  */
@@ -111,6 +113,7 @@ private:
 
     /** @brief ui keeps information about user interface */
     Ui::DialogCutSplinePath *ui;
+    LengthShortcutBar *m_lengthShortcuts{nullptr};
 
     /** @brief formula string with formula */
     QString m_formula{};
@@ -139,6 +142,8 @@ private:
     void FinishCreating();
 
     void InitIcons();
+
+    void UpdateLengthShortcutLabels();
 
     auto GenerateDefLeftSubName() const -> QString;
     auto GenerateDefRightSubName() const -> QString;

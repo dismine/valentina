@@ -38,7 +38,9 @@
 
 #include "../../visualization/path/vistoolcutarc.h"
 #include "../../visualization/visualization.h"
+#include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
+#include "../lengthshortcutbar.h"
 #include "../qmuparser/qmudef.h"
 #include "../support/dialogeditwrongformula.h"
 #include "../vgeometry/varc.h"
@@ -90,6 +92,9 @@ DialogCutArc::DialogCutArc(const VContainer *data, VAbstractPattern *doc, quint3
     connect(ui->lineEditName2, &QLineEdit::textEdited, this, &DialogCutArc::ValidateCurveNames);
 
     connect(ui->toolButtonExprLength, &QPushButton::clicked, this, &DialogCutArc::FXLength);
+    m_lengthShortcuts =
+        InstallLengthShortcutBar(ui->plainTextEditFormula, ui->horizontalLayout, ui->toolButtonExprLength);
+    UpdateLengthShortcutLabels();
     connect(ui->lineEditNamePoint, &QLineEdit::textChanged, this,
             [this]()
             {
@@ -116,6 +121,7 @@ DialogCutArc::DialogCutArc(const VContainer *data, VAbstractPattern *doc, quint3
 void DialogCutArc::FXLength()
 {
     auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
+    dialog->EnableLengthToken(VAbstractApplication::VApp()->TrVars()->VarToUser(currentLength));
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetFormula());
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
@@ -237,6 +243,7 @@ void DialogCutArc::changeEvent(QEvent *event)
     if (event->type() == QEvent::LanguageChange)
     {
         ui->retranslateUi(this);
+        UpdateLengthShortcutLabels();
     }
 
     if (event->type() == QEvent::PaletteChange)
@@ -247,6 +254,13 @@ void DialogCutArc::changeEvent(QEvent *event)
 
     // remember to call base class implementation
     DialogTool::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogCutArc::UpdateLengthShortcutLabels()
+{
+    const QString token = VAbstractApplication::VApp()->TrVars()->VarToUser(currentLength);
+    m_lengthShortcuts->SetLengthToken(token);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

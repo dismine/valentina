@@ -42,6 +42,8 @@ namespace Ui
 class DialogAlongLine;
 }
 
+class LengthShortcutBar;
+
 /**
  * @brief The DialogAlongLine class dialog for ToolAlongLine. Help create point and edit option.
  */
@@ -109,6 +111,7 @@ private:
 
     /** @brief ui keeps information about user interface */
     Ui::DialogAlongLine *ui;
+    LengthShortcutBar *m_lengthShortcuts{nullptr};
 
     /** @brief formula formula */
     QString m_formula{};
@@ -132,6 +135,7 @@ private:
     qint32 m_number{0};
 
     void SetCurrentLength();
+    void UpdateLengthShortcutLabels();
 
     void ChosenSecondPoint(quint32 id, const QString &toolTip);
 

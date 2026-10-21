@@ -85,6 +85,8 @@ VTestApp {
         "tst_dxf.h",
         "tst_formulacache.cpp",
         "tst_formulacache.h",
+        "tst_formulacommands.cpp",
+        "tst_formulacommands.h",
         "tst_svgfontwritingsystem.cpp",
         "tst_svgfontwritingsystem.h",
         "tst_vboundary.cpp",

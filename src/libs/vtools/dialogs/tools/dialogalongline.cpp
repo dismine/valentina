@@ -43,6 +43,7 @@
 
 #include "../../visualization/line/vistoolalongline.h"
 #include "../../visualization/visualization.h"
+#include "../lengthshortcutbar.h"
 #include "../ifc/ifcdef.h"
 #include "../ifc/xml/vabstractpattern.h"
 #include "../support/dialogeditwrongformula.h"
@@ -119,6 +120,9 @@ DialogAlongLine::DialogAlongLine(const VContainer *data, VAbstractPattern *doc, 
     connect(ui->comboBoxFirstPoint, &QComboBox::currentTextChanged, this, &DialogAlongLine::PointChanged);
     connect(ui->comboBoxSecondPoint, &QComboBox::currentTextChanged, this, &DialogAlongLine::PointChanged);
     connect(ui->toolButtonSwapPoints, &QToolButton::clicked, this, &DialogAlongLine::SwapPoints);
+    m_lengthShortcuts = InstallLengthShortcutBar(ui->plainTextEditFormula, ui->horizontalLayout,
+                                                 ui->toolButtonExprLength);
+    UpdateLengthShortcutLabels();
 
     vis = new VisToolAlongLine(&this->data);
 
@@ -159,6 +163,7 @@ void DialogAlongLine::RestoreTransientVariables()
 void DialogAlongLine::FXLength()
 {
     auto *dialog = new DialogEditWrongFormula(&data, toolId, this);
+    dialog->EnableLengthToken(VAbstractApplication::VApp()->TrVars()->VarToUser(currentLength));
     dialog->setWindowTitle(tr("Edit length"));
     dialog->SetFormula(GetFormula());
     dialog->setPostfix(UnitsToStr(VAbstractValApplication::VApp()->patternUnits(), true));
@@ -266,6 +271,7 @@ void DialogAlongLine::changeEvent(QEvent *event)
     if (event->type() == QEvent::LanguageChange)
     {
         ui->retranslateUi(this);
+        UpdateLengthShortcutLabels();
     }
 
     if (event->type() == QEvent::PaletteChange)
@@ -446,6 +452,13 @@ void DialogAlongLine::SwapPoints()
     const quint32 second = GetSecondPointId();
     SetFirstPointId(second);
     SetSecondPointId(first);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogAlongLine::UpdateLengthShortcutLabels()
+{
+    const QString token = VAbstractApplication::VApp()->TrVars()->VarToUser(currentLength);
+    m_lengthShortcuts->SetLengthToken(token);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

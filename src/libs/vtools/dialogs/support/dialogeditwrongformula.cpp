@@ -51,6 +51,8 @@
 #include <QWidget>
 #include <new>
 
+#include "../ifc/ifcdef.h"
+#include "../lengthshortcutbar.h"
 #include "../tools/dialogtool.h"
 #include "../vformat/knownmeasurements/vknownmeasurement.h"
 #include "../vformat/knownmeasurements/vknownmeasurements.h"
@@ -136,6 +138,9 @@ DialogEditWrongFormula::DialogEditWrongFormula(const VContainer *data, quint32 t
     ui->tableWidget->setEditTriggers(QTableWidget::NoEditTriggers);
     ui->tableWidget->verticalHeader()->hide();
     ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+
+    m_lengthShortcuts =
+        InstallLengthShortcutBar(ui->plainTextEditFormula, ui->horizontalLayout_2, ui->toolButtonPutHere);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -442,6 +447,10 @@ void DialogEditWrongFormula::changeEvent(QEvent *event)
     if (event->type() == QEvent::LanguageChange)
     {
         ui->retranslateUi(this);
+        if (m_hasLengthToken)
+        {
+            m_lengthShortcuts->SetLengthToken(VAbstractApplication::VApp()->TrVars()->VarToUser(currentLength));
+        }
     }
 
     if (event->type() == QEvent::PaletteChange)
@@ -525,6 +534,13 @@ void DialogEditWrongFormula::SetPreviewCalculationsMode()
 void DialogEditWrongFormula::ShowPieceArea(bool show) const
 {
     ui->radioButtonPieceArea->setVisible(show);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void DialogEditWrongFormula::EnableLengthToken(const QString &token)
+{
+    m_hasLengthToken = true;
+    m_lengthShortcuts->SetLengthToken(token);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

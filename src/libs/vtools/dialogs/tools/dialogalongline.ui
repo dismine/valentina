@@ -2,12 +2,12 @@
 <ui version="4.0">
  <class>DialogAlongLine</class>
  <widget class="QDialog" name="DialogAlongLine">
-  <property name="geometry">
+   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>446</width>
-    <height>358</height>
+    <width>540</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="windowTitle">
