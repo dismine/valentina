@@ -115,6 +115,8 @@ TKMMainWindow::TKMMainWindow(QWidget *parent)
     m_searchHistory(new VScrollableMenu(this))
 {
     ui->setupUi(this);
+    ui->plainTextEditDescription->SetFormulaHighlightingEnabled(false);
+    ui->plainTextEditKMDescription->SetFormulaHighlightingEnabled(false);
 
     InitIcons();
     WindowsLocale();

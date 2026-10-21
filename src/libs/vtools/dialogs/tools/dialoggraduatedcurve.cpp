@@ -88,6 +88,7 @@ DialogGraduatedCurve::DialogGraduatedCurve(const VContainer *data,
     ui(new Ui::DialogGraduatedCurve)
 {
     ui->setupUi(this);
+    ui->plainTextEditDescription->SetFormulaHighlightingEnabled(false);
 
     if (this->toolId == 0)
     { // fake id

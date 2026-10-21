@@ -65,6 +65,8 @@ DialogPatternProperties::DialogPatternProperties(VPattern *doc, VContainer *patt
     m_pattern(pattern)
 {
     ui->setupUi(this);
+    ui->plainTextEditDescription->SetFormulaHighlightingEnabled(false);
+    ui->plainTextEditTechNotes->SetFormulaHighlightingEnabled(false);
 
 #if defined(Q_OS_MAC)
     setWindowFlags(Qt::Window);

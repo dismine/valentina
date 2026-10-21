@@ -6788,6 +6788,7 @@ auto MainWindow::OpenNewValentina(const QString &fileName) const -> bool
 void MainWindow::CreateActions()
 {
     ui->setupUi(this);
+    ui->plainTextEditPatternMessages->SetFormulaHighlightingEnabled(false);
 
     connect(ui->actionArrowTool, &QAction::triggered, this, &MainWindow::ArrowTool);
     connect(ui->actionDraw, &QAction::triggered, this, &MainWindow::ActionDraw);

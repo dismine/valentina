@@ -26,14 +26,19 @@
  **
  *************************************************************************/
 #include "vplaintextedit.h"
+
+#include <QColor>
 #include <QDebug>
+#include <QEvent>
+
+#include "../vmisc/theme/vtheme.h"
 
 //---------------------------------------------------------------------------------------------------------------------
 VPlainTextEdit::VPlainTextEdit(QWidget *parent)
   : QPlainTextEdit(parent),
     m_highlighter(document())
 {
-    connect(this, &QPlainTextEdit::cursorPositionChanged, this, &VPlainTextEdit::MatchParentheses);
+    Init();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -41,7 +46,14 @@ VPlainTextEdit::VPlainTextEdit(const QString &text, QWidget *parent)
   : QPlainTextEdit(text, parent),
     m_highlighter(document())
 {
+    Init();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPlainTextEdit::Init()
+{
     connect(this, &QPlainTextEdit::cursorPositionChanged, this, &VPlainTextEdit::MatchParentheses);
+    connect(VTheme::Instance(), &VTheme::ThemeSettingsChanged, this, [this]() { m_highlighter.Refresh(); });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -51,11 +63,35 @@ VPlainTextEdit::~VPlainTextEdit()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPlainTextEdit::SetFormulaHighlightingEnabled(bool enabled)
+{
+    m_highlighter.SetFormulaHighlightingEnabled(enabled);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPlainTextEdit::IsFormulaHighlightingEnabled() const -> bool
+{
+    return m_highlighter.IsFormulaHighlightingEnabled();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPlainTextEdit::changeEvent(QEvent *event)
+{
+    if (event->type() == QEvent::LanguageChange || event->type() == QEvent::PaletteChange
+        || event->type() == QEvent::StyleChange)
+    {
+        m_highlighter.Refresh();
+    }
+
+    QPlainTextEdit::changeEvent(event);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPlainTextEdit::SetFilter(const QString &filter)
 {
     if (m_filter.isEmpty() && not filter.isEmpty())
     {
-        QTextDocument  const*doc = document();
+        QTextDocument const *doc = document();
         m_allLines.clear();
         m_allLines.reserve(doc->lineCount());
 
@@ -108,7 +144,7 @@ void VPlainTextEdit::MatchParentheses()
         int const pos = textCursor().block().position();
         for (int i = 0; i < infos.size(); ++i)
         {
-            ParenthesisInfo  const*info = infos.at(i);
+            ParenthesisInfo const *info = infos.at(i);
 
             int const curPos = textCursor().position() - textCursor().block().position();
             if ((info->position == curPos - 1 || info->position == curPos) && info->character == '(')
@@ -137,7 +173,7 @@ auto VPlainTextEdit::MatchLeftParenthesis(QTextBlock currentBlock, int i, int nu
     int const docPos = currentBlock.position();
     for (; i < infos.size(); ++i)
     {
-        ParenthesisInfo  const*info = infos.at(i);
+        ParenthesisInfo const *info = infos.at(i);
 
         if (info->character == '(')
         {
@@ -172,7 +208,7 @@ auto VPlainTextEdit::MatchRightParenthesis(QTextBlock currentBlock, int i, int n
     int const docPos = currentBlock.position();
     for (; i > -1 && parentheses.size() > 0; --i)
     {
-        ParenthesisInfo  const*info = parentheses.at(i);
+        ParenthesisInfo const *info = parentheses.at(i);
         if (info->character == ')')
         {
             ++numRightParentheses;
@@ -212,8 +248,16 @@ void VPlainTextEdit::CreateParenthesisSelection(int pos, bool match)
     QTextCharFormat format = selection.format;
     if (match)
     {
-        format.setBackground(Qt::lightGray);
-        format.setForeground(Qt::yellow);
+        if (m_highlighter.IsFormulaHighlightingEnabled())
+        {
+            // Background only, so the formula token color stays visible under the match.
+            format.setBackground(VTheme::IsInDarkTheme() ? QColor(0x50, 0x49, 0x45) : QColor(0xd5, 0xc4, 0xa1));
+        }
+        else
+        {
+            format.setBackground(Qt::lightGray);
+            format.setForeground(Qt::yellow);
+        }
     }
     else
     {

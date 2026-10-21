@@ -28,22 +28,31 @@
 #ifndef VPLAINTEXTEDIT_H
 #define VPLAINTEXTEDIT_H
 
-#include <QPlainTextEdit>
 #include "vhighlighter.h"
+#include <QPlainTextEdit>
+
+class QEvent;
 
 class VPlainTextEdit : public QPlainTextEdit
 {
     Q_OBJECT // NOLINT
+
 public:
-    explicit VPlainTextEdit(QWidget * parent = nullptr);
-    explicit VPlainTextEdit(const QString & text, QWidget * parent = nullptr);
+    explicit VPlainTextEdit(QWidget *parent = nullptr);
+    explicit VPlainTextEdit(const QString &text, QWidget *parent = nullptr);
     virtual ~VPlainTextEdit();
 
     void SetMatchParenthesesEnabled(bool enabled);
 
+    void SetFormulaHighlightingEnabled(bool enabled);
+    auto IsFormulaHighlightingEnabled() const -> bool;
+
     void SetFilter(const QString &filter);
 
     void appendFilteredText(const QString &text);
+
+protected:
+    void changeEvent(QEvent *event) override;
 
 private slots:
     void MatchParentheses();
@@ -53,6 +62,7 @@ private:
     QString m_filter{};
     QStringList m_allLines{};
 
+    void Init();
     auto MatchLeftParenthesis(QTextBlock currentBlock, int i, int numLeftParentheses) -> bool;
     auto MatchRightParenthesis(QTextBlock currentBlock, int i, int numRightParentheses) -> bool;
     void CreateParenthesisSelection(int pos, bool match = true);

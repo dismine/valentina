@@ -53,6 +53,7 @@ DialogFinalMeasurements::DialogFinalMeasurements(VPattern *doc, QWidget *parent)
     m_searchHistory(new VScrollableMenu(this))
 {
     ui->setupUi(this);
+    ui->plainTextEditDescription->SetFormulaHighlightingEnabled(false);
 
 #if defined(Q_OS_MAC)
     setWindowFlags(Qt::Window);

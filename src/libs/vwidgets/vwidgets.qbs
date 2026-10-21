@@ -5,6 +5,7 @@ VLib {
     Depends { name: "VMiscLib" }
     Depends { name: "VPropertyExplorerLib" }
     Depends { name: "VPatternDBLib" }
+    Depends { name: "IFCLib" }
 
     Depends {
         name: "Qt.openglwidgets";

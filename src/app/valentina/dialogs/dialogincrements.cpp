@@ -123,6 +123,8 @@ DialogIncrements::DialogIncrements(VContainer *data, VPattern *doc, QWidget *par
     m_searchHistoryPC(new VScrollableMenu(this))
 {
     ui->setupUi(this);
+    ui->plainTextEditDescription->SetFormulaHighlightingEnabled(false);
+    ui->plainTextEditDescriptionPC->SetFormulaHighlightingEnabled(false);
 
 #if defined(Q_OS_MAC)
     setWindowFlags(Qt::Window);

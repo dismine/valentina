@@ -28,7 +28,10 @@
 #ifndef VHIGHLIGHTER_H
 #define VHIGHLIGHTER_H
 
+#include <QSet>
+#include <QStringList>
 #include <QSyntaxHighlighter>
+#include <QTextCharFormat>
 #include <QVector>
 
 #include "../vmisc/defglobal.h"
@@ -59,8 +62,42 @@ class VHighlighter : public QSyntaxHighlighter
 public:
     explicit VHighlighter(QTextDocument *document);
 
+    void SetFormulaHighlightingEnabled(bool enabled);
+    auto IsFormulaHighlightingEnabled() const -> bool;
+
+    // Rebuild colors and translated names after a theme or language change.
+    void Refresh();
+
 protected:
-    virtual void highlightBlock(const QString &text);
+    void highlightBlock(const QString &text) override;
+
+private:
+    bool m_formulaHighlighting{true};
+
+    QSet<QString> m_locals{};
+    QStringList m_measurementPrefixes{};
+    QStringList m_geometryPrefixes{};
+    QSet<QString> m_exactGeometry{};
+    QSet<QString> m_functions{};
+
+    QTextCharFormat m_localFormat{};
+    QTextCharFormat m_patternFormat{};
+    QTextCharFormat m_measurementFormat{};
+    QTextCharFormat m_geometryFormat{};
+    QTextCharFormat m_functionFormat{};
+    QTextCharFormat m_numberFormat{};
+    QTextCharFormat m_ternaryFormat{};
+    QTextCharFormat m_comparisonFormat{};
+    QTextCharFormat m_arithmeticFormat{};
+
+    void RebuildFormats();
+    void RebuildLexicon();
+    void UpdateLocals();
+    void CollectParentheses(const QString &text);
+    void HighlightFormula(const QString &text);
+
+    auto FormatForIdentifier(const QString &identifier, const QString &line, vsizetype end) const
+        -> const QTextCharFormat *;
 };
 
 #endif // VHIGHLIGHTER_H

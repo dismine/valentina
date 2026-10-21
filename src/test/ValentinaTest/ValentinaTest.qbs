@@ -87,6 +87,8 @@ VTestApp {
         "tst_formulacache.h",
         "tst_formulacommands.cpp",
         "tst_formulacommands.h",
+        "tst_formulahighlight.cpp",
+        "tst_formulahighlight.h",
         "tst_svgfontwritingsystem.cpp",
         "tst_svgfontwritingsystem.h",
         "tst_vboundary.cpp",
