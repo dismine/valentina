@@ -119,9 +119,10 @@ DialogLayoutSettings::DialogLayoutSettings(VLayoutGenerator *generator, QWidget 
 
     connect(ui->checkBoxIgnoreFileds, CHECKBOX_STATE_CHANGED, this, &DialogLayoutSettings::IgnoreAllFields);
 
-    ui->comboBoxOnlineRotations->addItem(tr("0° and 180°"), static_cast<int>(NestingRotations::ZeroAnd180));
-    ui->comboBoxOnlineRotations->addItem(tr("0° only (napped fabric)"), static_cast<int>(NestingRotations::ZeroOnly));
-    ui->comboBoxOnlineRotations->addItem(tr("Any angle"), static_cast<int>(NestingRotations::Any));
+    ui->comboBoxOnlineRotations->addItem(tr("Follow piece grainline exactly"),
+                                         static_cast<int>(NestingRotations::ZeroOnly));
+    ui->comboBoxOnlineRotations->addItem(tr("Original Grainline and 180° rotation"),
+                                         static_cast<int>(NestingRotations::ZeroAnd180));
     connect(ui->checkBoxNestOnline, &QCheckBox::toggled, this, &DialogLayoutSettings::NestOnlineToggled);
 
     connect(ui->toolButtonPortrait, &QToolButton::toggled, this, &DialogLayoutSettings::Swap);
@@ -434,10 +435,11 @@ void DialogLayoutSettings::NestOnlineToggled(bool on)
 {
     // the service nests on one strip of the fabric width: only the width and the gap matter; its stop conditions
     // (budget, target length) live in the options widget, the local time and efficiency do not apply
-    const QList<QWidget *> localOnly{ui->doubleSpinBoxPaperHeight, ui->checkBoxIgnoreFileds,     ui->groupBoxCase,
+    // Paper height and auto crop length stay available: off means the sheet length is fixedFail.
+    const QList<QWidget *> localOnly{ui->checkBoxIgnoreFileds,     ui->groupBoxCase,
                                      ui->spinBoxNestingTime,       ui->doubleSpinBoxEfficiency,   ui->label_2, ui->label_3,
                                      ui->groupBoxStrips,          ui->checkBoxSaveLength,        ui->checkBoxOneSheetSolution,
-                                     ui->checkBoxFollowGrainline, ui->checkBoxManualPriority,    ui->checkBoxAutoCropLength,
+                                     ui->checkBoxFollowGrainline, ui->checkBoxManualPriority,
                                      ui->checkBoxAutoCropWidth,   ui->checkBoxUnitePages};
     for (QWidget *w : localOnly)
     {
@@ -454,19 +456,9 @@ auto DialogLayoutSettings::GetOnlineOptions() const -> VNestingOptions
 {
     VNestingOptions options = ui->optionsWidget->Options();
     options.rotations = GetOnlineRotations();
+    options.fixedLength = not GetAutoCropLength();
+    options.usableLengthMm = GetPaperHeight() / NestingPxPerMm;
     return options;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutSettings::SetOnlineSpeed(NestingSpeed speed)
-{
-    ui->optionsWidget->SetSpeed(speed);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void DialogLayoutSettings::SetOnlineRequestBuilder(const std::function<QJsonObject()> &builder)
-{
-    ui->optionsWidget->SetRequestBuilder(builder);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -821,8 +813,7 @@ void DialogLayoutSettings::RestoreDefaults()
     SetEfficiencyCoefficient(VValentinaSettings::GetDefEfficiencyCoefficient());
     SetNestQuantity(VValentinaSettings::GetDefLayoutNestQuantity());
     SetNestOnline(false);
-    SetOnlineRotations(NestingRotations::ZeroAnd180);
-    SetOnlineSpeed(NestingSpeed::Normal);
+    SetOnlineRotations(NestingRotations::ZeroOnly);
     SetPreferOneSheetSolution(VValentinaSettings::GetDefLayoutPreferOneSheetSolution());
     SetBoundaryTogetherWithNotches(VValentinaSettings::GetDefLayoutBoundaryTogetherWithNotches());
 
@@ -1152,7 +1143,6 @@ void DialogLayoutSettings::ReadSettings()
     SetNestQuantity(settings->GetLayoutNestQuantity());
     SetNestOnline(settings->GetLayoutNestOnline());
     SetOnlineRotations(static_cast<NestingRotations>(settings->GetLayoutOnlineRotations()));
-    SetOnlineSpeed(static_cast<NestingSpeed>(settings->GetLayoutOnlineSpeed()));
     SetBoundaryTogetherWithNotches(settings->GetLayoutBoundaryTogetherWithNotches());
 
     FindTemplate();
@@ -1186,7 +1176,6 @@ void DialogLayoutSettings::WriteSettings() const
     settings->SetLayoutNestQuantity(IsNestQuantity());
     settings->SetLayoutNestOnline(IsNestOnline());
     settings->SetLayoutOnlineRotations(static_cast<int>(GetOnlineRotations()));
-    settings->SetLayoutOnlineSpeed(static_cast<int>(ui->optionsWidget->Speed()));
     settings->SetLayoutBoundaryTogetherWithNotches(IsBoundaryTogetherWithNotches());
 }
 

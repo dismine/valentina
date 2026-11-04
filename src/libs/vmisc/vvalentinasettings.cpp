@@ -401,7 +401,7 @@ void VValentinaSettings::SetLayoutNestOnline(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VValentinaSettings::GetLayoutOnlineRotations() const -> int
 {
-    return value(*settingLayoutOnlineRotations, 0).toInt();
+    return value(*settingLayoutOnlineRotations, 1).toInt(); // NestingRotations::ZeroOnly
 }
 
 //---------------------------------------------------------------------------------------------------------------------

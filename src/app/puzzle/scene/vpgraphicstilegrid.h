@@ -77,7 +77,7 @@ private:
                                 const QFont &font,
                                 int nbCol,
                                 const VSvgFontEngine &engine) const;
-    void DrawGrid(QPainter *painter, int nbRow, int nbCol, const QMarginsF &margins, qreal width, qreal height) const;
+    void DrawGrid(QPainter *painter, int nbRow, int nbCol, const QPointF &origin, qreal width, qreal height) const;
 };
 
 //---------------------------------------------------------------------------------------------------------------------

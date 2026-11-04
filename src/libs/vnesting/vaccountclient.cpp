@@ -29,7 +29,7 @@
 #include "vaccountclient.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
-#include "vnestorclient.h"
+#include "vnestinghttpclient.h"
 
 #include <QCoreApplication>
 #include <QJsonDocument>
@@ -150,7 +150,7 @@ void VAccountClient::CheckService(const QString &baseUrl)
     const QUrl base(baseUrl);
     if (not base.isValid() || base.host().isEmpty())
     {
-        emit ServiceChecked(false, tr("The service address is not a valid URL."));
+        emit ServiceChecked(false, tr("The URL is not valid."));
         return;
     }
     QNetworkReply *reply = Get(QUrl(base.toString(QUrl::StripTrailingSlash) + "/health"_L1));
@@ -166,7 +166,9 @@ void VAccountClient::CheckService(const QString &baseUrl)
                     return;
                 }
                 const bool ok = Json(reply).value("status"_L1).toString() == "ok"_L1;
-                emit ServiceChecked(ok, ok ? tr("The service is reachable.") : tr("Unexpected reply from the service."));
+                emit ServiceChecked(ok,
+                                    ok ? tr("The remote nesting API is reachable.")
+                                       : tr("Unexpected reply from the remote nesting API."));
             });
 }
 
@@ -175,7 +177,7 @@ auto VAccountClient::Get(const QUrl &url, bool bearer) -> QNetworkReply *
 {
     if (bearer)
     {
-        return m_qnam.get(VNestorClient::BearerRequest(url, Token().Raw()));
+        return m_qnam.get(VNestingHttpClient::BearerRequest(url, Token().Raw()));
     }
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::UserAgentHeader, QCoreApplication::applicationName());

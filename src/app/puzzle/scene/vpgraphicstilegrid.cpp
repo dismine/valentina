@@ -30,14 +30,16 @@ constexpr qreal penWidth = 1;
 constexpr qreal minTextFontSize = 5.0;
 
 //---------------------------------------------------------------------------------------------------------------------
-auto SheetMargins(const VPSheetPtr &sheet) -> QMarginsF
+// Tiles cover the sheet from its top-left. That corner is above the axis: landscape length runs right, portrait
+// length runs up, and the cloth width is the other way.
+auto TileContentOrigin(const VPSheetPtr &sheet) -> QPointF
 {
-    if (not sheet.isNull() && not sheet->IgnoreMargins())
+    if (sheet.isNull())
     {
-        return sheet->GetSheetMargins();
+        return {};
     }
 
-    return {};
+    return sheet->GetMarginsRect().topLeft();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -231,12 +233,7 @@ auto VPGraphicsTileGrid::boundingRect() const -> QRectF
         not layout.isNull() && layout->LayoutSettings().GetShowTiles())
     {
         VPSheetPtr const sheet = layout->GetSheet(m_sheetUuid);
-
-        QMarginsF sheetMargins;
-        if (not sheet.isNull() && not sheet->IgnoreMargins())
-        {
-            sheetMargins = sheet->GetSheetMargins();
-        }
+        QPointF const origin = TileContentOrigin(sheet);
 
         qreal const xScale = layout->LayoutSettings().HorizontalScale();
         qreal const yScale = layout->LayoutSettings().VerticalScale();
@@ -244,7 +241,7 @@ auto VPGraphicsTileGrid::boundingRect() const -> QRectF
         qreal const width = layout->TileFactory()->DrawingAreaWidth() - VPTileFactory::tileStripeWidth;
         qreal const height = layout->TileFactory()->DrawingAreaHeight() - VPTileFactory::tileStripeWidth;
 
-        QRectF const rect(sheetMargins.left(), sheetMargins.top(),
+        QRectF const rect(origin.x(), origin.y(),
                           layout->TileFactory()->ColNb(sheet) * (width / xScale),
                           layout->TileFactory()->RowNb(sheet) * (height / yScale));
 
@@ -293,7 +290,7 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
     const qreal height = (layout->TileFactory()->DrawingAreaHeight() - VPTileFactory::tileStripeWidth) / yScale;
 
     VPSheetPtr const sheet = layout->GetSheet(m_sheetUuid);
-    QMarginsF const sheetMargins = SheetMargins(sheet);
+    QPointF const origin = TileContentOrigin(sheet);
 
     const int nbCol = layout->TileFactory()->ColNb(sheet);
     const int nbRow = layout->TileFactory()->RowNb(sheet);
@@ -312,8 +309,8 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
         qreal const fontSize = OptimizeSVGFontSizeToFitTextInRect(svgFontFamily,
                                                                   SVGFontStyle::Normal,
                                                                   SVGFontWeight::Normal,
-                                                                  QRectF(sheetMargins.left(),
-                                                                         sheetMargins.top(),
+                                                                  QRectF(origin.x(),
+                                                                         origin.y(),
                                                                          width / 3.,
                                                                          height / 3.),
                                                                   QString::number(nbRow * nbCol),
@@ -325,14 +322,14 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
         font = OptimizeOutlineFontSizeToFitTextInRect(m_printMode && settings->GetSingleStrokeOutlineFont()
                                                           ? layout->TileFactory()->SingleStrokeOutlineFont()
                                                           : font,
-                                                      QRectF(sheetMargins.left(),
-                                                             sheetMargins.top(),
+                                                      QRectF(origin.x(),
+                                                             origin.y(),
                                                              width / 3.,
                                                              height / 3.),
                                                       QString::number(nbRow * nbCol));
     }
 
-    DrawGrid(painter, nbRow, nbCol, sheetMargins, width, height);
+    DrawGrid(painter, nbRow, nbCol, origin, width, height);
 
     for (int j = 0; j <= nbRow; ++j)
     {
@@ -340,7 +337,7 @@ void VPGraphicsTileGrid::paint(QPainter *painter, const QStyleOptionGraphicsItem
         {
             if (j < nbRow && i < nbCol)
             {
-                QRectF const img(sheetMargins.left() + i * width, sheetMargins.top() + j * height, width, height);
+                QRectF const img(origin.x() + i * width, origin.y() + j * height, width, height);
 
                 PaintWatermark(painter, img, layout, watermarkData, xScale, yScale);
                 if (m_printMode && settings->GetSingleLineFonts())
@@ -521,7 +518,7 @@ void VPGraphicsTileGrid::PaintTileNumberSVGFont(QPainter *painter,
 
 //---------------------------------------------------------------------------------------------------------------------
 void VPGraphicsTileGrid::DrawGrid(
-    QPainter *painter, int nbRow, int nbCol, const QMarginsF &margins, qreal width, qreal height) const
+    QPainter *painter, int nbRow, int nbCol, const QPointF &origin, qreal width, qreal height) const
 {
     QPainterStateGuard const guard(painter);
 
@@ -535,8 +532,8 @@ void VPGraphicsTileGrid::DrawGrid(
         painter->setPen(pen);
     }
 
-    const qreal left = margins.left();
-    const qreal top = margins.top();
+    const qreal left = origin.x();
+    const qreal top = origin.y();
     const qreal gridPenWidth = pen.widthF();
     const qreal totalWidth = nbCol * width;
     const qreal totalHeight = nbRow * height;

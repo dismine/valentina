@@ -51,7 +51,7 @@ public:
     VNestingProgressDialog(const QJsonObject &request, bool unlimited, QWidget *parent = nullptr);
     ~VNestingProgressDialog() override;
 
-    /** @brief Update What VNestorClient::Progress carries. */
+    /** @brief Update What VNestingHttpClient::Progress carries. */
     void Update(const QString &status, int position, const QJsonObject &progress);
     /** @brief SetStopping After a first "stop and keep" press: the button now cancels for good. */
     void SetStopping();
@@ -65,7 +65,6 @@ signals:
 private:
     Q_DISABLE_COPY_MOVE(VNestingProgressDialog) // NOLINT
     std::unique_ptr<Ui::VNestingProgressDialog> ui;
-    qreal m_targetMm{0};
 };
 
 #endif // VNESTINGPROGRESSDIALOG_H

@@ -36,11 +36,10 @@
 #include "../vlayout/vbank.h"
 #include "../vlayout/vlayoutgenerator.h"
 #include "../vlayout/vnestingframe.h"
-#include "../vmisc/projectversion.h"
 #include "../vmisc/vcommonsettings.h"
-#include "../vnesting/vaccounttoken.h"
 #include "../vnesting/vnestingprogressdialog.h"
-#include "../vnesting/vnestorclient.h"
+#include "../vnesting/vnestingtransport.h"
+#include "../vnesting/vnestinghttpclient.h"
 #include "../vmisc/compatibility.h"
 #include "../vmisc/dialogs/dialogexporttocsv.h"
 #include "../vmisc/qxtcsvmodel.h"
@@ -68,11 +67,8 @@ using QTextCodec = VTextCodec;
 #endif // QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 
 #include <QDebug>
-#include <QDesktopServices>
 #include <QEventLoop>
-#include <QFile>
 #include <QJsonObject>
-#include <QPushButton>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QGraphicsScene>
@@ -190,16 +186,6 @@ void MainWindowsNoGUI::ToolLayoutSettings(bool checked)
         VLayoutGenerator lGenerator;
 
         DialogLayoutSettings layout(&lGenerator, this);
-        layout.SetOnlineRequestBuilder(
-            [this, &layout]()
-            {
-                QVector<VLayoutPiece> sent;
-                QStringList skippedNames;
-                const QJsonObject request =
-                    OnlineRequest(layout.GetPaperWidth(), layout.GetLayoutWidth(), layout.IsBoundaryTogetherWithNotches(),
-                                  layout.IsNestQuantity(), layout.GetOnlineOptions(), sent, skippedNames);
-                return sent.isEmpty() ? QJsonObject() : request;
-            });
         if (layout.exec() == QDialog::Rejected)
         {
             tButton->setChecked(false);
@@ -480,29 +466,46 @@ void MainWindowsNoGUI::ApplyGeneratorResult(const VLayoutGenerator &lGenerator)
     m_layoutSettings->SetAutoCropWidth(lGenerator.GetAutoCropWidth());
     m_layoutSettings->SetUnitePages(lGenerator.IsUnitePages());
     m_layoutSettings->SetLayoutStale(false);
+    m_layoutSettings->SetNestingIncomplete(false);
     m_layoutSettings->SetBoundaryTogetherWithNotches(lGenerator.IsBoundaryTogetherWithNotches());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto MainWindowsNoGUI::OnlineRequest(qreal paperWidthPx, qreal layoutWidthPx, bool together, bool nestQuantity,
                                      const VNestingOptions &options, QVector<VLayoutPiece> &sent,
-                                     QStringList &skippedNames) const -> QJsonObject
+                                     QStringList &instanceIds, QStringList &skippedNames) const -> QJsonObject
 {
-    // request: each piece in its layout base (forced flip, grainline along local y); quantities are expanded here,
-    // like the local nester does, so that symmetrical copies alternate sides
+    // Each copy is its own instance. PrepareQuantity already alternates symmetrical sides, the same way the
+    // local nester does. The id is opaque; copies are not merged by name.
     const QVector<VLayoutPiece> candidates = nestQuantity ? VBank::PrepareQuantity(listDetails) : listDetails;
     QVector<VNestingPieceInput> inputs;
     inputs.reserve(candidates.size());
     for (const auto &piece : candidates)
     {
-        inputs.append({piece.GetName(), NestingContour(piece, together), NestingLayoutBase(piece),
-                       piece.IsForbidFlipping(), piece.IsForceFlipping(), 1});
+        VNestingPieceInput input;
+        input.name = piece.GetName();
+        input.id = piece.GetUniqueID();
+        if (input.id.isEmpty())
+        {
+            input.id = QString::number(piece.GetId());
+        }
+        input.contourPx = NestingContour(piece, together);
+        input.base = NestingLayoutBase(piece);
+        input.forbidFlipping = piece.IsForbidFlipping();
+        input.forceFlipping = piece.IsForceFlipping();
+        input.quantity = 1;
+        inputs.append(input);
     }
     const qreal fabricWidthMm = paperWidthPx / NestingPxPerMm;
     const qreal gapMm = layoutWidthPx * 2 / NestingPxPerMm; // layout width is per side
+    const qreal lengthPx = qMax(options.usableLengthMm, 1.0) * NestingPxPerMm;
     QVector<int> skipped;
-    const QJsonObject request = NestingRequest(inputs, fabricWidthMm, gapMm, options, skipped);
+    QStringList instanceOf;
+    // Valentina's result paper is portrait: grain runs down the sheet. There is no lock on a fresh layout.
+    const QJsonObject request = NestingRequest(inputs, fabricWidthMm, gapMm, options, QRectF(0, 0, paperWidthPx, lengthPx),
+                                               true, skipped, &instanceOf);
     sent.clear();
+    instanceIds.clear();
     skippedNames.clear();
     for (vsizetype i = 0; i < candidates.size(); ++i)
     {
@@ -513,6 +516,7 @@ auto MainWindowsNoGUI::OnlineRequest(qreal paperWidthPx, qreal layoutWidthPx, bo
         else
         {
             sent.append(candidates.at(i));
+            instanceIds.append(instanceOf.value(static_cast<int>(i)));
         }
     }
     return request;
@@ -528,144 +532,80 @@ auto MainWindowsNoGUI::GenerateLayoutOnline(VLayoutGenerator &lGenerator) -> boo
         return false;
     }
 
-    // access first: a valid, premium token (shared with Puzzle in common.ini)
-    const VAccountToken token(VAbstractApplication::VApp()->Settings()->GetAccountToken());
-    if (token.IsExpired())
-    {
-        QMessageBox box(QMessageBox::Information, tr("Online nesting"),
-                        tr("Connect Valentina to your smart-pattern.com.ua account to use online nesting."),
-                        QMessageBox::Cancel, this);
-        QPushButton *open = box.addButton(tr("Open account settings"), QMessageBox::AcceptRole);
-        box.exec();
-        if (box.clickedButton() == open)
-        {
-            OpenAccountPreferences();
-        }
-        return false;
-    }
-    if (not token.IsPremium())
-    {
-        QMessageBox box(QMessageBox::Information, tr("Online nesting"),
-                        tr("Online nesting is reserved to premium subscribers."), QMessageBox::Cancel, this);
-        QPushButton *subscribe = box.addButton(tr("See the subscription"), QMessageBox::AcceptRole);
-        box.exec();
-        if (box.clickedButton() == subscribe)
-        {
-            QDesktopServices::openUrl(
-                QUrl(QStringLiteral("https://smart-pattern.com.ua/en/catalogue/premium-subscription_66/")));
-        }
-        return false;
-    }
-
     QVector<VLayoutPiece> sent;
+    QStringList instanceIds;
     QStringList skippedNames;
-    QJsonObject request =
+    const QJsonObject request =
         OnlineRequest(lGenerator.GetPaperWidth(), lGenerator.GetLayoutWidth(), lGenerator.IsBoundaryTogetherWithNotches(),
-                      lGenerator.IsNestQuantity(), lGenerator.GetOnlineOptions(), sent, skippedNames);
-    request.insert(QStringLiteral("app"), QStringLiteral("valentina")); // spec 18.2
-    request.insert(QStringLiteral("app_version"), AppVersionStr());
-    const QVector<int> quantities(sent.size(), 1);
+                      lGenerator.IsNestQuantity(), lGenerator.GetOnlineOptions(), sent, instanceIds, skippedNames);
     if (sent.isEmpty())
     {
-        QMessageBox::warning(this, tr("Online nesting"), tr("No piece has a usable outline."));
+        QMessageBox::warning(this, tr("Nesting"), tr("No piece has a usable outline."));
         return false;
     }
     if (not skippedNames.isEmpty())
     {
-        QMessageBox::warning(this, tr("Online nesting"),
+        QMessageBox::warning(this, tr("Nesting"),
                              tr("%n piece(s) without a usable outline will not be sent: %1", "",
                                 static_cast<int>(skippedNames.size()))
                                  .arg(skippedNames.join(QStringLiteral(", "))));
     }
 
-    // run the job to completion inside this call: the callers expect a synchronous answer
-    if (m_nestor == nullptr)
+    // The callers expect a synchronous answer. The engine is the one the user chose.
+    if (m_nesting == nullptr)
     {
-        m_nestor = new VNestorClient(this);
+        m_nesting = new VNestingTransport(this);
     }
-    const bool unlimited = request.value(QLatin1String("time_s")).toInt() == 0; // spec 15: ends when the user says so
-    VNestingProgressDialog progress(request, unlimited, this);
+    VNestingProgressDialog progress(request, false, this);
     progress.show();
     QEventLoop loop;
     QJsonObject result;
+    bool settled = false;
     bool cancelled = false;
-    bool stopping = false;
     bool failed = false;
     int failStatus = 0;
     QString failMessage;
     QList<QMetaObject::Connection> conns;
     conns << connect(&progress, &VNestingProgressDialog::canceled, &loop,
-                     [this, &cancelled, &loop, &progress, &stopping, unlimited]()
+                     [this, &cancelled, &settled, &loop]()
                      {
-                         if (unlimited && not stopping)
-                         {
-                             // first press keeps the best layout (Finished follows, or Cancelled if there was nothing
-                             // to keep); a second press cancels for good
-                             stopping = true;
-                             m_nestor->Stop();
-                             progress.SetStopping();
-                             return;
-                         }
                          cancelled = true;
-                         // one shot without Qt::SingleShotConnection (Qt 6 only): the lambda drops its own connection
                          auto once = QSharedPointer<QMetaObject::Connection>::create();
-                         *once = connect(m_nestor, &VNestorClient::Cancelled, this,
+                         *once = connect(m_nesting, &VNestingTransport::Cancelled, this,
                                          [this, once](const QJsonObject &summary)
                                          {
                                              disconnect(*once);
-                                             QMessageBox::information(this, tr("Online nesting"),
-                                                                      VNestorClient::CancelSummaryText(summary));
+                                             QMessageBox::information(this, tr("Nesting"),
+                                                                      VNestingHttpClient::CancelSummaryText(summary));
                                          });
-                         m_nestor->Cancel();
+                         m_nesting->Cancel();
+                         settled = true;
                          loop.quit();
                      });
-    conns << connect(m_nestor, &VNestorClient::Cancelled, &loop,
-                     [this, &cancelled, &loop](const QJsonObject &summary)
-                     {
-                         // a Stop() that found nothing to keep; an explicit cancel answers after the loop has quit
-                         cancelled = true;
-                         loop.quit();
-                         QMessageBox::information(this, tr("Online nesting"), VNestorClient::CancelSummaryText(summary));
-                     });
-    conns << connect(m_nestor, &VNestorClient::Progress, &progress,
+    conns << connect(m_nesting, &VNestingTransport::Progress, &progress,
                      [&progress](const QString &status, int position, const QJsonObject &running)
                      { progress.Update(status, position, running); });
-    conns << connect(m_nestor, &VNestorClient::Failed, &loop,
-                     [&failed, &failStatus, &failMessage, &loop](int status, const QString &message)
+    conns << connect(m_nesting, &VNestingTransport::Failed, &loop,
+                     [&failed, &failStatus, &failMessage, &settled, &loop](int status, const QString &message)
                      {
                          failed = true;
                          failStatus = status;
                          failMessage = message;
+                         settled = true;
                          loop.quit();
                      });
-    conns << connect(m_nestor, &VNestorClient::Finished, &loop,
-                     [&result, &loop](const QJsonObject &r)
+    conns << connect(m_nesting, &VNestingTransport::Finished, &loop,
+                     [&result, &settled, &loop](const QJsonObject &r)
                      {
                          result = r;
+                         settled = true;
                          loop.quit();
                      });
-    if (VAbstractApplication::VApp()->Settings()->GetShareFiles())
+    m_nesting->Submit(request);
+    if (not settled)
     {
-        // spec 17.1: the pattern as it is in memory, its measurement file, and what the job was asked for
-        const QString patternPath = VAbstractValApplication::VApp()->GetPatternPath();
-        QList<QPair<QString, QByteArray>> files{
-            {patternPath.isEmpty() ? QStringLiteral("pattern.val") : patternPath, doc->toByteArray()}};
-        QFile measurements(AbsoluteMPath(patternPath, doc->MPath()));
-        if (not doc->MPath().isEmpty() && measurements.open(QIODevice::ReadOnly))
-        {
-            files.append({measurements.fileName(), measurements.readAll()});
-        }
-        const auto *app = VAbstractValApplication::VApp();
-        m_nestor->SetFiles(files, QJsonObject{{"dimensions", QJsonObject{{"height", app->GetDimensionHeight()},
-                                                                         {"size", app->GetDimensionSize()},
-                                                                         {"hip", app->GetDimensionHip()},
-                                                                         {"waist", app->GetDimensionWaist()}}},
-                                              {"paper_width_px", lGenerator.GetPaperWidth()},
-                                              {"layout_width_px", lGenerator.GetLayoutWidth()},
-                                              {"nest_quantity", lGenerator.IsNestQuantity()}});
+        loop.exec();
     }
-    m_nestor->Submit(request);
-    loop.exec();
     for (const auto &c : std::as_const(conns))
     {
         disconnect(c);
@@ -680,41 +620,32 @@ auto MainWindowsNoGUI::GenerateLayoutOnline(VLayoutGenerator &lGenerator) -> boo
     {
         if (failStatus == 401)
         {
-            QMessageBox::warning(this, tr("Online nesting"),
-                                 tr("The service rejected your session. Sign in again in Preferences > Account.\n%1")
+            QMessageBox::warning(this, tr("Nesting"),
+                                 tr("The engine refused the request. If it requires a bearer token, paste one in Preferences > Nesting.\n%1")
                                      .arg(failMessage));
         }
         else if (failStatus == 403)
         {
-            QMessageBox::warning(this, tr("Online nesting"), tr("Access refused: %1").arg(failMessage));
-        }
-        else if (failMessage.contains(QLatin1String("longer than the usable roll length")))
-        {
-            QMessageBox::warning(this, tr("Online nesting"),
-                                 tr("A piece is longer than a roll minus the junction loss: %1").arg(failMessage));
-        }
-        else if (failMessage.contains(QLatin1String("could not construct an initial placement")))
-        {
-            QMessageBox::warning(this, tr("Online nesting"),
-                                 tr("A piece does not fit across the fabric width. Check the paper width."));
+            QMessageBox::warning(this, tr("Nesting"), tr("Access refused: %1").arg(failMessage));
         }
         else
         {
-            QMessageBox::warning(this, tr("Online nesting"), tr("Nesting failed: %1").arg(failMessage));
+            QMessageBox::warning(this, tr("Nesting"), tr("Nesting failed: %1").arg(failMessage));
         }
         return false;
     }
-    if (not NestingPlanComplete(result, quantities))
+    if (NestingPlacements(result).isEmpty())
     {
-        QMessageBox::warning(this, tr("Online nesting"),
-                             tr("The service returned an incomplete result; nothing was changed."));
+        QMessageBox::warning(this, tr("Nesting"),
+                             tr("The engine returned no placement. Nothing was changed.\n\n%1")
+                                 .arg(NestingSummaryText(result, request)));
         return false;
     }
 
-    // one portrait paper per roll (or one of the marker's length), no printer margins
+    // One portrait paper per bin. Pieces the result does not place are left off the paper.
     const QVector<VLayoutPaper> papers =
-        NestingResultPapers(sent, NestingPlacements(result), result, lGenerator.GetPaperWidth(),
-                            lGenerator.GetLayoutWidth(), lGenerator.IsBoundaryTogetherWithNotches());
+        NestingResultPapers(sent, instanceIds, result, lGenerator.GetPaperWidth(), lGenerator.GetLayoutWidth(),
+                            lGenerator.IsBoundaryTogetherWithNotches());
     int height = 0;
     for (const auto &paper : papers)
     {
@@ -724,9 +655,19 @@ auto MainWindowsNoGUI::GenerateLayoutOnline(VLayoutGenerator &lGenerator) -> boo
     lGenerator.SetPaperHeight(height);
     lGenerator.SetPrinterFields(false, QMarginsF());
     ApplyGeneratorResult(lGenerator);
+    const bool complete = NestingPlanComplete(result, instanceIds);
+    m_layoutSettings->SetNestingIncomplete(not complete);
     PrepareSceneList(PreviewQuatilty::Slow);
     QApplication::alert(this);
-    QMessageBox::information(this, tr("Online nesting"), VNestorClient::SummaryText(result));
+    const QString summary = NestingSummaryText(result, request);
+    if (complete)
+    {
+        QMessageBox::information(this, tr("Nesting"), summary);
+    }
+    else
+    {
+        QMessageBox::warning(this, tr("Nesting"), summary);
+    }
     return true;
 }
 

@@ -641,22 +641,17 @@ void VPTileFactory::DrawTilePageContent(QPainter *painter, const VPSheetPtr &she
         return;
     }
 
-    QMarginsF sheetMargins;
-    if (not sheet->IgnoreMargins())
-    {
-        sheetMargins = sheet->GetSheetMargins();
-    }
-
     auto const penTileDrawing =
         QPen(Qt::black, m_commonSettings->WidthMainLine(), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
     painter->setPen(penTileDrawing);
 
-    // paint the content of the page
+    // paint the content of the page. The first tile is the sheet's top-left, the same corner the on-screen grid uses.
     const qreal xScale = layout->LayoutSettings().HorizontalScale();
     const qreal yScale = layout->LayoutSettings().VerticalScale();
-    auto const source = QRectF(sheetMargins.left() + col * (m_drawingAreaWidth - tileStripeWidth) / xScale,
-                               sheetMargins.top() + row * (m_drawingAreaHeight - tileStripeWidth) / yScale,
+    const QPointF origin = sheet->GetMarginsRect().topLeft();
+    auto const source = QRectF(origin.x() + col * (m_drawingAreaWidth - tileStripeWidth) / xScale,
+                               origin.y() + row * (m_drawingAreaHeight - tileStripeWidth) / yScale,
                                m_drawingAreaWidth / xScale, m_drawingAreaHeight / yScale);
 
     auto const target = QRectF(0, 0, m_drawingAreaWidth, m_drawingAreaHeight);

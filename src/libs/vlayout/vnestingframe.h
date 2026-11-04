@@ -4,11 +4,11 @@
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   11 October, 2026
  **
- **  @brief  
+ **  @brief
  **  @copyright
- **  This source code is part of the Valentina project, a pattern making 
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2026 Valentina project 
+ **  Copyright (C) 2026 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -31,10 +31,9 @@
 
 #include "../vmisc/def.h"
 
+#include <QHash>
 #include <QJsonArray>
 #include <QJsonObject>
-#include <QMap>
-#include <QMultiMap>
 #include <QPointF>
 #include <QRectF>
 #include <QString>
@@ -43,9 +42,8 @@
 #include <QVector>
 
 /**
- * Frames for the online nesting service (nestor). Local piece pixels have the grainline along +y; the service's
- * strip runs along +x with the fabric width along y, in millimetres; the sheet is Puzzle's scene in pixels.
- * Every change of frame here is a proper rotation, so a piece is only ever mirrored when the service says so.
+ * Version 1 nesting job. Profile millimetres have the grain along +X and the origin at the unbuffered cut's
+ * minimum corner. The marker is Y-up: +X along the roll, +Y across the cloth. The sheet is Puzzle's scene.
  */
 #include "vlayoutpaper.h"
 
@@ -58,38 +56,26 @@ enum class NestingRotations : qint8
     Any = 2
 };
 
-auto NestingRotationsString(NestingRotations rotations) -> QString;
-
-enum class NestingSpeed : qint8
-{
-    Normal = 0,
-    Fast = 1,
-    Ultra = 2
-};
-
-auto NestingSpeedString(NestingSpeed speed) -> QString;
+// The project's point tolerance, in millimetres. One number for the job.
+constexpr qreal NestingGeometryToleranceMm = 0.1555;
+constexpr qreal NestingPxPerMm = PrintDPI / 25.4;
 
 struct VNestingOptions
 {
-    NestingRotations rotations{NestingRotations::ZeroAnd180};
-    int budgetTokens{0}; // spec 20: the most the job may cost; 0: no budget, until stopped
-    NestingSpeed speed{NestingSpeed::Normal};
-    qreal targetLengthMm{0}; // 0: no target
-    bool untilConverged{false};
-    bool preview{false};
-    QVector<qreal> rollsMm{}; // physical roll lengths, the last one repeating; empty = one endless roll
-    qreal rollJunctionMm{50}; // unusable band at each junction (tail of a roll plus head of the next)
-    bool groupByGroup{false}; // spec 21.5: nest the pieces' groups one after another, earlier ones fixed
-    bool noBackfill{false};   // spec 21.5: a group never fills a hole left by the earlier ones
+    NestingRotations rotations{NestingRotations::ZeroOnly};
+    qreal timeBudgetS{30};     // positive seconds typed by the user; never derived from the piece count
+    bool fixedLength{false};   // the layout dialog's sheet length is fixed
+    qreal usableLengthMm{0};   // that length, when fixedLength is set
 };
 
+// A placement is flip, then a counterclockwise rotation about the profile origin, then a translation.
 struct VNestingPlacement
 {
-    qreal x{0};
-    qreal y{0};
+    QString instanceId{};
+    QString flip{QStringLiteral("none")}; // none, x, y, both
     qreal rotationDeg{0};
-    bool mirrored{false};
-    int roll{0};
+    qreal xMm{0};
+    qreal yMm{0};
 };
 
 struct VNestingPieceInput
@@ -100,53 +86,78 @@ struct VNestingPieceInput
     bool forbidFlipping{false};
     bool forceFlipping{false};
     int quantity{1};
-    QString group{};            // spec 21: pieces of one import; empty = none
-    QVector<QPointF> fixedMm{}; // spec 21.4: already placed, in strip mm; non-empty = fixed, contourPx unused
+    QString id{};                    // opaque piece id; empty lets the shim mint one. Copies are not merged by name.
+    QVector<QPointF> placedSheetPx{}; // non-empty: this copy is already on the sheet and travels as a lock
 };
 
-constexpr qreal NestingPxPerMm = PrintDPI / 25.4;
+struct VNestingRead
+{
+    QString status{};
+    bool complete{false};
+    qreal lengthUsedMm{0};
+    QHash<QString, VNestingPlacement> placements{};
+    QStringList unplaced{};
+    bool hasReport{false};
+    QJsonObject report{};
+};
+
+struct NestingRotationFlip
+{
+    QString rotation{};      // oneWay, twoWay, any
+    QString flipAllowance{}; // none, x, y, both
+};
+
+// Loss: the layout dialog offers one rotation for every piece (follow the grainline, or that grainline
+// and 180°) and one mirror switch. fourWay, eightWay, any, and a tilt window cannot be named. Today's mirror is a single reflection
+// across the grain, which is profile +X, so an allowed mirror is flipAllowance "y" and not "x" or "both". A
+// forced flip is baked into the profile before the job; the job then forbids a further flip. forbidFlipping
+// is not a job field: it is flipAllowance "none".
+auto NestingMapRotationAndFlip(NestingRotations rotations, bool forbidFlipping, bool forceFlipping)
+    -> NestingRotationFlip;
 
 auto NestingLocalToStrip() -> QTransform;
+auto NestingFlipMatrix(const QString &flip) -> QTransform;
 auto NestingPlacementMatrix(const VNestingPlacement &p) -> QTransform;
-auto NestingStripToSheet(const QRectF &marginsRectPx, bool grainlineVertical) -> QTransform;
-auto NestingPieceMatrix(const QTransform &base,
+auto NestingMarkerToSheet(const QRectF &marginsRectPx, bool grainlineVertical) -> QTransform;
+auto NestingSheetToMarker(const QRectF &marginsRectPx, bool grainlineVertical) -> QTransform;
+auto NestingPieceMatrix(const QVector<QPointF> &contourPx,
+                        const QTransform &base,
                         const VNestingPlacement &p,
                         const QRectF &marginsRectPx,
                         bool grainlineVertical) -> QTransform;
 auto NestingFlipped(bool baseFlipped, bool mirrored) -> bool;
-auto NestingPolygon(const QVector<QPointF> &localPx, const QTransform &base) -> QJsonArray;
-// Sheet px -> strip mm, the inverse of NestingStripToSheet: a placed piece's outline as the service's fixed polygon.
-auto NestingFixedPolygon(const QVector<QPointF> &sheetPx, const QRectF &marginsRectPx, bool grainlineVertical)
-    -> QVector<QPointF>;
-// Identical free pieces (same outline, name, group and flip rules) travel as one item with a quantity; itemOf, when
-// given, maps every input to its item id (-1 when skipped) so that a result's copies can be handed back.
+auto NestingFlipMirrors(const QString &flip) -> bool;
+// Outward around-offset of a profile ring, corner arcs included. The origin is not moved.
+auto NestingAroundBuffer(const QVector<QPointF> &cutMm, qreal distanceMm) -> QVector<QPointF>;
+// One version 1 job. instanceOf, when given, is parallel to pieces: empty when that input was skipped.
 auto NestingRequest(const QVector<VNestingPieceInput> &pieces,
-                    qreal fabricWidthMm,
+                    qreal usableWidthMm,
                     qreal gapMm,
                     const VNestingOptions &options,
+                    const QRectF &marginsRectPx,
+                    bool grainlineVertical,
                     QVector<int> &skipped,
-                    QVector<int> *itemOf = nullptr) -> QJsonObject;
-// Area (mm²) of every copy in a request, for the savings table of the preview.
-auto NestingRequestArea(const QJsonObject &request) -> qreal;
-// The outline the local nester collides on: seam allowance when there is one, main contour otherwise.
+                    QStringList *instanceOf = nullptr) -> QJsonObject;
+// Sum of cut-contour areas (mm²), one per instance. Buffered area is not piece area.
+auto NestingRequestArea(const QJsonObject &job) -> qreal;
 auto NestingContour(const VLayoutPiece &piece, bool togetherWithNotches) -> QVector<QPointF>;
-// Rotation to apply after `base` so that the piece's grainline main line lies along local y, choosing the
-// direction by the arrow rule of VPPiece::RotateToGrainline. Identity without grainline.
 auto NestingGrainlineAlignment(const VLayoutPiece &piece, const QTransform &base) -> QTransform;
-// Base matrix of a Valentina layout piece: forced-flip mirror, then grainline alignment.
 auto NestingLayoutBase(const VLayoutPiece &piece) -> QTransform;
-auto NestingPlanComplete(const QJsonObject &result, const QVector<int> &quantities) -> bool;
-auto NestingPlacements(const QJsonObject &result) -> QMultiMap<int, VNestingPlacement>;
-// One portrait paper of the fabric width and the marker length (px), every placed copy positioned on it.
+auto NestingReadResult(const QJsonObject &result) -> VNestingRead;
+auto NestingPlanComplete(const QJsonObject &result, const QStringList &instanceIds) -> bool;
+auto NestingPlacements(const QJsonObject &result) -> QHash<QString, VNestingPlacement>;
+// Host summary. A missing report adds nothing and is not a failure. An incomplete status is said so.
+auto NestingSummaryText(const QJsonObject &result, const QJsonObject &job = QJsonObject()) -> QString;
 auto NestingResultPaper(const QVector<VLayoutPiece> &sent,
-                        const QMultiMap<int, VNestingPlacement> &placements,
+                        const QStringList &instanceIds,
+                        const QHash<QString, VNestingPlacement> &placements,
                         qreal fabricWidthPx,
                         qreal markerLengthPx,
                         qreal layoutWidthPx,
                         bool togetherWithNotches) -> VLayoutPaper;
-// One paper per roll that received pieces (result "rolls", spec 13.2), or one paper of the marker length.
+// One paper per bin. Pieces the result does not place are left out of the paper.
 auto NestingResultPapers(const QVector<VLayoutPiece> &sent,
-                         const QMultiMap<int, VNestingPlacement> &placements,
+                         const QStringList &instanceIds,
                          const QJsonObject &result,
                          qreal fabricWidthPx,
                          qreal layoutWidthPx,

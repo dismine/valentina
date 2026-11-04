@@ -2,20 +2,151 @@
 <ui version="4.0">
  <class>VNestingAccountPage</class>
  <widget class="QWidget" name="VNestingAccountPage">
-  <property name="windowTitle">
-   <string>Account</string>
+   <property name="windowTitle">
+   <string>Nesting</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
+    <widget class="QGroupBox" name="groupBoxEngine">
+     <property name="title">
+      <string>Nesting engine</string>
+     </property>
+     <layout class="QFormLayout" name="formLayoutEngine">
+      <item row="0" column="0">
+       <widget class="QLabel" name="labelEngineKind">
+        <property name="text">
+         <string>Call:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="comboBoxEngine">
+        <item>
+         <property name="text">
+          <string>Remote Nesting API</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Local program</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="labelHttpUrl">
+        <property name="text">
+         <string>URL:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QWidget" name="widgetHttpUrl" native="true">
+        <layout class="QHBoxLayout" name="horizontalLayoutHttpUrl">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLineEdit" name="lineEditHttpUrl">
+           <property name="placeholderText">
+            <string>http://localhost:8080</string>
+           </property>
+           <property name="toolTip">
+            <string>The base address only. Test calls /health. A job is posted to /jobs.</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonTestService">
+           <property name="text">
+            <string>Test</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="labelUrlHint">
+        <property name="text">
+         <string>Base address. Test calls /health. A job is posted to /jobs.</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLabel" name="labelServiceStatus">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="labelExecutable">
+        <property name="text">
+         <string>Program:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QWidget" name="widgetExecutable" native="true">
+        <layout class="QHBoxLayout" name="horizontalLayoutExecutable">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLineEdit" name="lineEditExecutable">
+           <property name="placeholderText">
+            <string>Path to an executable</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonBrowseExecutable">
+           <property name="text">
+            <string>Browse…</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="groupBoxAccount">
      <property name="title">
-      <string>smart-pattern.com.ua account</string>
+      <string>Authorization</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayoutAccount">
       <item>
-       <widget class="QLabel" name="labelStatus">
+       <widget class="QLabel" name="labelTokenHelp">
         <property name="text">
-         <string>Not signed in.</string>
+         <string>If this API requires a bearer token, paste it here. It is sent to the URL above. Leave it empty when the API does not require one.</string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -23,84 +154,12 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="labelPremium">
-        <property name="text">
-         <string/>
+       <widget class="QLineEdit" name="lineEditToken">
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="labelCode">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-        <property name="textInteractionFlags">
-         <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayoutButtons">
-        <item>
-         <widget class="QPushButton" name="buttonSignIn">
-          <property name="text">
-           <string>Sign in…</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="buttonCancel">
-          <property name="text">
-           <string>Cancel</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="buttonRefresh">
-          <property name="text">
-           <string>Refresh</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="buttonCopyToken">
-          <property name="toolTip">
-           <string>Copies your account token to the clipboard, to sign in on the service's administration pages. Keep it private: it is your session.</string>
-          </property>
-          <property name="text">
-           <string>Copy account token</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="buttonSignOut">
-          <property name="text">
-           <string>Sign out</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QLabel" name="labelError">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
+        <property name="placeholderText">
+         <string>Bearer token</string>
         </property>
        </widget>
       </item>
@@ -116,17 +175,17 @@
       <item>
        <widget class="QCheckBox" name="checkBoxShareFiles">
         <property name="text">
-         <string>Share my files with the nestor beta programme</string>
+         <string>Also send my pattern, measurements, and layout</string>
         </property>
         <property name="checked">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="labelShareFiles">
         <property name="text">
-         <string>With each online nesting job, the pattern, its measurement file, the layout file and the job settings are sent to the maintainer of the service, to measure and improve nestor. They are kept for 90 days, then deleted. Free previews send nothing.</string>
+         <string>A nest sends the piece outlines, the cloth width, and how the pieces may turn. Your pattern file, measurements, and formulas are not part of that. Tick the box if you are willing to send them as well.</string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -153,62 +212,6 @@
          </widget>
         </item>
        </layout>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="groupBoxAdvanced">
-     <property name="title">
-      <string>Advanced</string>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
-     </property>
-     <property name="checked">
-      <bool>false</bool>
-     </property>
-     <layout class="QFormLayout" name="formLayoutAdvanced">
-      <item row="0" column="0">
-       <widget class="QLabel" name="labelIssuer">
-        <property name="text">
-         <string>Account server:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEditIssuer"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="labelService">
-        <property name="text">
-         <string>Nesting service:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <layout class="QHBoxLayout" name="horizontalLayoutService">
-        <item>
-         <widget class="QLineEdit" name="lineEditService"/>
-        </item>
-        <item>
-         <widget class="QPushButton" name="buttonTestService">
-          <property name="text">
-           <string>Test</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLabel" name="labelServiceStatus">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
       </item>
      </layout>
     </widget>

@@ -86,6 +86,9 @@ public:
     auto IsLayoutStale() const -> bool;
     void SetLayoutStale(bool isLayoutStale);
 
+    auto IsNestingIncomplete() const -> bool;
+    void SetNestingIncomplete(bool incomplete);
+
     auto TiledMargins() const -> QMarginsF;
     void SetTiledMargins(const QMarginsF &tiledMargins);
 
@@ -154,6 +157,7 @@ private:
     bool m_isUnitePages{false};
     QString m_layoutPrinterName{};
     bool m_isLayoutStale{false};
+    bool m_nestingIncomplete{false};
     QMarginsF m_tiledMargins{};
     PageOrientation m_tiledPDFOrientation{PageOrientation::Portrait};
     QSizeF m_tiledPDFPaperSize{};
@@ -171,6 +175,7 @@ private:
 
     void PrintLayout();
     void PrintPreview();
+    auto RefuseIfNestingIncomplete() const -> bool;
 
     void SetPrinterSettings(QPrinter *printer, PrintType printType, const QString &filePath = QString());
     void SetPrinterPrinterMargins(QPrinter *printer);
@@ -318,6 +323,18 @@ inline auto VPrintLayout::IsLayoutStale() const -> bool
 inline void VPrintLayout::SetLayoutStale(bool isLayoutStale)
 {
     m_isLayoutStale = isLayoutStale;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline auto VPrintLayout::IsNestingIncomplete() const -> bool
+{
+    return m_nestingIncomplete;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+inline void VPrintLayout::SetNestingIncomplete(bool incomplete)
+{
+    m_nestingIncomplete = incomplete;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

@@ -48,6 +48,8 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetPaperWidth, ("layout/
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetPaperHeight, ("layout/sheetPaperHeight"_L1))
 // NOLINTNEXTLINE
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutSheetOrientation, ("layout/sheetOrientation"_L1))
+// NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTilePaperWidth, ("layout/tilePaperWidth"_L1))
 // NOLINTNEXTLINE
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingLayoutTilePaperHeight, ("layout/tilePaperHeight"_L1))
@@ -190,6 +192,20 @@ auto VPSettings::GetLayoutSheetPaperHeight() const -> qreal
 }
 
 //---------------------------------------------------------------------------------------------------------------------
+void VPSettings::SetLayoutSheetOrientation(QPageLayout::Orientation orientation)
+{
+    setValue(*settingLayoutSheetOrientation,
+             orientation == QPageLayout::Portrait ? QStringLiteral("portrait") : QStringLiteral("landscape"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPSettings::GetLayoutSheetOrientation() const -> QPageLayout::Orientation
+{
+    const QString text = value(*settingLayoutSheetOrientation, QStringLiteral("landscape")).toString();
+    return text == QLatin1String("portrait") ? QPageLayout::Portrait : QPageLayout::Landscape;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
 void VPSettings::SetLayoutTilePaperWidth(qreal width)
 {
     setValue(*settingLayoutTilePaperWidth, width);
@@ -198,7 +214,7 @@ void VPSettings::SetLayoutTilePaperWidth(qreal width)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSettings::GetLayoutTilePaperWidth() const -> qreal
 {
-    return ValueOrDef<qreal>(*this, *settingLayoutTilePaperWidth, UnitConvertor(210 /*A4*/, Unit::Mm, Unit::Px));
+    return ValueOrDef<qreal>(*this, *settingLayoutTilePaperWidth, UnitConvertor(297 /*A4 landscape*/, Unit::Mm, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -210,7 +226,7 @@ void VPSettings::SetLayoutTilePaperHeight(qreal height)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSettings::GetLayoutTilePaperHeight() const -> qreal
 {
-    return ValueOrDef<qreal>(*this, *settingLayoutTilePaperHeight, UnitConvertor(297 /*A4*/, Unit::Mm, Unit::Px));
+    return ValueOrDef<qreal>(*this, *settingLayoutTilePaperHeight, UnitConvertor(210 /*A4 landscape*/, Unit::Mm, Unit::Px));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -342,7 +358,7 @@ void VPSettings::SetLayoutFollowGrainline(bool value)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSettings::GetLayoutFollowGrainline() const -> bool
 {
-    return value(*settingLayoutFollowGrainline, false).toBool();
+    return value(*settingLayoutFollowGrainline, true).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------

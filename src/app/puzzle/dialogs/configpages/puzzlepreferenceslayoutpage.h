@@ -28,6 +28,7 @@
 #ifndef PUZZLEPREFERENCESLAYOUTPAGE_H
 #define PUZZLEPREFERENCESLAYOUTPAGE_H
 
+#include <QPageLayout>
 #include <QWidget>
 #include <memory>
 
@@ -68,6 +69,7 @@ private:
     std::unique_ptr<Ui::PuzzlePreferencesLayoutPage> ui;
     Unit m_oldLayoutUnit{Unit::Mm};
     bool m_settingsChanged{false};
+    QPageLayout::Orientation m_sheetOrientation{QPageLayout::Landscape};
 
     void InitLayoutUnits();
 

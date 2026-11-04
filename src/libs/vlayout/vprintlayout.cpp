@@ -192,6 +192,11 @@ void VPrintLayout::PdfTiledFile(const QString &name)
 {
     m_isTiled = true;
 
+    if (RefuseIfNestingIncomplete())
+    {
+        return;
+    }
+
     if (m_isLayoutStale && ContinueIfLayoutStale(m_parentWidget) == QMessageBox::No)
     {
         return;
@@ -221,6 +226,10 @@ void VPrintLayout::CleanLayout()
 //---------------------------------------------------------------------------------------------------------------------
 void VPrintLayout::PrintLayout()
 {
+    if (RefuseIfNestingIncomplete())
+    {
+        return;
+    }
     if (m_isLayoutStale && ContinueIfLayoutStale(m_parentWidget) == QMessageBox::No)
     {
         return;
@@ -263,6 +272,10 @@ void VPrintLayout::PrintLayout()
 //---------------------------------------------------------------------------------------------------------------------
 void VPrintLayout::PrintPreview()
 {
+    if (RefuseIfNestingIncomplete())
+    {
+        return;
+    }
     if (m_isLayoutStale && ContinueIfLayoutStale(m_parentWidget) == QMessageBox::No)
     {
         return;
@@ -704,6 +717,17 @@ auto VPrintLayout::WatermarkData() const -> VWatermarkData
     }
 
     return data;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPrintLayout::RefuseIfNestingIncomplete() const -> bool
+{
+    if (not m_nestingIncomplete)
+    {
+        return false;
+    }
+    qCritical() << tr("The nesting lay is not finished. Export and print stay closed until every piece is placed.");
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------

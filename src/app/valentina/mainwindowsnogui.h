@@ -42,7 +42,7 @@
 #include "dialogs/dialogsavelayout.h"
 #include "xml/vpattern.h"
 
-class VNestorClient;
+class VNestingTransport;
 class QGraphicsScene;
 struct PosterData;
 class QGraphicsRectItem;
@@ -118,7 +118,7 @@ protected:
     bool isNoScaling{false};                                // NOLINT(misc-non-private-member-variables-in-classes)
     bool isNeedAutosave{false};                             // NOLINT(misc-non-private-member-variables-in-classes)
     VPrintLayout *m_layoutSettings{new VPrintLayout(this)}; // NOLINT(misc-non-private-member-variables-in-classes)
-    VNestorClient *m_nestor{nullptr};                      // NOLINT(misc-non-private-member-variables-in-classes)
+    VNestingTransport *m_nesting{nullptr};                  // NOLINT(misc-non-private-member-variables-in-classes)
 
     /** @brief mouseCoordinate pointer to label who show mouse coordinate. */
     QPointer<QLabel> m_mouseCoordinate{nullptr};      // NOLINT(misc-non-private-member-variables-in-classes)
@@ -143,8 +143,8 @@ protected:
     auto GenerateLayout(VLayoutGenerator &lGenerator) -> bool;
     auto GenerateLayoutOnline(VLayoutGenerator &lGenerator) -> bool;
     auto OnlineRequest(qreal paperWidthPx, qreal layoutWidthPx, bool together, bool nestQuantity,
-                       const VNestingOptions &options, QVector<VLayoutPiece> &sent, QStringList &skippedNames) const
-        -> QJsonObject;
+                       const VNestingOptions &options, QVector<VLayoutPiece> &sent, QStringList &instanceIds,
+                       QStringList &skippedNames) const -> QJsonObject;
     void ApplyGeneratorResult(const VLayoutGenerator &lGenerator);
     virtual void OpenAccountPreferences() = 0;
     auto FileName() const -> QString;

@@ -180,10 +180,14 @@ void VPPiece::ClearTransformations()
         FlipVertically();
     }
 
-    // translate the piece so that the top left corner of the bouding rect of the piece is at the position
-    // (0,0) in the sheet coordinate system
+    // Drop the piece on the sheet, at the top-left of the current view.
+    QPointF dest(0, 0);
+    if (const VPSheetPtr sheet = Sheet(); not sheet.isNull())
+    {
+        dest = sheet->GetSheetRect().topLeft();
+    }
     const QPointF offset = MappedDetailBoundingRect().topLeft();
-    Translate(-offset.x(), -offset.y()); 
+    Translate(dest.x() - offset.x(), dest.y() - offset.y()); 
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -216,10 +220,11 @@ void VPPiece::RotateToGrainline(const VPTransformationOrigon &origin)
         return;
     }
 
-    QLineF fabricGrainline(grainline.p1().x(), grainline.p1().y(), grainline.p1().x() - 100, grainline.p1().y());
+    // Pattern +Y. Right on a landscape sheet, up on a portrait sheet.
+    QLineF fabricGrainline(grainline.p1().x(), grainline.p1().y(), grainline.p1().x() + 100, grainline.p1().y());
     if (sheet->GrainlineOrientation() == GrainlineType::Vertical)
     {
-        fabricGrainline.setAngle(fabricGrainline.angle() - 90);
+        fabricGrainline.setAngle(fabricGrainline.angle() + 90);
     }
 
     QVector<qreal> angles;

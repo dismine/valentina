@@ -152,8 +152,8 @@ void TST_VAccountToken::DefaultIsInvalid()
 void TST_VAccountToken::SameOriginCheck()
 {
     // Discovery endpoints must stay on the issuer's origin
-    QVERIFY(SameOrigin(QUrl(QStringLiteral("https://nestor.lossouarn.net/issuer")),
-                       QUrl(QStringLiteral("https://nestor.lossouarn.net/issuer/token"))));
+    QVERIFY(SameOrigin(QUrl(QStringLiteral("https://account.example/issuer")),
+                       QUrl(QStringLiteral("https://account.example/issuer/token"))));
     QVERIFY(SameOrigin(QUrl(QStringLiteral("https://Example.org")), QUrl(QStringLiteral("https://example.org:443/x"))));
     QVERIFY(not SameOrigin(QUrl(QStringLiteral("https://example.org")), QUrl(QStringLiteral("http://example.org/x"))));
     QVERIFY(not SameOrigin(QUrl(QStringLiteral("https://example.org")),

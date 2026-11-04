@@ -57,10 +57,8 @@ private:
     Q_DISABLE_COPY_MOVE(VNestingAccountPage) // NOLINT
     std::unique_ptr<Ui::VNestingAccountPage> ui;
     VAccountClient *m_client;
-    bool m_signingIn{false};
 
-    void ShowState();
-    void SetAdvancedVisible(bool visible);
+    void ShowEngineFields();
 };
 
 #endif // VNESTINGACCOUNTPAGE_H

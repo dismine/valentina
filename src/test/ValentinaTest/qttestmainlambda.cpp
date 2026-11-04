@@ -67,7 +67,7 @@
 #include "tst_vpiece.h"
 #include "tst_vpointf.h"
 #include "tst_vaccounttoken.h"
-#include "tst_vnestorclient.h"
+#include "tst_vnestinghttpclient.h"
 #include "tst_vnestingframe.h"
 #include "tst_vposter.h"
 #include "tst_vspline.h"
@@ -145,7 +145,7 @@ auto main(int argc, char **argv) -> int
     ASSERT_TEST(new TST_VPiece());
     ASSERT_TEST(new TST_VPoster());
     ASSERT_TEST(new TST_VAccountToken());
-    ASSERT_TEST(new TST_VNestorClient());
+    ASSERT_TEST(new TST_VNestingHttpClient());
     ASSERT_TEST(new TST_VNestingFrame());
     ASSERT_TEST(new TST_VAbstractPiece());
     ASSERT_TEST(new TST_VAsyncFileIO());

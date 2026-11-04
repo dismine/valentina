@@ -106,7 +106,7 @@
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/distribute-horizontal-margin.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/distribute-horizontal-page.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/distribute-horizontal-right.svg</file> -->
-        <!-- <file>icons/La-Sierra-Dark/actions/22x22/distribute-horizontal.svg</file> -->
+        <file>icons/La-Sierra-Dark/actions/22x22/distribute-horizontal.svg</file>
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/distribute-randomize.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/distribute-remove-overlaps.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22/distribute-unclump.svg</file> -->
@@ -1613,7 +1613,7 @@
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/distribute-horizontal-margin.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/distribute-horizontal-page.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/distribute-horizontal-right.svg</file> -->
-        <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/distribute-horizontal.svg</file> -->
+        <file>icons/La-Sierra-Dark/actions/22x22@2x/distribute-horizontal.svg</file>
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/distribute-randomize.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/distribute-remove-overlaps.svg</file> -->
         <!-- <file>icons/La-Sierra-Dark/actions/22x22@2x/distribute-unclump.svg</file> -->

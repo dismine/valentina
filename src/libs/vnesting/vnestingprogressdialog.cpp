@@ -28,7 +28,7 @@
 
 #include "vnestingprogressdialog.h"
 #include "ui_vnestingprogressdialog.h"
-#include "vnestorclient.h"
+#include "vnestinghttpclient.h"
 
 #include <QLocale>
 #include <QProgressBar>
@@ -40,8 +40,7 @@
 //---------------------------------------------------------------------------------------------------------------------
 VNestingProgressDialog::VNestingProgressDialog(const QJsonObject &request, bool unlimited, QWidget *parent)
   : QDialog(parent),
-    ui(std::make_unique<Ui::VNestingProgressDialog>()),
-    m_targetMm(request.value(QLatin1String("target_length_mm")).toDouble())
+    ui(std::make_unique<Ui::VNestingProgressDialog>())
 {
     ui->setupUi(this);
     setWindowModality(Qt::WindowModal);
@@ -55,26 +54,21 @@ VNestingProgressDialog::VNestingProgressDialog(const QJsonObject &request, bool 
     }
 #endif
 
-    const int budget = request.value(QLatin1String("budget_tokens")).toInt();
+    const int budget = qRound(request.value(QLatin1String("timeBudgetS")).toDouble());
+    ui->labelTokens->setText(tr("Time:"));
     ui->labelTokens->setVisible(budget > 0);
     ui->progressBarTokens->setVisible(budget > 0);
     ui->progressBarTokens->setRange(0, qMax(budget, 1));
     ui->progressBarTokens->setValue(0);
-    ui->progressBarTokens->setFormat(tr("%v of %m tokens"));
+    ui->progressBarTokens->setFormat(tr("%v of %m s"));
 
-    ui->labelTarget->setVisible(m_targetMm > 0);
-    ui->progressBarTarget->setVisible(m_targetMm > 0);
-    ui->progressBarTarget->setValue(0);
-
-    const bool groups = request.value(QLatin1String("group_by_group")).toBool();
-    ui->labelGroups->setVisible(groups);
-    ui->progressBarGroups->setVisible(groups);
-    ui->progressBarGroups->setRange(0, 1);
-    ui->progressBarGroups->setValue(0);
-    ui->progressBarGroups->setFormat(tr("Starting…"));
+    ui->labelTarget->setVisible(false);
+    ui->progressBarTarget->setVisible(false);
+    ui->labelGroups->setVisible(false);
+    ui->progressBarGroups->setVisible(false);
 
     ui->labelConditions->setText(ConditionsText(request));
-    ui->labelStatus->setText(tr("Sending pieces to the nesting service…"));
+    ui->labelStatus->setText(tr("Sending the nesting job…"));
 
     ui->buttonBox->button(QDialogButtonBox::Cancel)->setText(unlimited ? tr("Stop and keep the layout") : tr("Cancel"));
     connect(ui->buttonBox, &QDialogButtonBox::rejected, this, &VNestingProgressDialog::canceled);
@@ -86,36 +80,15 @@ VNestingProgressDialog::~VNestingProgressDialog() = default;
 //---------------------------------------------------------------------------------------------------------------------
 void VNestingProgressDialog::Update(const QString &status, int position, const QJsonObject &progress)
 {
-    ui->labelStatus->setText(VNestorClient::ProgressText(status, position, progress));
+    ui->labelStatus->setText(VNestingHttpClient::ProgressText(status, position, progress));
     if (progress.contains(QLatin1String("utilisation")))
     {
         ui->gaugeUtilisation->SetValue(qRound(progress.value(QLatin1String("utilisation")).toDouble() * 100));
     }
-    if (progress.contains(QLatin1String("tokens")))
+    if (progress.contains(QLatin1String("elapsed_s")))
     {
         ui->progressBarTokens->setValue(
-            qMin(progress.value(QLatin1String("tokens")).toInt(), ui->progressBarTokens->maximum()));
-    }
-    const qreal lengthMm = progress.value(QLatin1String("marker_length_mm")).toDouble();
-    if (m_targetMm > 0 && lengthMm > 0)
-    {
-        // full when the marker is down to the target
-        const QLocale locale;
-        ui->progressBarTarget->setValue(qMin(100, qRound(m_targetMm / lengthMm * 100)));
-        ui->progressBarTarget->setFormat(
-            tr("%1 m, target %2 m")
-                .arg(locale.toString(lengthMm / 1000, 'f', 2), locale.toString(m_targetMm / 1000, 'f', 2)));
-    }
-    if (progress.contains(QLatin1String("groups")))
-    {
-        const int total = progress.value(QLatin1String("groups")).toInt();
-        const int current = progress.value(QLatin1String("group")).toInt();
-        ui->progressBarGroups->setRange(0, qMax(total, 1));
-        ui->progressBarGroups->setValue(current);
-        ui->progressBarGroups->setFormat(tr("Nesting group %1 of %2: %3")
-                                             .arg(current)
-                                             .arg(total)
-                                             .arg(progress.value(QLatin1String("group_name")).toString()));
+            qMin(qRound(progress.value(QLatin1String("elapsed_s")).toDouble()), ui->progressBarTokens->maximum()));
     }
 }
 
@@ -129,26 +102,10 @@ void VNestingProgressDialog::SetStopping()
 auto VNestingProgressDialog::ConditionsText(const QJsonObject &request) -> QString
 {
     const QLocale locale;
-    QStringList ends;
-    if (const int budget = request.value(QLatin1String("budget_tokens")).toInt(); budget > 0)
+    const qreal seconds = request.value(QLatin1String("timeBudgetS")).toDouble();
+    if (seconds > 0)
     {
-        ends << tr("the budget of %n token(s) is spent", "", budget);
+        return tr("Stops when %1 seconds have elapsed.").arg(locale.toString(seconds, 'f', 0));
     }
-    if (const qreal target = request.value(QLatin1String("target_length_mm")).toDouble(); target > 0)
-    {
-        ends << tr("the marker is no longer than %1 m").arg(locale.toString(target / 1000, 'f', 2));
-    }
-    if (request.value(QLatin1String("until_converged")).toBool())
-    {
-        ends << tr("the search no longer improves");
-    }
-    if (const int seconds = request.value(QLatin1String("time_s")).toInt(); seconds > 0)
-    {
-        ends << tr("%n minute(s) have elapsed", "", qCeil(seconds / 60.0));
-    }
-    if (ends.isEmpty())
-    {
-        return tr("Runs until you stop it.");
-    }
-    return tr("Stops when %1, or when you stop it.").arg(ends.join(tr(", or when ")));
+    return tr("The job has no time budget.");
 }

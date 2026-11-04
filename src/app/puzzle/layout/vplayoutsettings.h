@@ -358,7 +358,7 @@ private:
     bool m_showWatermark{false};
 
     // control
-    bool m_followGrainLine{false};
+    bool m_followGrainLine{true};
 
     /**
      * @brief m_piecesGap the pieces gap in Unit::Px

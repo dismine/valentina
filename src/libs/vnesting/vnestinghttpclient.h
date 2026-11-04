@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpnestorclient.h
+ **  @file   vnestinghttpclient.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   11 October, 2026
  **
@@ -26,8 +26,8 @@
  **
  *************************************************************************/
 
-#ifndef VNESTORCLIENT_H
-#define VNESTORCLIENT_H
+#ifndef VNESTINGHTTPCLIENT_H
+#define VNESTINGHTTPCLIENT_H
 
 #include <QJsonObject>
 #include <QNetworkAccessManager>
@@ -38,15 +38,17 @@
 class QNetworkReply;
 
 /** @brief Submits a nesting job to the online service and polls it until done, failed or cancelled. */
-class VNestorClient : public QObject
+class VNestingHttpClient : public QObject
 {
     Q_OBJECT // NOLINT
 
 public:
-    explicit VNestorClient(QObject *parent = nullptr);
-    ~VNestorClient() override = default;
+    explicit VNestingHttpClient(QObject *parent = nullptr);
+    ~VNestingHttpClient() override = default;
 
     void Submit(const QJsonObject &request);
+    /** @brief Empty uses the URL from settings. A test or another host can point this client at one engine. */
+    void SetBaseUrl(const QString &url);
     /** @brief Spec 17.1: files (name, content) and metadata to upload once the next Submit is accepted. */
     void SetFiles(const QList<QPair<QString, QByteArray>> &files, const QJsonObject &meta);
     /** @brief Spec 17.1: withdraws every file this account shared; emits FilesDeleted or Failed. */
@@ -86,7 +88,7 @@ private slots:
 
 private:
     // cppcheck-suppress unknownMacro
-    Q_DISABLE_COPY_MOVE(VNestorClient) // NOLINT
+    Q_DISABLE_COPY_MOVE(VNestingHttpClient) // NOLINT
 
     QNetworkAccessManager m_qnam{};
     QTimer m_poll{};
@@ -95,13 +97,14 @@ private:
     bool m_stopping{false};
     QList<QPair<QString, QByteArray>> m_files{};
     QJsonObject m_meta{};
+    QString m_baseUrl{};
 
     void DropJob(bool notify);
     void UploadFiles(const QString &jobId);
-    static auto Request(const QString &path) -> QNetworkRequest;
+    auto Request(const QString &path) const -> QNetworkRequest;
     static auto Duration(qreal seconds) -> QString;
     static auto Body(const QByteArray &raw) -> QJsonObject;
     static auto ErrorText(QNetworkReply *reply, const QByteArray &raw) -> QString;
 };
 
-#endif // VNESTORCLIENT_H
+#endif // VNESTINGHTTPCLIENT_H

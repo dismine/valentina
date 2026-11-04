@@ -114,6 +114,7 @@ const QString AttrGradationLabel = QStringLiteral("gradationLabel");            
 const QString AttrCopyNumber = QStringLiteral("copyNumber");                                   // NOLINT(cert-err58-cpp)
 const QString AttrGroup = QStringLiteral("group");                                             // NOLINT(cert-err58-cpp)
 const QString AttrGrainlineType = QStringLiteral("grainlineType");                             // NOLINT(cert-err58-cpp)
+const QString AttrSheetOrientation = QStringLiteral("sheetOrientation");                       // NOLINT(cert-err58-cpp)
 const QString AttrXScale = QStringLiteral("xScale");                                           // NOLINT(cert-err58-cpp)
 const QString AttrYScale = QStringLiteral("yScale");                                           // NOLINT(cert-err58-cpp)
 const QString AttrIgnoreMargins = QStringLiteral("ignoreMargins");                             // NOLINT(cert-err58-cpp)

@@ -998,7 +998,7 @@
                        <bool>true</bool>
                       </property>
                       <property name="checked">
-                       <bool>true</bool>
+                       <bool>false</bool>
                       </property>
                       <property name="autoRaise">
                        <bool>true</bool>
@@ -1021,7 +1021,7 @@
                        <bool>true</bool>
                       </property>
                       <property name="checked">
-                       <bool>false</bool>
+                       <bool>true</bool>
                       </property>
                       <property name="autoRaise">
                        <bool>true</bool>
@@ -1045,83 +1045,6 @@
                      <string>Width:</string>
                     </property>
                    </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_5">
-                  <item>
-                   <widget class="QLabel" name="label_5">
-                    <property name="text">
-                     <string>Grainline orientation:</string>
-                    </property>
-                    <property name="wordWrap">
-                     <bool>true</bool>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <layout class="QHBoxLayout" name="horizontalLayout">
-                    <item>
-                     <widget class="QToolButton" name="toolButtonGrainlineHorizontalOrientation">
-                      <property name="toolTip">
-                       <string>Force the grainline orientation to always be horizontal</string>
-                      </property>
-                      <property name="text">
-                       <string notr="true"/>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="share/resources/puzzleicon.qrc">
-                        <normaloff>:/puzzleicon/light/32x32/horizontal_grainline.png</normaloff>:/puzzleicon/light/32x32/horizontal_grainline.png</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>24</width>
-                        <height>24</height>
-                       </size>
-                      </property>
-                      <property name="checkable">
-                       <bool>true</bool>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QToolButton" name="toolButtonGrainlineVerticalOrientation">
-                      <property name="toolTip">
-                       <string>Force the grainline orientation to always be vertical</string>
-                      </property>
-                      <property name="text">
-                       <string notr="true"/>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="share/resources/puzzleicon.qrc">
-                        <normaloff>:/puzzleicon/light/32x32/vertical_grainline.png</normaloff>:/puzzleicon/light/32x32/vertical_grainline.png</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>24</width>
-                        <height>24</height>
-                       </size>
-                      </property>
-                      <property name="checkable">
-                       <bool>true</bool>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <spacer name="horizontalSpacer_2">
-                      <property name="orientation">
-                       <enum>Qt::Orientation::Horizontal</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>40</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                   </layout>
                   </item>
                  </layout>
                 </item>
@@ -1444,7 +1367,7 @@
                        <bool>true</bool>
                       </property>
                       <property name="checked">
-                       <bool>true</bool>
+                       <bool>false</bool>
                       </property>
                       <property name="autoRaise">
                        <bool>true</bool>
@@ -1467,7 +1390,7 @@
                        <bool>true</bool>
                       </property>
                       <property name="checked">
-                       <bool>false</bool>
+                       <bool>true</bool>
                       </property>
                       <property name="autoRaise">
                        <bool>true</bool>
@@ -1844,6 +1767,9 @@
                  <widget class="QCheckBox" name="checkBoxFollowGainline">
                   <property name="text">
                    <string>Follow grainline</string>
+                  </property>
+                  <property name="checked">
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
@@ -2346,13 +2272,13 @@
   </action>
   <action name="actionOptimizeOnline">
    <property name="icon">
-    <iconset theme="system-run"/>
+    <iconset theme="distribute-horizontal"/>
    </property>
    <property name="text">
-    <string>Optimise placement online…</string>
+    <string>Nest Pieces</string>
    </property>
    <property name="toolTip">
-    <string>Send the sheet's pieces to the online nesting service (premium account required)</string>
+    <string>Send the sheet's pieces to the nesting engine chosen in Preferences</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>

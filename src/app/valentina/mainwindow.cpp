@@ -7512,6 +7512,13 @@ void MainWindow::ExportLayoutAs(bool checked)
 
     auto Uncheck = qScopeGuard([this] { ui->actionLayoutExportAs->setChecked(false); });
 
+    if (m_layoutSettings->IsNestingIncomplete())
+    {
+        QMessageBox::warning(this, tr("Layout mode"),
+                             tr("The nesting lay is not finished. Export and print stay closed until every piece is placed."));
+        return;
+    }
+
     if (m_layoutSettings->IsLayoutStale() && VPrintLayout::ContinueIfLayoutStale(this) == QMessageBox::No)
     {
         return;

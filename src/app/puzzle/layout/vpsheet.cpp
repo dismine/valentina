@@ -27,6 +27,8 @@
  *************************************************************************/
 #include "vpsheet.h"
 
+#include <QTransform>
+
 #include "../scene/vpgraphicspiece.h"
 #include "../scene/vpgraphicspiececontrols.h"
 #include "../scene/vpgraphicssheet.h"
@@ -251,6 +253,7 @@ VPSheetSceneData::VPSheetSceneData(const VPLayoutPtr &layout, const QUuid &sheet
     m_graphicsTileGrid = new VPGraphicsTileGrid(layout, m_sheetUuid);
     m_graphicsTileGrid->setZValue(10);
     m_scene->addItem(m_graphicsTileGrid);
+    m_scene->PlaceOrigins(QPointF(1, 0), QPointF(0, -1), 40);
 
     m_rotationControls = new VPGraphicsPieceControls(layout);
     m_scene->addItem(m_rotationControls);
@@ -272,6 +275,19 @@ VPSheetSceneData::~VPSheetSceneData() = default;
 auto VPSheetSceneData::Scene() const -> QSharedPointer<VMainGraphicsScene>
 {
     return m_scene;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheetSceneData::UpdateOrigins(QPageLayout::Orientation orientation)
+{
+    if (orientation == QPageLayout::Landscape)
+    {
+        // Pattern +Y points right. Pattern +X points down, so the width (−X) points up.
+        m_scene->PlaceOrigins(QPointF(0, 1), QPointF(1, 0), 40);
+        return;
+    }
+    // Portrait is the unrotated pattern frame. +Y points up. +X points right.
+    m_scene->PlaceOrigins(QPointF(1, 0), QPointF(0, -1), 40);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -342,6 +358,7 @@ void VPSheetSceneData::PrepareForExport(LayoutExportFormats format)
 
     m_rotationControls->setVisible(false);
     m_rotationOrigin->setVisible(false);
+    m_scene->SetOriginsVisible(false);
 
     if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
     {
@@ -390,6 +407,7 @@ void VPSheetSceneData::CleanAfterExport()
     m_graphicsSheet->SetPDFTiledExport(false);
 
     m_rotationControls->setVisible(true);
+    m_scene->SetOriginsVisible(true);
 
     if (VPLayoutPtr const layout = m_layout.toStrongRef(); not layout.isNull())
     {
@@ -562,7 +580,9 @@ VPSheet::VPSheet(const VPLayoutPtr &layout, QObject *parent)
     VPSettings  const*settings = VPApplication::VApp()->PuzzleSettings();
     SetIgnoreMargins(settings->GetLayoutSheetIgnoreMargins());
     SetSheetMargins(settings->GetLayoutSheetMargins());
+    m_orientation = settings->GetLayoutSheetOrientation();
     SetSheetSize(QSizeF(settings->GetLayoutSheetPaperWidth(), settings->GetLayoutSheetPaperHeight()));
+    m_sceneData->UpdateOrigins(m_orientation);
 
     connect(qApp, &QCoreApplication::aboutToQuit, m_validityWatcher,
             [this]()
@@ -673,17 +693,8 @@ void VPSheet::SetVisible(bool visible)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GrainlineOrientation() const -> GrainlineType
 {
-    if (m_grainlineType == GrainlineType::NotFixed)
-    {
-        if (m_size.height() < m_size.width())
-        {
-            return GrainlineType::Horizontal;
-        }
-
-        return GrainlineType::Vertical;
-    }
-
-    return m_grainlineType;
+    // The grainline is pattern +Y. Landscape points it right. Portrait points it up.
+    return m_orientation == QPageLayout::Landscape ? GrainlineType::Horizontal : GrainlineType::Vertical;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -739,20 +750,26 @@ void VPSheet::SetTrashSheet(bool newTrashSheet)
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GetSheetRect() const -> QRectF
 {
-    return {QPoint(0, 0), m_size};
+    const qreal cloth = m_size.width();
+    const qreal length = m_size.height();
+    if (m_orientation == QPageLayout::Landscape)
+    {
+        // Length (+Y) runs right from the origin. Width (−X) runs up.
+        return {0, -cloth, length, cloth};
+    }
+    // Portrait. Length (+Y) runs up. Width (−X) runs left. The origin is the bottom-right corner.
+    return {-cloth, -length, cloth, length};
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GetMarginsRect() const -> QRectF
 {
+    QRectF rect = GetSheetRect();
     if (not m_ignoreMargins)
     {
-        auto rect = QRectF(QPointF(m_margins.left(), m_margins.top()),
-                           QPointF(m_size.width() - m_margins.right(), m_size.height() - m_margins.bottom()));
-        return rect;
+        rect.adjust(m_margins.left(), m_margins.top(), -m_margins.right(), -m_margins.bottom());
     }
-
-    return {0, 0, m_size.width(), m_size.height()};
+    return rect;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -784,32 +801,23 @@ void VPSheet::RemoveUnusedLength()
 
     const qreal extra = 2;
     QRectF const sheetRect = GetSheetRect();
-    GrainlineType const type = GrainlineOrientation();
 
-    if (type == GrainlineType::Vertical)
+    if (m_orientation == QPageLayout::Portrait)
     {
-        qreal margin = 0;
-        if (not m_ignoreMargins)
+        // The far end of +Y is the top edge.
+        qreal const margin = m_ignoreMargins ? 0 : m_margins.top();
+        if (sheetRect.top() + margin < piecesBoundingRect.top())
         {
-            margin = m_margins.bottom();
-        }
-
-        if (sheetRect.bottomRight().y() - margin > piecesBoundingRect.bottomRight().y())
-        {
-            m_size = QSizeF(m_size.width(), piecesBoundingRect.bottomRight().y() + margin + extra);
+            m_size.setHeight(-piecesBoundingRect.top() + margin + extra);
         }
     }
-    else if (type == GrainlineType::Horizontal)
+    else
     {
-        qreal margin = 0;
-        if (not m_ignoreMargins)
+        // The far end of +Y is the right edge.
+        qreal const margin = m_ignoreMargins ? 0 : m_margins.right();
+        if (sheetRect.right() - margin > piecesBoundingRect.right())
         {
-            margin = m_margins.right();
-        }
-
-        if (sheetRect.topRight().x() - margin > piecesBoundingRect.topRight().x())
-        {
-            m_size = QSizeF(piecesBoundingRect.topRight().x() + margin + extra, m_size.height());
+            m_size.setHeight(piecesBoundingRect.right() + margin + extra);
         }
     }
 }
@@ -935,7 +943,58 @@ void VPSheet::ClearSelection() const
 //---------------------------------------------------------------------------------------------------------------------
 auto VPSheet::GetSheetOrientation() const -> QPageLayout::Orientation
 {
-    return m_size.height() >= m_size.width() ? QPageLayout::Portrait : QPageLayout::Landscape;
+    return m_orientation;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::SetSheetOrientation(QPageLayout::Orientation orientation)
+{
+    if (m_orientation == orientation)
+    {
+        return;
+    }
+
+    // Portrait scene (x, y) rotates to landscape (−y, x), and back by (y, −x).
+    const QTransform turn = orientation == QPageLayout::Landscape ? QTransform(0, 1, -1, 0, 0, 0)
+                                                                  : QTransform(0, -1, 1, 0, 0, 0);
+    m_orientation = orientation;
+
+    const QList<VPPiecePtr> pieces = GetPieces();
+    for (const auto &piece : pieces)
+    {
+        if (not piece.isNull())
+        {
+            piece->SetMatrix(turn * piece->GetMatrix());
+        }
+    }
+
+    m_sceneData->UpdateOrigins(m_orientation);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VPSheet::AdoptLegacySheet()
+{
+    const bool wasPortrait = m_size.height() >= m_size.width();
+    if (not wasPortrait)
+    {
+        // The old landscape button had swapped the fields, so the stored width was the horizontal length.
+        m_size.transpose();
+    }
+    m_orientation = wasPortrait ? QPageLayout::Portrait : QPageLayout::Landscape;
+
+    const QPointF shift = GetSheetRect().topLeft();
+    QTransform move;
+    move.translate(shift.x(), shift.y());
+    const QList<VPPiecePtr> pieces = GetPieces();
+    for (const auto &piece : pieces)
+    {
+        if (not piece.isNull())
+        {
+            piece->SetMatrix(move * piece->GetMatrix());
+        }
+    }
+
+    m_sceneData->UpdateOrigins(m_orientation);
 }
 
 //---------------------------------------------------------------------------------------------------------------------

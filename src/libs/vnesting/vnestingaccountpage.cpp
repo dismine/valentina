@@ -31,13 +31,9 @@
 #include "../vmisc/vcommonsettings.h"
 #include "ui_vnestingaccountpage.h"
 #include "vaccountclient.h"
-#include "vnestorclient.h"
+#include "vnestinghttpclient.h"
 
-#include <QClipboard>
-#include <QDesktopServices>
-#include <QGuiApplication>
-#include <QJsonObject>
-#include <QLocale>
+#include <QFileDialog>
 
 //---------------------------------------------------------------------------------------------------------------------
 VNestingAccountPage::VNestingAccountPage(QWidget *parent)
@@ -47,142 +43,73 @@ VNestingAccountPage::VNestingAccountPage(QWidget *parent)
 {
     ui->setupUi(this);
     ui->checkBoxShareFiles->setChecked(VAbstractApplication::VApp()->Settings()->GetShareFiles());
-    connect(ui->buttonCopyToken,
-            &QPushButton::clicked,
-            this,
-            [this]()
-            {
-                QGuiApplication::clipboard()->setText(VAbstractApplication::VApp()->Settings()->GetAccountToken());
-                ui->labelError->setText(tr("Account token copied to the clipboard."));
-            });
     connect(ui->buttonDeleteFiles,
             &QPushButton::clicked,
             this,
             [this]()
             {
-                auto *nestor = new VNestorClient(this);
+                auto *http = new VNestingHttpClient(this);
                 ui->buttonDeleteFiles->setEnabled(false);
                 ui->labelDeleteFiles->setText(tr("Deleting…"));
-                connect(nestor,
-                        &VNestorClient::FilesDeleted,
+                connect(http,
+                        &VNestingHttpClient::FilesDeleted,
                         this,
-                        [this, nestor]()
+                        [this, http]()
                         {
                             ui->buttonDeleteFiles->setEnabled(true);
                             ui->labelDeleteFiles->setText(tr("Your shared files were deleted."));
-                            nestor->deleteLater();
+                            http->deleteLater();
                         });
-                connect(nestor,
-                        &VNestorClient::Failed,
+                connect(http,
+                        &VNestingHttpClient::Failed,
                         this,
-                        [this, nestor](int, const QString &message)
+                        [this, http](int, const QString &message)
                         {
                             ui->buttonDeleteFiles->setEnabled(true);
                             ui->labelDeleteFiles->setText(tr("Could not delete: %1").arg(message));
-                            nestor->deleteLater();
+                            http->deleteLater();
                         });
-                nestor->DeleteMyFiles();
+                http->DeleteMyFiles();
             });
 
     VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-    ui->lineEditIssuer->setText(settings->GetAccountIssuerUrl());
-    ui->lineEditService->setText(settings->GetNestorServiceUrl());
-    SetAdvancedVisible(false);
-    connect(ui->groupBoxAdvanced, &QGroupBox::toggled, this, &VNestingAccountPage::SetAdvancedVisible);
+    ui->lineEditHttpUrl->setText(settings->GetNestingServiceUrl());
+    ui->lineEditExecutable->setText(settings->GetNestingExecutable());
+    ui->lineEditToken->setText(settings->GetAccountToken());
+    ui->comboBoxEngine->setCurrentIndex(settings->IsNestingLocalEngine() ? 1 : 0);
+    connect(ui->comboBoxEngine,
+            qOverload<int>(&QComboBox::currentIndexChanged),
+            this,
+            [this](int) { ShowEngineFields(); });
+    connect(ui->buttonBrowseExecutable, &QPushButton::clicked, this, [this]()
+            {
+                const QString path =
+                    QFileDialog::getOpenFileName(this, tr("Nesting program"), ui->lineEditExecutable->text());
+                if (not path.isEmpty())
+                {
+                    ui->lineEditExecutable->setText(path);
+                }
+            });
 
-    connect(ui->buttonSignIn,
-            &QPushButton::clicked,
-            this,
-            [this]()
-            {
-                Apply(); // the issuer typed in Advanced must be the one we talk to
-                m_signingIn = true;
-                ui->labelError->clear();
-                ShowState();
-                m_client->StartDeviceLogin();
-            });
-    connect(ui->buttonCancel,
-            &QPushButton::clicked,
-            this,
-            [this]()
-            {
-                m_client->CancelLogin();
-                m_signingIn = false;
-                ShowState();
-            });
-    connect(ui->buttonRefresh, &QPushButton::clicked, m_client, &VAccountClient::RefreshUserInfo);
-    connect(ui->buttonSignOut, &QPushButton::clicked, m_client, &VAccountClient::Logout);
     connect(ui->buttonTestService,
             &QPushButton::clicked,
             this,
             [this]()
             {
                 ui->labelServiceStatus->setText(tr("Checking…"));
-                m_client->CheckService(ui->lineEditService->text());
+                ShowEngineFields();
+                m_client->CheckService(ui->lineEditHttpUrl->text());
             });
 
-    connect(m_client,
-            &VAccountClient::UserCodeReady,
-            this,
-            [this](const QString &code, const QUrl &url)
-            {
-                ui->labelCode->setText(tr("Confirm this code in your browser: <b style=\"font-size:x-large\">%1</b><br>"
-                                          "If the browser did not open, go to <a href=\"%2\">%2</a>")
-                                           .arg(code.toHtmlEscaped(), url.toString().toHtmlEscaped()));
-                ui->labelCode->setOpenExternalLinks(true);
-                QDesktopServices::openUrl(url);
-            });
-    connect(m_client,
-            &VAccountClient::LoggedIn,
-            this,
-            [this]()
-            {
-                m_signingIn = false;
-                ShowState();
-                m_client->RefreshUserInfo();
-            });
-    connect(m_client,
-            &VAccountClient::LoggedOut,
-            this,
-            [this]()
-            {
-                m_signingIn = false;
-                ShowState();
-            });
-    connect(m_client,
-            &VAccountClient::UserInfo,
-            this,
-            [this](const QJsonObject &info)
-            {
-                const bool premium = info.value(QStringLiteral("premium")).toBool();
-                const QDate until = QDate::fromString(info.value(QStringLiteral("premium_until")).toString(),
-                                                      Qt::ISODate);
-                ui->labelPremium->setText(premium ? (until.isValid()
-                                                         ? tr("Premium subscription: yes, until %1")
-                                                               .arg(QLocale().toString(until, QLocale::ShortFormat))
-                                                         : tr("Premium subscription: yes"))
-                                                  : tr("Premium subscription: no"));
-            });
     connect(m_client,
             &VAccountClient::ServiceChecked,
             this,
             [this](bool ok, const QString &message)
-            { ui->labelServiceStatus->setText((ok ? QStringLiteral("✔ ") : QStringLiteral("✘ ")) + message); });
-    connect(m_client,
-            &VAccountClient::Failed,
-            this,
-            [this](const QString &message)
             {
-                m_signingIn = false;
-                ui->labelError->setText(message);
-                ShowState();
+                ui->labelServiceStatus->setText((ok ? QStringLiteral("✔ ") : QStringLiteral("✘ ")) + message);
+                ShowEngineFields();
             });
-
-    ShowState();
-    if (m_client->IsLoggedIn())
-    {
-        m_client->RefreshUserInfo();
-    }
+    ShowEngineFields();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -193,14 +120,10 @@ void VNestingAccountPage::Apply()
 {
     VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
     settings->SetShareFiles(ui->checkBoxShareFiles->isChecked());
-    const QString issuer = ui->lineEditIssuer->text().trimmed();
-    if (issuer != settings->GetAccountIssuerUrl())
-    {
-        // a token from another issuer is useless and would only produce 401s
-        settings->SetAccountIssuerUrl(issuer);
-        m_client->Logout();
-    }
-    settings->SetNestorServiceUrl(ui->lineEditService->text().trimmed());
+    settings->SetNestingServiceUrl(ui->lineEditHttpUrl->text().trimmed());
+    settings->SetNestingLocalEngine(ui->comboBoxEngine->currentIndex() == 1);
+    settings->SetNestingExecutable(ui->lineEditExecutable->text().trimmed());
+    settings->SetAccountToken(ui->lineEditToken->text().trimmed());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -210,53 +133,22 @@ void VNestingAccountPage::changeEvent(QEvent *event)
     {
         // retranslate designer form (single inheritance approach)
         ui->retranslateUi(this);
-        ShowState();
+        ShowEngineFields();
     }
     // remember to call base class implementation
     QWidget::changeEvent(event);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNestingAccountPage::ShowState()
+void VNestingAccountPage::ShowEngineFields()
 {
-    const VAccountToken token = m_client->Token();
-    const bool in = m_client->IsLoggedIn();
-    if (in)
-    {
-        ui->labelStatus->setText(tr("Signed in as %1 (%2).").arg(token.Name(), token.Email()));
-    }
-    else if (token.IsValid())
-    {
-        ui->labelStatus->setText(tr("Your session has expired. Please sign in again."));
-    }
-    else
-    {
-        ui->labelStatus->setText(tr("Connect Puzzle to your smart-pattern.com.ua account to use online nesting."));
-    }
-    if (not in)
-    {
-        ui->labelPremium->clear();
-    }
-    if (not m_signingIn)
-    {
-        ui->labelCode->clear();
-    }
-    ui->buttonSignIn->setVisible(not in && not m_signingIn);
-    ui->buttonCancel->setVisible(m_signingIn);
-    ui->buttonRefresh->setVisible(in);
-    ui->buttonSignOut->setVisible(in);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VNestingAccountPage::SetAdvancedVisible(bool visible)
-{
-    for (auto *w : {static_cast<QWidget *>(ui->labelIssuer),
-                    static_cast<QWidget *>(ui->lineEditIssuer),
-                    static_cast<QWidget *>(ui->labelService),
-                    static_cast<QWidget *>(ui->lineEditService),
-                    static_cast<QWidget *>(ui->buttonTestService),
-                    static_cast<QWidget *>(ui->labelServiceStatus)})
-    {
-        w->setVisible(visible);
-    }
+    const bool remote = ui->comboBoxEngine->currentIndex() == 0;
+    ui->labelHttpUrl->setVisible(remote);
+    ui->widgetHttpUrl->setVisible(remote);
+    ui->labelUrlHint->setVisible(remote);
+    ui->labelServiceStatus->setVisible(remote && not ui->labelServiceStatus->text().isEmpty());
+    ui->labelExecutable->setVisible(not remote);
+    ui->widgetExecutable->setVisible(not remote);
+    ui->groupBoxAccount->setVisible(remote);
+    ui->groupBoxBeta->setVisible(remote);
 }

@@ -218,6 +218,9 @@ void VPLayoutFileWriter::WriteSheets(const VPLayoutPtr &layout)
 void VPLayoutFileWriter::WriteSheet(const VPSheetPtr &sheet)
 {
     writeStartElement(ML::TagSheet);
+    SetAttribute(ML::AttrSheetOrientation,
+                 sheet->GetSheetOrientation() == QPageLayout::Portrait ? QStringLiteral("portrait")
+                                                                       : QStringLiteral("landscape"));
     SetAttributeOrRemoveIf<QString>(ML::AttrGrainlineType,
                                     GrainlineTypeToStr(sheet->GetGrainlineType()),
                                     [](const QString &type) noexcept

@@ -160,7 +160,7 @@
         <!-- <file>icons/Eleven-Dark/16/actions/distribute-horizontal-margin.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/distribute-horizontal-page.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/distribute-horizontal-right.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16/actions/distribute-horizontal.svg</file> -->
+        <file>icons/Eleven-Dark/16/actions/distribute-horizontal.svg</file>
         <!-- <file>icons/Eleven-Dark/16/actions/distribute-vertical-baseline.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/distribute-vertical-bottom.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16/actions/distribute-vertical-center.svg</file> -->
@@ -2491,7 +2491,7 @@
         <!-- <file>icons/Eleven-Dark/22/actions/distribute-horizontal-node.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/distribute-horizontal-page.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/distribute-horizontal-right.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22/actions/distribute-horizontal.svg</file> -->
+        <file>icons/Eleven-Dark/22/actions/distribute-horizontal.svg</file>
         <!-- <file>icons/Eleven-Dark/22/actions/distribute-randomize.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/distribute-remove-overlaps.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22/actions/distribute-unclump.svg</file> -->
@@ -4834,7 +4834,7 @@
         <!-- <file>icons/Eleven-Dark/24/actions/distribute-horizontal-node.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/distribute-horizontal-page.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/distribute-horizontal-right.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24/actions/distribute-horizontal.svg</file> -->
+        <file>icons/Eleven-Dark/24/actions/distribute-horizontal.svg</file>
         <!-- <file>icons/Eleven-Dark/24/actions/distribute-randomize.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/distribute-remove-overlaps.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24/actions/distribute-unclump.svg</file> -->
@@ -8092,7 +8092,7 @@
         <!-- <file>icons/Eleven-Dark/16@2x/actions/distribute-horizontal-margin.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/distribute-horizontal-page.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/distribute-horizontal-right.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/16@2x/actions/distribute-horizontal.svg</file> -->
+        <file>icons/Eleven-Dark/16@2x/actions/distribute-horizontal.svg</file>
         <!-- <file>icons/Eleven-Dark/16@2x/actions/distribute-vertical-baseline.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/distribute-vertical-bottom.svg</file> -->
         <!-- <file>icons/Eleven-Dark/16@2x/actions/distribute-vertical-center.svg</file> -->
@@ -10423,7 +10423,7 @@
         <!-- <file>icons/Eleven-Dark/22@2x/actions/distribute-horizontal-node.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/distribute-horizontal-page.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/distribute-horizontal-right.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/22@2x/actions/distribute-horizontal.svg</file> -->
+        <file>icons/Eleven-Dark/22@2x/actions/distribute-horizontal.svg</file>
         <!-- <file>icons/Eleven-Dark/22@2x/actions/distribute-randomize.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/distribute-remove-overlaps.svg</file> -->
         <!-- <file>icons/Eleven-Dark/22@2x/actions/distribute-unclump.svg</file> -->
@@ -12766,7 +12766,7 @@
         <!-- <file>icons/Eleven-Dark/24@2x/actions/distribute-horizontal-node.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/distribute-horizontal-page.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/distribute-horizontal-right.svg</file> -->
-        <!-- <file>icons/Eleven-Dark/24@2x/actions/distribute-horizontal.svg</file> -->
+        <file>icons/Eleven-Dark/24@2x/actions/distribute-horizontal.svg</file>
         <!-- <file>icons/Eleven-Dark/24@2x/actions/distribute-randomize.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/distribute-remove-overlaps.svg</file> -->
         <!-- <file>icons/Eleven-Dark/24@2x/actions/distribute-unclump.svg</file> -->

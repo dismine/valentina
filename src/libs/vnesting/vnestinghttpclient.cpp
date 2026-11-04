@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   vpnestorclient.cpp
+ **  @file   vnestinghttpclient.cpp
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   11 October, 2026
  **
@@ -26,7 +26,7 @@
  **
  *************************************************************************/
 
-#include "vnestorclient.h"
+#include "vnestinghttpclient.h"
 #include "../vmisc/vabstractapplication.h"
 #include "../vmisc/vcommonsettings.h"
 
@@ -51,15 +51,21 @@ constexpr int pollMs = 2000;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-VNestorClient::VNestorClient(QObject *parent)
+VNestingHttpClient::VNestingHttpClient(QObject *parent)
   : QObject(parent)
 {
     m_poll.setSingleShot(true);
-    connect(&m_poll, &QTimer::timeout, this, &VNestorClient::Poll);
+    connect(&m_poll, &QTimer::timeout, this, &VNestingHttpClient::Poll);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNestorClient::Submit(const QJsonObject &request)
+void VNestingHttpClient::SetBaseUrl(const QString &url)
+{
+    m_baseUrl = url.trimmed();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VNestingHttpClient::Submit(const QJsonObject &request)
 {
     DropJob(false);
     const int run = ++m_run;
@@ -101,20 +107,20 @@ void VNestorClient::Submit(const QJsonObject &request)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNestorClient::SetFiles(const QList<QPair<QString, QByteArray>> &files, const QJsonObject &meta)
+void VNestingHttpClient::SetFiles(const QList<QPair<QString, QByteArray>> &files, const QJsonObject &meta)
 {
     m_files = files;
     m_meta = meta;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNestorClient::UploadFiles(const QString &jobId)
+void VNestingHttpClient::UploadFiles(const QString &jobId)
 {
     if (m_files.isEmpty())
     {
         return;
     }
-    const QString boundary = QStringLiteral("nestor-") + QString::number(QRandomGenerator::global()->generate64(), 36);
+    const QString boundary = QStringLiteral("nesting-") + QString::number(QRandomGenerator::global()->generate64(), 36);
     QNetworkRequest req = Request(QStringLiteral("/jobs/") + jobId + QStringLiteral("/files"));
     req.setHeader(QNetworkRequest::ContentTypeHeader, QStringLiteral("multipart/form-data; boundary=") + boundary);
     QNetworkReply *reply = m_qnam.put(req, NestingFilesBody(m_files, m_meta, boundary));
@@ -128,14 +134,14 @@ void VNestorClient::UploadFiles(const QString &jobId)
             {
                 if (reply->error() != QNetworkReply::NoError)
                 {
-                    qWarning() << "nestor: file upload failed:" << reply->errorString();
+                    qWarning() << "nesting: file upload failed:" << reply->errorString();
                 }
                 reply->deleteLater();
             });
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VNestorClient::NestingFilesBody(const QList<QPair<QString, QByteArray>> &files,
+auto VNestingHttpClient::NestingFilesBody(const QList<QPair<QString, QByteArray>> &files,
                                      const QJsonObject &meta,
                                      const QString &boundary) -> QByteArray
 {
@@ -155,7 +161,7 @@ auto VNestorClient::NestingFilesBody(const QList<QPair<QString, QByteArray>> &fi
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNestorClient::DeleteMyFiles()
+void VNestingHttpClient::DeleteMyFiles()
 {
     QNetworkReply *reply = m_qnam.deleteResource(Request(QStringLiteral("/me/files")));
     connect(reply,
@@ -177,13 +183,13 @@ void VNestorClient::DeleteMyFiles()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNestorClient::Cancel()
+void VNestingHttpClient::Cancel()
 {
     DropJob(true);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNestorClient::Stop()
+void VNestingHttpClient::Stop()
 {
     if (m_jobId.isEmpty() || m_stopping)
     {
@@ -207,7 +213,7 @@ void VNestorClient::Stop()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNestorClient::DropJob(bool notify)
+void VNestingHttpClient::DropJob(bool notify)
 {
     m_poll.stop();
     ++m_run;
@@ -239,14 +245,14 @@ void VNestorClient::DropJob(bool notify)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VNestorClient::Duration(qreal seconds) -> QString
+auto VNestingHttpClient::Duration(qreal seconds) -> QString
 {
     const int whole = qRound(seconds);
     return QStringLiteral("%1:%2").arg(whole / 60).arg(whole % 60, 2, 10, QLatin1Char('0'));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VNestorClient::SummaryText(const QJsonObject &result) -> QString
+auto VNestingHttpClient::SummaryText(const QJsonObject &result) -> QString
 {
     const QLocale locale;
     QStringList lines{tr("Marker length %1 m, utilisation %2 %.")
@@ -269,7 +275,7 @@ auto VNestorClient::SummaryText(const QJsonObject &result) -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VNestorClient::CancelSummaryText(const QJsonObject &summary) -> QString
+auto VNestingHttpClient::CancelSummaryText(const QJsonObject &summary) -> QString
 {
     if (summary.isEmpty())
     {
@@ -289,7 +295,7 @@ auto VNestorClient::CancelSummaryText(const QJsonObject &summary) -> QString
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VNestorClient::RunningProgress(const QJsonObject &body) -> QJsonObject
+auto VNestingHttpClient::RunningProgress(const QJsonObject &body) -> QJsonObject
 {
     // the service's progress point plus the bill so far (spec 20), for ProgressText
     QJsonObject progress = body.value("progress"_L1).toObject();
@@ -302,7 +308,7 @@ auto VNestorClient::RunningProgress(const QJsonObject &body) -> QJsonObject
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VNestorClient::ProgressText(const QString &status, int position, const QJsonObject &progress) -> QString
+auto VNestingHttpClient::ProgressText(const QString &status, int position, const QJsonObject &progress) -> QString
 {
     if (status == "stopping"_L1)
     {
@@ -346,7 +352,7 @@ auto VNestorClient::ProgressText(const QString &status, int position, const QJso
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNestorClient::FetchInfo()
+void VNestingHttpClient::FetchInfo()
 {
     QNetworkReply *reply = m_qnam.get(Request(QStringLiteral("/health")));
     connect(reply,
@@ -363,7 +369,7 @@ void VNestorClient::FetchInfo()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNestorClient::Poll()
+void VNestingHttpClient::Poll()
 {
     if (m_jobId.isEmpty())
     {
@@ -416,15 +422,24 @@ void VNestorClient::Poll()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VNestorClient::Request(const QString &path) -> QNetworkRequest
+auto VNestingHttpClient::Request(const QString &path) const -> QNetworkRequest
 {
     VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
-    return BearerRequest(QUrl(QUrl(settings->GetNestorServiceUrl()).toString(QUrl::StripTrailingSlash) + path),
-                         settings->GetAccountToken());
+    const QString base = m_baseUrl.isEmpty() ? settings->GetNestingServiceUrl() : m_baseUrl;
+    const QUrl url(QUrl(base).toString(QUrl::StripTrailingSlash) + path);
+    const QString token = settings->GetAccountToken();
+    if (token.isEmpty())
+    {
+        QNetworkRequest request(url);
+        request.setHeader(QNetworkRequest::UserAgentHeader, QCoreApplication::applicationName());
+        request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::ManualRedirectPolicy);
+        return request;
+    }
+    return BearerRequest(url, token);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VNestorClient::BearerRequest(const QUrl &url, const QString &token) -> QNetworkRequest
+auto VNestingHttpClient::BearerRequest(const QUrl &url, const QString &token) -> QNetworkRequest
 {
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::UserAgentHeader, QCoreApplication::applicationName());
@@ -434,15 +449,15 @@ auto VNestorClient::BearerRequest(const QUrl &url, const QString &token) -> QNet
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VNestorClient::Body(const QByteArray &raw) -> QJsonObject
+auto VNestingHttpClient::Body(const QByteArray &raw) -> QJsonObject
 {
     return QJsonDocument::fromJson(raw).object();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VNestorClient::ErrorText(QNetworkReply *reply, const QByteArray &raw) -> QString
+auto VNestingHttpClient::ErrorText(QNetworkReply *reply, const QByteArray &raw) -> QString
 {
-    // nestor answers errors with a short text or {"detail": "..."}; fall back to Qt's description
+    // The service answers errors with a short text or {"detail": "..."}; fall back to Qt's description
     const QString detail = QJsonDocument::fromJson(raw).object().value("detail"_L1).toString();
     if (not detail.isEmpty())
     {

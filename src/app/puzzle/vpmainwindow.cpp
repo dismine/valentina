@@ -33,7 +33,6 @@
 #include <QBuffer>
 #include <QCloseEvent>
 #include <QFile>
-#include <QDesktopServices>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QFileSystemWatcher>
@@ -47,9 +46,7 @@
 #include <QSvgGenerator>
 #include <QTimer>
 #include <QUndoStack>
-#include <QSet>
 #include <QtMath>
-#include <climits>
 
 #include "../ifc/xml/vlayoutconverter.h"
 #include "../vdxf/libdxfrw/drw_base.h"
@@ -63,13 +60,14 @@
 #include "../vmisc/dialogs/dialogselectlanguage.h"
 #include "../vmisc/exception/vexception.h"
 #include "../vmisc/lambdaconstants.h"
-#include "../vnesting/vaccounttoken.h"
 #include "dialogs/vpdialogoptimizeonline.h"
+#include "../vlayout/vlayoutpoint.h"
 #include "../vnesting/vnestingprogressdialog.h"
-#include "../vnesting/vnestorclient.h"
+#include "../vnesting/vnestingtransport.h"
+#include "../vnesting/vnestinghttpclient.h"
 #include <QJsonArray>
+#include <QJsonDocument>
 #include "undocommands/vpundooptimizeonline.h"
-#include "../vmisc/projectversion.h"
 #include "../vmisc/theme/themeDef.h"
 #include "../vmisc/theme/vtheme.h"
 #include "../vmisc/vasyncfileio.h"
@@ -569,6 +567,7 @@ auto VPMainWindow::LoadFile(const QString &path) -> bool
         {
             VPLayoutFileReader fileReader;
             m_layout->Clear();
+            m_nestingIncomplete = false;
 
             fileReader.ReadFile(m_layout, &file);
 
@@ -1130,54 +1129,6 @@ void VPMainWindow::InitPaperSizeData(const QString &suffix)
     connect(ui->toolButtonSheetLandscapeOrientation, &QToolButton::toggled, this,
             &VPMainWindow::on_SheetOrientationChanged);
 
-    connect(ui->toolButtonGrainlineHorizontalOrientation, &QToolButton::clicked, this,
-            [this](bool checked)
-            {
-                VPSheetPtr const sheet = m_layout->GetFocusedSheet();
-                if (sheet.isNull())
-                {
-                    return;
-                }
-
-                if (checked)
-                {
-                    sheet->SetGrainlineType(GrainlineType::Horizontal);
-                    ui->toolButtonGrainlineVerticalOrientation->setChecked(false);
-                }
-                else
-                {
-                    sheet->SetGrainlineType(GrainlineType::NotFixed);
-                }
-
-                RotatePiecesToGrainline();
-                LayoutWasSaved(false);
-                m_graphicsView->RefreshLayout();
-            });
-
-    connect(ui->toolButtonGrainlineVerticalOrientation, &QToolButton::clicked, this,
-            [this](bool checked)
-            {
-                VPSheetPtr const sheet = m_layout->GetFocusedSheet();
-                if (sheet.isNull())
-                {
-                    return;
-                }
-
-                if (checked)
-                {
-                    sheet->SetGrainlineType(GrainlineType::Vertical);
-                    ui->toolButtonGrainlineHorizontalOrientation->setChecked(false);
-                }
-                else
-                {
-                    sheet->SetGrainlineType(GrainlineType::NotFixed);
-                }
-
-                RotatePiecesToGrainline();
-                LayoutWasSaved(false);
-                m_graphicsView->RefreshLayout();
-            });
-
     connect(ui->pushButtonSheetRemoveUnusedLength, &QPushButton::clicked, this,
             [this]()
             {
@@ -1413,13 +1364,6 @@ void VPMainWindow::InitPropertyTabLayout()
 
                 m_layout->LayoutSettings().SetFollowGrainline(checked);
 
-                if (VPSheetPtr const sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
-                {
-                    ToggleGrainlineControls(checked,
-                                            m_layout->LayoutSettings().IsCutOnFold(),
-                                            sheet->GetGrainlineType());
-                }
-
                 if (checked)
                 {
                     RotatePiecesToGrainline();
@@ -1629,10 +1573,6 @@ void VPMainWindow::SetPropertyTabSheetData()
             ui->doubleSpinBoxSheetMarginRight->setDisabled(ignoreMargins);
             ui->doubleSpinBoxSheetMarginTop->setDisabled(ignoreMargins);
             ui->doubleSpinBoxSheetMarginBottom->setDisabled(ignoreMargins);
-
-            ToggleGrainlineControls(m_layout->LayoutSettings().GetFollowGrainline(),
-                                    m_layout->LayoutSettings().IsCutOnFold(),
-                                    sheet->GetGrainlineType());
 
             // set placement grid
             ui->groupBoxSheetGrid->setDisabled(false);
@@ -2272,7 +2212,14 @@ void VPMainWindow::CorrectPaperDecimals()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::SheetPaperSizeChanged()
 {
-    bool const portrait = ui->doubleSpinBoxSheetPaperHeight->value() >= ui->doubleSpinBoxSheetPaperWidth->value();
+    bool portrait = false;
+    if (not m_layout.isNull())
+    {
+        if (VPSheetPtr const sheet = m_layout->GetFocusedSheet(); not sheet.isNull())
+        {
+            portrait = sheet->GetSheetOrientation() == QPageLayout::Portrait;
+        }
+    }
 
     {
         const QSignalBlocker blocker(ui->toolButtonSheetPortraitOritation);
@@ -2286,16 +2233,9 @@ void VPMainWindow::SheetPaperSizeChanged()
 
     if (not m_layout.isNull())
     {
-        if (m_layout->LayoutSettings().GetFollowGrainline())
+        if (VPSheetPtr const sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
         {
-            RotatePiecesToGrainline();
-        }
-        else
-        {
-            if (VPSheetPtr const sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
-            {
-                sheet->CheckPiecesPositionValidity();
-            }
+            sheet->CheckPiecesPositionValidity();
         }
     }
 
@@ -3759,31 +3699,6 @@ void VPMainWindow::InitIcons()
 
     SetTabIcon(ui->tabCurrentPieceProperty, QStringLiteral("64x64/iconCurrentPiece.png"));
     SetTabIcon(ui->tabTilesProperty, QStringLiteral("64x64/iconTiles.png"));
-
-    ui->toolButtonGrainlineHorizontalOrientation->setIcon(
-        VTheme::GetIconResource(resource, QStringLiteral("32x32/horizontal_grainline.png")));
-    ui->toolButtonGrainlineVerticalOrientation->setIcon(
-        VTheme::GetIconResource(resource, QStringLiteral("32x32/vertical_grainline.png")));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPMainWindow::ToggleGrainlineControls(bool followGrainline, bool cutOnFold, GrainlineType type)
-{
-    const bool enableGrainlineOptions = followGrainline || cutOnFold;
-
-    ui->toolButtonGrainlineHorizontalOrientation->setEnabled(enableGrainlineOptions);
-    ui->toolButtonGrainlineVerticalOrientation->setEnabled(enableGrainlineOptions);
-
-    if (enableGrainlineOptions)
-    {
-        ui->toolButtonGrainlineHorizontalOrientation->setChecked(type == GrainlineType::Horizontal);
-        ui->toolButtonGrainlineVerticalOrientation->setChecked(type == GrainlineType::Vertical);
-    }
-    else
-    {
-        ui->toolButtonGrainlineHorizontalOrientation->setChecked(false);
-        ui->toolButtonGrainlineVerticalOrientation->setChecked(false);
-    }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -4066,15 +3981,23 @@ void VPMainWindow::on_SheetOrientationChanged(bool checked)
 {
     if (checked && not m_layout.isNull())
     {
-        const qreal width = ui->doubleSpinBoxSheetPaperWidth->value();
-        const qreal height = ui->doubleSpinBoxSheetPaperHeight->value();
-
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperWidth, height);
-        SetDoubleSpinBoxValue(ui->doubleSpinBoxSheetPaperHeight, width);
-
-        if (VPSheetPtr const sheet = m_layout->GetFocusedSheet(); not sheet.isNull())
+        VPSheetPtr const sheet = m_layout->GetFocusedSheet();
+        if (sheet.isNull())
         {
-            sheet->SetSheetSizeConverted(height, width); // NOLINT(readability-suspicious-call-argument)
+            return;
+        }
+
+        const auto orientation = ui->toolButtonSheetPortraitOritation->isChecked() ? QPageLayout::Portrait
+                                                                                   : QPageLayout::Landscape;
+        if (orientation == sheet->GetSheetOrientation())
+        {
+            return;
+        }
+
+        sheet->SetSheetOrientation(orientation);
+        if (m_layout->LayoutSettings().GetFollowGrainline())
+        {
+            RotatePiecesToGrainline();
         }
 
         SheetPaperSizeChanged();
@@ -4082,6 +4005,7 @@ void VPMainWindow::on_SheetOrientationChanged(bool checked)
         LayoutWasSaved(false);
         m_layout->TileFactory()->RefreshTileInfos();
         m_graphicsView->RefreshLayout();
+        m_graphicsView->RefreshPieces();
     }
 }
 
@@ -4469,6 +4393,10 @@ void VPMainWindow::on_ConvertPaperSize()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_ExportLayout()
 {
+    if (RefuseIfNestingIncomplete())
+    {
+        return;
+    }
     if (m_layout.isNull())
     {
         return;
@@ -4523,6 +4451,10 @@ void VPMainWindow::on_ExportLayout()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_ExportSheet()
 {
+    if (RefuseIfNestingIncomplete())
+    {
+        return;
+    }
     if (m_layout.isNull())
     {
         return;
@@ -4573,6 +4505,10 @@ void VPMainWindow::on_ExportSheet()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintLayout_triggered()
 {
+    if (RefuseIfNestingIncomplete())
+    {
+        return;
+    }
     if (not m_layout->IsSheetsUniform())
     {
         qCritical() << tr("For printing multipages document all sheet should have the same size.");
@@ -4624,6 +4560,10 @@ void VPMainWindow::on_actionPrintLayout_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintPreviewLayout_triggered()
 {
+    if (RefuseIfNestingIncomplete())
+    {
+        return;
+    }
     if (not m_layout->IsSheetsUniform())
     {
         qCritical() << tr("For printing multipages document all sheet should have the same size.");
@@ -4670,6 +4610,10 @@ void VPMainWindow::on_actionPrintPreviewLayout_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintTiledLayout_triggered()
 {
+    if (RefuseIfNestingIncomplete())
+    {
+        return;
+    }
     QSharedPointer<QPrinter> const printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
     if (printer.isNull())
     {
@@ -4708,6 +4652,10 @@ void VPMainWindow::on_actionPrintTiledLayout_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintPreviewTiledLayout_triggered()
 {
+    if (RefuseIfNestingIncomplete())
+    {
+        return;
+    }
     QSharedPointer<QPrinter> const printer = PreparePrinter(QPrinterInfo::defaultPrinter(), QPrinter::HighResolution);
     if (printer.isNull())
     {
@@ -4752,6 +4700,10 @@ void VPMainWindow::on_printLayoutTiledPages(QPrinter *printer)
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintSheet_triggered()
 {
+    if (RefuseIfNestingIncomplete())
+    {
+        return;
+    }
     VPSheetPtr const sheet = m_layout->GetFocusedSheet();
     if (sheet.isNull())
     {
@@ -4796,6 +4748,10 @@ void VPMainWindow::on_actionPrintSheet_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintPreviewSheet_triggered()
 {
+    if (RefuseIfNestingIncomplete())
+    {
+        return;
+    }
     VPSheetPtr const sheet = m_layout->GetFocusedSheet();
     if (sheet.isNull())
     {
@@ -4834,6 +4790,10 @@ void VPMainWindow::on_actionPrintPreviewSheet_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintTiledSheet_triggered()
 {
+    if (RefuseIfNestingIncomplete())
+    {
+        return;
+    }
     VPSheetPtr const sheet = m_layout->GetFocusedSheet();
     if (sheet.isNull())
     {
@@ -4870,6 +4830,10 @@ void VPMainWindow::on_actionPrintTiledSheet_triggered()
 //---------------------------------------------------------------------------------------------------------------------
 void VPMainWindow::on_actionPrintPreviewTiledSheet_triggered()
 {
+    if (RefuseIfNestingIncomplete())
+    {
+        return;
+    }
     VPSheetPtr const sheet = m_layout->GetFocusedSheet();
     if (sheet.isNull())
     {
@@ -5158,8 +5122,6 @@ void VPMainWindow::LayoutCutOnFold_toggled(bool checked)
         if (VPSheetPtr const sheet = m_layout->GetFocusedSheet(); !sheet.isNull())
         {
             sheet->CheckPiecesPositionValidity();
-
-            ToggleGrainlineControls(m_layout->LayoutSettings().GetFollowGrainline(), checked, sheet->GetGrainlineType());
         }
         m_graphicsView->RefreshLayout();
     }
@@ -5237,35 +5199,6 @@ void VPMainWindow::on_actionOptimizeOnline_triggered()
         return;
     }
 
-    // access first: a valid, premium token
-    const VAccountToken token(VAbstractApplication::VApp()->Settings()->GetAccountToken());
-    if (token.IsExpired())
-    {
-        QMessageBox box(QMessageBox::Information, tr("Online nesting"),
-                        tr("Connect Puzzle to your smart-pattern.com.ua account to use online nesting."),
-                        QMessageBox::Cancel, this);
-        QPushButton *open = box.addButton(tr("Open account settings"), QMessageBox::AcceptRole);
-        box.exec();
-        if (box.clickedButton() == open)
-        {
-            on_actionPreferences_triggered();
-        }
-        return;
-    }
-    if (not token.IsPremium())
-    {
-        QMessageBox box(QMessageBox::Information, tr("Online nesting"),
-                        tr("Online nesting is reserved to premium subscribers."), QMessageBox::Cancel, this);
-        QPushButton *subscribe = box.addButton(tr("See the subscription"), QMessageBox::AcceptRole);
-        box.exec();
-        if (box.clickedButton() == subscribe)
-        {
-            QDesktopServices::openUrl(
-                QUrl(QStringLiteral("https://smart-pattern.com.ua/en/catalogue/premium-subscription_66/")));
-        }
-        return;
-    }
-
     const bool vertical = sheet->GrainlineOrientation() == GrainlineType::Vertical;
     const QRectF margins = sheet->GetMarginsRect();
     const qreal fabricWidthMm = (vertical ? margins.width() : margins.height()) / NestingPxPerMm;
@@ -5273,74 +5206,38 @@ void VPMainWindow::on_actionOptimizeOnline_triggered()
     const QList<VPPiecePtr> onSheet = m_layout->PiecesForSheet(sheet);
     const QList<VPPiecePtr> unplaced = m_layout->GetUnplacedPieces();
 
-    // request: each free piece's own contour in its reset frame (scale and forced flip only); a fixed piece (spec
-    // 21.4) sends its placed outline, sheet px -> strip mm, and the service nests the free ones around it
-    auto inputsFor = [margins, vertical](const QList<VPPiecePtr> &pieces, bool fixed)
+    // One instance per copy. A piece already on the sheet is a lock only when the user asked to nest around it.
+    auto inputFor = [](const VPPiecePtr &piece, bool lock)
     {
-        QVector<VNestingPieceInput> inputs;
-        inputs.reserve(pieces.size());
-        for (const auto &piece : pieces)
+        VNestingPieceInput input;
+        input.name = piece->GetName();
+        input.id = piece->GetUniqueID();
+        const VPPiece reset(static_cast<const VLayoutPiece &>(*piece));
+        CastTo(piece->GetExternalContourPoints(), input.contourPx);
+        input.base = reset.GetMatrix() * NestingGrainlineAlignment(*piece, reset.GetMatrix());
+        input.forbidFlipping = piece->IsForbidFlipping();
+        input.forceFlipping = piece->IsForceFlipping();
+        input.quantity = 1;
+        if (lock)
         {
-            VNestingPieceInput input;
-            input.name = piece->GetName();
-            input.group = piece->Group();
-            if (fixed)
-            {
-                QVector<QPointF> contour;
-                CastTo(piece->GetMappedExternalContourPoints(), contour);
-                input.fixedMm = NestingFixedPolygon(contour, margins, vertical);
-            }
-            else
-            {
-                const VPPiece reset(static_cast<const VLayoutPiece &>(*piece)); // the constructor clears transformations
-                CastTo(piece->GetExternalContourPoints(), input.contourPx);
-                input.base = reset.GetMatrix() * NestingGrainlineAlignment(*piece, reset.GetMatrix());
-                input.forbidFlipping = piece->IsForbidFlipping();
-                input.forceFlipping = piece->IsForceFlipping();
-            }
-            inputs.append(input);
+            CastTo(piece->GetMappedExternalContourPoints(), input.placedSheetPx);
         }
-        return inputs;
+        return input;
     };
-    // the free pieces (sorted by group, spec 21.5: the service nests groups in order of first appearance) and the
-    // fixed ones, which come last so that the free pieces keep ids 0..n-1
-    auto candidatesFor = [this, onSheet, unplaced](NestingPieces mode)
+    auto candidatesFor = [onSheet, unplaced](NestingPieces mode)
     {
         QList<VPPiecePtr> free = mode == NestingPieces::UnplacedAroundSheet ? unplaced : onSheet;
         if (mode == NestingPieces::SheetAndUnplaced)
         {
             free += unplaced;
         }
-        std::stable_sort(free.begin(), free.end(),
-                         [this](const VPPiecePtr &a, const VPPiecePtr &b)
-                         {
-                             const int ia = m_layout->GroupIndex(a->Group());
-                             const int ib = m_layout->GroupIndex(b->Group());
-                             return (ia < 0 ? INT_MAX : ia) < (ib < 0 ? INT_MAX : ib);
-                         });
-        return std::make_pair(free, mode == NestingPieces::UnplacedAroundSheet ? onSheet : QList<VPPiecePtr>());
+        const QList<VPPiecePtr> fixed = mode == NestingPieces::UnplacedAroundSheet ? onSheet : QList<VPPiecePtr>();
+        return std::make_pair(free, fixed);
     };
-    QSet<QString> groupNames;
-    for (const auto &piece : onSheet + unplaced)
-    {
-        if (not piece->Group().isEmpty())
-        {
-            groupNames.insert(piece->Group());
-        }
-    }
 
-    VPDialogOptimizeOnline dialog(static_cast<int>(onSheet.size()), static_cast<int>(unplaced.size()),
-                                  static_cast<int>(groupNames.size()), fabricWidthMm, gapMm, vertical,
+    VPDialogOptimizeOnline dialog(static_cast<int>(onSheet.size()), static_cast<int>(unplaced.size()), fabricWidthMm,
+                                  gapMm, m_layout->LayoutSettings().GetUnit(), vertical,
                                   sheet->GetGrainlineType() != GrainlineType::NotFixed, this);
-    dialog.SetRequestBuilder(
-        [&dialog, &inputsFor, &candidatesFor, fabricWidthMm, gapMm]()
-        {
-            QVector<int> skipped;
-            const auto [free, fixed] = candidatesFor(dialog.Mode());
-            const QJsonObject request = NestingRequest(inputsFor(free, false) + inputsFor(fixed, true), fabricWidthMm,
-                                                       gapMm, dialog.Options(), skipped);
-            return request.value(QLatin1String("pieces")).toArray().isEmpty() ? QJsonObject() : request;
-        });
     if (dialog.exec() != QDialog::Accepted)
     {
         return;
@@ -5349,53 +5246,61 @@ void VPMainWindow::on_actionOptimizeOnline_triggered()
     const auto [candidates, fixedPieces] = candidatesFor(dialog.Mode());
     if (candidates.isEmpty())
     {
-        QMessageBox::information(this, tr("Online nesting"), tr("There is no piece to place."));
+        QMessageBox::information(this, tr("Nesting"), tr("There is no piece to place."));
         return;
     }
 
-    const QVector<VNestingPieceInput> inputs = inputsFor(candidates, false) + inputsFor(fixedPieces, true);
-    QVector<int> skipped, itemOf;
-    QJsonObject request = NestingRequest(inputs, fabricWidthMm, gapMm, dialog.Options(), skipped, &itemOf);
-    request.insert(QStringLiteral("app"), QStringLiteral("puzzle")); // spec 18.2
-    request.insert(QStringLiteral("app_version"), AppVersionStr());
+    QVector<VNestingPieceInput> inputs;
+    inputs.reserve(candidates.size() + fixedPieces.size());
+    for (const auto &piece : candidates)
+    {
+        inputs.append(inputFor(piece, false));
+    }
+    for (const auto &piece : fixedPieces)
+    {
+        inputs.append(inputFor(piece, true));
+    }
+    QVector<int> skipped;
+    QStringList instanceOf;
+    const QJsonObject request = NestingRequest(inputs, fabricWidthMm, gapMm, dialog.Options(), margins, vertical,
+                                               skipped, &instanceOf);
+    const QList<VPPiecePtr> all = candidates + fixedPieces;
     QList<VPPiecePtr> sent;
-    QVector<int> sentItems; // the request item each sent piece is a copy of
+    QStringList instanceIds;
     QStringList skippedNames;
-    for (vsizetype i = 0; i < candidates.size(); ++i)
+    for (vsizetype i = 0; i < all.size(); ++i)
     {
         if (skipped.contains(static_cast<int>(i)))
         {
-            skippedNames.append(candidates.at(i)->GetName());
+            skippedNames.append(all.at(i)->GetName());
         }
         else
         {
-            sent.append(candidates.at(i));
-            sentItems.append(itemOf.at(static_cast<int>(i)));
+            sent.append(all.at(i));
+            instanceIds.append(instanceOf.value(static_cast<int>(i)));
         }
     }
     if (sent.isEmpty())
     {
-        QMessageBox::warning(this, tr("Online nesting"), tr("No piece has a usable outline."));
+        QMessageBox::warning(this, tr("Nesting"), tr("No piece has a usable outline."));
         return;
     }
     if (not skippedNames.isEmpty())
     {
-        QMessageBox::warning(this, tr("Online nesting"),
+        QMessageBox::warning(this, tr("Nesting"),
                              tr("%n piece(s) without a usable outline will not be sent: %1", "",
                                 static_cast<int>(skippedNames.size()))
                                  .arg(skippedNames.join(QStringLiteral(", "))));
     }
 
-    if (m_nestor == nullptr)
+    if (m_nesting == nullptr)
     {
-        m_nestor = new VNestorClient(this);
+        m_nesting = new VNestingTransport(this);
     }
-    const bool unlimited = request.value(QLatin1String("time_s")).toInt() == 0; // spec 15: ends when the user says so
-    auto *progress = new VNestingProgressDialog(request, unlimited, this);
+    auto *progress = new VNestingProgressDialog(request, false, this);
     progress->setAttribute(Qt::WA_DeleteOnClose);
     progress->show();
 
-    // one-shot connections for this run, all dropped together
     auto conns = QSharedPointer<QList<QMetaObject::Connection>>::create();
     auto cleanup = [progress, conns]()
     {
@@ -5406,170 +5311,155 @@ void VPMainWindow::on_actionOptimizeOnline_triggered()
         conns->clear();
         progress->close();
     };
-    auto stopping = QSharedPointer<bool>::create(false);
     *conns << connect(progress, &VNestingProgressDialog::canceled, this,
-                      [this, cleanup, conns, progress, unlimited, stopping]()
+                      [this, cleanup]()
                       {
-                          // one shot without Qt::SingleShotConnection (Qt 6 only): the lambda drops its own connection
                           auto once = QSharedPointer<QMetaObject::Connection>::create();
-                          *once = connect(m_nestor, &VNestorClient::Cancelled, this,
+                          *once = connect(m_nesting, &VNestingTransport::Cancelled, this,
                                           [this, once, cleanup](const QJsonObject &summary)
                                           {
                                               disconnect(*once);
                                               cleanup();
-                                              QMessageBox::information(this, tr("Online nesting"),
-                                                                       VNestorClient::CancelSummaryText(summary));
+                                              QMessageBox::information(this, tr("Nesting"),
+                                                                       VNestingHttpClient::CancelSummaryText(summary));
                                           });
-                          if (unlimited && not *stopping)
-                          {
-                              // first press keeps the best layout (Finished follows, or Cancelled if there was nothing
-                              // to keep); a second press cancels for good
-                              *stopping = true;
-                              *conns << *once;
-                              m_nestor->Stop();
-                              progress->SetStopping();
-                              return;
-                          }
-                          m_nestor->Cancel();
-                          cleanup();
+                          m_nesting->Cancel();
                       });
-    *conns << connect(m_nestor, &VNestorClient::Progress, progress,
+    *conns << connect(m_nesting, &VNestingTransport::Progress, progress,
                       [progress](const QString &status, int position, const QJsonObject &running)
                       { progress->Update(status, position, running); });
     const qint64 bodyBytes = QJsonDocument(request).toJson(QJsonDocument::Compact).size();
-    *conns << connect(m_nestor, &VNestorClient::Failed, this,
+    *conns << connect(m_nesting, &VNestingTransport::Failed, this,
                       [this, cleanup, bodyBytes, sent](int status, const QString &message)
                       {
                           cleanup();
                           if (status == 413)
                           {
                               const QLocale locale;
-                              QMessageBox::warning(this, tr("Online nesting"),
-                                                   tr("The request is too large for the service (%1 MB for %n "
+                              QMessageBox::warning(this, tr("Nesting"),
+                                                   tr("The request is too large for the engine (%1 MB for %n "
                                                       "piece(s)). Nest fewer pieces at a time.",
                                                       "", static_cast<int>(sent.size()))
-                                                       .arg(locale.toString(static_cast<double>(bodyBytes) / 1048576.0, 'f', 1)));
+                                                       .arg(locale.toString(static_cast<double>(bodyBytes) / 1048576.0,
+                                                                            'f', 1)));
                           }
                           else if (status == 401)
                           {
-                              QMessageBox::warning(this, tr("Online nesting"),
-                                                   tr("The service rejected your session. Sign in again in "
-                                                      "Preferences > Account.\n%1")
+                              QMessageBox::warning(this, tr("Nesting"),
+                                                   tr("The engine refused the request. If it requires a bearer "
+                                                      "token, paste one in Preferences > Nesting.\n%1")
                                                        .arg(message));
                           }
                           else if (status == 403)
                           {
-                              QMessageBox::warning(this, tr("Online nesting"), tr("Access refused: %1").arg(message));
-                          }
-                          else if (message.contains(QLatin1String("longer than the usable roll length")))
-                          {
-                              QMessageBox::warning(this, tr("Online nesting"),
-                                                   tr("A piece is longer than a roll minus the junction loss: %1").arg(message));
-                          }
-                          else if (message.contains(QLatin1String("could not construct an initial placement")))
-                          {
-                              QMessageBox::warning(this, tr("Online nesting"),
-                                                   tr("A piece does not fit across the fabric width. Check the sheet "
-                                                      "size and its grainline direction."));
+                              QMessageBox::warning(this, tr("Nesting"), tr("Access refused: %1").arg(message));
                           }
                           else
                           {
-                              QMessageBox::warning(this, tr("Online nesting"), tr("Nesting failed: %1").arg(message));
+                              QMessageBox::warning(this, tr("Nesting"), tr("Nesting failed: %1").arg(message));
                           }
                       });
-    *conns << connect(m_nestor, &VNestorClient::Finished, this,
-                      [this, cleanup, sheet, sent, sentItems](const QJsonObject &result)
+    *conns << connect(m_nesting, &VNestingTransport::Finished, this,
+                      [this, cleanup, sheet, sent, instanceIds, request](const QJsonObject &result)
                       {
                           cleanup();
-                          if (ApplyNestingResult(sheet, sent, sentItems, result))
+                          const bool applied = ApplyNestingResult(sheet, sent, instanceIds, result);
+                          QStringList stayed;
+                          const QHash<QString, VNestingPlacement> placements = NestingPlacements(result);
+                          for (vsizetype i = 0; i < sent.size() && i < instanceIds.size(); ++i)
                           {
-                              QMessageBox::information(this, tr("Online nesting"), VNestorClient::SummaryText(result));
+                              if (not placements.contains(instanceIds.at(i)))
+                              {
+                                  stayed.append(sent.at(i)->GetName());
+                              }
+                          }
+                          QString summary = NestingSummaryText(result, request);
+                          if (not stayed.isEmpty())
+                          {
+                              summary += QLatin1Char('\n')
+                                         + tr("Left where they were: %1").arg(stayed.join(QStringLiteral(", ")));
+                          }
+                          if (applied && not m_nestingIncomplete)
+                          {
+                              QMessageBox::information(this, tr("Nesting"), summary);
+                          }
+                          else
+                          {
+                              QMessageBox::warning(this, tr("Nesting"), summary);
                           }
                       });
-    if (VAbstractApplication::VApp()->Settings()->GetShareFiles())
+    m_nesting->Submit(request);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VPMainWindow::RefuseIfNestingIncomplete() -> bool
+{
+    if (not m_nestingIncomplete)
     {
-        // spec 17.1: the layout as it is in memory (even unsaved) and what the job was asked for
-        QByteArray data;
-        QBuffer buffer(&data);
-        buffer.open(QIODevice::WriteOnly);
-        VPLayoutFileWriter fileWriter;
-        fileWriter.WriteFile(m_layout, &buffer);
-        QList<QPair<QString, QByteArray>> files;
-        if (not fileWriter.hasError())
-        {
-            files.append({curFile.isEmpty() ? QStringLiteral("layout.vlt") : curFile, data});
-        }
-        m_nestor->SetFiles(files, QJsonObject{{"sheet", sheet->GetName()},
-                                              {"pieces_mode", static_cast<int>(dialog.Mode())},
-                                              {"grainline_vertical", vertical}});
+        return false;
     }
-    m_nestor->Submit(request);
+    QMessageBox::warning(this, tr("Nesting"),
+                         tr("The nesting lay is not finished. Export and print stay closed until every piece is placed."));
+    return true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 auto VPMainWindow::ApplyNestingResult(const VPSheetPtr &sheet, const QList<VPPiecePtr> &sent,
-                                      const QVector<int> &sentItems, const QJsonObject &result) -> bool
+                                      const QStringList &instanceIds, const QJsonObject &result) -> bool
 {
-    // copies per request item: the service places quantity copies of every merged item
-    QVector<int> quantities(sentItems.isEmpty() ? 0 : *std::max_element(sentItems.cbegin(), sentItems.cend()) + 1, 0);
-    for (const int item : sentItems)
+    const QHash<QString, VNestingPlacement> placements = NestingPlacements(result);
+    if (sheet.isNull() || placements.isEmpty())
     {
-        ++quantities[item];
-    }
-    if (sheet.isNull() || not NestingPlanComplete(result, quantities))
-    {
-        QMessageBox::warning(this, tr("Online nesting"),
-                             tr("The service returned an incomplete result; nothing was changed."));
         return false;
     }
     const bool vertical = sheet->GrainlineOrientation() == GrainlineType::Vertical;
     const QRectF margins = sheet->GetMarginsRect();
-    const qreal lengthPx = result.value(QStringLiteral("marker_length_mm")).toDouble() * NestingPxPerMm;
+    const qreal lengthPx = NestingReadResult(result).lengthUsedMm * NestingPxPerMm;
     const qreal availablePx = vertical ? margins.height() : margins.width();
     QSizeF const oldSize = sheet->GetSheetSize();
     QSizeF newSize = oldSize;
-    if (lengthPx > availablePx + 0.5)
+    if (lengthPx > 0.5)
     {
-        const qreal extra = lengthPx - availablePx;
-        newSize = vertical ? QSizeF(oldSize.width(), oldSize.height() + extra)
-                           : QSizeF(oldSize.width() + extra, oldSize.height());
-        const QLocale locale;
-        const qreal newLengthCm = (vertical ? newSize.height() : newSize.width()) / NestingPxPerMm / 10;
-        if (QMessageBox::question(this, tr("Online nesting"),
-                                  tr("The marker is longer than the sheet. Lengthen the sheet to %1 cm?")
-                                      .arg(locale.toString(newLengthCm, 'f', 1))) != QMessageBox::Yes)
-        {
-            return false;
-        }
+        // lengthUsed is measured on the usable rectangle. The margins along Y+ stay outside that length.
+        const qreal marginAlongLength = qMax(0.0, oldSize.height() - availablePx);
+        newSize = QSizeF(oldSize.width(), lengthPx + marginAlongLength);
     }
 
-    const QMultiMap<int, VNestingPlacement> placements = NestingPlacements(result);
-    QHash<int, int> taken; // copies of an item already handed to a piece
     QList<VPNestedPiece> entries;
     entries.reserve(sent.size());
-    for (vsizetype i = 0; i < sent.size(); ++i)
+    for (vsizetype i = 0; i < sent.size() && i < instanceIds.size(); ++i)
     {
+        const auto found = placements.constFind(instanceIds.at(i));
+        if (found == placements.cend())
+        {
+            continue; // stays where it was
+        }
         const VPPiecePtr &piece = sent.at(i);
         const VPPiece reset(static_cast<const VLayoutPiece &>(*piece));
-        const int item = sentItems.at(i);
-        const VNestingPlacement placement = placements.values(item).at(taken[item]++);
         VPNestedPiece entry;
         entry.piece = piece;
         entry.oldSheet = piece->Sheet();
         entry.oldMatrix = piece->GetMatrix();
         entry.oldFlipped = piece->IsVerticallyFlipped();
         entry.oldHFlipped = piece->IsHorizontallyFlipped();
+        QVector<QPointF> contour;
+        CastTo(piece->GetExternalContourPoints(), contour);
         const QTransform base = reset.GetMatrix() * NestingGrainlineAlignment(*piece, reset.GetMatrix());
-        entry.newMatrix = NestingPieceMatrix(base, placement, margins, vertical);
-        entry.newFlipped = NestingFlipped(reset.IsVerticallyFlipped(), placement.mirrored);
-        entry.newHFlipped = reset.IsHorizontallyFlipped(); // the reset base carries no user flip
+        entry.newMatrix = NestingPieceMatrix(contour, base, found.value(), margins, vertical);
+        entry.newFlipped = NestingFlipped(reset.IsVerticallyFlipped(), NestingFlipMirrors(found.value().flip));
+        entry.newHFlipped = reset.IsHorizontallyFlipped();
         entries.append(entry);
     }
+    if (entries.isEmpty())
+    {
+        return false;
+    }
     m_layout->UndoStack()->push(new VPUndoOptimizeOnline(sheet, entries, oldSize, newSize));
-    const QLocale locale;
-    // the permanent status label takes the whole bar, so a temporary message would not be visible
-    m_statusLabel->setText(
-        tr("Online nesting: %1 pieces placed, utilisation %2 %")
-            .arg(sent.size())
-            .arg(locale.toString(result.value(QStringLiteral("utilisation")).toDouble() * 100, 'f', 1)));    return true;
+    m_nestingIncomplete = not NestingPlanComplete(result, instanceIds);
+    m_statusLabel->setText(m_nestingIncomplete
+                               ? tr("Nesting: %1 of %2 pieces placed. The lay is not finished.")
+                                     .arg(entries.size())
+                                     .arg(sent.size())
+                               : tr("Nesting: %1 pieces placed.").arg(entries.size()));
+    return true;
 }

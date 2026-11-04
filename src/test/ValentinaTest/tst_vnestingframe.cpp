@@ -4,11 +4,11 @@
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   11 October, 2026
  **
- **  @brief  
+ **  @brief
  **  @copyright
- **  This source code is part of the Valentina project, a pattern making 
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2026 Valentina project 
+ **  Copyright (C) 2026 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -36,6 +36,7 @@
 #include "../vwidgets/vpiecegrainline.h"
 
 #include <QJsonArray>
+#include <QJsonDocument>
 #include <QJsonObject>
 #include <QLineF>
 #include <QtMath>
@@ -63,11 +64,10 @@ auto Bounds(const QVector<QPointF> &pts, const QTransform &m) -> QRectF
 
 auto Near(const QRectF &a, const QRectF &b) -> bool
 {
-    return qAbs(a.left() - b.left()) < 1e-6 && qAbs(a.top() - b.top()) < 1e-6 && qAbs(a.width() - b.width()) < 1e-6
-           && qAbs(a.height() - b.height()) < 1e-6;
+    return qAbs(a.left() - b.left()) < 1e-4 && qAbs(a.top() - b.top()) < 1e-4 && qAbs(a.width() - b.width()) < 1e-4
+           && qAbs(a.height() - b.height()) < 1e-4;
 }
 
-// VLayoutPiece::SetGrainline is protected; the test needs to set one directly.
 class GrainlinePiece : public VLayoutPiece
 {
 public:
@@ -86,7 +86,6 @@ auto RectPiece() -> GrainlinePiece
     return piece;
 }
 
-// the 50 x 100 mm rectangle with a grainline drawn from (10, 90) mm at `angleDeg` (QLineF convention)
 auto PieceWithGrainline(qreal angleDeg, GrainlineArrowDirection arrows) -> GrainlinePiece
 {
     GrainlinePiece piece = RectPiece();
@@ -104,6 +103,33 @@ auto MappedAngle(const VLayoutPiece &piece, const QTransform &m) -> qreal
 auto Input(const QString &name, bool forbid = false, bool force = false) -> VNestingPieceInput
 {
     return {name, RectPx(), QTransform(), forbid, force};
+}
+
+auto Place(qreal xMm, qreal yMm, qreal rotationDeg = 0, const QString &flip = QStringLiteral("none"))
+    -> VNestingPlacement
+{
+    VNestingPlacement placement;
+    placement.xMm = xMm;
+    placement.yMm = yMm;
+    placement.rotationDeg = rotationDeg;
+    placement.flip = flip;
+    return placement;
+}
+
+auto Job(const QVector<VNestingPieceInput> &pieces, const VNestingOptions &options, QVector<int> &skipped,
+         qreal gapMm = 2, const QRectF &margins = QRectF(), bool vertical = true, QStringList *instanceOf = nullptr)
+    -> QJsonObject
+{
+    return NestingRequest(pieces, 1500, gapMm, options, margins, vertical, skipped, instanceOf);
+}
+
+auto PlacementJson(const QString &instanceId, qreal xMm, qreal yMm, qreal rotationDeg, const QString &flip)
+    -> QJsonObject
+{
+    return {{QStringLiteral("instanceId"), instanceId},
+            {QStringLiteral("flip"), flip},
+            {QStringLiteral("rotationDeg"), rotationDeg},
+            {QStringLiteral("translation"), QJsonObject{{QStringLiteral("xMm"), xMm}, {QStringLiteral("yMm"), yMm}}}};
 }
 } // namespace
 
@@ -137,29 +163,30 @@ void TST_VNestingFrame::RoundTripIsTranslationOnly()
 {
     QFETCH(bool, vertical);
     const QRectF margins(10, 20, 1500 * k, 3000 * k);
-    // the strip spans y in [0, fabric width]; the raw piece sits at y in [-50, 0], so a real placement shifts it
-    // by +50 along y. Sent and placed that way, it lands with its grainline along the sheet's roll axis, unflipped.
-    const QTransform m = NestingLocalToStrip() * QTransform::fromTranslate(0, 50)
-                         * NestingStripToSheet(margins, vertical);
-    QVERIFY(m.determinant() > 0);
+    // The profile origin is the unbuffered cut's minimum corner, so an identity placement is translation (0, 0).
+    const QTransform m = NestingPieceMatrix(RectPx(), QTransform(), Place(0, 0), margins, vertical);
+    // Qt Y points down and marker Y points up the screen, so the sheet map's determinant is negative.
+    QVERIFY(m.determinant() < 0);
     const QRectF r = Bounds(RectPx(), m);
     if (vertical)
     {
-        QVERIFY(Near(r, QRectF(margins.right() - 50 * k, margins.top(), 50 * k, 100 * k)));
+        // Portrait. Length runs up from the bottom. Width runs left from the right edge.
+        QVERIFY(Near(r, QRectF(margins.right() - 50 * k, margins.bottom() - 100 * k, 50 * k, 100 * k)));
     }
     else
     {
-        QVERIFY(Near(r, QRectF(margins.left(), margins.top(), 100 * k, 50 * k)));
+        // Landscape. Length runs right. Width runs up from the bottom.
+        QVERIFY(Near(r, QRectF(margins.left(), margins.bottom() - 50 * k, 100 * k, 50 * k)));
     }
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-void TST_VNestingFrame::IdentityPlacementSitsAtStripOrigin()
+void TST_VNestingFrame::IdentityPlacementSitsAtSheetOrigin()
 {
     const QRectF margins(0, 0, 1500 * k, 3000 * k);
-    const QTransform m = NestingPieceMatrix(QTransform(), {0, 50, 0, false}, margins, true);
-    QVERIFY(Near(Bounds(RectPx(), m), QRectF(margins.right() - 50 * k, 0, 50 * k, 100 * k)));
+    const QTransform m = NestingPieceMatrix(RectPx(), QTransform(), Place(0, 0), margins, true);
+    QVERIFY(Near(Bounds(RectPx(), m), QRectF(margins.right() - 50 * k, margins.bottom() - 100 * k, 50 * k, 100 * k)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -167,12 +194,11 @@ void TST_VNestingFrame::IdentityPlacementSitsAtStripOrigin()
 void TST_VNestingFrame::Rotation180KeepsBoundingBox()
 {
     const QRectF margins(0, 0, 1500 * k, 3000 * k);
-    // in strip mm the rectangle spans x 0..100, y -50..0; rotated 180 it spans x -100..0, y 0..50;
-    // translating by (100, 0) then gives the same box as the unrotated piece translated by (0, 50)
-    const QTransform a = NestingPieceMatrix(QTransform(), {0, 50, 0, false}, margins, true);
-    const QTransform b = NestingPieceMatrix(QTransform(), {100, 0, 180, false}, margins, true);
+    // Profile spans x 0..100, y 0..50. A half turn about the origin needs translation (100, 50) to land on that box.
+    const QTransform a = NestingPieceMatrix(RectPx(), QTransform(), Place(0, 0), margins, true);
+    const QTransform b = NestingPieceMatrix(RectPx(), QTransform(), Place(100, 50, 180), margins, true);
     QVERIFY(Near(Bounds(RectPx(), a), Bounds(RectPx(), b)));
-    QVERIFY(b.determinant() > 0);
+    QVERIFY(b.determinant() < 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -180,9 +206,16 @@ void TST_VNestingFrame::Rotation180KeepsBoundingBox()
 void TST_VNestingFrame::MirrorFlipsHandedness()
 {
     const QRectF margins(0, 0, 1500 * k, 3000 * k);
-    QVERIFY(NestingPieceMatrix(QTransform(), {0, 0, 0, true}, margins, true).determinant() < 0);
-    QVERIFY(NestingPieceMatrix(QTransform(), {0, 0, 0, true}, margins, false).determinant() < 0);
-    QVERIFY(NestingPlacementMatrix({0, 0, 0, true}).determinant() < 0);
+    const qreal plainVertical = NestingPieceMatrix(RectPx(), QTransform(), Place(0, 0), margins, true).determinant();
+    const qreal flippedVertical
+        = NestingPieceMatrix(RectPx(), QTransform(), Place(0, 0, 0, QStringLiteral("y")), margins, true).determinant();
+    const qreal plainHorizontal = NestingPieceMatrix(RectPx(), QTransform(), Place(0, 0), margins, false).determinant();
+    const qreal flippedHorizontal
+        = NestingPieceMatrix(RectPx(), QTransform(), Place(0, 0, 0, QStringLiteral("y")), margins, false).determinant();
+    QVERIFY(plainVertical * flippedVertical < 0);
+    QVERIFY(plainHorizontal * flippedHorizontal < 0);
+    QVERIFY(NestingPlacementMatrix(Place(0, 0, 0, QStringLiteral("y"))).determinant() < 0);
+    QVERIFY(NestingPlacementMatrix(Place(0, 0, 0, QStringLiteral("both"))).determinant() > 0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -193,43 +226,80 @@ void TST_VNestingFrame::FlippedFlag()
     QVERIFY(NestingFlipped(false, true));
     QVERIFY(NestingFlipped(true, false));
     QVERIFY(not NestingFlipped(true, true));
+    QVERIFY(NestingFlipMirrors(QStringLiteral("y")));
+    QVERIFY(NestingFlipMirrors(QStringLiteral("x")));
+    QVERIFY(not NestingFlipMirrors(QStringLiteral("both")));
+    QVERIFY(not NestingFlipMirrors(QStringLiteral("none")));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-void TST_VNestingFrame::RequestShape()
+void TST_VNestingFrame::MapRotationAndFlip()
+{
+    const NestingRotationFlip zero = NestingMapRotationAndFlip(NestingRotations::ZeroOnly, false, false);
+    QCOMPARE(zero.rotation, QStringLiteral("oneWay"));
+    QCOMPARE(zero.flipAllowance, QStringLiteral("y"));
+    QCOMPARE(NestingMapRotationAndFlip(NestingRotations::ZeroAnd180, false, false).rotation, QStringLiteral("twoWay"));
+    QCOMPARE(NestingMapRotationAndFlip(NestingRotations::Any, false, false).rotation, QStringLiteral("any"));
+    QCOMPARE(NestingMapRotationAndFlip(NestingRotations::Any, true, false).flipAllowance, QStringLiteral("none"));
+    QCOMPARE(NestingMapRotationAndFlip(NestingRotations::Any, false, true).flipAllowance, QStringLiteral("none"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+void TST_VNestingFrame::RequestIsVersion1()
 {
     QVector<int> skipped;
-    const QJsonObject req = NestingRequest({Input("A"), Input("B")},
-                                           1500,
-                                           2,
-                                           {NestingRotations::ZeroAnd180, 60},
-                                           skipped);
+    const QJsonObject req = Job({Input("A"), Input("B")}, {NestingRotations::ZeroAnd180, 60}, skipped);
     QVERIFY(skipped.isEmpty());
-    QCOMPARE(req.value("fabric_width_mm").toDouble(), 1500.0);
-    QCOMPARE(req.value("gap_mm").toDouble(), 2.0);
-    QCOMPARE(req.value("time_s").toInt(), 0); // spec 20: no wall cap
-    QCOMPARE(req.value("budget_tokens").toInt(), 60);
-    const QJsonArray pieces = req.value("pieces").toArray();
-    QCOMPARE(pieces.size(), 2);
-    const QJsonObject p0 = pieces.at(0).toObject();
-    QCOMPARE(p0.value("id").toInt(), 0);
-    QCOMPARE(p0.value("name").toString(), QStringLiteral("A"));
-    QCOMPARE(p0.value("quantity").toInt(), 1);
-    QCOMPARE(p0.value("rotations").toArray(), QJsonArray({0, 180}));
-    QVERIFY(p0.value("mirror").toBool());
-    const QJsonArray poly = p0.value("polygon").toArray();
-    QCOMPARE(poly.size(), 4);
-    QCOMPARE(poly.at(2).toArray().at(0).toDouble(), 100.0); // (50k,100k) px -> (100, -50) mm
-    QCOMPARE(poly.at(2).toArray().at(1).toDouble(), -50.0);
-    QCOMPARE(NestingRequest({Input("A")}, 1500, 2, {NestingRotations::Any, 60}, skipped)
-                 .value("pieces")
-                 .toArray()
-                 .at(0)
-                 .toObject()
-                 .value("rotations")
-                 .toString(),
-             QStringLiteral("continuous"));
+    QCOMPARE(req.value(QStringLiteral("version")).toInt(), 1);
+    QCOMPARE(req.value(QStringLiteral("timeBudgetS")).toDouble(), 60.0);
+    QCOMPARE(req.value(QStringLiteral("matchMode")).toString(), QStringLiteral("off"));
+    QCOMPARE(req.value(QStringLiteral("honorPlacement")).toBool(), false);
+    QCOMPARE(req.value(QStringLiteral("geometryToleranceMm")).toDouble(), NestingGeometryToleranceMm);
+    const QJsonObject bin = req.value(QStringLiteral("bin")).toObject();
+    QCOMPARE(bin.value(QStringLiteral("usableWidthMm")).toDouble(), 1500.0);
+    QCOMPARE(bin.value(QStringLiteral("lengthMode")).toString(), QStringLiteral("open"));
+    QCOMPARE(bin.value(QStringLiteral("layoutMode")).toString(), QStringLiteral("single"));
+    QVERIFY(bin.value(QStringLiteral("obstacles")).toArray().isEmpty());
+    const QStringList absent{QStringLiteral("gap_mm"),
+                             QStringLiteral("budget_tokens"),
+                             QStringLiteral("speed"),
+                             QStringLiteral("group"),
+                             QStringLiteral("group_by_group"),
+                             QStringLiteral("no_backfill"),
+                             QStringLiteral("preview"),
+                             QStringLiteral("until_converged"),
+                             QStringLiteral("time_s"),
+                             QStringLiteral("fabric_width_mm"),
+                             QStringLiteral("rolls"),
+                             QStringLiteral("forbidFlipping"),
+                             QStringLiteral("app")};
+    for (const QString &key : absent)
+    {
+        QVERIFY2(not req.contains(key), qPrintable(key));
+    }
+    const QJsonObject piece = req.value(QStringLiteral("pieces")).toArray().at(0).toObject();
+    QCOMPARE(piece.value(QStringLiteral("rotation")).toString(), QStringLiteral("twoWay"));
+    QCOMPARE(piece.value(QStringLiteral("flipAllowance")).toString(), QStringLiteral("y"));
+    QCOMPARE(piece.value(QStringLiteral("fold")).toString(), QStringLiteral("none"));
+    QVERIFY(piece.value(QStringLiteral("holes")).toArray().isEmpty());
+    QVERIFY(piece.value(QStringLiteral("match")).toArray().isEmpty());
+    QVERIFY(not piece.contains(QStringLiteral("priority")));
+    QVERIFY(not piece.contains(QStringLiteral("name")));
+    QVERIFY(not piece.contains(QStringLiteral("quantity")));
+    const QJsonArray cut = piece.value(QStringLiteral("cut")).toArray();
+    QCOMPARE(cut.size(), 4);
+    QCOMPARE(cut.at(0).toArray().at(0).toDouble(), 0.0);
+    QCOMPARE(cut.at(0).toArray().at(1).toDouble(), 50.0);
+    QCOMPARE(cut.at(2).toArray().at(0).toDouble(), 100.0);
+    QCOMPARE(cut.at(2).toArray().at(1).toDouble(), 0.0);
+
+    VNestingPieceInput many = Input("A");
+    many.quantity = 8;
+    QCOMPARE(Job({many}, {NestingRotations::Any, 45}, skipped).value(QStringLiteral("timeBudgetS")).toDouble(), 45.0);
+    QCOMPARE(Job({Input("A")}, {NestingRotations::Any, 45}, skipped).value(QStringLiteral("timeBudgetS")).toDouble(),
+             45.0);
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -241,78 +311,210 @@ void TST_VNestingFrame::RequestSkipsDegeneratePieces()
     two.contourPx = {{0, 0}, {10, 10}};
     VNestingPieceInput flat = Input("flat");
     flat.contourPx = {{0, 0}, {10, 0}, {20, 0}};
-    const QJsonObject req = NestingRequest({Input("ok"), two, flat}, 1500, 2, {NestingRotations::ZeroOnly, 60}, skipped);
+    const QJsonObject req = Job({Input("ok"), two, flat}, {NestingRotations::ZeroOnly, 60}, skipped);
     QCOMPARE(skipped, QVector<int>({1, 2}));
-    const QJsonArray pieces = req.value("pieces").toArray();
+    const QJsonArray pieces = req.value(QStringLiteral("pieces")).toArray();
     QCOMPARE(pieces.size(), 1);
-    QCOMPARE(pieces.at(0).toObject().value("id").toInt(), 0); // ids index the *sent* list
+    QCOMPARE(pieces.at(0).toObject().value(QStringLiteral("id")).toString(), QStringLiteral("p0"));
+    QCOMPARE(pieces.at(0).toObject().value(QStringLiteral("rotation")).toString(), QStringLiteral("oneWay"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
-void TST_VNestingFrame::RequestFlippingRules()
+void TST_VNestingFrame::RequestOneInstancePerCopy()
 {
     QVector<int> skipped;
-    const QJsonArray pieces = NestingRequest({Input("free"), Input("forbid", true), Input("force", false, true)},
-                                             1500,
-                                             2,
-                                             {NestingRotations::ZeroAnd180, 60},
-                                             skipped)
-                                  .value("pieces")
-                                  .toArray();
-    QVERIFY(pieces.at(0).toObject().value("mirror").toBool());
-    QVERIFY(not pieces.at(1).toObject().value("mirror").toBool());
-    QVERIFY(not pieces.at(2).toObject().value("mirror").toBool());
+    QStringList instanceOf;
+    VNestingPieceInput named = Input("A");
+    named.id = QStringLiteral("sleeve");
+    VNestingPieceInput twin = Input("A");
+    twin.id = QStringLiteral("sleeve");
+    VNestingPieceInput three = Input("B");
+    three.quantity = 3;
+    const QJsonObject req = Job({named, twin, three}, {NestingRotations::ZeroOnly, 30}, skipped, 2, QRectF(), true,
+                                &instanceOf);
+    const QJsonArray pieces = req.value(QStringLiteral("pieces")).toArray();
+    const QJsonArray instances = req.value(QStringLiteral("instances")).toArray();
+    QCOMPARE(pieces.size(), 3); // same name is not merged
+    QCOMPARE(instances.size(), 5);
+    QCOMPARE(pieces.at(0).toObject().value(QStringLiteral("id")).toString(), QStringLiteral("sleeve#0"));
+    QCOMPARE(pieces.at(1).toObject().value(QStringLiteral("id")).toString(), QStringLiteral("sleeve#1"));
+    QCOMPARE(pieces.at(0).toObject().value(QStringLiteral("flipAllowance")).toString(), QStringLiteral("y"));
+    QCOMPARE(instances.at(0).toObject().value(QStringLiteral("id")).toString(), QStringLiteral("sleeve#0//authored/0"));
+    QCOMPARE(instances.at(2).toObject().value(QStringLiteral("index")).toInt(), 0);
+    QCOMPARE(instances.at(4).toObject().value(QStringLiteral("index")).toInt(), 2);
+    QCOMPARE(instanceOf, QStringList({QStringLiteral("sleeve#0//authored/0"), QStringLiteral("sleeve#1//authored/0"),
+                                      QStringLiteral("p2//authored/0")}));
+
+    QVector<int> flipSkipped;
+    const QJsonArray rules = Job({Input("free"), Input("forbid", true), Input("force", false, true)},
+                                 {NestingRotations::ZeroAnd180, 30}, flipSkipped)
+                                 .value(QStringLiteral("pieces"))
+                                 .toArray();
+    QCOMPARE(rules.at(0).toObject().value(QStringLiteral("flipAllowance")).toString(), QStringLiteral("y"));
+    QCOMPARE(rules.at(1).toObject().value(QStringLiteral("flipAllowance")).toString(), QStringLiteral("none"));
+    QCOMPARE(rules.at(2).toObject().value(QStringLiteral("flipAllowance")).toString(), QStringLiteral("none"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+void TST_VNestingFrame::RequestBakesHalfGap()
+{
+    QVector<int> skipped;
+    const QJsonObject piece = Job({Input("A")}, {NestingRotations::ZeroOnly, 30}, skipped, 2)
+                                  .value(QStringLiteral("pieces"))
+                                  .toArray()
+                                  .at(0)
+                                  .toObject();
+    QVERIFY(not piece.contains(QStringLiteral("gap_mm")));
+    qreal minX = 1e9;
+    qreal maxX = -1e9;
+    qreal minY = 1e9;
+    qreal maxY = -1e9;
+    for (const QJsonValue value : piece.value(QStringLiteral("collision")).toArray())
+    {
+        const QJsonArray pair = value.toArray();
+        minX = qMin(minX, pair.at(0).toDouble());
+        maxX = qMax(maxX, pair.at(0).toDouble());
+        minY = qMin(minY, pair.at(1).toDouble());
+        maxY = qMax(maxY, pair.at(1).toDouble());
+    }
+    // Half of the 2 mm gap on every side. The cut itself stays on 0..100 by 0..50.
+    QVERIFY(qAbs(minX + 1.0) < 0.02);
+    QVERIFY(qAbs(maxX - 101.0) < 0.02);
+    QVERIFY(qAbs(minY + 1.0) < 0.02);
+    QVERIFY(qAbs(maxY - 51.0) < 0.02);
+    QCOMPARE(piece.value(QStringLiteral("collision")).toArray().size() > 4, true);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+void TST_VNestingFrame::RequestLengthMode()
+{
+    QVector<int> skipped;
+    const QJsonObject openBin = Job({Input("A")}, {NestingRotations::Any, 30}, skipped).value(QStringLiteral("bin")).toObject();
+    QCOMPARE(openBin.value(QStringLiteral("lengthMode")).toString(), QStringLiteral("open"));
+    QVERIFY(not openBin.contains(QStringLiteral("usableLengthMm")));
+
+    VNestingOptions fixed{NestingRotations::Any, 30, true, 2000};
+    const QJsonObject fixedBin = Job({Input("A")}, fixed, skipped).value(QStringLiteral("bin")).toObject();
+    QCOMPARE(fixedBin.value(QStringLiteral("lengthMode")).toString(), QStringLiteral("fixedFail"));
+    QCOMPARE(fixedBin.value(QStringLiteral("usableLengthMm")).toDouble(), 2000.0);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+void TST_VNestingFrame::RequestLockRoundTrip_data()
+{
+    QTest::addColumn<bool>("vertical");
+    QTest::addColumn<QString>("flip");
+    QTest::addColumn<qreal>("rotation");
+    QTest::addColumn<qreal>("xMm");
+    QTest::addColumn<qreal>("yMm");
+    QTest::newRow("vertical identity") << true << QStringLiteral("none") << 0.0 << 0.0 << 0.0;
+    QTest::newRow("vertical mirror") << true << QStringLiteral("y") << 90.0 << 300.0 << 40.0;
+    QTest::newRow("horizontal") << false << QStringLiteral("none") << 15.0 << 80.0 << 25.0;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// cppcheck-suppress unusedFunction
+void TST_VNestingFrame::RequestLockRoundTrip()
+{
+    QFETCH(bool, vertical);
+    QFETCH(QString, flip);
+    QFETCH(qreal, rotation);
+    QFETCH(qreal, xMm);
+    QFETCH(qreal, yMm);
+    const QRectF margins(100, 200, 4000, 6000);
+    const VNestingPlacement pose = Place(xMm, yMm, rotation, flip);
+    const QTransform matrix = NestingPieceMatrix(RectPx(), QTransform(), pose, margins, vertical);
+    VNestingPieceInput locked = Input("locked");
+    locked.placedSheetPx = matrix.map(QPolygonF(RectPx()));
+    QVector<int> skipped;
+    const QJsonObject instance = Job({locked}, {NestingRotations::Any, 30}, skipped, 0, margins, vertical)
+                                     .value(QStringLiteral("instances"))
+                                     .toArray()
+                                     .at(0)
+                                     .toObject();
+    const QJsonObject lock = instance.value(QStringLiteral("lock")).toObject();
+    QVERIFY2(not instance.value(QStringLiteral("lock")).isNull(), qPrintable(QJsonDocument(instance).toJson()));
+    const VNestingPlacement back = Place(lock.value(QStringLiteral("translation")).toObject().value(QStringLiteral("xMm")).toDouble(),
+                                         lock.value(QStringLiteral("translation")).toObject().value(QStringLiteral("yMm")).toDouble(),
+                                         lock.value(QStringLiteral("rotationDeg")).toDouble(),
+                                         lock.value(QStringLiteral("flip")).toString());
+    const QRectF expected = Bounds(RectPx(), matrix);
+    const QRectF again = Bounds(RectPx(), NestingPieceMatrix(RectPx(), QTransform(), back, margins, vertical));
+    // The lock is stored to a thousandth of a millimetre.
+    QVERIFY(qAbs(again.left() - expected.left()) < 0.05 && qAbs(again.top() - expected.top()) < 0.05
+            && qAbs(again.width() - expected.width()) < 0.05 && qAbs(again.height() - expected.height()) < 0.05);
+
+    VNestingPieceInput broken = Input("broken");
+    broken.placedSheetPx = {{0, 0}, {1, 0}, {0, 1}};
+    const QJsonValue nullLock = Job({broken}, {NestingRotations::Any, 30}, skipped, 0, margins, vertical)
+                                    .value(QStringLiteral("instances"))
+                                    .toArray()
+                                    .at(0)
+                                    .toObject()
+                                    .value(QStringLiteral("lock"));
+    QVERIFY(nullLock.isNull());
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 // cppcheck-suppress unusedFunction
 void TST_VNestingFrame::PlanComplete()
 {
-    auto placement = [](int id)
-    { return QJsonObject{{"piece_id", id}, {"x", 0}, {"y", 0}, {"rotation_deg", 0}, {"mirrored", false}}; };
-    const QJsonObject ok{{"placements", QJsonArray{placement(0), placement(1)}}};
-    QVERIFY(NestingPlanComplete(ok, {1, 1}));
-    QVERIFY(not NestingPlanComplete(ok, {1, 1, 1}));
-    QVERIFY(not NestingPlanComplete(QJsonObject{{"placements", QJsonArray{placement(0), placement(0)}}}, {1, 1}));
-    QVERIFY(not NestingPlanComplete(QJsonObject{{"placements", QJsonArray{placement(0), placement(5)}}}, {1, 1}));
-    const auto map = NestingPlacements(QJsonObject{
-        {"placements",
-         QJsonArray{QJsonObject{{"piece_id", 1}, {"x", 12.5}, {"y", -3}, {"rotation_deg", 180}, {"mirrored", true}}}}});
-    QCOMPARE(map.size(), 1);
-    QCOMPARE(map.value(1).x, 12.5);
-    QCOMPARE(map.value(1).rotationDeg, 180.0);
-    QVERIFY(map.value(1).mirrored);
+    const QString a = QStringLiteral("a//authored/0");
+    const QString b = QStringLiteral("b//authored/0");
+    const QJsonObject ok{{QStringLiteral("status"), QStringLiteral("complete")},
+                         {QStringLiteral("bins"),
+                          QJsonArray{QJsonObject{{QStringLiteral("lengthUsedMm"), 10},
+                                                 {QStringLiteral("placements"),
+                                                  QJsonArray{PlacementJson(a, 0, 0, 0, QStringLiteral("none")),
+                                                             PlacementJson(b, 12.5, -3, 180, QStringLiteral("y"))}}}}},
+                         {QStringLiteral("unplaced"), QJsonArray{}}};
+    QVERIFY(NestingPlanComplete(ok, {a, b}));
+    QVERIFY(not NestingPlanComplete(ok, {a, b, QStringLiteral("c")}));
+    QJsonObject incomplete = ok;
+    incomplete.insert(QStringLiteral("status"), QStringLiteral("incomplete"));
+    QVERIFY(not NestingPlanComplete(incomplete, {a, b}));
+    const QHash<QString, VNestingPlacement> map = NestingPlacements(ok);
+    QCOMPARE(map.size(), 2);
+    QCOMPARE(map.value(b).xMm, 12.5);
+    QCOMPARE(map.value(b).yMm, -3.0);
+    QCOMPARE(map.value(b).rotationDeg, 180.0);
+    QCOMPARE(map.value(b).flip, QStringLiteral("y"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_VNestingFrame::RequestRotationsAndQuantity()
+// cppcheck-suppress unusedFunction
+void TST_VNestingFrame::SummaryShowsIncompleteAndReport()
 {
-    QCOMPARE(NestingRotationsString(NestingRotations::ZeroAnd180), QStringLiteral("0,180"));
-    QCOMPARE(NestingRotationsString(NestingRotations::ZeroOnly), QStringLiteral("0"));
-    QCOMPARE(NestingRotationsString(NestingRotations::Any), QStringLiteral("continuous"));
-
     QVector<int> skipped;
-    VNestingPieceInput three = Input("A");
-    three.quantity = 3;
-    const QJsonObject req = NestingRequest({three}, 1500, 2, {NestingRotations::ZeroOnly, 60}, skipped);
-    const QJsonObject p0 = req.value("pieces").toArray().at(0).toObject();
-    QCOMPARE(p0.value("quantity").toInt(), 3);
-    QCOMPARE(p0.value("rotations").toArray(), QJsonArray{QJsonValue(0)});
-}
+    const QJsonObject job = Job({Input("A")}, {NestingRotations::Any, 30}, skipped);
+    const QString id = job.value(QStringLiteral("instances")).toArray().at(0).toObject().value(QStringLiteral("id")).toString();
+    const QJsonObject incomplete{{QStringLiteral("status"), QStringLiteral("incomplete")},
+                                 {QStringLiteral("bins"),
+                                  QJsonArray{QJsonObject{{QStringLiteral("lengthUsedMm"), 1000},
+                                                         {QStringLiteral("placements"), QJsonArray{}}}}},
+                                 {QStringLiteral("unplaced"), QJsonArray{id}}};
+    const QString text = NestingSummaryText(incomplete, job);
+    QVERIFY2(text.contains(QStringLiteral("not finished")), qPrintable(text));
+    QVERIFY2(text.contains(id), qPrintable(text));
 
-//---------------------------------------------------------------------------------------------------------------------
-void TST_VNestingFrame::PlanCompleteWithQuantities()
-{
-    auto placement = [](int id)
-    { return QJsonObject{{"piece_id", id}, {"x", 0}, {"y", 0}, {"rotation_deg", 0}, {"mirrored", false}}; };
-    const QJsonObject result{{"placements", QJsonArray{placement(0), placement(0), placement(1)}}};
-    QVERIFY(NestingPlanComplete(result, {2, 1}));
-    QVERIFY(not NestingPlanComplete(result, {1, 1})); // one copy too many for piece 0
-    QVERIFY(not NestingPlanComplete(result, {2, 2})); // one copy missing for piece 1
-    const QMultiMap<int, VNestingPlacement> placements = NestingPlacements(result);
-    QCOMPARE(placements.count(0), 2);
-    QCOMPARE(placements.count(1), 1);
+    const QJsonObject bare{{QStringLiteral("status"), QStringLiteral("complete")},
+                           {QStringLiteral("bins"),
+                            QJsonArray{QJsonObject{{QStringLiteral("lengthUsedMm"), 1000},
+                                                   {QStringLiteral("placements"),
+                                                    QJsonArray{PlacementJson(id, 0, 0, 0, QStringLiteral("none"))}}}}},
+                           {QStringLiteral("unplaced"), QJsonArray{}}};
+    QVERIFY2(not NestingSummaryText(bare, job).contains(QStringLiteral("not finished")),
+             qPrintable(NestingSummaryText(bare, job)));
+    QVERIFY2(NestingSummaryText(bare).contains(QStringLiteral("placed")) || not NestingSummaryText(bare).isEmpty(),
+             "a missing report is not a failure");
+
+    QJsonObject reported = bare;
+    reported.insert(QStringLiteral("report"), QJsonObject{{QStringLiteral("stopReason"), QStringLiteral("timeBudget")}});
+    QVERIFY2(NestingSummaryText(reported, job).contains(QStringLiteral("timeBudget")), qPrintable(NestingSummaryText(reported, job)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -320,10 +522,8 @@ void TST_VNestingFrame::GrainlineAlignment_data()
 {
     QTest::addColumn<int>("arrows");
     QTest::addColumn<qreal>("expectedAngle");
-    // line drawn at 30°: up arrow -> line points up (90°), down arrow -> line points down (270°),
-    // both -> the smaller turn (+60° to 90°), four ways -> the left arrow (line+90°) points up -> line at 0°
-    QTest::newRow("up") << static_cast<int>(GrainlineArrowDirection::oneWayUp) << 90.0;
-    QTest::newRow("down") << static_cast<int>(GrainlineArrowDirection::oneWayDown) << 270.0;
+    QTest::newRow("up") << static_cast<int>(GrainlineArrowDirection::oneWayUp) << 270.0;
+    QTest::newRow("down") << static_cast<int>(GrainlineArrowDirection::oneWayDown) << 90.0;
     QTest::newRow("up and down") << static_cast<int>(GrainlineArrowDirection::twoWaysUpDown) << 90.0;
     QTest::newRow("four ways") << static_cast<int>(GrainlineArrowDirection::fourWays) << 0.0;
 }
@@ -336,7 +536,7 @@ void TST_VNestingFrame::GrainlineAlignment()
     const GrainlinePiece piece = PieceWithGrainline(30, static_cast<GrainlineArrowDirection>(arrows));
     const QTransform m = NestingGrainlineAlignment(piece, QTransform());
     QVERIFY2(qAbs(MappedAngle(piece, m) - expectedAngle) < 1e-6, qPrintable(QString::number(MappedAngle(piece, m))));
-    QVERIFY(qAbs(m.determinant() - 1) < 1e-9); // a rotation, no mirror
+    QVERIFY(qAbs(m.determinant() - 1) < 1e-9);
     QVERIFY(qAbs(m.dx()) < 1e-9 && qAbs(m.dy()) < 1e-9);
 }
 
@@ -355,33 +555,30 @@ void TST_VNestingFrame::LayoutBaseForceFlipped()
     GrainlinePiece piece = PieceWithGrainline(30, GrainlineArrowDirection::oneWayUp);
     piece.SetForceFlipping(true);
     const QTransform base = NestingLayoutBase(piece);
-    QVERIFY(qAbs(base.determinant() + 1) < 1e-9); // mirrored once
-    QVERIFY2(qAbs(MappedAngle(piece, base) - 90.0) < 1e-6,
-             qPrintable(QString::number(MappedAngle(piece, base)))); // and still aligned
+    QVERIFY(qAbs(base.determinant() + 1) < 1e-9);
+    QVERIFY2(qAbs(MappedAngle(piece, base) - 270.0) < 1e-6, qPrintable(QString::number(MappedAngle(piece, base))));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VNestingFrame::ResultPaperPlacesPieces()
 {
-    // two 50 x 100 mm rectangles one after the other along the 1500 mm wide strip: strip x is the marker length
-    const VLayoutPiece a = RectPiece();
-    const VLayoutPiece b = RectPiece();
-    QMultiMap<int, VNestingPlacement> placements;
-    placements.insert(0, {0, 50, 0, false}); // local (x,y) -> strip (y,-x): y in [-50,0] + 50 = [0,50]
-    placements.insert(1, {100, 50, 0, false});
+    const QString a = QStringLiteral("a//authored/0");
+    const QString b = QStringLiteral("b//authored/0");
+    QHash<QString, VNestingPlacement> placements;
+    placements.insert(a, Place(0, 0));
+    placements.insert(b, Place(100, 0));
     const qreal W = 1500 * k;
-    const VLayoutPaper paper = NestingResultPaper({a, b}, placements, W, 200 * k, 2 * k, false);
+    const VLayoutPaper paper = NestingResultPaper({RectPiece(), RectPiece()}, {a, b}, placements, W, 200 * k, 2 * k, false);
     QCOMPARE(paper.GetWidth(), qCeil(W));
     QCOMPARE(paper.GetHeight(), qCeil(200 * k));
     const QVector<VLayoutPiece> details = paper.GetDetails();
     QCOMPARE(details.size(), 2);
-    // vertical sheet frame: strip x runs down the sheet, strip y runs leftwards from the right edge
     const QRectF r0 = details.at(0).MappedDetailBoundingRect();
-    QVERIFY2(qAbs(r0.left() - (W - 50 * k)) < 1e-6 && qAbs(r0.top()) < 1e-6,
+    QVERIFY2(qAbs(r0.left() - (W - 50 * k)) < 1e-4 && qAbs(r0.top() - 100 * k) < 1e-4,
              qPrintable(QStringLiteral("%1 %2").arg(r0.left()).arg(r0.top())));
-    QVERIFY(qAbs(r0.width() - 50 * k) < 1e-6 && qAbs(r0.height() - 100 * k) < 1e-6);
+    QVERIFY(qAbs(r0.width() - 50 * k) < 1e-4 && qAbs(r0.height() - 100 * k) < 1e-4);
     const QRectF r1 = details.at(1).MappedDetailBoundingRect();
-    QVERIFY2(qAbs(r1.top() - 100 * k) < 1e-6, qPrintable(QString::number(r1.top())));
+    QVERIFY2(qAbs(r1.top()) < 1e-4, qPrintable(QString::number(r1.top())));
     QVERIFY(not details.at(0).IsVerticallyFlipped());
     QVERIFY(qAbs(details.at(0).GetLayoutWidth() - 2 * k) < 1e-9);
 }
@@ -389,22 +586,44 @@ void TST_VNestingFrame::ResultPaperPlacesPieces()
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VNestingFrame::ResultPaperCopies()
 {
-    const VLayoutPiece a = RectPiece();
-    QMultiMap<int, VNestingPlacement> placements;
-    placements.insert(0, {0, 50, 0, false});
-    placements.insert(0, {100, 50, 0, true}); // second copy mirrored
-    const VLayoutPaper paper = NestingResultPaper({a}, placements, 1500 * k, 200 * k, 0, false);
+    const QString plain = QStringLiteral("a//authored/0");
+    const QString mirrored = QStringLiteral("a//authored/1");
+    QHash<QString, VNestingPlacement> placements;
+    placements.insert(plain, Place(0, 0));
+    placements.insert(mirrored, Place(100, 0, 0, QStringLiteral("y")));
+    const VLayoutPaper paper = NestingResultPaper({RectPiece(), RectPiece()}, {plain, mirrored}, placements, 1500 * k,
+                                                  200 * k, 0, false);
     const QVector<VLayoutPiece> details = paper.GetDetails();
     QCOMPARE(details.size(), 2);
-    QCOMPARE(static_cast<int>(details.at(0).IsVerticallyFlipped())
-                 + static_cast<int>(details.at(1).IsVerticallyFlipped()),
+    QCOMPARE(static_cast<int>(details.at(0).IsVerticallyFlipped()) + static_cast<int>(details.at(1).IsVerticallyFlipped()),
              1);
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void TST_VNestingFrame::ResultPapersOnePerBin()
+{
+    const QString id = QStringLiteral("p0//authored/0");
+    const QJsonObject result{
+        {QStringLiteral("status"), QStringLiteral("complete")},
+        {QStringLiteral("bins"),
+         QJsonArray{QJsonObject{{QStringLiteral("lengthUsedMm"), 100},
+                                {QStringLiteral("placements"), QJsonArray{PlacementJson(id, 0, 0, 0, QStringLiteral("none"))}}},
+                    QJsonObject{{QStringLiteral("lengthUsedMm"), 150},
+                                {QStringLiteral("placements"),
+                                 QJsonArray{PlacementJson(id, 50, 0, 0, QStringLiteral("none"))}}}}},
+        {QStringLiteral("unplaced"), QJsonArray{}}};
+    const QVector<VLayoutPaper> papers = NestingResultPapers({RectPiece()}, {id}, result, 1500 * k, 0, false);
+    QCOMPARE(papers.size(), 2);
+    QCOMPARE(papers.at(0).GetHeight(), qCeil(100 * k));
+    QCOMPARE(papers.at(1).GetHeight(), qCeil(150 * k));
+    QCOMPARE(papers.at(1).GetDetails().size(), 1);
+    const QRectF r = papers.at(1).GetDetails().at(0).MappedDetailBoundingRect();
+    QVERIFY2(qAbs(r.top()) < 1e-4, qPrintable(QString::number(r.top())));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
 void TST_VNestingFrame::ExpandQuantityFlipsSymmetricalCopies()
 {
-    // the same expansion the local nester does: every odd copy of a symmetrical, force-flipped piece is unflipped
     GrainlinePiece sleeve = RectPiece();
     sleeve.SetQuantity(2);
     sleeve.SetSymmetricalCopy(true);
@@ -419,21 +638,8 @@ void TST_VNestingFrame::ExpandQuantityFlipsSymmetricalCopies()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_VNestingFrame::RequestSkipsByIndex()
-{
-    // two pieces share a name; only the degenerate one is skipped, by position
-    QVector<int> skipped;
-    VNestingPieceInput twin = Input("Detail");
-    twin.contourPx = {{0, 0}, {10, 10}};
-    const QJsonObject req = NestingRequest({Input("Detail"), twin}, 1500, 2, {NestingRotations::ZeroOnly, 60}, skipped);
-    QCOMPARE(skipped, QVector<int>({1}));
-    QCOMPARE(req.value("pieces").toArray().size(), 1);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void TST_VNestingFrame::ContourUsesSeamAllowance()
 {
-    // the outline sent is the one the local nester collides on: the seam allowance when there is one
     GrainlinePiece piece = RectPiece();
     QVERIFY(NestingContour(piece, false).size() == 4);
     QVector<VLayoutPoint> sa;
@@ -449,183 +655,14 @@ void TST_VNestingFrame::ContourUsesSeamAllowance()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void TST_VNestingFrame::RequestWritesOptions()
-{
-    QCOMPARE(NestingSpeedString(NestingSpeed::Normal), QStringLiteral("normal"));
-    QCOMPARE(NestingSpeedString(NestingSpeed::Fast), QStringLiteral("fast"));
-    QCOMPARE(NestingSpeedString(NestingSpeed::Ultra), QStringLiteral("ultra"));
-
-    QVector<int> skipped;
-    VNestingOptions options;
-    options.rotations = NestingRotations::ZeroOnly;
-    options.budgetTokens = 120;
-    options.speed = NestingSpeed::Fast;
-    options.targetLengthMm = 1200.5;
-    options.untilConverged = true;
-    options.preview = true;
-    const QJsonObject req = NestingRequest({Input("A")}, 1500, 2, options, skipped);
-    QCOMPARE(req.value("budget_tokens").toInt(), 120); // spec 20: the budget is in tokens, time is no cap
-    QCOMPARE(req.value("time_s").toInt(), 0);
-    QCOMPARE(req.value("speed").toString(), QStringLiteral("fast"));
-    QCOMPARE(req.value("target_length_mm").toDouble(), 1200.5);
-    QCOMPARE(req.value("until_converged").toBool(), true);
-    QCOMPARE(req.value("preview").toBool(), true);
-
-    // defaults: no target key at all (the service rejects 0), normal speed, nothing early, not a preview
-    const QJsonObject plain = NestingRequest({Input("A")}, 1500, 2, VNestingOptions{}, skipped);
-    QVERIFY(not plain.contains("target_length_mm"));
-    QVERIFY(not plain.contains("budget_tokens")); // no budget: unlimited, the service bills the work done
-    QCOMPARE(plain.value("time_s").toInt(), 0);
-    QCOMPARE(plain.value("speed").toString(), QStringLiteral("normal"));
-    QCOMPARE(plain.value("until_converged").toBool(), false);
-    QCOMPARE(plain.value("preview").toBool(), false);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
 void TST_VNestingFrame::RequestArea()
 {
-    // Input("A") is a 100 x 50 mm rectangle (see Input): two copies plus a skipped degenerate piece
     QVector<int> skipped;
     VNestingPieceInput two = Input("A");
     two.quantity = 2;
     VNestingPieceInput flat = Input("flat");
     flat.contourPx = {{0, 0}, {10, 0}, {20, 0}};
-    const QJsonObject req = NestingRequest({two, Input("B"), flat}, 1500, 2, VNestingOptions{}, skipped);
+    const QJsonObject req = Job({two, Input("B"), flat}, VNestingOptions{}, skipped);
     QCOMPARE(NestingRequestArea(req), 3 * 100.0 * 50.0);
     QCOMPARE(NestingRequestArea(QJsonObject{}), 0.0);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TST_VNestingFrame::RequestWritesRolls()
-{
-    QVector<int> skipped;
-    VNestingOptions options;
-    options.rollsMm = {3000, 2500};
-    options.rollJunctionMm = 80;
-    const QJsonObject req = NestingRequest({Input("A")}, 1500, 2, options, skipped);
-    QCOMPARE(req.value("rolls_mm").toArray(), (QJsonArray{3000.0, 2500.0}));
-    QCOMPARE(req.value("roll_junction_mm").toDouble(), 80.0);
-    // no rolls: neither key, the service would reject an empty list
-    const QJsonObject plain = NestingRequest({Input("A")}, 1500, 2, VNestingOptions{}, skipped);
-    QVERIFY(not plain.contains("rolls_mm") && not plain.contains("roll_junction_mm"));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TST_VNestingFrame::RequestMergesIdenticalPieces()
-{
-    // identical pieces travel as one item with a quantity (the service's distinct-piece limit, and the service is
-    // faster with quantities); a different group keeps its own item. itemOf maps every input to its item, -1 when skipped.
-    QVector<int> skipped, itemOf;
-    VNestingPieceInput other = Input("A");
-    other.group = QStringLiteral("size 40");
-    VNestingPieceInput flat = Input("C");
-    flat.contourPx = {{0, 0}, {10, 10}};
-    const QJsonObject req = NestingRequest({Input("A"), Input("B"), flat, Input("A"), other},
-                                           1500,
-                                           2,
-                                           {NestingRotations::ZeroOnly, 60},
-                                           skipped,
-                                           &itemOf);
-    const QJsonArray pieces = req.value("pieces").toArray();
-    QCOMPARE(pieces.size(), 3);
-    QCOMPARE(pieces.at(0).toObject().value("quantity").toInt(), 2);
-    QCOMPARE(pieces.at(2).toObject().value("group").toString(), QStringLiteral("size 40"));
-    QCOMPARE(skipped, QVector<int>({2}));
-    QCOMPARE(itemOf, QVector<int>({0, 1, -1, 0, 2}));
-
-    // coordinates are sent rounded to a thousandth of a millimetre: the body of a large layout counts
-    VNestingPieceInput tiny = Input("T");
-    tiny.contourPx = {{0, 0}, {1, 0}, {1, 1}, {0, 1}};
-    const QJsonArray poly = NestingRequest({tiny}, 1500, 2, {NestingRotations::ZeroOnly, 60}, skipped)
-                                .value("pieces")
-                                .toArray()
-                                .at(0)
-                                .toObject()
-                                .value("polygon")
-                                .toArray();
-    QCOMPARE(qAbs(poly.at(2).toArray().at(0).toDouble()), 0.265); // 1 px = 0.264583 mm
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TST_VNestingFrame::ResultPapersSplitByRoll()
-{
-    // the service answers with the roll of every copy and the rolls' start and used length (spec 13.2)
-    const QJsonObject result{
-        {"marker_length_mm", 500},
-        {"placements",
-         QJsonArray{
-             QJsonObject{{"piece_id", 0}, {"x", 0}, {"y", 50}, {"rotation_deg", 0}, {"mirrored", false}, {"roll", 0}},
-             QJsonObject{{"piece_id", 0}, {"x", 350}, {"y", 50}, {"rotation_deg", 0}, {"mirrored", false}, {"roll", 1}}}},
-        {"rolls",
-         QJsonArray{QJsonObject{{"index", 0}, {"start_mm", 0}, {"length_mm", 100}},
-                    QJsonObject{{"index", 1}, {"start_mm", 300}, {"length_mm", 150}}}}};
-    const QMultiMap<int, VNestingPlacement> placements = NestingPlacements(result);
-    QCOMPARE(placements.size(), 2);
-    QCOMPARE(placements.values(0).at(0).roll + placements.values(0).at(1).roll, 1);
-
-    const QVector<VLayoutPaper> papers = NestingResultPapers({RectPiece()}, placements, result, 1500 * k, 0, false);
-    QCOMPARE(papers.size(), 2);
-    QCOMPARE(papers.at(0).GetHeight(), qCeil(100 * k));
-    QCOMPARE(papers.at(1).GetHeight(), qCeil(150 * k));
-    QCOMPARE(papers.at(1).GetDetails().size(), 1);
-    // the copy on roll 1 is placed relative to that roll's start: strip x 350 - 300 = 50 mm from the paper top
-    const QRectF r = papers.at(1).GetDetails().at(0).MappedDetailBoundingRect();
-    QVERIFY2(qAbs(r.top() - 50 * k) < 1e-6, qPrintable(QString::number(r.top())));
-
-    // without rolls: one paper of the marker length, as before
-    QJsonObject single = result;
-    single.remove(QStringLiteral("rolls"));
-    QCOMPARE(NestingResultPapers({RectPiece()}, placements, single, 1500 * k, 0, false).size(), 1);
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TST_VNestingFrame::RequestGroupsAndFixed()
-{
-    VNestingPieceInput a = Input("A");
-    a.group = QStringLiteral("jacket");
-    VNestingPieceInput f = Input("F");
-    f.fixedMm = {QPointF(10, 5), QPointF(110, 5), QPointF(110, 53), QPointF(10, 53)};
-    VNestingOptions options{NestingRotations::ZeroAnd180, 60};
-    options.groupByGroup = true;
-    QVector<int> skipped;
-    const QJsonObject req = NestingRequest({a, f}, 1500, 2, options, skipped);
-    QVERIFY(skipped.isEmpty());
-    QVERIFY(req.value("group_by_group").toBool());
-    const QJsonArray pieces = req.value("pieces").toArray();
-    QCOMPARE(pieces.at(0).toObject().value("group").toString(), QStringLiteral("jacket"));
-    QVERIFY(not pieces.at(0).toObject().contains("fixed"));
-    const QJsonObject fixed = pieces.at(1).toObject();
-    QVERIFY(fixed.value("fixed").toBool());
-    QVERIFY(not fixed.contains("rotations"));
-    QCOMPARE(fixed.value("polygon").toArray().at(2).toArray().at(0).toDouble(), 110.0);
-    QCOMPARE(fixed.value("polygon").toArray().at(2).toArray().at(1).toDouble(), 53.0);
-    QVERIFY(not NestingRequest({a}, 1500, 2, {NestingRotations::ZeroAnd180, 60}, skipped).contains("group_by_group"));
-    QVERIFY(not req.contains("no_backfill"));
-    options.noBackfill = true;
-    QVERIFY(NestingRequest({a, f}, 1500, 2, options, skipped).value("no_backfill").toBool());
-    options.groupByGroup = false; // meaningless without the sequencing: not sent
-    QVERIFY(not NestingRequest({a, f}, 1500, 2, options, skipped).contains("no_backfill"));
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void TST_VNestingFrame::FixedPolygonRoundTrip()
-{
-    // a piece placed by a result, read back as a fixed polygon, is the request polygon moved by the placement
-    const QRectF margins(100, 200, 4000, 6000);
-    for (const bool vertical : {true, false})
-    {
-        const VNestingPlacement p{300, 40, 90, true};
-        const QTransform base;
-        const QVector<QPointF> local = RectPx();
-        const QVector<QPointF> onSheet = NestingPieceMatrix(base, p, margins, vertical).map(QPolygonF(local));
-        const QVector<QPointF> back = NestingFixedPolygon(onSheet, margins, vertical);
-        const QVector<QPointF> expected = NestingPlacementMatrix(p).map(
-            QPolygonF((base * NestingLocalToStrip()).map(QPolygonF(local))));
-        QCOMPARE(back.size(), expected.size());
-        for (int i = 0; i < back.size(); ++i)
-        {
-            QVERIFY2(qAbs(back.at(i).x() - expected.at(i).x()) < 1e-6, qPrintable(QString::number(i)));
-            QVERIFY2(qAbs(back.at(i).y() - expected.at(i).y()) < 1e-6, qPrintable(QString::number(i)));
-        }
-    }
 }

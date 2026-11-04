@@ -372,8 +372,15 @@ public:
     /** @brief Spec 17.1: send pattern, measurement and layout files with online nesting jobs (beta programme). */
     auto GetShareFiles() const -> bool;
     void SetShareFiles(bool value) const;
-    auto GetNestorServiceUrl() const -> QString;
-    void SetNestorServiceUrl(const QString &value) const;
+    auto GetNestingServiceUrl() const -> QString;
+    void SetNestingServiceUrl(const QString &value) const;
+    /** @brief The nesting engine is a local executable. Otherwise it is the remote nesting API above. */
+    auto IsNestingLocalEngine() const -> bool;
+    void SetNestingLocalEngine(bool local) const;
+    auto GetNestingExecutable() const -> QString;
+    void SetNestingExecutable(const QString &path) const;
+    auto GetNestingTimeBudgetS() const -> qreal;
+    void SetNestingTimeBudgetS(qreal seconds) const;
 
     auto IsTranslateFormula() const -> bool;
     void SetTranslateFormula(bool value) const;

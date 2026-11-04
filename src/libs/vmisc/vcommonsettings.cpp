@@ -248,7 +248,10 @@ Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAccountToken, ("account/token"_L
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAccountEmail, ("account/email"_L1))           // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAccountName, ("account/name"_L1))             // NOLINT
 Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingAccountShareFiles, ("account/shareFiles"_L1)) // NOLINT
-Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingNestorServiceUrl, ("nestor/serviceUrl"_L1))   // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingNestingServiceUrl, ("nesting/serviceUrl"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingNestingLocalEngine, ("nesting/localEngine"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingNestingExecutable, ("nesting/executable"_L1)) // NOLINT
+Q_GLOBAL_STATIC_WITH_ARGS(const QString, settingNestingTimeBudgetS, ("nesting/timeBudgetS"_L1)) // NOLINT
 
 #if !defined(Q_OS_WIN)
 const QString VCommonSettings::unixStandardSharePath = QStringLiteral(PKGDATADIR); // NOLINT(cert-err58-cpp)
@@ -1878,7 +1881,7 @@ void VCommonSettings::SetClientID(const QString &clientID) const
 auto VCommonSettings::GetAccountIssuerUrl() const -> QString
 {
     QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    return settings.value(*settingAccountIssuerUrl, QStringLiteral("https://smart-pattern.com.ua")).toString();
+    return settings.value(*settingAccountIssuerUrl).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1938,7 +1941,7 @@ void VCommonSettings::SetAccountName(const QString &value) const
 auto VCommonSettings::GetShareFiles() const -> bool
 {
     QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    return settings.value(*settingAccountShareFiles, true).toBool(); // on by default: beta testers are told
+    return settings.value(*settingAccountShareFiles, false).toBool();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -1950,17 +1953,69 @@ void VCommonSettings::SetShareFiles(bool value) const
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-auto VCommonSettings::GetNestorServiceUrl() const -> QString
+auto VCommonSettings::GetNestingServiceUrl() const -> QString
 {
-    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    return settings.value(*settingNestorServiceUrl, QStringLiteral("https://nestor.lossouarn.net")).toString();
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    const auto retiredServiceUrl = QStringLiteral("nestor/serviceUrl");
+    if (settings.contains(retiredServiceUrl))
+    {
+        settings.remove(retiredServiceUrl);
+        settings.sync();
+    }
+    return settings.value(*settingNestingServiceUrl).toString();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VCommonSettings::SetNestorServiceUrl(const QString &value) const
+auto VCommonSettings::IsNestingLocalEngine() const -> bool
+{
+    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingNestingLocalEngine, false).toBool();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetNestingLocalEngine(bool local) const
 {
     QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
-    settings.setValue(*settingNestorServiceUrl, value);
+    settings.setValue(*settingNestingLocalEngine, local);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetNestingExecutable() const -> QString
+{
+    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    return settings.value(*settingNestingExecutable).toString();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetNestingExecutable(const QString &path) const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingNestingExecutable, path);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto VCommonSettings::GetNestingTimeBudgetS() const -> qreal
+{
+    QSettings const settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    const qreal seconds = settings.value(*settingNestingTimeBudgetS, 30).toDouble();
+    return seconds > 0 ? seconds : 30;
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetNestingTimeBudgetS(qreal seconds) const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingNestingTimeBudgetS, seconds);
+    settings.sync();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VCommonSettings::SetNestingServiceUrl(const QString &value) const
+{
+    QSettings settings(this->format(), this->scope(), this->organizationName(), *commonIniFilename);
+    settings.setValue(*settingNestingServiceUrl, value);
     settings.sync();
 }
 

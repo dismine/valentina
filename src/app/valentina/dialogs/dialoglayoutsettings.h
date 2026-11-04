@@ -113,10 +113,7 @@ public:
 
     auto GetOnlineRotations() const -> NestingRotations;
     void SetOnlineRotations(NestingRotations value);
-    auto GetOnlineOptions() const -> VNestingOptions; // rotations, time (s), speed, target, convergence
-    void SetOnlineSpeed(NestingSpeed speed);
-    /** @brief Enables the free preview; the builder reads this dialog's current values. */
-    void SetOnlineRequestBuilder(const std::function<QJsonObject()> &builder);
+    auto GetOnlineOptions() const -> VNestingOptions; // rotations, time budget, and the sheet length when it is fixed
 
     void SetBoundaryTogetherWithNotches(bool value);
     auto IsBoundaryTogetherWithNotches() const -> bool;

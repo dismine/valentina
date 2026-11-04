@@ -3,7 +3,7 @@
  <class>VNestingProgressDialog</class>
  <widget class="QDialog" name="VNestingProgressDialog">
   <property name="windowTitle">
-   <string>Online nesting</string>
+   <string>Nesting</string>
   </property>
   <property name="minimumWidth">
    <number>420</number>

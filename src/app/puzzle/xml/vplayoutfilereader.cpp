@@ -333,7 +333,7 @@ void VPLayoutFileReader::ReadControl(const VPLayoutPtr &layout)
     layout->LayoutSettings().SetWarningPiecesOutOfBound(ReadAttributeBool(attribs, ML::AttrWarningOutOfBound, trueStr));
     layout->LayoutSettings().SetStickyEdges(ReadAttributeBool(attribs, ML::AttrStickyEdges, trueStr));
     layout->LayoutSettings().SetPiecesGap(qMax(ReadAttributeDouble(attribs, ML::AttrPiecesGap, QChar('0')), 0.0));
-    layout->LayoutSettings().SetFollowGrainline(ReadAttributeBool(attribs, ML::AttrFollowGrainline, falseStr));
+    layout->LayoutSettings().SetFollowGrainline(ReadAttributeBool(attribs, ML::AttrFollowGrainline, trueStr));
     layout->LayoutSettings().SetBoundaryTogetherWithNotches(
         ReadAttributeBool(attribs, ML::AttrBoundaryTogetherWithNotches, falseStr));
     layout->LayoutSettings().SetCutOnFold(ReadAttributeBool(attribs, ML::AttrCutOnFold, falseStr));
@@ -426,6 +426,13 @@ void VPLayoutFileReader::ReadSheet(const VPLayoutPtr &layout)
 
     QXmlStreamAttributes const attribs = attributes();
     sheet->SetGrainlineType(StrToGrainlineType(ReadAttributeEmptyString(attribs, ML::AttrGrainlineType)));
+    const QString orientationText = ReadAttributeEmptyString(attribs, ML::AttrSheetOrientation);
+    const bool legacySheet = orientationText.isEmpty();
+    if (not legacySheet)
+    {
+        sheet->SetSheetOrientation(orientationText == QLatin1String("portrait") ? QPageLayout::Portrait
+                                                                                : QPageLayout::Landscape);
+    }
 
     const QStringList tags{
         ML::TagName,   // 0
@@ -458,6 +465,11 @@ void VPLayoutFileReader::ReadSheet(const VPLayoutPtr &layout)
     }
 
     readElementText();
+
+    if (legacySheet)
+    {
+        sheet->AdoptLegacySheet();
+    }
 
     layout->AddSheet(sheet);
 }

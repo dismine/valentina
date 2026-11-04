@@ -396,10 +396,10 @@
             <item>
              <widget class="QCheckBox" name="checkBoxNestOnline">
               <property name="toolTip">
-               <string>Send the pieces to the online nesting service (smart-pattern.com.ua premium account).</string>
+               <string>Send a version 1 nesting job to the remote nesting API or local program chosen on the Nesting page.</string>
               </property>
               <property name="text">
-               <string>Nest online (premium account)</string>
+               <string>Nest with the chosen engine</string>
               </property>
              </widget>
             </item>
@@ -418,7 +418,7 @@
              <bool>false</bool>
             </property>
             <property name="text">
-             <string>One sheet of the marker's length; the paper height and the printer margins are ignored.</string>
+             <string>One sheet. Auto crop length leaves the length open. Turn it off and the paper height is a fixed length the pieces must fit.</string>
             </property>
             <property name="wordWrap">
              <bool>true</bool>

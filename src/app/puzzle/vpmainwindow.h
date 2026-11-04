@@ -56,7 +56,7 @@ template <typename T> class QSharedPointer;
 class DialogPuzzlePreferences;
 struct VPExportData;
 class WatermarkWindow;
-class VNestorClient;
+class VNestingTransport;
 
 class VPMainWindow : public VAbstractMainWindow
 {
@@ -326,10 +326,12 @@ private:
     VPCommandLinePtr m_cmd;
 
     QUndoStack *m_undoStack;
-    VNestorClient *m_nestor{nullptr};
+    VNestingTransport *m_nesting{nullptr};
+    bool m_nestingIncomplete{false};
 
-    auto ApplyNestingResult(const VPSheetPtr &sheet, const QList<VPPiecePtr> &sent, const QVector<int> &sentItems,
+    auto ApplyNestingResult(const VPSheetPtr &sheet, const QList<VPPiecePtr> &sent, const QStringList &instanceIds,
                             const QJsonObject &result) -> bool;
+    auto RefuseIfNestingIncomplete() -> bool;
 
     VPLayoutPtr m_layout;
 
@@ -544,8 +546,6 @@ private:
     void RotatePieces();
 
     void InitIcons();
-
-    void ToggleGrainlineControls(bool followGrainline, bool cutOnFold, GrainlineType type);
 };
 
 #endif // VPMAINWINDOW_H

@@ -71,6 +71,8 @@ public:
      */
     void RefreshLayout();
 
+    void UpdateOrigins(QPageLayout::Orientation orientation);
+
     void RefreshPieces(bool printMode = false);
 
     /**
@@ -285,6 +287,10 @@ public:
     void ClearSelection() const;
 
     auto GetSheetOrientation() const -> QPageLayout::Orientation;
+    void SetSheetOrientation(QPageLayout::Orientation orientation);
+
+    // A sheet saved before orientation was stored used a top-left origin and Qt's Y down.
+    void AdoptLegacySheet();
 
 public slots:
     void CheckPiecesPositionValidity() const;
@@ -310,6 +316,9 @@ private:
      * @brief m_size the Size in Unit::Px
      */
     QSizeF m_size{};
+
+    // Width is the cloth, along pattern −X. Height is the length, along pattern +Y.
+    QPageLayout::Orientation m_orientation{QPageLayout::Landscape};
 
     // margins
     /**

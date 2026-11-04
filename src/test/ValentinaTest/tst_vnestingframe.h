@@ -4,11 +4,11 @@
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   11 October, 2026
  **
- **  @brief  
+ **  @brief
  **  @copyright
- **  This source code is part of the Valentina project, a pattern making 
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2026 Valentina project 
+ **  Copyright (C) 2026 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -42,32 +42,30 @@ private slots:
     void LocalToStripTurnsGrainlineToX();
     void RoundTripIsTranslationOnly_data();
     void RoundTripIsTranslationOnly();
-    void IdentityPlacementSitsAtStripOrigin();
+    void IdentityPlacementSitsAtSheetOrigin();
     void Rotation180KeepsBoundingBox();
     void MirrorFlipsHandedness();
     void FlippedFlag();
-    void RequestShape();
+    void MapRotationAndFlip();
+    void RequestIsVersion1();
     void RequestSkipsDegeneratePieces();
-    void RequestFlippingRules();
+    void RequestOneInstancePerCopy();
+    void RequestBakesHalfGap();
+    void RequestLengthMode();
+    void RequestLockRoundTrip_data();
+    void RequestLockRoundTrip();
     void PlanComplete();
-    void RequestRotationsAndQuantity();
-    void PlanCompleteWithQuantities();
+    void SummaryShowsIncompleteAndReport();
     void GrainlineAlignment_data();
     void GrainlineAlignment();
     void GrainlineAlignmentIdentityWithoutGrainline();
     void LayoutBaseForceFlipped();
     void ResultPaperPlacesPieces();
     void ResultPaperCopies();
+    void ResultPapersOnePerBin();
     void ExpandQuantityFlipsSymmetricalCopies();
-    void RequestGroupsAndFixed();
-    void FixedPolygonRoundTrip();
-    void RequestSkipsByIndex();
     void ContourUsesSeamAllowance();
-    void RequestWritesOptions();
     void RequestArea();
-    void RequestWritesRolls();
-    void RequestMergesIdenticalPieces();
-    void ResultPapersSplitByRoll();
 };
 
 #endif // TST_VNESTINGFRAME_H

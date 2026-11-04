@@ -113,6 +113,7 @@ extern const QString AttrGradationLabel;
 extern const QString AttrCopyNumber;
 extern const QString AttrGroup;
 extern const QString AttrGrainlineType;
+extern const QString AttrSheetOrientation;
 extern const QString AttrXScale;
 extern const QString AttrYScale;
 extern const QString AttrIgnoreMargins;

@@ -32,13 +32,44 @@
 
 #include <QLocale>
 
+namespace
+{
 //---------------------------------------------------------------------------------------------------------------------
-VPDialogOptimizeOnline::VPDialogOptimizeOnline(int sheetPieces, int unplacedPieces, int groups, qreal fabricWidthMm,
-                                               qreal gapMm, bool grainlineVertical, bool grainlineFixed, QWidget *parent)
+auto LayoutDecimals(Unit unit) -> int
+{
+    switch (unit)
+    {
+        case Unit::Cm:
+            return 2;
+        case Unit::Mm:
+            return 1;
+        case Unit::Px:
+            return 4;
+        case Unit::Inch:
+            return 5;
+        default:
+            return 2;
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+auto FormatLayoutLength(qreal millimetres, Unit unit) -> QString
+{
+    const qreal value = UnitConvertor(millimetres, Unit::Mm, unit);
+    return QLocale().toString(value, 'f', LayoutDecimals(unit)) + QStringLiteral(" ") + UnitsToStr(unit, true);
+}
+} // namespace
+
+//---------------------------------------------------------------------------------------------------------------------
+VPDialogOptimizeOnline::VPDialogOptimizeOnline(int sheetPieces, int unplacedPieces, qreal fabricWidthMm, qreal gapMm,
+                                               Unit unit, bool grainlineVertical, bool grainlineFixed,
+                                               QWidget *parent)
   : QDialog(parent),
     ui(std::make_unique<Ui::VPDialogOptimizeOnline>())
 {
     ui->setupUi(this);
+    Q_UNUSED(grainlineVertical);
+    Q_UNUSED(grainlineFixed);
 
     ui->comboBoxPieces->addItem(tr("Pieces on this sheet (%n)", "", sheetPieces),
                                 static_cast<int>(NestingPieces::Sheet));
@@ -47,21 +78,15 @@ VPDialogOptimizeOnline::VPDialogOptimizeOnline(int sheetPieces, int unplacedPiec
     ui->comboBoxPieces->addItem(tr("Unplaced pieces around the pieces on this sheet (%n)", "", unplacedPieces),
                                 static_cast<int>(NestingPieces::UnplacedAroundSheet));
     ui->comboBoxPieces->setEnabled(unplacedPieces > 0);
-    ui->checkBoxGroupByGroup->setChecked(groups > 1); // spec 21.6
-    ui->checkBoxGroupByGroup->setEnabled(groups > 1);
-    ui->checkBoxNoBackfill->setEnabled(groups > 1); // a sub-option of the sequencing
-    connect(ui->checkBoxGroupByGroup, &QCheckBox::toggled, ui->checkBoxNoBackfill, &QCheckBox::setEnabled);
 
-    ui->comboBoxRotations->addItem(tr("0° and 180°"), static_cast<int>(NestingRotations::ZeroAnd180));
-    ui->comboBoxRotations->addItem(tr("0° only (napped fabric)"), static_cast<int>(NestingRotations::ZeroOnly));
-    ui->comboBoxRotations->addItem(tr("Any angle"), static_cast<int>(NestingRotations::Any));
-    ui->comboBoxRotations->setCurrentIndex(grainlineFixed ? 0 : 2);
+    ui->comboBoxRotations->addItem(tr("Follow piece grainline exactly"), static_cast<int>(NestingRotations::ZeroOnly));
+    ui->comboBoxRotations->addItem(tr("Original Grainline and 180° rotation"),
+                                   static_cast<int>(NestingRotations::ZeroAnd180));
+    ui->comboBoxRotations->setCurrentIndex(0);
 
 
-    const QLocale locale;
-    ui->labelSummary->setText(tr("Fabric width %1 mm, gap between pieces %2 mm, grainline %3.")
-                                  .arg(locale.toString(fabricWidthMm, 'f', 0), locale.toString(gapMm, 'f', 1),
-                                       grainlineVertical ? tr("along the sheet height") : tr("along the sheet width")));
+    ui->labelSummary->setText(tr("Fabric width %1, gap between pieces %2, grainline along the length.")
+                                  .arg(FormatLayoutLength(fabricWidthMm, unit), FormatLayoutLength(gapMm, unit)));
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -71,12 +96,6 @@ VPDialogOptimizeOnline::~VPDialogOptimizeOnline() = default;
 auto VPDialogOptimizeOnline::Mode() const -> NestingPieces
 {
     return static_cast<NestingPieces>(ui->comboBoxPieces->currentData().toInt());
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-auto VPDialogOptimizeOnline::GroupByGroup() const -> bool
-{
-    return ui->checkBoxGroupByGroup->isChecked();
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -90,13 +109,5 @@ auto VPDialogOptimizeOnline::Options() const -> VNestingOptions
 {
     VNestingOptions options = ui->optionsWidget->Options();
     options.rotations = Rotations();
-    options.groupByGroup = GroupByGroup();
-    options.noBackfill = GroupByGroup() && ui->checkBoxNoBackfill->isChecked();
     return options;
-}
-
-//---------------------------------------------------------------------------------------------------------------------
-void VPDialogOptimizeOnline::SetRequestBuilder(const std::function<QJsonObject()> &builder)
-{
-    ui->optionsWidget->SetRequestBuilder(builder);
 }

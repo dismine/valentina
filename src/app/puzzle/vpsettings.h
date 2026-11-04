@@ -29,6 +29,7 @@
 #define VPSETTINGS_H
 
 #include <QByteArray>
+#include <QPageLayout>
 
 #include "../vmisc/vcommonsettings.h"
 
@@ -61,6 +62,9 @@ public:
 
     void SetLayoutSheetPaperHeight(qreal height);
     auto GetLayoutSheetPaperHeight() const -> qreal;
+
+    void SetLayoutSheetOrientation(QPageLayout::Orientation orientation);
+    auto GetLayoutSheetOrientation() const -> QPageLayout::Orientation;
 
     void SetLayoutTilePaperWidth(qreal width);
     auto GetLayoutTilePaperWidth() const -> qreal;

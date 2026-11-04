@@ -3,7 +3,7 @@
  <class>VPDialogOptimizeOnline</class>
  <widget class="QDialog" name="VPDialogOptimizeOnline">
   <property name="windowTitle">
-   <string>Optimise placement online</string>
+   <string>Nest pieces</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -28,24 +28,7 @@
      <item row="1" column="1">
       <widget class="QComboBox" name="comboBoxRotations"/>
      </item>
-     <item row="2" column="1">
-      <widget class="QCheckBox" name="checkBoxGroupByGroup">
-       <property name="text">
-        <string>Nest group by group (carousel order)</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QCheckBox" name="checkBoxNoBackfill">
-       <property name="toolTip">
-        <string>Each group starts where the previous one ends, following the outline of its pieces, instead of filling the holes it left.</string>
-       </property>
-       <property name="text">
-        <string>Do not fill the holes left by previous groups</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0" colspan="2">
+     <item row="2" column="0" colspan="2">
       <widget class="QLabel" name="labelSummary">
        <property name="text">
         <string/>
@@ -55,7 +38,7 @@
        </property>
       </widget>
      </item>
-     <item row="5" column="0" colspan="2">
+     <item row="3" column="0" colspan="2">
       <widget class="VNestingOptionsWidget" name="optionsWidget" native="true"/>
      </item>
     </layout>

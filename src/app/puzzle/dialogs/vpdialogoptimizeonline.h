@@ -32,8 +32,6 @@
 #include "../vlayout/vnestingframe.h"
 
 #include <QDialog>
-#include <QJsonObject>
-#include <functional>
 #include <memory>
 
 namespace Ui
@@ -54,16 +52,13 @@ class VPDialogOptimizeOnline : public QDialog
     Q_OBJECT // NOLINT
 
 public:
-    VPDialogOptimizeOnline(int sheetPieces, int unplacedPieces, int groups, qreal fabricWidthMm, qreal gapMm,
+    VPDialogOptimizeOnline(int sheetPieces, int unplacedPieces, qreal fabricWidthMm, qreal gapMm, Unit unit,
                            bool grainlineVertical, bool grainlineFixed, QWidget *parent = nullptr);
     ~VPDialogOptimizeOnline() override;
 
     auto Mode() const -> NestingPieces;
-    auto GroupByGroup() const -> bool;
     auto Rotations() const -> NestingRotations;
-    auto Options() const -> VNestingOptions; // rotations and time included
-    /** @brief The builder reads Mode(), GroupByGroup() and Rotations() when the preview button is pressed. */
-    void SetRequestBuilder(const std::function<QJsonObject()> &builder);
+    auto Options() const -> VNestingOptions; // rotations and the seconds the user typed
 
 private:
     // cppcheck-suppress unknownMacro

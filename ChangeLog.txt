@@ -1,7 +1,15 @@
 # Valentina 1.1.2 (unreleased)
+- [Puzzle app] The sheet uses the pattern axes. Landscape is the default: length runs to the right along Y+ and the cloth width runs up along −X. Portrait turns those axes so length runs up. The sheet grows along Y+. The grainline follows the sheet. A green axis indicator shows the direction.
+- [Puzzle app] Follow grainline starts on. Tiled PDF pages start as landscape A4, and the tile grid is drawn on the sheet from its top-left.
+- [Puzzle app] The nesting dialog shows fabric width and the piece gap in the layout unit, the same way the sheet and the gap spinner do.
+- [Puzzle app] Preferences calls the engine page Nesting. A remote API takes a base URL and, when that API requires one, a bearer token pasted by the user. The page does not sign in to an account server.
+- [Puzzle app / Valentina app] Nesting no longer offers “Any angle”. A job asks for 0° and 180°, or for 0° only.
+- [Puzzle app] A nesting result sets the sheet length to the used length along Y+. The undo command is “nesting”.
+- [Puzzle app / Valentina app] Nesting rotations are “Follow piece grainline exactly”, the default, and “Original Grainline and 180° rotation”.
+- [Puzzle app / Valentina app] A nesting job writes the grainline tip as profile +X, so a rotation of 0 comes back pointing toward the end of the roll.
 - [Valentina app] Drawing tools now have keyboard shortcuts by default: line on L, point at distance and angle on D, point along perpendicular on P, point along bisector on B, point at line intersection on I, simple curve on C, arc on A, and the rest of the set used for fast drafting. Draw mode moves from Ctrl+W to Ctrl+Shift+W, Last Tool from L to Ctrl+Shift+L, and Final measurements from Ctrl+I to Ctrl+Shift+I, because those keys belong to tools now. A shortcut you already changed is kept. A saved shortcut that still matches the previous built-in default (including a tool that was left unset) is updated to the new one. If one of your own shortcuts already uses a key the new defaults need, that new default is left unset so your key keeps doing what you chose. This is applied once, from common.ini; clearing a shortcut after the update stays cleared.
 - [Valentina app] common.ini shortcut entries saved as @Invalid() for actions that still have no default are removed once, and a tool that now has a default is saved as that shortcut. @Invalid() is kept only where you cleared a shortcut that has a default: that token is how an empty shortcut list is stored. A blank value is not used for that.
-- [Valentina app / Puzzle app] Added online nesting: pieces are sent to the Nestor nesting service and the resulting layout is placed in the sheet.
+- [Valentina app / Puzzle app] Added online nesting: pieces are sent to the nesting engine you configure, and the resulting layout is placed on the sheet.
 - [Puzzle app] Added piece groups in the carousel, with an option to nest online group by group.
 - [Valentina app / Tape app] Formula editors highlight local variables, pattern variables, measurements, and ternary operators.
 - [Tape app] Fixed the known measurements editor showing empty measurement details after changing an image size.

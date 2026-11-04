@@ -152,6 +152,7 @@ auto PuzzlePreferencesLayoutPage::Apply() -> QStringList
         UnitConvertor(ui->doubleSpinBoxSheetPaperHeight->value(), m_oldLayoutUnit, Unit::Px));
     settings->SetLayoutSheetPaperWidth(
         UnitConvertor(ui->doubleSpinBoxSheetPaperWidth->value(), m_oldLayoutUnit, Unit::Px));
+    settings->SetLayoutSheetOrientation(m_sheetOrientation);
 
     settings->SetLayoutSheetIgnoreMargins(ui->checkBoxLayoutIgnoreFileds->isChecked());
     settings->SetLayoutSheetMargins(GetSheetMargins());
@@ -347,24 +348,20 @@ void PuzzlePreferencesLayoutPage::CorrectMaxMargins()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzlePreferencesLayoutPage::SwapSheetOrientation(bool checked)
 {
-    if (checked)
+    if (not checked)
     {
-        {
-            const QSignalBlocker blocker(ui->doubleSpinBoxSheetPaperWidth);
-            const qreal height = ui->doubleSpinBoxSheetPaperHeight->value();
-            ui->doubleSpinBoxSheetPaperWidth->setValue(height);
-        }
-
-        {
-            const QSignalBlocker blocker(ui->doubleSpinBoxSheetPaperHeight);
-            const qreal width = ui->doubleSpinBoxSheetPaperWidth->value();
-            ui->doubleSpinBoxSheetPaperHeight->setValue(width);
-        }
-
-        SheetPaperSizeChanged();
-
-        m_settingsChanged = true;
+        return;
     }
+
+    const bool portrait = sender() == ui->toolButtonSheetPortraitOritation;
+    {
+        const QSignalBlocker blockerPortrait(ui->toolButtonSheetPortraitOritation);
+        const QSignalBlocker blockerLandscape(ui->toolButtonSheetLandscapeOrientation);
+        ui->toolButtonSheetPortraitOritation->setChecked(portrait);
+        ui->toolButtonSheetLandscapeOrientation->setChecked(not portrait);
+    }
+    m_sheetOrientation = portrait ? QPageLayout::Portrait : QPageLayout::Landscape;
+    m_settingsChanged = true;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -566,16 +563,14 @@ void PuzzlePreferencesLayoutPage::CorrectPaperDecimals()
 //---------------------------------------------------------------------------------------------------------------------
 void PuzzlePreferencesLayoutPage::SheetPaperSizeChanged()
 {
-    bool const portrait = ui->doubleSpinBoxSheetPaperHeight->value() > ui->doubleSpinBoxSheetPaperWidth->value();
-
     {
         const QSignalBlocker blocker(ui->toolButtonSheetPortraitOritation);
-        ui->toolButtonSheetPortraitOritation->setChecked(portrait);
+        ui->toolButtonSheetPortraitOritation->setChecked(m_sheetOrientation == QPageLayout::Portrait);
     }
 
     {
         const QSignalBlocker blocker(ui->toolButtonSheetLandscapeOrientation);
-        ui->toolButtonSheetLandscapeOrientation->setChecked(not portrait);
+        ui->toolButtonSheetLandscapeOrientation->setChecked(m_sheetOrientation != QPageLayout::Portrait);
     }
 
     m_settingsChanged = true;
@@ -651,6 +646,7 @@ void PuzzlePreferencesLayoutPage::SetPieceGap(qreal gap)
 void PuzzlePreferencesLayoutPage::ReadSettings()
 {
     VPSettings  const*settings = VPApplication::VApp()->PuzzleSettings();
+    m_sheetOrientation = settings->GetLayoutSheetOrientation();
 
     SetLayoutUnit(settings->LayoutUnit());
     m_oldLayoutUnit = LayoutUnit();

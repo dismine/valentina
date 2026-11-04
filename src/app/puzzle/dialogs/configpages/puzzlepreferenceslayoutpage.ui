@@ -97,7 +97,7 @@
                   <bool>true</bool>
                  </property>
                  <property name="checked">
-                  <bool>true</bool>
+                  <bool>false</bool>
                  </property>
                  <property name="autoRaise">
                   <bool>true</bool>
@@ -117,7 +117,7 @@
                   <bool>true</bool>
                  </property>
                  <property name="checked">
-                  <bool>false</bool>
+                  <bool>true</bool>
                  </property>
                  <property name="autoRaise">
                   <bool>true</bool>
@@ -328,6 +328,9 @@
           <property name="text">
            <string>Follow grainline</string>
           </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item>
@@ -492,7 +495,7 @@
                 <bool>true</bool>
                </property>
                <property name="checked">
-                <bool>true</bool>
+                <bool>false</bool>
                </property>
                <property name="autoRaise">
                 <bool>true</bool>
@@ -512,7 +515,7 @@
                 <bool>true</bool>
                </property>
                <property name="checked">
-                <bool>false</bool>
+                <bool>true</bool>
                </property>
                <property name="autoRaise">
                 <bool>true</bool>

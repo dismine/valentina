@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  @file   tst_vnestorclient.h
+ **  @file   tst_vnestinghttpclient.h
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   12 October, 2026
  **
@@ -25,29 +25,29 @@
  **  along with Valentina.  If not, see <http://www.gnu.org/licenses/>.
  **
  *************************************************************************/
-#ifndef TST_VNESTORCLIENT_H
-#define TST_VNESTORCLIENT_H
+#ifndef TST_VNESTINGHTTPCLIENT_H
+#define TST_VNESTINGHTTPCLIENT_H
 
 #include <QObject>
 
-class TST_VNestorClient : public QObject
+class TST_VNestingHttpClient : public QObject
 {
     Q_OBJECT // NOLINT
 
 public:
-    explicit TST_VNestorClient(QObject *parent = nullptr);
+    explicit TST_VNestingHttpClient(QObject *parent = nullptr);
 
 private slots:
     void SummaryOfFinishedJob();
     void SummaryOfCancelledJob();
-    void ParseRollLengths();
     void SummaryOfStoppedJob();
     void StoppingProgressText();
     void QueuedProgressTextWithEta();
     void RunningProgressTextShowsTokens();
     void FilesBody();
     void ProgressDialogGauges();
+    void LocalEngineCarriesTheJob();
     void BearerRequestDoesNotFollowRedirects();
 };
 
-#endif // TST_VNESTORCLIENT_H
+#endif // TST_VNESTINGHTTPCLIENT_H

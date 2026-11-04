@@ -41,7 +41,7 @@ VPUndoOptimizeOnline::VPUndoOptimizeOnline(const VPSheetPtr &sheet, const QList<
     m_oldSize(oldSheetSizePx),
     m_newSize(newSheetSizePx)
 {
-    setText(tr("optimise placement online"));
+    setText(tr("nesting"));
 }
 
 //---------------------------------------------------------------------------------------------------------------------

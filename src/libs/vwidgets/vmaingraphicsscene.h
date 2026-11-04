@@ -61,6 +61,7 @@ public:
 
     auto VisibleItemsBoundingRect() const -> QRectF;
     void InitOrigins();
+    void PlaceOrigins(const QPointF &xDirection, const QPointF &yDirection, qreal zValue);
     void SetOriginsVisible(bool visible) const;
 
     auto IsNonInteractive() const -> bool;

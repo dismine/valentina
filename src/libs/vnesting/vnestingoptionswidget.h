@@ -4,11 +4,11 @@
  **  @author Roman Telezhynskyi <dismine(at)gmail.com>
  **  @date   12 October, 2026
  **
- **  @brief  
+ **  @brief
  **  @copyright
- **  This source code is part of the Valentina project, a pattern making 
+ **  This source code is part of the Valentina project, a pattern making
  **  program, whose allow create and modeling patterns of clothing.
- **  Copyright (C) 2026 Valentina project 
+ **  Copyright (C) 2026 Valentina project
  **  <https://gitlab.com/smart-pattern/valentina> All Rights Reserved.
  **
  **  Valentina is free software: you can redistribute it and/or modify
@@ -30,10 +30,7 @@
 
 #include "../vlayout/vnestingframe.h"
 
-#include <functional>
 #include <memory>
-#include <QJsonObject>
-#include <QLocale>
 #include <QWidget>
 
 namespace Ui
@@ -41,11 +38,9 @@ namespace Ui
 class VNestingOptionsWidget;
 }
 
-class VNestorClient;
-
 /**
- * @brief Speed, stop conditions, token quote and free preview of an online nesting job (spec 12.3).
- * The host dialog owns the rotations and reads Options(); the token budget lives here (spec 20).
+ * @brief The seconds the user types for timeBudgetS. Quick nest and Puzzle both use this widget.
+ * The host dialog owns the rotations and reads Options().
  */
 class VNestingOptionsWidget : public QWidget
 {
@@ -55,38 +50,16 @@ public:
     explicit VNestingOptionsWidget(QWidget *parent = nullptr);
     ~VNestingOptionsWidget() override;
 
-    /** @brief Enables the preview button; the builder returns the request to send, or an empty object. */
-    void SetRequestBuilder(std::function<QJsonObject()> builder);
-    auto Options() const -> VNestingOptions; // rotations are left at their default: the host sets them
-
-    auto Speed() const -> NestingSpeed;
-    void SetSpeed(NestingSpeed speed);
-
-    /** @brief Roll lengths typed in metres ("50, 50, 32.5" or "50; 50; 32,5"), in mm; unreadable or non-positive
-     * values are dropped. Separators: spaces, semicolons, and commas that are not a decimal mark of `locale`. */
-    static auto ParseRollLengthsMm(const QString &text, const QLocale &locale) -> QVector<qreal>;
+    auto Options() const -> VNestingOptions; // rotations and length are left at their defaults: the host sets them
+    auto TimeBudgetS() const -> qreal;
 
 protected:
     void changeEvent(QEvent *event) override;
 
 private:
-    // cppcheck-suppress unknownMacro
     Q_DISABLE_COPY_MOVE(VNestingOptionsWidget) // NOLINT
 
     std::unique_ptr<Ui::VNestingOptionsWidget> ui;
-    VNestorClient *m_client;
-    std::function<QJsonObject()> m_builder{};
-    int m_previewTimeS{10};
-    QList<int> m_workers{2, 4, 6}; // threads per speed, indexed by NestingSpeed, until /health answers
-    QList<qreal> m_evalsPerS{1500000, 3000000, 4000000}; // the service's measured rate per speed (spec 20)
-    QList<int> m_evalsPerToken{1500000, 1000000, 1000000};
-
-    void FillSpeeds();
-    void UpdateQuote();
-    void UpdatePreviewButton();
-    void ShowRolls();
-    void StartPreview();
-    void ShowPreview(const QJsonObject &request, const QJsonObject &result);
 };
 
 #endif // VNESTINGOPTIONSWIDGET_H

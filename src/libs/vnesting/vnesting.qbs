@@ -20,8 +20,10 @@ VLib {
         "vnestingprogressdialog.cpp",
         "vnestingprogressdialog.h",
         "vnestingprogressdialog.ui",
-        "vnestorclient.cpp",
-        "vnestorclient.h",
+        "vnestinghttpclient.cpp",
+        "vnestinghttpclient.h",
+        "vnestingtransport.cpp",
+        "vnestingtransport.h",
     ]
 
     Export {

@@ -102,7 +102,7 @@
        </item>
        <item>
         <property name="text">
-         <string>Account</string>
+         <string>Nesting</string>
         </property>
         <property name="textAlignment">
          <set>AlignCenter</set>
