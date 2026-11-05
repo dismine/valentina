@@ -466,7 +466,14 @@ auto NestingRequest(const QVector<VNestingPieceInput> &pieces,
 {
     if (instanceOf != nullptr)
     {
-        instanceOf->fill(QString(), static_cast<int>(pieces.size()));
+        // Qt 5's QStringList is its own class and has no QList::fill.
+        instanceOf->clear();
+        const int count = static_cast<int>(pieces.size());
+        instanceOf->reserve(count);
+        for (int i = 0; i < count; ++i)
+        {
+            instanceOf->append(QString());
+        }
     }
     QJsonArray pieceRecords;
     QJsonArray instances;

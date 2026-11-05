@@ -34,7 +34,6 @@
 #include <QAction>
 #include <QHBoxLayout>
 #include <QPlainTextEdit>
-#include <QPoint>
 #include <QScopeGuard>
 #include <QTextCursor>
 #include <QToolButton>
@@ -222,7 +221,6 @@ void TST_FormulaCommands::LengthShortcutBarFollowsTheEditor()
     layout->addWidget(bar);
     page.resize(760, 80);
     page.show();
-    QVERIFY(QTest::qWaitForWindowExposed(&page));
 
     formula->setPlainText(QStringLiteral("6.26565"));
     QVERIFY(length->isVisible());
@@ -238,7 +236,9 @@ void TST_FormulaCommands::LengthShortcutBarFollowsTheEditor()
     QCOMPARE(wrapHalf->toolTip(), QStringLiteral("Wrap the selected text as (selection)/2"));
     QCOMPARE(wrapThird->toolTip(), QStringLiteral("Wrap the selected text as (selection)/3"));
 
-    QTest::mouseClick(length, Qt::LeftButton, Qt::NoModifier, QPoint(4, length->height() / 2));
+    // click() emits clicked(). A pixel click can land on the menu arrow, and this is the only
+    // test that waits for a window to be exposed.
+    length->click();
     QCOMPARE(formula->toPlainText(), QStringLiteral("CurrentLength"));
     QVERIFY(not wrap->isEnabled());
 
