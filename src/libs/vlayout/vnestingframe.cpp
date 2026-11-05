@@ -164,7 +164,7 @@ auto RecoverLock(const QVector<QPointF> &profile, const QVector<QPointF> &marker
     {
         return best;
     }
-    int far = 1;
+    int farIndex = 1;
     qreal farLen = 0;
     for (int i = 1; i < profile.size(); ++i)
     {
@@ -172,7 +172,7 @@ auto RecoverLock(const QVector<QPointF> &profile, const QVector<QPointF> &marker
         if (len > farLen)
         {
             farLen = len;
-            far = i;
+            farIndex = i;
         }
     }
     if (farLen < kAlmost)
@@ -184,8 +184,8 @@ auto RecoverLock(const QVector<QPointF> &profile, const QVector<QPointF> &marker
     const QStringList flips{QStringLiteral("none"), QStringLiteral("y"), QStringLiteral("x"), QStringLiteral("both")};
     for (const QString &flip : flips)
     {
-        const QPointF a = FlipPoint(profile.at(far), flip) - FlipPoint(profile.at(0), flip);
-        const QPointF b = marker.at(far) - marker.at(0);
+        const QPointF a = FlipPoint(profile.at(farIndex), flip) - FlipPoint(profile.at(0), flip);
+        const QPointF b = marker.at(farIndex) - marker.at(0);
         if (std::hypot(a.x(), a.y()) < kAlmost || std::hypot(b.x(), b.y()) < kAlmost)
         {
             continue;
