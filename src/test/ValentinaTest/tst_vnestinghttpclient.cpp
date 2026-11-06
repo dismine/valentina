@@ -41,6 +41,7 @@
 #include <QLocale>
 #include <QNetworkRequest>
 #include <QProgressBar>
+#include <QStandardPaths>
 #include <QTemporaryDir>
 #include <QTimer>
 #include <QtTest>
@@ -236,10 +237,26 @@ void TST_VNestingHttpClient::LocalEngineCarriesTheJob()
                                    .toUtf8();
     QCOMPARE(script.write(program), static_cast<qint64>(program.size()));
     script.close();
-    QVERIFY(script.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner | QFileDevice::ExeOwner));
+
+    // CreateProcess will not run a shebang script, so the program is the interpreter and the script is an argument.
+#if defined(Q_OS_WIN)
+    const QStringList interpreterNames{QStringLiteral("python"), QStringLiteral("python3")};
+#else
+    const QStringList interpreterNames{QStringLiteral("python3"), QStringLiteral("python")};
+#endif
+    QString interpreter;
+    for (const QString &name : interpreterNames)
+    {
+        interpreter = QStandardPaths::findExecutable(name);
+        if (not interpreter.isEmpty())
+        {
+            break;
+        }
+    }
+    QVERIFY2(not interpreter.isEmpty(), "The local-engine stand-in needs python3 or python on PATH.");
 
     VNestingTransport transport(this);
-    transport.SetEngine(true, QString(), scriptPath);
+    transport.SetEngine(true, QString(), interpreter, {scriptPath});
     QJsonObject result;
     QString failed;
     QEventLoop loop;

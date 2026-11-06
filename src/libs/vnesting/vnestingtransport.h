@@ -32,6 +32,7 @@
 #include <QJsonObject>
 #include <QObject>
 #include <QString>
+#include <QStringList>
 
 class QProcess;
 class QTimer;
@@ -50,8 +51,9 @@ public:
     explicit VNestingTransport(QObject *parent = nullptr);
     ~VNestingTransport() override = default;
 
-    /** @brief Use this engine instead of the one stored in settings. */
-    void SetEngine(bool localExecutable, const QString &httpUrl, const QString &executable);
+    /** @brief Use this engine instead of the one stored in settings. arguments are passed to a local program. */
+    void SetEngine(bool localExecutable, const QString &httpUrl, const QString &executable,
+                   const QStringList &arguments = {});
 
     void Submit(const QJsonObject &job);
     void Cancel();
@@ -73,12 +75,13 @@ private:
     bool m_killedByBudget{false};
     QString m_httpUrl{};
     QString m_executable{};
+    QStringList m_arguments{};
     int m_run{0};
     int m_elapsed{0};
     qreal m_budgetS{0};
 
     void SubmitHttp(const QJsonObject &job);
-    void SubmitExecutable(const QJsonObject &job, qreal timeBudgetS);
+    void SubmitExecutable(const QJsonObject &job, qreal timeBudgetS, const QStringList &arguments);
     void ReadEngine();
     void Tick();
 };

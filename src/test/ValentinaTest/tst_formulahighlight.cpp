@@ -103,7 +103,8 @@ auto FormatAt(const QTextDocument &doc, int position) -> QTextCharFormat
 
     const int offset = position - static_cast<int>(block.position());
     QTextCharFormat format;
-    const QList<QTextLayout::FormatRange> ranges = layout->formats();
+    // Qt 5 returns QVector. Qt 6 returns QList. The two do not convert.
+    const auto ranges = layout->formats();
     for (const QTextLayout::FormatRange &range : ranges)
     {
         if (offset >= range.start && offset < range.start + range.length)

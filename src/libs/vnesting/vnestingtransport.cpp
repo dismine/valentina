@@ -57,12 +57,14 @@ VNestingTransport::VNestingTransport(QObject *parent)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNestingTransport::SetEngine(bool localExecutable, const QString &httpUrl, const QString &executable)
+void VNestingTransport::SetEngine(bool localExecutable, const QString &httpUrl, const QString &executable,
+                                  const QStringList &arguments)
 {
     m_override = true;
     m_local = localExecutable;
     m_httpUrl = httpUrl;
     m_executable = executable;
+    m_arguments = arguments;
 }
 
 //---------------------------------------------------------------------------------------------------------------------
@@ -78,17 +80,19 @@ void VNestingTransport::Submit(const QJsonObject &job)
     bool local = m_local;
     QString executable = m_executable;
     QString httpUrl = m_httpUrl;
+    QStringList arguments = m_arguments;
     if (not m_override)
     {
         const VCommonSettings *settings = VAbstractApplication::VApp()->Settings();
         local = settings->IsNestingLocalEngine();
         executable = settings->GetNestingExecutable();
         httpUrl = settings->GetNestingServiceUrl();
+        arguments.clear();
     }
     if (local)
     {
         m_executable = executable;
-        SubmitExecutable(job, budget);
+        SubmitExecutable(job, budget, arguments);
         return;
     }
     if (httpUrl.trimmed().isEmpty())
@@ -125,7 +129,7 @@ void VNestingTransport::SubmitHttp(const QJsonObject &job)
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void VNestingTransport::SubmitExecutable(const QJsonObject &job, qreal timeBudgetS)
+void VNestingTransport::SubmitExecutable(const QJsonObject &job, qreal timeBudgetS, const QStringList &arguments)
 {
     ++m_run;
     m_clock->stop();
@@ -148,6 +152,8 @@ void VNestingTransport::SubmitExecutable(const QJsonObject &job, qreal timeBudge
     m_budgetS = timeBudgetS;
     m_process = new QProcess(this);
     m_process->setProgram(program);
+    // CreateProcess does not run a shebang script. A stand-in passes the interpreter here and the script in arguments.
+    m_process->setArguments(arguments);
     const QByteArray bytes = QJsonDocument(job).toJson(QJsonDocument::Compact);
     connect(m_process, &QProcess::started, this, [this, bytes, run]()
             {

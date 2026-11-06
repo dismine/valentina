@@ -1,3 +1,4 @@
+import qbs.Environment
 import qbs.FileInfo
 
 import "qbs/imports/conan/ConanfileProbe.qbs" as ConanfileProbe
@@ -127,9 +128,9 @@ Project {
         environment: {
             var env = base;
 
-            // commonRunEnvironment is empty, and this list replaces the process environment.
-            // A variable set only on the workflow step never reaches valentinaTest. Without this,
-            // Windows QTest still writes to OutputDebugString and the log shows only the exit code.
+            // These entries are added to the run environment. A name that is already set, such as PATH, is replaced
+            // by the entry. A variable set only on the workflow step is not already in this list: Windows QTest still
+            // writes to OutputDebugString unless QT_FORCE_STDERR_LOGGING is pushed here.
             var hasForceStderr = false;
             for (var e = 0; e < env.length; ++e) {
                 if (env[e].startsWith("QT_FORCE_STDERR_LOGGING=")) {
@@ -154,7 +155,8 @@ Project {
             if (qbs.targetOS.contains("unix") && !qbs.targetOS.contains("macos")) {
                 env.push("LD_LIBRARY_PATH=" + qbs.installRoot + qbs.installPrefix + "/" + buildconfig.libDirName + "/valentina");
             } else if (qbs.targetOS.contains("windows")) {
-                // PATH
+                // PATH. commonRunEnvironment does not carry the process PATH. Setting PATH to only the
+                // install directory drops python, and a local nesting engine started from the tests cannot be found.
                 var path = "";
                 for (var i = 0; i < env.length; ++i) {
                     if (env[i].startsWith("PATH=")) {
@@ -164,10 +166,11 @@ Project {
                 }
 
                 var fullInstallDir = FileInfo.joinPaths(qbs.installRoot, qbs.installPrefix);
+                var machinePath = Environment.getEnv("PATH") || "";
                 if (path.length === 0) {
-                    path = fullInstallDir;
-                } else {
-                    path = fullInstallDir + ";" + path;
+                    path = machinePath.length === 0 ? fullInstallDir : fullInstallDir + ";" + machinePath;
+                } else if (machinePath.length !== 0 && path.indexOf(machinePath) === -1) {
+                    path = path + ";" + machinePath;
                 }
 
                 var arrayElem = "PATH=" + path;
