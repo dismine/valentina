@@ -115,8 +115,8 @@ Project {
         Depends { name: "buildconfig" }
 
         // NOTE: on Windows QTest sends its output to OutputDebugString unless stderr is a console or
-        // QT_FORCE_STDERR_LOGGING is set, so a redirected run (CI) shows no test output. windows.yml sets it for
-        // the CI test step; set it yourself when running this target from a non-console Windows shell.
+        // QT_FORCE_STDERR_LOGGING is set. This product replaces the process environment, so the variable
+        // has to be pushed below. Setting it only on the workflow step never reaches valentinaTest.
         arguments: ["-silent", "-o", "-,txt"]
 
         Properties {
@@ -126,6 +126,20 @@ Project {
 
         environment: {
             var env = base;
+
+            // commonRunEnvironment is empty, and this list replaces the process environment.
+            // A variable set only on the workflow step never reaches valentinaTest. Without this,
+            // Windows QTest still writes to OutputDebugString and the log shows only the exit code.
+            var hasForceStderr = false;
+            for (var e = 0; e < env.length; ++e) {
+                if (env[e].startsWith("QT_FORCE_STDERR_LOGGING=")) {
+                    hasForceStderr = true;
+                    break;
+                }
+            }
+            if (!hasForceStderr) {
+                env.push("QT_FORCE_STDERR_LOGGING=1");
+            }
 
 	    // QT_QPA_PLATFORM
             for (var i = 0; i < env.length; ++i) {

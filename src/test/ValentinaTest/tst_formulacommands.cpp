@@ -220,10 +220,11 @@ void TST_FormulaCommands::LengthShortcutBarFollowsTheEditor()
     layout->addWidget(formula);
     layout->addWidget(bar);
     page.resize(760, 80);
-    page.show();
 
     formula->setPlainText(QStringLiteral("6.26565"));
-    QVERIFY(length->isVisible());
+    // valentinaTest forces the offscreen platform. show() does not make isVisible() true there on
+    // Windows, so check the explicit hidden flag set by SetLengthToken.
+    QVERIFY(not length->isHidden());
     QVERIFY(not wrap->isEnabled());
     QCOMPARE(half->text(), QStringLiteral("CurrentLength/2"));
     QCOMPARE(third->text(), QStringLiteral("CurrentLength/3"));
@@ -236,8 +237,7 @@ void TST_FormulaCommands::LengthShortcutBarFollowsTheEditor()
     QCOMPARE(wrapHalf->toolTip(), QStringLiteral("Wrap the selected text as (selection)/2"));
     QCOMPARE(wrapThird->toolTip(), QStringLiteral("Wrap the selected text as (selection)/3"));
 
-    // click() emits clicked(). A pixel click can land on the menu arrow, and this is the only
-    // test that waits for a window to be exposed.
+    // click() emits clicked() without a window. A pixel click can land on the menu arrow.
     length->click();
     QCOMPARE(formula->toPlainText(), QStringLiteral("CurrentLength"));
     QVERIFY(not wrap->isEnabled());
@@ -263,7 +263,7 @@ void TST_FormulaCommands::LengthShortcutBarFollowsTheEditor()
     QCOMPARE(formula->toPlainText(), QStringLiteral("(Line)/3*2"));
 
     bar->SetLengthToken(QString());
-    QVERIFY(not length->isVisible());
+    QVERIFY(length->isHidden());
 }
 
 //---------------------------------------------------------------------------------------------------------------------

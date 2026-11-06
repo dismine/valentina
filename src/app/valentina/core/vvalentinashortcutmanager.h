@@ -59,7 +59,16 @@ private:
 inline auto VValentinaShortcutManager::DefaultShortcuts() -> QList<VSShortcut>
 {
     const auto chord = [](Qt::Key key, Qt::KeyboardModifiers modifiers = Qt::NoModifier) -> QStringList
-    { return {QKeySequence(modifiers | key).toString()}; };
+    {
+        // QFlags | Qt::Key is an unsigned QFlags::Int. QKeySequence(int) fails Clang Qt 5
+        // -Werror=sign-conversion. Qt 6 takes a QKeyCombination instead.
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        const QKeySequence sequence(QKeyCombination(modifiers, key));
+#else
+        const QKeySequence sequence(static_cast<int>(modifiers) | static_cast<int>(key));
+#endif
+        return {sequence.toString(QKeySequence::PortableText)};
+    };
 
     // previousDefaults is the binding shipped before bindingUpgradeScheme. An empty list means the action had no binding.
     const auto upgraded = [](VShortcutAction type, const QStringList &defaults,

@@ -180,9 +180,19 @@ inline auto ConflictingShortcutSequences(const QList<QStringList> &bindings) -> 
 inline auto ResolveShortcutPreferences(const QList<VShortcutPreference> &preferences) -> QList<VShortcutResolution>
 {
     const int count = static_cast<int>(preferences.size());
-    QList<VShortcutResolution> resolved(count);
-    QList<bool> isCustom(count, false);
-    QList<bool> blocked(count, false);
+    // Qt 5 QList has no sized constructors. QList<T>(count) and QList<T>(count, value) fail both Qt 5 jobs.
+    QList<VShortcutResolution> resolved;
+    QList<bool> isCustom;
+    QList<bool> blocked;
+    resolved.reserve(count);
+    isCustom.reserve(count);
+    blocked.reserve(count);
+    for (int i = 0; i < count; ++i)
+    {
+        resolved.append(VShortcutResolution{});
+        isCustom.append(false);
+        blocked.append(false);
+    }
 
     for (int i = 0; i < count; ++i)
     {
