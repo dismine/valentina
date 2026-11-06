@@ -493,6 +493,7 @@
                     </xs:element>  
                   </xs:sequence>
                   <xs:attribute type="GrainlineType" name="grainlineType"/>
+                  <xs:attribute type="SheetOrientation" name="sheetOrientation"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
@@ -634,6 +635,12 @@
       <xs:enumeration value="horizontal"/>
       <xs:enumeration value="vertical"/>
       <xs:enumeration value="notFixed"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SheetOrientation">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="portrait"/>
+      <xs:enumeration value="landscape"/>
     </xs:restriction>
   </xs:simpleType>  
   <xs:simpleType name="LayoutScale">

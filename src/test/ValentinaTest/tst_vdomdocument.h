@@ -46,6 +46,7 @@ private slots:
     void TestUniqueId() const;
     void FindElementByIdStepsOverNonElementNodes();
     void ConvertHeightLineNamesToV1_1_0() const;
+    void ConvertLayoutSheetOrientation() const;
 
 private:
     Q_DISABLE_COPY_MOVE(TST_VDomDocument) // NOLINT

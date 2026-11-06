@@ -30,7 +30,9 @@
 
 #include "../ifc/exception/vexceptionwrongid.h"
 #include "../ifc/xml/vdomdocument.h"
+#include "../ifc/xml/vlayoutconverter.h"
 #include "../ifc/xml/vpatternconverter.h"
+#include "../vmisc/exception/vexception.h"
 
 #include <QFile>
 #include <QTemporaryDir>
@@ -238,4 +240,117 @@ void TST_VDomDocument::ConvertHeightLineNamesToV1_1_0() const
 
     const QDomElement mirrorLine = doc.elementsByTagName(QStringLiteral("mirrorLine")).at(0).toElement();
     QCOMPARE(mirrorLine.attribute(QStringLiteral("center")), QStringLiteral("Line_H_B"));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// WriteSheet stored sheetOrientation while the layout version was still 0.2.3, and that schema rejected the
+// attribute before conversion. A 0.2.3 file that already has the attribute has to open, keep the value, and become
+// 0.2.4. A sheet that omits the attribute has to stay without it: ReadSheet treats that as a legacy sheet.
+void TST_VDomDocument::ConvertLayoutSheetOrientation() const
+{
+    const QString layout = QStringLiteral(R"(<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.2.3">
+    <properties>
+        <unit>cm</unit>
+        <title></title>
+        <description></description>
+        <control/>
+        <tiles visible="true">
+            <size width="10" length="20"/>
+            <margin/>
+        </tiles>
+        <scale xScale="1" yScale="1"/>
+        <watermark></watermark>
+    </properties>
+    <unplacedPieces/>
+    <sheets>
+        <sheet%1>
+            <name>Sheet</name>
+            <size width="100" length="200"/>
+            <margin/>
+            <pieces/>
+        </sheet>
+    </sheets>
+</layout>
+)");
+
+    QTemporaryDir dir;
+    QVERIFY2(dir.isValid(), "Failed to create temporary directory.");
+
+    const auto writeLayout = [&layout](const QString &path, const QString &sheetAttributes) -> bool
+    {
+        QFile file(path);
+        if (not file.open(QIODevice::WriteOnly))
+        {
+            return false;
+        }
+
+        const QByteArray data = layout.arg(sheetAttributes).toUtf8();
+        return file.write(data) == data.size();
+    };
+
+    const QString orientedPath = dir.filePath(QStringLiteral("oriented.vlt"));
+    const QString legacyPath = dir.filePath(QStringLiteral("legacy.vlt"));
+    QVERIFY2(writeLayout(orientedPath, QStringLiteral(" sheetOrientation=\"landscape\"")),
+             "Failed to write oriented layout.");
+    QVERIFY2(writeLayout(legacyPath, QString()), "Failed to write legacy layout.");
+
+    QFile orientedFile(orientedPath);
+    QVERIFY2(orientedFile.open(QIODevice::ReadOnly), "Failed to read oriented layout.");
+    const QByteArray orientedData = orientedFile.readAll();
+    orientedFile.close();
+
+    QFile legacyFile(legacyPath);
+    QVERIFY2(legacyFile.open(QIODevice::ReadOnly), "Failed to read legacy layout.");
+    const QByteArray legacyData = legacyFile.readAll();
+    legacyFile.close();
+
+    const QString schemaV0_2_3 = VLayoutConverter::XSDSchemas().value(FormatVersion(0, 2, 3));
+    const QString schemaV0_2_4 = VLayoutConverter::CurrentSchema;
+    QVERIFY2(schemaV0_2_3.endsWith(QStringLiteral("v0.2.3.xsd")), "Layout 0.2.3 is not bound to its own schema.");
+    QVERIFY2(schemaV0_2_4.endsWith(QStringLiteral("v0.2.4.xsd")), "Current layout schema is not 0.2.4.");
+
+    QString error;
+    QVERIFY2(VDomDocument::ValidateXMLData(schemaV0_2_3, orientedData, orientedPath, error),
+             qUtf8Printable(error));
+    QVERIFY2(VDomDocument::ValidateXMLData(schemaV0_2_4, orientedData, orientedPath, error),
+             qUtf8Printable(error));
+    QVERIFY2(VDomDocument::ValidateXMLData(schemaV0_2_3, legacyData, legacyPath, error), qUtf8Printable(error));
+    QVERIFY2(VDomDocument::ValidateXMLData(schemaV0_2_4, legacyData, legacyPath, error), qUtf8Printable(error));
+
+    const QByteArray rejected = layout.arg(QStringLiteral(" sheetOrientation=\"diagonal\"")).toUtf8();
+    QVERIFY2(not VDomDocument::ValidateXMLData(schemaV0_2_3, rejected, QStringLiteral("rejected.vlt"), error),
+             "An unknown sheet orientation passed the 0.2.3 schema.");
+    QVERIFY2(not error.isEmpty(), "Rejected sheet orientation did not report an error.");
+
+    const auto convertedText = [](const QString &path) -> QString
+    {
+        try
+        {
+            VLayoutConverter converter(path);
+            QFile converted(converter.Convert());
+            if (not converted.open(QIODevice::ReadOnly))
+            {
+                return {};
+            }
+
+            return QString::fromUtf8(converted.readAll());
+        }
+        catch (const VException &e)
+        {
+            return e.ErrorMessage();
+        }
+    };
+
+    const QString orientedText = convertedText(orientedPath);
+    QVERIFY2(orientedText.contains(QStringLiteral("version=\"0.2.4\"")),
+             qUtf8Printable(QStringLiteral("Oriented layout was not converted to 0.2.4: %1").arg(orientedText)));
+    QVERIFY2(orientedText.contains(QStringLiteral("sheetOrientation=\"landscape\"")),
+             qUtf8Printable(QStringLiteral("Sheet orientation was dropped: %1").arg(orientedText)));
+
+    const QString legacyText = convertedText(legacyPath);
+    QVERIFY2(legacyText.contains(QStringLiteral("version=\"0.2.4\"")),
+             qUtf8Printable(QStringLiteral("Legacy layout was not converted to 0.2.4: %1").arg(legacyText)));
+    QVERIFY2(not legacyText.contains(QStringLiteral("sheetOrientation")),
+             qUtf8Printable(QStringLiteral("Legacy sheet gained an orientation: %1").arg(legacyText)));
 }

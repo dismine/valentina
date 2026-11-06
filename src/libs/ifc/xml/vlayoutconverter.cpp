@@ -45,8 +45,8 @@ using namespace Qt::Literals::StringLiterals;
  */
 
 const QString VLayoutConverter::LayoutMinVerStr = QStringLiteral("0.1.0");
-const QString VLayoutConverter::LayoutMaxVerStr = QStringLiteral("0.2.3");
-const QString VLayoutConverter::CurrentSchema = QStringLiteral("://schema/layout/v0.2.3.xsd");
+const QString VLayoutConverter::LayoutMaxVerStr = QStringLiteral("0.2.4");
+const QString VLayoutConverter::CurrentSchema = QStringLiteral("://schema/layout/v0.2.4.xsd");
 
 // VLayoutConverter::LayoutMinVer; // <== DON'T FORGET TO UPDATE TOO!!!!
 // VLayoutConverter::LayoutMaxVer; // <== DON'T FORGET TO UPDATE TOO!!!!
@@ -155,7 +155,8 @@ auto VLayoutConverter::XSDSchemas() -> QHash<unsigned int, QString>
         std::make_pair(FormatVersion(0, 2, 0), QStringLiteral("://schema/layout/v0.2.0.xsd")),
         std::make_pair(FormatVersion(0, 2, 1), QStringLiteral("://schema/layout/v0.2.1.xsd")),
         std::make_pair(FormatVersion(0, 2, 2), QStringLiteral("://schema/layout/v0.2.2.xsd")),
-        std::make_pair(FormatVersion(0, 2, 3), CurrentSchema),
+        std::make_pair(FormatVersion(0, 2, 3), QStringLiteral("://schema/layout/v0.2.3.xsd")),
+        std::make_pair(FormatVersion(0, 2, 4), CurrentSchema),
     };
 
     return schemas;
@@ -204,9 +205,12 @@ void VLayoutConverter::ApplyPatches()
             Q_FALLTHROUGH();
         case FormatVersion(0, 2, 2):
             ToV0_2_3();
-            ValidateXML(CurrentSchema);
             Q_FALLTHROUGH();
         case FormatVersion(0, 2, 3):
+            ToV0_2_4();
+            ValidateXML(CurrentSchema);
+            Q_FALLTHROUGH();
+        case FormatVersion(0, 2, 4):
             break;
         default:
             InvalidVersion(m_ver);
@@ -461,5 +465,17 @@ void VLayoutConverter::ToV0_2_3()
     Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 2, 3), "Time to refactor the code.");
 
     SetVersion(QStringLiteral("0.2.3"));
+    Save();
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+void VLayoutConverter::ToV0_2_4()
+{
+    // TODO. Delete if minimal supported version is 0.2.4
+    Q_STATIC_ASSERT_X(VLayoutConverter::LayoutMinVer < FormatVersion(0, 2, 4), "Time to refactor the code.");
+
+    // sheetOrientation may already be on a sheet. Leave it, and do not add it when it is absent.
+    // VPLayoutFileReader::ReadSheet calls VPSheet::AdoptLegacySheet only when the attribute is missing.
+    SetVersion(QStringLiteral("0.2.4"));
     Save();
 }

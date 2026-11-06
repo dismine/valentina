@@ -1,4 +1,5 @@
 # Valentina 1.1.2 (unreleased)
+- [Puzzle app] Fixed layout files that store the sheet orientation failing to open. The orientation is kept. The layout format is now 0.2.4.
 - [Puzzle app] The sheet uses the pattern axes. Landscape is the default: length runs to the right along Y+ and the cloth width runs up along −X. Portrait turns those axes so length runs up. The sheet grows along Y+. The grainline follows the sheet. A green axis indicator shows the direction.
 - [Puzzle app] Follow grainline starts on. Tiled PDF pages start as landscape A4, and the tile grid is drawn on the sheet from its top-left.
 - [Puzzle app] The nesting dialog shows fabric width and the piece gap in the layout unit, the same way the sheet and the gap spinner do.

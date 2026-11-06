@@ -47,7 +47,7 @@ public:
     static const QString LayoutMaxVerStr;
     static const QString CurrentSchema;
     static constexpr const unsigned LayoutMinVer = FormatVersion(0, 1, 0);
-    static constexpr const unsigned LayoutMaxVer = FormatVersion(0, 2, 3);
+    static constexpr const unsigned LayoutMaxVer = FormatVersion(0, 2, 4);
 
     static auto XSDSchemas() -> QHash<unsigned, QString>;
 
@@ -79,6 +79,7 @@ protected:
     void ToV0_1_7();
     void ToV0_2_2();
     void ToV0_2_3();
+    void ToV0_2_4();
 
 private:
     Q_DISABLE_COPY_MOVE(VLayoutConverter) // NOLINT
